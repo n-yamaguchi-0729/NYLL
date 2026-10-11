@@ -1,16 +1,20 @@
 # NYLL
 
-A library of formalized mathematics in Lean 4.
+The public development home for Naganori Yamaguchi's Lean 4 libraries.
 
-NYLL is under development. Completed parts are gradually extracted and published
-as separate libraries.
+NYLL brings together all of these libraries, including work in progress. As parts
+are completed, they are extracted and published as standalone libraries in their
+own repositories. The full collection continues to be developed here.
 
 [Browse the library](https://n-yamaguchi-0729.github.io/NYLL/) · [Source](https://github.com/n-yamaguchi-0729/NYLL)
 
 Import the whole library with `import Nyll`, or a specific module such as
 `import Nyll.EtaleFundamentalGroups.All`.
 
-## Published libraries
+## Published standalone libraries
+
+The repositories below contain work extracted from NYLL. Follow these links for
+each library's scope, documentation, and source.
 
 | Library | Description |
 | --- | --- |
