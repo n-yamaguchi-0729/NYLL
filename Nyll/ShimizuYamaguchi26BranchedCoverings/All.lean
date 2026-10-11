@@ -15,12 +15,19 @@ Formalization of Ryoji Shimizu and Naganori Yamaguchi,
 
 The current additions are draft sources awaiting Lean validation. They supply
 integral coordinate changes from Lemma 2.3, the
-coordinate calculation in Lemma 2.4, the arithmetic six-section bound in
+geometric dyadic collision of Lemma 2.4, the arithmetic six-section bound in
 Corollary 2.7, and the connected finite etale quadratic cover used in
 Proposition 2.5. Its coordinate algebra is an integral domain, free of rank
 two, and it gives a continuous quadratic quotient of the affine fundamental
 group. The construction reuses the existing adjoined-root etale criterion
 and Galois-category results from the etale fundamental group library.
+
+For Lemma 2.4, rational projective points are given primitive integral
+coordinates. The actual homogeneous section supports are pulled to the
+dyadic special fibre, where a common point forces the same parity type
+for all three coordinate pairs. This yields divisibility by four;
+distinctness and the sign comparison with the paper's determinant give
+the dyadic valuation bound, including the point at infinity.
 
 The actual projective open `D₊(T₁) ∩ D₊(v*T₀-u*T₁)` is identified with
 `Spec ℤ[t, 1/(v*t-u)]` by a constructed scheme isomorphism, compatible with
