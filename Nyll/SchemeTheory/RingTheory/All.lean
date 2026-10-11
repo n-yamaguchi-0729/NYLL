@@ -112,6 +112,7 @@ import Nyll.SchemeTheory.RingTheory.HenselianLocalRing_exists_completeOrthogonal
 import Nyll.SchemeTheory.RingTheory.HenselianLocalRing_of_isIntegral_of_isLocalRing
 import Nyll.SchemeTheory.RingTheory.HenselianLocalRing_of_moduleFinite_of_isLocalRing
 import Nyll.SchemeTheory.RingTheory.Module_Finite_of_ker_le_range_of_isNoetherianRing
+import Nyll.SchemeTheory.RingTheory.NonfiniteGeneratorCount
 import Nyll.SchemeTheory.RingTheory.PrimeContainingAtHeightOne
 import Nyll.SchemeTheory.RingTheory.NormPolynomial
 
