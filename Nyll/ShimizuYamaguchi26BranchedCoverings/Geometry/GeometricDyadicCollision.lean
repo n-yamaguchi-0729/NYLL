@@ -7,12 +7,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.DyadicCollision
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalProjectiveCoordinates
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.FieldSectionPoint
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.RationalSectionSupport
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.TwoSectionComplement
 import Nyll.SchemeTheory.ProjectiveSpace.Basic
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 import Mathlib.Algebra.Ring.Int.Parity
+import Mathlib.Algebra.Field.ZMod
 import Mathlib.Data.ZMod.Basic
 import Mathlib.LinearAlgebra.Projectivization.Basic
 import Mathlib.RingTheory.Coprime.Basic
@@ -54,27 +57,6 @@ namespace ShimizuYamaguchi26BranchedCoverings
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- The support of the integral section with the given rational projective point,
-as the zero locus of its primitive homogeneous equation. -/
-def rationalSectionSupport (a : Projectivization ℚ (ℚ × ℚ)) :
-    Set (ProjectiveLine ℤ) :=
-  ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
-    {linearSectionEquation (rationalPointNumerator a) (rationalPointDenominator a)}
-
-/-- Pulling the actual integral section support to the dyadic special fibre
-reduces its primitive homogeneous equation modulo two. -/
-theorem mem_rationalSectionSupport_specialFiber_iff
-    (a : Projectivization ℚ (ℚ × ℚ)) (x : ProjectiveLine (ZMod 2)) :
-    (ProjSpace.map ℤ (ZMod 2) 1) x ∈ rationalSectionSupport a ↔
-      linearSectionEquation (rationalPointNumerator a : ZMod 2)
-        (rationalPointDenominator a : ZMod 2) ∈ x.asHomogeneousIdeal := by
-  rw [rationalSectionSupport, ProjectiveSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
-  change MvPolynomial.map (algebraMap ℤ (ZMod 2))
-      (linearSectionEquation (rationalPointNumerator a) (rationalPointDenominator a)) ∈
-        x.asHomogeneousIdeal ↔ _
-  simp only [linearSectionEquation, map_sub, map_mul, MvPolynomial.map_C,
-    MvPolynomial.map_X, algebraMap_int_eq]
-
 private theorem primitive_not_both_even (u v : ℤ) (hprimitive : IsCoprime u v)
     (hu : Even u) (hv : Even v) : False := by
   obtain ⟨a, b, hab⟩ := hprimitive
@@ -83,18 +65,6 @@ private theorem primitive_not_both_even (u v : ℤ) (hprimitive : IsCoprime u v)
   simp only [Int.cast_add, Int.cast_mul, hu.intCast_zmod_two, hv.intCast_zmod_two,
     mul_zero, zero_add] at hcast
   exact zero_ne_one hcast
-
-private theorem not_both_coordinates_mem (x : ProjectiveLine (ZMod 2))
-    (hzero : MvPolynomial.X (0 : Fin 2) ∈ x.asHomogeneousIdeal)
-    (hone : MvPolynomial.X (1 : Fin 2) ∈ x.asHomogeneousIdeal) : False := by
-  have hspan : Ideal.span (Set.range (MvPolynomial.X : Fin 2 → MvPolynomial (Fin 2) (ZMod 2))) ≤
-      x.asHomogeneousIdeal.toIdeal := by
-    rw [Ideal.span_le, Set.range_subset_iff]
-    intro i
-    fin_cases i
-    · exact hzero
-    · exact hone
-  exact x.not_irrelevant_le ((ProjSpace.irrelevant_le_span_X (ZMod 2) 1).trans hspan)
 
 private theorem primitive_section_parity (x : ProjectiveLine (ZMod 2))
     (u v : ℤ) (hprimitive : IsCoprime u v)
@@ -134,12 +104,12 @@ theorem exists_four_dvd_coordinateDeterminant_of_common_specialFiber_point
       rcases primitive_section_parity x (u i) (v i) (hprimitive i) (hsection i) with
         h | h | h
       · exact ⟨h.1, h.2.1⟩
-      · exact (not_both_coordinates_mem x hzero h.2.2).elim
+      · exact (projectiveLine_not_both_coordinates_mem x hzero h.2.2).elim
       · have hone := x.asHomogeneousIdeal.toIdeal.sub_mem hzero h.2.2
         have heq : (MvPolynomial.X (0 : Fin 2) : MvPolynomial (Fin 2) (ZMod 2)) -
             (MvPolynomial.X 0 - MvPolynomial.X 1) = MvPolynomial.X 1 := by ring
         rw [heq] at hone
-        exact (not_both_coordinates_mem x hzero hone).elim
+        exact (projectiveLine_not_both_coordinates_mem x hzero hone).elim
     exact exists_four_dvd_coordinateDeterminant_of_three u v
       (fun i => (hparity i).1) (fun i => (hparity i).2)
   · by_cases hone : MvPolynomial.X (1 : Fin 2) ∈ x.asHomogeneousIdeal
@@ -190,7 +160,7 @@ theorem exists_two_le_padicValInt_delta_of_three_sections
     exists_four_dvd_coordinateDeterminant_of_common_specialFiber_point
       (fun i => rationalPointNumerator (a i)) (fun i => rationalPointDenominator (a i))
       (fun i => rationalPointCoordinates_isCoprime (a i)) x
-      (fun i => (mem_rationalSectionSupport_specialFiber_iff (a i) x).mp (hsection i))
+      (fun i => (mem_rationalSectionSupport_baseChange_iff (ZMod 2) (a i) x).mp (hsection i))
   have hne := rationalPoint_coordinateDeterminant_ne_zero (a i) (a j) (fun h => hij (ha h))
   have hpower : (2 : ℤ) ^ 2 ∣ coordinateDeterminant
       (rationalPointNumerator (a i)) (rationalPointDenominator (a i))

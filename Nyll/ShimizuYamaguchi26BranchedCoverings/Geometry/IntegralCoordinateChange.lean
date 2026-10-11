@@ -146,9 +146,10 @@ private theorem bezoutCoordinateSubstitution_irrelevant
   rw [← heq]
   exact Ideal.mem_map_of_mem (bezoutCoordinateSubstitution u v a b).toRingHom hpre
 
-/-- The integral projective scheme automorphism sending the equation of `(u,v)` to infinity. -/
-def integralCoordinateChange (u v a b : ℤ) (hab : a * u + b * v = 1) :
-    ProjectiveLine ℤ ≅ ProjectiveLine ℤ where
+/-- The projective scheme automorphism over the base ring sending the equation of
+`(u,v)` to infinity. In particular this gives the integral coordinate change over `ℤ`. -/
+def integralCoordinateChange (u v a b : R) (hab : a * u + b * v = 1) :
+    ProjectiveLine R ≅ ProjectiveLine R where
   hom := Proj.map (bezoutCoordinateSubstitution u v a b)
     (bezoutCoordinateSubstitution_irrelevant u v a b hab)
   inv := Proj.map (bezoutCoordinateSubstitution a v u b)
@@ -166,11 +167,11 @@ def integralCoordinateChange (u v a b : ℤ) (hab : a * u + b * v = 1) :
 
 /-- The primitive linear equation is the inverse image of the infinity equation. -/
 theorem integralCoordinateChange_preimage_infinity
-    (u v a b : ℤ) (hab : a * u + b * v = 1) :
-    (integralCoordinateChange u v a b hab).hom ⁻¹ᵁ infinityComplement ℤ =
-      Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (linearSectionEquation u v) := by
+    (u v a b : R) (hab : a * u + b * v = 1) :
+    (integralCoordinateChange u v a b hab).hom ⁻¹ᵁ infinityComplement R =
+      Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R) (linearSectionEquation u v) := by
   change Proj.map (bezoutCoordinateSubstitution u v a b) _ ⁻¹ᵁ
-      Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (MvPolynomial.X 1) = _
+      Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R) (MvPolynomial.X 1) = _
   rw [Proj.map_preimage_basicOpen, bezoutCoordinateSubstitution_X_one]
 
 /-- The coefficient of `T₀` in the transformed second equation is the original determinant. -/

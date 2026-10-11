@@ -22,6 +22,13 @@ two, and it gives a continuous quadratic quotient of the affine fundamental
 group. The construction reuses the existing adjoined-root etale criterion
 and Galois-category results from the etale fundamental group library.
 
+The incidence assertion of Lemma 2.3 uses the actual homogeneous zero loci
+in each prime special fibre: the two section supports meet if and only if
+the prime divides the paper's determinant. Their common point is explicitly
+constructed from evaluation at the reduced coordinates. Its uniqueness is
+proved on the affine chart using the maximal evaluation ideal, with a
+coordinate exchange at infinity, and its singleton is closed.
+
 For Lemma 2.4, rational projective points are given primitive integral
 coordinates. The actual homogeneous section supports are pulled to the
 dyadic special fibre, where a common point forces the same parity type
