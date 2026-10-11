@@ -25,7 +25,6 @@ import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Category.Ring.Basic
 import Mathlib.Algebra.EuclideanDomain.Int
 import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
@@ -81,16 +80,6 @@ open scoped Polynomial
 
 namespace ShimizuYamaguchi26BranchedCoverings
 
-private theorem stalkIdeal_mul {X : Scheme} (I J : X.IdealSheafData) (x : X) :
-    (I * J).stalkIdeal x = I.stalkIdeal x * J.stalkIdeal x := by
-  obtain ⟨U, hU, hxU, -⟩ :=
-    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := x)
-      (show x ∈ (⊤ : X.Opens) from trivial)
-  let V : X.affineOpens := ⟨U, hU⟩
-  rw [(I * J).stalkIdeal_eq_map_ideal x V hxU,
-    I.stalkIdeal_eq_map_ideal x V hxU, J.stalkIdeal_eq_map_ideal x V hxU,
-    Scheme.IdealSheafData.ideal_mul, Pi.mul_apply, Ideal.map_mul]
-
 /-- The product of the actual infinity-section ideal and the actual ideal
 of a primitive integral section has strict normal crossings at `(p,w)`
 when its nonzero denominator has valuation one. -/
@@ -128,8 +117,8 @@ theorem integralSectionPair_isStrictNormalCrossingsAt_infinity
     simp only [Scheme.initialParameterProduct, Fin.castLE_rfl, id_eq,
       Fin.prod_univ_two, t, Matrix.cons_val_zero, Matrix.cons_val_one]
   refine ⟨hregular, 2, 2, t, by decide, Nat.le_refl 2, hparameters, ?_⟩
-  rw [stalkIdeal_mul, hinfinity, hsection, Ideal.span_singleton_mul_span_singleton,
-    hproduct]
+  rw [Scheme.IdealSheafData.stalkIdeal_mul, hinfinity, hsection,
+    Ideal.span_singleton_mul_span_singleton, hproduct]
 
 private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
     (p : ℕ) [Fact p.Prime] (u v c d u' v' c' d' : ℤ)
@@ -158,7 +147,7 @@ private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
     change (((integralSection u v c d hcd).ker *
         (integralSection u' v' c' d' hcd').ker).stalkIdeal (e.inv y)).map
         (e.inv.stalkMap y).hom = J.stalkIdeal y
-    rw [stalkIdeal_mul, Ideal.map_mul,
+    rw [Scheme.IdealSheafData.stalkIdeal_mul, Ideal.map_mul,
       ← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom
         (integralSection u v c d hcd).ker e.inv y,
       ← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom
@@ -170,7 +159,7 @@ private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
         (integralSection 1 0 1 0 (by decide)).ker.stalkIdeal y =
       ((integralSection 1 0 1 0 (by decide)).ker *
         (integralSection U V A B hAB).ker).stalkIdeal y
-    rw [stalkIdeal_mul, mul_comm]
+    rw [Scheme.IdealSheafData.stalkIdeal_mul, mul_comm]
   have hnormal : J.IsStrictNormalCrossingsAt y :=
     integralSectionPair_isStrictNormalCrossingsAt_infinity p U V A B hAB hdet hval
   have : IsRegularLocalRing T := hnormal.1

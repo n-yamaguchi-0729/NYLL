@@ -49,13 +49,21 @@ common complement.
 
 On the infinity chart, the intersection algebra defined by `w` and `v-u*w`
 is explicitly identified with `R/(v)`. Over a DVR its module length is the
-additive valuation of `v`. Localizing the polynomial chart at its actual
-closed-point ideal preserves this intersection quotient, and its length
-over that local ring is computed. The projective chart/stalk and primitive
-section-image identifications remain to be supplied.
+additive valuation of `v`. The actual projective stalk is identified with
+the polynomial localization, and the actual section kernel ideals are
+identified with these equations. Transport through the integral coordinate
+isomorphism gives the intersection length `v_p(Delta)` for any two distinct
+rational sections at the second section's point over `p`.
 
-The section and intersection-multiplicity comparisons for arbitrary
-primitive coordinates, the prosolvable criterion of Theorem 2.6, and the
-finite simple quotient exclusions of
-Theorems 3.1 and 3.6 remain to be formalized here.
+When `v_p(Delta)=1`, the two actual section equations form a regular system
+of parameters. This gives strict normal crossings for the product of the
+two section kernel ideals at their intersection. If the determinants of
+all other members of a finite family against the second section are not
+divisible by `p`, their stalk ideals are unit ideals. The same parameters
+therefore give strict normal crossings for the entire finite product.
+These sources are still awaiting Lean validation; the full finite-family
+normal-crossing criterion, its converse, and the comparison with base change
+to `Z_p` remain open.
+The prosolvable criterion of Theorem 2.6 and the finite simple quotient
+exclusions of Theorems 3.1 and 3.6 also remain to be formalized here.
 -/

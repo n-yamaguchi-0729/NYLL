@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.Basic
+import Nyll.SchemeTheory.Divisors.SubschemeStalk
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalProjectiveCoordinates
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityChartStalk
@@ -34,8 +35,10 @@ import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import Mathlib.Order.KrullDimension
 import Mathlib.RingTheory.Coprime.Basic
 import Mathlib.RingTheory.Ideal.Maps
+import Mathlib.RingTheory.Ideal.Quotient.Basic
 import Mathlib.RingTheory.Ideal.Span
 import Mathlib.RingTheory.Length
+import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Basic
 import Mathlib.Tactic.Ring
 
@@ -154,5 +157,37 @@ theorem rationalSectionIntersection_length
   unfold rationalSectionIntersectionIdeal rationalSection
   rw [integralSection_at_integerPrimePoint, padicValInt_rationalPointDelta]
   simpa only [padicValInt, Int.natAbs_neg] using hlength
+
+/-- If the determinant is not divisible by `p`, the first section has unit ideal in the
+actual local ring at the second section's point over `p`. -/
+theorem rationalSection_stalkIdeal_eq_top_of_not_dvd
+    (p : ℕ) [Fact p.Prime] (a b : Projectivization ℚ (ℚ × ℚ)) (hab : a ≠ b)
+    (hnot : ¬ (p : ℤ) ∣ rationalPointDelta a b) :
+    (rationalSection a).ker.stalkIdeal (rationalSection b (integerPrimePoint p)) = ⊤ := by
+  let S : Type :=
+    (ProjectiveLine ℤ).presheaf.stalk (rationalSection b (integerPrimePoint p))
+  let I : Ideal S :=
+    (rationalSection a).ker.stalkIdeal (rationalSection b (integerPrimePoint p))
+  let J : Ideal S :=
+    (rationalSection b).ker.stalkIdeal (rationalSection b (integerPrimePoint p))
+  have hlength : Module.length S (S ⧸ (I ⊔ J)) = 0 := by
+    calc
+      Module.length S (S ⧸ (I ⊔ J)) =
+          (padicValInt p (rationalPointDelta a b) : ℕ∞) :=
+        rationalSectionIntersection_length p a b hab
+      _ = 0 := by rw [padicValInt.eq_zero_of_not_dvd hnot, Nat.cast_zero]
+  have hsup : I ⊔ J = ⊤ :=
+    Ideal.Quotient.subsingleton_iff.mp (Module.length_eq_zero_iff.mp hlength)
+  have hJ : J ≠ ⊤ := by
+    change (rationalSection b).ker.stalkIdeal
+      (rationalSection b (integerPrimePoint p)) ≠ ⊤
+    rw [← (rationalSection b).ker_stalkMap_eq_stalkIdeal (integerPrimePoint p)]
+    exact RingHom.ker_ne_top ((rationalSection b).stalkMap (integerPrimePoint p)).hom
+  change I = ⊤
+  by_contra hI
+  have hle : I ⊔ J ≤ IsLocalRing.maximalIdeal S :=
+    sup_le (IsLocalRing.le_maximalIdeal hI) (IsLocalRing.le_maximalIdeal hJ)
+  rw [hsup] at hle
+  exact (IsLocalRing.maximalIdeal.isMaximal S).ne_top (top_le_iff.mp hle)
 
 end ShimizuYamaguchi26BranchedCoverings
