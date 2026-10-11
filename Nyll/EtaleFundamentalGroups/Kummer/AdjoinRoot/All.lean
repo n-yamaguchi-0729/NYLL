@@ -13,5 +13,6 @@ import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootScaling
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootFiberTransitivity
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.StandardCover
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerRamification
+import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Kummer.AdjoinRoot. -/

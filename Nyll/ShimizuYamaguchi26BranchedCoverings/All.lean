@@ -35,8 +35,10 @@ common complement.
 
 On the infinity chart, the intersection algebra defined by `w` and `v-u*w`
 is explicitly identified with `R/(v)`. Over a DVR its module length is the
-additive valuation of `v`. This is the affine algebra calculation; its
-comparison with the localized projective intersection is still required.
+additive valuation of `v`. Localizing the polynomial chart at its actual
+closed-point ideal preserves this intersection quotient, and its length
+over that local ring is computed. The projective chart/stalk and primitive
+section-image identifications remain to be supplied.
 
 The section and intersection-multiplicity comparisons for arbitrary
 primitive coordinates, the prosolvable criterion of Theorem 2.6, and the

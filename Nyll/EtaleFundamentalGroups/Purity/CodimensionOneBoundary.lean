@@ -16,10 +16,7 @@ import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.Topology.Inseparable
 import Mathlib.Topology.Irreducible
 import Mathlib.Topology.Closure
-import Mathlib.Topology.Inseparable
-import Mathlib.Topology.Irreducible
 import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.Maps.Basic
 import Mathlib.Topology.Maps.Basic
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.Topology.Sober
