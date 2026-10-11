@@ -11,6 +11,7 @@ import Nyll.SchemeTheory.FiniteEtale.Algebra.All
 import Nyll.SchemeTheory.FiniteEtale.Away.All
 import Nyll.SchemeTheory.FiniteEtale.BaseChange.All
 import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.FiniteEtale.ClopenFull
 import Nyll.SchemeTheory.FiniteEtale.ClopenPullback
 import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberSections
 import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberFullyFaithful

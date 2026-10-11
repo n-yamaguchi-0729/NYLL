@@ -17,6 +17,7 @@ import Nyll.JacobianVarieties.All
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
 import Nyll.AnabelianGeometry.All
+import Nyll.ShimizuYamaguchi26BranchedCoverings.All
 
 /-!
 Workspace-wide aggregate of all maintained Lean source libraries.

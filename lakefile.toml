@@ -37,4 +37,5 @@ globs = [
   "Nyll.Yamaguchi26AbfaithfulGalois.+",
   "Nyll.Yamaguchi26SolvableCoverings.+",
   "Nyll.AnabelianGeometry.+",
+  "Nyll.ShimizuYamaguchi26BranchedCoverings.+",
 ]

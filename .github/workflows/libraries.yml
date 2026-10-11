@@ -150,9 +150,18 @@ jobs:
       stage: depth3-anabelian
       target: +Nyll.AnabelianGeometry.All
 
+  depth3-branched:
+    name: ShimizuYamaguchi26BranchedCoverings.All
+    needs: depth3-anabelian
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-branched
+      target: +Nyll.ShimizuYamaguchi26BranchedCoverings.All
+
   all:
     name: All
-    needs: depth3-anabelian
+    needs: depth3-branched
     if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
