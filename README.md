@@ -28,7 +28,7 @@ each library's scope, documentation, and source.
 
 ## AI-written code and verification
 
-All original code developed for NYLL is written by AI (OpenAI Codex). Naganori Yamaguchi sets the mathematical goals and scope and directs the development.
+All original code developed for NYLL is written by OpenAI Codex. Naganori Yamaguchi sets the mathematical goals and scope and directs the development.
 
 Lean kernel checking validates formal proofs against the encoded statements, definitions, and assumptions. Whether those statements faithfully represent the original mathematics requires separate review. NYLL includes work in progress and code that has not yet been checked by Lean; publication here does not imply that every formalization is complete or verified.
 
