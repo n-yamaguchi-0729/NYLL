@@ -1,0 +1,160 @@
+name: Lean
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Nyll/**'
+      - 'Nyll.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+      - 'lean-toolchain'
+      - '.github/workflows/libraries.yml'
+      - '.github/workflows/library-stage.yml'
+      - '.github/scripts/**'
+  pull_request:
+    paths:
+      - Nyll/**
+      - Nyll.lean
+      - lakefile.toml
+      - lake-manifest.json
+      - lean-toolchain
+      - .github/workflows/libraries.yml
+      - .github/workflows/library-stage.yml
+      - .github/scripts/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: libraries-${{ github.ref }}
+  cancel-in-progress: false
+
+# Each job hands its reusable artifacts to the next job before a new runner starts.
+# Continue after source diagnostics; each failed job still makes the workflow fail.
+jobs:
+  depth1-procgroups:
+    name: ProCGroups.All
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-procgroups
+      target: +Nyll.ProCGroups.All
+
+  depth1-valuedfield:
+    name: ValuedFieldTheory.All
+    needs: depth1-procgroups
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-valuedfield
+      target: +Nyll.ValuedFieldTheory.All
+
+  depth1-galoiscohomology:
+    name: GaloisCohomology.All
+    needs: depth1-valuedfield
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-galoiscohomology
+      target: +Nyll.GaloisCohomology.All
+
+  depth1-schemetheory:
+    name: SchemeTheory.All
+    needs: depth1-galoiscohomology
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-schemetheory
+      target: +Nyll.SchemeTheory.All
+
+  depth2-classfield:
+    name: ClassFieldTheory.All
+    needs: depth1-schemetheory
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield
+      target: +Nyll.ClassFieldTheory.All
+
+  depth2-curves:
+    name: AlgebraicCurves.All
+    needs: depth2-classfield
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-curves
+      target: +Nyll.AlgebraicCurves.All
+
+  depth2-fundamental:
+    name: EtaleFundamentalGroups.All
+    needs: depth2-curves
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-fundamental
+      target: +Nyll.EtaleFundamentalGroups.All
+
+  depth2-cohomology:
+    name: EtaleCohomology.All
+    needs: depth2-fundamental
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-cohomology
+      target: +Nyll.EtaleCohomology.All
+
+  depth3-sawin:
+    name: SawinTotallyRealTowers.All
+    needs: depth2-cohomology
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-sawin
+      target: +Nyll.SawinTotallyRealTowers.All
+
+  depth3-jacobians:
+    name: JacobianVarieties.All
+    needs: depth3-sawin
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-jacobians
+      target: +Nyll.JacobianVarieties.All
+
+  depth3-abfaithful:
+    name: Yamaguchi26AbfaithfulGalois.All
+    needs: depth3-jacobians
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-abfaithful
+      target: +Nyll.Yamaguchi26AbfaithfulGalois.All
+
+  depth3-solvable:
+    name: Yamaguchi26SolvableCoverings.All
+    needs: depth3-abfaithful
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-solvable
+      target: +Nyll.Yamaguchi26SolvableCoverings.All
+
+  depth3-anabelian:
+    name: AnabelianGeometry.All
+    needs: depth3-solvable
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-anabelian
+      target: +Nyll.AnabelianGeometry.All
+
+  all:
+    name: All
+    needs: depth3-anabelian
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: all
+      target: +Nyll

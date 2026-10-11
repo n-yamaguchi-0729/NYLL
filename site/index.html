@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- Copyright (c) 2026 Naganori Yamaguchi. Apache-2.0.
+     Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+     https://github.com/n-yamaguchi-0729 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NYLL — A library of formalized mathematics in Lean 4. Browse libraries, modules, declarations, and their Lean source.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="author" content="Naganori Yamaguchi">
+  <title>NYLL — A library of formalized mathematics in Lean 4</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/site.css">
+  <script defer src="./assets/site.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NGQXB29549"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-NGQXB29549');
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" data-route aria-label="NYLL home">NYLL<span class="brand-rule" aria-hidden="true"></span></a>
+    <a class="header-label" href="./" data-route>Mathematics in Lean 4</a>
+    <form class="search-form" role="search" action="./" autocomplete="off">
+      <svg class="search-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"></circle><path d="m13 13 4 4"></path></svg>
+      <label class="sr-only" for="search">Search libraries, modules, and declarations</label>
+      <input id="search" name="q" type="search" placeholder="Search the library…" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestions" disabled>
+      <kbd class="search-key" aria-hidden="true">/</kbd>
+      <div id="search-popup" class="search-popup" hidden>
+        <div id="search-suggestions" role="listbox" aria-label="Search suggestions"></div>
+        <a id="search-all" class="search-all" href="./" data-route>View all results <span aria-hidden="true">↗</span></a>
+      </div>
+    </form>
+    <nav class="header-nav" aria-label="External links"><a id="github-link" href="https://github.com/n-yamaguchi-0729/NYLL">GitHub <span aria-hidden="true">↗</span></a></nav>
+    <button id="tree-toggle" class="icon-button tree-toggle" type="button" aria-label="Open module navigation" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"></path></svg></button>
+  </header>
+  <div class="layout">
+    <main id="main" class="main" tabindex="-1" aria-busy="true">
+      <div class="initial-state"><span class="eyebrow">NYLL / Library browser</span><h1>A library of formalized<br>mathematics in Lean 4.</h1><p class="muted" role="status">Loading the source catalog…</p></div>
+    </main>
+    <aside id="sidebar" class="sidebar" aria-label="Module navigation">
+      <div class="sidebar-head"><span class="eyebrow">Browse modules</span><button id="tree-close" class="icon-button" type="button" aria-label="Close module navigation">×</button></div>
+      <nav id="file-tree" class="file-tree" aria-label="Library and module tree"><p class="muted">Loading…</p></nav>
+      <div id="revision" class="revision"></div>
+    </aside>
+  </div>
+  <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="Close module navigation" hidden></button>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">This browser needs JavaScript to load the source catalog. The full library is available on <a href="https://github.com/n-yamaguchi-0729/NYLL">GitHub</a>.</p></noscript>
+</body>
+</html>

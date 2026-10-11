@@ -1,0 +1,59 @@
+name: Library website
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    permissions:
+      contents: read
+      pages: read
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Test source extraction
+        run: python3 -m unittest discover -s tools/tests
+      - name: Build source browser
+        run: python3 tools/build_site.py --output _site --repository https://github.com/n-yamaguchi-0729/NYLL --revision "${{ github.sha }}"
+      - name: Check published site size
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          size = sum(p.stat().st_size for p in Path("_site").rglob("*") if p.is_file())
+          print(f"Published site: {size:,} bytes")
+          if size >= 1_000_000_000:
+              raise SystemExit("The site exceeds the GitHub Pages 1 GB limit.")
+          PY
+      - name: Configure Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+      - name: Upload website
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b
+        with:
+          path: _site
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e

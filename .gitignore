@@ -1,0 +1,10 @@
+.lake/
+_site/
+__pycache__/
+*.pyc
+/tmp/
+*.olean
+*.ilean
+*.trace
+.DS_Store
+Thumbs.db
