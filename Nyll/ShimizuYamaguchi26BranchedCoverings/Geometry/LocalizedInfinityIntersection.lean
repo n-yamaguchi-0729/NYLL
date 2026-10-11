@@ -36,8 +36,9 @@ additive valuation of `v`. This supplies the localization comparison in
 the infinity-chart calculation of Lemma 2.3 of Ryoji Shimizu and
 Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
-The projective chart/stalk identification, primitive section images, and
-normalization as the integer `p`-adic valuation remain separate steps.
+The projective chart/stalk identification and normalization as the integer
+`p`-adic valuation are developed in `ProjectiveInfinityIntersection`. The
+comparison with global section ideals and normal crossings is separate.
 -/
 
 noncomputable section

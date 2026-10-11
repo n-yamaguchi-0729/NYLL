@@ -30,9 +30,10 @@ equations; no intersection comparison is supplied as an assumption.
 This is the affine algebra calculation in Lemma 2.3 of Ryoji Shimizu and
 Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
-The comparison with the localized projective intersection at `(p,w)`, the
-identification of primitive section images, and the normalization of this DVR
-valuation as the integer `p`-adic valuation remain separate geometric steps.
+The projective-stalk calculation and the integer `p`-adic normalization are
+developed in `ProjectiveInfinityIntersection`; the primitive section images
+are constructed in `RationalSection`. Identifying the original global section
+ideals in the local chart and the normal-crossing criterion remains separate.
 -/
 
 noncomputable section
