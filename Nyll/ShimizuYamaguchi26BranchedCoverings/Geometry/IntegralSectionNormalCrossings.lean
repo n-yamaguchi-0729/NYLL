@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_IdealSheafData_comap_mul
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.Basic
+import Nyll.SchemeTheory.FiniteEtale.Basic
 import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalProjectiveCoordinates
@@ -22,15 +24,14 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.PrimitiveSectionIdeal
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.RationalSection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.Category.Ring.Basic
 import Mathlib.Algebra.EuclideanDomain.Int
 import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.CategoryTheory.Iso
+import Mathlib.CategoryTheory.MorphismProperty.Composition
+import Mathlib.CategoryTheory.MorphismProperty.Limits
 import Mathlib.Data.Fin.SuccPred
 import Mathlib.Data.Fin.VecNotation
 import Mathlib.Data.Set.Image
@@ -40,7 +41,6 @@ import Mathlib.RingTheory.Coprime.Basic
 import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
@@ -132,8 +132,6 @@ private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
   let e : ProjectiveLine ℤ ≅ ProjectiveLine ℤ :=
     integralCoordinateChange u' v' c' d' hcd'
   let y : ProjectiveLine ℤ := integerProjectiveInfinityPoint p
-  let S : Type := (ProjectiveLine ℤ).presheaf.stalk (e.inv y)
-  let T : Type := IntegerProjectiveInfinityLocalRing p
   let U : ℤ := -(c' * u + d' * v)
   let V : ℤ := coordinateDeterminant u' v' u v
   obtain ⟨A, B, hAB⟩ : IsCoprime U V :=
@@ -142,43 +140,26 @@ private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
     (integralSection u v c d hcd).ker * (integralSection u' v' c' d' hcd').ker
   let J : (ProjectiveLine ℤ).IdealSheafData :=
     (integralSection 1 0 1 0 (by decide)).ker * (integralSection U V A B hAB).ker
-  let F : S ≃+* T := (asIso (e.inv.stalkMap y)).commRingCatIsoToRingEquiv
-  have hmap : (I.stalkIdeal (e.inv y)).map F.toRingHom = J.stalkIdeal y := by
-    change (((integralSection u v c d hcd).ker *
-        (integralSection u' v' c' d' hcd').ker).stalkIdeal (e.inv y)).map
-        (e.inv.stalkMap y).hom = J.stalkIdeal y
-    rw [Scheme.IdealSheafData.stalkIdeal_mul, Ideal.map_mul,
-      ← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom
-        (integralSection u v c d hcd).ker e.inv y,
-      ← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom
-        (integralSection u' v' c' d' hcd').ker e.inv y,
+  have hpull : I.comap e.inv = J := by
+    dsimp only [I, J, e]
+    rw [Scheme.IdealSheafData.comap_mul,
       integralSection_ker_comap_coordinateChange_inv
         u' v' c' d' u v c d A B hcd' hcd hAB,
-      integralSection_ker_comap_coordinateChange_inv_self u' v' c' d' hcd']
-    change (integralSection U V A B hAB).ker.stalkIdeal y *
-        (integralSection 1 0 1 0 (by decide)).ker.stalkIdeal y =
-      ((integralSection 1 0 1 0 (by decide)).ker *
-        (integralSection U V A B hAB).ker).stalkIdeal y
-    rw [Scheme.IdealSheafData.stalkIdeal_mul, mul_comm]
+      integralSection_ker_comap_coordinateChange_inv_self u' v' c' d' hcd',
+      mul_comm]
+  have hback : J.comap e.hom = I := by
+    rw [← hpull, ← Scheme.IdealSheafData.comap_comp,
+      e.hom_inv_id, Scheme.IdealSheafData.comap_id]
   have hnormal : J.IsStrictNormalCrossingsAt y :=
     integralSectionPair_isStrictNormalCrossingsAt_infinity p U V A B hAB hdet hval
-  have : IsRegularLocalRing T := hnormal.1
-  obtain ⟨n, r, t, hrpos, hrn, hparameters, hideal⟩ := hnormal.2
-  let s : Fin n → S := F.symm ∘ t
-  have hparametersS : Scheme.IsRegularSystemOfParameters s :=
-    hparameters.map_ringEquiv F.symm
+  have : IsFiniteEtale e.hom :=
+    MorphismProperty.of_isIso (@IsFiniteEtale : MorphismProperty Scheme) e.hom
   change I.IsStrictNormalCrossingsAt (e.inv y)
-  refine ⟨IsRegularLocalRing.of_ringEquiv F.symm, n, r, s, hrpos, hrn, hparametersS, ?_⟩
-  calc
-    I.stalkIdeal (e.inv y) =
-        ((I.stalkIdeal (e.inv y)).map F.toRingHom).map F.symm.toRingHom :=
-      (Ideal.map_of_equiv F).symm
-    _ = (J.stalkIdeal y).map F.symm.toRingHom :=
-      congrArg (Ideal.map F.symm.toRingHom) hmap
-    _ = (Ideal.span {Scheme.initialParameterProduct t r hrn}).map F.symm.toRingHom :=
-      congrArg (Ideal.map F.symm.toRingHom) hideal
-    _ = Ideal.span {Scheme.initialParameterProduct s r hrn} := by
-      rw [Ideal.map_span, Set.image_singleton, Scheme.initialParameterProduct_map]
+  rw [← hback]
+  apply Scheme.IdealSheafData.IsStrictNormalCrossingsAt.comap_of_finiteEtale
+    J e.hom (e.inv y)
+  rw [← Scheme.Hom.comp_apply, e.inv_hom_id]
+  exact hnormal
 
 /-- For two distinct rational points, valuation one of `Delta` makes the
 product of their actual section ideals strictly normal crossing at the
