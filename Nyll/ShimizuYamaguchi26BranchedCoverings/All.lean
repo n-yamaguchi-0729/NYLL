@@ -65,7 +65,13 @@ only one member passes through the point, its equation is the first member
 of an explicitly supplied regular parameter system, and the finite product
 again has strict normal crossings there. The determinant incidence-count
 conditions therefore give strict normal crossings at every point of the
-product support over the selected prime.
+product support over the selected prime. The actual special-fibre incidence
+comparison derives these conditions from the number of original sections
+through each closed point and the valuation-one condition for meeting pairs.
+Distinct primitive section equations are relatively prime in the polynomial
+ring; the finite intersection of their equation ideals therefore equals
+their product. The corresponding global reduced Cartier comparison remains
+separate from this chart calculation.
 These sources are still awaiting Lean validation; the full finite-family
 normal-crossing criterion, its converse, and the comparison with base change
 to `Z_p` remain open.
