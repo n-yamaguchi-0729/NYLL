@@ -41,13 +41,13 @@ universe u
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-variable {k : Type u} [Field k]
+variable {R : Type u} [CommRing R]
 
 /-- Both homogeneous coordinates cannot belong to a projective point's ideal. -/
-theorem projectiveLine_not_both_coordinates_mem (x : ProjectiveLine k)
+theorem projectiveLine_not_both_coordinates_mem (x : ProjectiveLine R)
     (hzero : MvPolynomial.X (0 : Fin 2) ∈ x.asHomogeneousIdeal)
     (hone : MvPolynomial.X (1 : Fin 2) ∈ x.asHomogeneousIdeal) : False := by
-  have hspan : Ideal.span (Set.range (MvPolynomial.X : Fin 2 → MvPolynomial (Fin 2) k)) ≤
+  have hspan : Ideal.span (Set.range (MvPolynomial.X : Fin 2 → MvPolynomial (Fin 2) R)) ≤
       x.asHomogeneousIdeal.toIdeal := by
     rw [Ideal.span_le, Set.range_subset_iff]
     intro i
@@ -55,7 +55,9 @@ theorem projectiveLine_not_both_coordinates_mem (x : ProjectiveLine k)
     · exact hzero
     · exact hone
   exact x.not_irrelevant_le
-    ((AlgebraicGeometry.ProjSpace.irrelevant_le_span_X k 1).trans hspan)
+    ((AlgebraicGeometry.ProjSpace.irrelevant_le_span_X R 1).trans hspan)
+
+variable {k : Type u} [Field k]
 
 /-- Evaluation at the ordered pair of homogeneous coordinates `(u,v)`. -/
 def fieldSectionEvaluation (u v : k) : MvPolynomial (Fin 2) k →+* k :=
