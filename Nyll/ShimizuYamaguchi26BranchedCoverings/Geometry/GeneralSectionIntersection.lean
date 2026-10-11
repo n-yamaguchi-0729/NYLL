@@ -149,13 +149,8 @@ theorem rationalSectionIntersection_length
     (rationalPointNumerator a) (rationalPointDenominator a) ha.choose ha.choose_spec.choose
     (rationalPointNumerator b) (rationalPointDenominator b) hb.choose hb.choose_spec.choose
     ha.choose_spec.choose_spec hb.choose_spec.choose_spec hdet
-  have hswap : coordinateDeterminant (rationalPointNumerator b) (rationalPointDenominator b)
-      (rationalPointNumerator a) (rationalPointDenominator a) =
-      -coordinateDeterminant (rationalPointNumerator a) (rationalPointDenominator a)
-        (rationalPointNumerator b) (rationalPointDenominator b) := by
-    unfold coordinateDeterminant
-    ring
-  rw [hswap] at hlength
+  rw [coordinateDeterminant_swap (rationalPointNumerator a) (rationalPointDenominator a)
+    (rationalPointNumerator b) (rationalPointDenominator b)] at hlength
   unfold rationalSectionIntersectionIdeal rationalSection
   rw [integralSection_at_integerPrimePoint, padicValInt_rationalPointDelta]
   simpa only [padicValInt, Int.natAbs_neg] using hlength

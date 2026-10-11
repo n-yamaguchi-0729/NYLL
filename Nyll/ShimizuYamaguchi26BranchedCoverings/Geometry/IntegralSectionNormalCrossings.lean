@@ -7,24 +7,37 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.Basic
 import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalProjectiveCoordinates
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityChartStalk
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegerChartLocalization
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegerProjectiveIntersection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegerSectionParameters
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralCoordinateChange
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSection
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSectionCoordinateTransport
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSectionPrimePoint
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSectionStalk
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.PrimitiveSectionIdeal
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.RationalSection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.Category.Ring.Basic
 import Mathlib.Algebra.EuclideanDomain.Int
 import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.CategoryTheory.Iso
 import Mathlib.Data.Fin.SuccPred
 import Mathlib.Data.Fin.VecNotation
 import Mathlib.Data.Set.Image
+import Mathlib.LinearAlgebra.Projectivization.Basic
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
+import Mathlib.RingTheory.Coprime.Basic
 import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.RingTheory.Ideal.Span
@@ -32,9 +45,10 @@ import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
-# Strict normal crossings for two normalized integral sections
+# Strict normal crossings for two integral sections
 
 Consider the product of the actual kernel ideal sheaves of the infinity
 section and a primitive integral section `(u,v)`. At the point `(p,w)`,
@@ -47,7 +61,13 @@ this system also proves that the ambient local ring is regular. Together
 these facts give strict normal crossings for the actual ideal-sheaf product
 at this point.
 
-This supplies the normalized two-section implication toward Lemma 2.3 of
+The integral Bezout coordinate isomorphism carries the actual ideals of any
+two distinct rational sections to this normalized pair. Its stalk isomorphism
+transports the regular system of parameters and the product ideal back to the
+original point of the second section over `p`. Thus valuation one of the
+original determinant gives strict normal crossings there.
+
+This supplies the two-section implication toward Lemma 2.3 of
 Ryoji Shimizu and Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
 The criterion for a finite family, its converse, and the comparison with
@@ -56,7 +76,7 @@ base change to `ℤ_p` are separate assertions.
 
 noncomputable section
 
-open AlgebraicGeometry
+open AlgebraicGeometry CategoryTheory
 open scoped Polynomial
 
 namespace ShimizuYamaguchi26BranchedCoverings
@@ -110,5 +130,92 @@ theorem integralSectionPair_isStrictNormalCrossingsAt_infinity
   refine ⟨hregular, 2, 2, t, by decide, Nat.le_refl 2, hparameters, ?_⟩
   rw [stalkIdeal_mul, hinfinity, hsection, Ideal.span_singleton_mul_span_singleton,
     hproduct]
+
+private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
+    (p : ℕ) [Fact p.Prime] (u v c d u' v' c' d' : ℤ)
+    (hcd : c * u + d * v = 1) (hcd' : c' * u' + d' * v' = 1)
+    (hdet : coordinateDeterminant u' v' u v ≠ 0)
+    (hval : padicValInt p (coordinateDeterminant u' v' u v) = 1) :
+    ((integralSection u v c d hcd).ker *
+      (integralSection u' v' c' d' hcd').ker).IsStrictNormalCrossingsAt
+        ((integralCoordinateChange u' v' c' d' hcd').inv
+          (integerProjectiveInfinityPoint p)) := by
+  let e : ProjectiveLine ℤ ≅ ProjectiveLine ℤ :=
+    integralCoordinateChange u' v' c' d' hcd'
+  let y : ProjectiveLine ℤ := integerProjectiveInfinityPoint p
+  let S : Type := (ProjectiveLine ℤ).presheaf.stalk (e.inv y)
+  let T : Type := IntegerProjectiveInfinityLocalRing p
+  let U : ℤ := -(c' * u + d' * v)
+  let V : ℤ := coordinateDeterminant u' v' u v
+  obtain ⟨A, B, hAB⟩ : IsCoprime U V :=
+    isCoprime_normalizedCoordinates u' v' c' d' u v hcd' ⟨c, d, hcd⟩
+  let I : (ProjectiveLine ℤ).IdealSheafData :=
+    (integralSection u v c d hcd).ker * (integralSection u' v' c' d' hcd').ker
+  let J : (ProjectiveLine ℤ).IdealSheafData :=
+    (integralSection 1 0 1 0 (by decide)).ker * (integralSection U V A B hAB).ker
+  let F : S ≃+* T := (asIso (e.inv.stalkMap y)).commRingCatIsoToRingEquiv
+  have hmap : (I.stalkIdeal (e.inv y)).map F.toRingHom = J.stalkIdeal y := by
+    change (((integralSection u v c d hcd).ker *
+        (integralSection u' v' c' d' hcd').ker).stalkIdeal (e.inv y)).map
+        (e.inv.stalkMap y).hom = J.stalkIdeal y
+    rw [stalkIdeal_mul, Ideal.map_mul,
+      ← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom
+        (integralSection u v c d hcd).ker e.inv y,
+      ← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom
+        (integralSection u' v' c' d' hcd').ker e.inv y,
+      integralSection_ker_comap_coordinateChange_inv
+        u' v' c' d' u v c d A B hcd' hcd hAB,
+      integralSection_ker_comap_coordinateChange_inv_self u' v' c' d' hcd']
+    change (integralSection U V A B hAB).ker.stalkIdeal y *
+        (integralSection 1 0 1 0 (by decide)).ker.stalkIdeal y =
+      ((integralSection 1 0 1 0 (by decide)).ker *
+        (integralSection U V A B hAB).ker).stalkIdeal y
+    rw [stalkIdeal_mul, mul_comm]
+  have hnormal : J.IsStrictNormalCrossingsAt y :=
+    integralSectionPair_isStrictNormalCrossingsAt_infinity p U V A B hAB hdet hval
+  have : IsRegularLocalRing T := hnormal.1
+  obtain ⟨n, r, t, hrpos, hrn, hparameters, hideal⟩ := hnormal.2
+  let s : Fin n → S := F.symm ∘ t
+  have hparametersS : Scheme.IsRegularSystemOfParameters s :=
+    hparameters.map_ringEquiv F.symm
+  change I.IsStrictNormalCrossingsAt (e.inv y)
+  refine ⟨IsRegularLocalRing.of_ringEquiv F.symm, n, r, s, hrpos, hrn, hparametersS, ?_⟩
+  calc
+    I.stalkIdeal (e.inv y) =
+        ((I.stalkIdeal (e.inv y)).map F.toRingHom).map F.symm.toRingHom :=
+      (Ideal.map_of_equiv F).symm
+    _ = (J.stalkIdeal y).map F.symm.toRingHom :=
+      congrArg (Ideal.map F.symm.toRingHom) hmap
+    _ = (Ideal.span {Scheme.initialParameterProduct t r hrn}).map F.symm.toRingHom :=
+      congrArg (Ideal.map F.symm.toRingHom) hideal
+    _ = Ideal.span {Scheme.initialParameterProduct s r hrn} := by
+      rw [Ideal.map_span, Set.image_singleton, Scheme.initialParameterProduct_map]
+
+/-- For two distinct rational points, valuation one of `Delta` makes the
+product of their actual section ideals strictly normal crossing at the
+second section's point above `p`. -/
+theorem rationalSectionPair_isStrictNormalCrossingsAt
+    (p : ℕ) [Fact p.Prime] (a b : Projectivization ℚ (ℚ × ℚ)) (hab : a ≠ b)
+    (hval : padicValInt p (rationalPointDelta a b) = 1) :
+    ((rationalSection a).ker * (rationalSection b).ker).IsStrictNormalCrossingsAt
+      (rationalSection b (integerPrimePoint p)) := by
+  let ha : IsCoprime (rationalPointNumerator a) (rationalPointDenominator a) :=
+    rationalPointCoordinates_isCoprime a
+  let hb : IsCoprime (rationalPointNumerator b) (rationalPointDenominator b) :=
+    rationalPointCoordinates_isCoprime b
+  have hdet := rationalPoint_coordinateDeterminant_ne_zero b a (Ne.symm hab)
+  have hval' : padicValInt p (coordinateDeterminant
+      (rationalPointNumerator b) (rationalPointDenominator b)
+      (rationalPointNumerator a) (rationalPointDenominator a)) = 1 := by
+    rw [coordinateDeterminant_swap]
+    rw [padicValInt_rationalPointDelta] at hval
+    simpa only [padicValInt, Int.natAbs_neg] using hval
+  have hnormal := integralSectionPair_isStrictNormalCrossingsAt_coordinateChange p
+    (rationalPointNumerator a) (rationalPointDenominator a) ha.choose ha.choose_spec.choose
+    (rationalPointNumerator b) (rationalPointDenominator b) hb.choose hb.choose_spec.choose
+    ha.choose_spec.choose_spec hb.choose_spec.choose_spec hdet hval'
+  unfold rationalSection
+  rw [integralSection_at_integerPrimePoint]
+  exact hnormal
 
 end ShimizuYamaguchi26BranchedCoverings

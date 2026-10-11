@@ -42,32 +42,29 @@ namespace ShimizuYamaguchi26BranchedCoverings
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-private def integerCoordinateSwap : ProjectiveLine ℤ ≅ ProjectiveLine ℤ :=
-  integralCoordinateChange (0 : ℤ) 1 0 1 (by rw [zero_mul, one_mul, zero_add])
-
 private theorem range_zeroSection_comp_swap :
-    Set.range (zeroSection ℤ ≫ integerCoordinateSwap.hom) =
+    Set.range (zeroSection ℤ ≫ (projectiveCoordinateSwap ℤ).hom) =
       (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ := by
   have hzero : Set.range (zeroSection ℤ) =
-      integerCoordinateSwap.hom ⁻¹'
+      (projectiveCoordinateSwap ℤ).hom ⁻¹'
         (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ := by
     rw [Set.preimage_compl]
     change Set.range (zeroSection ℤ) =
-      ((integerCoordinateSwap.hom ⁻¹ᵁ infinityComplement ℤ :
+      (((projectiveCoordinateSwap ℤ).hom ⁻¹ᵁ infinityComplement ℤ :
         (ProjectiveLine ℤ).Opens) : Set (ProjectiveLine ℤ))ᶜ
-    rw [integerCoordinateSwap, integralCoordinateChange_preimage_infinity]
+    rw [projectiveCoordinateSwap, integralCoordinateChange_preimage_infinity]
     change Set.range (zeroSection ℤ) =
       (ProjectiveSpectrum.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
         (linearSectionEquation (0 : ℤ) 1) : Set (ProjectiveLine ℤ))ᶜ
     rw [ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl, compl_compl, range_zeroSection]
-  change Set.range (fun x => integerCoordinateSwap.hom (zeroSection ℤ x)) = _
+  change Set.range (fun x => (projectiveCoordinateSwap ℤ).hom (zeroSection ℤ x)) = _
   rw [Set.range_comp', hzero]
-  exact Set.image_preimage_eq _ (Scheme.homeoOfIso integerCoordinateSwap).surjective
+  exact Set.image_preimage_eq _ (Scheme.homeoOfIso (projectiveCoordinateSwap ℤ)).surjective
 
 /-- The actual integral section associated to coordinates and Bézout coefficients. -/
 def integralSection (u v a b : ℤ) (hab : a * u + b * v = 1) :
     Spec (CommRingCat.of ℤ) ⟶ ProjectiveLine ℤ :=
-  (zeroSection ℤ ≫ integerCoordinateSwap.hom) ≫
+  (zeroSection ℤ ≫ (projectiveCoordinateSwap ℤ).hom) ≫
     (integralCoordinateChange u v a b hab).inv
 
 /-- The constructed morphism is a section of the integral projective line. -/
@@ -91,7 +88,7 @@ theorem range_integralSection (u v a b : ℤ) (hab : a * u + b * v = 1) :
         {linearSectionEquation u v} := by
   let e : ProjectiveLine ℤ ≅ ProjectiveLine ℤ :=
     integralCoordinateChange u v a b hab
-  change Set.range (fun x => e.inv ((zeroSection ℤ ≫ integerCoordinateSwap.hom) x)) = _
+  change Set.range (fun x => e.inv ((zeroSection ℤ ≫ (projectiveCoordinateSwap ℤ).hom) x)) = _
   rw [Set.range_comp', range_zeroSection_comp_swap]
   calc
     e.inv '' (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ =

@@ -165,6 +165,12 @@ def integralCoordinateChange (u v a b : R) (hab : a * u + b * v = 1) :
       exact hab)]
     exact Proj.map_id
 
+/-- The projective automorphism exchanging the two homogeneous coordinates. -/
+def projectiveCoordinateSwap (R : Type u) [CommRing R] :
+    ProjectiveLine R ≅ ProjectiveLine R :=
+  integralCoordinateChange (0 : R) 1 0 1
+    (by rw [zero_mul, one_mul, zero_add])
+
 /-- The primitive linear equation is the inverse image of the infinity equation. -/
 theorem integralCoordinateChange_preimage_infinity
     (u v a b : R) (hab : a * u + b * v = 1) :

@@ -5,8 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+import Nyll.SchemeTheory.RingTheory.DVRFractionFieldAway
 import Mathlib.Algebra.GroupWithZero.Associated
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
@@ -56,18 +56,6 @@ theorem puncturedSpectrumOpen_eq_basicOpen_of_uniformizer
     rw [hπ.maximalIdeal_eq]
     exact Ideal.mem_span_singleton_self π
 
-private theorem fractionField_isLocalizationAway_uniformizer
-    (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
-    [Field K] [Algebra R K] [IsFractionRing R K]
-    {π : R} (hπ : Irreducible π) : IsLocalization.Away π K := by
-  refine (IsLocalization.iff_of_le_of_exists_dvd (S := K)
-    (Submonoid.powers π) (nonZeroDivisors R)
-    (powers_le_nonZeroDivisors_of_noZeroDivisors hπ.ne_zero) ?_).mpr inferInstance
-  intro a ha
-  obtain ⟨n, hn⟩ := IsDiscreteValuationRing.associated_pow_irreducible
-    (nonZeroDivisors.ne_zero ha) hπ
-  exact ⟨π ^ n, ⟨n, rfl⟩, hn.dvd⟩
-
 /-- The canonical map from a DVR's fraction-field spectrum is an open
 immersion. Its localization presentation is derived from the DVR. -/
 theorem isOpenImmersion_SpecMap_fractionField_of_dvr
@@ -75,7 +63,9 @@ theorem isOpenImmersion_SpecMap_fractionField_of_dvr
     [Field K] [Algebra R K] [IsFractionRing R K] :
     IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R K))) := by
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible R
-  have : IsLocalization.Away π K := fractionField_isLocalizationAway_uniformizer R K hπ
+  have : IsLocalization.Away π K :=
+    SchemeTheory.isLocalizationAway_fractionField_of_isDiscreteValuationRing
+      R K π hπ.ne_zero hπ.not_isUnit
   exact IsOpenImmersion.of_isLocalization π
 
 /-- The canonical fraction-field spectrum has exactly the puncture as its
@@ -86,7 +76,9 @@ theorem range_SpecMap_fractionField_of_dvr
     Set.range (Spec.map (CommRingCat.ofHom (algebraMap R K))) =
       (puncturedSpectrumOpen R : Set (Spec (.of R))) := by
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible R
-  have : IsLocalization.Away π K := fractionField_isLocalizationAway_uniformizer R K hπ
+  have : IsLocalization.Away π K :=
+    SchemeTheory.isLocalizationAway_fractionField_of_isDiscreteValuationRing
+      R K π hπ.ne_zero hπ.not_isUnit
   change Set.range (PrimeSpectrum.comap (algebraMap R K)) = _
   rw [PrimeSpectrum.localization_away_comap_range K π,
     ← puncturedSpectrumOpen_eq_basicOpen_of_uniformizer R hπ]

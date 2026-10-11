@@ -64,20 +64,8 @@ theorem exists_connected_finite_etale_quadratic_cover (u v : ℤ)
   let : IsDomain B := twoSectionQuadraticAlgebra_isDomain u v ε hε hεu hv hv0
   let : Module.Finite R B := (quadraticPolynomial_monic cR).finite_adjoinRoot
   let : Module.Free R B := (quadraticPolynomial_monic cR).free_adjoinRoot
-  have hsign : IsUnit (C ε : ℤ[X]) := by
-    rcases hε with rfl | rfl
-    · rw [map_one]
-      exact isUnit_one
-    · rw [map_neg, map_one]
-      exact isUnit_one.neg
-  have hunit : IsUnit (1 - 4 * cR) := by
-    have hdisc := congrArg (algebraMap ℤ[X] R)
-      (quadraticConstantTerm_discriminant u v ε hεu hv)
-    simp only [map_sub, map_one, map_mul, map_ofNat] at hdisc
-    change IsUnit (1 - 4 * algebraMap ℤ[X] R c)
-    rw [hdisc]
-    exact (hsign.map (algebraMap ℤ[X] R)).mul
-      (IsLocalization.Away.algebraMap_isUnit (boundaryPolynomial u v))
+  have hunit : IsUnit (1 - 4 * cR) :=
+    quadraticConstantTerm_discriminant_isUnit u v ε hε hεu hv
   have hetale : Algebra.Etale R B := quadraticPolynomial_etale cR hunit
   refine ⟨inferInstance, inferInstance, ?_, ?_, ?_, inferInstance,
     quadraticPolynomial_finrank cR⟩

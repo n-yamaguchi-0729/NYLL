@@ -124,6 +124,26 @@ theorem quadraticConstantTerm_discriminant (u v ε : ℤ)
 /-- The affine coordinate ring obtained by removing `v * t - u = 0`. -/
 abbrev TwoSectionCoordinateRing (u v : ℤ) : Type := Localization.Away (boundaryPolynomial u v)
 
+/-- The actual discriminant is a unit after removing the boundary equation.
+This uses the constructed integral constant term and either integral sign. -/
+theorem quadraticConstantTerm_discriminant_isUnit (u v ε : ℤ)
+    (hε : ε = 1 ∨ ε = -1) (hεu : (4 : ℤ) ∣ 1 + ε * u)
+    (hv : (4 : ℤ) ∣ v) :
+    IsUnit (1 - 4 * algebraMap ℤ[X] (TwoSectionCoordinateRing u v)
+      (quadraticConstantTerm u v ε)) := by
+  have hsign : IsUnit (C ε : ℤ[X]) := by
+    rcases hε with rfl | rfl
+    · rw [map_one]
+      exact isUnit_one
+    · rw [map_neg, map_one]
+      exact isUnit_one.neg
+  have hdisc := congrArg (algebraMap ℤ[X] (TwoSectionCoordinateRing u v))
+    (quadraticConstantTerm_discriminant u v ε hεu hv)
+  simp only [map_sub, map_one, map_mul, map_ofNat] at hdisc
+  rw [hdisc]
+  exact (hsign.map (algebraMap ℤ[X] (TwoSectionCoordinateRing u v))).mul
+    (IsLocalization.Away.algebraMap_isUnit (boundaryPolynomial u v))
+
 /-- A nonzero denominator makes the boundary equation a nonzero polynomial. -/
 theorem boundaryPolynomial_ne_zero (u v : ℤ) (hv : v ≠ 0) :
     boundaryPolynomial u v ≠ 0 := by
@@ -151,19 +171,8 @@ theorem exists_finite_etale_quadratic_algebra (u v : ℤ)
   let R : Type := TwoSectionCoordinateRing u v
   let : IsDomain R := Localization.Away.isDomain (boundaryPolynomial_ne_zero u v hv0)
   let cR : R := algebraMap ℤ[X] R c
-  have hsign : IsUnit (C ε : ℤ[X]) := by
-    rcases hε with rfl | rfl
-    · rw [map_one]
-      exact isUnit_one
-    · rw [map_neg, map_one]
-      exact isUnit_one.neg
-  have hunit : IsUnit (1 - 4 * cR) := by
-    have hmap := congrArg (algebraMap ℤ[X] R) hdisc
-    simp only [map_sub, map_one, map_mul, map_ofNat] at hmap
-    change IsUnit (1 - 4 * algebraMap ℤ[X] R c)
-    rw [hmap]
-    exact (hsign.map (algebraMap ℤ[X] R)).mul
-      (IsLocalization.Away.algebraMap_isUnit (boundaryPolynomial u v))
+  have hunit : IsUnit (1 - 4 * cR) :=
+    quadraticConstantTerm_discriminant_isUnit u v ε hε hεu hv
   exact ⟨quadraticPolynomial_etale cR hunit,
     (quadraticPolynomial_monic cR).finite_adjoinRoot,
     (quadraticPolynomial_monic cR).free_adjoinRoot,

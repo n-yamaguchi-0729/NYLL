@@ -24,6 +24,12 @@ namespace ShimizuYamaguchi26BranchedCoverings
 /-- The signed determinant of two integral homogeneous coordinate pairs. -/
 def coordinateDeterminant (u v u' v' : ℤ) : ℤ := u * v' - v * u'
 
+/-- Swapping the two coordinate pairs reverses the determinant's sign. -/
+theorem coordinateDeterminant_swap (u v u' v' : ℤ) :
+    coordinateDeterminant u' v' u v = -coordinateDeterminant u v u' v' := by
+  unfold coordinateDeterminant
+  ring
+
 /-- An integral change of coordinates multiplies the determinant by the
 matrix determinant. -/
 theorem coordinateDeterminant_transform (a b c d u v u' v' : ℤ) :

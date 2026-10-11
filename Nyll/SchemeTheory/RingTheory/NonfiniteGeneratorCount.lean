@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.Fintype.EquivFin
+import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.Data.Nat.Find
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
@@ -78,18 +79,11 @@ variable (C)
 
 private theorem exists_ordered_algebra_generators [Algebra.FiniteType R C] :
     ∃ (r : ℕ) (y : Fin r → C), Algebra.adjoin R (Set.range y) = ⊤ := by
-  classical
-  obtain ⟨s, hs⟩ := Algebra.FiniteType.out (R := R) (A := C)
-  let y : Fin s.card → C := fun i => (s.equivFin.symm i).val
-  have hrange : Set.range y = (s : Set C) := by
-    ext x
-    constructor
-    · rintro ⟨i, rfl⟩
-      exact (s.equivFin.symm i).property
-    · intro hx
-      refine ⟨s.equivFin ⟨x, hx⟩, ?_⟩
-      exact congrArg (fun z : s => z.val) (s.equivFin.symm_apply_apply ⟨x, hx⟩)
-  exact ⟨s.card, y, (congrArg (Algebra.adjoin R) hrange).trans hs⟩
+  obtain ⟨r, f, hf⟩ :=
+    (Algebra.FiniteType.iff_quotient_mvPolynomial'' (R := R) (S := C)).mp inferInstance
+  refine ⟨r, f ∘ MvPolynomial.X, ?_⟩
+  rw [Algebra.adjoin_range_eq_range_aeval, ← MvPolynomial.aeval_unique f]
+  exact (AlgHom.range_eq_top f).mpr hf
 
 private theorem exists_nonfinite_generator_count [Algebra.FiniteType R C] :
     ∃ d : ℕ, ∃ (r : ℕ) (y : Fin r → C),

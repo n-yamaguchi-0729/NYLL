@@ -37,17 +37,6 @@ namespace SchemeTheory
 
 attribute [local instance] Ideal.Quotient.field
 
-/-- The normalization of a reduced Artinian algebra is the product of the
-normalizations in its actual maximal-ideal quotients. -/
-private def integralClosureFactorsEquiv
-    (R : Type u) (A : Type w) [CommRing R] [CommRing A] [Algebra R A]
-    [IsArtinianRing A] [IsReduced A] :
-    integralClosure R A ≃ₐ[R]
-      ∀ m : MaximalSpectrum A, integralClosure R (A ⧸ m.asIdeal) :=
-  (((IsArtinianRing.equivPi A).restrictScalars R).mapIntegralClosure).trans
-    (EtaleFundamentalGroups.integralClosurePiAlgEquiv
-      (R := R) (fun m : MaximalSpectrum A => A ⧸ m.asIdeal))
-
 /-- A finite étale algebra over a DVR's fraction field has finite étale
 normalization when each of its actual field factors is unramified over the
 DVR. The hypothesis consists of residue separability and ramification index

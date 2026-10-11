@@ -5,15 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.FiniteEtale.ClopenPullback
 import Nyll.SchemeTheory.Topology.ConnectedComponentsMap
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.CategoryTheory.Functor.FullyFaithful
 import Mathlib.Topology.Sets.Closeds
@@ -142,48 +141,6 @@ private theorem isClopen_range_inl (Y : Scheme.{u}) :
     exact IsOpenImmersion.isOpen_range (coprod.inr : Y ⟶ Y ⨿ Y)
   · exact IsOpenImmersion.isOpen_range (coprod.inl : Y ⟶ Y ⨿ Y)
 
-private def clopenCover {Y : Scheme.{u}} (U : Clopens Y) : FiniteEtale Y where
-  toComma := Over.mk U.toOpens.ι
-  prop := by
-    let : IsClosedImmersion U.toOpens.ι :=
-      IsClosedImmersion.of_isPreimmersion U.toOpens.ι (by
-        rw [Scheme.Opens.range_ι]
-        exact U.isClosed)
-    exact IsFiniteEtale.mk
-
-private theorem clopen_subset_of_preimage_subset_of_full
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [(FiniteEtale.pullback f).Full]
-    (U V : Clopens Y) (h : f ⁻¹' (U : Set Y) ⊆ f ⁻¹' (V : Set Y)) :
-    (U : Set Y) ⊆ (V : Set Y) := by
-  let F := FiniteEtale.pullback f
-  let : IsOpenImmersion (clopenCover V).hom :=
-    inferInstanceAs (IsOpenImmersion V.toOpens.ι)
-  let : IsOpenImmersion (F.obj (clopenCover V)).hom :=
-    inferInstanceAs (IsOpenImmersion (Limits.pullback.snd (clopenCover V).hom f))
-  have hrange : Set.range (F.obj (clopenCover U)).hom ⊆
-      Set.range (F.obj (clopenCover V)).hom := by
-    change Set.range (Limits.pullback.snd U.toOpens.ι f) ⊆
-      Set.range (Limits.pullback.snd V.toOpens.ι f)
-    rw [Scheme.Pullback.range_snd, Scheme.Pullback.range_snd,
-      Scheme.Opens.range_ι, Scheme.Opens.range_ι]
-    exact h
-  let k : F.obj (clopenCover U) ⟶ F.obj (clopenCover V) :=
-    MorphismProperty.Over.homMk
-      (IsOpenImmersion.lift (F.obj (clopenCover V)).hom
-        (F.obj (clopenCover U)).hom hrange)
-      (IsOpenImmersion.lift_fac _ _ hrange)
-  let a : clopenCover U ⟶ clopenCover V := F.preimage k
-  intro y hy
-  have hy' : y ∈ Set.range U.toOpens.ι := by
-    rw [Scheme.Opens.range_ι]
-    exact hy
-  obtain ⟨x, hx⟩ := hy'
-  have he : V.toOpens.ι (a.left x) = y := by
-    rw [← Scheme.Hom.comp_apply, MorphismProperty.Over.w a]
-    exact hx
-  have : y ∈ Set.range V.toOpens.ι := ⟨a.left x, he⟩
-  rwa [Scheme.Opens.range_ι] at this
-
 /-- Fullness alone descends every clopen subset uniquely. The cover used to
 construct the descent is the trivial two-sheeted cover. -/
 theorem existsUnique_clopen_preimage_of_pullback_full
@@ -205,8 +162,8 @@ theorem existsUnique_clopen_preimage_of_pullback_full
   intro T hT
   apply Clopens.ext
   exact Set.Subset.antisymm
-    (clopen_subset_of_preimage_subset_of_full f T V (hT.trans hV.symm).subset)
-    (clopen_subset_of_preimage_subset_of_full f V T (hV.trans hT.symm).subset)
+    (clopen_subset_of_preimage_subset f T V (hT.trans hV.symm).subset)
+    (clopen_subset_of_preimage_subset f V T (hV.trans hT.symm).subset)
 
 /-- Fullness of finite étale pullback gives a bijection on clopen subsets. -/
 theorem bijective_clopen_preimage_of_pullback_full
@@ -219,8 +176,8 @@ theorem bijective_clopen_preimage_of_pullback_full
       congrArg (fun C : Clopens X => (C : Set X)) h
     apply Clopens.ext
     exact Set.Subset.antisymm
-      (clopen_subset_of_preimage_subset_of_full f U V hpre.subset)
-      (clopen_subset_of_preimage_subset_of_full f V U hpre.symm.subset)
+      (clopen_subset_of_preimage_subset f U V hpre.subset)
+      (clopen_subset_of_preimage_subset f V U hpre.symm.subset)
   · intro U
     obtain ⟨V, hV, _⟩ := existsUnique_clopen_preimage_of_pullback_full f U
     exact ⟨V, Clopens.ext hV⟩

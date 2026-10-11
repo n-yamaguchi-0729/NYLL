@@ -51,15 +51,10 @@ universe u
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-private def infinityCoordinateSwap (R : Type u) [CommRing R] :
-    ProjectiveLine R ≅ ProjectiveLine R :=
-  integralCoordinateChange (0 : R) 1 0 1
-    (by rw [zero_mul, one_mul, zero_add])
-
 /-- The affine chart at infinity, with coordinate `T₁ / T₀`. -/
 def infinityChartEmbedding (R : Type u) [CommRing R] :
     Spec (CommRingCat.of R[X]) ⟶ ProjectiveLine R :=
-  standardChartEmbedding R ≫ (infinityCoordinateSwap R).hom
+  standardChartEmbedding R ≫ (projectiveCoordinateSwap R).hom
 
 instance (R : Type u) [CommRing R] : IsOpenImmersion (infinityChartEmbedding R) := by
   unfold infinityChartEmbedding
@@ -70,10 +65,10 @@ theorem infinityChartEmbedding_opensRange (R : Type u) [CommRing R] :
     (infinityChartEmbedding R).opensRange =
       Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R)
         (MvPolynomial.X (0 : Fin 2)) := by
-  have hswap : (infinityCoordinateSwap R).hom = (infinityCoordinateSwap R).inv := rfl
+  have hswap : (projectiveCoordinateSwap R).hom = (projectiveCoordinateSwap R).inv := rfl
   rw [infinityChartEmbedding, Scheme.Hom.opensRange_comp,
     standardChartEmbedding_opensRange, hswap, Scheme.Hom.inv_image]
-  rw [infinityCoordinateSwap, integralCoordinateChange_preimage_infinity]
+  rw [projectiveCoordinateSwap, integralCoordinateChange_preimage_infinity]
   simp only [linearSectionEquation, map_one, map_zero, one_mul, zero_mul, sub_zero]
 
 /-- The original integral section equation restricts to `v-u*w` on the infinity chart. -/
@@ -82,9 +77,9 @@ theorem infinityChartEmbedding_preimage_linearSection (u v : ℤ) :
         Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
           (linearSectionEquation u v) =
       PrimeSpectrum.basicOpen (Polynomial.C v - Polynomial.C u * Polynomial.X) := by
-  have hswap : (infinityCoordinateSwap ℤ).hom = (infinityCoordinateSwap ℤ).inv := rfl
+  have hswap : (projectiveCoordinateSwap ℤ).hom = (projectiveCoordinateSwap ℤ).inv := rfl
   rw [infinityChartEmbedding, Scheme.Hom.comp_preimage, hswap,
-    infinityCoordinateSwap, integralCoordinateChange_inv_preimage_linearSection,
+    projectiveCoordinateSwap, integralCoordinateChange_inv_preimage_linearSection,
     standardChartEmbedding_preimage_linearSection]
   apply congrArg PrimeSpectrum.basicOpen
   simp only [coordinateDeterminant, zero_mul, one_mul, zero_add, zero_sub, map_neg]
