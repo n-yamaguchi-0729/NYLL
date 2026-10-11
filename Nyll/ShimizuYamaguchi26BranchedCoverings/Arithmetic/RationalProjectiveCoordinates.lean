@@ -152,6 +152,12 @@ theorem rationalPointDelta_eq_signed_coordinateDeterminant
         one_mul, zero_mul, sub_zero]
     · simp only [rationalPointDelta, if_neg hb, if_neg ha]
 
+/-- The extended determinant vanishes when both rational points coincide. -/
+theorem rationalPointDelta_self (a : Projectivization ℚ (ℚ × ℚ)) :
+    rationalPointDelta a a = 0 := by
+  rw [rationalPointDelta_eq_signed_coordinateDeterminant]
+  simp only [coordinateDeterminant, mul_comm, sub_self, neg_zero, ite_self]
+
 /-- The paper's integer and the coordinate determinant have the same value at every prime. -/
 theorem padicValInt_rationalPointDelta (p : ℕ)
     (a b : Projectivization ℚ (ℚ × ℚ)) :

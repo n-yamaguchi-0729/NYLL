@@ -60,7 +60,12 @@ of parameters. This gives strict normal crossings for the product of the
 two section kernel ideals at their intersection. If the determinants of
 all other members of a finite family against the second section are not
 divisible by `p`, their stalk ideals are unit ideals. The same parameters
-therefore give strict normal crossings for the entire finite product.
+therefore give strict normal crossings for the entire finite product. If
+only one member passes through the point, its equation is the first member
+of an explicitly supplied regular parameter system, and the finite product
+again has strict normal crossings there. The determinant incidence-count
+conditions therefore give strict normal crossings at every point of the
+product support over the selected prime.
 These sources are still awaiting Lean validation; the full finite-family
 normal-crossing criterion, its converse, and the comparison with base change
 to `Z_p` remain open.

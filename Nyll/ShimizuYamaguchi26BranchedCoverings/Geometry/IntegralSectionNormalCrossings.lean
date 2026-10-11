@@ -47,7 +47,7 @@ import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
-# Strict normal crossings for two integral sections
+# Strict normal crossings for integral sections
 
 Consider the product of the actual kernel ideal sheaves of the infinity
 section and a primitive integral section `(u,v)`. At the point `(p,w)`,
@@ -61,12 +61,13 @@ these facts give strict normal crossings for the actual ideal-sheaf product
 at this point.
 
 The integral Bezout coordinate isomorphism carries the actual ideals of any
-two distinct rational sections to this normalized pair. Its stalk isomorphism
-transports the regular system of parameters and the product ideal back to the
-original point of the second section over `p`. Thus valuation one of the
-original determinant gives strict normal crossings there.
+two distinct rational sections to this normalized pair. Finite-etale pullback
+transports strict normal crossings back to the original point of the second
+section over `p`. Thus valuation one of the original determinant gives strict
+normal crossings there. A single section uses the first member of the same
+parameter system, supplied concretely by the auxiliary primitive pair `(1,p)`.
 
-This supplies the two-section implication toward Lemma 2.3 of
+These supply the one- and two-section implications toward Lemma 2.3 of
 Ryoji Shimizu and Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
 The criterion for a finite family, its converse, and the comparison with
@@ -79,6 +80,15 @@ open AlgebraicGeometry CategoryTheory
 open scoped Polynomial
 
 namespace ShimizuYamaguchi26BranchedCoverings
+
+private theorem infinitySection_stalkIdeal_eq
+    (p : ℕ) [Fact p.Prime] :
+    (integralSection 1 0 1 0 (by decide)).ker.stalkIdeal
+      (integerProjectiveInfinityPoint p) =
+      Ideal.span {infinityChartGermAt ℤ (integerInfinityChartPoint p) Polynomial.X} := by
+  rw [integralSection_stalkIdeal_eq]
+  simp only [infinitySectionIdeal, map_zero, map_one, one_mul, zero_sub,
+    Ideal.span_singleton_neg, Ideal.map_span, Set.image_singleton]
 
 /-- The product of the actual infinity-section ideal and the actual ideal
 of a primitive integral section has strict normal crossings at `(p,w)`
@@ -102,11 +112,6 @@ theorem integralSectionPair_isStrictNormalCrossingsAt_infinity
   have hregular : (ProjectiveLine ℤ).IsRegularAt (integerProjectiveInfinityPoint p) :=
     EtaleFundamentalGroups.Kummer.isRegularLocalRing_of_regularSystem
       (List.ofFn t) hparameters.1 hparameters.2
-  have hinfinity : (integralSection 1 0 1 0 (by decide)).ker.stalkIdeal
-      (integerProjectiveInfinityPoint p) = Ideal.span {g Polynomial.X} := by
-    rw [integralSection_stalkIdeal_eq]
-    simp only [infinitySectionIdeal, map_zero, map_one, one_mul, zero_sub,
-      Ideal.span_singleton_neg, Ideal.map_span, Set.image_singleton]
   have hsection : (integralSection u v a b hab).ker.stalkIdeal
       (integerProjectiveInfinityPoint p) =
       Ideal.span {g (Polynomial.C v - Polynomial.C u * Polynomial.X)} := by
@@ -117,8 +122,64 @@ theorem integralSectionPair_isStrictNormalCrossingsAt_infinity
     simp only [Scheme.initialParameterProduct, Fin.castLE_rfl, id_eq,
       Fin.prod_univ_two, t, Matrix.cons_val_zero, Matrix.cons_val_one]
   refine ⟨hregular, 2, 2, t, by decide, Nat.le_refl 2, hparameters, ?_⟩
-  rw [Scheme.IdealSheafData.stalkIdeal_mul, hinfinity, hsection,
+  rw [Scheme.IdealSheafData.stalkIdeal_mul, infinitySection_stalkIdeal_eq, hsection,
     Ideal.span_singleton_mul_span_singleton, hproduct]
+
+/-- The actual infinity section has strict normal crossings at its point
+above each prime, with its equation as the first regular parameter. -/
+theorem infinitySection_isStrictNormalCrossingsAt
+    (p : ℕ) [hp : Fact p.Prime] :
+    (integralSection 1 0 1 0 (by decide)).ker.IsStrictNormalCrossingsAt
+      (integerProjectiveInfinityPoint p) := by
+  have hp0 : (p : ℤ) ≠ 0 := Int.natCast_ne_zero.mpr hp.out.ne_zero
+  let S : Type := IntegerProjectiveInfinityLocalRing p
+  let g : ℤ[X] →+* S := infinityChartGermAt ℤ (integerInfinityChartPoint p)
+  let t : Fin 2 → S :=
+    ![g Polynomial.X, g (Polynomial.C (p : ℤ) - Polynomial.C 1 * Polynomial.X)]
+  have hparameters : Scheme.IsRegularSystemOfParameters t :=
+    integerProjectiveInfinitySection_isRegularSystemOfParameters p 1 p hp0 padicValInt_self
+  have hregular : (ProjectiveLine ℤ).IsRegularAt (integerProjectiveInfinityPoint p) :=
+    (integralSectionPair_isStrictNormalCrossingsAt_infinity p 1 p 1 0
+      (by simp only [one_mul, zero_mul, add_zero]) hp0 padicValInt_self).1
+  have hproduct : Scheme.initialParameterProduct t 1 (by decide) = g Polynomial.X := by
+    simp only [Scheme.initialParameterProduct, Fin.prod_univ_one,
+      Fin.castLE_zero, t, Matrix.cons_val_zero]
+  refine ⟨hregular, 2, 1, t, by decide, by decide, hparameters, ?_⟩
+  rw [infinitySection_stalkIdeal_eq, hproduct]
+
+/-- A rational section has strict normal crossings at its actual point
+over every prime, without a hypothesis on any other section. -/
+theorem rationalSection_isStrictNormalCrossingsAt
+    (p : ℕ) [Fact p.Prime] (a : Projectivization ℚ (ℚ × ℚ)) :
+    (rationalSection a).ker.IsStrictNormalCrossingsAt
+      (rationalSection a (integerPrimePoint p)) := by
+  let ha : IsCoprime (rationalPointNumerator a) (rationalPointDenominator a) :=
+    rationalPointCoordinates_isCoprime a
+  let e : ProjectiveLine ℤ ≅ ProjectiveLine ℤ := integralCoordinateChange
+    (rationalPointNumerator a) (rationalPointDenominator a)
+    ha.choose ha.choose_spec.choose ha.choose_spec.choose_spec
+  let y : ProjectiveLine ℤ := integerProjectiveInfinityPoint p
+  let I : (ProjectiveLine ℤ).IdealSheafData := (rationalSection a).ker
+  let J : (ProjectiveLine ℤ).IdealSheafData := (integralSection 1 0 1 0 (by decide)).ker
+  have hpull : I.comap e.inv = J :=
+    integralSection_ker_comap_coordinateChange_inv_self
+      (rationalPointNumerator a) (rationalPointDenominator a)
+      ha.choose ha.choose_spec.choose ha.choose_spec.choose_spec
+  have hback : J.comap e.hom = I := by
+    rw [← hpull, ← Scheme.IdealSheafData.comap_comp,
+      e.hom_inv_id, Scheme.IdealSheafData.comap_id]
+  have hpoint : rationalSection a (integerPrimePoint p) = e.inv y :=
+    integralSection_at_integerPrimePoint
+      (rationalPointNumerator a) (rationalPointDenominator a)
+      ha.choose ha.choose_spec.choose ha.choose_spec.choose_spec p
+  have : IsFiniteEtale e.hom :=
+    MorphismProperty.of_isIso (@IsFiniteEtale : MorphismProperty Scheme) e.hom
+  change I.IsStrictNormalCrossingsAt (rationalSection a (integerPrimePoint p))
+  rw [hpoint, ← hback]
+  apply Scheme.IdealSheafData.IsStrictNormalCrossingsAt.comap_of_finiteEtale
+    J e.hom (e.inv y)
+  rw [← Scheme.Hom.comp_apply, e.inv_hom_id]
+  exact infinitySection_isStrictNormalCrossingsAt p
 
 private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
     (p : ℕ) [Fact p.Prime] (u v c d u' v' c' d' : ℤ)
