@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Properties
+import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.CategoryTheory.Functor.FullyFaithful
+import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryFan
 import Mathlib.Topology.Sets.Closeds
 
 /-!
@@ -45,30 +47,39 @@ private theorem section_descent_of_pullback_full
   let : IsFiniteEtale (𝟙 Y) := .mk
   let T : FiniteEtale Y := FiniteEtale.mk (𝟙 Y)
   let F := FiniteEtale.pullback f
-  let p : (F.obj T).left ⟶ X := Limits.pullback.snd (𝟙 Y) f
+  let p : Limits.pullback (𝟙 Y) f ⟶ X := Limits.pullback.snd (𝟙 Y) f
   have hp : (p ≫ a) ≫ W.hom = p ≫ f := by
     rw [Category.assoc, ha]
-  let k : F.obj T ⟶ F.obj W := MorphismProperty.Over.homMk
-    (Limits.pullback.lift (p ≫ a) p hp) (Limits.pullback.lift_snd _ _ _)
+  let kLeft : Limits.pullback (𝟙 Y) f ⟶ Limits.pullback W.hom f :=
+    Limits.pullback.lift (p ≫ a) p hp
+  have hkFst : kLeft ≫ Limits.pullback.fst W.hom f = p ≫ a :=
+    Limits.pullback.lift_fst _ _ _
+  let k : F.obj T ⟶ F.obj W :=
+    MorphismProperty.Over.homMk kLeft (Limits.pullback.lift_snd _ _ _)
   let b : T ⟶ W := F.preimage k
   have hb : F.map b = k := F.map_preimage k
-  have hb₁ : Limits.pullback.fst (𝟙 Y) f ≫ b.left = p ≫ a := by
-    calc
-      Limits.pullback.fst (𝟙 Y) f ≫ b.left =
-          (F.map b).left ≫ Limits.pullback.fst W.hom f :=
-        (Limits.pullback.lift_fst _ _ _).symm
-      _ = k.left ≫ Limits.pullback.fst W.hom f :=
-        congrArg (fun z : F.obj T ⟶ F.obj W =>
-          z.left ≫ Limits.pullback.fst W.hom f) hb
-      _ = p ≫ a := Limits.pullback.lift_fst _ _ _
-  let t : X ⟶ (F.obj T).left :=
+  let s : Y ⟶ W.left := b.left
+  have hs : s ≫ W.hom = 𝟙 Y := MorphismProperty.Over.w b
+  let bPullback : Limits.pullback (𝟙 Y) f ⟶ Limits.pullback W.hom f :=
+    (F.map b).left
+  have hbLeft : bPullback = kLeft :=
+    congrArg (fun z : F.obj T ⟶ F.obj W =>
+      (show Limits.pullback (𝟙 Y) f ⟶ Limits.pullback W.hom f from z.left)) hb
+  have hbFst : bPullback ≫ Limits.pullback.fst W.hom f =
+      Limits.pullback.fst (𝟙 Y) f ≫ s :=
+    Limits.pullback.lift_fst _ _ _
+  have hb₁ : Limits.pullback.fst (𝟙 Y) f ≫ s = p ≫ a :=
+    hbFst.symm.trans ((congrArg
+      (fun z : Limits.pullback (𝟙 Y) f ⟶ Limits.pullback W.hom f =>
+        z ≫ Limits.pullback.fst W.hom f) hbLeft).trans hkFst)
+  let t : X ⟶ Limits.pullback (𝟙 Y) f :=
     Limits.pullback.lift f (𝟙 X) (by rw [Category.comp_id, Category.id_comp])
   have ht₁ : t ≫ Limits.pullback.fst (𝟙 Y) f = f :=
     Limits.pullback.lift_fst _ _ _
   have ht₂ : t ≫ p = 𝟙 X := Limits.pullback.lift_snd _ _ _
-  refine ⟨b.left, MorphismProperty.Over.w b, ?_⟩
+  refine ⟨s, hs, ?_⟩
   calc
-    f ≫ b.left = (t ≫ Limits.pullback.fst (𝟙 Y) f) ≫ b.left := by rw [ht₁]
+    f ≫ s = (t ≫ Limits.pullback.fst (𝟙 Y) f) ≫ s := by rw [ht₁]
     _ = t ≫ (p ≫ a) := by rw [Category.assoc, hb₁]
     _ = a := by rw [← Category.assoc, ht₂, Category.id_comp]
 
@@ -78,7 +89,8 @@ private theorem exists_characteristic_morphism
       a ≫ coprod.desc (𝟙 Y) (𝟙 Y) = f ∧
         a ⁻¹' Set.range (coprod.inl : Y ⟶ Y ⨿ Y) = (U : Set X) := by
   classical
-  have hcompl : IsCompl U.toOpens.ι.opensRange (Uᶜ).toOpens.ι.opensRange := by
+  have hcompl : IsCompl (Scheme.Opens.ι U.toOpens).opensRange
+      (Scheme.Opens.ι (Uᶜ).toOpens).opensRange := by
     rw [Scheme.Opens.opensRange_ι, Scheme.Opens.opensRange_ι]
     apply IsCompl.of_eq
     · apply Opens.ext
@@ -86,32 +98,32 @@ private theorem exists_characteristic_morphism
     · apply Opens.ext
       exact Set.union_compl_self (U : Set X)
   obtain ⟨h⟩ := nonempty_isColimit_binaryCofanMk_of_isCompl
-    U.toOpens.ι (Uᶜ).toOpens.ι hcompl
+    (Scheme.Opens.ι U.toOpens) (Scheme.Opens.ι (Uᶜ).toOpens) hcompl
   let c := BinaryCofan.mk
-    (U.toOpens.ι ≫ f ≫ (coprod.inl : Y ⟶ Y ⨿ Y))
-    ((Uᶜ).toOpens.ι ≫ f ≫ (coprod.inr : Y ⟶ Y ⨿ Y))
+    ((Scheme.Opens.ι U.toOpens) ≫ f ≫ (coprod.inl : Y ⟶ Y ⨿ Y))
+    ((Scheme.Opens.ι (Uᶜ).toOpens) ≫ f ≫ (coprod.inr : Y ⟶ Y ⨿ Y))
   let a : X ⟶ Y ⨿ Y := h.desc c
-  have haU : U.toOpens.ι ≫ a = U.toOpens.ι ≫ f ≫ coprod.inl :=
+  have haU : (Scheme.Opens.ι U.toOpens) ≫ a = (Scheme.Opens.ι U.toOpens) ≫ f ≫ coprod.inl :=
     h.fac c ⟨WalkingPair.left⟩
-  have haV : (Uᶜ).toOpens.ι ≫ a = (Uᶜ).toOpens.ι ≫ f ≫ coprod.inr :=
+  have haV : (Scheme.Opens.ι (Uᶜ).toOpens) ≫ a = (Scheme.Opens.ι (Uᶜ).toOpens) ≫ f ≫ coprod.inr :=
     h.fac c ⟨WalkingPair.right⟩
   refine ⟨a, ?_, ?_⟩
   · apply BinaryCofan.IsColimit.hom_ext h
-    · rw [← Category.assoc, haU, Category.assoc, Category.assoc,
+    · rw [BinaryCofan.mk_inl, ← Category.assoc, haU, Category.assoc, Category.assoc,
         coprod.inl_desc, Category.comp_id]
-    · rw [← Category.assoc, haV, Category.assoc, Category.assoc,
+    · rw [BinaryCofan.mk_inr, ← Category.assoc, haV, Category.assoc, Category.assoc,
         coprod.inr_desc, Category.comp_id]
   · ext x
     by_cases hx : x ∈ U
     · have hax : a x = (coprod.inl : Y ⟶ Y ⨿ Y) (f x) :=
-        congrArg (fun g : U.toOpens.toScheme ⟶ Y ⨿ Y => g ⟨x, hx⟩) haU
+        congrArg (fun g : (Scheme.Opens.toScheme U.toOpens) ⟶ Y ⨿ Y => g ⟨x, hx⟩) haU
       constructor
       · intro _
         exact hx
       · intro _
         exact ⟨f x, hax.symm⟩
     · have hax : a x = (coprod.inr : Y ⟶ Y ⨿ Y) (f x) :=
-        congrArg (fun g : (Uᶜ).toOpens.toScheme ⟶ Y ⨿ Y => g ⟨x, hx⟩) haV
+        congrArg (fun g : (Scheme.Opens.toScheme (Uᶜ).toOpens) ⟶ Y ⨿ Y => g ⟨x, hx⟩) haV
       constructor
       · rintro ⟨y, hy⟩
         exact False.elim (inl_ne_inr Y Y y (f x) (hy.trans hax))
@@ -123,7 +135,7 @@ private theorem isFiniteEtale_double (Y : Scheme.{u}) :
   have : IsZariskiLocalAtSource (@Etale : MorphismProperty Scheme.{u}) :=
     HasRingHomProperty.instIsZariskiLocalAtSource
   have : Etale (coprod.desc (𝟙 Y) (𝟙 Y)) := by
-    apply IsZariskiLocalAtSource.of_openCover (coprodOpenCover Y Y)
+    apply IsZariskiLocalAtSource.of_openCover (coprodOpenCover.{u, 0} Y Y)
     rintro (⟨⟩ | ⟨⟩)
     · change Etale ((coprod.inl : Y ⟶ Y ⨿ Y) ≫ coprod.desc (𝟙 Y) (𝟙 Y))
       rw [coprod.inl_desc]

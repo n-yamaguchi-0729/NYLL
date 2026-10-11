@@ -105,12 +105,13 @@ theorem mem_dense_open_of_specializes_of_stalk_dimension_one
   have hyheight : (1 : ℕ∞) ≤ Order.coheight yA := by
     calc
       (1 : ℕ∞) = 0 + 1 := (zero_add 1).symm
-      _ ≤ Order.coheight η.1 + 1 := add_le_add_right (zero_le _) 1
+      _ ≤ Order.coheight η.1 + 1 :=
+        add_le_add_left (show (0 : ℕ∞) ≤ Order.coheight η.1 from zero_le) 1
       _ ≤ Order.coheight yA := Order.coheight_add_one_le hyη
   have htwo : (2 : ℕ∞) ≤ Order.coheight xA := by
     calc
       (2 : ℕ∞) = 1 + 1 := by norm_num
-      _ ≤ Order.coheight yA + 1 := add_le_add_right hyheight 1
+      _ ≤ Order.coheight yA + 1 := add_le_add_left hyheight 1
       _ ≤ Order.coheight xA := Order.coheight_add_one_le hxy
   rw [hxheight] at htwo
   norm_num at htwo

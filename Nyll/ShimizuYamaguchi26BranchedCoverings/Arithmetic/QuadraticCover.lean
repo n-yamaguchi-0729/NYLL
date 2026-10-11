@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.DyadicCollision
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
+import Mathlib.Algebra.GroupWithZero.Basic
 import Mathlib.Algebra.Polynomial.AlgebraMap
 import Mathlib.Algebra.Polynomial.Coeff
 import Mathlib.Algebra.Polynomial.Degree.SmallDegree
@@ -49,10 +50,11 @@ def quadraticPolynomial {R : Type*} [CommRing R] (c : R) : R[X] := X ^ 2 + X + C
 /-- The quadratic equation is monic over any commutative coefficient ring. -/
 theorem quadraticPolynomial_monic {R : Type*} [CommRing R] (c : R) :
     (quadraticPolynomial c).Monic := by
-  change (X ^ 2 + X + C c : R[X]).Monic
-  rw [add_assoc]
-  apply monic_X_pow_add
-  simpa only [C_1, one_mul] using (degree_linear_lt (a := (1 : R)) (b := c))
+  apply Monic.def.mpr
+  by_cases h : (1 : R) = 0
+  · exact eq_of_zero_eq_one h.symm (quadraticPolynomial c).leadingCoeff 1
+  · simpa only [quadraticPolynomial, C_1, one_mul] using
+      (leadingCoeff_quadratic (a := (1 : R)) (b := (1 : R)) (c := c) h)
 
 /-- The derivative square is exactly the image of the quadratic discriminant. -/
 theorem quadraticPolynomial_derivative_square {R : Type*} [CommRing R] (c : R) :
@@ -60,13 +62,27 @@ theorem quadraticPolynomial_derivative_square {R : Type*} [CommRing R] (c : R) :
       (quadraticPolynomial c).derivative) ^ 2 =
         algebraMap R (AdjoinRoot (quadraticPolynomial c)) (1 - 4 * c) := by
   let r : AdjoinRoot (quadraticPolynomial c) := AdjoinRoot.root (quadraticPolynomial c)
+  have hpoly : quadraticPolynomial c = (X ^ 2 + X + C c : R[X]) := rfl
   have hroot : r ^ 2 + r + algebraMap R (AdjoinRoot (quadraticPolynomial c)) c = 0 := by
     have h : aeval r (quadraticPolynomial c) = 0 := by
       rw [AdjoinRoot.aeval_eq, AdjoinRoot.mk_self]
-    simpa only [quadraticPolynomial, map_add, map_pow, aeval_X, aeval_C] using h
+    have heval : aeval r (quadraticPolynomial c) =
+        r ^ 2 + r + algebraMap R (AdjoinRoot (quadraticPolynomial c)) c := by
+      calc
+        aeval r (quadraticPolynomial c) = aeval r (X ^ 2 + X + C c : R[X]) :=
+          congrArg (fun q : R[X] => aeval r q) hpoly
+        _ = r ^ 2 + r + algebraMap R (AdjoinRoot (quadraticPolynomial c)) c := by
+          rw [aeval_add, aeval_add, aeval_X_pow, aeval_X, aeval_C]
+    exact heval.symm.trans h
+  have hderivativePoly : (quadraticPolynomial c).derivative = C (2 : R) * X + 1 := by
+    rw [hpoly, derivative_add, derivative_add, derivative_X_sq, derivative_X,
+      derivative_C, add_zero]
   have hderivative : aeval r (quadraticPolynomial c).derivative = 2 * r + 1 := by
-    simp only [quadraticPolynomial, derivative_add, derivative_X_sq, derivative_X,
-      derivative_C, add_zero, map_add, map_mul, aeval_C, aeval_X, map_ofNat, map_one]
+    calc
+      aeval r (quadraticPolynomial c).derivative = aeval r (C (2 : R) * X + 1 : R[X]) :=
+        congrArg (fun q : R[X] => aeval r q) hderivativePoly
+      _ = 2 * r + 1 := by
+        rw [aeval_add, aeval_mul, aeval_C, aeval_X, aeval_one, map_ofNat]
   change (aeval r (quadraticPolynomial c).derivative) ^ 2 = _
   rw [hderivative]
   calc
@@ -96,7 +112,7 @@ theorem quadraticPolynomial_etale {R : Type*} [CommRing R] (c : R)
 theorem quadraticPolynomial_finrank {R : Type*} [CommRing R] [Nontrivial R] (c : R) :
     Module.finrank R (AdjoinRoot (quadraticPolynomial c)) = 2 := by
   rw [Module.finrank_eq_card_basis (AdjoinRoot.powerBasis' (quadraticPolynomial_monic c)).basis,
-    Fintype.card_fin]
+    Fintype.card_fin, AdjoinRoot.powerBasis'_dim]
   simpa only [quadraticPolynomial, C_1, one_mul] using
     (natDegree_quadratic (a := (1 : R)) (b := (1 : R)) (c := c) one_ne_zero)
 
@@ -149,8 +165,8 @@ theorem boundaryPolynomial_ne_zero (u v : ℤ) (hv : v ≠ 0) :
     boundaryPolynomial u v ≠ 0 := by
   intro h
   have hcoeff := congrArg (fun f : ℤ[X] => f.coeff 1) h
-  simp only [boundaryPolynomial, coeff_sub, coeff_C_mul_X, if_pos rfl,
-    coeff_C, Nat.one_ne_zero, if_false, sub_zero, coeff_zero] at hcoeff
+  simp only [boundaryPolynomial, coeff_sub, coeff_C_mul_X, coeff_C,
+    Nat.one_ne_zero, ite_false, sub_zero, coeff_zero] at hcoeff
   exact hv hcoeff
 
 /-- The algebraic construction in Proposition 2.5: over the stated affine

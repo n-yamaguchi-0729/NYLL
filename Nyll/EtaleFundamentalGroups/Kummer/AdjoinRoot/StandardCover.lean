@@ -96,7 +96,10 @@ theorem finite_etale_awayMap_adjoinRoot
     rw [Algebra.TensorProduct.tmul_one_eq_one_tmul]
     change eAway (algebraMap B T (algebraMap A B a)) = _
     rw [eAway.commutes]
-    simp only [Localization.awayMap, IsLocalization.Away.map, IsLocalization.map_eq]
+    change algebraMap B Bf (algebraMap A B a) =
+      IsLocalization.map Bf (algebraMap A B) _ (algebraMap A Af a)
+    symm
+    exact IsLocalization.map_eq _ a
   rw [← hmap]
   exact RingHom.Etale.respectsIso.1 (algebraMap Af T) eAway.toRingEquiv
     (RingHom.etale_algebraMap.mpr inferInstance)
@@ -136,7 +139,7 @@ theorem standardKummerCover_finiteFlat_and_etaleAway
     change (Spec.map (CommRingCat.ofHom (algebraMap A B))).finrank x = n
     rw [Scheme.Hom.finrank_SpecMap_algebraMap, Module.rankAtStalk_eq_finrank_of_free]
     change Module.finrank A B = n
-    rw [Module.finrank_eq_card_basis (AdjoinRoot.powerBasis' hmonic).basis,
+    rw [Module.finrank_eq_card_basis (AdjoinRoot.powerBasisAux' hmonic),
       Fintype.card_fin, Polynomial.natDegree_X_pow_sub_C]
   · exact (IsFinite.SpecMap_iff
       (CommRingCat.ofHom (Localization.awayMap (algebraMap A B) f))).mpr hAwayFinite

@@ -56,13 +56,13 @@ private theorem standardChart_aeval_bijective (R : Type u) [CommRing R] :
       Polynomial R →ₐ[R] StandardChartRing R) := by
   obtain ⟨φ, hφ⟩ := ProjSpace.exists_algHom_away_apply_ratio_eq R 1 (1 : Fin 2)
     (fun j : Fin 2 => if j = 0 then Polynomial.X else (1 : Polynomial R))
-    (by rw [if_neg (by decide : (1 : Fin 2) ≠ 0)])
+    (by rw [ite_eq_right (by decide : (1 : Fin 2) ≠ 0)])
   let ψ : Polynomial R →ₐ[R] StandardChartRing R :=
     Polynomial.aeval (ProjSpace.ratio R 1 1 0)
   have hleft : φ.comp ψ = AlgHom.id R (Polynomial R) := by
     apply Polynomial.algHom_ext
     change φ (Polynomial.aeval (ProjSpace.ratio R 1 1 0) Polynomial.X) = Polynomial.X
-    rw [Polynomial.aeval_X, hφ, if_pos rfl]
+    rw [Polynomial.aeval_X, hφ, ite_eq_left rfl]
   have hright : ψ.comp φ = AlgHom.id R (StandardChartRing R) := by
     apply AlgHom.ext_of_adjoin_eq_top (ProjSpace.adjoin_range_ratio R 1 (1 : Fin 2))
     rintro z ⟨j, rfl⟩
@@ -70,8 +70,12 @@ private theorem standardChart_aeval_bijective (R : Type u) [CommRing R] :
       ProjSpace.ratio R 1 1 j
     rw [hφ]
     fin_cases j
-    · rw [if_pos rfl, Polynomial.aeval_X]
-    · rw [if_neg (by decide : (1 : Fin 2) ≠ 0), map_one, ProjSpace.ratio_self]
+    · change Polynomial.aeval (ProjSpace.ratio R 1 1 0)
+        (if (0 : Fin 2) = 0 then Polynomial.X else 1) = ProjSpace.ratio R 1 1 0
+      rw [ite_eq_left rfl, Polynomial.aeval_X]
+    · change Polynomial.aeval (ProjSpace.ratio R 1 1 0)
+        (if (1 : Fin 2) = 0 then Polynomial.X else 1) = ProjSpace.ratio R 1 1 1
+      rw [ite_eq_right (by decide : (1 : Fin 2) ≠ 0), map_one, ProjSpace.ratio_self]
   have hleft' : Function.LeftInverse φ ψ := fun p => DFunLike.congr_fun hleft p
   have hright' : Function.RightInverse φ ψ := fun z => DFunLike.congr_fun hright z
   exact ⟨hleft'.injective, hright'.surjective⟩

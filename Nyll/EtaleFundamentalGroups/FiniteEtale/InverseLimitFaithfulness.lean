@@ -39,12 +39,12 @@ theorem exists_refinement_map_eq
     ∃ (j : Iᵒᵖ) (h : j ⟶ A.right),
       refinementHom F A h ≫ f = refinementHom F A h ≫ g :=
   exists_refinement_map_eq_of_stage_equality F s
-    (fun i a b hab ↦ exists_inverse_limit_stage_map_eq F s hs i a b hab) f g hfg
+    (exists_inverse_limit_stage_map_eq F s hs) f g hfg
 
 /-- The actual comparison from the model localization is faithful, by
 geometric eventual equality and the concrete fraction criterion. -/
 theorem localizedBaseChange_faithful : (localizedBaseChange F s).Faithful :=
   localizedBaseChange_faithful_of_stage_equality F s
-    (fun i a b hab ↦ exists_inverse_limit_stage_map_eq F s hs i a b hab)
+    (exists_inverse_limit_stage_map_eq F s hs)
 
 end AlgebraicGeometry.FiniteEtale.InverseLimitModel

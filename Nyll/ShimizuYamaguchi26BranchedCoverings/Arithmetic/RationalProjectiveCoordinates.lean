@@ -54,9 +54,9 @@ def rationalPointCoordinates (a : Projectivization ℚ (ℚ × ℚ)) : ℚ × �
 theorem rationalPointCoordinates_isCoprime (a : Projectivization ℚ (ℚ × ℚ)) :
     IsCoprime (rationalPointNumerator a) (rationalPointDenominator a) := by
   by_cases h : a.rep.2 = 0
-  · simp only [rationalPointNumerator, rationalPointDenominator, if_pos h]
+  · simp only [rationalPointNumerator, rationalPointDenominator, ite_eq_left h]
     exact isCoprime_one_left
-  · simp only [rationalPointNumerator, rationalPointDenominator, if_neg h]
+  · simp only [rationalPointNumerator, rationalPointDenominator, ite_eq_right h]
     exact Rat.isCoprime_num_den (a.rep.1 / a.rep.2)
 
 private theorem exists_smul_rationalPointCoordinates_eq_rep
@@ -65,7 +65,7 @@ private theorem exists_smul_rationalPointCoordinates_eq_rep
   by_cases h : a.rep.2 = 0
   · have hc : rationalPointCoordinates a = (1, 0) := by
       simp only [rationalPointCoordinates, rationalPointNumerator,
-        rationalPointDenominator, if_pos h, Int.cast_one, Int.cast_zero]
+        rationalPointDenominator, ite_eq_left h, Int.cast_one, Int.cast_zero]
     refine ⟨a.rep.1, ?_⟩
     rw [hc]
     apply Prod.ext
@@ -77,7 +77,7 @@ private theorem exists_smul_rationalPointCoordinates_eq_rep
     have hd : (q.den : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr q.den_ne_zero
     have hc : rationalPointCoordinates a = ((q.num : ℚ), (q.den : ℚ)) := by
       simp only [rationalPointCoordinates, rationalPointNumerator,
-        rationalPointDenominator, if_neg h, Int.cast_natCast]
+        rationalPointDenominator, ite_eq_right h, Int.cast_natCast, q]
     refine ⟨a.rep.2 / (q.den : ℚ), ?_⟩
     rw [hc]
     apply Prod.ext
@@ -144,13 +144,13 @@ theorem rationalPointDelta_eq_signed_coordinateDeterminant
         (rationalPointNumerator b) (rationalPointDenominator b) := by
   by_cases hb : b.rep.2 = 0
   · simp only [rationalPointDelta, coordinateDeterminant,
-      rationalPointNumerator, rationalPointDenominator, if_pos hb,
+      rationalPointNumerator, rationalPointDenominator, ite_eq_left hb,
       mul_zero, mul_one, zero_sub, neg_neg]
   · by_cases ha : a.rep.2 = 0
     · simp only [rationalPointDelta, coordinateDeterminant,
-        rationalPointNumerator, rationalPointDenominator, if_pos ha, if_neg hb,
+        rationalPointNumerator, rationalPointDenominator, ite_eq_left ha, ite_eq_right hb,
         one_mul, zero_mul, sub_zero]
-    · simp only [rationalPointDelta, if_neg hb, if_neg ha]
+    · simp only [rationalPointDelta, ite_eq_right hb, ite_eq_right ha]
 
 /-- The extended determinant vanishes when both rational points coincide. -/
 theorem rationalPointDelta_self (a : Projectivization ℚ (ℚ × ℚ)) :
@@ -167,7 +167,7 @@ theorem padicValInt_rationalPointDelta (p : ℕ)
         (rationalPointDenominator b)) := by
   rw [rationalPointDelta_eq_signed_coordinateDeterminant]
   by_cases hb : b.rep.2 = 0
-  · simp only [if_pos hb, padicValInt, Int.natAbs_neg]
-  · rw [if_neg hb]
+  · simp only [ite_eq_left hb, padicValInt, Int.natAbs_neg]
+  · rw [ite_eq_right hb]
 
 end ShimizuYamaguchi26BranchedCoverings

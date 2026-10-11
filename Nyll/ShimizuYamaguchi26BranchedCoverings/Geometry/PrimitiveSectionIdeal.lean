@@ -52,7 +52,7 @@ open scoped Polynomial BigOperators
 namespace ShimizuYamaguchi26BranchedCoverings
 
 /-- The principal ideal of the section equation in the integral infinity chart. -/
-def infinitySectionIdeal (u v : ℤ) : Ideal ℤ[X] :=
+noncomputable def infinitySectionIdeal (u v : ℤ) : Ideal ℤ[X] :=
   Ideal.span {Polynomial.C v - Polynomial.C u * Polynomial.X}
 
 /-- A primitive nonconstant section equation generates a prime ideal. -/

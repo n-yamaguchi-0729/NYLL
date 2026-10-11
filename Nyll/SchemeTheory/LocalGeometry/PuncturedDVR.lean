@@ -48,7 +48,7 @@ theorem puncturedSpectrumOpen_eq_basicOpen_of_uniformizer
     change p.asIdeal = maximalIdeal R
     apply le_antisymm (le_maximalIdeal p.isPrime.ne_top)
     rw [hπ.maximalIdeal_eq]
-    exact Ideal.span_singleton_le_iff_mem.mpr hπp
+    exact (Ideal.span_singleton_le_iff_mem p.asIdeal).mpr hπp
   · intro hp hpc
     apply hp
     rw [hpc]
@@ -80,8 +80,9 @@ theorem range_SpecMap_fractionField_of_dvr
     SchemeTheory.isLocalizationAway_fractionField_of_isDiscreteValuationRing
       R K π hπ.ne_zero hπ.not_isUnit
   change Set.range (PrimeSpectrum.comap (algebraMap R K)) = _
-  rw [PrimeSpectrum.localization_away_comap_range K π,
-    ← puncturedSpectrumOpen_eq_basicOpen_of_uniformizer R hπ]
+  exact (PrimeSpectrum.localization_away_comap_range K π).trans
+    (congrArg (fun U : (Spec (.of R)).Opens => (U : Set (Spec (.of R))))
+      (puncturedSpectrumOpen_eq_basicOpen_of_uniformizer R hπ).symm)
 
 /-- The puncture of a DVR is its fraction-field spectrum, as schemes over
 that DVR. -/
@@ -106,6 +107,9 @@ theorem puncturedSpectrumIsoSpecFractionField_hom_SpecMap
       puncturedSpectrumInclusion R := by
   let : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R K))) :=
     isOpenImmersion_SpecMap_fractionField_of_dvr R K
-  exact IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+  exact IsOpenImmersion.isoOfRangeEq_hom_fac (puncturedSpectrumOpen R).ι
+    (Spec.map (CommRingCat.ofHom (algebraMap R K)))
+    ((Opens.range_ι (puncturedSpectrumOpen R)).trans
+      (range_SpecMap_fractionField_of_dvr R K).symm)
 
 end AlgebraicGeometry.Scheme

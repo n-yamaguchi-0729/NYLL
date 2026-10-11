@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.FiniteEtale.InverseLimitModel
 
 universe u v
 
-variable {I : Type v} [Preorder I] [IsDirectedOrder I] [Nonempty I]
+variable {I : Type v} [Preorder I]
 variable (F : Iᵒᵖ ⥤ Scheme.{u}) (s : Cone F)
 variable (heq : ∀ (i : Iᵒᵖ) {A B : FiniteEtale (F.obj i)} (a b : A ⟶ B),
   (pullback (s.π.app i)).map a = (pullback (s.π.app i)).map b →
@@ -100,6 +100,8 @@ theorem exists_refinement_map_eq_of_stage_equality
     _ = refinementHom F A h ≫ (ag ≫ d) := Category.assoc _ _ _
     _ = refinementHom F A h ≫ g := congrArg (fun a ↦ refinementHom F A h ≫ a) hfacg
 
+variable [IsDirectedOrder I]
+
 /-- The actual comparison from the model localization is faithful, by
 geometric eventual equality and the existing fraction criterion. -/
 theorem localizedBaseChange_faithful_of_stage_equality : (localizedBaseChange F s).Faithful := by
@@ -114,7 +116,8 @@ theorem localizedBaseChange_faithful_of_stage_equality : (localizedBaseChange F 
     have hg : G.map (Q.map g) = (baseChange F s).map g :=
       (Functor.congr_hom (q_comp_localizedBaseChange F s) g).trans
         ((Category.id_comp _).trans (Category.comp_id _))
-    obtain ⟨j, a, ha⟩ := exists_refinement_map_eq_of_stage_equality F s heq f g (hf.symm.trans (h.trans hg))
+    obtain ⟨j, a, ha⟩ := exists_refinement_map_eq_of_stage_equality F s heq f g
+      (hf.symm.trans (h.trans hg))
     exact (MorphismProperty.map_eq_iff_precomp Q (cartesian F) f g).2
       ⟨refinementObj F A a, refinementHom F A a, refinementHom_cartesian F A a, ha⟩
   have hop : G.op.Faithful :=

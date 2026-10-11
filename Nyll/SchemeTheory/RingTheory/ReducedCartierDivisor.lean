@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Mathlib.Algebra.GroupWithZero.Action.Regular
+import Mathlib.LinearAlgebra.Span.Defs
 import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
@@ -58,7 +59,9 @@ theorem maximalIdeal_localizationAtPrime_eq_span_of_reduced_quotient
         (A := S) P I hP).symm
     _ = I.map (algebraMap A S) := hmap
     _ = Ideal.span ({algebraMap A S f} : Set S) := by
-      rw [I, Ideal.map_span, Set.image_singleton]
+      change (Ideal.span ({f} : Set A)).map (algebraMap A S) =
+        Ideal.span ({algebraMap A S f} : Set S)
+      rw [Ideal.map_span, Set.image_singleton]
 
 /-- The ambient local ring at a generic point of a reduced Cartier divisor
 is regular. The quotient by the displayed nonzerodivisor is a field. -/
@@ -118,6 +121,7 @@ theorem isDiscreteValuationRing_localizationAtPrime_of_reduced_quotient
     apply Ideal.mem_bot.mp
     rw [← hzero, hmax]
     exact Ideal.mem_span_singleton_self x
-  exact ((IsDiscreteValuationRing.TFAE S hnotfield).out 5 1).mp ⟨x, hmax⟩
+  have hprincipal : (IsLocalRing.maximalIdeal S).IsPrincipal := ⟨x, hmax⟩
+  exact ((IsDiscreteValuationRing.TFAE S hnotfield).out 5 1).mp hprincipal
 
 end SchemeTheory

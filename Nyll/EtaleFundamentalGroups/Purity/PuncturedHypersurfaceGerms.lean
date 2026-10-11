@@ -11,9 +11,11 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualFaithfulness
 import Nyll.SchemeTheory.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.DensePullback
 import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+import Mathlib.CategoryTheory.Category.Preorder
 import Mathlib.CategoryTheory.Functor.FullyFaithful
 import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 import Mathlib.CategoryTheory.NatIso
+import Mathlib.Order.OrderDual
 
 /-!
 # Faithfulness on germs along a punctured hypersurface
@@ -54,11 +56,14 @@ theorem projection_pullback_faithful (W : Neighborhood R f)
   have : (pullback (Limits.pullback.fst W.val.ι (hypersurfaceMap R f))).Faithful := hW
   have : (pullback (neighborhoodPullbackIso R f W).hom).Faithful :=
     pullback_faithful_of_isDominant (neighborhoodPullbackIso R f W).hom
-  exact Functor.Faithful.of_iso
-    (MorphismProperty.Over.pullbackComp (P := @IsFiniteEtale) (Q := ⊤)
+  let e : pullback (projection R f W) ≅
+      pullback (Limits.pullback.fst W.val.ι (hypersurfaceMap R f)) ⋙
+        pullback (neighborhoodPullbackIso R f W).hom :=
+    MorphismProperty.Over.pullbackComp (P := @IsFiniteEtale) (Q := ⊤)
       (neighborhoodPullbackIso R f W).hom
       (Limits.pullback.fst W.val.ι (hypersurfaceMap R f))
-      (projection R f W) rfl).symm
+      (projection R f W) rfl
+  exact Functor.Faithful.of_iso e.symm
 
 variable [IsNoetherianRing R] (hf : f ∈ IsLocalRing.maximalIdeal R)
 
@@ -81,7 +86,9 @@ theorem exists_stage_map_eq
       fun p hp hfp ↦ ⟨i.unop.property.2 p hp hfp, hUzero p hp hfp⟩⟩
   let j : (OrderDual (Neighborhood R f))ᵒᵖ := op (OrderDual.toDual V)
   let h : j ⟶ i :=
-    (homOfLE (show i.unop ≤ OrderDual.toDual V from inf_le_left)).op
+    (homOfLE (show i.unop ≤ OrderDual.toDual V from by
+      change i.unop.val ⊓ U ≤ i.unop.val
+      exact inf_le_left)).op
   have hV : (pullback ((cone R f).π.app j)).Faithful :=
     projection_pullback_faithful R f V (hUfaithful V.val inf_le_right V.property.2)
   let e : pullback ((cone R f).π.app i) ≅
@@ -103,6 +110,6 @@ theorem restriction_faithful :
     (InverseLimitModel.localizedBaseChange (diagram R f) (cone R f)).Faithful :=
   InverseLimitModel.localizedBaseChange_faithful_of_stage_equality
     (diagram R f) (cone R f)
-    (fun i a b hab ↦ exists_stage_map_eq R f hf i a b hab)
+    (exists_stage_map_eq R f hf)
 
 end AlgebraicGeometry.FiniteEtale.PuncturedHypersurface

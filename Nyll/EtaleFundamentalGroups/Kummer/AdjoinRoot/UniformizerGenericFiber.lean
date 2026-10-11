@@ -99,8 +99,9 @@ theorem uniformizerRootFractionEquiv_root
         rw [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_C]))
   have hroot : eRoot (1 ⊗ₜ[R] AdjoinRoot.root (X ^ n - C π)) =
       AdjoinRoot.root (X ^ n - C (algebraMap R (FractionRing R) π)) := by
-    simp only [eRoot, AlgEquiv.trans_apply,
-      adjoinRootBaseChangeAlgEquiv_tmul_root, AdjoinRoot.algEquivOfEq_root]
+    simp only [eRoot, AlgEquiv.trans_apply]
+    rw [adjoinRootBaseChangeAlgEquiv_tmul_root (A := R) (S := FractionRing R)
+      (X ^ n - C π), AdjoinRoot.algEquivOfEq_root]
   change finiteGenericFiberAlgEquiv (R := R) (C := B)
     (K := FractionRing R) (E := FractionRing B)
       (eRoot.symm (AdjoinRoot.root (X ^ n - C (algebraMap R (FractionRing R) π)))) = _
@@ -138,7 +139,7 @@ theorem uniformizerRoot_fractionField_finiteSeparable_degree
   have : Algebra.FormallyEtale K E := Algebra.FormallyEtale.of_equiv e
   refine ⟨inferInstance, (Algebra.FormallyEtale.iff_isSeparable K E).mp inferInstance, ?_⟩
   rw [← e.toLinearEquiv.finrank_eq,
-    Module.finrank_eq_card_basis (AdjoinRoot.powerBasis' hmonic).basis,
+    Module.finrank_eq_card_basis (AdjoinRoot.powerBasisAux' hmonic),
     Fintype.card_fin, Polynomial.natDegree_X_pow_sub_C]
 
 end EtaleFundamentalGroups.Kummer

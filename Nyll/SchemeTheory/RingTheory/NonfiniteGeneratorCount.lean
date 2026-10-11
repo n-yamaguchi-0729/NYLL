@@ -52,7 +52,9 @@ theorem integralPrefixLength_le {r : ℕ} (y : Fin r → C) :
 theorem integralPrefixLength_spec {r : ℕ} (y : Fin r → C) :
     ∀ i : Fin r, i.val < integralPrefixLength R y → IsIntegral R (y i) := by
   classical
-  exact Nat.findGreatest_spec (Nat.zero_le r)
+  exact Nat.findGreatest_spec
+    (P := fun s : ℕ => ∀ i : Fin r, i.val < s → IsIntegral R (y i))
+    (Nat.zero_le r)
     (show ∀ i : Fin r, i.val < 0 → IsIntegral R (y i) from
       fun i hi => False.elim (Nat.not_lt_zero i.val hi))
 

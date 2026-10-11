@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.AlgebraicGeometry.Spec
+import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.Data.Set.Image
 import Mathlib.Order.KrullDimension
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
@@ -76,9 +77,11 @@ abbrev InfinityIntersectionAlgebra (u v : R) := R[X] ⧸ infinityIntersectionIde
 /-- Evaluation at zero constructs the affine intersection algebra as `R / (v)`. -/
 def infinityIntersectionEquiv (u v : R) :
     InfinityIntersectionAlgebra u v ≃ₐ[R] R ⧸ Ideal.span {v} :=
-  (Ideal.quotientEquivAlgOfEq R (infinityIntersectionIdeal_eq u v)).trans (by
-    simpa only [map_zero, sub_zero] using
-      Polynomial.quotientSpanCXSubCAlgEquiv v (0 : R))
+  (Ideal.quotientEquivAlgOfEq R
+    (show infinityIntersectionIdeal u v =
+        Ideal.span {Polynomial.C v, Polynomial.X - Polynomial.C (0 : R)} by
+      rw [infinityIntersectionIdeal_eq, Polynomial.C_0, sub_zero])).trans
+    (Polynomial.quotientSpanCXSubCAlgEquiv v (0 : R))
 
 /-- The affine intersection is the spectrum of the actual denominator quotient. -/
 def infinityIntersectionIso (u v : R) :
