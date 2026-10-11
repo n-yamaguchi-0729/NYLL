@@ -6,4 +6,5 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.TwoSectionComplement
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralCoordinateChange
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.QuadraticQuotient

@@ -60,4 +60,19 @@ theorem exists_integral_change_sending_to_infinity
       ring
     _ = -1 := congrArg Neg.neg hab
 
+/-- The normalized coordinates of a second primitive pair remain primitive
+under the explicit integral change sending the first pair to infinity.
+The witnesses are computed from the original two Bezout identities. -/
+theorem isCoprime_normalizedCoordinates
+    (u v a b u' v' : ℤ) (hab : a * u + b * v = 1)
+    (huv' : IsCoprime u' v') :
+    IsCoprime (-(a * u' + b * v')) (coordinateDeterminant u v u' v') := by
+  obtain ⟨c, d, hcd⟩ := huv'
+  refine ⟨-(c * u + d * v), -c * b + d * a, ?_⟩
+  calc
+    _ = (a * u + b * v) * (c * u' + d * v') := by
+      unfold coordinateDeterminant
+      ring
+    _ = 1 := by rw [hab, hcd, one_mul]
+
 end ShimizuYamaguchi26BranchedCoverings

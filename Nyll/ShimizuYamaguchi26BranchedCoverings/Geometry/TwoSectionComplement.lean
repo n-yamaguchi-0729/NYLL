@@ -27,8 +27,9 @@ For primitive `(u,v)`, the first equation is the rational section considered
 in Proposition 2.5 of Ryoji Shimizu and Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
 The scheme comparison proved here applies without the primitivity assumption;
-identifying the closed subscheme with the corresponding section, and treating
-an arbitrary coordinate change, are separate assertions.
+identifying the closed subscheme with the corresponding section is a separate
+assertion. `IntegralCoordinateChange` extends this comparison to pairs of
+equations with arbitrary primitive first coordinates.
 -/
 
 noncomputable section

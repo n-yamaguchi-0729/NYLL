@@ -4,15 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticCover
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticConnected
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticScheme
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralCoordinateChange
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.TwoSectionComplement
 import Nyll.EtaleFundamentalGroups.GaloisCovers.DoubleCoverQuotient
 import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
 import Nyll.SchemeTheory.Normalization.Normal
 import Nyll.SchemeTheory.FiniteEtale.Basic
+import Mathlib.Algebra.Group.Int.Units
+import Mathlib.Algebra.Ring.Int.Parity
+import Mathlib.RingTheory.Coprime.Basic
+import Mathlib.Tactic.NormNum
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 import Mathlib.AlgebraicGeometry.Properties
@@ -42,7 +48,9 @@ Shimizu and Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
 The actual standard-chart comparison transports this quotient to every open
 subscheme of the projective complement of `T₁ = 0` and `v*T₀-u*T₁ = 0`.
-Identifying arbitrary primitive sections and changing their coordinates remain
+The explicit integral change of coordinates also gives the quotient for any
+two primitive equations with nonzero determinant divisible by four. Identifying
+their closed loci as section images and comparing normal crossings remain
 separate geometric assertions.
 -/
 
@@ -113,5 +121,36 @@ theorem exists_surjective_cyclicTwo_of_le_twoSectionComplement
   have : IsOpenImmersion j := inferInstance
   exact exists_surjective_cyclicTwo_of_openImmersion_twoSectionCoordinateRing
     u v hu hv hv0 j ξ
+
+/-- Two primitive integral equations with nonzero determinant divisible by
+four give a continuous cyclic quotient of order two on every open inside
+their common complement. The odd normalized numerator, coordinate change,
+and quadratic cover are all constructed from the original primitive pairs.
+
+This is the determinant-obstruction case of Proposition 2.5. Comparing this
+condition with failure of normal crossings is a separate geometric step. -/
+theorem exists_surjective_cyclicTwo_of_four_dvd_pairDeterminant
+    (u v u' v' : ℤ) (huv : IsCoprime u v) (huv' : IsCoprime u' v')
+    (hfour : (4 : ℤ) ∣ coordinateDeterminant u v u' v')
+    (hne : coordinateDeterminant u v u' v' ≠ 0)
+    (U : (ProjectiveLine ℤ).Opens) (hU : U ≤ integralPairComplement u v u' v')
+    {Ω : Type} [Field Ω] [IsSepClosed Ω] (ξ : Spec (.of Ω) ⟶ U.toScheme) :
+    ∃ φ : π₁ᵉᵗ(ξ) →ₜ* Multiplicative (ZMod 2), Function.Surjective φ := by
+  obtain ⟨a, b, hab⟩ := huv
+  have hprimitive := isCoprime_normalizedCoordinates u v a b u' v' hab huv'
+  have hodd : Odd (-(a * u' + b * v')) := by
+    apply Int.not_even_iff_odd.mp
+    intro heven
+    have htwo : (2 : ℤ) ∣ coordinateDeterminant u v u' v' :=
+      dvd_trans (by norm_num : (2 : ℤ) ∣ 4) hfour
+    have hunit : IsUnit (2 : ℤ) :=
+      hprimitive.isUnit_of_dvd' (even_iff_two_dvd.mp heven) htwo
+    norm_num [Int.isUnit_iff] at hunit
+  let j : U.toScheme ⟶ Spec (.of (TwoSectionCoordinateRing
+      (-(a * u' + b * v')) (coordinateDeterminant u v u' v'))) :=
+    (ProjectiveLine ℤ).homOfLE hU ≫ (integralPairComplementIso u v a b u' v' hab).hom
+  have : IsOpenImmersion j := inferInstance
+  exact exists_surjective_cyclicTwo_of_openImmersion_twoSectionCoordinateRing
+    (-(a * u' + b * v')) (coordinateDeterminant u v u' v') hodd hfour hne j ξ
 
 end ShimizuYamaguchi26BranchedCoverings

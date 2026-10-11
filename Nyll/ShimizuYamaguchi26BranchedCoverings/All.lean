@@ -13,7 +13,8 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.All
 Formalization of Ryoji Shimizu and Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
 
-The present sources cover integral coordinate changes from Lemma 2.3, the
+The current additions are draft sources awaiting Lean validation. They supply
+integral coordinate changes from Lemma 2.3, the
 coordinate calculation in Lemma 2.4, the arithmetic six-section bound in
 Corollary 2.7, and the connected finite etale quadratic cover used in
 Proposition 2.5. Its coordinate algebra is an integral domain, free of rank
@@ -23,10 +24,17 @@ and Galois-category results from the etale fundamental group library.
 
 The actual projective open `D₊(T₁) ∩ D₊(v*T₀-u*T₁)` is identified with
 `Spec ℤ[t, 1/(v*t-u)]` by a constructed scheme isomorphism, compatible with
-the maps to the projective line.
+the maps to the projective line. Bézout coefficients construct projective
+scheme automorphisms taking any primitive integral linear equation to the
+equation at infinity. Restricting these automorphisms gives affine models
+for arbitrary pairs of linear equations with primitive first coordinates;
+the determinant is the transformed denominator coefficient. If both pairs
+are primitive and their determinant is nonzero and divisible by four, the
+continuous quadratic quotient is constructed on every open inside their
+common complement.
 
 The section and intersection-multiplicity comparisons for arbitrary
-primitive coordinates, projective coordinate changes, the prosolvable
-criterion of Theorem 2.6, and the finite simple quotient exclusions of
+primitive coordinates, the prosolvable criterion of Theorem 2.6, and the
+finite simple quotient exclusions of
 Theorems 3.1 and 3.6 remain to be formalized here.
 -/
