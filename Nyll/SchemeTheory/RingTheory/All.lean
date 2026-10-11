@@ -10,6 +10,7 @@ import Nyll.SchemeTheory.RingTheory.CyclicIdempotentFactor
 import Nyll.SchemeTheory.RingTheory.Descent.All
 import Nyll.SchemeTheory.RingTheory.DepthTwoRegularPair
 import Nyll.SchemeTheory.RingTheory.RegularLocalQuotientLift
+import Nyll.SchemeTheory.RingTheory.ReducedCartierDivisor
 import Nyll.SchemeTheory.RingTheory.PuncturedHypersurfacePrime
 import Nyll.SchemeTheory.RingTheory.DeterminantTrickCongruence
 import Nyll.SchemeTheory.RingTheory.Finite

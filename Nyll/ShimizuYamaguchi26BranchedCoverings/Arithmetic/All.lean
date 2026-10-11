@@ -7,3 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.DyadicCollision
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticCover
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalFunctionNonsquare
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticConnected
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticScheme
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.SixSectionBound
