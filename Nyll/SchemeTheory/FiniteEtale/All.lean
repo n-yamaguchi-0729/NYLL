@@ -18,6 +18,7 @@ import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberFullyFaithful
 import Nyll.SchemeTheory.FiniteEtale.MaximalOpenExtension
 import Nyll.SchemeTheory.FiniteEtale.FullOfSectionDescent
 import Nyll.SchemeTheory.FiniteEtale.DensePullback
+import Nyll.SchemeTheory.FiniteEtale.DVRUnramifiedExtension
 import Nyll.SchemeTheory.FiniteEtale.Forget.All
 import Nyll.SchemeTheory.FiniteEtale.Geometry
 import Nyll.SchemeTheory.FiniteEtale.Henselian.All

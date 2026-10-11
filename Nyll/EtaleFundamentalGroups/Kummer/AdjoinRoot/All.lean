@@ -8,7 +8,9 @@ import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.Global.All
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootDivisor
+import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.ReducedBoundary
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootScaling
 import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootFiberTransitivity
+import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerRamification
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Kummer.AdjoinRoot. -/
