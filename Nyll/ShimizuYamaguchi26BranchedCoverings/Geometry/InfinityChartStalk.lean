@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.CategoryTheory.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Iso
 import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.RingTheory.Spectrum.Prime.Basic
 
@@ -83,35 +84,55 @@ def projectiveInfinityPoint (R : Type u) [CommRing R] [IsLocalRing R] :
     ProjectiveLine R :=
   infinityChartEmbedding R (infinityChartClosedPoint R)
 
+/-- At any prime of the infinity chart, the actual projective stalk is the
+localization of the polynomial ring at that prime. -/
+def infinityChartStalkEquiv (R : Type u) [CommRing R] (q : PrimeSpectrum R[X]) :
+    (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) ≃+*
+      Localization.AtPrime q.asIdeal :=
+  ((asIso ((infinityChartEmbedding R).stalkMap q)) ≪≫
+    Spec.stalkIso (CommRingCat.of R[X]) q).commRingCatIsoToRingEquiv
+
+/-- A polynomial gives a germ at any point of the infinity chart, using the
+actual structure-sheaf germ and the inverse stalk map of the open immersion. -/
+def infinityChartGermAt (R : Type u) [CommRing R] (q : PrimeSpectrum R[X]) :
+    R[X] →+* (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) :=
+  ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv ≫
+    (Spec (CommRingCat.of R[X])).presheaf.germ ⊤ q trivial ≫
+    (asIso ((infinityChartEmbedding R).stalkMap q)).inv).hom
+
+/-- The actual chart germ becomes the localization map at the chosen prime. -/
+theorem infinityChartStalkEquiv_germAt (R : Type u) [CommRing R]
+    (q : PrimeSpectrum R[X]) (f : R[X]) :
+    infinityChartStalkEquiv R q (infinityChartGermAt R q f) =
+      algebraMap R[X] (Localization.AtPrime q.asIdeal) f := by
+  change (Spec.stalkIso (CommRingCat.of R[X]) q).hom
+    ((asIso ((infinityChartEmbedding R).stalkMap q)).hom
+      ((asIso ((infinityChartEmbedding R).stalkMap q)).inv
+        ((Spec (CommRingCat.of R[X])).presheaf.germ ⊤ q trivial
+          ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv f)))) = _
+  rw [CommRingCat.hom_inv_apply]
+  have h := ConcreteCategory.congr_hom
+    (Spec.germ_stalkMapIso_hom (R := CommRingCat.of R[X]) (x := q))
+    ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv f)
+  simpa only [CommRingCat.comp_apply, CommRingCat.hom_inv_apply] using h
+
 /-- The projective stalk is the localization at the concrete infinity chart prime. -/
 def projectiveInfinityStalkEquiv (R : Type u) [CommRing R] [IsLocalRing R] :
     (ProjectiveLine R).presheaf.stalk (projectiveInfinityPoint R) ≃+*
       InfinityChartLocalRing R :=
-  ((asIso ((infinityChartEmbedding R).stalkMap (infinityChartClosedPoint R))) ≪≫
-    Spec.stalkIso (CommRingCat.of R[X]) (infinityChartClosedPoint R)).commRingCatIsoToRingEquiv
+  infinityChartStalkEquiv R (infinityChartClosedPoint R)
 
-/-- A polynomial defines a projective local germ through the actual affine
-structure-sheaf germ and the inverse stalk map of the chart. -/
+/-- A polynomial defines a projective local germ at the point above the
+closed point of the local base through the actual affine structure sheaf. -/
 def infinityChartGerm (R : Type u) [CommRing R] [IsLocalRing R] :
     R[X] →+* (ProjectiveLine R).presheaf.stalk (projectiveInfinityPoint R) :=
-  ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv ≫
-    (Spec (CommRingCat.of R[X])).presheaf.germ ⊤ (infinityChartClosedPoint R) trivial ≫
-    (asIso ((infinityChartEmbedding R).stalkMap (infinityChartClosedPoint R))).inv).hom
+  infinityChartGermAt R (infinityChartClosedPoint R)
 
 /-- The actual chart germ becomes the standard polynomial localization map. -/
 theorem projectiveInfinityStalkEquiv_germ (R : Type u) [CommRing R] [IsLocalRing R]
     (f : R[X]) :
     projectiveInfinityStalkEquiv R (infinityChartGerm R f) =
-      algebraMap R[X] (InfinityChartLocalRing R) f := by
-  change (Spec.stalkIso (CommRingCat.of R[X]) (infinityChartClosedPoint R)).hom
-    ((asIso ((infinityChartEmbedding R).stalkMap (infinityChartClosedPoint R))).hom
-      ((asIso ((infinityChartEmbedding R).stalkMap (infinityChartClosedPoint R))).inv
-        ((Spec (CommRingCat.of R[X])).presheaf.germ ⊤ (infinityChartClosedPoint R) trivial
-          ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv f)))) = _
-  rw [CommRingCat.hom_inv_apply]
-  have h := ConcreteCategory.congr_hom
-    (Spec.germ_stalkMapIso_hom (R := CommRingCat.of R[X]) (x := infinityChartClosedPoint R))
-    ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv f)
-  simpa only [CommRingCat.comp_apply, CommRingCat.hom_inv_apply] using h
+      algebraMap R[X] (InfinityChartLocalRing R) f :=
+  infinityChartStalkEquiv_germAt R (infinityChartClosedPoint R) f
 
 end ShimizuYamaguchi26BranchedCoverings

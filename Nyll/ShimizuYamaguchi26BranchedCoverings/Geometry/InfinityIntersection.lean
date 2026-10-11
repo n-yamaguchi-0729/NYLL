@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Mathlib.Algebra.Polynomial.Eval.Defs
 import Mathlib.AlgebraicGeometry.Spec
+import Mathlib.Data.Set.Image
 import Mathlib.Order.KrullDimension
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
+import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Ideal.Span
 import Mathlib.RingTheory.Length
@@ -50,6 +53,14 @@ variable {R : Type u} [CommRing R]
 /-- The ideal of the two section equations on the chart with coordinate `w`. -/
 def infinityIntersectionIdeal (u v : R) : Ideal R[X] :=
   Ideal.span {Polynomial.X, Polynomial.C v - Polynomial.C u * Polynomial.X}
+
+/-- Extending coefficients preserves the two concrete intersection equations. -/
+theorem infinityIntersectionIdeal_map {S : Type*} [CommRing S] (f : R →+* S) (u v : R) :
+    (infinityIntersectionIdeal u v).map (Polynomial.mapRingHom f) =
+      infinityIntersectionIdeal (f u) (f v) := by
+  simp only [infinityIntersectionIdeal, Ideal.map_span, Set.image_pair,
+    Polynomial.coe_mapRingHom, Polynomial.map_X, Polynomial.map_sub,
+    Polynomial.map_mul, Polynomial.map_C]
 
 /-- Eliminating the chart coordinate leaves exactly the denominator equation. -/
 theorem infinityIntersectionIdeal_eq (u v : R) :
