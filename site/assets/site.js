@@ -11,7 +11,7 @@
     { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", description: "Sawin’s totally real tower theorem and related results of Martinet and Shafarevich." },
     { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", description: "Étale fundamental groups and étale cohomology." },
     { name: "Jacobian Varieties", repository: "JacobianVarieties", description: "Algebraic curves, Picard groups, and Jacobian varieties." },
-    { name: "Yamaguchi Papers Formalization", repository: "YamaguchiPapersFormalization", description: "Formalizations of Naganori Yamaguchi’s papers." },
+    { name: "Research Papers", repository: "YamaguchiPapersFormalization", description: "Formalizations of research papers." },
     { name: "Anabelian Geometry", repository: "AnabelianGeometry", description: "Work toward the formalization of Grothendieck’s anabelian conjecture." },
   ];
 
@@ -181,11 +181,11 @@
   function renderHome() {
     document.title = "NYLL — Lean 4 libraries in development";
     const values = [...libraries.values()];
-    app.innerHTML = `<section class="hero"><span class="eyebrow">Naganori Yamaguchi · Lean 4</span><h1>A home for Lean 4<br>libraries in development.</h1><p>NYLL is the public development home for all of Naganori Yamaguchi’s Lean 4 libraries. Work in progress is published here. As parts are completed, they are extracted and published as standalone libraries. All original code developed for NYLL is written by OpenAI Codex.</p><nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="#development-libraries">Browse work in progress ↓</a></nav></section>
+    app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1>A home for Lean 4<br>libraries in development.</h1><p>NYLL is the public development home for a growing collection of Lean 4 libraries. Work in progress is published here. As parts are completed, they are extracted and published as standalone libraries. All original code developed for NYLL is written by OpenAI Codex.</p><nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="#development-libraries">Browse work in progress ↓</a></nav></section>
       <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Published standalone libraries</h2><span class="count">${count(publishedLibraries.length, "repository", "repositories")}</span></div><p class="catalog-description">These repositories publish parts extracted from NYLL. See each library for its scope, documentation, and source.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="https://github.com/n-yamaguchi-0729/${escape(library.repository)}">${escape(library.name)} <span aria-hidden="true">↗</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
       <section id="development-libraries" aria-labelledby="libraries-heading"><div class="catalog-intro"><h2 id="libraries-heading">Browse development libraries</h2><span class="count">${count(values.length, "library", "libraries")} · ${count(modules.size, "module")}</span></div><p class="catalog-description">Explore the full collection in NYLL, including work in progress.</p>
       ${values.map((library, index) => {
-        const summary = plainExcerpt(library.summary || library.doc);
+        const summary = plainExcerpt(doc(library.summary || library.doc).replace(/Formalization of Naganori Yamaguchi['’]s /g, "Formalization of "));
         return `<article class="library-row"><span class="row-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><div><h3>${routeLink(libraryHref(library.id), escape(libraryName(library)))}</h3>${summary ? `<p class="math-summary">${escape(summary)}</p>` : ""}<div class="row-meta"><span>${count(library.moduleCount, "module")}</span><code>${escape(library.rootModule || `Nyll.${library.id}.All`)}</code></div></div>${routeLink(libraryHref(library.id), "↗", `class="row-arrow" aria-label="Browse ${escape(libraryName(library))}"`)}</article>`;
       }).join("")}</section><p class="page-footer">Browse the documentation alongside its Lean source. ${sourceAction(manifest.source?.repo, "The source repository ↗")} contains the full development collection.</p>`;
     void typesetMath(app);
