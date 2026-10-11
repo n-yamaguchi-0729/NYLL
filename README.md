@@ -1,6 +1,6 @@
 # NYLL
 
-The public development home for Naganori Yamaguchi's Lean 4 libraries.
+The public development home for a growing collection of Lean 4 libraries.
 
 NYLL brings together all of these libraries, including work in progress. As parts
 are completed, they are extracted and published as standalone libraries in their
@@ -23,12 +23,12 @@ each library's scope, documentation, and source.
 | [Sawin's Totally Real Towers](https://github.com/n-yamaguchi-0729/SawinTotallyRealTowers) | Sawin's totally real tower theorem and related results of Martinet and Shafarevich. |
 | [Étale Fundamental Groups and Cohomology](https://github.com/n-yamaguchi-0729/EtaleFundamentalGroupsAndCohomology) | Étale fundamental groups and étale cohomology. |
 | [Jacobian Varieties](https://github.com/n-yamaguchi-0729/JacobianVarieties) | Algebraic curves, Picard groups, and Jacobian varieties. |
-| [Yamaguchi Papers Formalization](https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization) | Formalizations of Naganori Yamaguchi's papers. |
+| [Research Papers](https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization) | Formalizations of research papers. |
 | [Anabelian Geometry](https://github.com/n-yamaguchi-0729/AnabelianGeometry) | A library under development toward the formalization of Grothendieck's anabelian conjecture. |
 
 ## AI-written code and verification
 
-All original code developed for NYLL is written by OpenAI Codex. Naganori Yamaguchi sets the mathematical goals and scope and directs the development.
+All original code developed for NYLL is written by OpenAI Codex. The project maintainer sets the mathematical goals and scope and directs the development.
 
 Lean kernel checking validates formal proofs against the encoded statements, definitions, and assumptions. Whether those statements faithfully represent the original mathematics requires separate review. NYLL includes work in progress and code that has not yet been checked by Lean; publication here does not imply that every formalization is complete or verified.
 
