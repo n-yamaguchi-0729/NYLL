@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralCoordinateChange
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.LocalizedInfinityIntersection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
@@ -21,6 +22,7 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.RingTheory.Spectrum.Prime.Basic
+import Mathlib.Tactic.Ring
 
 /-!
 # The actual projective stalk at the infinity chart point
@@ -73,6 +75,33 @@ theorem infinityChartEmbedding_opensRange (R : Type u) [CommRing R] :
     standardChartEmbedding_opensRange, hswap, Scheme.Hom.inv_image]
   rw [infinityCoordinateSwap, integralCoordinateChange_preimage_infinity]
   simp only [linearSectionEquation, map_one, map_zero, one_mul, zero_mul, sub_zero]
+
+/-- The original integral section equation restricts to `v-u*w` on the infinity chart. -/
+theorem infinityChartEmbedding_preimage_linearSection (u v : ℤ) :
+    infinityChartEmbedding ℤ ⁻¹ᵁ
+        Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+          (linearSectionEquation u v) =
+      PrimeSpectrum.basicOpen (Polynomial.C v - Polynomial.C u * Polynomial.X) := by
+  have hswap : (infinityCoordinateSwap ℤ).hom = (infinityCoordinateSwap ℤ).inv := rfl
+  rw [infinityChartEmbedding, Scheme.Hom.comp_preimage, hswap,
+    infinityCoordinateSwap, integralCoordinateChange_inv_preimage_linearSection,
+    standardChartEmbedding_preimage_linearSection]
+  apply congrArg PrimeSpectrum.basicOpen
+  simp only [coordinateDeterminant, zero_mul, one_mul, zero_add, zero_sub, map_neg]
+  ring
+
+/-- Vanishing of the homogeneous section equation is vanishing of its actual chart polynomial. -/
+theorem infinityChartEmbedding_linearSection_mem_iff
+    (u v : ℤ) (q : PrimeSpectrum ℤ[X]) :
+    linearSectionEquation u v ∈ (infinityChartEmbedding ℤ q).asHomogeneousIdeal ↔
+      Polynomial.C v - Polynomial.C u * Polynomial.X ∈ q.asIdeal := by
+  classical
+  apply not_iff_not.mp
+  change q ∈ infinityChartEmbedding ℤ ⁻¹ᵁ
+      Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u v) ↔
+    q ∈ PrimeSpectrum.basicOpen (Polynomial.C v - Polynomial.C u * Polynomial.X)
+  rw [infinityChartEmbedding_preimage_linearSection]
 
 /-- The prime of the infinity chart above the closed point of the local base. -/
 def infinityChartClosedPoint (R : Type u) [CommRing R] [IsLocalRing R] :
