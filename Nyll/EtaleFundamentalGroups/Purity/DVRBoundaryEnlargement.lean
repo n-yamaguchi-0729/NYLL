@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
 import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
 import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 import Nyll.SchemeTheory.FiniteEtale.DVRUnramifiedExtension
 import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing

@@ -71,9 +71,9 @@ theorem rationalSectionIntersectionIdeal_at_infinity
       integerProjectiveInfinityIntersectionIdeal p
         (rationalPointNumerator a) (rationalPointDenominator a) := by
   have hnum : rationalPointNumerator b = 1 := by
-    rw [rationalPointNumerator, if_pos hb]
+    rw [rationalPointNumerator, ite_eq_left hb]
   have hden : rationalPointDenominator b = 0 := by
-    rw [rationalPointDenominator, if_pos hb]
+    rw [rationalPointDenominator, ite_eq_left hb]
   simp only [rationalSectionIntersectionIdeal, integerProjectiveInfinityPoint,
     rationalSection_stalkIdeal_eq, hnum, hden]
   change (infinitySectionIdeal (rationalPointNumerator a) (rationalPointDenominator a)).map
@@ -96,14 +96,14 @@ theorem rationalSectionIntersection_length_at_infinity
           rationalSectionIntersectionIdeal a b (integerProjectiveInfinityPoint p)) =
       (padicValInt p (rationalPointDelta a b) : ℕ∞) := by
   have hnum : rationalPointNumerator b = 1 := by
-    rw [rationalPointNumerator, if_pos hb]
+    rw [rationalPointNumerator, ite_eq_left hb]
   have hden : rationalPointDenominator b = 0 := by
-    rw [rationalPointDenominator, if_pos hb]
+    rw [rationalPointDenominator, ite_eq_left hb]
   have hdet := rationalPoint_coordinateDeterminant_ne_zero a b hab
   rw [hnum, hden, coordinateDeterminant, mul_zero, mul_one, zero_sub] at hdet
   have hva : rationalPointDenominator a ≠ 0 := neg_ne_zero.mp hdet
   rw [rationalSectionIntersectionIdeal_at_infinity p a b hb,
-    rationalPointDelta, if_pos hb]
+    rationalPointDelta, ite_eq_left hb]
   exact integerProjectiveInfinityIntersection_length p
     (rationalPointNumerator a) (rationalPointDenominator a) hva
 

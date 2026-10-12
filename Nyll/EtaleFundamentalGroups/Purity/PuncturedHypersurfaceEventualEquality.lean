@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodExistence
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
 import Mathlib.AlgebraicGeometry.Limits

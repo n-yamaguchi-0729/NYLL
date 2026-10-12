@@ -34,7 +34,14 @@ Lean kernel checking validates formal proofs against the encoded statements, def
 
 Copyright, authorship, and license notices for upstream and adapted code are preserved in the relevant source files.
 
-## License
+## License and attribution
 
-See [LICENSE](LICENSE). Copyright, authorship, and attribution notices for adapted
-code are preserved in the corresponding source files and directories.
+NYLL's original code and documentation are Copyright (c) 2026 Naganori Yamaguchi
+and released under [Apache-2.0](LICENSE), unless a file states otherwise.
+
+External and adapted material retains its source-specific copyright, authorship,
+license, and attribution notices. An absent upstream notice does not transfer
+ownership to NYLL. The [pi1 attribution record](Nyll/EtaleFundamentalGroups/Pi1/ATTRIBUTION.md)
+and [pinned source manifest](Nyll/EtaleFundamentalGroups/Pi1/UPSTREAM.json) distinguish
+upstream adaptations from NYLL additions. Anthropic FLT, mathlib, and other external
+source notices remain in their corresponding files and directories.

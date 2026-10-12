@@ -17,7 +17,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
 import Nyll.SchemeTheory.Divisors.Basic
 import Nyll.SchemeTheory.Divisors.EtaleRegularity
-import Nyll.SchemeTheory.FiniteEtale.Geometry
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 
 /-!
 # Arithmetic boundaries under finite etale morphisms

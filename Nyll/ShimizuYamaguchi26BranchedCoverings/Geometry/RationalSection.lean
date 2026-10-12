@@ -9,20 +9,28 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.FieldSectionPoint
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.RationalSectionSupport
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
+import Nyll.SchemeTheory.Divisors.LocalComplement
 import Nyll.SchemeTheory.ProjectiveSpace.Basic
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.CategoryTheory.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
+import Mathlib.Data.Finset.Lattice.Fold
 import Mathlib.Data.Int.Cast.Lemmas
 import Mathlib.Data.Set.Image
+import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.LinearAlgebra.Projectivization.Basic
 import Mathlib.RingTheory.Coprime.Basic
 import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Spectrum.Prime.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.Topology.Maps.Basic
+import Mathlib.Topology.Sets.Closeds
 
 /-!
 # Rational points and their integral section closures
@@ -40,6 +48,8 @@ Shimizu and Yamaguchi,
 noncomputable section
 
 open CategoryTheory AlgebraicGeometry
+
+open scoped BigOperators
 
 namespace ShimizuYamaguchi26BranchedCoverings
 
@@ -133,5 +143,50 @@ theorem closure_rationalSectionGenericPoint (a : Projectivization ℚ (ℚ × �
       (rationalSection a).isClosedEmbedding.closure_image_eq _
     _ = Set.range (rationalSection a) := by rw [hgeneric, Set.image_univ]
     _ = rationalSectionSupport a := range_rationalSection a
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+/-- The support complement of the actual product of section kernel ideals
+is the finite intersection of the nonvanishing opens of their equations. -/
+theorem rationalSectionFamily_supportComplement
+    (A : Finset (Projectivization ℚ (ℚ × ℚ))) :
+    (∏ a ∈ A, (rationalSection a).ker).supportComplement =
+      A.inf (fun a =>
+        Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+          (linearSectionEquation (rationalPointNumerator a)
+            (rationalPointDenominator a))) := by
+  have hsingle (a : Projectivization ℚ (ℚ × ℚ)) :
+      (rationalSection a).ker.supportComplement =
+        Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+          (linearSectionEquation (rationalPointNumerator a)
+            (rationalPointDenominator a)) := by
+    apply TopologicalSpace.Opens.ext
+    change ((rationalSection a).ker.support : Set (ProjectiveLine ℤ))ᶜ = _
+    have hker : ((rationalSection a).ker.support : Set (ProjectiveLine ℤ)) =
+        closure (Set.range (rationalSection a)) :=
+      Scheme.Hom.support_ker (rationalSection a)
+    have hclosed : closure (Set.range (rationalSection a)) =
+        Set.range (rationalSection a) :=
+      (rationalSection a).isClosedEmbedding.isClosed_range.closure_eq
+    have hopen :
+        (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+          (linearSectionEquation (rationalPointNumerator a)
+            (rationalPointDenominator a)) : Set (ProjectiveLine ℤ)) =
+          (rationalSectionSupport a)ᶜ :=
+      ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+        (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation (rationalPointNumerator a)
+          (rationalPointDenominator a))
+    exact (congrArg (fun Z : Set (ProjectiveLine ℤ) => Zᶜ)
+      (hker.trans (hclosed.trans (range_rationalSection a)))).trans hopen.symm
+  have hfinite : (∏ a ∈ A, (rationalSection a).ker).supportComplement =
+      A.inf (fun a => (rationalSection a).ker.supportComplement) := by
+    change (∏ a ∈ A, (rationalSection a).ker).support.compl =
+      A.inf (fun a => (rationalSection a).ker.support.compl)
+    rw [Scheme.IdealSheafData.support_finset_prod]
+    exact map_finset_sup
+      (TopologicalSpace.Closeds.complOrderIso (ProjectiveLine ℤ)) A
+      (fun a => (rationalSection a).ker.support)
+  exact hfinite.trans (Finset.inf_congr rfl fun a _ => hsingle a)
 
 end ShimizuYamaguchi26BranchedCoverings

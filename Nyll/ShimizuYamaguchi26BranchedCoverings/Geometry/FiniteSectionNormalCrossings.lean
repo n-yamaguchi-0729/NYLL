@@ -6,9 +6,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.Basic
+import Nyll.SchemeTheory.Divisors.LocalComplement
 import Nyll.SchemeTheory.ProjectiveSpace.Basic
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalProjectiveCoordinates
-import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.GeneralSectionIntersection
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Theorem2Dot3IntersectionMultiplicity
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSectionNormalCrossings
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSectionPrimePoint
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.RationalSection
@@ -20,16 +21,21 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.CategoryTheory.ConcreteCategory.Basic
 import Mathlib.Data.Finset.Card
 import Mathlib.Data.Finset.Filter
 import Mathlib.Data.Finset.Insert
+import Mathlib.Data.Finset.Lattice.Fold
 import Mathlib.Data.Set.Card
+import Mathlib.Data.Set.Lattice.Indexed
+import Mathlib.Data.SetLike.Basic
 import Mathlib.Data.ZMod.Basic
 import Mathlib.LinearAlgebra.Projectivization.Basic
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.Topology.Closure
 import Mathlib.Topology.Maps.Basic
+import Mathlib.Topology.Sets.Closeds
 
 /-!
 # Normal crossings in a finite family of rational sections
@@ -167,35 +173,44 @@ theorem rationalSectionFamily_isStrictNormalCrossingsAt_over_prime
     (hbase : ProjSpace.π ℤ 1 x = integerPrimePoint p) :
     (∏ c ∈ A, (rationalSection c).ker).IsStrictNormalCrossingsAt x := by
   classical
-  have hsupport : ∀ B : Finset (Projectivization ℚ (ℚ × ℚ)),
-      x ∈ (∏ c ∈ B, (rationalSection c).ker).support →
-        ∃ b ∈ B, x ∈ (rationalSection b).ker.support := by
-    intro B
-    induction B using Finset.induction_on with
-    | empty =>
-        intro hxB
-        rw [Finset.prod_empty, Scheme.IdealSheafData.one_eq_top,
-          Scheme.IdealSheafData.support_top] at hxB
-        exact False.elim hxB
-    | @insert a B ha ih =>
-        intro hxB
-        rw [Finset.prod_insert ha, Scheme.IdealSheafData.support_mul] at hxB
-        change x ∈ (rationalSection a).ker.support ∨
-          x ∈ (∏ c ∈ B, (rationalSection c).ker).support at hxB
-        rcases hxB with hxa | hxB
-        · exact ⟨a, Finset.mem_insert_self a B, hxa⟩
-        · obtain ⟨b, hb, hxb⟩ := ih hxB
-          exact ⟨b, Finset.mem_insert_of_mem hb, hxb⟩
-  obtain ⟨b, hb, hxb⟩ := hsupport A hx
-  rw [Scheme.Hom.support_ker,
-    (rationalSection b).isClosedEmbedding.isClosed_range.closure_eq] at hxb
-  obtain ⟨q, hqx⟩ := hxb
+  have hsupport : ∃ b ∈ A,
+      x ∈ ((rationalSection b).ker.support : Set (ProjectiveLine ℤ)) := by
+    let S : Projectivization ℚ (ℚ × ℚ) →
+        TopologicalSpace.Closeds (ProjectiveLine ℤ) :=
+      fun c => (rationalSection c).ker.support
+    have hprod : (∏ c ∈ A, (rationalSection c).ker).support = A.sup S :=
+      Scheme.IdealSheafData.support_finset_prod A (fun c => (rationalSection c).ker)
+    have hfinite : ((A.sup S : TopologicalSpace.Closeds (ProjectiveLine ℤ)) :
+        Set (ProjectiveLine ℤ)) = ⋃ c ∈ A, (S c : Set (ProjectiveLine ℤ)) :=
+      (TopologicalSpace.Closeds.coe_finset_sup S A).trans
+        (Finset.sup_set_eq_biUnion A (fun c => (S c : Set (ProjectiveLine ℤ))))
+    have hsets : ((∏ c ∈ A, (rationalSection c).ker).support :
+        Set (ProjectiveLine ℤ)) = ⋃ c ∈ A, (S c : Set (ProjectiveLine ℤ)) :=
+      (congrArg (fun Z : TopologicalSpace.Closeds (ProjectiveLine ℤ) =>
+        (Z : Set (ProjectiveLine ℤ))) hprod).trans hfinite
+    have hxSet : x ∈ ((∏ c ∈ A, (rationalSection c).ker).support :
+        Set (ProjectiveLine ℤ)) := SetLike.mem_coe.mpr hx
+    have hxUnion : x ∈ ⋃ c ∈ A, (S c : Set (ProjectiveLine ℤ)) :=
+      (Set.ext_iff.mp hsets x).mp hxSet
+    simpa only [Set.mem_iUnion, exists_prop, S] using hxUnion
+  obtain ⟨b, hb, hxb⟩ := hsupport
+  have hker : ((rationalSection b).ker.support : Set (ProjectiveLine ℤ)) =
+      closure (Set.range (rationalSection b)) :=
+    Scheme.Hom.support_ker (rationalSection b)
+  have hrange : ((rationalSection b).ker.support : Set (ProjectiveLine ℤ)) =
+      Set.range (rationalSection b) :=
+    hker.trans (rationalSection b).isClosedEmbedding.isClosed_range.closure_eq
+  obtain ⟨q, hqx⟩ := (Set.ext_iff.mp hrange x).mp hxb
   have hq : q = integerPrimePoint p := by
-    calc
-      q = (rationalSection b ≫ ProjSpace.π ℤ 1) q := by
-        rw [rationalSection_comp_π]
-      _ = ProjSpace.π ℤ 1 x := by rw [Scheme.Hom.comp_apply, hqx]
-      _ = integerPrimePoint p := hbase
+    let q₀ : Spec (CommRingCat.of ℤ) := integerPrimePoint p
+    have hsection : q = (rationalSection b ≫ ProjSpace.π ℤ 1) q := by
+      rw [rationalSection_comp_π]
+      exact (CategoryTheory.id_apply (X := (Spec (CommRingCat.of ℤ)).carrier) q).symm
+    have hpoint : (rationalSection b ≫ ProjSpace.π ℤ 1) q =
+        ProjSpace.π ℤ 1 x := by
+      rw [Scheme.Hom.comp_apply, hqx]
+    have hprime : ProjSpace.π ℤ 1 x = q₀ := hbase
+    exact hsection.trans (hpoint.trans hprime)
   have hbx : rationalSection b (integerPrimePoint p) = x := hq ▸ hqx
   rw [← hbx]
   exact rationalSectionFamily_isStrictNormalCrossingsAt_of_card_le_two

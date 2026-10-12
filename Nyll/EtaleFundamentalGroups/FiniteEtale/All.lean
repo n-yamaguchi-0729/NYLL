@@ -19,7 +19,6 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbeli
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.All
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisDomination
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.All
 import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.All

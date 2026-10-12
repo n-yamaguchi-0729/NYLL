@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodDiagr
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.DensePullback
 import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum

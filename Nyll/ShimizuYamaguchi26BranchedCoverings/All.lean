@@ -4,77 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Theorem2Dot3IntersectionMultiplicity
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Theorem2Dot4DyadicCollision
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Theorem2Dot5QuadraticQuotient
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Theorem2Dot7LargeBoundaryQuotient
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.All
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.All
 
 /-!
 # Branched coverings of the projective line over the integers
 
-Formalization of Ryoji Shimizu and Naganori Yamaguchi,
-[On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
+Formalization of Ryoji Shimizu and Naganori Yamaguchi's
+[On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1),
+using the numbering of arXiv v1. Numbered files contain the corresponding paper arguments;
+`Arithmetic` and `Geometry` contain their supporting constructions.
 
-The current additions are draft sources awaiting Lean validation. They supply
-integral coordinate changes from Lemma 2.3, the
-geometric dyadic collision of Lemma 2.4, the arithmetic six-section bound in
-Corollary 2.7, and the connected finite etale quadratic cover used in
-Proposition 2.5. Its coordinate algebra is an integral domain, free of rank
-two, and it gives a continuous quadratic quotient of the affine fundamental
-group. The construction reuses the existing adjoined-root etale criterion
-and Galois-category results from the etale fundamental group library.
-
-The incidence assertion of Lemma 2.3 uses the actual homogeneous zero loci
-in each prime special fibre: the two section supports meet if and only if
-the prime divides the paper's determinant. Their common point is explicitly
-constructed from evaluation at the reduced coordinates. Its uniqueness is
-proved on the affine chart using the maximal evaluation ideal, with a
-coordinate exchange at infinity, and its singleton is closed.
-
-For Lemma 2.4, rational projective points are given primitive integral
-coordinates. The actual homogeneous section supports are pulled to the
-dyadic special fibre, where a common point forces the same parity type
-for all three coordinate pairs. This yields divisibility by four;
-distinctness and the sign comparison with the paper's determinant give
-the dyadic valuation bound, including the point at infinity.
-
-The actual projective open `D₊(T₁) ∩ D₊(v*T₀-u*T₁)` is identified with
-`Spec ℤ[t, 1/(v*t-u)]` by a constructed scheme isomorphism, compatible with
-the maps to the projective line. Bézout coefficients construct projective
-scheme automorphisms taking any primitive integral linear equation to the
-equation at infinity. Restricting these automorphisms gives affine models
-for arbitrary pairs of linear equations with primitive first coordinates;
-the determinant is the transformed denominator coefficient. If both pairs
-are primitive and their determinant is nonzero and divisible by four, the
-continuous quadratic quotient is constructed on every open inside their
-common complement.
-
-On the infinity chart, the intersection algebra defined by `w` and `v-u*w`
-is explicitly identified with `R/(v)`. Over a DVR its module length is the
-additive valuation of `v`. The actual projective stalk is identified with
-the polynomial localization, and the actual section kernel ideals are
-identified with these equations. Transport through the integral coordinate
-isomorphism gives the intersection length `v_p(Delta)` for any two distinct
-rational sections at the second section's point over `p`.
-
-When `v_p(Delta)=1`, the two actual section equations form a regular system
-of parameters. This gives strict normal crossings for the product of the
-two section kernel ideals at their intersection. If the determinants of
-all other members of a finite family against the second section are not
-divisible by `p`, their stalk ideals are unit ideals. The same parameters
-therefore give strict normal crossings for the entire finite product. If
-only one member passes through the point, its equation is the first member
-of an explicitly supplied regular parameter system, and the finite product
-again has strict normal crossings there. The determinant incidence-count
-conditions therefore give strict normal crossings at every point of the
-product support over the selected prime. The actual special-fibre incidence
-comparison derives these conditions from the number of original sections
-through each closed point and the valuation-one condition for meeting pairs.
-Distinct primitive section equations are relatively prime in the polynomial
-ring; the finite intersection of their equation ideals therefore equals
-their product. The corresponding global reduced Cartier comparison remains
-separate from this chart calculation.
-These sources are still awaiting Lean validation; the full finite-family
-normal-crossing criterion, its converse, and the comparison with base change
-to `Z_p` remain open.
-The prosolvable criterion of Theorem 2.6 and the finite simple quotient
-exclusions of Theorems 3.1 and 3.6 also remain to be formalized here.
+Includes section intersection calculations for Lemma 2.3, the dyadic collision calculation
+for Lemma 2.4, the quadratic quotient construction for Proposition 2.5, and the case
+of at least seven sections in Corollary 2.7. The full
+finite-divisor normal-crossing criterion and its comparison over `Z_p`, the remaining
+geometric hypotheses of the paper statements, and the main quotient criteria remain
+outside the completed formalization. Existing boundary and solvable-covering results are
+reused from `Yamaguchi26SolvableCoverings` as their concrete hypotheses are supplied.
 -/

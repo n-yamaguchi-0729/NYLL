@@ -222,7 +222,93 @@ def command_prefix(tokens: list[Token], start: int) -> tuple[int, str, str] | No
     return None
 
 
-def parse_module(source: str, module: str, path: str, source_base: str) -> dict:
+def source_attribution(source: str, path: str, source_base: str,
+                       provenance: dict | None = None) -> dict:
+    """Keep source notices and their scope; never infer an external holder.
+
+    Ordinary leading comments supply the evidence. Lean imports and prose later
+    in a proof do not identify the source's authors. The only fallback concerns
+    original NYLL documentation and is explicitly labelled as a project default.
+    """
+    blocks, i = [], 0
+    while i < len(source):
+        while i < len(source) and (source[i].isspace() or source[i] == "\ufeff"):
+            i += 1
+        start = i
+        if source.startswith("--", i):
+            parts = []
+            while source.startswith("--", i):
+                end = source.find("\n", i)
+                end = len(source) if end < 0 else end
+                parts.append(source[i + 2:end].lstrip())
+                i = end + 1
+                while i < len(source) and source[i] in " \t":
+                    i += 1
+            text = "\n".join(parts)
+        elif source.startswith("/-", i):
+            is_doc = source.startswith(("/--", "/-!"), i)
+            level, i = 1, i + 2
+            while level and i < len(source):
+                if source.startswith("/-", i):
+                    level, i = level + 1, i + 2
+                elif source.startswith("-/", i):
+                    level, i = level - 1, i + 2
+                else:
+                    i += 1
+            if level:
+                raise SourceError(f"Unclosed attribution comment at character {start}")
+            text = source[start + (3 if is_doc else 2):i - 2].strip()
+        else:
+            break
+        if re.search(r"copyright|\bauthors?\b|licen[cs]e|attribution|\bnotice\b|"
+                     r"upstream|adapt(?:ed|ation)|\bpi1\b|(?:copied|ported|derived)\s+from|"
+                     r"original\s+(?:mathlib\s+)?source|based\s+on", text, re.IGNORECASE):
+            blocks.append({"text": text, "line": source.count("\n", 0, start) + 1})
+    header = "\n\n".join(block["text"] for block in blocks)
+    external_path = any(part.lower() in {"pi1", "flt", "mathlib"} for part in Path(path).parts)
+    external = external_path or bool(provenance and provenance.get("upstream_paths")) or bool(
+        re.search(r"github\.com/(?:chrisflav/pi1|anthropics/fermats-last-theorem|"
+                  r"leanprover-community/mathlib4)|\bupstream\b|\bpi1\b|\bAnthropic\b|"
+                  r"(?:adapted|copied|derived|ported|based)\s+from|based\s+on|"
+                  r"original\s+mathlib\s+source", header, re.IGNORECASE))
+    notice_lines = list(dict.fromkeys(
+        line.strip() for line in header.splitlines()
+        if re.search(r"Copyright\s+(?:\(c\)|©|\d{4})|^\s*Authors?(?: of [^:]*)?:",
+                     line, re.IGNORECASE)))
+    # Existing source notices always take precedence, including notices that name
+    # a non-NYLL author without an upstream URL. Absent external notices stay absent.
+    default = None
+    if not blocks and not external and (path.startswith("Nyll/") or path == "Nyll.lean"):
+        default = "Original NYLL documentation: Copyright (c) 2026 Naganori Yamaguchi (project default)."
+    return {
+        "notices": blocks, "noticeLines": notice_lines, "externalSource": external,
+        "defaultNotice": default,
+        "missingNotice": bool(external and not blocks),
+        "provenanceUrl": (f"{source_base}/Nyll/EtaleFundamentalGroups/Pi1/ATTRIBUTION.md"
+                          if provenance is not None else ""),
+    }
+
+
+def pi1_provenance(root: Path) -> dict[str, dict]:
+    """Read mapped source ownership, without treating source hashes as build evidence."""
+    path = root / "Nyll/EtaleFundamentalGroups/Pi1/UPSTREAM.json"
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if data["schema"] != "nyll.pi1.provenance.v1":
+            raise ValueError("Unsupported pi1 provenance schema")
+        files = data["local_source_snapshot"]["files"]
+        result = {entry["path"]: entry for entry in files}
+        if len(result) != len(files):
+            raise ValueError("Duplicate pi1 provenance path")
+        return result
+    except (ValueError, KeyError, TypeError) as error:
+        raise SourceError(f"Invalid pi1 provenance manifest: {error}") from error
+
+
+def parse_module(source: str, module: str, path: str, source_base: str,
+                 provenance: dict | None = None) -> dict:
     """Extract explicit source entries without assuming elaboration succeeded."""
     tokens = lex(source)
     commands: list[tuple[int, int, str, str]] = []
@@ -393,7 +479,8 @@ def parse_module(source: str, module: str, path: str, source_base: str) -> dict:
     return {"name": module, "path": path, "doc": "\n\n".join(docs),
             "imports": list(dict.fromkeys(imports)), "importedBy": [],
             "source": source, "sourceUrl": f"{source_base}/{quote(path, safe='/')}",
-            "declarations": declarations, "indexKind": "source"}
+            "declarations": declarations, "indexKind": "source",
+            "attribution": source_attribution(source, path, source_base, provenance)}
 
 
 def git(root: Path, *args: str) -> str:
@@ -427,13 +514,15 @@ def build(root: Path, output: Path, repository: str, revision: str | None = None
     search = []
     libraries: dict[str, list[dict]] = defaultdict(list)
     declaration_ids: set[str] = set()
+    provenance = pi1_provenance(root)
     for number, path in enumerate(files, 1):
         if path.is_symlink():
             raise SourceError(f"Refusing a symlinked Lean source: {path}")
         relative = path.relative_to(root).as_posix()
         name = relative.removesuffix(".lean").replace("/", ".")
         try:
-            module = parse_module(path.read_text(encoding="utf-8"), name, relative, source_base)
+            module = parse_module(path.read_text(encoding="utf-8"), name, relative, source_base,
+                                  provenance.get(relative))
         except SourceError as error:
             raise SourceError(f"{relative}: {error}") from error
         parts = name.split(".")

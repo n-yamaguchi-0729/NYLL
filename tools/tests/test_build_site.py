@@ -251,6 +251,91 @@ def value : Choice := .first
         self.assertNotIn("deriving instance", entries[0]["source"])
 
 
+class SourceAttributionTests(unittest.TestCase):
+    source_base = "https://github.com/example/NYLL/blob/" + "a" * 40
+
+    def attribution(self, source, path="Nyll/Example/Basic.lean", provenance=None):
+        return site.parse_module(source, path.removesuffix(".lean").replace("/", "."),
+                                 path, self.source_base, provenance)["attribution"]
+
+    def test_original_source_notices_are_preserved_without_default(self):
+        header = "Copyright (c) 2026 Naganori Yamaguchi.\nAuthors: Naganori Yamaguchi (assisted by OpenAI Codex)"
+        result = self.attribution("/-\n" + header + "\n-/\nmodule\ndef value := 1")
+        self.assertEqual(result["notices"], [{"text": header, "line": 1}])
+        self.assertIsNone(result["defaultNotice"])
+        self.assertFalse(result["externalSource"])
+        self.assertEqual(result["noticeLines"], header.splitlines())
+
+    def test_headerless_original_has_documentation_only_default(self):
+        result = self.attribution("import Mathlib.Data.Nat.Basic\ndef value := 1")
+        self.assertIn("Original NYLL documentation:", result["defaultNotice"])
+        self.assertIn("Naganori Yamaguchi", result["defaultNotice"])
+        self.assertEqual(result["noticeLines"], [])
+        self.assertEqual(result["notices"], [])
+
+    def test_headerless_external_paths_never_receive_default(self):
+        for path in ["Nyll/SchemeTheory/Pi1/Unknown.lean", "Pi1/Unknown.lean",
+                     "Nyll/FLT/Unknown.lean", "Mathlib/Unknown.lean"]:
+            with self.subTest(path=path):
+                result = self.attribution("def value := 1", path)
+                self.assertIsNone(result["defaultNotice"])
+                self.assertTrue(result["missingNotice"])
+                self.assertTrue(result["externalSource"])
+
+    def test_manifest_mapped_external_source_without_header_is_not_reassigned(self):
+        result = self.attribution("def value := 1", provenance={
+            "upstream_paths": ["Pi1/FundamentalGroup/Point.lean"], "role": "nyll_extension"})
+        self.assertIsNone(result["defaultNotice"])
+        self.assertTrue(result["externalSource"])
+        self.assertTrue(result["provenanceUrl"].endswith("/Pi1/ATTRIBUTION.md"))
+
+    def test_headerless_pi1_provenance_and_uncertainty_remain_literal(self):
+        header = "Authors: Christian Merten\nThe cited pi1 file has no copyright notice; its holder requires review."
+        result = self.attribution("/-\n" + header + "\n-/\nmodule\ndef value := 1")
+        self.assertEqual(result["notices"][0]["text"], header)
+        self.assertIsNone(result["defaultNotice"])
+        self.assertTrue(result["externalSource"])
+        self.assertFalse(any("Naganori" in x for x in result["noticeLines"]))
+
+    def test_mixed_source_keeps_scoped_blocks_and_both_credits(self):
+        upstream = "Copyright (c) 2025 Christian Merten.\nAuthors: Christian Merten"
+        local = "This notice applies only to NYLL proof completions, not upstream declarations.\nCopyright (c) 2026 Naganori Yamaguchi.\nAuthors: Naganori Yamaguchi (assisted by OpenAI Codex)"
+        result = self.attribution(f"/-\n{upstream}\n-/\n/-\n{local}\n-/\nmodule\ndef value := 1")
+        self.assertEqual([x["text"] for x in result["notices"]], [upstream, local])
+        self.assertEqual(len(result["noticeLines"]), 4)
+        self.assertIsNone(result["defaultNotice"])
+        self.assertTrue(result["externalSource"])
+
+    def test_flt_notice_and_attribution_links_are_not_replaced(self):
+        header = "Anthropic FLT upstream notice: Copyright 2026 Anthropic, PBC.\nUpstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/abc/NOTICE\nUpstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theorem/blob/abc/ATTRIBUTION.md\nLocal adaptation and maintenance: Naganori Yamaguchi."
+        result = self.attribution("/-\n" + header + "\n-/\nimport Mathlib\ndef value := 1")
+        self.assertEqual(result["notices"][0]["text"], header)
+        self.assertEqual(result["noticeLines"], [header.splitlines()[0]])
+        self.assertIsNone(result["defaultNotice"])
+
+    def test_other_author_without_url_does_not_receive_default(self):
+        result = self.attribution("-- Authors: Someone Else\n-- Licensed under Apache-2.0.\ndef value := 1")
+        self.assertIsNone(result["defaultNotice"])
+        self.assertEqual(result["noticeLines"], ["Authors: Someone Else"])
+
+    def test_notices_in_leading_doc_comments_keep_their_source_scope(self):
+        result = self.attribution("/-! Copyright (c) 2024 External Author.\nAdapted from an external project. -/\nmodule\ndef value := 1")
+        self.assertTrue(result["externalSource"])
+        self.assertIsNone(result["defaultNotice"])
+        self.assertIn("External Author", result["noticeLines"][0])
+
+    def test_original_mathlib_source_marker_without_copyright_is_not_reassigned(self):
+        result = self.attribution("/- Original mathlib source:\nMathlib.Algebra.Example -/\nmodule\ndef value := 1")
+        self.assertTrue(result["externalSource"])
+        self.assertIsNone(result["defaultNotice"])
+
+    def test_proof_strings_and_comments_are_not_attribution(self):
+        result = self.attribution('def text := "Copyright (c) 2020 Not An Author"\n-- Authors: Also Not An Author\n')
+        self.assertEqual(result["noticeLines"], [])
+        self.assertEqual(result["notices"], [])
+        self.assertIsNotNone(result["defaultNotice"])
+
+
 class BuildTests(unittest.TestCase):
     def setUp(self):
         # Scratch is local to the checkout's generated/ignored output directory.

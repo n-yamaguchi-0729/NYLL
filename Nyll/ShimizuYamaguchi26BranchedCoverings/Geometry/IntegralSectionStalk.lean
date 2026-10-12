@@ -58,7 +58,9 @@ namespace ShimizuYamaguchi26BranchedCoverings
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-private theorem integralSection_infinityChart_ideal_top
+/-- On the infinity chart, the actual kernel ideal of a primitive section is
+obtained from its polynomial equation ideal by the canonical section-ring map. -/
+theorem integralSection_infinityChart_ideal_top
     (u v a b : ℤ) (hab : a * u + b * v = 1) :
     (((integralSection u v a b hab).ker.comap (infinityChartEmbedding ℤ)).ideal
         ⟨⊤, isAffineOpen_top (Spec (CommRingCat.of ℤ[X]))⟩) =

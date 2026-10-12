@@ -14,7 +14,6 @@ import Nyll.SchemeTheory.RingTheory.RegularLocalDimensionOne
 import Nyll.SchemeTheory.RingTheory.ReducedCartierDivisor
 import Nyll.SchemeTheory.RingTheory.PuncturedHypersurfacePrime
 import Nyll.SchemeTheory.RingTheory.DeterminantTrickCongruence
-import Nyll.SchemeTheory.RingTheory.Finite
 import Nyll.SchemeTheory.RingTheory.FiniteOpenFactor
 import Nyll.SchemeTheory.RingTheory.GenericFiber.All
 import Nyll.SchemeTheory.RingTheory.HenselianCyclicIdempotent
@@ -40,7 +39,6 @@ import Nyll.SchemeTheory.RingTheory.Localization.All
 import Nyll.SchemeTheory.RingTheory.LocalizationIdempotentFactor
 import Nyll.SchemeTheory.RingTheory.OpenImmersionFiniteFactor
 import Nyll.SchemeTheory.RingTheory.QuotientBaseChange
-import Nyll.SchemeTheory.RingTheory.QuotientProducts
 import Nyll.SchemeTheory.RingTheory.Ramification.All
 import Nyll.SchemeTheory.RingTheory.SmoothReduced
 import Nyll.SchemeTheory.RingTheory.TensorProductPrime
