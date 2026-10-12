@@ -69,6 +69,8 @@ theorem infinityIntersection_polynomial_eq_constantCoeff (u v : R) (f : R[X]) :
     _ = algebraMap R (InfinityIntersectionAlgebra u v) (Polynomial.constantCoeff f) :=
       (IsScalarTower.algebraMap_apply R R[X] (InfinityIntersectionAlgebra u v) (f.coeff 0)).symm
 
+section LocalRing
+
 variable [IsLocalRing R]
 
 /-- The infinity chart closed point above the closed point of the coefficient ring. -/
@@ -161,6 +163,8 @@ theorem localizedInfinityIntersection_length_eq (u v : R) :
         (localizedInfinityIntersection_algebraMap_surjective u v)).symm
     _ = Module.length R[X] (InfinityIntersectionAlgebra u v) :=
       (localizedInfinityIntersectionEquiv u v).toLinearEquiv.length_eq
+
+end LocalRing
 
 /-- The localized infinity-chart intersection multiplicity over a DVR is the valuation of `v`. -/
 theorem localizedInfinityIntersection_length [IsDomain R] [IsDiscreteValuationRing R] (u v : R) :

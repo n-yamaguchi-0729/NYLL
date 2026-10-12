@@ -111,8 +111,7 @@ def integerInfinityChartLocalizationEquiv (p : ℕ) [Fact p.Prime] :
       (infinityChartClosedPointIdeal (IntegerPrimeLocalization p))
   have : IsLocalization.AtPrime (InfinityChartLocalRing (IntegerPrimeLocalization p))
       (integerInfinityChartIdeal p) := by
-    rw [← infinityChartClosedPointIdeal_comap p]
-    exact hAtPrime
+    simpa only [infinityChartClosedPointIdeal_comap p] using hAtPrime
   exact IsLocalization.algEquiv (integerInfinityChartIdeal p).primeCompl
     (IntegerInfinityChartLocalRing p) (InfinityChartLocalRing (IntegerPrimeLocalization p))
 

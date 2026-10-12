@@ -97,12 +97,15 @@ theorem exists_open_extension_at_regular_dimension_one_generic_boundary
   let q := X.fromSpecStalk x.1.1
   let g : Spec (.of K) ⟶ Spec R :=
     Spec.map (CommRingCat.ofHom (algebraMap R K))
+  have hg : (Scheme.puncturedSpectrumIsoSpecFractionField R K).hom ≫ g =
+      Scheme.puncturedSpectrumInclusion R :=
+    Scheme.puncturedSpectrumIsoSpecFractionField_hom_SpecMap R K
   have he : Limits.pullback.fst q U.ι = e.hom ≫ g := by
     change Limits.pullback.fst (X.fromSpecStalk x.1.1) U.ι =
       ((Scheme.genericComplementPuncturedSpectrumPullbackIso U x).hom ≫
         (Scheme.puncturedSpectrumIsoSpecFractionField R K).hom) ≫ g
-    rw [Category.assoc, Scheme.puncturedSpectrumIsoSpecFractionField_hom_SpecMap,
-      Scheme.genericComplementPuncturedSpectrumPullbackIso_hom_inclusion]
+    rw [Category.assoc, hg,
+      Scheme.genericComplementPuncturedSpectrumPullbackIso_hom_inclusion U x]
   have hr : Limits.pullback.snd q U.ι = e.hom ≫ r := by
     dsimp only [r]
     rw [← Category.assoc, e.hom_inv_id, Category.id_comp]

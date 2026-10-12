@@ -74,7 +74,7 @@ theorem standardChartEquiv_linearSectionEquation {R : Type u} [CommRing R] (u v 
     standardChartEquiv R (Polynomial.C v * Polynomial.X - Polynomial.C u) =
       Away.isLocalizationElem (ProjSpace.X_mem_one R 1 (1 : Fin 2))
         (linearSectionEquation_mem_one u v) := by
-  rw [map_sub, map_mul, standardChartEquiv_X,
+  rw [map_sub, map_mul, standardChartEquiv_X, ← Polynomial.algebraMap_eq,
     (standardChartEquiv R).commutes v, (standardChartEquiv R).commutes u]
   exact (linearSectionEquation_dehomogenize u v).symm
 
