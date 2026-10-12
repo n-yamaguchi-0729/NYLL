@@ -12,6 +12,7 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.TwoSectionComplement
 import Mathlib.Algebra.Category.Ring.Basic
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.AlgebraicGeometry.Spec
@@ -63,8 +64,12 @@ theorem integralSection_ker_eq_vanishingIdeal
   apply congrArg Scheme.IdealSheafData.vanishingIdeal
   apply SetLike.coe_injective
   change closure ((integralSection u v a b hab) '' Set.univ) = _
-  rw [Set.image_univ, range_integralSection,
-    (ProjectiveSpectrum.isClosed_zeroLocus _ _).closure_eq]
+  rw [Set.image_univ]
+  have hrange : Set.range (integralSection u v a b hab) =
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        {linearSectionEquation u v} : Set (ProjectiveLine ℤ)) :=
+    range_integralSection u v a b hab
+  exact (integralSection u v a b hab).isClosedEmbedding.isClosed_range.closure_eq.trans hrange
 
 /-- The actual ideal sheaf of a rational section is the vanishing ideal of
 the closure of its original rational point in the integral projective line. -/

@@ -10,11 +10,14 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityChartStalk
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityIntersection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegerChartLocalization
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegerProjectiveIntersection
+import Mathlib.Algebra.Module.Equiv.Defs
 import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.Algebra.Polynomial.Coeff
 import Mathlib.Algebra.Polynomial.Div
+import Mathlib.Algebra.Ring.CompTypeclasses
+import Mathlib.Algebra.Ring.Equiv
+import Mathlib.Algebra.Ring.Hom.Defs
 import Mathlib.Data.Fin.VecNotation
-import Mathlib.Data.List.Forall2
 import Mathlib.Data.List.OfFn
 import Mathlib.Data.Set.Image
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
@@ -69,14 +72,17 @@ private theorem integerSectionEquations_isWeaklyRegular
   change IsSMulRegular
     (ℤ[X] ⧸ (Polynomial.X : ℤ[X]) • (⊤ : Submodule ℤ[X] ℤ[X]))
     (Polynomial.C v - Polynomial.C u * Polynomial.X)
-  rw [hspan, isSMulRegular_quotient_iff_mem_of_smul_mem]
+  apply (isSMulRegular_quotient_iff_mem_of_smul_mem
+    ((Polynomial.X : ℤ[X]) • (⊤ : Submodule ℤ[X] ℤ[X]))
+    (Polynomial.C v - Polynomial.C u * Polynomial.X)).mpr
   intro f hf
+  rw [hspan] at hf ⊢
   rw [smul_eq_mul, Ideal.mem_span_singleton, Polynomial.X_dvd_iff] at hf
   apply Ideal.mem_span_singleton.mpr
   apply Polynomial.X_dvd_iff.mpr
   have hconstant : v * f.coeff 0 = 0 := by
     simpa only [Polynomial.mul_coeff_zero, Polynomial.coeff_sub,
-      Polynomial.coeff_C_zero, Polynomial.coeff_mul_X_zero, sub_zero] using hf
+      Polynomial.coeff_C_zero, Polynomial.coeff_X_zero, mul_zero, sub_zero] using hf
   exact (mul_eq_zero.mp hconstant).resolve_left hv
 
 private theorem integerInfinityChartSectionEquations_isRegular
@@ -109,9 +115,10 @@ private theorem integerInfinityChartSectionEquations_isRegular
 theorem integerProjectiveInfinitySectionEquations_isRegular
     (p : ℕ) [Fact p.Prime] (u v : ℤ) (hv : v ≠ 0) (hpv : (p : ℤ) ∣ v) :
     RingTheory.Sequence.IsRegular (IntegerProjectiveInfinityLocalRing p)
-      [infinityChartGermAt ℤ (integerInfinityChartPoint p) Polynomial.X,
+      ([infinityChartGermAt ℤ (integerInfinityChartPoint p) Polynomial.X,
         infinityChartGermAt ℤ (integerInfinityChartPoint p)
-          (Polynomial.C v - Polynomial.C u * Polynomial.X)] := by
+          (Polynomial.C v - Polynomial.C u * Polynomial.X)] :
+        List (IntegerProjectiveInfinityLocalRing p)) := by
   let e : IntegerProjectiveInfinityLocalRing p ≃+* IntegerInfinityChartLocalRing p :=
     infinityChartStalkEquiv ℤ (integerInfinityChartPoint p)
   let g : ℤ[X] →+* IntegerProjectiveInfinityLocalRing p :=
@@ -122,15 +129,27 @@ theorem integerProjectiveInfinitySectionEquations_isRegular
     apply e.injective
     rw [RingEquiv.apply_symm_apply]
     exact (infinityChartStalkEquiv_germAt ℤ (integerInfinityChartPoint p) f).symm
+  let rs : List (IntegerInfinityChartLocalRing p) :=
+    [algebraMap ℤ[X] (IntegerInfinityChartLocalRing p) Polynomial.X,
+      algebraMap ℤ[X] (IntegerInfinityChartLocalRing p)
+        (Polynomial.C v - Polynomial.C u * Polynomial.X)]
+  have : RingHomInvPair
+      (e.symm : IntegerInfinityChartLocalRing p →+* IntegerProjectiveInfinityLocalRing p)
+      (e.symm.symm : IntegerProjectiveInfinityLocalRing p →+* IntegerInfinityChartLocalRing p) :=
+    RingHomInvPair.of_ringEquiv e.symm
+  have : RingHomInvPair
+      (e.symm.symm : IntegerProjectiveInfinityLocalRing p →+* IntegerInfinityChartLocalRing p)
+      (e.symm : IntegerInfinityChartLocalRing p →+* IntegerProjectiveInfinityLocalRing p) :=
+    RingHomInvPair.symm _ _
   have hregular : RingTheory.Sequence.IsRegular (IntegerProjectiveInfinityLocalRing p)
-      ([algebraMap ℤ[X] (IntegerInfinityChartLocalRing p) Polynomial.X,
-        algebraMap ℤ[X] (IntegerInfinityChartLocalRing p)
-          (Polynomial.C v - Polynomial.C u * Polynomial.X)].map e.symm) :=
-    (e.symm.toAddEquiv.isRegular_congr
-      (List.forall₂_map_right_iff.mpr
-        (List.forall₂_same.mpr fun a _ z ↦ e.symm.map_mul a z))).mp
+      (rs.map (e.symm : IntegerInfinityChartLocalRing p →+*
+        IntegerProjectiveInfinityLocalRing p)) :=
+    (e.symm.toSemilinearEquiv.isRegular_congr' rs).mp
       (integerInfinityChartSectionEquations_isRegular p u v hv hpv)
-  simpa only [List.map_cons, List.map_nil, hg] using hregular
+  change RingTheory.Sequence.IsRegular (IntegerProjectiveInfinityLocalRing p)
+    ([g Polynomial.X, g (Polynomial.C v - Polynomial.C u * Polynomial.X)] :
+      List (IntegerProjectiveInfinityLocalRing p))
+  simpa only [rs, List.map_cons, List.map_nil, RingHom.coe_coe, hg] using hregular
 
 /-- When the local intersection multiplicity is one, the two concrete
 section equations are a regular system of parameters in the actual
@@ -155,16 +174,21 @@ theorem integerProjectiveInfinitySection_isRegularSystemOfParameters
     rw [Module.length_eq_one_iff, isSimpleModule_iff_isCoatom,
       ← Ideal.isMaximal_def, IsLocalRing.isMaximal_iff] at hlength
     exact hlength
+  let g : ℤ[X] →+* IntegerProjectiveInfinityLocalRing p :=
+    infinityChartGermAt ℤ (integerInfinityChartPoint p)
   have hideal : Ideal.ofList
-      [infinityChartGermAt ℤ (integerInfinityChartPoint p) Polynomial.X,
-        infinityChartGermAt ℤ (integerInfinityChartPoint p)
-          (Polynomial.C v - Polynomial.C u * Polynomial.X)] =
+      [g Polynomial.X, g (Polynomial.C v - Polynomial.C u * Polynomial.X)] =
       integerProjectiveInfinityIntersectionIdeal p u v := by
-    rw [integerProjectiveInfinityIntersectionIdeal, infinityIntersectionIdeal,
-      Ideal.map_span, Set.image_pair, Ideal.ofList_cons, Ideal.ofList_cons,
-      Ideal.ofList_nil, sup_bot_eq, Ideal.span_insert]
-  rw [AlgebraicGeometry.Scheme.IsRegularSystemOfParameters]
-  simp only [Matrix.vecCons, List.ofFn_cons, List.ofFn_zero]
+    change Ideal.ofList
+      [g Polynomial.X, g (Polynomial.C v - Polynomial.C u * Polynomial.X)] =
+        (infinityIntersectionIdeal u v).map g
+    rw [infinityIntersectionIdeal, Ideal.map_span, Set.image_pair,
+      Ideal.ofList_cons, Ideal.ofList_cons, Ideal.ofList_nil, sup_bot_eq, Ideal.span_insert]
+  change RingTheory.Sequence.IsRegular (IntegerProjectiveInfinityLocalRing p)
+      ([g Polynomial.X, g (Polynomial.C v - Polynomial.C u * Polynomial.X)] :
+        List (IntegerProjectiveInfinityLocalRing p)) ∧
+    Ideal.ofList [g Polynomial.X, g (Polynomial.C v - Polynomial.C u * Polynomial.X)] =
+      IsLocalRing.maximalIdeal (IntegerProjectiveInfinityLocalRing p)
   exact ⟨integerProjectiveInfinitySectionEquations_isRegular p u v hv hpv,
     hideal.trans hmaximal⟩
 
