@@ -17,6 +17,7 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
 import Mathlib.Data.Set.Image
+import Mathlib.Order.BooleanAlgebra.Basic
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.Topology.Homeomorph.Defs
 
@@ -53,11 +54,16 @@ private theorem range_zeroSection_comp_swap :
       (((projectiveCoordinateSwap ℤ).hom ⁻¹ᵁ infinityComplement ℤ :
         (ProjectiveLine ℤ).Opens) : Set (ProjectiveLine ℤ))ᶜ
     rw [projectiveCoordinateSwap, integralCoordinateChange_preimage_infinity]
-    change Set.range (zeroSection ℤ) =
-      (ProjectiveSpectrum.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
-        (linearSectionEquation (0 : ℤ) 1) : Set (ProjectiveLine ℤ))ᶜ
-    rw [ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl, compl_compl, range_zeroSection]
-  change Set.range (fun x => (projectiveCoordinateSwap ℤ).hom (zeroSection ℤ x)) = _
+    have hbasic :
+        (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+          (linearSectionEquation (0 : ℤ) 1) : Set (ProjectiveLine ℤ)) =
+        (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+          {linearSectionEquation (0 : ℤ) 1} : Set (ProjectiveLine ℤ))ᶜ :=
+      ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+        (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (linearSectionEquation (0 : ℤ) 1)
+    exact (range_zeroSection ℤ).trans (compl_eq_comm.mp hbasic.symm).symm
+  change Set.range (fun x : Spec (CommRingCat.of ℤ) =>
+    (projectiveCoordinateSwap ℤ).hom (zeroSection ℤ x)) = _
   rw [Set.range_comp', hzero]
   exact Set.image_preimage_eq _ (Scheme.homeoOfIso (projectiveCoordinateSwap ℤ)).surjective
 
@@ -88,22 +94,32 @@ theorem range_integralSection (u v a b : ℤ) (hab : a * u + b * v = 1) :
         {linearSectionEquation u v} := by
   let e : ProjectiveLine ℤ ≅ ProjectiveLine ℤ :=
     integralCoordinateChange u v a b hab
-  change Set.range (fun x => e.inv ((zeroSection ℤ ≫ (projectiveCoordinateSwap ℤ).hom) x)) = _
+  change Set.range (fun x : Spec (CommRingCat.of ℤ) =>
+      e.inv ((zeroSection ℤ ≫ (projectiveCoordinateSwap ℤ).hom) x)) =
+    (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+      {linearSectionEquation u v} : Set (ProjectiveLine ℤ))
   rw [Set.range_comp', range_zeroSection_comp_swap]
-  calc
-    e.inv '' (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ =
-        e.hom ⁻¹' (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ := by
-      exact congrFun (Scheme.homeoOfIso e).image_symm _
-    _ = ((e.hom ⁻¹ᵁ infinityComplement ℤ :
+  have himage : e.inv '' (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ =
+      e.hom ⁻¹' (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ :=
+    congrFun (Scheme.homeoOfIso e).image_symm
+      (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ
+  have hpreimage : e.hom ⁻¹' (infinityComplement ℤ : Set (ProjectiveLine ℤ))ᶜ =
+      ((e.hom ⁻¹ᵁ infinityComplement ℤ :
         (ProjectiveLine ℤ).Opens) : Set (ProjectiveLine ℤ))ᶜ :=
-      Set.preimage_compl
-    _ = (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
-        (linearSectionEquation u v) : Set (ProjectiveLine ℤ))ᶜ := by
-      rw [e, integralCoordinateChange_preimage_infinity]
-    _ = ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
-        {linearSectionEquation u v} := by
-      change (ProjectiveSpectrum.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
-        (linearSectionEquation u v) : Set (ProjectiveLine ℤ))ᶜ = _
-      rw [ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl, compl_compl]
+    Set.preimage_compl
+  have hchart : ((e.hom ⁻¹ᵁ infinityComplement ℤ :
+        (ProjectiveLine ℤ).Opens) : Set (ProjectiveLine ℤ))ᶜ =
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u v) : Set (ProjectiveLine ℤ))ᶜ :=
+    congrArg (fun U : (ProjectiveLine ℤ).Opens => (U : Set (ProjectiveLine ℤ))ᶜ)
+      (integralCoordinateChange_preimage_infinity u v a b hab)
+  have hzeroLocus :
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u v) : Set (ProjectiveLine ℤ))ᶜ =
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        {linearSectionEquation u v} : Set (ProjectiveLine ℤ)) :=
+    compl_eq_comm.mp (ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+      (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (linearSectionEquation u v)).symm
+  exact himage.trans (hpreimage.trans (hchart.trans hzeroLocus))
 
 end ShimizuYamaguchi26BranchedCoverings

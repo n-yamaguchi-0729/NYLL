@@ -10,6 +10,8 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityIntersection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.LocalizedInfinityIntersection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Mathlib.Algebra.Polynomial.Basic
+import Mathlib.Algebra.Ring.Equiv
+import Mathlib.Algebra.Ring.Hom.Defs
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.Data.ENat.Basic
 import Mathlib.Data.Set.Image
@@ -47,7 +49,11 @@ namespace ShimizuYamaguchi26BranchedCoverings
 
 universe u
 
-variable {R : Type u} [CommRing R] [IsLocalRing R]
+variable {R : Type u} [CommRing R]
+
+section LocalRing
+
+variable [IsLocalRing R]
 
 /-- The actual local ring at the infinity-chart point of the projective line. -/
 abbrev ProjectiveInfinityLocalRing (R : Type u) [CommRing R] [IsLocalRing R] :=
@@ -71,10 +77,14 @@ theorem map_projectiveInfinityIntersectionIdeal (u v : R) :
     (projectiveInfinityIntersectionIdeal u v).map
         (projectiveInfinityStalkEquiv R).toRingHom =
       (infinityIntersectionIdeal u v).map (algebraMap R[X] (InfinityChartLocalRing R)) := by
-  rw [projectiveInfinityIntersectionIdeal, Ideal.map_map]
-  congr 1
-  ext f
-  exact projectiveInfinityStalkEquiv_germ R f
+  let e : ProjectiveInfinityLocalRing R ≃+* InfinityChartLocalRing R :=
+    projectiveInfinityStalkEquiv R
+  let g : R[X] →+* ProjectiveInfinityLocalRing R := infinityChartGerm R
+  have hcomp : e.toRingHom.comp g = algebraMap R[X] (InfinityChartLocalRing R) :=
+    RingHom.ext (fun f => projectiveInfinityStalkEquiv_germ R f)
+  exact (Ideal.map_map (I := infinityIntersectionIdeal u v) g e.toRingHom).trans
+    (congrArg (fun φ : R[X] →+* InfinityChartLocalRing R =>
+      (infinityIntersectionIdeal u v).map φ) hcomp)
 
 /-- The quotient by the two equation germs in the projective local ring. -/
 abbrev ProjectiveInfinityIntersectionAlgebra (u v : R) :=
@@ -93,9 +103,12 @@ theorem projectiveInfinityIntersection_length_eq (u v : R) :
       Module.length (InfinityChartLocalRing R) (LocalizedInfinityIntersectionAlgebra u v) := by
   rw [Module.length_quotient, Module.length_quotient,
     ← map_projectiveInfinityIntersectionIdeal]
-  simpa only [RingEquiv.idealComapOrderIso_symm_apply] using
+  simpa only [RingEquiv.idealComapOrderIso_symm_apply, RingEquiv.toRingHom_eq_coe,
+    Ideal.map_coe] using
     (Order.coheight_orderIso (projectiveInfinityStalkEquiv R).idealComapOrderIso.symm
       (projectiveInfinityIntersectionIdeal u v)).symm
+
+end LocalRing
 
 /-- Over a DVR, the length of the two equation germs in the projective stalk is the valuation. -/
 theorem projectiveInfinityIntersection_length [IsDomain R] [IsDiscreteValuationRing R]

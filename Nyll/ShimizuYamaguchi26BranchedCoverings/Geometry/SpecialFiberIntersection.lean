@@ -107,9 +107,9 @@ private theorem prime_dvd_delta_iff (p : ℕ)
         (rationalPointNumerator b) (rationalPointDenominator b) := by
   rw [rationalPointDelta_eq_signed_coordinateDeterminant]
   by_cases hb : b.rep.2 = 0
-  · rw [if_pos hb]
+  · rw [ite_eq_left hb]
     exact Int.dvd_neg
-  · rw [if_neg hb]
+  · rw [ite_eq_right hb]
 
 /-- The reduction point of the first section belongs to the second section
 exactly when the prime divides the paper's integer `Δ`. -/
@@ -168,7 +168,7 @@ theorem specialFiber_intersection_singleton_closed (p : ℕ) [Fact p.Prime]
         IsClosed ({rationalSectionSpecialFiberPoint p a} : Set (ProjectiveLine (ZMod p))) := by
   constructor
   · ext x
-    simp only [Set.mem_setOf_eq, Set.mem_singleton_iff]
+    simp only [Set.mem_ofPred_eq, Set.mem_singleton_iff]
     constructor
     · intro hx
       exact eq_fieldSectionPoint_of_linearSection_mem
