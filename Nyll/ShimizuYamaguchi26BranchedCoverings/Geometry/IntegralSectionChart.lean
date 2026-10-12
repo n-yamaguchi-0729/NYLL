@@ -17,6 +17,7 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
+import Mathlib.Data.Int.Cast.Lemmas
 import Mathlib.Data.Set.Image
 import Mathlib.Data.Set.Insert
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
@@ -72,14 +73,17 @@ theorem integralSection_eq_infinityChart
   have heval : ev (Polynomial.C v - Polynomial.C u * Polynomial.X) = 0 := by
     simp only [ev, Polynomial.coe_eval₂RingHom, Polynomial.eval₂_sub,
       Polynomial.eval₂_mul, Polynomial.eval₂_C, Polynomial.eval₂_X,
-      algebraMap_int_eq, huc, sub_self]
+      algebraMap_int_eq, Int.coe_castRingHom, huc, sub_self]
   have hrange : Set.range f ⊆ Set.range (integralSection u v a b hab) := by
     rw [range_integralSection]
     rintro y ⟨x, rfl⟩
-    rw [ProjectiveSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
+    apply (ProjectiveSpectrum.mem_zeroLocus
+      (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (f x) {linearSectionEquation u v}).mpr
+    apply Set.singleton_subset_iff.mpr
     change linearSectionEquation u v ∈
       (infinityChartEmbedding ℤ (Spec.map (CommRingCat.ofHom ev) x)).asHomogeneousIdeal
-    rw [infinityChartEmbedding_linearSection_mem_iff]
+    apply (infinityChartEmbedding_linearSection_mem_iff u v
+      (Spec.map (CommRingCat.ofHom ev) x)).mpr
     change ev (Polynomial.C v - Polynomial.C u * Polynomial.X) ∈ x.asIdeal
     rw [heval]
     exact Ideal.zero_mem _

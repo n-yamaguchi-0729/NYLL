@@ -13,6 +13,7 @@ import Nyll.SchemeTheory.ProjectiveSpace.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.CategoryTheory.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
 import Mathlib.Data.Int.Cast.Lemmas
 import Mathlib.Data.Set.Image
@@ -101,12 +102,15 @@ theorem rationalSectionGenericPoint_eq (a : Projectivization ℚ (ℚ × ℚ)) :
   rw [← range_rationalSection] at hmem
   obtain ⟨p, hp⟩ := hmem
   have hpzero : p = (⊥ : PrimeSpectrum ℤ) := by
-    calc
-      p = (rationalSection a ≫ ProjSpace.π ℤ 1) p := by
-        rw [rationalSection_comp_π]
-      _ = ProjSpace.π ℤ 1 (rationalSectionGenericPoint a) := by
-        rw [Scheme.Hom.comp_apply, hp]
-      _ = ⊥ := hbase
+    let η : Spec (CommRingCat.of ℤ) := (⊥ : PrimeSpectrum ℤ)
+    have hsection : p = (rationalSection a ≫ ProjSpace.π ℤ 1) p := by
+      rw [rationalSection_comp_π]
+      exact (CategoryTheory.id_apply (X := (Spec (CommRingCat.of ℤ)).carrier) p).symm
+    have hpoint : (rationalSection a ≫ ProjSpace.π ℤ 1) p =
+        ProjSpace.π ℤ 1 (rationalSectionGenericPoint a) := by
+      rw [Scheme.Hom.comp_apply, hp]
+    have hgeneric : ProjSpace.π ℤ 1 (rationalSectionGenericPoint a) = η := hbase
+    exact hsection.trans (hpoint.trans hgeneric)
   rw [← hp, hpzero]
 
 /-- The homogeneous support is precisely the Zariski closure of the original
@@ -114,14 +118,18 @@ rational point in the integral projective line. -/
 theorem closure_rationalSectionGenericPoint (a : Projectivization ℚ (ℚ × ℚ)) :
     closure ({rationalSectionGenericPoint a} : Set (ProjectiveLine ℤ)) =
       rationalSectionSupport a := by
-  have hgeneric : closure ({(⊥ : PrimeSpectrum ℤ)} : Set (PrimeSpectrum ℤ)) = Set.univ := by
+  let η : Spec (CommRingCat.of ℤ) := (⊥ : PrimeSpectrum ℤ)
+  have hgeneric : closure ({η} : Set (Spec (CommRingCat.of ℤ))) = Set.univ := by
+    change closure ({(⊥ : PrimeSpectrum ℤ)} : Set (PrimeSpectrum ℤ)) = Set.univ
     rw [PrimeSpectrum.closure_singleton, PrimeSpectrum.asIdeal_bot,
       PrimeSpectrum.zeroLocus_bot]
+  have hpoint : rationalSectionGenericPoint a = rationalSection a η :=
+    rationalSectionGenericPoint_eq a
   calc
     closure ({rationalSectionGenericPoint a} : Set (ProjectiveLine ℤ)) =
-        closure ((rationalSection a) '' ({(⊥ : PrimeSpectrum ℤ)} : Set (PrimeSpectrum ℤ))) := by
-      rw [Set.image_singleton, rationalSectionGenericPoint_eq]
-    _ = (rationalSection a) '' closure ({(⊥ : PrimeSpectrum ℤ)} : Set (PrimeSpectrum ℤ)) :=
+        closure ((rationalSection a) '' ({η} : Set (Spec (CommRingCat.of ℤ)))) := by
+      rw [Set.image_singleton, ← hpoint]
+    _ = (rationalSection a) '' closure ({η} : Set (Spec (CommRingCat.of ℤ))) :=
       (rationalSection a).isClosedEmbedding.closure_image_eq _
     _ = Set.range (rationalSection a) := by rw [hgeneric, Set.image_univ]
     _ = rationalSectionSupport a := range_rationalSection a

@@ -13,7 +13,10 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.ProjectiveInfinityInter
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Mathlib.Algebra.Algebra.Tower
 import Mathlib.Algebra.Polynomial.AlgebraMap
+import Mathlib.Algebra.Ring.Equiv
+import Mathlib.Algebra.Ring.Hom.Defs
 import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.AlgebraicGeometry.Spec
 import Mathlib.Data.ENat.Basic
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import Mathlib.Order.KrullDimension
@@ -71,11 +74,12 @@ theorem integerProjectiveInfinityStalkEquiv_germ
     integerProjectiveInfinityStalkEquiv p
         (infinityChartGermAt ℤ (integerInfinityChartPoint p) f) =
       algebraMap ℤ[X] (InfinityChartLocalRing (IntegerPrimeLocalization p)) f := by
-  change integerInfinityChartLocalizationEquiv p
-    (infinityChartStalkEquiv ℤ (integerInfinityChartPoint p)
-      (infinityChartGermAt ℤ (integerInfinityChartPoint p) f)) = _
-  rw [infinityChartStalkEquiv_germAt]
-  exact integerInfinityChartLocalizationEquiv_algebraMap p f
+  let q : AlgebraicGeometry.Spec (CommRingCat.of ℤ[X]) := integerInfinityChartPoint p
+  have hchart : infinityChartStalkEquiv ℤ q (infinityChartGermAt ℤ q f) =
+      algebraMap ℤ[X] (IntegerInfinityChartLocalRing p) f :=
+    infinityChartStalkEquiv_germAt ℤ q f
+  exact (congrArg (integerInfinityChartLocalizationEquiv p) hchart).trans
+    (integerInfinityChartLocalizationEquiv_algebraMap p f)
 
 /-- The ideal of the two equation germs in the actual integral projective stalk. -/
 def integerProjectiveInfinityIntersectionIdeal (p : ℕ) [Fact p.Prime] (u v : ℤ) :
@@ -91,13 +95,21 @@ theorem map_integerProjectiveInfinityIntersectionIdeal
         (algebraMap ℤ (IntegerPrimeLocalization p) v)).map
           (algebraMap (IntegerPrimeLocalization p)[X]
             (InfinityChartLocalRing (IntegerPrimeLocalization p))) := by
-  rw [integerProjectiveInfinityIntersectionIdeal, Ideal.map_map]
-  have hcomp : (integerProjectiveInfinityStalkEquiv p).toRingHom.comp
-      (infinityChartGermAt ℤ (integerInfinityChartPoint p)) =
-        algebraMap ℤ[X] (InfinityChartLocalRing (IntegerPrimeLocalization p)) := by
-    ext f
-    exact integerProjectiveInfinityStalkEquiv_germ p f
-  rw [hcomp, IsScalarTower.algebraMap_eq ℤ[X] (IntegerPrimeLocalization p)[X]
+  let e : IntegerProjectiveInfinityLocalRing p ≃+*
+      InfinityChartLocalRing (IntegerPrimeLocalization p) := integerProjectiveInfinityStalkEquiv p
+  let g : ℤ[X] →+* IntegerProjectiveInfinityLocalRing p :=
+    infinityChartGermAt ℤ (integerInfinityChartPoint p)
+  have hcomp : e.toRingHom.comp g =
+      algebraMap ℤ[X] (InfinityChartLocalRing (IntegerPrimeLocalization p)) :=
+    RingHom.ext (fun f => integerProjectiveInfinityStalkEquiv_germ p f)
+  have hmap : ((infinityIntersectionIdeal u v).map g).map e.toRingHom =
+      (infinityIntersectionIdeal u v).map
+        (algebraMap ℤ[X] (InfinityChartLocalRing (IntegerPrimeLocalization p))) :=
+    (Ideal.map_map (I := infinityIntersectionIdeal u v) g e.toRingHom).trans
+      (congrArg (fun φ : ℤ[X] →+* InfinityChartLocalRing (IntegerPrimeLocalization p) =>
+        (infinityIntersectionIdeal u v).map φ) hcomp)
+  refine hmap.trans ?_
+  rw [IsScalarTower.algebraMap_eq ℤ[X] (IntegerPrimeLocalization p)[X]
     (InfinityChartLocalRing (IntegerPrimeLocalization p)), ← Ideal.map_map,
     Polynomial.algebraMap_def, infinityIntersectionIdeal_map]
 
@@ -105,7 +117,8 @@ theorem map_integerProjectiveInfinityIntersectionIdeal
 abbrev IntegerProjectiveInfinityIntersectionAlgebra (p : ℕ) [Fact p.Prime] (u v : ℤ) :=
   IntegerProjectiveInfinityLocalRing p ⧸ integerProjectiveInfinityIntersectionIdeal p u v
 
-/-- The two projective-stalk intersection quotients agree before and after coefficient localization. -/
+/-- The two projective-stalk intersection quotients agree before and after
+coefficient localization. -/
 def integerProjectiveInfinityIntersectionEquiv (p : ℕ) [Fact p.Prime] (u v : ℤ) :
     IntegerProjectiveInfinityIntersectionAlgebra p u v ≃+*
       ProjectiveInfinityIntersectionAlgebra (algebraMap ℤ (IntegerPrimeLocalization p) u)
@@ -131,7 +144,8 @@ theorem integerProjectiveInfinityIntersection_length_eq
   rw [projectiveInfinityIntersection_length_eq,
     Module.length_quotient, Module.length_quotient,
     ← map_integerProjectiveInfinityIntersectionIdeal]
-  simpa only [RingEquiv.idealComapOrderIso_symm_apply] using
+  simpa only [RingEquiv.idealComapOrderIso_symm_apply, RingEquiv.toRingHom_eq_coe,
+    Ideal.map_coe] using
     (Order.coheight_orderIso (integerProjectiveInfinityStalkEquiv p).idealComapOrderIso.symm
       (integerProjectiveInfinityIntersectionIdeal p u v)).symm
 
