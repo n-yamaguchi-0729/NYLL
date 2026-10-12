@@ -57,8 +57,9 @@ private theorem comap_inv_eq_map_hom {X Y : Scheme} (e : X ≅ Y)
   · apply Scheme.IdealSheafData.le_map_iff_comap_le.mpr
     simpa only [← Scheme.IdealSheafData.comap_comp, e.hom_inv_id,
       Scheme.IdealSheafData.comap_id] using (le_refl I)
-  · have h := Scheme.IdealSheafData.comap_mono e.inv
-      (Scheme.IdealSheafData.comap_map_le I e.hom)
+  · have h : ((I.map e.hom).comap e.hom).comap e.inv ≤ I.comap e.inv :=
+      Scheme.IdealSheafData.comap_mono e.inv
+        (Scheme.IdealSheafData.comap_map_le I e.hom)
     rw [← Scheme.IdealSheafData.comap_comp, e.inv_hom_id,
       Scheme.IdealSheafData.comap_id] at h
     exact h
@@ -96,12 +97,35 @@ theorem integralSection_ker_comap_coordinateChange_inv
         {linearSectionEquation u' v'} =
     ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
       {linearSectionEquation (-(a * u' + b * v')) (coordinateDeterminant u v u' v')}
-  have hopen := congrArg
-    (fun U : (ProjectiveLine ℤ).Opens => ((U : Set (ProjectiveLine ℤ))ᶜ))
-    (integralCoordinateChange_inv_preimage_linearSection u v a b u' v' hab)
-  simpa only [Scheme.Hom.coe_preimage, Proj.basicOpen,
-    ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl,
-    Set.preimage_compl, compl_compl] using hopen
+  have hopen : (integralCoordinateChange u v a b hab).inv ⁻¹'
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u' v') : Set (ProjectiveLine ℤ))ᶜ =
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation (-(a * u' + b * v'))
+          (coordinateDeterminant u v u' v')) : Set (ProjectiveLine ℤ))ᶜ :=
+    congrArg (fun U : (ProjectiveLine ℤ).Opens => (U : Set (ProjectiveLine ℤ))ᶜ)
+      (integralCoordinateChange_inv_preimage_linearSection u v a b u' v' hab)
+  have hsource :
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u' v') : Set (ProjectiveLine ℤ))ᶜ =
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        {linearSectionEquation u' v'} : Set (ProjectiveLine ℤ)) :=
+    compl_eq_comm.mp (ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+      (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (linearSectionEquation u' v')).symm
+  have htarget :
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation (-(a * u' + b * v'))
+          (coordinateDeterminant u v u' v')) : Set (ProjectiveLine ℤ))ᶜ =
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        {linearSectionEquation (-(a * u' + b * v'))
+          (coordinateDeterminant u v u' v')} : Set (ProjectiveLine ℤ)) :=
+    compl_eq_comm.mp (ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+      (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+      (linearSectionEquation (-(a * u' + b * v'))
+        (coordinateDeterminant u v u' v'))).symm
+  exact (congrArg (fun Z : Set (ProjectiveLine ℤ) =>
+    (integralCoordinateChange u v a b hab).inv ⁻¹' Z) hsource.symm).trans
+      (hopen.trans htarget)
 
 /-- Pulling back the first section's actual ideal gives the actual section
 at infinity, including its scheme structure. -/
@@ -126,12 +150,31 @@ theorem integralSection_ker_comap_coordinateChange_inv_self
       MvPolynomial.X (1 : Fin 2) ∉ x.asHomogeneousIdeal.toIdeal
     simp only [linearSectionEquation, map_zero, map_one, zero_mul, one_mul,
       zero_sub, x.asHomogeneousIdeal.toIdeal.neg_mem_iff]
-  have hopen := congrArg
-    (fun U : (ProjectiveLine ℤ).Opens => ((U : Set (ProjectiveLine ℤ))ᶜ))
-    ((integralCoordinateChange_inv_preimage_firstSection u v a b hab).trans
-      hinfinity.symm)
-  simpa only [Scheme.Hom.coe_preimage, Proj.basicOpen,
-    ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl,
-    Set.preimage_compl, compl_compl] using hopen
+  have hopen : (integralCoordinateChange u v a b hab).inv ⁻¹'
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u v) : Set (ProjectiveLine ℤ))ᶜ =
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation (1 : ℤ) 0) : Set (ProjectiveLine ℤ))ᶜ :=
+    congrArg (fun U : (ProjectiveLine ℤ).Opens => (U : Set (ProjectiveLine ℤ))ᶜ)
+      ((integralCoordinateChange_inv_preimage_firstSection u v a b hab).trans
+        hinfinity.symm)
+  have hsource :
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation u v) : Set (ProjectiveLine ℤ))ᶜ =
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        {linearSectionEquation u v} : Set (ProjectiveLine ℤ)) :=
+    compl_eq_comm.mp (ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+      (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) (linearSectionEquation u v)).symm
+  have htarget :
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation (1 : ℤ) 0) : Set (ProjectiveLine ℤ))ᶜ =
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        {linearSectionEquation (1 : ℤ) 0} : Set (ProjectiveLine ℤ)) :=
+    compl_eq_comm.mp (ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl
+      (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+      (linearSectionEquation (1 : ℤ) 0)).symm
+  exact (congrArg (fun Z : Set (ProjectiveLine ℤ) =>
+    (integralCoordinateChange u v a b hab).inv ⁻¹' Z) hsource.symm).trans
+      (hopen.trans htarget)
 
 end ShimizuYamaguchi26BranchedCoverings
