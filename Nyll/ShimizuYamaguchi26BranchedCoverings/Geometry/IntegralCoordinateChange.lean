@@ -71,13 +71,13 @@ def bezoutCoordinateSubstitution (u v a b : R) :
           else linearSectionEquation u v).IsHomogeneous 1 := by
       intro j
       by_cases hj : j = 0
-      · rw [if_pos hj]
+      · rw [ite_eq_left hj]
         exact (MvPolynomial.isHomogeneous_C_mul_X a (0 : Fin 2)).add
           (MvPolynomial.isHomogeneous_C_mul_X b (1 : Fin 2))
-      · rw [if_neg hj]
+      · rw [ite_eq_right hj]
         exact (MvPolynomial.mem_homogeneousSubmodule 1 _).mp
           (linearSectionEquation_mem_one u v)
-    simpa only [one_mul] using
+    simpa only [MvPolynomial.coe_eval₂Hom, one_mul] using
       h.eval₂ MvPolynomial.C _ (MvPolynomial.isHomogeneous_C _) hcoordinates
 
 /-- The substitution fixes the coefficient ring. -/
@@ -90,13 +90,13 @@ theorem bezoutCoordinateSubstitution_X_zero (u v a b : R) :
     bezoutCoordinateSubstitution u v a b (MvPolynomial.X 0) =
       MvPolynomial.C a * MvPolynomial.X 0 + MvPolynomial.C b * MvPolynomial.X 1 := by
   change MvPolynomial.eval₂Hom MvPolynomial.C _ (MvPolynomial.X (0 : Fin 2)) = _
-  rw [MvPolynomial.eval₂Hom_X', if_pos rfl]
+  rw [MvPolynomial.eval₂Hom_X', ite_eq_left rfl]
 
 /-- The second coordinate is the primitive section equation. -/
 theorem bezoutCoordinateSubstitution_X_one (u v a b : R) :
     bezoutCoordinateSubstitution u v a b (MvPolynomial.X 1) = linearSectionEquation u v := by
   change MvPolynomial.eval₂Hom MvPolynomial.C _ (MvPolynomial.X (1 : Fin 2)) = _
-  rw [MvPolynomial.eval₂Hom_X', if_neg (by decide : (1 : Fin 2) ≠ 0)]
+  rw [MvPolynomial.eval₂Hom_X', ite_eq_right (by decide : (1 : Fin 2) ≠ 0)]
 
 /-- Bézout's identity makes the two explicit homogeneous substitutions inverse. -/
 theorem bezoutCoordinateSubstitution_comp (u v a b : R) (hab : a * u + b * v = 1) :
@@ -112,20 +112,34 @@ theorem bezoutCoordinateSubstitution_comp (u v a b : R) (hab : a * u + b * v = 1
     change bezoutCoordinateSubstitution u v a b
         (bezoutCoordinateSubstitution a v u b (MvPolynomial.X j)) = MvPolynomial.X j
     fin_cases j
-    · rw [bezoutCoordinateSubstitution_X_zero, map_add, map_mul, map_mul,
+    · change bezoutCoordinateSubstitution u v a b
+        (bezoutCoordinateSubstitution a v u b (MvPolynomial.X (0 : Fin 2))) =
+          MvPolynomial.X (0 : Fin 2)
+      rw [bezoutCoordinateSubstitution_X_zero, map_add, map_mul, map_mul,
         bezoutCoordinateSubstitution_C, bezoutCoordinateSubstitution_C,
         bezoutCoordinateSubstitution_X_zero, bezoutCoordinateSubstitution_X_one]
       calc
-        _ = MvPolynomial.C (a * u + b * v) * MvPolynomial.X 0 := by
+        (MvPolynomial.C u *
+            (MvPolynomial.C a * MvPolynomial.X 0 + MvPolynomial.C b * MvPolynomial.X 1) +
+          MvPolynomial.C b * linearSectionEquation u v : MvPolynomial (Fin 2) R) =
+            MvPolynomial.C (a * u + b * v) * MvPolynomial.X 0 := by
           simp only [linearSectionEquation, map_add, map_mul]
           ring
         _ = MvPolynomial.X 0 := by rw [hab, map_one, one_mul]
-    · rw [bezoutCoordinateSubstitution_X_one]
+    · change bezoutCoordinateSubstitution u v a b
+        (bezoutCoordinateSubstitution a v u b (MvPolynomial.X (1 : Fin 2))) =
+          MvPolynomial.X (1 : Fin 2)
+      rw [bezoutCoordinateSubstitution_X_one]
       simp only [linearSectionEquation, map_sub, map_mul, bezoutCoordinateSubstitution_C,
         bezoutCoordinateSubstitution_X_zero, bezoutCoordinateSubstitution_X_one]
       calc
-        _ = MvPolynomial.C (a * u + b * v) * MvPolynomial.X 1 := by
-          simp only [linearSectionEquation, map_add, map_mul]
+        (MvPolynomial.C v *
+            (MvPolynomial.C a * MvPolynomial.X 0 + MvPolynomial.C b * MvPolynomial.X 1) -
+          MvPolynomial.C a *
+            (MvPolynomial.C v * MvPolynomial.X 0 - MvPolynomial.C u * MvPolynomial.X 1) :
+              MvPolynomial (Fin 2) R) =
+            MvPolynomial.C (a * u + b * v) * MvPolynomial.X 1 := by
+          simp only [map_add, map_mul]
           ring
         _ = MvPolynomial.X 1 := by rw [hab, map_one, one_mul]
 
@@ -157,13 +171,13 @@ def integralCoordinateChange (u v a b : R) (hab : a * u + b * v = 1) :
       rw [mul_comm u a]
       exact hab))
   hom_inv_id := by
-    rw [← Proj.map_comp, bezoutCoordinateSubstitution_comp u v a b hab]
-    exact Proj.map_id
+    rw [← Proj.map_comp]
+    simp only [bezoutCoordinateSubstitution_comp u v a b hab, Proj.map_id]
   inv_hom_id := by
-    rw [← Proj.map_comp, bezoutCoordinateSubstitution_comp a v u b (by
+    rw [← Proj.map_comp]
+    simp only [bezoutCoordinateSubstitution_comp a v u b (by
       rw [mul_comm u a]
-      exact hab)]
-    exact Proj.map_id
+      exact hab), Proj.map_id]
 
 /-- The projective automorphism exchanging the two homogeneous coordinates. -/
 def projectiveCoordinateSwap (R : Type u) [CommRing R] :

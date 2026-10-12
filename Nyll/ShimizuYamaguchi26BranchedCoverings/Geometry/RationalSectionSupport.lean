@@ -9,6 +9,7 @@ import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.TwoSectionComplement
 import Nyll.SchemeTheory.ProjectiveSpace.Basic
 import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Data.Int.Cast.Lemmas
 import Mathlib.Data.Set.Insert
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
@@ -47,11 +48,14 @@ theorem mem_rationalSectionSupport_baseChange_iff (R : Type) [CommRing R]
     (ProjSpace.map ℤ R 1) x ∈ rationalSectionSupport a ↔
       linearSectionEquation (rationalPointNumerator a : R)
         (rationalPointDenominator a : R) ∈ x.asHomogeneousIdeal := by
-  rw [rationalSectionSupport, ProjectiveSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
+  refine (ProjectiveSpectrum.mem_zeroLocus
+    (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ) ((ProjSpace.map ℤ R 1) x)
+    {linearSectionEquation (rationalPointNumerator a) (rationalPointDenominator a)}).trans ?_
+  rw [Set.singleton_subset_iff]
   change MvPolynomial.map (algebraMap ℤ R)
       (linearSectionEquation (rationalPointNumerator a) (rationalPointDenominator a)) ∈
         x.asHomogeneousIdeal ↔ _
   simp only [linearSectionEquation, map_sub, map_mul, MvPolynomial.map_C,
-    MvPolynomial.map_X, algebraMap_int_eq]
+    MvPolynomial.map_X, algebraMap_int_eq, Int.coe_castRingHom]
 
 end ShimizuYamaguchi26BranchedCoverings

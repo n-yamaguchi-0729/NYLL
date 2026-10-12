@@ -67,20 +67,20 @@ def fieldSectionEvaluation (u v : k) : MvPolynomial (Fin 2) k →+* k :=
 theorem fieldSectionEvaluation_X_zero (u v : k) :
     fieldSectionEvaluation u v (MvPolynomial.X 0) = u := by
   change MvPolynomial.eval _ (MvPolynomial.X (0 : Fin 2)) = _
-  rw [MvPolynomial.eval_X, if_pos rfl]
+  rw [MvPolynomial.eval_X, ite_eq_left (rfl : (0 : Fin 2) = 0)]
 
 /-- Evaluation of the second homogeneous coordinate. -/
 theorem fieldSectionEvaluation_X_one (u v : k) :
     fieldSectionEvaluation u v (MvPolynomial.X 1) = v := by
   change MvPolynomial.eval _ (MvPolynomial.X (1 : Fin 2)) = _
-  rw [MvPolynomial.eval_X, if_neg (by decide : (1 : Fin 2) ≠ 0)]
+  rw [MvPolynomial.eval_X, ite_eq_right (by decide : (1 : Fin 2) ≠ 0)]
 
 /-- Evaluation of a homogeneous linear section equation. -/
 theorem fieldSectionEvaluation_linearSectionEquation (u v s t : k) :
     fieldSectionEvaluation u v (linearSectionEquation s t) = t * u - s * v := by
-  simp only [fieldSectionEvaluation, linearSectionEquation, map_sub, map_mul,
-    MvPolynomial.eval_C, MvPolynomial.eval_X, if_pos rfl,
-    if_neg (by decide : (1 : Fin 2) ≠ 0)]
+  rw [linearSectionEquation, map_sub, map_mul, map_mul,
+    fieldSectionEvaluation_X_zero, fieldSectionEvaluation_X_one]
+  simp only [fieldSectionEvaluation, MvPolynomial.eval_C]
 
 /-- The actual projective-scheme point determined by a nonzero coordinate pair.
 Its homogeneous ideal is the homogeneous core of the evaluation kernel. -/

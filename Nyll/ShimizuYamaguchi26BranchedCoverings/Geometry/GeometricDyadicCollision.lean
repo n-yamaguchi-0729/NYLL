@@ -19,6 +19,7 @@ import Mathlib.Algebra.Field.ZMod
 import Mathlib.Data.ZMod.Basic
 import Mathlib.LinearAlgebra.Projectivization.Basic
 import Mathlib.RingTheory.Coprime.Basic
+import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
 import Mathlib.RingTheory.Ideal.Span
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import Mathlib.Tactic.FinCases
@@ -83,7 +84,7 @@ private theorem primitive_section_parity (x : ProjectiveLine (ZMod 2))
     · refine Or.inr (Or.inl ⟨hu, hv, ?_⟩)
       have hneg : -MvPolynomial.X (1 : Fin 2) ∈ x.asHomogeneousIdeal.toIdeal := by
         simpa only [linearSectionEquation, hu.intCast_zmod_two, hv.intCast_zmod_two,
-          map_zero, map_one, one_mul, zero_mul, zero_sub] using hsection
+          map_zero, map_one, one_mul, zero_mul, zero_sub, HomogeneousIdeal.mem_iff] using hsection
       exact (x.asHomogeneousIdeal.toIdeal.neg_mem_iff).mp hneg
     · refine Or.inr (Or.inr ⟨hu, hv, ?_⟩)
       simpa only [linearSectionEquation, hu.intCast_zmod_two, hv.intCast_zmod_two,

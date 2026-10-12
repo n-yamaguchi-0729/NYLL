@@ -67,6 +67,7 @@ private theorem standardChartEmbedding_X_zero_mem_iff
       Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R)
         (MvPolynomial.X (0 : Fin 2)) ↔ q ∈ PrimeSpectrum.basicOpen (Polynomial.X : Polynomial R)
   rw [hpre]
+  exact Iff.rfl
 
 private theorem mem_range_affineZeroSection_iff
     (R : Type u) [CommRing R] (q : PrimeSpectrum (Polynomial R)) :
@@ -78,6 +79,7 @@ private theorem mem_range_affineZeroSection_iff
     Polynomial.ker_evalRingHom, PrimeSpectrum.zeroLocus_span,
     PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
   simp only [Polynomial.C_0, sub_zero]
+  exact Iff.rfl
 
 /-- The image of the zero section is exactly its homogeneous linear zero locus. -/
 theorem range_zeroSection (R : Type u) [CommRing R] :
@@ -85,7 +87,9 @@ theorem range_zeroSection (R : Type u) [CommRing R] :
       ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) R)
         {linearSectionEquation (0 : R) 1} := by
   ext x
-  rw [ProjectiveSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
+  refine Iff.trans ?_ ((ProjectiveSpectrum.mem_zeroLocus
+    (MvPolynomial.homogeneousSubmodule (Fin 2) R) x
+    {linearSectionEquation (0 : R) 1}).trans Set.singleton_subset_iff).symm
   have hequation : linearSectionEquation (0 : R) 1 = MvPolynomial.X (0 : Fin 2) := by
     simp only [linearSectionEquation, map_one, map_zero, one_mul, zero_mul, sub_zero]
   rw [hequation]

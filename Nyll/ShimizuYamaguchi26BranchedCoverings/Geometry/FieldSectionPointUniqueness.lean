@@ -17,6 +17,7 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.Data.Set.Insert
+import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
 import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Ideal.Maximal
 import Mathlib.RingTheory.Ideal.Span
@@ -65,6 +66,7 @@ private theorem linearSection_mem_infinityComplement (u v : k) (hv : v ≠ 0)
   change MvPolynomial.X (1 : Fin 2) ∉ x.asHomogeneousIdeal
   intro hx1
   have hvx0 : MvPolynomial.C v * MvPolynomial.X 0 ∈ x.asHomogeneousIdeal := by
+    apply HomogeneousIdeal.mem_iff.mp
     have hm := x.asHomogeneousIdeal.toIdeal.add_mem h
       (x.asHomogeneousIdeal.toIdeal.mul_mem_left (MvPolynomial.C u) hx1)
     simpa only [linearSectionEquation, sub_add_cancel] using hm
@@ -138,6 +140,7 @@ private theorem eq_of_linearSection_mem
         MvPolynomial.X (1 : Fin 2) ∈ z.asHomogeneousIdeal := by
       apply coordinate_mem_of_scaled_mem z u hu 1
       apply z.asHomogeneousIdeal.toIdeal.neg_mem_iff.mp
+      apply HomogeneousIdeal.mem_iff.mpr
       simpa only [linearSectionEquation, hv, map_zero, zero_mul, zero_sub] using hz
     let e : ProjectiveLine k ≅ ProjectiveLine k :=
       integralCoordinateChange (0 : k) 1 0 1 (by rw [zero_mul, one_mul, zero_add])
@@ -169,8 +172,13 @@ theorem zeroLocus_linearSectionEquation_eq_singleton
     (u v : k) (huv : u ≠ 0 ∨ v ≠ 0) :
     ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) k)
       {linearSectionEquation u v} = {fieldSectionPoint u v huv} := by
-  ext x
-  rw [ProjectiveSpectrum.mem_zeroLocus, Set.singleton_subset_iff, Set.mem_singleton_iff]
+  apply Set.ext
+  intro x
+  refine (ProjectiveSpectrum.mem_zeroLocus
+    (MvPolynomial.homogeneousSubmodule (Fin 2) k) x {linearSectionEquation u v}).trans ?_
+  change {linearSectionEquation u v} ⊆ (x.asHomogeneousIdeal : Set (MvPolynomial (Fin 2) k)) ↔
+    x = fieldSectionPoint u v huv
+  rw [Set.singleton_subset_iff]
   constructor
   · exact eq_fieldSectionPoint_of_linearSection_mem u v huv x
   · rintro rfl
@@ -179,7 +187,12 @@ theorem zeroLocus_linearSectionEquation_eq_singleton
 /-- The actual projective-scheme point supplied by a nonzero field-valued pair is closed. -/
 theorem isClosed_singleton_fieldSectionPoint (u v : k) (huv : u ≠ 0 ∨ v ≠ 0) :
     IsClosed ({fieldSectionPoint u v huv} : Set (ProjectiveLine k)) := by
-  rw [← zeroLocus_linearSectionEquation_eq_singleton u v huv]
-  exact ProjectiveSpectrum.isClosed_zeroLocus _ _
+  have hclosed : IsClosed
+      (ProjectiveSpectrum.zeroLocus (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+        {linearSectionEquation u v} : Set (ProjectiveLine k)) :=
+    ProjectiveSpectrum.isClosed_zeroLocus
+      (MvPolynomial.homogeneousSubmodule (Fin 2) k) {linearSectionEquation u v}
+  exact (congrArg (fun S : Set (ProjectiveLine k) => IsClosed S)
+    (zeroLocus_linearSectionEquation_eq_singleton u v huv)).mp hclosed
 
 end ShimizuYamaguchi26BranchedCoverings

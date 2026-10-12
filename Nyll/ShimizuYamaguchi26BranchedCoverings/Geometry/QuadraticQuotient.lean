@@ -83,11 +83,10 @@ theorem exists_surjective_cyclicTwo_twoSectionCoordinateRing
   let Y : FiniteEtale (Spec (.of R)) := FiniteEtale.mk π
   have : ConnectedSpace Y.left := hconnected
   apply FiniteEtale.exists_surjective_cyclicTwo_of_connected_doubleCover ξ Y
-  calc
-    Y.hom.finrank (ξ (IsLocalRing.closedPoint Ω)) = Module.finrank R B := by
-      simpa only [Module.rankAtStalk_eq_finrank_of_free, Pi.natCast_apply, Nat.cast_id] using
-        (Scheme.Hom.finrank_SpecMap_algebraMap R B (ξ (IsLocalRing.closedPoint Ω)))
-    _ = 2 := hdegree
+  change π.finrank (ξ (IsLocalRing.closedPoint Ω)) = 2
+  exact (Scheme.Hom.finrank_SpecMap_algebraMap R B (ξ (IsLocalRing.closedPoint Ω))).trans
+    ((congrFun (Module.rankAtStalk_eq_finrank_of_free (R := R) (M := B))
+      (ξ (IsLocalRing.closedPoint Ω))).trans hdegree)
 
 /-- Removing further closed subsets preserves the constructed quotient of
 order two. The source is any open subscheme of the actual affine complement;

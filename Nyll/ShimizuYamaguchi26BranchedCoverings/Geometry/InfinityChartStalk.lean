@@ -66,10 +66,21 @@ theorem infinityChartEmbedding_opensRange (R : Type u) [CommRing R] :
       Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R)
         (MvPolynomial.X (0 : Fin 2)) := by
   have hswap : (projectiveCoordinateSwap R).hom = (projectiveCoordinateSwap R).inv := rfl
-  rw [infinityChartEmbedding, Scheme.Hom.opensRange_comp,
-    standardChartEmbedding_opensRange, hswap, Scheme.Hom.inv_image]
-  rw [projectiveCoordinateSwap, integralCoordinateChange_preimage_infinity]
-  simp only [linearSectionEquation, map_one, map_zero, one_mul, zero_mul, sub_zero]
+  calc
+    (infinityChartEmbedding R).opensRange =
+        (projectiveCoordinateSwap R).hom ''ᵁ (standardChartEmbedding R).opensRange :=
+      Scheme.Hom.opensRange_comp (standardChartEmbedding R) (projectiveCoordinateSwap R).hom
+    _ = (projectiveCoordinateSwap R).hom ⁻¹ᵁ infinityComplement R := by
+      rw [standardChartEmbedding_opensRange]
+      simpa only [hswap] using
+        (Scheme.Hom.inv_image (projectiveCoordinateSwap R) (infinityComplement R))
+    _ = Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R)
+        (linearSectionEquation (0 : R) 1) :=
+      integralCoordinateChange_preimage_infinity (0 : R) 1 0 1
+        (by rw [zero_mul, one_mul, zero_add])
+    _ = Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) R)
+        (MvPolynomial.X (0 : Fin 2)) := by
+      rw [linearSectionEquation, map_one, map_zero, one_mul, zero_mul, sub_zero]
 
 /-- The original integral section equation restricts to `v-u*w` on the infinity chart. -/
 theorem infinityChartEmbedding_preimage_linearSection (u v : ℤ) :
@@ -96,7 +107,9 @@ theorem infinityChartEmbedding_linearSection_mem_iff
       Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
         (linearSectionEquation u v) ↔
     q ∈ PrimeSpectrum.basicOpen (Polynomial.C v - Polynomial.C u * Polynomial.X)
-  rw [infinityChartEmbedding_preimage_linearSection]
+  exact Iff.of_eq (congrArg
+    (fun U : (Spec (CommRingCat.of ℤ[X])).Opens => q ∈ U)
+    (infinityChartEmbedding_preimage_linearSection u v))
 
 /-- The prime of the infinity chart above the closed point of the local base. -/
 def infinityChartClosedPoint (R : Type u) [CommRing R] [IsLocalRing R] :
@@ -110,35 +123,53 @@ def projectiveInfinityPoint (R : Type u) [CommRing R] [IsLocalRing R] :
 
 /-- At any prime of the infinity chart, the actual projective stalk is the
 localization of the polynomial ring at that prime. -/
-def infinityChartStalkEquiv (R : Type u) [CommRing R] (q : PrimeSpectrum R[X]) :
+def infinityChartStalkEquiv (R : Type u) [CommRing R]
+    (q : Spec (CommRingCat.of R[X])) :
+    let : q.asIdeal.IsPrime := q.isPrime
     (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) ≃+*
-      Localization.AtPrime q.asIdeal :=
-  ((asIso ((infinityChartEmbedding R).stalkMap q)) ≪≫
-    Spec.stalkIso (CommRingCat.of R[X]) q).commRingCatIsoToRingEquiv
+      Localization.AtPrime q.asIdeal := by
+  intro hprime
+  let e : (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) ≅
+      (Spec (CommRingCat.of R[X])).presheaf.stalk q :=
+    asIso ((infinityChartEmbedding R).stalkMap q)
+  exact (e ≪≫ Spec.stalkIso (CommRingCat.of R[X]) q).commRingCatIsoToRingEquiv
 
 /-- A polynomial gives a germ at any point of the infinity chart, using the
 actual structure-sheaf germ and the inverse stalk map of the open immersion. -/
-def infinityChartGermAt (R : Type u) [CommRing R] (q : PrimeSpectrum R[X]) :
-    R[X] →+* (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) :=
-  ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv ≫
-    (Spec (CommRingCat.of R[X])).presheaf.germ ⊤ q trivial ≫
-    (asIso ((infinityChartEmbedding R).stalkMap q)).inv).hom
+def infinityChartGermAt (R : Type u) [CommRing R]
+    (q : Spec (CommRingCat.of R[X])) :
+    R[X] →+* (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) := by
+  let e : (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) ≅
+      (Spec (CommRingCat.of R[X])).presheaf.stalk q :=
+    asIso ((infinityChartEmbedding R).stalkMap q)
+  exact ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv ≫
+    (Spec (CommRingCat.of R[X])).presheaf.germ ⊤ q trivial ≫ e.inv).hom
 
 /-- The actual chart germ becomes the localization map at the chosen prime. -/
 theorem infinityChartStalkEquiv_germAt (R : Type u) [CommRing R]
-    (q : PrimeSpectrum R[X]) (f : R[X]) :
+    (q : Spec (CommRingCat.of R[X])) (f : R[X]) :
+    let : q.asIdeal.IsPrime := q.isPrime
     infinityChartStalkEquiv R q (infinityChartGermAt R q f) =
       algebraMap R[X] (Localization.AtPrime q.asIdeal) f := by
-  change (Spec.stalkIso (CommRingCat.of R[X]) q).hom
-    ((asIso ((infinityChartEmbedding R).stalkMap q)).hom
-      ((asIso ((infinityChartEmbedding R).stalkMap q)).inv
-        ((Spec (CommRingCat.of R[X])).presheaf.germ ⊤ q trivial
-          ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv f)))) = _
-  rw [CommRingCat.hom_inv_apply]
-  have h := ConcreteCategory.congr_hom
-    (Spec.germ_stalkMapIso_hom (R := CommRingCat.of R[X]) (x := q))
-    ((Scheme.ΓSpecIso (CommRingCat.of R[X])).inv f)
-  simpa only [CommRingCat.comp_apply, CommRingCat.hom_inv_apply] using h
+  intro hprime
+  let e : (ProjectiveLine R).presheaf.stalk (infinityChartEmbedding R q) ≅
+      (Spec (CommRingCat.of R[X])).presheaf.stalk q :=
+    asIso ((infinityChartEmbedding R).stalkMap q)
+  let g : CommRingCat.of R[X] ⟶ (Spec (CommRingCat.of R[X])).presheaf.stalk q :=
+    (Scheme.ΓSpecIso (CommRingCat.of R[X])).inv ≫
+      (Spec (CommRingCat.of R[X])).presheaf.germ ⊤ q trivial
+  have hcancel : e.hom (e.inv (g f)) = g f := CommRingCat.hom_inv_apply e (g f)
+  have hspec : (Spec.stalkIso (CommRingCat.of R[X]) q).hom (g f) =
+      algebraMap R[X] (Localization.AtPrime q.asIdeal) f := by
+    have hbase : CommRingCat.ofHom (algebraMap R[X] (Localization.AtPrime q.asIdeal)) ≫
+        (Spec.stalkIso (CommRingCat.of R[X]) q).inv = g :=
+      Spec.algebraMap_stalkIso_inv (R := CommRingCat.of R[X]) q
+    have hmap : g ≫ (Spec.stalkIso (CommRingCat.of R[X]) q).hom =
+        CommRingCat.ofHom (algebraMap R[X] (Localization.AtPrime q.asIdeal)) := by
+      rw [← hbase, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    simpa only [ConcreteCategory.comp_apply, ConcreteCategory.hom_ofHom] using
+      (ConcreteCategory.congr_hom hmap f)
+  exact (congrArg (Spec.stalkIso (CommRingCat.of R[X]) q).hom hcancel).trans hspec
 
 /-- The projective stalk is the localization at the concrete infinity chart prime. -/
 def projectiveInfinityStalkEquiv (R : Type u) [CommRing R] [IsLocalRing R] :
