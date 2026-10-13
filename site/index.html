@@ -39,8 +39,27 @@
     <button id="tree-toggle" class="icon-button tree-toggle" type="button" aria-label="Open module navigation" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"></path></svg></button>
   </header>
   <div class="layout">
-    <main id="main" class="main" tabindex="-1" aria-busy="true">
-      <div class="initial-state"><span class="eyebrow">NYLL / Library browser</span><h1>A home for Lean 4<br>libraries in development.</h1><p class="muted" role="status">Loading the source catalog…</p></div>
+    <main id="main" class="main" tabindex="-1">
+      <section class="hero">
+        <span class="eyebrow">NYLL · Lean 4</span>
+        <h1>A home for Lean 4<br>libraries in development.</h1>
+        <p>NYLL is the public development home for a growing collection of Lean 4 libraries. Work in progress is published here. As parts are completed, they are extracted and published as standalone libraries.</p>
+        <nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="https://github.com/n-yamaguchi-0729/NYLL/tree/main/Nyll">Browse development sources ↗</a></nav>
+      </section>
+      <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading">
+        <div class="catalog-intro"><h2 id="published-heading">Published standalone libraries</h2></div>
+        <p class="catalog-description">These repositories publish parts extracted from NYLL. See each library for its scope, documentation, and source.</p>
+        <ul class="published-list">
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/ProCGroups">Pro-C Groups <span aria-hidden="true">↗</span></a></h3><p>Profinite and pro-C groups, free pro-C groups, and completed group algebras.</p></li>
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/ClassFieldTheory">Class Field Theory <span aria-hidden="true">↗</span></a></h3><p>Local and global class field theory, reciprocity, and ramification.</p></li>
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/SawinTotallyRealTowers">Sawin’s Totally Real Towers <span aria-hidden="true">↗</span></a></h3><p>Sawin’s totally real tower theorem and related results of Martinet and Shafarevich.</p></li>
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/EtaleFundamentalGroupsAndCohomology">Étale Fundamental Groups and Cohomology <span aria-hidden="true">↗</span></a></h3><p>Étale fundamental groups and étale cohomology.</p></li>
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/JacobianVarieties">Jacobian Varieties <span aria-hidden="true">↗</span></a></h3><p>Algebraic curves, Picard groups, and Jacobian varieties.</p></li>
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization">Research Papers <span aria-hidden="true">↗</span></a></h3><p>Formalizations of research papers.</p></li>
+          <li><h3><a href="https://github.com/n-yamaguchi-0729/AnabelianGeometry">Anabelian Geometry <span aria-hidden="true">↗</span></a></h3><p>Work toward the formalization of Grothendieck’s anabelian conjecture.</p></li>
+        </ul>
+      </section>
+      <section class="module-overview"><h2 class="section-label">Authorship and verification</h2><div class="documentation"><p>NYLL’s original code and documentation are Copyright (c) 2026 Naganori Yamaguchi. All original code developed for NYLL is written by OpenAI Codex. Source-specific credits and licenses are preserved for adapted and external material.</p><p>NYLL includes work in progress; publication here does not imply that every formalization is complete or verified. See the <a href="https://github.com/n-yamaguchi-0729/NYLL#ai-written-code-and-verification">authorship, verification, and license details</a>.</p></div></section>
     </main>
     <aside id="sidebar" class="sidebar" aria-label="Module navigation">
       <div class="sidebar-head"><span class="eyebrow">Browse modules</span><button id="tree-close" class="icon-button" type="button" aria-label="Close module navigation">×</button></div>
@@ -50,6 +69,6 @@
   </div>
   <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="Close module navigation" hidden></button>
   <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
-  <noscript><p class="noscript">This browser needs JavaScript to load the source catalog. The full library is available on <a href="https://github.com/n-yamaguchi-0729/NYLL">GitHub</a>.</p></noscript>
+  <noscript><p class="noscript">Interactive module browsing and search need JavaScript. Use the library links above or browse the full source on <a href="https://github.com/n-yamaguchi-0729/NYLL">GitHub</a>.</p></noscript>
 </body>
 </html>

@@ -2,15 +2,18 @@
 
 import importlib.util
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
 import sys
 import unittest
 import uuid
+from xml.etree import ElementTree
 
 
 ROOT = Path(__file__).resolve().parents[2]
+TEST_OUTPUT = Path(os.environ.get("NYLL_SITE_TEST_OUTPUT", ROOT / "tmp" / "site-tests"))
 SPEC = importlib.util.spec_from_file_location("build_site", ROOT / "tools" / "build_site.py")
 site = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = site
@@ -338,8 +341,8 @@ class SourceAttributionTests(unittest.TestCase):
 
 class BuildTests(unittest.TestCase):
     def setUp(self):
-        # Scratch is local to the checkout's generated/ignored output directory.
-        self.scratch = ROOT / "_site" / ("test-" + uuid.uuid4().hex)
+        # Keep test fixtures separate from published output and Lean caches.
+        self.scratch = TEST_OUTPUT / ("test-" + uuid.uuid4().hex)
         self.project = self.scratch / "project"
         (self.project / "Nyll" / "Example").mkdir(parents=True)
         (self.project / "site").mkdir()
@@ -356,7 +359,7 @@ class BuildTests(unittest.TestCase):
 
     def tearDown(self):
         resolved = self.scratch.resolve()
-        self.assertTrue(resolved.is_relative_to((ROOT / "_site").resolve()))
+        self.assertTrue(resolved.is_relative_to(TEST_OUTPUT.resolve()))
         shutil.rmtree(resolved)
 
     def test_build_all_sources_graph_and_commit_links(self):
@@ -374,6 +377,27 @@ class BuildTests(unittest.TestCase):
         self.assertTrue((output / manifest["searchUrl"]).is_file())
         self.assertEqual((output / "index.html").read_text(), "<h1>NYLL</h1>")
         self.assertTrue((output / ".nojekyll").exists())
+        sitemap = ElementTree.parse(output / "sitemap.xml")
+        self.assertEqual([loc.text for loc in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")],
+                         [site.SITE_URL])
+
+    def test_sitemap_uses_configured_homepage_without_inventing_query_routes(self):
+        output = self.scratch / "output"
+        site.build(self.project, output, "https://github.com/example/NYLL",
+                   site_url="https://example.org/libraries")
+        sitemap = ElementTree.parse(output / "sitemap.xml")
+        namespace = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+        self.assertEqual(sitemap.getroot().tag, namespace + "urlset")
+        self.assertEqual([loc.text for loc in sitemap.findall(".//" + namespace + "loc")],
+                         ["https://example.org/libraries/"])
+
+    def test_sitemap_rejects_non_homepage_urls_before_writing(self):
+        output = self.scratch / "output"
+        for url in ["/NYLL/", "https://example.org/NYLL/?q=term", "https://example.org/#module",
+                    "https://user:secret@example.org/"]:
+            with self.subTest(url=url), self.assertRaisesRegex(site.SourceError, "Site URL"):
+                site.build(self.project, output, "https://github.com/example/NYLL", site_url=url)
+        self.assertFalse(output.exists())
 
     def test_missing_local_module_blocks_publishing(self):
         (self.project / "Nyll.lean").write_text("import Nyll.DoesNotExist\n")

@@ -24,11 +24,13 @@ import re
 import shutil
 import subprocess
 import sys
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
+from xml.etree import ElementTree
 
 
 DECLARATIONS = {"theorem", "lemma", "def", "abbrev", "instance", "structure",
                 "class", "inductive", "axiom", "opaque"}
+SITE_URL = "https://n-yamaguchi-0729.github.io/NYLL/"
 MODIFIERS = {"noncomputable", "private", "protected", "unsafe", "partial",
              "nonrec", "public", "meta", "local", "scoped"}
 COMMANDS = DECLARATIONS | MODIFIERS | {
@@ -492,8 +494,15 @@ def write_json(path: Path, data: object) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
 
 
-def build(root: Path, output: Path, repository: str, revision: str | None = None) -> dict:
+def build(root: Path, output: Path, repository: str, revision: str | None = None,
+          site_url: str = SITE_URL) -> dict:
     root, output = root.resolve(), output.resolve()
+    parsed_url = urlsplit(site_url)
+    if (parsed_url.scheme not in {"http", "https"} or not parsed_url.hostname or
+            parsed_url.username is not None or parsed_url.password is not None or
+            parsed_url.query or parsed_url.fragment):
+        raise SourceError("Site URL must be an absolute HTTP(S) homepage URL without credentials, query, or fragment")
+    site_url = site_url.rstrip("/") + "/"
     source_root = root / "Nyll"
     if not source_root.is_dir():
         raise SourceError(f"Missing Lean source directory: {source_root}")
@@ -592,6 +601,13 @@ def build(root: Path, output: Path, repository: str, revision: str | None = None
         write_json(output / "data" / commit / "modules" / (module["name"] + ".json"), module)
     write_json(output / "data" / commit / "search.json", search)
     write_json(output / "data" / "manifest.json", manifest)
+    # Query routes share index.html and render their content in JavaScript.
+    # Advertise the substantive HTML homepage without claiming every route is
+    # its duplicate or flooding the sitemap with declaration/search URLs.
+    sitemap = ElementTree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    entry = ElementTree.SubElement(sitemap, "url")
+    ElementTree.SubElement(entry, "loc").text = site_url
+    ElementTree.ElementTree(sitemap).write(output / "sitemap.xml", encoding="utf-8", xml_declaration=True)
     (output / ".nojekyll").touch()
     print(json.dumps(manifest["counts"]))
     return manifest
@@ -602,10 +618,11 @@ def main() -> None:
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--repository", default="https://github.com/n-yamaguchi-0729/NYLL")
+    parser.add_argument("--site-url", default=SITE_URL, help="Absolute published homepage URL for sitemap.xml")
     parser.add_argument("--revision", help="Exact source commit; defaults to HEAD")
     args = parser.parse_args()
     try:
-        build(args.root, args.output or args.root / "_site", args.repository, args.revision)
+        build(args.root, args.output or args.root / "_site", args.repository, args.revision, args.site_url)
     except (SourceError, subprocess.CalledProcessError) as error:
         parser.exit(1, f"Site build failed: {error}\n")
 
