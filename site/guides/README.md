@@ -10,6 +10,11 @@ publication manifest, and includes the declaration, its local Lean context, and
 immutable links to the standalone repository and its originating NYLL commit.
 It does not execute Lean or claim to replace kernel verification.
 
+Library overviews explain the mathematical problem and what the library achieves
+in connected prose. Include necessary qualifications there without a separate
+scope section. An entry's `discussion` is its opening explanation of the result
+and its significance; `summary` remains the short text for cards and metadata.
+
 The Pages workflow rebuilds on NYLL pushes, manual runs, and daily at 04:23 UTC.
 It fetches the current published revisions and refreshes Lean excerpts and links.
 The editorial selection and historical prose are maintained here; new results

@@ -2,9 +2,10 @@
   "slug": "etale-fundamental-groups-and-cohomology",
   "title": "Étale Fundamental Groups and Cohomology",
   "repository": "EtaleFundamentalGroupsAndCohomology",
-  "summary": "Ten constructions and theorems connecting finite étale geometry, continuous Galois actions, and sheaf cohomology.",
+  "summary": "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions.",
   "overview": [
-    "The étale topology turns algebraic covering spaces into a setting for fundamental groups and cohomology. Geometric fibers and continuous Galois actions describe covers, while locally constant sheaves, Kummer theory, and descent connect them with cohomology."
+    "Over a field, an étale scheme can be recovered from its geometric fiber together with the action of the field's Galois group. For a general scheme, finite étale covers are likewise described by finite locally constant sheaves and, on a connected base with a geometric point, by fundamental-group actions. The results explain when changes to a scheme preserve its covers and how its fundamental group combines geometry with the arithmetic of the base field.",
+    "The cohomological results describe what can be recovered from local data. The Kummer sequence records the obstruction to extracting a global root, while Hilbert 90 expresses the triviality of line bundles over a field; the latter theorem here assumes characteristic zero. The proper base change result shows that sections on a proper scheme over a henselian local ring are determined by its closed fiber. This comparison concerns global sections, or degree-zero cohomology."
   ],
   "scopeNote": "These results cover finite étale geometry and selected statements in étale cohomology. The Hilbert 90 theorem here assumes characteristic zero. Proper base change is treated in degree zero over a henselian local ring.",
   "references": [
@@ -122,7 +123,7 @@
         "The forward functor takes the geometric fiber over $\\operatorname{Spec}K$. No finiteness condition is imposed on the entire scheme or the entire Galois set. Continuity nevertheless forces every individual orbit to be finite."
       ],
       "discussion": [
-        "Finite continuous orbits correspond to finite separable field extensions. Allowing arbitrary disjoint unions extends this correspondence to every étale scheme over the field. The equivalence makes the étale geometry of a point accessible through Galois actions, providing the basic model for the fundamental group of a general scheme."
+        "Every étale scheme over a field is described by its geometric fiber with a continuous Galois action. Finite orbits correspond to finite separable extensions, and arbitrary disjoint unions account for schemes with infinitely many components. The equivalence makes the étale geometry of a point accessible through field Galois theory, providing the basic model for fundamental groups of schemes."
       ],
       "history": [
         "Grothendieck's SGA 1 seminar of 1960–61 extended field Galois theory to finite covers of schemes. The classification over a field is the starting example; Stacks Project Lemma 58.2.2 includes arbitrary étale schemes."
@@ -148,7 +149,7 @@
         "The group need not be profinite, compact, or Hausdorff. The category consists of finite sets carrying continuous actions. The conclusion is existence of an isomorphism; it does not assert a unique or canonical choice."
       ],
       "discussion": [
-        "Fiber functors play the role of base points in a category of covers. Their isomorphism class is determined by exactness, while their automorphisms retain the fundamental-group information. Thus a category can determine its fiber functor up to isomorphism without selecting a preferred identification, just as changing a base point need not give a canonical identification of fundamental groups."
+        "An exact functor from finite continuous group actions to finite sets is isomorphic to the forgetful functor. Such fiber functors play the role of base points in a category of covers, and their automorphisms retain the fundamental-group information. The isomorphism need not be canonical: determining a fiber functor up to isomorphism does not choose a preferred identification."
       ],
       "history": [
         "Uniqueness up to isomorphism of fiber functors is a foundation of the Galois-category theory in SGA 1. Stacks Project Lemma 58.3.4 gives this version for finite continuous group actions."
@@ -174,7 +175,7 @@
         "The following are equivalent: $h$ is surjective; $H$ is fully faithful; $H$ sends connected objects to connected objects; every connected $X$ for which $H(X)$ has a section has a section; and, for every $X$, the induced map\n$$\\operatorname{Hom}(1,X)\\longrightarrow\\operatorname{Hom}(1',H(X))$$\nis bijective. Here a section is a morphism from the terminal object."
       ],
       "discussion": [
-        "These criteria turn a question about a profinite group homomorphism into questions about finite covers. Preserving connectedness means that a transitive action remains transitive after restriction. The section criterion detects a proper image through a finite transitive action that acquires a fixed point, giving a concrete way to test surjectivity."
+        "Surjectivity of the homomorphism associated with compatible fiber functors can be tested through the corresponding categories of finite covers. The theorem gives five equivalent criteria, including preservation of connected objects and a condition on sections. They replace a question about all elements of a profinite group with finite actions, where a proper image can be detected by a new fixed point."
       ],
       "history": [
         "The Galois-category approach studies profinite groups through their finite actions. Stacks Project Lemma 58.4.1 collects these categorical forms of surjectivity."
@@ -199,7 +200,7 @@
         "The maps are the continuous homomorphisms induced by pullback and the structure morphism. Exactness includes injectivity on the left, surjectivity on the right, and equality of the kernel with the image. No splitting is asserted."
       ],
       "discussion": [
-        "The sequence separates two sources of covering spaces: geometry over separably closed constants and arithmetic coming from the base field. It places both inside a single fundamental group. This relationship is central when studying varieties over number fields or finite fields, where geometric covers and field Galois actions must be considered together."
+        "For a geometrically connected, quasi-compact, quasi-separated scheme over a field, the fundamental group fits into an exact sequence with its geometric fundamental group and the base field's Galois group. The sequence separates covers coming from geometry over separably closed constants from the arithmetic of the field. It lets both be studied together, without asserting a splitting."
       ],
       "history": [
         "The geometric–arithmetic sequence is part of the fundamental-group theory developed in SGA 1. Stacks Project Lemma 58.14.3 gives the algebraic-closure formulation; purely inseparable invariance relates it to the separable-closure formulation."
@@ -225,7 +226,7 @@
         "If $X$ and $Y$ are connected and $\\xi:\\operatorname{Spec}\\Omega\\to X$ is a geometric point, with $\\Omega$ separably closed, the induced homomorphism is a topological group isomorphism\n$$\\pi_1^{\\mathrm{et}}(X,\\xi)\\cong\\pi_1^{\\mathrm{et}}(Y,f\\xi).$$\nIts underlying map is exactly the usual fundamental-group homomorphism associated with $f$."
       ],
       "discussion": [
-        "Nilpotent structure and purely inseparable extensions can change a scheme without changing its finite étale covers. This invariance permits passage to reduced schemes or inseparable models when studying fundamental groups. It also distinguishes étale covering theory from constructions that depend on the full structure sheaf, such as differential or infinitesimal geometry."
+        "Pullback along a universal homeomorphism gives an equivalence of finite étale cover categories. Thus nilpotent structure and purely inseparable changes can alter a scheme without altering its covering theory. This permits passage to reduced schemes or inseparable models in fundamental-group calculations, while distinguishing étale covers from constructions that depend on the full structure sheaf."
       ],
       "history": [
         "This property is known as topological invariance of finite étale covers. Stacks Project Proposition 58.8.4 formulates it for universal homeomorphisms, encompassing both nilpotent thickenings and purely inseparable phenomena."
@@ -254,7 +255,7 @@
         "More concretely, every unit $a\\in\\Gamma(X,\\mathcal O_X)^\\times$ admits a root after a finite étale surjective morphism $f:Y\\to X$: there is $b\\in\\Gamma(Y,\\mathcal O_Y)^\\times$ with $b^n=f^*a$. The cover can be chosen to have degree $n$ at every point."
       ],
       "discussion": [
-        "Extracting roots becomes possible locally in the étale topology even when no global root exists. The Kummer sequence measures that failure through cohomology. Its long exact sequence relates units modulo nth powers to roots-of-unity torsors and torsion in the Picard group, connecting elementary equations with the geometry of line bundles."
+        "When a positive integer n is invertible on a scheme, every unit acquires an nth root étale locally. The Kummer sequence records how a global root can nevertheless fail to exist. Through its long exact sequence, units modulo nth powers are related to roots-of-unity torsors and torsion in the Picard group, connecting root equations with line bundles."
       ],
       "history": [
         "Classical Kummer theory studies extensions obtained by extracting roots. The sheaf sequence extends that viewpoint from fields to schemes; Stacks Project Section 59.28 develops this formulation and its relation to Picard groups."
@@ -283,7 +284,7 @@
         "The current Lean theorem assumes characteristic zero; the classical vanishing statement holds over every field."
       ],
       "discussion": [
-        "The first cohomology of the multiplicative group classifies line bundles. Over a field, every one-dimensional vector space has a basis, so its line bundle is trivial. The vanishing statement expresses this fact cohomologically and connects multiplicative Galois cocycles with the geometry of descent."
+        "The first étale cohomology of the multiplicative group vanishes over a characteristic-zero field. This group classifies line bundles, and over a field every one-dimensional vector space has a basis, making its line bundle trivial. The vanishing expresses this geometric fact cohomologically and connects multiplicative Galois cocycles with descent; the classical result extends beyond the characteristic-zero case treated here."
       ],
       "history": [
         "The étale formulation of Hilbert 90 places a field-theoretic vanishing result within the general identification of first multiplicative-group cohomology with the Picard group. Stacks Project Section 59.24 explains that identification."
@@ -308,7 +309,7 @@
         "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$. No connectedness, noetherianity, quasi-compactness, or assumption that $X$ lies over a field is included."
       ],
       "discussion": [
-        "A finite étale cover can be viewed as a locally varying finite set, with its gluing recorded by a sheaf. Conversely, the sheaf determines both the cover and its morphisms. This equivalence links algebraic covering spaces with finite local systems and, over a connected base with a geometric point, continuous finite fundamental-group actions."
+        "Finite étale schemes are equivalent to finite locally constant sheaves of sets through their sheaves of sections. A cover is therefore a locally varying finite set whose gluing determines both the scheme and its morphisms. This connects algebraic covering spaces with finite local systems and, on a connected base with a geometric point, with continuous finite fundamental-group actions."
       ],
       "history": [
         "This correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology. Stacks Project Lemma 59.64.4 gives the representability statement for the étale site."
@@ -337,7 +338,7 @@
         "The coefficient ring is fixed independently of the schemes. These are étale sheaves of modules, with no quasi-coherence, finite-generation, torsion, or noetherian hypothesis."
       ],
       "discussion": [
-        "Exactness allows sheaves supported on a closed subscheme to be treated as sheaves on the ambient scheme without losing short exact sequences. Geometric stalks explain the result: on the closed subscheme they recover the original stalks, and outside it they vanish. This is a basic tool for separating closed and open contributions in cohomology."
+        "Direct image along a closed immersion preserves short exact sequences of étale module sheaves. Sheaves supported on a closed subscheme can therefore be treated on the ambient scheme without losing exactness. Their geometric stalks are the original stalks on the closed subscheme and zero outside it, providing a tool for separating closed and open contributions in cohomology."
       ],
       "history": [
         "Direct image under closed immersions belongs to the localization formalism of étale sheaves. Stacks Project Section 59.46 develops the étale-neighborhood and stalk descriptions underlying its exactness."
@@ -362,7 +363,7 @@
         "No noetherianity or torsion condition is imposed. Only degree zero is asserted here, so these cohomology groups are global sections."
       ],
       "discussion": [
-        "The closed fiber determines every global section of the sheaf: sections lift uniquely from that fiber to the whole proper scheme. Properness and the henselian base make this strong rigidity possible. It is the degree-zero model for proper base change, where cohomological information in a family is compared with information on its fibers."
+        "For a proper scheme over a henselian local ring, every section of an étale module sheaf on the closed fiber lifts uniquely to the whole scheme. Thus the closed fiber determines all global sections. This is the degree-zero form of proper base change, showing how properness and a henselian base allow information on one fiber to recover a global object."
       ],
       "history": [
         "Proper base change was developed in SGA 4 to control étale cohomology in families. Stacks Project Section 59.91 includes the degree-zero result for henselian pairs, with henselian local rings as a special case."

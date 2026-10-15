@@ -45,11 +45,9 @@ pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .skip-link { position: fixed; top: -60px; left: 16px; z-index: 100; padding: 8px 14px; color: var(--bg); background: var(--ink); }
 .skip-link:focus { top: 10px; }
-.site-header { display: grid; grid-template-columns: auto minmax(0,1fr) minmax(250px,400px) auto; align-items: center; gap: 26px; position: fixed; inset: 0 0 auto; height: var(--header); padding: 0 30px; border-bottom: 1px solid var(--line); background: var(--bg); z-index: 40; }
+.site-header { display: grid; grid-template-columns: minmax(0,1fr) minmax(250px,400px) auto; align-items: center; gap: 26px; position: fixed; inset: 0 0 auto; height: var(--header); padding: 0 30px; border-bottom: 1px solid var(--line); background: var(--bg); z-index: 40; }
 .brand { display: flex; align-items: center; gap: 23px; font: 700 25px/1 var(--serif); letter-spacing: -.035em; color: var(--ink); text-decoration: none; }
 .brand:hover { text-decoration: none; }
-.brand-rule { width: 1px; height: 22px; background: var(--line); }
-.header-label { color: var(--muted); font-size: 13px; text-decoration: none; }
 .header-nav { font-size: 13px; white-space: nowrap; }
 .header-nav a { color: var(--ink); text-decoration: none; }
 .header-nav span { color: var(--muted); padding-left: 5px; }
@@ -120,9 +118,6 @@ pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
 .row-arrow { color: var(--accent); text-decoration: none; font-size: 21px; }
 .row-meta { display: flex; gap: 14px; flex-wrap: wrap; color: var(--faint); font-size: 11px; }
 .page-footer { margin-top: 30px; color: var(--muted); font-size: 12px; }
-.breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 11px; margin-bottom: 22px; overflow-wrap: anywhere; }
-.breadcrumbs a { color: var(--muted); text-decoration: none; }
-.breadcrumbs .sep { color: var(--faint); }
 .page-head { margin-bottom: 28px; }
 .page-head .eyebrow { margin-bottom: 10px; }
 .page-title { margin: 0 0 15px; font: 400 clamp(29px,3.1vw,41px)/1.18 var(--serif); letter-spacing: -.03em; overflow-wrap: anywhere; }
@@ -210,8 +205,8 @@ pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
 .load-more { margin-top: 20px; }
 .noscript { margin: 24px; }
 @media (min-width: 1700px) { :root { --tree: 310px; } .main { padding-right: 80px; } }
-@media (max-width: 1150px) { :root { --tree: 250px; } .site-header { gap: 18px; grid-template-columns: auto minmax(0,1fr) minmax(220px,360px) auto; padding: 0 24px; } .header-label { font-size: 11px; } .main { padding: 36px 32px 64px; } .hero h1 { font-size: 40px; } }
-@media (max-width: 900px) { :root { --header: 62px; } .site-header { grid-template-columns: auto minmax(0,1fr) auto; gap: 20px; padding: 0 20px; } .brand-rule, .header-label, .header-nav { display: none; } .tree-toggle, #tree-close { display: inline-flex; } .layout { display: block; } .main { width: 100%; max-width: 850px; margin: auto; padding: 34px 28px 64px; } .sidebar { display: none; position: fixed; inset: var(--header) 0 0 auto; height: calc(100vh - var(--header)); width: min(350px,88vw); z-index: 35; padding: 18px 20px 0; } .sidebar.is-open { display: flex; } .sidebar-backdrop { position: fixed; inset: var(--header) 0 0; background: #0005; border: 0; z-index: 30; } .hero { padding-top: 5px; } .hero h1 { font-size: clamp(35px,6vw,48px); } .tree summary { padding-top: 8px; padding-bottom: 8px; } .tree summary::before { top: 7px; } .tree a { padding-top: 7px; padding-bottom: 7px; } }
+@media (max-width: 1150px) { :root { --tree: 250px; } .site-header { gap: 18px; grid-template-columns: minmax(0,1fr) minmax(220px,360px) auto; padding: 0 24px; } .main { padding: 36px 32px 64px; } .hero h1 { font-size: 40px; } }
+@media (max-width: 900px) { :root { --header: 62px; } .site-header { grid-template-columns: auto minmax(0,1fr) auto; gap: 20px; padding: 0 20px; } .header-nav { display: none; } .tree-toggle, #tree-close { display: inline-flex; } .layout { display: block; } .main { width: 100%; max-width: 850px; margin: auto; padding: 34px 28px 64px; } .sidebar { display: none; position: fixed; inset: var(--header) 0 0 auto; height: calc(100vh - var(--header)); width: min(350px,88vw); z-index: 35; padding: 18px 20px 0; } .sidebar.is-open { display: flex; } .sidebar-backdrop { position: fixed; inset: var(--header) 0 0; background: #0005; border: 0; z-index: 30; } .hero { padding-top: 5px; } .hero h1 { font-size: clamp(35px,6vw,48px); } .tree summary { padding-top: 8px; padding-bottom: 8px; } .tree summary::before { top: 7px; } .tree a { padding-top: 7px; padding-bottom: 7px; } }
 @media (max-width: 540px) { .site-header { gap: 13px; padding: 0 16px; } .brand { font-size: 23px; } .search-form input { padding-right: 10px; font-size: 12px; } .search-key { display: none; } .main { padding: 28px 20px 54px; } .hero h1 { font-size: 35px; } .hero p { font-size: 14px; } .hero { padding-bottom: 30px; } .catalog-intro { align-items: flex-start; flex-direction: column; gap: 6px; } .library-row { grid-template-columns: 22px minmax(0,1fr) 17px; gap: 10px; padding: 21px 0; } .library-row h3 { font-size: 16px; } .dependencies { grid-template-columns: 1fr; gap: 8px; } .declaration-heading { gap: 8px; } .declaration h3 { font-size: 13px; } .statement { padding: 12px; font-size: 11px; } .module-row-head { align-items: flex-start; } .module-row .count { font-size: 10px; } .page-head { margin-bottom: 23px; } .catalog-toolbar { align-items: flex-start; } .catalog-toolbar h2 { font-size: 22px; } .module-title { font-size: 24px; } .declaration.is-target { margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
 @media print { body { padding: 0; background: white; color: black; } .site-header, .sidebar, .skip-link, .sidebar-backdrop, .small-button { display: none; } .layout { display: block; } .main { width: 100%; padding: 0; } .statement { background: #f5f5f5; break-inside: avoid; } a { color: inherit; } .declaration { break-inside: avoid; } }

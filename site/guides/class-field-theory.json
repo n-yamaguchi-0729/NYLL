@@ -2,10 +2,10 @@
   "slug": "class-field-theory",
   "title": "Class Field Theory",
   "repository": "ClassFieldTheory",
-  "summary": "Local and global reciprocity, ramification, and explicit consequences in number theory.",
+  "summary": "This library describes abelian extensions of local fields and number fields through arithmetic in the base field, explaining their Galois groups and how primes and norms behave.",
   "overview": [
-    "Class field theory describes abelian extensions through the arithmetic of the base field. Locally, multiplicative groups and norm subgroups provide this description. For number fields, the corresponding objects are ray class groups and idèle classes.",
-    "The selected results range from reciprocity and the existence theorem to ramification, Hilbert pairings, local-to-global norms, conductors, and the Kronecker–Weber theorem. Each guide gives the mathematical statement, its significance and history, and the corresponding Lean code."
+    "Class field theory asks how the abelian extensions of a field can be described using the field itself. For a nonarchimedean local field, reciprocity identifies Galois groups with quotients of the multiplicative group by norm subgroups, and the existence theorem says which subgroups arise. For number fields, ray class groups describe Frobenius automorphisms, while the idèle class group gives a single description of all finite abelian extensions.",
+    "These descriptions also constrain ramification, determine the least ray class modulus needed for an extension, and relate global norm equations to local tests. Over the rational numbers, the Kronecker–Weber theorem makes the extensions concrete by placing them in cyclotomic fields. The global results here concern number fields, not global function fields. The local reciprocity map and Hilbert pairing results assert existence without imposing additional normalization."
   ],
   "scopeNote": "The global results in this published library concern number fields; global function-field class field theory is outside its present scope. The entries distinguish the existence of a reciprocity map or pairing from any additional normalization properties.",
   "references": [
@@ -69,7 +69,7 @@
         "Here $N_{L/K}(L^\\times)$ is the subgroup of field norms."
       ],
       "discussion": [
-        "The theorem translates Galois automorphisms into multiplication in the base field. Two elements of $K^\\times$ give the same automorphism precisely when their ratio is a norm. In particular, the norm subgroup has index $[L:K]$. This is an existence statement; choosing a Frobenius normalization requires additional properties."
+        "For a finite abelian extension of a nonarchimedean local field, the Galois group is a quotient of the base field's multiplicative group by the norm subgroup. Two elements give the same automorphism precisely when their ratio is a norm. This turns a question about extension fields into arithmetic in the base field; the existence statement does not choose a Frobenius normalization."
       ],
       "history": [
         "Serre's Local Fields presents the cohomological approach to local reciprocity, following the development associated with Hochschild and Artin–Tate. This finite quotient formulation is a convenient point of entry to that theory."
@@ -99,7 +99,7 @@
         "The right side is the topological abelianization: the quotient by the closure of the commutator subgroup."
       ],
       "discussion": [
-        "The multiplicative group of a local field determines all its finite abelian extensions at once. The completion retains precisely the finite continuous quotients relevant to Galois theory. The topology matters: the original locally compact group $K^\\times$ is not generally itself the profinite Galois group on the right."
+        "The multiplicative group of a nonarchimedean local field determines all its finite abelian extensions through a single topological isomorphism. Its completion with respect to open subgroups of finite index is the abelianized absolute Galois group. This completion keeps exactly the finite continuous quotients relevant to Galois theory, explaining why the topology of the multiplicative group matters."
       ],
       "history": [
         "Lubin and Tate's 1965 paper supplies an explicit formal-group perspective on local abelian extensions. Serre's cohomological presentation gives a complementary route to the reciprocity theorem assembled here at the profinite level."
@@ -130,7 +130,7 @@
         "The correspondence reverses inclusion: $L_1\\subseteq L_2$ exactly when $N_{L_2/K}(L_2^\\times)\\subseteq N_{L_1/K}(L_1^\\times)$."
       ],
       "discussion": [
-        "Reciprocity describes the norm subgroup of a given extension; the existence theorem answers the converse question. Every open subgroup of finite index comes from a unique finite abelian extension in the chosen separable closure. Thus extension fields can be classified using arithmetic inside $K$ alone, with inclusion reversed on the subgroup side."
+        "Every open subgroup of finite index in a nonarchimedean local field's multiplicative group is the norm subgroup of a unique finite abelian extension in a chosen separable closure. This answers the converse to reciprocity: it determines which subgroups come from extensions. The resulting classification uses arithmetic inside the base field, with larger extensions corresponding to smaller norm subgroups."
       ],
       "history": [
         "The existence theorem complements reciprocity in classical local class field theory. Lubin–Tate theory provides explicit local abelian extensions, while Serre treats existence together with local symbols in the final part of Local Fields."
@@ -158,7 +158,7 @@
         "The extension is unramified away from $\\mathfrak m$. For a finite prime $\\mathfrak p$ outside its finite support and a prime $\\mathfrak P$ above $\\mathfrak p$, the map sends $[\\mathfrak p]$ to the arithmetic Frobenius at $\\mathfrak P$."
       ],
       "discussion": [
-        "The Artin map turns congruence conditions on ideals into information about Galois automorphisms. At an unramified prime, its value determines the Frobenius action; the identity value means that the prime splits completely. The theorem links prime splitting with ray class groups, which are defined from the arithmetic of the base field."
+        "A finite abelian extension of number fields admits a surjective Artin map from a suitable ray class group. Away from the modulus, the map sends a prime class to its Frobenius automorphism, and an identity value means that the prime splits completely. Thus congruence conditions on ideals in the base field describe how primes behave in the extension."
       ],
       "history": [
         "Artin's 1927 reciprocity map made the correspondence with Galois groups canonical through Frobenius. Milne's historical discussion explains the earlier contributions of Kronecker, Weber, Hilbert, and Takagi to the class-field correspondence."
@@ -188,7 +188,7 @@
         "Here $G_K=\\operatorname{Gal}(K^{\\mathrm{sep}}/K)$, and $G_K^{\\mathrm{ab}}$ denotes its topological abelianization."
       ],
       "discussion": [
-        "Idèle classes assemble the multiplicative groups of all completions into one global arithmetic object. After removing the identity component, the remaining topological group records every finite abelian extension of $K$. This gives a single description of the abelianized absolute Galois group, rather than a separate reciprocity map for each extension."
+        "For a number field, the idèle class group modulo its identity component is topologically isomorphic to the abelianized absolute Galois group. Idèle classes assemble multiplicative information from all completions of the field. Removing the connected component leaves precisely the group that records its finite abelian extensions, giving one global description instead of a separate reciprocity map for each extension."
       ],
       "history": [
         "Milne's notes explain the algebraic and cohomological approach associated with Chevalley and Artin–Tate and present both ideal-theoretic and idelic reciprocity. The idelic formulation unifies finite-place and infinite-place conditions."
@@ -214,7 +214,7 @@
         "If $G_n\\ne G_{n+1}$, then $\\varphi(n)\\in\\mathbb Z$. The formal statement gives an integer $z$ with the rational equality $\\varphi(n)=z$."
       ],
       "discussion": [
-        "Upper ramification numbering can involve rational values, but abelian extensions have integral jumps. This is a strong restriction on wild ramification and underlies the integral conductor exponents in class field theory. The abelian hypothesis is essential: fractional upper jumps can occur for nonabelian extensions."
+        "Finite abelian extensions of nonarchimedean local fields have integral upper ramification breaks. Although upper numbering can take rational values, its jumps in the abelian case occur at integers. This restricts wild ramification and underlies the integral conductor exponents of class field theory. The abelian hypothesis matters: nonabelian extensions can have fractional upper jumps."
       ],
       "history": [
         "Arf's original ramification paper appeared in volume 181 of Crelle's journal in 1940. Serre's Local Fields develops the ramification and norm theory in which the Hasse–Arf theorem is situated."
@@ -245,7 +245,7 @@
         "It is skew-symmetric, nondegenerate, and satisfies the Steinberg relation. For representatives $a,b\\in K^\\times$, one has $B([a],[b])=1$ exactly when $b$ is a norm from the Kummer algebra $K[T]/(T^n-a)$."
       ],
       "discussion": [
-        "The pairing turns norm equations into an orthogonality test. Its perfectness means that every nontrivial power class is detected by pairing with another class. Kummer extensions, multiplicative characters, and local norm conditions are therefore tied together in a finite duality. The stated result asserts existence of such a pairing, without prescribing a further normalization."
+        "For a nonarchimedean local field containing a primitive nth root of unity, with n nonzero in the field, power classes admit a perfect roots-of-unity-valued pairing. It detects every nontrivial power class and turns a norm condition into an orthogonality test. This connects Kummer extensions with multiplicative characters and local norm equations; the result asserts existence without an additional normalization."
       ],
       "history": [
         "Local norm-residue symbols connect reciprocity with Kummer theory. Serre treats local symbols and the existence theorem together; the duality formulation explains how norm tests encode characters of power-class groups."
@@ -275,7 +275,7 @@
         "The right side includes every finite and every infinite completion. The norm after base change is the determinant norm of the resulting finite algebra."
       ],
       "discussion": [
-        "This is a local-to-global principle for a multiplicative equation: an element is a global norm exactly when it passes every local norm test. Both finite and infinite places matter. The cyclic hypothesis is crucial; analogous norm equations for general extensions can have a global obstruction even when all local tests succeed."
+        "In a finite cyclic extension of number fields, an element is a global norm exactly when it is a norm after passage to every finite and infinite completion. This gives a local-to-global test for a multiplicative equation. Cyclicity is crucial: for more general extensions, a global obstruction can remain even when all the local norm tests succeed."
       ],
       "history": [
         "The Hasse norm theorem is a central example of a local-to-global principle. Milne treats it through cyclic cohomology and idèle classes and explains why the corresponding assertion fails for general noncyclic extensions."
@@ -305,7 +305,7 @@
         "The order compares the finite exponents and the allowed infinite part. Thus the conclusion specifies the whole upward-closed set of admissible moduli."
       ],
       "discussion": [
-        "The conductor packages the least congruence conditions needed to realize an abelian extension as a class field. Its finite exponents measure the required ramification depth, while its infinite part records real places that become complex. Knowing this single modulus determines exactly which larger ray class moduli can accommodate the extension."
+        "A finite abelian extension of number fields has a unique least modulus determining which ray class fields contain it. This conductor packages the congruence conditions needed to realize the extension as a class field. Its finite exponents measure ramification depth, while its infinite part records real places that become complex; every admissible modulus is then determined by comparison with it."
       ],
       "history": [
         "Ray class groups are the classical mechanism for allowing ramification in class field theory. Milne develops moduli, conductors, and ray class fields together in the ideal-theoretic presentation of the global theory."
@@ -335,7 +335,7 @@
         "where $\\zeta_n$ is a primitive $n$th root of unity."
       ],
       "discussion": [
-        "Every abelian extension of the rational numbers can be found inside a field generated by roots of unity. This gives a concrete description of the maximal abelian extension of $\\mathbb Q$: it is the union of all cyclotomic fields. The theorem is the basic model for the problem of explicitly generating abelian extensions of other number fields."
+        "Every finite abelian extension of the rational numbers embeds into a cyclotomic field, so it can be found inside a field generated by roots of unity. Consequently, the maximal abelian extension of the rational numbers is the union of all cyclotomic fields. This concrete description provides the basic model for explicitly generating abelian extensions of other number fields."
       ],
       "history": [
         "Milne records Hilbert's 1896 proof following earlier incomplete proofs by Kronecker and Weber. The theorem is the rational-number-field prototype for the broader problem of explicitly generating abelian extensions."

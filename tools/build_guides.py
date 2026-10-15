@@ -332,10 +332,9 @@ https://github.com/n-yamaguchi-0729 -->
 <link rel="icon" href="{base}assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{base}assets/site.css"><link rel="stylesheet" href="{base}assets/guides.css">
 <script defer src="{base}assets/guides.js"></script>
-</head><body class="guide-body">
+</head><body class="guide-body {'guide-overview' if depth == 2 else 'guide-entry'}">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header guide-header"><a class="brand" href="{base}">NYLL<span class="brand-rule" aria-hidden="true"></span></a>
-<a class="header-label" href="{base}#published-libraries">Number theory &amp; arithmetic geometry</a>
+<header class="site-header guide-header"><a class="brand" href="{base}">NYLL</a>
 <nav aria-label="Main navigation"><a href="{base}#published-libraries">Libraries</a><a href="{base}?q=">Source browser</a><a href="{NYLL}">GitHub ↗</a></nav></header>
 <main id="main" class="guide-main">{content}</main>
 <footer class="guide-footer">© 2026 Naganori Yamaguchi · Apache-2.0<br>Original code is written by OpenAI Codex. Source-specific credits and licenses are preserved in the linked repositories.<br><a href="{NYLL}#ai-written-code-and-verification">Authorship and verification</a> · <a href="{base}">NYLL home</a></footer>
@@ -364,11 +363,9 @@ def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
         links = "".join(f'<li><a href="{e(s["declaration"]["sourceUrl"])}"><code>{e(s["declaration"]["name"])}</code></a></li>'
                         for s in entry["selected"][1:])
         related = f'<details class="related-sources"><summary>Related Lean sources</summary><ul>{links}</ul></details>'
-    content = f'''<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../../">NYLL</a><span>/</span><a href="../">{e(guide['title'])}</a></nav>
-<header class="guide-hero"><p class="eyebrow">{e(entry['kind'])} · {e(guide['title'])}</p><h1>{e(entry['title'])}</h1><p class="lead">{inline(entry['summary'])}</p>
-<div class="guide-actions"><a href="{repo_url}">{e(guide['repository'])} on GitHub ↗</a><a href="../../../#published-libraries">All NYLL libraries →</a></div></header>
+    content = f'''<header class="guide-hero"><p class="eyebrow">{e(entry['kind'])} · {e(guide['title'])}</p><h1>{e(entry['title'])}</h1><div class="lead">{paragraphs(entry['discussion'])}</div>
+<div class="guide-actions"><a href="{repo_url}">{e(guide['repository'])} on GitHub ↗</a></div></header>
 <section id="statement" class="guide-section statement"><h2>Mathematical statement</h2>{paragraphs(entry['statement'])}</section>
-<section class="guide-section"><h2>Significance</h2>{paragraphs(entry['discussion'])}</section>
 <section id="history" class="guide-section"><h2>History and context</h2>{paragraphs(entry['history'])}</section>
 <section id="lean" class="guide-section"><h2>Lean code</h2>{source_block(entry['selected'][0])}{related}</section>
 <section id="references" class="guide-section"><h2>References</h2>{bibliography(refs)}</section>
@@ -381,10 +378,8 @@ def overview_page(guide: dict, entries: list[dict], site_url: str) -> str:
     cards = "\n".join(f'''<li><a href="{x['slug']}/"><span class="eyebrow">{e(x['kind'])}</span><h3>{e(x['title'])}<span aria-hidden="true"> →</span></h3><p>{inline(x['summary'])}</p></a></li>''' for x in entries)
     used = {ref for entry in entries for ref in entry["references"]}
     refs = [ref for ref in guide["references"] if ref["id"] in used]
-    content = f'''<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../">NYLL</a><span>/</span><span>Published libraries</span></nav>
-<header class="guide-hero"><p class="eyebrow">Published library</p><h1>{e(guide['title'])}</h1><p class="lead">{inline(guide['summary'])}</p>
-<div class="guide-actions"><a class="primary" href="https://github.com/{OWNER}/{guide['repository']}">{e(guide['repository'])} on GitHub ↗</a><a href="../../#published-libraries">All NYLL libraries →</a></div></header>
-<section class="guide-section overview">{paragraphs(guide['overview'])}<div class="scope-note"><h2>Scope of this library</h2>{paragraphs([guide['scopeNote']])}</div></section>
+    content = f'''<header class="guide-hero"><h1>{e(guide['title'])}</h1><div class="overview">{paragraphs(guide['overview'])}</div>
+<div class="guide-actions"><a class="primary" href="https://github.com/{OWNER}/{guide['repository']}">{e(guide['repository'])} on GitHub ↗</a></div></header>
 <section class="guide-section"><h2>Selected theorems and definitions</h2><ul class="result-grid">{cards}</ul></section>
 <section class="guide-section"><h2>References used in these guides</h2>{bibliography(refs)}</section>'''
     return page(guide["title"], guide["summary"], content, 2, f"libraries/{guide['slug']}/", site_url)

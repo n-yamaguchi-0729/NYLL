@@ -2,10 +2,10 @@
   "slug": "anabelian-geometry",
   "title": "Anabelian geometry",
   "repository": "AnabelianGeometry",
-  "summary": "Actual geometric étale fundamental groups: slimness for hyperbolic curves and a full profinite comparison for a twice-punctured genus-zero curve.",
+  "summary": "This library studies how the geometry of a curve constrains its étale fundamental group, proving centralizer rigidity for hyperbolic curves and computing the genus-zero case with two punctures.",
   "overview": [
-    "The current public results build structural facts about geometric fundamental groups from finite étale covers. Their groups are automorphism groups of geometric fiber functors, rather than abstract groups assumed to model the geometry.",
-    "Hyperbolicity appears as a centralizer constraint: every open subgroup has trivial centralizer in the whole fundamental group. The twice-punctured genus-zero case gives a useful boundary case, where the group is instead procyclic."
+    "For curves over algebraically closed fields of characteristic zero, these results connect geometric features with the structure of the étale fundamental group. A proper curve of genus at least two, or a punctured curve satisfying the hyperbolicity inequality, has a slim fundamental group: every open subgroup has trivial centralizer in the whole group. This controls centralizing symmetries throughout its finite covering theory.",
+    "A genus-zero curve with two punctures gives the boundary case, where the fundamental group is the profinite completion of the integers and admits a topological generator. The present results establish these geometric properties; arithmetic reconstruction of curves and the corresponding positive-characteristic results remain outside their scope."
   ],
   "scopeNote": "These selected theorems concern geometric curves over algebraically closed fields of characteristic zero. They do not prove the Grothendieck conjecture, arithmetic reconstruction of curves from Galois-augmented groups, or the corresponding statements in positive characteristic. The project remains under development.",
   "references": [
@@ -45,7 +45,7 @@
         "This is the library's predicate $\\mathrm{IsSlim}(G)$. It quantifies over all open subgroups, including nonnormal ones."
       ],
       "discussion": [
-        "Slimness strengthens center-freeness by requiring the same rigidity around every open subgroup. These subgroups correspond to finite covers, so the theorem controls centralizing symmetries throughout the covering theory of a hyperbolic curve. Such control is useful in anabelian geometry, where fundamental-group maps are often considered only up to inner automorphism and centralizers measure possible ambiguities."
+        "For a smooth proper curve of genus at least two over an algebraically closed field of characteristic zero, every open subgroup of the étale fundamental group has trivial centralizer in the whole group. This property, called slimness, controls centralizing symmetries throughout the finite covering theory of the curve. It is useful in anabelian geometry, where fundamental-group maps are considered up to inner automorphism and centralizers measure the resulting ambiguities."
       ],
       "history": [
         "SGA 1 made finite étale covers the foundation of the algebraic fundamental group. Grothendieck's anabelian perspective asks how much geometry such groups retain. Mochizuki's 1999 paper proves reconstruction results for hyperbolic curves over sub-p-adic fields; the geometric slimness theorem here is a structural result in that broader setting, rather than an arithmetic reconstruction theorem."
@@ -77,7 +77,7 @@
         "$$C_{\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)}(H)=\\{1\\}.$$"
       ],
       "discussion": [
-        "Genus and punctures both contribute to hyperbolicity. The inequality explains why a projective line with at least three punctures can have the same kind of centralizer rigidity as a proper curve of genus at least two. Because the condition persists through finite covers, slimness describes the entire covering theory rather than only the center of one fundamental group."
+        "For a curve of genus $g$ with $r\\ge1$ punctures over an algebraically closed field of characteristic zero, the inequality $2g+r-2>0$ implies that every open subgroup of its étale fundamental group has trivial centralizer. Thus punctures can provide the same centralizer rigidity as genus. The result includes a projective line with at least three punctures and controls finite covers as well as the curve itself."
       ],
       "history": [
         "SGA 1 supplies the finite-étale covering framework. Hyperbolic curves, including punctured curves, are central to Grothendieck's anabelian program. Mochizuki's 1999 work studies their arithmetic fundamental groups and pro-p variants over sub-p-adic fields. The geometric theorem on this page concerns a different, foundational question: centralizers inside the full fundamental group over an algebraically closed field."
@@ -104,7 +104,7 @@
         "such that $\\gamma$ topologically generates the group and $e(\\gamma)=1$. The isomorphism is continuous in both directions."
       ],
       "discussion": [
-        "This is the boundary between the procyclic and hyperbolic genus-zero cases. With two punctures, the curve has the covering theory of the multiplicative group, and one topological generator accounts for its full fundamental group. A third puncture changes the situation: the fundamental group is no longer procyclic and falls within the hyperbolic slimness theorem."
+        "Over an algebraically closed field of characteristic zero, a smooth proper genus-zero curve with two distinct points removed has étale fundamental group isomorphic to $\\widehat{\\mathbb Z}$. The conclusion also supplies a topological generator, showing that the curve has the covering theory of the multiplicative group. This describes the boundary before the hyperbolic genus-zero case: adding a third puncture leads to a nonprocyclic group with the centralizer rigidity of slimness."
       ],
       "history": [
         "The classical power maps on the multiplicative group lead to the profinite-integer description of its fundamental group in characteristic zero. SGA 1 places this calculation in the general theory of finite étale covers, which allows it to be transported to a genus-zero curve without choosing coordinates in advance."

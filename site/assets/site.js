@@ -6,13 +6,13 @@
   "use strict";
 
   const publishedLibraries = [
-    { name: "Pro-C Groups", repository: "ProCGroups", slug: "pro-c-groups", description: "Profinite and pro-C groups, free pro-C groups, and completed group algebras." },
-    { name: "Class Field Theory", repository: "ClassFieldTheory", slug: "class-field-theory", description: "Local and global class field theory, reciprocity, and ramification." },
-    { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", slug: "sawin-totally-real-towers", description: "Sawin’s totally real tower theorem and related results of Martinet and Shafarevich." },
-    { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", slug: "etale-fundamental-groups-and-cohomology", description: "Étale fundamental groups and étale cohomology." },
-    { name: "Jacobian Varieties", repository: "JacobianVarieties", slug: "jacobian-varieties", description: "Algebraic curves, Picard groups, and Jacobian varieties." },
-    { name: "Research Papers", repository: "YamaguchiPapersFormalization", slug: "research-papers", description: "Formalizations of research papers." },
-    { name: "Anabelian Geometry", repository: "AnabelianGeometry", slug: "anabelian-geometry", description: "Work toward the formalization of Grothendieck’s anabelian conjecture." },
+    { name: "Pro-C Groups", repository: "ProCGroups", slug: "pro-c-groups", description: "The library studies profinite groups through their finite quotients, providing ways to construct maps, determine the ranks of open subgroups, and prove that presented groups are infinite." },
+    { name: "Class Field Theory", repository: "ClassFieldTheory", slug: "class-field-theory", description: "This library describes abelian extensions of local fields and number fields through arithmetic in the base field, explaining their Galois groups and how primes and norms behave." },
+    { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", slug: "sawin-totally-real-towers", description: "The library constructs totally real number fields of arbitrarily large degree while keeping their root discriminants bounded and the same infinite set of primes completely split." },
+    { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", slug: "etale-fundamental-groups-and-cohomology", description: "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions." },
+    { name: "Jacobian Varieties", repository: "JacobianVarieties", slug: "jacobian-varieties", description: "This library constructs the Jacobian of a smooth proper curve and shows how its geometry controls torsion points and abelian covers of the curve." },
+    { name: "Research Papers", repository: "YamaguchiPapersFormalization", slug: "research-papers", description: "These papers study how abelian Galois data detect automorphisms and how the geometry of a boundary controls finite covers over the integers." },
+    { name: "Anabelian Geometry", repository: "AnabelianGeometry", slug: "anabelian-geometry", description: "This library studies how the geometry of a curve constrains its étale fundamental group, proving centralizer rigidity for hyperbolic curves and computing the genus-zero case with two punctures." },
   ];
 
   const base = new URL("../", document.currentScript.src);
@@ -171,13 +171,6 @@
     return moduleCache.get(name);
   }
 
-  function breadcrumbs(library, tail) {
-    const crumbs = [routeLink(href(), "NYLL")];
-    if (library) crumbs.push(routeLink(libraryHref(library.id), escape(libraryName(library))));
-    if (tail) crumbs.push(`<span aria-current="page">${escape(tail)}</span>`);
-    return `<nav class="breadcrumbs" aria-label="Breadcrumb">${crumbs.join('<span class="sep" aria-hidden="true">/</span>')}</nav>`;
-  }
-
   function renderHome() {
     document.title = "NYLL — Lean 4 libraries for number theory and arithmetic geometry";
     const values = [...libraries.values()];
@@ -226,7 +219,7 @@
     if (navigation !== version) return;
     if (root?.doc) overview = doc(root.doc);
     document.title = `${libraryName(library)} · NYLL`;
-    app.innerHTML = `${breadcrumbs(null, libraryName(library))}<header class="page-head"><span class="eyebrow">Library</span><h1 class="page-title">${escape(libraryName(library))}</h1><div class="page-actions"><span>${count(items.length, "module")}</span>${root ? routeLink(moduleHref(root.name), "Root module") : ""}${sourceAction(root ? sourceUrl(root) : "")}</div></header>
+    app.innerHTML = `<header class="page-head"><span class="eyebrow">Library</span><h1 class="page-title">${escape(libraryName(library))}</h1><div class="page-actions"><span>${count(items.length, "module")}</span>${root ? routeLink(moduleHref(root.name), "Root module") : ""}${sourceAction(root ? sourceUrl(root) : "")}</div></header>
       ${overview ? `<section class="module-overview"><h2 class="section-label">Library documentation</h2><div class="documentation">${markdown(overview, sourceUrl(root) || base)}</div></section>` : ""}
       <section aria-labelledby="modules-heading"><div class="catalog-toolbar"><h2 id="modules-heading">Modules</h2><label><span class="sr-only">Filter modules in this library</span><input id="module-filter" type="search" placeholder="Filter modules…" spellcheck="false"></label></div><div id="module-list">${groupedModuleRows(items, library)}</div></section>`;
     document.getElementById("module-filter").addEventListener("input", (event) => { window.MathJax?.typesetClear?.([document.getElementById("module-list")]); document.getElementById("module-list").innerHTML = groupedModuleRows(items, library, event.target.value); void typesetMath(document.getElementById("module-list")); });
@@ -276,7 +269,7 @@
     const url = sourceUrl(module);
     const title = shortName(name);
     document.title = `${title} · ${libraryName(library)} · NYLL`;
-    app.innerHTML = `${breadcrumbs(library, `${title}.lean`)}<header class="page-head"><span class="eyebrow">Module</span><h1 class="page-title module-title">${escape(title)}.lean</h1><div class="qualified-module">${escape(name)}</div><div class="page-actions"><span>${count(declarations.length, "declaration")} indexed from source</span>${sourceAction(url)}</div></header>
+    app.innerHTML = `<header class="page-head"><span class="eyebrow">Module</span><h1 class="page-title module-title">${escape(title)}.lean</h1><div class="qualified-module">${escape(name)}</div><div class="page-actions"><span>${count(declarations.length, "declaration")} indexed from source</span>${sourceAction(url)}</div></header>
       ${module.doc ? `<section class="module-overview"><h2 class="section-label">Module documentation</h2><div class="documentation">${markdown(module.doc, url)}</div></section>` : ""}
       ${attributionHtml(module)}
       <div class="dependencies">${importDetails("Imports", module.imports)}${importDetails("Imported by", module.importedBy)}</div>
@@ -330,7 +323,7 @@
   async function renderSearch(pattern, version) {
     document.title = `Search: ${pattern} · NYLL`;
     const type = currentParams.get("type") || "all";
-    app.innerHTML = `${breadcrumbs(null, "Search")}<header class="page-head"><span class="eyebrow">Search the library</span><h1 class="page-title">${escape(pattern || "Search")}</h1><p id="search-count" class="search-count" role="status">Loading the search index…</p></header><div class="catalog-toolbar"><h2>Results</h2><label><span class="sr-only">Result type</span><select id="search-type"><option value="all">All entries</option><option value="library">Libraries</option><option value="module">Modules</option><option value="declaration">Declarations</option></select></label></div><div id="search-results"></div><button id="load-more" class="small-button load-more" type="button" hidden>Show more results</button>`;
+    app.innerHTML = `<header class="page-head"><span class="eyebrow">Search the library</span><h1 class="page-title">${escape(pattern || "Search")}</h1><p id="search-count" class="search-count" role="status">Loading the search index…</p></header><div class="catalog-toolbar"><h2>Results</h2><label><span class="sr-only">Result type</span><select id="search-type"><option value="all">All entries</option><option value="library">Libraries</option><option value="module">Modules</option><option value="declaration">Declarations</option></select></label></div><div id="search-results"></div><button id="load-more" class="small-button load-more" type="button" hidden>Show more results</button>`;
     const select = document.getElementById("search-type");
     select.value = ["all", "library", "module", "declaration"].includes(type) ? type : "all";
     select.addEventListener("change", () => navigate(href({ q: pattern, type: select.value === "all" ? null : select.value })));
