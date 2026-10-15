@@ -173,7 +173,8 @@
         },
         {
           "path": "Nyll/ClassFieldTheory/Definitions/GlobalClassFieldTheory/FiniteAbelianReciprocityData.lean",
-          "name": "ClassFieldTheory.FiniteAbelianReciprocityData"
+          "name": "ClassFieldTheory.FiniteAbelianReciprocityData",
+          "show": true
         }
       ]
     },
@@ -260,7 +261,13 @@
         },
         {
           "path": "Nyll/ClassFieldTheory/Definitions/HilbertSymbols/IsLocalHilbertPairing.lean",
-          "name": "ClassFieldTheory.HilbertPairing.IsLocalHilbertPairing"
+          "name": "ClassFieldTheory.HilbertPairing.IsLocalHilbertPairing",
+          "show": true
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/Definitions/HilbertSymbols/HilbertPairing.lean",
+          "name": "ClassFieldTheory.HilbertPairing",
+          "show": true
         }
       ]
     },
@@ -320,7 +327,8 @@
         },
         {
           "path": "Nyll/ClassFieldTheory/Definitions/ConductorsAndRayClassFields/IsAbelianConductor.lean",
-          "name": "ClassFieldTheory.IsAbelianConductor"
+          "name": "ClassFieldTheory.IsAbelianConductor",
+          "show": true
         }
       ]
     },

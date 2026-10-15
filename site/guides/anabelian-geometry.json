@@ -61,7 +61,8 @@
         },
         {
           "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean",
-          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSlim"
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSlim",
+          "show": true
         }
       ]
     },
@@ -90,6 +91,11 @@
         {
           "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/OpenCurveSlim.lean",
           "name": "AnabelianGeometry.isSlim_fundamentalGroup_open_hyperbolic"
+        },
+        {
+          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean",
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSlim",
+          "show": true
         }
       ]
     },

@@ -75,7 +75,8 @@
         },
         {
           "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/AbFaithfulness.lean",
-          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSigmaAbFaithful"
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSigmaAbFaithful",
+          "show": true
         }
       ]
     },
@@ -102,6 +103,11 @@
         {
           "path": "Nyll/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean",
           "name": "Yamaguchi26AbfaithfulGalois.mixed_characteristic_properties_3_6"
+        },
+        {
+          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/AbFaithfulness.lean",
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSigmaAbFaithful",
+          "show": true
         }
       ]
     },
@@ -131,6 +137,11 @@
         {
           "path": "Nyll/Yamaguchi26AbfaithfulGalois/HigherLocalField/Basic.lean",
           "name": "ValuationTheory.IsHigherLocalField"
+        },
+        {
+          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/AbFaithfulness.lean",
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsAbFaithful",
+          "show": true
         }
       ]
     },

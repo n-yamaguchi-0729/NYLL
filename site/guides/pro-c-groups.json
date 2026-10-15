@@ -320,7 +320,23 @@
         },
         {
           "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
-          "name": "ProCGroups.FullTateModule.eq_zero_of_nsmul_eq_zero"
+          "name": "ProCGroups.FullTateModule.eq_zero_of_nsmul_eq_zero",
+          "show": true
+        },
+        {
+          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
+          "name": "ProCGroups.compatibleTorsionFamilies",
+          "show": true
+        },
+        {
+          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
+          "name": "ProCGroups.FullTateModule.evaluation_annihilated",
+          "show": true
+        },
+        {
+          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
+          "name": "ProCGroups.FullTateModule.evaluation_compatible",
+          "show": true
         }
       ]
     },

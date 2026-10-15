@@ -145,7 +145,8 @@
         },
         {
           "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.comp_ofCurve"
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.comp_ofCurve",
+          "show": true
         }
       ]
     },
@@ -330,6 +331,11 @@
         {
           "path": "Nyll/JacobianVarieties/WeilPairing/CharZeroNondegeneracy.lean",
           "name": "AlgebraicCurve.DivisorialWeilPairingData.toHom_injective_charZero"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/WeilPairing/Divisorial.lean",
+          "name": "AlgebraicCurve.DivisorialWeilPairingData.toHom_apply_apply",
+          "show": true
         }
       ]
     }

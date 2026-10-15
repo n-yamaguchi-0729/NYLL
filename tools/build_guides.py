@@ -246,6 +246,8 @@ def validate_guide(data: dict) -> None:
             relative = Path(target["path"])
             if relative.is_absolute() or ".." in relative.parts or not target["path"].startswith("Nyll/") or relative.suffix != ".lean":
                 raise SourceError(f"Invalid source path: {target['path']}")
+            if "show" in target and not isinstance(target["show"], bool):
+                raise SourceError(f"Expected a boolean show flag: {target['name']}")
 
 
 def declaration_fingerprint(declaration: dict, imports: list[str]) -> str:
@@ -299,7 +301,7 @@ def extract(guide: dict, sources: Path, fetch: bool) -> tuple[list[dict], dict]:
                 raise SourceError(f"Selected declaration is unfinished: {target['name']}")
             key = f"{guide['slug']}/{entry['slug']}/{target['name']}"
             fingerprints[key] = declaration_fingerprint(decl, module["imports"])
-            selected.append({"declaration": decl, "module": module,
+            selected.append({"declaration": decl, "module": module, "show": target.get("show", False),
                              "nyllUrl": f"{NYLL}/blob/{origin}/{quote(path)}#L{decl['line']}-L{decl['endLine']}"})
         entries.append({**entry, "selected": selected})
     return entries, {"repository": repo, "revision": revision, "nyllRevision": origin,
@@ -345,8 +347,8 @@ def source_block(selected: dict) -> str:
     decl, module = selected["declaration"], selected["module"]
     context = "\n\n".join(c["source"] for c in decl["context"])
     notices = "\n\n".join(n["text"] for n in module.get("attribution", {}).get("notices", []))
-    # A signature without its proof is explicitly an excerpt, not a standalone file.
-    code = decl["statement"]
+    # Definition values carry mathematical content, unlike theorem proofs.
+    code = decl["source"] if decl["kind"] in {"def", "abbrev"} else decl["statement"]
     details = f'<details><summary>In-scope Lean context</summary><pre><code class="language-lean">{e(context)}</code></pre></details>' if context else ""
     full = "" if code.strip() == decl["source"].strip() else f'<details><summary>Full declaration and proof</summary><pre><code class="language-lean">{e(decl["source"])}</code></pre></details>'
     credits = f'<details><summary>Source credits and license</summary><pre>{e(notices)}</pre></details>' if notices else ""
@@ -359,14 +361,16 @@ def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
     refs = [r for r in guide["references"] if r["id"] in entry["references"]]
     repo_url = f"https://github.com/{OWNER}/{guide['repository']}"
     related = ""
-    if len(entry["selected"]) > 1:
+    visible = [s for i, s in enumerate(entry["selected"]) if i == 0 or s.get("show")]
+    linked = [s for s in entry["selected"][1:] if not s.get("show")]
+    if linked:
         links = "".join(f'<li><a href="{e(s["declaration"]["sourceUrl"])}"><code>{e(s["declaration"]["name"])}</code></a></li>'
-                        for s in entry["selected"][1:])
+                        for s in linked)
         related = f'<details class="related-sources"><summary>Related Lean sources</summary><ul>{links}</ul></details>'
     content = f'''<header class="guide-hero"><p class="eyebrow">{e(entry['kind'])} · {e(guide['title'])}</p><h1>{e(entry['title'])}</h1><p class="lead">{inline(entry['summary'])}</p><div class="guide-description">{paragraphs(entry['discussion'])}</div>
 <div class="guide-actions"><a href="{repo_url}">{e(guide['repository'])} on GitHub ↗</a></div></header>
 <section id="statement" class="guide-section mathematical-statement"><h2>Mathematical statement</h2>{paragraphs(entry['statement'])}</section>
-<section id="lean" class="guide-section"><h2>Lean code</h2>{source_block(entry['selected'][0])}{related}</section>
+<section id="lean" class="guide-section"><h2>Lean code</h2>{''.join(source_block(s) for s in visible)}{related}</section>
 <section id="references" class="guide-section"><h2>References</h2>{bibliography(refs)}</section>
 <p class="source-version">Published source: <a href="{repo_url}/commit/{snapshot['revision']}">{snapshot['revision'][:8]}</a>.</p>
 <p class="back-link"><a href="../">← All selected results in {e(guide['title'])}</a></p>'''

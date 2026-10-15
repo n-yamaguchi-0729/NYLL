@@ -115,7 +115,8 @@
         },
         {
           "path": "Nyll/SawinTotallyRealTowers/MaximalRealProPOutside.lean",
-          "name": "ClassFieldTower.Sawin.maximalRealProPOutside"
+          "name": "ClassFieldTower.Sawin.maximalRealProPOutside",
+          "show": true
         }
       ]
     },
@@ -143,6 +144,11 @@
         {
           "path": "Nyll/SawinTotallyRealTowers/MaximalRealProPOutside.lean",
           "name": "ClassFieldTower.Sawin.isAdmissibleFiniteLayer_iff_le_maximalRealProPOutside"
+        },
+        {
+          "path": "Nyll/SawinTotallyRealTowers/FiniteRealPExtension.lean",
+          "name": "ClassFieldTower.Sawin.IsAdmissibleFiniteLayer",
+          "show": true
         }
       ]
     },

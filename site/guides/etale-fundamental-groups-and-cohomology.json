@@ -271,6 +271,16 @@
         {
           "path": "Nyll/EtaleCohomology/Classical/KummerSequence.lean",
           "name": "EtaleCohomology.exists_finiteEtale_unit_root"
+        },
+        {
+          "path": "Nyll/EtaleCohomology/Classical/KummerSequence.lean",
+          "name": "EtaleCohomology.etaleKummerComplex",
+          "show": true
+        },
+        {
+          "path": "Nyll/EtaleCohomology/Classical/MultiplicativeGroup.lean",
+          "name": "EtaleCohomology.etaleMultiplicativeGroupPower_apply",
+          "show": true
         }
       ]
     },

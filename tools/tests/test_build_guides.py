@@ -88,6 +88,21 @@ class GuideTests(unittest.TestCase):
         self.assertIn("Authors: A. Author &lt;script&gt;", block)
         self.assertNotIn("<script>", block)
 
+    def test_definition_content_is_visible_without_opening_proof_details(self):
+        module = parsed("namespace Example\nvariable (n : Nat)\n"
+                        "def Faithful : Prop := ∀ m : Nat, n + m = m + n\n"
+                        "theorem faithful : Faithful n := by intro m; omega\nend Example\n")
+        definition, theorem = module["declarations"]
+        block = guides.source_block({"declaration": definition, "module": module,
+                                     "nyllUrl": "https://example.org/source"})
+        self.assertIn("∀ m : Nat, n + m = m + n", block.split("<details>")[0])
+        self.assertNotIn("Full declaration and proof", block)
+        proof_block = guides.source_block({"declaration": theorem, "module": module,
+                                           "nyllUrl": "https://example.org/source"})
+        self.assertIn("theorem faithful : Faithful n", proof_block.split("<details>")[0])
+        self.assertNotIn("omega", proof_block.split("<details>")[0])
+        self.assertIn("omega", proof_block)
+
     def test_invalid_targets_and_missing_references_are_rejected(self):
         data = fixture()
         guides.validate_guide(data)
@@ -98,6 +113,26 @@ class GuideTests(unittest.TestCase):
         data["entries"][0]["references"] = ["missing"]
         with self.assertRaises(guides.SourceError):
             guides.validate_guide(data)
+        data = fixture()
+        data["entries"][0]["lean"][0]["show"] = "yes"
+        with self.assertRaises(guides.SourceError):
+            guides.validate_guide(data)
+
+    def test_named_condition_is_shown_and_other_related_sources_remain_links(self):
+        data = fixture()
+        module = parsed("namespace Example\n"
+                        "theorem result : Faithful := by exact witness\n"
+                        "def Faithful : Prop := ∀ n : Nat, n = n\n"
+                        "theorem related : True := by trivial\nend Example\n")
+        selected = [{"declaration": d, "module": module, "nyllUrl": "https://example.org/source",
+                     "show": d["name"] == "Example.Faithful"} for d in module["declarations"]]
+        entry = {**data["entries"][0], "selected": selected}
+        rendered = guides.entry_page(data, entry, {"revision": "a" * 40}, "https://example.org/")
+        self.assertEqual(rendered.count('<article class="lean-source">'), 2)
+        self.assertIn("∀ n : Nat, n = n", rendered)
+        related = rendered.split('<details class="related-sources">')[1].split('</details>')[0]
+        self.assertIn("Example.related", related)
+        self.assertNotIn("Example.Faithful", related)
 
     def test_extract_checks_published_hash_and_missing_or_unfinished_declaration(self):
         source = "namespace Example\ntheorem result : True := by trivial\nend Example\n"
