@@ -16,7 +16,7 @@ import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import quote, urlparse
-from xml.etree import ElementTree as ET
+from site_sitemaps import write_sitemap
 
 from build_site import parse_module, SourceError, SITE_URL, COMMANDS, MODIFIERS
 
@@ -425,7 +425,7 @@ def build(root: Path, output: Path, sources: Path, fetch: bool = False, write_lo
     if write_lock:
         lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output.mkdir(parents=True, exist_ok=True)
-    urls = [site_url]
+    urls = []
     for guide in guides:
         directory = output / "libraries" / guide["slug"]
         directory.mkdir(parents=True, exist_ok=True)
@@ -438,10 +438,7 @@ def build(root: Path, output: Path, sources: Path, fetch: bool = False, write_lo
             (target / "index.html").write_text(entry_page(guide, entry, snapshots[guide["slug"]], site_url), encoding="utf-8")
             refs = [r for r in guide["references"] if r["id"] in entry["references"]]
             urls.append(f"{site_url}libraries/{guide['slug']}/{entry['slug']}/")
-    sitemap = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
-    for url in urls:
-        ET.SubElement(ET.SubElement(sitemap, "url"), "loc").text = url
-    ET.ElementTree(sitemap).write(output / "sitemap.xml", encoding="utf-8", xml_declaration=True)
+    write_sitemap(output, "sitemap-guides.xml", urls, site_url)
     (output / "guide-sources.json").write_text(json.dumps({k: {a: b for a, b in v.items() if a not in {"fingerprints", "dependencyHashes"}} for k, v in snapshots.items()}, indent=2) + "\n", encoding="utf-8")
     counts = {"libraries": len(guides), "entries": sum(len(x) for x in all_entries.values())}
     print(json.dumps(counts))

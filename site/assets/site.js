@@ -48,14 +48,171 @@
   const doc = (value) => typeof value === "string" ? value : "";
   const libraryOf = (module) => libraries.get(module?.library);
 
+  const homeTitle = "NYLL — Lean 4 libraries for number theory and arithmetic geometry";
+  const homeDescription = "Lean 4 libraries for number theory and arithmetic geometry. Explore mathematical statements, published Lean code, historical context, and references.";
+  const encodeRoutePart = (value) => encodeURIComponent(String(value)).replace(/[!'()*]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase());
+
+  function readRoute(value) {
+    const url = new URL(value, location.href);
+    if (url.origin !== base.origin || !url.pathname.startsWith(base.pathname)) return null;
+    const path = url.pathname.slice(base.pathname.length);
+    const match = path.match(/^(modules|browse)\/([^/]+)(?:\/|\/index\.html)?$/);
+    if (path !== "" && path !== "index.html" && !match) return null;
+    let id;
+    try { id = match ? decodeURIComponent(match[2]) : ""; } catch { return null; }
+    const query = url.searchParams;
+    let route;
+    if (query.has("q")) {
+      const type = ["library", "module", "declaration"].includes(query.get("type")) ? query.get("type") : "";
+      route = { kind: "search", query: query.get("q"), type };
+    } else if (match) {
+      route = { kind: match[1] === "modules" ? "module" : "library", id };
+    } else if (query.get("module")) {
+      route = { kind: "module", id: query.get("module") };
+    } else if (query.get("library")) {
+      route = { kind: "library", id: query.get("library") };
+    } else {
+      route = { kind: "home" };
+    }
+    route.hash = url.hash;
+    if (route.kind === "module") {
+      let fragment = "";
+      try { fragment = decodeURIComponent(url.hash.slice(1)); } catch { /* Keep an unrecognized fragment unchanged. */ }
+      route.declaration = query.get("decl") || (fragment.startsWith("declaration-") ? fragment.slice(12) : "");
+    }
+    return route;
+  }
+
+  function routeHref(route) {
+    const path = route.kind === "module" ? "modules/" + encodeRoutePart(route.id) + "/"
+      : route.kind === "library" ? "browse/" + encodeRoutePart(route.id) + "/" : "";
+    const url = new URL(path, base);
+    if (route.kind === "search") {
+      url.searchParams.set("q", route.query || "");
+      if (route.type) url.searchParams.set("type", route.type);
+    }
+    url.hash = route.kind === "module" && route.declaration
+      ? "declaration-" + encodeRoutePart(route.declaration) : route.hash || "";
+    return url.pathname + url.search + url.hash;
+  }
+
+  function routeParams(route) {
+    const params = new URLSearchParams();
+    if (route.kind === "module") {
+      params.set("module", route.id);
+      if (route.declaration) params.set("decl", route.declaration);
+    } else if (route.kind === "library") params.set("library", route.id);
+    else if (route.kind === "search") {
+      params.set("q", route.query);
+      if (route.type) params.set("type", route.type);
+    }
+    return params;
+  }
+
+  function normalizeLocation() {
+    const route = readRoute(location.href);
+    if (!route) return null;
+    const next = routeHref(route);
+    if (next !== location.pathname + location.search + location.hash) history.replaceState(history.state, "", next);
+    return route;
+  }
+
   function href(values = {}) {
-    const url = new URL(base);
-    for (const [name, value] of Object.entries(values)) if (value !== null && value !== undefined && value !== "") url.searchParams.set(name, value);
-    return `${url.pathname}${url.search}`;
+    const route = values.q !== null && values.q !== undefined ? { kind: "search", query: values.q, type: values.type }
+      : values.module ? { kind: "module", id: values.module, declaration: values.decl }
+      : values.library ? { kind: "library", id: values.library } : { kind: "home" };
+    return routeHref(route);
   }
   const moduleHref = (name, declaration) => href({ module: name, decl: declaration });
   const libraryHref = (id) => href({ library: id });
-  const routeLink = (url, label, attributes = "") => `<a href="${escape(url)}" data-route ${attributes}>${label}</a>`;
+  const routeLink = (url, label, attributes = "") => '<a href="' + escape(url) + '" data-route ' + attributes + ">" + label + "</a>";
+
+  function metadataRoot() {
+    const configured = document.body.dataset.siteRoot;
+    if (configured) return new URL(configured, base);
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) return new URL(base);
+    return new URL(["module", "library"].includes(document.body.dataset.staticPage) ? "../../" : "./", canonical.href);
+  }
+  const canonicalBase = metadataRoot();
+  const initialRoute = readRoute(location.href);
+  let keepInitialContent = Boolean(app.children.length) && initialRoute !== null
+    && (document.body.dataset.staticPage || "home") === initialRoute.kind
+    && (initialRoute.kind === "home" || document.body.dataset.staticId === initialRoute.id);
+
+  function setMetadata(title, description, route = readRoute(location.href)) {
+    document.title = title;
+    const setMeta = (attribute, name, content) => {
+      let element = document.querySelector("meta[" + attribute + '="' + name + '"]');
+      if (!element) {
+        element = document.createElement("meta");
+        element.setAttribute(attribute, name);
+        document.head.appendChild(element);
+      }
+      element.setAttribute("content", content);
+    };
+    setMeta("name", "description", description);
+    setMeta("name", "robots", route?.kind === "search" ? "noindex,follow" : "index,follow");
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+    setMeta("name", "twitter:title", title);
+    setMeta("name", "twitter:description", description);
+    if (route) {
+      const relative = routeHref(route).slice(base.pathname.length).split("#")[0];
+      const canonicalUrl = new URL(relative, canonicalBase).href;
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement("link");
+        canonical.setAttribute("rel", "canonical");
+        document.head.appendChild(canonical);
+      }
+      canonical.href = canonicalUrl;
+      setMeta("property", "og:url", canonicalUrl);
+    }
+  }
+
+  function updateRouteMetadata(route) {
+    if (route.kind === "module") {
+      const module = modules.get(route.id);
+      const label = libraryName(libraryOf(module));
+      setMetadata(route.id + " · NYLL",
+        plainExcerpt(module?.doc || module?.summary, 160) || route.id + ": Lean source, declarations, and documentation in " + label + ".", route);
+    } else if (route.kind === "library") {
+      const library = libraries.get(route.id);
+      const label = libraryName(library);
+      setMetadata(label + " · NYLL", plainExcerpt(library?.doc || library?.summary, 160)
+        || label + ": Lean source modules, mathematical statements, and documentation.", route);
+    } else if (route.kind === "search") {
+      setMetadata("Search: " + route.query + " · NYLL", "Search NYLL libraries, modules, and Lean declarations.", route);
+    } else setMetadata(homeTitle, homeDescription, route);
+  }
+
+  function scrollToRouteTarget(route) {
+    for (const element of app.querySelectorAll(".declaration.is-target")) element.classList.remove("is-target");
+    let target;
+    if (route.kind === "module" && route.declaration) {
+      target = [...app.querySelectorAll("[data-declaration]")].find((element) => element.dataset.declaration === route.declaration);
+      target?.classList.add("is-target");
+    } else if (route.hash) {
+      try { target = document.getElementById(decodeURIComponent(route.hash.slice(1))); } catch { /* Ignore malformed fragments. */ }
+    }
+    if (target && app.contains(target)) requestAnimationFrame(() => target.isConnected && target.scrollIntoView({ block: "start" }));
+  }
+
+  function showLoadFailure(error, preserve) {
+    if (preserve) {
+      if (!app.querySelector("[data-load-notice]")) app.insertAdjacentHTML("afterbegin",
+        '<p class="context-note" data-load-notice role="status">Interactive browsing could not be loaded. The published page remains available below. Reload the page to try again.</p>');
+      announce.textContent = error.message;
+      return;
+    }
+    setMetadata("Page unavailable · NYLL", error.message);
+    document.querySelector('meta[name="robots"]').setAttribute("content", "noindex,follow");
+    app.innerHTML = '<section class="error-state"><span class="eyebrow">NYLL</span><h1>This page could not be loaded.</h1><p>' + escape(error.message)
+      + "</p><p>" + routeLink(href(), "Return to all libraries") + " · " + sourceAction(manifest?.source?.repo || "https://github.com/n-yamaguchi-0729/NYLL", "Browse on GitHub ↗")
+      + '</p><button id="retry-page" class="small-button" type="button">Reload page</button></section>';
+    document.getElementById("retry-page").addEventListener("click", () => location.reload());
+  }
 
   function safeUrl(value, context = base) {
     try {
@@ -172,7 +329,7 @@
   }
 
   function renderHome() {
-    document.title = "NYLL — Lean 4 libraries for number theory and arithmetic geometry";
+    setMetadata(homeTitle, homeDescription);
     const values = [...libraries.values()];
     app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1><span class="hero-title-wide">NYLL — Lean 4 libraries for<br>number theory and arithmetic geometry</span><span class="hero-title-compact">Number theory and arithmetic geometry in Lean 4</span></h1><p>Lean 4 libraries for number theory and arithmetic geometry. Explore the published libraries, their mathematical results, and the code behind them. NYLL also hosts ongoing development.</p><nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="#development-libraries">Browse work in progress ↓</a></nav></section>
       <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Published standalone libraries</h2><span class="count">${count(publishedLibraries.length, "repository", "repositories")}</span></div><p class="catalog-description">Explore each library’s scope and selected theorems and definitions, with mathematical explanations, Lean code, and references.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="${new URL(`libraries/${library.slug}/`, base).pathname}">${escape(library.name)} <span aria-hidden="true">→</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
@@ -218,7 +375,8 @@
     if (root) root = await getModule(root.name);
     if (navigation !== version) return;
     if (root?.doc) overview = doc(root.doc);
-    document.title = `${libraryName(library)} · NYLL`;
+    setMetadata(libraryName(library) + " · NYLL", plainExcerpt(overview, 160)
+      || libraryName(library) + ": Lean source modules, mathematical statements, and documentation.");
     app.innerHTML = `<header class="page-head"><span class="eyebrow">Library</span><h1 class="page-title">${escape(libraryName(library))}</h1><div class="page-actions"><span>${count(items.length, "module")}</span>${root ? routeLink(moduleHref(root.name), "Root module") : ""}${sourceAction(root ? sourceUrl(root) : "")}</div></header>
       ${overview ? `<section class="module-overview"><h2 class="section-label">Library documentation</h2><div class="documentation">${markdown(overview, sourceUrl(root) || base)}</div></section>` : ""}
       <section aria-labelledby="modules-heading"><div class="catalog-toolbar"><h2 id="modules-heading">Modules</h2><label><span class="sr-only">Filter modules in this library</span><input id="module-filter" type="search" placeholder="Filter modules…" spellcheck="false"></label></div><div id="module-list">${groupedModuleRows(items, library)}</div></section>`;
@@ -254,7 +412,8 @@
     const declarations = module.declarations || [];
     const url = sourceUrl(module);
     const title = shortName(name);
-    document.title = `${title} · ${libraryName(library)} · NYLL`;
+    setMetadata(name + " · NYLL", plainExcerpt(module.doc || module.summary, 160)
+      || name + ": Lean source, declarations, and documentation in " + libraryName(library) + ".");
     app.innerHTML = `<header class="page-head"><span class="eyebrow">Module</span><h1 class="page-title module-title">${escape(title)}.lean</h1><div class="qualified-module">${escape(name)}</div><div class="page-actions"><span>${count(declarations.length, "declaration")} indexed from source</span>${sourceAction(url)}</div></header>
       ${module.doc ? `<section class="module-overview"><h2 class="section-label">Module documentation</h2><div class="documentation">${markdown(module.doc, url)}</div></section>` : ""}
       <div class="dependencies">${importDetails("Imports", module.imports)}${importDetails("Imported by", module.importedBy)}</div>
@@ -306,7 +465,7 @@
   }
 
   async function renderSearch(pattern, version) {
-    document.title = `Search: ${pattern} · NYLL`;
+    setMetadata("Search: " + pattern + " · NYLL", "Search NYLL libraries, modules, and Lean declarations.");
     const type = currentParams.get("type") || "all";
     app.innerHTML = `<header class="page-head"><span class="eyebrow">Search the library</span><h1 class="page-title">${escape(pattern || "Search")}</h1><p id="search-count" class="search-count" role="status">Loading the search index…</p></header><div class="catalog-toolbar"><h2>Results</h2><label><span class="sr-only">Result type</span><select id="search-type"><option value="all">All entries</option><option value="library">Libraries</option><option value="module">Modules</option><option value="declaration">Declarations</option></select></label></div><div id="search-results"></div><button id="load-more" class="small-button load-more" type="button" hidden>Show more results</button>`;
     const select = document.getElementById("search-type");
@@ -398,50 +557,47 @@
 
   async function render() {
     const version = ++navigation;
+    const route = normalizeLocation();
+    if (!route) return;
     window.MathJax?.typesetClear?.([app]);
-    currentParams = new URLSearchParams(location.search);
-    const query = currentParams.get("q");
-    const module = currentParams.get("module");
-    const library = currentParams.get("library");
-    search.value = query || "";
+    currentParams = routeParams(route);
+    const preserve = keepInitialContent && initialRoute.kind === route.kind && initialRoute.id === route.id;
+    search.value = route.kind === "search" ? route.query : "";
     app.setAttribute("aria-busy", "true");
+    updateRouteMetadata(route);
     renderTree();
     try {
-      if (query !== null) await renderSearch(query, version);
-      else if (module) await renderModule(module, version);
-      else if (library) await renderLibrary(library, version);
+      if (route.kind === "search") await renderSearch(route.query, version);
+      else if (route.kind === "module") await renderModule(route.id, version);
+      else if (route.kind === "library") await renderLibrary(route.id, version);
       else renderHome();
       if (version !== navigation) return;
-      const declaration = currentParams.get("decl");
-      if (declaration) {
-        const target = [...app.querySelectorAll("[data-declaration]")].find((element) => element.dataset.declaration === declaration);
-        if (target) { target.classList.add("is-target"); requestAnimationFrame(() => target.scrollIntoView({ block: "start" })); }
-      }
+      keepInitialContent = false;
+      scrollToRouteTarget(route);
       announce.textContent = document.title;
     } catch (error) {
-      if (version === navigation) {
-        document.title = "Page unavailable · NYLL";
-        app.innerHTML = `<section class="error-state"><span class="eyebrow">NYLL</span><h1>This page could not be loaded.</h1><p>${escape(error.message)}</p><p>${routeLink(href(), "Return to all libraries")} · ${sourceAction(manifest.source?.repo, "Browse on GitHub ↗")}</p><button id="retry-page" class="small-button" type="button">Reload page</button></section>`;
-        document.getElementById("retry-page").addEventListener("click", () => location.reload());
-      }
+      if (version === navigation) showLoadFailure(error, preserve);
     } finally { if (version === navigation) app.setAttribute("aria-busy", "false"); }
   }
 
-  function navigate(url) {
-    if (!manifest) return;
-    const next = new URL(url, base);
-    if (next.origin !== location.origin || next.pathname !== base.pathname) return;
-    history.pushState({}, "", next);
+  function navigate(value) {
+    if (!manifest) return false;
+    const route = readRoute(new URL(value, location.href));
+    if (!route) return false;
+    history.pushState({}, "", routeHref(route));
+    keepInitialContent = false;
     closeSuggestions(); ++suggestionVersion;
     setMenu(false);
     window.scrollTo({ top: 0 });
     app.focus({ preventScroll: true });
     void render();
+    return true;
   }
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a[data-route]");
-    if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0) { event.preventDefault(); navigate(link.href); }
+    if (link && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0
+      && (!link.target || link.target === "_self") && !link.hasAttribute("download") && navigate(link.href)) event.preventDefault();
     if (!event.target.closest(".search-form")) { closeSuggestions(); ++suggestionVersion; }
   });
   document.addEventListener("focusin", (event) => { if (!event.target.closest(".search-form")) { closeSuggestions(); ++suggestionVersion; } });
@@ -465,14 +621,24 @@
   menuToggle.addEventListener("click", () => setMenu(!sidebar.classList.contains("is-open")));
   document.getElementById("tree-close").addEventListener("click", () => { setMenu(false); menuToggle.focus(); });
   backdrop.addEventListener("click", () => { setMenu(false); menuToggle.focus(); });
-  window.addEventListener("popstate", () => { closeSuggestions(); setMenu(false); void render(); });
+  window.addEventListener("popstate", () => { closeSuggestions(); setMenu(false); if (manifest) void render(); });
+  window.addEventListener("hashchange", () => {
+    const route = readRoute(location.href);
+    if (route && route.kind === "module" && route.id === currentParams.get("module")) {
+      currentParams = routeParams(route);
+      scrollToRouteTarget(route);
+    }
+  });
+
+  const startingRoute = normalizeLocation();
+  if (startingRoute?.kind === "search") updateRouteMetadata(startingRoute);
 
   fetch(new URL("data/manifest.json", base), { cache: "no-cache" }).then((response) => { if (!response.ok) throw new Error("The source catalog could not be loaded. Please try again shortly."); return response.json(); }).then((data) => {
     manifest = data;
-    search.disabled = false;
     libraries = new Map((manifest.libraries || []).map((library) => [library.id, library]));
     modules = new Map((manifest.modules || []).map((module) => [module.name, module]));
     if (!libraries.size && !modules.size) throw new Error("The source catalog is empty.");
+    search.disabled = false;
     const source = manifest.source || {};
     if (source.repo) document.getElementById("github-link").href = source.repo;
     const date = source.committedAt ? new Date(source.committedAt) : null;
@@ -480,5 +646,11 @@
     const revision = source.commitShort || source.commit?.slice(0, 8);
     document.getElementById("revision").innerHTML = `<p>Source revision ${revision ? `<a href="${escape(`${source.repo}/commit/${source.commit}`)}"><code>${escape(revision)}</code></a>` : "unavailable"}</p>${dateText ? `<p>${escape(dateText)} · updated from Git</p>` : ""}<p><a href="${escape(`${source.repo}/actions/workflows/libraries.yml`)}">Lean checks ↗</a></p>`;
     void render();
-  }).catch((error) => { app.setAttribute("aria-busy", "false"); app.innerHTML = `<section class="error-state"><span class="eyebrow">NYLL</span><h1>The library browser is unavailable.</h1><p>${escape(error.message)}</p><p><a href="https://github.com/n-yamaguchi-0729/NYLL">Browse the source on GitHub ↗</a></p><button class="small-button" type="button" onclick="location.reload()">Try again</button></section>`; tree.innerHTML = '<p class="muted">Source catalog unavailable.</p>'; });
+  }).catch((error) => {
+    manifest = undefined;
+    search.disabled = true;
+    app.setAttribute("aria-busy", "false");
+    showLoadFailure(error, keepInitialContent);
+    if (!keepInitialContent) tree.innerHTML = '<p class="muted">Source catalog unavailable.</p>';
+  });
 })();

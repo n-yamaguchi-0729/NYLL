@@ -1,6 +1,7 @@
 """Regression checks for the source browser's indexing boundaries and provenance."""
 
 import importlib.util
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
@@ -9,10 +10,12 @@ import subprocess
 import sys
 import unittest
 import uuid
+from urllib.parse import quote, unquote, urljoin, urlsplit
 from xml.etree import ElementTree
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools"))
 TEST_OUTPUT = Path(os.environ.get("NYLL_SITE_TEST_OUTPUT", ROOT / "tmp" / "site-tests"))
 SPEC = importlib.util.spec_from_file_location("build_site", ROOT / "tools" / "build_site.py")
 site = importlib.util.module_from_spec(SPEC)
@@ -346,7 +349,7 @@ class BuildTests(unittest.TestCase):
         self.project = self.scratch / "project"
         (self.project / "Nyll" / "Example").mkdir(parents=True)
         (self.project / "site").mkdir()
-        (self.project / "site" / "index.html").write_text("<h1>NYLL</h1>")
+        shutil.copyfile(ROOT / "site" / "index.html", self.project / "site" / "index.html")
         (self.project / "Nyll.lean").write_text("import Nyll.Example.All\n")
         (self.project / "Nyll" / "Example" / "All.lean").write_text(
             "import Nyll.Example.Basic\n/-! # Examples\n\nA library description. -/\n")
@@ -375,21 +378,28 @@ class BuildTests(unittest.TestCase):
         self.assertIn(commit, module_path)
         self.assertIn(commit, manifest["searchUrl"])
         self.assertTrue((output / manifest["searchUrl"]).is_file())
-        self.assertEqual((output / "index.html").read_text(), "<h1>NYLL</h1>")
+        home = (output / "index.html").read_text()
+        self.assertIn('id="published-libraries"', home)
+        self.assertIn('href="./browse/Example/"', home)
+        self.assertIn('href="./modules/Nyll/"', home)
+        self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}">', home)
         self.assertTrue((output / ".nojekyll").exists())
-        sitemap = ElementTree.parse(output / "sitemap.xml")
-        self.assertEqual([loc.text for loc in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")],
-                         [site.SITE_URL])
+        sitemap = ElementTree.parse(output / "sitemap-source.xml")
+        locations = [loc.text for loc in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+        self.assertEqual(set(locations), {site.SITE_URL, site.SITE_URL + "browse/Example/",
+                         *(site.SITE_URL + "modules/" + m["name"] + "/" for m in manifest["modules"])})
 
     def test_sitemap_uses_configured_homepage_without_inventing_query_routes(self):
         output = self.scratch / "output"
         site.build(self.project, output, "https://github.com/example/NYLL",
                    site_url="https://example.org/libraries")
-        sitemap = ElementTree.parse(output / "sitemap.xml")
+        sitemap = ElementTree.parse(output / "sitemap-source.xml")
         namespace = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         self.assertEqual(sitemap.getroot().tag, namespace + "urlset")
-        self.assertEqual([loc.text for loc in sitemap.findall(".//" + namespace + "loc")],
-                         ["https://example.org/libraries/"])
+        locations = [loc.text for loc in sitemap.findall(".//" + namespace + "loc")]
+        self.assertEqual(locations[0], "https://example.org/libraries/")
+        self.assertTrue(all(url.startswith(locations[0]) and "?" not in url for url in locations))
+        self.assertEqual(len(locations), 5)
 
     def test_sitemap_rejects_non_homepage_urls_before_writing(self):
         output = self.scratch / "output"
@@ -414,6 +424,153 @@ class BuildTests(unittest.TestCase):
         (output / "data" / "manifest.json").unlink()
         with self.assertRaisesRegex(site.SourceError, "valid NYLL generated manifest"):
             site.build(self.project, output, "https://github.com/example/NYLL")
+
+    def test_static_module_has_documentation_statements_assumptions_and_links_without_proofs(self):
+        (self.project / "Nyll" / "Example" / "Basic.lean").write_text('''/-!
+# Module guide
+
+This module explains **identity** and $x_1 = x_1$.
+
+- [An external reference](https://example.org/reference)
+- [The source aggregate](All.lean)
+- [Unsafe](javascript:alert)
+
+<script>bad()</script>
+-/
+namespace Sample
+variable (n : Nat)
+/-- A **documented** result. -/
+theorem yes : n = n := by
+  -- UNIQUE_PROOF_CONTENT
+  rfl
+end Sample
+''')
+        output = self.scratch / "output"
+        manifest = site.build(self.project, output, "https://github.com/example/NYLL")
+        html = (output / "modules" / "Nyll.Example.Basic" / "index.html").read_text()
+        self.assertIn('<strong>identity</strong>', html)
+        self.assertIn('<strong>documented</strong>', html)
+        self.assertIn('variable (n : Nat)', html)
+        self.assertIn('theorem yes : n = n', html)
+        self.assertNotIn('UNIQUE_PROOF_CONTENT', html)
+        self.assertNotIn(':= by', html)
+        self.assertIn('href="../../modules/Nyll.Example.All/"', html)
+        self.assertIn('href="../../browse/Example/"', html)
+        self.assertIn('href="../../assets/site.css"', html)
+        self.assertIn('src="../../assets/site.js"', html)
+        self.assertIn('class="brand" href="../../"', html)
+        self.assertIn('action="../../"', html)
+        self.assertIn('data-static-page="module" data-static-id="Nyll.Example.Basic"', html)
+        self.assertIn(f'data-site-root="{site.SITE_URL}"', html)
+        self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}modules/Nyll.Example.Basic/">', html)
+        self.assertIn('<meta property="og:url"', html)
+        self.assertIn('<title>Nyll.Example.Basic · NYLL</title>', html)
+        self.assertNotIn('<script>bad()</script>', html)
+        self.assertIn('&lt;script&gt;bad()&lt;/script&gt;', html)
+        self.assertNotIn('href="javascript:', html)
+        self.assertIn('/Nyll/Example/All.lean', html)
+        data_url = next(m['dataUrl'] for m in manifest['modules'] if m['name'] == 'Nyll.Example.Basic')
+        entry = json.loads((output / data_url).read_text())['declarations'][0]
+        self.assertIn(f'id="declaration-{entry["id"]}"', html)
+
+    def test_all_source_pages_are_reachable_from_home_with_normal_links(self):
+        output = self.scratch / "output"
+        site.build(self.project, output, "https://github.com/example/NYLL")
+
+        class Links(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.links = []
+
+            def handle_starttag(self, tag, attrs):
+                if tag == 'a':
+                    self.links.append(dict(attrs).get('href', ''))
+
+        expected = {site.SITE_URL}
+        expected.update(site.SITE_URL + str(path.relative_to(output).parent) + '/'
+                        for kind in ('modules', 'browse') for path in (output / kind).glob('*/index.html'))
+        seen, pending = set(), [site.SITE_URL]
+        while pending:
+            current = pending.pop()
+            if current in seen:
+                continue
+            seen.add(current)
+            relative = unquote(urlsplit(current).path.removeprefix('/NYLL/'))
+            page = output / relative / 'index.html'
+            parser = Links()
+            parser.feed(page.read_text())
+            for href in parser.links:
+                target = urljoin(current, href).split('#', 1)[0]
+                if target in expected and target not in seen:
+                    pending.append(target)
+        self.assertEqual(seen, expected)
+
+    def test_special_names_are_url_encoded_and_decode_to_real_page_paths(self):
+        library = "Odd & '量"
+        name = f"Nyll.{library}.Basic?#"
+        folder = self.project / "Nyll" / library
+        folder.mkdir()
+        (folder / "Basic?#.lean").write_text('def unusual : String := "<tag>"\n')
+        output = self.scratch / "output"
+        site.build(self.project, output, "https://github.com/example/NYLL", site_url="https://example.org/")
+        canonical = 'https://example.org/modules/' + quote(name, safe='') + '/'
+        module_page = output / unquote(urlsplit(canonical).path.lstrip('/')) / 'index.html'
+        self.assertTrue(module_page.is_file())
+        html = module_page.read_text()
+        self.assertIn(f'<link rel="canonical" href="{canonical}">', html)
+        self.assertIn('Nyll.Odd &amp; &#x27;量.Basic?#', html)
+        home = (output / 'index.html').read_text()
+        self.assertIn('./browse/' + quote(library, safe='') + '/', home)
+        namespace = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
+        locations = [element.text for element in ElementTree.parse(output / 'sitemap-source.xml').findall('.//' + namespace + 'loc')]
+        self.assertIn(canonical, locations)
+        self.assertTrue(all(not urlsplit(url).query and not urlsplit(url).fragment for url in locations))
+
+    def test_stale_pages_cleanup_preserves_unrelated_outputs(self):
+        extra = self.project / "Nyll" / "Example" / "Removed.lean"
+        extra.write_text('theorem gone : True := by trivial\n')
+        output = self.scratch / "output"
+        site.build(self.project, output, "https://github.com/example/NYLL")
+        stale = output / 'modules' / 'Nyll.Example.Removed' / 'index.html'
+        unrelated = stale.parent / 'notes.txt'
+        unrelated.write_text('Keep this output')
+        other = output / 'modules' / 'unrelated'
+        other.mkdir()
+        (other / 'index.html').write_text('Not a generated source page')
+        extra.unlink()
+        site.build(self.project, output, "https://github.com/example/NYLL")
+        self.assertFalse(stale.exists())
+        self.assertEqual(unrelated.read_text(), 'Keep this output')
+        self.assertEqual((other / 'index.html').read_text(), 'Not a generated source page')
+
+    def test_modified_or_redirected_source_pages_are_not_deleted_or_overwritten(self):
+        output = self.scratch / "output"
+        site.build(self.project, output, "https://github.com/example/NYLL")
+        target = output / 'modules' / 'Nyll.Example.Basic' / 'index.html'
+        target.write_text('User content')
+        with self.assertRaisesRegex(site.SourceError, 'unrelated or modified source page'):
+            site.build(self.project, output, "https://github.com/example/NYLL")
+        self.assertEqual(target.read_text(), 'User content')
+        target.unlink()
+        outside = self.scratch / 'unrelated.html'
+        outside.write_text('Outside output')
+        target.symlink_to(outside)
+        with self.assertRaisesRegex(site.SourceError, 'redirected generated source page'):
+            site.build(self.project, output, "https://github.com/example/NYLL")
+        self.assertEqual(outside.read_text(), 'Outside output')
+
+    def test_inventory_cannot_delete_paths_outside_generated_route_trees(self):
+        output = self.scratch / "output"
+        site.build(self.project, output, "https://github.com/example/NYLL")
+        unrelated = output / 'keep.html'
+        unrelated.write_text('Keep')
+        inventory = output / '.source-pages.json'
+        data = json.loads(inventory.read_text())
+        data['pages']['keep.html'] = 'invalid'
+        inventory.write_text(json.dumps(data))
+        with self.assertRaisesRegex(site.SourceError, 'inventory path'):
+            site.build(self.project, output, "https://github.com/example/NYLL")
+        self.assertEqual(unrelated.read_text(), 'Keep')
 
 
 if __name__ == "__main__":

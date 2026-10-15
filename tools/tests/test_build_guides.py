@@ -302,8 +302,13 @@ def body := "unterminated string ignored by the header reader
                 self.assertIn("Full declaration and proof", html)
                 self.assertIn('href="https://example.org/groups"', html)
                 self.assertNotIn(".bib", html)
-                sitemap = ET.parse(root / "output/sitemap.xml")
-                self.assertEqual(len(sitemap.getroot()), 3)
+                sitemap = ET.parse(root / "output/sitemap-guides.xml")
+                self.assertEqual(len(sitemap.getroot()), 2)
+                index = ET.parse(root / "output/sitemap.xml")
+                namespace = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+                self.assertEqual(index.getroot().tag, namespace + "sitemapindex")
+                self.assertEqual([loc.text for loc in index.findall(".//" + namespace + "loc")],
+                                 [guides.SITE_URL + "sitemap-guides.xml"])
                 guides.build(root, root / "output", root / "sources")
                 snapshot["fingerprints"]["pro-c-groups/example/Example.result"] = "changed"
                 with self.assertRaisesRegex(guides.SourceError, "review required"):

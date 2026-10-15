@@ -25,7 +25,9 @@ import shutil
 import subprocess
 import sys
 from urllib.parse import quote, urlsplit
-from xml.etree import ElementTree
+
+from site_sitemaps import write_sitemap
+from static_pages import write_pages
 
 
 DECLARATIONS = {"theorem", "lemma", "def", "abbrev", "instance", "structure",
@@ -602,13 +604,15 @@ def build(root: Path, output: Path, repository: str, revision: str | None = None
         write_json(output / "data" / commit / "modules" / (module["name"] + ".json"), module)
     write_json(output / "data" / commit / "search.json", search)
     write_json(output / "data" / "manifest.json", manifest)
-    # Query routes share index.html and render their content in JavaScript.
-    # Advertise the substantive HTML homepage without claiming every route is
-    # its duplicate or flooding the sitemap with declaration/search URLs.
-    sitemap = ElementTree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
-    entry = ElementTree.SubElement(sitemap, "url")
-    ElementTree.SubElement(entry, "loc").text = site_url
-    ElementTree.ElementTree(sitemap).write(output / "sitemap.xml", encoding="utf-8", xml_declaration=True)
+    # The same shell now has a crawlable page for every library and module.
+    # Statements and documentation are in the initial HTML; interactive proof
+    # expansion still uses the immutable JSON rather than duplicating all source.
+    try:
+        source_urls = write_pages(output, (root / "site" / "index.html").read_text(encoding="utf-8"),
+                                  manifest, modules, site_url)
+    except (ValueError, OSError) as error:
+        raise SourceError(str(error)) from error
+    write_sitemap(output, "sitemap-source.xml", source_urls, site_url)
     (output / ".nojekyll").touch()
     print(json.dumps(manifest["counts"]))
     return manifest

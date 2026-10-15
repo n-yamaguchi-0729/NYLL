@@ -26,6 +26,8 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Test source extraction
         run: python3 -m unittest discover -s tools/tests
+      - name: Test source browser routes
+        run: node --test tools/tests/test_site_routes.cjs
       - name: Build source browser
         run: python3 tools/build_site.py --output _site --repository https://github.com/n-yamaguchi-0729/NYLL --revision "${{ github.sha }}"
       - name: Refresh published library guides
