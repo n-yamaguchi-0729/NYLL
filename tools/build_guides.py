@@ -336,9 +336,9 @@ https://github.com/n-yamaguchi-0729 -->
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header guide-header"><a class="brand" href="{base}">NYLL</a>
 <nav aria-label="Main navigation"><a href="{base}#published-libraries">Libraries</a><a href="{base}?q=">Source browser</a><a href="{NYLL}">GitHub ↗</a></nav></header>
-<main id="main" class="guide-main">{content}</main>
+<div class="guide-layout"><main id="main" class="guide-main">{content}</main>
 <footer class="guide-footer">© 2026 Naganori Yamaguchi · Apache-2.0<br>Original code is written by OpenAI Codex. Source-specific credits and licenses are preserved in the linked repositories.<br><a href="{NYLL}#ai-written-code-and-verification">Authorship and verification</a> · <a href="{base}">NYLL home</a></footer>
-</body></html>'''
+</div></body></html>'''
 
 
 def source_block(selected: dict) -> str:
@@ -363,10 +363,9 @@ def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
         links = "".join(f'<li><a href="{e(s["declaration"]["sourceUrl"])}"><code>{e(s["declaration"]["name"])}</code></a></li>'
                         for s in entry["selected"][1:])
         related = f'<details class="related-sources"><summary>Related Lean sources</summary><ul>{links}</ul></details>'
-    content = f'''<header class="guide-hero"><p class="eyebrow">{e(entry['kind'])} · {e(guide['title'])}</p><h1>{e(entry['title'])}</h1><div class="lead">{paragraphs(entry['discussion'])}</div>
+    content = f'''<header class="guide-hero"><p class="eyebrow">{e(entry['kind'])} · {e(guide['title'])}</p><h1>{e(entry['title'])}</h1><p class="lead">{inline(entry['summary'])}</p><div class="guide-description">{paragraphs(entry['discussion'])}</div>
 <div class="guide-actions"><a href="{repo_url}">{e(guide['repository'])} on GitHub ↗</a></div></header>
-<section id="statement" class="guide-section statement"><h2>Mathematical statement</h2>{paragraphs(entry['statement'])}</section>
-<section id="history" class="guide-section"><h2>History and context</h2>{paragraphs(entry['history'])}</section>
+<section id="statement" class="guide-section mathematical-statement"><h2>Mathematical statement</h2>{paragraphs(entry['statement'])}</section>
 <section id="lean" class="guide-section"><h2>Lean code</h2>{source_block(entry['selected'][0])}{related}</section>
 <section id="references" class="guide-section"><h2>References</h2>{bibliography(refs)}</section>
 <p class="source-version">Published source: <a href="{repo_url}/commit/{snapshot['revision']}">{snapshot['revision'][:8]}</a>.</p>

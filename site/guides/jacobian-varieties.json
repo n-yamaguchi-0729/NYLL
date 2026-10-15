@@ -63,7 +63,7 @@
         "The associated genus is the geometric function-field genus, denoted $g(C)$. The public construction uses finite faithfully flat descent to obtain the fixed object $J_C/k$."
       ],
       "discussion": [
-        "A smooth proper geometrically irreducible curve has a Jacobian over its field of definition even when it has no rational point. The construction gives the curve's degree-zero divisor theory a geometric group in which arithmetic questions can be studied. Choosing a rational base point later provides a normalized map from the curve to this group; the Jacobian itself exists independently of that choice."
+        "A curve may have no rational point, yet its degree-zero divisor theory still gives rise to a geometric group over the original field. A rational base point is used later to define a normalized map from the curve into that group. Grothendieck's 1962 Bourbaki treatment of Picard schemes explains how relative Picard functors and faithfully flat descent address precisely the difficulty caused by the absence of a rational section."
       ],
       "history": [
         "Grothendieck's 1962 Bourbaki talk on Picard schemes explains why families of line bundles must be treated through relative Picard functors and faithfully flat descent. It explicitly addresses the difficulty caused by the absence of a rational section. This viewpoint provides a scheme-theoretic setting for Jacobians over their original fields, beyond the classical description by complex periods."
@@ -92,7 +92,7 @@
         "$$J_C/k\\ \\text{smooth and proper},\\qquad J_C\\ \\text{geometrically irreducible},\\qquad \\dim J_C=g(C).$$"
       ],
       "discussion": [
-        "The Jacobian of a smooth proper geometrically irreducible curve is a smooth proper group scheme whose dimension equals the curve's genus. This turns a numerical invariant of the curve into the dimension of a geometric object. In genus one the Jacobian is an elliptic curve; in higher genus it has correspondingly more dimensions in which to study torsion, isogenies, and maps to other abelian varieties."
+        "The genus becomes the dimension of a group variety, so a numerical invariant of the curve determines the size of the geometric setting in which its torsion and maps to abelian varieties can be studied. In the classical complex construction, this dimension comes from periods of differentials. Milne's Jacobian Varieties connects that analytic picture with the algebraic construction over arbitrary fields."
       ],
       "history": [
         "The classical complex Jacobian is built from the periods of differentials, with dimension equal to the genus. Milne's Jacobian Varieties presents the algebraic construction and its relation to that analytic picture, allowing the dimension statement to be expressed over arbitrary fields."
@@ -130,7 +130,7 @@
         "The motivating divisor-class formula is $Q\\mapsto[\\mathcal O_C(Q-P)]$; the implementation constructs an actual morphism of schemes over $k$."
       ],
       "discussion": [
-        "Choosing a rational point $P$ on a smooth proper geometrically irreducible curve gives the Abel–Jacobi morphism to its Jacobian, with $P$ mapping to the identity. The divisor-class description $Q\\mapsto[Q-P]$ explains how differences of points become elements of an abelian group. This morphism connects the curve's geometry with its divisor relations and provides the starting point for studying maps to abelian varieties and abelian covers."
+        "The divisor-class description $Q\\mapsto[Q-P]$ explains how differences of points become elements of an abelian group. The morphism connects the curve's geometry with its divisor relations and starts the study of maps to abelian varieties and abelian covers. This is the algebraic counterpart of integration from a base point: Milne's Section 2 relates the two through Abel's theorem and Jacobi inversion."
       ],
       "history": [
         "Abel's theorem and Jacobi inversion connect divisors with integrals of differentials. Milne's Section 2 explains how these classical results identify the analytic Jacobian with the algebraic one and relate integration from a base point to the canonical morphism of a pointed curve."
@@ -160,7 +160,7 @@
         "The quantified $g$ in the cited declaration is a morphism in the category of schemes over $k$."
       ],
       "discussion": [
-        "Every morphism from a pointed smooth proper geometrically irreducible curve to an abelian variety that sends the base point to zero factors uniquely through the Abel–Jacobi morphism. Thus the Jacobian captures all such maps at once: each new target is reached by a unique morphism out of the Jacobian. Requiring the base point to map to zero removes the freedom to translate the target."
+        "This universal property reduces the study of pointed maps from the curve to the study of maps out of its Jacobian. Sending the base point to zero removes translation freedom, and uniqueness makes the factorization a characterization of the Jacobian. It is the curve case of the Albanese viewpoint, which characterizes a variety through its maps to abelian varieties; Milne develops it in Section 6."
       ],
       "history": [
         "The Albanese viewpoint characterizes a variety by its maps to abelian varieties. For a pointed curve, its Jacobian has this universal role. Milne treats this characterization in Section 6, alongside the duality theory of Jacobians."
@@ -186,7 +186,7 @@
         "The conclusion includes smoothness, properness, geometric connectedness, and the required Picard representation data for $J$."
       ],
       "discussion": [
-        "Over an algebraically closed field of characteristic zero, the Abel–Jacobi morphism of a pointed smooth proper genus-one curve is an isomorphism. Passing to the Jacobian therefore preserves the whole curve, with the chosen point becoming the identity of its group structure. The result explains the role of a base point in the relation between genus-one curves and elliptic curves: it supplies the origin needed for that identification."
+        "The chosen point becomes the identity, and the curve acquires the group structure familiar from elliptic curves. Thus a base point supplies the origin needed to identify a genus-one curve with a group. This connection belongs to classical Jacobian theory: Milne's treatment of canonical maps explains it through degree-zero divisor classes, while his Abelian Varieties describes the role of the identity in the group structure."
       ],
       "history": [
         "The connection between genus-one curves and elliptic curves is part of the classical Jacobian theory. Milne's treatment of canonical maps explains the degree-zero divisor-class description; his Abelian Varieties also shows how the identity point governs the group structure on an abelian variety."
@@ -212,7 +212,7 @@
         "$$\\#A(K)[n]=n^{2d},\\qquad A(K)[n]=\\{x\\in A(K):nx=0\\}.$$"
       ],
       "discussion": [
-        "An abelian variety of dimension $d$ over an algebraically closed field of characteristic zero has exactly $n^{2d}$ points killed by a positive integer $n$. For a Jacobian this becomes $n^{2g}$, directly relating torsion to the genus of the curve. These finite groups form the levels of Tate modules, so their size is a basic numerical input to the study of Galois representations and étale cohomology."
+        "For a Jacobian, the torsion count is $n^{2g}$, directly linking the genus to the finite groups from which Tate modules are assembled. Their size is a basic input to the study of Galois representations and étale cohomology. Milne's Abelian Varieties derives the count from the degree of multiplication by an integer in Section 8 and explains the passage to prime-power Tate modules."
       ],
       "history": [
         "Milne's Abelian Varieties derives the torsion count from the degree of multiplication by an integer in Section 8. Its discussion also explains the passage to prime-power Tate modules, linking finite torsion groups with the linear objects used in arithmetic geometry."
@@ -238,7 +238,7 @@
         "The coefficient object is the constant étale sheaf on the finite abelian group $\\mu_n(K)$."
       ],
       "discussion": [
-        "For a smooth proper curve of genus $g$ over an algebraically closed field of characteristic zero, first étale cohomology with $n$th-root-of-unity coefficients has $n^{2g}$ elements. These cohomology classes describe finite abelian covering data. Kummer theory relates them to torsion line bundles, and the Jacobian realizes that torsion geometrically, connecting the genus of the curve with the size of its finite abelian covering theory."
+        "Kummer theory connects first étale cohomology with torsion line bundles, and the Jacobian realizes that torsion geometrically. The count $n^{2g}$ therefore links the genus to the size of the curve's finite abelian covering data. SGA 1 established the fundamental-group language for these covers; Milne's Jacobian Varieties, Section 9, develops their relation with the torsion of the Jacobian."
       ],
       "history": [
         "SGA 1 established the fundamental-group language for finite étale covers. In the Jacobian setting, the relation between abelian covers and torsion is developed in Milne's Jacobian Varieties, Section 9; Kummer theory provides the cohomological expression used here."
@@ -264,7 +264,7 @@
         "$$\\#H^1_{\\mathrm{\\acute et}}(U,\\underline{\\mu_n(K)})=n^{\\,2g+r-1}.$$"
       ],
       "discussion": [
-        "Removing $r\\ge1$ points from a smooth proper curve of genus $g$ changes the first étale cohomology count with $n$th-root-of-unity coefficients to $n^{2g+r-1}$ over an algebraically closed field of characteristic zero. Each puncture contributes boundary information, while the degree relation removes one independent contribution. The formula separates the roles of genus and boundary in the curve's finite abelian covering theory."
+        "Each puncture contributes boundary information, while the degree relation ties those contributions together. The exponent $2g+r-1$ separates the roles of genus and boundary in the finite abelian covering theory of a curve. This fits the classical theory of generalized Jacobians, which incorporates boundary conditions into divisor classes; Milne's Sections 8–9 explain how that broader geometry relates to covers of punctured curves."
       ],
       "history": [
         "The classical theory of generalized Jacobians incorporates boundary conditions into the geometry of divisor classes. Milne's Sections 8–9 place punctured-curve covering questions in this broader setting. The formula here expresses the boundary contribution through étale cohomology."
@@ -291,7 +291,7 @@
         "where $T(J)=\\varprojlim_n J(K)[n]$ is the full Tate module. It also proves that $e$ agrees with the map induced by $a$ followed by the fundamental-group/Tate comparison for $J$."
       ],
       "discussion": [
-        "For a pointed smooth proper curve over an algebraically closed field of characteristic zero, a compatible Picard representation identifies the abelianized geometric fundamental group with the Jacobian's full Tate module. The comparison agrees with the map induced by Abel–Jacobi. It therefore explains how the curve's abelian covering data are carried by a specific geometric morphism into compatible systems of torsion points, with the representation and compatibility hypotheses stated below."
+        "The compatibility with Abel–Jacobi identifies the geometric morphism that carries abelian covering data into compatible systems of torsion points. It gives a link between covering theory and the Jacobian's torsion beyond an abstract group isomorphism. Milne's Abelian Varieties, Section 15, describes the fundamental-group/Tate-module comparison for abelian varieties, which combines here with the Jacobian's description of abelian covers of a curve."
       ],
       "history": [
         "Milne's Abelian Varieties, Section 15, relates the étale fundamental group of an abelian variety to its full Tate module. Together with the Jacobian's description of abelian covers of a curve, this explains the classical bridge between Abel–Jacobi maps, covering theory, and compatible systems of torsion points."
@@ -318,7 +318,7 @@
         "is injective. In particular, $w(x,y)=1$ for every $y$ implies $x=0$."
       ],
       "discussion": [
-        "Over an algebraically closed field of characteristic zero, a divisorial Weil pairing satisfying the stated compatibility and moving conditions detects every nonzero torsion divisor class. Equivalently, sending a class to its pairing character is injective. This nondegeneracy makes the pairing useful for studying torsion through duality and explains how pairing data can constrain automorphisms and Galois actions on the torsion of a Jacobian."
+        "Nondegeneracy allows torsion divisor classes to be studied through their pairing characters. It is what makes the pairing useful for duality and for constraining automorphisms or Galois actions on torsion. The result belongs to classical abelian-variety duality: Milne's Abelian Varieties, Section 16, describes pairings through divisors and rational functions and relates them to torsion in an abelian variety and its dual."
       ],
       "history": [
         "The Weil pairing belongs to the classical duality theory of abelian varieties. Milne's Abelian Varieties, Section 16, develops pairings from divisor evaluation and relates them to torsion and dual abelian varieties. The divisorial formulation makes the connection with rational functions and reciprocity explicit."

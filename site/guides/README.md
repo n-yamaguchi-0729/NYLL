@@ -12,8 +12,17 @@ It does not execute Lean or claim to replace kernel verification.
 
 Library overviews explain the mathematical problem and what the library achieves
 in connected prose. Include necessary qualifications there without a separate
-scope section. An entry's `discussion` is its opening explanation of the result
-and its significance; `summary` remains the short text for cards and metadata.
+scope section. An entry opens with its short `summary`, followed by `discussion`
+explaining its significance and a little historical context. Avoid restating the
+summary. The longer `history` field remains editorial source material, without a
+separate displayed section. References must support the displayed explanation.
+
+Guide typography uses the role-based variables in `site/assets/site.css`, shared
+with the homepage and source browser. Keep the homepage's appearance and align
+guide content with its left edge at every breakpoint. Pages without the module
+tree share the same right edge; do not center entry and overview pages separately.
+The homepage hero remains a larger display heading; guides use the ordinary page
+title style shared with library pages in the source browser.
 
 The Pages workflow rebuilds on NYLL pushes, manual runs, and daily at 04:23 UTC.
 It fetches the current published revisions and refreshes Lean excerpts and links.
