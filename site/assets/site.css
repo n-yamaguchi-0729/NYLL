@@ -110,6 +110,11 @@ pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
 .hero { padding: 13px 0 36px; }
 .hero .eyebrow { margin-bottom: 20px; }
 .hero h1, .initial-state h1 { margin: 0 0 20px; font: 400 clamp(34px,3.8vw,51px)/1.13 var(--serif); letter-spacing: -.035em; max-width: 740px; }
+.hero-title-compact { display: none; }
+@media (max-width: 540px) {
+  .hero-title-wide { display: none; }
+  .hero-title-compact { display: inline; }
+}
 .hero p { max-width: 610px; margin-bottom: 0; color: var(--muted); font: var(--type-lead); }
 .home-links { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 20px; font: var(--type-navigation); }
 .published-catalog { margin-bottom: 38px; }

@@ -194,7 +194,7 @@
       "slug": "arithmetic-exact-sequence",
       "title": "The geometric–arithmetic exact sequence",
       "kind": "theorem",
-      "summary": "For a geometrically connected, quasi-compact, quasi-separated scheme over a field, the geometric fundamental group is the kernel of the arithmetic Galois action.",
+      "summary": "For a geometrically connected, quasi-compact, quasi-separated scheme over a field, the geometric fundamental group is the kernel of the natural map to the absolute Galois group.",
       "statement": [
         "Let $k$ be a field, $L$ a separable closure, and $X\\to\\operatorname{Spec}k$ a quasi-compact, quasi-separated scheme such that $X_L$ is connected. Choose a geometric point $\\xi:\\operatorname{Spec}\\Omega\\to X_L$, with $\\Omega$ separably closed, and let $x$ be its image in $X$. Then\n$$1\\longrightarrow\\pi_1^{\\mathrm{et}}(X_L,\\xi)\\longrightarrow\\pi_1^{\\mathrm{et}}(X,x)\\longrightarrow\\operatorname{Gal}(L/k)\\longrightarrow1$$\nis exact.",
         "The maps are the continuous homomorphisms induced by pullback and the structure morphism. Exactness includes injectivity on the left, surjectivity on the right, and equality of the kernel with the image. No splitting is asserted."
