@@ -231,20 +231,6 @@
     return `<details class="dependency-details"><summary>${label}<span>${number(names.length)}</span></summary>${names.length ? `<ul>${names.map((name) => `<li>${modules.has(name) ? routeLink(moduleHref(name), escape(name)) : escape(name)}</li>`).join("")}</ul>` : '<p class="muted">None.</p>'}</details>`;
   }
 
-  function attributionHtml(module) {
-    const attribution = module.attribution;
-    if (!attribution) return "";
-    const lines = (attribution.noticeLines || []).map((line) => `<p>${escape(line)}</p>`).join("");
-    const fallback = attribution.defaultNotice ? `<p>${escape(attribution.defaultNotice)}</p>` : "";
-    const missing = attribution.missingNotice ? "<p>No copyright or author notice is recorded in this source header; no owner is inferred.</p>" : "";
-    const scope = attribution.externalSource && attribution.notices?.length ? "<p>Credits follow the source’s stated scopes. The notices below distinguish upstream material and local changes.</p>" : "";
-    const notices = attribution.notices || [];
-    const details = notices.length ? `<details class="context-details"><summary>Source notices and local changes</summary>${notices.map((notice) => `<pre>${escape(notice.text)}</pre><p>${sourceAction(sourceUrl(module, notice.line), `Source notice · L${notice.line} ↗`)}</p>`).join("")}</details>` : "";
-    const provenance = sourceAction(attribution.provenanceUrl, "pi1 attribution and adaptation record ↗");
-    if (!lines && !fallback && !missing && !details && !provenance) return "";
-    return `<section class="module-overview" aria-label="Authorship and copyright"><h2 class="section-label">Authorship and copyright</h2><div class="documentation">${lines}${fallback}${missing}${scope}${details}${provenance ? `<p>${provenance}</p>` : ""}</div></section>`;
-  }
-
   function declarationHtml(declaration, module) {
     const name = declaration.fullName || declaration.name || declaration.id;
     const id = declaration.id || name;
@@ -271,7 +257,6 @@
     document.title = `${title} · ${libraryName(library)} · NYLL`;
     app.innerHTML = `<header class="page-head"><span class="eyebrow">Module</span><h1 class="page-title module-title">${escape(title)}.lean</h1><div class="qualified-module">${escape(name)}</div><div class="page-actions"><span>${count(declarations.length, "declaration")} indexed from source</span>${sourceAction(url)}</div></header>
       ${module.doc ? `<section class="module-overview"><h2 class="section-label">Module documentation</h2><div class="documentation">${markdown(module.doc, url)}</div></section>` : ""}
-      ${attributionHtml(module)}
       <div class="dependencies">${importDetails("Imports", module.imports)}${importDetails("Imported by", module.importedBy)}</div>
       <section aria-labelledby="declarations-heading"><div class="catalog-toolbar"><h2 id="declarations-heading">Declarations</h2>${declarations.some((entry) => entry.source && !entry.statementIncludesBody && entry.source.trim() !== entry.statement?.trim()) ? '<button id="proof-toggle" class="small-button" type="button" aria-pressed="false">Expand all source</button>' : ""}</div>${declarations.length ? declarations.map((entry) => declarationHtml(entry, module)).join("") : '<p class="empty">This module has no indexed declarations. Its imports and full source are available here.</p>'}</section>
       ${module.source ? '<details class="source-details"><summary>Full module source</summary><div id="full-source"></div></details>' : ""}<p class="page-footer">Statements and documentation are read from the Lean source at the revision shown. Source entries are not a measure of mathematical completeness.</p>`;

@@ -10,8 +10,8 @@
 .guide-main { min-width: 0; }
 .guide-hero .eyebrow { margin-bottom: 10px; }
 .guide-hero h1 { margin: 0 0 15px; font: var(--type-page-title); letter-spacing: -.03em; overflow-wrap: anywhere; }
-.guide-hero .lead { max-width: 610px; color: var(--muted); font: var(--type-lead); margin-bottom: 20px; }
-.guide-description, .guide-hero .overview { max-width: 80ch; font: var(--type-body); }
+.guide-hero .lead { color: var(--muted); font: var(--type-lead); margin-bottom: 20px; }
+.guide-description, .guide-hero .overview { font: var(--type-body); text-align: justify; text-align-last: start; hyphens: auto; }
 .guide-description p, .guide-hero .overview p { margin-bottom: .85em; }
 .guide-description > :last-child, .guide-hero .overview > :last-child { margin-bottom: 0; }
 .guide-actions { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 20px; font: var(--type-navigation); }
