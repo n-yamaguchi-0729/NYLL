@@ -1,0 +1,337 @@
+{
+  "slug": "jacobian-varieties",
+  "title": "Jacobian varieties",
+  "repository": "JacobianVarieties",
+  "summary": "From a smooth proper curve to its Jacobian, then to torsion, étale cohomology, and the abelianized fundamental group.",
+  "overview": [
+    "These entries follow the public construction from a curve to a group scheme and then to its arithmetic invariants. The first results work over an arbitrary field; the later comparison and torsion results below use algebraically closed fields of characteristic zero.",
+    "The geometric objects matter: the Jacobian is a descended scheme, Abel–Jacobi is a scheme morphism, and the cohomology groups are the actual derived étale cohomology groups. Source links identify the declarations and their hypotheses."
+  ],
+  "scopeNote": "The public repository does not yet provide the full fppf Picard-sheaf identification and base-change API for the fixed unpointed Jacobian, the general positive-genus closed-immersion API, or a complete principal-polarization theorem. The Tate comparison below takes a representing Picard object and an explicit Abel–Jacobi class compatibility as input. The pairing entry proves nondegeneracy for supplied divisorial pairing data.",
+  "references": [
+    {
+      "id": "milne-jacobian",
+      "type": "book-chapter",
+      "author": "J. S. Milne",
+      "title": "Jacobian Varieties",
+      "year": 1986,
+      "publisher": "Springer, New York, in Arithmetic Geometry (Storrs, Conn., 1984), Chapter VII",
+      "pages": "167–212",
+      "url": "https://www.jmilne.org/math/xnotes/JVs.pdf",
+      "note": "Author's revised version dated June 12, 2021; original numbering retained."
+    },
+    {
+      "id": "milne-abelian",
+      "type": "book-chapter",
+      "author": "J. S. Milne",
+      "title": "Abelian Varieties",
+      "year": 1986,
+      "publisher": "Springer, New York, in Arithmetic Geometry (Storrs, Conn., 1984), Chapter V",
+      "pages": "103–150",
+      "url": "https://www.jmilne.org/math/xnotes/AVs.pdf",
+      "note": "Author's revised version dated January 2, 2022; original numbering retained."
+    },
+    {
+      "id": "sga1",
+      "type": "book",
+      "author": "Alexander Grothendieck et al.",
+      "title": "Revêtements étales et groupe fondamental (SGA 1)",
+      "year": 1971,
+      "publisher": "Springer, Lecture Notes in Mathematics 224",
+      "url": "https://arxiv.org/abs/math/0206203",
+      "note": "Link to the updated edition with remarks by Michel Raynaud."
+    },
+    {
+      "id": "grothendieck-picard-1962",
+      "type": "seminar-talk",
+      "author": "Alexander Grothendieck",
+      "title": "Technique de descente et théorèmes d'existence en géométrie algébrique. V. Les schémas de Picard : théorèmes d'existence",
+      "year": 1962,
+      "publisher": "Séminaire Bourbaki, Exposé 232",
+      "pages": "143–161",
+      "url": "https://numdam.org/item/SB_1961-1962__7__143_0.pdf"
+    }
+  ],
+  "entries": [
+    {
+      "slug": "unpointed-jacobian",
+      "title": "A Jacobian without a rational base point",
+      "kind": "definition",
+      "summary": "A smooth proper geometrically irreducible curve has a fixed descended Jacobian over its original field.",
+      "statement": [
+        "Let $k$ be a field and let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$. The definition constructs a scheme over $k$, denoted $J_C$, without requiring a point in $C(k)$.",
+        "The associated genus is the geometric function-field genus, denoted $g(C)$. The public construction uses finite faithfully flat descent to obtain the fixed object $J_C/k$."
+      ],
+      "discussion": [
+        "The Jacobian turns degree-zero divisor classes into a geometric group. Constructing it over the original field matters in arithmetic: a curve may have no rational point, but its Jacobian still has an identity and an arithmetic theory of its own. A base point is needed to map the curve into that group, not to make the group exist."
+      ],
+      "history": [
+        "Grothendieck's 1962 Bourbaki talk on Picard schemes explains why families of line bundles must be treated through relative Picard functors and faithfully flat descent. It explicitly addresses the difficulty caused by the absence of a rational section. This viewpoint provides a scheme-theoretic setting for Jacobians over their original fields, beyond the classical description by complex periods."
+      ],
+      "references": [
+        "grothendieck-picard-1962"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.genus"
+        }
+      ]
+    },
+    {
+      "slug": "dimension-and-group",
+      "title": "The group scheme and its dimension",
+      "kind": "theorem",
+      "summary": "The same descended Jacobian is smooth, proper, geometrically irreducible, and has dimension equal to the curve's genus.",
+      "statement": [
+        "Let $k$ be a field and let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$. The public declarations give the fixed descended Jacobian $J_C$ a group-object structure and prove",
+        "$$J_C/k\\ \\text{smooth and proper},\\qquad J_C\\ \\text{geometrically irreducible},\\qquad \\dim J_C=g(C).$$"
+      ],
+      "discussion": [
+        "The equality $\\dim J_C=g(C)$ converts the genus of a curve into the dimension of a group variety. It explains why genus-one curves lead to elliptic curves and why a higher-genus curve has a higher-dimensional Jacobian. Smoothness and properness make this group suitable for studying torsion, isogenies, and maps from the curve into other abelian varieties."
+      ],
+      "history": [
+        "The classical complex Jacobian is built from the periods of differentials, with dimension equal to the genus. Milne's Jacobian Varieties presents the algebraic construction and its relation to that analytic picture, allowing the dimension statement to be expressed over arbitrary fields."
+      ],
+      "references": [
+        "milne-jacobian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.smoothOfRelativeDimension_genus"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.instGrpObj"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.instIsProper"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.instGeometricallyIrreducible"
+        }
+      ]
+    },
+    {
+      "slug": "abel-jacobi",
+      "title": "The pointed Abel–Jacobi morphism",
+      "kind": "definition",
+      "summary": "A chosen rational point determines a morphism from the curve to its fixed Jacobian and maps to the identity.",
+      "statement": [
+        "Let $k$ be a field and let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$. For $P\\in C(k)$, the definition gives a $k$-morphism $a_P:C\\to J_C$ to the fixed descended Jacobian, the point-minus-basepoint Abel–Jacobi morphism. Its normalization is proved:",
+        "$$a_P(P)=0.$$",
+        "The motivating divisor-class formula is $Q\\mapsto[\\mathcal O_C(Q-P)]$; the implementation constructs an actual morphism of schemes over $k$."
+      ],
+      "discussion": [
+        "The map $Q\\mapsto[Q-P]$ places the curve inside the geometry of its degree-zero divisor classes. Choosing $P$ fixes the origin of this comparison: differences of points become elements of an abelian group. The map is the starting point for studying maps to abelian varieties, divisor relations, and the part of the curve's fundamental group detected by abelian covers."
+      ],
+      "history": [
+        "Abel's theorem and Jacobi inversion connect divisors with integrals of differentials. Milne's Section 2 explains how these classical results identify the analytic Jacobian with the algebraic one and relate integration from a base point to the canonical morphism of a pointed curve."
+      ],
+      "references": [
+        "milne-jacobian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.ofCurve"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.comp_ofCurve"
+        }
+      ]
+    },
+    {
+      "slug": "albanese-factorization",
+      "title": "Unique factorization through Abel–Jacobi",
+      "kind": "theorem",
+      "summary": "Every pointed morphism from the curve to an abelian variety factors uniquely through the fixed Jacobian.",
+      "statement": [
+        "Let $k$ be a field, let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$, and choose $P\\in C(k)$. Let $A/k$ be a smooth proper geometrically irreducible group scheme. For a $k$-morphism $f:C\\to A$ with $f(P)=0$,",
+        "$$\\exists!\\,g:J_C\\longrightarrow A\\quad\\text{such that}\\quad f=g\\circ a_P.$$",
+        "The quantified $g$ in the cited declaration is a morphism in the category of schemes over $k$."
+      ],
+      "discussion": [
+        "This property says that the Jacobian captures every pointed map from the curve to an abelian variety. Rather than studying each target separately, one can first pass to $J_C$ and then study a map out of a group variety. The condition $f(P)=0$ removes translation freedom; uniqueness makes the factorization a characterization, not merely a convenient construction."
+      ],
+      "history": [
+        "The Albanese viewpoint characterizes a variety by its maps to abelian varieties. For a pointed curve, its Jacobian has this universal role. Milne treats this characterization in Section 6, alongside the duality theory of Jacobians."
+      ],
+      "references": [
+        "milne-jacobian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
+          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.exists_unique_ofCurve_comp"
+        }
+      ]
+    },
+    {
+      "slug": "genus-one",
+      "title": "A pointed genus-one curve is its Jacobian",
+      "kind": "theorem",
+      "summary": "In characteristic zero, the constructed Abel–Jacobi map for a genus-one curve is an isomorphism.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$, let $C$ be the smooth proper curve model of a one-variable function field $F/K$, and choose $P\\in C(K)$. If $g(F/K)=1$, the theorem constructs a representing degree-zero Picard object $J$, together with",
+        "$$a_P:C\\xrightarrow{\\sim}J,\\qquad a_P(P)=0.$$",
+        "The conclusion includes smoothness, properness, geometric connectedness, and the required Picard representation data for $J$."
+      ],
+      "discussion": [
+        "For genus one, passing from the curve to its Jacobian loses no geometry once a base point is chosen. The point becomes the identity, and the curve acquires the group structure familiar from elliptic curves. This explains the importance of a rational point: it identifies the curve itself with a group, rather than leaving it as a genus-one curve without a specified origin."
+      ],
+      "history": [
+        "The connection between genus-one curves and elliptic curves is part of the classical Jacobian theory. Milne's treatment of canonical maps explains the degree-zero divisor-class description; his Abelian Varieties also shows how the identity point governs the group structure on an abelian variety."
+      ],
+      "references": [
+        "milne-jacobian",
+        "milne-abelian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Albanese/GenusOneAbelJacobiIsomorphism.lean",
+          "name": "AlgebraicCurve.CurveModel.exists_abelJacobi_isIso_of_genus_one"
+        }
+      ]
+    },
+    {
+      "slug": "torsion-cardinality",
+      "title": "Counting torsion points",
+      "kind": "theorem",
+      "summary": "An abelian variety of dimension d over an algebraically closed field of characteristic zero has n^(2d) points killed by n.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$. Let $A/K$ carry a commutative relative group law and the source's abelian-scheme properties, with smooth relative dimension $d$. For every integer $n\\ge1$,",
+        "$$\\#A(K)[n]=n^{2d},\\qquad A(K)[n]=\\{x\\in A(K):nx=0\\}.$$"
+      ],
+      "discussion": [
+        "The number $n^{2d}$ measures the size of the finite subgroup cut out by multiplication by $n$. For a Jacobian, it becomes $n^{2g}$ and links the genus directly to torsion. These groups are the finite levels from which Tate modules are assembled, so the count is a basic numerical input to the study of Galois representations and étale cohomology."
+      ],
+      "history": [
+        "Milne's Abelian Varieties derives the torsion count from the degree of multiplication by an integer in Section 8. Its discussion also explains the passage to prime-power Tate modules, linking finite torsion groups with the linear objects used in arithmetic geometry."
+      ],
+      "references": [
+        "milne-abelian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Picard/TorsionCardinality.lean",
+          "name": "GoodReductionJacobian.RelativeGroupLaw.natCard_torsionLevel_eq_pow"
+        }
+      ]
+    },
+    {
+      "slug": "proper-h1",
+      "title": "Finite étale H¹ of a proper curve",
+      "kind": "theorem",
+      "summary": "The actual first étale cohomology group with roots-of-unity coefficients has the expected genus-dependent cardinality.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$, and let $C$ be a geometrically integral smooth proper curve model of $F/K$, equipped with a $K$-point and a geometric point. For $n\\ge1$,",
+        "$$\\#H^1_{\\mathrm{\\acute et}}(C,\\underline{\\mu_n(K)})=n^{2g(F/K)}.$$",
+        "The coefficient object is the constant étale sheaf on the finite abelian group $\\mu_n(K)$."
+      ],
+      "discussion": [
+        "First étale cohomology with these coefficients records finite abelian covering data. Its cardinality is the one expected from $2g$ independent directions at each finite level. Kummer theory connects those directions with torsion line bundles, while the Jacobian supplies their geometric realization. The result therefore links three descriptions of the same abelian information: covers, line bundles, and torsion points."
+      ],
+      "history": [
+        "SGA 1 established the fundamental-group language for finite étale covers. In the Jacobian setting, the relation between abelian covers and torsion is developed in Milne's Jacobian Varieties, Section 9; Kummer theory provides the cohomological expression used here."
+      ],
+      "references": [
+        "sga1",
+        "milne-jacobian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Kummer/FiniteH1Cardinality.lean",
+          "name": "AlgebraicCurve.CurveModel.natCard_finiteH1_eq_pow_genus"
+        }
+      ]
+    },
+    {
+      "slug": "open-h1",
+      "title": "The contribution of punctures to H¹",
+      "kind": "theorem",
+      "summary": "For a nonempty finite boundary, the first étale cohomology count gains r−1 boundary directions.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$, and let $C$ be a smooth proper curve model of genus $g$ with a $K$-point. Let $j:U\\hookrightarrow C$ be a dense open immersion with $U$ integral and quasi-compact. Suppose the boundary has $r\\ge1$ places, and choose a geometric point of $U$. Then, for $n\\ge1$,",
+        "$$\\#H^1_{\\mathrm{\\acute et}}(U,\\underline{\\mu_n(K)})=n^{\\,2g+r-1}.$$"
+      ],
+      "discussion": [
+        "Removing $r$ points adds $r-1$ directions to the proper curve's first cohomology. Each puncture contributes boundary information, but the degree relation ties those contributions together. The formula separates the influence of genus from that of the boundary and gives a numerical way to distinguish proper and punctured curves through their finite abelian covering data."
+      ],
+      "history": [
+        "The classical theory of generalized Jacobians incorporates boundary conditions into the geometry of divisor classes. Milne's Sections 8–9 place punctured-curve covering questions in this broader setting. The formula here expresses the boundary contribution through étale cohomology."
+      ],
+      "references": [
+        "milne-jacobian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Kummer/OpenFiniteH1Cardinality.lean",
+          "name": "AlgebraicCurve.CurveModel.natCard_open_finiteH1_eq_pow_genus_boundary"
+        }
+      ]
+    },
+    {
+      "slug": "abel-jacobi-tate",
+      "title": "Abel–Jacobi and the full Tate module",
+      "kind": "theorem",
+      "summary": "Under explicit Picard representation and class-compatibility hypotheses, Abel–Jacobi identifies the abelianized fundamental group with the full Tate module.",
+      "statement": [
+        "Let $C/K$ be a geometrically integral smooth proper curve model over an algebraically closed field of characteristic $0$, with base point $P$. Supply a smooth proper geometrically connected object $J$ representing the designated degree-zero relative Picard functor, and a morphism $a:C\\to J$ whose Poincaré pullbacks give the classes $\\mathcal O(Q-P)$ after field extensions.",
+        "For every geometric point $\\xi$ of $C$, the theorem constructs a continuous group isomorphism",
+        "$$e:\\pi_1^{\\mathrm{\\acute et}}(C,\\xi)^{\\mathrm{ab}}\\xrightarrow{\\sim}T(J),$$",
+        "where $T(J)=\\varprojlim_n J(K)[n]$ is the full Tate module. It also proves that $e$ agrees with the map induced by $a$ followed by the fundamental-group/Tate comparison for $J$."
+      ],
+      "discussion": [
+        "The comparison identifies the entire abelianized geometric fundamental group with the compatible torsion of the Jacobian. Its compatibility with Abel–Jacobi is essential: it tells us which geometric map carries covering data into the Tate module. Thus the Jacobian captures the curve's abelian covering theory, while the nonabelian information in the full fundamental group remains beyond this comparison."
+      ],
+      "history": [
+        "Milne's Abelian Varieties, Section 15, relates the étale fundamental group of an abelian variety to its full Tate module. Together with the Jacobian's description of abelian covers of a curve, this explains the classical bridge between Abel–Jacobi maps, covering theory, and compatible systems of torsion points."
+      ],
+      "references": [
+        "milne-abelian",
+        "milne-jacobian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Kummer/AbelJacobiTate.lean",
+          "name": "JacobianVarieties.Kummer.exists_abelJacobi_fullTate_equiv"
+        }
+      ]
+    },
+    {
+      "slug": "weil-pairing",
+      "title": "Nondegeneracy of the divisorial Weil pairing",
+      "kind": "theorem",
+      "summary": "Every nonzero torsion divisor class is detected by a character obtained from supplied divisorial Weil-pairing data.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$, and let $F/K$ have principal-divisor data. Assume there is a transcendental $t\\in F$ with $[F:K(t)]<\\infty$. For $n\\ge1$, let $w$ be divisorial Weil-pairing data on $\\operatorname{Pic}^0(F/K)[n]$: its pairing agrees with divisor evaluation, and torsion classes admit rational divisor representatives avoiding any given finite set of places. Then",
+        "$$x\\longmapsto\\bigl(y\\longmapsto w(x,y)\\bigr)$$",
+        "is injective. In particular, $w(x,y)=1$ for every $y$ implies $x=0$."
+      ],
+      "discussion": [
+        "Nondegeneracy means that no nonzero torsion divisor class is invisible to every other class. The pairing turns a torsion class into a character, allowing divisor-theoretic information to be studied through duality. This is a central reason Weil pairings are useful in the arithmetic of curves and Jacobians: they constrain how automorphisms and Galois actions can act on torsion."
+      ],
+      "history": [
+        "The Weil pairing belongs to the classical duality theory of abelian varieties. Milne's Abelian Varieties, Section 16, develops pairings from divisor evaluation and relates them to torsion and dual abelian varieties. The divisorial formulation makes the connection with rational functions and reciprocity explicit."
+      ],
+      "references": [
+        "milne-abelian"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/WeilPairing/CharZeroNondegeneracy.lean",
+          "name": "AlgebraicCurve.DivisorialWeilPairingData.toHom_injective_charZero"
+        }
+      ]
+    }
+  ]
+}

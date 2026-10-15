@@ -1,0 +1,353 @@
+{
+  "slug": "pro-c-groups",
+  "title": "Pro-C groups",
+  "repository": "ProCGroups",
+  "summary": "Universal properties, free profinite groups, Fox calculus, exact sequences, and duality, with the hypotheses exposed.",
+  "overview": [
+    "These ten entries select structural results from the public ProCGroups library. They move from completion and freeness to open subgroups, differential modules, a Golod–Shafarevich criterion, and abelian constructions. A pro-C group is a profinite group with a neighborhood basis of open normal subgroups whose finite quotients belong to a specified class C.",
+    "The source distinguishes algebraic groups, topological groups, finite quotient systems, and completed modules. Each entry identifies the actual declarations used; the displayed Lean source is extracted from the public repository."
+  ],
+  "scopeNote": "This is a selection, not a claim that every theorem about pro-C groups has been formalized. Closure assumptions on C vary by result. The open-subgroup theorem has a finite basis, and the completed Crowell theorem uses a finite-rank free pro-C source and a separated completed differential module. The duality entry concerns profinite abelian groups, not all locally compact abelian groups.",
+  "references": [
+    {
+      "id": "ribes-zalesskii-2010",
+      "type": "book",
+      "author": "Luis Ribes and Pavel Zalesskii",
+      "title": "Profinite Groups",
+      "year": 2010,
+      "publisher": "Springer-Verlag Berlin Heidelberg",
+      "doi": "10.1007/978-3-642-01642-4",
+      "url": "https://link.springer.com/book/10.1007/978-3-642-01642-4",
+      "note": "Second edition; Ergebnisse der Mathematik und ihrer Grenzgebiete, 3. Folge, volume 40."
+    },
+    {
+      "id": "fox-1953",
+      "type": "article",
+      "author": "Ralph H. Fox",
+      "title": "Free Differential Calculus. I: Derivation in the Free Group Ring",
+      "year": 1953,
+      "journal": "Annals of Mathematics",
+      "volume": "57 (3)",
+      "pages": "547–560",
+      "doi": "10.2307/1969736",
+      "url": "https://www.jstor.org/stable/1969736"
+    },
+    {
+      "id": "crowell-1971",
+      "type": "article",
+      "author": "R. H. Crowell",
+      "title": "The Derived Module of a Homomorphism",
+      "year": 1971,
+      "journal": "Advances in Mathematics",
+      "volume": "6",
+      "pages": "210–238",
+      "doi": "10.1016/0001-8708(71)90016-8",
+      "url": "https://www.mobt3ath.com/uplode/book/book-92767.pdf",
+      "note": "Original article; the linked PDF reproduces the published text."
+    },
+    {
+      "id": "golod-shafarevich-1964",
+      "type": "article",
+      "author": "E. S. Golod and I. R. Shafarevich",
+      "title": "On the class field tower",
+      "year": 1964,
+      "journal": "Izvestiya Akademii Nauk SSSR. Seriya Matematicheskaya",
+      "volume": "28 (2)",
+      "pages": "261–272",
+      "url": "https://www.mathnet.ru/eng/im2955",
+      "note": "Original article in Russian."
+    },
+    {
+      "id": "pontrjagin-1934",
+      "type": "article",
+      "author": "L. Pontrjagin",
+      "title": "The Theory of Topological Commutative Groups",
+      "year": 1934,
+      "journal": "Annals of Mathematics",
+      "volume": "35 (2)",
+      "pages": "361–388",
+      "doi": "10.2307/1968438",
+      "url": "https://www.jstor.org/stable/1968438"
+    },
+    {
+      "id": "tate-1967",
+      "type": "book-chapter",
+      "author": "J. T. Tate",
+      "title": "p-Divisible Groups",
+      "year": 1967,
+      "publisher": "Springer, Berlin, Heidelberg",
+      "pages": "158–183",
+      "doi": "10.1007/978-3-642-87942-5_12",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-642-87942-5_12",
+      "note": "In Proceedings of a Conference on Local Fields."
+    }
+  ],
+  "entries": [
+    {
+      "slug": "completion-universal-property",
+      "title": "What a pro-C completion means",
+      "kind": "definition",
+      "summary": "Completion is characterized by a dense map through which continuous maps to pro-C groups factor uniquely.",
+      "statement": [
+        "Let $C$ be a class of finite groups. Let $G$ be a topological group and let $\\widehat G_C$ be a profinite group. A continuous homomorphism $\\iota:G\\to\\widehat G_C$ is a pro-$C$ completion when its image is dense, its target has an open normal basis with quotients in $C$, and every continuous homomorphism $\\varphi:G\\to H$ to a pro-$C$ group has a unique continuous factorization.",
+        "Composition with $\\iota$ therefore gives $$\\operatorname{Hom}_{\\mathrm{cont}}(\\widehat G_C,H)\\cong\\operatorname{Hom}_{\\mathrm{cont}}(G,H).$$ The quantification is over profinite targets with the specified open normal basis, in the universe used by the declaration."
+      ],
+      "discussion": [
+        "Completion gathers the finite-quotient information selected by C into one profinite group. Its universal property lets a map defined on the original group extend uniquely to that completion, while density ensures that the extension is determined by its original values. The completion map need not be injective: elements invisible in all relevant finite quotients can disappear."
+      ],
+      "history": [
+        "Ribes and Zalesskii’s 2010 monograph treats completion through finite quotients and universal mapping properties. This places pro-C completion alongside ordinary profinite and pro-p completion: the chosen class of finite targets determines which information the completed group retains."
+      ],
+      "references": [
+        "ribes-zalesskii-2010"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/Completion/UniversalProperty.lean",
+          "name": "ProCGroups.Completion.IsProCCompletion"
+        }
+      ]
+    },
+    {
+      "slug": "free-pro-c-universal-property",
+      "title": "Free pro-C groups",
+      "kind": "definition",
+      "summary": "A continuous choice of generator images extends uniquely to a continuous homomorphism.",
+      "statement": [
+        "Let $C$ be a class of finite groups. Let $X$ be a topological space, $F$ a profinite group, and $\\iota:X\\to F$ a continuous map. The predicate says that $F$ is pro-$C$, the image of $\\iota$ topologically generates $F$, and every continuous map $\\varphi:X\\to H$ to a pro-$C$ group extends uniquely to a continuous group homomorphism $f:F\\to H$.",
+        "The required equation is $$f(\\iota(x))=\\varphi(x)\\qquad(x\\in X).$$ There is no requirement that $\\varphi(X)$ generate $H$: the universal property quantifies over all continuous choices of generator images."
+      ],
+      "discussion": [
+        "Freeness means that continuous maps out of the group can be specified by choosing generator images. For a finite discrete generating space, this is the familiar finite-rank picture. For an infinite space, its topology restricts the permitted assignments and is part of the mathematical data. The universal property makes constructions on generators extend coherently to the entire group."
+      ],
+      "history": [
+        "The free pro-C groups studied in Ribes and Zalesskii’s 2010 monograph are the profinite counterparts of abstract free groups. Their theory combines universal mapping properties with finite quotients, while the topology of an infinite generating family requires particular care."
+      ],
+      "references": [
+        "ribes-zalesskii-2010"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/FreeProC/Basic.lean",
+          "name": "ProCGroups.FreeProC.IsFreeProCGroup"
+        }
+      ]
+    },
+    {
+      "slug": "open-subgroup-schreier-rank",
+      "title": "The Schreier rank of an open subgroup",
+      "kind": "theorem",
+      "summary": "An open subgroup of a finite-rank free pro-C group is free, with the expected index-dependent rank.",
+      "statement": [
+        "Assume $C$ is closed under isomorphisms, subgroups, quotients, finite direct products, and extensions, and contains a nontrivial finite cyclic group. Let $F$ be epimorphically free pro-$C$ on a finite converging basis $X$, and let $H\\le F$ be open. Put $r=|X|$ and $i=[F:H]$.",
+        "There is a free pro-$C$ group with a basis of size $$\\begin{cases}0,&r=0,\\\\1+i(r-1),&r\\ge1,\\end{cases}$$ and a continuous group isomorphism from that group to $H$. The conclusion provides freeness as well as a numerical rank."
+      ],
+      "discussion": [
+        "The theorem determines both the structure and the rank of an open subgroup. Openness gives finite index, and the formula shows exactly how passing to that subgroup changes the number of free generators. The closure hypotheses on C ensure that the subgroup stays in the same theory. The separate zero-rank case correctly preserves the trivial group."
+      ],
+      "history": [
+        "This is the profinite counterpart of the classical Schreier formula for finite-index subgroups of free groups. Ribes and Zalesskii’s monograph develops the free pro-C version, where restrictions on the class of finite groups determine whether the subgroup remains free."
+      ],
+      "references": [
+        "ribes-zalesskii-2010"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/ReidemeisterSchreier/Profinite/OpenSubgroups/BasisFiniteRank.lean",
+          "name": "ReidemeisterSchreier.Profinite.exists_basis_openSubgroup_of_extensionClosed_finiteRank"
+        }
+      ]
+    },
+    {
+      "slug": "fox-fundamental-formula",
+      "title": "The relative Fox fundamental formula",
+      "kind": "theorem",
+      "summary": "A group-ring boundary decomposes into Fox derivatives times the boundaries of the generators.",
+      "statement": [
+        "Let $X$ be finite, $F(X)$ the free group on $X$, $H$ any group, and $\\psi:F(X)\\to H$ a homomorphism. For every $w\\in F(X)$, $$[\\psi(w)]-1=\\sum_{x\\in X}\\frac{\\partial_\\psi w}{\\partial x}\\bigl([\\psi(x)]-1\\bigr)\\quad\\text{in }\\mathbb Z[H].$$ Here $[h]$ denotes the group-ring basis element indexed by $h$, and the derivative is the relative Fox derivative.",
+        "The factors occur in the displayed order. The group ring need not be commutative, so exchanging a derivative with the factor to its right changes the assertion."
+      ],
+      "discussion": [
+        "Fox derivatives turn a word in a noncommutative group into coefficients in a group ring. The fundamental formula reconstructs its boundary from those coefficients and the generator boundaries. In a presentation, a relator maps to the identity, so its Fox vector lies in the kernel of the boundary map. This makes group relations accessible to linear algebra over a group ring."
+      ],
+      "history": [
+        "Fox’s 1953 paper introduced free differential calculus in the free group ring. The subject grew out of his study of Alexander’s knot polynomial. Crowell’s 1971 derived-module construction subsequently gave a universal module interpretation of the associated presentation matrices and exact sequences, connecting the calculus with the homology of covering spaces."
+      ],
+      "references": [
+        "fox-1953",
+        "crowell-1971"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/FoxDifferential/Discrete/FoxCalculus/Boundary.lean",
+          "name": "FoxDifferential.FoxCalculus.relativeFreeGroupFoxDerivative_fundamental_formula"
+        }
+      ]
+    },
+    {
+      "slug": "discrete-crowell-sequence",
+      "title": "The discrete Crowell exact sequence",
+      "kind": "theorem",
+      "summary": "A surjective group homomorphism yields an exact sequence connecting its kernel to its derived module.",
+      "statement": [
+        "Let $\\psi:G\\twoheadrightarrow H$ be a surjective homomorphism of groups and let $N=\\ker\\psi$. Write $A_\\psi$ for the universal module of $\\psi$-crossed homomorphisms. Then $$0\\longrightarrow N^{\\mathrm{ab}}\\longrightarrow A_\\psi\\longrightarrow\\mathbb Z[H]\\xrightarrow{\\varepsilon}\\mathbb Z\\longrightarrow0$$ is exact.",
+        "The head map sends the class of $n$ to its universal differential; the next map sends the differential of $g$ to $[\\psi(g)]-1$. The last map is augmentation. The action of $H$ on $N^{\\mathrm{ab}}$ comes from conjugation through lifts in $G$."
+      ],
+      "discussion": [
+        "The sequence connects the abelianized kernel of a group surjection with its universal crossed differential module. Exactness says precisely which differentials have zero boundary and identifies every element of the augmentation ideal as a boundary. For a finite free source, Fox coordinates turn the middle term into a free group-ring module, making the sequence useful for computations from a presentation."
+      ],
+      "history": [
+        "Crowell’s 1971 paper defines the derived module of a homomorphism by a universal property and constructs its module sequence. The motivation includes Alexander modules and knot groups, but the construction applies to general group homomorphisms. Fox derivatives provide coordinates when a free presentation is available."
+      ],
+      "references": [
+        "crowell-1971",
+        "fox-1953"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/CrowellExactSequence/Discrete/Exactness.lean",
+          "name": "CrowellExactSequence.Morishita2024.crowellExactSequence_of_surjective"
+        }
+      ]
+    },
+    {
+      "slug": "completed-crowell-sequence",
+      "title": "The separated completed Crowell sequence",
+      "kind": "theorem",
+      "summary": "The kernel–differential–augmentation sequence is exact in the stated finite-rank pro-C setting.",
+      "statement": [
+        "Let $C$ satisfy the source’s full-formation assumptions and contain trivial quotients. The formation package includes closure under quotients, finite subdirect products, normal subgroups, extensions, and subgroups. Let $F$ be a free pro-$C$ group with a chosen converging basis of finite cardinality $r$, and let $\\psi:F\\twoheadrightarrow H$ be a continuous surjection to a profinite group.",
+        "For $N=\\ker\\psi$, the separated completed differential module gives $$0\\to N/\\overline{[N,N]}\\to A^{\\mathrm{sep}}_\\psi(C)\\to\\mathbb Z_C\\mathopen{[\\![} H\\mathclose{]\\!]}\\to\\mathbb Z_C\\to0.$$ The bundled endpoint records exactness of the underlying integer-linear maps.",
+        "Here $\\mathbb Z_C$ is the pro-$C$ completion of the additive group $\\mathbb Z$, with its induced ring structure, and $\\mathbb Z_C\\mathopen{[\\![} H\\mathclose{]\\!]}$ is the corresponding completed group algebra."
+      ],
+      "discussion": [
+        "This sequence carries the relation-module method into the profinite setting. Closing the commutator subgroup gives the appropriate topological abelianization, and completed coefficients retain compatible information from finite quotients. Separation of the middle module is essential to the stated result. Under the finite-rank free-source hypotheses, exactness identifies the relation contribution without asserting that the sequence splits."
+      ],
+      "history": [
+        "Crowell’s discrete module sequence provides the algebraic pattern. Profinite group theory, as developed in Ribes and Zalesskii, replaces discrete quotients and modules with objects controlled by finite continuous quotients. The sequence here combines that viewpoint with completed Fox calculus; its hypotheses specify the setting in which the classical pattern remains exact."
+      ],
+      "references": [
+        "crowell-1971",
+        "ribes-zalesskii-2010"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/CrowellExactSequence/Profinite/FreeExactness.lean",
+          "name": "CrowellExactSequence.freeProC_presentedSepCrowellZC_of_continuousMagnus_zcBiAllStages_of_psi_surj"
+        },
+        {
+          "path": "Nyll/ProCGroups/CrowellExactSequence/Profinite/MainTheorem.lean",
+          "name": "CrowellExactSequence.profiniteSeparatedCrowellLinearSequence_isExact"
+        }
+      ]
+    },
+    {
+      "slug": "weighted-golod-shafarevich",
+      "title": "A weighted Golod–Shafarevich infinitude criterion",
+      "kind": "theorem",
+      "summary": "A nonpositive presentation polynomial certifies that an actual pro-p group is infinite.",
+      "statement": [
+        "Let $p$ be prime and let $G$ be a profinite group with a displayed finite pro-$p$ presentation on $d$ generators and $r$ relators. For each relator choose a lower Zassenhaus depth $\\nu_i$, and assume those depth bounds hold for the displayed presentation. No minimality assumption is required.",
+        "If some real $t$ satisfies $0\\le t<1$ and $$1-dt+\\sum_{i=1}^{r}t^{\\nu_i}\\le0,$$ then $G$ is infinite. The theorem takes an actual presentation object, not merely numerical values for $d$, $r$, and the depths."
+      ],
+      "discussion": [
+        "The inequality turns generator counts and relator depths into an infinitude test. Deep relations contribute little when t lies between zero and one, so some additional relations can be imposed without exhausting the inequality. This is particularly useful for constructing infinite Galois groups with extra splitting conditions. For countably many added relations, one also needs a separate limiting argument."
+      ],
+      "history": [
+        "Golod and Shafarevich’s 1964 paper established the existence of infinite class field towers through inequalities for generators and relations. Weighted versions retain the filtration depths of individual relators instead of using only their number. That extra information is what makes it possible to impose carefully chosen deep relations while preserving infinitude."
+      ],
+      "references": [
+        "golod-shafarevich-1964"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/GolodShafarevich/WeightedFiniteCriterion.lean",
+          "name": "ClassFieldTower.ProP.FiniteProPPresentation.infinite_of_gsPolynomial_nonpos"
+        }
+      ]
+    },
+    {
+      "slug": "profinite-pontryagin-biduality",
+      "title": "Pontryagin biduality for profinite abelian groups",
+      "kind": "theorem",
+      "summary": "Evaluation identifies a profinite abelian group with its continuous character bidual.",
+      "statement": [
+        "Let $G$ be a compact, totally disconnected abelian topological group. Its Pontryagin dual $G^\\vee$ consists of continuous circle-valued characters with the compact-open topology. The source constructs a continuous group isomorphism $$G\\xrightarrow{\\sim}(G^\\vee)^\\vee,\\qquad g\\longmapsto\\bigl(\\chi\\longmapsto\\chi(g)\\bigr).$$",
+        "This is an isomorphism of the actual topological groups. In particular, finite torsion is retained; this is not an identification obtained only after tensoring with a field."
+      ],
+      "discussion": [
+        "Continuous characters retain all the information in a profinite abelian group: evaluating them recovers the original group, including its topology and finite torsion. Finite quotients explain why this is possible. Their characters distinguish elements, and compactness allows compatible finite evaluation conditions to be solved simultaneously. The canonical evaluation map makes this a usable identification, rather than an unspecified isomorphism."
+      ],
+      "history": [
+        "Pontrjagin’s 1934 paper developed the duality theory of topological commutative groups. Character groups provide a common language for finite abelian duality and its topological extensions. The result here is the profinite abelian case of that theory, where finite quotient duality and compactness supply the bidual identification."
+      ],
+      "references": [
+        "pontrjagin-1934"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/Abelian/ProfiniteBidual.lean",
+          "name": "ProCGroups.Duality.profiniteBidualEquiv"
+        },
+        {
+          "path": "Nyll/ProCGroups/Abelian/ProfiniteBidual.lean",
+          "name": "ProCGroups.Duality.profiniteBidualEquiv_apply"
+        }
+      ]
+    },
+    {
+      "slug": "full-tate-module",
+      "title": "The full Tate module of an abelian group",
+      "kind": "definition",
+      "summary": "Compatible torsion points at every positive integer form a torsion-free inverse-limit object.",
+      "statement": [
+        "For an abelian group $M$, put $M[n]=\\{x\\in M:nx=0\\}$. The full Tate module is $$T(M)=\\{(x_n)_{n\\ge1}:x_n\\in M[n],\\;m x_{nm}=x_n\\text{ for }n,m\\ge1\\}.$$ The transition from level $nm$ to level $n$ is multiplication by $m$.",
+        "The definition applies to an arbitrary abelian group. The source also proves that if $n>0$ and $n x=0$ for $x\\in T(M)$, then $x=0$. Thus this compatible-family group is torsion-free."
+      ],
+      "discussion": [
+        "The compatibility conditions distinguish the full Tate module from an unrelated product of torsion groups. They require every torsion point to fit coherently into higher levels. This coherence also explains torsion-freeness: a family killed by n has each coordinate equal to n times a higher coordinate, hence zero. Using every positive integer keeps all prime-power directions in the same object."
+      ],
+      "history": [
+        "Tate’s 1967 paper on p-divisible groups is a primary source for the prime-power setting of Tate modules. The construction here uses compatible torsion at all positive integers. It expresses the same inverse-limit idea without choosing a single prime or requiring the original abelian group to come from an algebraic variety."
+      ],
+      "references": [
+        "tate-1967"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
+          "name": "ProCGroups.FullTateModule"
+        },
+        {
+          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
+          "name": "ProCGroups.FullTateModule.eq_zero_of_nsmul_eq_zero"
+        }
+      ]
+    },
+    {
+      "slug": "recognizing-profinite-integers",
+      "title": "Recognizing the profinite integers",
+      "kind": "theorem",
+      "summary": "A topological generator and finite quotients of every order characterize the additive group of profinite integers.",
+      "statement": [
+        "Let $G$ be a profinite group and let $g\\in G$ topologically generate it. Suppose that for every positive integer $n$ there is an open normal subgroup $U\\trianglelefteq G$ with $|G/U|=n$. Then there is a continuous group isomorphism $$G\\xrightarrow{\\sim}\\widehat{\\mathbb Z}$$ sending $g$ to the compatible residue class of the integer $1$.",
+        "The Lean target is the all-finite-groups integer inverse-limit carrier, written multiplicatively to match the source group API. Its distinguished element is additive integer one, not the additive identity of $\\widehat{\\mathbb Z}$."
+      ],
+      "discussion": [
+        "A topological generator alone only makes a group procyclic: finite cyclic groups and p-adic integers also qualify. Quotients of every positive order ensure that no prime-power direction is missing. Sending the chosen generator to one makes the cyclic quotient maps compatible and identifies the resulting inverse limit with the full profinite integers. The normalization is useful when comparing concrete constructions."
+      ],
+      "history": [
+        "Procyclic groups form a basic part of the structure theory presented in Ribes and Zalesskii’s 2010 monograph. The profinite integers occupy the universal position among them: their finite cyclic quotients range over all positive orders. The recognition theorem expresses that role using a chosen generator."
+      ],
+      "references": [
+        "ribes-zalesskii-2010"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/Completion/ProfiniteIntegerRecognition.lean",
+          "name": "ProCGroups.Completion.exists_profiniteInteger_equiv_of_generator_and_quotient_orders"
+        }
+      ]
+    }
+  ]
+}

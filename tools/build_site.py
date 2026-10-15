@@ -581,7 +581,8 @@ def build(root: Path, output: Path, repository: str, revision: str | None = None
     }
     output.mkdir(parents=True, exist_ok=True)
     if (root / "site").is_dir():
-        shutil.copytree(root / "site", output, dirs_exist_ok=True)
+        shutil.copytree(root / "site", output, dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns("guides"))
     # A deployment contains one immutable revision. Remove only a previously
     # generated data tree, after all source validation has succeeded. This also
     # prevents deleted modules and older revisions from accumulating on Pages.

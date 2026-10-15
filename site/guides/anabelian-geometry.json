@@ -1,0 +1,123 @@
+{
+  "slug": "anabelian-geometry",
+  "title": "Anabelian geometry",
+  "repository": "AnabelianGeometry",
+  "summary": "Actual geometric étale fundamental groups: slimness for hyperbolic curves and a full profinite comparison for a twice-punctured genus-zero curve.",
+  "overview": [
+    "The current public results build structural facts about geometric fundamental groups from finite étale covers. Their groups are automorphism groups of geometric fiber functors, rather than abstract groups assumed to model the geometry.",
+    "Hyperbolicity appears as a centralizer constraint: every open subgroup has trivial centralizer in the whole fundamental group. The twice-punctured genus-zero case gives a useful boundary case, where the group is instead procyclic."
+  ],
+  "scopeNote": "These selected theorems concern geometric curves over algebraically closed fields of characteristic zero. They do not prove the Grothendieck conjecture, arithmetic reconstruction of curves from Galois-augmented groups, or the corresponding statements in positive characteristic. The project remains under development.",
+  "references": [
+    {
+      "id": "sga1",
+      "type": "book",
+      "author": "Alexander Grothendieck et al.",
+      "title": "Revêtements étales et groupe fondamental (SGA 1)",
+      "year": 1971,
+      "publisher": "Springer, Lecture Notes in Mathematics 224",
+      "url": "https://arxiv.org/abs/math/0206203",
+      "note": "Link to the updated edition with remarks by Michel Raynaud."
+    },
+    {
+      "id": "mochizuki-local-pro-p",
+      "type": "journal-article",
+      "author": "Shinichi Mochizuki",
+      "title": "The local pro-p anabelian geometry of curves",
+      "year": 1999,
+      "journal": "Inventiones mathematicae",
+      "volume": "138",
+      "pages": "319–423",
+      "doi": "10.1007/s002220050381",
+      "url": "https://link.springer.com/article/10.1007/s002220050381",
+      "note": "Historical context for the arithmetic reconstruction problem; that reconstruction theorem is not claimed as formalized here."
+    }
+  ],
+  "entries": [
+    {
+      "slug": "proper-hyperbolic-slimness",
+      "title": "Slimness for proper hyperbolic curves",
+      "kind": "theorem",
+      "summary": "Every open subgroup of the geometric fundamental group of a proper curve of genus at least two has trivial centralizer.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$, let $C$ be a smooth proper curve model of a one-variable function field $F/K$, and assume $g(F/K)\\ge2$. For a geometric point $\\xi$, put $G=\\pi_1^{\\mathrm{\\acute et}}(C,\\xi)$. Then",
+        "$$\\forall\\,H\\le G\\text{ open},\\qquad C_G(H)=\\{1\\}.$$",
+        "This is the library's predicate $\\mathrm{IsSlim}(G)$. It quantifies over all open subgroups, including nonnormal ones."
+      ],
+      "discussion": [
+        "Slimness strengthens center-freeness by requiring the same rigidity around every open subgroup. These subgroups correspond to finite covers, so the theorem controls centralizing symmetries throughout the covering theory of a hyperbolic curve. Such control is useful in anabelian geometry, where fundamental-group maps are often considered only up to inner automorphism and centralizers measure possible ambiguities."
+      ],
+      "history": [
+        "SGA 1 made finite étale covers the foundation of the algebraic fundamental group. Grothendieck's anabelian perspective asks how much geometry such groups retain. Mochizuki's 1999 paper proves reconstruction results for hyperbolic curves over sub-p-adic fields; the geometric slimness theorem here is a structural result in that broader setting, rather than an arithmetic reconstruction theorem."
+      ],
+      "references": [
+        "sga1",
+        "mochizuki-local-pro-p"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/ProperCurveSlim.lean",
+          "name": "AnabelianGeometry.isSlim_fundamentalGroup_proper_hyperbolic"
+        },
+        {
+          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean",
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSlim"
+        }
+      ]
+    },
+    {
+      "slug": "open-hyperbolic-slimness",
+      "title": "Slimness for punctured hyperbolic curves",
+      "kind": "theorem",
+      "summary": "The same centralizer rigidity holds when the genus and number of punctures satisfy the hyperbolicity inequality.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$. Let $j:U\\hookrightarrow C$ be an open immersion into a smooth proper curve model of genus $g$, with nonempty finite boundary of size $r$. In the public statement, $U$ is integral, normal, locally Noetherian and quasi-compact, and $j$ is quasi-compact and quasi-separated. If",
+        "$$2g+r-2>0,$$",
+        "then for every geometric point $\\xi$ of $U$ and every open subgroup $H\\le\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)$,",
+        "$$C_{\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)}(H)=\\{1\\}.$$"
+      ],
+      "discussion": [
+        "Genus and punctures both contribute to hyperbolicity. The inequality explains why a projective line with at least three punctures can have the same kind of centralizer rigidity as a proper curve of genus at least two. Because the condition persists through finite covers, slimness describes the entire covering theory rather than only the center of one fundamental group."
+      ],
+      "history": [
+        "SGA 1 supplies the finite-étale covering framework. Hyperbolic curves, including punctured curves, are central to Grothendieck's anabelian program. Mochizuki's 1999 work studies their arithmetic fundamental groups and pro-p variants over sub-p-adic fields. The geometric theorem on this page concerns a different, foundational question: centralizers inside the full fundamental group over an algebraically closed field."
+      ],
+      "references": [
+        "sga1",
+        "mochizuki-local-pro-p"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/OpenCurveSlim.lean",
+          "name": "AnabelianGeometry.isSlim_fundamentalGroup_open_hyperbolic"
+        }
+      ]
+    },
+    {
+      "slug": "two-punctures",
+      "title": "A genus-zero curve with two punctures",
+      "kind": "theorem",
+      "summary": "The actual étale fundamental group is the full profinite completion of the integers, with a chosen topological generator supplied by the conclusion.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$. Let $C/K$ be integral, smooth, proper, and of relative dimension $1$, with a supplied two-affine-open cover for computing coherent cohomology. Suppose $\\dim_K H^1(C,\\mathcal O_C)=0$. For two distinct closed points $x,y$ and $U=C\\setminus\\{x,y\\}$, every geometric point $\\xi$ of $U$ admits",
+        "$$e:\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)\\xrightarrow{\\sim}\\widehat{\\mathbb Z},\\qquad \\gamma\\in\\pi_1^{\\mathrm{\\acute et}}(U,\\xi),$$",
+        "such that $\\gamma$ topologically generates the group and $e(\\gamma)=1$. The isomorphism is continuous in both directions."
+      ],
+      "discussion": [
+        "This is the boundary between the procyclic and hyperbolic genus-zero cases. With two punctures, the curve has the covering theory of the multiplicative group, and one topological generator accounts for its full fundamental group. A third puncture changes the situation: the fundamental group is no longer procyclic and falls within the hyperbolic slimness theorem."
+      ],
+      "history": [
+        "The classical power maps on the multiplicative group lead to the profinite-integer description of its fundamental group in characteristic zero. SGA 1 places this calculation in the general theory of finite étale covers, which allows it to be transported to a genus-zero curve without choosing coordinates in advance."
+      ],
+      "references": [
+        "sga1"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/TwoPuncturesFundamentalGroup.lean",
+          "name": "AnabelianGeometry.GeometricFundamentalGroup.exists_fundamentalGroup_profiniteInteger_equiv_of_finrank_H1_eq_zero_complement_pair"
+        }
+      ]
+    }
+  ]
+}

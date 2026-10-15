@@ -6,13 +6,13 @@
   "use strict";
 
   const publishedLibraries = [
-    { name: "Pro-C Groups", repository: "ProCGroups", description: "Profinite and pro-C groups, free pro-C groups, and completed group algebras." },
-    { name: "Class Field Theory", repository: "ClassFieldTheory", description: "Local and global class field theory, reciprocity, and ramification." },
-    { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", description: "Sawin’s totally real tower theorem and related results of Martinet and Shafarevich." },
-    { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", description: "Étale fundamental groups and étale cohomology." },
-    { name: "Jacobian Varieties", repository: "JacobianVarieties", description: "Algebraic curves, Picard groups, and Jacobian varieties." },
-    { name: "Research Papers", repository: "YamaguchiPapersFormalization", description: "Formalizations of research papers." },
-    { name: "Anabelian Geometry", repository: "AnabelianGeometry", description: "Work toward the formalization of Grothendieck’s anabelian conjecture." },
+    { name: "Pro-C Groups", repository: "ProCGroups", slug: "pro-c-groups", description: "Profinite and pro-C groups, free pro-C groups, and completed group algebras." },
+    { name: "Class Field Theory", repository: "ClassFieldTheory", slug: "class-field-theory", description: "Local and global class field theory, reciprocity, and ramification." },
+    { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", slug: "sawin-totally-real-towers", description: "Sawin’s totally real tower theorem and related results of Martinet and Shafarevich." },
+    { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", slug: "etale-fundamental-groups-and-cohomology", description: "Étale fundamental groups and étale cohomology." },
+    { name: "Jacobian Varieties", repository: "JacobianVarieties", slug: "jacobian-varieties", description: "Algebraic curves, Picard groups, and Jacobian varieties." },
+    { name: "Research Papers", repository: "YamaguchiPapersFormalization", slug: "research-papers", description: "Formalizations of research papers." },
+    { name: "Anabelian Geometry", repository: "AnabelianGeometry", slug: "anabelian-geometry", description: "Work toward the formalization of Grothendieck’s anabelian conjecture." },
   ];
 
   const base = new URL("../", document.currentScript.src);
@@ -179,10 +179,10 @@
   }
 
   function renderHome() {
-    document.title = "NYLL — Lean 4 libraries in development";
+    document.title = "NYLL — Lean 4 libraries for number theory and arithmetic geometry";
     const values = [...libraries.values()];
-    app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1>A home for Lean 4<br>libraries in development.</h1><p>NYLL is the public development home for a growing collection of Lean 4 libraries. Work in progress is published here. As parts are completed, they are extracted and published as standalone libraries.</p><nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="#development-libraries">Browse work in progress ↓</a></nav></section>
-      <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Published standalone libraries</h2><span class="count">${count(publishedLibraries.length, "repository", "repositories")}</span></div><p class="catalog-description">These repositories publish parts extracted from NYLL. See each library for its scope, documentation, and source.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="https://github.com/n-yamaguchi-0729/${escape(library.repository)}">${escape(library.name)} <span aria-hidden="true">↗</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
+    app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1>NYLL — Lean 4 libraries for<br>number theory and arithmetic geometry</h1><p>Lean 4 libraries for number theory and arithmetic geometry. Explore the published libraries, their mathematical results, and the code behind them. NYLL also hosts ongoing development.</p><nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="#development-libraries">Browse work in progress ↓</a></nav></section>
+      <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Published standalone libraries</h2><span class="count">${count(publishedLibraries.length, "repository", "repositories")}</span></div><p class="catalog-description">Explore each library’s scope and selected theorems and definitions, with mathematical explanations, Lean code, and references.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="${new URL(`libraries/${library.slug}/`, base).pathname}">${escape(library.name)} <span aria-hidden="true">→</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
       <section id="development-libraries" aria-labelledby="libraries-heading"><div class="catalog-intro"><h2 id="libraries-heading">Browse development libraries</h2><span class="count">${count(values.length, "library", "libraries")} · ${count(modules.size, "module")}</span></div><p class="catalog-description">Explore the full collection in NYLL, including work in progress.</p>
       ${values.map((library, index) => {
         const summary = plainExcerpt(doc(library.summary || library.doc).replace(/Formalization of Naganori Yamaguchi['’]s /g, "Formalization of "));

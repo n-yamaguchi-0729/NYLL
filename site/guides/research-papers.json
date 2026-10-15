@@ -1,0 +1,347 @@
+{
+  "slug": "research-papers",
+  "title": "Research papers",
+  "repository": "YamaguchiPapersFormalization",
+  "summary": "Selected public formalizations of ab-faithfulness, extension of solvable coverings, and rational-section complements over the integers.",
+  "overview": [
+    "The repository brings together three research projects. The entries below expose the geometric or group-theoretic inputs of each selected result, together with the conclusion actually present in the public Lean source.",
+    "Ab-faithfulness concerns conjugation detected by abelian quotients of open subgroups. The covering results concern actual étale fundamental groups of schemes. The rational-section results turn explicit arithmetic of determinants into local intersection statements and finite quotients."
+  ],
+  "scopeNote": "These are selected completed declarations, not a claim that all three papers are completely formalized. In particular, the general Hilbertian application still needs its embedding-problem input; several examples in the solvable-coverings paper remain outside scope; and the full normal-crossings/prosolvable-triviality equivalence in Theorem 2.6 of the branched-coverings paper is not claimed here. The large-boundary entry covers only the at-least-seven case of Corollary 2.7.",
+  "references": [
+    {
+      "id": "yamaguchi-ab-faithfulness",
+      "type": "preprint",
+      "author": "Naganori Yamaguchi",
+      "title": "Ab-faithfulness of absolute Galois groups in number theory",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2610.05634v1",
+      "note": "arXiv:2610.05634v1, submitted October 4, 2026."
+    },
+    {
+      "id": "yamaguchi-solvable-coverings",
+      "type": "preprint",
+      "author": "Naganori Yamaguchi",
+      "title": "Extension of solvable coverings across horizontal divisors over the integers",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2610.02948v1",
+      "note": "arXiv:2610.02948v1, submitted October 2, 2026."
+    },
+    {
+      "id": "shimizu-yamaguchi-branched",
+      "type": "preprint",
+      "author": "Ryoji Shimizu and Naganori Yamaguchi",
+      "title": "On branched coverings of the projective line over the integers",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2608.15057v1",
+      "note": "arXiv:2608.15057v1, submitted August 15, 2026."
+    },
+    {
+      "id": "sga1",
+      "type": "book",
+      "author": "Alexander Grothendieck et al.",
+      "title": "Revêtements étales et groupe fondamental (SGA 1)",
+      "year": 1971,
+      "publisher": "Springer, Lecture Notes in Mathematics 224",
+      "url": "https://arxiv.org/abs/math/0206203",
+      "note": "Link to the updated edition with remarks by Michel Raynaud."
+    }
+  ],
+  "entries": [
+    {
+      "slug": "ab-faithfulness",
+      "title": "Ab-faithfulness",
+      "kind": "definition",
+      "summary": "Finite relative quotients must be detectable by their action on abelianized open normal subgroups.",
+      "statement": [
+        "A profinite group $G$ is ab-faithful if, for every open subgroup $H\\le G$ and every open normal subgroup $N\\triangleleft H$, the conjugation action gives an injection",
+        "$$H/N\\hookrightarrow\\operatorname{Aut}(N^{\\mathrm{ab}}),\\qquad N^{\\mathrm{ab}}=N/\\overline{[N,N]}.$$",
+        "For a set of primes $\\Sigma$, the $\\Sigma$-version replaces $N^{\\mathrm{ab}}$ by $(N^\\Sigma)^{\\mathrm{ab}}$, where $N^\\Sigma$ is the maximal pro-$\\Sigma$ quotient."
+      ],
+      "discussion": [
+        "Abelianization usually discards commutators and much of a group's structure. Ab-faithfulness asks whether the lost information can still be detected through conjugation on the abelianizations of many open subgroups. For absolute Galois groups, this means examining finite extensions together with their relative Galois actions. The condition is therefore stronger than a statement about the single abelian quotient of the original group."
+      ],
+      "history": [
+        "Yamaguchi's 2026 paper places ab-faithfulness in the study of absolute Galois groups and finite-step solvable quotients. Definition 1.1 gives the prime-restricted form. The paper then develops valuation-theoretic and embedding-problem methods for establishing the property, and relates it to questions of center-freeness and slimness."
+      ],
+      "references": [
+        "yamaguchi-ab-faithfulness"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/AbFaithfulness.lean",
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsAbFaithful"
+        },
+        {
+          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/AbFaithfulness.lean",
+          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSigmaAbFaithful"
+        }
+      ]
+    },
+    {
+      "slug": "mixed-characteristic",
+      "title": "Mixed-characteristic discrete valuations",
+      "kind": "theorem",
+      "summary": "Conjugation on the mod-p abelianized absolute Galois group detects every element of a finite Galois group.",
+      "statement": [
+        "Let $K$ have characteristic $0$ and a discrete valuation with residue characteristic $p>0$. For every finite Galois extension $L/K$,",
+        "$$\\operatorname{Gal}(L/K)\\longrightarrow\\operatorname{Aut}(G_L^{\\mathrm{ab}}/p)$$",
+        "is injective. In addition, $G_K$ is $p$-ab-faithful. Neither completeness nor Henselianity of the given valuation is assumed in this declaration."
+      ],
+      "discussion": [
+        "A finite Galois automorphism is already detected on the mod-$p$ abelian quotient of the larger field's absolute Galois group. This is a strong economy of information: one does not need the full nonabelian group to distinguish the relative automorphisms. The absence of a completeness assumption extends the result beyond local fields to a broader class of discretely valued fields."
+      ],
+      "history": [
+        "This is Theorem 3.6 of Yamaguchi's 2026 ab-faithfulness paper. Its mixed-characteristic argument uses Kummer theory and a reduction to prime-degree extensions. Within the paper, this valuation-theoretic result supplies an important input for the higher-local-field theorem and subsequent applications to solvable quotients."
+      ],
+      "references": [
+        "yamaguchi-ab-faithfulness"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean",
+          "name": "Yamaguchi26AbfaithfulGalois.mixed_characteristic_properties_3_6"
+        }
+      ]
+    },
+    {
+      "slug": "higher-local-fields",
+      "title": "Higher local fields",
+      "kind": "theorem",
+      "summary": "Every positive-dimensional higher local field has an ab-faithful absolute Galois group.",
+      "statement": [
+        "An $n$-dimensional higher local field is defined recursively: dimension $0$ means a finite field, and dimension $n+1$ means a field with a complete discrete valuation whose residue field is $n$-dimensional. The theorem states",
+        "$$n>0,\\quad K\\text{ an }n\\text{-dimensional higher local field}\\quad\\Longrightarrow\\quad G_K\\text{ is ab-faithful}.$$"
+      ],
+      "discussion": [
+        "Higher local fields retain arithmetic information through successive residue fields. The theorem shows that ab-faithfulness survives this higher-dimensional setting, rather than being confined to ordinary local fields. The condition on every finite extension is especially useful when studying solvable quotients of absolute Galois groups, where control of conjugation must persist after passing to open subgroups."
+      ],
+      "history": [
+        "Theorem 4.2 of Yamaguchi's 2026 paper extends the ab-faithfulness discussion to positive-dimensional higher local fields. The argument follows their residue-field towers, combining mixed-characteristic detection with lifting from characteristic-zero residue fields. The paper then uses these examples in its study of finite-step solvable Galois groups."
+      ],
+      "references": [
+        "yamaguchi-ab-faithfulness"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/Yamaguchi26AbfaithfulGalois/Theorem4Dot2HigherLocalFields.lean",
+          "name": "Yamaguchi26AbfaithfulGalois.higher_local_field_abFaithful_4_2"
+        },
+        {
+          "path": "Nyll/Yamaguchi26AbfaithfulGalois/HigherLocalField/Basic.lean",
+          "name": "ValuationTheory.IsHigherLocalField"
+        }
+      ]
+    },
+    {
+      "slug": "integers-fundamental-group",
+      "title": "The étale fundamental group of Spec Z",
+      "kind": "theorem",
+      "summary": "Every geometric base point gives the trivial étale fundamental group of the integers.",
+      "statement": [
+        "For a separably closed field $\\Omega$ and any geometric point $\\xi:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\mathbb Z$,",
+        "$$\\pi_1^{\\mathrm{\\acute et}}(\\operatorname{Spec}\\mathbb Z,\\xi)=1.$$",
+        "The Lean conclusion is that the automorphism group of the geometric fiber functor is a subsingleton."
+      ],
+      "discussion": [
+        "The theorem says that the integers admit no nontrivial connected finite étale cover. It is an arithmetic rigidity statement: extending the rational numbers without introducing ramification at any finite prime is impossible. This provides a useful base case for geometric arguments over $\\operatorname{Spec}\\mathbb Z$, where a covering that extends across every possible boundary may be forced to become trivial."
+      ],
+      "history": [
+        "The classical argument uses Minkowski's discriminant theorem to exclude nontrivial number fields unramified at every finite prime. Yamaguchi records the result as Example 1.4(1). SGA 1 supplies the language that expresses the absence of such connected covers as triviality of an étale fundamental group."
+      ],
+      "references": [
+        "yamaguchi-solvable-coverings",
+        "sga1"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot4FundamentalGroupIntegers.lean",
+          "name": "Yamaguchi26SolvableCoverings.fundamental_group_integers_1_4"
+        }
+      ]
+    },
+    {
+      "slug": "boundary-condition",
+      "title": "The arithmetic boundary condition",
+      "kind": "definition",
+      "summary": "A local condition at characteristic two is combined with a geometric-integrality condition that survives every connected finite étale cover.",
+      "statement": [
+        "Let $X$ be connected and locally Noetherian, and let $D$ be a horizontal effective Cartier divisor: each prime component dominates $\\operatorname{Spec}\\mathbb Z$. Condition $(\\dagger)$ requires all three of the following.",
+        "The scheme $X$ is regular along $D$. Every prime component of $D$ contains a residue-characteristic-$2$ point where $D$ has normal crossings. After every connected finite étale cover $X'\\to X$, each reduced prime component of the pulled-back boundary has geometrically integral generic fiber over $\\mathbb Q$."
+      ],
+      "discussion": [
+        "The condition combines local geometry in characteristic two with a global restriction on boundary components. Requiring geometric integrality after every connected finite étale cover is what allows the argument to be repeated over open subgroups of the fundamental group. This persistence is crucial for passing from control of abelian coverings to control of all solvable coverings."
+      ],
+      "history": [
+        "Definition 2.2 of Yamaguchi's 2026 solvable-coverings paper introduces this condition after an abelian invariance result. The paper explains why geometric integrality of the original boundary alone is insufficient: it must remain available after finite étale base change to support the stronger prosolvable conclusion."
+      ],
+      "references": [
+        "yamaguchi-solvable-coverings"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot2BoundaryCondition.lean",
+          "name": "Yamaguchi26SolvableCoverings.BoundaryCondition"
+        },
+        {
+          "path": "Nyll/Yamaguchi26SolvableCoverings/Geometry/Boundary.lean",
+          "name": "Yamaguchi26SolvableCoverings.IsHorizontal"
+        }
+      ]
+    },
+    {
+      "slug": "perfect-boundary-kernel",
+      "title": "A perfect boundary kernel",
+      "kind": "theorem",
+      "summary": "Under the arithmetic boundary condition, removing the divisor does not change the maximal prosolvable fundamental group.",
+      "statement": [
+        "Let $X$ be connected and locally Noetherian, and let $D$ be a horizontal effective Cartier divisor. Assume condition $(\\dagger)$: $X$ is regular along $D$; each prime component contains a characteristic-$2$ normal-crossings point of $D$; and each reduced boundary component has geometrically integral generic fiber over $\\mathbb Q$ after every connected finite étale cover of $X$. Put $U=X\\setminus D$. The theorem proves that $U$ is connected. For a geometric point $\\xi$ of $U$, let",
+        "$$f:\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)\\longrightarrow\\pi_1^{\\mathrm{\\acute et}}(X,\\xi),\\qquad K=\\ker(f).$$",
+        "Then $K=\\overline{[K,K]}$, with closure taken in $K$, and the inclusion-induced map gives",
+        "$$\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)^{\\mathrm{solv}}\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(X,\\xi)^{\\mathrm{solv}}.$$"
+      ],
+      "discussion": [
+        "Removing a divisor can create new coverings through ramification along the missing boundary. Here the new kernel is topologically perfect, so finite solvable quotients cannot detect it. Consequently, solvable covering theory remains unchanged even though the full fundamental groups need not be isomorphic. The theorem isolates precisely the kind of nonabelian information that may survive in the boundary kernel."
+      ],
+      "history": [
+        "This is Theorem 2.5 of Yamaguchi's 2026 paper on extending solvable coverings. It advances from abelian invariance to prosolvable invariance by applying the abelian argument after finite étale covers. The formulation through a perfect kernel also prepares the representation-extension result that follows."
+      ],
+      "references": [
+        "yamaguchi-solvable-coverings"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot5PerfectKernel.lean",
+          "name": "Yamaguchi26SolvableCoverings.perfect_kernel_2_5"
+        }
+      ]
+    },
+    {
+      "slug": "residual-extension",
+      "title": "Extending a representation from its reduction",
+      "kind": "theorem",
+      "summary": "A continuous representation extends across the boundary exactly when its residue representation does.",
+      "statement": [
+        "Let $X$ be connected and locally Noetherian, and let $D$ be a horizontal effective Cartier divisor. Assume $X$ is regular along $D$, each prime component contains a characteristic-$2$ normal-crossings point of $D$, and all reduced boundary components have geometrically integral generic fibers over $\\mathbb Q$ after every connected finite étale cover of $X$. Put $U=X\\setminus D$. Let $A$ be a complete Noetherian local ring with finite residue field $k_A$ of characteristic $p$, carrying its maximal-ideal-adic topology. For $n\\ge1$ and a continuous representation $\\rho:\\pi_1^{\\mathrm{\\acute et}}(U)\\to\\mathrm{GL}_n(A)$,",
+        "$$\\rho\\text{ factors continuously through }\\pi_1^{\\mathrm{\\acute et}}(X)\\quad\\Longleftrightarrow\\quad\\bar\\rho\\text{ does}.$$",
+        "Here $\\bar\\rho$ is reduction modulo the maximal ideal, with the discrete topology on $k_A$. When the factorization of $\\rho$ exists, it is unique."
+      ],
+      "discussion": [
+        "The theorem reduces an extension problem over a complete local ring to one over its finite residue field. This can make the obstruction much easier to test. The reason is structural: the boundary kernel is perfect, while the congruence filtration detects it through successive abelian pieces. Once the residual obstruction vanishes, no hidden obstruction remains at higher adic precision."
+      ],
+      "history": [
+        "Corollary 2.6 of Yamaguchi's 2026 solvable-coverings paper follows the perfect-kernel theorem. It applies that geometric result to continuous linear representations, using the congruence filtration of a complete local coefficient ring. The conclusion connects extension of arithmetic coverings with reduction modulo the maximal ideal."
+      ],
+      "references": [
+        "yamaguchi-solvable-coverings"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot6ResidualExtension.lean",
+          "name": "Yamaguchi26SolvableCoverings.residual_extension_2_6"
+        }
+      ]
+    },
+    {
+      "slug": "section-normal-crossings",
+      "title": "Normal crossings from rational sections",
+      "kind": "theorem",
+      "summary": "Normal crossings can be tested by counting colliding sections and measuring the valuation of their determinants.",
+      "statement": [
+        "Let $A\\subset\\mathbb P^1(\\mathbb Q)$ be finite, and let $D_A$ be the divisor formed by the integral sections corresponding to its points. For primitive coordinates $a=[u_a:v_a]$ and $b=[u_b:v_b]$, put $\\Delta(a,b)=u_av_b-u_bv_a$, up to the harmless sign of the chosen primitive representatives.",
+        "For a prime $p$, the divisor $(D_A)_{\\mathbb Z_p}$ has normal crossings if and only if every closed point of $\\mathbb P^1_{\\mathbb F_p}$ lies on at most two labelled sections and every distinct pair meeting there satisfies",
+        "$$v_p\\!\\left(\\Delta(a,b)\\right)=1.$$"
+      ],
+      "discussion": [
+        "The criterion translates a local geometric condition into two explicit arithmetic tests. One counts how many distinct sections collide; the other measures the order of contact of a colliding pair. This makes normal crossings accessible through primitive coordinates and valuations, while keeping track of sections that become indistinguishable after reduction modulo a prime."
+      ],
+      "history": [
+        "Lemma 2.3 of Shimizu and Yamaguchi's 2026 paper develops this criterion for rational sections of the projective line over the integers. It supplies the local arithmetic input for the later analysis of dyadic collisions and finite quotients of the complement's fundamental group."
+      ],
+      "references": [
+        "shimizu-yamaguchi-branched"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3NormalCrossings.lean",
+          "name": "ShimizuYamaguchi26BranchedCoverings.rationalSectionPadicDivisor_isNormalCrossings_iff_specialFiber_conditions"
+        }
+      ]
+    },
+    {
+      "slug": "intersection-length",
+      "title": "Intersection multiplicity as a determinant valuation",
+      "kind": "theorem",
+      "summary": "The local intersection length of two rational sections is exactly the p-adic valuation of their determinant.",
+      "statement": [
+        "Let $a\\ne b$ be rational points of $\\mathbb P^1_{\\mathbb Q}$, with associated sections $D_a,D_b\\subset\\mathbb P^1_{\\mathbb Z}$. Let $y$ be a point of the fiber over a prime $p$ lying on $D_b$, and let $x$ be its image in $\\mathbb P^1_{\\mathbb Z}$. Then",
+        "$$\\operatorname{length}_{\\mathcal O_x}\\!\\left(\\mathcal O_x/(I_a+I_b)_x\\right)=v_p\\!\\left(\\Delta(a,b)\\right).$$"
+      ],
+      "discussion": [
+        "The determinant records not only whether two sections meet modulo $p$, but how strongly they meet. Its valuation equals the local intersection length, turning an arithmetic divisibility calculation into a geometric multiplicity. This explains why valuation one gives the transverse case in the normal-crossings criterion, whereas larger valuations detect higher-order contact between sections."
+      ],
+      "history": [
+        "This is the intersection-multiplicity component of Lemma 2.3 in Shimizu–Yamaguchi. The paper uses the local-length interpretation of the determinant valuation to connect explicit rational coordinates with the geometry of arithmetic surfaces."
+      ],
+      "references": [
+        "shimizu-yamaguchi-branched"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3SpecialFiberMultiplicity.lean",
+          "name": "ShimizuYamaguchi26BranchedCoverings.rationalSectionIntersection_length_at_specialFiber_point"
+        }
+      ]
+    },
+    {
+      "slug": "dyadic-quadratic-quotient",
+      "title": "A quadratic quotient from failure at 2",
+      "kind": "theorem",
+      "summary": "Failure of normal crossings over the 2-adic integers produces a nontrivial quotient of the actual arithmetic fundamental group.",
+      "statement": [
+        "For finite $A\\subset\\mathbb P^1(\\mathbb Q)$, put $U_A=\\mathbb P^1_{\\mathbb Z}\\setminus D_A$. If $(D_A)_{\\mathbb Z_2}$ is not a normal-crossings divisor, then for every geometric point $\\xi$ of $U_A$ there is a continuous surjection",
+        "$$\\pi_1^{\\mathrm{\\acute et}}(U_A,\\xi)\\twoheadrightarrow\\mathbb Z/2\\mathbb Z.$$"
+      ],
+      "discussion": [
+        "A bad crossing in the dyadic fiber has a global consequence: the integral complement admits a connected double cover. The resulting quotient shows that its fundamental group, and already its maximal prosolvable quotient, is nontrivial. Thus the local configuration at one prime can obstruct a global triviality statement about arithmetic covering spaces."
+      ],
+      "history": [
+        "Proposition 2.5 of Shimizu–Yamaguchi constructs this quadratic obstruction. It supplies one direction of the paper's relation between normal crossings at two and solvable quotients. The opposite direction requires further arguments; the quadratic construction alone does not establish the full equivalence."
+      ],
+      "references": [
+        "shimizu-yamaguchi-branched"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/PadicNormalCrossingsQuotient.lean",
+          "name": "ShimizuYamaguchi26BranchedCoverings.exists_surjective_cyclicTwo_of_not_normalCrossings_at_two"
+        }
+      ]
+    },
+    {
+      "slug": "seven-sections",
+      "title": "At least seven sections force a quotient",
+      "kind": "theorem",
+      "summary": "The complement of seven or more distinct rational sections always has a cyclic quotient of order two.",
+      "statement": [
+        "Let $A\\subset\\mathbb P^1(\\mathbb Q)$ be finite with $|A|\\ge7$, and form the open complement $U_A\\subset\\mathbb P^1_{\\mathbb Z}$ of the corresponding integral sections. For every geometric point $\\xi$ of $U_A$,",
+        "$$\\exists\\,\\phi:\\pi_1^{\\mathrm{\\acute et}}(U_A,\\xi)\\twoheadrightarrow\\mathbb Z/2\\mathbb Z\\quad\\text{continuous}.$$"
+      ],
+      "discussion": [
+        "The bound seven comes from the scarcity of reduction points over $\\mathbb F_2$. Too many sections force a collision severe enough to yield a quadratic cover. The conclusion gives a uniform obstruction depending only on the number of boundary components, without requiring a separate analysis of every configuration of rational points."
+      ],
+      "history": [
+        "This is the large-boundary case of Corollary 2.7 in Shimizu–Yamaguchi. The paper observes that normal crossings at two permits at most two sections through each of the three rational points of the dyadic projective line, giving the threshold of six."
+      ],
+      "references": [
+        "shimizu-yamaguchi-branched"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot7LargeBoundaryQuotient.lean",
+          "name": "ShimizuYamaguchi26BranchedCoverings.large_boundary_quotient_2_7"
+        }
+      ]
+    }
+  ]
+}

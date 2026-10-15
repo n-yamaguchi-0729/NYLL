@@ -1,0 +1,363 @@
+{
+  "slug": "sawin-totally-real-towers",
+  "title": "Sawin’s totally real towers",
+  "repository": "SawinTotallyRealTowers",
+  "summary": "From restricted ramification and pro-2 presentations to bounded root discriminants and one infinite set of completely split primes.",
+  "overview": [
+    "The main result constructs totally real number fields of unbounded degree with a common root-discriminant bound and one fixed infinite set of completely split rational primes congruent to one modulo four. These entries follow the arithmetic extension, generator and relation estimates, Frobenius cutting, and discriminant bound that support that result.",
+    "The library’s name refers to the arithmetic input associated with Sawin’s unit-distance work. The precise infinite-prime tower formulation also appears as Proposition 2.3 in the joint paper Remarks on the disproof of the unit distance conjecture. The references distinguish that formulation from the related lemmas in Sawin’s single-author paper."
+  ],
+  "scopeNote": "This guide covers ten concrete definitions and results from the public repository, not a formalization of the entire unit-distance disproof. The main endpoint is an arithmetic existence theorem. Its proof supplies the bound 255255 without claiming optimality. The separately listed Shafarevich theorem assumes an odd prime and must not be substituted for the pro-2 arithmetic used in the tower construction.",
+  "references": [
+    {
+      "id": "sawin-2026",
+      "type": "preprint",
+      "author": "Will Sawin",
+      "title": "An explicit lower bound for the unit distance problem",
+      "year": 2026,
+      "doi": "10.48550/arXiv.2605.20579",
+      "url": "https://arxiv.org/abs/2605.20579",
+      "note": "The arithmetic tower ingredients are related to Lemmas 11–12; the library does not formalize the whole unit-distance argument."
+    },
+    {
+      "id": "remarks-2026",
+      "type": "preprint",
+      "author": "Noga Alon, Thomas F. Bloom, W. T. Gowers, Daniel Litt, Will Sawin, Arul Shankar, Jacob Tsimerman, Victor Wang, and Melanie Matchett Wood",
+      "title": "Remarks on the disproof of the unit distance conjecture",
+      "year": 2026,
+      "doi": "10.48550/arXiv.2605.20695",
+      "url": "https://arxiv.org/abs/2605.20695",
+      "note": "Proposition 2.3 states the bounded-root-discriminant totally real tower with infinitely many completely split primes congruent to one modulo four."
+    },
+    {
+      "id": "hajir-maire-ramakrishna-2019",
+      "type": "preprint",
+      "author": "Farshid Hajir, Christian Maire, and Ravi Ramakrishna",
+      "title": "Cutting towers of number fields",
+      "year": 2019,
+      "doi": "10.48550/arXiv.1901.04354",
+      "url": "https://arxiv.org/abs/1901.04354",
+      "note": "Cited as the arXiv preprint; develops cutting methods with refined Golod–Shafarevich estimates."
+    },
+    {
+      "id": "golod-shafarevich-1964",
+      "type": "article",
+      "author": "E. S. Golod and I. R. Shafarevich",
+      "title": "On the class field tower",
+      "year": 1964,
+      "journal": "Izvestiya Akademii Nauk SSSR. Seriya Matematicheskaya",
+      "volume": "28 (2)",
+      "pages": "261–272",
+      "url": "https://www.mathnet.ru/eng/im2955",
+      "note": "Original article in Russian."
+    },
+    {
+      "id": "shafarevich-1963",
+      "type": "article",
+      "author": "Igor R. Šafarevič",
+      "title": "Extensions à points de ramification donnés (en russe)",
+      "year": 1963,
+      "journal": "Publications Mathématiques de l’IHÉS",
+      "volume": "18",
+      "pages": "71–92",
+      "publisher": "Institut des Hautes Études Scientifiques",
+      "doi": "10.1007/BF02684785",
+      "url": "https://www.numdam.org/articles/10.1007/BF02684785/"
+    },
+    {
+      "id": "martinet-1978",
+      "type": "article",
+      "author": "Jacques Martinet",
+      "title": "Tours de corps de classes et estimations de discriminants",
+      "year": 1978,
+      "journal": "Inventiones mathematicae",
+      "volume": "44",
+      "pages": "65–73",
+      "doi": "10.1007/BF01389902",
+      "url": "https://link.springer.com/article/10.1007/BF01389902"
+    },
+    {
+      "id": "ribes-zalesskii-2010",
+      "type": "book",
+      "author": "Luis Ribes and Pavel Zalesskii",
+      "title": "Profinite Groups",
+      "year": 2010,
+      "publisher": "Springer-Verlag Berlin Heidelberg",
+      "doi": "10.1007/978-3-642-01642-4",
+      "url": "https://link.springer.com/book/10.1007/978-3-642-01642-4",
+      "note": "Second edition; background for Frattini quotients, generator rank, and pro-p presentations."
+    }
+  ],
+  "entries": [
+    {
+      "slug": "maximal-real-pro-p-extension",
+      "title": "The maximal real pro-p extension with restricted ramification",
+      "kind": "definition",
+      "summary": "The ambient arithmetic extension is built from its admissible finite Galois layers.",
+      "statement": [
+        "Fix a prime $p$ and a set $T$ of finite places of $\\mathbb Q$. A finite Galois intermediate field $E\\subseteq\\overline{\\mathbb Q}$ is admissible when $\\operatorname{Gal}(E/\\mathbb Q)$ is a $p$-group, $E/\\mathbb Q$ is unramified at finite places outside $T$, and it is unramified at infinite places.",
+        "The extension is defined inside a fixed algebraic closure by $$M_{p,T}=\\bigvee_{\\text{admissible }E}E.$$ Over $\\mathbb Q$, the infinite-place condition says that the finite layer is totally real. The Lean definition allows a natural-number parameter; the prime case is the intended pro-$p$ application."
+      ],
+      "discussion": [
+        "The field collects all finite extensions satisfying the same ramification and reality constraints. Composita preserve those conditions, so finite portions of the infinite extension remain accessible through finite Galois theory. At p equal to two, the infinite-place condition is especially important: restricting finite ramification alone does not force total reality. Whether this maximal extension is infinite is a separate arithmetic question."
+      ],
+      "history": [
+        "Shafarevich’s 1963 work studies extensions with prescribed ramification. Golod and Shafarevich’s 1964 paper then showed that class field towers can be infinite. Maximal pro-p extensions with restricted ramification are the natural setting in which those arithmetic constraints can be combined with generator–relation criteria for infinitude."
+      ],
+      "references": [
+        "shafarevich-1963",
+        "golod-shafarevich-1964"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/FiniteRealPExtension.lean",
+          "name": "ClassFieldTower.Sawin.IsAdmissibleFiniteLayer"
+        },
+        {
+          "path": "Nyll/SawinTotallyRealTowers/MaximalRealProPOutside.lean",
+          "name": "ClassFieldTower.Sawin.maximalRealProPOutside"
+        }
+      ]
+    },
+    {
+      "slug": "finite-layer-characterization",
+      "title": "Which finite fields lie in the maximal extension?",
+      "kind": "theorem",
+      "summary": "Admissibility is equivalent to containment in the constructed maximal extension.",
+      "statement": [
+        "Write $M_{p,T}$ for the compositum in $\\overline{\\mathbb Q}$ of the finite Galois extensions that are totally real, unramified outside $T$, and have $p$-group Galois group. For prime $p$, this is the maximal totally real pro-$p$ extension unramified outside $T$.",
+        "Let $T$ be a set of finite places of $\\mathbb Q$, and let $E$ be a finite Galois intermediate field of $\\overline{\\mathbb Q}/\\mathbb Q$. Then $$E\\subseteq M_{p,T}\\quad\\Longleftrightarrow\\quad E\\text{ is an admissible finite layer for }(p,T).$$",
+        "Admissibility means a $p$-group Galois group, no finite ramification outside $T$, and no infinite-place ramification. The declaration is stated for a natural-number parameter $p$; its later uses take $p$ prime. The finite Galois hypothesis on $E$ is part of the statement."
+      ],
+      "discussion": [
+        "The equivalence lets one recover ramification and reality properties from containment in the infinite field. A finite subfield of the directed compositum is contained in a single admissible layer, and the required properties descend to it. This is useful when selecting fields of large degree: their containment supplies the arithmetic conditions needed for discriminant and splitting arguments."
+      ],
+      "history": [
+        "Profinite Galois theory organizes infinite Galois extensions through their finite layers and finite quotient groups. Ribes and Zalesskii give the group-theoretic framework, while Shafarevich’s prescribed-ramification work supplies the arithmetic setting. Here the finite-layer characterization connects those viewpoints without assuming an independent description of the infinite extension."
+      ],
+      "references": [
+        "ribes-zalesskii-2010",
+        "shafarevich-1963"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/MaximalRealProPOutside.lean",
+          "name": "ClassFieldTower.Sawin.isAdmissibleFiniteLayer_iff_le_maximalRealProPOutside"
+        }
+      ]
+    },
+    {
+      "slug": "initial-group-five-generators",
+      "title": "Five generators for the initial arithmetic group",
+      "kind": "theorem",
+      "summary": "The maximal real pro-2 group for the six chosen ramified primes has generator rank exactly five.",
+      "statement": [
+        "Let $$S=\\{3,5,7,11,13,17\\},\\qquad M=M_{2,S},\\qquad G=\\operatorname{Gal}(M/\\mathbb Q),$$ where $S$ is viewed as the corresponding finite places. The theorem proves both that $G$ can be topologically generated by at most five elements and that its topological generator rank is exactly five. Here $M_{2,S}$ is the maximal totally real pro-$2$ extension of $\\mathbb Q$ unramified at finite primes outside $S$.",
+        "The generator count is for the actual Galois group of the maximal real extension unramified outside $S$. It is not an assumed parameter of an abstract pro-$2$ group. In particular, ramification at $2$ is excluded by this support."
+      ],
+      "discussion": [
+        "An exact generator count is stronger than a list of generators: it shows that none can be removed from a minimal generating family. Here the Frattini quotient has order thirty-two, so its dimension over the field with two elements is five. That rank provides the generator term in the Golod–Shafarevich inequality used to construct the tower."
+      ],
+      "history": [
+        "Frattini quotients are a standard tool for determining generators of pro-p groups, as developed in Ribes and Zalesskii. The six-prime support used here also appears in Proposition 2.3 of Remarks. Its arithmetic is suited to obtaining a favorable balance between generators and relations."
+      ],
+      "references": [
+        "remarks-2026",
+        "ribes-zalesskii-2010"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/RealProTwoGeneratorRank.lean",
+          "name": "ClassFieldTower.Sawin.maximalRealProTwo_generatorRank"
+        }
+      ]
+    },
+    {
+      "slug": "initial-minimal-presentation",
+      "title": "A five-generator presentation with at most six relations",
+      "kind": "theorem",
+      "summary": "The initial arithmetic group admits an actual finite minimal pro-2 presentation.",
+      "statement": [
+        "Here $M_{2,S}$ denotes the maximal totally real pro-$2$ extension of $\\mathbb Q$ unramified at finite primes outside $S$.",
+        "For $G=\\operatorname{Gal}(M_{2,S}/\\mathbb Q)$ with $S=\\{3,5,7,11,13,17\\}$, there exist a free pro-$2$ source, a natural number $r\\le6$, and an actual presentation $$G\\cong F_5/\\overline{\\langle\\!\\langle\\rho_1,\\ldots,\\rho_r\\rangle\\!\\rangle}$$ that is minimal on its five generators.",
+        "The formal object includes the continuous surjection and the displayed relators presenting its kernel. Minimality gives Zassenhaus depth at least two for these relators. The theorem says at most six relations, not exactly six."
+      ],
+      "discussion": [
+        "The small relation count leaves room to impose further splitting conditions. At $t=5/12$, the quadratic bound is $$1-5t+6t^2=-\\frac1{24}.$$ Minimality puts the existing relators at depth at least two, and sufficiently deep additional relators contribute less than this remaining margin. Their depths must be measured in the same free source as the presentation."
+      ],
+      "history": [
+        "The generator–relation method comes from Golod and Shafarevich’s class field tower argument. Later cutting methods use a strict negative margin to impose new arithmetic conditions. The real pro-2 construction with this six-prime support appears in Remarks; the presentation supplies the numerical starting point for that strategy."
+      ],
+      "references": [
+        "golod-shafarevich-1964",
+        "remarks-2026"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/RealProTwoInitialPresentation.lean",
+          "name": "ClassFieldTower.Sawin.exists_sawinInitialProTwo_minimalPresentation"
+        }
+      ]
+    },
+    {
+      "slug": "deep-frobenius-sequence",
+      "title": "Primes with deep Frobenius lifts",
+      "kind": "theorem",
+      "summary": "Arithmetic Frobenius elements can be lifted to successively deeper levels of one free pro-2 presentation.",
+      "statement": [
+        "Put $S=\\{3,5,7,11,13,17\\}$ and $G=\\operatorname{Gal}(M_{2,S}/\\mathbb Q)$, where $M_{2,S}$ is the maximal totally real pro-$2$ extension of $\\mathbb Q$ unramified at finite primes outside $S$.",
+        "There exist a five-generator minimal presentation $P:F_5\\twoheadrightarrow G$ with at most six relators, primes $q_n$ and elements $f_n\\in F_5$ such that $$q_n>n,\\quad q_n\\notin S,\\quad q_n\\equiv1\\pmod4,\\quad P(f_n)=\\operatorname{Frob}_{q_n},\\quad f_n\\in D_{n+5}(F_5).$$ Here $D_k$ is the pro-$2$ Zassenhaus filtration.",
+        "The Frobenius elements are the arithmetic elements supplied by the source’s decomposition-group construction. The theorem chooses a presentation together with the sequence; the depth condition is imposed on lifts in that very free source."
+      ],
+      "discussion": [
+        "The sequence joins arithmetic prime selection to a group-theoretic estimate. Chebotarev conditions select genuine primes, while increasing Zassenhaus depths make the cost of killing their Frobenius lifts summable. The congruence condition is retained throughout. The bound q_n greater than n guarantees an infinite set of primes; strict increase or injectivity of the chosen sequence is unnecessary."
+      ],
+      "history": [
+        "Hajir, Maire, and Ramakrishna’s Cutting towers of number fields develops the refined Golod–Shafarevich method for imposing splitting conditions. Proposition 2.3 of Remarks adapts the Chebotarev selection by adjoining fourth roots of unity, obtaining primes congruent to one modulo four. The deep lifts connect that selection with the relation budget."
+      ],
+      "references": [
+        "hajir-maire-ramakrishna-2019",
+        "remarks-2026"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/RealProTwoFrobeniusSequence.lean",
+          "name": "ClassFieldTower.Sawin.exists_sawinDeepFrobenius_sequence"
+        }
+      ]
+    },
+    {
+      "slug": "infinite-frobenius-quotient",
+      "title": "Killing infinitely many Frobenius elements without making the group finite",
+      "kind": "theorem",
+      "summary": "There is an infinite quotient in which the selected primes have trivial decomposition groups.",
+      "statement": [
+        "Let $G=\\operatorname{Gal}(M_{2,S}/\\mathbb Q)$ with $S=\\{3,5,7,11,13,17\\}$, where $M_{2,S}$ is the maximal totally real pro-$2$ extension of $\\mathbb Q$ unramified at finite primes outside $S$. There is a sequence of primes $q_n>n$, outside $S$ and congruent to one modulo four, with infinite range, for which $$G/\\overline{\\langle\\!\\langle\\operatorname{Frob}_{q_n}:n\\ge0\\rangle\\!\\rangle}$$ is infinite.",
+        "The accompanying decomposition-group theorem states that the image of the entire decomposition group at each selected prime is trivial in this quotient. This is the group-theoretic condition that will force complete splitting in the corresponding fixed field."
+      ],
+      "discussion": [
+        "A presentation with five generators and at most six relators of depth at least two gives a negative margin of $1/24$ at $t=5/12$. The added relations satisfy $$\\sum_{n\\ge0}t^{n+5}=\\frac{t^5}{1-t}<\\frac1{24}.$$ A limiting argument handles all of them together. Killing Frobenius at unramified primes forces complete splitting in the fixed field, while the infinite quotient still provides finite layers of unbounded degree."
+      ],
+      "history": [
+        "Hajir, Maire, and Ramakrishna’s 2019 preprint constructs infinite extensions with bounded ramification using refined Golod–Shafarevich estimates. It also obtains infinitely many completely split primes. Frobenius cutting is the key mechanism: additional splitting relations are chosen deep enough that the resulting tower remains infinite."
+      ],
+      "references": [
+        "hajir-maire-ramakrishna-2019",
+        "golod-shafarevich-1964"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/RealProTwoFrobeniusSequence.lean",
+          "name": "ClassFieldTower.Sawin.exists_sawinInfinite_frobenius_quotient"
+        },
+        {
+          "path": "Nyll/SawinTotallyRealTowers/RealProTwoFrobeniusSequence.lean",
+          "name": "ClassFieldTower.Sawin.exists_sawinInfinite_decomposition_split_quotient"
+        }
+      ]
+    },
+    {
+      "slug": "discriminant-bound",
+      "title": "A uniform root-discriminant bound of 255255",
+      "kind": "theorem",
+      "summary": "Restricted tame ramification gives an exponential bound for the actual number-field discriminant.",
+      "statement": [
+        "Let $L/\\mathbb Q$ be a finite Galois number field whose Galois group is a $2$-group. Assume it is unramified at finite places outside $S=\\{3,5,7,11,13,17\\}$. Then $$|\\operatorname{disc}(L)|\\le255255^{[L:\\mathbb Q]},\\qquad255255=3\\cdot5\\cdot7\\cdot11\\cdot13\\cdot17.$$",
+        "Consequently its root discriminant satisfies $|\\operatorname{disc}(L)|^{1/[L:\\mathbb Q]}\\le255255$. Total reality is not an assumption of this discriminant theorem; it is supplied separately when the theorem is applied to the chosen tower."
+      ],
+      "discussion": [
+        "All allowed ramified primes are odd, whereas the Galois group has 2-power order, so ramification is tame. Bounding each allowed prime’s discriminant exponent by the degree gives the stated product bound. Its value is uniformity: one constant works across layers of arbitrarily large degree. The estimate need not be sharp for an individual field to serve that purpose."
+      ],
+      "history": [
+        "Martinet’s 1978 paper connects class field towers with discriminant estimates. Hajir, Maire, and Ramakrishna later obtained new root-discriminant bounds through their cutting method. The constant here comes from the chosen six-prime support and is used as a uniform bound, rather than as a claim to an optimal numerical record."
+      ],
+      "references": [
+        "martinet-1978",
+        "hajir-maire-ramakrishna-2019"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/SawinDiscriminantBound.lean",
+          "name": "ClassFieldTower.Sawin.discr_natAbs_le_of_sawin_ramification"
+        }
+      ]
+    },
+    {
+      "slug": "sawin-totally-real-tower",
+      "title": "One infinite prime set splitting in fields of unbounded degree",
+      "kind": "theorem",
+      "summary": "A single infinite set of primes splits completely in totally real fields with uniformly bounded root discriminant.",
+      "statement": [
+        "There are a real constant $B$ and an infinite set $Q$ of primes, all congruent to $1$ modulo $4$, such that for every $N$ there is a totally real number field $F$ with $$[F:\\mathbb Q]\\ge N,\\qquad |\\operatorname{disc}(F)|^{1/[F:\\mathbb Q]}\\le B,$$ and every $q\\in Q$ splits completely in $F$.",
+        "The implementation chooses $B=255255$. Its explicit splitting conclusion supplies $[F:\\mathbb Q]$ distinct maximal ideals of $\\mathcal O_F$ containing $q$. For a rational prime in a number field, this maximal number of distinct primes above $q$ expresses complete splitting."
+      ],
+      "discussion": [
+        "The same infinite prime set works before any degree threshold is chosen. This combines two kinds of control: the degrees grow without bound, while root discriminants remain bounded and the selected primes keep splitting completely. Such fields provide arithmetic input for constructions using many conjugates and split primes. The theorem itself is an arithmetic result, not the full unit-distance argument."
+      ],
+      "history": [
+        "This infinite-prime formulation is Proposition 2.3 of the joint paper Remarks on the disproof of the unit distance conjecture. It uses the Frobenius-cutting method of Hajir, Maire, and Ramakrishna. Sawin’s single-author paper gives related arithmetic ingredients for the unit-distance application; its formulation and the joint paper’s proposition should be distinguished."
+      ],
+      "references": [
+        "remarks-2026",
+        "sawin-2026"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/SawinTotallyRealTower.lean",
+          "name": "ClassFieldTower.Sawin.sawin_totally_real_tower"
+        }
+      ]
+    },
+    {
+      "slug": "martinet-corollary",
+      "title": "A Martinet-type bounded-discriminant corollary",
+      "kind": "theorem",
+      "summary": "Forgetting the splitting conditions yields totally real number fields of unbounded degree and bounded root discriminant.",
+      "statement": [
+        "There exists a real number $C>0$ such that for every natural number $N$ there are an integer $d\\ge N$ and a totally real number field $K$ with $$[K:\\mathbb Q]=d,\\qquad|\\operatorname{disc}(K)|\\le C^d.$$",
+        "Thus one constant controls the discriminants exponentially in the degree, while the degrees are unbounded. Equivalently, the root discriminants of the chosen fields are uniformly bounded. The field may depend on $N$, but $C$ does not."
+      ],
+      "discussion": [
+        "The result separates large degree from uncontrolled discriminant growth. One constant bounds root discriminants throughout the chosen family, even though the field varies with the degree threshold. It follows by forgetting the splitting conditions in the stronger totally real tower theorem. The conclusion supplies arbitrarily large degrees, not a field of every prescribed exact degree."
+      ],
+      "history": [
+        "Martinet’s 1978 Tours de corps de classes et estimations de discriminants is a primary source for the connection between class field towers and discriminant bounds. The corollary records that existence phenomenon for totally real fields. Here it follows from a theorem that additionally controls splitting of infinitely many primes."
+      ],
+      "references": [
+        "martinet-1978"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/MartinetCorollary.lean",
+          "name": "ClassFieldTower.Sawin.exists_totallyReal_discr_le"
+        }
+      ]
+    },
+    {
+      "slug": "shafarevich-relation-rank",
+      "title": "Shafarevich’s relation-rank bound for odd primes",
+      "kind": "theorem",
+      "summary": "Degree-two continuous cohomology of the maximal everywhere-unramified pro-p group is finite and arithmetically bounded.",
+      "statement": [
+        "Let $F$ be a number field and $p$ an odd prime. Let $G$ be its maximal everywhere-unramified pro-$p$ Galois group, and let $d(G)$ be its finite topological generator rank. Write $r_1,r_2$ for its numbers of real and complex places and put $\\delta=1$ if $F$ contains a primitive $p$th root of unity, and $\\delta=0$ otherwise.",
+        "The theorem proves that $H^2_{\\mathrm{cont}}(G,\\mathbb F_p)$ is finite-dimensional and $$\\dim_{\\mathbb F_p}H^2_{\\mathrm{cont}}(G,\\mathbb F_p)\\le d(G)+(r_1+r_2-1)+\\delta.$$ The coefficient module is the trivial module."
+      ],
+      "discussion": [
+        "Degree-two cohomology controls the relations of a pro-p group. The bound expresses that complexity through the generator rank, the number field’s unit rank, and a roots-of-unity correction. Combined with a generator estimate, it can feed an infinitude criterion. The odd-prime assumption matters: this statement cannot simply be specialized to justify the separate real pro-2 construction."
+      ],
+      "history": [
+        "Shafarevich’s 1963 paper studies extensions with prescribed ramification and underlies the arithmetic relation estimates used in class field tower theory. Golod and Shafarevich’s subsequent infinitude argument shows why these bounds matter: controlling relations relative to generators can force an unramified tower to continue indefinitely."
+      ],
+      "references": [
+        "shafarevich-1963",
+        "golod-shafarevich-1964"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/SawinTotallyRealTowers/UnramifiedProPRelationRank/RelationRank/ShafarevichRelationRankBound.lean",
+          "name": "ClassFieldTower.Martinet.Shafarevich.shafarevich_relation_rank_bound"
+        }
+      ]
+    }
+  ]
+}
