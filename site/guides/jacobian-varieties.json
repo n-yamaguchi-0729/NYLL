@@ -1,11 +1,11 @@
 {
   "slug": "jacobian-varieties",
-  "title": "Jacobian varieties",
+  "title": "Jacobians and generalized Jacobians",
   "repository": "JacobianVarieties",
-  "summary": "Ordinary and generalized Jacobians turn maps from curves into universal algebraic-group factorizations; the selected results also relate curves to étale cohomology and Tate modules.",
+  "summary": "The library develops both Jacobians and Generalized Jacobians: it constructs full moduli over arbitrary fields and proves the associated existence and unique factorization results for maps from open curves to commutative algebraic groups. Further results relate curves to étale cohomology and Tate modules.",
   "overview": [
     "A Jacobian gives a curve's degree-zero divisor theory the structure of an algebraic group. The library constructs it over the original field, without requiring a rational point for the construction. A chosen rational point gives an Abel–Jacobi map through which every pointed map to an abelian variety factors uniquely.",
-    "For an open curve and a map to a separated commutative group scheme locally of finite type, a full Cartier modulus can be constructed over the original field. The map then factors uniquely and equivariantly through the intrinsic Picard-one scheme for that modulus. The original open domain is preserved, and no rational curve point or perfectness assumption is required. Choosing a rational point sent to the identity gives the corresponding unique group homomorphism from the generalized Jacobian. Over an algebraically closed field, an actual regular map also has a least full conductor; the conductor of a map into a product is the coefficientwise maximum of those of its components.",
+    "Generalized Jacobians extend this factorization theory to open curves and targets that need not be proper. For a map to a separated commutative group scheme locally of finite type, the library constructs a full Cartier modulus over the original field and proves unique equivariant factorization through the intrinsic Picard-one scheme for that modulus. The original open domain is preserved, and no rational curve point or perfectness assumption is required. Choosing a rational point sent to the identity gives the corresponding unique group homomorphism from the generalized Jacobian. Over an algebraically closed field, an actual regular map also has a least full conductor; the conductor of a map into a product is the coefficientwise maximum of those of its components.",
     "Over algebraically closed fields of characteristic zero, the selected cohomology results measure genus and the contribution of punctures. The Tate comparison assumes a representing Picard object and compatibility with divisor classes; the Weil-pairing result proves nondegeneracy for supplied divisorial pairing data. Independent Lie, Witt, symmetric-product and analytic comparison results are outside this selection."
   ],
   "scopeNote": "The generalized-Jacobian factorization is over arbitrary fields and constructs its modulus from the original map; uniqueness concerns the factor pair for the returned modulus. The Tate comparison takes a representing Picard object and explicit Abel–Jacobi class compatibility as input. The Weil-pairing entry proves nondegeneracy for supplied divisorial pairing data. The selection does not assert the independent Lie, Witt or analytic comparison theorems.",
@@ -93,7 +93,7 @@
     },
     {
       "slug": "generalized-jacobian-unpointed-factorization",
-      "title": "Maps from open curves admit a modulus and unique equivariant Picard-torsor factorization",
+      "title": "Generalized Jacobians: existence of a modulus and unique factorization",
       "kind": "theorem",
       "summary": "Every map from a nonempty open curve to a separated commutative group locally of finite type constructs a full modulus and a unique equivariant Picard-one factorization over its original field.",
       "statement": [

@@ -70,7 +70,7 @@
   "entries": [
     {
       "slug": "finite-local-reciprocity",
-      "title": "Local reciprocity for finite abelian extensions",
+      "title": "Local fields: reciprocity for finite abelian extensions",
       "kind": "theorem",
       "summary": "A finite abelian extension is recovered as a quotient of the base field's multiplicative group by its norm subgroup.",
       "statement": [
@@ -100,7 +100,7 @@
     },
     {
       "slug": "profinite-local-reciprocity",
-      "title": "Local reciprocity and the abelian absolute Galois group",
+      "title": "Local fields: profinite reciprocity",
       "kind": "theorem",
       "summary": "All finite abelian local extensions fit into one topological isomorphism.",
       "statement": [
@@ -131,7 +131,7 @@
     },
     {
       "slug": "local-existence",
-      "title": "Local class fields: classification by norm subgroups",
+      "title": "Local fields: existence and classification by norm subgroups",
       "kind": "theorem",
       "summary": "Every open finite-index subgroup is a norm subgroup, with the correct reversal of inclusion.",
       "statement": [
@@ -158,7 +158,7 @@
     },
     {
       "slug": "finite-global-reciprocity",
-      "title": "Artin reciprocity for finite abelian number-field extensions",
+      "title": "Number fields: global Artin reciprocity",
       "kind": "theorem",
       "summary": "A ray class Artin map realizes Frobenius automorphisms in a finite abelian number-field extension.",
       "statement": [
@@ -190,7 +190,7 @@
     },
     {
       "slug": "topological-global-reciprocity",
-      "title": "Idelic reciprocity for number fields",
+      "title": "Number fields: global idelic reciprocity",
       "kind": "theorem",
       "summary": "The identity component is exactly the part removed from the idèle class group to obtain the abelian Galois group.",
       "statement": [
@@ -216,7 +216,7 @@
     },
     {
       "slug": "hasse-arf",
-      "title": "Hasse–Arf: integral ramification breaks",
+      "title": "Local fields: the Hasse–Arf theorem",
       "kind": "theorem",
       "summary": "Upper ramification breaks of a finite abelian local extension are integral.",
       "statement": [
@@ -247,7 +247,7 @@
     },
     {
       "slug": "perfect-hilbert-pairing",
-      "title": "Existence of a perfect local Hilbert pairing",
+      "title": "Local fields: perfect Hilbert pairings",
       "kind": "theorem",
       "summary": "Power classes are dual to their roots-of-unity-valued characters.",
       "statement": [
@@ -283,7 +283,7 @@
     },
     {
       "slug": "hasse-norm",
-      "title": "The cyclic Hasse norm theorem",
+      "title": "Number fields: the cyclic Hasse norm theorem",
       "kind": "theorem",
       "summary": "For a cyclic number-field extension, local norm equations have a global solution.",
       "statement": [
@@ -313,7 +313,7 @@
     },
     {
       "slug": "abelian-conductor",
-      "title": "The least ray class modulus of an abelian extension",
+      "title": "Number fields: conductors of abelian extensions",
       "kind": "theorem",
       "summary": "A unique least modulus measures which ray class fields contain the extension.",
       "statement": [
@@ -344,7 +344,7 @@
     },
     {
       "slug": "kronecker-weber",
-      "title": "The Kronecker–Weber theorem",
+      "title": "Number fields: the Kronecker–Weber theorem",
       "kind": "theorem",
       "summary": "Every finite abelian extension of the rational numbers embeds into a cyclotomic field.",
       "statement": [
@@ -374,7 +374,7 @@
     },
     {
       "slug": "function-field-class-fields",
-      "title": "Class field theory for global function fields",
+      "title": "Function fields: global reciprocity and class-field existence",
       "kind": "theorem",
       "summary": "Open subgroups of finite index in the ordinary idèle class group classify finite abelian extensions, and completion gives absolute reciprocity.",
       "statement": [
@@ -424,7 +424,7 @@
     },
     {
       "slug": "function-field-local-global",
-      "title": "Local–global compatibility of function-field Artin maps",
+      "title": "Function fields: compatibility of local and global Artin maps",
       "kind": "theorem",
       "summary": "The actual local Artin map agrees with global reciprocity on a one-place idèle and has the arithmetic Frobenius normalization.",
       "statement": [
