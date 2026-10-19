@@ -7,8 +7,10 @@ from argparse import Namespace
 from contextlib import redirect_stdout
 from io import StringIO
 import json
+import io
 from pathlib import Path
 import sys
+import tarfile
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -17,6 +19,7 @@ PACKAGE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PACKAGE))
 sys.path.insert(0, str(PACKAGE / "verification"))
 import public_ci
+import public7_sync
 import scope
 import verify
 
@@ -158,6 +161,30 @@ class PipelineTests(unittest.TestCase):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_canonical_archive_keeps_checker_code_out_of_library_import_graph(self):
+        owners = [owner for group in public7_sync.TOPICS for owner in group]
+        files = {"Nyll.lean": "import Nyll.All\n", "LICENSE": "license\n",
+                 "lean-toolchain": "lean:test\n", "lake-manifest.json": "{}\n"}
+        files["Nyll/All.lean"] = "".join("import Nyll." + o + ".All\n" for o in owners)
+        files["lakefile.toml"] = "[[lean_lib]]\nname = 'Nyll'\nglobs = " + json.dumps(
+            ["Nyll.All", "Nyll"] + ["Nyll." + o + ".+" for o in owners]) + "\n"
+        files.update({"Nyll/" + o + "/All.lean": "import Mathlib.Init\n" for o in owners})
+        tool = public7_sync.PACKAGE + "verification/Inventory.lean"
+        files[tool] = "import Lean\nunsafe def main : IO Unit := pure ()\n"
+        buffer = io.BytesIO()
+        with tarfile.open(fileobj=buffer, mode="w") as archive:
+            for name, text in files.items():
+                data = text.encode()
+                info = tarfile.TarInfo(name)
+                info.size = len(data)
+                archive.addfile(info, io.BytesIO(data))
+        with patch.object(public7_sync, "SOURCE", "a" * 40), \
+             patch.object(public7_sync, "git", return_value=buffer.getvalue()):
+            contents, _, _, graph, _ = public7_sync.canonical()
+        self.assertIn(tool, contents)
+        self.assertEqual(len(graph), len(owners) + 2)
+        self.assertNotIn(public7_sync.module(tool), graph)
+
     def test_existing_verifiers_exclude_distributed_tooling_without_changing_workflows(self):
         scratch = Path.cwd() / "tmp/publication-tests"
         scratch.mkdir(parents=True, exist_ok=True)
