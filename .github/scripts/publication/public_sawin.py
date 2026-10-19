@@ -114,6 +114,12 @@ def desired_sawin(repo, desired, source_commit, ordered, parse_imports):
         tests = tests.replace(old_test, new_test)
     elif new_test not in tests:
         raise ValueError("Historical partial test changed")
+    old_body_test = "old['historicalBodySHA256'])"
+    new_body_test = "old.get('currentBodySHA256', old['historicalBodySHA256']))"
+    if new_body_test not in tests:
+        if tests.count(old_body_test) != 1:
+            raise ValueError('Historical partial body test is ambiguous')
+        tests = tests.replace(old_body_test, new_body_test)
     compile(verify, verify_path, "exec")
     compile(tests, test_path, "exec")
     return {
