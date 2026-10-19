@@ -338,7 +338,7 @@ https://github.com/n-yamaguchi-0729 -->
 </head><body class="guide-body {'guide-overview' if depth == 2 else 'guide-entry'}">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header guide-header"><a class="brand" href="{base}">NYLL</a>
-<nav aria-label="Main navigation"><a href="{base}#published-libraries">Libraries</a><a href="{base}?q=">Source browser</a><a href="{NYLL}">GitHub ↗</a></nav></header>
+<nav aria-label="Main navigation"><a href="{base}#published-libraries">Libraries</a><a href="{base}browse/">All source code</a><a href="{NYLL}">GitHub ↗</a></nav></header>
 <div class="guide-layout"><main id="main" class="guide-main">{content}</main>
 <footer class="guide-footer">© 2026 Naganori Yamaguchi · Apache-2.0<br>Original code is written by OpenAI Codex. Source-specific credits and licenses are preserved in the linked repositories.<br><a href="{NYLL}#ai-written-code-and-verification">Authorship and verification</a> · <a href="{base}">NYLL home</a></footer>
 </div></body></html>'''

@@ -380,13 +380,22 @@ class BuildTests(unittest.TestCase):
         self.assertTrue((output / manifest["searchUrl"]).is_file())
         home = (output / "index.html").read_text()
         self.assertIn('id="published-libraries"', home)
+        main = home.split('<main id="main"', 1)[1].split('</main>', 1)[0]
+        self.assertIn('href="./browse/"', main)
+        self.assertNotIn('class="library-row"', main)
+        self.assertNotIn('work in progress', main)
+        catalog = (output / 'browse' / 'index.html').read_text()
+        self.assertIn('data-page="catalog"', catalog)
+        self.assertIn('href="../browse/Example/"', catalog)
+        self.assertIn('href="../assets/site.css"', catalog)
+        self.assertIn('All source code', catalog)
         self.assertIn('href="./browse/Example/"', home)
         self.assertIn('href="./modules/Nyll/"', home)
         self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}">', home)
         self.assertTrue((output / ".nojekyll").exists())
         sitemap = ElementTree.parse(output / "sitemap-source.xml")
         locations = [loc.text for loc in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-        self.assertEqual(set(locations), {site.SITE_URL, site.SITE_URL + "browse/Example/",
+        self.assertEqual(set(locations), {site.SITE_URL, site.SITE_URL + "browse/", site.SITE_URL + "browse/Example/",
                          *(site.SITE_URL + "modules/" + m["name"] + "/" for m in manifest["modules"])})
 
     def test_sitemap_uses_configured_homepage_without_inventing_query_routes(self):
@@ -399,7 +408,7 @@ class BuildTests(unittest.TestCase):
         locations = [loc.text for loc in sitemap.findall(".//" + namespace + "loc")]
         self.assertEqual(locations[0], "https://example.org/libraries/")
         self.assertTrue(all(url.startswith(locations[0]) and "?" not in url for url in locations))
-        self.assertEqual(len(locations), 5)
+        self.assertEqual(len(locations), 6)
 
     def test_sitemap_rejects_non_homepage_urls_before_writing(self):
         output = self.scratch / "output"

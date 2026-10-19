@@ -65,6 +65,20 @@ test("foreign, guide, malformed, and out-of-base URLs are not SPA routes", () =>
     "https://preview.test/NYLL/modules/X/extra/"]) assert.equal(api.readRoute(url), null, url);
 });
 
+test("the full source catalog has its own canonical route", () => {
+  const env = setup();
+  for (const suffix of ["browse", "browse/", "browse/index.html"]) {
+    const route = env.api.readRoute("https://preview.test/NYLL/" + suffix);
+    assert.equal(route.kind, "catalog");
+    assert.equal(env.api.routeHref(route), "/NYLL/browse/");
+  }
+  assert.equal(env.api.href({catalog: true}), "/NYLL/browse/");
+  env.location.href = "https://preview.test/NYLL/browse/";
+  env.api.setMetadata("All source code · NYLL", "All source libraries.");
+  assert.equal(env.canonical(), "https://n-yamaguchi-0729.github.io/NYLL/browse/");
+  assert.equal(env.meta("robots"), "index,follow");
+});
+
 test("empty searches and filters survive normalization, including legacy query precedence", () => {
   const env = setup("https://preview.test/NYLL/?module=X&q=&type=declaration");
   env.api.normalizeLocation();

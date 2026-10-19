@@ -138,7 +138,7 @@ def source_link(url: str, label: str = "View source ↗", cls: str = "") -> str:
 
 
 def sidebar(manifest: dict, prefix: str, active_library: str = "", active_module: str = "") -> str:
-    parts = ['<ul class="tree"><li class="tree-root">' + link(prefix, "All libraries") + "</li>"]
+    parts = ['<ul class="tree"><li class="tree-root">' + link(prefix + "browse/", "All source code") + "</li>"]
     for library in manifest["libraries"]:
         active = library["id"] == active_library
         current = ' aria-current="page"' if active and not active_module else ""
@@ -151,20 +151,19 @@ def sidebar(manifest: dict, prefix: str, active_library: str = "", active_module
     return "".join(parts) + "</ul>"
 
 
-def development_libraries(manifest: dict) -> str:
+def source_catalog(manifest: dict) -> str:
     rows = []
     for index, library in enumerate(manifest["libraries"], 1):
         name = library_name(library)
-        description = excerpt(library["doc"], 240)
-        href = "./" + route("browse", library["id"])
+        href = "../" + route("browse", library["id"])
         rows.append(f'<article class="library-row"><span class="row-number" aria-hidden="true">{index:02}</span><div><h3>' +
                     link(href, escape(name)) + '</h3>' +
-                    (f'<p class="math-summary">{escape(description)}</p>' if description else "") +
                     f'<div class="row-meta"><span>{count(library["moduleCount"], "module")}</span><code>{escape(library["rootModule"])}</code></div></div>' +
                     link(href, "↗", f'class="row-arrow" aria-label="Browse {escape(name)}"') + "</article>")
-    return ('<section id="development-libraries" aria-labelledby="libraries-heading"><div class="catalog-intro"><h2 id="libraries-heading">Browse development libraries</h2>' +
+    return ('<header class="page-head"><h1 class="page-title">All source code</h1><p>The complete published NYLL collection, organized by source library.</p></header>' +
+            '<section aria-labelledby="libraries-heading"><div class="catalog-intro"><h2 id="libraries-heading">Source libraries</h2>' +
             f'<span class="count">{count(len(rows), "library", "libraries")} · {count(manifest["counts"]["modules"], "module")}</span></div>' +
-            '<p class="catalog-description">Explore the full collection in NYLL, including work in progress.</p>' + "".join(rows) + "</section>")
+            "".join(rows) + "</section>")
 
 
 def module_rows(items: list[dict], library: dict, prefix: str) -> str:
@@ -235,14 +234,10 @@ def replace_one(pattern: str, value, source: str) -> str:
 
 def page(shell: str, manifest: dict, site_url: str, title: str, description: str,
          canonical: str, content: str | None, kind: str, identity: str = "", library: str = "") -> str:
-    prefix = "./" if kind == "home" else "../../"
+    prefix = "./" if kind == "home" else "../" if kind == "catalog" else "../../"
     rendered = shell
     if content is not None:
         rendered = replace_one(r'(<main\b[^>]*\bid="main"[^>]*>).*?(</main>)', lambda m: m[1] + content + m[2], rendered)
-    else:
-        if 'id="development-libraries"' not in rendered:
-            rendered = replace_one(r'(<section class="module-overview")', lambda m: development_libraries(manifest) + m[1], rendered)
-        rendered = rendered.replace('href="https://github.com/n-yamaguchi-0729/NYLL/tree/main/Nyll">Browse development sources ↗', 'href="#development-libraries">Browse work in progress ↓')
     rendered = replace_one(r'(<nav\b[^>]*\bid="file-tree"[^>]*>).*?(</nav>)', lambda m: m[1] + sidebar(manifest, "./", library, identity if kind == "module" else "") + m[2], rendered)
     revision = manifest["source"]
     rendered = replace_one(r'(<div id="revision"[^>]*>).*?(</div>)', lambda m: m[1] + '<p>Source revision ' + source_link(revision["repo"] + "/tree/" + revision["commit"], revision["commitShort"]) + "</p>" + m[2], rendered)
@@ -257,16 +252,19 @@ def page(shell: str, manifest: dict, site_url: str, title: str, description: str
             f'\n  <meta property="og:title" content="{escape(title)}">\n  <meta property="og:description" content="{escape(description)}">' +
             f'\n  <meta property="og:url" content="{escape(canonical)}">\n')
     rendered = rendered.replace("</head>", tags + "</head>", 1)
-    rendered = replace_one(r'<body\b[^>]*>', lambda _: f'<body data-static-page="{kind}" data-static-id="{escape(identity)}" data-site-root="{escape(site_url)}">', rendered)
+    rendered = replace_one(r'<body\b[^>]*>', lambda _: f'<body data-page="{kind}" data-static-page="{kind}" data-static-id="{escape(identity)}" data-site-root="{escape(site_url)}">', rendered)
     rendered = re.sub(r'<noscript>.*?</noscript>', '<noscript><p class="noscript">Browse the libraries and modules using the links on this page. Search and expandable proof source need JavaScript.</p></noscript>', rendered, flags=re.S)
     return MARKER + "\n" + rendered
 
 
 def generated_path(output: Path, relative: str) -> Path:
     path = Path(relative)
-    if len(path.parts) != 3 or path.parts[0] not in {"modules", "browse"} or path.parts[2] != "index.html":
+    if relative == "browse/index.html":
+        pass
+    elif len(path.parts) != 3 or path.parts[0] not in {"modules", "browse"} or path.parts[2] != "index.html":
         raise ValueError("Invalid generated source-page inventory path")
-    route(path.parts[0], path.parts[1])
+    else:
+        route(path.parts[0], path.parts[1])
     target = output / path
     if any(part.is_symlink() for part in (target, target.parent, target.parent.parent)):
         raise ValueError("Refusing a redirected generated source page")
@@ -286,7 +284,7 @@ def write_pages(output: Path, shell: str, manifest: dict, modules: dict[str, dic
         if data.get("schema") != SCHEMA or not isinstance(data.get("pages"), dict):
             raise ValueError("Invalid generated source-page inventory")
         previous = data["pages"]
-    names = {f'modules/{name}/index.html' for name in modules} | {f'browse/{library["id"]}/index.html' for library in manifest["libraries"]}
+    names = {"browse/index.html"} | {f'modules/{name}/index.html' for name in modules} | {f'browse/{library["id"]}/index.html' for library in manifest["libraries"]}
     # Validate all preimages before changing or removing any source-page files.
     for relative in names | previous.keys():
         target = generated_path(output, relative)
@@ -303,6 +301,10 @@ def write_pages(output: Path, shell: str, manifest: dict, modules: dict[str, dic
         updated[relative] = hashlib.sha256(payload).hexdigest()
         urls.append(canonical)
 
+    catalog_url = site_url + "browse/"
+    write("browse/index.html", page(shell, manifest, site_url, "All source code · NYLL",
+          "Browse all NYLL source libraries, modules, and Lean declarations.", catalog_url,
+          source_catalog(manifest), "catalog"), catalog_url)
     libraries = {library["id"]: library for library in manifest["libraries"]}
     for library in manifest["libraries"]:
         name = library_name(library)

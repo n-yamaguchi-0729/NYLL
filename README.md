@@ -9,20 +9,34 @@ published result is given by its precise Lean statement and assumptions.
 
 [Browse the library](https://n-yamaguchi-0729.github.io/NYLL/) · [Source](https://github.com/n-yamaguchi-0729/NYLL)
 
-Import the whole library with `import Nyll`, or a specific module such as
-`import Nyll.EtaleFundamentalGroups.All`.
+## Using NYLL
 
-## Using the library
+Use the Lean version in [lean-toolchain](lean-toolchain) and the Mathlib revision
+pinned in [lake-manifest.json](lake-manifest.json). Add NYLL to your project's
+lakefile.toml:
 
-Use the Lean version in [lean-toolchain](lean-toolchain) and the dependency
-revisions in [lake-manifest.json](lake-manifest.json). From the repository root,
-obtain the pinned Mathlib cache with `lake --wfail exe cache get` and run
-`lake --wfail build +Nyll`, or build only the module needed for your work.
+```toml
+[[require]]
+name = "Nyll"
+git = "https://github.com/n-yamaguchi-0729/NYLL.git"
+rev = "main"
+```
 
-The official repository contains source code. Private proof-cache distribution
-and development records are maintained separately.
+Run `lake update Nyll`, then commit the generated lake-manifest.json to retain
+the resolved revisions. In Lean, use `import Nyll` for the full collection,
+or import the specific modules needed by your proof.
 
-## Published standalone libraries
+The standalone repositories below provide smaller distributions of the same
+package. Choose one distribution; use NYLL when you need several libraries together.
+
+To build a checkout of NYLL, run from its root:
+
+```sh
+lake exe cache get
+lake --wfail build +Nyll
+```
+
+## Libraries
 
 These repositories contain their named library and its actual NYLL import
 dependencies. Their READMEs describe the included results and assumptions.
@@ -37,13 +51,10 @@ dependencies. Their READMEs describe the included results and assumptions.
 | [Research Papers](https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization) | Results on ab-faithful Galois actions and solvable coverings. |
 | [Anabelian Geometry](https://github.com/n-yamaguchi-0729/AnabelianGeometry) | Genus-zero weak reconstruction over number fields and geometric hyperbolic slimness. Weak reconstruction proves existence of a curve isomorphism; realizing the supplied group isomorphism and uniqueness in that correspondence remain unfinished. |
 
-NYLL also contains the shared foundations in scheme theory, valued fields,
-Galois cohomology, algebraic curves and abelian varieties. A proved component
-does not imply completion of a larger mathematical program: the general
-Néron–Ogg–Shafarevich criterion, the general proper/Henselian specialization
-equivalence, the full Lefschetz trace formula, further
-generalized-Jacobian comparisons and the general anabelian conjectures remain
-separate goals.
+[All source code](https://n-yamaguchi-0729.github.io/NYLL/browse/) includes these
+libraries and the shared foundations in scheme theory, valued fields, Galois
+cohomology, algebraic curves and abelian varieties. The library guides specify
+the proved results and the mathematical goals that remain open.
 
 ## AI-written code and verification
 

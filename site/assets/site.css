@@ -85,6 +85,8 @@ pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
 .icon-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .tree-toggle, #tree-close { display: none; }
 .layout { display: grid; grid-template-columns: minmax(0,1fr) var(--tree); min-height: calc(100vh - var(--header)); }
+body[data-page="home"] .layout { grid-template-columns: minmax(0,1fr); }
+body[data-page="home"] .sidebar, body[data-page="home"] .tree-toggle { display: none; }
 .main { min-width: 0; width: min(100%, var(--content-width)); justify-self: center; padding: var(--content-top) var(--content-gutter-end) var(--content-bottom) var(--content-gutter); outline: none; }
 .sidebar { position: sticky; top: var(--header); height: calc(100vh - var(--header)); min-width: 0; overflow: auto; border-left: 1px solid var(--line); padding: 26px 18px 0; background: var(--bg); display: flex; flex-direction: column; }
 .sidebar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }

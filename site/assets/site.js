@@ -7,15 +7,18 @@
 
   const publishedLibraries = [
     { name: "Pro-C Groups", repository: "ProCGroups", slug: "pro-c-groups", description: "The library studies profinite groups through their finite quotients, providing ways to construct maps, determine the ranks of open subgroups, and prove that presented groups are infinite." },
-    { name: "Class Field Theory", repository: "ClassFieldTheory", slug: "class-field-theory", description: "This library describes abelian extensions of local fields and number fields through arithmetic in the base field, explaining their Galois groups and how primes and norms behave." },
+    { name: "Class Field Theory", repository: "ClassFieldTheory", slug: "class-field-theory", description: "This library studies abelian extensions of local fields, number fields, and global function fields through reciprocity, norm subgroups, and class fields." },
     { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", slug: "sawin-totally-real-towers", description: "The library constructs totally real number fields of arbitrarily large degree while keeping their root discriminants bounded and the same infinite set of primes completely split." },
     { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", slug: "etale-fundamental-groups-and-cohomology", description: "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions." },
     { name: "Generalized Jacobians", repository: "JacobianVarieties", slug: "jacobian-varieties", description: "Generalized Jacobians over arbitrary fields, including ordinary Jacobians at zero modulus, with modulus existence and unique factorization for maps from open curves to commutative algebraic groups." },
     { name: "Research Papers", repository: "YamaguchiPapersFormalization", slug: "research-papers", description: "These papers study how abelian Galois data detect automorphisms and how the geometry of a boundary controls finite covers over the integers." },
-    { name: "Anabelian Geometry", repository: "AnabelianGeometry", slug: "anabelian-geometry", description: "This library studies how the geometry of a curve constrains its étale fundamental group, proving centralizer rigidity for hyperbolic curves and computing the genus-zero case with two punctures." },
+    { name: "Anabelian Geometry", repository: "AnabelianGeometry", slug: "anabelian-geometry", description: "This library reconstructs genus-zero curves over number fields up to isomorphism from their arithmetic fundamental groups, and proves centralizer rigidity for geometric hyperbolic curves." },
   ];
 
   const base = new URL("../", document.currentScript.src);
+  // Keep shared navigation anchored at the deployment root after SPA navigation.
+  document.querySelector(".brand").href = base.href;
+  document.querySelector(".search-form").action = base.href;
   const app = document.getElementById("main");
   const search = document.getElementById("search");
   const popup = document.getElementById("search-popup");
@@ -56,8 +59,9 @@
     const url = new URL(value, location.href);
     if (url.origin !== base.origin || !url.pathname.startsWith(base.pathname)) return null;
     const path = url.pathname.slice(base.pathname.length);
+    const catalog = /^(?:browse|browse\/|browse\/index\.html)$/.test(path);
     const match = path.match(/^(modules|browse)\/([^/]+)(?:\/|\/index\.html)?$/);
-    if (path !== "" && path !== "index.html" && !match) return null;
+    if (path !== "" && path !== "index.html" && !match && !catalog) return null;
     let id;
     try { id = match ? decodeURIComponent(match[2]) : ""; } catch { return null; }
     const query = url.searchParams;
@@ -65,6 +69,8 @@
     if (query.has("q")) {
       const type = ["library", "module", "declaration"].includes(query.get("type")) ? query.get("type") : "";
       route = { kind: "search", query: query.get("q"), type };
+    } else if (catalog) {
+      route = { kind: "catalog" };
     } else if (match) {
       route = { kind: match[1] === "modules" ? "module" : "library", id };
     } else if (query.get("module")) {
@@ -85,7 +91,8 @@
 
   function routeHref(route) {
     const path = route.kind === "module" ? "modules/" + encodeRoutePart(route.id) + "/"
-      : route.kind === "library" ? "browse/" + encodeRoutePart(route.id) + "/" : "";
+      : route.kind === "library" ? "browse/" + encodeRoutePart(route.id) + "/"
+      : route.kind === "catalog" ? "browse/" : "";
     const url = new URL(path, base);
     if (route.kind === "search") {
       url.searchParams.set("q", route.query || "");
@@ -102,6 +109,7 @@
       params.set("module", route.id);
       if (route.declaration) params.set("decl", route.declaration);
     } else if (route.kind === "library") params.set("library", route.id);
+    else if (route.kind === "catalog") params.set("catalog", "1");
     else if (route.kind === "search") {
       params.set("q", route.query);
       if (route.type) params.set("type", route.type);
@@ -120,7 +128,8 @@
   function href(values = {}) {
     const route = values.q !== null && values.q !== undefined ? { kind: "search", query: values.q, type: values.type }
       : values.module ? { kind: "module", id: values.module, declaration: values.decl }
-      : values.library ? { kind: "library", id: values.library } : { kind: "home" };
+      : values.library ? { kind: "library", id: values.library }
+      : values.catalog ? { kind: "catalog" } : { kind: "home" };
     return routeHref(route);
   }
   const moduleHref = (name, declaration) => href({ module: name, decl: declaration });
@@ -132,13 +141,14 @@
     if (configured) return new URL(configured, base);
     const canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) return new URL(base);
-    return new URL(["module", "library"].includes(document.body.dataset.staticPage) ? "../../" : "./", canonical.href);
+    const kind = document.body.dataset.staticPage;
+    return new URL(["module", "library"].includes(kind) ? "../../" : kind === "catalog" ? "../" : "./", canonical.href);
   }
   const canonicalBase = metadataRoot();
   const initialRoute = readRoute(location.href);
   let keepInitialContent = Boolean(app.children.length) && initialRoute !== null
     && (document.body.dataset.staticPage || "home") === initialRoute.kind
-    && (initialRoute.kind === "home" || document.body.dataset.staticId === initialRoute.id);
+    && (["home", "catalog"].includes(initialRoute.kind) || document.body.dataset.staticId === initialRoute.id);
 
   function setMetadata(title, description, route = readRoute(location.href)) {
     document.title = title;
@@ -182,6 +192,8 @@
       const label = libraryName(library);
       setMetadata(label + " · NYLL", plainExcerpt(library?.doc || library?.summary, 160)
         || label + ": Lean source modules, mathematical statements, and documentation.", route);
+    } else if (route.kind === "catalog") {
+      setMetadata("All source code · NYLL", "Browse all NYLL source libraries, modules, and Lean declarations.", route);
     } else if (route.kind === "search") {
       setMetadata("Search: " + route.query + " · NYLL", "Search NYLL libraries, modules, and Lean declarations.", route);
     } else setMetadata(homeTitle, homeDescription, route);
@@ -330,14 +342,18 @@
 
   function renderHome() {
     setMetadata(homeTitle, homeDescription);
+    app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1><span class="hero-title-wide">NYLL — Lean 4 libraries for<br>number theory and arithmetic geometry</span><span class="hero-title-compact">Number theory and arithmetic geometry in Lean 4</span></h1><p>Explore verified Lean 4 code for number theory and arithmetic geometry, with explanations of selected mathematical results and links to their proofs.</p></section>
+      <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Libraries</h2></div><p class="catalog-description">Explore each library’s scope and selected results, with mathematical explanations, Lean code, and references.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="${new URL(`libraries/${library.slug}/`, base).pathname}">${escape(library.name)} <span aria-hidden="true">→</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
+      <section class="module-overview"><h2>${routeLink(href({catalog: true}), "All source code →")}</h2><p>Browse the complete NYLL collection by library, module, and declaration. The libraries above are also available as separate distributions with their required dependencies.</p></section>
+      <p class="page-footer">Copyright © 2026 Naganori Yamaguchi. Original code written with OpenAI Codex; adapted sources retain their credits. <a href="https://github.com/n-yamaguchi-0729/NYLL#ai-written-code-and-verification">Authorship, verification, and licenses</a>.</p>`;
+  }
+
+  function renderCatalog() {
     const values = [...libraries.values()];
-    app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1><span class="hero-title-wide">NYLL — Lean 4 libraries for<br>number theory and arithmetic geometry</span><span class="hero-title-compact">Number theory and arithmetic geometry in Lean 4</span></h1><p>Lean 4 libraries for number theory and arithmetic geometry. Explore the published libraries, their mathematical results, and the code behind them. NYLL also hosts ongoing development.</p><nav class="home-links" aria-label="Explore NYLL"><a href="#published-libraries">Published standalone libraries ↓</a><a href="#development-libraries">Browse work in progress ↓</a></nav></section>
-      <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Published standalone libraries</h2><span class="count">${count(publishedLibraries.length, "repository", "repositories")}</span></div><p class="catalog-description">Explore each library’s scope and selected theorems and definitions, with mathematical explanations, Lean code, and references.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="${new URL(`libraries/${library.slug}/`, base).pathname}">${escape(library.name)} <span aria-hidden="true">→</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
-      <section id="development-libraries" aria-labelledby="libraries-heading"><div class="catalog-intro"><h2 id="libraries-heading">Browse development libraries</h2><span class="count">${count(values.length, "library", "libraries")} · ${count(modules.size, "module")}</span></div><p class="catalog-description">Explore the full collection in NYLL, including work in progress.</p>
+    app.innerHTML = `<header class="page-head"><h1 class="page-title">All source code</h1><p>The complete published NYLL collection, organized by source library.</p></header><section aria-labelledby="libraries-heading"><div class="catalog-intro"><h2 id="libraries-heading">Source libraries</h2><span class="count">${count(values.length, "library", "libraries")} · ${count(modules.size, "module")}</span></div>
       ${values.map((library, index) => {
-        const summary = plainExcerpt(doc(library.summary || library.doc).replace(/Formalization of Naganori Yamaguchi['’]s /g, "Formalization of "));
-        return `<article class="library-row"><span class="row-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><div><h3>${routeLink(libraryHref(library.id), escape(libraryName(library)))}</h3>${summary ? `<p class="math-summary">${escape(summary)}</p>` : ""}<div class="row-meta"><span>${count(library.moduleCount, "module")}</span><code>${escape(library.rootModule || `Nyll.${library.id}.All`)}</code></div></div>${routeLink(libraryHref(library.id), "↗", `class="row-arrow" aria-label="Browse ${escape(libraryName(library))}"`)}</article>`;
-      }).join("")}</section><section class="module-overview"><h2 class="section-label">Authorship and verification</h2><div class="documentation"><p>NYLL’s original code and documentation are Copyright (c) 2026 Naganori Yamaguchi. All original code developed for NYLL is written by OpenAI Codex. Source-specific credits and licenses are preserved for adapted and external material.</p><p>${sourceAction(`${manifest.source?.repo}/blob/${manifest.source?.commit}/README.md`, "Authorship, verification, and license details ↗")}</p></div></section><p class="page-footer">Browse the documentation alongside its Lean source. ${sourceAction(manifest.source?.repo, "The source repository ↗")} contains the full development collection.</p>`;
+        return `<article class="library-row"><span class="row-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><div><h3>${routeLink(libraryHref(library.id), escape(libraryName(library)))}</h3><div class="row-meta"><span>${count(library.moduleCount, "module")}</span><code>${escape(library.rootModule || `Nyll.${library.id}.All`)}</code></div></div>${routeLink(libraryHref(library.id), "↗", `class="row-arrow" aria-label="Browse ${escape(libraryName(library))}"`)}</article>`;
+      }).join("")}</section>`;
     void typesetMath(app);
   }
 
@@ -508,7 +524,7 @@
   function renderTree() {
     const active = currentParams.get("module") || "";
     const activeLibrary = currentParams.get("library") || modules.get(active)?.library;
-    tree.innerHTML = `<ul class="tree"><li class="tree-root">${routeLink(href(), "All libraries", `${!activeLibrary && !currentParams.has("q") ? 'aria-current="page"' : ""}`)}</li>${[...libraries.values()].map((library) => `<li><details data-tree-library="${escape(library.id)}"${library.id === activeLibrary ? " open" : ""}><summary>${escape(libraryName(library))}</summary><ul class="library-tree-mount"></ul></details></li>`).join("")}</ul>`;
+    tree.innerHTML = `<ul class="tree"><li class="tree-root">${routeLink(href({catalog: true}), "All source code", `${currentParams.has("catalog") ? 'aria-current="page"' : ""}`)}</li>${[...libraries.values()].map((library) => `<li><details data-tree-library="${escape(library.id)}"${library.id === activeLibrary ? " open" : ""}><summary>${escape(libraryName(library))}</summary><ul class="library-tree-mount"></ul></details></li>`).join("")}</ul>`;
     for (const detail of tree.querySelectorAll("[data-tree-library]")) {
       const populate = () => {
         const mount = detail.querySelector(".library-tree-mount");
@@ -561,6 +577,7 @@
     if (!route) return;
     window.MathJax?.typesetClear?.([app]);
     currentParams = routeParams(route);
+    document.body.dataset.page = route.kind;
     const preserve = keepInitialContent && initialRoute.kind === route.kind && initialRoute.id === route.id;
     search.value = route.kind === "search" ? route.query : "";
     app.setAttribute("aria-busy", "true");
@@ -570,6 +587,7 @@
       if (route.kind === "search") await renderSearch(route.query, version);
       else if (route.kind === "module") await renderModule(route.id, version);
       else if (route.kind === "library") await renderLibrary(route.id, version);
+      else if (route.kind === "catalog") renderCatalog();
       else renderHome();
       if (version !== navigation) return;
       keepInitialContent = false;
