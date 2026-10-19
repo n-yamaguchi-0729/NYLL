@@ -10,6 +10,7 @@ on:
       - lean-toolchain
       - .github/workflows/libraries.yml
       - .github/workflows/library-stage.yml
+      - .github/workflows/proof-check.yml
       - .github/scripts/**
   workflow_dispatch:
 
@@ -156,3 +157,17 @@ jobs:
     with:
       stage: all
       target: +Nyll
+
+  verify:
+    name: NanoDa and Lean kernel replay for every library
+    # A later successful aggregate does not hide an earlier depth-job failure.
+    needs: [depth1-procgroups, depth1-valuedfield, depth1-galoiscohomology,
+      depth1-schemetheory, depth2-classfield, depth2-curves, depth2-fundamental,
+      depth2-cohomology, depth2-abelianvarieties, depth3-sawin, depth3-jacobians,
+      depth3-abfaithful, depth3-solvable, depth3-anabelian, all]
+    if: github.event.repository.private == false
+    uses: ./.github/workflows/proof-check.yml
+    with:
+      config: .github/scripts/proof-manifest-config.json
+      partition: true
+      cache-prefix: nyll-proof-v1
