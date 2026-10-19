@@ -4,10 +4,10 @@
   "repository": "EtaleFundamentalGroupsAndCohomology",
   "summary": "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions.",
   "overview": [
-    "Over a field, an étale scheme can be recovered from its geometric fiber together with the action of the field's Galois group. For a general scheme, finite étale covers are likewise described by finite locally constant sheaves and, on a connected base with a geometric point, by fundamental-group actions. The results explain when changes to a scheme preserve its covers and how its fundamental group combines geometry with the arithmetic of the base field.",
-    "The cohomological results describe what can be recovered from local data. The Kummer sequence records the obstruction to extracting a global root, while Hilbert 90 expresses the triviality of line bundles over a field; the latter theorem here assumes characteristic zero. The proper base change result shows that sections on a proper scheme over a henselian local ring are determined by its closed fiber. This comparison concerns global sections, or degree-zero cohomology."
+    "Over a field, an étale scheme can be recovered from its geometric fiber together with the action of the field's Galois group. For a general scheme, finite étale covers are likewise described by finite locally constant sheaves and, on a connected base with a geometric point, by fundamental-group actions. The results explain when changes to a scheme preserve its covers and how its fundamental group combines geometry with the arithmetic of the base field. For a proper scheme over a separably closed field, extending the field to another separably closed field preserves its finite étale covers and its geometric fundamental group.",
+    "The cohomological results describe what can be recovered from local data. The Kummer sequence records the obstruction to extracting a global root, while the selected Hilbert 90 theorem expresses the triviality of line bundles over a characteristic-zero field. Finite direct image is exact, commutes with arbitrary base change, and preserves cohomology in every degree. For a proper scheme over a henselian local ring, restriction to the closed fiber is an isomorphism on H⁰ and injective on H¹ for arbitrary module coefficients. The general higher-degree proper base change and Lefschetz trace formula remain further goals."
   ],
-  "scopeNote": "These results cover finite étale geometry and selected statements in étale cohomology. The Hilbert 90 theorem here assumes characteristic zero. Proper base change is treated in degree zero over a henselian local ring.",
+  "scopeNote": "The proper constant-field theorem gives an equivalence of finite étale covers over separably closed field extensions. Finite direct image is treated in all cohomological degrees. The general proper henselian comparison here gives H⁰ bijectivity and H¹ injectivity, not H¹ surjectivity, the full higher-degree proper base change theorem, or the general specialization equivalence. A full Lefschetz trace formula is a separate goal.",
   "references": [
     {
       "id": "sga1",
@@ -110,13 +110,40 @@
       "year": 2026,
       "url": "https://stacks.math.columbia.edu/tag/095S",
       "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
+    },
+    {
+      "id": "stacks-0a49",
+      "type": "online",
+      "author": "The Stacks Project Authors",
+      "title": "Lemma 58.9.3: Finite étale covers under extension of algebraically closed fields",
+      "year": 2026,
+      "url": "https://stacks.math.columbia.edu/tag/0A49",
+      "note": "Living reference; consulted 19 October 2026. The tag is the stable identifier."
+    },
+    {
+      "id": "stacks-03qp",
+      "type": "online",
+      "author": "The Stacks Project Authors",
+      "title": "Proposition 59.55.2: Vanishing of finite higher direct images",
+      "year": 2026,
+      "url": "https://stacks.math.columbia.edu/tag/03QP",
+      "note": "Living reference; consulted 19 October 2026. The tag is the stable identifier."
+    },
+    {
+      "id": "stacks-0959",
+      "type": "online",
+      "author": "The Stacks Project Authors",
+      "title": "Lemma 59.55.3: Finite direct image and base change",
+      "year": 2026,
+      "url": "https://stacks.math.columbia.edu/tag/0959",
+      "note": "Living reference; consulted 19 October 2026. The tag is the stable identifier."
     }
   ],
   "entries": [
     {
       "slug": "etale-schemes-over-a-field",
       "title": "Étale schemes over a field as continuous Galois sets",
-      "kind": "definition",
+      "kind": "theorem",
       "summary": "The geometric fiber over a separable closure gives an equivalence for all étale schemes over a field, including those with infinitely many components.",
       "statement": [
         "Let $k$ be a field, let $K$ be a separable closure of $k$, and equip $G=\\operatorname{Aut}_k(K)$ with its Krull topology. There is an equivalence\n$$\\operatorname{Et}/k \\simeq G\\text{-}\\mathbf{Set}_{\\mathrm{disc,cont}}.$$\nOn the right are discrete sets with continuous $G$-action; on the left are schemes étale over $\\operatorname{Spec}k$.",
@@ -140,59 +167,8 @@
       ]
     },
     {
-      "slug": "uniqueness-of-fiber-functors",
-      "title": "Uniqueness up to isomorphism of a finite-action fiber functor",
-      "kind": "theorem",
-      "summary": "An exact finite-set-valued functor on finite continuous group actions is isomorphic to the forgetful functor.",
-      "statement": [
-        "Let $G$ be a topological group and let\n$$F:\\mathbf{FinCont}(G)\\longrightarrow\\mathbf{FinSet}$$\npreserve finite limits and finite colimits. If $U$ denotes the usual forgetful functor, the theorem proves that a natural isomorphism $U\\cong F$ exists.",
-        "The group need not be profinite, compact, or Hausdorff. The category consists of finite sets carrying continuous actions. The conclusion is existence of an isomorphism; it does not assert a unique or canonical choice."
-      ],
-      "discussion": [
-        "Fiber functors play the role of base points in a category of covers, and their automorphisms retain the fundamental-group information. The isomorphism here need not be canonical: identifying a fiber functor up to isomorphism does not choose a preferred identification. This distinction is foundational in the Galois-category theory of SGA 1, with the finite-action version recorded in the Stacks Project."
-      ],
-      "history": [
-        "Uniqueness up to isomorphism of fiber functors is a foundation of the Galois-category theory in SGA 1. Stacks Project Lemma 58.3.4 gives this version for finite continuous group actions."
-      ],
-      "references": [
-        "sga1",
-        "stacks-0bmv"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleFundamentalGroups/GaloisCategories/FiberFunctorUniqueness.lean",
-          "name": "CategoryTheory.FiniteContinuousAction.nonempty_iso_forget_of_exact"
-        }
-      ]
-    },
-    {
-      "slug": "surjectivity-criteria",
-      "title": "Five criteria for surjectivity on fundamental groups",
-      "kind": "theorem",
-      "summary": "A morphism of fiber-functor data is surjective on automorphism groups precisely when the corresponding functor preserves connectedness or satisfies equivalent categorical conditions.",
-      "statement": [
-        "Let $\\mathcal C,\\mathcal C'$ be Galois categories with fiber functors $F,F'$. Suppose $H:\\mathcal C\\to\\mathcal C'$ preserves a terminal object and is equipped with $F'\\circ H\\cong F$. It induces\n$$h:\\operatorname{Aut}(F')\\longrightarrow\\operatorname{Aut}(F).$$",
-        "The following are equivalent: $h$ is surjective; $H$ is fully faithful; $H$ sends connected objects to connected objects; every connected $X$ for which $H(X)$ has a section has a section; and, for every $X$, the induced map\n$$\\operatorname{Hom}(1,X)\\longrightarrow\\operatorname{Hom}(1',H(X))$$\nis bijective. Here a section is a morphism from the terminal object."
-      ],
-      "discussion": [
-        "A proper image can be detected through a finite action in which it has a new fixed point. The equivalent criteria turn this observation into tests involving connected objects and sections, replacing a question about a whole profinite group with categorical conditions. This follows the Galois-category approach of studying groups through finite actions; the Stacks Project collects the five formulations."
-      ],
-      "history": [
-        "The Galois-category approach studies profinite groups through their finite actions. Stacks Project Lemma 58.4.1 collects these categorical forms of surjectivity."
-      ],
-      "references": [
-        "stacks-0bn6"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleFundamentalGroups/GaloisCategories/Surjectivity.lean",
-          "name": "CategoryTheory.PreGaloisCategory.autHomOfCompIso_surjective_tfae"
-        }
-      ]
-    },
-    {
       "slug": "arithmetic-exact-sequence",
-      "title": "The geometric–arithmetic exact sequence",
+      "title": "The exact sequence of geometric and arithmetic fundamental groups",
       "kind": "theorem",
       "summary": "For a geometrically connected, quasi-compact, quasi-separated scheme over a field, the geometric fundamental group is the kernel of the natural map to the absolute Galois group.",
       "statement": [
@@ -246,8 +222,51 @@
       ]
     },
     {
+      "slug": "proper-constant-extension",
+      "title": "Finite étale covers of proper schemes are invariant under separably closed field extensions",
+      "kind": "theorem",
+      "summary": "Extending a separably closed ground field preserves finite étale covers of a proper scheme and the actual geometric fundamental group.",
+      "statement": [
+        "Let $K/k$ be an extension of separably closed fields and let $X$ be a proper $k$-scheme. For the projection $p:X_K\\to X$, actual pullback gives an equivalence",
+        "$$p^*:\\operatorname{FEt}(X)\\xrightarrow{\\sim}\\operatorname{FEt}(X_K).$$",
+        "Every finite étale cover of $X_K$ therefore descends to $X$, and morphisms between such covers descend uniquely. For any geometric point $\\xi$ of $X_K$, the projection induces a continuous group isomorphism",
+        "$$\\pi_1^{\\mathrm{\\acute et}}(X_K,\\xi)\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(X,p\\xi).$$",
+        "No smoothness, reducedness, or connectedness assumption on X is required. The comparison is natural under further extensions of the coefficient field and morphisms of the original proper schemes."
+      ],
+      "discussion": [
+        "This permits the ground field to be enlarged for geometric calculations while preserving all finite étale covering data. The construction proves essential surjectivity for the actual pullback functor, so it supplies descent of covers as well as comparison of existing ones.",
+        "The Stacks Project records the algebraically closed case as Lemma 58.9.3. The formalization extends it to separably closed fields using invariance under purely inseparable changes, and identifies the resulting fundamental-group isomorphism with the projection-induced map."
+      ],
+      "history": [
+        "Invariance of finite étale covers under algebraically closed constant extension is part of the proper-cover theory in SGA 1 and Stacks Project Section 58.9."
+      ],
+      "references": [
+        "stacks-0a49",
+        "sga1"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/EtaleFundamentalGroups/FiniteEtale/ProperSeparablyClosedExtension.lean",
+          "name": "AlgebraicGeometry.FiniteEtale.pullback_isEquivalence_of_isProper_of_isSepClosed_constant_extension"
+        },
+        {
+          "path": "Nyll/EtaleFundamentalGroups/FiniteEtale/ProperAlgebraicallyClosedExtension.lean",
+          "name": "AlgebraicGeometry.FiniteEtale.exists_model_of_isProper_of_isAlgClosed_constant_extension"
+        },
+        {
+          "path": "Nyll/EtaleFundamentalGroups/GeometricFiber/ProperConstantExtensionFundamentalGroup.lean",
+          "name": "AlgebraicGeometry.FiniteEtale.fundamentalGroupEquivProperConstantExtension",
+          "show": true
+        },
+        {
+          "path": "Nyll/EtaleFundamentalGroups/GeometricFiber/ProperConstantExtensionFundamentalGroup.lean",
+          "name": "AlgebraicGeometry.FiniteEtale.fundamentalGroupEquivProperConstantExtension_coefficient_naturality"
+        }
+      ]
+    },
+    {
       "slug": "kummer-sequence",
-      "title": "The Kummer sequence on the small étale site",
+      "title": "Exactness of the Kummer sequence on the small étale site",
       "kind": "theorem",
       "summary": "When a positive integer is invertible on the scheme, taking its power on the multiplicative group is locally surjective in the étale topology.",
       "statement": [
@@ -286,7 +305,7 @@
     },
     {
       "slug": "field-hilbert-90",
-      "title": "Vanishing of derived étale H¹ of the multiplicative group over a field",
+      "title": "Hilbert 90: vanishing of étale H¹ of Gₘ over characteristic-zero fields",
       "kind": "theorem",
       "summary": "The first étale cohomology of the multiplicative group vanishes over a characteristic-zero field.",
       "statement": [
@@ -311,8 +330,8 @@
     },
     {
       "slug": "finite-locally-constant-sheaves",
-      "title": "Finite étale schemes and finite locally constant sheaves",
-      "kind": "definition",
+      "title": "Finite étale schemes are equivalent to finite locally constant sheaves",
+      "kind": "theorem",
       "summary": "The sheaf of sections identifies finite étale schemes with finite locally constant sheaves of sets on the small étale site.",
       "statement": [
         "For every scheme $X$, there is an equivalence\n$$\\operatorname{FinEt}(X)\\simeq\\mathbf{Sh}_{\\mathrm{flc}}(X_{\\mathrm{et}},\\mathbf{Set}).$$\nThe right-hand category is the full subcategory of sheaves that are étale locally isomorphic to constant sheaves associated with finite sets.",
@@ -339,41 +358,17 @@
       ]
     },
     {
-      "slug": "closed-immersion-exact-pushforward",
-      "title": "Exact direct image for a closed immersion",
-      "kind": "theorem",
-      "summary": "Direct image along a closed immersion preserves short exact sequences of étale sheaves of modules.",
-      "statement": [
-        "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes and let $R$ be a commutative ring. For every short exact sequence of sheaves of $R$-modules on $Z_{\\mathrm{et}}$,\n$$0\\longrightarrow A\\longrightarrow B\\longrightarrow C\\longrightarrow0,$$\ndirect image gives a short exact sequence\n$$0\\longrightarrow i_*A\\longrightarrow i_*B\\longrightarrow i_*C\\longrightarrow0$$\non $X_{\\mathrm{et}}$.",
-        "The coefficient ring is fixed independently of the schemes. These are étale sheaves of modules, with no quasi-coherence, finite-generation, torsion, or noetherian hypothesis."
-      ],
-      "discussion": [
-        "Sheaves on a closed subscheme can be treated on the ambient scheme without losing exactness: their geometric stalks remain unchanged on the closed subscheme and become zero outside it. This helps separate closed and open contributions in cohomology. The construction belongs to the localization formalism of étale sheaves, whose neighborhood and stalk descriptions are developed in the Stacks Project."
-      ],
-      "history": [
-        "Direct image under closed immersions belongs to the localization formalism of étale sheaves. Stacks Project Section 59.46 develops the étale-neighborhood and stalk descriptions underlying its exactness."
-      ],
-      "references": [
-        "stacks-04e1"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleCohomology/Sites/ClosedImmersionExact.lean",
-          "name": "EtaleCohomology.etalePushforwardClosed_shortExact"
-        }
-      ]
-    },
-    {
       "slug": "proper-henselian-degree-zero",
-      "title": "Degree-zero proper base change over a henselian local ring",
+      "title": "Proper henselian restriction is an isomorphism on H⁰ and injective on H¹",
       "kind": "theorem",
-      "summary": "A section of an étale module sheaf on a proper scheme over a henselian local ring is uniquely determined by its restriction to the closed fiber, and every closed-fiber section lifts.",
+      "summary": "Restriction to the closed fiber is an isomorphism on H⁰ and injective on H¹ for any étale module sheaf on a proper scheme over a henselian local ring.",
       "statement": [
         "Let $R$ be a henselian local ring with residue field $\\kappa$, let $f:X\\to\\operatorname{Spec}R$ be proper, and write $i:X_\\kappa\\to X$ for the closed-fiber inclusion. For any commutative coefficient ring $\\Lambda$ and any étale sheaf $F$ of $\\Lambda$-modules on $X$, restriction is bijective:\n$$H^0(X_{\\mathrm{et}},F)\\xrightarrow{\\;\\sim\\;}H^0((X_\\kappa)_{\\mathrm{et}},i^*F).$$",
-        "No noetherianity or torsion condition is imposed. Only degree zero is asserted here, so these cohomology groups are global sections."
+        "For the same sheaf and coefficients, the actual restriction map in degree one is injective: $$H^1(X_{\\mathrm{et}},F)\\hookrightarrow H^1((X_\\kappa)_{\\mathrm{et}},i^*F).$$ No noetherianity or torsion condition is imposed. Surjectivity in degree one and the general higher-degree proper base change theorem are not asserted here."
       ],
       "discussion": [
-        "Properness and the henselian base make the closed fiber sufficient for recovering global sections, without a noetherianity or torsion hypothesis. The assertion concerns degree zero, so it does not claim the corresponding result for higher cohomology. It is part of the proper base change theory developed in SGA 4 to study étale cohomology in families, here in the henselian local setting."
+        "Properness and the henselian base make the closed fiber sufficient for recovering global sections. In degree one, two classes that restrict to the same class were already equal on the original scheme. These conclusions hold with arbitrary module coefficients, without noetherianity or torsion assumptions.",
+        "The degree-one injectivity follows from the degree-zero comparison, an injective presentation, and exact direct image for the closed immersion. It is a step within proper base change theory; lifting every closed-fiber H¹ class remains a separate assertion."
       ],
       "history": [
         "Proper base change was developed in SGA 4 to control étale cohomology in families. Stacks Project Section 59.91 includes the degree-zero result for henselian pairs, with henselian local rings as a special case."
@@ -385,6 +380,51 @@
         {
           "path": "Nyll/EtaleCohomology/Sites/ProperHenselianH0.lean",
           "name": "EtaleCohomology.etaleClosedFiber_globalSections_bijective"
+        },
+        {
+          "path": "Nyll/EtaleCohomology/Classical/ProperHenselianH1.lean",
+          "name": "EtaleCohomology.etaleClosedFiber_cohomology_one_injective",
+          "show": true
+        }
+      ]
+    },
+    {
+      "slug": "finite-direct-image",
+      "title": "Finite direct image is exact, commutes with base change, and preserves cohomology",
+      "kind": "theorem",
+      "summary": "A finite morphism has no positive higher direct images, commutes with arbitrary base change, and gives a coefficient-linear cohomology comparison in every degree.",
+      "statement": [
+        "Let $f:X\\to Y$ be finite, let $\\Lambda$ be any commutative ring, and let $F$ be an étale sheaf of $\\Lambda$-modules on $X$. Then",
+        "$$R^q f_*F=0\\quad(q>0),\\qquad H^n_{\\mathrm{\\acute et}}(Y,f_*F)\\simeq_\\Lambda H^n_{\\mathrm{\\acute et}}(X,F)\\quad(n\\ge0).$$",
+        "For any $g:Y^{\\prime}\\to Y$, form the cartesian square with $X^{\\prime}=X\\times_Y Y^{\\prime}$, projection $g^{\\prime}:X^{\\prime}\\to X$, and $f^{\\prime}:X^{\\prime}\\to Y^{\\prime}$. The canonical base-change morphism is an isomorphism:",
+        "$$g^*f_*F\\xrightarrow{\\sim}f^{\\prime}_*(g^{\\prime})^*F.$$",
+        "No torsion condition on the coefficients, flatness, finite-presentation condition on f, or restriction on the base-change morphism is required. The cohomology comparison is natural in F."
+      ],
+      "discussion": [
+        "Finite morphisms can be used to move an étale cohomology calculation to the base scheme without losing higher-degree information. Exactness of direct image removes the higher direct-image terms, and arbitrary base change makes this compatible with passing to fibers or changing the base.",
+        "The geometric stalk of finite direct image is a finite product of stalks over the fiber. This description underlies both exactness and the canonical base-change comparison; the Stacks Project presents these results in Proposition 59.55.2 and Lemma 59.55.3."
+      ],
+      "history": [
+        "Finite direct images form a basic case of étale base change. Stacks Project Section 59.55 derives their higher vanishing and base-change behavior from the finite-fiber stalk description."
+      ],
+      "references": [
+        "stacks-03qp",
+        "stacks-0959"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/EtaleCohomology/Sites/FiniteBaseChange.lean",
+          "name": "EtaleCohomology.finiteDirectImageBaseChange_app_isIso"
+        },
+        {
+          "path": "Nyll/EtaleCohomology/Classical/FinitePushforward.lean",
+          "name": "EtaleCohomology.etalePushforwardFinite_rightDerived_succ_isZero",
+          "show": true
+        },
+        {
+          "path": "Nyll/EtaleCohomology/Classical/FinitePushforward.lean",
+          "name": "EtaleCohomology.etaleCohomologyFinitePushforwardEquiv",
+          "show": true
         }
       ]
     }

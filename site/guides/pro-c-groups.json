@@ -4,8 +4,8 @@
   "repository": "ProCGroups",
   "summary": "The library studies profinite groups through their finite quotients, providing ways to construct maps, determine the ranks of open subgroups, and prove that presented groups are infinite.",
   "overview": [
-    "A pro-C group is built from finite groups in a chosen class C by taking inverse limits. This library develops ways to study such groups through their finite quotients. The universal properties of completions and free groups explain how to construct continuous homomorphisms, while the open-subgroup theorem computes the ranks of open subgroups in the finite-rank free case.",
-    "The library also studies how defining relations constrain the structure of a group. Fox derivatives and Crowell sequences express relations in modules, and a weighted Golod–Shafarevich criterion detects infinite pro-p groups. For profinite abelian groups, continuous characters recover the original group; Tate modules describe how compatible torsion points fit together. The individual results specify the hypotheses on C and the groups involved."
+    "A pro-C group is built from finite groups in a chosen class C by taking inverse limits. The selected results explain structural consequences: open subgroups of finite-rank free pro-C groups are free with an explicit rank formula, and a topological generator together with finite quotients of every order characterizes the profinite integers.",
+    "Fox derivatives and Crowell exact sequences express relations in modules, while a weighted Golod–Shafarevich criterion detects infinite pro-p groups. For profinite abelian groups, continuous characters recover the original group through Pontryagin biduality. The individual results specify the closure assumptions on C and the groups involved."
   ],
   "scopeNote": "This is a selection, not a claim that every theorem about pro-C groups has been formalized. Closure assumptions on C vary by result. The open-subgroup theorem has a finite basis, and the completed Crowell theorem uses a finite-rank free pro-C source and a separated completed differential module. The duality entry concerns profinite abelian groups, not all locally compact abelian groups.",
   "references": [
@@ -84,58 +84,8 @@
   ],
   "entries": [
     {
-      "slug": "completion-universal-property",
-      "title": "What a pro-C completion means",
-      "kind": "definition",
-      "summary": "Completion is characterized by a dense map through which continuous maps to pro-C groups factor uniquely.",
-      "statement": [
-        "Let $C$ be a class of finite groups. Let $G$ be a topological group and let $\\widehat G_C$ be a profinite group. A continuous homomorphism $\\iota:G\\to\\widehat G_C$ is a pro-$C$ completion when its image is dense, its target has an open normal basis with quotients in $C$, and every continuous homomorphism $\\varphi:G\\to H$ to a pro-$C$ group has a unique continuous factorization.",
-        "Composition with $\\iota$ therefore gives $$\\operatorname{Hom}_{\\mathrm{cont}}(\\widehat G_C,H)\\cong\\operatorname{Hom}_{\\mathrm{cont}}(G,H).$$ The quantification is over profinite targets with the specified open normal basis, in the universe used by the declaration."
-      ],
-      "discussion": [
-        "The choice of C determines which finite-quotient information the completed group retains. Constructions on the original group can then extend to the completion, although elements invisible in every relevant finite quotient may disappear. Ribes and Zalesskii’s 2010 monograph treats this viewpoint through finite quotients and universal mapping properties, placing pro-C completion alongside ordinary profinite and pro-p completion."
-      ],
-      "history": [
-        "Ribes and Zalesskii’s 2010 monograph treats completion through finite quotients and universal mapping properties. This places pro-C completion alongside ordinary profinite and pro-p completion: the chosen class of finite targets determines which information the completed group retains."
-      ],
-      "references": [
-        "ribes-zalesskii-2010"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ProCGroups/Completion/UniversalProperty.lean",
-          "name": "ProCGroups.Completion.IsProCCompletion"
-        }
-      ]
-    },
-    {
-      "slug": "free-pro-c-universal-property",
-      "title": "Free pro-C groups",
-      "kind": "definition",
-      "summary": "A continuous choice of generator images extends uniquely to a continuous homomorphism.",
-      "statement": [
-        "Let $C$ be a class of finite groups. Let $X$ be a topological space, $F$ a profinite group, and $\\iota:X\\to F$ a continuous map. The predicate says that $F$ is pro-$C$, the image of $\\iota$ topologically generates $F$, and every continuous map $\\varphi:X\\to H$ to a pro-$C$ group extends uniquely to a continuous group homomorphism $f:F\\to H$.",
-        "The required equation is $$f(\\iota(x))=\\varphi(x)\\qquad(x\\in X).$$ There is no requirement that $\\varphi(X)$ generate $H$: the universal property quantifies over all continuous choices of generator images."
-      ],
-      "discussion": [
-        "For a finite discrete generating space, the universal property gives the familiar finite-rank picture. For an infinite space, its topology controls which assignments of generator images are permitted, so that topology is part of the mathematical data. Ribes and Zalesskii’s 2010 monograph develops these profinite counterparts of abstract free groups by combining universal mapping properties with finite quotients."
-      ],
-      "history": [
-        "The free pro-C groups studied in Ribes and Zalesskii’s 2010 monograph are the profinite counterparts of abstract free groups. Their theory combines universal mapping properties with finite quotients, while the topology of an infinite generating family requires particular care."
-      ],
-      "references": [
-        "ribes-zalesskii-2010"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ProCGroups/FreeProC/Basic.lean",
-          "name": "ProCGroups.FreeProC.IsFreeProCGroup"
-        }
-      ]
-    },
-    {
       "slug": "open-subgroup-schreier-rank",
-      "title": "The Schreier rank of an open subgroup",
+      "title": "Open subgroups of free pro-C groups: freeness and Schreier rank",
       "kind": "theorem",
       "summary": "An open subgroup of a finite-rank free pro-C group is free, with the expected index-dependent rank.",
       "statement": [
@@ -160,7 +110,7 @@
     },
     {
       "slug": "fox-fundamental-formula",
-      "title": "The relative Fox fundamental formula",
+      "title": "Fox’s fundamental formula for group rings",
       "kind": "theorem",
       "summary": "A group-ring boundary decomposes into Fox derivatives times the boundaries of the generators.",
       "statement": [
@@ -186,7 +136,7 @@
     },
     {
       "slug": "discrete-crowell-sequence",
-      "title": "The discrete Crowell exact sequence",
+      "title": "Crowell’s exact sequence for a group quotient",
       "kind": "theorem",
       "summary": "A surjective group homomorphism yields an exact sequence connecting its kernel to its derived module.",
       "statement": [
@@ -212,7 +162,7 @@
     },
     {
       "slug": "completed-crowell-sequence",
-      "title": "The separated completed Crowell sequence",
+      "title": "The completed Crowell exact sequence for free pro-C groups",
       "kind": "theorem",
       "summary": "The kernel–differential–augmentation sequence is exact in the stated finite-rank pro-C setting.",
       "statement": [
@@ -243,7 +193,7 @@
     },
     {
       "slug": "weighted-golod-shafarevich",
-      "title": "A weighted Golod–Shafarevich infinitude criterion",
+      "title": "Golod–Shafarevich: a depth criterion for infinite pro-p groups",
       "kind": "theorem",
       "summary": "A nonpositive presentation polynomial certifies that an actual pro-p group is infinite.",
       "statement": [
@@ -296,53 +246,8 @@
       ]
     },
     {
-      "slug": "full-tate-module",
-      "title": "The full Tate module of an abelian group",
-      "kind": "definition",
-      "summary": "Compatible torsion points at every positive integer form a torsion-free inverse-limit object.",
-      "statement": [
-        "For an abelian group $M$, put $M[n]=\\{x\\in M:nx=0\\}$. The full Tate module is $$T(M)=\\{(x_n)_{n\\ge1}:x_n\\in M[n],\\;m x_{nm}=x_n\\text{ for }n,m\\ge1\\}.$$ The transition from level $nm$ to level $n$ is multiplication by $m$.",
-        "The definition applies to an arbitrary abelian group. The source also proves that if $n>0$ and $n x=0$ for $x\\in T(M)$, then $x=0$. Thus this compatible-family group is torsion-free."
-      ],
-      "discussion": [
-        "Coherence across levels explains torsion-freeness: a family killed by a positive integer n has each coordinate equal to n times a higher coordinate, hence zero. Using all positive integers retains every prime-power direction. Tate’s 1967 paper on p-divisible groups treats the prime-power setting; here the same inverse-limit idea applies to arbitrary abelian groups without choosing a single prime."
-      ],
-      "history": [
-        "Tate’s 1967 paper on p-divisible groups is a primary source for the prime-power setting of Tate modules. The construction here uses compatible torsion at all positive integers. It expresses the same inverse-limit idea without choosing a single prime or requiring the original abelian group to come from an algebraic variety."
-      ],
-      "references": [
-        "tate-1967"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
-          "name": "ProCGroups.FullTateModule"
-        },
-        {
-          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
-          "name": "ProCGroups.FullTateModule.eq_zero_of_nsmul_eq_zero",
-          "show": true
-        },
-        {
-          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
-          "name": "ProCGroups.compatibleTorsionFamilies",
-          "show": true
-        },
-        {
-          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
-          "name": "ProCGroups.FullTateModule.evaluation_annihilated",
-          "show": true
-        },
-        {
-          "path": "Nyll/ProCGroups/Abelian/FullTateModule.lean",
-          "name": "ProCGroups.FullTateModule.evaluation_compatible",
-          "show": true
-        }
-      ]
-    },
-    {
       "slug": "recognizing-profinite-integers",
-      "title": "Recognizing the profinite integers",
+      "title": "When a procyclic group is the group of profinite integers",
       "kind": "theorem",
       "summary": "A topological generator and finite quotients of every order characterize the additive group of profinite integers.",
       "statement": [

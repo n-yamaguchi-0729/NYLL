@@ -2,12 +2,13 @@
   "slug": "anabelian-geometry",
   "title": "Anabelian geometry",
   "repository": "AnabelianGeometry",
-  "summary": "This library studies how the geometry of a curve constrains its étale fundamental group, proving centralizer rigidity for hyperbolic curves and computing the genus-zero case with two punctures.",
+  "summary": "This library reconstructs genus-zero curves over number fields up to isomorphism from their arithmetic fundamental groups, and proves centralizer rigidity for geometric hyperbolic curves.",
   "overview": [
-    "For curves over algebraically closed fields of characteristic zero, these results connect geometric features with the structure of the étale fundamental group. A proper curve of genus at least two, or a punctured curve satisfying the hyperbolicity inequality, has a slim fundamental group: every open subgroup has trivial centralizer in the whole group. This controls centralizing symmetries throughout its finite covering theory.",
-    "A genus-zero curve with two punctures gives the boundary case, where the fundamental group is the profinite completion of the integers and admits a topological generator. The present results establish these geometric properties; arithmetic reconstruction of curves and the corresponding positive-characteristic results remain outside their scope."
+    "For a curve over a number field $k$, its arithmetic fundamental group records finite étale covers together with a projection to the absolute Galois group $G_k$. The genus-zero reconstruction theorem shows that this information determines the curve up to $k$-isomorphism when at least three geometric points are removed from a smooth proper geometrically integral genus-zero curve. The compactification need not be a projective line over $k$, and the punctures need not be $k$-rational.",
+    "This is weak reconstruction: an isomorphism of the arithmetic groups over $G_k$ yields an isomorphism of curves. Identifying the supplied group isomorphism with the map induced by the recovered curve isomorphism, proving uniqueness in that correspondence, and extending reconstruction to general positive-genus hyperbolic curves remain further goals. The formalized arithmetic result is over number fields.",
+    "Over algebraically closed fields of characteristic zero, the library proves slimness for proper and punctured hyperbolic curves: every open subgroup of the geometric fundamental group has trivial centralizer. A complementary calculation identifies the group of a genus-zero curve with two punctures with $\\widehat{\\mathbb Z}$. This contrast shows the change in geometric group structure when the number of punctures reaches three."
   ],
-  "scopeNote": "These selected theorems concern geometric curves over algebraically closed fields of characteristic zero. They do not prove the Grothendieck conjecture, arithmetic reconstruction of curves from Galois-augmented groups, or the corresponding statements in positive characteristic. The project remains under development.",
+  "scopeNote": "Genus-zero weak reconstruction over number fields establishes existence of a curve isomorphism. It does not yet realize a prescribed fundamental-group isomorphism or prove uniqueness in that correspondence. General positive-genus reconstruction, arbitrary finitely generated characteristic-zero base fields, and positive-characteristic analogues are outside the selected reconstruction theorem.",
   "references": [
     {
       "id": "sga1",
@@ -20,39 +21,87 @@
       "note": "Link to the updated edition with remarks by Michel Raynaud."
     },
     {
-      "id": "mochizuki-local-pro-p",
+      "id": "nakamura-punctured-lines",
       "type": "journal-article",
-      "author": "Shinichi Mochizuki",
-      "title": "The local pro-p anabelian geometry of curves",
-      "year": 1999,
-      "journal": "Inventiones mathematicae",
-      "volume": "138",
-      "pages": "319–423",
-      "doi": "10.1007/s002220050381",
-      "url": "https://link.springer.com/article/10.1007/s002220050381",
-      "note": "Historical context for the arithmetic reconstruction problem; that reconstruction theorem is not claimed as formalized here."
+      "author": "Hiroaki Nakamura",
+      "title": "Galois rigidity of the étale fundamental groups of punctured projective lines",
+      "year": 1990,
+      "journal": "Journal für die reine und angewandte Mathematik",
+      "volume": "411",
+      "pages": "205–216",
+      "doi": "10.1515/crll.1990.411.205",
+      "url": "https://doi.org/10.1515/crll.1990.411.205",
+      "note": "Original genus-zero reconstruction theorem. The selected Lean results use number fields; the original theorem also treats finitely generated extensions of the rationals."
+    },
+    {
+      "id": "nakamura-weight-filtration",
+      "type": "journal-article",
+      "author": "Hiroaki Nakamura",
+      "title": "Galois rigidity of pure sphere braid groups and profinite calculus",
+      "year": 1994,
+      "journal": "Journal of Mathematical Sciences, the University of Tokyo",
+      "volume": "1",
+      "pages": "71–136",
+      "url": "https://www.ms.u-tokyo.ac.jp/journal/pdf/jms010103.pdf",
+      "note": "Section 2.1 explains the weight characterization of inertia and its use in the earlier reconstruction theorem. This reference does not assert that all braid-group or pro-l results in the paper are formalized."
     }
   ],
   "entries": [
     {
-      "slug": "proper-hyperbolic-slimness",
-      "title": "Slimness for proper hyperbolic curves",
+      "slug": "genus-zero-arithmetic-reconstruction",
+      "title": "Grothendieck’s conjecture for genus-zero curves over number fields",
       "kind": "theorem",
-      "summary": "Every open subgroup of the geometric fundamental group of a proper curve of genus at least two has trivial centralizer.",
+      "summary": "The weak reconstruction form of Grothendieck’s anabelian conjecture: over a number field, the arithmetic fundamental group determines a hyperbolic genus-zero curve up to isomorphism.",
       "statement": [
-        "Let $K$ be algebraically closed of characteristic $0$, let $C$ be a smooth proper curve model of a one-variable function field $F/K$, and assume $g(F/K)\\ge2$. For a geometric point $\\xi$, put $G=\\pi_1^{\\mathrm{\\acute et}}(C,\\xi)$. Then",
-        "$$\\forall\\,H\\le G\\text{ open},\\qquad C_G(H)=\\{1\\}.$$",
-        "This is the library's predicate $\\mathrm{IsSlim}(G)$. It quantifies over all open subgroups, including nonnormal ones."
+        "Let $k$ be a number field and let $C_1,C_2$ be smooth proper geometrically integral curves over $k$ of geometric genus $0$. Let $U_i\\subset C_i$ be nonempty opens with $r_i=\\#(C_{i,\\bar k}\\setminus U_{i,\\bar k})\\ge3$. Choose geometric points $x_i$ and the corresponding arithmetic projections $p_i:\\pi_1^{\\mathrm{\\acute et}}(U_i,x_i)\\to G_k$. If a continuous group isomorphism $\\alpha$ satisfies",
+        "$$\\alpha:\\pi_1^{\\mathrm{\\acute et}}(U_1,x_1)\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(U_2,x_2),\\qquad p_2\\circ\\alpha=p_1,$$",
+        "then there exists a $k$-scheme isomorphism $U_1\\cong U_2$. Rational points, rational punctures, and a chosen identification $C_i\\cong\\mathbb P^1_k$ are not hypotheses.",
+        "For $U_S=\\mathbb P^1_k\\setminus S$ and $U_T=\\mathbb P^1_k\\setminus T$, where $S,T\\subset\\mathbb P^1(k)$ are finite sets with at least three elements, the rational-configuration theorem gives more: a bijection $\\sigma:S\\to T$, an element $f\\in\\mathrm{GL}_2(k)$ with $[f](p)=\\sigma(p)$ for every $p\\in S$, and the induced isomorphism of the opens. It also constructs a geometric fundamental-group isomorphism compatible with $\\alpha$ that carries the inertia group at $p$ to a conjugate of the inertia group at $\\sigma(p)$.",
+        "The conclusion is weak reconstruction: existence of a curve isomorphism. Neither theorem asserts that the resulting curve isomorphism induces the original $\\alpha$, or proves uniqueness in that stronger correspondence."
       ],
       "discussion": [
-        "This property, called slimness, controls centralizing symmetries throughout the finite covering theory of the curve. Centralizers also measure ambiguities when fundamental-group maps are considered up to inner automorphism. In the covering framework of SGA 1, it forms part of the setting for anabelian geometry; Mochizuki's 1999 work proves arithmetic reconstruction results over sub-p-adic fields, whereas the theorem here concerns geometric curves over algebraically closed fields of characteristic zero."
+        "The arithmetic projection retains information that the geometric group alone loses. In the rational case, the conclusion recovers the positions of the punctures up to a projective linear change of coordinates, with the recovered permutation tied to inertia. Nakamura’s 1990 theorem established this genus-zero reconstruction principle; his 1994 treatment explains the weight characterization that recognizes inertia from the Galois action.",
+        "The formal proof constructs the auxiliary finite covers and their point comparisons from the original arithmetic group isomorphism. For a general genus-zero compactification, it passes to finite rational models and descends the reconstructed map to $k$. Those models and their compatibility are proved intermediate conclusions, rather than additional assumptions on the theorem’s input.",
+        "The selected formal result uses number fields. Recovering a prescribed group isomorphism, with uniqueness up to the appropriate inner conjugation, is the stronger Isom correspondence and remains unfinished here; the same is true of reconstruction for general hyperbolic curves of positive genus."
       ],
       "history": [
-        "SGA 1 made finite étale covers the foundation of the algebraic fundamental group. Grothendieck's anabelian perspective asks how much geometry such groups retain. Mochizuki's 1999 paper proves reconstruction results for hyperbolic curves over sub-p-adic fields; the geometric slimness theorem here is a structural result in that broader setting, rather than an arithmetic reconstruction theorem."
+        "Nakamura’s 1990 paper treats punctured projective lines over fields finitely generated over the rationals. Section 2.1 of his 1994 paper revisits the nonlinear weight filtration and its inertia characterization. The Lean statements selected here give number-field weak reconstruction, with a separate descent endpoint covering nonsplit genus-zero compactifications and nonrational punctures."
       ],
       "references": [
-        "sga1",
-        "mochizuki-local-pro-p"
+        "nakamura-punctured-lines",
+        "nakamura-weight-filtration"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/AnabelianGeometry/WeightFiltration/GenusZeroNakamura.lean",
+          "name": "AnabelianGeometry.WeightFiltration.exists_schemeIso_of_genusZero_arithmeticFundamentalGroupEquiv"
+        },
+        {
+          "path": "Nyll/AnabelianGeometry/WeightFiltration/RationalConfigurationNakamura.lean",
+          "name": "AnabelianGeometry.WeightFiltration.exists_projectiveTransformation_with_inertia_of_arithmeticFundamentalGroupEquiv"
+        }
+      ]
+    },
+    {
+      "slug": "hyperbolic-slimness",
+      "title": "Slimness of geometric fundamental groups of hyperbolic curves",
+      "kind": "theorem",
+      "summary": "Every open subgroup of a geometric hyperbolic curve’s fundamental group has trivial centralizer, for both proper and punctured curves in characteristic zero.",
+      "statement": [
+        "Let $K$ be algebraically closed of characteristic $0$ and let $C$ be a smooth proper curve model of genus $g$. For $X=C$, assume $g\\ge2$. Alternatively, let $j:X\\hookrightarrow C$ be an open immersion with nonempty finite boundary of size $r$ and assume $2g+r-2>0$. In the open-curve statement, $X$ is integral, normal, locally Noetherian and quasi-compact, and $j$ is quasi-compact and quasi-separated.",
+        "For any geometric point $\\xi$ of $X$, put $G=\\pi_1^{\\mathrm{\\acute et}}(X,\\xi)$. Then",
+        "$$\\forall\\,H\\le G\\text{ open},\\qquad C_G(H)=\\{1\\}.$$",
+        "This is slimness. The quantifier includes all open subgroups, including nonnormal ones."
+      ],
+      "discussion": [
+        "The conclusion controls centralizing symmetries throughout the finite covering theory, since open subgroups correspond to connected finite étale covers. It is stronger than saying only that the original group has trivial center.",
+        "Genus and punctures both supply hyperbolicity: a proper curve needs genus at least two, while $\\mathbb P^1$ with three punctures already satisfies the inequality. The formal proofs realize open subgroups by actual covers, preserve hyperbolicity through their compactifications, and use cohomological faithfulness to prove the centralizer statement. SGA 1 provides the covering-theoretic framework."
+      ],
+      "history": [
+        "SGA 1 develops the equivalence between finite étale covering theory and fundamental groups used in these proofs. The centralizer statement concerns geometric groups over algebraically closed fields; arithmetic reconstruction additionally uses the Galois action."
+      ],
+      "references": [
+        "sga1"
       ],
       "lean": [
         {
@@ -60,48 +109,14 @@
           "name": "AnabelianGeometry.isSlim_fundamentalGroup_proper_hyperbolic"
         },
         {
-          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean",
-          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSlim",
-          "show": true
-        }
-      ]
-    },
-    {
-      "slug": "open-hyperbolic-slimness",
-      "title": "Slimness for punctured hyperbolic curves",
-      "kind": "theorem",
-      "summary": "The same centralizer rigidity holds when the genus and number of punctures satisfy the hyperbolicity inequality.",
-      "statement": [
-        "Let $K$ be algebraically closed of characteristic $0$. Let $j:U\\hookrightarrow C$ be an open immersion into a smooth proper curve model of genus $g$, with nonempty finite boundary of size $r$. In the public statement, $U$ is integral, normal, locally Noetherian and quasi-compact, and $j$ is quasi-compact and quasi-separated. If",
-        "$$2g+r-2>0,$$",
-        "then for every geometric point $\\xi$ of $U$ and every open subgroup $H\\le\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)$,",
-        "$$C_{\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)}(H)=\\{1\\}.$$"
-      ],
-      "discussion": [
-        "Punctures can provide the same centralizer rigidity as genus: a projective line with at least three punctures is already hyperbolic. Slimness controls finite covers as well as the curve itself. Such curves are central to the anabelian program built on SGA 1's covering theory; Mochizuki's 1999 work studies their arithmetic fundamental groups over sub-p-adic fields, while this result concerns the geometric group in characteristic zero."
-      ],
-      "history": [
-        "SGA 1 supplies the finite-étale covering framework. Hyperbolic curves, including punctured curves, are central to Grothendieck's anabelian program. Mochizuki's 1999 work studies their arithmetic fundamental groups and pro-p variants over sub-p-adic fields. The geometric theorem on this page concerns a different, foundational question: centralizers inside the full fundamental group over an algebraically closed field."
-      ],
-      "references": [
-        "sga1",
-        "mochizuki-local-pro-p"
-      ],
-      "lean": [
-        {
           "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/OpenCurveSlim.lean",
           "name": "AnabelianGeometry.isSlim_fundamentalGroup_open_hyperbolic"
-        },
-        {
-          "path": "Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean",
-          "name": "ProCGroups.FiniteStepSolvableQuotients.IsSlim",
-          "show": true
         }
       ]
     },
     {
       "slug": "two-punctures",
-      "title": "A genus-zero curve with two punctures",
+      "title": "The fundamental group of a twice-punctured genus-zero curve is the profinite integers",
       "kind": "theorem",
       "summary": "The actual étale fundamental group is the full profinite completion of the integers, with a chosen topological generator supplied by the conclusion.",
       "statement": [

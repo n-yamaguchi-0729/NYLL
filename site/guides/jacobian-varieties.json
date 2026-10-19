@@ -2,12 +2,13 @@
   "slug": "jacobian-varieties",
   "title": "Jacobian varieties",
   "repository": "JacobianVarieties",
-  "summary": "This library constructs the Jacobian of a smooth proper curve and shows how its geometry controls torsion points and abelian covers of the curve.",
+  "summary": "Ordinary and generalized Jacobians turn maps from curves into universal algebraic-group factorizations; the selected results also relate curves to étale cohomology and Tate modules.",
   "overview": [
-    "A Jacobian gives a curve's degree-zero divisor theory the structure of an algebraic group. The library constructs this object over the curve's original field, even when the curve has no rational point, and proves that its dimension equals the genus. Choosing a rational point then gives an Abel–Jacobi morphism through which every pointed map to an abelian variety factors uniquely.",
-    "Over algebraically closed fields of characteristic zero, the later results count torsion points and first étale cohomology, describe the contribution of punctures, and compare the abelianized fundamental group with the full Tate module. The Tate comparison assumes a representing Picard object and compatibility with divisor classes; the Weil-pairing result proves nondegeneracy for supplied divisorial pairing data."
+    "A Jacobian gives a curve's degree-zero divisor theory the structure of an algebraic group. The library constructs it over the original field, without requiring a rational point for the construction. A chosen rational point gives an Abel–Jacobi map through which every pointed map to an abelian variety factors uniquely.",
+    "For an open curve and a map to a separated commutative group scheme locally of finite type, a full Cartier modulus can be constructed over the original field. The map then factors uniquely and equivariantly through the intrinsic Picard-one scheme for that modulus. The original open domain is preserved, and no rational curve point or perfectness assumption is required. Choosing a rational point sent to the identity gives the corresponding unique group homomorphism from the generalized Jacobian. Over an algebraically closed field, an actual regular map also has a least full conductor; the conductor of a map into a product is the coefficientwise maximum of those of its components.",
+    "Over algebraically closed fields of characteristic zero, the selected cohomology results measure genus and the contribution of punctures. The Tate comparison assumes a representing Picard object and compatibility with divisor classes; the Weil-pairing result proves nondegeneracy for supplied divisorial pairing data. Independent Lie, Witt, symmetric-product and analytic comparison results are outside this selection."
   ],
-  "scopeNote": "The public repository does not yet provide the full fppf Picard-sheaf identification and base-change API for the fixed unpointed Jacobian, the general positive-genus closed-immersion API, or a complete principal-polarization theorem. The Tate comparison below takes a representing Picard object and an explicit Abel–Jacobi class compatibility as input. The pairing entry proves nondegeneracy for supplied divisorial pairing data.",
+  "scopeNote": "The generalized-Jacobian factorization is over arbitrary fields and constructs its modulus from the original map; uniqueness concerns the factor pair for the returned modulus. The Tate comparison takes a representing Picard object and explicit Abel–Jacobi class compatibility as input. The Weil-pairing entry proves nondegeneracy for supplied divisorial pairing data. The selection does not assert the independent Lie, Witt or analytic comparison theorems.",
   "references": [
     {
       "id": "milne-jacobian",
@@ -50,109 +51,23 @@
       "publisher": "Séminaire Bourbaki, Exposé 232",
       "pages": "143–161",
       "url": "https://numdam.org/item/SB_1961-1962__7__143_0.pdf"
+    },
+    {
+      "id": "serre-algebraic-groups-class-fields",
+      "type": "book",
+      "author": "Jean-Pierre Serre",
+      "title": "Algebraic Groups and Class Fields",
+      "year": 1988,
+      "publisher": "Springer, Graduate Texts in Mathematics 117",
+      "doi": "10.1007/978-1-4612-1035-1",
+      "url": "https://link.springer.com/book/10.1007/978-1-4612-1035-1",
+      "note": "Chapters III and V treat maps from curves to commutative groups and generalized Jacobians."
     }
   ],
   "entries": [
     {
-      "slug": "unpointed-jacobian",
-      "title": "A Jacobian without a rational base point",
-      "kind": "definition",
-      "summary": "A smooth proper geometrically irreducible curve has a fixed descended Jacobian over its original field.",
-      "statement": [
-        "Let $k$ be a field and let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$. The definition constructs a scheme over $k$, denoted $J_C$, without requiring a point in $C(k)$.",
-        "The associated genus is the geometric function-field genus, denoted $g(C)$. The public construction uses finite faithfully flat descent to obtain the fixed object $J_C/k$."
-      ],
-      "discussion": [
-        "A curve may have no rational point, yet its degree-zero divisor theory still gives rise to a geometric group over the original field. A rational base point is used later to define a normalized map from the curve into that group. Grothendieck's 1962 Bourbaki treatment of Picard schemes explains how relative Picard functors and faithfully flat descent address precisely the difficulty caused by the absence of a rational section."
-      ],
-      "history": [
-        "Grothendieck's 1962 Bourbaki talk on Picard schemes explains why families of line bundles must be treated through relative Picard functors and faithfully flat descent. It explicitly addresses the difficulty caused by the absence of a rational section. This viewpoint provides a scheme-theoretic setting for Jacobians over their original fields, beyond the classical description by complex periods."
-      ],
-      "references": [
-        "grothendieck-picard-1962"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian"
-        },
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.genus"
-        }
-      ]
-    },
-    {
-      "slug": "dimension-and-group",
-      "title": "The group scheme and its dimension",
-      "kind": "theorem",
-      "summary": "The same descended Jacobian is smooth, proper, geometrically irreducible, and has dimension equal to the curve's genus.",
-      "statement": [
-        "Let $k$ be a field and let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$. The public declarations give the fixed descended Jacobian $J_C$ a group-object structure and prove",
-        "$$J_C/k\\ \\text{smooth and proper},\\qquad J_C\\ \\text{geometrically irreducible},\\qquad \\dim J_C=g(C).$$"
-      ],
-      "discussion": [
-        "The genus becomes the dimension of a group variety, so a numerical invariant of the curve determines the size of the geometric setting in which its torsion and maps to abelian varieties can be studied. In the classical complex construction, this dimension comes from periods of differentials. Milne's Jacobian Varieties connects that analytic picture with the algebraic construction over arbitrary fields."
-      ],
-      "history": [
-        "The classical complex Jacobian is built from the periods of differentials, with dimension equal to the genus. Milne's Jacobian Varieties presents the algebraic construction and its relation to that analytic picture, allowing the dimension statement to be expressed over arbitrary fields."
-      ],
-      "references": [
-        "milne-jacobian"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.smoothOfRelativeDimension_genus"
-        },
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.instGrpObj"
-        },
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.instIsProper"
-        },
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.instGeometricallyIrreducible"
-        }
-      ]
-    },
-    {
-      "slug": "abel-jacobi",
-      "title": "The pointed Abel–Jacobi morphism",
-      "kind": "definition",
-      "summary": "A chosen rational point determines a morphism from the curve to its fixed Jacobian and maps to the identity.",
-      "statement": [
-        "Let $k$ be a field and let $C/k$ be smooth, proper, geometrically irreducible, and of relative dimension $1$. For $P\\in C(k)$, the definition gives a $k$-morphism $a_P:C\\to J_C$ to the fixed descended Jacobian, the point-minus-basepoint Abel–Jacobi morphism. Its normalization is proved:",
-        "$$a_P(P)=0.$$",
-        "The motivating divisor-class formula is $Q\\mapsto[\\mathcal O_C(Q-P)]$; the implementation constructs an actual morphism of schemes over $k$."
-      ],
-      "discussion": [
-        "The divisor-class description $Q\\mapsto[Q-P]$ explains how differences of points become elements of an abelian group. The morphism connects the curve's geometry with its divisor relations and starts the study of maps to abelian varieties and abelian covers. This is the algebraic counterpart of integration from a base point: Milne's Section 2 relates the two through Abel's theorem and Jacobi inversion."
-      ],
-      "history": [
-        "Abel's theorem and Jacobi inversion connect divisors with integrals of differentials. Milne's Section 2 explains how these classical results identify the analytic Jacobian with the algebraic one and relate integration from a base point to the canonical morphism of a pointed curve."
-      ],
-      "references": [
-        "milne-jacobian"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.ofCurve"
-        },
-        {
-          "path": "Nyll/JacobianVarieties/JacobianChallenge.lean",
-          "name": "AlgebraicGeometry.JacobianChallenge.Jacobian.comp_ofCurve",
-          "show": true
-        }
-      ]
-    },
-    {
       "slug": "albanese-factorization",
-      "title": "Unique factorization through Abel–Jacobi",
+      "title": "Pointed maps from curves to abelian varieties factor uniquely through Abel–Jacobi",
       "kind": "theorem",
       "summary": "Every pointed morphism from the curve to an abelian variety factors uniquely through the fixed Jacobian.",
       "statement": [
@@ -177,8 +92,93 @@
       ]
     },
     {
+      "slug": "generalized-jacobian-unpointed-factorization",
+      "title": "Maps from open curves admit a modulus and unique equivariant Picard-torsor factorization",
+      "kind": "theorem",
+      "summary": "Every map from a nonempty open curve to a separated commutative group locally of finite type constructs a full modulus and a unique equivariant Picard-one factorization over its original field.",
+      "statement": [
+        "Let $k$ be any field, let $C/k$ be a smooth proper geometrically integral curve, let $U\\subseteq C$ be a nonempty open subscheme, and let $G/k$ be a separated commutative group scheme locally of finite type. Given a $k$-morphism $q:U\\to G$, there is a full effective Cartier divisor $D$ over $k$ with $C\\setminus|D|=U$ for which $q$ satisfies the geometric modulus condition.",
+        "For this returned divisor, let $J_D$ be the generalized Jacobian, $J_D^1$ its intrinsic Picard-one torsor, and $a_D^1:U\\to J_D^1$ the Abel map. There is a unique pair consisting of a group-scheme morphism $\\phi:J_D\\to G$ and a $k$-morphism $F:J_D^1\\to G$ such that",
+        "$$q=F\\circ a_D^1,\\qquad F(a\\cdot x)=\\phi(a)F(x)$$",
+        "where equivariance holds on points valued in every $k$-scheme. Neither a rational point of $C$, a preassigned modulus, nor perfectness of $k$ is required. The target need not be smooth or connected. Uniqueness is for the pair $(\\phi,F)$ with the returned $D$ fixed, not for the divisor itself.",
+        "If a point $\\varepsilon\\in U(k)$ is supplied and $q(\\varepsilon)=1$, there is also a direct pointed form: the map constructs such a divisor $D$ and a unique group-scheme morphism $\\phi:J_D\\to G$ with $q=\\phi\\circ a_{D,\\varepsilon}$. Two maps from the same $U$ can be given a common ground-field modulus."
+      ],
+      "discussion": [
+        "A modulus retains the multiplicities of the boundary, so it can control maps to groups beyond the proper targets handled by the ordinary Jacobian. This theorem starts with the actual map, constructs the needed divisor without shrinking its domain, and supplies the algebraic factorization. The Picard-one torsor records the absence of a chosen origin: selecting a rational base point is unnecessary.",
+        "Serre develops maps from curves to commutative groups and generalized Jacobians in Chapters III and V of Algebraic Groups and Class Fields. The formal result links modulus existence to the constructed group and torsor over the original field, while keeping the full Cartier divisor and the equivariance equation."
+      ],
+      "history": [
+        "The modulus approach connects the mapping properties of open curves with generalized Jacobians. Chapters III and V of Serre's Algebraic Groups and Class Fields provide the mathematical reference for these two parts."
+      ],
+      "references": [
+        "serre-algebraic-groups-class-fields"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGroupPicardOneFactorization.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.exists_modulus_unique_picardOneFactor"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGeometricModulusExistence.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.exists_group_geometricRegularMapHasModulus"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGroupPointedFactorization.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.exists_modulus_unique_pointedGroupFactor",
+          "show": true
+        },
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGroupCommonModulus.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.exists_common_group_geometricRegularMapHasModulus"
+        }
+      ]
+    },
+    {
+      "slug": "least-conductor",
+      "title": "Least conductors exist, and the conductor of a product map is their coefficientwise maximum",
+      "kind": "theorem",
+      "summary": "An actual map from an open curve constructs its unique least full conductor, with an exact coefficientwise formula for product-valued maps.",
+      "statement": [
+        "Let $k$ be algebraically closed in any characteristic, let $C/k$ be a smooth proper integral curve, let $U\\subseteq C$ be nonempty, and let $q:U\\to G$ be a morphism to a separated commutative group scheme locally of finite type. Let $a_q$ be its function on places with values in $G(k)$, equal to the actual point values on $U$ and extended by the identity outside $U$. There is a unique effective place modulus $D_q$ such that, for every effective place modulus $E$,",
+        "$$a_q\\text{ has full modulus }E\\quad\\Longleftrightarrow\\quad D_q\\le E.$$",
+        "In additive notation, having full modulus $E$ means $\\sum_v\\operatorname{ord}_v(f)a_q(v)=0$ for every nonzero rational function $f\\equiv1\\pmod E$. Thus the conductor here classifies moduli of the specified point-value function on all places.",
+        "The inequality compares every place multiplicity. The conductor has coefficient zero at all places centered in $U$; its support may be strictly smaller than $C\\setminus U$. The actual map supplies both a modulus and its unique reciprocal local symbol, without requiring either as input.",
+        "For another such map $r:U\\to H$, the conductor of the map into the product group satisfies",
+        "$$D_{(q,r)}=D_q\\vee D_r,\\qquad D_{(q,r)}(v)=\\max\\{D_q(v),D_r(v)\\}.$$"
+      ],
+      "discussion": [
+        "A modulus can often be enlarged, so existence alone leaves many choices. The conductor removes that ambiguity by specifying the least allowed multiplicity at every place. Classifying all moduli as those above it is stronger than finding a modulus of minimum total degree.",
+        "For a map to a product group, each coordinate imposes its own condition and the least simultaneous bound is their coefficientwise maximum. The calculation uses the actual regular maps and applies to nonproper targets as well. The local-symbol and modulus viewpoint is developed in Serre’s Algebraic Groups and Class Fields."
+      ],
+      "history": [
+        "Serre’s treatment of maps from curves to commutative algebraic groups uses moduli and local symbols to describe their boundary behavior and their relation to generalized Jacobians."
+      ],
+      "references": [
+        "serre-algebraic-groups-class-fields"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGroupLocalSymbolExistence.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.existsUnique_group_regularMap_modulus_classification"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGroupLocalSymbolExistence.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.exists_group_regularMap_localSymbol"
+        },
+        {
+          "path": "Nyll/JacobianVarieties/Generalized/GeneralGroupProductConductor.lean",
+          "name": "AlgebraicGeometry.GeneralizedJacobian.exists_group_regularMap_product_conductors",
+          "show": true
+        },
+        {
+          "path": "Nyll/AlgebraicCurves/Models/Charts/OpenPointValues.lean",
+          "name": "AlgebraicCurve.CurveModel.regularMapValues"
+        }
+      ]
+    },
+    {
       "slug": "genus-one",
-      "title": "A pointed genus-one curve is its Jacobian",
+      "title": "A pointed genus-one curve is isomorphic to its Jacobian",
       "kind": "theorem",
       "summary": "In characteristic zero, the constructed Abel–Jacobi map for a genus-one curve is an isomorphism.",
       "statement": [
@@ -204,33 +204,8 @@
       ]
     },
     {
-      "slug": "torsion-cardinality",
-      "title": "Counting torsion points",
-      "kind": "theorem",
-      "summary": "An abelian variety of dimension d over an algebraically closed field of characteristic zero has n^(2d) points killed by n.",
-      "statement": [
-        "Let $K$ be algebraically closed of characteristic $0$. Let $A/K$ carry a commutative relative group law and the source's abelian-scheme properties, with smooth relative dimension $d$. For every integer $n\\ge1$,",
-        "$$\\#A(K)[n]=n^{2d},\\qquad A(K)[n]=\\{x\\in A(K):nx=0\\}.$$"
-      ],
-      "discussion": [
-        "For a Jacobian, the torsion count is $n^{2g}$, directly linking the genus to the finite groups from which Tate modules are assembled. Their size is a basic input to the study of Galois representations and étale cohomology. Milne's Abelian Varieties derives the count from the degree of multiplication by an integer in Section 8 and explains the passage to prime-power Tate modules."
-      ],
-      "history": [
-        "Milne's Abelian Varieties derives the torsion count from the degree of multiplication by an integer in Section 8. Its discussion also explains the passage to prime-power Tate modules, linking finite torsion groups with the linear objects used in arithmetic geometry."
-      ],
-      "references": [
-        "milne-abelian"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/JacobianVarieties/Picard/TorsionCardinality.lean",
-          "name": "GoodReductionJacobian.RelativeGroupLaw.natCard_torsionLevel_eq_pow"
-        }
-      ]
-    },
-    {
       "slug": "proper-h1",
-      "title": "Finite étale H¹ of a proper curve",
+      "title": "Cardinality of étale H¹ of a proper curve: the genus formula",
       "kind": "theorem",
       "summary": "The actual first étale cohomology group with roots-of-unity coefficients has the expected genus-dependent cardinality.",
       "statement": [
@@ -257,7 +232,7 @@
     },
     {
       "slug": "open-h1",
-      "title": "The contribution of punctures to H¹",
+      "title": "Cardinality of étale H¹ of an open curve: the genus and boundary formula",
       "kind": "theorem",
       "summary": "For a nonempty finite boundary, the first étale cohomology count gains r−1 boundary directions.",
       "statement": [
@@ -282,7 +257,7 @@
     },
     {
       "slug": "abel-jacobi-tate",
-      "title": "Abel–Jacobi and the full Tate module",
+      "title": "Abel–Jacobi identifies the abelianized fundamental group with the full Tate module",
       "kind": "theorem",
       "summary": "Under explicit Picard representation and class-compatibility hypotheses, Abel–Jacobi identifies the abelianized fundamental group with the full Tate module.",
       "statement": [

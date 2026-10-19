@@ -29,6 +29,17 @@ It fetches the current published revisions and refreshes Lean excerpts and links
 The editorial selection and historical prose are maintained here; new results
 are added deliberately, rather than automatically inventing explanations.
 
+Select mathematically substantial proved results with useful conclusions.
+Do not make individual pages for a definition, a notation, a routine calculation,
+or a small step of a proof; explain necessary definitions within a result's page.
+A constructed equivalence or isomorphism can be a substantial result even when
+Lean expresses it as a definition. Its inverse and proof obligations must actually
+be supplied. Classify pages by their mathematical content, not the command token.
+
+There is no minimum or target number of pages per library. An empty selection is
+preferable to padding it with minor results. Keep unfinished local prototypes out
+of the selection, and state the precise hypotheses and scope of partial theorems.
+
 `review-lock.json` records the reviewed declarations and their transitive NYLL
 source dependencies, together with the dependency manifest and Lean toolchain.
 Changes to these inputs stop deployment pending review, including proof changes

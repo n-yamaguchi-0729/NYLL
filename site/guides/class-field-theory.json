@@ -2,12 +2,13 @@
   "slug": "class-field-theory",
   "title": "Class Field Theory",
   "repository": "ClassFieldTheory",
-  "summary": "This library describes abelian extensions of local fields and number fields through arithmetic in the base field, explaining their Galois groups and how primes and norms behave.",
+  "summary": "This library studies abelian extensions of local fields, number fields, and global function fields through reciprocity, norm subgroups, and class fields.",
   "overview": [
     "Class field theory asks how the abelian extensions of a field can be described using the field itself. For a nonarchimedean local field, reciprocity identifies Galois groups with quotients of the multiplicative group by norm subgroups, and the existence theorem says which subgroups arise. For number fields, ray class groups describe Frobenius automorphisms, while the idèle class group gives a single description of all finite abelian extensions.",
-    "These descriptions also constrain ramification, determine the least ray class modulus needed for an extension, and relate global norm equations to local tests. Over the rational numbers, the Kronecker–Weber theorem makes the extensions concrete by placing them in cyclotomic fields. The global results here concern number fields, not global function fields. The local reciprocity map and Hilbert pairing results assert existence without imposing additional normalization."
+    "These descriptions also constrain ramification, determine the least ray class modulus needed for an extension, and relate global norm equations to local tests. Over the rational numbers, the Kronecker–Weber theorem makes the extensions concrete by placing them in cyclotomic fields. The selected local reciprocity map and Hilbert pairing results assert existence without imposing additional normalization.",
+    "For global function fields over finite fields, the actual idèle norm gives an inclusion-reversing classification of finite abelian extensions by open subgroups of finite index. Completing the idèle class group gives the absolute abelian Galois group. The local and global Artin maps agree at each place, with arithmetic Frobenius giving the normalization at unramified places."
   ],
-  "scopeNote": "The global results in this published library concern number fields; global function-field class field theory is outside its present scope. The entries distinguish the existence of a reciprocity map or pairing from any additional normalization properties.",
+  "scopeNote": "The selection covers local fields, number fields, and global function fields over finite fields. The function-field existence theorem uses the ordinary idèle-class topology; its local–global comparison concerns the actual constructed Artin maps. The selected local-field reciprocity and Hilbert-pairing results assert existence without imposing additional normalization.",
   "references": [
     {
       "id": "serre-local-fields",
@@ -55,12 +56,21 @@
       "doi": "10.1515/crll.1940.181.1",
       "url": "https://www.degruyterbrill.com/document/doi/10.1515/crll.1940.181.1/html",
       "note": "The publisher records the print year as 1940; the later online publication date is not the original publication year."
+    },
+    {
+      "id": "milne-adt",
+      "type": "book",
+      "author": "J. S. Milne",
+      "title": "Arithmetic Duality Theorems, second edition",
+      "year": 2006,
+      "url": "https://jmilne.org/math/Books/ADTnot.pdf",
+      "note": "Chapter I, Appendix A: Class field theory for function fields."
     }
   ],
   "entries": [
     {
       "slug": "finite-local-reciprocity",
-      "title": "Finite local reciprocity",
+      "title": "Local reciprocity for finite abelian extensions",
       "kind": "theorem",
       "summary": "A finite abelian extension is recovered as a quotient of the base field's multiplicative group by its norm subgroup.",
       "statement": [
@@ -90,7 +100,7 @@
     },
     {
       "slug": "profinite-local-reciprocity",
-      "title": "Profinite local reciprocity",
+      "title": "Local reciprocity and the abelian absolute Galois group",
       "kind": "theorem",
       "summary": "All finite abelian local extensions fit into one topological isomorphism.",
       "statement": [
@@ -121,7 +131,7 @@
     },
     {
       "slug": "local-existence",
-      "title": "The local existence correspondence",
+      "title": "Local class fields: classification by norm subgroups",
       "kind": "theorem",
       "summary": "Every open finite-index subgroup is a norm subgroup, with the correct reversal of inclusion.",
       "statement": [
@@ -148,7 +158,7 @@
     },
     {
       "slug": "finite-global-reciprocity",
-      "title": "Finite global reciprocity",
+      "title": "Artin reciprocity for finite abelian number-field extensions",
       "kind": "theorem",
       "summary": "A ray class Artin map realizes Frobenius automorphisms in a finite abelian number-field extension.",
       "statement": [
@@ -180,7 +190,7 @@
     },
     {
       "slug": "topological-global-reciprocity",
-      "title": "Topological global reciprocity",
+      "title": "Idelic reciprocity for number fields",
       "kind": "theorem",
       "summary": "The identity component is exactly the part removed from the idèle class group to obtain the abelian Galois group.",
       "statement": [
@@ -206,7 +216,7 @@
     },
     {
       "slug": "hasse-arf",
-      "title": "The Hasse–Arf theorem",
+      "title": "Hasse–Arf: integral ramification breaks",
       "kind": "theorem",
       "summary": "Upper ramification breaks of a finite abelian local extension are integral.",
       "statement": [
@@ -237,7 +247,7 @@
     },
     {
       "slug": "perfect-hilbert-pairing",
-      "title": "A perfect local Hilbert pairing",
+      "title": "Existence of a perfect local Hilbert pairing",
       "kind": "theorem",
       "summary": "Power classes are dual to their roots-of-unity-valued characters.",
       "statement": [
@@ -303,7 +313,7 @@
     },
     {
       "slug": "abelian-conductor",
-      "title": "The conductor of an abelian extension",
+      "title": "The least ray class modulus of an abelian extension",
       "kind": "theorem",
       "summary": "A unique least modulus measures which ray class fields contain the extension.",
       "statement": [
@@ -359,6 +369,94 @@
         {
           "path": "Nyll/ClassFieldTheory/KroneckerWeber/Core.lean",
           "name": "KroneckerWeber.exists_cyclotomicEmbedding"
+        }
+      ]
+    },
+    {
+      "slug": "function-field-class-fields",
+      "title": "Class field theory for global function fields",
+      "kind": "theorem",
+      "summary": "Open subgroups of finite index in the ordinary idèle class group classify finite abelian extensions, and completion gives absolute reciprocity.",
+      "statement": [
+        "Let $k$ be a finite field and $K/k$ a function field finite over a chosen $k(t)$. Write $C_K=\\mathbb A_K^\\times/K^\\times$ with its ordinary quotient topology. Every open subgroup $H\\subseteq C_K$ of finite index is exactly $N_{L/K}(C_L)$ for a unique finite abelian extension $L/K$ inside a fixed separable closure.",
+        "The actual norm map supplies an inclusion-reversing equivalence $L\\longmapsto N_{L/K}(C_L)$. The constructed finite Artin map and the completed absolute Artin map give",
+        "$$C_K/N_{L/K}(C_L)\\simeq\\operatorname{Gal}(L/K),\\qquad \\widehat{C_K}\\xrightarrow{\\sim}G_K^{\\mathrm{ab}}.$$",
+        "The completion uses all ordinary open subgroups of finite index, and the second isomorphism is an isomorphism of topological groups extending the constructed absolute Artin map. Norm cofinality is proved, rather than supplied as an existence hypothesis.",
+        "The Lean interface uses principal-divisor data: every nonzero function has a finitely supported divisor of valuation orders and degree zero. The library constructs these data from the function-field structure over the finite base field, and for its finite extensions."
+      ],
+      "discussion": [
+        "This is an existence and classification theorem: an open finite-index subgroup actually produces its class field. The same norm subgroups also determine the topology needed for completed reciprocity, so the finite classification and the absolute Galois description fit together.",
+        "The kernel is the image of the field extension’s idèle norm. This makes the correspondence usable for comparing concrete extensions and for recovering an extension from its norm subgroup. Milne’s Arithmetic Duality Theorems treats the function-field version in Chapter I, Appendix A."
+      ],
+      "history": [
+        "Function-field class field theory expresses abelian covering data through idèles and their norm groups. Milne’s Chapter I, Appendix A develops its local and global reciprocity formulations."
+      ],
+      "references": [
+        "milne-adt"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/GlobalClassFields/Classification.lean",
+          "name": "FunctionField.exists_classField_of_open"
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/GlobalClassFields/Classification.lean",
+          "name": "FunctionField.finiteAbelianFieldNormSubgroupOrderIso"
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/FiniteAbelian.lean",
+          "name": "FunctionField.abelianFiniteNormQuotientEquiv"
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/ProfiniteReciprocity.lean",
+          "name": "FunctionField.profiniteReciprocity",
+          "show": true
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/ProfiniteReciprocity.lean",
+          "name": "FunctionField.profiniteReciprocity_map"
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Fields/Curve.lean",
+          "name": "FunctionField.isCurveOver"
+        }
+      ]
+    },
+    {
+      "slug": "function-field-local-global",
+      "title": "Local–global compatibility of function-field Artin maps",
+      "kind": "theorem",
+      "summary": "The actual local Artin map agrees with global reciprocity on a one-place idèle and has the arithmetic Frobenius normalization.",
+      "statement": [
+        "Let $L/K$ be a finite abelian extension of global function fields over a finite field $k$, with compatible rational-parameter structures and principal-divisor data. Let $w$ be a place of $L$ above $v$ of $K$. For $x\\in K_v^\\times$, write $[x]_v\\in C_K$ for the class of the idèle equal to $x$ at $v$ and $1$ elsewhere. Then",
+        "$$\\operatorname{Art}_{w}(x)=\\operatorname{Art}_{L/K}([x]_v)\\quad\\text{in }\\operatorname{Gal}(L/K).$$",
+        "If the ramification index at $w$ is $1$, the decomposition-group Artin map satisfies",
+        "$$\\operatorname{Art}^{D_w}_{w}(x)=\\operatorname{Frob}_w^{\\operatorname{ord}_v(x)}.$$",
+        "Here $\\operatorname{Frob}_w$ induces $y\\mapsto y^{\\#\\kappa(v)}$ on the residue field. In particular a uniformizer maps to arithmetic Frobenius, and local units map to the identity in the unramified case."
+      ],
+      "discussion": [
+        "The comparison identifies the independently constructed local and global maps. It permits a global Artin value to be calculated place by place and fixes the Frobenius convention through its residue-field action.",
+        "The unramified formula provides a concrete calculation for every local element, including its valuation and unit part. Local reciprocity and the expression of global reciprocity through local maps are developed together in Milne’s function-field appendix."
+      ],
+      "history": [
+        "Milne’s Arithmetic Duality Theorems, Chapter I, Appendix A presents local reciprocity with the arithmetic Frobenius convention and its relation to global reciprocity."
+      ],
+      "references": [
+        "milne-adt"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/LocalGlobalCompatibility.lean",
+          "name": "FunctionField.localArtin_eq_abelianFiniteArtin_placeIdele"
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/UnramifiedFrobenius.lean",
+          "name": "FunctionField.localDecompositionArtin_eq_unramifiedFrobenius_zpow",
+          "show": true
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/UnramifiedFrobenius.lean",
+          "name": "FunctionField.unramifiedDecompositionFrobenius_residue"
         }
       ]
     }
