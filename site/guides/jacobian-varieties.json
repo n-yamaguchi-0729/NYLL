@@ -74,11 +74,11 @@
         "Let $k$ be any field, let $C/k$ be a smooth proper geometrically integral curve, let $U\\subseteq C$ be a nonempty open subscheme, and let $G/k$ be a separated commutative group scheme locally of finite type. Given a $k$-morphism $q:U\\to G$, there is a full effective Cartier divisor $D$ over $k$ with $C\\setminus|D|=U$ for which $q$ satisfies the geometric modulus condition.",
         "For this returned divisor, let $J_D$ be the generalized Jacobian, $J_D^1$ its intrinsic Picard-one torsor, and $a_D^1:U\\to J_D^1$ the Abel map. There is a unique pair consisting of a group-scheme morphism $\\phi:J_D\\to G$ and a $k$-morphism $F:J_D^1\\to G$ such that",
         "$$q=F\\circ a_D^1,\\qquad F(a\\cdot x)=\\phi(a)F(x)$$",
-        "where equivariance holds on points valued in every $k$-scheme. Neither a rational point of $C$, a preassigned modulus, nor perfectness of $k$ is required. The target need not be smooth or connected. Uniqueness is for the pair $(\\phi,F)$ with the returned $D$ fixed, not for the divisor itself.",
+        "where equivariance holds on points valued in every $k$-scheme. For the resulting modulus $D$, the pair $(\\phi,F)$ is unique.",
         "If a point $\\varepsilon\\in U(k)$ is supplied and $q(\\varepsilon)=1$, there is also a direct pointed form: the map constructs such a divisor $D$ and a unique group-scheme morphism $\\phi:J_D\\to G$ with $q=\\phi\\circ a_{D,\\varepsilon}$. Two maps from the same $U$ can be given a common ground-field modulus."
       ],
       "discussion": [
-        "A modulus retains the multiplicities of the boundary, so it can control maps to groups beyond the proper targets handled by the ordinary Jacobian. This theorem starts with the actual map, constructs the needed divisor without shrinking its domain, and supplies the algebraic factorization. The Picard-one torsor records the absence of a chosen origin: selecting a rational base point is unnecessary.",
+        "A modulus retains boundary multiplicities and controls maps to commutative algebraic groups. The theorem factors the given morphism through the Picard degree-one torsor of a suitable modulus.",
         "Serre develops maps from curves to commutative groups and generalized Jacobians in Chapters III and V of Algebraic Groups and Class Fields. The formal result links modulus existence to the constructed group and torsor over the original field, while keeping the full Cartier divisor and the equivariance equation."
       ],
       "history": [
@@ -142,7 +142,7 @@
         "Let $k$ be algebraically closed in any characteristic, let $C/k$ be a smooth proper integral curve, let $U\\subseteq C$ be nonempty, and let $q:U\\to G$ be a morphism to a separated commutative group scheme locally of finite type. Let $a_q$ be its function on places with values in $G(k)$, equal to the actual point values on $U$ and extended by the identity outside $U$. There is a unique effective place modulus $D_q$ such that, for every effective place modulus $E$,",
         "$$a_q\\text{ has full modulus }E\\quad\\Longleftrightarrow\\quad D_q\\le E.$$",
         "In additive notation, having full modulus $E$ means $\\sum_v\\operatorname{ord}_v(f)a_q(v)=0$ for every nonzero rational function $f\\equiv1\\pmod E$. Thus the conductor here classifies moduli of the specified point-value function on all places.",
-        "The inequality compares every place multiplicity. The conductor has coefficient zero at all places centered in $U$; its support may be strictly smaller than $C\\setminus U$. The actual map supplies both a modulus and its unique reciprocal local symbol, without requiring either as input.",
+        "The inequality compares every place multiplicity. The conductor has coefficient zero at all places centered in $U$; its support may be strictly smaller than $C\\setminus U$. The map admits a modulus and a unique reciprocal local symbol.",
         "For another such map $r:U\\to H$, the conductor of the map into the product group satisfies",
         "$$D_{(q,r)}=D_q\\vee D_r,\\qquad D_{(q,r)}(v)=\\max\\{D_q(v),D_r(v)\\}.$$"
       ],

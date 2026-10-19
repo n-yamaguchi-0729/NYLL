@@ -39,10 +39,10 @@
       "summary": "For a geometrically connected, quasi-compact, quasi-separated scheme over a field, the geometric fundamental group is the kernel of the natural map to the absolute Galois group.",
       "statement": [
         "Let $k$ be a field, $L$ a separable closure, and $X\\to\\operatorname{Spec}k$ a quasi-compact, quasi-separated scheme such that $X_L$ is connected. Choose a geometric point $\\xi:\\operatorname{Spec}\\Omega\\to X_L$, with $\\Omega$ separably closed, and let $x$ be its image in $X$. Then\n$$1\\longrightarrow\\pi_1^{\\mathrm{et}}(X_L,\\xi)\\longrightarrow\\pi_1^{\\mathrm{et}}(X,x)\\longrightarrow\\operatorname{Gal}(L/k)\\longrightarrow1$$\nis exact.",
-        "The maps are the continuous homomorphisms induced by pullback and the structure morphism. Exactness includes injectivity on the left, surjectivity on the right, and equality of the kernel with the image. No splitting is asserted."
+        "The maps are the continuous homomorphisms induced by pullback and the structure morphism. Exactness includes injectivity on the left, surjectivity on the right, and equality of the kernel with the image."
       ],
       "discussion": [
-        "The sequence separates the geometry over separably closed constants from the arithmetic of the base field, while explaining how both enter a single fundamental group. It does not choose a splitting. This geometric–arithmetic viewpoint was developed in SGA 1; purely inseparable invariance relates the separable-closure formulation here to the algebraic-closure formulation in the Stacks Project. See [Stacks Project, Lemma 58.14.3](https://stacks.math.columbia.edu/tag/0BTX)."
+        "The sequence separates the geometry over separably closed constants from the arithmetic of the base field, while explaining how both enter a single fundamental group. This geometric–arithmetic viewpoint was developed in SGA 1; purely inseparable invariance relates the separable-closure formulation here to the algebraic-closure formulation in the Stacks Project. See [Stacks Project, Lemma 58.14.3](https://stacks.math.columbia.edu/tag/0BTX)."
       ],
       "history": [
         "The geometric–arithmetic sequence is part of the fundamental-group theory developed in SGA 1. Stacks Project Lemma 58.14.3 gives the algebraic-closure formulation; purely inseparable invariance relates it to the separable-closure formulation."
@@ -65,7 +65,7 @@
       "summary": "The sheaf of sections identifies finite étale schemes with finite locally constant sheaves of sets on the small étale site.",
       "statement": [
         "For every scheme $X$, there is an equivalence\n$$\\operatorname{FinEt}(X)\\simeq\\mathbf{Sh}_{\\mathrm{flc}}(X_{\\mathrm{et}},\\mathbf{Set}).$$\nThe right-hand category is the full subcategory of sheaves that are étale locally isomorphic to constant sheaves associated with finite sets.",
-        "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$. No connectedness, noetherianity, quasi-compactness, or assumption that $X$ lies over a field is included."
+        "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$."
       ],
       "discussion": [
         "A finite cover can be viewed as a locally varying finite set whose gluing determines both the scheme and its morphisms. On a connected base with a geometric point, this also connects it to continuous finite fundamental-group actions. The correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology, expressed through étale representability. See [Stacks Project, Section 59.64](https://stacks.math.columbia.edu/tag/09Y8)."
@@ -126,7 +126,7 @@
         "$$p^*:\\operatorname{FEt}(X)\\xrightarrow{\\sim}\\operatorname{FEt}(X_K).$$",
         "Every finite étale cover of $X_K$ therefore descends to $X$, and morphisms between such covers descend uniquely. For any geometric point $\\xi$ of $X_K$, the projection induces a continuous group isomorphism",
         "$$\\pi_1^{\\mathrm{\\acute et}}(X_K,\\xi)\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(X,p\\xi).$$",
-        "No smoothness, reducedness, or connectedness assumption on X is required. The comparison is natural under further extensions of the coefficient field and morphisms of the original proper schemes."
+        "The comparison is natural under further extensions of the coefficient field and morphisms of the original proper schemes."
       ],
       "discussion": [
         "This permits the ground field to be enlarged for geometric calculations while preserving all finite étale covering data. The construction proves essential surjectivity for the actual pullback functor, so it supplies descent of covers as well as comparison of existing ones.",
@@ -169,7 +169,7 @@
         "$$R^q f_*F=0\\quad(q>0),\\qquad H^n_{\\mathrm{\\acute et}}(Y,f_*F)\\simeq_\\Lambda H^n_{\\mathrm{\\acute et}}(X,F)\\quad(n\\ge0).$$",
         "For any $g:Y^{\\prime}\\to Y$, form the cartesian square with $X^{\\prime}=X\\times_Y Y^{\\prime}$, projection $g^{\\prime}:X^{\\prime}\\to X$, and $f^{\\prime}:X^{\\prime}\\to Y^{\\prime}$. The canonical base-change morphism is an isomorphism:",
         "$$g^*f_*F\\xrightarrow{\\sim}f^{\\prime}_*(g^{\\prime})^*F.$$",
-        "No torsion condition on the coefficients, flatness, finite-presentation condition on f, or restriction on the base-change morphism is required. The cohomology comparison is natural in F."
+        "The cohomology comparison is natural in F."
       ],
       "discussion": [
         "Finite morphisms can be used to move an étale cohomology calculation to the base scheme without losing higher-degree information. Exactness of direct image removes the higher direct-image terms, and arbitrary base change makes this compatible with passing to fibers or changing the base.",

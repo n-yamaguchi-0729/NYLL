@@ -145,8 +145,8 @@
       "kind": "theorem",
       "summary": "A nonpositive presentation polynomial certifies that an actual pro-p group is infinite.",
       "statement": [
-        "Let $p$ be prime and let $G$ be a profinite group with a displayed finite pro-$p$ presentation on $d$ generators and $r$ relators. For each relator choose a lower Zassenhaus depth $\\nu_i$, and assume those depth bounds hold for the displayed presentation. No minimality assumption is required.",
-        "If some real $t$ satisfies $0\\le t<1$ and $$1-dt+\\sum_{i=1}^{r}t^{\\nu_i}\\le0,$$ then $G$ is infinite. The theorem takes an actual presentation object, not merely numerical values for $d$, $r$, and the depths."
+        "Let $p$ be prime and let $G$ be a profinite group with a displayed finite pro-$p$ presentation on $d$ generators and $r$ relators. For each relator choose a lower Zassenhaus depth $\\nu_i$, and assume those depth bounds hold for the displayed presentation.",
+        "If some real $t$ satisfies $0\\le t<1$ and $$1-dt+\\sum_{i=1}^{r}t^{\\nu_i}\\le0,$$ then $G$ is infinite."
       ],
       "discussion": [
         "Relator depths matter because deep relations contribute little to the polynomial, allowing extra conditions to be imposed while preserving infinitude. Countably many added relations also require a limiting argument. Golod and Shafarevich’s 1964 paper established infinite class field towers through generator–relation inequalities; retaining individual depths makes that method useful for constructions with additional splitting conditions."
@@ -171,7 +171,7 @@
       "summary": "Evaluation identifies a profinite abelian group with its continuous character bidual.",
       "statement": [
         "Let $G$ be a compact, totally disconnected abelian topological group. Its Pontryagin dual $G^\\vee$ consists of continuous circle-valued characters with the compact-open topology. The source constructs a continuous group isomorphism $$G\\xrightarrow{\\sim}(G^\\vee)^\\vee,\\qquad g\\longmapsto\\bigl(\\chi\\longmapsto\\chi(g)\\bigr).$$",
-        "This is an isomorphism of the actual topological groups. In particular, finite torsion is retained; this is not an identification obtained only after tensoring with a field."
+        "This is an isomorphism of topological groups and preserves finite torsion."
       ],
       "discussion": [
         "Finite quotient characters distinguish elements, while compactness allows compatible finite evaluation conditions to be solved simultaneously. The resulting identification preserves both topology and finite torsion, giving a canonical passage between a group and its character data. This is the profinite abelian case of the duality theory developed in Pontrjagin’s 1934 paper on topological commutative groups."

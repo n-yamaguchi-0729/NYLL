@@ -4,8 +4,7 @@
   "repository": "AnabelianGeometry",
   "summary": "This library reconstructs genus-zero curves over number fields up to isomorphism from their arithmetic fundamental groups, and proves centralizer rigidity for geometric hyperbolic curves.",
   "overview": [
-    "For a curve over a number field $k$, its arithmetic fundamental group records finite étale covers together with a projection to the absolute Galois group $G_k$. The genus-zero reconstruction theorem shows that this information determines the curve up to $k$-isomorphism when at least three geometric points are removed from a smooth proper geometrically integral genus-zero curve. The compactification need not be a projective line over $k$, and the punctures need not be $k$-rational.",
-    "This is weak reconstruction: an isomorphism of the arithmetic groups over $G_k$ yields an isomorphism of curves. Identifying the supplied group isomorphism with the map induced by the recovered curve isomorphism, proving uniqueness in that correspondence, and extending reconstruction to general positive-genus hyperbolic curves remain further goals. The formalized arithmetic result is over number fields.",
+    "For a curve over a number field $k$, its arithmetic fundamental group records finite étale covers together with a projection to the absolute Galois group $G_k$. The genus-zero reconstruction theorem shows that this information determines the curve up to $k$-isomorphism when at least three geometric points are removed from a smooth proper geometrically integral genus-zero curve.",
     "Over algebraically closed fields of characteristic zero, the library proves slimness for proper and punctured hyperbolic curves: every open subgroup of the geometric fundamental group has trivial centralizer."
   ],
   "scopeNote": "Genus-zero weak reconstruction over number fields establishes existence of a curve isomorphism. It does not yet realize a prescribed fundamental-group isomorphism or prove uniqueness in that correspondence. General positive-genus reconstruction, arbitrary finitely generated characteristic-zero base fields, and positive-characteristic analogues are outside the selected reconstruction theorem.",
@@ -32,18 +31,6 @@
       "doi": "10.1515/crll.1990.411.205",
       "url": "https://doi.org/10.1515/crll.1990.411.205",
       "note": "Original genus-zero reconstruction theorem. The selected Lean results use number fields; the original theorem also treats finitely generated extensions of the rationals."
-    },
-    {
-      "id": "nakamura-weight-filtration",
-      "type": "journal-article",
-      "author": "Hiroaki Nakamura",
-      "title": "Galois rigidity of pure sphere braid groups and profinite calculus",
-      "year": 1994,
-      "journal": "Journal of Mathematical Sciences, the University of Tokyo",
-      "volume": "1",
-      "pages": "71–136",
-      "url": "https://www.ms.u-tokyo.ac.jp/journal/pdf/jms010103.pdf",
-      "note": "Section 2.1 explains the weight characterization of inertia and its use in the earlier reconstruction theorem. This reference does not assert that all braid-group or pro-l results in the paper are formalized."
     }
   ],
   "entries": [
@@ -55,21 +42,18 @@
       "statement": [
         "Let $k$ be a number field and let $C_1,C_2$ be smooth proper geometrically integral curves over $k$ of geometric genus $0$. Let $U_i\\subset C_i$ be nonempty opens with $r_i=\\#(C_{i,\\bar k}\\setminus U_{i,\\bar k})\\ge3$. Choose geometric points $x_i$ and the corresponding arithmetic projections $p_i:\\pi_1^{\\mathrm{\\acute et}}(U_i,x_i)\\to G_k$. If a continuous group isomorphism $\\alpha$ satisfies",
         "$$\\alpha:\\pi_1^{\\mathrm{\\acute et}}(U_1,x_1)\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(U_2,x_2),\\qquad p_2\\circ\\alpha=p_1,$$",
-        "then there exists a $k$-scheme isomorphism $U_1\\cong U_2$. Rational points, rational punctures, and a chosen identification $C_i\\cong\\mathbb P^1_k$ are not hypotheses.",
+        "then there exists a $k$-scheme isomorphism $U_1\\cong U_2$.",
         "For $U_S=\\mathbb P^1_k\\setminus S$ and $U_T=\\mathbb P^1_k\\setminus T$, where $S,T\\subset\\mathbb P^1(k)$ are finite sets with at least three elements, the rational-configuration theorem gives more: a bijection $\\sigma:S\\to T$, an element $f\\in\\mathrm{GL}_2(k)$ with $[f](p)=\\sigma(p)$ for every $p\\in S$, and the induced isomorphism of the opens. It also constructs a geometric fundamental-group isomorphism compatible with $\\alpha$ that carries the inertia group at $p$ to a conjugate of the inertia group at $\\sigma(p)$.",
-        "The conclusion is weak reconstruction: existence of a curve isomorphism. Neither theorem asserts that the resulting curve isomorphism induces the original $\\alpha$, or proves uniqueness in that stronger correspondence."
+        "This is weak reconstruction: existence of a curve isomorphism. Realization of the prescribed $\\alpha$ by a unique curve isomorphism is the stronger Isom correspondence and remains unfinished."
       ],
       "discussion": [
-        "The arithmetic projection retains information that the geometric group alone loses. In the rational case, the conclusion recovers the positions of the punctures up to a projective linear change of coordinates, with the recovered permutation tied to inertia. Nakamura’s 1990 theorem established this genus-zero reconstruction principle; his 1994 treatment explains the weight characterization that recognizes inertia from the Galois action.",
-        "The formal proof constructs the auxiliary finite covers and their point comparisons from the original arithmetic group isomorphism. For a general genus-zero compactification, it passes to finite rational models and descends the reconstructed map to $k$. Those models and their compatibility are proved intermediate conclusions, rather than additional assumptions on the theorem’s input.",
-        "The selected formal result uses number fields. Recovering a prescribed group isomorphism, with uniqueness up to the appropriate inner conjugation, is the stronger Isom correspondence and remains unfinished here; the same is true of reconstruction for general hyperbolic curves of positive genus."
+        "The arithmetic projection retains information that the geometric group alone loses. In the rational case, the conclusion recovers the positions of the punctures up to a projective linear change of coordinates, with the recovered permutation tied to inertia. Nakamura’s 1990 theorem established this genus-zero reconstruction principle."
       ],
       "history": [
-        "Nakamura’s 1990 paper treats punctured projective lines over fields finitely generated over the rationals. Section 2.1 of his 1994 paper revisits the nonlinear weight filtration and its inertia characterization. The Lean statements selected here give number-field weak reconstruction, with a separate descent endpoint covering nonsplit genus-zero compactifications and nonrational punctures."
+        "Nakamura’s 1990 paper treats punctured projective lines over fields finitely generated over the rationals. The selected Lean statements establish weak reconstruction over number fields."
       ],
       "references": [
-        "nakamura-punctured-lines",
-        "nakamura-weight-filtration"
+        "nakamura-punctured-lines"
       ],
       "lean": [
         {

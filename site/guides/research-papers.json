@@ -47,10 +47,10 @@
       "statement": [
         "Let $K$ have characteristic $0$ and a discrete valuation with residue characteristic $p>0$. For every finite Galois extension $L/K$,",
         "$$\\operatorname{Gal}(L/K)\\longrightarrow\\operatorname{Aut}(G_L^{\\mathrm{ab}}/p)$$",
-        "is injective. In addition, $G_K$ is $p$-ab-faithful. Neither completeness nor Henselianity of the given valuation is assumed in this declaration."
+        "is injective. In addition, $G_K$ is $p$-ab-faithful."
       ],
       "discussion": [
-        "The field need only carry a discrete valuation of mixed characteristic $(0,p)$; completeness and Henselianity are unnecessary. Detection through a single prime thus applies beyond ordinary local fields. Yamaguchi's Theorem 3.6 proves this using Kummer theory and a reduction to prime-degree extensions, providing an input to the higher-local-field theorem and later applications to solvable Galois quotients."
+        "Yamaguchi's Theorem 3.6 proves this using Kummer theory and a reduction to prime-degree extensions, providing an input to the higher-local-field theorem and later applications to solvable Galois quotients."
       ],
       "history": [
         "This is Theorem 3.6 of Yamaguchi's 2026 ab-faithfulness paper. Its mixed-characteristic argument uses Kummer theory and a reduction to prime-degree extensions. Within the paper, this valuation-theoretic result supplies an important input for the higher-local-field theorem and subsequent applications to solvable quotients."
@@ -112,8 +112,8 @@
       "statement": [
         "Let $K$ be a field and assume its absolute Galois group $G_K$ is ab-faithful: for every open subgroup $H$ and open normal subgroup $N\\subseteq H$, the conjugation action of $H/N$ on the topological abelianization $N^{\\mathrm{ab}}$ is faithful. Write $G_K^{(m)}$ for its maximal $m$-step solvable quotient. Then",
         "$$Z(G_K^{(m)})=1\\qquad(m\\ge2).$$",
-        "This statement holds in every characteristic and does not take formal Hilbert 90 or a cyclotomic orientation as extra input. For slimness, the cited second theorem additionally assumes that $K(\\mu_{p^\\infty})/K$ is infinite for every prime $p\\ne\\operatorname{char}K$, and that a cyclic extension of degree $p$ exists when $\\operatorname{char}K=p>0$. Under these hypotheses, the centralizer of every open subgroup of $G_K^{(m)}$ is trivial.",
-        "Slimness is also proved directly, without an ab-faithfulness or orientation hypothesis supplied by the user, for each of these classes of fields: $K$ infinite and finitely generated over its prime field; $K$ admitting an embedding into a finitely generated extension of $\\mathbb Q_p$ for a prime $p$; and $K$ a higher local field of positive dimension. In all three cases $G_K^{(m)}$ is slim for every $m\\ge2$."
+        "This statement holds in every characteristic. For slimness, the cited second theorem additionally assumes that $K(\\mu_{p^\\infty})/K$ is infinite for every prime $p\\ne\\operatorname{char}K$, and that a cyclic extension of degree $p$ exists when $\\operatorname{char}K=p>0$. Under these hypotheses, the centralizer of every open subgroup of $G_K^{(m)}$ is trivial.",
+        "Slimness also holds for each of these classes of fields: $K$ infinite and finitely generated over its prime field; $K$ admitting an embedding into a finitely generated extension of $\\mathbb Q_p$ for a prime $p$; and $K$ a higher local field of positive dimension. In all three cases $G_K^{(m)}$ is slim for every $m\\ge2$."
       ],
       "discussion": [
         "Finite-step solvable quotients retain only a bounded number of layers of commutators. Center-freeness says that this truncation still leaves no nontrivial element invisible to every inner automorphism, once ab-faithfulness is available.",

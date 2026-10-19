@@ -16,6 +16,10 @@ scope section. An entry opens with its short `summary`, followed by `discussion`
 explaining its significance and a little historical context. Avoid restating the
 summary. The longer `history` field remains editorial source material, without a
 separate displayed section. References must support the displayed explanation.
+State a theorem's hypotheses and conclusion directly. Omit lists of assumptions
+it does not require, descriptions of inputs removed during development, and
+proof-completion commentary. Cite the source of the stated result; do not add
+loosely related papers to supply background or imply that their proofs were used.
 
 Guide typography uses the role-based variables in `site/assets/site.css`, shared
 with the homepage and source browser. Keep the homepage's appearance and align

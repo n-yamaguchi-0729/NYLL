@@ -8,7 +8,7 @@
     "The Hasse–Arf theorem constrains ramification in abelian local extensions. The cyclic Hasse norm theorem relates global norm equations to local tests, and the Kronecker–Weber theorem places every finite abelian extension of the rational numbers in a cyclotomic field.",
     "For global function fields over finite fields, the actual idèle norm gives an inclusion-reversing classification of finite abelian extensions by open subgroups of finite index. Completing the idèle class group gives the absolute abelian Galois group. The local and global Artin maps agree at each place, with arithmetic Frobenius giving the normalization at unramified places."
   ],
-  "scopeNote": "The selection covers local fields, number fields, and global function fields over finite fields. The function-field existence theorem uses the ordinary idèle-class topology. The selected local-field reciprocity theorem asserts existence without imposing additional normalization.",
+  "scopeNote": "The selection covers local fields, number fields, and global function fields over finite fields. The function-field existence theorem uses the ordinary idèle-class topology. The selected local-field reciprocity theorem asserts existence.",
   "references": [
     {
       "id": "serre-local-fields",
@@ -171,7 +171,7 @@
         "Let $k$ be a finite field and $K/k$ a function field finite over a chosen $k(t)$. Write $C_K=\\mathbb A_K^\\times/K^\\times$ with its ordinary quotient topology. Every open subgroup $H\\subseteq C_K$ of finite index is exactly $N_{L/K}(C_L)$ for a unique finite abelian extension $L/K$ inside a fixed separable closure.",
         "The actual norm map supplies an inclusion-reversing equivalence $L\\longmapsto N_{L/K}(C_L)$. The constructed finite Artin map and the completed absolute Artin map give",
         "$$C_K/N_{L/K}(C_L)\\simeq\\operatorname{Gal}(L/K),\\qquad \\widehat{C_K}\\xrightarrow{\\sim}G_K^{\\mathrm{ab}}.$$",
-        "The completion uses all ordinary open subgroups of finite index, and the second isomorphism is an isomorphism of topological groups extending the constructed absolute Artin map. Norm cofinality is proved, rather than supplied as an existence hypothesis.",
+        "The completion uses all ordinary open subgroups of finite index, and the second isomorphism is an isomorphism of topological groups extending the constructed absolute Artin map.",
         "The Lean interface uses principal-divisor data: every nonzero function has a finitely supported divisor of valuation orders and degree zero. The library constructs these data from the function-field structure over the finite base field, and for its finite extensions."
       ],
       "discussion": [
