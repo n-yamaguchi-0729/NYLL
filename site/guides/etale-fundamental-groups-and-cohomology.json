@@ -22,121 +22,13 @@
       "note": "Revised and annotated edition of the seminar volume first published in 1971 as Lecture Notes in Mathematics 224."
     },
     {
-      "id": "stacks-03qr",
+      "id": "stacks-project",
       "type": "online",
       "author": "The Stacks Project Authors",
-      "title": "Lemma 58.2.2: Schemes étale over a point",
+      "title": "The Stacks Project",
       "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/03QR",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-0bmv",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Lemma 58.3.4: Fiber functors on finite continuous group actions",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/0BMV",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-0bn6",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Lemma 58.4.1: Functors and homomorphisms of fundamental groups",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/0BN6",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-0btx",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Lemma 58.14.3: Geometric and arithmetic fundamental groups",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/0BTX",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-0bqn",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Proposition 58.8.4: Topological invariance of finite étale covers",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/0BQN",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-03pk",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Section 59.28: Kummer theory",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/03PK",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-03p7",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Section 59.24: Picard groups",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/03P7",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-09y8",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Section 59.64: Locally constant sheaves",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/09Y8",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-04e1",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Section 59.46: Closed immersions and pushforward",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/04E1",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-095s",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Section 59.91: The proper base change theorem",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/095S",
-      "note": "Living reference; consulted 15 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-0a49",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Lemma 58.9.3: Finite étale covers under extension of algebraically closed fields",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/0A49",
-      "note": "Living reference; consulted 19 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-03qp",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Proposition 59.55.2: Vanishing of finite higher direct images",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/03QP",
-      "note": "Living reference; consulted 19 October 2026. The tag is the stable identifier."
-    },
-    {
-      "id": "stacks-0959",
-      "type": "online",
-      "author": "The Stacks Project Authors",
-      "title": "Lemma 59.55.3: Finite direct image and base change",
-      "year": 2026,
-      "url": "https://stacks.math.columbia.edu/tag/0959",
-      "note": "Living reference; consulted 19 October 2026. The tag is the stable identifier."
+      "url": "https://stacks.math.columbia.edu/",
+      "note": "Chapters 58 (Fundamental Groups of Schemes) and 59 (Étale Cohomology)."
     }
   ],
   "entries": [
@@ -150,14 +42,14 @@
         "The forward functor takes the geometric fiber over $\\operatorname{Spec}K$. No finiteness condition is imposed on the entire scheme or the entire Galois set. Continuity nevertheless forces every individual orbit to be finite."
       ],
       "discussion": [
-        "Finite Galois orbits correspond to finite separable extensions, while arbitrary disjoint unions account for schemes with infinitely many components. This makes the étale geometry of a point accessible through field Galois theory and provides the basic model for fundamental groups of schemes. Grothendieck's SGA 1 seminar of 1960–61 developed that passage from field extensions to finite covers of schemes."
+        "Finite Galois orbits correspond to finite separable extensions, while arbitrary disjoint unions account for schemes with infinitely many components. This makes the étale geometry of a point accessible through field Galois theory and provides the basic model for fundamental groups of schemes. Grothendieck's SGA 1 seminar of 1960–61 developed that passage from field extensions to finite covers of schemes. See [Stacks Project, Lemma 58.2.2](https://stacks.math.columbia.edu/tag/03QR)."
       ],
       "history": [
         "Grothendieck's SGA 1 seminar of 1960–61 extended field Galois theory to finite covers of schemes. The classification over a field is the starting example; Stacks Project Lemma 58.2.2 includes arbitrary étale schemes."
       ],
       "references": [
         "sga1",
-        "stacks-03qr"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -176,14 +68,14 @@
         "The maps are the continuous homomorphisms induced by pullback and the structure morphism. Exactness includes injectivity on the left, surjectivity on the right, and equality of the kernel with the image. No splitting is asserted."
       ],
       "discussion": [
-        "The sequence separates the geometry over separably closed constants from the arithmetic of the base field, while explaining how both enter a single fundamental group. It does not choose a splitting. This geometric–arithmetic viewpoint was developed in SGA 1; purely inseparable invariance relates the separable-closure formulation here to the algebraic-closure formulation in the Stacks Project."
+        "The sequence separates the geometry over separably closed constants from the arithmetic of the base field, while explaining how both enter a single fundamental group. It does not choose a splitting. This geometric–arithmetic viewpoint was developed in SGA 1; purely inseparable invariance relates the separable-closure formulation here to the algebraic-closure formulation in the Stacks Project. See [Stacks Project, Lemma 58.14.3](https://stacks.math.columbia.edu/tag/0BTX)."
       ],
       "history": [
         "The geometric–arithmetic sequence is part of the fundamental-group theory developed in SGA 1. Stacks Project Lemma 58.14.3 gives the algebraic-closure formulation; purely inseparable invariance relates it to the separable-closure formulation."
       ],
       "references": [
         "sga1",
-        "stacks-0btx"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -202,13 +94,13 @@
         "If $X$ and $Y$ are connected and $\\xi:\\operatorname{Spec}\\Omega\\to X$ is a geometric point, with $\\Omega$ separably closed, the induced homomorphism is a topological group isomorphism\n$$\\pi_1^{\\mathrm{et}}(X,\\xi)\\cong\\pi_1^{\\mathrm{et}}(Y,f\\xi).$$\nIts underlying map is exactly the usual fundamental-group homomorphism associated with $f$."
       ],
       "discussion": [
-        "Nilpotent structure and purely inseparable changes can alter a scheme without altering its finite covering theory. This permits passage to reduced schemes or purely inseparable models in fundamental-group calculations, even though constructions involving the full structure sheaf may change. Known as topological invariance of finite étale covers, the result is formulated for universal homeomorphisms in the Stacks Project."
+        "Nilpotent structure and purely inseparable changes can alter a scheme without altering its finite covering theory. This permits passage to reduced schemes or purely inseparable models in fundamental-group calculations, even though constructions involving the full structure sheaf may change. Known as topological invariance of finite étale covers, the result is formulated for universal homeomorphisms in the Stacks Project. See [Stacks Project, Proposition 58.8.4](https://stacks.math.columbia.edu/tag/0BQN)."
       ],
       "history": [
         "This property is known as topological invariance of finite étale covers. Stacks Project Proposition 58.8.4 formulates it for universal homeomorphisms, encompassing both nilpotent thickenings and purely inseparable phenomena."
       ],
       "references": [
-        "stacks-0bqn"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -235,13 +127,13 @@
       ],
       "discussion": [
         "This permits the ground field to be enlarged for geometric calculations while preserving all finite étale covering data. The construction proves essential surjectivity for the actual pullback functor, so it supplies descent of covers as well as comparison of existing ones.",
-        "The Stacks Project records the algebraically closed case as Lemma 58.9.3. The formalization extends it to separably closed fields using invariance under purely inseparable changes, and identifies the resulting fundamental-group isomorphism with the projection-induced map."
+        "The Stacks Project records the algebraically closed case as [Lemma 58.9.3](https://stacks.math.columbia.edu/tag/0A49). The formalization extends it to separably closed fields using invariance under purely inseparable changes, and identifies the resulting fundamental-group isomorphism with the projection-induced map."
       ],
       "history": [
         "Invariance of finite étale covers under algebraically closed constant extension is part of the proper-cover theory in SGA 1 and Stacks Project Section 58.9."
       ],
       "references": [
-        "stacks-0a49",
+        "stacks-project",
         "sga1"
       ],
       "lean": [
@@ -274,13 +166,13 @@
         "More concretely, every unit $a\\in\\Gamma(X,\\mathcal O_X)^\\times$ admits a root after a finite étale surjective morphism $f:Y\\to X$: there is $b\\in\\Gamma(Y,\\mathcal O_Y)^\\times$ with $b^n=f^*a$. The cover can be chosen to have degree $n$ at every point."
       ],
       "discussion": [
-        "An étale-local root need not descend to a global root. The long exact sequence relates this obstruction to roots-of-unity torsors and torsion in the Picard group, connecting equations for roots with line bundles. Classical Kummer theory studies field extensions obtained by extracting roots; the sheaf sequence carries that viewpoint to schemes, as developed in the Stacks Project."
+        "An étale-local root need not descend to a global root. The long exact sequence relates this obstruction to roots-of-unity torsors and torsion in the Picard group, connecting equations for roots with line bundles. Classical Kummer theory studies field extensions obtained by extracting roots; the sheaf sequence carries that viewpoint to schemes, as developed in the Stacks Project. See [Stacks Project, Section 59.28](https://stacks.math.columbia.edu/tag/03PK)."
       ],
       "history": [
         "Classical Kummer theory studies extensions obtained by extracting roots. The sheaf sequence extends that viewpoint from fields to schemes; Stacks Project Section 59.28 develops this formulation and its relation to Picard groups."
       ],
       "references": [
-        "stacks-03pk"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -313,13 +205,13 @@
         "The current Lean theorem assumes characteristic zero; the classical vanishing statement holds over every field."
       ],
       "discussion": [
-        "First cohomology of the multiplicative group classifies line bundles. Over a field, every one-dimensional vector space has a basis, so the corresponding line bundle is trivial. The étale formulation of Hilbert 90 places the classical field-theoretic vanishing within this Picard-group interpretation and connects multiplicative cocycles with descent. The classical theorem holds in every characteristic, beyond the characteristic-zero case stated here."
+        "First cohomology of the multiplicative group classifies line bundles. Over a field, every one-dimensional vector space has a basis, so the corresponding line bundle is trivial. The étale formulation of Hilbert 90 places the classical field-theoretic vanishing within this Picard-group interpretation and connects multiplicative cocycles with descent. The classical theorem holds in every characteristic, beyond the characteristic-zero case stated here. See [Stacks Project, Section 59.24](https://stacks.math.columbia.edu/tag/03P7)."
       ],
       "history": [
         "The étale formulation of Hilbert 90 places a field-theoretic vanishing result within the general identification of first multiplicative-group cohomology with the Picard group. Stacks Project Section 59.24 explains that identification."
       ],
       "references": [
-        "stacks-03p7"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -338,13 +230,13 @@
         "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$. No connectedness, noetherianity, quasi-compactness, or assumption that $X$ lies over a field is included."
       ],
       "discussion": [
-        "A finite cover can be viewed as a locally varying finite set whose gluing determines both the scheme and its morphisms. On a connected base with a geometric point, this also connects it to continuous finite fundamental-group actions. The correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology, expressed through étale representability."
+        "A finite cover can be viewed as a locally varying finite set whose gluing determines both the scheme and its morphisms. On a connected base with a geometric point, this also connects it to continuous finite fundamental-group actions. The correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology, expressed through étale representability. See [Stacks Project, Section 59.64](https://stacks.math.columbia.edu/tag/09Y8)."
       ],
       "history": [
         "This correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology. Stacks Project Lemma 59.64.4 gives the representability statement for the étale site."
       ],
       "references": [
-        "stacks-09y8"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -368,13 +260,13 @@
       ],
       "discussion": [
         "Properness and the henselian base make the closed fiber sufficient for recovering global sections. In degree one, two classes that restrict to the same class were already equal on the original scheme. These conclusions hold with arbitrary module coefficients, without noetherianity or torsion assumptions.",
-        "The degree-one injectivity follows from the degree-zero comparison, an injective presentation, and exact direct image for the closed immersion. It is a step within proper base change theory; lifting every closed-fiber H¹ class remains a separate assertion."
+        "The degree-one injectivity follows from the degree-zero comparison, an injective presentation, and exact direct image for the closed immersion. It is a step within proper base change theory; lifting every closed-fiber H¹ class remains a separate assertion. See [Stacks Project, Section 59.91](https://stacks.math.columbia.edu/tag/095S)."
       ],
       "history": [
         "Proper base change was developed in SGA 4 to control étale cohomology in families. Stacks Project Section 59.91 includes the degree-zero result for henselian pairs, with henselian local rings as a special case."
       ],
       "references": [
-        "stacks-095s"
+        "stacks-project"
       ],
       "lean": [
         {
@@ -402,14 +294,13 @@
       ],
       "discussion": [
         "Finite morphisms can be used to move an étale cohomology calculation to the base scheme without losing higher-degree information. Exactness of direct image removes the higher direct-image terms, and arbitrary base change makes this compatible with passing to fibers or changing the base.",
-        "The geometric stalk of finite direct image is a finite product of stalks over the fiber. This description underlies both exactness and the canonical base-change comparison; the Stacks Project presents these results in Proposition 59.55.2 and Lemma 59.55.3."
+        "The geometric stalk of finite direct image is a finite product of stalks over the fiber. This description underlies both exactness and the canonical base-change comparison; the Stacks Project presents these results in [Proposition 59.55.2](https://stacks.math.columbia.edu/tag/03QP) and [Lemma 59.55.3](https://stacks.math.columbia.edu/tag/0959)."
       ],
       "history": [
         "Finite direct images form a basic case of étale base change. Stacks Project Section 59.55 derives their higher vanishing and base-change behavior from the finite-fiber stalk description."
       ],
       "references": [
-        "stacks-03qp",
-        "stacks-0959"
+        "stacks-project"
       ],
       "lean": [
         {
