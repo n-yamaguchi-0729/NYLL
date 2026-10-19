@@ -2,10 +2,10 @@
   "slug": "anabelian-geometry",
   "title": "Anabelian geometry",
   "repository": "AnabelianGeometry",
-  "summary": "This library reconstructs genus-zero curves over number fields up to isomorphism from their arithmetic fundamental groups, and proves centralizer rigidity for geometric hyperbolic curves.",
+  "summary": "Anabelian geometry seeks to recover algebraic curves from their arithmetic fundamental groups. This library formalizes genus-zero weak reconstruction over number fields and geometric slimness.",
   "overview": [
-    "For a curve over a number field $k$, its arithmetic fundamental group records finite étale covers together with a projection to the absolute Galois group $G_k$. The genus-zero reconstruction theorem shows that this information determines the curve up to $k$-isomorphism when at least three geometric points are removed from a smooth proper geometrically integral genus-zero curve.",
-    "Over algebraically closed fields of characteristic zero, the library proves slimness for proper and punctured hyperbolic curves: every open subgroup of the geometric fundamental group has trivial centralizer."
+    "Anabelian geometry asks whether an algebraic curve can be recovered from its arithmetic fundamental group. Over a field k, this group records finite étale covers together with a projection to the absolute Galois group of k, retaining arithmetic information about the curve. Grothendieck’s anabelian conjectures propose that, for suitable curves and fields, this group-theoretic data determines the algebraic geometry.",
+    "The library formalizes weak reconstruction for hyperbolic genus-zero curves over number fields, in the setting of [Nakamura’s 1990 theorem](https://doi.org/10.1515/crll.1990.411.205): an isomorphism of arithmetic fundamental groups over the base Galois group implies an isomorphism of the curves. It also develops geometric slimness, the condition that every open subgroup of the fundamental group has trivial centralizer. The reconstruction result establishes existence of a curve isomorphism; the stronger correspondence realizing a prescribed group isomorphism remains unfinished."
   ],
   "scopeNote": "Genus-zero weak reconstruction over number fields establishes existence of a curve isomorphism. It does not yet realize a prescribed fundamental-group isomorphism or prove uniqueness in that correspondence. General positive-genus reconstruction, arbitrary finitely generated characteristic-zero base fields, and positive-characteristic analogues are outside the selected reconstruction theorem.",
   "references": [

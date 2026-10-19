@@ -2,10 +2,10 @@
   "slug": "pro-c-groups",
   "title": "Pro-C groups",
   "repository": "ProCGroups",
-  "summary": "The library studies profinite groups through their finite quotients, providing ways to construct maps, determine the ranks of open subgroups, and prove that presented groups are infinite.",
+  "summary": "Profinite groups describe infinite symmetries through finite quotients. This library develops their pro-C and pro-p forms, free constructions and presentation theory in Lean.",
   "overview": [
-    "A pro-C group is built from finite groups in a chosen class C by taking inverse limits. Open subgroups of finite-rank free pro-C groups are again free, and the Schreier formula determines their ranks.",
-    "The completed Crowell sequence relates kernels of group homomorphisms to completed differential and augmentation modules. A weighted Golod–Shafarevich criterion detects infinite pro-p groups, while Pontryagin biduality recovers profinite abelian groups from their continuous characters. Each result specifies its hypotheses on C and on the groups involved."
+    "A profinite group is an inverse limit of finite groups: its topology records how the finite quotients fit together. Requiring those finite groups to belong to a class C gives a pro-C group; taking C to be the finite p-groups gives a pro-p group. Absolute Galois groups and étale fundamental groups are natural examples of profinite groups, connecting this theory with arithmetic and algebraic geometry.",
+    "The library develops these constructions in Lean, including completions, free pro-C groups, continuous modules and completed group algebras. It provides tools for studying subgroup structure and groups given by generators and relations, in the framework described in Ribes and Zalesskii’s [Profinite Groups](https://link.springer.com/book/10.1007/978-3-642-01642-4)."
   ],
   "scopeNote": "This is a selection, not a claim that every theorem about pro-C groups has been formalized. Closure assumptions on C vary by result. The open-subgroup theorem has a finite basis, and the completed Crowell theorem uses a finite-rank free pro-C source and a separated completed differential module. The duality entry concerns profinite abelian groups, not all locally compact abelian groups.",
   "references": [

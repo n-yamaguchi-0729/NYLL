@@ -2,10 +2,10 @@
   "slug": "sawin-totally-real-towers",
   "title": "Sawin’s totally real towers",
   "repository": "SawinTotallyRealTowers",
-  "summary": "The library constructs totally real number fields of arbitrarily large degree while keeping their root discriminants bounded and the same infinite set of primes completely split.",
+  "summary": "Sawin’s arithmetic construction produces totally real fields of increasing degree with bounded root discriminant and infinitely many completely split primes. This library formalizes that construction in Lean.",
   "overview": [
-    "The main theorem constructs totally real number fields of arbitrarily large degree with root discriminant at most 255255. One fixed infinite set of rational primes, all congruent to one modulo four, splits completely in every field. The degree can therefore grow while both the discriminant bound and the splitting conditions remain fixed.",
-    "The construction starts with the maximal totally real pro-2 extension of the rationals unramified outside six odd primes. Carefully chosen Frobenius relations force primes to split, while a Golod–Shafarevich estimate keeps the resulting quotient infinite. Its finite layers provide fields of large degree, and restricted ramification controls their discriminants. These results formalize the arithmetic tower used in Sawin’s unit-distance work."
+    "A totally real number field has only real embeddings. Its root discriminant, the absolute discriminant raised to the reciprocal of the degree, measures discriminant growth on a common scale across different degrees. Sawin’s tower construction keeps this quantity bounded as the degree grows, while one fixed infinite set of rational primes splits completely throughout the tower. Such fields provide the arithmetic input for constructions in the unit-distance problem.",
+    "The library formalizes this arithmetic construction using pro-2 Galois groups, controlled ramification and Golod–Shafarevich estimates. Its infinite-prime conclusion is the tower statement in Proposition 2.3 of [Remarks on the disproof of the unit distance conjecture](https://arxiv.org/abs/2605.20695). The development also includes discriminant estimates and Shafarevich’s relation-rank bound."
   ],
   "scopeNote": "The main endpoint is an arithmetic existence theorem used in Sawin's unit-distance work; this is not a formalization of the entire unit-distance disproof. The bound 255255 is not claimed to be optimal. The separately listed Shafarevich theorem assumes an odd prime and must not be substituted for the pro-2 arithmetic used in the tower construction.",
   "references": [

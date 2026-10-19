@@ -10,9 +10,13 @@ publication manifest, and includes the declaration, its local Lean context, and
 immutable links to the standalone repository and its originating NYLL commit.
 It does not execute Lean or claim to replace kernel verification.
 
-Library overviews explain the mathematical problem and what the library achieves
-in connected prose. Include necessary qualifications there without a separate
-scope section. An entry opens with only its title and one short `summary`
+Library overviews introduce the subject before describing the formalization:
+explain the central objects or question, add relevant origins or source literature,
+then state what this library develops. Use two focused paragraphs, not a catalogue
+of the selected theorems below. For a text or paper formalization, name that source
+and distinguish the current coverage from the overall goal. Keep homepage
+descriptions consistent with these introductions. Include necessary qualifications
+without a separate scope section. An entry opens with only its title and one short `summary`
 paragraph. Use the same title and summary on its overview card, without a kind
 label. Do not add a second introductory explanation. The precise mathematical
 statement and Lean code follow. The longer `history` field remains editorial

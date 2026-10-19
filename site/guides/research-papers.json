@@ -2,10 +2,10 @@
   "slug": "research-papers",
   "title": "Research papers",
   "repository": "YamaguchiPapersFormalization",
-  "summary": "These papers study how abelian Galois data detect automorphisms and how the geometry of a boundary controls finite covers over the integers.",
+  "summary": "Lean formalizations of Naganori Yamaguchi’s papers on ab-faithfulness of absolute Galois groups and extension of solvable coverings across horizontal divisors.",
   "overview": [
-    "This collection develops selected results from two papers on Galois groups and coverings over the integers. The first proves ab-faithfulness for discretely valued fields of mixed characteristic and for positive-dimensional higher local fields. It proves center-freeness of finite-step solvable quotients under ab-faithfulness, and proves slimness directly for infinite finitely generated fields, sub-p-adic fields, and positive-dimensional higher local fields.",
-    "The second explains when removing a horizontal divisor leaves solvable covering theory unchanged. Under its arithmetic boundary condition, it also reduces the extension of a representation across the divisor to the same question for its reduction modulo the maximal ideal."
+    "This library formalizes results from two papers by Naganori Yamaguchi. [Ab-faithfulness of absolute Galois groups in number theory](https://arxiv.org/abs/2610.05634v1) asks how automorphisms of finite Galois extensions are detected by their actions on abelian Galois groups above them. The Lean development proves ab-faithfulness for discretely valued fields of mixed characteristic and positive-dimensional higher local fields, and studies the centers and centralizers of finite-step solvable Galois quotients.",
+    "[Extension of solvable coverings across horizontal divisors over the integers](https://arxiv.org/abs/2610.02948v1) asks when a finite solvable cover of the complement of a divisor extends over the whole arithmetic scheme. The library formalizes the arithmetic boundary criterion, the resulting invariance of the prosolvable fundamental group, and a criterion that reduces extension of a representation to extension of its residual representation."
   ],
   "scopeNote": "These are selected completed declarations from the ab-faithfulness and solvable-coverings papers. The general Hilbertian application still needs its embedding-problem input, and several examples in the solvable-coverings paper remain outside the selection. Local prototypes are not included.",
   "references": [

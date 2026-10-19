@@ -2,10 +2,10 @@
   "slug": "etale-fundamental-groups-and-cohomology",
   "title": "Étale Fundamental Groups and Cohomology",
   "repository": "EtaleFundamentalGroupsAndCohomology",
-  "summary": "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions.",
+  "summary": "A Lean formalization of parts of the Stacks Project on étale fundamental groups and étale cohomology: the algebraic theory of covering spaces and sheaves.",
   "overview": [
-    "Over a field, an étale scheme can be recovered from its geometric fiber together with the action of the field's Galois group. For a general scheme, finite étale covers are likewise described by finite locally constant sheaves and, on a connected base with a geometric point, by fundamental-group actions. The results explain when changes to a scheme preserve its covers and how its fundamental group combines geometry with the arithmetic of the base field. For a proper scheme over a separably closed field, extending the field to another separably closed field preserves its finite étale covers and its geometric fundamental group.",
-    "For a finite morphism, direct image of étale module sheaves is exact and commutes with arbitrary base change. The resulting cohomology comparison holds in every degree. The general higher-degree proper base change theorem and Lefschetz trace formula remain further goals."
+    "Étale fundamental groups give an algebraic version of covering-space theory. For a connected scheme with a geometric base point, the group consists of the compatible permutations of the fibers of all finite étale covers; its finite continuous actions classify these covers. Grothendieck developed this viewpoint in [SGA 1](https://smf.emath.fr/node/43215) in 1960–61, bringing covering-space theory and Galois theory into a common framework. Étale cohomology studies sheaves on the étale site, providing cohomological invariants for algebraic varieties and arithmetic schemes.",
+    "This library formalizes parts of the [Stacks Project](https://stacks.math.columbia.edu/), from finite étale covers and Galois categories to étale sheaves, their cohomology, and the foundations of trace constructions. The development follows Chapters 58, 59, 63 and 64; the [chapter-by-chapter coverage table](https://github.com/n-yamaguchi-0729/EtaleFundamentalGroupsAndCohomology#stacks-project-coverage) links their statements to the Lean proofs and records the remaining work."
   ],
   "scopeNote": "The proper constant-field theorem gives an equivalence of finite étale covers over separably closed field extensions. Finite direct image is treated in all cohomological degrees. The selection does not assert general proper henselian specialization, higher-degree proper base change, or a full Lefschetz trace formula.",
   "references": [
@@ -28,7 +28,7 @@
       "title": "The Stacks Project",
       "year": 2026,
       "url": "https://stacks.math.columbia.edu/",
-      "note": "Chapters 58 (Fundamental Groups of Schemes) and 59 (Étale Cohomology)."
+      "note": "Chapters 58 (Fundamental Groups of Schemes), 59 (Étale Cohomology), 63 (More Étale Cohomology) and 64 (The Trace Formula); chapter coverage is recorded in the library README."
     }
   ],
   "entries": [
