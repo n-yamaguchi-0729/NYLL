@@ -565,7 +565,26 @@ def current_mathematics_readme(text, files, selected_paths, primary):
             'Local class field theory covers nonarchimedean local fields. Global class field\n'
             'theory covers number fields and function fields over finite fields, including\n'
             'reciprocity, existence, norm subgroups, conductors and ray class fields.')
-        text = text.replace('## Incomplete results\n', '## Function-field class field theory\n')
+        groups = {
+            'Local fields': ('Finite local reciprocity', 'Profinite local reciprocity',
+                             'Local existence theorem', 'Hasse--Arf theorem',
+                             'Perfect local Hilbert pairing'),
+            'Number fields': ('Finite global reciprocity', 'Topological global reciprocity',
+                              'Global Artin map', 'Hilbert product formula',
+                              'Cyclic Hasse norm theorem', 'Abelian conductor', 'Ray class fields',
+                              'Big Hilbert class field', 'Small Hilbert class field',
+                              'Principal ideal theorem', 'Kronecker--Weber theorem')}
+        retained = {}
+        for titles in groups.values():
+            for title in titles:
+                matches = re.findall(r'^\| \[' + re.escape(title) +
+                    r'\]\(([^)]+)\) \| (.*?) \|$', text, re.M)
+                require(len(matches) == 1, 'Missing or ambiguous class field result: ' + title)
+                path, description = matches[0]
+                source_path = path.split('#')[0]
+                require(source_path in files and source_path in selected_paths,
+                        'Class field README source is not included: ' + source_path)
+                retained[title] = f'| [{title}]({path}) | {description} |'
         prefix = 'AlgebraicFunctionFieldTheory/'
         rows = [
             ('Existence and classification', link('ClassFieldTheory', prefix +
@@ -583,18 +602,32 @@ def current_mathematics_readme(text, files, selected_paths, primary):
             ('Profinite reciprocity', link('ClassFieldTheory', prefix +
                 'Artin/ProfiniteReciprocity', 'profiniteReciprocity'),
              'The profinite completion for the ordinary idèle-class topology is isomorphic to the abelianized absolute Galois group.')]
-        content = ('For function fields over a finite constant field, the following endpoints\n'
-                   'use a chosen rational parameter. Their principal-divisor structure '
-                   '(finite support of valuation orders and degree zero) is constructed from '
-                   'the function-field hypotheses by ' + link('ClassFieldTheory', prefix +
-                       'Fields/Curve', 'isCurveOver') + '. No class-field existence input '
-                   'or norm-cofinality hypothesis is supplied.\n\n'
-                   '| Result | Lean endpoint |\n| --- | --- |\n' + '\n'.join(
-                       f'| {title}: {description} | {endpoint} |'
-                       for title, endpoint, description in rows) + '\n\n'
-                   'The development also includes arithmetic Frobenius normalization, conductors,\n'
-                   'ray class fields, prescribed splitting, and the cyclic Hasse norm theorem.')
-        text = readme_section(text, 'Function-field class field theory', 'cft-function-fields', content)
+        table_header = '| Result | Mathematical content |\n| --- | --- |\n'
+        introductions = {'Local fields': 'For nonarchimedean local fields.',
+                         'Number fields': 'For finite extensions of the rational numbers.'}
+        further = {'Local fields': 'Further results include local Kronecker–Weber.',
+                   'Number fields': 'Further results include general power-residue reciprocity '
+                                    'and Gauss quadratic reciprocity.'}
+        sections = ['### ' + title + '\n\n' + introductions[title] + '\n\n' + table_header +
+                    '\n'.join(retained[name] for name in titles) + '\n\n' + further[title]
+                    for title, titles in groups.items()]
+        # Use the same heading level, columns and readable link labels for all three settings.
+        def labelled(endpoint, labels):
+            for label in labels:
+                endpoint = re.sub(r'\[`[^`]+`\]', '[' + label + ']', endpoint, count=1)
+            return endpoint
+        labels = [('Existence', 'Classification'),
+                  ('Local–global compatibility', 'Unramified Frobenius'), ('Profinite reciprocity',)]
+        sections.append('### Function fields\n\n'
+            'For function fields over a finite constant field, with a chosen rational parameter '
+            '(' + link('ClassFieldTheory', prefix + 'Fields/Curve', 'isCurveOver') + ').\n\n' +
+            table_header + '\n'.join(f'| {labelled(endpoint, names)} | {description} |'
+                for (_, endpoint, description), names in zip(rows, labels)) + '\n\n'
+            'Further results include conductors, ray class fields, prescribed splitting, '
+            'and the cyclic Hasse norm theorem.')
+        text = readme_section(text, 'Main results', 'cft-main-results', '\n\n'.join(sections))
+        text = re.sub(r'^## (?:Function-field class field theory|Incomplete results)\n.*?(?=^## |\Z)',
+                      '', text, flags=re.M | re.S)
     if primary == ['JacobianVarieties']:
         text = text.replace('Nyll/JacobianVarieties/Picard/TorsionCardinality.lean',
                             'Nyll/JacobianVarieties/Picard/Torsion/TorsionCardinality.lean')

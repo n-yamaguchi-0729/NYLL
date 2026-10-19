@@ -44,14 +44,34 @@ class ReadmeEndpointTests(unittest.TestCase):
             base + 'Artin/UnramifiedFrobenius.lean':
                 b'theorem localDecompositionArtin_eq_unramifiedFrobenius_zpow : True := by trivial\n',
             base + 'Fields/Curve.lean': b'theorem isCurveOver : True := by trivial\n'}
-        text = ('# CFT\n\n## Scope\n\nNumber fields.\n\n## Incomplete results\n\n'
+        titles = ('Finite local reciprocity', 'Profinite local reciprocity',
+                  'Local existence theorem', 'Hasse--Arf theorem', 'Perfect local Hilbert pairing',
+                  'Finite global reciprocity', 'Topological global reciprocity', 'Global Artin map',
+                  'Hilbert product formula', 'Cyclic Hasse norm theorem', 'Abelian conductor',
+                  'Ray class fields', 'Big Hilbert class field', 'Small Hilbert class field',
+                  'Principal ideal theorem', 'Kronecker--Weber theorem')
+        old_rows = []
+        for index, title in enumerate(titles):
+            path = f'Nyll/ClassFieldTheory/Theorems/Result{index}.lean'
+            files[path] = b'theorem result : True := by trivial\n'
+            old_rows.append(f'| [{title}]({path}) | Retain statement {index}. |')
+        text = ('# CFT\n\n## Scope\n\nNumber fields.\n\n## Main results\n\n' +
+                '\n'.join(old_rows) + '\n\n## Incomplete results\n\n'
                 'Global function-field class field theory is not included.\n\n'
                 '## Public API\n\nKeep API.\n')
         result = readme.current_mathematics_readme(text, files, set(files), ['ClassFieldTheory'])
         self.assertNotIn('not included', result)
         self.assertIn('ordinary idèle-class topology', result)
-        self.assertIn('principal-divisor structure', result)
-        self.assertIn('is constructed from', result)
+        self.assertNotIn('## Function-field class field theory', result)
+        self.assertNotIn('## Incomplete results', result)
+        self.assertEqual(result.count('| Result | Mathematical content |'), 3)
+        headings = [line for line in result.splitlines() if line.startswith('### ')]
+        self.assertEqual(headings, ['### Local fields', '### Number fields', '### Function fields'])
+        self.assertIn('Keep API.', result)
+        for row in old_rows:
+            self.assertEqual(result.count(row), 1)
+        self.assertIn('[Existence](', result)
+        self.assertIn('[Classification](', result)
         self.assertIn('arithmetic Frobenius to the power of the valuation', result)
         self.assertIn('`isCurveOver`', result)
         for path in files:
