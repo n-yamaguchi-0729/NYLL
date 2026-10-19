@@ -92,9 +92,6 @@
         "Assume $C$ is closed under isomorphisms, subgroups, quotients, finite direct products, and extensions, and contains a nontrivial finite cyclic group. Let $F$ be epimorphically free pro-$C$ on a finite converging basis $X$, and let $H\\le F$ be open. Put $r=|X|$ and $i=[F:H]$.",
         "There is a free pro-$C$ group with a basis of size $$\\begin{cases}0,&r=0,\\\\1+i(r-1),&r\\ge1,\\end{cases}$$ and a continuous group isomorphism from that group to $H$. The conclusion provides freeness as well as a numerical rank."
       ],
-      "discussion": [
-        "Openness gives finite index, and the rank formula measures exactly how passing to the subgroup changes the number of free generators. The assumptions on C ensure that this process preserves freeness. This is the profinite counterpart of the classical Schreier formula for free groups, developed in the pro-C setting in Ribes and Zalesskii’s monograph."
-      ],
       "history": [
         "This is the profinite counterpart of the classical Schreier formula for finite-index subgroups of free groups. Ribes and Zalesskii’s monograph develops the free pro-C version, where restrictions on the class of finite groups determine whether the subgroup remains free."
       ],
@@ -117,9 +114,6 @@
         "Let $C$ satisfy the source’s full-formation assumptions and contain trivial quotients. The formation package includes closure under quotients, finite subdirect products, normal subgroups, extensions, and subgroups. Let $F$ be a free pro-$C$ group with a chosen converging basis of finite cardinality $r$, and let $\\psi:F\\twoheadrightarrow H$ be a continuous surjection to a profinite group.",
         "For $N=\\ker\\psi$, the separated completed differential module gives $$0\\to N/\\overline{[N,N]}\\to A^{\\mathrm{sep}}_\\psi(C)\\to\\mathbb Z_C\\mathopen{[\\![} H\\mathclose{]\\!]}\\to\\mathbb Z_C\\to0.$$ The bundled endpoint records exactness of the underlying integer-linear maps.",
         "Here $\\mathbb Z_C$ is the pro-$C$ completion of the additive group $\\mathbb Z$, with its induced ring structure, and $\\mathbb Z_C\\mathopen{[\\![} H\\mathclose{]\\!]}$ is the corresponding completed group algebra."
-      ],
-      "discussion": [
-        "The kernel is abelianized by taking its quotient by the closure of its commutator subgroup. A separated completed differential module then connects this topological quotient to the completed group algebra under the stated assumptions on C. Crowell’s discrete module sequence supplies the algebraic pattern; the profinite version retains compatible information from finite continuous quotients."
       ],
       "history": [
         "Crowell’s discrete module sequence provides the algebraic pattern. Profinite group theory, as developed in Ribes and Zalesskii, replaces discrete quotients and modules with objects controlled by finite continuous quotients. The sequence here combines that viewpoint with completed Fox calculus; its hypotheses specify the setting in which the classical pattern remains exact."
@@ -148,9 +142,6 @@
         "Let $p$ be prime and let $G$ be a profinite group with a displayed finite pro-$p$ presentation on $d$ generators and $r$ relators. For each relator choose a lower Zassenhaus depth $\\nu_i$, and assume those depth bounds hold for the displayed presentation.",
         "If some real $t$ satisfies $0\\le t<1$ and $$1-dt+\\sum_{i=1}^{r}t^{\\nu_i}\\le0,$$ then $G$ is infinite."
       ],
-      "discussion": [
-        "Relator depths matter because deep relations contribute little to the polynomial, allowing extra conditions to be imposed while preserving infinitude. Countably many added relations also require a limiting argument. Golod and Shafarevich’s 1964 paper established infinite class field towers through generator–relation inequalities; retaining individual depths makes that method useful for constructions with additional splitting conditions."
-      ],
       "history": [
         "Golod and Shafarevich’s 1964 paper established the existence of infinite class field towers through inequalities for generators and relations. Weighted versions retain the filtration depths of individual relators instead of using only their number. That extra information is what makes it possible to impose carefully chosen deep relations while preserving infinitude."
       ],
@@ -172,9 +163,6 @@
       "statement": [
         "Let $G$ be a compact, totally disconnected abelian topological group. Its Pontryagin dual $G^\\vee$ consists of continuous circle-valued characters with the compact-open topology. The source constructs a continuous group isomorphism $$G\\xrightarrow{\\sim}(G^\\vee)^\\vee,\\qquad g\\longmapsto\\bigl(\\chi\\longmapsto\\chi(g)\\bigr).$$",
         "This is an isomorphism of topological groups and preserves finite torsion."
-      ],
-      "discussion": [
-        "Finite quotient characters distinguish elements, while compactness allows compatible finite evaluation conditions to be solved simultaneously. The resulting identification preserves both topology and finite torsion, giving a canonical passage between a group and its character data. This is the profinite abelian case of the duality theory developed in Pontrjagin’s 1934 paper on topological commutative groups."
       ],
       "history": [
         "Pontrjagin’s 1934 paper developed the duality theory of topological commutative groups. Character groups provide a common language for finite abelian duality and its topological extensions. The result here is the profinite abelian case of that theory, where finite quotient duality and compactness supply the bidual identification."

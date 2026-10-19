@@ -98,9 +98,6 @@
         "There are a real constant $B$ and an infinite set $Q$ of primes, all congruent to $1$ modulo $4$, such that for every $N$ there is a totally real number field $F$ with $$[F:\\mathbb Q]\\ge N,\\qquad |\\operatorname{disc}(F)|^{1/[F:\\mathbb Q]}\\le B,$$ and every $q\\in Q$ splits completely in $F$.",
         "The implementation chooses $B=255255$. Its explicit splitting conclusion supplies $[F:\\mathbb Q]$ distinct maximal ideals of $\\mathcal O_F$ containing $q$. For a rational prime in a number field, this maximal number of distinct primes above $q$ expresses complete splitting."
       ],
-      "discussion": [
-        "The prime set is fixed before the degree threshold is chosen, so splitting persists as the fields become arbitrarily large without increasing the root-discriminant bound. This arithmetic input is used in the unit-distance application. The infinite-prime formulation is Proposition 2.3 of the joint paper Remarks on the disproof of the unit distance conjecture; Sawin’s single-author paper gives related arithmetic ingredients."
-      ],
       "history": [
         "This infinite-prime formulation is Proposition 2.3 of the joint paper Remarks on the disproof of the unit distance conjecture. It uses the Frobenius-cutting method of Hajir, Maire, and Ramakrishna. Sawin’s single-author paper gives related arithmetic ingredients for the unit-distance application; its formulation and the joint paper’s proposition should be distinguished."
       ],
@@ -123,9 +120,6 @@
       "statement": [
         "Let $F$ be a number field and $p$ an odd prime. Let $G$ be its maximal everywhere-unramified pro-$p$ Galois group, and let $d(G)$ be its finite topological generator rank. Write $r_1,r_2$ for its numbers of real and complex places and put $\\delta=1$ if $F$ contains a primitive $p$th root of unity, and $\\delta=0$ otherwise.",
         "The theorem proves that $H^2_{\\mathrm{cont}}(G,\\mathbb F_p)$ is finite-dimensional and $$\\dim_{\\mathbb F_p}H^2_{\\mathrm{cont}}(G,\\mathbb F_p)\\le d(G)+(r_1+r_2-1)+\\delta.$$ The coefficient module is the trivial module."
-      ],
-      "discussion": [
-        "The estimate measures relation complexity through generator rank, unit rank, and a roots-of-unity correction. Together with generator counts it can support an infinitude argument, but its odd-prime hypothesis excludes direct use in the separate pro-2 construction. Shafarevich’s 1963 work on prescribed ramification underlies these arithmetic relation estimates, whose role in infinite towers is illustrated by the subsequent Golod–Shafarevich argument."
       ],
       "history": [
         "Shafarevich’s 1963 paper studies extensions with prescribed ramification and underlies the arithmetic relation estimates used in class field tower theory. Golod and Shafarevich’s subsequent infinitude argument shows why these bounds matter: controlling relations relative to generators can force an unramified tower to continue indefinitely."

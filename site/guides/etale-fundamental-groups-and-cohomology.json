@@ -41,9 +41,6 @@
         "Let $k$ be a field, $L$ a separable closure, and $X\\to\\operatorname{Spec}k$ a quasi-compact, quasi-separated scheme such that $X_L$ is connected. Choose a geometric point $\\xi:\\operatorname{Spec}\\Omega\\to X_L$, with $\\Omega$ separably closed, and let $x$ be its image in $X$. Then\n$$1\\longrightarrow\\pi_1^{\\mathrm{et}}(X_L,\\xi)\\longrightarrow\\pi_1^{\\mathrm{et}}(X,x)\\longrightarrow\\operatorname{Gal}(L/k)\\longrightarrow1$$\nis exact.",
         "The maps are the continuous homomorphisms induced by pullback and the structure morphism. Exactness includes injectivity on the left, surjectivity on the right, and equality of the kernel with the image."
       ],
-      "discussion": [
-        "The sequence separates the geometry over separably closed constants from the arithmetic of the base field, while explaining how both enter a single fundamental group. This geometric–arithmetic viewpoint was developed in SGA 1; purely inseparable invariance relates the separable-closure formulation here to the algebraic-closure formulation in the Stacks Project. See [Stacks Project, Lemma 58.14.3](https://stacks.math.columbia.edu/tag/0BTX)."
-      ],
       "history": [
         "The geometric–arithmetic sequence is part of the fundamental-group theory developed in SGA 1. Stacks Project Lemma 58.14.3 gives the algebraic-closure formulation; purely inseparable invariance relates it to the separable-closure formulation."
       ],
@@ -66,9 +63,6 @@
       "statement": [
         "For every scheme $X$, there is an equivalence\n$$\\operatorname{FinEt}(X)\\simeq\\mathbf{Sh}_{\\mathrm{flc}}(X_{\\mathrm{et}},\\mathbf{Set}).$$\nThe right-hand category is the full subcategory of sheaves that are étale locally isomorphic to constant sheaves associated with finite sets.",
         "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$."
-      ],
-      "discussion": [
-        "A finite cover can be viewed as a locally varying finite set whose gluing determines both the scheme and its morphisms. On a connected base with a geometric point, this also connects it to continuous finite fundamental-group actions. The correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology, expressed through étale representability. See [Stacks Project, Section 59.64](https://stacks.math.columbia.edu/tag/09Y8)."
       ],
       "history": [
         "This correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology. Stacks Project Lemma 59.64.4 gives the representability statement for the étale site."
@@ -95,9 +89,6 @@
       "statement": [
         "Let $f:X\\to Y$ be integral, universally injective, and surjective. Pullback induces an equivalence\n$$f^*:\\operatorname{FinEt}(Y)\\simeq\\operatorname{FinEt}(X).$$\nSuch a morphism is a universal homeomorphism.",
         "If $X$ and $Y$ are connected and $\\xi:\\operatorname{Spec}\\Omega\\to X$ is a geometric point, with $\\Omega$ separably closed, the induced homomorphism is a topological group isomorphism\n$$\\pi_1^{\\mathrm{et}}(X,\\xi)\\cong\\pi_1^{\\mathrm{et}}(Y,f\\xi).$$\nIts underlying map is exactly the usual fundamental-group homomorphism associated with $f$."
-      ],
-      "discussion": [
-        "Nilpotent structure and purely inseparable changes can alter a scheme without altering its finite covering theory. This permits passage to reduced schemes or purely inseparable models in fundamental-group calculations, even though constructions involving the full structure sheaf may change. Known as topological invariance of finite étale covers, the result is formulated for universal homeomorphisms in the Stacks Project. See [Stacks Project, Proposition 58.8.4](https://stacks.math.columbia.edu/tag/0BQN)."
       ],
       "history": [
         "This property is known as topological invariance of finite étale covers. Stacks Project Proposition 58.8.4 formulates it for universal homeomorphisms, encompassing both nilpotent thickenings and purely inseparable phenomena."
@@ -127,10 +118,6 @@
         "Every finite étale cover of $X_K$ therefore descends to $X$, and morphisms between such covers descend uniquely. For any geometric point $\\xi$ of $X_K$, the projection induces a continuous group isomorphism",
         "$$\\pi_1^{\\mathrm{\\acute et}}(X_K,\\xi)\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(X,p\\xi).$$",
         "The comparison is natural under further extensions of the coefficient field and morphisms of the original proper schemes."
-      ],
-      "discussion": [
-        "This permits the ground field to be enlarged for geometric calculations while preserving all finite étale covering data. The construction proves essential surjectivity for the actual pullback functor, so it supplies descent of covers as well as comparison of existing ones.",
-        "The Stacks Project records the algebraically closed case as [Lemma 58.9.3](https://stacks.math.columbia.edu/tag/0A49). The formalization extends it to separably closed fields using invariance under purely inseparable changes, and identifies the resulting fundamental-group isomorphism with the projection-induced map."
       ],
       "history": [
         "Invariance of finite étale covers under algebraically closed constant extension is part of the proper-cover theory in SGA 1 and Stacks Project Section 58.9."
@@ -170,10 +157,6 @@
         "For any $g:Y^{\\prime}\\to Y$, form the cartesian square with $X^{\\prime}=X\\times_Y Y^{\\prime}$, projection $g^{\\prime}:X^{\\prime}\\to X$, and $f^{\\prime}:X^{\\prime}\\to Y^{\\prime}$. The canonical base-change morphism is an isomorphism:",
         "$$g^*f_*F\\xrightarrow{\\sim}f^{\\prime}_*(g^{\\prime})^*F.$$",
         "The cohomology comparison is natural in F."
-      ],
-      "discussion": [
-        "Finite morphisms can be used to move an étale cohomology calculation to the base scheme without losing higher-degree information. Exactness of direct image removes the higher direct-image terms, and arbitrary base change makes this compatible with passing to fibers or changing the base.",
-        "The geometric stalk of finite direct image is a finite product of stalks over the fiber. This description underlies both exactness and the canonical base-change comparison; the Stacks Project presents these results in [Proposition 59.55.2](https://stacks.math.columbia.edu/tag/03QP) and [Lemma 59.55.3](https://stacks.math.columbia.edu/tag/0959)."
       ],
       "history": [
         "Finite direct images form a basic case of étale base change. Stacks Project Section 59.55 derives their higher vanishing and base-change behavior from the finite-fiber stalk description."

@@ -236,7 +236,7 @@ def validate_guide(data: dict) -> None:
         if not SLUG.fullmatch(name) or name in seen:
             raise SourceError(f"Invalid or duplicate entry slug: {slug}/{name}")
         seen.add(name)
-        for key in ("title", "summary", "statement", "discussion", "history", "lean", "references"):
+        for key in ("title", "summary", "statement", "history", "lean", "references"):
             if not entry.get(key):
                 raise SourceError(f"Missing {key} in {slug}/{name}")
         if not set(entry["references"]) <= set(refs):
@@ -367,8 +367,7 @@ def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
         links = "".join(f'<li><a href="{e(s["declaration"]["sourceUrl"])}"><code>{e(s["declaration"]["name"])}</code></a></li>'
                         for s in linked)
         related = f'<details class="related-sources"><summary>Related Lean sources</summary><ul>{links}</ul></details>'
-    content = f'''<header class="guide-hero"><p class="eyebrow">{e(entry['kind'])} · {e(guide['title'])}</p><h1>{e(entry['title'])}</h1><p class="lead">{inline(entry['summary'])}</p><div class="guide-description">{paragraphs(entry['discussion'])}</div>
-<div class="guide-actions"><a href="{repo_url}">{e(guide['repository'])} on GitHub ↗</a></div></header>
+    content = f'''<header class="guide-hero"><h1>{e(entry['title'])}</h1><p class="lead">{inline(entry['summary'])}</p></header>
 <section id="statement" class="guide-section mathematical-statement"><h2>Mathematical statement</h2>{paragraphs(entry['statement'])}</section>
 <section id="lean" class="guide-section"><h2>Lean code</h2>{''.join(source_block(s) for s in visible)}{related}</section>
 <p class="source-version">Published source: <a href="{repo_url}/commit/{snapshot['revision']}">{snapshot['revision'][:8]}</a>.</p>
@@ -377,7 +376,7 @@ def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
 
 
 def overview_page(guide: dict, entries: list[dict], site_url: str) -> str:
-    cards = "\n".join(f'''<li><a href="{x['slug']}/"><span class="eyebrow">{e(x['kind'])}</span><h3>{e(x['title'])}<span aria-hidden="true"> →</span></h3><p>{inline(x['summary'])}</p></a></li>''' for x in entries)
+    cards = "\n".join(f'''<li><a href="{x['slug']}/"><h3>{e(x['title'])}<span aria-hidden="true"> →</span></h3><p>{inline(x['summary'])}</p></a></li>''' for x in entries)
     used = {ref for entry in entries for ref in entry["references"]}
     refs = [ref for ref in guide["references"] if ref["id"] in used]
     content = f'''<header class="guide-hero"><h1>{e(guide['title'])}</h1><div class="overview">{paragraphs(guide['overview'])}</div>

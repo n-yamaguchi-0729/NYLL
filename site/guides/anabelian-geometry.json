@@ -46,9 +46,6 @@
         "For $U_S=\\mathbb P^1_k\\setminus S$ and $U_T=\\mathbb P^1_k\\setminus T$, where $S,T\\subset\\mathbb P^1(k)$ are finite sets with at least three elements, the rational-configuration theorem gives more: a bijection $\\sigma:S\\to T$, an element $f\\in\\mathrm{GL}_2(k)$ with $[f](p)=\\sigma(p)$ for every $p\\in S$, and the induced isomorphism of the opens. It also constructs a geometric fundamental-group isomorphism compatible with $\\alpha$ that carries the inertia group at $p$ to a conjugate of the inertia group at $\\sigma(p)$.",
         "This is weak reconstruction: existence of a curve isomorphism. Realization of the prescribed $\\alpha$ by a unique curve isomorphism is the stronger Isom correspondence and remains unfinished."
       ],
-      "discussion": [
-        "The arithmetic projection retains information that the geometric group alone loses. In the rational case, the conclusion recovers the positions of the punctures up to a projective linear change of coordinates, with the recovered permutation tied to inertia. Nakamura’s 1990 theorem established this genus-zero reconstruction principle."
-      ],
       "history": [
         "Nakamura’s 1990 paper treats punctured projective lines over fields finitely generated over the rationals. The selected Lean statements establish weak reconstruction over number fields."
       ],
@@ -76,10 +73,6 @@
         "For any geometric point $\\xi$ of $X$, put $G=\\pi_1^{\\mathrm{\\acute et}}(X,\\xi)$. Then",
         "$$\\forall\\,H\\le G\\text{ open},\\qquad C_G(H)=\\{1\\}.$$",
         "This is slimness. The quantifier includes all open subgroups, including nonnormal ones."
-      ],
-      "discussion": [
-        "The conclusion controls centralizing symmetries throughout the finite covering theory, since open subgroups correspond to connected finite étale covers. It is stronger than saying only that the original group has trivial center.",
-        "Genus and punctures both supply hyperbolicity: a proper curve needs genus at least two, while $\\mathbb P^1$ with three punctures already satisfies the inequality. The formal proofs realize open subgroups by actual covers, preserve hyperbolicity through their compactifications, and use cohomological faithfulness to prove the centralizer statement. SGA 1 provides the covering-theoretic framework."
       ],
       "history": [
         "SGA 1 develops the equivalence between finite étale covering theory and fundamental groups used in these proofs. The centralizer statement concerns geometric groups over algebraically closed fields; arithmetic reconstruction additionally uses the Galois action."

@@ -49,9 +49,6 @@
         "$$\\operatorname{Gal}(L/K)\\longrightarrow\\operatorname{Aut}(G_L^{\\mathrm{ab}}/p)$$",
         "is injective. In addition, $G_K$ is $p$-ab-faithful."
       ],
-      "discussion": [
-        "Yamaguchi's Theorem 3.6 proves this using Kummer theory and a reduction to prime-degree extensions, providing an input to the higher-local-field theorem and later applications to solvable Galois quotients."
-      ],
       "history": [
         "This is Theorem 3.6 of Yamaguchi's 2026 ab-faithfulness paper. Its mixed-characteristic argument uses Kummer theory and a reduction to prime-degree extensions. Within the paper, this valuation-theoretic result supplies an important input for the higher-local-field theorem and subsequent applications to solvable quotients."
       ],
@@ -78,9 +75,6 @@
       "statement": [
         "An $n$-dimensional higher local field is defined recursively: dimension $0$ means a finite field, and dimension $n+1$ means a field with a complete discrete valuation whose residue field is $n$-dimensional. The theorem states",
         "$$n>0,\\quad K\\text{ an }n\\text{-dimensional higher local field}\\quad\\Longrightarrow\\quad G_K\\text{ is ab-faithful}.$$"
-      ],
-      "discussion": [
-        "Higher local fields are built through successive complete discrete valuations ending in a finite residue field. The uniform conclusion over finite extensions is useful for studying solvable quotients, where conjugation must remain controlled after passing to open subgroups. Yamaguchi's Theorem 4.2 follows the residue-field towers, combining mixed-characteristic detection with lifting from characteristic-zero residue fields."
       ],
       "history": [
         "Theorem 4.2 of Yamaguchi's 2026 paper extends the ab-faithfulness discussion to positive-dimensional higher local fields. The argument follows their residue-field towers, combining mixed-characteristic detection with lifting from characteristic-zero residue fields. The paper then uses these examples in its study of finite-step solvable Galois groups."
@@ -114,10 +108,6 @@
         "$$Z(G_K^{(m)})=1\\qquad(m\\ge2).$$",
         "This statement holds in every characteristic. For slimness, the cited second theorem additionally assumes that $K(\\mu_{p^\\infty})/K$ is infinite for every prime $p\\ne\\operatorname{char}K$, and that a cyclic extension of degree $p$ exists when $\\operatorname{char}K=p>0$. Under these hypotheses, the centralizer of every open subgroup of $G_K^{(m)}$ is trivial.",
         "Slimness also holds for each of these classes of fields: $K$ infinite and finitely generated over its prime field; $K$ admitting an embedding into a finitely generated extension of $\\mathbb Q_p$ for a prime $p$; and $K$ a higher local field of positive dimension. In all three cases $G_K^{(m)}$ is slim for every $m\\ge2$."
-      ],
-      "discussion": [
-        "Finite-step solvable quotients retain only a bounded number of layers of commutators. Center-freeness says that this truncation still leaves no nontrivial element invisible to every inner automorphism, once ab-faithfulness is available.",
-        "The argument supplies formal Hilbert 90 from the field’s arithmetic. Corollary 6.6 records a general criterion with explicit cyclotomic and cyclic-extension hypotheses; the field applications then prove the needed inputs for the concrete families in the statement. This turns the criterion into direct slimness theorems for fields used in arithmetic geometry."
       ],
       "history": [
         "Corollary 6.6 and the field applications around Example 6.7 of Yamaguchi’s 2026 ab-faithfulness paper connect faithful abelian actions to centers and centralizers in finite-step solvable Galois quotients."
@@ -163,9 +153,6 @@
         "Then $K=\\overline{[K,K]}$, with closure taken in $K$, and the inclusion-induced map gives",
         "$$\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)^{\\mathrm{solv}}\\xrightarrow{\\sim}\\pi_1^{\\mathrm{\\acute et}}(X,\\xi)^{\\mathrm{solv}}.$$"
       ],
-      "discussion": [
-        "The kernel created in the full fundamental group is topologically perfect, so finite solvable quotients cannot detect it. This explains how the boundary can retain nonabelian information without producing new solvable covers. Yamaguchi's Theorem 2.5 obtains this stronger conclusion by applying the abelian invariance argument after finite étale covers; the perfect-kernel formulation also leads to the subsequent representation-extension result."
-      ],
       "history": [
         "This is Theorem 2.5 of Yamaguchi's 2026 paper on extending solvable coverings. It advances from abelian invariance to prosolvable invariance by applying the abelian argument after finite étale covers. The formulation through a perfect kernel also prepares the representation-extension result that follows."
       ],
@@ -188,9 +175,6 @@
         "Let $X$ be connected and locally Noetherian, and let $D$ be a horizontal effective Cartier divisor. Assume $X$ is regular along $D$, each prime component contains a characteristic-$2$ normal-crossings point of $D$, and all reduced boundary components have geometrically integral generic fibers over $\\mathbb Q$ after every connected finite étale cover of $X$. Put $U=X\\setminus D$. Let $A$ be a complete Noetherian local ring with finite residue field $k_A$ of characteristic $p$, carrying its maximal-ideal-adic topology. For $n\\ge1$ and a continuous representation $\\rho:\\pi_1^{\\mathrm{\\acute et}}(U)\\to\\mathrm{GL}_n(A)$,",
         "$$\\rho\\text{ factors continuously through }\\pi_1^{\\mathrm{\\acute et}}(X)\\quad\\Longleftrightarrow\\quad\\bar\\rho\\text{ does}.$$",
         "Here $\\bar\\rho$ is reduction modulo the maximal ideal, with the discrete topology on $k_A$. When the factorization of $\\rho$ exists, it is unique."
-      ],
-      "discussion": [
-        "The extension problem over a complete Noetherian local ring with finite residue field becomes a question over finite coefficients. A perfect boundary kernel contributes no obstruction through the successive abelian pieces of the congruence filtration, so the residual test suffices at every adic level. Corollary 2.6 of Yamaguchi's 2026 paper applies the preceding perfect-kernel theorem in exactly this way."
       ],
       "history": [
         "Corollary 2.6 of Yamaguchi's 2026 solvable-coverings paper follows the perfect-kernel theorem. It applies that geometric result to continuous linear representations, using the congruence filtration of a complete local coefficient ring. The conclusion connects extension of arithmetic coverings with reduction modulo the maximal ideal."

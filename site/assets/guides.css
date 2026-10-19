@@ -6,12 +6,11 @@
 .guide-header nav { display: flex; align-items: center; gap: 24px; font: var(--type-navigation); }
 .guide-header nav a { color: var(--ink); text-decoration: none; }
 .guide-main { min-width: 0; }
-.guide-hero .eyebrow { margin-bottom: 10px; }
 .guide-hero h1 { margin: 0 0 15px; font: var(--type-page-title); letter-spacing: -.03em; overflow-wrap: anywhere; }
 .guide-hero .lead { color: var(--muted); font: var(--type-lead); margin-bottom: 20px; }
-.guide-description, .guide-hero .overview { font: var(--type-body); text-align: justify; text-align-last: start; hyphens: auto; }
-.guide-description p, .guide-hero .overview p { margin-bottom: .85em; }
-.guide-description > :last-child, .guide-hero .overview > :last-child { margin-bottom: 0; }
+.guide-hero .overview { font: var(--type-body); text-align: justify; text-align-last: start; hyphens: auto; }
+.guide-hero .overview p { margin-bottom: .85em; }
+.guide-hero .overview > :last-child { margin-bottom: 0; }
 .guide-actions { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 20px; font: var(--type-navigation); }
 .guide-actions a { padding: 10px 0; }
 .guide-actions .primary { border: 1px solid var(--accent); background: var(--accent); color: var(--bg); border-radius: 4px; padding: 10px 16px; }
@@ -25,7 +24,7 @@
 .result-grid li { min-width: 0; }
 .result-grid a { height: 100%; display: block; border: 1px solid var(--line); border-radius: 5px; padding: 22px; background: var(--paper); text-decoration: none; color: var(--ink); }
 .result-grid a:hover { border-color: var(--accent); background: var(--accent-soft); }
-.result-grid h3 { margin: 8px 0 7px; font: var(--type-item-title); color: var(--ink); }
+.result-grid h3 { margin: 0 0 7px; font: var(--type-item-title); color: var(--ink); }
 .result-grid h3 span { color: var(--accent); }
 .result-grid p { font: var(--type-caption); margin: 0; color: var(--muted); }
 .lean-source { min-width: 0; border: 1px solid var(--line); border-radius: 5px; padding: 20px; margin: 20px 0; background: var(--paper); }

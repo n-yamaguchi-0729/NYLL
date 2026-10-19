@@ -72,7 +72,7 @@
       "slug": "finite-local-reciprocity",
       "title": "Local class field theory: reciprocity and existence",
       "kind": "theorem",
-      "summary": "Reciprocity identifies finite abelian extensions with norm quotients, assembles them into the abelianized absolute Galois group, and classifies extensions by open finite-index subgroups.",
+      "summary": "Finite abelian extensions of a local field correspond to open subgroups of finite index in its multiplicative group, with Galois groups given by the corresponding norm quotients.",
       "statement": [
         "Let $K$ be a nonarchimedean local field, with its valuative topology, and let $L/K$ be a finite abelian Galois extension. There exists a continuous surjective homomorphism",
         "$$\\operatorname{Art}_{L/K}:K^\\times\\longrightarrow\\operatorname{Gal}(L/K),\\qquad \\ker(\\operatorname{Art}_{L/K})=N_{L/K}(L^\\times).$$",
@@ -83,9 +83,6 @@
         "Fix a nonarchimedean local field $K$ and a separable closure. Finite abelian intermediate extensions correspond to open finite-index subgroups of $K^\\times$ through",
         "$$L\\longmapsto N_{L/K}(L^\\times).$$",
         "The correspondence reverses inclusion: $L_1\\subseteq L_2$ exactly when $N_{L_2/K}(L_2^\\times)\\subseteq N_{L_1/K}(L_1^\\times)$."
-      ],
-      "discussion": [
-        "The reciprocity map and the existence theorem together classify finite abelian extensions of a local field. The finite quotient, profinite, and norm-subgroup formulations describe the same theory at complementary levels."
       ],
       "history": [
         "Serre's Local Fields presents the cohomological approach to local reciprocity, following the development associated with Hochschild and Artin–Tate. This finite quotient formulation is a convenient point of entry to that theory.",
@@ -135,9 +132,6 @@
         "$$C_K/C_K^0\\ \\simeq_{\\mathrm{top}}\\ G_K^{\\mathrm{ab}}.$$",
         "Here $G_K=\\operatorname{Gal}(K^{\\mathrm{sep}}/K)$, and $G_K^{\\mathrm{ab}}$ denotes its topological abelianization."
       ],
-      "discussion": [
-        "The ray class formulation describes splitting of primes through their Frobenius automorphisms. The idelic formulation joins the arithmetic of all completions and identifies the quotient of the idèle class group by its identity component with the abelianized absolute Galois group."
-      ],
       "history": [
         "Artin's 1927 reciprocity map made the correspondence with Galois groups canonical through Frobenius. Milne's historical discussion explains the earlier contributions of Kronecker, Weber, Hilbert, and Takagi to the class-field correspondence.",
         "Milne's notes explain the algebraic and cohomological approach associated with Chevalley and Artin–Tate and present both ideal-theoretic and idelic reciprocity. The idelic formulation unifies finite-place and infinite-place conditions."
@@ -173,10 +167,6 @@
         "$$C_K/N_{L/K}(C_L)\\simeq\\operatorname{Gal}(L/K),\\qquad \\widehat{C_K}\\xrightarrow{\\sim}G_K^{\\mathrm{ab}}.$$",
         "The completion uses all ordinary open subgroups of finite index, and the second isomorphism is an isomorphism of topological groups extending the constructed absolute Artin map.",
         "The Lean interface uses principal-divisor data: every nonzero function has a finitely supported divisor of valuation orders and degree zero. The library constructs these data from the function-field structure over the finite base field, and for its finite extensions."
-      ],
-      "discussion": [
-        "This is an existence and classification theorem: an open finite-index subgroup actually produces its class field. The same norm subgroups also determine the topology needed for completed reciprocity, so the finite classification and the absolute Galois description fit together.",
-        "The kernel is the image of the field extension’s idèle norm. This makes the correspondence usable for comparing concrete extensions and for recovering an extension from its norm subgroup. Milne’s Arithmetic Duality Theorems treats the function-field version in Chapter I, Appendix A."
       ],
       "history": [
         "Function-field class field theory expresses abelian covering data through idèles and their norm groups. Milne’s Chapter I, Appendix A develops its local and global reciprocity formulations."
@@ -222,9 +212,6 @@
         "$$\\varphi(n)=\\frac{1}{|G_0|}\\sum_{i=1}^{n}|G_i|\\quad(n\\in\\mathbb N).$$",
         "If $G_n\\ne G_{n+1}$, then $\\varphi(n)\\in\\mathbb Z$. The formal statement gives an integer $z$ with the rational equality $\\varphi(n)=z$."
       ],
-      "discussion": [
-        "Upper numbering can take rational values, but its jumps in the abelian case occur at integers. This restriction on wild ramification underlies the integral conductor exponents of class field theory; nonabelian extensions can have fractional upper jumps. Arf's ramification paper appeared in 1940, and Serre's Local Fields develops the ramification and norm theory surrounding the Hasse–Arf theorem."
-      ],
       "history": [
         "Arf's original ramification paper appeared in volume 181 of Crelle's journal in 1940. Serre's Local Fields develops the ramification and norm theory in which the Hasse–Arf theorem is situated."
       ],
@@ -253,9 +240,6 @@
         "$$a\\in N_{L/K}(L^\\times)\\quad\\Longleftrightarrow\\quad a\\in N_{L\\otimes_K K_v\\,/\\,K_v}\\bigl((L\\otimes_K K_v)^\\times\\bigr)\\ \\text{for every place }v.$$",
         "The right side includes every finite and every infinite completion. The norm after base change is the determinant norm of the resulting finite algebra."
       ],
-      "discussion": [
-        "The theorem makes a global multiplicative equation testable at every finite and infinite completion. Cyclicity is essential: for more general extensions, an obstruction can remain even when every local norm test succeeds. This is a classical example of the local-to-global principle, treated by Milne through cyclic cohomology and idèle classes together with the limitations of the noncyclic case."
-      ],
       "history": [
         "The Hasse norm theorem is a central example of a local-to-global principle. Milne treats it through cyclic cohomology and idèle classes and explains why the corresponding assertion fails for general noncyclic extensions."
       ],
@@ -282,9 +266,6 @@
         "Every finite abelian extension $L/\\mathbb Q$ is contained in a cyclotomic field. More precisely, there exist an integer $n>0$ and a $\\mathbb Q$-algebra embedding",
         "$$L\\hookrightarrow\\mathbb Q(\\zeta_n),$$",
         "where $\\zeta_n$ is a primitive $n$th root of unity."
-      ],
-      "discussion": [
-        "Roots of unity therefore suffice to generate fields containing every finite abelian extension of the rational numbers, and their union is the maximal abelian extension. This gives a concrete model for the broader problem of explicitly generating abelian extensions. As Milne recounts, Hilbert proved the theorem in 1896 after earlier incomplete proofs by Kronecker and Weber."
       ],
       "history": [
         "Milne records Hilbert's 1896 proof following earlier incomplete proofs by Kronecker and Weber. The theorem is the rational-number-field prototype for the broader problem of explicitly generating abelian extensions."

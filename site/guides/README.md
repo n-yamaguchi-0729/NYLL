@@ -12,10 +12,12 @@ It does not execute Lean or claim to replace kernel verification.
 
 Library overviews explain the mathematical problem and what the library achieves
 in connected prose. Include necessary qualifications there without a separate
-scope section. An entry opens with its short `summary`, followed by `discussion`
-explaining its significance and a little historical context. Avoid restating the
-summary. The longer `history` field remains editorial source material, without a
-separate displayed section. References must support the displayed explanation.
+scope section. An entry opens with only its title and one short `summary`
+paragraph. Use the same title and summary on its overview card, without a kind
+label. Do not add a second introductory explanation. The precise mathematical
+statement and Lean code follow. The longer `history` field remains editorial
+source material, without a separate displayed section. References must support
+the displayed mathematics.
 State a theorem's hypotheses and conclusion directly. Omit lists of assumptions
 it does not require, descriptions of inputs removed during development, and
 proof-completion commentary. Cite the source of the stated result; do not add

@@ -77,10 +77,6 @@
         "where equivariance holds on points valued in every $k$-scheme. For the resulting modulus $D$, the pair $(\\phi,F)$ is unique.",
         "If a point $\\varepsilon\\in U(k)$ is supplied and $q(\\varepsilon)=1$, there is also a direct pointed form: the map constructs such a divisor $D$ and a unique group-scheme morphism $\\phi:J_D\\to G$ with $q=\\phi\\circ a_{D,\\varepsilon}$. Two maps from the same $U$ can be given a common ground-field modulus."
       ],
-      "discussion": [
-        "A modulus retains boundary multiplicities and controls maps to commutative algebraic groups. The theorem factors the given morphism through the Picard degree-one torsor of a suitable modulus.",
-        "Serre develops maps from curves to commutative groups and generalized Jacobians in Chapters III and V of Algebraic Groups and Class Fields. The formal result links modulus existence to the constructed group and torsor over the original field, while keeping the full Cartier divisor and the equivariance equation."
-      ],
       "history": [
         "The modulus approach connects the mapping properties of open curves with generalized Jacobians. Chapters III and V of Serre's Algebraic Groups and Class Fields provide the mathematical reference for these two parts."
       ],
@@ -117,9 +113,6 @@
         "$$\\exists!\\,g:J_C\\longrightarrow A\\quad\\text{such that}\\quad f=g\\circ a_P.$$",
         "The quantified $g$ in the cited declaration is a morphism in the category of schemes over $k$."
       ],
-      "discussion": [
-        "This universal property reduces the study of pointed maps from the curve to the study of maps out of its Jacobian. Sending the base point to zero removes translation freedom, and uniqueness makes the factorization a characterization of the Jacobian. It is the curve case of the Albanese viewpoint, which characterizes a variety through its maps to abelian varieties; Milne develops it in Section 6."
-      ],
       "history": [
         "The Albanese viewpoint characterizes a variety by its maps to abelian varieties. For a pointed curve, its Jacobian has this universal role. Milne treats this characterization in Section 6, alongside the duality theory of Jacobians."
       ],
@@ -145,10 +138,6 @@
         "The inequality compares every place multiplicity. The conductor has coefficient zero at all places centered in $U$; its support may be strictly smaller than $C\\setminus U$. The map admits a modulus and a unique reciprocal local symbol.",
         "For another such map $r:U\\to H$, the conductor of the map into the product group satisfies",
         "$$D_{(q,r)}=D_q\\vee D_r,\\qquad D_{(q,r)}(v)=\\max\\{D_q(v),D_r(v)\\}.$$"
-      ],
-      "discussion": [
-        "A modulus can often be enlarged, so existence alone leaves many choices. The conductor removes that ambiguity by specifying the least allowed multiplicity at every place. Classifying all moduli as those above it is stronger than finding a modulus of minimum total degree.",
-        "For a map to a product group, each coordinate imposes its own condition and the least simultaneous bound is their coefficientwise maximum. The calculation uses the actual regular maps and applies to nonproper targets as well. The local-symbol and modulus viewpoint is developed in Serre’s Algebraic Groups and Class Fields."
       ],
       "history": [
         "Serre’s treatment of maps from curves to commutative algebraic groups uses moduli and local symbols to describe their boundary behavior and their relation to generalized Jacobians."
@@ -187,9 +176,6 @@
         "The coefficient object is the constant étale sheaf on the finite abelian group $\\mu_n(K)$.",
         "Let $K$ be algebraically closed of characteristic $0$, and let $C$ be a smooth proper curve model of genus $g$ with a $K$-point. Let $j:U\\hookrightarrow C$ be a dense open immersion with $U$ integral and quasi-compact. Suppose the boundary has $r\\ge1$ places, and choose a geometric point of $U$. Then, for $n\\ge1$,",
         "$$\\#H^1_{\\mathrm{\\acute et}}(U,\\underline{\\mu_n(K)})=n^{\\,2g+r-1}.$$"
-      ],
-      "discussion": [
-        "Kummer theory and Jacobian torsion connect the genus with finite abelian covering data. For an open curve, the boundary contributes r−1 additional directions. The two formulas are presented together, with their respective hypotheses."
       ],
       "history": [
         "SGA 1 established the fundamental-group language for finite étale covers. In the Jacobian setting, the relation between abelian covers and torsion is developed in Milne's Jacobian Varieties, Section 9; Kummer theory provides the cohomological expression used here.",
