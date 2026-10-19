@@ -5,15 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationDegreeLift
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_etale_schemeNsmul_of_isUnit_of_smoothOfRelativeDimension
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_exists_smoothOfRelativeDimension_of_smooth_of_isLocalRing
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_isFinite_endKerStr_and_natCard_eq_endDegree_of_etale
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawEtaleSchemeNsmul
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawSmoothOfRelativeDimension
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFiniteEndKerStrNatCardEqEndDegree
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 /-!
-# Multiplication covers of degree invertible in the ground field
+# Multiplication covers of degree invertible in the local base ring
 
-The actual multiplication map is finite étale whenever its integer is a unit.
+The actual multiplication map is finite étale at every invertible integer,
+over any local base ring.
 Combined with the degree lifting theorem, this supplies a multiplication cover
 over every connected finite étale cover whose degree is invertible, in arbitrary
 characteristic.
@@ -28,7 +29,9 @@ open RelativeGroupLaw_isFinite_endKerStr_and_natCard_eq_endDegree_of_etale.P2mSe
 
 namespace GoodReductionJacobian.RelativeGroupLaw
 
-variable {K : Type} [Field K] {A : Scheme} {f : A ⟶ Spec (.of K)}
+section LocalRing
+
+variable {K : Type} [CommRing K] [IsLocalRing K] {A : Scheme} {f : A ⟶ Spec (.of K)}
   [IsProper f] [Smooth f] (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
 
 include hc in
@@ -52,6 +55,11 @@ theorem isFiniteEtale_schemeNsmul_of_isUnit (n : ℕ) (hn : IsUnit (n : K)) :
 def unitMultiplicationCover (n : ℕ) (hn : IsUnit (n : K)) : FiniteEtale A := by
   have _ : IsFiniteEtale (G.schemeNsmul n) := G.isFiniteEtale_schemeNsmul_of_isUnit hc n hn
   exact FiniteEtale.mk (G.schemeNsmul n)
+
+end LocalRing
+
+variable {K : Type} [Field K] {A : Scheme} {f : A ⟶ Spec (.of K)}
+  [IsProper f] [Smooth f] (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
 
 theorem isConnected_unitMultiplicationCover [GeometricallyConnected f]
     (n : ℕ) (hn : IsUnit (n : K)) : IsConnected (G.unitMultiplicationCover hc n hn) := by

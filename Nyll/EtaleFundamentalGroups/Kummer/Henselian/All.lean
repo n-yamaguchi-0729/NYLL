@@ -7,5 +7,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Kummer.Henselian.TameUniformizerRadical
 import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
 import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UnitRoot
+import Nyll.EtaleFundamentalGroups.Kummer.Henselian.PrimeToUniformizerRadical
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Kummer.Henselian. -/

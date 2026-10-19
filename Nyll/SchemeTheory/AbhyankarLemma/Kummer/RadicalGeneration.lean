@@ -183,7 +183,7 @@ theorem exists_base_element_and_value_zero_radical_correction
     LubinTate.Valuations.exponentialValuation_inv_value w haMap0 hden
   change w (x ^ n / algebraMap K L a) = 0
   rw [div_eq_mul_inv, w.map_mul, hr, hdenInv]
-  simp
+  simp only [← WithTop.coe_add, add_neg_cancel, WithTop.coe_zero]
 
 /-- Hensel's lemma supplies prime-to-residue-characteristic roots on the
 principal-unit fibre: if a valuation-ring element reduces to `1`, then it is
@@ -286,7 +286,7 @@ theorem exists_pow_eq_of_residue_eq_one_of_coprime
     dsimp [f, gbar, hbar]
     rw [Polynomial.map_sub, Polynomial.map_pow,
       Polynomial.map_X, Polynomial.map_C, huV, map_one,
-      show (1 : Polynomial k) = Polynomial.C 1 by simp]
+      show (1 : Polynomial k) = Polynomial.C 1 from Polynomial.C_1.symm]
     simpa only [Polynomial.C_1, mul_comm] using
       (geom_sum_mul (Polynomial.X : Polynomial k) m).symm
   have hmCast : (m : k) ≠ 0 := by

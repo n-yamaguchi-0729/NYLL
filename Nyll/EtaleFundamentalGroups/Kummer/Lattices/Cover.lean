@@ -40,7 +40,7 @@ theorem range_mapDomainAlgHom_eq_gradeZero_quotient
     intro l hl
     change l ∈ (Finsupp.mapDomain H.subtype y.coeff).support at hl
     obtain ⟨h, _, rfl⟩ := Finset.mem_image.mp (Finsupp.mapDomain_support hl)
-    simp
+    exact (QuotientAddGroup.eq_zero_iff _).mpr h.property
   · intro hx
     apply (AddMonoidAlgebra.mapDomainAlgHom R R H.subtype).mem_range.mpr
     refine ⟨AddMonoidAlgebra.comapDomain H.subtype H.subtype_injective x, ?_⟩

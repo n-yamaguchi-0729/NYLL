@@ -296,10 +296,10 @@ private def eqLocusCongr
       _ = r' x.1 := x.2
       _ = r' (eA (eA.symm x.1)) := by rw [eA.apply_symm_apply]
       _ = eB (r (eA.symm x.1)) := hrx.symm⟩
-  left_inv x := by ext; simp
-  right_inv x := by ext; simp
-  map_add' x y := by ext; simp
-  map_smul' r x := by ext; simp
+  left_inv x := Subtype.ext (eA.symm_apply_apply x.1)
+  right_inv x := Subtype.ext (eA.apply_symm_apply x.1)
+  map_add' x y := Subtype.ext (map_add eA x.1 y.1)
+  map_smul' r x := Subtype.ext (map_smul eA r x.1)
 
 /-- Evidence that an abstract formal-gluing equalizer is the degree-zero
 diagram of a genuine descent coalgebra on the full completion/principal

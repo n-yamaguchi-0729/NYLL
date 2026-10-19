@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.IntegralPurelyInseparableLocalTensor
+import Nyll.SchemeTheory.RingTheory.Reduced.IntegralPurelyInseparableLocalTensor
 import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Localization.BaseChange

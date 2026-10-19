@@ -131,7 +131,9 @@ theorem infinityPrime_isMaximal
   have hmap :
       (Ideal.map e.toRingHom
         (Ideal.span ({Polynomial.X} : Set (Polynomial K)))).IsMaximal :=
-    hX.map_of_surjective_of_ker_le e.surjective (by simp)
+    hX.map_of_surjective_of_ker_le (f := e.toRingHom) e.surjective (by
+      rw [(RingHom.injective_iff_ker_eq_bot e.toRingHom).mp e.injective]
+      exact bot_le)
   have hmap_eq :
       Ideal.map e.toRingHom
           (Ideal.span ({Polynomial.X} : Set (Polynomial K))) =

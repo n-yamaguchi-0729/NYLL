@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalSectionsBaseChange
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperGeometricallyReducedSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_Modules_pullbackUnitIso_hom_app_pullbackLocalSection_toUnitSection
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoHomAppPullbackLocalSectionToUnitSection
 import Nyll.SchemeTheory.FiniteEtale.Algebra.LocalEtaleFromClosedFiber
 import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.RingTheory.Etale.Basic

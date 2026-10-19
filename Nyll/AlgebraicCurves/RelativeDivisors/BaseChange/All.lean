@@ -1,0 +1,24 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBasePointSums
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ComapCurveChangeOfPointCompEqIsoPullbackModuleComparison
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ComapCurveChangeOfPointEqTopIsoPullbackModuleComparison
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.InvertibleRigidifyLineBundleTensorIdealModulePullbackIso
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.InvertibleTwistModulePullbackIso
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.InvertibleTwistModulePullbackIsoSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.LineBundlePullbackIsoInvModulePowKerMulPowProdKer
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackInjective
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackLineBundlePullbackIso
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackOfPoint
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackOfPointLineBundleIsoIdealModuleIso
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.RigidifyLineBundleTensorIdealModulePullbackIsoPullback
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.SupportedInComapEq
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.TwistModulePullbackIsoPullback
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.TwistModulePullbackIsoPullbackSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.UniquePullbackEq

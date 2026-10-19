@@ -219,7 +219,7 @@ private noncomputable def sigmaMapCoforkGeneric {C : Type u}
       apply Sigma.map'_eq
         (funext fun i ↦ Function.Coequalizer.condition sigma tau i)
       intro _
-      simp)
+      simp only [eqToHom_refl, Category.comp_id])
 
 /-- The copower of an object by the coequalizer of two functions is the
 coequalizer of the induced maps between copowers. -/
@@ -301,7 +301,7 @@ private lemma map_sigmaMap_naturality {C : Type u} {D : Type u'}
     _ = G.map (Sigma.ι (fun _ : E ↦ X) (sigma i)) ≫
           (PreservesCoproduct.iso G (fun _ : E ↦ X)).hom := by
             rw [Sigma.ι_comp_map']
-            simp
+            rw [Category.id_comp]
     _ = Sigma.ι (fun _ : E ↦ G.obj X) (sigma i) := by
           simpa [← PreservesCoproduct.inv_hom] using
             (map_ι_comp_inv_sigmaComparison
@@ -577,7 +577,7 @@ private noncomputable def pullbackIsoSpecTensorOfHom
       (by
         simpa only [Category.comp_id] using
           hom_eq_isoSpec_hom_comp_specMap_algebraMap p)
-      (by simp))
+      (by rw [Category.comp_id, Category.id_comp]))
   exact e₀ ≪≫ pullbackSymmetry pΓ pS ≪≫
     pullbackSpecIso R S Γ(Z, ⊤)
 
@@ -667,7 +667,7 @@ private lemma pullbackMap_pullbackSpecIso {R S A B : Type u}
     let pB := Spec.map (CommRingCat.ofHom (algebraMap R B))
     let a := Spec.map (CommRingCat.ofHom f.toRingHom)
     let q := pullback.map pS pB pS pA (𝟙 _) a (𝟙 _)
-      (by simp) (by
+      (by rw [Category.comp_id, Category.id_comp]) (by
         rw [← Spec.map_comp]
         simp only [Category.comp_id]
         dsimp only [pB]
@@ -692,7 +692,9 @@ private lemma pullbackMap_pullbackSpecIso {R S A B : Type u}
     rw [← Spec.map_comp]
     congr 1
     ext x
-    simp
+    change x ⊗ₜ[R] (1 : B) =
+      Algebra.TensorProduct.map (AlgHom.id S S) f (x ⊗ₜ[R] (1 : A))
+    rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, map_one]
   · simp only [Category.assoc, pullback.lift_snd,
       pullbackSpecIso_inv_snd]
     apply (cancel_epi (pullbackSpecIso R S B).inv).1
@@ -712,7 +714,7 @@ private noncomputable def baseChangeMapOfHom
     (Spec.map (CommRingCat.ofHom (algebraMap R S))) pY
     (Spec.map (CommRingCat.ofHom (algebraMap R S)))
     f (𝟙 _) (𝟙 _) (by simpa only [Category.comp_id] using w.symm)
-    (by simp)
+    (by rw [Category.comp_id, Category.id_comp])
 
 private lemma baseChangeMap_comp_pullbackIsoSpecTensorOfHom
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
@@ -740,18 +742,18 @@ private lemma baseChangeMap_comp_pullbackIsoSpecTensorOfHom
       X.isoSpec.hom (𝟙 _) (𝟙 _)
       (by simpa only [Category.comp_id] using
         hom_eq_isoSpec_hom_comp_specMap_algebraMap pX)
-      (by simp))
+      (by rw [Category.comp_id, Category.id_comp]))
   let eY : pullback pY pS ≅ pullback pΓY pS :=
     asIso (pullback.map pY pS pΓY pS
       Y.isoSpec.hom (𝟙 _) (𝟙 _)
       (by simpa only [Category.comp_id] using
         hom_eq_isoSpec_hom_comp_specMap_algebraMap pY)
-      (by simp))
+      (by rw [Category.comp_id, Category.id_comp]))
   let q : pullback pX pS ⟶ pullback pY pS :=
     baseChangeMapOfHom pX pY f w
   let qSpec : pullback pS pΓX ⟶ pullback pS pΓY :=
     pullback.map pS pΓX pS pΓY
-      (𝟙 _) a (𝟙 _) (by simp) (by
+      (𝟙 _) a (𝟙 _) (by rw [Category.comp_id, Category.id_comp]) (by
         change Spec.map (CommRingCat.ofHom
             (algebraMap R Γ(X, ⊤))) ≫ 𝟙 _ =
           Spec.map (CommRingCat.ofHom fAlg.toRingHom) ≫
@@ -1600,7 +1602,7 @@ private def localSplitCoforkForgetAfterPullbackIsColimit
     Functor.isoWhiskerRight
         (MorphismProperty.Over.pullbackComp
           (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) (Q := ⊤) (q ≫ pS) a
-          (fg := q ≫ (pS ≫ a)) (by simp)) H ≪≫
+          (fg := q ≫ (pS ≫ a)) (by rw [Category.assoc])) H ≪≫
       Functor.associator _ _ _
   have hdirectComposite : IsColimit
       ((FiniteEtale.pullback (q ≫ (pS ≫ a)) ⋙ H).mapCocone
@@ -1620,13 +1622,13 @@ private lemma pullback_congrHom_map_naturality
     (e : a ≫ 𝟙 S = i ≫ b) (e' : a' ≫ 𝟙 S = i ≫ b') :
     (pullback.congrHom ha rfl).hom ≫
         pullback.map a' p b' p i (𝟙 T) (𝟙 S) e'
-          (by simp) =
+          (by rw [Category.comp_id, Category.id_comp]) =
       pullback.map a p b p i (𝟙 T) (𝟙 S) e
-          (by simp) ≫
+          (by rw [Category.comp_id, Category.id_comp]) ≫
         (pullback.congrHom hb rfl).hom := by
   simp only [pullback.congrHom, asIso_hom]
   rw [pullback.map_comp, pullback.map_comp]
-  simp
+  simp only [Category.id_comp, Category.comp_id]
 
 private lemma pullback_congrHom_map_naturality_inv
     {W Y T S : Scheme.{u}} {a a' : W ⟶ S} {b b' : Y ⟶ S}
@@ -1634,13 +1636,13 @@ private lemma pullback_congrHom_map_naturality_inv
     (e : a ≫ 𝟙 S = i ≫ b) (e' : a' ≫ 𝟙 S = i ≫ b') :
     (pullback.congrHom ha rfl).inv ≫
         pullback.map a p b p i (𝟙 T) (𝟙 S) e
-          (by simp) =
+          (by rw [Category.comp_id, Category.id_comp]) =
       pullback.map a' p b' p i (𝟙 T) (𝟙 S) e'
-          (by simp) ≫
+          (by rw [Category.comp_id, Category.id_comp]) ≫
         (pullback.congrHom hb rfl).inv := by
   simp only [pullback.congrHom_inv]
   rw [pullback.map_comp, pullback.map_comp]
-  simp
+  simp only [Category.id_comp, Category.comp_id]
 
 private lemma pullback_congrHom_map_naturality_right_rfl
     {W Y T S : Scheme.{u}} {a a' : W ⟶ S} {b : Y ⟶ S}
@@ -1648,9 +1650,9 @@ private lemma pullback_congrHom_map_naturality_right_rfl
     (e : a ≫ 𝟙 S = i ≫ b) (e' : a' ≫ 𝟙 S = i ≫ b) :
     (pullback.congrHom ha rfl).hom ≫
         pullback.map a' p b p i (𝟙 T) (𝟙 S) e'
-          (by simp) =
+          (by rw [Category.comp_id, Category.id_comp]) =
       pullback.map a p b p i (𝟙 T) (𝟙 S) e
-          (by simp) := by
+          (by rw [Category.comp_id, Category.id_comp]) := by
   simpa [pullback.congrHom] using
     pullback_congrHom_map_naturality p i ha (rfl : b = b) e e'
 
@@ -1789,10 +1791,13 @@ private def reverseForwardIsColimitEquiv :
 
 /-- The maps in the literal statement of 0BMN (written with `pullback.map`). -/
 private def zeroBMNLeft : pullback p (a ≫ c) ⟶ pullback p c :=
-  pullback.map p (a ≫ c) p c (𝟙 U) a (𝟙 Z) (by simp) (by simp)
+  pullback.map p (a ≫ c) p c (𝟙 U) a (𝟙 Z)
+    (by rw [Category.comp_id, Category.id_comp]) (Category.comp_id _)
 
 private def zeroBMNRight : pullback p (a ≫ c) ⟶ pullback p c :=
-  pullback.map p (a ≫ c) p c (𝟙 U) b (𝟙 Z) (by simp) (by simp [hc])
+  pullback.map p (a ≫ c) p c (𝟙 U) b (𝟙 Z)
+    (by rw [Category.comp_id, Category.id_comp])
+    (by simpa only [Category.comp_id] using hc)
 
 private lemma forwardLeft_eq_zeroBMNLeft :
     forwardLeft (a := a) (c := c) p = zeroBMNLeft (a := a) (c := c) p := by
@@ -2091,11 +2096,11 @@ private def normalizedUnderlyingIsColimitEquiv
           _ = f.left ≫ s.π.left := rfl
       change (pullback.congrHom (nestedSourceHom_eq s) rfl).hom ≫
             pullback.map (f ≫ s.π).left p s.π.left p f.left
-              (𝟙 U) (𝟙 s.pt.left) eNew (by simp) =
+              (𝟙 U) (𝟙 s.pt.left) eNew (by rw [Category.comp_id, Category.id_comp]) =
           pullback.map
               (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p
               (s.ι.app WalkingParallelPair.one ≫ 𝟙 s.pt).left p
-              f.left (𝟙 U) (𝟙 s.pt.left) eOld (by simp) ≫
+              f.left (𝟙 U) (𝟙 s.pt.left) eOld (by rw [Category.comp_id, Category.id_comp]) ≫
             (pullback.congrHom (nestedMiddleHom_eq s) rfl).hom
       exact pullback_congrHom_map_naturality p f.left
         (nestedSourceHom_eq s) (nestedMiddleHom_eq s) eOld eNew)
@@ -2122,11 +2127,11 @@ private def normalizedUnderlyingIsColimitEquiv
             congrArg (fun k ↦ k.left) s.condition
       change (pullback.congrHom (nestedSourceHom_eq s) rfl).hom ≫
             pullback.map (f ≫ s.π).left p s.π.left p g.left
-              (𝟙 U) (𝟙 s.pt.left) eNew (by simp) =
+              (𝟙 U) (𝟙 s.pt.left) eNew (by rw [Category.comp_id, Category.id_comp]) =
           pullback.map
               (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p
               (s.ι.app WalkingParallelPair.one ≫ 𝟙 s.pt).left p
-              g.left (𝟙 U) (𝟙 s.pt.left) eOld (by simp) ≫
+              g.left (𝟙 U) (𝟙 s.pt.left) eOld (by rw [Category.comp_id, Category.id_comp]) ≫
             (pullback.congrHom (nestedMiddleHom_eq s) rfl).hom
       exact pullback_congrHom_map_naturality p g.left
         (nestedSourceHom_eq s) (nestedMiddleHom_eq s) eOld eNew)
@@ -2147,10 +2152,10 @@ private def normalizedUnderlyingIsColimitEquiv
       change pullback.map
               (s.ι.app WalkingParallelPair.one ≫ 𝟙 s.pt).left p
               (𝟙 s.pt.left) p s.π.left (𝟙 U) (𝟙 s.pt.left)
-              eOld (by simp) =
+              eOld (by rw [Category.comp_id, Category.id_comp]) =
           (pullback.congrHom (nestedMiddleHom_eq s) rfl).hom ≫
             pullback.map s.π.left p (𝟙 s.pt.left) p s.π.left
-              (𝟙 U) (𝟙 s.pt.left) eNew (by simp)
+              (𝟙 U) (𝟙 s.pt.left) eNew (by rw [Category.comp_id, Category.id_comp])
       exact (pullback_congrHom_map_naturality_right_rfl p s.π.left
         (nestedMiddleHom_eq s) eOld eNew).symm)
 
@@ -2216,14 +2221,14 @@ private lemma scheme_comp_eqToHom_heq
     {W Y Z : Scheme.{u}} (h : W ⟶ Y) (e : Y = Z) :
     h ≫ eqToHom e ≍ h := by
   cases e
-  simp
+  simp only [eqToHom_refl, Category.comp_id, heq_eq_eq]
 
 private lemma scheme_eqToHom_comp_comp_eqToHom_heq
     {V W Y Z : Scheme.{u}} (h : W ⟶ Y) (e₁ : V = W) (e₂ : Y = Z) :
     eqToHom e₁ ≫ h ≫ eqToHom e₂ ≍ h := by
   cases e₁
   cases e₂
-  simp
+  simp only [eqToHom_refl, Category.comp_id, Category.id_comp, heq_eq_eq]
 
 /-- The forgotten finite étale pullback cofork is the reverse-oriented
 Scheme cofork used in the pullback-symmetry bridge. -/
@@ -2383,7 +2388,7 @@ private def forgetToUnderlyingSchemeMapCoconeIsColimit
           (Cofork.ext (Iso.refl _) (by
             change pullback.fst (localSplitMap s j) s.π.left ≫ 𝟙 _ =
               pullback.fst (localSplitMap s j) s.π.left
-            simp))⟩)
+            exact Category.comp_id _))⟩)
       (fun j k ↦ by
         rcases localSplitOverlapZeroBMNIsColimit s hs j k with ⟨hjk⟩
         exact ⟨hjk.ofIsoColimit
@@ -2394,7 +2399,7 @@ private def forgetToUnderlyingSchemeMapCoconeIsColimit
               pullback.fst
                 (pullback.fst (localSplitMap s j) (localSplitMap s k) ≫
                   localSplitMap s j) s.π.left
-            simp))⟩)
+            exact Category.comp_id _))⟩)
   let F : Functor (FiniteEtale X) Scheme.{u} :=
     FiniteEtale.forget X ⋙ CategoryTheory.Over.forget X
   have hschemeMapped : IsColimit

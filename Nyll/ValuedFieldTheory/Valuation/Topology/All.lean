@@ -9,6 +9,12 @@ import Nyll.ValuedFieldTheory.Valuation.Topology.AdicCompletionInverseLimitRing
 import Nyll.ValuedFieldTheory.Valuation.Topology.AdicContractingFixedPoint
 import Nyll.ValuedFieldTheory.Valuation.Topology.CompatibleInverseLimit
 import Nyll.ValuedFieldTheory.Valuation.Topology.Models
+import Nyll.ValuedFieldTheory.Valuation.Topology.ValuedVSubEqOneVDetEqOne
+import Nyll.ValuedFieldTheory.Valuation.Topology.ValuedMulVecAddEqVDetEqOne
+import Nyll.ValuedFieldTheory.Valuation.Topology.ValuedIsClosedSubmodule
+import Nyll.ValuedFieldTheory.Valuation.Topology.ValuedMultipliableOneAdd
+import Nyll.ValuedFieldTheory.Valuation.Topology.ValuedVProdSubOneSubSumSubLe
+import Nyll.ValuedFieldTheory.Valuation.Topology.ValuedVTprodEqFinsetProd
 
 /-!
 # Topological constructions in valuation theory

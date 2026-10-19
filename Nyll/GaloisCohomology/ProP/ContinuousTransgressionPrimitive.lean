@@ -210,7 +210,7 @@ noncomputable def invariantContinuousH1OfInflationPrimitive
       (OpenNormalSubgroupInClass.quotientProj U g)⁻¹ :=
     map_inv (OpenNormalSubgroupInClass.quotientProj U) g
   rw [hqgn, hqinv] at hconj
-  rw [hqinv, show g * g⁻¹ = 1 by simp,
+  rw [hqinv, show g * g⁻¹ = 1 from mul_inv_cancel g,
     normalizedInflationPrimitiveValue_one] at hbase
   have hfconj : f (g * n.1 * g⁻¹) = f n.1 := by
     rw [hgn'] at hconj

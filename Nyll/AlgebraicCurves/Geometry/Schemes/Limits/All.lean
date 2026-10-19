@@ -1,0 +1,28 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.AffineLimit
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.AffineLimitHomIsLFPFinitePresentation
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.AffineLimitLocallyOfFiniteType
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.AffineLimitPresheafULiftOpenImmersionIsLocallySurjective
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FGSubalgebraIsColimitCocone
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FGSubalgebraIsLimitSpecCone
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FGSubalgebraTensorStage
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraHomPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraIsAffinePullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraIsoPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraOpensPreimageEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraProperFlatPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraPullbackFinitePresentation
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraPullbackFstCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraPullbackISupEqTop
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraPullbackIsAffine
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FlatFgSubalgebraFlatPullbackSnd
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.IsClosedImmersionFgSubalgebraClosedImmersionPullbackMap
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.IsProperFgSubalgebraProperPullbackSnd
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.IsSeparatedFgSubalgebra
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.SmoothFgSubalgebraSmoothPullbackSnd
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.SpecMapBaseMemIsDirectLimit

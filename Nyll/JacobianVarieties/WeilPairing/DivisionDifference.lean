@@ -5,13 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.JacobianVarieties.WeilPairing.Datum
-import Nyll.AlgebraicCurves.Places.Evaluation
-import Nyll.AlgebraicCurves.Places.EvaluationAlgebra
-import Nyll.AlgebraicCurves.Places.Place_isRational_of_isAlgClosed
-import Nyll.AlgebraicCurves.Places.SemilinearEvaluation
-import Nyll.AlgebraicCurves.Divisors.Semilinear
+import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
+import Nyll.AlgebraicCurves.Places.Evaluation.SemilinearEvaluation
+import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
 import Mathlib.Tactic.Ring
 
 /-! # Weil pairing of division differences
@@ -45,10 +44,10 @@ private theorem evalFun_div (f g : F) (D : Divisor K F) (hf : f ≠ 0) (hg : g �
     evalFun (f / g) D = evalFun f D / evalFun g D := by
   have hgi : ∀ v ∈ D.support, g⁻¹ ∈ v.toValuationSubring := by
     intro v hv
-    apply v.mem_toValuationSubring_of_ord_nonneg_alt (inv_ne_zero hg)
+    apply v.mem_of_ord_nonneg (inv_ne_zero hg)
     rw [v.ord_inv, hgD v hv, neg_zero]
   rw [div_eq_mul_inv, evalFun_mul_of_forall_mem hrat
-    (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt hf (hfD v hv).ge) hgi]
+    (fun v hv => v.mem_of_ord_nonneg hf (hfD v hv).ge) hgi]
   have hval := evalFun_zpow_left_of_ord_eq_zero hg (D := D) (-1)
     hrat hgD
   rw [zpow_neg_one, zpow_neg_one] at hval
@@ -109,11 +108,11 @@ theorem pairing_divisionDifference
         (Divisor.evalFun f E / Divisor.evalFun g D) := by
   have hfE : ∀ v ∈ E.support, v.evalAt f ≠ 0 := by
     intro v hv
-    apply v.evalAt_ne_zero_of_ord_eq_zero (v.isRational_of_isAlgClosed) hf
+    apply v.evalAt_ne_zero (v.isRational_of_isAlgClosed) hf
     rw [hfdiv v, (hDE v).resolve_right (Finsupp.mem_support_iff.mp hv), mul_zero]
   have hfE' : ∀ v ∈ E'.support, v.evalAt f ≠ 0 := by
     intro v hv
-    apply v.evalAt_ne_zero_of_ord_eq_zero (v.isRational_of_isAlgClosed) hf
+    apply v.evalAt_ne_zero (v.isRational_of_isAlgClosed) hf
     rw [hfdiv v, (hDE' v).resolve_right (Finsupp.mem_support_iff.mp hv), mul_zero]
   have hgD : ∀ v ∈ D.support, v.ord g = 0 := by
     intro v hv
@@ -178,11 +177,11 @@ theorem exists_semilinearDivisionDifference
     hf hg hσg hfdiv hgdiv hσgdiv hDE hDE' hDB
   have hfmem : ∀ v ∈ E.support, f ∈ v.toValuationSubring := by
     intro v hv
-    apply v.mem_toValuationSubring_of_ord_nonneg_alt hf
+    apply v.mem_of_ord_nonneg hf
     rw [hfdiv v, (hDE v).resolve_right (Finsupp.mem_support_iff.mp hv), mul_zero]
   have hgmem : ∀ v ∈ D.support, g ∈ v.toValuationSubring := by
     intro v hv
-    apply v.mem_toValuationSubring_of_ord_nonneg_alt hg
+    apply v.mem_of_ord_nonneg hg
     rw [hgdiv v, (hDE v).resolve_left (Finsupp.mem_support_iff.mp hv),
       (hDB v).resolve_left (Finsupp.mem_support_iff.mp hv), mul_zero, sub_self]
   have hevalf := SemilinearAut.evalFun_smul σ E

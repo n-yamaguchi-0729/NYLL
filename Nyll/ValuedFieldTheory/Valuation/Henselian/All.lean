@@ -35,6 +35,8 @@ import Nyll.ValuedFieldTheory.Valuation.Henselian.ArtinSchreier
 import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
 import Nyll.ValuedFieldTheory.Valuation.Henselian.FiniteResidueRootLifting
 
+import Nyll.ValuedFieldTheory.Valuation.Henselian.ResiduePowerRootsOfUnity
+
 /-!
 # Henselian valuation theory
 

@@ -309,7 +309,8 @@ theorem radicalFamily_totalRamified_surjective_coprime_of_separableResidue
     let w0 := exponentialValuationRestrict w (⊥ : IntermediateField K L)
     let h0 : ∀ x : K, w0 (algebraMap K (⊥ : IntermediateField K L) x) = v x :=
       exponentialValuationRestrict_extends v w hExt ⊥
-    have hdegree0 : Module.finrank K (⊥ : IntermediateField K L) = 1 := by simp
+    have hdegree0 : Module.finrank K (⊥ : IntermediateField K L) = 1 :=
+      IntermediateField.finrank_bot
     obtain ⟨he0, hres0⟩ :=
       exponentialRamificationIndex_eq_one_and_residueFieldMap_surjective_of_finrank_eq_one
         v w0 h0 hdegree0
@@ -318,7 +319,9 @@ theorem radicalFamily_totalRamified_surjective_coprime_of_separableResidue
       Function.Surjective (tameResidueFieldMap v w0 h0) ∧
         Nat.Coprime (Module.finrank K (⊥ : IntermediateField K L))
           (residueCharacteristic v)
-    exact ⟨he0.trans hdegree0.symm, hres0, by simp⟩
+    exact ⟨he0.trans hdegree0.symm, hres0, by
+      rw [hdegree0]
+      exact Nat.coprime_one_left _⟩
   have hstep : ∀ (E : IntermediateField K L), ∀ x ∈ S,
       P E → P ((E⟮x⟯).restrictScalars K) := by
     intro E x hx hPE

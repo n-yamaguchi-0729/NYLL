@@ -36,7 +36,7 @@ theorem bivariatePolynomial_ringKrullDim :
   change ringKrullDim (MvPolynomial (Fin 2) K) = 2
   rw [MvPolynomial.ringKrullDim_of_isNoetherianRing,
     ringKrullDim_eq_zero_of_field]
-  simp
+  norm_num
 
 /--
 The prime principal ideal of an irreducible plane equation has height one.
@@ -59,7 +59,10 @@ theorem coordinate_sub_irreducible
   simpa [sub_eq_add_neg] using
     MvPolynomial.irreducible_mul_X_add
       (1 : BivariatePolynomial K) (-MvPolynomial.C a) i
-      one_ne_zero (by simp) (by simp) isRelPrime_one_left
+      one_ne_zero
+      (by rw [MvPolynomial.vars_one]; exact Finset.notMem_empty i)
+      (by rw [MvPolynomial.vars_neg, MvPolynomial.vars_C]; exact Finset.notMem_empty i)
+      isRelPrime_one_left
 
 /--
 The maximal ideal defined by a rational point of an irreducible affine plane

@@ -11,7 +11,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences
+import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 
 /-!
 # Pullback of degree-zero divisor classes

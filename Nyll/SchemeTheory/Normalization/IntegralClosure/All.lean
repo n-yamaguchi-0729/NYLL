@@ -10,6 +10,7 @@ import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.All
 import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
 import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.All
 import Nyll.SchemeTheory.Normalization.IntegralClosure.TwoIntegralBasesEquiv
+import Nyll.SchemeTheory.Normalization.IntegralClosure.Nested
 
 /-!
 # Integral-closure constructions and comparisons

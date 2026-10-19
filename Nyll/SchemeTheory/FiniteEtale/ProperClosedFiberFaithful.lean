@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.isIso_of_isIso_pullback_closedFibre_of_isFinite_of_etale_of_isProper
+import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
 import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
 import Mathlib.AlgebraicGeometry.Morphisms.Proper

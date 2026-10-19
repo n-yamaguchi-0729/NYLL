@@ -28,7 +28,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun w ↦ Z.presheaf.stalk w) h) =
       (Z.presheaf.stalkCongr (.of_eq h)).hom := by
   subst z'
-  simp
+  exact (Z.presheaf.stalkSpecializes_refl z).symm
 
 private theorem SpecMap_genericPoint_of_injective
     {R S : CommRingCat.{u}} [IsDomain R] [IsDomain S]

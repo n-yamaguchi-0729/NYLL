@@ -42,7 +42,14 @@ noncomputable def arrowStalkMapIsoOfIsoOver
       (asIso (e.hom.stalkMap z)).symm
       (by
         rw [Scheme.Hom.stalkMap_comp]
-        simp)
+        simp only [Iso.refl_hom, Iso.symm_hom, asIso_inv]
+        have hcancel :
+            (g.stalkMap (e.hom z) ≫ e.hom.stalkMap z) ≫ inv (e.hom.stalkMap z) =
+              g.stalkMap (e.hom z) :=
+          (Category.assoc _ _ _).trans
+            ((congrArg (fun a => g.stalkMap (e.hom z) ≫ a)
+              (IsIso.hom_inv_id (e.hom.stalkMap z))).trans (Category.comp_id _))
+        exact (Category.id_comp (g.stalkMap (e.hom z))).trans hcancel.symm)
   have hs : e.hom (e.inv s) = s := by
     change (e.inv ≫ e.hom) s = (𝟙 S) s
     rw [e.inv_hom_id]
@@ -66,15 +73,17 @@ noncomputable def integralClosureStalkArrowIsoOfIsoOver
         (algebraMap A (integralClosure A L))) = z)
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] :
     let P := Q.under A
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : P.IsPrime := inferInstance
+    let : Q.LiesOver P := inferInstance
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     let q := localizedNormalizationPrime (K := K) (L := L) P Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
     Arrow.mk
         (z.stalkMap
@@ -83,7 +92,7 @@ noncomputable def integralClosureStalkArrowIsoOfIsoOver
       Arrow.mk (CommRingCat.ofHom
         (R := Localization.AtPrime P) (S := Localization.AtPrime q)
         (algebraMap (Localization.AtPrime P) (Localization.AtPrime q))) := by
-  dsimp only
+  intro P hP hLiesOver algebraP_L towerP_L algebraP_Q q hq
   exact arrowStalkMapIsoOfIsoOver e z
       (Spec.map (CommRingCat.ofHom
         (algebraMap A (integralClosure A L)))) h

@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
 import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
-import Nyll.SchemeTheory.RingTheory.LocalizationTensorTower
+import Nyll.SchemeTheory.RingTheory.Localization.LocalizationTensorTower
 
 
 /-!

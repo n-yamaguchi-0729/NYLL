@@ -1,0 +1,21 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsRepresentableSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsSheafFunctor
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalEmpty
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalGeometricallyConnected
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalIsAffine
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalIsAffineOpen
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalProper
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalSumMap
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.LocallyOfFiniteTypeQuasiCompactSeparated
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.OpenCurveUniversalDivisor
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.SupportedInUniversal
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.UniversalData
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.UniversalSumKernel

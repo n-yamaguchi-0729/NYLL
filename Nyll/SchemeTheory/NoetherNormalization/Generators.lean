@@ -50,14 +50,14 @@ theorem exists_generalNormalization_generatorInvariant
   | 0, x => by
       refine
         ⟨0, le_rfl, x, algebraicIndependent_empty_type, ∅, ?_, ?_, ?_⟩
-      · simp
-      · simp
+      · rfl
+      · rw [Finset.coe_empty, Set.image_empty, Set.union_empty]
       · exact isIntegral_of_mem_adjoin_range_self x
   | n + 1, x => by
       by_cases hx : AlgebraicIndependent K x
       · refine ⟨n + 1, le_rfl, x, hx, ∅, ?_, ?_, ?_⟩
-        · simp
-        · simp
+        · rw [Finset.card_empty, Nat.sub_self]
+        · rw [Finset.coe_empty, Set.image_empty, Set.union_empty]
         · exact isIntegral_of_mem_adjoin_range_self x
       · have hnotinj :
             ¬ Function.Injective
@@ -92,7 +92,9 @@ theorem exists_generalNormalization_generatorInvariant
           ⟨r, hr.trans (Nat.le_succ n), t, htind, J, ?_, ?_, ?_⟩
         · have hzero :
               (0 : Fin (n + 1)) ∉ J'.image Fin.succ := by
-            simp
+            intro hj
+            obtain ⟨j, _, hj⟩ := Finset.mem_image.mp hj
+            exact Fin.succ_ne_zero j hj
           have himageCard :
               (J'.image Fin.succ).card = J'.card :=
             Finset.card_image_of_injective J' (Fin.succ_injective n)
@@ -167,7 +169,7 @@ theorem exists_generalNormalization_generatorInvariant
                     refine ⟨0, ?_, rfl⟩
                     change (0 : Fin (n + 1)) ∈
                       insert 0 (J'.image Fin.succ)
-                    simp
+                    exact Finset.mem_insert_self _ _
                   change
                     x j.succ - x 0 ^ m j ∈
                       Algebra.adjoin K newSet
@@ -180,7 +182,7 @@ theorem exists_generalNormalization_generatorInvariant
                 refine ⟨0, ?_, rfl⟩
                 change (0 : Fin (n + 1)) ∈
                   insert 0 (J'.image Fin.succ)
-                simp
+                exact Finset.mem_insert_self _ _
           have hIHadjoin' :
               Algebra.adjoin K oldSet =
                 Algebra.adjoin K (Set.range tail) := by

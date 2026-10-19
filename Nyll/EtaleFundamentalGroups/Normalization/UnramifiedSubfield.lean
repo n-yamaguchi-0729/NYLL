@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointFixedSubfield
 import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointGaloisQuotient
 import Nyll.EtaleFundamentalGroups.Normalization.FiniteEtaleGenericFiber
-import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
 import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
 
 /-!

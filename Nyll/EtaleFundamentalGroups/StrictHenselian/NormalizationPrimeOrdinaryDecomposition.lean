@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFraction
-import Nyll.SchemeTheory.RingTheory.HenselianIntegralClosureUnits
+import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralClosureUnits
 import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
 import Mathlib.FieldTheory.Galois.Infinite

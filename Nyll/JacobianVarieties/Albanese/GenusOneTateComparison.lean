@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Albanese.GenusOneAlbanese
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianTateComparison
 import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
 import Nyll.ProCGroups.Abelian.FullTateModule

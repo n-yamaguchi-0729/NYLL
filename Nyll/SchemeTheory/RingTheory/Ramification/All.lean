@@ -41,3 +41,4 @@ import Nyll.SchemeTheory.RingTheory.Ramification.InertiaCoefficientContraction
 import Nyll.SchemeTheory.RingTheory.Ramification.ProfiniteRingActionRestriction
 import Nyll.SchemeTheory.RingTheory.Ramification.RingActionInvariantPreimage
 import Nyll.SchemeTheory.RingTheory.Ramification.IdealInertiaClosed
+import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR

@@ -206,6 +206,7 @@ import Nyll.EtaleFundamentalGroups.Purity.ClosedComplementStalkSection
 import Nyll.EtaleFundamentalGroups.Purity.RetrocompactSectionExtension
 import Nyll.EtaleFundamentalGroups.Purity.RetrocompactRestriction
 import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
+import Nyll.EtaleFundamentalGroups.Purity.TameCodimensionOne
 import Nyll.EtaleFundamentalGroups.Purity.DVRBoundaryEnlargement
 
 

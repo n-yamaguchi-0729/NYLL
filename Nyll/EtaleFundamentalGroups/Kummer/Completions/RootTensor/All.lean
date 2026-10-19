@@ -5,5 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.EtalePrescribedExponent
+import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.PrimeToDegree
+import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.GaloisPrimeTo
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Kummer.Completions.RootTensor. -/

@@ -20,7 +20,6 @@ import Nyll.AlgebraicCurves.Hilbert.All
 import Nyll.AlgebraicCurves.Models.All
 import Nyll.AlgebraicCurves.Places.All
 import Nyll.AlgebraicCurves.RelativeDivisors.All
-import Nyll.AlgebraicCurves.Valuations.All
 
 /-!
 # Algebraic curves

@@ -71,6 +71,7 @@ private theorem fractionPullback_fullyFaithful
 variable {R Ω : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [IsLocalRing R]
   [Field Ω] [IsSepClosed Ω] (φ : R →+* Ω) [IsLocalHom φ]
 
+omit [IsLocalRing R] [IsLocalHom φ] in
 private theorem strictGeneric_fundamentalGroup_comp_eq_one
     {Ω' : Type u} [Field Ω'] [IsSepClosed Ω']
     (point : Spec (.of Ω') ⟶

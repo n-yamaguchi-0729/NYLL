@@ -1,0 +1,25 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Models.FunctionFields.ApplyGenericPointEqAlgEquivFunctionField
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelGenericPointEvaluation
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelGeometricGenericLift
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelIsoAlgEquiv
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelIsoFieldEquivSymmFunctionFieldGermEq
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelIsoFunctionField
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+import Nyll.AlgebraicCurves.Models.FunctionFields.FieldEquivSymmStalkMapEqAlgebraMap
+import Nyll.AlgebraicCurves.Models.FunctionFields.FieldReparametrization
+import Nyll.AlgebraicCurves.Models.FunctionFields.FiniteFlatHomAlgHom
+import Nyll.AlgebraicCurves.Models.FunctionFields.FunctionFieldAutomorphisms
+import Nyll.AlgebraicCurves.Models.FunctionFields.FunctionFieldGermPointResidue
+import Nyll.AlgebraicCurves.Models.FunctionFields.FunctionFieldGermRestrictionResidue
+import Nyll.AlgebraicCurves.Models.FunctionFields.FunctionFieldModPH2
+import Nyll.AlgebraicCurves.Models.FunctionFields.GermToFunctionFieldAppEq
+import Nyll.AlgebraicCurves.Models.FunctionFields.HomAlgHom
+import Nyll.AlgebraicCurves.Models.FunctionFields.IsoAlgEquivFunctionField
+import Nyll.AlgebraicCurves.Models.FunctionFields.RangeAlgebraMapFunctionFieldEqIInf
+import Nyll.AlgebraicCurves.Models.FunctionFields.RingHomFunctionFieldFieldEquivSymmStalkMapEq

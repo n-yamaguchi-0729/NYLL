@@ -6,15 +6,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Albanese.SeparableAlbaneseChartGlue
 import Nyll.JacobianVarieties.Albanese.GeometricPaddedDivisors
-import Nyll.JacobianVarieties.Picard.Exists_abelJacobi_of_representsRelSubPic
-import Nyll.JacobianVarieties.Picard.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Schemes.isReduced_of_smooth_of_field
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver_ext_of_forall_algebraicClosure_point_of_isReduced_of_flat
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivOfPoint
-import Nyll.AlgebraicCurves.Geometry.Sheaves.IdealSheafModule
+import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
+import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Actual Abel--Jacobi factorization after a finite separable extension

@@ -63,7 +63,7 @@ theorem continuousCohomologyZModPMap_trivial_one_eq_zero :
   rw [← cancel_epi (ContinuousCohomology.π (trivialZModP p G) 1)]
   rw [trivialZModP_π_naturality]
   rw [trivialZModPCocyclesMap_trivial_one_eq_zero]
-  simp
+  simp only [Limits.zero_comp, Limits.comp_zero]
 
 /-- Inflation followed by restriction is zero on continuous `H¹` with trivial `ZMod p`
 coefficients. -/
@@ -114,7 +114,7 @@ theorem continuousCohomologyZModPMapLifted_trivial_one_eq_zero :
   rw [← cancel_epi (ContinuousCohomology.π (trivialZModPLifted p G) 1)]
   rw [trivialZModPLifted_π_naturality]
   rw [trivialZModPCocyclesMapLifted_trivial_one_eq_zero]
-  simp
+  simp only [Limits.zero_comp, Limits.comp_zero]
 
 /-- Inflation followed by restriction is zero on lifted continuous `H¹` with trivial
 `ZMod p` coefficients. -/

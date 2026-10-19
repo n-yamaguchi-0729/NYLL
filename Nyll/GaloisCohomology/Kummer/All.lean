@@ -22,6 +22,10 @@ import Nyll.GaloisCohomology.Kummer.RelativeTwoCocycle
 import Nyll.GaloisCohomology.Kummer.MixedTwoCocycle
 import Nyll.GaloisCohomology.Kummer.QuotientTwoCocycle
 import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormSurjective
+import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormClass
+import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormCriterion
+import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormRestriction
+import Nyll.GaloisCohomology.Kummer.FiniteGaloisUnitsH2TowerNaturality
 import Nyll.GaloisCohomology.Kummer.AbsoluteMuPTopRep
 import Nyll.GaloisCohomology.Kummer.AbsoluteMuPTrivialization
 import Nyll.GaloisCohomology.Kummer.FiniteKummerMuPCoefficients

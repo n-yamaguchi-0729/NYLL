@@ -104,7 +104,11 @@ private theorem finLaurentRingEquiv_single
         (AddMonoidAlgebra.uniqueAlgEquiv R (Fin 0 → ℤ)).toRingEquiv
             (AddMonoidAlgebra.single 0 a) = a
       apply (AddMonoidAlgebra.uniqueAlgEquiv R (Fin 0 → ℤ)).symm.injective
-      simp
+      change (AddMonoidAlgebra.uniqueAlgEquiv R (Fin 0 → ℤ)).symm
+          ((AddMonoidAlgebra.uniqueAlgEquiv R (Fin 0 → ℤ))
+            (AddMonoidAlgebra.single 0 a)) =
+        (AddMonoidAlgebra.uniqueAlgEquiv R (Fin 0 → ℤ)).symm a
+      rw [AlgEquiv.symm_apply_apply, AddMonoidAlgebra.uniqueAlgEquiv_symm_apply]
   | r + 1, x, a => by
       change
         AddMonoidAlgebra.mapRingEquiv ℤ (finLaurentRingEquiv R r)
@@ -127,7 +131,7 @@ private theorem finLaurentRingEquiv_single
 private def finDiagonalAddMonoidHom {r : ℕ} (n : Fin r → ℕ) :
     (Fin r → ℤ) →+ (Fin r → ℤ) where
   toFun x i := (n i : ℤ) * x i
-  map_zero' := by ext; simp
+  map_zero' := by ext i; exact mul_zero _
   map_add' x y := by ext; simp [mul_add]
 
 private theorem nestedLaurentDiagonalMap_monomial
@@ -310,10 +314,10 @@ private def fintypeReindexAddEquiv (ι : Type u) [Fintype ι] :
   invFun y i := y (Fintype.equivFin ι i)
   left_inv x := by
     ext i
-    simp
+    exact congrArg x ((Fintype.equivFin ι).symm_apply_apply i)
   right_inv y := by
     ext j
-    simp
+    exact congrArg y ((Fintype.equivFin ι).apply_symm_apply j)
   map_add' x y := by
     ext j
     rfl

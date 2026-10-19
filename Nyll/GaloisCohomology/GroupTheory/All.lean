@@ -14,6 +14,7 @@ import Nyll.GaloisCohomology.GroupTheory.Transfer.All
 
 import Nyll.GaloisCohomology.GroupTheory.FiniteOrbitProduct
 import Nyll.GaloisCohomology.GroupTheory.H2FiniteIndexTrace
+import Nyll.GaloisCohomology.GroupTheory.FinitePGroupInvariants
 
 /-!
 # Finite group foundations

@@ -4,21 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.All
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.All
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.All
-
+import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+import Nyll.SchemeTheory.LocalGeometry.ClosedComplementPuncture
+import Nyll.SchemeTheory.LocalGeometry.CompactOpenSpecialization
 import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
+import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
+import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
 import Nyll.SchemeTheory.LocalGeometry.LocalRepresentabilityULift
 import Nyll.SchemeTheory.LocalGeometry.OverTotalOpenChart
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalkNormality
+import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
+import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrumFlat
-import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
+import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 import Nyll.SchemeTheory.LocalGeometry.StalkDominantNeighborhood
-import Nyll.SchemeTheory.LocalGeometry.CompactOpenSpecialization
-import Nyll.SchemeTheory.LocalGeometry.ClosedComplementPuncture
+import Nyll.SchemeTheory.LocalGeometry.HeightOne.All
+import Nyll.SchemeTheory.LocalGeometry.HeightTwo.All
+import Nyll.SchemeTheory.LocalGeometry.RegularLocal.All
+import Nyll.SchemeTheory.LocalGeometry.AffineAwayChart
+import Nyll.SchemeTheory.LocalGeometry.DVRFiberCover
+import Nyll.SchemeTheory.LocalGeometry.DVRGenericBaseChange
+import Nyll.SchemeTheory.LocalGeometry.PointedStalkMap
+import Nyll.SchemeTheory.LocalGeometry.SmoothRegularStalks
+import Nyll.SchemeTheory.LocalGeometry.SmoothGenericNormal
+import Nyll.SchemeTheory.LocalGeometry.SmoothIntegralFiberCharts
+import Nyll.SchemeTheory.LocalGeometry.SmoothPrimeFiberCharts
 
 /-! Canonical aggregate for SchemeTheory.LocalGeometry. -/

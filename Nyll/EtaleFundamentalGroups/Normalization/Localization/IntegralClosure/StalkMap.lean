@@ -58,9 +58,9 @@ noncomputable def normalizationChartStalkArrowIso
     [AlgebraicGeometry.QuasiSeparated f]
     {U : Y.Opens} (hU : IsAffineOpen U)
     (Q : PrimeSpectrum
-      (letI := (f.app U).hom.toAlgebra
+      (let : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
        integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U))) :
-    letI := (f.app U).hom.toAlgebra
+    let : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
     Arrow.mk
         (f.fromNormalization.stalkMap
           (f.normalizationOpenCover.f ⟨U, hU⟩ Q)) ≅
@@ -68,13 +68,13 @@ noncomputable def normalizationChartStalkArrowIso
         ((Spec.map (CommRingCat.ofHom
           (algebraMap Γ(Y, U)
             (integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U))))).stalkMap Q) := by
-  dsimp only
+  intro algebraSections
   let i := f.normalizationOpenCover.f ⟨U, hU⟩
   let g := Spec.map (f.normalizationDiagramMap.app (.op U))
   let j := hU.fromSpec
-  haveI : IsOpenImmersion i :=
+  have : IsOpenImmersion i :=
     f.normalizationOpenCover.map_prop ⟨U, hU⟩
-  haveI : IsOpenImmersion j := inferInstance
+  have : IsOpenImmersion j := inferInstance
   exact arrowStalkMapIsoOfOpenSquare i f.fromNormalization g j
     (f.ι_fromNormalization ⟨U, hU⟩) Q
 
@@ -87,9 +87,9 @@ noncomputable def normalizationChartStalkPrimeLocalizationArrowIso
     [AlgebraicGeometry.QuasiSeparated f]
     {U : Y.Opens} (hU : IsAffineOpen U)
     (Q : PrimeSpectrum
-      (letI := (f.app U).hom.toAlgebra
+      (let : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
        integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U))) :
-    letI := (f.app U).hom.toAlgebra
+    let : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) := (f.app U).hom.toAlgebra
     let C := integralClosure Γ(Y, U) Γ(X, f ⁻¹ᵁ U)
     let φ : Γ(Y, U) →+* C := algebraMap Γ(Y, U) C
     Arrow.mk
@@ -98,9 +98,7 @@ noncomputable def normalizationChartStalkPrimeLocalizationArrowIso
       Arrow.mk (CommRingCat.ofHom
         (Localization.localRingHom
           (Q.comap φ).asIdeal Q.asIdeal φ rfl)) := by
-  dsimp only
-  letI : Algebra Γ(Y, U) Γ(X, f ⁻¹ᵁ U) :=
-    (f.app U).hom.toAlgebra
+  intro algebraSections C φ
   let e₁ := normalizationChartStalkArrowIso f hU Q
   let e₂ := Scheme.arrowStalkMapSpecIso
     (CommRingCat.ofHom
@@ -121,15 +119,17 @@ canonically transported prime of the normalization after base localization.
 noncomputable def integralClosureSpecStalkArrowIso
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] :
     let P := Q.under A
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : P.IsPrime := inferInstance
+    let : Q.LiesOver P := inferInstance
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     let q := localizedNormalizationPrime (K := K) (L := L) P Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
     Arrow.mk
         ((Spec.map (CommRingCat.ofHom
@@ -138,18 +138,7 @@ noncomputable def integralClosureSpecStalkArrowIso
       Arrow.mk (CommRingCat.ofHom
         (R := Localization.AtPrime P) (S := Localization.AtPrime q)
         (algebraMap (Localization.AtPrime P) (Localization.AtPrime q))) := by
-  dsimp only
-  let P := Q.under A
-  letI : P.IsPrime := inferInstance
-  letI : Q.LiesOver P := inferInstance
-  letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  letI : IsScalarTower A (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
-  let q := localizedNormalizationPrime (K := K) (L := L) P Q
-  letI : q.IsMaximal :=
-    localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
+  intro P hP hLiesOver algebraP_L towerP_L algebraP_Q q hq
   let E : Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime q :=
     integralClosurePrimeLocalizationAlgEquiv

@@ -10,8 +10,8 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Places
-import Nyll.AlgebraicCurves.Geometry.Schemes.TwoAffineOpenCoverKaehler
+import Nyll.AlgebraicCurves.Models.Points.Places
+import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
 
 /-!
 # Function Field

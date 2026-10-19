@@ -49,7 +49,9 @@ theorem exists_cyclicLaurentRingEquiv
           (AddMonoidAlgebra.single (1 : ℤ) (1 : R)) =
         AddMonoidAlgebra.single (1 : ℤ) (1 : R) ^ n
     rw [AddMonoidAlgebra.mapDomain_single, AddMonoidAlgebra.single_pow]
-    simp
+    change AddMonoidAlgebra.single (n • (1 : ℤ)) (1 : R) =
+      AddMonoidAlgebra.single (n • (1 : ℤ)) ((1 : R) ^ n)
+    rw [one_pow]
   have hf : f.eval₂ φ u = 0 := by
     simp [f, hφu]
   let forward : AdjoinRoot f →ₐ[R] A :=

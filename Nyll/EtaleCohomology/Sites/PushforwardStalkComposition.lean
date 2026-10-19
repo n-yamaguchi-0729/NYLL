@@ -146,4 +146,23 @@ theorem etalePushforwardStalkComponent_comp
   exact congrArg (fun z => (Scheme.pointSmallEtale r.val).toPresheafFiber C z F.obj)
     (etalePushforwardGeometricLift_comp p q t s r U a)
 
+variable (R : Type u) [CommRing R]
+
+/-- Transport along equality of scheme morphisms preserves the actual
+direct-image stalk component. -/
+theorem etalePushforwardStalkComponent_congr
+    {q₁ q₂ : Y ⟶ X} (h : q₁ = q₂)
+    (y : Spec (.of Ω) ⟶ Y) (h₁ : y ≫ q₁ = t) (h₂ : y ≫ q₂ = t)
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u} R)) :
+    (Scheme.pointSmallEtale t).sheafFiber.map
+        ((eqToIso (congrArg (fun q : Y ⟶ X => etalePushforward q R) h)).hom.app F) ≫
+        etalePushforwardStalkComponent q₂ t ⟨y, h₂⟩ F =
+      etalePushforwardStalkComponent q₁ t ⟨y, h₁⟩ F := by
+  subst q₂
+  change (Scheme.pointSmallEtale t).sheafFiber.map (𝟙 _) ≫ _ = _
+  let c := etalePushforwardStalkComponent q₁ t ⟨y, h₁⟩ F
+  exact (congrArg (fun a => a ≫ c)
+    ((Scheme.pointSmallEtale t).sheafFiber.map_id ((etalePushforward q₁ R).obj F))).trans
+    (Category.id_comp c)
+
 end EtaleCohomology

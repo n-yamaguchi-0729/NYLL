@@ -38,7 +38,9 @@ variable {A : Type (u + 1)} [Category.{u} A]
   {FA : A → A → Type u} {CA : A → Type u}
   [∀ M N, FunLike (FA M N) (CA M) (CA N)] [ConcreteCategory.{u} A FA]
 
-private theorem exists_sectionEquality_open
+/-- Equality of two sections holds on an open subset containing the image
+of every étale restriction on which they agree. -/
+theorem exists_sectionEquality_open
     {Y : Scheme.{u}} [Y.smallEtaleTopology.HasSheafCompose (forget A)]
     (F : Sheaf Y.smallEtaleTopology A)
     (U : Y.Etale) (a b : ToType (F.obj.obj (op U))) :

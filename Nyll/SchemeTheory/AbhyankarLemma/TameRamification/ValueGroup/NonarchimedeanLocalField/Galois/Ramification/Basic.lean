@@ -91,7 +91,7 @@ variable {M : Type u} [Field M] [Algebra L M]
 noncomputable def finrankPowerUnitsHom : Lˣ →* Lˣ where
   toFun x := x ^ Module.finrank L M
   map_one' := by
-    simp
+    exact one_pow _
   map_mul' x y := by
     simpa using mul_pow x y (Module.finrank L M)
 

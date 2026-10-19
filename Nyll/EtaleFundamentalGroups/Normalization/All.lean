@@ -7,9 +7,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Normalization.Branch.All
 import Nyll.EtaleFundamentalGroups.Normalization.EtaleDominantQuotient
 import Nyll.EtaleFundamentalGroups.Normalization.FiniteEtaleGenericFiber
-import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
-import Nyll.EtaleFundamentalGroups.Normalization.GenericFiber
-import Nyll.EtaleFundamentalGroups.Normalization.GenericFieldSource
 import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.All
 import Nyll.EtaleFundamentalGroups.Normalization.Localization.All
 import Nyll.EtaleFundamentalGroups.Normalization.Primes.All
@@ -40,14 +37,15 @@ import Nyll.EtaleFundamentalGroups.Normalization.NormalLocalFiberDegree
 import Nyll.EtaleFundamentalGroups.Normalization.FiberDegreeCriterion
 import Nyll.EtaleFundamentalGroups.Normalization.GlobalFiberDegreeCriterion
 import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedCriteria
-import Nyll.EtaleFundamentalGroups.Normalization.GenericFieldSourceNaturality
 import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalFieldSource
+
+import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalFieldSourceGeneric
+import Nyll.EtaleFundamentalGroups.Normalization.OpenNormalizationFiniteModel
 
 /-!
 # Normalization infrastructure
 
 Integral closures, normalization primes, localization comparisons, and product factors.
 -/
-
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Normalization. -/

@@ -18,7 +18,7 @@ import Mathlib.RingTheory.GradedAlgebra.Basic
 import Mathlib.RingTheory.IsTensorProduct
 import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.RingTheory.HomogeneousIdealMap
+import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousIdealMap
 
 /-!
 # Descent of a grading to a homogeneous subalgebra

@@ -7,15 +7,15 @@ https://github.com/n-yamaguchi-0729
 
 import Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroGroupCut
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePropertyBundle_geometricallyIntegral
-import Nyll.AlgebraicCurves.Geometry.Deformation.smoothOfRelativeDimension_of_finrank_cotangentSpace_eq
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurve_exists_twoAffineOpenCover_of_section
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
+import Nyll.AlgebraicCurves.Geometry.Deformation.SmoothOfRelativeDimension
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.JacobianVarieties.Picard.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.CurveModel_finrank_cotangentSpace_zeroSection_eq_genusFF_of_representsRelSubPic
-import Nyll.JacobianVarieties.Picard.Existence
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+import Nyll.JacobianVarieties.Picard.Deformation.CurveModelFinrankCotangentSpaceZeroSectionEqGenusFF
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
 
 /-!
 # Relative dimension of a pointed Picard scheme over a field

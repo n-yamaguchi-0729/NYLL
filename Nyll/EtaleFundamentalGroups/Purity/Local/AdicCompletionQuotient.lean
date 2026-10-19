@@ -121,7 +121,8 @@ theorem adicCompletion_ker_evalₐ_eq_map_pow
     AdicCompletion.eval I R n x = 0
   constructor
   · intro hx
-    let hle : I ^ n ≤ I ^ n • (⊤ : Ideal R) := by simp
+    let hle : I ^ n ≤ I ^ n • (⊤ : Ideal R) := by
+      rw [Ideal.smul_eq_mul, Ideal.mul_top]
     calc
       AdicCompletion.eval I R n x =
           Ideal.Quotient.factor hle (AdicCompletion.evalₐ I n x) :=
@@ -129,7 +130,8 @@ theorem adicCompletion_ker_evalₐ_eq_map_pow
       _ = Ideal.Quotient.factor hle 0 := congrArg _ hx
       _ = 0 := map_zero _
   · intro hx
-    let hle : I ^ n • (⊤ : Ideal R) ≤ I ^ n := by simp
+    let hle : I ^ n • (⊤ : Ideal R) ≤ I ^ n := by
+      rw [Ideal.smul_eq_mul, Ideal.mul_top]
     calc
       AdicCompletion.evalₐ I n x =
           Ideal.Quotient.factor hle (AdicCompletion.eval I R n x) :=
@@ -191,7 +193,7 @@ theorem adicCompletion_exists_sub_mem_map_pow
       (x - algebraMap R (AdicCompletion I R) r) = 0
   rw [map_sub, AdicCompletion.algebraMap_apply,
     AdicCompletion.evalₐ_of, ← hr]
-  simp
+  exact sub_self _
 
 /-- The residue ring of a Noetherian local ring is unchanged by maximal-adic
 completion.  The source ideal is stated as the actual maximal ideal of the

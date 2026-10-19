@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteRelativeSpec
+import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 import Mathlib.Algebra.Ring.Subring.Basic

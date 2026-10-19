@@ -6,9 +6,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPoints
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.TateModule
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_schemeNsmul_comp_eq_comp_schemeNsmul_of_hom
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AbelianVarieties.Tate.FullTateModule
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawSchemeNsmulCompEqCompSchemeNsmul
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationCover
 import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup

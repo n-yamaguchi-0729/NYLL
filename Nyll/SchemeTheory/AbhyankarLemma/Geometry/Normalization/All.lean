@@ -9,5 +9,6 @@ import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.DVR
 import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
 import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Residue
 import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Tame
+import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.GaloisOrderTame
 
 /-! Canonical aggregate for EtaleFundamentalGroups.TameRamification.Abhyankar.Normalization. -/

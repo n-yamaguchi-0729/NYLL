@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
 
 /-!
 # Localization of integral closures

@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Normalization.LocalUnramifiedCriterion
-import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
 import Nyll.SchemeTheory.Affine.ChartStalkLocalization
 import Mathlib.Algebra.Category.Ring.Constructions
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

@@ -12,13 +12,17 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 
 import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
 import Nyll.AlgebraicCurves.Geometry.Descent.FppfGmRepresentable
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction_effective_of_finiteEtale
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction_effective_of_finiteEtale_of_forall_orbit
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction_effective_of_isPullback_of_flat_surjective
+import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectiveFiniteEtale
+import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectiveFiniteEtaleOrbit
+import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectivePullback
 
 import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
 import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
 import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
+import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
 import Nyll.AlgebraicCurves.Geometry.Descent.GroupGlobalRepresentation
 import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
 import Nyll.AlgebraicCurves.Geometry.Descent.RepresentableMatching
+import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatFiniteTypeGeometry
+import Nyll.AlgebraicCurves.Geometry.Descent.NaturalRepresentationDescent
+import Nyll.AlgebraicCurves.Geometry.Descent.SheafifiedLocalRepresentation

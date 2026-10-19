@@ -74,7 +74,10 @@ lemma KT.of_linearEquiv {a : A} (e : M ≃ₗ[A] N) (h : KT a M) : KT a N := fun
   refine ⟨n, ?_⟩
   have : k = LinearMap.rTensor I e.toLinearMap (LinearMap.rTensor I e.symm.toLinearMap k) := by
     rw [← LinearMap.comp_apply, ← LinearMap.rTensor_comp]
-    simp
+    have he : e.toLinearMap.comp e.symm.toLinearMap = LinearMap.id := by
+      ext x
+      exact e.apply_symm_apply x
+    rw [he, LinearMap.rTensor_id, LinearMap.id_apply]
   rw [this, ← map_smul, hn, map_zero]
 
 lemma KT.of_flat (a : A) [Module.Flat A M] : KT a M := fun I k hk =>
@@ -103,7 +106,8 @@ variable {M₁ M₂ M₃ : Type*} [AddCommGroup M₁] [Module A M₁] [AddCommGr
 lemma rid_rTensor (ι : M₁ →ₗ[A] M₂) (z : M₁ ⊗[A] A) :
     TensorProduct.rid A M₂ (LinearMap.rTensor A ι z) = ι (TensorProduct.rid A M₁ z) := by
   induction z using TensorProduct.inductionOn with
-  | tmul m r => simp
+  | tmul m r =>
+      simp only [LinearMap.rTensor_tmul, TensorProduct.rid_tmul, map_smul]
   | add u v hu hv => simp only [map_add, hu, hv]
 
 lemma rTensor_injective_of_injective (ι : M₁ →ₗ[A] M₂) (hι : Function.Injective ι) :
@@ -192,7 +196,7 @@ theorem base_case : ∃ a : A, a ≠ 0 ∧ KT a M := by
     by_cases hgT : g ∈ T
     · exact F.smul_mem a (Submodule.subset_span ⟨⟨g, hgT⟩, rfl⟩)
     · have hmem : g ∈ Finset.univ.filter (fun g : ↥G => g ∉ T) :=
-        Finset.mem_filter.mpr ⟨by simp, hgT⟩
+        Finset.mem_filter.mpr ⟨Finset.mem_univ g, hgT⟩
       obtain ⟨d, hd⟩ : c g ∣ a := Finset.dvd_prod_of_mem c hmem
       rw [hd, mul_comm, mul_smul, ← hFeq]
       exact Submodule.smul_mem _ d (hc g hgT)
@@ -201,7 +205,7 @@ theorem base_case : ∃ a : A, a ≠ 0 ∧ KT a M := by
     have hm : m ∈ Submodule.span A (G : Set M) := by rw [hG]; trivial
     induction hm using Submodule.span_induction with
     | mem x hx => exact hgen ⟨x, hx⟩
-    | zero => simp
+    | zero => rw [smul_zero]; exact F.zero_mem
     | add x y _ _ hx hy => rw [smul_add]; exact F.add_mem hx hy
     | smul r x _ hx => rw [smul_comm]; exact F.smul_mem r hx
   refine ⟨a, ha, ?_⟩
@@ -363,7 +367,7 @@ theorem poly_step
   have hf : ∀ (j : ℕ) (m : M), (f ^ j) m = (X ^ j : B'[X]) • m := by
     intro j m
     induction j with
-    | zero => simp
+    | zero => simp only [pow_zero, Module.End.one_apply, one_smul]
     | succ j ih => rw [pow_succ', Module.End.mul_apply, ih, pow_succ', mul_smul]; rfl
   obtain ⟨i₀, hi₀⟩ := (monotone_stabilizes_iff_noetherian.mpr (inferInstance : IsNoetherian B' M'))
     ⟨K f M', K_mono f M'⟩

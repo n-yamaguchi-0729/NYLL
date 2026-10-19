@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.GenericFieldSource
+import Nyll.SchemeTheory.FunctionFields.GenericFieldSource
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
 import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
 import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral

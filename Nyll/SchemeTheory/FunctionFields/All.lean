@@ -4,23 +4,34 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.FunctionFields.AffineFunctionFieldNaturality
+import Nyll.SchemeTheory.FunctionFields.AlgebraIsSeparableFinrankFieldRangeFrobeniusEq
+import Nyll.SchemeTheory.FunctionFields.AlgebraTensorIsFieldSeparable
+import Nyll.SchemeTheory.FunctionFields.AlgebraAlgHomApplyNeZero
+import Nyll.SchemeTheory.FunctionFields.AlgebraFiniteIntegralClosureAdjoinSingleton
+import Nyll.SchemeTheory.FunctionFields.ArithmeticGeometricIntegrality
+import Nyll.SchemeTheory.FunctionFields.FrobeniusSubfield
 import Nyll.SchemeTheory.FunctionFields.Functoriality
+import Nyll.SchemeTheory.FunctionFields.GenericFieldSource
+import Nyll.SchemeTheory.FunctionFields.GenericFieldSourceNaturality
 import Nyll.SchemeTheory.FunctionFields.GeometricIntegrality
 import Nyll.SchemeTheory.FunctionFields.IntegerBase
-import Nyll.SchemeTheory.FunctionFields.ArithmeticGeometricIntegrality
+import Nyll.SchemeTheory.FunctionFields.IntegralGenericPointReflection
+import Nyll.SchemeTheory.FunctionFields.IntermediateFieldFiniteDimensionalAdjoin
+import Nyll.SchemeTheory.FunctionFields.AlgClosedAlgEquivApplyEqAddAlgebraMap
+import Nyll.SchemeTheory.FunctionFields.IsSeparableAlgHomApplyEqPow
+import Nyll.SchemeTheory.FunctionFields.MathlibFieldTheoryRatFuncImperfectionDegree
+import Nyll.SchemeTheory.FunctionFields.ModuleFlatMemNonZeroDivisorsFlatQuotientSpan
+import Nyll.SchemeTheory.FunctionFields.OpenChartGenericPoints
+import Nyll.SchemeTheory.FunctionFields.OpenImmersion
+import Nyll.SchemeTheory.FunctionFields.OpenImmersionSections
 import Nyll.SchemeTheory.FunctionFields.PlainIntegerBase
+import Nyll.SchemeTheory.FunctionFields.RatFuncAlgEquivApplyXEqMoebius
+import Nyll.SchemeTheory.FunctionFields.ScalarFunctoriality
+import Nyll.SchemeTheory.FunctionFields.StalkFactorization
+import Nyll.SchemeTheory.FunctionFields.StalkFunctoriality
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
+import Nyll.SchemeTheory.FunctionFields.TensorFractionGeneration
 import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.All
 import Nyll.SchemeTheory.FunctionFields.SeparableClosure.All
-import Nyll.SchemeTheory.FunctionFields.StalkFactorization
 import Nyll.SchemeTheory.FunctionFields.Valuations.All
-import Nyll.SchemeTheory.FunctionFields.StalkFunctoriality
-
-/-!
-# Function fields and prime divisors
-
-This facade collects functoriality for dominant morphisms, function-field
-transcendence, valuation-theoretic prime divisors and their counting theorems,
-together with ring covers of domains.
--/
-
-/- Canonical aggregate for SchemeTheory.FunctionFields. -/

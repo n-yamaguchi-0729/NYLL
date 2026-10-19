@@ -7,9 +7,9 @@ https://github.com/n-yamaguchi-0729
 
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurve_exists_twoAffineOpenCover_of_section
-import Nyll.AlgebraicCurves.Geometry.Nonempty_algEquiv_functionField_of_iso
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusFF_eq_of_algEquiv
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+import Nyll.AlgebraicCurves.Geometry.AlgEquivFunctionFieldIso
+import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqAlgEquiv
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 import Mathlib.Algebra.Algebra.Tower
 

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.GeneratedAlgebraLocalization
-import Nyll.SchemeTheory.RingTheory.SubmoduleAdjoinLocalization
+import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
+import Nyll.SchemeTheory.RingTheory.Localization.SubmoduleAdjoinLocalization
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.AffineAnd
 import Mathlib.RingTheory.RingHom.Finite

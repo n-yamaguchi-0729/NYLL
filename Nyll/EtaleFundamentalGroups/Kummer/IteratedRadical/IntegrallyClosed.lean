@@ -29,12 +29,15 @@ private theorem exists_pair_of_length_eq_two {R : Type u} (xs : List R)
     (hxs : xs.length = 2) :
     ∃ x y : R, xs = [x, y] := by
   rcases xs with _ | ⟨x, xs⟩
-  · simp at hxs
+  · simp only [List.length_nil] at hxs
+    omega
   rcases xs with _ | ⟨y, xs⟩
-  · simp at hxs
+  · simp only [List.length_cons, List.length_nil] at hxs
+    omega
   rcases xs with _ | ⟨z, xs⟩
   · exact ⟨x, y, rfl⟩
-  · simp at hxs
+  · simp only [List.length_cons] at hxs
+    omega
 
 /--
 The full positive iterated radical cover of a two-dimensional regular

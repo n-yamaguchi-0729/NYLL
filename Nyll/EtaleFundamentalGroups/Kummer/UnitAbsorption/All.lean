@@ -10,5 +10,8 @@ import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
 import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
 import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.LocalDVR.All
 import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PureRadical
+import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PureRadicalTame
+import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PrescribedRootTame
+import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalTame
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Kummer.UnitAbsorption. -/

@@ -253,7 +253,7 @@ theorem restrictedValuationSubring_ne_top
     _ = (⊤ : ValuationSubring F).comap (algebraMap M F) := by
       apply ValuationSubring.ext
       intro x
-      simp
+      exact iff_of_true (by trivial) (by trivial)
 
 omit [IsDedekindDomain S] [IsFractionRing S M] [IsPurelyInseparable M F] in
 /-- The center is unchanged after restricting the valuation to `M`. -/

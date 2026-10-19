@@ -110,17 +110,18 @@ def finiteGaloisEtaleObject (K : Type u) [Field K]
   have : Etale (Spec.map (CommRingCat.ofHom (algebraMap K E))) := h.toEtale
   exact Scheme.Etale.mk (Spec.map (CommRingCat.ofHom (algebraMap K E)))
 
-/-- In characteristic zero, the refinement can be chosen inside the actual
-algebraic closure, finite and Galois over the original field. -/
-theorem exists_finiteGalois_mem_covering_sieve_of_field
+/-- A covering sieve of any pointed object over a characteristic-zero field
+has an actual finite Galois refinement over the original base field. -/
+theorem exists_finiteGalois_mem_covering_sieve_of_field_object
     (K : Type u) [Field K] [CharZero K]
-    (S : Sieve (Scheme.Etale.mk (𝟙 (Spec (.of K)))))
+    (V : (Spec (.of K)).Etale) (x : V.left)
+    (S : Sieve V)
     (hS : S ∈ (Spec (.of K)).smallEtaleTopology _) :
     ∃ (E : FiniteGaloisIntermediateField K (AlgebraicClosure K))
-      (f : finiteGaloisEtaleObject K E ⟶ Scheme.Etale.mk (𝟙 (Spec (.of K)))),
+      (f : finiteGaloisEtaleObject K E ⟶ V),
       S f := by
   obtain ⟨Y, g, y, hg, _⟩ := exists_etale_neighborhood_in_sieve S hS
-    (default : Spec (.of K))
+    x
   obtain ⟨L, a, e, hfield, hsep, he⟩ := Scheme.Etale.exists_iso_sigmaSpec K Y
   let : Field (L y) := (hfield y).toField
   let : Algebra K (L y) := (a y).hom.toAlgebra
@@ -147,5 +148,43 @@ theorem exists_finiteGalois_mem_covering_sieve_of_field
         intro k
         exact b.commutes k)
   exact ⟨E, l ≫ g, S.downward_closed hg l⟩
+
+/-- In characteristic zero, a cover of the base field can be refined
+inside its algebraic closure by an actual finite Galois extension. -/
+theorem exists_finiteGalois_mem_covering_sieve_of_field
+    (K : Type u) [Field K] [CharZero K]
+    (S : Sieve (Scheme.Etale.mk (𝟙 (Spec (.of K)))))
+    (hS : S ∈ (Spec (.of K)).smallEtaleTopology _) :
+    ∃ (E : FiniteGaloisIntermediateField K (AlgebraicClosure K))
+      (f : finiteGaloisEtaleObject K E ⟶ Scheme.Etale.mk (𝟙 (Spec (.of K)))),
+      S f :=
+  exists_finiteGalois_mem_covering_sieve_of_field_object K
+    (Scheme.Etale.mk (𝟙 (Spec (.of K)))) (default : Spec (.of K)) S hS
+
+/-- A finite family of actual sections lifts simultaneously through a
+sheaf epimorphism after a single actual finite Galois refinement. -/
+theorem exists_finiteGalois_lift_finite_sections_of_field
+    (K : Type u) [Field K] [CharZero K]
+    {F G : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
+    (η : F ⟶ G) [Epi η]
+    (V : (Spec (.of K)).Etale) (x : V.left)
+    {ι : Type*} [Finite ι] (t : ι → G.obj.obj (op V)) :
+    ∃ (E : FiniteGaloisIntermediateField K (AlgebraicClosure K))
+      (f : finiteGaloisEtaleObject K E ⟶ V),
+      ∀ i, ∃ s : F.obj.obj (op (finiteGaloisEtaleObject K E)),
+        η.hom.app _ s = G.obj.map f.op (t i) := by
+  have : Fintype ι := Fintype.ofFinite ι
+  have : Sheaf.IsLocallySurjective η :=
+    (Sheaf.isLocallySurjective_iff_epi' AddCommGrpCat.{u} η).mpr inferInstance
+  let J := (Spec (.of K)).smallEtaleTopology
+  let Sᵢ (i : ι) : J.Cover V :=
+    ⟨Presheaf.imageSieve η.hom (t i), Presheaf.imageSieve_mem J η.hom (t i)⟩
+  let S : J.Cover V := Finset.univ.inf Sᵢ
+  obtain ⟨E, f, hf⟩ :=
+    exists_finiteGalois_mem_covering_sieve_of_field_object K V x S S.condition
+  refine ⟨E, f, ?_⟩
+  intro i
+  have hi : S ≤ Sᵢ i := Finset.inf_le (Finset.mem_univ i)
+  exact hi f hf
 
 end EtaleCohomology

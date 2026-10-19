@@ -1,0 +1,41 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAlgebraMapAppTop
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAlgebraMapSections
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAlgebraMapSectionsBaseChange
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppBijectiveAppTopMorphismRestrict
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppIsAffineOpen
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppProper
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopBijectiveAppTopPullbackSnd
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopIsMaximal
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatFinitePresentation
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatIsAdicComplete
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatNoetherian
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAlgebraMapSections
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTop
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTopFiberToSpecResidueField
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndResidue
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectivePresheafMapInf
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.CompSectionCompEqIsClosedMap
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.DenseSetOfSectionAlgClosed
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.EqAppLEMapEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.EqSection
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FinrankSectionsPushforwardThickeningInjectiveUnitAppIff
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FinsetNormAppLESubLtImpFalse
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomAppInjectiveIsAffineOpen
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomBijectiveAppPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenEqAppLEEqAppLEEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenLinearEquivTensorSections
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsClosedImmersionAppCurveChangeInjective
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsUnitAppTopEqBijective
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.NormSectionsMulMapEqNorm
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.SectionFinite
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.SubsingletonH1FinrankH0SectionsOfTensorInvModulePowKer
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.SumAppLEMulAppLENeZeroEqZero
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.TraceEqZeroFinrankEqChar
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.UniqueSectionAlgebraMapGermEq

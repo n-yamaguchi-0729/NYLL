@@ -6,17 +6,17 @@ https://github.com/n-yamaguchi-0729
 -/
 
 import Nyll.JacobianVarieties.Albanese.AbelJacobiHomDetectionField
-import Nyll.JacobianVarieties.Picard.Designation
-import Nyll.JacobianVarieties.Picard.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_comp_mul_eq_mul_comp_of_comp_one_eq_one_of_abelianSchemePropertyBundle
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivOfPoint
-import Nyll.SchemeTheory.Modules.Monoidal
+import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 
 /-!
 # Uniqueness of pointed Abel–Jacobi factorizations over any field

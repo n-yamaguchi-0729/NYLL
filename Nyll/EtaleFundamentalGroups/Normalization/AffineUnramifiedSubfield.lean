@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGalois
 import Nyll.EtaleFundamentalGroups.Normalization.FieldSourceNormalization
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.EtaleFundamentalGroups.Normalization.GenericFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
 import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
 import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic

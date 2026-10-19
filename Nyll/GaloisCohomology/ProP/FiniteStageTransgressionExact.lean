@@ -121,7 +121,8 @@ theorem finiteStageContinuousCharacterRestriction_range_eq_transgression_ker
   · rintro ⟨ψ, rfl⟩
     exact ⟨Additive.ofMul (characterOfH1 ψ).toMonoidHom, rfl⟩
   · rintro ⟨ψ, rfl⟩
-    exact ⟨continuousH1OfFiniteStageCharacter U ψ, by simp⟩
+    exact ⟨continuousH1OfFiniteStageCharacter U ψ,
+      finiteStageContinuousCharacterRestrictionLinearMap_realize R U ψ⟩
 
 end
 

@@ -21,7 +21,8 @@ The universal section constructed from the local universal elements induces
 a map from the Yoneda presheaf of the glued scheme. Its restriction to each
 cover member is a bijection, by the cartesian gluing square and the local
 representing equivalence. The sheaf condition then makes this map an
-isomorphism globally.
+isomorphism globally. The value universe may exceed the universe of
+scheme morphisms, as it does for sheafification on the big fppf site.
 -/
 
 
@@ -31,11 +32,11 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 noncomputable section
 
-universe u v
+universe u v w
 
 namespace SchemeTheory.WeilRestriction
 
-variable {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type u)
+variable {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type (max u w))
   (𝒰 : S.OpenCover) [Category.{v} 𝒰.I₀] [𝒰.LocallyDirected]
   (W : ∀ i : 𝒰.I₀, Over (𝒰.X i))
   (h : ∀ i : 𝒰.I₀, ((Over.map (𝒰.f i)).op ⋙ F).RepresentableBy (W i))
@@ -55,8 +56,8 @@ variable (hF : Presheaf.IsSheaf (Scheme.zariskiTopology.over S) F)
 /-- Evaluation of the glued universal section agrees with the local representing equivalence. -/
 lemma gluedLocalRepresenterUniversalSection_eval (i : 𝒰.I₀) (T : Over (𝒰.X i))
     (g : (Over.map (𝒰.f i)).obj T ⟶ gluedLocalRepresenter F 𝒰 W h) :
-    (yonedaEquiv.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
-        (op ((Over.map (𝒰.f i)).obj T)) g =
+    (uliftYonedaEquiv.{w}.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
+        (op ((Over.map (𝒰.f i)).obj T)) (ULift.up g) =
       gluedLocalRepresenterEvaluationEquiv F 𝒰 W h i T g := by
   let E := Over.iteratedSliceEquiv (Over.mk (𝒰.f i))
   let h' := representableByIteratedSlice (𝒰.f i) F (W i) (h i)
@@ -76,28 +77,30 @@ lemma gluedLocalRepresenterUniversalSection_eval (i : 𝒰.I₀) (T : Over (𝒰
 /-- Evaluation at the glued universal section is bijective on every local test scheme. -/
 lemma gluedLocalRepresenterUniversalSection_bijective (i : 𝒰.I₀) (T : Over (𝒰.X i)) :
     Function.Bijective
-      ((yonedaEquiv.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
+      ((uliftYonedaEquiv.{w}.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
         (op ((Over.map (𝒰.f i)).obj T))) := by
   have heq :
-      (fun g ↦ (yonedaEquiv.symm
+      (fun g ↦ (uliftYonedaEquiv.{w}.symm
         (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
           (op ((Over.map (𝒰.f i)).obj T)) g) =
-        (fun g ↦ gluedLocalRepresenterEvaluationEquiv F 𝒰 W h i T g) :=
-    funext (gluedLocalRepresenterUniversalSection_eval F 𝒰 W h hF i T)
+        (fun g ↦ gluedLocalRepresenterEvaluationEquiv F 𝒰 W h i T g.down) :=
+    funext fun g => gluedLocalRepresenterUniversalSection_eval F 𝒰 W h hF i T g.down
   change Function.Bijective (fun g ↦
-    (yonedaEquiv.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
+    (uliftYonedaEquiv.{w}.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF)).app
       (op ((Over.map (𝒰.f i)).obj T)) g)
   rw [heq]
-  exact (gluedLocalRepresenterEvaluationEquiv F 𝒰 W h i T).bijective
+  exact (Equiv.ulift.trans (gluedLocalRepresenterEvaluationEquiv F 𝒰 W h i T)).bijective
 
 /-- A sheaf with local relative representers is represented by their glued scheme. -/
 def gluedLocalRepresentable : F.RepresentableBy (gluedLocalRepresenter F 𝒰 W h) := by
   let J := Scheme.zariskiTopology.over S
-  let η : J.yoneda.obj (gluedLocalRepresenter F 𝒰 W h) ⟶ (⟨F, hF⟩ : Sheaf J (Type u)) :=
-    ObjectProperty.homMk (yonedaEquiv.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF))
-  letI : IsIso η := isIso_of_bijective_on_openCover 𝒰 η
+  let η : J.uliftYoneda.{w}.obj (gluedLocalRepresenter F 𝒰 W h) ⟶
+      (⟨F, hF⟩ : Sheaf J (Type (max u w))) :=
+    ObjectProperty.homMk
+      (uliftYonedaEquiv.{w}.symm (gluedLocalRepresenterUniversalSection F 𝒰 W h hF))
+  have : IsIso η := isIso_of_bijective_on_openCover 𝒰 η
     (fun i T ↦ gluedLocalRepresenterUniversalSection_bijective F 𝒰 W h hF i T)
-  exact Functor.representableByEquiv.symm
-    ((sheafToPresheaf J (Type u)).mapIso (asIso η))
+  exact (Functor.RepresentableBy.equivUliftYonedaIso F _).symm
+    ((sheafToPresheaf J (Type (max u w))).mapIso (asIso η))
 
 end SchemeTheory.WeilRestriction

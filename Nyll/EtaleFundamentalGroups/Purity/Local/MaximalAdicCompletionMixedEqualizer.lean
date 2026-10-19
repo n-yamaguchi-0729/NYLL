@@ -208,7 +208,7 @@ private theorem maximalAdicCompletionAmitsurCounit_one_tmul
   induction x using TensorProduct.inductionOn with
   | add x y hx hy =>
       rw [TensorProduct.tmul_add, map_add, hx, hy]
-  | tmul s m => simp
+  | tmul s m => rw [maximalAdicCompletionAmitsurCounit_tmul, one_mul]
 
 omit [IsNoetherianRing R] in
 @[simp]
@@ -218,7 +218,10 @@ private theorem maximalAdicCompletionAmitsurCounit_difference
         (maximalAdicCompletionAmitsurDifference R M x) = 0 := by
   induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add, map_add, hx, hy, add_zero]
-  | tmul s m => simp
+  | tmul s m =>
+      rw [maximalAdicCompletionAmitsurDifference_tmul, map_sub,
+        maximalAdicCompletionAmitsurCounit_tmul,
+        maximalAdicCompletionAmitsurCounit_tmul, mul_one, one_mul, sub_self]
 
 /-- A power-torsion Amitsur difference for maximal-adic completion is zero. -/
 private theorem maximalAdicCompletionAmitsurDifference_eq_zero_of_pow
@@ -271,7 +274,7 @@ private theorem maximalAdicCompletionAmitsurDifference_localized_eq_zero
           (p.1.2 i) := by
       exact congrArg (fun h ↦ h (p.1.2 i))
         (IsLocalizedModule.map_comp' P locM locHat locDouble g d).symm
-    _ = 0 := by rw [hdg]; simp
+    _ = 0 := by rw [hdg, map_zero, LinearMap.zero_apply]
 
 private theorem maximalAdicCompletionAmitsurDifference_eq_zero
     (p : LinearMap.eqLocus

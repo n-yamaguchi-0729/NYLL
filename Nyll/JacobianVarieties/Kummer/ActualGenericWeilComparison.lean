@@ -4,17 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.AbelJacobiDivisionDisplacement
+import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiDivisionDisplacement
 import Nyll.JacobianVarieties.Kummer.MovingRepresentatives
 import Nyll.JacobianVarieties.Kummer.WeilGenericCharacter
 import Nyll.JacobianVarieties.WeilPairing.ConstantExtension
 import Nyll.JacobianVarieties.Picard.ConstantExtensionFixedDivisors
-import Nyll.JacobianVarieties.Pic0.Pic0_nonempty_divisorialWeilPairingData_of_isAlgClosed
-import Nyll.AlgebraicCurves.Models.CurveModelGeometricGenericLift
-import Nyll.AlgebraicCurves.Models.CurveModelGenericPointEvaluation
-import Nyll.AlgebraicCurves.Models.CurveModelSemilinearFixedField
-import Nyll.AlgebraicCurves.Geometry.Schemes.genericPoint_mem_preimage_comp_pullback_fst_of_injective_algebraMap
-import Nyll.AlgebraicCurves.Places.Place_evalAt_map_eq_of_comap_eq
+import Nyll.JacobianVarieties.Pic0.DivisorialWeilPairingDataAlgClosed
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelGeometricGenericLift
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelGenericPointEvaluation
+import Nyll.AlgebraicCurves.Models.ConstantExtension.CurveModelSemilinearFixedField
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.GenericPointMemPreimageCompPullbackFst
+import Nyll.AlgebraicCurves.Places.Evaluation.EvalAtMapEqComapEq
 
 /-!
 # The actual Abel--Jacobi Weil character at the geometric generic point
@@ -191,7 +191,7 @@ existsUnique_point_and_ord_eq_and_ord_eq_zero_of_iso_pullback_of_ffEquiv_symm_ge
   have hordε : (M₀.pointEquivPlace ε).ord (u.val : F₀) = 0 := by
     rw [hdiv, hDε₀, mul_zero]
   let b : K := (M₀.pointEquivPlace ε).evalAt (u.val : F₀)
-  have hb : b ≠ 0 := (M₀.pointEquivPlace ε).evalAt_ne_zero_of_ord_eq_zero
+  have hb : b ≠ 0 := (M₀.pointEquivPlace ε).evalAt_ne_zero
     (M₀.isRational_pointEquivPlace ε) hf hordε
   have hcoeff (k : K) : algebraMap F₀ F (algebraMap K F₀ k) =
       algebraMap Ω F (algebraMap K Ω k) :=
@@ -203,7 +203,7 @@ existsUnique_point_and_ord_eq_and_ord_eq_zero_of_iso_pullback_of_ffEquiv_symm_ge
     exact Place.evalAt_map_eq_of_comap_eq (algebraMap K Ω) (algebraMap F₀ F) hcoeff
       (M₀.pointEquivPlace ε) (M.pointEquivPlace s) (hgeom.2.1 ε s hs).1
       (M₀.isRational_pointEquivPlace ε)
-      ((M₀.pointEquivPlace ε).mem_toValuationSubring_of_ord_nonneg_alt hf hordε.ge)
+      ((M₀.pointEquivPlace ε).mem_of_ord_nonneg hf hordε.ge)
   let uη : SchemeHomOver
       (Spec.map (CommRingCat.ofHom (algebraMap K M₀.C.functionField))) M₀.toBase :=
     ⟨q, (fromSpecStalk_generic_comp_toBase M₀.toBase).trans

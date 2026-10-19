@@ -48,9 +48,11 @@ theorem linearChangeFirst_comp_neg {n : ℕ} (c : Fin n → K) :
   rw [comp_aeval, ← MvPolynomial.aeval_X_left]
   ext i
   refine Fin.cases ?_ ?_ i
-  · simp
+  · simp only [Fin.cases_zero, aeval_X]
   · intro j
-    simp
+    simp only [Fin.cases_succ, map_add, map_mul, aeval_C, aeval_X,
+      Fin.cases_zero, Pi.neg_apply, map_neg, MvPolynomial.algebraMap_eq]
+    rw [neg_mul, add_neg_cancel_right]
 
 /-- The triangular linear substitution as an algebra equivalence. -/
 def linearChangeFirstEquiv {n : ℕ} (c : Fin n → K) :
@@ -87,9 +89,10 @@ theorem eval_linearChangeFirst_finCons_one_zero {n : ℕ} (c : Fin n → K)
   refine congrArg (fun z : Fin (n + 1) → K => eval z F) ?_
   funext i
   refine Fin.cases ?_ ?_ i
-  · simp
+  · simp only [Function.comp_apply, Fin.cases_zero, eval_X, Fin.cons_zero]
   · intro j
-    simp
+    simp only [Function.comp_apply, Fin.cases_succ, eval_add, eval_mul, eval_X, eval_C,
+      Fin.cons_zero, Fin.cons_succ, Pi.zero_apply, mul_one, zero_add]
 
 /--
 Evaluation through `finSuccEquiv`: the first multivariable coordinate becomes
@@ -153,9 +156,10 @@ theorem aeval_linearChangeFirst_linearCoordinates
           (Fin.cases (X 0) (fun j => X j.succ + C (c j) * X 0) i)) = x := by
     funext i
     refine Fin.cases ?_ ?_ i
-    · simp
+    · simp only [Fin.cases_zero, aeval_X, linearCoordinatesFirst_zero]
     · intro j
-      simp
+      simp only [Fin.cases_succ, map_add, map_mul, aeval_C, aeval_X,
+        linearCoordinatesFirst_zero, linearCoordinatesFirst_succ, sub_add_cancel]
   rw [hpoints]
 
 /--
@@ -168,7 +172,7 @@ theorem eval_finCons_one_zero_eq_constantCoeff_coeff {n d : ℕ}
       MvPolynomial.constantCoeff ((finSuccEquiv K n F).coeff d) := by
   by_cases hF₀ : F = 0
   · subst F
-    simp
+    simp only [map_zero, Polynomial.coeff_zero]
   have hdeg : (finSuccEquiv K n F).natDegree < d + 1 := by
     linarith [natDegree_finSuccEquiv F, degreeOf_le_totalDegree F 0,
       hF.totalDegree hF₀]

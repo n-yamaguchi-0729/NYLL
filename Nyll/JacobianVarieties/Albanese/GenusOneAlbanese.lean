@@ -5,15 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.Albanese.GenusOneAbelJacobiIsomorphism
-import Nyll.JacobianVarieties.Picard.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Designation
-import Nyll.JacobianVarieties.Picard.Representation
-import Nyll.AlgebraicCurves.Cohomology.Finite_H0_H1_structureSheaf_of_isAlgClosed
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurve_exists_curveModel_iso_germToFunctionField_eq_of_isAlgClosed
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroGroupCut
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Cohomology.FiniteH0H1StructureSheafAlgClosed
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoFunctionFieldGermEq
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_comp_mul_eq_mul_comp_of_comp_one_eq_one_of_abelianSchemePropertyBundle
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
 
 /-!
 # The Albanese variety of a genus-one curve

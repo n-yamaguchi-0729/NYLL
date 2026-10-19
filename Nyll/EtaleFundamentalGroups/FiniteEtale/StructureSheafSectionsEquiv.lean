@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChartCechSectionsOf
+import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
 import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-!

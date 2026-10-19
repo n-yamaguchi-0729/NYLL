@@ -9,6 +9,7 @@ import Nyll.ValuedFieldTheory.Ramification.Herbrand.FixedField
 import Nyll.ValuedFieldTheory.Ramification.Herbrand.Function
 import Nyll.ValuedFieldTheory.Ramification.Herbrand.Quotient
 import Nyll.ValuedFieldTheory.Ramification.Herbrand.Tower
+import Nyll.ValuedFieldTheory.Ramification.Herbrand.Bounds
 
 /-!
 # Herbrand theory

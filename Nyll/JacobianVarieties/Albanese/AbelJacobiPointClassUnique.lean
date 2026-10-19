@@ -4,16 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Designation
-import Nyll.JacobianVarieties.Picard.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroCut
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Schemes.isReduced_of_smooth_of_field
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver_ext_of_forall_algebraicClosure_point_of_isReduced_of_flat
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivOfPoint
-import Nyll.AlgebraicCurves.Geometry.Sheaves.IdealSheafModule
+import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
+import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.SchemeTheory.Modules.Monoidal
+import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 
 /-!
 # Equality of Abel–Jacobi maps from their actual geometric point classes

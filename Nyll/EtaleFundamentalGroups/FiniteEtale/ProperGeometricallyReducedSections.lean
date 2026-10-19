@@ -8,7 +8,7 @@ import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
 import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteGeometricallyReducedEtale
 import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import Mathlib.Algebra.Category.Ring.Constructions
-import Nyll.AlgebraicCurves.Geometry.Schemes.finite_appTop_of_isProper_of_isNoetherianRing
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
 
 /-!
 # Global sections of proper geometrically reduced schemes over fields

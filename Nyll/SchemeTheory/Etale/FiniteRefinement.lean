@@ -6,11 +6,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.SchemeTheory.Etale.IntegralRefinement
 import Nyll.SchemeTheory.Etale.AffineChartFiniteSubalgebra
-import Nyll.SchemeTheory.Modules.DirectImageAlgebraQuasicoherent
+import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
 import Nyll.SchemeTheory.Modules.GeneratedAlgebraSource
 import Nyll.SchemeTheory.Modules.GeneratedAlgebraLocalFactors
 import Nyll.SchemeTheory.Modules.GeneratedFiniteAlgebra
-import Nyll.SchemeTheory.Modules.FiniteAffineSectionSubmodule
+import Nyll.SchemeTheory.Modules.Submodules.FiniteAffineSectionSubmodule
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Finite

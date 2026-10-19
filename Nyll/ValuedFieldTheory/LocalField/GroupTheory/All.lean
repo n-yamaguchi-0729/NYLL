@@ -8,6 +8,8 @@ import Nyll.ValuedFieldTheory.LocalField.GroupTheory.ContinuousQuotientEquiv
 import Nyll.ValuedFieldTheory.LocalField.GroupTheory.IntegerMultipleSubgroup
 import Nyll.ValuedFieldTheory.LocalField.GroupTheory.PowerIndex
 
+import Nyll.ValuedFieldTheory.LocalField.GroupTheory.QuotientPowers
+
 /-!
 # Group-theoretic infrastructure for local field theory
 

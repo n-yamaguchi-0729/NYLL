@@ -19,8 +19,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth_descendsAlong_surjective_inf_flat_inf_quasiCompact
-import Nyll.AlgebraicCurves.Geometry.Curves.smooth_isProper_geometricallyConnected_of_finiteEtale_baseChange
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDescendsAlongSurjectiveInfFlatInfQuasiCompact
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperGeometricallyConnected
 
 /-!
 # Geometric properties descend along a faithfully flat affine base change

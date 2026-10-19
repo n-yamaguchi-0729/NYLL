@@ -84,7 +84,7 @@ theorem finiteUnramifiedSubextension_finset_iSup
       simpa using finiteUnramifiedSubextension_bot v w hExt hhens
   | @insert i s his ih =>
       let E := F i
-      have hE := hs i (by simp)
+      have hE := hs i (Finset.mem_insert_self i s)
       have hs' : ∀ j ∈ s,
           FiniteUnramifiedSubextension v w hExt (F j) := by
         intro j hjs

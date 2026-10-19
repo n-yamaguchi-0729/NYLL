@@ -16,7 +16,8 @@ import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import quote, urlparse
-from site_sitemaps import write_sitemap
+from xml.etree import ElementTree as ET
+from site_sitemaps import NAMESPACE, write_sitemap
 
 from build_site import parse_module, SourceError, SITE_URL, COMMANDS, MODIFIERS
 
@@ -383,13 +384,62 @@ def overview_page(guide: dict, entries: list[dict], site_url: str) -> str:
     refs = [ref for ref in guide["references"] if ref["id"] in used]
     content = f'''<header class="guide-hero"><h1>{e(guide['title'])}</h1><div class="overview">{paragraphs(guide['overview'])}</div>
 <div class="guide-actions"><a class="primary" href="https://github.com/{OWNER}/{guide['repository']}">{e(guide['repository'])} on GitHub ↗</a></div></header>
-<section class="guide-section"><h2>Selected theorems and definitions</h2><ul class="result-grid">{cards}</ul></section>
+<section class="guide-section"><h2>Selected results</h2><ul class="result-grid">{cards}</ul></section>
 <section class="guide-section"><h2>References used in these guides</h2>{bibliography(refs)}</section>'''
     return page(guide["title"], guide["summary"], content, 2, f"libraries/{guide['slug']}/", site_url)
 
 
+def checked_output_path(output: Path, relative: str) -> Path:
+    """Confine generated files without following an existing symlink."""
+    target = output / relative
+    if not target.is_relative_to(output) or ".." in Path(relative).parts:
+        raise SourceError(f"Guide output path escapes its directory: {relative}")
+    for path in (target, *target.parents):
+        if path.is_symlink():
+            raise SourceError(f"Symlink in guide output path: {path}")
+        if path == output:
+            break
+    if not target.resolve().is_relative_to(output):
+        raise SourceError(f"Guide output path escapes its directory: {relative}")
+    if target.exists() and not target.is_file():
+        raise SourceError(f"Expected a generated file: {target}")
+    return target
+
+
+def previous_entry_pages(output: Path, site_url: str) -> set[Path]:
+    """Read only entry pages recorded by this generator's previous sitemap."""
+    sitemap = checked_output_path(output, "sitemap-guides.xml")
+    if not sitemap.exists():
+        return set()
+    try:
+        tree = ET.parse(sitemap)
+    except ET.ParseError as error:
+        raise SourceError(f"Invalid guide sitemap: {error}") from error
+    if tree.getroot().tag != f"{{{NAMESPACE}}}urlset":
+        raise SourceError("Unexpected guide sitemap format")
+    entries = set()
+    for row in tree.getroot():
+        locations = row.findall(f"{{{NAMESPACE}}}loc")
+        if row.tag != f"{{{NAMESPACE}}}url" or len(locations) != 1:
+            raise SourceError("Unexpected guide sitemap entry")
+        url = locations[0].text or ""
+        if not url.startswith(site_url):
+            raise SourceError(f"Guide sitemap URL is outside {site_url}: {url}")
+        parts = url[len(site_url):].split("/")
+        if (len(parts) not in {3, 4} or parts[0] != "libraries" or parts[-1]
+                or any(not SLUG.fullmatch(part) for part in parts[1:-1])):
+            raise SourceError(f"Invalid guide sitemap page: {url}")
+        if len(parts) == 4:
+            entries.add(checked_output_path(output, "/".join(parts) + "index.html"))
+    return entries
+
+
 def build(root: Path, output: Path, sources: Path, fetch: bool = False, write_lock: bool = False,
           site_url: str = SITE_URL) -> dict:
+    # Check before resolving: otherwise a symlink would lose its identity.
+    output = output.absolute()
+    if any(path.is_symlink() for path in (output, *output.parents)):
+        raise SourceError(f"Symlink in guide output directory: {output}")
     root, output, sources = root.resolve(), output.resolve(), sources.resolve()
     if output == root or output.is_relative_to(root / "Nyll") or output.is_relative_to(root / "site"):
         raise SourceError("Guide output must be separate from source files")
@@ -422,22 +472,34 @@ def build(root: Path, output: Path, sources: Path, fetch: bool = False, write_lo
         if changed:
             raise SourceError("Mathematical guide review required: selected declarations or their dependencies changed. "
                               "Review the prose and source before --write-lock.\n" + "\n".join(changed))
+    # Finish review, rendering, and path checks before changing any output.
+    pages, entry_pages, urls = {}, set(), []
+    for guide in guides:
+        route = f"libraries/{guide['slug']}/"
+        entries = all_entries[guide["slug"]]
+        pages[checked_output_path(output, route + "index.html")] = overview_page(guide, entries, site_url)
+        urls.append(site_url + route)
+        for entry in entries:
+            entry_route = route + entry["slug"] + "/"
+            target = checked_output_path(output, entry_route + "index.html")
+            pages[target] = entry_page(guide, entry, snapshots[guide["slug"]], site_url)
+            entry_pages.add(target)
+            urls.append(site_url + entry_route)
+    obsolete = previous_entry_pages(output, site_url) - entry_pages
+    for relative in ("sitemap-guides.xml", "sitemap-source.xml", "sitemap.xml", "guide-sources.json"):
+        checked_output_path(output, relative)
     if write_lock:
         lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     output.mkdir(parents=True, exist_ok=True)
-    urls = []
-    for guide in guides:
-        directory = output / "libraries" / guide["slug"]
-        directory.mkdir(parents=True, exist_ok=True)
-        entries = all_entries[guide["slug"]]
-        (directory / "index.html").write_text(overview_page(guide, entries, site_url), encoding="utf-8")
-        urls.append(f"{site_url}libraries/{guide['slug']}/")
-        for entry in entries:
-            target = directory / entry["slug"]
-            target.mkdir(parents=True, exist_ok=True)
-            (target / "index.html").write_text(entry_page(guide, entry, snapshots[guide["slug"]], site_url), encoding="utf-8")
-            refs = [r for r in guide["references"] if r["id"] in entry["references"]]
-            urls.append(f"{site_url}libraries/{guide['slug']}/{entry['slug']}/")
+    for target, content in pages.items():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8")
+    for target in sorted(obsolete):
+        # Never remove a directory recursively: unrelated files survive.
+        if target.exists():
+            target.unlink()
+        if target.parent.is_dir() and not any(target.parent.iterdir()):
+            target.parent.rmdir()
     write_sitemap(output, "sitemap-guides.xml", urls, site_url)
     (output / "guide-sources.json").write_text(json.dumps({k: {a: b for a, b in v.items() if a not in {"fingerprints", "dependencyHashes"}} for k, v in snapshots.items()}, indent=2) + "\n", encoding="utf-8")
     counts = {"libraries": len(guides), "entries": sum(len(x) for x in all_entries.values())}

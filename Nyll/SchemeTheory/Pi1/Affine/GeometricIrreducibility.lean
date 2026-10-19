@@ -132,7 +132,8 @@ instance (priority := 100) PreirreducibleSpace.of_isEmpty (X : Type*) [Topologic
 lemma irreducibleSpace_iff_subsingleton_and_nonempty {X : Type*} [TopologicalSpace X] :
     IrreducibleSpace X ↔
       (irreducibleComponents X).Subsingleton ∧ (irreducibleComponents X).Nonempty := by
-  refine ⟨fun hX ↦ irreducibleComponents_eq_singleton (X := X) ▸ by simp, fun ⟨hS, hN⟩ ↦ ?_⟩
+  refine ⟨fun hX ↦ irreducibleComponents_eq_singleton (X := X) ▸
+    ⟨Set.subsingleton_singleton, Set.singleton_nonempty _⟩, fun ⟨hS, hN⟩ ↦ ?_⟩
   · obtain ⟨s, hs⟩ := hN
     have : s = Set.univ := by
       rw [← Set.univ_subset_iff]

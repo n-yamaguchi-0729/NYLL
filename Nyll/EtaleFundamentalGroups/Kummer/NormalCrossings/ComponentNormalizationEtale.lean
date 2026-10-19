@@ -140,7 +140,7 @@ theorem HasSurjectiveComponentsOverIntegers.componentBranchIntegralClosure_etale
       D hNC Z hZ W hW z hz q hqPrime hqOver
   have hCardGlobal : Nat.card (q.toAddSubgroup.inertia Gal(L/K)) = 1 := by
     rw [hGlobal]
-    simp
+    exact Nat.card_unique
   have hRamGlobal : q.ramificationIdx Ax = 1 := by
     calc
       q.ramificationIdx Ax =

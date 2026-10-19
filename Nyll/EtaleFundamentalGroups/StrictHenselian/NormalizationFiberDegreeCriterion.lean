@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
 import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
-import Nyll.SchemeTheory.RingTheory.StrictHenselianFiberDegree
+import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiberDegree
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.TensorProduct.Maps

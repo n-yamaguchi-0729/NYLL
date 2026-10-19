@@ -15,6 +15,10 @@ import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
 import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
 
 import Nyll.GaloisCohomology.ArtinSchreier.AutomorphismDetection
+import Nyll.GaloisCohomology.ArtinSchreier.RestrictionKernelCharacterEquiv
+import Nyll.GaloisCohomology.ArtinSchreier.FiniteExtension
+
+import Nyll.GaloisCohomology.ArtinSchreier.RestrictionDegree
 
 /-!
 # Artin–Schreier characters and cohomology

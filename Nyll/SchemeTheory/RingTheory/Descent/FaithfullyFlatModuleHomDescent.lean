@@ -38,7 +38,9 @@ def tensorProductDescentCompatibleLinearMaps :
         (F (1 ⊗ₜ[R] m)) =
       tensorProductDescentRight (R := R) (S := S) (M := N)
         (F (1 ⊗ₜ[R] m))}
-  zero_mem' := by simp
+  zero_mem' := by
+    intro m
+    simp only [LinearMap.zero_apply, map_zero]
   add_mem' := by
     intro F G hF hG m
     simp only [LinearMap.add_apply, map_add]

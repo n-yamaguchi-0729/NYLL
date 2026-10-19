@@ -54,7 +54,9 @@ private theorem finiteTypeModel_isFractionRing
         rw [mem_nonZeroDivisors_iff_ne_zero, map_ne_zero_iff]
         · exact (mem_nonZeroDivisors_iff_ne_zero.mp hx)
         · exact Subtype.val_injective
-      exact ⟨⟨algebraMap T C x, hxC⟩, 1, by simp⟩
+      exact ⟨⟨algebraMap T C x, hxC⟩, 1, by
+        simp only [OneMemClass.coe_one, map_one, mul_one]
+        rfl⟩
   have hloc : IsLocalization N K :=
     IsLocalization.localization_localization_isLocalization
       M (nonZeroDivisors C) K
@@ -240,7 +242,7 @@ normalization_ramificationIdx_eq_at_essentiallyEtale_contraction_of_functionFiel
     rw [integralClosureEtaleBaseChangeAlgebra_algebraMap_coe]
     simp only [Subalgebra.coe_algebraMap]
     rw [IsScalarTower.algebraMap_apply S M M]
-    simp
+    exact Algebra.algebraMap_self_apply _
   let : IsScalarTower DS E M :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let NDS : Submonoid DS := Algebra.algebraMapSubmonoid DS NS

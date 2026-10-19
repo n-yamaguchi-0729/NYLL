@@ -5,9 +5,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.WeilPairing.Divisorial
-import Nyll.JacobianVarieties.Pic0.Pic0_exists_injective_conorm_of_constantFieldExtension_of_isAlgClosed
-import Nyll.AlgebraicCurves.Divisors.ConstantExtensionEvaluation
-import Nyll.AlgebraicCurves.Places.Place_isRational_iff_deg_eq_one
+import Nyll.JacobianVarieties.Pic0.InjectiveConormConstantExtension
+import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtensionEvaluation
+import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
 
 /-!
 # Divisorial Weil pairing under algebraically closed constant extension
@@ -96,10 +96,10 @@ theorem constantExtensionDatum_pairing {n : ℕ} (d : WeilDatum K F n) :
   change Divisor.evalFun (algebraMap F F' d.f₁) (con hfg hfg' hgen d.D₂) /
     Divisor.evalFun (algebraMap F F' d.f₂) (con hfg hfg' hgen d.D₁) = _
   rw [heval d.f₁ d.D₂ (fun v hv => d.rational_of_mem_support_right hv)
-      (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt d.f₁_ne_zero
+      (fun v hv => v.mem_of_ord_nonneg d.f₁_ne_zero
         (d.ord_f₁_eq_zero_of_mem_support hv).ge),
     heval d.f₂ d.D₁ (fun v hv => d.rational_of_mem_support_left hv)
-      (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt d.f₂_ne_zero
+      (fun v hv => v.mem_of_ord_nonneg d.f₂_ne_zero
         (d.ord_f₂_eq_zero_of_mem_support hv).ge)]
   exact (map_div₀ (algebraMap K K') _ _).symm
 

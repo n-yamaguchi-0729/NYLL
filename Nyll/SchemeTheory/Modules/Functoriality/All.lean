@@ -1,0 +1,48 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.SchemeTheory.Modules.Functoriality.AffineFlatSectionsBaseChange
+import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
+import Nyll.SchemeTheory.Modules.Functoriality.AffineSectionsBaseChange
+import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeComposition
+import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeHom
+import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeIsomorphism
+import Nyll.SchemeTheory.Modules.Functoriality.CanonicalPullbackLegRelation
+import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
+import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
+import Nyll.SchemeTheory.Modules.Functoriality.FlatSectionsBaseChange
+import Nyll.SchemeTheory.Modules.Functoriality.IsoPullbackMapProjectionMorphismIff
+import Nyll.SchemeTheory.Modules.Functoriality.IsoPullbackPullback
+import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
+import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardPullback
+import Nyll.SchemeTheory.Modules.Functoriality.ProjectionMorphism
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackCompPullbackCongrPasteSquaresApp
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackIsoBijectiveApp
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocallyMemSpanUnit
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
+import Nyll.SchemeTheory.Modules.Functoriality.PushforwardCoefficients
+import Nyll.SchemeTheory.Modules.Functoriality.PushforwardHomCompIso
+import Nyll.SchemeTheory.Modules.Functoriality.PushforwardRestrict
+import Nyll.SchemeTheory.Modules.Functoriality.PushforwardSectionComparison
+import Nyll.SchemeTheory.Modules.Functoriality.UniqueIsoPullbackMapIsoEq
+import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
+import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnitKernel
+import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraMap
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackPresentation
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackQuotientTransition
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackSectionComposition
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
+import Nyll.SchemeTheory.Modules.Functoriality.SpecPullbackSections
+import Nyll.SchemeTheory.Modules.Functoriality.PullbackSectionRestriction
+import Nyll.SchemeTheory.Modules.Functoriality.AlgebraObjectSheaf
+import Nyll.SchemeTheory.Modules.Functoriality.RelativeSpecDirectImage
+import Nyll.SchemeTheory.Modules.Functoriality.AlgebraObjectSections
+import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraImage
+import Nyll.SchemeTheory.Modules.Functoriality.RelativeSpecMap
+import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionCounit
+import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionPushforwardUnit

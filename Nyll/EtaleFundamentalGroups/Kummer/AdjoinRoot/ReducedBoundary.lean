@@ -30,8 +30,8 @@ import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
 import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
 import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
 import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.SchemeTheory.RingTheory.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # Kummer covers at a reduced boundary

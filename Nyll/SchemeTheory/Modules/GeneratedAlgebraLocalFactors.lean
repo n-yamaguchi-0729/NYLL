@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.GeneratedAlgebraLocalization
+import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
 import Nyll.SchemeTheory.Etale.AffineFiniteSubalgebraRefinement
 import Nyll.SchemeTheory.Etale.LocalFactorOpenCover
 import Mathlib.AlgebraicGeometry.Cover.Open

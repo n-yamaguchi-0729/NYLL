@@ -13,8 +13,8 @@ import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
 import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
 import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
 import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
-import Nyll.SchemeTheory.RingTheory.RegularLocalDimensionOne
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 import Mathlib.Algebra.Algebra.Tower
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact

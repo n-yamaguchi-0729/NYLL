@@ -14,22 +14,22 @@ Upstream per-file ATTRIBUTION:
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.JacobianVarieties.Picard.Exists_openChart_relSubPicPresheaf_algEquivZeroCut_of_relEffCartierDiv
-import Nyll.JacobianVarieties.Picard.Exists_opens_range_subset_iff_forall_subsingleton_H1_fibre
-import Nyll.JacobianVarieties.Picard.Exists_relEffCartierDiv_twistModule_iso_of_subsingleton_H1
-import Nyll.JacobianVarieties.Picard.Representation
-import Nyll.JacobianVarieties.Picard.ThetaBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroCut
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
+import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
+import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundle
+import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChartCechSectionsOf
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivTwist2
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv_exists_I_eq_mul
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv_IsUniversal_isProper
+import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalProper
 import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion

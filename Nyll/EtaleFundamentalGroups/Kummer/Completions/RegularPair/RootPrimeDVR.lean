@@ -60,7 +60,7 @@ private theorem prime_eq_span_of_nonzero_le_span_of_isHausdorff
     intro n
     induction n with
     | zero =>
-        exact ⟨a, haP, by simp⟩
+        exact ⟨a, haP, by rw [pow_zero, one_mul]⟩
     | succ n ih =>
         obtain ⟨b, hbP, hab⟩ := ih
         have hbSpan : b ∈ Ideal.span ({x} : Set R) := hPle hbP

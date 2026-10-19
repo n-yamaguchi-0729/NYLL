@@ -41,9 +41,11 @@ theorem isColimit_cofork_of_fpqc_local
         (IsColimit
           (Cofork.ofπ
             (f := pullback.map (π i) (a ≫ c) (π i) c
-              (𝟙 _) a (𝟙 _) (by simp) (by simp))
+              (𝟙 _) a (𝟙 _) (by rw [Category.comp_id, Category.id_comp])
+              (Category.comp_id _))
             (g := pullback.map (π i) (a ≫ c) (π i) c
-              (𝟙 _) b (𝟙 _) (by simp) (by simpa using hc))
+              (𝟙 _) b (𝟙 _) (by rw [Category.comp_id, Category.id_comp])
+              (by simpa only [Category.comp_id] using hc))
             (pullback.fst (π i) c) (by
               simp only [pullback.map, pullback.lift_fst]))))
     (hoverlap : ∀ i j,
@@ -53,9 +55,11 @@ theorem isColimit_cofork_of_fpqc_local
         (IsColimit
           (Cofork.ofπ
             (f := pullback.map q (a ≫ c) q c
-              (𝟙 _) a (𝟙 _) (by simp) (by simp))
+              (𝟙 _) a (𝟙 _) (by rw [Category.comp_id, Category.id_comp])
+              (Category.comp_id _))
             (g := pullback.map q (a ≫ c) q c
-              (𝟙 _) b (𝟙 _) (by simp) (by simpa using hc))
+              (𝟙 _) b (𝟙 _) (by rw [Category.comp_id, Category.id_comp])
+              (by simpa only [Category.comp_id] using hc))
             (pullback.fst q c) (by
               simp only [pullback.map, pullback.lift_fst])))) :
     Nonempty (IsColimit (Cofork.ofπ c hc)) := by
@@ -88,11 +92,13 @@ theorem isColimit_cofork_of_fpqc_local
   let fᵢ (i : ι) :
       pullback (π i) (a ≫ c) ⟶ pullback (π i) c :=
     pullback.map (π i) (a ≫ c) (π i) c
-      (𝟙 _) a (𝟙 _) (by simp) (by simp)
+      (𝟙 _) a (𝟙 _) (by rw [Category.comp_id, Category.id_comp])
+              (Category.comp_id _)
   let gᵢ (i : ι) :
       pullback (π i) (a ≫ c) ⟶ pullback (π i) c :=
     pullback.map (π i) (a ≫ c) (π i) c
-      (𝟙 _) b (𝟙 _) (by simp) (by simpa using hc)
+      (𝟙 _) b (𝟙 _) (by rw [Category.comp_id, Category.id_comp])
+              (by simpa only [Category.comp_id] using hc)
   have hfgᵢ (i : ι) :
       fᵢ i ≫ (pullback.snd (π i) c ≫ s.π) =
         gᵢ i ≫ (pullback.snd (π i) c ≫ s.π) := by
@@ -118,7 +124,8 @@ theorem isColimit_cofork_of_fpqc_local
         pullback q c ⟶ pullback (π i) c :=
       pullback.map q c (π i) c
         (pullback.fst (π i) (π j)) (𝟙 _) (𝟙 _)
-        (by simp [q]) (by simp)
+        (by simp only [q, Category.comp_id])
+        (by rw [Category.comp_id, Category.id_comp])
     let mⱼ :
         pullback q c ⟶ pullback (π j) c :=
       pullback.map q c (π j) c
@@ -128,7 +135,7 @@ theorem isColimit_cofork_of_fpqc_local
             (pullback.condition :
               pullback.fst (π i) (π j) ≫ π i =
                 pullback.snd (π i) (π j) ≫ π j))
-        (by simp)
+        (by rw [Category.comp_id, Category.id_comp])
     have hleft :
         pullback.fst q c ≫
               (pullback.fst (π i) (π j) ≫ eᵢ i) =

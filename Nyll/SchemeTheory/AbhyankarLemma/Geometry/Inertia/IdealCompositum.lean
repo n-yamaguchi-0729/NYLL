@@ -104,6 +104,6 @@ theorem idealRelativeInertia_card_eq_one_of_cyclic_of_card_dvd
       Nat.card_congr
         (Equiv.ofInjective inclusion
           (idealRelativeInertiaInclusion_injective (Q := Q) resRight))
-    _ = 1 := by rw [hrangeBot]; simp
+    _ = 1 := by rw [hrangeBot]; exact Nat.card_unique
 
 end TameAbhyankar.SGA1

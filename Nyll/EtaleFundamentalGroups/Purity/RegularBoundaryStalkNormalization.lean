@@ -7,8 +7,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.RegularBoundaryPurity
 import Nyll.SchemeTheory.Affine.StalkLocalization
 import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # Normalization over a regular boundary stalk

@@ -5,5 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.ComponentExtraction
+import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.LocalizedComponent
+import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.TameUniformizerRoot
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure. -/

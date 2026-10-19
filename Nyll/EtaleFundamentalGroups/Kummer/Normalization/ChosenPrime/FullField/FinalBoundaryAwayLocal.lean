@@ -154,11 +154,11 @@ theorem
       calc
         pointed x = algebraMap R Cₚ x := by
           rw [← pointed.commutes x]
-          simp
+          rw [Algebra.algebraMap_self_apply]
         _ = algebraMap R Cₚ y := hxy
         _ = pointed y := by
           rw [← pointed.commutes y]
-          simp
+          rw [Algebra.algebraMap_self_apply]
   obtain ⟨mTag, qTag, ⟨ETagComponent⟩⟩ :=
     exists_etaleChosenLocalFactor_finiteGenericFiberComponent_algEquiv
       (R := R) (C := C) (L := L) P e P' heP'

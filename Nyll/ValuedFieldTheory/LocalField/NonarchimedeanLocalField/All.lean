@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.AdditiveEquiv
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Basic
+import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.CompactModule
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.FiniteExtensionCompleteDVF
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.FiniteExtensionTopology
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.FiniteUnramified
@@ -37,6 +38,11 @@ import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Valuation
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.ValuationExactSequence
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.ValuativeExtension
 import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.ValuedTopology
+
+import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.PositiveCharacteristicPowerIndex
+
+import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.PowerClassTopology
+import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.PrimePowerCongruenceIndex
 
 /-!
 # Nonarchimedean local fields

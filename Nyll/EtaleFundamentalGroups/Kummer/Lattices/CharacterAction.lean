@@ -177,11 +177,12 @@ theorem fixedBy_latticeCharacterAction_eq_gradeZero
     ext l
     rw [latticeCharacterAction_coeff]
     by_cases hcoeff : x.coeff l = 0
-    · simp [hcoeff]
+    · simp only [hcoeff, zero_mul]
     · have hl : l ∈ x.coeff.support := Finsupp.mem_support_iff.mpr hcoeff
       have hdegree : QuotientAddGroup.mk' H l = 0 := hx l hl
       rw [hdegree]
-      simp
+      change x.coeff l * (χ 1 : k) = x.coeff l
+      rw [map_one, Units.val_one, mul_one]
 
 /-- The common fixed subalgebra of quotient characters is the image of the
 subgroup lattice algebra. -/

@@ -252,7 +252,7 @@ theorem exists_smithCyclicCoordinates_isUnit_of_formallyUnramified_latticeCover
     convert h using 1
     apply RingHom.ext
     intro x
-    simp
+    simp only [RingHom.comp_apply, RingEquiv.symm_toRingHom_apply_toRingHom_apply]
   have hbase : (finDiagonalRadicalBase R n).FormallyUnramified := by
     have h := RingHom.FormallyUnramified.respectsIso.2
       ((finDiagonalRadicalBase R n).comp eH.toRingHom)
@@ -260,7 +260,7 @@ theorem exists_smithCyclicCoordinates_isUnit_of_formallyUnramified_latticeCover
     convert h using 1
     apply RingHom.ext
     intro x
-    simp
+    simp only [RingHom.comp_apply, RingEquiv.toRingHom_apply_symm_toRingHom_apply]
   have hnUnit : ∀ i, IsUnit (n i : R) :=
     all_exponents_isUnit_of_formallyUnramified_nestedDiagonalRadical
       n hn (by

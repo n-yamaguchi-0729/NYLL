@@ -6,13 +6,13 @@ https://github.com/n-yamaguchi-0729
 -/
 
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurve_exists_twoAffineOpenCover_of_section
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroGroupCut
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePropertyBundle_geometricallyIntegral
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
 import Nyll.JacobianVarieties.Picard.RelativeDimension
-import Nyll.JacobianVarieties.Picard.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Existence
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
 
 /-!
 # The dimension of a represented Jacobian equals the geometric genus

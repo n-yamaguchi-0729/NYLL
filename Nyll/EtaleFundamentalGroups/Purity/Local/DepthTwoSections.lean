@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Affine.RegularPairHartogs
-import Nyll.SchemeTheory.RingTheory.DepthTwoRegularPair
+import Nyll.SchemeTheory.RingTheory.RegularLocal.DepthTwoRegularPair
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.Finite

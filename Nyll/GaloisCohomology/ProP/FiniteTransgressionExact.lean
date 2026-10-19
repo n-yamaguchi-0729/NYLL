@@ -43,7 +43,7 @@ def finiteCharacterRestrictionAddHom (N : Subgroup P) [N.Normal] :
     calc
       ψ.toMul g * ψ.toMul n.1 * (ψ.toMul g)⁻¹ =
           ψ.toMul n.1 * (ψ.toMul g * (ψ.toMul g)⁻¹) := by ac_rfl
-      _ = ψ.toMul n.1 := by simp⟩
+      _ = ψ.toMul n.1 := by rw [mul_inv_cancel, mul_one]⟩
   map_zero' := by
     apply Subtype.ext
     rfl
@@ -86,8 +86,7 @@ theorem transgressionFactor_one_one_eq_extension_value
     (ψ : MonoidHom P (Multiplicative (ZMod p)))
     (hψ : ψ.comp N.subtype = χ) :
     transgressionFactor N χ 1 1 = (ψ (Quotient.out (1 : P ⧸ N))).toAdd := by
-  rw [transgressionFactor_eq_extension_coboundary N χ ψ hψ]
-  simp
+  rw [transgressionFactor_eq_extension_coboundary N χ ψ hψ, one_mul, add_sub_cancel_right]
 
 omit [Fact p.Prime] in
 /-- An invariant character extending to the ambient group has zero finite transgression. -/

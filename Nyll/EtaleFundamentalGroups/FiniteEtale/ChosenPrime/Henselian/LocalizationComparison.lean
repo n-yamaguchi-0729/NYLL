@@ -81,8 +81,8 @@ noncomputable def etaleChosenLocalFactor_henselian_inputPrimeAlgEquiv
         change (Algebra.TensorProduct.map
           (Algebra.ofId C Cₚ) (AlgHom.id R S))
             (1 ⊗ₜ[R] s) = 1 ⊗ₜ[R] s
-        rw [Algebra.TensorProduct.map_tmul]
-        simp)
+        rw [Algebra.TensorProduct.map_tmul, map_one]
+        rfl)
   let cancel : TS ≃ₐ[R] S :=
     (Algebra.TensorProduct.congr pointed.symm (AlgEquiv.refl)).trans
       (Algebra.TensorProduct.lid R S)
@@ -110,7 +110,10 @@ noncomputable def etaleChosenLocalFactor_henselian_inputPrimeAlgEquiv
           (Algebra.ofId C Cₚ) (AlgHom.id R S))
             (1 ⊗ₜ[R] s))) = s
     rw [Algebra.TensorProduct.map_tmul]
-    simp
+    rw [map_one, Algebra.TensorProduct.congr_apply,
+      Algebra.TensorProduct.map_tmul, map_one]
+    simp only [AlgEquiv.refl_toAlgHom, AlgHom.id_apply,
+      Algebra.TensorProduct.lid_tmul, one_smul]
   have hcancel_symm_right (s : S) :
       cancel.symm s =
         algebraMap T TS (Algebra.TensorProduct.includeRight s) :=

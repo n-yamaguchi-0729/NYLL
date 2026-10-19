@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomial_exists_ne_zero_eval_eq_zero_of_finrank_lt
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Exists_ell_mul_lt_mul_ell_of_degree_pos
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Coefficients_aeval_mem_lSpace_of_isHomogeneous
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.FiniteDimensional_lSpace
-import Nyll.AlgebraicCurves.Places.Nonempty_place_of_transcendental_of_finiteDimensional
+import Nyll.SchemeTheory.RingTheory.Polynomial.CommonZeros
+import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.EllMulLtMulEllDegreePos
+import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.CoefficientsAevalMemLSpace
+import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+import Nyll.AlgebraicCurves.Places.Orders.BasicTranscendental
 import Mathlib.Logic.Equiv.Fin.Basic
 
 /-!

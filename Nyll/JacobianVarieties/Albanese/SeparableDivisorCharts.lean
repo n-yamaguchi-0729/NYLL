@@ -15,21 +15,21 @@ https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536
 -/
 
 
-import Nyll.JacobianVarieties.Picard.SeparableChartSections
-import Nyll.JacobianVarieties.Picard.Representation
-import Nyll.JacobianVarieties.Picard.Exists_chart_subsingleton_H1_fibre
-import Nyll.JacobianVarieties.Picard.HasChartSections_forall_geometricFibre_riemannRoch_imp_eq
-import Nyll.JacobianVarieties.Picard.EulerChar_fibre_sectionTwist_tensor_idealModule_eq_one
-import Nyll.JacobianVarieties.Picard.Exists_opens_range_subset_iff_forall_subsingleton_H1_fibre
-import Nyll.JacobianVarieties.Picard.Exists_relEffCartierDiv_twistModule_iso_of_subsingleton_H1
-import Nyll.JacobianVarieties.Picard.Exists_openChart_relSubPicPresheaf_algEquivZeroCut_of_relEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv_exists_I_eq_prodKerGraph
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurve_exists_finiteMapData_le_isUnit
-import Nyll.AlgebraicCurves.Geometry.Picard.ChartSections
+import Nyll.JacobianVarieties.Picard.Cohomology.SeparableChartSections
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSubsingletonH1Fibre
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.HasChartSectionsGeometricFibreRiemannRochImpEq
+import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.EulerCharFibreSectionTwistTensorIdealModuleEqOne
+import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
+import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
+import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
+import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor
+import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivTwist2
+import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
 
 /-! # Effective-divisor charts after a finite separable extension
 

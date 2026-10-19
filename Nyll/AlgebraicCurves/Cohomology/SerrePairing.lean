@@ -10,8 +10,9 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
+import Nyll.AlgebraicCurves.Differentials.Local.Order
 import Nyll.AlgebraicCurves.Differentials.Kaehler.Weil
-import Nyll.AlgebraicCurves.Differentials.Regular
+import Nyll.AlgebraicCurves.Differentials.Regular.Regular
 import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
 
 /-!
@@ -55,11 +56,6 @@ theorem mul_eq_zero_or_ord_nonneg {f g : F} (hf : f = 0 ∨ 0 ≤ v.ord f) (hg :
   omega
 
 variable [v.DCoordGenerates] [Nontrivial Ω[F⁄K]]
-
-theorem differentialCoeff_add (ω η : Ω[F⁄K]) :
-    v.differentialCoeff (ω + η) = v.differentialCoeff ω + v.differentialCoeff η :=
-  v.differentialCoeff_unique
-    (by rw [add_smul, v.differentialCoeff_smul_dCoord, v.differentialCoeff_smul_dCoord])
 
 theorem differentialCoeff_smul_algebraMap (c : K) (ω : Ω[F⁄K]) :
     v.differentialCoeff (c • ω) = algebraMap K F c * v.differentialCoeff ω := by

@@ -12,10 +12,10 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalH0BaseChange
-import Nyll.AlgebraicCurves.Cohomology.Scheme_Modules_finite_projective_sections_and_exists_linearEquiv_tensorProduct_pullbackLocalSection_of_forall_subsingleton_HSucc
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.OModulePresheaf_exists_cochain_baseChange_equiv_of_locallyTrivial
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChartCechSectionsOf
-import Nyll.SchemeTheory.Modules.Invertible
+import Nyll.AlgebraicCurves.Cohomology.ProjectiveSectionsBaseChange
+import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.CochainBaseChangeEquiv
+import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+import Nyll.SchemeTheory.Modules.Invertible.Invertible
 
 /-!
 # Actual section base change for proper geometrically reduced local families

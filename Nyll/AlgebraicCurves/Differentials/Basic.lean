@@ -10,7 +10,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Mathlib.RingTheory.Kaehler.Basic
 
 /-!
@@ -31,11 +31,11 @@ variable (v : Place K F)
 
 open Classical in
 /-- A chosen element of order one at the place, or zero if no such element exists. -/
-def uniformizer_alt : F :=
+def orderUniformizer : F :=
   if h : ∃ t : F, v.ord t = 1 then h.choose else 0
 
-theorem ord_uniformizer_alt (h : ∃ t : F, v.ord t = 1) : v.ord v.uniformizer_alt = 1 := by
-  rw [uniformizer_alt, dite_eq_left h]
+theorem ord_orderUniformizer (h : ∃ t : F, v.ord t = 1) : v.ord v.orderUniformizer = 1 := by
+  rw [orderUniformizer, dite_eq_left h]
   exact h.choose_spec
 
 open Classical in
@@ -55,9 +55,9 @@ theorem diffCoeff_of_not_exists {t : F} {ω : Ω[F⁄K]} (h : ¬ ∃ g : F, ω =
 
 /-- The order of the differential coefficient with respect to the chosen uniformizer. -/
 def ordDiff (ω : Ω[F⁄K]) : ℤ :=
-  v.ord (diffCoeff v.uniformizer_alt ω)
+  v.ord (diffCoeff v.orderUniformizer ω)
 
-theorem ordDiff_def (ω : Ω[F⁄K]) : v.ordDiff ω = v.ord (diffCoeff v.uniformizer_alt ω) := rfl
+theorem ordDiff_def (ω : Ω[F⁄K]) : v.ordDiff ω = v.ord (diffCoeff v.orderUniformizer ω) := rfl
 
 end Place
 

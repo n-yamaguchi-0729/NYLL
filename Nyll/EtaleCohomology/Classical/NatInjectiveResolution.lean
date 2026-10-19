@@ -5,6 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleCohomology.Classical.InjectiveResolution
+import Nyll.SchemeTheory.HomologicalAlgebra.InjectiveResolutionMap
+import Nyll.EtaleCohomology.Classical.EtaleRestriction
 import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.Algebra.Homology.Additive
 import Mathlib.Algebra.Homology.Embedding.Extend
@@ -181,5 +183,71 @@ def etaleAbelianCohomologyRightDerivedEquiv
     ((((injectiveResolution F).isoRightDerivedObj
       ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj
         (op (⊤_ X.Etale))) n).symm).addCommGroupIsoToAddEquiv)
+
+/-- The actual cohomology presheaf can be computed from the original
+injective resolution by restriction and actual global sections. -/
+def etaleCohomologyPresheafResolutionEquiv
+    (X : Scheme.{u}) (V : X.Etale)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
+    (I : InjectiveResolution F) (n : ℕ) :
+    Sheaf.H'.{u} F n V ≃+
+      ((((etaleRestriction V.hom AddCommGrpCat.{u}) ⋙
+        (sheafSections V.left.smallEtaleTopology AddCommGrpCat.{u}).obj
+          (op (⊤_ V.left.Etale))).mapHomologicalComplex
+            (ComplexShape.up ℕ)).obj I.cocomplex).homology n := by
+  let R := etaleRestriction V.hom AddCommGrpCat.{u}
+  have : R.Additive :=
+    inferInstanceAs (etaleRestriction V.hom AddCommGrpCat.{u}).Additive
+  let Γ := (sheafSections V.left.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (op (⊤_ V.left.Etale))
+  let I' := InjectiveResolution.mapExactPreservingInjectives R I
+  let eComp := (Functor.mapHomologicalComplexCompIso
+    (Iso.refl (R ⋙ Γ)) (ComplexShape.up ℕ)).app I.cocomplex
+  let eHom := (HomologicalComplex.homologyFunctor AddCommGrpCat.{u}
+    (ComplexShape.up ℕ) n).mapIso eComp
+  exact (etaleCohomologyPresheafRestrictionEquiv V F n).trans
+    ((etaleAbelianCohomologyNatResolutionEquiv V.left (R.obj F) I' n).trans
+      eHom.addCommGroupIsoToAddEquiv)
+
+/-- Global sections after actual étale restriction are sections at the
+original étale object. -/
+def etaleRestrictionSectionsIso {X : Scheme.{u}} (V : X.Etale) :
+    etaleRestriction V.hom AddCommGrpCat.{u} ⋙
+      (sheafSections V.left.smallEtaleTopology AddCommGrpCat.{u}).obj
+        (op (⊤_ V.left.Etale)) ≅
+      (sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj (op V) := by
+  let eT : (⊤_ V.left.Etale) ≅ Scheme.Etale.mk (𝟙 V.left) :=
+    terminalIsTerminal.uniqueUpToIso
+      (MorphismProperty.Over.mkIdTerminal
+        (P := show MorphismProperty Scheme.{u} from @Etale) V.left)
+  let eId : (etalePostcompose V.hom).obj (Scheme.Etale.mk (𝟙 V.left)) ≅ V :=
+    MorphismProperty.Over.isoMk
+      (P := show MorphismProperty Scheme.{u} from @Etale) (Iso.refl _) (by
+      change (𝟙 V.left) ≫ V.hom = (𝟙 V.left) ≫ V.hom
+      rfl)
+  let e := (etalePostcompose V.hom).mapIso eT ≪≫ eId
+  change (sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (op ((etalePostcompose V.hom).obj (⊤_ V.left.Etale))) ≅ _
+  exact (sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).mapIso e.symm.op
+
+/-- Actual cohomology at an étale object is computed by evaluating an
+injective resolution of the original sheaf at that object. -/
+def etaleCohomologyPresheafEvaluationResolutionEquiv
+    (X : Scheme.{u}) (V : X.Etale)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
+    (I : InjectiveResolution F) (n : ℕ) :
+    Sheaf.H'.{u} F n V ≃+
+      (((((sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj (op V)).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj I.cocomplex).homology n) := by
+  have : ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj (op V)).Additive :=
+    Functor.additive_of_iso
+      (sheafSectionsNatIsoEvaluation X.smallEtaleTopology AddCommGrpCat.{u}
+        (X := V)).symm
+  let e := (NatIso.mapHomologicalComplex (etaleRestrictionSectionsIso V)
+    (ComplexShape.up ℕ)).app I.cocomplex
+  let eh := (HomologicalComplex.homologyFunctor AddCommGrpCat.{u}
+    (ComplexShape.up ℕ) n).mapIso e
+  exact (etaleCohomologyPresheafResolutionEquiv X V F I n).trans
+    eh.addCommGroupIsoToAddEquiv
 
 end EtaleCohomology

@@ -47,7 +47,7 @@ theorem isUnramifiedAt_of_inertia_card_eq_one
   have hcop : Nat.Coprime (Nat.card (P.toAddSubgroup.inertia G))
       (ringExpChar (A ⧸ p)) := by
     rw [hcard]
-    simp
+    exact Nat.coprime_one_left _
   let : Algebra.IsSeparable (A ⧸ p) (B ⧸ P) :=
     residue_isSeparable_of_inertia_card_coprime_ringExpChar
       (A := A) (B := B) (G := G) p hp P hcop

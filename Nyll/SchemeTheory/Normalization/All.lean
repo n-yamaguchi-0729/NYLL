@@ -20,13 +20,7 @@ import Nyll.SchemeTheory.Normalization.Normal
 import Nyll.SchemeTheory.Normalization.PrimeSeparation
 import Nyll.SchemeTheory.Normalization.Products.All
 import Nyll.SchemeTheory.Normalization.QuotientFiniteFactor
-
 import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
-
-
-
-
-/- Canonical aggregate for SchemeTheory.Normalization. -/
 import Nyll.SchemeTheory.Normalization.NativeNormalizationPrime
 import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphisms
 import Nyll.SchemeTheory.Normalization.NormalizationAutomorphismSurjectivity
@@ -40,6 +34,29 @@ import Nyll.SchemeTheory.Normalization.NativeNormalizationRingMap
 import Nyll.SchemeTheory.Normalization.SubalgebraNormalizationTower
 import Nyll.SchemeTheory.Normalization.SubalgebraNormalizationTowerRamification
 import Nyll.SchemeTheory.Normalization.FiniteNormalSource
+import Nyll.SchemeTheory.Normalization.FiniteNormalFormalSplitting
+import Nyll.SchemeTheory.Normalization.FormalFieldFiberSplitting
+import Nyll.SchemeTheory.Normalization.FormalProductFieldSplitting
+import Nyll.SchemeTheory.Normalization.SourceIso
+import Nyll.SchemeTheory.Normalization.OpenChart
+
+/- Canonical aggregate for SchemeTheory.Normalization. -/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /-!
 # Normalization of affine curves

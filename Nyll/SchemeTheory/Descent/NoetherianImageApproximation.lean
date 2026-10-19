@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.SchemeTheory.Descent.AffineTransitionImageLimit
 import Nyll.SchemeTheory.Descent.FGSubalgebra
-import Nyll.SchemeTheory.Descent.SubalgebraStages_nonempty_isLimit_cone
+import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.FiniteType

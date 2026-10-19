@@ -26,13 +26,13 @@ open CategoryTheory AlgebraicGeometry
 
 noncomputable section
 
-universe u
+universe u w
 
 namespace SchemeTheory.WeilRestriction
 
 /-- Regard a local relative representer as a representer on the corresponding iterated slice. -/
 def representableByIteratedSlice {S U : Scheme.{u}} (f : U ⟶ S)
-    (F : (Over S)ᵒᵖ ⥤ Type u) (W : Over U)
+    (F : (Over S)ᵒᵖ ⥤ Type w) (W : Over U)
     (h : ((Over.map f).op ⋙ F).RepresentableBy W) :
     ((Over.forget (Over.mk f)).op ⋙ F).RepresentableBy
       ((Over.iteratedSliceEquiv (Over.mk f)).inverse.obj W) := by
@@ -44,8 +44,14 @@ def representableByIteratedSlice {S U : Scheme.{u}} (f : U ⟶ S)
     exact (Functor.associator E.functor E.inverse (Over.forget (Over.mk f))).symm.trans <|
       (Functor.isoWhiskerRight E.unitIso.symm (Over.forget (Over.mk f))).trans
         (Functor.leftUnitor (Over.forget (Over.mk f)))
-  refine (E.toAdjunction.representableBy W).ofIso ?_
-  exact (Functor.isoWhiskerLeft E.functor.op h.toIso).trans <|
+  let r : (E.functor.op ⋙ ((Over.map f).op ⋙ F)).RepresentableBy
+      (E.inverse.obj W) :=
+    { homEquiv := (E.toAdjunction.homEquiv _ W).symm.trans h.homEquiv
+      homEquiv_comp a b := by
+        change h.homEquiv ((E.toAdjunction.homEquiv _ W).symm (a ≫ b)) = _
+        rw [E.toAdjunction.homEquiv_naturality_left_symm, h.homEquiv_comp]
+        rfl }
+  exact r.ofIso <|
     (Functor.associator E.functor.op (Over.map f).op F).symm.trans <|
       Functor.isoWhiskerRight (NatIso.op e.symm) F
 

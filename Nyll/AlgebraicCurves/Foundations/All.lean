@@ -11,9 +11,7 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
 import Nyll.AlgebraicCurves.Foundations.Algebra.All
-import Nyll.AlgebraicCurves.Foundations.CategoryTheory.All
 import Nyll.AlgebraicCurves.Foundations.CommutativeAlgebra.All
 import Nyll.AlgebraicCurves.Foundations.Compatibility.All
-import Nyll.AlgebraicCurves.Foundations.FieldTheory.All
 import Nyll.AlgebraicCurves.Foundations.HomologicalAlgebra.All
 import Nyll.AlgebraicCurves.Foundations.Polynomial.All

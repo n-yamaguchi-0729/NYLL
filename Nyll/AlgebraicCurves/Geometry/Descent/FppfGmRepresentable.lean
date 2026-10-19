@@ -178,8 +178,6 @@ variable (S : Scheme.{u})
 abbrev fppfTopologyOver : GrothendieckTopology (Over S) :=
   Scheme.fppfTopology.over S
 
-example : (fppfTopologyOver S).Subcanonical := inferInstance
-
 variable (G : Over S) [GrpObj G]
 
 theorem isSheaf_fppfOver_yonedaGrpObj :

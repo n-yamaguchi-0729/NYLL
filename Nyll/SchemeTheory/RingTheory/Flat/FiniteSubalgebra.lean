@@ -215,7 +215,7 @@ theorem exists_fg_mem_range_lv (b : R ⊗[R₀] B₀) :
     ∃ E : Subalgebra R₀ R, E.FG ∧ b ∈ Set.range (lv (B₀ := B₀) E) := by
   induction b using TensorProduct.inductionOn with
   | tmul r b =>
-    refine ⟨Algebra.adjoin R₀ {r}, ⟨{r}, by simp⟩, ?_⟩
+    refine ⟨Algebra.adjoin R₀ {r}, ⟨{r}, by rw [Finset.coe_singleton]⟩, ?_⟩
     refine ⟨⟨r, Algebra.subset_adjoin (Set.mem_singleton r)⟩ ⊗ₜ b, ?_⟩
     simp [lv]
   | add x y hx hy =>

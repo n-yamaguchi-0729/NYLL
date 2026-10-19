@@ -8,8 +8,8 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianModelSections
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalFiniteEtaleSections
 import Nyll.SchemeTheory.Affine.SpecFlatBaseChangeSections
 import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleFromLocalizations
-import Nyll.AlgebraicCurves.Geometry.Schemes.exists_fg_subalgebra_isProper_flat_isPullback_of_isProper_of_flat_of_locallyOfFinitePresentation
-import Nyll.AlgebraicCurves.Geometry.Schemes.finite_appTop_of_isProper_of_isNoetherianRing
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraProperFlatPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
 import Mathlib.Algebra.Ring.ULift
 import Mathlib.RingTheory.LocalProperties.Projective
 import Mathlib.RingTheory.Localization.BaseChange

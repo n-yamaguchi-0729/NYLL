@@ -7,5 +7,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
 import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensor.All
 import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.WholeNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.AffineNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.RootChartNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothGenericNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothGeometricGaloisExtension
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothProperGeometricExtension
 
 /-! Canonical aggregate for EtaleFundamentalGroups.FiniteEtale.BaseChange. -/

@@ -74,13 +74,13 @@ theorem etaleChosenLocalFactor_pointed_boundaryAway_without_noetherian
     (hunique : ∀ P'' : Ideal (C ⊗[R] S),
       P''.IsPrime → P''.LiesOver P → e ∉ P'' → P'' = P') :
     let Q := etaleChosenAwayPrime e P'
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' :=
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' :=
       etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
     let Cₚ := Localization.AtPrime P
     let Dₚ := Localization.AtPrime Q
-    letI : Algebra Cₚ Dₚ :=
+    let : Algebra Cₚ Dₚ :=
       Localization.AtPrime.algebraOfLiesOver P Q
     @Algebra.Etale
       (Localization.Away
@@ -92,20 +92,11 @@ theorem etaleChosenLocalFactor_pointed_boundaryAway_without_noetherian
       (Localization.awayMap
         (algebraMap Cₚ Dₚ)
         (algebraMap C Cₚ (algebraMap R C f))).toAlgebra := by
-  dsimp only
-  let T := C ⊗[R] S
+  intro Q hQprime hQoverPrime hQoverP Cₚ Dₚ cpDpAlgebra
   let D := Localization.Away e
-  let Q : Ideal D := etaleChosenAwayPrime e P'
-  let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
-  let Dₚ := Localization.AtPrime Q
   let fC : C := algebraMap R C f
   let : Module.Finite C D := hfinite
   let : Algebra.IsIntegral C D := Algebra.IsIntegral.of_finite C D
-  let : Algebra Cₚ Dₚ :=
-    Localization.AtPrime.algebraOfLiesOver P Q
   have hQunique : P.primesOver D = {Q} :=
     etaleChosenAway_primesOver_eq_singleton
       P e P' heP' hunique
@@ -146,84 +137,31 @@ theorem etaleChosenLocalFactor_henselian_boundaryAway_without_noetherian
     (hunique : ∀ P'' : Ideal (C ⊗[R] S),
       P''.IsPrime → P''.LiesOver P → e ∉ P'' → P'' = P') :
     let Q := etaleChosenAwayPrime e P'
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' :=
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' :=
       etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
     let Cₚ := Localization.AtPrime P
     let Dₚ := Localization.AtPrime Q
-    letI : Algebra Cₚ Dₚ :=
+    let : Algebra Cₚ Dₚ :=
       Localization.AtPrime.algebraOfLiesOver P Q
-    letI : Algebra R Dₚ :=
+    let : Algebra R Dₚ :=
       ((algebraMap Cₚ Dₚ).comp (algebraMap R Cₚ)).toAlgebra
     @RingHom.Etale
       (Localization.Away f)
       (Localization.Away (algebraMap R Dₚ f))
       _ _
       (Localization.awayMap (algebraMap R Dₚ) f) := by
-  dsimp only
-  let D := Localization.Away e
-  let Q : Ideal D := etaleChosenAwayPrime e P'
-  let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
-  let Dₚ := Localization.AtPrime Q
-  let : Algebra Cₚ Dₚ :=
-    Localization.AtPrime.algebraOfLiesOver P Q
-  let rDAlgebra : Algebra R Dₚ :=
-    ((algebraMap Cₚ Dₚ).comp (algebraMap R Cₚ)).toAlgebra
-  let : Algebra R Dₚ := rDAlgebra
-  let : SMul R Dₚ := rDAlgebra.toSMul
-  let : IsScalarTower R C Cₚ :=
-    IsScalarTower.of_algebraMap_eq' rfl
+  intro Q hQprime hQoverPrime hQoverP Cₚ Dₚ cpDpAlgebra rDpAlgebra
+  let : SMul R Dₚ := rDpAlgebra.toSMul
   let : IsScalarTower R Cₚ Dₚ :=
     IsScalarTower.of_algebraMap_eq' rfl
-  let pointed : R ≃ₐ[R] Cₚ :=
-    henselianPointedEtaleLocalizationAlgEquiv P hres
-  let : Algebra Cₚ R := pointed.symm.toRingHom.toAlgebra
-  have hCₚR : Function.Bijective (algebraMap Cₚ R) := by
-    change Function.Bijective pointed.symm.toRingHom
-    exact pointed.symm.bijective
-  let : IsScalarTower Cₚ R Dₚ := by
-    apply IsScalarTower.of_algebraMap_eq'
-    ext x
-    change algebraMap Cₚ Dₚ x =
-      algebraMap Cₚ Dₚ
-        (algebraMap R Cₚ (pointed.symm x))
-    rw [show algebraMap R Cₚ (pointed.symm x) =
-        pointed (pointed.symm x) by
-      simpa using (pointed.commutes (pointed.symm x)).symm]
-    simp
-  let : Algebra.IsPushout Cₚ Dₚ R Dₚ :=
-    Algebra.IsPushout.of_bijective_left R Dₚ hCₚR
-  let fCₚ : Cₚ := algebraMap C Cₚ (algebraMap R C f)
-  have hPointed :
-      @Algebra.Etale
-        (Localization.Away fCₚ)
-        (Localization.Away (algebraMap Cₚ Dₚ fCₚ))
-        _ _
-        (Localization.awayMap
-          (algebraMap Cₚ Dₚ) fCₚ).toAlgebra :=
-    etaleChosenLocalFactor_pointed_boundaryAway_without_noetherian
+  exact localization_awayMap_etale_of_source_algEquiv
+    (A := R) (C := Cₚ) (D := Dₚ)
+    (henselianPointedEtaleLocalizationAlgEquiv P hres) f
+    (etaleChosenLocalFactor_pointed_boundaryAway_without_noetherian
       (R := R) (C := C) (S := S)
-      f hAway P e P' heP' hfinite hunique
-  have hfCₚ : algebraMap Cₚ R fCₚ = f := by
-    change pointed.symm fCₚ = f
-    apply pointed.injective
-    rw [pointed.apply_symm_apply]
-    calc
-      fCₚ = algebraMap R Cₚ f :=
-        (IsScalarTower.algebraMap_apply R C Cₚ f).symm
-      _ = pointed f := by
-        rw [← pointed.commutes f]
-        simp
-  have hBack :=
-    localization_awayMap_etale_of_isPushout
-      (A := Cₚ) (B := Dₚ) (C := R) (D := Dₚ)
-      fCₚ hPointed
-  rw [hfCₚ] at hBack
-  exact hBack
+      f hAway P e P' heP' hfinite hunique)
 
 namespace Kummer
 
@@ -286,7 +224,7 @@ theorem etaleChosenLocalFactor_henselian_inputPrime_boundaryAway_without_noether
     etaleChosenLocalFactor_henselian_boundaryAway_without_noetherian
       (R := R) (C := C) (S := S)
       f hAway P hres e P' heP' hfinite hunique
-  let Einput :=
+  let Einput : Dₚ ≃ₐ[R] Localization.AtPrime p :=
     etaleChosenLocalFactor_henselian_inputPrimeCompositeAlgEquiv
       (R := R) (C := C) (S := S)
       P hres e P' heP' p hP'p

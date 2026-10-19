@@ -1,0 +1,26 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.CardLeSubsetSupport
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqKerLiftSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqProdKerGraphSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqZeroSchemeIdealSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqZeroSchemeIdealSupportedInSupportSubset
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.InvertibleISupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.OpenImmersionPresheafSupportedInIncl
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SndApplyEqNotMemSupport
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SourceOpenRestriction
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInFinset
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInIEqMul
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInLineBundleIso
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedRestriction
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.HenselianRegularDivisorBlock
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.HenselianCompletedFiberSelection
+import Nyll.AlgebraicCurves.RelativeDivisors.Support.CompletedCartierBlockRestriction

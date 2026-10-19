@@ -7,6 +7,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.CategoryTheory.Adjunction.Whiskering
 import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+import Nyll.SchemeTheory.Sheaves.OverExtension
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
 
 /-!
 # Free abelian representables and actual sheaf sections
@@ -36,6 +38,18 @@ def freeAbelianSheafYonedaHomEquiv (V : C) (F : Sheaf J AddCommGrpCat.{v}) :
   ((sheafificationAdjunction J AddCommGrpCat.{v}).homEquiv
     (yoneda.obj V ⋙ AddCommGrpCat.free) F).trans
     (((AddCommGrpCat.adj.whiskerRight Cᵒᵖ).homEquiv (yoneda.obj V) F.obj).trans yonedaEquiv)
+
+/-- Evaluation on the identity generator is additive. -/
+def freeAbelianSheafYonedaHomAddEquiv (V : C) (F : Sheaf J AddCommGrpCat.{v}) :
+    ((freeAbelianSheafYoneda J).obj V ⟶ F) ≃+ F.obj.obj (op V) where
+  toEquiv := freeAbelianSheafYonedaHomEquiv J V F
+  map_add' a b := by
+    change ((((sheafificationAdjunction J AddCommGrpCat.{v}).unit.app
+        (yoneda.obj V ⋙ AddCommGrpCat.free)) ≫
+        (sheafToPresheaf J AddCommGrpCat.{v}).map (a + b)).app (op V))
+      (FreeAbelianGroup.of (𝟙 V)) = _
+    rw [Functor.map_add, Preadditive.comp_add]
+    rfl
 
 /-- The equivalence evaluates the sheafified morphism on the identity generator. -/
 theorem freeAbelianSheafYonedaHomEquiv_apply (V : C)
@@ -184,5 +198,56 @@ theorem freeAbelianSheafYoneda_map_epi_of_cover {V W : C} (f : V ⟶ W)
     [Limits.HasPullback f f] (hf : Sieve.generate (Presieve.singleton f) ∈ J W) :
     Epi ((freeAbelianSheafYoneda J).map f) :=
   Limits.epi_of_isColimit_cofork (freeAbelianSheafYonedaCoverIsColimit J f hf)
+
+section Over
+
+variable (U : C) [HasSheafify (J.over U) AddCommGrpCat.{v}]
+
+/-- Extending the constant integer sheaf from the localized site gives the
+free abelian sheaf represented by the chosen object. -/
+def freeAbelianSheafYonedaOverExtensionIso :
+    (freeAbelianSheafYoneda J).obj U ≅
+      (overAbelianSheafExtension U J).obj
+        ((constantSheaf (J.over U) AddCommGrpCat.{v}).obj
+          (AddCommGrpCat.of (ULift.{v} ℤ))) := by
+  let E : Sheaf J AddCommGrpCat.{v} ⥤ Type v :=
+    sheafToPresheaf J AddCommGrpCat.{v} ⋙
+      (evaluation _ _).obj (op U) ⋙ forget AddCommGrpCat.{v}
+  let e : E.CorepresentableBy ((freeAbelianSheafYoneda J).obj U) :=
+    { homEquiv := freeAbelianSheafYonedaHomEquiv J U _
+      homEquiv_comp := fun η a => freeAbelianSheafYonedaHomEquiv_postcomp J U a η }
+  let adj := overAbelianSheafExtensionAdjunction U J
+  let cAdj := constantSheafAdj (J.over U) AddCommGrpCat.{v} (Over.mkIdTerminal (X := U))
+  let e' : E.CorepresentableBy
+      ((overAbelianSheafExtension U J).obj
+        ((constantSheaf (J.over U) AddCommGrpCat.{v}).obj
+          (AddCommGrpCat.of (ULift.{v} ℤ)))) :=
+    { homEquiv := fun {F} =>
+        (adj.homEquiv _ F).trans
+          ((cAdj.homEquiv _ ((J.overPullback AddCommGrpCat.{v} U).obj F)).trans
+            (AddCommGrpCat.uliftZMultiplesAddEquiv _).toEquiv)
+      homEquiv_comp := by
+        intro F G η a
+        change AddCommGrpCat.uliftZMultiplesAddEquiv _
+          (cAdj.homEquiv _ _
+            (adj.homEquiv _ G (a ≫ η))) = _
+        rw [Adjunction.homEquiv_naturality_right,
+          Adjunction.homEquiv_naturality_right]
+        rfl }
+  exact e.uniqueUpToIso e'
+
+/-- Evaluation of actual sheaf cohomology on an object is the derived
+cohomology of the actual restriction to its localized site. -/
+def sheafCohomologyOverEquiv
+    [Limits.HasBinaryProducts C]
+    [CategoryTheory.HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
+    [CategoryTheory.HasExt.{v} (Sheaf (J.over U) AddCommGrpCat.{v})]
+    (F : Sheaf J AddCommGrpCat.{v}) (n : ℕ) :
+    Sheaf.H'.{v} F n U ≃+ Sheaf.H.{v} (F.over U) n :=
+  (((CategoryTheory.Abelian.extFunctor n).mapIso
+    (freeAbelianSheafYonedaOverExtensionIso J U).symm.op).app F).addCommGroupIsoToAddEquiv.trans
+    (overAbelianSheafExtensionAdjunction U J).extEquiv
+
+end Over
 
 end EtaleCohomology

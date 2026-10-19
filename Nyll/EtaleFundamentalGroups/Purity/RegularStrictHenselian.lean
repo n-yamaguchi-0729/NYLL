@@ -7,8 +7,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
 import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
-import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
 
 /-!
 # Simple connectedness of regular strictly Henselian punctures

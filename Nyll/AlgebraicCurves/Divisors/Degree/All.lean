@@ -1,0 +1,35 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Divisors.Degree.CardEffectiveDivisorsMulEqSum
+import Nyll.AlgebraicCurves.Divisors.Degree.CardPlacesDegOneEqSumDivisors
+import Nyll.AlgebraicCurves.Divisors.Degree.DegZeroOrdEqMulDvdOrd
+import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
+import Nyll.AlgebraicCurves.Divisors.Degree.DegreeEqFinrankAdjoinEqMaxNegOrd
+import Nyll.AlgebraicCurves.Divisors.Degree.DegreeLeFinrankAdjoinEqMaxNegOrd
+import Nyll.AlgebraicCurves.Divisors.Degree.DegreePoleDivisorEqFinrankAdjoin
+import Nyll.AlgebraicCurves.Divisors.Degree.EqFloorMulDegreeLeMinOrdLe
+import Nyll.AlgebraicCurves.Divisors.Degree.EqPowEqOrdInvSmulDEqZero
+import Nyll.AlgebraicCurves.Divisors.Degree.EqWeightFloor
+import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
+import Nyll.AlgebraicCurves.Divisors.Degree.FinrankAdjoinLeDegreeEqMaxNegOrd
+import Nyll.AlgebraicCurves.Divisors.Degree.FormalRootPoleBound
+import Nyll.AlgebraicCurves.Divisors.Degree.PoleData
+import Nyll.AlgebraicCurves.Divisors.Degree.PoleDivisorTranscendental
+import Nyll.AlgebraicCurves.Divisors.Degree.PowerSeriesPoleOperations
+import Nyll.AlgebraicCurves.Divisors.Degree.RationalSeriesDivisorBound
+import Nyll.AlgebraicCurves.Divisors.Degree.SimpleRootPolynomialDivisorBound
+import Nyll.AlgebraicCurves.Divisors.Degree.SumDivisorsMulCardPlacesLt
+import Nyll.AlgebraicCurves.Divisors.Degree.SymmValueRowsKernelIff
+import Nyll.AlgebraicCurves.Divisors.Degree.UnitriangularDivisorBound
+import Nyll.AlgebraicCurves.Divisors.Degree.UnitriangularProductConductor
+import Nyll.AlgebraicCurves.Divisors.Degree.UnitriangularRamifiedDescent
+import Nyll.AlgebraicCurves.Divisors.Degree.FormalTranslationDivisorBound
+import Nyll.AlgebraicCurves.Divisors.Degree.FormalDiagonalPoleBound
+import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferencePoleBound
+import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferenceTameOrder
+import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferenceTameIntegral
+import Nyll.AlgebraicCurves.Divisors.Degree.TameBoundaryGroupDifference

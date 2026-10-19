@@ -60,7 +60,7 @@ attribute [-simp] AlgebraicCurve.Divisor.mapRestrict_single
   AlgebraicCurve.Place.mem_fiber AlgebraicCurve.Place.restrict_toValuationSubring
   AlgebraicCurve.Divisor.degree_pushforward AlgebraicCurve.Place.restrictResidueMap_residue
   AlgebraicCurve.Pic0.coe_pushforwardDegZeroHom AlgebraicCurve.Pic0.coe_pullbackDegZeroHom
-  AlgebraicCurve.Place.kw_ffgc_adicCompletionComapIntegers_coe
+  AlgebraicCurve.Place.adicCompletionComapIntegers_coe
   AlgebraicCurve.Place.CanonicalLocalResidueDataS.mk.sizeOf_spec
   AlgebraicCurve.Place.mem_simplePoleSubmodule AlgebraicCurve.Place.coe_uniformizerSubring
   ModularCurve.Lg37.Lg37CompletionSection.mk.injEq

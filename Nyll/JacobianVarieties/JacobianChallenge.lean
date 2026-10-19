@@ -11,13 +11,13 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.UnpointedJacobian
-import Nyll.JacobianVarieties.Picard.UnpointedAbelJacobi
-import Nyll.JacobianVarieties.Picard.UnpointedAlbanese
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLawGrpObj
+import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
+import Nyll.JacobianVarieties.Picard.AbelJacobi.UnpointedAbelJacobi
+import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedAlbanese
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducible_geometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Curves.geometricallyIntegral_of_smooth_of_geometricallyConnected
+import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
+import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
 import Mathlib.AlgebraicGeometry.Geometrically.Integral
 import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 

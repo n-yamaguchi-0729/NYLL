@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.exists_fg_subalgebra_isProper_flat_isPullback_of_isProper_of_flat_of_locallyOfFinitePresentation
-import Nyll.AlgebraicCurves.Foundations.CommutativeAlgebra.IsLocalRing_exists_subalgebra_coe_eq_isNoetherianRing_isLocalRing_isUnit_iff
+import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraProperFlatPullback
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubalgebraCoeEqNoetherianLocalRingIsUnitIff
 import Mathlib.Algebra.Ring.ULift
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 

@@ -106,6 +106,9 @@ import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
 
 import Nyll.GaloisCohomology.Kummer.Concrete.SeparableGaloisClosureConjugation
 import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupSeparableAbsoluteAction
+import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousKummerScalar
+
+import Nyll.GaloisCohomology.Kummer.Concrete.RadicalPowerSaturation
 
 /-!
 # Concrete Kummer extensions and characters

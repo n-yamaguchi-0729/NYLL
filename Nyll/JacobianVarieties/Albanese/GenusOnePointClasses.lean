@@ -4,15 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusOneDivisors
+import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusOneDivisors
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Divisors.ClassGroup
-import Nyll.AlgebraicCurves.Divisors.Pic0_mk_eq_zero_iff
-import Nyll.AlgebraicCurves.FunctionFields.CurveOver
-import Nyll.AlgebraicCurves.Models.Basic
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardZero
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+import Nyll.AlgebraicCurves.Models.Construction.Basic
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Nyll.JacobianVarieties.Albanese.AbelJacobiFiniteSums
-import Nyll.JacobianVarieties.Picard.Exists_relativeGroupLaw_abelJacobi_of_representsRelSubPic
+import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
 
 /-!
 # Points and divisor classes on a genus-one curve

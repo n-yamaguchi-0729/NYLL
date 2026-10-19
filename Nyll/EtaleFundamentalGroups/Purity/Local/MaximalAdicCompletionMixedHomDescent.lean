@@ -75,7 +75,7 @@ def maximalAdicCompletionMixedCompatibleLinearMaps
     change maximalAdicCompletionMixedLeft R N
         (0 : MaximalAdicCompletionMixedSource R N) =
       maximalAdicCompletionMixedRight R N 0
-    simp
+    rw [map_zero, map_zero]
   add_mem' := by
     intro F G hF hG m
     change maximalAdicCompletionMixedLeft R N

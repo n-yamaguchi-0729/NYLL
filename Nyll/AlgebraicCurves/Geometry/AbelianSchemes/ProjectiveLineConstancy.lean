@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpace_specMap_comp_awayInclusion_eq_of_forall_apply_ratio_mul_eq
+import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceSpecMapCompAwayInclusionEq
 import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
 import Nyll.SchemeTheory.ProjectiveSpace.Basic
 import Mathlib.Algebra.MvPolynomial.Equiv

@@ -15,6 +15,23 @@ import Nyll.GaloisCohomology.FieldTheory.ContinuousAdditiveHilbert90
 import Nyll.GaloisCohomology.FieldTheory.AdditiveH2Finite
 import Nyll.GaloisCohomology.FieldTheory.ScalarRatioRigidity
 
+import Nyll.GaloisCohomology.FieldTheory.FiniteCompositumDegree
+
+import Nyll.GaloisCohomology.FieldTheory.FiniteFrobeniusTower
+import Nyll.GaloisCohomology.FieldTheory.FiniteFrobeniusPeriodicField
+import Nyll.GaloisCohomology.FieldTheory.PeriodicHilbert90
+import Nyll.GaloisCohomology.FieldTheory.FiniteActionHilbert90
+import Nyll.GaloisCohomology.FieldTheory.FiniteFrobeniusUnits
+import Nyll.GaloisCohomology.FieldTheory.PeriodicSubfield
+import Nyll.GaloisCohomology.FieldTheory.PeriodicGalois
+
+import Nyll.GaloisCohomology.FieldTheory.PeriodicGaloisAction
+
+import Nyll.GaloisCohomology.FieldTheory.ConstantTensorEquiv
+import Nyll.GaloisCohomology.FieldTheory.CompositumNorm
+import Nyll.GaloisCohomology.FieldTheory.SimpleBaseChangeNorm
+import Nyll.GaloisCohomology.FieldTheory.CompositumCyclic
+
 /-!
 # Field-theoretic inputs for Galois cohomology
 

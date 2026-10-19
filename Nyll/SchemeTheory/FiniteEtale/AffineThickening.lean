@@ -8,7 +8,7 @@ module
 
 public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianBaseChange
-public import Nyll.SchemeTheory.RingTheory.HenselianNilIdeal
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianNilIdeal
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.CategoryTheory.Adjunction.Unique

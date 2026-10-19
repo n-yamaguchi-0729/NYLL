@@ -10,6 +10,7 @@ import Nyll.GaloisCohomology.Kummer.Abstract.KummerCyclicOperator
 import Nyll.GaloisCohomology.Kummer.Abstract.KummerDelta
 import Nyll.GaloisCohomology.Kummer.Abstract.KummerFixedField
 import Nyll.GaloisCohomology.Kummer.Abstract.KummerGlobalOperator
+import Nyll.GaloisCohomology.Kummer.Abstract.MultiplicativeFixedPoints
 
 /-!
 # Abstract Kummer theory

@@ -1,0 +1,45 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionCompEqIffIdealEqBot
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFactorsIff
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFinitePresentationFactorsIff
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFiniteSubalgebra
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionRepresents
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.CompEqOpenImmersion
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.EqCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.EqSndCompCompEqConst
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FiniteSetOfMemIffMulMem
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FiniteToProjCompleteOrthogonalIdempotents
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FlatFinitePresentation
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FlatFinrankEqFinite
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFiniteFinrankSubschemeIotaKerPow
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFinrankCompFinrankEqConst
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFinrankMorphismRestrictEqFinrank
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqIdMemOpens
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomNatCardLeFinrankFinite
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsClopenPreimageEqProper
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsClosedImmersionUniqueCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsSeparatedComp
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoCompEqOpenImmersion
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoOpenImmersion
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.JacobsonSpaceLocallyOfFiniteType
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyOfFiniteTypeComp
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteDescendsAlongSurjectiveInfFlatInfQuasiCompact
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteFlat
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteLocallyQuasiFiniteSchemeFibreEndo
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensFinitePreimageSingletonToSpecPolynomial
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensFlatMorphismRestrictFinrankEqMem
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensProperToSpecPolynomial
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperSurjectiveOpenImmersionCompEqIsIntegral
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperSurjectiveOpenImmersionCompEqSeparated
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.RepresentableByRepresentableByRestrictFiniteEtale
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.RepresentableByRepresentableByRestrictFiniteEtaleOrbit
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeHomOverClosedImmersion
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ValuativeCriterion

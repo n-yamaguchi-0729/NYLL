@@ -4,6 +4,7 @@ Copyright (c) 2026 Naganori Yamaguchi. Apache-2.0.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 """
 import copy
+from contextlib import contextmanager
 import hashlib
 import importlib.util
 import json
@@ -52,6 +53,28 @@ def publication(files):
     return {"source_commit": "b" * 40, "canonical_repository": "n-yamaguchi-0729/NYLL",
             "repository": "n-yamaguchi-0729/ProCGroups",
             "source_hashes": {name: hashlib.sha256(blob).hexdigest() for name, blob in files.items()}}
+
+
+@contextmanager
+def guide_site():
+    """An isolated published-source fixture; no Git or Lean process is run."""
+    parent = Path(os.environ.get("NYLL_SITE_TEST_OUTPUT", ROOT / "tmp" / "site-tests"))
+    parent.mkdir(parents=True, exist_ok=True)
+    files = published_files()
+    with tempfile.TemporaryDirectory(dir=parent) as temporary:
+        root = Path(temporary)
+        editorial = root / "site/guides"
+        editorial.mkdir(parents=True)
+        (editorial / "pro-c-groups.json").write_text(json.dumps(fixture()), encoding="utf-8")
+        with patch.dict(guides.REPOSITORIES, {"pro-c-groups": "ProCGroups"}, clear=True), \
+                patch.object(guides, "git", return_value="a" * 40), \
+                patch.object(guides, "source_text", side_effect=lambda *_: json.dumps(publication(files))), \
+                patch.object(guides, "source_blobs", side_effect=lambda _p, _s, names: {p: files[p] for p in names}):
+            yield root, editorial
+
+
+def output_bytes(output):
+    return {path.relative_to(output): path.read_bytes() for path in output.rglob("*") if path.is_file()}
 
 
 class GuideTests(unittest.TestCase):
@@ -277,6 +300,99 @@ def body := "unterminated string ignored by the header reader
                 with self.assertRaisesRegex(guides.SourceError, "missing or outdated"):
                     guides.build(root, root / "failed-output", root / "sources")
                 self.assertFalse((root / "failed-output").exists())
+
+    def test_rerun_removes_retired_entries_preserves_unmanaged_files_and_guards_review(self):
+        with guide_site() as (root, editorial):
+            data = fixture()
+            for slug in ("retired", "retired-with-notes"):
+                data["entries"].append({**copy.deepcopy(data["entries"][0]), "slug": slug})
+            guide_json = editorial / "pro-c-groups.json"
+            guide_json.write_text(json.dumps(data), encoding="utf-8")
+            output = root / "output"
+            guides.build(root, output, root / "sources", write_lock=True)
+            library = output / "libraries/pro-c-groups"
+            notes = library / "retired-with-notes/notes.txt"
+            notes.write_text("Keep these notes.", encoding="utf-8")
+            unrelated = library / "manual/index.html"
+            unrelated.parent.mkdir()
+            unrelated.write_text("Handwritten page.", encoding="utf-8")
+            data["entries"] = data["entries"][:1]
+            guide_json.write_text(json.dumps(data), encoding="utf-8")
+            before = output_bytes(output)
+            lock_before = (editorial / "review-lock.json").read_bytes()
+            with self.assertRaisesRegex(guides.SourceError, "review required"):
+                guides.build(root, output, root / "sources")
+            self.assertEqual(output_bytes(output), before)
+            self.assertEqual((editorial / "review-lock.json").read_bytes(), lock_before)
+
+            guides.build(root, output, root / "sources", write_lock=True)
+            self.assertFalse((library / "retired").exists())
+            self.assertFalse((notes.parent / "index.html").exists())
+            self.assertEqual(notes.read_text(encoding="utf-8"), "Keep these notes.")
+            self.assertEqual(unrelated.read_text(encoding="utf-8"), "Handwritten page.")
+            self.assertTrue((library / "example/index.html").is_file())
+            self.assertIn("<h2>Selected results</h2>", (library / "index.html").read_text(encoding="utf-8"))
+            locations = ET.parse(output / "sitemap-guides.xml").findall(".//{" + guides.NAMESPACE + "}loc")
+            self.assertEqual({loc.text for loc in locations}, {
+                guides.SITE_URL + "libraries/pro-c-groups/",
+                guides.SITE_URL + "libraries/pro-c-groups/example/",
+            })
+
+    def test_unsafe_previous_sitemap_paths_fail_before_mutation(self):
+        bad_urls = [
+            guides.SITE_URL + "libraries/pro-c-groups/../victim/",
+            guides.SITE_URL + "libraries/pro-c-groups/%2e%2e/victim/",
+            guides.SITE_URL + "libraries/pro-c-groups/example/?download=1",
+            "https://other.example/libraries/pro-c-groups/example/",
+        ]
+        for url in bad_urls:
+            with self.subTest(url=url), guide_site() as (root, editorial):
+                output = root / "output"
+                guides.build(root, output, root / "sources", write_lock=True)
+                sitemap = output / "sitemap-guides.xml"
+                tree = ET.parse(sitemap)
+                tree.findall(".//{" + guides.NAMESPACE + "}loc")[-1].text = url
+                tree.write(sitemap, encoding="utf-8", xml_declaration=True)
+                before = output_bytes(output)
+                lock_before = (editorial / "review-lock.json").read_bytes()
+                with self.assertRaisesRegex(guides.SourceError, "sitemap"):
+                    guides.build(root, output, root / "sources", write_lock=True)
+                self.assertEqual(output_bytes(output), before)
+                self.assertEqual((editorial / "review-lock.json").read_bytes(), lock_before)
+
+    def test_symlinks_in_current_retired_and_output_paths_are_rejected(self):
+        for kind in ("retired-file", "retired-directory", "current-file", "output"):
+            with self.subTest(kind=kind), guide_site() as (root, editorial):
+                output = root / "output"
+                guides.build(root, output, root / "sources", write_lock=True)
+                page = output / "libraries/pro-c-groups/example/index.html"
+                outside = root / "outside"
+                outside.mkdir()
+                external_page = outside / "index.html"
+                external_page.write_text("Unmanaged content.", encoding="utf-8")
+                if kind == "output":
+                    link = root / "linked-output"
+                    link.symlink_to(output, target_is_directory=True)
+                    build_output = link
+                else:
+                    page.unlink()
+                    if kind == "retired-directory":
+                        page.parent.rmdir()
+                        page.parent.symlink_to(outside, target_is_directory=True)
+                    else:
+                        page.symlink_to(external_page)
+                    build_output = output
+                    if kind.startswith("retired"):
+                        data = fixture()
+                        data["entries"] = []
+                        (editorial / "pro-c-groups.json").write_text(json.dumps(data), encoding="utf-8")
+                before = output_bytes(output)
+                lock_before = (editorial / "review-lock.json").read_bytes()
+                with self.assertRaisesRegex(guides.SourceError, "Symlink"):
+                    guides.build(root, build_output, root / "sources", write_lock=True)
+                self.assertEqual(output_bytes(output), before)
+                self.assertEqual(external_page.read_text(encoding="utf-8"), "Unmanaged content.")
+                self.assertEqual((editorial / "review-lock.json").read_bytes(), lock_before)
 
     def test_static_pages_sitemap_and_review_failure_before_writing(self):
         parent = Path(os.environ.get("NYLL_SITE_TEST_OUTPUT", ROOT / "tmp" / "site-tests"))

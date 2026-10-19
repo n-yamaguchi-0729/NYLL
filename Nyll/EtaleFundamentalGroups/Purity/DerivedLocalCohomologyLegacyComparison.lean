@@ -127,7 +127,8 @@ def projectiveResolutionForgottenLegacyExtIsoDerivedExtSucc
   (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).mapIso
       (P.isoExt (n + 1) Y) ≪≫
     (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).mapIso
-      (K.homologyIsoSc' n (n + 1) (n + 2) (by simp) (by simp)) ≪≫
+      (K.homologyIsoSc' n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ
+        (n + 1))) ≪≫
     (S.mapHomologyIso
       (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u})).symm ≪≫
     (S.map (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u})).abHomologyIso ≪≫
@@ -265,9 +266,9 @@ theorem projectiveResolution_homologyIsoScSucc_hom_naturality
     HomologicalComplex.homologyMap
         (projectiveResolutionLinearYonedaMap P' P phi Y) (n + 1) ≫
       ((P'.complex.linearYonedaObj R Y).homologyIsoSc'
-        n (n + 1) (n + 2) (by simp) (by simp)).hom =
+        n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1))).hom =
     ((P.complex.linearYonedaObj R Y).homologyIsoSc'
-        n (n + 1) (n + 2) (by simp) (by simp)).hom ≫
+        n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1))).hom ≫
       ShortComplex.homologyMap
         ((HomologicalComplex.shortComplexFunctor'
           (ModuleCat.{u} R) (ComplexShape.up ℕ)
@@ -275,17 +276,19 @@ theorem projectiveResolution_homologyIsoScSucc_hom_naturality
           (projectiveResolutionLinearYonedaMap P' P phi Y)) := by
   let e := HomologicalComplex.homologyFunctorIso'
     (ModuleCat.{u} R) (ComplexShape.up ℕ)
-      n (n + 1) (n + 2) (by simp) (by simp)
+      n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1))
   have hcomp (Q : HomologicalComplex (ModuleCat.{u} R)
       (ComplexShape.up ℕ)) :
       e.hom.app Q =
         (Q.homologyIsoSc' n (n + 1) (n + 2)
-          (by simp) (by simp)).hom := by
+          (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1))).hom := by
     change (𝟙 (Q.homology (n + 1))) ≫
         ShortComplex.homologyMap
-          (Q.isoSc' n (n + 1) (n + 2) (by simp) (by simp)).hom =
+          (Q.isoSc' n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n +
+            1))).hom =
       ShortComplex.homologyMap
-        (Q.isoSc' n (n + 1) (n + 2) (by simp) (by simp)).hom
+        (Q.isoSc' n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n +
+          1))).hom
     exact Category.id_comp _
   have h := e.hom.naturality
     (projectiveResolutionLinearYonedaMap P' P phi Y)
@@ -599,9 +602,9 @@ theorem projectiveResolutionForgottenLegacyExtIsoDerivedExtSucc_naturality
       F.map (HomologicalComplex.homologyMap
           (projectiveResolutionLinearYonedaMap P' P phi Y) (n + 1)) ≫
         F.map ((P'.complex.linearYonedaObj R Y).homologyIsoSc'
-          n (n + 1) (n + 2) (by simp) (by simp)).hom =
+          n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1))).hom =
       F.map ((P.complex.linearYonedaObj R Y).homologyIsoSc'
-          n (n + 1) (n + 2) (by simp) (by simp)).hom ≫
+          n (n + 1) (n + 2) (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1))).hom ≫
         F.map (ShortComplex.homologyMap beta) := by
     rw [← F.map_comp,
       projectiveResolution_homologyIsoScSucc_hom_naturality

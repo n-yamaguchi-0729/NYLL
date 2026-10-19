@@ -10,8 +10,8 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Regular
-import Nyll.AlgebraicCurves.Places.Value
+import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+import Nyll.AlgebraicCurves.Places.Evaluation.Value
 
 /-!
 # Log De Rham
@@ -174,10 +174,11 @@ def cocycles (S : Set (Place K F)) : Submodule K (Ω[F⁄K] × F) where
 /-- Exact differential-function pairs arising from functions regular off the specified places. -/
 def exactPart (S : Set (Place K F)) : Submodule K (Ω[F⁄K] × F) where
   carrier := {c | ∃ h : F, (∀ v : Place K F, v ∉ S → h ∈ v.toValuationSubring) ∧ c = (D K F h, h)}
-  zero_mem' := ⟨0, fun v _ => zero_mem _, Prod.ext (by simp) rfl⟩
+  zero_mem' := ⟨0, fun v _ => zero_mem _, Prod.ext (map_zero (D K F)).symm rfl⟩
   add_mem' := by
     rintro _ _ ⟨h, hh, rfl⟩ ⟨h', hh', rfl⟩
-    exact ⟨h + h', fun v hv => add_mem (hh v hv) (hh' v hv), Prod.ext (by simp [map_add]) rfl⟩
+    exact ⟨h + h', fun v hv => add_mem (hh v hv) (hh' v hv),
+      Prod.ext (map_add (D K F) h h').symm rfl⟩
   smul_mem' := by
     rintro a _ ⟨h, hh, rfl⟩
     refine ⟨a • h, fun v hv => ?_, ?_⟩
@@ -347,13 +348,13 @@ def frobPair : (Ω[F⁄K] × F) →ₛₗ[frobenius K p] (Ω[F⁄K] × F) where
   toFun c := (0, c.2 ^ p)
   map_add' c c' := by
     ext
-    · simp
+    · exact (zero_add 0).symm
     · have : CharP F p := charP_of_injective_algebraMap (algebraMap K F).injective p
       change (c.2 + c'.2) ^ p = c.2 ^ p + c'.2 ^ p
       exact add_pow_char (p := p) c.2 c'.2
   map_smul' a c := by
     ext
-    · simp
+    · exact (smul_zero (frobenius K p a)).symm
     · simp only [Prod.smul_snd, frobenius_def, Algebra.smul_def, mul_pow, map_pow]
 
 variable (S : Set (Place K F))
@@ -415,11 +416,11 @@ variable (S : Set (Place K F))
 def cartierPair :
     (Ω[F⁄K] × F) →ₛₗ[((frobeniusEquiv K p).symm : K →+* K)] (Ω[F⁄K] × F) where
   toFun c := (C c.1, 0)
-  map_add' c c' := by ext <;> simp [map_add]
+  map_add' c c' := Prod.ext (map_add C c.1 c'.1) (zero_add 0).symm
   map_smul' a c := by
     ext
     · simp only [Prod.smul_fst, RingHom.coe_coe]; exact hC.semi a c.1
-    · simp
+    · exact (smul_zero ((frobeniusEquiv K p).symm a)).symm
 
 theorem cartierPair_mem_cocycles (c : ↥(cocycles K F S)) :
     cartierPair hC (c : Ω[F⁄K] × F) ∈ cocycles K F S := by

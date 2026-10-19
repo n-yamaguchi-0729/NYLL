@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.WeilPairing.DivisorialWeilPairingData_toHom_injective_of_divisible_coprime_of_isAlgClosed
-import Nyll.JacobianVarieties.Pic0.Pic0_exists_zsmul_eq_of_finiteDimensional_ratFunc_of_forall_pow_eq_self
-import Nyll.JacobianVarieties.Pic0.Pic0_nonempty_divisorialWeilPairingData_of_isAlgClosed
-import Nyll.AlgebraicCurves.FunctionFields.FunctionField_exists_ratFuncAlgHom_apply_X_eq
+import Nyll.JacobianVarieties.WeilPairing.DivisorialPairingToHomInjectiveDivisibleCoprime
+import Nyll.JacobianVarieties.Pic0.ZsmulEqFiniteDimensionalRatFunc
+import Nyll.JacobianVarieties.Pic0.DivisorialWeilPairingDataAlgClosed
+import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldRatFuncAlgHomApplyXEq
 
 /-!
 # Nondegeneracy of the divisorial Weil pairing in characteristic zero

@@ -7,6 +7,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
 import Nyll.SchemeTheory.RingTheory.Localization.AtMappedPrimeEquiv
 import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
+import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
 
 /-!
 # Prime-local integral-closure comparison through an integral base
@@ -34,34 +37,22 @@ noncomputable def localizationAtMappedPrimeAlgEquiv_overAtPrime
     (e : R ≃ₐ[A] S)
     (P : Ideal A) [P.IsPrime]
     (Q : Ideal R) [Q.IsPrime] [Q.LiesOver P] :
-    let Q' := Q.map e.toRingEquiv
-    letI : Q'.IsPrime := inferInstance
-    letI : Q'.LiesOver P := by
+    let Q' : Ideal S := Q.map e.toRingEquiv
+    let hQPrime : Q'.IsPrime := inferInstance
+    let hQLiesOver : Q'.LiesOver P := by
       refine ⟨(Q.over_def P).trans ?_⟩
       ext a
       change algebraMap A R a ∈ Q ↔ algebraMap A S a ∈ Q'
       rw [← e.commutes a]
       exact Ideal.apply_mem_of_equiv_iff.symm
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let hSourceAlgebra : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q') :=
+    let hTargetAlgebra : Algebra (Localization.AtPrime P) (Localization.AtPrime Q') :=
       Localization.AtPrime.algebraOfLiesOver P Q'
     Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime Q' := by
-  dsimp only
-  let Q' := Q.map e.toRingEquiv
-  letI : Q'.IsPrime := inferInstance
-  letI : Q'.LiesOver P := by
-    refine ⟨(Q.over_def P).trans ?_⟩
-    ext a
-    change algebraMap A R a ∈ Q ↔ algebraMap A S a ∈ Q'
-    rw [← e.commutes a]
-    exact Ideal.apply_mem_of_equiv_iff.symm
-  let V := Localization.AtPrime P
-  letI : Algebra V (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
-  letI : Algebra V (Localization.AtPrime Q') :=
-    Localization.AtPrime.algebraOfLiesOver P Q'
+  intro Q' hQPrime hQLiesOver hSourceAlgebra hTargetAlgebra
+  let V : Type uA := Localization.AtPrime P
   let eLocal : Localization.AtPrime Q ≃ₐ[A]
       Localization.AtPrime Q' :=
     localizationAtMappedPrimeAlgEquiv e Q
@@ -91,62 +82,40 @@ at the contraction of `Q` to `A`.  The resulting target prime in
 `integralClosure (A_P) L` and the local equivalence are both canonical. -/
 noncomputable def integralClosureIntegralBasePrimeLocalizationAlgEquiv
     (Q : Ideal (integralClosure B L)) [Q.IsPrime] :
-    letI : Algebra B (integralClosure A L) :=
+    let hBaseAlgebra : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
       integralClosureIntegralBaseAlgEquiv
     let eA : integralClosure B L ≃ₐ[A] integralClosure A L :=
       eB.restrictScalars A
-    let QA := Q.map eA.toRingEquiv
-    letI : QA.IsPrime := inferInstance
-    let P := Q.under A
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI : QA.LiesOver P := by
+    let QA : Ideal (integralClosure A L) := Q.map eA.toRingEquiv
+    let hQAPrime : QA.IsPrime := inferInstance
+    let P : Ideal A := Q.under A
+    let hPPrime : P.IsPrime := inferInstance
+    let hQLiesOver : Q.LiesOver P := inferInstance
+    let hQALiesOver : QA.LiesOver P := by
       refine ⟨(Q.over_def P).trans ?_⟩
       ext a
       change algebraMap A (integralClosure B L) a ∈ Q ↔
         algebraMap A (integralClosure A L) a ∈ QA
       rw [← eA.commutes a]
       exact Ideal.apply_mem_of_equiv_iff.symm
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
-    let q := localizedNormalizationPrime (K := K) (L := L) P QA
-    letI : q.IsMaximal :=
+    let hExtensionAlgebra : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
+    let q : Ideal (integralClosure (Localization.AtPrime P) L) :=
+      localizedNormalizationPrime (K := K) (L := L) P QA
+    let hqMaximal : q.IsMaximal :=
       localizedNormalizationPrime_isMaximal (K := K) (L := L) P QA
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let hSourceAlgebra : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime q := by
-  dsimp only
-  letI : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
-  let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
-    integralClosureIntegralBaseAlgEquiv
-  let eA : integralClosure B L ≃ₐ[A] integralClosure A L :=
-    eB.restrictScalars A
-  let QA := Q.map eA.toRingEquiv
-  letI : QA.IsPrime := inferInstance
-  let P := Q.under A
-  letI : P.IsPrime := inferInstance
-  letI : Q.LiesOver P := inferInstance
-  letI : QA.LiesOver P := by
-    refine ⟨(Q.over_def P).trans ?_⟩
-    ext a
-    change algebraMap A (integralClosure B L) a ∈ Q ↔
-      algebraMap A (integralClosure A L) a ∈ QA
-    rw [← eA.commutes a]
-    exact Ideal.apply_mem_of_equiv_iff.symm
-  letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  letI : IsScalarTower A (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let q := localizedNormalizationPrime (K := K) (L := L) P QA
-  letI : q.IsMaximal :=
-    localizedNormalizationPrime_isMaximal (K := K) (L := L) P QA
-  letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
-  letI : Algebra (Localization.AtPrime P) (Localization.AtPrime QA) :=
+  intro hBaseAlgebra eB eA QA hQAPrime P hPPrime hQLiesOver hQALiesOver
+    hExtensionAlgebra hExtensionTower q hqMaximal hSourceAlgebra
+  let hMappedAlgebra : Algebra (Localization.AtPrime P) (Localization.AtPrime QA) :=
     Localization.AtPrime.algebraOfLiesOver P QA
   let Ebase : Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime QA :=
@@ -157,7 +126,8 @@ noncomputable def integralClosureIntegralBasePrimeLocalizationAlgEquiv
       (K := K) (L := L) P QA
   exact Ebase.trans Elocal
 
-private def IsAwayMapEtale
+/-- Elaborate the Away rings after fixing their underlying rings and algebra. -/
+private def integralBaseAwayMapEtale
     {R D : Type*} [CommRing R] [CommRing D] [Algebra R D]
     (f : R) : Prop :=
   (Localization.awayMap (algebraMap R D) f).Etale
@@ -169,71 +139,42 @@ prime of `integralClosure (A_P) L` back to an arbitrary prime of
 `integralClosureIntegralBasePrimeLocalizationAlgEquiv`. -/
 theorem localization_awayMap_integralClosureIntegralBasePrime_etale_of_localized
     (Q : Ideal (integralClosure B L)) [Q.IsPrime]
-    (f : Localization.AtPrime (Q.under A))
-    (hAway :
-      letI : Algebra B (integralClosure A L) :=
-        integralClosureIntegralBaseAlgebra
-      let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
-        integralClosureIntegralBaseAlgEquiv
-      let eA : integralClosure B L ≃ₐ[A] integralClosure A L :=
-        eB.restrictScalars A
-      let QA := Q.map eA.toRingEquiv
-      letI : QA.IsPrime := inferInstance
-      let P := Q.under A
-      letI : P.IsPrime := inferInstance
-      letI : QA.LiesOver P := by
-        refine ⟨rfl.trans ?_⟩
-        ext a
-        change algebraMap A (integralClosure B L) a ∈ Q ↔
-          algebraMap A (integralClosure A L) a ∈ QA
-        rw [← eA.commutes a]
-        exact Ideal.apply_mem_of_equiv_iff.symm
-      letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-      letI := localizationAtPrimeToExtension_isScalarTower
-        (K := K) (L := L) P
-      let q := localizedNormalizationPrime (K := K) (L := L) P QA
-      letI : q.IsMaximal :=
-        localizedNormalizationPrime_isMaximal (K := K) (L := L) P QA
-      IsAwayMapEtale (R := Localization.AtPrime P)
-        (D := Localization.AtPrime q) f) :
-    let P := Q.under A
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    (f : Localization.AtPrime (Q.under A)) :
+    let hBaseAlgebra : Algebra B (integralClosure A L) :=
+      integralClosureIntegralBaseAlgebra
+    let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
+      integralClosureIntegralBaseAlgEquiv
+    let eA : integralClosure B L ≃ₐ[A] integralClosure A L :=
+      eB.restrictScalars A
+    let QA : Ideal (integralClosure A L) := Q.map eA.toRingEquiv
+    let hQAPrime : QA.IsPrime := inferInstance
+    let P : Ideal A := Q.under A
+    let hPPrime : P.IsPrime := inferInstance
+    let hQLiesOver : Q.LiesOver P := inferInstance
+    let hQALiesOver : QA.LiesOver P := by
+      refine ⟨(Q.over_def P).trans ?_⟩
+      ext a
+      change algebraMap A (integralClosure B L) a ∈ Q ↔
+        algebraMap A (integralClosure A L) a ∈ QA
+      rw [← eA.commutes a]
+      exact Ideal.apply_mem_of_equiv_iff.symm
+    let hExtensionAlgebra : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
+    let q : Ideal (integralClosure (Localization.AtPrime P) L) :=
+      localizedNormalizationPrime (K := K) (L := L) P QA
+    let hqMaximal : q.IsMaximal :=
+      localizedNormalizationPrime_isMaximal (K := K) (L := L) P QA
+    let hqPrime : q.IsPrime := hqMaximal.isPrime
+    let hSourceAlgebra : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
-    RingHom.Etale
-      (R := Localization.Away f)
-      (S := Localization.Away
-        (algebraMap (Localization.AtPrime P) (Localization.AtPrime Q) f))
-      (Localization.awayMap
-        (algebraMap (Localization.AtPrime P) (Localization.AtPrime Q)) f) := by
-  dsimp only
-  let : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
-  let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
-    integralClosureIntegralBaseAlgEquiv
-  let eA : integralClosure B L ≃ₐ[A] integralClosure A L :=
-    eB.restrictScalars A
-  let QA := Q.map eA.toRingEquiv
-  let : QA.IsPrime := inferInstance
-  let P := Q.under A
-  let : P.IsPrime := inferInstance
-  let : Q.LiesOver P := inferInstance
-  let : QA.LiesOver P := by
-    refine ⟨rfl.trans ?_⟩
-    ext a
-    change algebraMap A (integralClosure B L) a ∈ Q ↔
-      algebraMap A (integralClosure A L) a ∈ QA
-    rw [← eA.commutes a]
-    exact Ideal.apply_mem_of_equiv_iff.symm
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower A (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let q := localizedNormalizationPrime (K := K) (L := L) P QA
-  let : q.IsMaximal :=
-    localizedNormalizationPrime_isMaximal (K := K) (L := L) P QA
-  let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
+    integralBaseAwayMapEtale
+      (R := Localization.AtPrime P) (D := Localization.AtPrime q) f →
+      integralBaseAwayMapEtale
+        (R := Localization.AtPrime P) (D := Localization.AtPrime Q) f := by
+  intro hBaseAlgebra eB eA QA hQAPrime P hPPrime hQLiesOver hQALiesOver
+    hExtensionAlgebra hExtensionTower q hqMaximal hqPrime hSourceAlgebra hAway
   let E : Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime q :=
     integralClosureIntegralBasePrimeLocalizationAlgEquiv

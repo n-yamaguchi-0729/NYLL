@@ -1,0 +1,16 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
+import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
+import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionDegEqOne
+import Nyll.AlgebraicCurves.Places.ConstantExtension.ConstantFieldExtension
+import Nyll.AlgebraicCurves.Places.ConstantExtension.FiniteConstantFieldFormFiberConstantsEqSingleton
+import Nyll.AlgebraicCurves.Places.ConstantExtension.ForgetConstantsRestrictEq
+import Nyll.AlgebraicCurves.Places.ConstantExtension.OrdAlgebraMapEqMulOrdConstantExtension
+import Nyll.AlgebraicCurves.Places.ConstantExtension.RamificationIndexForgetConstantsEqOneAdjoinRangeEqTop
+import Nyll.AlgebraicCurves.Places.ConstantExtension.RamificationIndexForgetConstantsEqOneConstantExtension
+import Nyll.AlgebraicCurves.Places.ConstantExtension.SumDegFiberConstantsEqDeg

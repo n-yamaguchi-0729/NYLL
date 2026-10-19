@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.SchemeTheory.RingTheory.TensorProductPrime
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.TensorProductPrime
 import Mathlib.Algebra.Category.Ring.Under.Basic
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.RingTheory.LocalRing.ResidueField.Ideal

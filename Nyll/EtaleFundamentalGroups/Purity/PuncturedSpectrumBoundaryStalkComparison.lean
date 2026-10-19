@@ -41,24 +41,24 @@ noncomputable def
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let C := integralClosure R W.left.functionField
     let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
@@ -69,17 +69,19 @@ noncomputable def
         R hpos W
     ∀ (Q : Ideal C), [Q.IsPrime] →
     let P := Q.under R
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI := EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
-      (K := U.functionField) (L := W.left.functionField) P
-    letI := EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
-      (K := U.functionField) (L := W.left.functionField) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : P.IsPrime := inferInstance
+    let : Q.LiesOver P := inferInstance
+    let : Algebra (Localization.AtPrime P) W.left.functionField :=
+      EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
+        (K := U.functionField) (L := W.left.functionField) P
+    let : IsScalarTower R (Localization.AtPrime P) W.left.functionField :=
+      EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
+        (K := U.functionField) (L := W.left.functionField) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     let q := EtaleFundamentalGroups.localizedNormalizationPrime
       (K := U.functionField) (L := W.left.functionField) P Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       EtaleFundamentalGroups.localizedNormalizationPrime_isMaximal
         (K := U.functionField) (L := W.left.functionField) P Q
     Arrow.mk
@@ -88,36 +90,9 @@ noncomputable def
       Arrow.mk (CommRingCat.ofHom
         (R := Localization.AtPrime P) (S := Localization.AtPrime q)
         (algebraMap (Localization.AtPrime P) (Localization.AtPrime q))) := by
-  dsimp only
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  letI : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  letI : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  letI : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  letI : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let C := integralClosure R W.left.functionField
-  let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
-    connectedCoverGenericComposite W ≫ j
-  let z := g.fromNormalization
-  let e : g.normalization ≅ Spec (.of C) :=
-    connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure
-      R hpos W
-  intro Q _
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower C g z e Q hQ P hP hLiesOver
+    algebraP_W towerP_W algebraP_Q q hq
   exact EtaleFundamentalGroups.integralClosureStalkArrowIsoOfIsoOver
     (K := U.functionField) (L := W.left.functionField) z e
     (connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure_hom_fromSpec
@@ -131,24 +106,24 @@ theorem
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let C := integralClosure R W.left.functionField
     let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
@@ -159,46 +134,28 @@ theorem
         R hpos W
     ∀ (Q : Ideal C), [Q.IsPrime] →
     let P := Q.under R
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI := EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
-      (K := U.functionField) (L := W.left.functionField) P
-    letI := EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
-      (K := U.functionField) (L := W.left.functionField) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : P.IsPrime := inferInstance
+    let : Q.LiesOver P := inferInstance
+    let : Algebra (Localization.AtPrime P) W.left.functionField :=
+      EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
+        (K := U.functionField) (L := W.left.functionField) P
+    let : IsScalarTower R (Localization.AtPrime P) W.left.functionField :=
+      EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
+        (K := U.functionField) (L := W.left.functionField) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     let q := EtaleFundamentalGroups.localizedNormalizationPrime
       (K := U.functionField) (L := W.left.functionField) P Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       EtaleFundamentalGroups.localizedNormalizationPrime_isMaximal
         (K := U.functionField) (L := W.left.functionField) P Q
     (algebraMap (Localization.AtPrime P)
       (Localization.AtPrime q)).FormallyEtale →
       (z.stalkMap
         (e.inv (⟨Q, inferInstance⟩ : PrimeSpectrum C))).hom.FormallyEtale := by
-  dsimp only
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  let : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  let : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  intro Q _ hlocal
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower C g z e Q hQ P hP hLiesOver
+    algebraP_W towerP_W algebraP_Q q hq hlocal
   exact
     (EtaleFundamentalGroups.RingHom.FormallyEtale.respectsIso.arrow_mk_iso_iff
       (connectedPuncturedCoverGenericNormalizationBoundaryStalkArrowIso
@@ -215,95 +172,76 @@ theorem
     (hlocal :
       let U := Scheme.puncturedSpectrum R
       let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-      letI : Nonempty U :=
+      let : Nonempty U :=
         Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-      letI : IsOpenImmersion j := by
+      let : IsOpenImmersion j := by
         dsimp only [j, Scheme.puncturedSpectrumInclusion]
         infer_instance
-      letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-      letI : Algebra R U.functionField :=
+      let : IsIntegral U := isIntegral_of_isOpenImmersion j
+      let : Algebra R U.functionField :=
         puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-      letI : IsFractionRing R U.functionField :=
+      let : IsFractionRing R U.functionField :=
         puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-      letI : IsIntegral W.left :=
+      let : IsIntegral W.left :=
         EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-      letI : Algebra U.functionField W.left.functionField :=
+      let : Algebra U.functionField W.left.functionField :=
         EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-      letI : Algebra R W.left.functionField :=
+      let : Algebra R W.left.functionField :=
         ((algebraMap U.functionField W.left.functionField).comp
           (algebraMap R U.functionField)).toAlgebra
-      letI : IsScalarTower R U.functionField W.left.functionField :=
+      let : IsScalarTower R U.functionField W.left.functionField :=
         IsScalarTower.of_algebraMap_eq' rfl
       let C := integralClosure R W.left.functionField
       ∀ (Q : Ideal C), [Q.IsPrime] →
         Q.under R = maximalIdeal R →
         let P := Q.under R
-        letI : P.IsPrime := inferInstance
-        letI : Q.LiesOver P := inferInstance
-        letI := EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
-          (K := U.functionField) (L := W.left.functionField) P
-        letI := EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
-          (K := U.functionField) (L := W.left.functionField) P
-        letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+        let : P.IsPrime := inferInstance
+        let : Q.LiesOver P := inferInstance
+        let : Algebra (Localization.AtPrime P) W.left.functionField :=
+          EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
+            (K := U.functionField) (L := W.left.functionField) P
+        let : IsScalarTower R (Localization.AtPrime P) W.left.functionField :=
+          EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
+            (K := U.functionField) (L := W.left.functionField) P
+        let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
           Localization.AtPrime.algebraOfLiesOver P Q
         let q := EtaleFundamentalGroups.localizedNormalizationPrime
           (K := U.functionField) (L := W.left.functionField) P Q
-        letI : q.IsMaximal :=
+        let : q.IsMaximal :=
           EtaleFundamentalGroups.localizedNormalizationPrime_isMaximal
             (K := U.functionField) (L := W.left.functionField) P Q
         (algebraMap (Localization.AtPrime P)
           (Localization.AtPrime q)).FormallyEtale) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let z := (connectedCoverGenericComposite W ≫ j).fromNormalization
     ∀ y : (connectedCoverGenericComposite W ≫ j).normalization,
       z y ∉ Scheme.puncturedSpectrumOpen R →
         (z.stalkMap y).hom.FormallyEtale := by
-  dsimp only
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  let : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  let : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower z
   let C := integralClosure R W.left.functionField
   let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
     connectedCoverGenericComposite W ≫ j
-  let z := g.fromNormalization
   let e : g.normalization ≅ Spec (.of C) :=
     connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure
       R hpos W
@@ -349,95 +287,77 @@ theorem
     (hlocal :
       let U := Scheme.puncturedSpectrum R
       let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-      letI : Nonempty U :=
+      let : Nonempty U :=
         Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-      letI : IsOpenImmersion j := by
+      let : IsOpenImmersion j := by
         dsimp only [j, Scheme.puncturedSpectrumInclusion]
         infer_instance
-      letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-      letI : Algebra R U.functionField :=
+      let : IsIntegral U := isIntegral_of_isOpenImmersion j
+      let : Algebra R U.functionField :=
         puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-      letI : IsFractionRing R U.functionField :=
+      let : IsFractionRing R U.functionField :=
         puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-      letI : IsIntegral W.left :=
+      let : IsIntegral W.left :=
         EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-      letI : Algebra U.functionField W.left.functionField :=
+      let : Algebra U.functionField W.left.functionField :=
         EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-      letI : Algebra R W.left.functionField :=
+      let : Algebra R W.left.functionField :=
         ((algebraMap U.functionField W.left.functionField).comp
           (algebraMap R U.functionField)).toAlgebra
-      letI : IsScalarTower R U.functionField W.left.functionField :=
+      let : IsScalarTower R U.functionField W.left.functionField :=
         IsScalarTower.of_algebraMap_eq' rfl
       let C := integralClosure R W.left.functionField
       ∀ (Q : Ideal C), [Q.IsPrime] →
         Q.under R = maximalIdeal R →
         let P := Q.under R
-        letI : P.IsPrime := inferInstance
-        letI : Q.LiesOver P := inferInstance
-        letI := EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
-          (K := U.functionField) (L := W.left.functionField) P
-        letI := EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
-          (K := U.functionField) (L := W.left.functionField) P
-        letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+        let : P.IsPrime := inferInstance
+        let : Q.LiesOver P := inferInstance
+        let : Algebra (Localization.AtPrime P) W.left.functionField :=
+          EtaleFundamentalGroups.localizationAtPrimeToExtensionAlgebra
+            (K := U.functionField) (L := W.left.functionField) P
+        let : IsScalarTower R (Localization.AtPrime P) W.left.functionField :=
+          EtaleFundamentalGroups.localizationAtPrimeToExtension_isScalarTower
+            (K := U.functionField) (L := W.left.functionField) P
+        let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
           Localization.AtPrime.algebraOfLiesOver P Q
         let q := EtaleFundamentalGroups.localizedNormalizationPrime
           (K := U.functionField) (L := W.left.functionField) P Q
-        letI : q.IsMaximal :=
+        let : q.IsMaximal :=
           EtaleFundamentalGroups.localizedNormalizationPrime_isMaximal
             (K := U.functionField) (L := W.left.functionField) P Q
         (algebraMap (Localization.AtPrime P)
           (Localization.AtPrime q)).FormallyEtale) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     IsFiniteEtale
       (connectedCoverGenericComposite W ≫ j).fromNormalization := by
-  dsimp only
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  let : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  let : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower
+  have hboundary :=
+    connectedPuncturedCoverGenericNormalization_boundaryStalkMap_formallyEtale_of_primeLocalizations
+      R hpos W hlocal
   exact
     connectedPuncturedCoverGenericNormalization_isFiniteEtale_of_boundary_stalkMap_formallyEtale
-      R hpos W
-      (
-connectedPuncturedCoverGenericNormalization_boundaryStalkMap_formallyEtale_of_primeLocalizations
-        R hpos W hlocal)
+      R hpos W hboundary
 
 end AlgebraicGeometry.FiniteEtale
 

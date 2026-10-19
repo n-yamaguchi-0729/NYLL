@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisTrivialInertiaEtale
-import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
 import Nyll.EtaleFundamentalGroups.Normalization.GenericNormalizationChartAction
 import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedGeometricInertia
 import Nyll.EtaleFundamentalGroups.Inertia.AffineGeometricPoint

@@ -1,0 +1,33 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Models.Points.AlgEquivPointPlaceCompHomEqAlgAutSmulPointPlace
+import Nyll.AlgebraicCurves.Models.Points.AlgHomFiniteAlongPointPlaceRestrictAlong
+import Nyll.AlgebraicCurves.Models.Points.CompToBaseEqIdBaseClosedPointEq
+import Nyll.AlgebraicCurves.Models.Points.DenseRangePullbackLiftSpecMapCompPoint
+import Nyll.AlgebraicCurves.Models.Points.FieldEquivSymmMemEvalAtPointPlaceEqStalkClosedPointTo
+import Nyll.AlgebraicCurves.Models.Points.HasValuePlaceOfPointSubAlgebraMapMem
+import Nyll.AlgebraicCurves.Models.Points.HomPointPlaceRestrictEq
+import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
+import Nyll.AlgebraicCurves.Models.Points.IsRationalPointPlace
+import Nyll.AlgebraicCurves.Models.Points.IsoCompToBaseEqPlaceOfPointCongrEq
+import Nyll.AlgebraicCurves.Models.Points.IsoFromSpecStalkCompEqPointPlaceSymmCompEq
+import Nyll.AlgebraicCurves.Models.Points.NatCardStabilizerPointPlaceMulNatCardKerEq
+import Nyll.AlgebraicCurves.Models.Points.OrdPlaceOfPointFieldEquivSymmAlgebraMapEqOne
+import Nyll.AlgebraicCurves.Models.Points.OrdPlaceOfPointFieldEquivSymmFunctionFieldGermEqZero
+import Nyll.AlgebraicCurves.Models.Points.PlaceEqPointPlaceSymmCompEq
+import Nyll.AlgebraicCurves.Models.Points.PlaceOfPointOfGeneratorIota0Comap
+import Nyll.AlgebraicCurves.Models.Points.PlaceOfPointOfGeneratorIotaInfComap
+import Nyll.AlgebraicCurves.Models.Points.Places
+import Nyll.AlgebraicCurves.Models.Points.PointPlaceBaseChangeGermCriterion
+import Nyll.AlgebraicCurves.Models.Points.PointPlaceCompEqCongrRingEquiv
+import Nyll.AlgebraicCurves.Models.Points.PointPlaceEqSmulPointPlace
+import Nyll.AlgebraicCurves.Models.Points.PointPlaceImmersionGermCriterion
+import Nyll.AlgebraicCurves.Models.Points.PullbackFoldrOfPointPowIsoFoldrOfPointPointPlaceSymm
+import Nyll.AlgebraicCurves.Models.Points.RationalPointExistence
+import Nyll.AlgebraicCurves.Models.Points.SubAlgebraMapMemHasValuePlaceOfPoint
+import Nyll.AlgebraicCurves.Models.Points.SurjectiveEqGenericPointOrIsClosedSingleton
+import Nyll.AlgebraicCurves.Models.Points.UniquePointOrdEqOrdEqZero

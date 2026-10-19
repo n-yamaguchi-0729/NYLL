@@ -18,7 +18,6 @@ import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
 import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueAtSourceGeneric
 import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
 import Nyll.EtaleFundamentalGroups.GaloisCovers.GenericPullbackDeck
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenFunctionField
 import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
 import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormal
 import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalExtendedQuotientKernel
@@ -59,5 +58,14 @@ import Nyll.EtaleFundamentalGroups.GaloisCovers.RelativeGalois
 import Nyll.EtaleFundamentalGroups.GaloisCovers.DeckSubgroupIntermediate
 import Nyll.EtaleFundamentalGroups.GaloisCovers.DeckIntermediateScheme
 import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
+import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenCoverBoundaryRestriction
+import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenSquareFunctionField
+import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenCoverConstantField
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FinitePowers
+import Nyll.EtaleFundamentalGroups.GaloisCovers.TripleProduct
+import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
+import Nyll.EtaleFundamentalGroups.GaloisCovers.RestrictionDegree
+import Nyll.EtaleFundamentalGroups.GaloisCovers.SurjectiveBaseChangeDescent
+import Nyll.EtaleFundamentalGroups.GaloisCovers.SmoothGenericCharts
 
 /-! Canonical aggregate for EtaleFundamentalGroups.GaloisCovers. -/

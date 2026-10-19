@@ -6,26 +6,26 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Albanese.LineBundleSumInvariance
 import Nyll.JacobianVarieties.Albanese.DivisorPicardChart
-import Nyll.JacobianVarieties.Picard.Representation
-import Nyll.JacobianVarieties.Picard.Exists_openChart_relSubPicPresheaf_algEquivZeroCut_of_relEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivTwist2
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv_isInvertible_I
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv_nonempty_twistModule_pullbackAlong_iso_pullback
-import Nyll.AlgebraicCurves.Geometry.Sheaves.ModulesRigidify
-import Nyll.AlgebraicCurves.Geometry.Sheaves.IdealSheafModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_Modules_IsInvertible_dual
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_Modules_IsInvertible_tensor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_Modules_IsInvertible_nonempty_iso_tensorUnit_of_isLocalRing
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_IdealSheafData_IsInvertible_pow
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_IdealSheafData_IsInvertible_isInvertible_module
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_IdealSheafData_IsInvertible_isInvertible_invModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.ext_of_forall_comp_eq_of_isAlgClosed
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor
-import Nyll.SchemeTheory.Modules.Invertible
-import Nyll.SchemeTheory.Modules.Monoidal
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
+import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.TwistModulePullbackIsoPullback
+import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitLocalRing
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+import Nyll.SchemeTheory.Modules.Invertible.Invertible
+import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!+# Sums on divisor Picard charts

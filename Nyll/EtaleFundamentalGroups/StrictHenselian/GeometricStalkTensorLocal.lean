@@ -9,6 +9,7 @@ import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
 import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
 import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
 import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
+import Nyll.SchemeTheory.RingTheory.Localization.LocalMapLocalizationSurjective
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
@@ -183,15 +184,7 @@ theorem geometricStalk_tensor_localizationAtPrime_bijective
       obtain ⟨t, ht⟩ := hb
       obtain ⟨r, hr⟩ := hc
       exact ⟨t + r, by rw [map_add, ht, hr, map_add]⟩
-  intro x
-  obtain ⟨b, s, rfl⟩ := IsLocalization.exists_mk'_eq q.primeCompl x
-  obtain ⟨t, ht⟩ := hpreimage b
-  obtain ⟨d, hd⟩ := hpreimage s
-  have hdunit : IsUnit d := IsLocalHom.map_nonunit d
-    (hd.symm ▸ IsLocalization.map_units L s)
-  obtain ⟨dunit, hdunit⟩ := hdunit
-  refine ⟨t * ↑(dunit⁻¹), ?_⟩
-  apply IsLocalization.eq_mk'_iff_mul_eq.mpr
-  rw [← hd, ← hdunit, ← map_mul, mul_assoc, Units.inv_mul, mul_one, ht]
+  exact IsLocalization.surjective_algebraMap_of_numerators_mem_range
+    q.primeCompl hpreimage
 
 end EtaleFundamentalGroups.StrictHenselian

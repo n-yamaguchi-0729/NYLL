@@ -64,13 +64,13 @@ def finiteEtaleInternalHomCoverRepresentable (i : S.directedAffineCover.I₀) :
 
 /-- The finite étale scheme representing the relative internal Hom of `U` and `V`. -/
 def finiteEtaleInternalHomRepresenter : FiniteEtale S where
-  toComma := gluedLocalRepresenter
+  toComma := gluedLocalRepresenter.{u, u, u}
     (relativeInternalHomFunctor ((FiniteEtale.forget S).obj U) ((FiniteEtale.forget S).obj V))
     S.directedAffineCover
     (fun i ↦ (FiniteEtale.forget (S.directedAffineCover.X i)).obj
       (finiteEtaleInternalHomCoverRepresenter S U V i))
     (fun i ↦ finiteEtaleInternalHomCoverRepresentable S U V i)
-  prop := gluedLocalRepresenter_isFiniteEtale
+  prop := gluedLocalRepresenter_isFiniteEtale.{u, u, u}
     (relativeInternalHomFunctor ((FiniteEtale.forget S).obj U) ((FiniteEtale.forget S).obj V))
     S.directedAffineCover
     (fun i ↦ (FiniteEtale.forget (S.directedAffineCover.X i)).obj
@@ -83,7 +83,7 @@ def finiteEtaleInternalHomRepresentable :
     (relativeInternalHomFunctor ((FiniteEtale.forget S).obj U)
       ((FiniteEtale.forget S).obj V)).RepresentableBy
         ((FiniteEtale.forget S).obj (finiteEtaleInternalHomRepresenter S U V)) :=
-  gluedLocalRepresentable
+  gluedLocalRepresentable.{u, u, u}
     (relativeInternalHomFunctor ((FiniteEtale.forget S).obj U) ((FiniteEtale.forget S).obj V))
     S.directedAffineCover
     (fun i ↦ (FiniteEtale.forget (S.directedAffineCover.X i)).obj

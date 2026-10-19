@@ -37,5 +37,10 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RawOverlapSupplier
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CommonCoverRecovery
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoverRecovery
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoefficientCover
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisStage
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ProperGeometricGaloisModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisDVRModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RootDVRModel
 
 /-! Finite-field models of finite étale covers. -/

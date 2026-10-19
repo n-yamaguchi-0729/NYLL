@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMultiplicationCover
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTransitions
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTranslations
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.TateModule
+import Nyll.AbelianVarieties.Tate.FullTateModule
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Mathlib.Algebra.Group.Submonoid.Defs
 

@@ -7,5 +7,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.FiniteDiagonal
 import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
 import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
+import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.ResidueSeparableTower
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Ramification.Unramified. -/

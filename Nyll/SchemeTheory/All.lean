@@ -30,16 +30,18 @@ import Nyll.SchemeTheory.Cohomology.All
 import Nyll.SchemeTheory.HomologicalAlgebra.All
 import Nyll.SchemeTheory.Pi1.All
 
-/-!
-# Scheme theory
-
-Foundations for algebraic geometry: schemes and morphisms, descent, normalization, finite étale
-covers, sheaves and cohomology. Includes commutative algebra and Abhyankar's lemma.
--/
-
 /-
 # Scheme theory
 
 Reader-facing entry point for the scheme-theoretic and commutative-algebra
 modules in this workspace.
+-/
+import Nyll.SchemeTheory.GroupSchemes.All
+import Nyll.SchemeTheory.BaseChange.BaseChangedIdentifiedModelIso
+
+/-!
+# Scheme theory
+
+Foundations for algebraic geometry: schemes and morphisms, descent, normalization, finite étale
+covers, sheaves and cohomology. Includes commutative algebra and Abhyankar's lemma.
 -/

@@ -5,5 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
+import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+import Nyll.SchemeTheory.Normalization.GenericFiber.FiniteEtaleNormalization
 
-/-! Canonical aggregate for EtaleFundamentalGroups.Normalization.GenericFiber. -/
+/-! Canonical aggregate for SchemeTheory.Normalization.GenericFiber. -/

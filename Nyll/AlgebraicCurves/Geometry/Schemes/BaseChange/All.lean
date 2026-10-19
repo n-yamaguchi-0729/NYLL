@@ -1,0 +1,26 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.AffinePullbackIntersectionSections
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.EqPullbackSndCompProper
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.FiniteSetOfPullbackFstEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.FlatSurjectiveIsoMorphismRestrictEqPullbackFst
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.GenericPointMemPreimageCompPullbackFst
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomFinrankPullbackMapCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomQuasiFiniteAtPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsClosedImmersionAppInjectiveAppPullbackEqIsAffineOpen
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsClosedImmersionAppInjectiveAppPullbackEqReduced
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackIsoSpecQuotientCompMorphismRestrictEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackSurjectiveAppKerAppEqMapKer
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPushoutAppTopPullbackFstAppTopPullbackSnd
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsoPullbackResidueIsoPullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackGluePullback
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackLiftFstCompFstSndCompFstProdStr
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackPullbackMapFstComp
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ReducedPullbackResidue
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange

@@ -7,5 +7,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoequalizers
 import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
 import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
+import Nyll.SchemeTheory.FiniteEtale.Forget.Extensive
 
 /-! Canonical aggregate for SchemeTheory.FiniteEtale.Forget. -/

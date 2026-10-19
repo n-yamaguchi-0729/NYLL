@@ -81,8 +81,7 @@ theorem etaleChartLocalization_algebraMap_injective
   have hone : (1 : V) = 0 := by
     apply hsmul
     change algebraMap A V a * 1 = algebraMap A V a * 0
-    rw [ha]
-    simp
+    rw [ha, zero_mul, zero_mul]
   exact one_ne_zero hone
 
 /-- After returning to the ambient scheme, the boundary-away chart map is

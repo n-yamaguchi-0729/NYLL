@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorComponent
 import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+import Mathlib.Algebra.Algebra.Defs
 
 /-!
 # Complete-DVF higher-radical tensor products
@@ -82,9 +83,19 @@ theorem integralClosure_completeDVFFactorialRootTensorProduct_etale
   apply integralClosure_genericTensorProduct_etale
   intro m hm
   let : m.IsMaximal := hm
-  exact
+  have hAlgebra :
+      pureRadicalFractionFieldGenericTensorComponentRootAlgebra
+          (K := K) varpi m =
+        genericTensorFieldComponentLeftScalarAlgebra (R := Rn) m := by
+    apply Algebra.algebra_ext _ _
+    intro x
+    rfl
+  have hComponent :=
     integralClosure_completeDVFFactorialRootTensorComponent_etale
       base varpi hvarpi D hdegree m hm
+  dsimp only at hComponent
+  rw [hAlgebra] at hComponent
+  exact hComponent
 
 end EtaleFundamentalGroups.Kummer
 

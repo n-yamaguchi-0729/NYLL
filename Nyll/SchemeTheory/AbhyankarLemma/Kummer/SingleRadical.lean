@@ -497,7 +497,7 @@ theorem finrank_eq_addOrderOf_valueCoset_of_single_radical_of_separableResidue
       LubinTate.Valuations.exponentialValuation_inv_value w hbMap0 hbMapValue
     dsimp [delta]
     rw [div_eq_mul_inv, w.map_mul, hr, hbInvValue]
-    simp
+    simp only [← WithTop.coe_add, add_neg_cancel, WithTop.coe_zero]
   let uK : K := a / b ^ d
   have hbPow0 : b ^ d ≠ 0 := pow_ne_zero d hb0
   have huK0 : uK ≠ 0 := by
@@ -635,7 +635,7 @@ theorem finrank_eq_addOrderOf_valueCoset_of_single_radical_of_separableResidue
       LubinTate.Valuations.exponentialValuation_inv_value w hb'Map0 hb'MapValue
     dsimp [zeta]
     rw [div_eq_mul_inv, w.map_mul, hr, hb'InvValue]
-    simp
+    simp only [← WithTop.coe_add, add_neg_cancel, WithTop.coe_zero]
   let zetaW : LubinTate.Valuations.exponentialValuationSubring w :=
     ⟨zeta, by
       change (0 : WithTop ℝ) ≤ w zeta
@@ -693,7 +693,7 @@ theorem finrank_eq_addOrderOf_valueCoset_of_single_radical_of_separableResidue
       Module.finrank K L = Module.finrank K
           (IntermediateField.adjoin K ({alpha} : Set L)) := by
         rw [hgen]
-        simp
+        exact IntermediateField.finrank_top'.symm
       _ = (minpoly K alpha).natDegree :=
         IntermediateField.adjoin.finrank (Algebra.IsIntegral.isIntegral alpha)
   have hminle : (minpoly K alpha).natDegree ≤ n := by

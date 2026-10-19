@@ -6,14 +6,14 @@ https://github.com/n-yamaguchi-0729
 -/
 
 import Nyll.AlgebraicCurves.Geometry.Curves.IsIsoOfBijectivePointsCharZero
-import Nyll.AlgebraicCurves.Geometry.Curves.isIntegral_of_smooth_of_geometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroCut
+import Nyll.AlgebraicCurves.Geometry.Curves.IsIntegralSmooth
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Models.Basic
+import Nyll.AlgebraicCurves.Models.Construction.Basic
 import Nyll.JacobianVarieties.Albanese.GenusOnePointClasses
-import Nyll.JacobianVarieties.Picard.CurveModel_exists_representsRelSubPic_abelJacobi_of_isAlgClosed
-import Nyll.JacobianVarieties.Picard.Designation
-import Nyll.JacobianVarieties.Picard.Representation
+import Nyll.JacobianVarieties.Picard.Representability.CurveModelPicardRepresentabilityAbelJacobi
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 
 /-!
 # The actual Abel--Jacobi isomorphism of a pointed genus-one curve

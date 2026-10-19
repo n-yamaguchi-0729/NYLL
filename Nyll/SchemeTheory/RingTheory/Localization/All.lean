@@ -4,18 +4,34 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.PrincipalProductEtale
-import Nyll.SchemeTheory.RingTheory.Localization.AwayToPrime
-import Nyll.SchemeTheory.RingTheory.Localization.CommAlgPrincipal
+import Nyll.SchemeTheory.RingTheory.Localization.AlgebraFiniteMaximalSpectrumBijectiveLocalization
+import Nyll.SchemeTheory.RingTheory.Localization.ArtinianUnitLifting
 import Nyll.SchemeTheory.RingTheory.Localization.AtMappedPrimeEquiv
 import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.All
-import Nyll.SchemeTheory.RingTheory.Localization.SubalgebraPrime
-
-
-
+import Nyll.SchemeTheory.RingTheory.Localization.AwayToPrime
+import Nyll.SchemeTheory.RingTheory.Localization.CommAlgPrincipal
 import Nyll.SchemeTheory.RingTheory.Localization.DedekindPrime
+import Nyll.SchemeTheory.RingTheory.Localization.FiberLocalizationQuotient
+import Nyll.SchemeTheory.RingTheory.Localization.Fraction.All
+import Nyll.SchemeTheory.RingTheory.Localization.IdealIffMapEqBotAway
+import Nyll.SchemeTheory.RingTheory.Localization.IsFractionRingPowMulMemColonSurjectiveRestrict
+import Nyll.SchemeTheory.RingTheory.Localization.IsLocalizationAtPrimeSurjectiveKerPiSpanMulQuotient
+import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+import Nyll.SchemeTheory.RingTheory.Localization.LocalMapLocalizationSurjective
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingIsRegularSystemOfParameters
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingMemMaximalIdealNotMemSqMinimalPrimesNotMem
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingMkCompAlgebraMapSurjective
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingMonicCoeffMemMaximalIdealAevalMemSpan
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingRingHomCompAlgebraMapEqKerEqSpan
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubAlgebraMapMemMapMaximalIdeal
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubSumMemSpanPair
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubalgebraCoeEqNoetherianLocalRingIsUnitIff
+import Nyll.SchemeTheory.RingTheory.Localization.LocalRingUniqueFactorizationMonoid
+import Nyll.SchemeTheory.RingTheory.Localization.LocalizationTensorTower
 import Nyll.SchemeTheory.RingTheory.Localization.PrimeLocalizationInjection
 import Nyll.SchemeTheory.RingTheory.Localization.PrimeLocalizationSquare
-
-/-! Canonical aggregate for SchemeTheory.RingTheory.Localization. -/
+import Nyll.SchemeTheory.RingTheory.Localization.PrincipalProductEtale
+import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
+import Nyll.SchemeTheory.RingTheory.Localization.SubalgebraPrime
+import Nyll.SchemeTheory.RingTheory.Localization.SubmoduleAdjoinLocalization
+import Nyll.SchemeTheory.RingTheory.Localization.SubmoduleAdjoinRestriction

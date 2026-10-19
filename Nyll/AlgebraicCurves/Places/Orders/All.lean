@@ -1,0 +1,55 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Places.Orders.AdicValuationSubEq
+import Nyll.AlgebraicCurves.Places.Orders.AdicValuationSubLe
+import Nyll.AlgebraicCurves.Places.Orders.AlgHomLaurentSeriesOrderEqOrd
+import Nyll.AlgebraicCurves.Places.Orders.BasicOrderMap
+import Nyll.AlgebraicCurves.Places.Orders.BasicTranscendental
+import Nyll.AlgebraicCurves.Places.Orders.EqOrdAddHom
+import Nyll.AlgebraicCurves.Places.Orders.EqValuationSubLtOne
+import Nyll.AlgebraicCurves.Places.Orders.FiniteSetOfOrdNeZeroFiniteDimensional
+import Nyll.AlgebraicCurves.Places.Orders.FinsetOrdSubAlgebraMapEqOne
+import Nyll.AlgebraicCurves.Places.Orders.FinsetSumNegOrdEqFinrank
+import Nyll.AlgebraicCurves.Places.Orders.FinsetSumOrdSubAlgebraMapEqFinrank
+import Nyll.AlgebraicCurves.Places.Orders.IsIntegralAdjoinEqTopOrdSubAlgebraMapEqOne
+import Nyll.AlgebraicCurves.Places.Orders.IsIntegralAdjoinOrdEqOneOrdEqZero
+import Nyll.AlgebraicCurves.Places.Orders.IsIntegralAdjoinOrdNonneg
+import Nyll.AlgebraicCurves.Places.Orders.MapDomainFilterApplyLeOrd
+import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZero
+import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
+import Nyll.AlgebraicCurves.Places.Orders.MemSpanPowMulOrdNonneg
+import Nyll.AlgebraicCurves.Places.Orders.MulApplyEqMulSubMinOrd
+import Nyll.AlgebraicCurves.Places.Orders.NotMemOrdNegOrdEqOne
+import Nyll.AlgebraicCurves.Places.Orders.NotMemRangeNeOrdNonneg
+import Nyll.AlgebraicCurves.Places.Orders.OrdAlgebraMapEqMulOrd
+import Nyll.AlgebraicCurves.Places.Orders.OrdEqFinset
+import Nyll.AlgebraicCurves.Places.Orders.OrdEqOneOrdSumEqOne
+import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroIsAlgebraic
+import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroIsIntegralAdjoin
+import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroNotMem
+import Nyll.AlgebraicCurves.Places.Orders.OrdNegTranscendental
+import Nyll.AlgebraicCurves.Places.Orders.OrdNonnegIsIntegralAdjoin
+import Nyll.AlgebraicCurves.Places.Orders.OrdSubAlgebraMapPosTranscendental
+import Nyll.AlgebraicCurves.Places.Orders.OrdSumAlgebraMapMulLeOrd
+import Nyll.AlgebraicCurves.Places.Orders.PositiveOrderElement
+import Nyll.AlgebraicCurves.Places.Orders.PowerSeriesRescaleIntegral
+import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
+import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
+import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
+import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdNeZeroCastNatAbsNeZero
+import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdNeZeroCastNatAbsNeZeroDivisorClassGroup
+import Nyll.AlgebraicCurves.Places.Orders.TranscendentalFiniteDimensionalAdjoin
+import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
+import Nyll.AlgebraicCurves.Places.Orders.UniqueValuationSubLtOne
+import Nyll.AlgebraicCurves.Places.Orders.TameParameterOrder
+import Nyll.AlgebraicCurves.Places.Orders.TameSeriesCompositionOrder
+import Nyll.AlgebraicCurves.Places.Orders.GroupPowerSeriesPositiveOrders
+import Nyll.AlgebraicCurves.Places.Orders.TameLaurentEmbedding
+import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalFormalLift
+import Nyll.AlgebraicCurves.Places.Orders.IntegralGroupPowerSeriesOrders
+import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalInfinity

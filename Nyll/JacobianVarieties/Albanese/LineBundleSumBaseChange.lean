@@ -5,12 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.Albanese.LineBundleSumInvariance
-import Nyll.AlgebraicCurves.RelativeDivisors.ChangeBase
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.IdealSheafModule
+import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOverBaseChange
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange
 import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!

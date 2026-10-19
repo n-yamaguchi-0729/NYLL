@@ -5,8 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Modules.AffineSourceColimit
-import Nyll.SchemeTheory.Modules.DirectImageAlgebra
-import Nyll.SchemeTheory.Modules.GeneratedAlgebraLocalization
+import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
+import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.CategoryTheory.Limits.HasLimits

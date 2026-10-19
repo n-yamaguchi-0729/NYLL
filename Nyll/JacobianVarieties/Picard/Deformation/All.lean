@@ -1,0 +1,32 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.JacobianVarieties.Picard.Deformation.BasisPushforwardDualNumberThickening
+import Nyll.JacobianVarieties.Picard.Deformation.CurveModelFinrankCotangentSpaceZeroSectionEqGenusFF
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClass
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassApplyBaseTransportEqH1baseChangeMap
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassCechH1ToH1GermEq
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassCrossSections
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassInjective
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassMapMul
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassNatural
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassSurjective
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationNormTraceField
+import Nyll.JacobianVarieties.Picard.Deformation.DeformationNormTraceMono
+import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnMapEqOneAddEpsMulSmul
+import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnNormMapEqOneAddEpsMulTraceSmul
+import Nyll.JacobianVarieties.Picard.Deformation.Map01OneAddEpsMul
+import Nyll.JacobianVarieties.Picard.Deformation.NormCurveChangeDualNumberIsoUnit
+import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+import Nyll.JacobianVarieties.Picard.Deformation.PicardDeformationKernelNaturality
+import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsBaseChangeSurjectiveFibre
+import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerBijective
+import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerMul
+import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberKerPointsToRigKerBaseTransport
+import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberUniqueKerPointBaseChangeCompFstEq
+import Nyll.JacobianVarieties.Picard.Deformation.TrivialModDeformationsMapH1TensorNatural
+import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE

@@ -7,7 +7,7 @@ https://github.com/n-yamaguchi-0729
 
 import Nyll.JacobianVarieties.Albanese.FiniteSums
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
 import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 import Mathlib.Data.Fin.Tuple.Basic

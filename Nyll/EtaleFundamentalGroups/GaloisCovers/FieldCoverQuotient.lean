@@ -51,12 +51,12 @@ private noncomputable def fieldAlgEquivSchemeIso
     rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← Spec.map_id]
     rw [Spec.map_injective.eq_iff]
     ext z
-    simp
+    exact sigma.apply_symm_apply z
   inv_hom_id := by
     rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← Spec.map_id]
     rw [Spec.map_injective.eq_iff]
     ext z
-    simp
+    exact sigma.symm_apply_apply z
 
 private noncomputable def fieldAlgEquivToFiniteEtaleAut
     (sigma : Gal(L/K)) : Aut (FiniteEtale.mk (ξ K L)) := by

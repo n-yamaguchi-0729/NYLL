@@ -66,10 +66,11 @@ private lemma genericImage_coeff (i : ι) (j : BasisIndex R A) :
   simp only [genericImage, map_sum, Algebra.TensorProduct.basis_repr_tmul]
   rw [Finset.sum_apply']
   rw [Finset.sum_eq_single j]
-  · simp
+  · simp only [Finsupp.smul_apply, Finsupp.mapRange_apply,
+      Module.Basis.repr_self_apply, ite_true, map_one, smul_eq_mul, mul_one]
   · intro k _ hkj
     simp [hkj]
-  · simp
+  · exact fun h ↦ (h (Finset.mem_univ j)).elim
 
 private def relationCoeff (s : σ) (j : BasisIndex R A) :
     MvPolynomial (ι × BasisIndex R A) R :=
@@ -318,7 +319,7 @@ private lemma homForward_comp
         (homForward (P := P) h) := by
   unfold homForward
   rw [← AlgHom.comp_assoc, ← Algebra.TensorProduct.map_comp]
-  simp
+  rw [AlgHom.comp_id]
 
 private def categoryWeilHomEquiv (S : CommAlgCat.{u} R) :
     (CommAlgCat.of R (HomRing (R := R) (A := A) (B := B) P) ⟶ S) ≃

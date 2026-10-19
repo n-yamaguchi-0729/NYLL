@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkUnibranchIrreducible
-import Nyll.SchemeTheory.RingTheory.GeometricallyUnibranch
+import Nyll.SchemeTheory.RingTheory.Reduced.GeometricallyUnibranch
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!

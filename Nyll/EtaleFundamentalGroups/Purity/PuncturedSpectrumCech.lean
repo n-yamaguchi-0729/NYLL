@@ -355,7 +355,7 @@ theorem puncturedSpectrumOverlapSpecMapLeft_comp_chartIso_inv
   rw [← cancel_epi (puncturedSpectrumOverlapIsoSpecAwayMul R i j).hom]
   rw [← Category.assoc,
     puncturedSpectrumOverlapIsoSpecAwayMul_hom_comp_left]
-  simp
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
 /- The two descriptions of the right overlap map agree after transporting
 source and target through the affine identifications. -/
@@ -369,7 +369,7 @@ theorem puncturedSpectrumOverlapSpecMapRight_comp_chartIso_inv
   rw [← cancel_epi (puncturedSpectrumOverlapIsoSpecAwayMul R i j).hom]
   rw [← Category.assoc,
     puncturedSpectrumOverlapIsoSpecAwayMul_hom_comp_right]
-  simp
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
 /-- Restriction of finite etale covers from the left principal chart to the
 pairwise overlap. -/

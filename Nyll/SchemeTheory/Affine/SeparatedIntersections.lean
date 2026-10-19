@@ -87,7 +87,9 @@ theorem main {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [IsAffine Y]
   have hP : IsPullback (X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ hU.isoSpec.hom)
       (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ hV.isoSpec.hom) hU.fromSpec hV.fromSpec :=
     (isPullback_opens_inf U V).of_iso (Iso.refl _) hU.isoSpec hV.isoSpec (Iso.refl _)
-      (by simp) (by simp) (by simp [IsAffineOpen.isoSpec_hom]) (by simp [IsAffineOpen.isoSpec_hom])
+      (by simp only [Iso.refl_hom, Category.id_comp])
+      (by simp only [Iso.refl_hom, Category.id_comp])
+      (by simp [IsAffineOpen.isoSpec_hom]) (by simp [IsAffineOpen.isoSpec_hom])
   set ψ := pullback.mapDesc hU.fromSpec hV.fromSpec f' with hψ
   have : IsClosedImmersion ψ := inferInstance
   set F : ↑(U ⊓ V) ⟶ Spec (.of (A ⊗[R] B)) :=

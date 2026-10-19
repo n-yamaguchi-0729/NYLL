@@ -7,6 +7,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleCohomology.Classical.All
 import Nyll.EtaleCohomology.Constructible.All
 import Nyll.EtaleCohomology.Sites.All
+import Nyll.EtaleCohomology.Trace.All
+import Nyll.EtaleCohomology.Frobenius.All
 
 /-!
 # Étale cohomology

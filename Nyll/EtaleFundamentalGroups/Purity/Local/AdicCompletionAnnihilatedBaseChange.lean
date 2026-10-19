@@ -43,7 +43,7 @@ theorem adicCompletion_tmul_eq_zero_of_mem_map
   · rintro y ⟨r, hr, rfl⟩
     simpa [Algebra.smul_def, @hM m ⟨r, hr⟩] using
       (TensorProduct.smul_tmul r (1 : AdicCompletion I R) m)
-  · simp
+  · exact TensorProduct.zero_tmul _ _
   · intro x y _ _ hx hy
     rw [TensorProduct.add_tmul, hx, hy, add_zero]
   · intro a x _ hx
@@ -133,7 +133,7 @@ theorem adicCompletion_tmul_eq_zero_of_mem_map_pow
   · rintro y ⟨r, hr, rfl⟩
     simpa [Algebra.smul_def, @hM m ⟨r, hr⟩] using
       (TensorProduct.smul_tmul r (1 : AdicCompletion I R) m)
-  · simp
+  · exact TensorProduct.zero_tmul _ _
   · intro x y _ _ hx hy
     rw [TensorProduct.add_tmul, hx, hy, add_zero]
   · intro a x _ hx

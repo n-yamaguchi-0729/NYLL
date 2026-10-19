@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.RingTheory.DVRFractionFieldAway
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
 import Mathlib.Algebra.GroupWithZero.Associated
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Restrict

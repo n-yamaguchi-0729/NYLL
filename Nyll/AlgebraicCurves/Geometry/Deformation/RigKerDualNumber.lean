@@ -13,10 +13,10 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 import Mathlib.Algebra.DualNumber
 import Mathlib.Algebra.TrivSqZeroExt.Basic
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.SubPicCondition
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroGroupCut
+import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 

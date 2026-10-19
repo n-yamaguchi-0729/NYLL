@@ -1,0 +1,28 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.InvertibleSectionIdeal
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleDescentFiniteFaithfullyFlat
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleGluingOpenCover
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoEqMapPullbackRigSectionCompEq
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoEqMapPullbackRigSectionCompEqSurjective
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoMapPullbackRigSectionCompEq
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullback
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackFiniteFaithfullyFlat
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackOpenCover
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoUnit
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoUnitPullbackRigSection
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundlePullbackRigSectionPullbackIsoTensorUnit
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleSubsingletonIsoMapPullbackRigSectionCompEq
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedPointDifferenceEquivalence
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseTwist
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupBaseChange
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupComparison
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedLocalRigidification

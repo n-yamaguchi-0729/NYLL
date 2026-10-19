@@ -12,7 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.JacobianVarieties.WeilPairing.Datum
 import Nyll.JacobianVarieties.Autoduality.Cohomology
-import Nyll.AlgebraicCurves.Places.EvaluationAlgebra
+import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
 
 /-!
 # Divisorial Weil pairings
@@ -155,12 +155,12 @@ theorem rational_of_mem_support_right {v : Place K F} (hv : v ∈ d.D₂.support
 
 theorem evalAt_f₁_ne_zero {v : Place K F} (hv : v ∈ d.D₂.support) :
     v.evalAt d.f₁ ≠ 0 :=
-  v.evalAt_ne_zero_of_ord_eq_zero (d.rational_of_mem_support_right hv) d.f₁_ne_zero
+  v.evalAt_ne_zero (d.rational_of_mem_support_right hv) d.f₁_ne_zero
     (d.ord_f₁_eq_zero_of_mem_support hv)
 
 theorem evalAt_f₂_ne_zero {v : Place K F} (hv : v ∈ d.D₁.support) :
     v.evalAt d.f₂ ≠ 0 :=
-  v.evalAt_ne_zero_of_ord_eq_zero (d.rational_of_mem_support_left hv) d.f₂_ne_zero
+  v.evalAt_ne_zero (d.rational_of_mem_support_left hv) d.f₂_ne_zero
     (d.ord_f₂_eq_zero_of_mem_support hv)
 
 end WeilDatum
@@ -269,10 +269,10 @@ def galSmul (d : WeilDatum K F n) : WeilDatum K F n where
 theorem galSmul_pairing (d : WeilDatum K F n) : (d.galSmul σ).pairing = d.pairing := by
   change Divisor.evalFun (σ d.f₁) (σ • d.D₂) / Divisor.evalFun (σ d.f₂) (σ • d.D₁) = d.pairing
   rw [Divisor.evalFun_smul σ d.D₂ (fun v hv => d.rational_of_mem_support_right hv)
-      (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt
+      (fun v hv => v.mem_of_ord_nonneg
         d.f₁_ne_zero (d.ord_f₁_eq_zero_of_mem_support hv).ge),
     Divisor.evalFun_smul σ d.D₁ (fun v hv => d.rational_of_mem_support_left hv)
-      (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt
+      (fun v hv => v.mem_of_ord_nonneg
         d.f₂_ne_zero (d.ord_f₂_eq_zero_of_mem_support hv).ge)]
   rfl
 
@@ -353,14 +353,14 @@ theorem pairing_eq_of_addPrincipalLeft (hrec : WeilReciprocity K F)
       exact hEv (hE0 v hne)
     rw [d.ord_f₂ v, hD₂v, mul_zero]
   have hevalf₂E : ∀ v ∈ E.support, v.evalAt d.f₂ ≠ 0 := fun v hv =>
-    v.evalAt_ne_zero_of_ord_eq_zero (hratE v hv) d.f₂_ne_zero (hordf₂E v hv)
+    v.evalAt_ne_zero (hratE v hv) d.f₂_ne_zero (hordf₂E v hv)
   have hnum : Divisor.evalFun d'.f₁ d'.D₂
       = Divisor.evalFun d.f₁ d.D₂ * Divisor.evalFun h d.D₂ ^ (n : ℤ) := by
     rw [hf₁, hD₂,
       Divisor.evalFun_mul_of_forall_mem hratD₂
-        (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt
+        (fun v hv => v.mem_of_ord_nonneg
           d.f₁_ne_zero (d.ord_f₁_eq_zero_of_mem_support hv).ge)
-        (fun v hv => v.mem_toValuationSubring_of_ord_nonneg_alt (zpow_ne_zero _ hh)
+        (fun v hv => v.mem_of_ord_nonneg (zpow_ne_zero _ hh)
           (by rw [Place.ord_zpow, hordh v hv, mul_zero])),
       Divisor.evalFun_zpow_left_of_ord_eq_zero hh (n : ℤ) hratD₂ hordh]
   have hrecip : Divisor.evalFun h d.D₂ ^ (n : ℤ) = Divisor.evalFun d.f₂ E := by
@@ -434,9 +434,9 @@ private theorem addLeft_pairing (d' : WeilDatum K F n) (hD : d.D₂ = d'.D₂) (
       = Divisor.evalFun d.f₁ d.D₂ * Divisor.evalFun d'.f₁ d.D₂ := by
     refine Divisor.evalFun_mul_of_forall_mem (fun v hv => d.rational_of_mem_support_right hv)
       (fun v hv => ?_) (fun v hv => ?_)
-    · exact v.mem_toValuationSubring_of_ord_nonneg_alt
+    · exact v.mem_of_ord_nonneg
         d.f₁_ne_zero (d.ord_f₁_eq_zero_of_mem_support hv).ge
-    · exact v.mem_toValuationSubring_of_ord_nonneg_alt d'.f₁_ne_zero
+    · exact v.mem_of_ord_nonneg d'.f₁_ne_zero
         (d'.ord_f₁_eq_zero_of_mem_support (hD ▸ hv)).ge
   have hden : Divisor.evalFun d.f₂ (d.D₁ + d'.D₁)
       = Divisor.evalFun d.f₂ d.D₁ * Divisor.evalFun d.f₂ d'.D₁ := by

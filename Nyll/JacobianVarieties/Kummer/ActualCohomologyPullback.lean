@@ -11,7 +11,7 @@ import Nyll.JacobianVarieties.Kummer.DivisorClassCohomologyComparison
 import Nyll.JacobianVarieties.Kummer.CohomologyPullbackCharacters
 import Nyll.EtaleFundamentalGroups.Cohomology.GenericPointCharacterDetection
 import Nyll.EtaleFundamentalGroups.Cohomology.H1CharacterComposition
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalkNormality
+import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 
 /-!
 # Actual Abel--Jacobi pullback on finite-coefficient H¹

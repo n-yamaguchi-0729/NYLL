@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.AlgebraicCurves.Geometry.Descent.RepresentableMatching
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLawGrpObj
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
 import Mathlib.Algebra.Category.Grp.Basic
 import Mathlib.Algebra.Group.Subgroup.Basic
 

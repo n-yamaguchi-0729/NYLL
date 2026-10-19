@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
 import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 import Nyll.EtaleCohomology.Classical.KummerRootCover
 import Mathlib.AlgebraicGeometry.PullbackCarrier
@@ -151,9 +152,8 @@ def etaleKummerBoundary (X : Scheme.{u}) {n : ℕ} (hn : 0 < n)
     (hnX : IsUnit (n : Γ(X, ⊤))) (V : X.Etale)
     (s : (etaleMultiplicativeGroupSheaf X).obj.obj (op V)) :
     Sheaf.H'.{u} (etaleRootsOfUnitySheaf X n) 1 V :=
-  (Ext.mk₀ ((freeAbelianSheafYonedaHomEquiv X.smallEtaleTopology V
-    (etaleMultiplicativeGroupSheaf X)).symm s)).comp
-      (etaleKummerComplex_shortExact X hn hnX).extClass (zero_add 1)
+  cohomologyPresheafSectionBoundary X (etaleKummerComplex X n)
+    (etaleKummerComplex_shortExact X hn hnX) V s
 
 /-- The connecting class vanishes exactly when the unit already has a
 root on the given étale object. -/
@@ -162,38 +162,8 @@ theorem etaleKummerBoundary_eq_zero_iff (X : Scheme.{u}) {n : ℕ}
     (s : (etaleMultiplicativeGroupSheaf X).obj.obj (op V)) :
     etaleKummerBoundary X hn hnX V s = 0 ↔
       ∃ t, (etaleMultiplicativeGroupPower X n).hom.app (op V) t = s := by
-  let P : Sheaf X.smallEtaleTopology AddCommGrpCat.{u} :=
-    (freeAbelianSheafYoneda X.smallEtaleTopology).obj V
-  let e : (P ⟶ etaleMultiplicativeGroupSheaf X) ≃
-      (etaleMultiplicativeGroupSheaf X).obj.obj (op V) :=
-    freeAbelianSheafYonedaHomEquiv X.smallEtaleTopology V
-      (etaleMultiplicativeGroupSheaf X)
-  let a : P ⟶ etaleMultiplicativeGroupSheaf X := e.symm s
-  let S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) :=
-    etaleKummerComplex X n
-  have hS : S.ShortExact := etaleKummerComplex_shortExact X hn hnX
-  constructor
-  · intro h
-    obtain ⟨b, hb⟩ := Ext.covariant_sequence_exact₃ P hS (Ext.mk₀ a) rfl h
-    obtain ⟨t, rfl⟩ := (Ext.mk₀_bijective P S.X₂).surjective b
-    have ht : t ≫ S.g = a :=
-      (Ext.mk₀_bijective P S.X₃).injective (by
-        simpa only [Ext.mk₀_comp_mk₀] using hb)
-    refine ⟨e t, ?_⟩
-    change S.g.hom.app (op V) (e t) = s
-    rw [← freeAbelianSheafYonedaHomEquiv_postcomp, ht]
-    exact e.apply_symm_apply s
-  · rintro ⟨t, ht⟩
-    let b : P ⟶ S.X₂ := e.symm t
-    have hb : b ≫ S.g = a := by
-      apply e.injective
-      rw [freeAbelianSheafYonedaHomEquiv_postcomp]
-      change S.g.hom.app (op V) (e (e.symm t)) = e (e.symm s)
-      rw [e.apply_symm_apply, e.apply_symm_apply]
-      exact ht
-    change (Ext.mk₀ a).comp hS.extClass (zero_add 1) = 0
-    rw [← hb, ← Ext.mk₀_comp_mk₀, Ext.comp_assoc_of_second_deg_zero,
-      hS.comp_extClass, Ext.comp_zero]
+  exact cohomologyPresheafSectionBoundary_eq_zero_iff X
+    (etaleKummerComplex X n) (etaleKummerComplex_shortExact X hn hnX) V s
 
 /-- Naturality uses the actual restriction map of the actual cohomology
 presheaf. -/
@@ -204,26 +174,8 @@ theorem etaleKummerBoundary_restrict (X : Scheme.{u}) {n : ℕ}
       (etaleKummerBoundary X hn hnX V s) =
         etaleKummerBoundary X hn hnX W
           ((etaleMultiplicativeGroupSheaf X).obj.map f.op s) := by
-  let P : X.Etale ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u} :=
-    freeAbelianSheafYoneda X.smallEtaleTopology
-  let F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u} :=
-    etaleMultiplicativeGroupSheaf X
-  let eV : (P.obj V ⟶ F) ≃ F.obj.obj (op V) :=
-    freeAbelianSheafYonedaHomEquiv X.smallEtaleTopology V F
-  let eW : (P.obj W ⟶ F) ≃ F.obj.obj (op W) :=
-    freeAbelianSheafYonedaHomEquiv X.smallEtaleTopology W F
-  let a : P.obj V ⟶ F := eV.symm s
-  let b : P.obj W ⟶ F := eW.symm (F.obj.map f.op s)
-  have hab : P.map f ≫ a = b := by
-    apply eW.injective
-    rw [freeAbelianSheafYonedaHomEquiv_precomp]
-    change F.obj.map f.op (eV (eV.symm s)) = eW (eW.symm (F.obj.map f.op s))
-    rw [eV.apply_symm_apply, eW.apply_symm_apply]
-  change (Ext.mk₀ (P.map f)).comp
-    ((Ext.mk₀ a).comp (etaleKummerComplex_shortExact X hn hnX).extClass (zero_add 1))
-      (zero_add 1) = _
-  rw [← Ext.comp_assoc_of_second_deg_zero, Ext.mk₀_comp_mk₀, hab]
-  rfl
+  exact cohomologyPresheafSectionBoundary_restrict X (etaleKummerComplex X n)
+    (etaleKummerComplex_shortExact X hn hnX) f s
 
 /-- The actual Kummer class is killed by an actual finite étale cover of
 degree exactly n, not merely by an unspecified local covering. -/

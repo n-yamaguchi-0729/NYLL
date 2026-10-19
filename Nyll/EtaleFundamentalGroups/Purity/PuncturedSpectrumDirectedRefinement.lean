@@ -39,7 +39,7 @@ abbrev puncturedSpectrumRefinementIndex :=
 def puncturedSpectrumRefinementSingleton
     (i : puncturedSpectrumGeneratorIndex R) :
     puncturedSpectrumRefinementIndex R :=
-  ⟨{i}, by simp⟩
+  ⟨{i}, Finset.singleton_nonempty i⟩
 
 /-- Union is a common lower bound for the reverse-inclusion order. -/
 def puncturedSpectrumRefinementUnion

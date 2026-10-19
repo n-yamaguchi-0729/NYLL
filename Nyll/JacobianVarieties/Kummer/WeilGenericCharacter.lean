@@ -79,10 +79,10 @@ theorem exists_weilDatum_pairing_eq_generic_kummer
       hf hg hfdiv hgdiv hDE hDx hDε
   have hβ : β ≠ 0 := by
     have hfx : x.evalAt f ≠ 0 :=
-      x.evalAt_ne_zero_of_ord_eq_zero x.isRational_of_isAlgClosed hf
+      x.evalAt_ne_zero x.isRational_of_isAlgClosed hf
         (by rw [hfdiv x, hDx, mul_zero])
     have hfε : ε.evalAt f ≠ 0 :=
-      ε.evalAt_ne_zero_of_ord_eq_zero ε.isRational_of_isAlgClosed hf
+      ε.evalAt_ne_zero ε.isRational_of_isAlgClosed hf
         (by rw [hfdiv ε, hDε, mul_zero])
     have hpow : β ^ (n : ℕ) ≠ 0 := by
       rw [hroot, ← hx, ← hε]

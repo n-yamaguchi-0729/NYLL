@@ -10,5 +10,13 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierB_finite_and_card_torsion_le_pow_genusFF
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierB_linearIndependent_of_cartier_fixed
+import Nyll.AlgebraicCurves.Differentials.Cartier.CartierBFiniteCardTorsionLePowGenusFF
+import Nyll.AlgebraicCurves.Differentials.Cartier.CartierBLinearIndependent
+import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
+import Nyll.AlgebraicCurves.Differentials.Cartier.CartierFixedness
+import Nyll.AlgebraicCurves.Differentials.Cartier.CartierOperatorUnique
+import Nyll.AlgebraicCurves.Differentials.Cartier.DlogCartierOperatorFixed
+import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCEqCartierLaws
+import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCPowPredSmulD
+import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCPowSmulDEqZero
+import Nyll.AlgebraicCurves.Differentials.Cartier.PthPowerKernel

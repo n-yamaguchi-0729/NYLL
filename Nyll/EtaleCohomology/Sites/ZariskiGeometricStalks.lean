@@ -6,6 +6,7 @@ https://github.com/n-yamaguchi-0729
 -/
 
 import Nyll.EtaleCohomology.Sites.ZariskiSectionEquality
+import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.CategoryTheory.Comma.Over.Basic
@@ -45,11 +46,80 @@ def zariskiGeometricLift (U : X.Opens) (hU : s ξ ∈ U) :
   let k : Spec (CommRingCat.of Ω) ⟶ U.toScheme := IsOpenImmersion.lift U.ι s hRange
   exact Over.homMk k (IsOpenImmersion.lift_fac U.ι s hRange)
 
-private lemma zariskiGeometricLift_unique (U : X.Opens)
+lemma zariskiGeometricLift_unique (U : X.Opens)
     (a b : (Scheme.pointSmallEtale s).fiber.obj ((zariskiToEtale X).obj U)) : a = b := by
   apply Over.OverMorphism.ext
   apply (cancel_mono U.ι).mp
   exact a.w.trans b.w.symm
+
+/-- Restricting an actual section to a smaller Zariski neighborhood does not
+change its geometric germ. -/
+lemma zariskiGeometricAbelianGerm_restrict
+    (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
+    {U V : X.Opens} (hUV : U ≤ V) (hU : s ξ ∈ U) (hV : s ξ ∈ V)
+    (a : A.obj.obj (op ((zariskiToEtale X).obj V))) :
+    (Scheme.pointSmallEtale s).toPresheafFiber ((zariskiToEtale X).obj U)
+      (zariskiGeometricLift s ξ U hU) A.obj
+      (A.obj.map ((zariskiToEtale X).map (homOfLE hUV)).op a) =
+    (Scheme.pointSmallEtale s).toPresheafFiber ((zariskiToEtale X).obj V)
+      (zariskiGeometricLift s ξ V hV) A.obj a := by
+  have h := (Scheme.pointSmallEtale s).toPresheafFiber_w
+    ((zariskiToEtale X).map (homOfLE hUV))
+    (zariskiGeometricLift s ξ U hU) A.obj
+  have ht : (Scheme.pointSmallEtale s).fiber.map
+      ((zariskiToEtale X).map (homOfLE hUV))
+      (zariskiGeometricLift s ξ U hU) = zariskiGeometricLift s ξ V hV :=
+    zariskiGeometricLift_unique s V _ _
+  rw [ht] at h
+  exact ConcreteCategory.congr_hom h a
+
+/-- Equality of geometric germs of sections already holds on a Zariski
+neighborhood of the underlying point. -/
+theorem exists_zariski_neighborhood_sections_eq_of_geometric_germs_eq
+    (F : Sheaf X.smallEtaleTopology (Type u))
+    (U : X.Opens) (hU : s ξ ∈ U)
+    (a b : F.obj.obj (op ((zariskiToEtale X).obj U)))
+    (hab : (Scheme.pointSmallEtale s).toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s ξ U hU) F.obj a =
+      (Scheme.pointSmallEtale s).toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s ξ U hU) F.obj b) :
+    ∃ (V : X.Opens) (hVU : V ≤ U), s ξ ∈ V ∧
+      F.obj.map ((zariskiToEtale X).map (homOfLE hVU)).op a =
+      F.obj.map ((zariskiToEtale X).map (homOfLE hVU)).op b := by
+  obtain ⟨V, g, y, _, hy⟩ := ((Scheme.pointSmallEtale s).toPresheafFiber_eq_iff'
+    (P := F.obj) ((zariskiToEtale X).obj U) (zariskiGeometricLift s ξ U hU) a b).mp hab
+  obtain ⟨W, hWU, hW, habW⟩ :=
+    exists_zariski_neighborhood_sections_eq_of_etale_map_eq F U a b V g hy (y.left ξ)
+  have hPoint : V.hom (y.left ξ) = s ξ :=
+    (Scheme.Hom.comp_apply y.left V.hom ξ).symm.trans
+      (congrArg (fun k : Spec (CommRingCat.of Ω) ⟶ X => k ξ) y.w)
+  rw [hPoint] at hW
+  exact ⟨W, hWU, hW, habW⟩
+
+/-- For abelian étale sheaves, equality of actual geometric germs can be
+realized by equality after a Zariski restriction. -/
+theorem exists_zariski_neighborhood_abelianSections_eq_of_geometric_germs_eq
+    (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (U : X.Opens) (hU : s ξ ∈ U)
+    (a b : A.obj.obj (op ((zariskiToEtale X).obj U)))
+    (hab : (Scheme.pointSmallEtale s).toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s ξ U hU) A.obj a =
+      (Scheme.pointSmallEtale s).toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s ξ U hU) A.obj b) :
+    ∃ (V : X.Opens) (hVU : V ≤ U), s ξ ∈ V ∧
+      A.obj.map ((zariskiToEtale X).map (homOfLE hVU)).op a =
+      A.obj.map ((zariskiToEtale X).map (homOfLE hVU)).op b := by
+  let T := (sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})).obj A
+  apply exists_zariski_neighborhood_sections_eq_of_geometric_germs_eq s ξ T U hU a b
+  let Φ := Scheme.pointSmallEtale s
+  let W := (zariskiToEtale X).obj U
+  let t := zariskiGeometricLift s ξ U hU
+  let e := (Φ.presheafFiberCompIso (forget AddCommGrpCat.{u})).app A.obj
+  apply ((ConcreteCategory.isIso_iff_bijective e.hom).mp inferInstance).1
+  have he := Φ.toPresheafFiber_presheafFiberCompIso_hom_app
+    (forget AddCommGrpCat.{u}) W t A.obj
+  have ha := ConcreteCategory.congr_hom he a
+  have hb := ConcreteCategory.congr_hom he b
+  exact ha.trans (hab.trans hb.symm)
 
 private def zariskiGeometricNeighborhoods :
     OpenNhds (s ξ) ⥤ (Scheme.pointSmallEtale s).fiber.Elements where
@@ -92,14 +162,8 @@ private lemma zariski_germ_eq_of_geometric_germ_eq
         (zariskiGeometricLift s ξ U hU) F.obj b) :
     TopCat.Presheaf.germ ((etaleZariskiRestriction X (Type u)).obj F).obj U (s ξ) hU a =
       TopCat.Presheaf.germ ((etaleZariskiRestriction X (Type u)).obj F).obj U (s ξ) hU b := by
-  obtain ⟨V, g, y, _, hy⟩ := ((Scheme.pointSmallEtale s).toPresheafFiber_eq_iff' (P := F.obj)
-    ((zariskiToEtale X).obj U) (zariskiGeometricLift s ξ U hU) a b).mp hab
-  obtain ⟨W, hWU, hW, habW⟩ :=
-    exists_zariski_neighborhood_sections_eq_of_etale_map_eq F U a b V g hy (y.left ξ)
-  have hPoint : V.hom (y.left ξ) = s ξ :=
-    (Scheme.Hom.comp_apply y.left V.hom ξ).symm.trans
-      (congrArg (fun k : Spec (CommRingCat.of Ω) ⟶ X => k ξ) y.w)
-  rw [hPoint] at hW
+  obtain ⟨W, hWU, hW, habW⟩ := exists_zariski_neighborhood_sections_eq_of_geometric_germs_eq
+    s ξ F U hU a b hab
   let H : (TopCat.of X).Presheaf (Type u) :=
     ((etaleZariskiRestriction X (Type u)).obj F).obj
   exact (H.germ_res_apply (homOfLE hWU) (s ξ) hW a).symm.trans
@@ -124,5 +188,68 @@ theorem etaleZariskiStalkToGeometricStalk_injective :
     congrArg (fun k : H.obj (op V) ⟶ (Scheme.pointSmallEtale s).presheafFiber.obj F.obj => k c)
       (germ_etaleZariskiStalkToGeometricStalk s ξ F V hV)
   exact (hg _).symm.trans (hab.trans (hg b))
+
+/-- Sections on a Zariski open are equal when all their actual geometric
+germs are equal. The geometric points used in the proof are the separable
+closures of the actual residue fields. -/
+theorem etaleZariskiSection_eq_of_geometric_germs_eq
+    (U : X.Opens)
+    (a b : F.obj.obj (op ((zariskiToEtale X).obj U)))
+    (h : ∀ (Ω' : Type u) [Field Ω'] [IsSepClosed Ω']
+      (s' : Spec (CommRingCat.of Ω') ⟶ X)
+      (ξ' : Spec (CommRingCat.of Ω')) (hU : s' ξ' ∈ U),
+      (Scheme.pointSmallEtale s').toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s' ξ' U hU) F.obj a =
+      (Scheme.pointSmallEtale s').toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s' ξ' U hU) F.obj b) :
+    a = b := by
+  let Htop : TopCat.Sheaf (Type u) X :=
+    ⟨(zariskiToEtale X).op ⋙ F.obj,
+      ((etaleZariskiRestriction X (Type u)).obj F).property⟩
+  apply TopCat.Presheaf.section_ext Htop U a b
+  intro x hx
+  let K := SeparableClosure (X.residueField x)
+  let s' : Spec (CommRingCat.of K) ⟶ X :=
+    (Scheme.SpecToEquivOfField K X).symm
+      ⟨x, CommRingCat.ofHom (algebraMap (X.residueField x) K)⟩
+  let ξ' : Spec (CommRingCat.of K) := IsLocalRing.closedPoint (CommRingCat.of K)
+  have hs : s' ξ' = x := by
+    change X.fromSpecResidueField x
+      ((Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) K))) ξ') = x
+    exact Scheme.fromSpecResidueField_apply _ _
+  let germEqAt : X → Prop := fun y => ∀ hy : y ∈ U,
+    TopCat.Presheaf.germ ((etaleZariskiRestriction X (Type u)).obj F).obj U y hy a =
+      TopCat.Presheaf.germ ((etaleZariskiRestriction X (Type u)).obj F).obj U y hy b
+  have hAt : germEqAt (s' ξ') := by
+    intro hy
+    exact zariski_germ_eq_of_geometric_germ_eq s' ξ' F U hy a b (h K s' ξ' hy)
+  exact (congrArg germEqAt hs).mp hAt hx
+
+/-- Equality of abelian étale sections on an open is detected by their actual
+abelian geometric germs. -/
+theorem etaleZariskiAbelianSection_eq_of_geometric_germs_eq
+    (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (U : X.Opens)
+    (a b : A.obj.obj (op ((zariskiToEtale X).obj U)))
+    (h : ∀ (Ω' : Type u) [Field Ω'] [IsSepClosed Ω']
+      (s' : Spec (CommRingCat.of Ω') ⟶ X)
+      (ξ' : Spec (CommRingCat.of Ω')) (hU : s' ξ' ∈ U),
+      (Scheme.pointSmallEtale s').toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s' ξ' U hU) A.obj a =
+      (Scheme.pointSmallEtale s').toPresheafFiber ((zariskiToEtale X).obj U)
+        (zariskiGeometricLift s' ξ' U hU) A.obj b) :
+    a = b := by
+  let T := (sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})).obj A
+  apply etaleZariskiSection_eq_of_geometric_germs_eq T U a b
+  intro Ω' _ _ s' ξ' hU
+  let Φ := Scheme.pointSmallEtale s'
+  let W := (zariskiToEtale X).obj U
+  let t := zariskiGeometricLift s' ξ' U hU
+  let e := (Φ.presheafFiberCompIso (forget AddCommGrpCat.{u})).app A.obj
+  apply ((ConcreteCategory.isIso_iff_bijective e.hom).mp inferInstance).1
+  have he := Φ.toPresheafFiber_presheafFiberCompIso_hom_app
+    (forget AddCommGrpCat.{u}) W t A.obj
+  have ha := ConcreteCategory.congr_hom he a
+  have hb := ConcreteCategory.congr_hom he b
+  exact ha.trans ((h Ω' s' ξ' hU).trans hb.symm)
 
 end EtaleCohomology

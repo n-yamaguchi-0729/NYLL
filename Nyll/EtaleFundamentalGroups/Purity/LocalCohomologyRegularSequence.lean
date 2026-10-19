@@ -41,8 +41,9 @@ theorem localCohomology_isZero_of_isRegular
     change Module.support R (R ⧸ I ^ n) ⊆ PrimeSpectrum.zeroLocus I
     rw [Module.support_eq_zeroLocus, Ideal.annihilator_quotient]
     rcases n with _ | n
-    · simp
-    · simp
+    · simp only [pow_zero, Ideal.one_eq_top, Submodule.top_coe,
+        PrimeSpectrum.zeroLocus_univ, Set.empty_subset]
+    · rw [PrimeSpectrum.zeroLocus_pow I (Nat.succ_ne_zero n)]
   have hDerived :
       Subsingleton (CategoryTheory.Abelian.Ext.{u} N M i) :=
     ModuleCat.subsingleton_ext_of_exists_isRegular I N hSupp M smul_lt rs mem reg

@@ -66,7 +66,7 @@ private theorem finiteUnramifiedExtension_algEquiv
     · intro _hx
       trivial
     · intro _hx
-      exact ⟨e.symm x, by simp, e.apply_symm_apply x⟩
+      exact ⟨e.symm x, by trivial, e.apply_symm_apply x⟩
   have haGenB : Algebra.adjoin K ({(aB : B)} : Set B) = ⊤ := by
     apply Algebra.adjoin_eq_top_of_intermediateField
       (fun x _hx ↦ Algebra.IsAlgebraic.isAlgebraic x)

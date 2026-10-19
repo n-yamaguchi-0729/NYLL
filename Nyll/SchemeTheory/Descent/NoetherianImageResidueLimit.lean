@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.RingTheory.SubalgebraResidueFieldColimit
+import Nyll.SchemeTheory.RingTheory.FinitePresentation.SubalgebraResidueFieldColimit
 import Nyll.SchemeTheory.Descent.NoetherianImageApproximation
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Opposites

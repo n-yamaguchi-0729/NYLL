@@ -38,5 +38,8 @@ import Nyll.SchemeTheory.Topology.PullbackFiniteSkyscraperEmbedding
 import Nyll.SchemeTheory.Topology.PullbackSkyscraperClosedDiscrete
 import Nyll.SchemeTheory.Topology.FiniteProductRestriction
 import Nyll.SchemeTheory.Topology.SpectralClosedSheafRestriction
+import Nyll.SchemeTheory.Topology.FppfAlgebraicallyClosedPoint
+import Nyll.SchemeTheory.Topology.RepresentedFppfSurjective
+import Nyll.SchemeTheory.Topology.FpqcOpenDescent
 
 /-! Topological results used by scheme theory. -/

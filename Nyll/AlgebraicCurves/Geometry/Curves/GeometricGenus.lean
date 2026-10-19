@@ -9,9 +9,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Models.Basic
+import Nyll.AlgebraicCurves.Models.Construction.Basic
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Cohomology.Cech.Scheme_TwoAffineOpenCover_finrank_cechDiff_baseChange_of_isAlgClosed
+import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.TwoAffineCoverFinrankCechDiffBaseChange
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 
 /-!

@@ -10,18 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation
-import Nyll.AlgebraicCurves.Divisors.Maps
-import Nyll.AlgebraicCurves.Places.Rational.RationalFunctionField_weilReciprocity
-import Nyll.AlgebraicCurves.FunctionFields.WeilReciprocity_algebraMap
-import Nyll.AlgebraicCurves.FunctionFields.FunctionField_finite_of_ratFuncAlgHom
-import Nyll.AlgebraicCurves.FunctionFields.FunctionField_exists_ratFuncAlgHom_apply_X_eq
-import Nyll.AlgebraicCurves.Places.Place_isRational_of_isAlgClosed
-import Nyll.AlgebraicCurves.Places.Rational.RationalFunctionField_deg_eq_one_of_isAlgClosed
-import Nyll.AlgebraicCurves.Places.Place_isRational_iff_deg_eq_one
-import Nyll.AlgebraicCurves.Places.Rational.RationalFunctionField_hasPrincipalDivisors
-import Nyll.AlgebraicCurves.Places.Place_evalAt_algebraMap
-import Nyll.AlgebraicCurves.Places.Place_ord_algebraMap
+import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+import Nyll.AlgebraicCurves.Places.Rational.RatFuncWeilReciprocity
+import Nyll.AlgebraicCurves.FunctionFields.NormTrace.WeilReciprocityAlgebraMap
+import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldFiniteRatFuncAlgHom
+import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldRatFuncAlgHomApplyXEq
+import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
+import Nyll.AlgebraicCurves.Places.Rational.RatFuncDegEqOneAlgClosed
+import Nyll.AlgebraicCurves.Places.Rational.RatFuncHasPrincipalDivisors
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Weil Reciprocity
@@ -55,7 +53,7 @@ theorem finsupp_prod_zpow_const {c : K} (hc : c ≠ 0) (D : Divisor K F) :
   classical
   unfold Finsupp.prod Finsupp.sum
   induction D.support using Finset.cons_induction with
-  | empty => simp
+  | empty => rw [Finset.prod_empty, Finset.sum_empty, zpow_zero]
   | cons a s ha ih => rw [Finset.prod_cons, Finset.sum_cons, zpow_add₀ hc, ih]
 
 theorem degree_eq_sum_of_rational (D : Divisor K F)

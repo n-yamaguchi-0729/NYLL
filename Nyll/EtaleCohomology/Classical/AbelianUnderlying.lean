@@ -21,9 +21,9 @@ This allows their extension fibers to be compared as sheaves of sets.
 
 noncomputable section
 
-universe u
+universe u v w
 
-open AlgebraicGeometry CategoryTheory
+open AlgebraicGeometry CategoryTheory CategoryTheory.Functor
 
 namespace EtaleCohomology
 
@@ -32,6 +32,44 @@ def etaleAbelianUnderlying (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u} ⥤
       Sheaf X.smallEtaleTopology (Type u) :=
   sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})
+
+/-- The underlying Type sheaf of an actual constant abelian sheaf is the
+existing Type-valued constant sheaf on the same étale site. -/
+def etaleConstantAbelianUnderlyingIso (X : Scheme.{u}) :
+    constantSheaf X.smallEtaleTopology AddCommGrpCat.{u} ⋙
+        etaleAbelianUnderlying X ≅
+      forget AddCommGrpCat.{u} ⋙ constantSheaf X.smallEtaleTopology (Type u) := by
+  let : X.smallEtaleTopology.PreservesSheafification (forget AddCommGrpCat.{u}) :=
+    GrothendieckTopology.PreservesSheafification.transport
+      X.smallEtaleTopology (Scheme.AffineEtale.topology X) (Scheme.AffineEtale.Spec X)
+      (Type u) (forget AddCommGrpCat.{u})
+  exact constantCommuteCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})
+
+/-- The constant-sheaf comparison respects the sheafification unit, before
+evaluation at any étale object. -/
+theorem constantAbelianForgetToSheafify {C : Type u} [Category.{v} C]
+    (J : GrothendieckTopology C)
+    [HasWeakSheafify J AddCommGrpCat.{w}] [HasWeakSheafify J (Type w)]
+    (U : AddCommGrpCat.{w} ⥤ Type w) [J.PreservesSheafification U]
+    [J.HasSheafCompose U] (A : AddCommGrpCat.{w}) :
+    whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj A)) U ≫
+      (sheafifyComposeIso J U ((Functor.const Cᵒᵖ).obj A)).inv ≫
+      sheafifyMap J (Functor.constComp Cᵒᵖ A U).hom =
+    (Functor.constComp Cᵒᵖ A U).hom ≫
+      toSheafify J ((Functor.const Cᵒᵖ).obj (U.obj A)) := by
+  calc
+    _ = toSheafify J ((Functor.const Cᵒᵖ).obj A ⋙ U) ≫
+        sheafifyMap J (Functor.constComp Cᵒᵖ A U).hom := by
+      rw [← Category.assoc, CategoryTheory.sheafComposeIso_inv_fac]
+    _ = (Functor.constComp Cᵒᵖ A U).hom ≫
+        toSheafify J ((Functor.const Cᵒᵖ).obj (U.obj A)) :=
+      (CategoryTheory.toSheafify_naturality J (Functor.constComp Cᵒᵖ A U).hom).symm
+
+theorem constantPresheafAdj_unit_app_eq_id {C : Type u} [Category.{v} C]
+    {D : Type w} [Category.{v} D] (T : C) (hT : Limits.IsTerminal T) (A : D) :
+    (constantPresheafAdj D hT).unit.app A = 𝟙 A := by
+  change (Functor.constCompEvaluationObj D (Opposite.op T)).hom.app A = 𝟙 A
+  rfl
 
 private def integerSheafEquivalenceUnderlyingIso (X : Scheme.{u}) :
     (Classical.integerSheafEquivalence X.smallEtaleTopology).functor ⋙

@@ -4,9 +4,57 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
 import Nyll.SchemeTheory.RingTheory.AdicCompletion.CoprimeProduct
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.Dimension
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FaithfullyFlat
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
 import Nyll.SchemeTheory.RingTheory.AdicCompletion.IntegralExtensionAlgebra
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalRingLocalRingAdicCompletionIsAdicCompleteMapMaximalIdealEq
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalRingIsAdicCompleteMapMaximalIdealQuotient
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.IsLocalizationAtPrimeRingEquivAdicCompletionMaximalIdeal
 import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalizationAtPrime
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.MvPowerSeriesIsAdicCompleteMaximalIdeal
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicProjectiveSplittings
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.NilpotentModule
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveOverCompletion
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectivePresentationKernels
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientRingComparison
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.SequenceLimit
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSystemLayersOverCompletion
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.TensorIdealQuotient
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorNaturality
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemKernelUniversal
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemKernel
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSystemLayers
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteEtaleSystem
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.HomogeneousPolynomialSystem
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedAction
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemAssociatedGraded
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.KernelStabilization
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FreeModuleFlat
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.NoetherianOfQuotient
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.DirectSumExactness
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.CommonBasis
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesApproximation
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FinitePiCoefficients
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.StrictExactness
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientSequence
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReductionSystemComparison
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ChangeBase
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemHom
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemBilinear
+import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteAlgebraSystem
 
 /-!
 # Adic completions in integral extensions

@@ -148,7 +148,8 @@ def radicialDiagonalSndSection (f : X ⟶ Y) (V : finiteEtaleProperty.Over ⊤ X
 private theorem pullbackComp_identitySection
     {A B : Scheme.{u}} (j : A ⟶ B) (q : B ⟶ A) (hj : j ≫ q = 𝟙 A)
     (V : finiteEtaleProperty.Over ⊤ A) :
-    Limits.pullback.lift (𝟙 V.left) V.hom (by simp) ≫
+    Limits.pullback.lift (𝟙 V.left) V.hom
+      (by exact (Category.id_comp V.hom).trans (Category.comp_id V.hom).symm) ≫
         ((MorphismProperty.Over.pullbackComp
           (P := finiteEtaleProperty) (Q := ⊤) j q (𝟙 A) hj.symm).hom.app V).left ≫
         Limits.pullback.fst (Limits.pullback.snd V.hom q) j =

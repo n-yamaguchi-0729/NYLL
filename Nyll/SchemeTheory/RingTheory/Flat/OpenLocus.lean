@@ -103,7 +103,10 @@ lemma injective_rTensor_iff : Function.Injective (LinearMap.rTensor Bs f) ↔
   have : LinearMap.rTensor Bs f =
       (TensorProduct.comm A Bs Y).toLinearMap ∘ₗ LinearMap.lTensor Bs f ∘ₗ
         (TensorProduct.comm A Y' Bs).toLinearMap := by
-    ext; simp
+    apply TensorProduct.ext'
+    intro y s
+    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, TensorProduct.comm_tmul,
+      LinearMap.lTensor_tmul, LinearMap.rTensor_tmul]
   rw [this]
   simp only [LinearMap.coe_comp, LinearEquiv.coe_coe, EquivLike.comp_injective,
     EquivLike.injective_comp]
@@ -227,8 +230,9 @@ theorem exists_uniform_killer {N : Type*} [AddCommGroup N] [Module B N] (S : Sub
   induction t using Finset.induction_on with
   | empty => exact ⟨1, S.one_mem, fun k hk => by simp_all⟩
   | insert x t hx ih =>
-    obtain ⟨s₁, hs₁, h₁⟩ := ih (fun k hk => h k (Submodule.span_mono (by simp) hk))
-    obtain ⟨s₂, hs₂, h₂⟩ := h x (Submodule.subset_span (by simp))
+    obtain ⟨s₁, hs₁, h₁⟩ := ih (fun k hk =>
+      h k (Submodule.span_mono (fun _ ht ↦ Finset.mem_insert_of_mem ht) hk))
+    obtain ⟨s₂, hs₂, h₂⟩ := h x (Submodule.subset_span (Finset.mem_insert_self x t))
     refine ⟨s₁ * s₂, S.mul_mem hs₁ hs₂, fun k hk => ?_⟩
     rw [Finset.coe_insert, Submodule.mem_span_insert] at hk
     obtain ⟨c, z, hz, rfl⟩ := hk

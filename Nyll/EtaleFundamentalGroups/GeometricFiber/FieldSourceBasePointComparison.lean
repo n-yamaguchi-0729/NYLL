@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-private theorem fundamentalGroupHom_conjAut
+theorem fundamentalGroupHom_conjAut
     {S X : Scheme.{u}} {Ω Ω' : Type u} [Field Ω] [Field Ω']
     (r : S ⟶ X) (p : Spec (.of Ω) ⟶ S) (p' : Spec (.of Ω') ⟶ S)
     (s : fiber p ≅ fiber p') (τ : π₁ᵉᵗ(p)) :

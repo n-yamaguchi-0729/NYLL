@@ -60,7 +60,8 @@ import Nyll.SchemeTheory.FiniteEtale.StrictLocalSections
 import Nyll.SchemeTheory.FiniteEtale.ProperClosedFiberFaithful
 import Nyll.SchemeTheory.FiniteEtale.ProperHenselianSections
 import Nyll.SchemeTheory.FiniteEtale.AffineUniversalHomeomorphismEquivalence
-import Nyll.SchemeTheory.FiniteEtale.isIso_of_isIso_pullback_closedFibre_of_isFinite_of_etale_of_isProper
+import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
+import Nyll.SchemeTheory.FiniteEtale.PointSectionsBaseChange
 
 
 /-!

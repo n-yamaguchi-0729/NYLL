@@ -223,7 +223,8 @@ theorem normalPoint_hasFiniteResidueDegree
         (e.symm y) =
       y
   rw [← e.commutes]
-  simp
+  rw [Algebra.algebraMap_self_apply]
+  exact e.apply_symm_apply y
 
 /--
 The genuine function-field prime divisor associated to a normal rational

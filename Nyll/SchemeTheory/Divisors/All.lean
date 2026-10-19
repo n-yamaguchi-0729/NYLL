@@ -8,6 +8,7 @@ import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.Basic
 import Nyll.SchemeTheory.Divisors.CartierEtale
+import Nyll.SchemeTheory.Divisors.CartierProducts
 import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
 import Nyll.SchemeTheory.Divisors.ConnectedComplement
 import Nyll.SchemeTheory.Divisors.EtaleRegularity
@@ -27,8 +28,14 @@ import Nyll.SchemeTheory.Divisors.SmoothIrreducibleComponents
 import Nyll.SchemeTheory.Divisors.StalkAwayComplement
 
 import Nyll.SchemeTheory.Divisors.AffineComplement
-import Nyll.SchemeTheory.Divisors.Scheme_isIntegral_subscheme_vanishingIdeal
+import Nyll.SchemeTheory.Divisors.IsIntegralSubschemeVanishingIdeal
 import Nyll.SchemeTheory.Divisors.SubschemeStalk
 import Nyll.SchemeTheory.Divisors.RegularCartier
+import Nyll.SchemeTheory.Divisors.StalkIdealSupport
+import Nyll.SchemeTheory.Divisors.StalkIdealExt
+import Nyll.SchemeTheory.Divisors.PointIdealStalk
+import Nyll.SchemeTheory.Divisors.DVRUnitQuotient
+import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
+import Nyll.SchemeTheory.Divisors.CartierOpenDescent
 
 /-! Canonical aggregate for scheme-theoretic divisors. -/

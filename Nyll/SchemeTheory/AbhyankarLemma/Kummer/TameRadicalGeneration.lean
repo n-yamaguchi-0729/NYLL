@@ -198,7 +198,7 @@ theorem generatedOverMaximalUnramifiedByRadicals_of_finiteTame
     · rintro ⟨i, rfl⟩
       exact ⟨e.symm i, rfl⟩
     · rintro ⟨q, rfl⟩
-      exact ⟨e q, by simp⟩
+      exact ⟨e q, congrArg alpha (e.symm_apply_apply q)⟩
   refine ⟨Fintype.card Q,
     (fun i ↦ m (e.symm i)),
     (fun i ↦ a (e.symm i)),

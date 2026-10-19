@@ -10,4 +10,12 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Places.Taylor.IsConfluentPattern_exists_eq_of_lt_jetMult
+import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+import Nyll.AlgebraicCurves.Places.Taylor.DetTaylorCoeffMulEqProdEvalAtMulDetJetMatrix
+import Nyll.AlgebraicCurves.Places.Taylor.EqTaylorCoeffInvSumAntidiagonalEq
+import Nyll.AlgebraicCurves.Places.Taylor.IsConfluentPatternEqLtJetMult
+import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
+import Nyll.AlgebraicCurves.Places.Taylor.Taylor
+import Nyll.AlgebraicCurves.Places.Taylor.TaylorPolynomial
+import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsDNeZero
+import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsTranscendental

@@ -316,8 +316,8 @@ private def postcompAlgEquiv {X Y : Type u}
     (e : X ≃ₐ[R] Y) : (B →ₐ[R] X) ≃ (B →ₐ[R] Y) where
   toFun f := e.toAlgHom.comp f
   invFun f := e.symm.toAlgHom.comp f
-  left_inv f := by ext x; simp
-  right_inv f := by ext x; simp
+  left_inv f := by ext x; exact e.symm_apply_apply (f x)
+  right_inv f := by ext x; exact e.apply_symm_apply (f x)
 
 private def targetAlgHomEquiv (C : CommAlgCat S) :
     (B →ₐ[R] (tensorRightR (R := R) (A := A)).obj (restrictObj (R := R) C)) ≃
@@ -369,7 +369,9 @@ private lemma cancelBaseChange_symm_map {C D : CommAlgCat S}
       Algebra.TensorProduct.map g.hom (AlgHom.id S (S ⊗[R] A))
         ((Algebra.TensorProduct.cancelBaseChange R S S C A).symm x) := by
   induction x using TensorProduct.inductionOn with
-  | tmul c a => simp
+  | tmul c a =>
+      simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
+        Algebra.TensorProduct.cancelBaseChange_symm_tmul, AlgHom.restrictScalars_apply]
   | add x y hx hy => simp [hx, hy]
 
 omit [Module.Free R A] [Module.Finite R A] [Algebra.FinitePresentation R B] in

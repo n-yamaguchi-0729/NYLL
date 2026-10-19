@@ -7,9 +7,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorDescent
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
 import Nyll.EtaleFundamentalGroups.StrictHenselian.AffineNeighborhoodFaithfullyFlat
-import Nyll.SchemeTheory.RingTheory.DVRFractionFieldAway
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
 import Mathlib.RingTheory.Polynomial.RationalRoot
-import Nyll.SchemeTheory.RingTheory.IntegralClosureEtaleOfSplit
+import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
 import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 import Mathlib.RingTheory.TensorProduct.Pi
 import Mathlib.RingTheory.FinitePresentation

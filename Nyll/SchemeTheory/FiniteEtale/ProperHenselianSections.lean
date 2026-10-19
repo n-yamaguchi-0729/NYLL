@@ -12,7 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 
 import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Nyll.SchemeTheory.FiniteEtale.isIso_of_isIso_pullback_closedFibre_of_isFinite_of_etale_of_isProper
+import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
 import Nyll.SchemeTheory.Morphisms.ProperHenselianClopenLift
 
 /-!

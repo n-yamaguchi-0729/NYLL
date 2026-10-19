@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.MultiplicationMorphisms
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedMaps
 import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperKunneth
 import Mathlib.AlgebraicGeometry.Noetherian

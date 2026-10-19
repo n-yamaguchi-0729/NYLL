@@ -22,6 +22,8 @@ import Nyll.EtaleFundamentalGroups.StrictHenselian.All
 
 import Nyll.EtaleFundamentalGroups.Pi1.All
 
+import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoequalizers
+
 /-!
 # Étale fundamental groups
 

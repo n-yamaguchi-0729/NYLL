@@ -211,9 +211,9 @@ theorem map_equationIdeal_linearChangeY
     (f : BivariatePolynomial K) (c : Fin 1 → K) :
     (equationIdeal f).map (linearChangeY c).toRingEquiv.toRingHom =
       equationIdeal (linearChangeY c f) := by
-  rw [equationIdeal, Ideal.map_span]
-  simp
-  rfl
+  rw [equationIdeal, Ideal.map_span, Set.image_singleton, equationIdeal]
+  simp only [RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, AlgEquiv.coe_ringEquiv]
+
 
 /-- The invertible linear change descends to the two coordinate rings. -/
 def coordinateRingEquivLinearChangeY

@@ -187,10 +187,10 @@ def finiteAlongRingHom
     (h : v.FiniteAlong ι) :
     A →+* v.valuationSubring where
   toFun a := ⟨ι a, h a⟩
-  map_zero' := Subtype.ext (by simp)
-  map_one' := Subtype.ext (by simp)
-  map_add' x y := Subtype.ext (by simp)
-  map_mul' x y := Subtype.ext (by simp)
+  map_zero' := Subtype.ext (map_zero ι)
+  map_one' := Subtype.ext (map_one ι)
+  map_add' x y := Subtype.ext (map_add ι x y)
+  map_mul' x y := Subtype.ext (map_mul ι x y)
 
 /-- The finite-along factorization respects the `K`-algebra structures. -/
 def finiteAlongAlgHom

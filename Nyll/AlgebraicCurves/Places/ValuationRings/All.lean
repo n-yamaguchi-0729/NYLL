@@ -1,0 +1,41 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Places.ValuationRings.BasicIsPrimeOverValuationSubring
+import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
+import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubringFiniteDimensional
+import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubringSeparable
+import Nyll.AlgebraicCurves.Places.ValuationRings.ComapEqToValuationSubring
+import Nyll.AlgebraicCurves.Places.ValuationRings.ComapToValuationSubringEq
+import Nyll.AlgebraicCurves.Places.ValuationRings.EqCoeMemNonunitsIff
+import Nyll.AlgebraicCurves.Places.ValuationRings.EqComapToValuationSubringEq
+import Nyll.AlgebraicCurves.Places.ValuationRings.EqToValuationSubringLe
+import Nyll.AlgebraicCurves.Places.ValuationRings.FiniteSetOfNotMemToValuationSubringOrEvalAtMem
+import Nyll.AlgebraicCurves.Places.ValuationRings.FinsetNotMemToValuationSubringOrOrdSubAlgebraMapPosImpMem
+import Nyll.AlgebraicCurves.Places.ValuationRings.IntegralClosureAtOrdFiberNonneg
+import Nyll.AlgebraicCurves.Places.ValuationRings.IsDedekindDomainIInfToSubringIsMaximalIff
+import Nyll.AlgebraicCurves.Places.ValuationRings.IsIntegralAdjoinMemToValuationSubring
+import Nyll.AlgebraicCurves.Places.ValuationRings.IsRationalRangeStalkSectionEq
+import Nyll.AlgebraicCurves.Places.ValuationRings.LocalSubringIffLocalization
+import Nyll.AlgebraicCurves.Places.ValuationRings.MemIntegralClosureIffPlace
+import Nyll.AlgebraicCurves.Places.ValuationRings.MemMemNonunitsIffNotIsUnit
+import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringEvalEvalEqZero
+import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringIffMapMem
+import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringIsIntegralAdjoin
+import Nyll.AlgebraicCurves.Places.ValuationRings.OrdEqNegLogValuationSubringEq
+import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
+import Nyll.AlgebraicCurves.Places.ValuationRings.SmulEqSubMemNonunitsSmulEq
+import Nyll.AlgebraicCurves.Places.ValuationRings.SubAlgebraMapMemMaximalIdeal
+import Nyll.AlgebraicCurves.Places.ValuationRings.SubAlgebraMapMemNonunits
+import Nyll.AlgebraicCurves.Places.ValuationRings.ToSubringEqIsIntegrallyClosedIn
+import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComap
+import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapNeTop
+import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapRingHom
+import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapRingHomSeparable
+import Nyll.AlgebraicCurves.Places.ValuationRings.UniqueCentrePlaceProper
+import Nyll.AlgebraicCurves.Places.ValuationRings.UniqueSubAlgebraMapMemNonunits
+import Nyll.AlgebraicCurves.Places.ValuationRings.ValuationSubringAlgHomApplyEqMemIff

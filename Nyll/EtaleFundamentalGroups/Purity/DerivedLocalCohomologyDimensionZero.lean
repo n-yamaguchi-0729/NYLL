@@ -53,7 +53,7 @@ theorem derivedLocalCohomology_bot_not_isZero_zero
   rw [derivedLocalCohomology_not_isZero_iff_exists_persistent_transition]
   let eIso : ModuleCat.of R (R ⧸ (⊥ : Ideal R) ^ 1) ≅ ModuleCat.of R R :=
     (Submodule.quotEquivOfEqBot
-      ((⊥ : Ideal R) ^ 1) (by simp)).toModuleIso
+      ((⊥ : Ideal R) ^ 1) (pow_one _)).toModuleIso
   let e : ModuleCat.of R (R ⧸ (⊥ : Ideal R) ^ 1) ⟶ ModuleCat.of R R :=
     eIso.hom
   have he : e ≠ 0 := by

@@ -26,7 +26,9 @@ namespace EtaleCohomology
 
 variable {X Y : Scheme.{u}} (q : Y ⟶ X)
 
-private def baseChangeIdentityIso :
+/-- The identity étale object on the source is the base change of the
+identity étale object on the target. -/
+def baseChangeIdentityIso :
     (Scheme.Etale.mk (𝟙 Y) : Y.Etale) ≅ (etaleBaseChange q).obj (Scheme.Etale.mk (𝟙 X)) := by
   let B : Y.Etale := (etaleBaseChange q).obj (Scheme.Etale.mk (𝟙 X))
   let j : (Scheme.Etale.mk (𝟙 Y) : Y.Etale) ⟶ B :=

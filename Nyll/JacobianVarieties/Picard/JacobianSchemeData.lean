@@ -11,7 +11,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.JacobianVarieties.Picard.Designation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
 
 /-!

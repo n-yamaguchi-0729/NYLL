@@ -1,0 +1,23 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.SchemeTheory.RingTheory.Dimension.AlgebraFinrankQuotientSpanSubEq
+import Nyll.SchemeTheory.RingTheory.Dimension.AlgebraTrdegQuotientLt
+import Nyll.SchemeTheory.RingTheory.Dimension.HeightOneNormality
+import Nyll.SchemeTheory.RingTheory.Dimension.IdealHeightAddKrullDimensionQuotientEqKrullDimension
+import Nyll.SchemeTheory.RingTheory.Dimension.IdealHeightEqOneNeBot
+import Nyll.SchemeTheory.RingTheory.Dimension.IdealHeightMapQuotientMkSpanSingletonAddOne
+import Nyll.SchemeTheory.RingTheory.Dimension.IdealIsPrimeLeLeKrullDimensionQuotientEqOne
+import Nyll.SchemeTheory.RingTheory.Dimension.IdealNatCastLeKrullDimensionQuotient
+import Nyll.SchemeTheory.RingTheory.Dimension.IdealNeZeroIsMaximalRadicalMapIsPrime
+import Nyll.SchemeTheory.RingTheory.Dimension.LocalLengthRamificationFormula
+import Nyll.SchemeTheory.RingTheory.Dimension.LocalRingDvdPowKrullDimLEOne
+import Nyll.SchemeTheory.RingTheory.Dimension.LocalRingEqBotLt
+import Nyll.SchemeTheory.RingTheory.Dimension.LocalRingKrullDimensionQuotientSpanSingletonAddOne
+import Nyll.SchemeTheory.RingTheory.Dimension.NoetherianRingKrullDimensionLeOne
+import Nyll.SchemeTheory.RingTheory.Dimension.PrimeContainingAtHeightOne
+import Nyll.SchemeTheory.RingTheory.Dimension.PuncturedHypersurfacePrime
+import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne

@@ -45,7 +45,8 @@ lemma IsLocalizedModule.subsingleton [IsLocalizedModule S f] (h : 0 ∈ S) :
   refine ⟨fun a b ↦ ?_⟩
   obtain ⟨⟨a, s⟩, (rfl : mk' f a s = _)⟩ := IsLocalizedModule.mk'_surjective S f a
   obtain ⟨⟨b, t⟩, (rfl : mk' f b t = _)⟩ := IsLocalizedModule.mk'_surjective S f b
-  exact (IsLocalizedModule.mk'_eq_mk'_iff f a b s t).mpr ⟨⟨0, h⟩, by simp⟩
+  exact (IsLocalizedModule.mk'_eq_mk'_iff f a b s t).mpr
+    ⟨⟨0, h⟩, by simp only [Submonoid.smul_def, zero_smul]⟩
 
 section
 
@@ -64,7 +65,8 @@ lemma IsLocalizedModule.map_injective_iff_localizedModule_map_injective
     rw [← LocalizedModule.restrictScalars_map_eq S g₁ g₂ l]
     simp only [LinearMap.coe_restrictScalars]
   rw [this]
-  simp
+  simp only [LinearMap.coe_comp, LinearEquiv.coe_coe,
+    EmbeddingLike.comp_injective, EquivLike.injective_comp]
 
 lemma IsLocalizedModule.map_surjective_iff_localizedModule_map_surjective
     [IsLocalizedModule S g₁] [IsLocalizedModule S g₂] (l : M →ₗ[R] N) :
@@ -76,7 +78,8 @@ lemma IsLocalizedModule.map_surjective_iff_localizedModule_map_surjective
     rw [← LocalizedModule.restrictScalars_map_eq S g₁ g₂ l]
     simp only [LinearMap.coe_restrictScalars]
   rw [this]
-  simp
+  simp only [LinearMap.coe_comp, LinearEquiv.coe_coe,
+    EquivLike.comp_surjective, EquivLike.surjective_comp]
 
 lemma IsLocalizedModule.map_bijective_iff_localizedModule_map_bijective
     [IsLocalizedModule S g₁] [IsLocalizedModule S g₂] (l : M →ₗ[R] N) :
@@ -88,7 +91,8 @@ lemma IsLocalizedModule.map_bijective_iff_localizedModule_map_bijective
     rw [← LocalizedModule.restrictScalars_map_eq S g₁ g₂ l]
     simp only [LinearMap.coe_restrictScalars]
   rw [this]
-  simp
+  simp only [LinearMap.coe_comp, LinearEquiv.coe_coe,
+    EquivLike.comp_bijective, EquivLike.bijective_comp]
 
 end
 
@@ -141,7 +145,16 @@ lemma FinitePresentation.exists_basis_of_isLocalizedModule_powers :
   let eb : Mₜ t ≃ₗ[Rₜ t] I →₀ Rₜ t :=
     .ofLinearMap (.extendScalarsOfIsLocalizationEquiv (.powers t) (Rₜ t) eb'')
       (.extendScalarsOfIsLocalizationEquiv (.powers t) (Rₜ t) eb''.symm)
-      (by ext; simp) (by ext; simp)
+      (by
+        ext x
+        simp only [LinearMap.comp_apply, LinearMap.extendScalarsOfIsLocalizationEquiv_apply,
+          LinearMap.extendScalarsOfIsLocalization_apply', LinearEquiv.coe_coe,
+          LinearEquiv.apply_symm_apply, LinearMap.id_apply])
+      (by
+        ext x
+        simp only [LinearMap.comp_apply, LinearMap.extendScalarsOfIsLocalizationEquiv_apply,
+          LinearMap.extendScalarsOfIsLocalization_apply', LinearEquiv.coe_coe,
+          LinearEquiv.symm_apply_apply, LinearMap.id_apply])
   refine ⟨Basis.ofRepr eb, fun i ↦ ?_⟩
   simp only [LinearMap.extendScalarsOfIsLocalizationEquiv_apply, LinearEquiv.trans_symm,
     LinearEquiv.symm_symm, Basis.coe_ofRepr, LinearEquiv.symm_ofLinearMap,
@@ -149,7 +162,9 @@ lemma FinitePresentation.exists_basis_of_isLocalizedModule_powers :
     LinearMap.extendScalarsOfIsLocalization_apply', LinearEquiv.coe_coe, LinearEquiv.trans_apply,
     LinearEquiv.restrictScalars_symm_apply, Basis.repr_symm_apply, eb, eb'']
   have : Finsupp.single i 1 =
-    (Finsupp.mapRange.linearMap (Algebra.linearMap R (Rₜ t))) (Finsupp.basisSingleOne i) := by simp
+    (Finsupp.mapRange.linearMap (Algebra.linearMap R (Rₜ t))) (Finsupp.basisSingleOne i) := by
+    simp only [Finsupp.coe_basisSingleOne, Finsupp.mapRange.linearMap_apply,
+      Finsupp.mapRange_single, Algebra.linearMap_apply, map_one]
   rw [this]
   rw [IsLocalizedModule.linearEquiv_symm_apply]
   simp only [Finsupp.coe_basisSingleOne, Finsupp.mapRange.linearMap_apply, Finsupp.mapRange_single,

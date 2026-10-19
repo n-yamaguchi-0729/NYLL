@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLawGrpObj
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
 import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
 import Mathlib.Data.List.FinRange
@@ -16,8 +16,9 @@ import Mathlib.Data.Multiset.MapFold
 
 A morphism from a scheme to a relative group defines a sum morphism on every finite
 power of the source. Its action on test schemes is natural. Over an arbitrary field,
-properness and geometric integrality of the target imply permutation invariance:
-commutativity is deduced from the existing geometric theorem, not assumed.
+commutativity of the target implies permutation invariance, without requiring properness.
+The proper geometrically integral specializations obtain commutativity from the existing
+geometric theorem.
 The list sum therefore descends to multisets of test-scheme points, naturally in the
 test scheme. This is a quotient of point families, not an assertion of a scheme quotient.
 
@@ -74,6 +75,18 @@ theorem sumList_natural (G : RelativeGroupLaw R f) {T T' : Scheme.{u}}
   | cons x xs ih =>
     rw [sumList_cons, List.map_cons, sumList_cons, G.mul_natural, ih]
 
+/-- An additive evaluator sends the actual relative point sum to the sum
+of its values, over every parameter scheme. -/
+theorem value_sumList (G : RelativeGroupLaw R f) {T : Scheme.{u}}
+    (t : T ⟶ Spec (CommRingCat.of R)) {A : Type*} [AddMonoid A]
+    (v : SchemeHomOver t f → A) (h₁ : v (G.one t) = 0)
+    (h₂ : ∀ x y, v (G.mul t x y) = v x + v y)
+    (xs : List (SchemeHomOver t f)) :
+    v (G.sumList t xs) = (xs.map v).sum := by
+  induction xs with
+  | nil => rw [sumList_nil, h₁, List.map_nil, List.sum_nil]
+  | cons x xs ih => rw [sumList_cons, h₂, ih, List.map_cons, List.sum_cons]
+
 /-- The sum of a finite family of morphisms to the relative group, as an actual morphism. -/
 def sumFamily (G : RelativeGroupLaw R f) (T : Over (Spec (CommRingCat.of R)))
     {n : ℕ} (xs : Fin n → (T ⟶ Over.mk f)) : T ⟶ Over.mk f :=
@@ -123,10 +136,10 @@ theorem finiteSumMap_evaluate (G : RelativeGroupLaw K b) {C T : Scheme.{u}}
     (finFibrePow.proj c n i ≫ q.1) = (xs i).1 ≫ q.1
   exact WidePullback.lift_π_assoc _ _ _ _ _ _
 
-variable [IsProper b] [GeometricallyIntegral b]
-
-/-- Proper geometrically integral group targets make list sums invariant under permutation. -/
-theorem sumList_perm (G : RelativeGroupLaw K b) {T : Scheme.{u}}
+/-- Commutativity makes finite sums invariant under permutations, including
+for nonproper targets. -/
+theorem sumList_perm_of_commutative (G : RelativeGroupLaw K b)
+    (hc : G.IsCommutative) {T : Scheme.{u}}
     (t : T ⟶ Spec (CommRingCat.of K)) {xs ys : List (SchemeHomOver t b)}
     (h : xs.Perm ys) : G.sumList t xs = G.sumList t ys := by
   induction h with
@@ -135,20 +148,21 @@ theorem sumList_perm (G : RelativeGroupLaw K b) {T : Scheme.{u}}
   | swap x y xs =>
     rw [sumList_cons, sumList_cons, sumList_cons, sumList_cons,
       ← G.mul_assoc, ← G.mul_assoc,
-      G.mul_comm_of_isProper_of_geometricallyIntegral t y x]
+      hc t y x]
   | trans h₁ h₂ ih₁ ih₂ => exact ih₁.trans ih₂
 
 /-- A finite-family sum over an arbitrary field is unchanged by reindexing its coordinates. -/
-theorem sumFamily_perm (G : RelativeGroupLaw K b)
+theorem sumFamily_perm_of_commutative (G : RelativeGroupLaw K b) (hc : G.IsCommutative)
     (T : Over (Spec (CommRingCat.of K))) {n : ℕ}
     (xs : Fin n → (T ⟶ Over.mk b)) (σ : Equiv.Perm (Fin n)) :
     G.sumFamily T (xs ∘ σ) = G.sumFamily T xs := by
   apply congrArg (overHomEquivSchemeHomOver T b).symm
-  exact G.sumList_perm T.hom
+  exact G.sumList_perm_of_commutative hc T.hom
     (σ.ofFn_comp_perm (fun i => overHomEquivSchemeHomOver T b (xs i)))
 
 /-- The actual sum morphism is invariant under the existing action on the finite fibre power. -/
-theorem finiteSumMap_permute (G : RelativeGroupLaw K b) {C : Scheme.{u}}
+theorem finiteSumMap_permute_of_commutative (G : RelativeGroupLaw K b)
+    (hc : G.IsCommutative) {C : Scheme.{u}}
     (c : C ⟶ Spec (CommRingCat.of K)) (q : SchemeHomOver c b) {n : ℕ}
     (σ : Equiv.Perm (Fin n)) :
     (finFibrePow.permAct c n σ).hom ≫ (G.finiteSumMap c q n).1 =
@@ -169,13 +183,39 @@ theorem finiteSumMap_permute (G : RelativeGroupLaw K b) {C : Scheme.{u}}
     change (finFibrePow.permAct c n σ).hom ≫ (finFibrePow.proj c n i ≫ q.1) = _
     rw [← Category.assoc, finFibrePow.permAct_hom, finFibrePow.permHom_proj]
     rfl
-  have hc := congrArg
+  have hcongr := congrArg
     (fun a : Fin n → SchemeHomOver (finFibrePow.toBase c n) b =>
       G.sumList (finFibrePow.toBase c n) (List.ofFn a)) (funext heq)
-  have hp := G.sumList_perm (finFibrePow.toBase c n)
+  have hp := G.sumList_perm_of_commutative hc (finFibrePow.toBase c n)
     ((σ⁻¹).ofFn_comp_perm (fun i : Fin n => NeronModelInfra.schemeHomOverComp
       ⟨finFibrePow.proj c n i, finFibrePow.proj_comp c n i⟩ q))
-  exact congrArg Subtype.val (h.trans (hc.trans hp))
+  exact congrArg Subtype.val (h.trans (hcongr.trans hp))
+
+variable [IsProper b] [GeometricallyIntegral b]
+
+/-- Proper geometrically integral group targets make list sums invariant under permutation. -/
+theorem sumList_perm (G : RelativeGroupLaw K b) {T : Scheme.{u}}
+    (t : T ⟶ Spec (CommRingCat.of K)) {xs ys : List (SchemeHomOver t b)}
+    (h : xs.Perm ys) : G.sumList t xs = G.sumList t ys :=
+  G.sumList_perm_of_commutative
+    (fun t x y => G.mul_comm_of_isProper_of_geometricallyIntegral t x y) t h
+
+/-- A finite-family sum over an arbitrary field is unchanged by reindexing its coordinates. -/
+theorem sumFamily_perm (G : RelativeGroupLaw K b)
+    (T : Over (Spec (CommRingCat.of K))) {n : ℕ}
+    (xs : Fin n → (T ⟶ Over.mk b)) (σ : Equiv.Perm (Fin n)) :
+    G.sumFamily T (xs ∘ σ) = G.sumFamily T xs :=
+  G.sumFamily_perm_of_commutative
+    (fun t x y => G.mul_comm_of_isProper_of_geometricallyIntegral t x y) T xs σ
+
+/-- The actual sum morphism is invariant under the existing action on the finite fibre power. -/
+theorem finiteSumMap_permute (G : RelativeGroupLaw K b) {C : Scheme.{u}}
+    (c : C ⟶ Spec (CommRingCat.of K)) (q : SchemeHomOver c b) {n : ℕ}
+    (σ : Equiv.Perm (Fin n)) :
+    (finFibrePow.permAct c n σ).hom ≫ (G.finiteSumMap c q n).1 =
+      (G.finiteSumMap c q n).1 :=
+  G.finiteSumMap_permute_of_commutative
+    (fun t x y => G.mul_comm_of_isProper_of_geometricallyIntegral t x y) c q σ
 
 /-- Add an unordered finite family of test-scheme points.
 The value is independent of the representing list by geometric commutativity. -/

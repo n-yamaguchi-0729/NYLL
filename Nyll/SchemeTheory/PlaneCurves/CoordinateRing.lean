@@ -277,7 +277,8 @@ theorem coordinateX_sub_mem_pointIdeal
         algebraMap K (CoordinateRing f) (p.coords 0) ∈
       pointIdeal p := by
   rw [mem_pointIdeal_iff]
-  simp
+  rw [map_sub, pointEval_coordinateX, AlgHom.commutes, Algebra.algebraMap_self_apply,
+    sub_self]
 
 theorem coordinateY_sub_mem_pointIdeal
     {f : BivariatePolynomial K} (p : RationalPoint f) :
@@ -285,7 +286,8 @@ theorem coordinateY_sub_mem_pointIdeal
         algebraMap K (CoordinateRing f) (p.coords 1) ∈
       pointIdeal p := by
   rw [mem_pointIdeal_iff]
-  simp
+  rw [map_sub, pointEval_coordinateY, AlgHom.commutes, Algebra.algebraMap_self_apply,
+    sub_self]
 
 /-- The residue algebra at a `K`-rational point is canonically `K`. -/
 noncomputable def pointResidueEquiv

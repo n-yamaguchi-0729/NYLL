@@ -11,5 +11,6 @@ import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.OfFieldTower
 import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.OfFieldTowerEtale
 import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
 import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.TowerIdealOver
+import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.GaloisDegree
 
 /-! Canonical aggregate for EtaleFundamentalGroups.GenericTensor.FieldComponent. -/

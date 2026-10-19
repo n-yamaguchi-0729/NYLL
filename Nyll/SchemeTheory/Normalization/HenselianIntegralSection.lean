@@ -10,11 +10,11 @@ public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSection
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.IdempotentFactor
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonSection
 public import Nyll.SchemeTheory.Normalization.QuotientFiniteFactor
-public import Nyll.SchemeTheory.RingTheory.CyclicIdempotentFactor
-public import Nyll.SchemeTheory.RingTheory.HenselianIdempotents
-public import Nyll.SchemeTheory.RingTheory.JacobsonIdempotentFactor
-public import Nyll.SchemeTheory.RingTheory.JacobsonIntegral
-public import Nyll.SchemeTheory.RingTheory.LocalizationIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Idempotents.CyclicIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
+public import Nyll.SchemeTheory.RingTheory.Idempotents.JacobsonIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
+public import Nyll.SchemeTheory.RingTheory.Idempotents.LocalizationIdempotentFactor
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.RingTheory.Unramified.LocalStructure
 

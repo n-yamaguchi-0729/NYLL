@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Pic0.Pic0_exists_injective_conorm_of_constantFieldExtension_of_isAlgClosed
-import Nyll.AlgebraicCurves.Divisors.Semilinear
+import Nyll.JacobianVarieties.Pic0.InjectiveConormConstantExtension
+import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
 
 /-!
 # Constant-extension divisors are fixed by coefficient actions

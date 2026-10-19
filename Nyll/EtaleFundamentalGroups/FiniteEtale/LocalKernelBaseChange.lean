@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Foundations.Algebra.Module_free_quotient_range_of_ker_baseChange_residueField_le
+import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleFreeQuotientRange
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProjectiveCokernelBaseChange
 
 /-!

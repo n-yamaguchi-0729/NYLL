@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.PrimeContainingAtHeightOne
+import Nyll.SchemeTheory.RingTheory.Dimension.PrimeContainingAtHeightOne
 
 /-!
 # Height-one primes in positive-dimensional local domains

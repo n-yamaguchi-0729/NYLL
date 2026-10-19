@@ -1,0 +1,22 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveAdjoinRangeEqTopApplyAlgEquivEqPow
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveAlgClosed
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveEssFiniteTypeAdjoinFinsetEqTop
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveEssFiniteTypeLe
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendental
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTrdegEqOne
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.IsAlgebraicAdjoinTranscendental
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.SeparatingTranscendental
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.FormalTranslationSimplePolynomial

@@ -10,8 +10,8 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences
-import Nyll.AlgebraicCurves.Places.Place_sum_ramificationIndex_mul_inertiaDeg
+import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDeg
 
 /-!
 # Fundamental Identity Along

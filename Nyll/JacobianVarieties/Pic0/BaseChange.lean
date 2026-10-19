@@ -10,7 +10,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ConstantExtension
+import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
 
 /-!
 # Extension of constants on Picard groups

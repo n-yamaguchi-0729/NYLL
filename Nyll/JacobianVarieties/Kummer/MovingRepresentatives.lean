@@ -5,8 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.Kummer.DivisorClasses
-import Nyll.JacobianVarieties.Pic0.Pic0_exists_mk_eq_forall_notMem_support
-import Nyll.AlgebraicCurves.Divisors.Pic0_mk_eq_zero_iff
+import Nyll.JacobianVarieties.Pic0.MkEqNotMemSupport
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardZero
 
 /-!
 # Kummer representatives avoiding prescribed places

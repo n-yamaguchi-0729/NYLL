@@ -364,9 +364,7 @@ theorem
       have hmap :
           (Ideal.span ({s i} : Set A)).map (algebraMap A Ahat) =
             Ideal.span ({algebraMap A Ahat (s i)} : Set Ahat) := by
-        rw [Ideal.map_span]
-        congr 1
-        simp
+        rw [Ideal.map_span, Set.image_singleton]
       rw [← hmap]
       exact hzero
     · exact (hsHatPrime.not_isUnit

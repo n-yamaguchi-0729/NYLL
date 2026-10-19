@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
+import Mathlib.GroupTheory.SpecificGroups.Cyclic
+import Nyll.EtaleFundamentalGroups.Inertia.Localized.ActionComparison
+import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
 
 /-!
@@ -28,26 +31,6 @@ variable [Field K] [Field L]
 variable [Algebra A K] [IsFractionRing A K]
 variable [Algebra K L] [Algebra A L] [IsScalarTower A K L]
 
-omit [IsDomain A] [Algebra A L] [IsScalarTower A K L] in
-private theorem localizationAtPrime_smulCommClass
-    (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) P
-    SMulCommClass Gal(L/K) (Localization.AtPrime P) L := by
-  let V := Localization.AtPrime P
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower V K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) P
-  refine ⟨fun σ v x ↦ ?_⟩
-  change σ (algebraMap V L v * x) = algebraMap V L v * σ x
-  rw [map_mul, IsScalarTower.algebraMap_apply V K L, AlgEquiv.commutes]
-
 variable [IsRegularRing A]
 variable [FiniteDimensional K L] [IsGalois K L]
 
@@ -56,6 +39,8 @@ private theorem localizedNormalizationInertia_isCyclic
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
     [CharZero (A ⧸ P)] :
     IsCyclic (localizedNormalizationInertia (K := K) (L := L) P Q) := by
+  rw [localizedNormalizationInertia_eq_integralClosureInertia
+    (K := K) (L := L) P Q]
   let V := Localization.AtPrime P
   let : Algebra V K :=
     localizationAtPrimeToFractionFieldAlgebra (K := K) P
@@ -64,8 +49,6 @@ private theorem localizedNormalizationInertia_isCyclic
   let : IsScalarTower V K L :=
     localizationAtPrimeToFractionFieldToExtension_isScalarTower
       (K := K) (L := L) P
-  let : SMulCommClass Gal(L/K) V L :=
-    localizationAtPrime_smulCommClass (K := K) (L := L) P
   let Bp := integralClosure V L
   let : IsDiscreteValuationRing V :=
     isDiscreteValuationRing_localizationAtPrime_of_height_eq_one A P hP
@@ -94,54 +77,17 @@ private theorem localizedNormalizationInertia_isCyclic
   have hp : p ≠ ⊥ := IsDiscreteValuationRing.not_a_field V
   have hQlocal : Qlocal ≠ ⊥ :=
     Ideal.ne_bot_of_liesOver_of_ne_bot hp Qlocal
-  let genericAction : MulSemiringAction Gal(L/K) Bp := inferInstance
   let integralClosureAction : MulSemiringAction Gal(L/K) Bp :=
     IsIntegralClosure.MulSemiringAction V K L Bp
-  let genericInertia : Subgroup Gal(L/K) := by
-    letI := genericAction
-    exact Qlocal.toAddSubgroup.inertia Gal(L/K)
-  let integralClosureInertia : Subgroup Gal(L/K) := by
-    letI := integralClosureAction
-    exact Qlocal.toAddSubgroup.inertia Gal(L/K)
-  have hsmul (σ : Gal(L/K)) (x : Bp) :
-      (letI := genericAction; σ • x) =
-        (letI := integralClosureAction; σ • x) := by
-    apply Subtype.ext
-    calc
-      ((letI := genericAction; (σ • x : Bp)) : L) =
-          σ • (x : L) := by
-        let := genericAction
-        exact integralClosure.coe_smul σ x
-      _ = σ (x : L) := AlgEquiv.smul_def _ _
-      _ = ((letI := integralClosureAction; (σ • x : Bp)) : L) := by
-        let := integralClosureAction
-        exact (algebraMap_galRestrict_apply V σ x).symm
-  have hinertia : genericInertia = integralClosureInertia := by
-    ext σ
-    change
-      (∀ x : Bp, (letI := genericAction; σ • x) - x ∈ Qlocal) ↔
-        (∀ x : Bp, (letI := integralClosureAction; σ • x) - x ∈ Qlocal)
-    constructor
-    · intro h x
-      rw [← hsmul σ x]
-      exact h x
-    · intro h x
-      rw [hsmul σ x]
-      exact h x
-  have hcyclic : IsCyclic integralClosureInertia := by
-    let := integralClosureAction
-    have hcop : Nat.Coprime
-        (Nat.card (Qlocal.toAddSubgroup.inertia Gal(L/K)))
-        (ringExpChar (Bp ⧸ Qlocal)) := by
-      rw [ringExpChar.eq_one]
-      exact Nat.coprime_one_right _
-    change IsCyclic (Qlocal.toAddSubgroup.inertia Gal(L/K))
-    exact
-      TameAbhyankar.SGA1.idealInertia_isCyclic_of_card_coprime_ringExpChar
-        (A := V) (B := Bp) (P := Qlocal) hQlocal hcop
-  change IsCyclic genericInertia
-  rw [hinertia]
-  exact hcyclic
+  change IsCyclic (Qlocal.toAddSubgroup.inertia Gal(L/K))
+  have hcop : Nat.Coprime
+      (Nat.card (Qlocal.toAddSubgroup.inertia Gal(L/K)))
+      (ringExpChar (Bp ⧸ Qlocal)) := by
+    rw [ringExpChar.eq_one]
+    exact Nat.coprime_one_right _
+  exact
+    TameAbhyankar.SGA1.idealInertia_isCyclic_of_card_coprime_ringExpChar
+      (A := V) (B := Bp) (P := Qlocal) hQlocal hcop
 
 /-- Noncomputably chosen additive cyclic coordinates on the localized
 normalization inertia group.  The coordinate modulus is the actual group

@@ -9,6 +9,7 @@ import Nyll.SchemeTheory.RingTheory.GenericFiber.DVRProductComponent
 import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
 import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
 import Nyll.SchemeTheory.RingTheory.GenericFiber.LiesOverFractionRingExtension
+import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
 
 /-!
 # Generic fibres and fraction rings

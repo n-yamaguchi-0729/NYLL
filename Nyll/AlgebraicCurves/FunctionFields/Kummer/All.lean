@@ -10,4 +10,4 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Kummer.KummerCover_finrank_eq
+import Nyll.AlgebraicCurves.FunctionFields.Kummer.KummerCoverFinrankEq

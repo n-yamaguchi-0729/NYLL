@@ -33,7 +33,9 @@ variable (M : Type w) [AddCommGroup M] [Module R M]
 /-- Tuples satisfying the degree-one Koszul relations for `f`. -/
 def generatorRelationCycles : Submodule R (ι → M) where
   carrier := {x | ∀ i j, f i • x j = f j • x i}
-  zero_mem' := by simp
+  zero_mem' := by
+    intro i j
+    exact (smul_zero (f i)).trans (smul_zero (f j)).symm
   add_mem' := by
     intro x y hx hy i j
     simp only [Pi.add_apply, smul_add, hx i j, hy i j]
@@ -53,7 +55,7 @@ def generatorRelationBoundary :
     rw [← mul_smul, mul_comm, mul_smul]⟩
   map_add' x y := by
     ext i
-    simp
+    exact smul_add (f i) x y
   map_smul' r x := by
     ext i
     exact smul_comm _ _ _

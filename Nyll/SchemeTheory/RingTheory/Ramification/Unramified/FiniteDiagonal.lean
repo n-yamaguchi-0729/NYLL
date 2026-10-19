@@ -42,7 +42,8 @@ lemma mul_formallyUnramifiedElem_eq_lmul_tmul_one_mul
         Algebra.FormallyUnramified.elem R S := by
   induction x using TensorProduct.inductionOn with
   | tmul x y =>
-      rw [show x ⊗ₜ[R] y = (x ⊗ₜ[R] (1 : S)) * ((1 : S) ⊗ₜ[R] y) by simp]
+      rw [show x ⊗ₜ[R] y = (x ⊗ₜ[R] (1 : S)) * ((1 : S) ⊗ₜ[R] y) by
+        rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]]
       rw [mul_assoc, Algebra.FormallyUnramified.one_tmul_mul_elem (R := R) y]
       simp [← mul_assoc]
   | add x y hx hy =>
@@ -102,7 +103,7 @@ lemma finiteUnramifiedDiagonalAwayMul_bijective :
       refine ⟨0, s ⊗ₜ[R] (1 : S), ?_⟩
       change s * (Algebra.TensorProduct.lmul' R e) ^ 0 =
         Algebra.TensorProduct.lmul' R (s ⊗ₜ[R] (1 : S))
-      simp
+      rw [pow_zero, Algebra.TensorProduct.lmul'_apply_tmul]
     · intro x y hxy
       change Algebra.TensorProduct.lmul' R x =
         Algebra.TensorProduct.lmul' R y at hxy

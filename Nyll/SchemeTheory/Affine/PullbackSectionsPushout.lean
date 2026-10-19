@@ -13,7 +13,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.Algebra.Category.Ring.Constructions
-import Nyll.SchemeTheory.Modules.SectionsAlgebra
+import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
 
 /-!
 # Scheme Hom is Affine Open preimage and is Pushout of is Pullback

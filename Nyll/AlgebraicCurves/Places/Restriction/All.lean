@@ -1,0 +1,36 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Places.Restriction.AlgEquivEqOneSmulPlaceEq
+import Nyll.AlgebraicCurves.Places.Restriction.AlgEquivSmulEqRestrictEq
+import Nyll.AlgebraicCurves.Places.Restriction.ComapAlgebraMapNeTop
+import Nyll.AlgebraicCurves.Places.Restriction.EmbeddingPlaceRangeEqComplPlacesOf
+import Nyll.AlgebraicCurves.Places.Restriction.EqComapEq
+import Nyll.AlgebraicCurves.Places.Restriction.EquivComapEqOrdEqDegEq
+import Nyll.AlgebraicCurves.Places.Restriction.IntermediateFieldFiniteDimensionalSmulEq
+import Nyll.AlgebraicCurves.Places.Restriction.KerProductMapEqPlaceEquivRestrictAlong
+import Nyll.AlgebraicCurves.Places.Restriction.MemComapIffOrdNonneg
+import Nyll.AlgebraicCurves.Places.Restriction.NatCardSetOfComapEqEqDeg
+import Nyll.AlgebraicCurves.Places.Restriction.OrdAlgebraMapEqOrdComapEq
+import Nyll.AlgebraicCurves.Places.Restriction.OrdEqSumDegEqDegComapEq
+import Nyll.AlgebraicCurves.Places.Restriction.OrdRestrictAlongEqNatCardAlgHom
+import Nyll.AlgebraicCurves.Places.Restriction.PairwiseDisjointFiber
+import Nyll.AlgebraicCurves.Places.Restriction.PlaceChartRestrictionSquare
+import Nyll.AlgebraicCurves.Places.Restriction.PlaceComapAlgebraMapEq
+import Nyll.AlgebraicCurves.Places.Restriction.PlaceComapEqOrdEqMulOrd
+import Nyll.AlgebraicCurves.Places.Restriction.PlaceEquivOrdEqEllMapDomainEq
+import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageEqPreimageRestrictAlongPlacesOf
+import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageSubsetPreimageRestrictAlongPlacesOf
+import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfUnionEqUnivSupEqTop
+import Nyll.AlgebraicCurves.Places.Restriction.PreimageRestrictAlongPlacesOfSubsetPlacesOfPreimage
+import Nyll.AlgebraicCurves.Places.Restriction.RestrictAlongEqFiniteDimensionalFieldRange
+import Nyll.AlgebraicCurves.Places.Restriction.RestrictAlongEqSmulEqInvSmulPow
+import Nyll.AlgebraicCurves.Places.Restriction.RestrictAlongSurjective
+import Nyll.AlgebraicCurves.Places.Restriction.RestrictEq
+import Nyll.AlgebraicCurves.Places.Restriction.RestrictEqMem
+import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
+import Nyll.AlgebraicCurves.Places.Restriction.SmulEqComapEq
+import Nyll.AlgebraicCurves.Places.Restriction.SurjectiveAlgebraMapInjectiveRestrictPlace

@@ -152,7 +152,7 @@ theorem linearNormalization_bridges
   have hSA : Algebra.IsIntegral S A :=
     (Algebra.isIntegral_def).2 fun y => hint y (by
       rw [hx]
-      simp)
+      trivial)
   let g : MvPolynomial (Fin r) K →ₐ[K] S :=
     (MvPolynomial.aeval t).codRestrict S fun P => by
       change MvPolynomial.aeval t P ∈ Algebra.adjoin K (Set.range t)

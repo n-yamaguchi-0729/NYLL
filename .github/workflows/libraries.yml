@@ -1,18 +1,6 @@
 name: Lean
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'Nyll/**'
-      - 'Nyll.lean'
-      - 'lakefile.toml'
-      - 'lake-manifest.json'
-      - 'lean-toolchain'
-      - '.github/workflows/libraries.yml'
-      - '.github/workflows/library-stage.yml'
-      - '.github/scripts/**'
   pull_request:
     paths:
       - Nyll/**
@@ -105,9 +93,18 @@ jobs:
       stage: depth2-cohomology
       target: +Nyll.EtaleCohomology.All
 
+  depth2-abelianvarieties:
+    name: AbelianVarieties.All
+    needs: depth2-cohomology
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-abelianvarieties
+      target: +Nyll.AbelianVarieties.All
+
   depth3-sawin:
     name: SawinTotallyRealTowers.All
-    needs: depth2-cohomology
+    needs: depth2-abelianvarieties
     if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
@@ -150,18 +147,10 @@ jobs:
       stage: depth3-anabelian
       target: +Nyll.AnabelianGeometry.All
 
-  depth3-branched:
-    name: ShimizuYamaguchi26BranchedCoverings.All
-    needs: depth3-anabelian
-    if: ${{ always() && !cancelled() }}
-    uses: ./.github/workflows/library-stage.yml
-    with:
-      stage: depth3-branched
-      target: +Nyll.ShimizuYamaguchi26BranchedCoverings.All
 
   all:
     name: All
-    needs: depth3-branched
+    needs: depth3-anabelian
     if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:

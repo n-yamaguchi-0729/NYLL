@@ -170,7 +170,7 @@ theorem exists_nonzero_trace_zero_of_not_mem_bot_of_coprime
     have halphaEq : alpha = algebraMap K L c := by
       exact sub_eq_zero.mp hbeta
     rw [halphaEq]
-    simp
+    exact IntermediateField.algebraMap_mem _ c
   exact ⟨beta, hbeta0, hbetaTrace⟩
 
 end TraceCentering
@@ -277,7 +277,7 @@ theorem finrank_eq_one_of_valueSubgroup_eq_of_residue_surjective_of_coprime
   have hepsilonValue : w epsilon = 0 := by
     dsimp [epsilon]
     rw [div_eq_mul_inv, w.map_mul, hbetaValue, hbMapInvValue]
-    simp
+    simp only [← WithTop.coe_add, add_neg_cancel, WithTop.coe_zero]
   have hepsilonTrace : Algebra.trace K L epsilon = 0 := by
     have hepsilonSmul : epsilon = b⁻¹ • beta := by
       dsimp [epsilon]
@@ -381,7 +381,8 @@ theorem finrank_eq_one_of_valueSubgroup_eq_of_residue_surjective_of_coprime
     rw [Polynomial.IsRoot.def]
     apply f.injective
     calc
-      f (pbar.eval c) = (pbar.map f).eval (f c) := by simp
+      f (pbar.eval c) = (pbar.map f).eval (f c) :=
+        (Polynomial.eval_map_apply (p := pbar) f c).symm
       _ = (pbar.map f).eval (IsLocalRing.residue W epsilonW) := by rw [hc]
       _ = 0 := htargetRoot
       _ = f 0 := (map_zero f).symm

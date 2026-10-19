@@ -12,7 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.SchemeTheory.Modules.PullbackMonoidal
+import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
 
 /-!
@@ -147,7 +147,6 @@ variable (R' : Type u) [CommRing R'] [Algebra R R'] (B : Type u) [CommRing B] [A
   [Algebra R B]
   [IsScalarTower R R' B]
 
-example : IsScalarTower R R' (DualNumber B) := inferInstance
 omit [Algebra R R'] [IsScalarTower R R' B] in
 theorem fstHom_toRingHom_eq :
     (TrivSqZeroExt.fstHom R B B).toRingHom = (TrivSqZeroExt.fstHom R' B B).toRingHom := rfl

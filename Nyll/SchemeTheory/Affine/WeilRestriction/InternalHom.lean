@@ -186,7 +186,7 @@ def specTensorIso
                 congr 1
                 congr 1
                 ext x
-                simp)
+                exact f.unop.hom.commutes x)
       apply pullback.hom_ext
       · rw [Category.assoc, pullbackSpecIso_inv_fst]
         rw [Category.assoc, pullback.lift_fst]
@@ -199,7 +199,9 @@ def specTensorIso
         rw [← Spec.map_comp]
         congr 1
         ext x
-        simp)
+        change (Algebra.TensorProduct.map f.unop.hom (AlgHom.id R A))
+          (1 ⊗ₜ[R] x) = 1 ⊗ₜ[R] x
+        simp only [Algebra.TensorProduct.map_tmul, map_one, AlgHom.id_apply])
 
 /-- Transport a corepresentation of a functor through an equivalence of its source category. -/
 def corepresentableByCompEquivalence

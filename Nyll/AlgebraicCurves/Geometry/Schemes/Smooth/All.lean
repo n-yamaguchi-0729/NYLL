@@ -1,0 +1,36 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.EtaleFormallyUnramifiedStalkMap
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.EtaleNhdSectionSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.FibreSmoothCurveNeighbourhood
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.FormallyUnramifiedEqCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.GeometricallyReducedReduced
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomFiberInclusionMemSmoothLocus
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomMemSmoothLocusFlat
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomSmoothLocusLePreimage
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.IsIntegralSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.IsoMorphismRestrictSmoothOfRelativeDimensionOne
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.OpenFibreSmoothCurveNeighbourhood
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedEtale
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SectionCompEqSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothCompEqIdSpecMapCompEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDVRStalk
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDescendsAlongSurjectiveInfFlatInfQuasiCompact
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothIsDomainIsIntegrallyClosedStalk
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothIsOpenIsIrreducibleNhd
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfClosedPoints
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimension
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionDVRStalkIsClosed
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionDVRStalkSection
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionLeTopologicalKrullDim
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionTopologicalKrullDimLe
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionTopologicalKrullDimPreimageSingletonEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothRelativeDimension
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothSmoothOfRelativeDimension
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ValuationRingStalkSmoothOfRelativeDimensionOne

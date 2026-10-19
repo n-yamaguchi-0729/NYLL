@@ -44,13 +44,13 @@ theorem tensorProduct_linearMap_ext_of_one_tmul
       calc
         F (s ⊗ₜ[R] m) = F (s • (1 ⊗ₜ[R] m)) := by
           rw [TensorProduct.smul_tmul']
-          simp
+          rw [smul_eq_mul, mul_one]
         _ = s • F (1 ⊗ₜ[R] m) := by rw [map_smul]
         _ = s • G (1 ⊗ₜ[R] m) := by rw [h m]
         _ = G (s • (1 ⊗ₜ[R] m)) := (G.map_smul s _).symm
         _ = G (s ⊗ₜ[R] m) := by
           rw [TensorProduct.smul_tmul']
-          simp
+          rw [smul_eq_mul, mul_one]
 
 /-- A linear map between localized modules is determined by the images of
 the source elements with denominator one. -/

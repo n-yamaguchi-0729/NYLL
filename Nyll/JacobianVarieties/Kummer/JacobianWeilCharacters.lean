@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.TorsionAlgebraicPoints
-import Nyll.JacobianVarieties.Picard.Exists_pic0_equiv_points_of_representsRelSubPic_of_abelJacobi
-import Nyll.JacobianVarieties.Pic0.Pic0_nonempty_divisorialWeilPairingData_of_isAlgClosed
+import Nyll.JacobianVarieties.Picard.Torsion.TorsionAlgebraicPoints
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Pic0EquivPointsPicardRepresentability
+import Nyll.JacobianVarieties.Pic0.DivisorialWeilPairingDataAlgClosed
 import Nyll.JacobianVarieties.WeilPairing.Divisorial
 import Nyll.JacobianVarieties.Autoduality.Cohomology
-import Nyll.AlgebraicCurves.FunctionFields.IsCurveOver_exists_separating_transcendental
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationMonodromy
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationMonodromyGroup
 import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1Comparison

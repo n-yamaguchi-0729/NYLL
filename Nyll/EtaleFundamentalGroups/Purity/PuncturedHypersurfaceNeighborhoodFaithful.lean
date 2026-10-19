@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedComponentFaithful
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.RingTheory.PuncturedHypersurfacePrime
+import Nyll.SchemeTheory.RingTheory.Dimension.PuncturedHypersurfacePrime
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Topology

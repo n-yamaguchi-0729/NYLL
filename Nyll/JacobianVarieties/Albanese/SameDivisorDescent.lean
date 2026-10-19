@@ -13,19 +13,19 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
-import Nyll.AlgebraicCurves.Foundations.CategoryTheory.CategoryTheory_MorphismProperty_widePullback_base
-import Nyll.AlgebraicCurves.Geometry.Schemes.isIntegral_of_smooth_of_preconnectedSpace
-import Nyll.AlgebraicCurves.Geometry.Schemes.SmoothOfRelativeDimension_le_topologicalKrullDim
+import Nyll.SchemeTheory.CategoryTheory.MorphismPropertyWidePullbackBase
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.IsIntegralSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionLeTopologicalKrullDim
 import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
-import Nyll.AlgebraicCurves.RelativeDivisors.RelEffCartierDiv_IsUniversal_geometricallyConnected
-import Nyll.AlgebraicCurves.RelativeDivisors.UniversalSumKernel
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalGeometricallyConnected
+import Nyll.AlgebraicCurves.RelativeDivisors.Representability.UniversalSumKernel
 import Nyll.JacobianVarieties.Albanese.FiniteSums
 
 /-!
 # Finite sums on universal effective divisors
 
 Over any field, finite sums of the images of a smooth geometrically connected
-pointed curve in a proper geometrically integral group scheme descend through
+pointed curve in a separated commutative group scheme descend through
 the actual universal effective-divisor map. Its finite flat kernel pair has
 generic rank `r!`; the distinct permutation sections exhaust that rank, as
 proved by linear independence of algebra characters. Flat base change preserves
@@ -256,13 +256,13 @@ private theorem injective_finFibrePow_permHom
 /-- The finite-sum morphism descends to the actual universal effective-divisor
 scheme. The same finite flat sum map retains its scheme-valued kernel criterion.
 No reducedness assumption is imposed on schemes testing that criterion. -/
-theorem exists_finiteSumMap_desc
+theorem exists_finiteSumMap_desc_of_commutative
     {K : Type u} [Field K] {C B Y : Scheme.{u}}
     (c : C ⟶ Spec (CommRingCat.of K)) [IsSeparated c]
     [SmoothOfRelativeDimension 1 c] [GeometricallyConnected c]
     (s : Spec (CommRingCat.of K) ⟶ C) (hs : s ≫ c = 𝟙 _)
-    {b : B ⟶ Spec (CommRingCat.of K)} [IsProper b] [GeometricallyIntegral b]
-    (G : RelativeGroupLaw K b) (q : SchemeHomOver c b)
+    {b : B ⟶ Spec (CommRingCat.of K)} [IsSeparated b]
+    (G : RelativeGroupLaw K b) (hc : G.IsCommutative) (q : SchemeHomOver c b)
     {r : ℕ} {y : Y ⟶ Spec (CommRingCat.of K)} {D : RelEffCartierDiv c r y}
     (hU : D.IsUniversal) :
     ∃ (σ : finFibrePow c r ⟶ Y) (hσ : σ ≫ y = finFibrePow.toBase c r)
@@ -363,7 +363,7 @@ theorem exists_finiteSumMap_desc
       have hright := congrArg (· ≫ e) (ha₂ i)
       have hinv : (η ≫ finFibrePow.permHom c r i.down) ≫ e = η ≫ e := by
         rw [Category.assoc]
-        exact congrArg (η ≫ ·) (G.finiteSumMap_permute c q i.down)
+        exact congrArg (η ≫ ·) (G.finiteSumMap_permute_of_commutative hc c q i.down)
       simpa only [Category.assoc] using hleft.trans (hright.trans hinv).symm
   have hequal : ∀ {T : Scheme.{u}} (v w : T ⟶ X), v ≫ σ = w ≫ σ → v ≫ e = w ≫ e := by
     intro T v w hvw
@@ -377,8 +377,65 @@ theorem exists_finiteSumMap_desc
     exact (G.finiteSumMap c q r).2.trans hσ.symm
   exact ⟨σ, hσ, ⟨d, hdb⟩, hI, hfin, hflat, hsurj, hd, hkernel⟩
 
+/-- The proper geometrically integral case follows from geometric commutativity. -/
+theorem exists_finiteSumMap_desc
+    {K : Type u} [Field K] {C B Y : Scheme.{u}}
+    (c : C ⟶ Spec (CommRingCat.of K)) [IsSeparated c]
+    [SmoothOfRelativeDimension 1 c] [GeometricallyConnected c]
+    (s : Spec (CommRingCat.of K) ⟶ C) (hs : s ≫ c = 𝟙 _)
+    {b : B ⟶ Spec (CommRingCat.of K)} [IsProper b] [GeometricallyIntegral b]
+    (G : RelativeGroupLaw K b) (q : SchemeHomOver c b)
+    {r : ℕ} {y : Y ⟶ Spec (CommRingCat.of K)} {D : RelEffCartierDiv c r y}
+    (hU : D.IsUniversal) :
+    ∃ (σ : finFibrePow c r ⟶ Y) (hσ : σ ≫ y = finFibrePow.toBase c r)
+      (sum : SchemeHomOver y b),
+      D.I.comap (mapOnProdOver c σ hσ) = fibrePowOver.tautIdeal c r ∧
+      IsFinite σ ∧ Flat σ ∧ Surjective σ ∧
+      σ ≫ sum.1 = (G.finiteSumMap c q r).1 ∧
+      ∀ {T : Scheme.{u}} (g : T ⟶ Spec (CommRingCat.of K))
+        (v w : T ⟶ finFibrePow c r)
+        (hv : v ≫ finFibrePow.toBase c r = g)
+        (hw : w ≫ finFibrePow.toBase c r = g),
+        v ≫ σ = w ≫ σ ↔
+          SameDivisor c (fun i => v ≫ finFibrePow.proj c r i)
+            (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hv])
+            (fun i => w ≫ finFibrePow.proj c r i)
+            (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hw]) :=
+  exists_finiteSumMap_desc_of_commutative c s hs G
+    (fun t x y => G.mul_comm_of_isProper_of_geometricallyIntegral t x y) q hU
+
 /-- Equal effective divisors give the same finite sum of images, for points
 valued in any scheme, including nonreduced schemes. -/
+theorem sumList_eq_of_sameDivisor_of_commutative
+    {K : Type u} [Field K] {C B Y : Scheme.{u}}
+    (c : C ⟶ Spec (CommRingCat.of K)) [IsSeparated c]
+    [SmoothOfRelativeDimension 1 c] [GeometricallyConnected c]
+    (s : Spec (CommRingCat.of K) ⟶ C) (hs : s ≫ c = 𝟙 _)
+    {b : B ⟶ Spec (CommRingCat.of K)} [IsSeparated b]
+    (G : RelativeGroupLaw K b) (hc : G.IsCommutative) (q : SchemeHomOver c b)
+    {r : ℕ} {y : Y ⟶ Spec (CommRingCat.of K)} {D : RelEffCartierDiv c r y}
+    (hU : D.IsUniversal) {T : Scheme.{u}} (g : T ⟶ Spec (CommRingCat.of K))
+    (a a' : Fin r → SchemeHomOver g c)
+    (h : SameDivisor c (fun i => (a i).1) (fun i => (a i).2)
+      (fun i => (a' i).1) (fun i => (a' i).2)) :
+    G.sumList g (List.ofFn fun i => NeronModelInfra.schemeHomOverComp (a i) q) =
+      G.sumList g (List.ofFn fun i => NeronModelInfra.schemeHomOverComp (a' i) q) := by
+  obtain ⟨σ, -, sum, -, -, -, -, hfac, hkernel⟩ :=
+    exists_finiteSumMap_desc_of_commutative c s hs G hc q hU
+  let v : T ⟶ finFibrePow c r :=
+    WidePullback.lift g (fun i => (a i).1) (fun i => (a i).2)
+  let w : T ⟶ finFibrePow c r :=
+    WidePullback.lift g (fun i => (a' i).1) (fun i => (a' i).2)
+  have hσvw : v ≫ σ = w ≫ σ := by
+    apply (hkernel g v w (WidePullback.lift_base _ _ _ _)
+      (WidePullback.lift_base _ _ _ _)).mpr
+    simpa only [v, w, WidePullback.lift_π] using h
+  rw [← G.finiteSumMap_evaluate c q g a, ← G.finiteSumMap_evaluate c q g a']
+  apply Subtype.ext
+  change v ≫ (G.finiteSumMap c q r).1 = w ≫ (G.finiteSumMap c q r).1
+  rw [← hfac, ← Category.assoc, ← Category.assoc, hσvw]
+
+/-- Geometric commutativity supplies the proper-target special case. -/
 theorem sumList_eq_of_sameDivisor
     {K : Type u} [Field K] {C B Y : Scheme.{u}}
     (c : C ⟶ Spec (CommRingCat.of K)) [IsSeparated c]
@@ -392,20 +449,8 @@ theorem sumList_eq_of_sameDivisor
     (h : SameDivisor c (fun i => (a i).1) (fun i => (a i).2)
       (fun i => (a' i).1) (fun i => (a' i).2)) :
     G.sumList g (List.ofFn fun i => NeronModelInfra.schemeHomOverComp (a i) q) =
-      G.sumList g (List.ofFn fun i => NeronModelInfra.schemeHomOverComp (a' i) q) := by
-  obtain ⟨σ, -, sum, -, -, -, -, hfac, hkernel⟩ :=
-    exists_finiteSumMap_desc c s hs G q hU
-  let v : T ⟶ finFibrePow c r :=
-    WidePullback.lift g (fun i => (a i).1) (fun i => (a i).2)
-  let w : T ⟶ finFibrePow c r :=
-    WidePullback.lift g (fun i => (a' i).1) (fun i => (a' i).2)
-  have hσvw : v ≫ σ = w ≫ σ := by
-    apply (hkernel g v w (WidePullback.lift_base _ _ _ _)
-      (WidePullback.lift_base _ _ _ _)).mpr
-    simpa only [v, w, WidePullback.lift_π] using h
-  rw [← G.finiteSumMap_evaluate c q g a, ← G.finiteSumMap_evaluate c q g a']
-  apply Subtype.ext
-  change v ≫ (G.finiteSumMap c q r).1 = w ≫ (G.finiteSumMap c q r).1
-  rw [← hfac, ← Category.assoc, ← Category.assoc, hσvw]
+      G.sumList g (List.ofFn fun i => NeronModelInfra.schemeHomOverComp (a' i) q) :=
+  sumList_eq_of_sameDivisor_of_commutative c s hs G
+    (fun t x y => G.mul_comm_of_isProper_of_geometricallyIntegral t x y) q hU g a a' h
 
 end JacobianVarieties.Albanese

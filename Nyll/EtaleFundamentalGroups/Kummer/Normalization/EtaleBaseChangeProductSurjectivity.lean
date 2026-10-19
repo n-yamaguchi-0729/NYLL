@@ -63,7 +63,7 @@ theorem etaleBaseChangeProductMap_surjective_of_fractionFieldProductMap_surjecti
         change productC (1 ⊗ₜ[A] l) = algebraMap L M l
         change algebraMap C M 1 * algebraMap L M l =
           algebraMap L M l
-        simp }
+        rw [map_one, one_mul] }
   let R : Subalgebra L M := productL.range
   let : Module.Finite L R := Module.Finite.range productL.toLinearMap
   let : Field R := fieldOfFiniteDimensional L R
@@ -74,7 +74,7 @@ theorem etaleBaseChangeProductMap_surjective_of_fractionFieldProductMap_surjecti
   have hg_val (c : C) : ((g c : R) : M) = algebraMap C M c := by
     change productC (c ⊗ₜ[A] 1) = algebraMap C M c
     change algebraMap C M c * algebraMap L M 1 = algebraMap C M c
-    simp
+    rw [map_one, mul_one]
   have hg : Function.Injective g := by
     intro x y hxy
     have hv := congrArg (fun z : R ↦ (z : M)) hxy

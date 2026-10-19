@@ -19,6 +19,9 @@ import Nyll.SchemeTheory.WeilRestriction.LocalIsomorphism
 import Nyll.SchemeTheory.WeilRestriction.LocalRepresenterDiagram
 import Nyll.SchemeTheory.WeilRestriction.LocalRepresenters
 import Nyll.SchemeTheory.WeilRestriction.Restriction
+import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
+import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
+import Nyll.SchemeTheory.WeilRestriction.RelativeTotalLocalBijection
 import Nyll.SchemeTheory.WeilRestriction.Sheaf
 
 /-! Canonical aggregate for SchemeTheory.WeilRestriction. -/

@@ -87,7 +87,8 @@ theorem exists_finiteEtale_killing_cohomologyPresheaf_class_of_field
       rw [← hb, ← Ext.comp_assoc _ _ _ (zero_add (n + 1)) rfl
         (by omega), he, Ext.zero_comp]
 
-private def fieldEtaleTerminal (K : Type u) [Field K] :
+/-- The terminal-object structure on the small étale category of a field. -/
+def fieldEtaleTerminal (K : Type u) [Field K] :
     IsTerminal (Scheme.Etale.mk (𝟙 (Spec (.of K)))) :=
   IsTerminal.ofUniqueHom
     (fun V => MorphismProperty.Over.homMk

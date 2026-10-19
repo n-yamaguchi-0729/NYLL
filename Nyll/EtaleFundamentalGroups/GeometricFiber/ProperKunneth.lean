@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth_isReduced_of_isReduced_of_isLocallyNoetherian
+import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
 import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
 import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperHomotopyExact
 import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence

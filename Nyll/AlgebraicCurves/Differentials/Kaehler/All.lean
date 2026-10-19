@@ -10,10 +10,16 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
+import Nyll.AlgebraicCurves.Differentials.Kaehler.AlgebraTraceInvMulDerivationEqInvNormMulDerivationNorm
+import Nyll.AlgebraicCurves.Differentials.Kaehler.DerivationAddMulLeftPowChar
 import Nyll.AlgebraicCurves.Differentials.Kaehler.FunctionField
-import Nyll.AlgebraicCurves.Differentials.Kaehler.Algebra_trace_inv_mul_derivation_eq_inv_norm_mul_derivation_norm
-import Nyll.AlgebraicCurves.Differentials.Kaehler.Derivation_add_mulLeft_pow_char
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferential_D_ne_zero_of_transcendental
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferential_exists_unique_smul_D_of_transcendental
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferential_span_D_eq_top_of_transcendental
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialMapInjective
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialUniqueSmulD
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerRankOneTranscendental
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerToFunctionFieldEqSmulDCoord
+import Nyll.AlgebraicCurves.Differentials.Kaehler.TranscendentalSeparable
 import Nyll.AlgebraicCurves.Differentials.Kaehler.Weil
+import Nyll.AlgebraicCurves.Differentials.Kaehler.WeilDifferentialRankOne
+import Nyll.AlgebraicCurves.Differentials.Kaehler.WeilOfKaehlerNeZeroMaximal

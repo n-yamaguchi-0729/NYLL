@@ -8,7 +8,7 @@ https://github.com/n-yamaguchi-0729
 import Nyll.SchemeTheory.Descent.NoetherianImageIdempotentLift
 import Nyll.SchemeTheory.Morphisms.ProperIntegralHenselianSections
 import Nyll.SchemeTheory.Affine.ConnectedOfGlobalSections
-import Nyll.SchemeTheory.Morphisms.ChowDatumProj_nonempty_of
+import Nyll.SchemeTheory.Morphisms.ChowDatumProj
 import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
 import Mathlib.Algebra.Category.Ring.Constructions
 import Mathlib.Algebra.Ring.Idempotent

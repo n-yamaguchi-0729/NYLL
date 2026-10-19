@@ -1,0 +1,17 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.FunctionFieldConstantExtension
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.FunctionFieldConstantExtensionScalars
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.FunctionFieldGermTraceEqTraceFunAlongFunctionFieldGerm
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.IsAffineOpenRangeAlgebraMapFunctionFieldEqIInf
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.OpenImmersionFunctionFieldIso
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.OpensRangeAlgebraMapFunctionFieldEqIInf
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.PartialMapMemDomainToRationalMap
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.RationalLocalization
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.RationalMapSpecializesKrullDimensionLeOne
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.RingHomFunctionFieldGermEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.UniqueFunctionFieldGermEq

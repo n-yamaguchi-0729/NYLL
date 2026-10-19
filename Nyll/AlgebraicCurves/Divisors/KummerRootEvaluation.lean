@@ -5,12 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup
-import Nyll.AlgebraicCurves.Geometry.WeilReciprocity_of_isAlgClosed
-import Nyll.AlgebraicCurves.Places.Evaluation
-import Nyll.AlgebraicCurves.Places.EvaluationAlgebra
-import Nyll.AlgebraicCurves.Places.Place_isRational_of_isAlgClosed
-import Nyll.AlgebraicCurves.Divisors.Divisor_evalFun_single_sub_single
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+import Nyll.AlgebraicCurves.Geometry.WeilReciprocityAlgClosed
+import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
+import Nyll.AlgebraicCurves.Divisors.Evaluation
 import Mathlib.Tactic.Abel
 
 /-! # Actual roots from Weil reciprocity
@@ -42,16 +41,16 @@ theorem evaluation_quotient_pow
     (evalFun f E / evalFun g D) ^ n = evalFun f B := by
   have hfB : ∀ v ∈ B.support, v.evalAt f ≠ 0 := by
     intro v hv
-    apply v.evalAt_ne_zero_of_ord_eq_zero (v.isRational_of_isAlgClosed) hf
+    apply v.evalAt_ne_zero (v.isRational_of_isAlgClosed) hf
     rw [hfdiv v, (hDB v).resolve_right (Finsupp.mem_support_iff.mp hv), mul_zero]
   have hgD : ∀ v ∈ D.support, v.evalAt g ≠ 0 := by
     intro v hv
-    apply v.evalAt_ne_zero_of_ord_eq_zero (v.isRational_of_isAlgClosed) hg
+    apply v.evalAt_ne_zero (v.isRational_of_isAlgClosed) hg
     rw [hgdiv v, (hDE v).resolve_left (Finsupp.mem_support_iff.mp hv),
       (hDB v).resolve_left (Finsupp.mem_support_iff.mp hv), mul_zero, sub_self]
   have hfG : ∀ v ∈ ((n : ℤ) • E - B).support, v.evalAt f ≠ 0 := by
     intro v hv
-    apply v.evalAt_ne_zero_of_ord_eq_zero (v.isRational_of_isAlgClosed) hf
+    apply v.evalAt_ne_zero (v.isRational_of_isAlgClosed) hf
     rw [hfdiv v]
     by_cases hD : D v = 0
     · rw [hD, mul_zero]
@@ -97,9 +96,9 @@ theorem evaluation_quotient_pow_points
       have hvε : v ≠ ε := fun h => hD ((congrArg D h).trans hDε)
       exact Or.inr (by rw [Finsupp.add_apply,
         Finsupp.single_eq_of_ne hvx, Finsupp.single_eq_of_ne hvε, add_zero])
-  have hfx : x.evalAt f ≠ 0 := x.evalAt_ne_zero_of_ord_eq_zero
+  have hfx : x.evalAt f ≠ 0 := x.evalAt_ne_zero
     x.isRational_of_isAlgClosed hf (by rw [hfdiv x, hDx, mul_zero])
-  have hfε : ε.evalAt f ≠ 0 := ε.evalAt_ne_zero_of_ord_eq_zero
+  have hfε : ε.evalAt f ≠ 0 := ε.evalAt_ne_zero
     ε.isRational_of_isAlgClosed hf (by rw [hfdiv ε, hDε, mul_zero])
   exact (evaluation_quotient_pow n D E
     (Finsupp.single x 1 + Finsupp.single ε (-1)) f g hf hg hfdiv hgdiv hDE hDB).trans

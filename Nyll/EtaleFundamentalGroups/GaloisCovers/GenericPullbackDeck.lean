@@ -50,7 +50,7 @@ private theorem genericExtensionMorphism_self_isPreimmersion
         (algebraMap X.functionField X.functionField) =
         𝟙 (CommRingCat.of X.functionField) := by
       ext x
-      simp
+      exact Algebra.algebraMap_self_apply x
     rw [h]
     infer_instance
   infer_instance

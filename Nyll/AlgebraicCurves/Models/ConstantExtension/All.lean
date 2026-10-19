@@ -1,0 +1,34 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Models.ConstantExtension.BaseChangeSemilinearAction
+import Nyll.AlgebraicCurves.Models.ConstantExtension.BaseEmbedding
+import Nyll.AlgebraicCurves.Models.ConstantExtension.BaseGeneration
+import Nyll.AlgebraicCurves.Models.ConstantExtension.BaseTower
+import Nyll.AlgebraicCurves.Models.ConstantExtension.CurveModelSemilinearFixedField
+import Nyll.AlgebraicCurves.Models.ConstantExtension.DivisorDescent
+import Nyll.AlgebraicCurves.Models.ConstantExtension.DivisorPeriod
+import Nyll.AlgebraicCurves.Models.ConstantExtension.ExtensionCoordinates
+import Nyll.AlgebraicCurves.Models.ConstantExtension.FiniteFrobenius
+import Nyll.AlgebraicCurves.Models.ConstantExtension.FixedDivisor
+import Nyll.AlgebraicCurves.Models.ConstantExtension.FunctionDescent
+import Nyll.AlgebraicCurves.Models.ConstantExtension.FunctionPeriod
+import Nyll.AlgebraicCurves.Models.ConstantExtension.FunctionTower
+import Nyll.AlgebraicCurves.Models.ConstantExtension.ModelConstants
+import Nyll.AlgebraicCurves.Models.ConstantExtension.ModelExtension
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PeriodicExtension
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PicardDescent
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PicardFrobenius
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PicardNorm
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PicardNormQuotient
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PicardNormRealization
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PicardTower
+import Nyll.AlgebraicCurves.Models.ConstantExtension.PlacePeriod
+import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearAction
+import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearActionUniqueness
+import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearAutBaseAutEqPointPlaceEqSmul
+import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearFunctionField
+import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearTower

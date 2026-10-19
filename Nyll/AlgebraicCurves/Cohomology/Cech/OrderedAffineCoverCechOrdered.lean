@@ -12,7 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
 import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechCup
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.OrderedAffineCoverCochainPullback
+import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
 
 /-!
 # Ordered Affine Cover Cech Ordered

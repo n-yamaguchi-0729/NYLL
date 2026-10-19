@@ -8,6 +8,7 @@ import Mathlib.Algebra.Algebra.ZMod
 import Mathlib.Algebra.CharP.Algebra
 import Mathlib.Algebra.CharP.Lemmas
 import Mathlib.Algebra.Polynomial.Derivative
+import Mathlib.Algebra.Polynomial.Monic
 import Mathlib.Algebra.Polynomial.Splits
 import Mathlib.FieldTheory.Finite.Basic
 import Mathlib.FieldTheory.Finite.GaloisField
@@ -38,17 +39,31 @@ variable {K : Type u} [CommRing K]
 def artinSchreierPolynomial (p : ℕ) (a : K) : K[X] :=
   X ^ p - X - C a
 
+/-- The defining Artin--Schreier equation is monic. -/
+theorem artinSchreierPolynomial_monic [Nontrivial K]
+    (p : ℕ) (hp : 1 < p) (a : K) :
+    (artinSchreierPolynomial p a).Monic := by
+  change (X ^ p - X - C a).Monic
+  rw [sub_sub]
+  apply monic_X_pow_sub
+  rw [degree_X_add_C]
+  exact_mod_cast hp
+
+/-- The derivative of the actual defining polynomial is the constant `-1`. -/
+theorem artinSchreierPolynomial_derivative
+    (p : ℕ) [CharP K p] (a : K) :
+    derivative (artinSchreierPolynomial p a) = -1 := by
+  simp only [artinSchreierPolynomial, derivative_sub, derivative_X_pow,
+    CharP.cast_eq_zero K p, map_zero, zero_mul, derivative_X,
+    derivative_C, zero_sub, sub_zero]
+
 /-- Its derivative is `-1`, so it is separable. -/
 theorem artinSchreierPolynomial_separable
     (p : ℕ) [CharP K p] (a : K) :
     (artinSchreierPolynomial p a).Separable := by
-  have hder : derivative (artinSchreierPolynomial p a) = -1 := by
-    simp only [artinSchreierPolynomial, derivative_sub, derivative_X_pow,
-      CharP.cast_eq_zero K p, map_zero, zero_mul, derivative_X,
-      derivative_C, zero_sub, sub_zero]
   rw [separable_def']
   refine ⟨0, -1, ?_⟩
-  rw [hder]
+  rw [artinSchreierPolynomial_derivative]
   ring
 
 /-- Every prime-field translate of one root is again a root. -/

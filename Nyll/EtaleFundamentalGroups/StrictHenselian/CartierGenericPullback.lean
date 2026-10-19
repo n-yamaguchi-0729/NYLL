@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
-import Nyll.SchemeTheory.RingTheory.DVRFractionFieldAway
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
 import Nyll.SchemeTheory.Divisors.RegularCartier
 
 /-!

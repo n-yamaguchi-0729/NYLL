@@ -362,7 +362,8 @@ private theorem stalkClosedPointTo_specMap_algEquiv
         CommRingCat.ofHom sigma.toRingEquiv.toRingHom) hfac).symm
     _ = ((Spec (.of Omega)).presheaf.germ ⊤ x trivial ≫ e.inv) ≫
           (e.hom ≫ (stalkClosedPointIso (.of Omega)).hom ≫
-            CommRingCat.ofHom sigma.toRingEquiv.toRingHom) := by simp
+            CommRingCat.ofHom sigma.toRingEquiv.toRingHom) := by
+      simp only [Category.assoc, Iso.inv_hom_id_assoc]
 
 /-- The function-field embedding associated to a precomposed generic lift is
 the original embedding followed by the absolute Galois automorphism. -/

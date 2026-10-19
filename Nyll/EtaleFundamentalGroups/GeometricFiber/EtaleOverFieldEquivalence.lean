@@ -1568,7 +1568,10 @@ private lemma unitComponent_triangle
     Functor.mapIso_hom]
   rw [Functor.map_comp, Category.assoc]
   rw [geometricFiberCounitComponent_naturality]
-  simp
+  simp only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_hom,
+    Iso.hom_inv_id_assoc]
+  rw [← CategoryTheory.Functor.map_comp, Iso.inv_hom_id]
+  exact CategoryTheory.Functor.map_id _ _
 
 private noncomputable def unitIso :
     𝟭 ((Spec (.of k)).Etale) ≅

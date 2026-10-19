@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.Kummer.JacobianWeilCohomologyInjective
-import Nyll.JacobianVarieties.Pic0.Pic0_torsion_bijective_of_injective
+import Nyll.JacobianVarieties.Pic0.TorsionBijectiveInjective
 import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationCharacters
 import Nyll.JacobianVarieties.WeilPairing.Divisorial

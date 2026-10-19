@@ -1,0 +1,32 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallyEtaleFormallySmooth
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothFormallySmoothFormallyUnramifiedAeval
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothFormallyUnramifiedAevalMaximalIdealEq
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothLinearMapEq
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothMaximalIdealEqSpanPerfectField
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothMaximalIdealEqSpanSeparableResidueField
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothQuotientSpanSingleton
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsSmoothAtFlatLocalizationAtPrime
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsSmoothAtIsSmoothAtFiber
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsStandardSmoothStandardSmooth
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraSmoothIsDomainIsIntegrallyClosed
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraSmoothIsIntegrallyClosedIsDomain
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraSmoothIsIntegrallyClosedKrullDimLEOne
+import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraSmoothReducedReduced
+import Nyll.SchemeTheory.RingTheory.Smooth.CotangentLifts
+import Nyll.SchemeTheory.RingTheory.Smooth.JacobianLocalization
+import Nyll.SchemeTheory.RingTheory.Smooth.MathlibRingTheorySmoothAlgebraOverFieldRegularStalks
+import Nyll.SchemeTheory.RingTheory.Smooth.RingHomFormallySmoothFormallyUnramified
+import Nyll.SchemeTheory.RingTheory.Smooth.RingHomFormallySmoothFormallyUnramifiedEval2RingHomUniqueEqSmulD
+import Nyll.SchemeTheory.RingTheory.Smooth.SmoothDifferentialGeneratorMappedIdeal
+import Nyll.SchemeTheory.RingTheory.Smooth.SmoothDifferentialGeneratorTwoParameters
+import Nyll.SchemeTheory.RingTheory.Smooth.SmoothReduced
+import Nyll.SchemeTheory.RingTheory.Smooth.SmoothUnramifiedPolynomialTwoParameters
+import Nyll.SchemeTheory.RingTheory.Smooth.StandardSmoothFibreRegularity
+import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
+import Nyll.SchemeTheory.RingTheory.Smooth.UniformizerPrimeFiber

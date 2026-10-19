@@ -20,8 +20,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
-import Nyll.AlgebraicCurves.Geometry.Schemes.Scheme_exists_quotient_of_finiteLocallyFree_equivalenceRelation
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction_effective_of_isPullback_of_flat_surjective
+import Nyll.AlgebraicCurves.Geometry.Schemes.Quotients.QuotientFiniteLocallyFreeEquivalenceRelation
+import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectivePullback
 
 /-!
 # Effective descent along finite faithfully flat covers

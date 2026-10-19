@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalSectionAlgebra
 import Nyll.SchemeTheory.Affine.SpecFlatBaseChangeSections
 import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleFromLocalizations
-import Nyll.AlgebraicCurves.Geometry.Schemes.finite_appTop_of_isProper_of_isNoetherianRing
+import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
 import Mathlib.RingTheory.LocalProperties.Projective
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.Algebra.Module.FinitePresentation

@@ -19,6 +19,11 @@ import Mathlib.Tactic.Ext
 # Basic
 -/
 
+/-- Each homogeneous component in finitely many variables is a finite module. -/
+instance MvPolynomial.finiteHomogeneousSubmodule (σ R : Type*) [CommSemiring R] [Finite σ]
+    (d : ℕ) : Module.Finite R ↥(MvPolynomial.homogeneousSubmodule σ R d) :=
+  Module.Finite.iff_fg.mpr (MvPolynomial.homogeneousSubmodule_fg σ R d)
+
 namespace AlgebraicGeometry.HilbertFunctor
 
 open MvPolynomial

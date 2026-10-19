@@ -166,7 +166,7 @@ theorem
       (K := K) (L := L) P hP Q hEtale
   refine ⟨hcard, ?_⟩
   rw [hcard]
-  simp
+  exact Nat.coprime_one_left 2
 
 section IntegerBase
 

@@ -66,7 +66,7 @@ theorem exists_mem_fieldNormSubgroup_val_finrank_of_uniformizer
         (ϖ ^ Module.finrank K L) =
         (multiplicativeIntegerValuation K).val
           (ϖ ^ (Module.finrank K L : ℤ)) := by
-      simp
+      rw [zpow_natCast]
     _ = (Module.finrank K L : ℤ) := by
       rw [(multiplicativeIntegerValuation K).val_zpow, hϖ, mul_one]
 

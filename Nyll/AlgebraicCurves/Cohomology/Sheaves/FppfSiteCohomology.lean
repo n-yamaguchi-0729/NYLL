@@ -104,8 +104,6 @@ theorem etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
 theorem zariskiTopology_le_fppfTopology : zariskiTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage
 
-example : fppfTopology.{u}.Subcanonical := inferInstance
-
 /-- The category of flat, locally finitely presented schemes over the base. -/
 protected def Fppf (S : Scheme.{u}) : Type (u + 1) := MorphismProperty.Over fppfProperty ⊤ S
 
@@ -159,8 +157,6 @@ instance (S : Scheme.{u}) :
       ((MorphismProperty.Over.forget fppfProperty ⊤ S).restrictedTopology
         (S.overGrothendieckTopology fppfProperty))
       (S.overGrothendieckTopology fppfProperty)
-
-example (S : Scheme.{u}) : EssentiallySmall.{u + 1} S.Fppf := inferInstance
 
 /-- The identity morphism, as an object of the small fppf site. -/
 noncomputable def fppfTerminal (S : Scheme.{u}) : S.Fppf :=
@@ -321,10 +317,6 @@ section SpecInt
 
 /-- The spectrum of the integers. -/
 noncomputable abbrev specInt : Scheme.{0} := Spec (CommRingCat.of ℤ)
-
-noncomputable example (F : Sheaf (smallFppfTopology specInt) Ab.{1}) :
-    AddCommGroup (fppfCohomology specInt F 1) :=
-  inferInstance
 
 open Abelian in
 /-- Identify degree-zero fppf cohomology over the integers with global sections. -/

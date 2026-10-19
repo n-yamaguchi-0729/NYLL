@@ -19,5 +19,8 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteSchemeCo
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticFunctionField
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothConnectedCovers
+import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.WholeFractionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.AffineFunctionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.AffinePullback
 
 /-! Canonical aggregate for EtaleFundamentalGroups.FiniteEtale.GenericFiber. -/

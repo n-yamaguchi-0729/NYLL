@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.RingTheory.RegularLocalDimensionOne
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
 import Mathlib.AlgebraicGeometry.Properties
 
 /-!

@@ -14,6 +14,11 @@ import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.All
 import Nyll.GaloisCohomology.Cyclic.Herbrand.Product
 import Nyll.GaloisCohomology.Cyclic.Herbrand.SupportedQuotient
 
+import Nyll.GaloisCohomology.Cyclic.Herbrand.FiniteErrors
+import Nyll.GaloisCohomology.Cyclic.Herbrand.AlmostTrivialProduct
+
+import Nyll.GaloisCohomology.Cyclic.Herbrand.TrivialAction
+
 /-!
 # Herbrand quotients
 

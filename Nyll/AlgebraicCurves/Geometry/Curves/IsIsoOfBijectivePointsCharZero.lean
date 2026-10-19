@@ -5,8 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Scheme_exists_isOpenImmersion_of_functionField_iso
-import Nyll.AlgebraicCurves.Geometry.Schemes.Scheme_exists_iso_comp_eq_of_isOpenImmersion_of_isProper
+import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.OpenImmersionFunctionFieldIso
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoCompEqOpenImmersion
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

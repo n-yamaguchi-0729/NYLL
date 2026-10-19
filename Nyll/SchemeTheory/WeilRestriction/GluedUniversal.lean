@@ -29,11 +29,11 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 noncomputable section
 
-universe u v
+universe u v w
 
 namespace SchemeTheory.WeilRestriction
 
-variable {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type u)
+variable {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type w)
   (𝒰 : S.OpenCover) [Category.{v} 𝒰.I₀] [𝒰.LocallyDirected]
   (W : ∀ i : 𝒰.I₀, Over (𝒰.X i))
   (h : ∀ i : 𝒰.I₀, ((Over.map (𝒰.f i)).op ⋙ F).RepresentableBy (W i))

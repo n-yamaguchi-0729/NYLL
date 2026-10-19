@@ -10,42 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup
+import Nyll.AlgebraicCurves.Places.Basic
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.FunctionFields.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Order
-import Nyll.AlgebraicCurves.Differentials.Uniformizer
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+import Nyll.AlgebraicCurves.Differentials.Local.Order
+import Nyll.AlgebraicCurves.Differentials.Local.Uniformizer
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Divisors.Canonical
+import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
 import Nyll.AlgebraicCurves.Differentials.Residues.Basic
-import Nyll.AlgebraicCurves.Divisors.Maps
-import Nyll.AlgebraicCurves.Valuations.AdicCompletion
+import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+import Nyll.ValuedFieldTheory.Valuation.Completion.AdicCompletion
 import Nyll.AlgebraicCurves.Places.Completion
 import Nyll.AlgebraicCurves.Differentials.Residues.TateTrace
-import Nyll.AlgebraicCurves.Differentials.Residues.Canonical
+import Nyll.AlgebraicCurves.Differentials.Residues.Construction
 import Nyll.AlgebraicCurves.Differentials.Residues.TateCommFinite
-import Nyll.AlgebraicCurves.Differentials.Residues.TateTraceCompat_of_isSeparable
+import Nyll.AlgebraicCurves.Differentials.Residues.TateTraceCompatSeparable
 import Nyll.AlgebraicCurves.Differentials.Residues.TateAgreement
 import Nyll.AlgebraicCurves.Differentials.Residues.TateChainRule
 
 /-!
-# Residue Trace Completion Commute
+Compare residues, traces and completions.
 -/
 
 section ProofImplementation
 
 namespace AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute
-open _root_.AlgebraicCurve.Place in
-attribute [-instance]
-  instIsPrimeCenter
-  instIsFractionRingIntegralClosureAt
-  instIsTorsionFreeSubtypeMemValuationSubringToValuationSubringIntegralClosureAt
-  instIsDedekindDomainIntegralClosureAt
-  instFiniteSubtypeMemValuationSubringToValuationSubringIntegralClosureAt
-attribute [-simp] AlgebraicCurve.Place.placeOfPrime_toValuationSubring
-  AlgebraicCurve.Place.mem_fiberOver AlgebraicCurve.Place.fiberEquiv_symm_apply
-  AlgebraicCurve.Place.fiberEquiv_apply AlgebraicCurve.Place.centerHeightOneSpectrum_asIdeal
 
 namespace AlgebraicCurve
 open _root_.AlgebraicCurve
@@ -227,8 +218,8 @@ namespace Place
 open _root_.AlgebraicCurve.Place
 open _root_.AlgebraicCurve.Place
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Pointwise
+open scoped _root_.Pointwise
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Pointwise
 
 variable {K F}
 variable (σ : F ≃ₐ[K] F)
@@ -240,8 +231,8 @@ end Place
 namespace Divisor
 open _root_.AlgebraicCurve.Divisor
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Pointwise
+open scoped _root_.Pointwise
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Pointwise
 
 variable {K F}
 
@@ -250,8 +241,8 @@ end Divisor
 namespace Pic0
 open _root_.AlgebraicCurve.Pic0
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Pointwise
+open scoped _root_.Pointwise
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Pointwise
 
 variable {K F}
 
@@ -294,38 +285,6 @@ section SinglePlace
 
 variable {K F : Type*} [Field K] [Field F] [Algebra K F] (v : Place K F)
 
-private theorem _root_.AlgebraicCurve.Place.ord_nonneg_of_mem {f : F} (hf : f ∈
-  v.toValuationSubring) : 0 ≤ v.ord f := by
-  rcases eq_or_ne f 0 with rfl | hf0
-  · simp
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨n, u, hu⟩ :=
-    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
-  have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
-    have h := congrArg (Subtype.val) hu
-    push_cast at h
-    rw [zpow_natCast]
-    exact h
-  rw [hcoe, v.ord_unit_smul_zpow u hπ (n : ℤ)]
-  exact Int.natCast_nonneg n
-
-open _root_.AlgebraicCurve.Place
-private theorem _root_.AlgebraicCurve.Place.mem_of_ord_nonneg {f : F} (hf : f ≠ 0) (h : 0 ≤ v.ord
-  f) :
-    f ∈ v.toValuationSubring := by
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨u, hu⟩ := v.exists_unit_mul_zpow hf hπ
-  rw [hu, show v.ord f = (((v.ord f).toNat : ℕ) : ℤ) from (Int.toNat_of_nonneg h).symm,
-    zpow_natCast]
-  exact mul_mem (u : v.toValuationSubring).2 (pow_mem (π : v.toValuationSubring).2 _)
-
-open _root_.AlgebraicCurve.Place
-private theorem _root_.AlgebraicCurve.Place.mem_iff_ord_nonneg {f : F} (hf : f ≠ 0) :
-    f ∈ v.toValuationSubring ↔ 0 ≤ v.ord f :=
-  ⟨v.ord_nonneg_of_mem, v.mem_of_ord_nonneg hf⟩
-
-open _root_.AlgebraicCurve.Place
 theorem exists_ord_pos : ∃ f : F, f ≠ 0 ∧ 0 < v.ord f := by
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
   refine ⟨(π : F), ?_, ?_⟩
@@ -610,10 +569,12 @@ end IrreducibleValuation
 
 section SpectralSetup
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
+open scoped _root_.Valued
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
+      _root_.NNReal
+        AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
+          _root_.WithZero
+            AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
 
 open _root_.WithZeroMulInt
 open _root_.Valuation.IsRankOneDiscrete
@@ -624,10 +585,12 @@ end SpectralSetup
 
 section AbsoluteValue
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
+open scoped _root_.Valued
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
+      _root_.NNReal
+        AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
+          _root_.WithZero
+            AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
 
 open _root_.WithZeroMulInt
 open _root_.Valuation.IsRankOneDiscrete
@@ -640,10 +603,12 @@ end AbsoluteValue
 
 section IntegralClosure
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
+open scoped _root_.Valued
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
+      _root_.NNReal
+        AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
+          _root_.WithZero
+            AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
 
 variable {K F F' : Type*} [Field K] [Field F] [Field F'] [Algebra K F] [Algebra K F']
 variable (F)
@@ -653,10 +618,12 @@ end IntegralClosure
 
 section ClosedAdjoin
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
+open scoped _root_.Valued
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
+      _root_.NNReal
+        AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.NNReal
+          _root_.WithZero
+            AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
 
 variable {K F F' : Type*} [Field K] [Field F] [Field F'] [Algebra K F] [Algebra K F']
 variable (F)
@@ -690,9 +657,10 @@ open _root_.IsDedekindDomain.HeightOneSpectrum
 open _root_.IsLocalRing
 open _root_.WithZero
 
-open scoped
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
-  _root_.AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
+open scoped _root_.Valued
+    AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.Valued
+      _root_.WithZero
+        AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute.WithZero
 
 namespace AlgebraicCurve
 open _root_.AlgebraicCurve
@@ -952,28 +920,28 @@ variable {K E : Type*} [Field K] [Field E] [Algebra K E]
 
 variable [HasCanonicalLocalResidueKStar K E]
 
-theorem kwHgfV352_localResidueCompletion_spec (v : Place K E) (xh : v.adicCompletion)
+theorem completionResidue_eq_of_sub_mem_integers (v : Place K E) (xh : v.adicCompletion)
     {x : E} (hx : algebraMap E v.adicCompletion x - xh ∈ v.adicCompletionIntegers) :
     kwHgfV352_localResidueCompletion v xh = v.localResidue x := by
   unfold kwHgfV352_localResidueCompletion
-  set x₀ := (kwHgfV352_exists_sub_mem_adicCompletionIntegers v xh).choose
-  have hx₀ := (kwHgfV352_exists_sub_mem_adicCompletionIntegers v xh).choose_spec
+  set x₀ := (exists_sub_mem_adicCompletionIntegers v xh).choose
+  have hx₀ := (exists_sub_mem_adicCompletionIntegers v xh).choose_spec
   have heq : algebraMap E v.adicCompletion (x₀ - x)
       = (algebraMap E v.adicCompletion x₀ - xh) - (algebraMap E v.adicCompletion x - xh) := by
     rw [map_sub]; ring
   have hdiff : algebraMap E v.adicCompletion (x₀ - x) ∈ v.adicCompletionIntegers :=
     heq ▸ sub_mem hx₀ hx
   have hov : x₀ - x ∈ v.toValuationSubring :=
-    (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff v _).mp hdiff
+    (algebraMap_mem_adicCompletionIntegers_iff v _).mp hdiff
   have hzero : v.localResidue (x₀ - x) = 0 :=
     v.localResidue_eq_zero_of_ord_nonneg (Or.inr (v.ord_nonneg_of_mem hov))
   rw [map_sub, sub_eq_zero] at hzero
   exact hzero
 
-theorem kwHgfV352_localResidueCompletion_algebraMap (v : Place K E) (x : E) :
+theorem completionResidue_algebraMap (v : Place K E) (x : E) :
     kwHgfV352_localResidueCompletion v (algebraMap E v.adicCompletion x)
       = v.localResidue x :=
-  kwHgfV352_localResidueCompletion_spec v _
+  completionResidue_eq_of_sub_mem_integers v _
     (by rw [sub_self]; exact zero_mem _)
 
 end LocalResidueCompletion
@@ -1103,7 +1071,7 @@ variable {E : Type*} [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
 variable [Algebra.IsIntegral E F]
 variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
 
-theorem kwF4gRRTate_RTCC_of_tate
+theorem residueTraceCompletionCommute_of_tate
     [HasPrincipalDivisors K E] [HasPrincipalDivisors K F]
     [Nontrivial Ω[F⁄K]] [∀ w : Place K F, w.DCoordGenerates]
     [∀ u : Place K E, u.FiniteResidue]
@@ -1115,7 +1083,7 @@ theorem kwF4gRRTate_RTCC_of_tate
   intro _ _ _ v _ w _ hw g
   unfold kaehlerResidueTerm
   rw [diagonalHom_apply]
-  rw [← kwHgfV352_localResidueCompletion_algebraMap w
+  rw [← completionResidue_algebraMap w
     (g * w.differentialCoeff (kaehlerPullback K F E v.dCoord))]
   have := hfinF w (algebraMap F w.adicCompletion
     (g * w.differentialCoeff (kaehlerPullback K F E v.dCoord)))
@@ -1149,11 +1117,13 @@ theorem _root_.AlgebraicCurve.residueTraceCompletionCommute
     [AlgebraicCurve.IsCurveOver K F] [AlgebraicCurve.IsCurveOver K E] [PerfectField K]
     [Nontrivial Ω[F⁄K]] [∀ w : AlgebraicCurve.Place K F, w.DCoordGenerates]
     [Algebra.IsSeparable E F] :
-    ModularCurve.KwF4R1V391a.KwF4R1V391aResidueTraceCompletionCommute K F E :=
+    ModularCurve.KwF4R1V391a.KwF4R1V391aResidueTraceCompletionCommute K F E := by
   let hF : ModularCurve.KwF4gRRTate.KwF4gRRTateCommFinite K F := AlgebraicCurve.tateCommFinite
   let hE : ModularCurve.KwF4gRRTate.KwF4gRRTateCommFinite K E := AlgebraicCurve.tateCommFinite
-  ModularCurve.KwF4gRRTate.kwF4gRRTate_RTCC_of_tate hF hE
+  intro _ _ _ v _ w _ hw g
+  exact (ModularCurve.KwF4gRRTate.residueTraceCompletionCommute_of_tate hF hE
     (AlgebraicCurve.tateAgreement hF) (AlgebraicCurve.tateAgreement hE)
-    (AlgebraicCurve.tateChainRule hF) (AlgebraicCurve.tateTraceCompat_of_isSeparable hF hE)
+    (AlgebraicCurve.tateChainRule hF) (AlgebraicCurve.tateTraceCompat_of_isSeparable hF hE))
+    v w hw g
 end AlgebraicCurves.Differentials.Residues.Proofs.ResidueTraceCompletionCommute
 end ProofImplementation

@@ -8,6 +8,8 @@ import Nyll.GaloisCohomology.ProP.MultiplicativeBinaryProductH2Evaluation
 import Nyll.GaloisCohomology.ProP.H2InflationRangeCardinality
 import Nyll.GaloisCohomology.ProP.MultiplicativeProductH2Evaluation
 import Nyll.GaloisCohomology.ProP.FiniteCyclicH2CoefficientNorm
+import Nyll.GaloisCohomology.ProP.FiniteCyclicH2PullbackNorm
+import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryRestriction
 import Nyll.GaloisCohomology.ProP.DiscreteH2Representatives
 import Nyll.GaloisCohomology.ProP.CentralExtensionFrattiniKernel
 import Nyll.GaloisCohomology.ProP.ContinuousH1Bridge

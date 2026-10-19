@@ -5,14 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Picard.Exists_relativeGroupLaw_abelJacobi_of_representsRelSubPic
-import Nyll.JacobianVarieties.Pic0.Pic0_mem_closure_mk_single_sub_single
-import Nyll.AlgebraicCurves.Models.Basic
-import Nyll.AlgebraicCurves.FunctionFields.CurveOver
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
+import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
+import Nyll.AlgebraicCurves.Models.Construction.Basic
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Schemes.isReduced_of_smooth_of_field
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver_ext_of_forall_algebraicClosure_point_of_isReduced_of_flat
+import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
 import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!

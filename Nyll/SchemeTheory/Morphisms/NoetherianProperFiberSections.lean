@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.exists_appTop_pullback_map_eq_appTop_pullback_fst_of_isProper
+import Nyll.SchemeTheory.Morphisms.AppTopPullbackMapEqAppTopPullbackFst
 import Nyll.SchemeTheory.Affine.HomeomorphismIdempotentSections
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Pullbacks

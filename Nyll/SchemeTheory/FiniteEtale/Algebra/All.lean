@@ -30,6 +30,7 @@ import Nyll.SchemeTheory.FiniteEtale.Algebra.PrimeRigidity
 
 /- Canonical aggregate for SchemeTheory.FiniteEtale.Algebra. -/
 import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
+import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecializationNaturality
 import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteGeometricallyReducedEtale
 import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteSplitIdempotentSurjectivity
 import Nyll.SchemeTheory.FiniteEtale.Algebra.LocalEtaleFromClosedFiber

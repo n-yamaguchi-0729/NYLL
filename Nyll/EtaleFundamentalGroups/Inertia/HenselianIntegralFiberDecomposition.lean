@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiber
-import Nyll.SchemeTheory.RingTheory.JacobsonIdempotentRigidity
+import Nyll.SchemeTheory.RingTheory.Idempotents.JacobsonIdempotentRigidity
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.RingTheory.Idempotents

@@ -69,7 +69,7 @@ theorem maximalIdeal_ramificationIdx_eq_finrank_of_residueFieldMap_bijective
   let : Unique ((IsLocalRing.maximalIdeal R).primesOver S) :=
     { default := ⟨IsLocalRing.maximalIdeal S, by
           rw [IsLocalRing.primesOver_eq S hp]
-          simp⟩
+          exact Set.mem_singleton _⟩
       uniq := fun q ↦ Subtype.ext (by
         have hq : (q : Ideal S) ∈ (IsLocalRing.maximalIdeal R).primesOver S := q.property
         simpa only [IsLocalRing.primesOver_eq S hp,

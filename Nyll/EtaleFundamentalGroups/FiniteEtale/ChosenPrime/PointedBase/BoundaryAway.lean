@@ -86,16 +86,16 @@ theorem exists_etaleChosenLocalFactor_pointedBaseComponent_boundaryAway
     let : Algebra Cₚ K :=
       pointedBaseReverseFractionRingAlgebra pointed
     ∃ (n : MaximalSpectrum (K ⊗[K] L)),
-      letI : Algebra Cₚ (GenericTensorFieldComponent n.asIdeal) :=
+      let : Algebra Cₚ (GenericTensorFieldComponent n.asIdeal) :=
         genericTensorFieldComponentLeftScalarAlgebra
           (R := Cₚ) n.asIdeal
       ∃ (p : PrimeSpectrum
           (integralClosure Cₚ
             (GenericTensorFieldComponent n.asIdeal))),
         let Dbase := Localization.AtPrime p.asIdeal
-        letI : CommRing Dbase := inferInstance
-        letI : Algebra Cₚ Dbase := inferInstance
-        letI : Algebra R Dbase :=
+        let : CommRing Dbase := inferInstance
+        let : Algebra Cₚ Dbase := inferInstance
+        let : Algebra R Dbase :=
           ((algebraMap Cₚ Dbase).comp
             (algebraMap R Cₚ)).toAlgebra
         Nonempty (Dₚ ≃ₐ[Cₚ] Dbase) ∧
@@ -144,14 +144,11 @@ theorem exists_etaleChosenLocalFactor_pointedBaseComponent_boundaryAway
       pointed m.asIdeal q.asIdeal
   let n : MaximalSpectrum (K ⊗[K] L) := Classical.choose hRefinement
   have hn := Classical.choose_spec hRefinement
-  let : Algebra Cₚ (GenericTensorFieldComponent n.asIdeal) :=
-    genericTensorFieldComponentLeftScalarAlgebra
-      (R := Cₚ) (K := K) (F := K) (L := L) n.asIdeal
+  refine ⟨n, ?_⟩
+  intro componentAlgebra
   obtain ⟨p, ⟨Ebase⟩⟩ := hn
-  let Dbase := Localization.AtPrime p.asIdeal
-  let rBaseAlgebra : Algebra R Dbase :=
-    ((algebraMap Cₚ Dbase).comp (algebraMap R Cₚ)).toAlgebra
-  let : Algebra R Dbase := rBaseAlgebra
+  refine ⟨p, ?_⟩
+  intro Dbase baseCommRing baseAlgebra rBaseAlgebra
   let : SMul R Dbase := rBaseAlgebra.toSMul
   let : IsScalarTower R Cₚ Dbase :=
     IsScalarTower.of_algebraMap_eq' rfl
@@ -163,7 +160,7 @@ theorem exists_etaleChosenLocalFactor_pointedBaseComponent_boundaryAway
         _ _
         (Localization.awayMap (algebraMap R Dbase) f).toAlgebra :=
     localization_awayMap_etale_of_tower_algEquiv Etotal f hDp
-  exact ⟨n, p, ⟨Etotal⟩, hBase⟩
+  exact ⟨⟨Etotal⟩, hBase⟩
 
 end EtaleFundamentalGroups
 

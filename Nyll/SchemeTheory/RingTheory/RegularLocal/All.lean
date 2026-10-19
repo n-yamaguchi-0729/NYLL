@@ -1,0 +1,40 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularRingIntegralClosure
+import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
+import Nyll.SchemeTheory.RingTheory.RegularLocal.CommonRegularElement
+import Nyll.SchemeTheory.RingTheory.RegularLocal.DepthTwoRegularPair
+import Nyll.SchemeTheory.RingTheory.RegularLocal.FlatLocalAscent
+import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularScalar
+import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularSequence
+import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularSequenceAux
+import Nyll.SchemeTheory.RingTheory.RegularLocal.IsRegularRingUniqueFactorizationMonoid
+import Nyll.SchemeTheory.RingTheory.RegularLocal.LocalRingIsCohenMacaulayOfDimKrullDimensionQuotientAddHeight
+import Nyll.SchemeTheory.RingTheory.RegularLocal.LocalRingRegularLocalFormallySmooth
+import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthBound
+import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthLeKrullDimensionQuotient
+import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthQuotientEqDepth
+import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+import Nyll.SchemeTheory.RingTheory.RegularLocal.QuotientRegular
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepth
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepthFreeness
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalFiniteFreeResolution
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalIsDomainIsIntegrallyClosed
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeEtale
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeIsStandardSmooth
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeMvPolynomial
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientLift
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingleton
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingletonMap
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalRingQuotientNonZeroDivisorAscent
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalRingRegularSequenceAscent
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalSpanFinrankKerAddKrullDimensionEq
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalUniqueFactorizationMonoid
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RingTheorySequenceIsWeaklyRegularIsZeroTorOneQuotientOfList

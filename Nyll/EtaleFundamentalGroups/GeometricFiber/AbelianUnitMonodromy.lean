@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperGroupScheme
 import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
 import Mathlib.CategoryTheory.Galois.Topology
 import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLaw_schemeNsmul_comp_eq_comp_schemeNsmul_of_hom
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawSchemeNsmulCompEqCompSchemeNsmul
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPoints
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel

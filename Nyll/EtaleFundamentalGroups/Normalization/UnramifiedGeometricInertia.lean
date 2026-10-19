@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationPointRigidity
-import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
 import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
 import Nyll.SchemeTheory.Normalization.FiniteSeparable
 import Mathlib.Algebra.Algebra.Equiv

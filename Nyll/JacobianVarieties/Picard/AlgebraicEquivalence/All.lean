@@ -1,0 +1,20 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceBaseChange
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceFibre
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceFoldrOfPoint
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalencePullbackIsoPullbackUnitEulerCharEqOne
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalencePullbackIsoTensorUnit
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalencePullbackOfInvertible
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceTensor
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceTensorPow
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.ClosedFibreAlgebraicEquivalence
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.FibrewiseAlgebraicEquivalenceOfInvertibleNormCurveChange
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.IsLFPSurjPicardZeroPresheafIsOpenSetOfAlgebraicEquivalence
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.IsOpenSetOfAlgebraicEquivalenceFibreTwoStrata
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.RelativeDivisorEqAlgebraicEquivalence
+import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.RelativeDivisorEqAlgebraicEquivalencePullbackMapOnProdOver

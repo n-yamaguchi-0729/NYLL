@@ -146,7 +146,7 @@ noncomputable def cohomologyZeroAddEquivHom (F : Sheaf J AddCommGrpCat.{w}) :
 factor. -/
 noncomputable def biprodSES (F G : Sheaf J AddCommGrpCat.{w}) :
     ShortComplex (Sheaf J AddCommGrpCat.{w}) :=
-  ShortComplex.mk (biprod.inl : F ⟶ F ⊞ G) (biprod.snd : F ⊞ G ⟶ G) (by simp)
+  ShortComplex.mk (biprod.inl : F ⟶ F ⊞ G) (biprod.snd : F ⊞ G ⟶ G) biprod.inl_snd
 omit [HasExt (Sheaf J AddCommGrpCat)] in
 theorem biprodSES_shortExact (F G : Sheaf J AddCommGrpCat.{w}) :
     (biprodSES F G).ShortExact :=
@@ -156,7 +156,7 @@ theorem biprodSES_delta_apply_eq_zero (F G : Sheaf J AddCommGrpCat.{w}) (n₀ n�
     (h : n₀ + 1 = n₁) (x : Ext (constIntSheaf J) (biprodSES F G).X₃ n₀) :
     cohomologyδ (biprodSES_shortExact F G) n₀ n₁ h x = 0 := by
   have hsurj : Function.Surjective (cohomologyMap (biprodSES F G).g n₀) :=
-    cohomologyMap_surjective_of_section (biprodSES F G).g biprod.inr (by simp [biprodSES]) n₀
+    cohomologyMap_surjective_of_section (biprodSES F G).g biprod.inr biprod.inr_snd n₀
   obtain ⟨z, rfl⟩ := hsurj x
   exact (cohomology_exact_three (biprodSES_shortExact F G) n₀ n₁ h).apply_apply_eq_zero z
 
@@ -170,14 +170,6 @@ instance fppfSheavesIsGrothendieckAbelian :
     IsGrothendieckAbelian.{u + 1} (Sheaf Scheme.fppfTopology.{u} Ab.{u + 1}) := by
   have : EssentiallySmall.{u + 1} Scheme.{u} := inferInstance
   exact Sheaf.isGrothendieckAbelian_of_essentiallySmall Scheme.fppfTopology Ab.{u + 1}
-
-example : HasExt.{u + 1} (Sheaf Scheme.fppfTopology.{u} Ab.{u + 1}) := inferInstance
-
-example : HasSheafify Scheme.fppfTopology.{u} Ab.{u + 1} := inferInstance
-
-example : Scheme.fppfTopology.{u}.Subcanonical := inferInstance
-
-noncomputable example : IsTerminal (Spec (CommRingCat.of ℤ)) := specZIsTerminal
 
 section WithLocalInstances
 
@@ -473,8 +465,8 @@ noncomputable def biprodSESHom (F : Sheaf J AddCommGrpCat.{w})
   τ₁ := 𝟙 F
   τ₂ := biprod.map (𝟙 F) ψ
   τ₃ := ψ
-  comm₁₂ := by simp [biprodSES]
-  comm₂₃ := by simp [biprodSES]
+  comm₁₂ := (biprod.inl_map (𝟙 F) ψ).symm
+  comm₂₃ := biprod.map_snd (𝟙 F) ψ
 omit [HasExt (Sheaf J AddCommGrpCat)] in
 @[simp]
 lemma biprodSESHom_τ₁ (F : Sheaf J AddCommGrpCat.{w}) {G G' : Sheaf J AddCommGrpCat.{w}}
@@ -507,18 +499,18 @@ theorem satGate_biprodSESHom_delta_zero_consistency (F : Sheaf J AddCommGrpCat.{
 /-- The split short complex with the two middle biproduct factors in reverse order. -/
 noncomputable def biprodSESSwap (F G : Sheaf J AddCommGrpCat.{w}) :
     ShortComplex (Sheaf J AddCommGrpCat.{w}) :=
-  ShortComplex.mk (biprod.inr : F ⟶ G ⊞ F) (biprod.fst : G ⊞ F ⟶ G) (by simp)
+  ShortComplex.mk (biprod.inr : F ⟶ G ⊞ F) (biprod.fst : G ⊞ F ⟶ G) biprod.inr_fst
 
 /-- The isomorphism of split complexes induced by the symmetry of the middle biproduct. -/
 noncomputable def biprodSESSwapIso (F G : Sheaf J AddCommGrpCat.{w}) :
     biprodSES F G ≅ biprodSESSwap F G :=
   ShortComplex.isoMk (Iso.refl F) (biprod.braiding F G) (Iso.refl G)
     (by
-      dsimp [biprodSES, biprodSESSwap]
-      apply biprod.hom_ext <;> simp)
+      change 𝟙 F ≫ biprod.inr = biprod.inl ≫ (biprod.braiding F G).hom
+      rw [Category.id_comp, ← biprod.braiding'_eq_braiding, biprod.braiding'_hom, biprod.inl_desc])
     (by
-      dsimp [biprodSES, biprodSESSwap]
-      simp)
+      change (biprod.braiding F G).hom ≫ biprod.fst = biprod.snd ≫ 𝟙 G
+      rw [biprod.braiding_hom, biprod.lift_fst, Category.comp_id])
 omit [HasExt (Sheaf J AddCommGrpCat)] in
 theorem biprodSESSwap_shortExact (F G : Sheaf J AddCommGrpCat.{w}) :
     (biprodSESSwap F G).ShortExact :=

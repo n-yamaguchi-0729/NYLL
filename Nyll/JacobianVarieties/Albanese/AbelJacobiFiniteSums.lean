@@ -6,16 +6,16 @@ https://github.com/n-yamaguchi-0729
 -/
 
 import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.JacobianVarieties.Picard.Exists_relativeGroupLaw_abelJacobi_of_representsRelSubPic
-import Nyll.JacobianVarieties.Picard.Designation
-import Nyll.JacobianVarieties.Picard.Representation
+import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelativeGroupLaw
+import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Models.Basic
-import Nyll.AlgebraicCurves.FunctionFields.CurveOver
-import Nyll.AlgebraicCurves.Divisors.ClassGroup
+import Nyll.AlgebraicCurves.Models.Construction.Basic
+import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Mathlib.GroupTheory.QuotientGroup.Defs
 import Mathlib.Algebra.BigOperators.Group.List.Basic
 

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.HenselianIntegralDomainLocal
-import Nyll.SchemeTheory.RingTheory.HenselianLocalRing_of_isIntegral_of_isLocalRing
+import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Properties

@@ -67,7 +67,7 @@ theorem mapEquiv_symm_mapEquiv
     (e : F ≃+* G) (V : ValuationSubring F) :
     mapEquiv e.symm (mapEquiv e V) = V := by
   ext x
-  simp
+  simp only [mem_mapEquiv_iff, RingEquiv.symm_symm, RingEquiv.symm_apply_apply]
 
 end ValuationSubring
 

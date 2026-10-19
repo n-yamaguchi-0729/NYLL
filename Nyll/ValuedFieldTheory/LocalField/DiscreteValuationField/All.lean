@@ -38,6 +38,8 @@ import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubring
 import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValueGroup
 import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.WithZeroValuationTopology
 
+import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldUnitCongruencePowerIndex
+
 /-!
 # Local-field algebraic infrastructure
 

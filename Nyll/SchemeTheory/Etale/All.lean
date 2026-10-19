@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Etale.HenselianLocalGeometricLift
 import Nyll.SchemeTheory.Etale.AffineClosedLift
 import Nyll.SchemeTheory.Etale.AffineResidueField
 import Nyll.SchemeTheory.Etale.AffineGeometricFiberBound
@@ -13,6 +14,7 @@ import Nyll.SchemeTheory.Etale.ChosenResidueExtension
 import Nyll.SchemeTheory.Etale.ClosedNeighborhoodEqualizer
 import Nyll.SchemeTheory.Etale.ClosedNeighborhoodLift
 import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
+import Nyll.SchemeTheory.Etale.FiniteStrictLocalSection
 import Nyll.SchemeTheory.Etale.FiniteAffineCover
 import Nyll.SchemeTheory.Etale.FiniteRadicialLocalSection
 import Nyll.SchemeTheory.Etale.GeometricFiberNeighborhood
@@ -43,5 +45,9 @@ import Nyll.SchemeTheory.Etale.LocalFactorOpenCover
 import Nyll.SchemeTheory.Etale.FiniteRefinement
 import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
 import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
+import Nyll.SchemeTheory.Etale.FiniteStrictLocalGeometricSection
+import Nyll.SchemeTheory.Etale.Frobenius
+import Nyll.SchemeTheory.Etale.FiniteStrictLocalSchemeGeometricSection
+import Nyll.SchemeTheory.Etale.FrobeniusSquare
 
 /- Canonical aggregate for SchemeTheory.Etale. -/

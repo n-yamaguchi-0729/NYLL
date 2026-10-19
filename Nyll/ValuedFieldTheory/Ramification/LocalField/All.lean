@@ -8,6 +8,7 @@ import Nyll.ValuedFieldTheory.Ramification.LocalField.BaseChange
 import Nyll.ValuedFieldTheory.Ramification.LocalField.Core
 import Nyll.ValuedFieldTheory.Ramification.LocalField.InertiaCard
 import Nyll.ValuedFieldTheory.Ramification.LocalField.FirstRamificationComparison
+import Nyll.ValuedFieldTheory.Ramification.LocalField.ResidueInertia
 import Nyll.ValuedFieldTheory.Ramification.LocalField.Unramified
 
 /-!

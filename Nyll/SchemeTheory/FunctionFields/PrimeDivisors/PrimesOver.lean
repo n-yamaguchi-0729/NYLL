@@ -43,7 +43,8 @@ theorem card_primesOver_le_finrank
     (Algebra.QuasiFinite.finite_primesOver (R := R) (S := S) p).fintype
   rw [← p.sum_ramification_inertia_eq_finrank S, Nat.card_eq_fintype_card]
   calc
-    Fintype.card (p.primesOver S) = ∑ _q : p.primesOver S, 1 := by simp
+    Fintype.card (p.primesOver S) = ∑ _q : p.primesOver S, 1 := by
+      rw [Finset.sum_const, Finset.card_univ, smul_eq_mul, mul_one]
     _ ≤ ∑ q : p.primesOver S, q.1.ramificationIdx R * q.1.inertiaDeg R := by
       exact Finset.sum_le_sum fun q (_ : q ∈ Finset.univ) ↦
         Nat.one_le_iff_ne_zero.mpr

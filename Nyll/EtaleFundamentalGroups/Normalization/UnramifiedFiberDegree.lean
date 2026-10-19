@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
 import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
 import Nyll.SchemeTheory.Morphisms.FiberRank
 import Mathlib.AlgebraicGeometry.Fiber

@@ -12,7 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOverBaseChange
+import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Fibre
 
 /-!

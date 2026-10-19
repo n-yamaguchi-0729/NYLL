@@ -12,6 +12,7 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 
 import Nyll.JacobianVarieties.Albanese.All
 import Nyll.JacobianVarieties.Autoduality.All
+import Nyll.JacobianVarieties.Generalized.All
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.All
 import Nyll.JacobianVarieties.Pic0.All
 import Nyll.JacobianVarieties.Picard.All

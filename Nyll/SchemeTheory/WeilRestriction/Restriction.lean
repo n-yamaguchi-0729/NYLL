@@ -27,17 +27,26 @@ open CategoryTheory AlgebraicGeometry
 
 noncomputable section
 
-universe u
+universe u w
 
 namespace SchemeTheory.WeilRestriction
 
+/-- Restriction to a new base is represented by the actual pullback, in any value universe. -/
+def representableByBaseChange {S X : Scheme.{u}} (f : X ⟶ S)
+    {F : (Over S)ᵒᵖ ⥤ Type w} {W : Over S} (h : F.RepresentableBy W) :
+    ((Over.map f).op ⋙ F).RepresentableBy ((Over.pullback f).obj W) where
+  homEquiv {T} := ((Over.mapPullbackAdj f).homEquiv T W).symm.trans h.homEquiv
+  homEquiv_comp a b := by
+    change h.homEquiv (((Over.mapPullbackAdj f).homEquiv _ W).symm (a ≫ b)) = _
+    rw [(Over.mapPullbackAdj f).homEquiv_naturality_left_symm, h.homEquiv_comp]
+    rfl
+
 /-- Restriction along a composite is represented by the pullback of a local representer. -/
 def representableByRestrictionBaseChange {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ X)
-    (F : (Over S)ᵒᵖ ⥤ Type u) (W : Over X)
+    (F : (Over S)ᵒᵖ ⥤ Type w) (W : Over X)
     (h : ((Over.map f).op ⋙ F).RepresentableBy W) :
     ((Over.map (g ≫ f)).op ⋙ F).RepresentableBy ((Over.pullback g).obj W) :=
-  ((Over.mapPullbackAdj g).representableBy W).ofIso <|
-    (Functor.isoWhiskerLeft (Over.map g).op h.toIso).trans <|
+  (representableByBaseChange g h).ofIso <|
       (Functor.associator (Over.map g).op (Over.map f).op F).symm.trans <|
         Functor.isoWhiskerRight (NatIso.op (Over.mapComp g f)) F
 

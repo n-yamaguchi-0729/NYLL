@@ -10,9 +10,9 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Value
-import Nyll.AlgebraicCurves.Places.Evaluation
-import Nyll.AlgebraicCurves.Places.SemilinearValue
+import Nyll.AlgebraicCurves.Places.Evaluation.Value
+import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+import Nyll.AlgebraicCurves.Places.Evaluation.SemilinearValue
 
 /-!
 # Depth
@@ -102,7 +102,7 @@ theorem HasValuation.smul (g : SemilinearAut L F)
     {f : F} {γ : A.ValueGroup} (h : V.HasValuation A f γ) :
     (g • V).HasValuation A (g • f) γ := by
   obtain ⟨a, ha, rfl⟩ := h
-  exact ⟨SemilinearAut.baseAut g a, ha.smul g, hg a⟩
+  exact ⟨SemilinearAut.baseAut g a, ha.semilinear_smul g, hg a⟩
 
 theorem HasDepth.smul (g : SemilinearAut L F)
     (hg : ∀ a : L, A.valuation (SemilinearAut.baseAut g a) = A.valuation a)
@@ -115,7 +115,7 @@ theorem DepthBetween.smul (g : SemilinearAut L F)
     {f : F} {ϖ : L} {m n : ℕ} (h : V.DepthBetween A f ϖ m n) :
     (g • V).DepthBetween A (g • f) ϖ m n := by
   obtain ⟨a, ha, h₁, h₂⟩ := h
-  refine ⟨SemilinearAut.baseAut g a, ha.smul g, ?_, ?_⟩
+  refine ⟨SemilinearAut.baseAut g a, ha.semilinear_smul g, ?_, ?_⟩
   · rw [hg a]; exact h₁
   · rw [hg a]; exact h₂
 

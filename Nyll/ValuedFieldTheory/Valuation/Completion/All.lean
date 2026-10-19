@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
 import Nyll.ValuedFieldTheory.Valuation.Completion.AbsoluteValueExtensions
+import Nyll.ValuedFieldTheory.Valuation.Completion.AdicCompletion
+import Nyll.ValuedFieldTheory.Valuation.Completion.ArtinSchreierClasses
 import Nyll.ValuedFieldTheory.Valuation.Completion.BaseChangeAdjoinRoot
 import Nyll.ValuedFieldTheory.Valuation.Completion.BaseChangeNormTrace
 import Nyll.ValuedFieldTheory.Valuation.Completion.CanonicalTensorMap
+import Nyll.ValuedFieldTheory.Valuation.Completion.CyclotomicCompletion
 import Nyll.ValuedFieldTheory.Valuation.Completion.DVFCompletedExtensionRealization
 import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
 import Nyll.ValuedFieldTheory.Valuation.Completion.DVFFiniteExtensionDescent
@@ -22,6 +24,9 @@ import Nyll.ValuedFieldTheory.Valuation.Completion.DVFSeparableClosedTensor
 import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
 import Nyll.ValuedFieldTheory.Valuation.Completion.DegreeNormTrace
 import Nyll.ValuedFieldTheory.Valuation.Completion.DenseTensorProduct
+import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
+import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
 import Nyll.ValuedFieldTheory.Valuation.Completion.ExtensionFactorClassification
 import Nyll.ValuedFieldTheory.Valuation.Completion.ExtensionInvariants
 import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteLocalization
@@ -44,9 +49,12 @@ import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosure
 import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosureTopology
 import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableTensorField
 import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianTensorField
+import Nyll.ValuedFieldTheory.Valuation.Completion.DVRAdicCompletionIsDomainDVRIsAdicComplete
+import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
 import Nyll.ValuedFieldTheory.Valuation.Completion.Padic
 import Nyll.ValuedFieldTheory.Valuation.Completion.PolynomialCRT
 import Nyll.ValuedFieldTheory.Valuation.Completion.PolynomialFactors
+import Nyll.ValuedFieldTheory.Valuation.Completion.PowerClasses
 import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosedAutRestriction
 import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosedRange
 import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
@@ -55,21 +63,13 @@ import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableFactorCoefficients
 import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableGeneratorDescent
 import Nyll.ValuedFieldTheory.Valuation.Completion.SeparablePolynomialFactors
 import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableRootApproximation
+import Nyll.ValuedFieldTheory.Valuation.Completion.StableGalois
 import Nyll.ValuedFieldTheory.Valuation.Completion.TensorProductDecomposition
 import Nyll.ValuedFieldTheory.Valuation.Completion.TensorProductProductFormulas
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
+import Nyll.ValuedFieldTheory.Valuation.Completion.ValuationSubringAlgClosedCompletion
+import Nyll.ValuedFieldTheory.Valuation.Completion.ValuationCompletionAlgebra
 import Nyll.ValuedFieldTheory.Valuation.Completion.WeakApproximation
-
-import Nyll.ValuedFieldTheory.Valuation.Completion.PowerClasses
-
-import Nyll.ValuedFieldTheory.Valuation.Completion.ArtinSchreierClasses
-
-import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
-
-import Nyll.ValuedFieldTheory.Valuation.Completion.CyclotomicCompletion
-import Nyll.ValuedFieldTheory.Valuation.Completion.StableGalois
+import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
 
 /-!
 # Algebra over completions

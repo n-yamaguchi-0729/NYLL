@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
 
 /-!
 # Fully faithful pullback across purely inseparable extensions
@@ -13,40 +13,6 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 noncomputable section
 universe u
 open CategoryTheory Limits AlgebraicGeometry
-namespace EtaleFundamentalGroups
-
-/-- A purely inseparable field extension induces a universally injective map of spectra. -/
-theorem purelyInseparable_specMap_universallyInjective
-    (k L : Type u) [Field k] [Field L] [Algebra k L] [IsPurelyInseparable k L] :
-    UniversallyInjective (Spec.map (CommRingCat.ofHom (algebraMap k L))) := by
-  apply ((tfae_universallyInjective _).out 1 2).mpr
-  intro K _ a b hab
-  apply (Spec.preimage_inj a b).mp
-  apply CommRingCat.hom_ext
-  apply IsPurelyInseparable.injective_comp_algebraMap k L K
-  have h := congrArg Spec.preimage hab
-  rw [Spec.preimage_comp, Spec.preimage_comp, Spec.preimage_map] at h
-  exact congrArg CommRingCat.Hom.hom h
-
-/-- The coefficient projection of a purely inseparable extension is an
-integral, universally injective, surjective scheme morphism. -/
-theorem purelyInseparable_constantField_projection_properties
-    (k L : Type u) [Field k] [Field L] [Algebra k L] [IsPurelyInseparable k L]
-    (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) :
-    let p := pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k L))) f
-    IsIntegralHom p ∧ UniversallyInjective p ∧ Surjective p := by
-  let φ := Spec.map (CommRingCat.ofHom (algebraMap k L))
-  let : IsIntegralHom φ := (IsIntegralHom.SpecMap_iff).2
-    (Algebra.IsIntegral.isIntegral (R := k))
-  let : UniversallyInjective φ := purelyInseparable_specMap_universallyInjective k L
-  let : Surjective φ := ⟨fun y ↦ ⟨Classical.choice (inferInstance : Nonempty (Spec (.of L))),
-    Subsingleton.elim _ _⟩⟩
-  exact ⟨inferInstance,
-    MorphismProperty.pullback_snd
-      (P := (show MorphismProperty Scheme.{u} from @UniversallyInjective)) φ f inferInstance,
-    inferInstance⟩
-
-end EtaleFundamentalGroups
 namespace AlgebraicGeometry.FiniteEtale
 open EtaleFundamentalGroups
 

@@ -1,0 +1,33 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.AlgebraicCurves.Models.Rational.CurveModelRatFunc
+import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineCoefficientChartPoint
+import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineRatFuncBaseChange
+import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineRatFuncModel
+import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineStandardPlace
+import Nyll.AlgebraicCurves.Models.Rational.PuncturedProjectiveLineAmbientFields
+import Nyll.AlgebraicCurves.Models.Rational.PuncturedProjectiveLineBoundaryPlaces
+import Nyll.AlgebraicCurves.Models.Rational.PuncturedProjectiveLineFunctionFields
+import Nyll.AlgebraicCurves.Models.Rational.PuncturedProjectiveLineGenericPoints
+import Nyll.AlgebraicCurves.Models.Rational.PuncturedProjectiveLineOriginalFields
+import Nyll.AlgebraicCurves.Models.Rational.RationalBoundaryConfigurationIso
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationArithmeticPairFunction
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationBoundaryPlaceOrders
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationChosenPlaceLiteral
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationCuspPlaces
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationFiniteExtensionCoordinate
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationFiniteExtensionValues
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationIteratedBaseChange
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationPairCoordinate
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationPairCrossRatio
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationPairFunction
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationPairNormalizedValues
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationPairOrders
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationPairSchemeCoordinate
+import Nyll.AlgebraicCurves.Models.Rational.RationalConfigurationSquareBoundaryLabels
+import Nyll.AlgebraicCurves.Models.Rational.RationalPairSquareModelMap
+import Nyll.AlgebraicCurves.Models.Rational.RationalSquareModelBoundaryLabels

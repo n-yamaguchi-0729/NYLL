@@ -139,7 +139,8 @@ theorem integralClosure_etale_of_etaleBaseChangeProductMap_surjective
       (Algebra.ofId C M) 1 *
           (IsScalarTower.toAlgHom A L M) b.1 =
         algebraMap L M b.1
-    simp
+    change algebraMap C M 1 * algebraMap L M b.1 = algebraMap L M b.1
+    rw [map_one, one_mul]
   let componentMap : T →ₐ[B] D :=
     { toRingHom := componentMapC.toRingHom
       commutes' := hcomponentMapC_right }

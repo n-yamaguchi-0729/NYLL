@@ -104,7 +104,8 @@ lemma power_weightedSum_ne
   refine hne <| Finsupp.ext <| congrFun <| ofFn_inj.mp ?_
   apply ofDigits_inj_of_len_eq
     (Nat.lt_add_right F.totalDegree one_lt_two)
-    (by simp) (powerDigits_lt_base F vlt) (powerDigits_lt_base F wlt)
+    (by rw [List.length_ofFn, List.length_ofFn])
+    (powerDigits_lt_base F vlt) (powerDigits_lt_base F wlt)
   simpa only [powerNormalizationBase, powerNormalizationExponent,
     ofDigits_eq_sum_mapIdx, mapIdx_eq_ofFn, get_ofFn, length_ofFn,
     Fin.val_cast, mul_comm, sum_ofFn] using! h
@@ -126,9 +127,9 @@ lemma degreeOf_zero_powerChange_monomial {a : K} (ha : a ≠ 0) :
         simp [powerNormalizationExponent, powerNormalizationBase, add_comm,
           leadingCoeff_X_pow_add_C])
   rw [natDegree_mul (by simp [ha])
-      (mul_ne_zero (by simp)
+      (mul_ne_zero (pow_ne_zero _ Polynomial.X_ne_zero)
         (Finset.prod_ne_zero_iff.mpr (fun i _ => h i))),
-    natDegree_mul (by simp)
+    natDegree_mul (pow_ne_zero _ Polynomial.X_ne_zero)
       (Finset.prod_ne_zero_iff.mpr (fun i _ => h i)),
     natDegree_prod _ _ (fun i _ => h i), natDegree_finSuccEquiv,
     degreeOf_C]
@@ -281,7 +282,7 @@ theorem aeval_powerChangeFirst_powerCoordinates
               X 0 ^ powerNormalizationExponent F i)) = x := by
     funext i
     refine Fin.cases ?_ ?_ i
-    · simp
+    · simp only [ite_true, MvPolynomial.aeval_X, powerCoordinatesFirst_zero]
     · intro j
       simp [powerCoordinatesFirst, powerTailCoordinatesFirst]
   rw [hpoints]
