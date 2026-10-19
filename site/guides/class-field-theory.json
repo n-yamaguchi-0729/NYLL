@@ -5,10 +5,10 @@
   "summary": "This library studies abelian extensions of local fields, number fields, and global function fields through reciprocity, norm subgroups, and class fields.",
   "overview": [
     "Class field theory asks how the abelian extensions of a field can be described using the field itself. For a nonarchimedean local field, reciprocity identifies Galois groups with quotients of the multiplicative group by norm subgroups, and the existence theorem says which subgroups arise. For number fields, ray class groups describe Frobenius automorphisms, while the idèle class group gives a single description of all finite abelian extensions.",
-    "These descriptions also constrain ramification, determine the least ray class modulus needed for an extension, and relate global norm equations to local tests. Over the rational numbers, the Kronecker–Weber theorem makes the extensions concrete by placing them in cyclotomic fields. The selected local reciprocity map and Hilbert pairing results assert existence without imposing additional normalization.",
+    "The Hasse–Arf theorem constrains ramification in abelian local extensions. The cyclic Hasse norm theorem relates global norm equations to local tests, and the Kronecker–Weber theorem places every finite abelian extension of the rational numbers in a cyclotomic field.",
     "For global function fields over finite fields, the actual idèle norm gives an inclusion-reversing classification of finite abelian extensions by open subgroups of finite index. Completing the idèle class group gives the absolute abelian Galois group. The local and global Artin maps agree at each place, with arithmetic Frobenius giving the normalization at unramified places."
   ],
-  "scopeNote": "The selection covers local fields, number fields, and global function fields over finite fields. The function-field existence theorem uses the ordinary idèle-class topology; its local–global comparison concerns the actual constructed Artin maps. The selected local-field reciprocity and Hilbert-pairing results assert existence without imposing additional normalization.",
+  "scopeNote": "The selection covers local fields, number fields, and global function fields over finite fields. The function-field existence theorem uses the ordinary idèle-class topology. The selected local-field reciprocity theorem asserts existence without imposing additional normalization.",
   "references": [
     {
       "id": "serre-local-fields",
@@ -70,22 +70,31 @@
   "entries": [
     {
       "slug": "finite-local-reciprocity",
-      "title": "Local fields: reciprocity for finite abelian extensions",
+      "title": "Local class field theory: reciprocity and existence",
       "kind": "theorem",
-      "summary": "A finite abelian extension is recovered as a quotient of the base field's multiplicative group by its norm subgroup.",
+      "summary": "Reciprocity identifies finite abelian extensions with norm quotients, assembles them into the abelianized absolute Galois group, and classifies extensions by open finite-index subgroups.",
       "statement": [
         "Let $K$ be a nonarchimedean local field, with its valuative topology, and let $L/K$ be a finite abelian Galois extension. There exists a continuous surjective homomorphism",
         "$$\\operatorname{Art}_{L/K}:K^\\times\\longrightarrow\\operatorname{Gal}(L/K),\\qquad \\ker(\\operatorname{Art}_{L/K})=N_{L/K}(L^\\times).$$",
-        "Here $N_{L/K}(L^\\times)$ is the subgroup of field norms."
+        "Here $N_{L/K}(L^\\times)$ is the subgroup of field norms.",
+        "For a nonarchimedean local field $K$, let $\\widehat{K^\\times}_{\\mathrm{top}}$ be the inverse limit of $K^\\times/U$ over open normal subgroups $U$ of finite index. Then",
+        "$$\\widehat{K^\\times}_{\\mathrm{top}}\\ \\simeq_{\\mathrm{top}}\\ G_K^{\\mathrm{ab}},\\qquad G_K=\\operatorname{Gal}(K^{\\mathrm{sep}}/K).$$",
+        "The right side is the topological abelianization: the quotient by the closure of the commutator subgroup.",
+        "Fix a nonarchimedean local field $K$ and a separable closure. Finite abelian intermediate extensions correspond to open finite-index subgroups of $K^\\times$ through",
+        "$$L\\longmapsto N_{L/K}(L^\\times).$$",
+        "The correspondence reverses inclusion: $L_1\\subseteq L_2$ exactly when $N_{L_2/K}(L_2^\\times)\\subseteq N_{L_1/K}(L_1^\\times)$."
       ],
       "discussion": [
-        "The norm subgroup tells precisely when two elements of the base field induce the same Galois automorphism. This turns questions about an extension into multiplicative arithmetic within the base field. Serre's Local Fields presents this finite form of reciprocity through the cohomological approach associated with Hochschild and Artin–Tate, providing a starting point for the broader local theory."
+        "The reciprocity map and the existence theorem together classify finite abelian extensions of a local field. The finite quotient, profinite, and norm-subgroup formulations describe the same theory at complementary levels."
       ],
       "history": [
-        "Serre's Local Fields presents the cohomological approach to local reciprocity, following the development associated with Hochschild and Artin–Tate. This finite quotient formulation is a convenient point of entry to that theory."
+        "Serre's Local Fields presents the cohomological approach to local reciprocity, following the development associated with Hochschild and Artin–Tate. This finite quotient formulation is a convenient point of entry to that theory.",
+        "Lubin and Tate's 1965 paper supplies an explicit formal-group perspective on local abelian extensions. Serre's cohomological presentation gives a complementary route to the reciprocity theorem assembled here at the profinite level.",
+        "The existence theorem complements reciprocity in classical local class field theory. Lubin–Tate theory provides explicit local abelian extensions, while Serre treats existence together with local symbols in the final part of Local Fields."
       ],
       "references": [
-        "serre-local-fields"
+        "serre-local-fields",
+        "lubin-tate"
       ],
       "lean": [
         {
@@ -95,64 +104,20 @@
         {
           "path": "Nyll/ClassFieldTheory/LocalClassFieldTheory/Finite/LocalReciprocity/MathlibInterface.lean",
           "name": "ClassFieldTheory.LocalCFT.finiteAbelianLocalReciprocity"
-        }
-      ]
-    },
-    {
-      "slug": "profinite-local-reciprocity",
-      "title": "Local fields: profinite reciprocity",
-      "kind": "theorem",
-      "summary": "All finite abelian local extensions fit into one topological isomorphism.",
-      "statement": [
-        "For a nonarchimedean local field $K$, let $\\widehat{K^\\times}_{\\mathrm{top}}$ be the inverse limit of $K^\\times/U$ over open normal subgroups $U$ of finite index. Then",
-        "$$\\widehat{K^\\times}_{\\mathrm{top}}\\ \\simeq_{\\mathrm{top}}\\ G_K^{\\mathrm{ab}},\\qquad G_K=\\operatorname{Gal}(K^{\\mathrm{sep}}/K).$$",
-        "The right side is the topological abelianization: the quotient by the closure of the commutator subgroup."
-      ],
-      "discussion": [
-        "Passing to the inverse limit retains exactly the finite continuous quotients of the multiplicative group that matter for abelian Galois theory. The completion is therefore essential: it incorporates the topology while bringing all finite extensions into one description. Lubin and Tate's 1965 formal-group construction gives an explicit perspective on these extensions, complementary to the cohomological approach presented by Serre."
-      ],
-      "history": [
-        "Lubin and Tate's 1965 paper supplies an explicit formal-group perspective on local abelian extensions. Serre's cohomological presentation gives a complementary route to the reciprocity theorem assembled here at the profinite level."
-      ],
-      "references": [
-        "lubin-tate",
-        "serre-local-fields"
-      ],
-      "lean": [
+        },
         {
           "path": "Nyll/ClassFieldTheory/Theorems/LocalClassFieldTheory/ProfiniteLocalReciprocity.lean",
-          "name": "ClassFieldTheory.profiniteLocalReciprocity"
+          "name": "ClassFieldTheory.profiniteLocalReciprocity",
+          "show": true
         },
         {
           "path": "Nyll/ClassFieldTheory/LocalClassFieldTheory/Infinite/ProfiniteLocalReciprocity.lean",
           "name": "LocalClassFieldTheory.profiniteLocalReciprocity"
-        }
-      ]
-    },
-    {
-      "slug": "local-existence",
-      "title": "Local fields: existence and classification by norm subgroups",
-      "kind": "theorem",
-      "summary": "Every open finite-index subgroup is a norm subgroup, with the correct reversal of inclusion.",
-      "statement": [
-        "Fix a nonarchimedean local field $K$ and a separable closure. Finite abelian intermediate extensions correspond to open finite-index subgroups of $K^\\times$ through",
-        "$$L\\longmapsto N_{L/K}(L^\\times).$$",
-        "The correspondence reverses inclusion: $L_1\\subseteq L_2$ exactly when $N_{L_2/K}(L_2^\\times)\\subseteq N_{L_1/K}(L_1^\\times)$."
-      ],
-      "discussion": [
-        "Reciprocity associates a norm subgroup to an extension; the existence theorem supplies the converse and makes the classification complete. Larger extensions correspond to smaller subgroups, so inclusion questions become comparisons within the base field. This classical complement to reciprocity has an explicit construction through Lubin–Tate theory and is treated alongside local symbols in Serre's Local Fields."
-      ],
-      "history": [
-        "The existence theorem complements reciprocity in classical local class field theory. Lubin–Tate theory provides explicit local abelian extensions, while Serre treats existence together with local symbols in the final part of Local Fields."
-      ],
-      "references": [
-        "lubin-tate",
-        "serre-local-fields"
-      ],
-      "lean": [
+        },
         {
           "path": "Nyll/ClassFieldTheory/Theorems/LocalClassFieldTheory/FiniteAbelianLocalExistenceOrderIso.lean",
-          "name": "ClassFieldTheory.finiteAbelianLocalExistence_orderIso"
+          "name": "ClassFieldTheory.finiteAbelianLocalExistence_orderIso",
+          "show": true
         }
       ]
     },
@@ -160,18 +125,22 @@
       "slug": "finite-global-reciprocity",
       "title": "Number fields: global Artin reciprocity",
       "kind": "theorem",
-      "summary": "A ray class Artin map realizes Frobenius automorphisms in a finite abelian number-field extension.",
+      "summary": "Ray class reciprocity describes Frobenius in finite abelian extensions; idelic reciprocity identifies the abelianized absolute Galois group.",
       "statement": [
         "Let $L/K$ be a finite abelian extension of number fields. There are a modulus $\\mathfrak m$ and a surjective homomorphism",
         "$$\\operatorname{Art}_{L/K,\\mathfrak m}:\\mathrm{Cl}_{\\mathfrak m}(K)\\longrightarrow\\operatorname{Gal}(L/K).$$",
         "Here $\\mathrm{Cl}_{\\mathfrak m}(K)$ is the ray class group of modulus $\\mathfrak m$.",
-        "The extension is unramified away from $\\mathfrak m$. For a finite prime $\\mathfrak p$ outside its finite support and a prime $\\mathfrak P$ above $\\mathfrak p$, the map sends $[\\mathfrak p]$ to the arithmetic Frobenius at $\\mathfrak P$."
+        "The extension is unramified away from $\\mathfrak m$. For a finite prime $\\mathfrak p$ outside its finite support and a prime $\\mathfrak P$ above $\\mathfrak p$, the map sends $[\\mathfrak p]$ to the arithmetic Frobenius at $\\mathfrak P$.",
+        "Let $K$ be a number field, $\\mathbb A_K^\\times$ its idèle group, and $C_K=\\mathbb A_K^\\times/K^\\times$ its idèle class group. Write $C_K^0$ for the connected component of the identity. Then",
+        "$$C_K/C_K^0\\ \\simeq_{\\mathrm{top}}\\ G_K^{\\mathrm{ab}}.$$",
+        "Here $G_K=\\operatorname{Gal}(K^{\\mathrm{sep}}/K)$, and $G_K^{\\mathrm{ab}}$ denotes its topological abelianization."
       ],
       "discussion": [
-        "Away from the modulus, a prime's image under the Artin map records its Frobenius automorphism; an identity value means that the prime splits completely. Congruence conditions on ideals thus describe the behavior of primes in an extension. Artin's 1927 reciprocity map made the class-field correspondence canonical through Frobenius, building on the earlier work discussed in Milne's historical account."
+        "The ray class formulation describes splitting of primes through their Frobenius automorphisms. The idelic formulation joins the arithmetic of all completions and identifies the quotient of the idèle class group by its identity component with the abelianized absolute Galois group."
       ],
       "history": [
-        "Artin's 1927 reciprocity map made the correspondence with Galois groups canonical through Frobenius. Milne's historical discussion explains the earlier contributions of Kronecker, Weber, Hilbert, and Takagi to the class-field correspondence."
+        "Artin's 1927 reciprocity map made the correspondence with Galois groups canonical through Frobenius. Milne's historical discussion explains the earlier contributions of Kronecker, Weber, Hilbert, and Takagi to the class-field correspondence.",
+        "Milne's notes explain the algebraic and cohomological approach associated with Chevalley and Artin–Tate and present both ideal-theoretic and idelic reciprocity. The idelic formulation unifies finite-place and infinite-place conditions."
       ],
       "references": [
         "milne-cft"
@@ -185,190 +154,11 @@
           "path": "Nyll/ClassFieldTheory/Definitions/GlobalClassFieldTheory/FiniteAbelianReciprocityData.lean",
           "name": "ClassFieldTheory.FiniteAbelianReciprocityData",
           "show": true
-        }
-      ]
-    },
-    {
-      "slug": "topological-global-reciprocity",
-      "title": "Number fields: global idelic reciprocity",
-      "kind": "theorem",
-      "summary": "The identity component is exactly the part removed from the idèle class group to obtain the abelian Galois group.",
-      "statement": [
-        "Let $K$ be a number field, $\\mathbb A_K^\\times$ its idèle group, and $C_K=\\mathbb A_K^\\times/K^\\times$ its idèle class group. Write $C_K^0$ for the connected component of the identity. Then",
-        "$$C_K/C_K^0\\ \\simeq_{\\mathrm{top}}\\ G_K^{\\mathrm{ab}}.$$",
-        "Here $G_K=\\operatorname{Gal}(K^{\\mathrm{sep}}/K)$, and $G_K^{\\mathrm{ab}}$ denotes its topological abelianization."
-      ],
-      "discussion": [
-        "Idèle classes assemble multiplicative information from all completions of a number field. Removing the connected component leaves the group that records its finite abelian extensions, unifying finite-place and infinite-place conditions in one topological description. Milne presents this idelic formulation alongside ideal-theoretic reciprocity, within the algebraic and cohomological development associated with Chevalley and Artin–Tate."
-      ],
-      "history": [
-        "Milne's notes explain the algebraic and cohomological approach associated with Chevalley and Artin–Tate and present both ideal-theoretic and idelic reciprocity. The idelic formulation unifies finite-place and infinite-place conditions."
-      ],
-      "references": [
-        "milne-cft"
-      ],
-      "lean": [
+        },
         {
           "path": "Nyll/ClassFieldTheory/Theorems/GlobalClassFieldTheory/TopologicalGlobalReciprocity.lean",
-          "name": "ClassFieldTheory.topologicalGlobalReciprocity"
-        }
-      ]
-    },
-    {
-      "slug": "hasse-arf",
-      "title": "Local fields: the Hasse–Arf theorem",
-      "kind": "theorem",
-      "summary": "Upper ramification breaks of a finite abelian local extension are integral.",
-      "statement": [
-        "Let $L/K$ be a finite abelian extension of nonarchimedean local fields, with compatible valuations. Let $G_i$ be the lower ramification groups, and put",
-        "$$\\varphi(n)=\\frac{1}{|G_0|}\\sum_{i=1}^{n}|G_i|\\quad(n\\in\\mathbb N).$$",
-        "If $G_n\\ne G_{n+1}$, then $\\varphi(n)\\in\\mathbb Z$. The formal statement gives an integer $z$ with the rational equality $\\varphi(n)=z$."
-      ],
-      "discussion": [
-        "Upper numbering can take rational values, but its jumps in the abelian case occur at integers. This restriction on wild ramification underlies the integral conductor exponents of class field theory; nonabelian extensions can have fractional upper jumps. Arf's ramification paper appeared in 1940, and Serre's Local Fields develops the ramification and norm theory surrounding the Hasse–Arf theorem."
-      ],
-      "history": [
-        "Arf's original ramification paper appeared in volume 181 of Crelle's journal in 1940. Serre's Local Fields develops the ramification and norm theory in which the Hasse–Arf theorem is situated."
-      ],
-      "references": [
-        "arf-ramification",
-        "serre-local-fields"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ClassFieldTheory/Theorems/HasseArf/HasseArf.lean",
-          "name": "ClassFieldTheory.hasseArf"
-        },
-        {
-          "path": "Nyll/ClassFieldTheory/Definitions/HasseArf/HerbrandFunctionAtLowerIndex.lean",
-          "name": "ClassFieldTheory.herbrandFunctionAtLowerIndex"
-        }
-      ]
-    },
-    {
-      "slug": "perfect-hilbert-pairing",
-      "title": "Local fields: perfect Hilbert pairings",
-      "kind": "theorem",
-      "summary": "Power classes are dual to their roots-of-unity-valued characters.",
-      "statement": [
-        "Let $K$ be a nonarchimedean local field, let $n>0$ be nonzero in $K$, and assume that $K$ contains a primitive $n$th root of unity. Set $P=K^\\times/(K^\\times)^n$. There exists a bimultiplicative pairing",
-        "$$B:P\\times P\\longrightarrow\\mu_n(K),\\qquad P\\xrightarrow{\\;\\sim\\;}\\operatorname{Hom}(P,\\mu_n(K)),\\quad a\\longmapsto B(a,-).$$",
-        "It is skew-symmetric, nondegenerate, and satisfies the Steinberg relation. For representatives $a,b\\in K^\\times$, one has $B([a],[b])=1$ exactly when $b$ is a norm from the Kummer algebra $K[T]/(T^n-a)$."
-      ],
-      "discussion": [
-        "A nontrivial power class is detected by pairing it with a suitable second class, while a trivial pairing value expresses a norm condition. This turns local norm equations into orthogonality tests and connects Kummer extensions with multiplicative characters. These connections are the classical role of local norm-residue symbols, which Serre treats together with the existence theorem in Local Fields."
-      ],
-      "history": [
-        "Local norm-residue symbols connect reciprocity with Kummer theory. Serre treats local symbols and the existence theorem together; the duality formulation explains how norm tests encode characters of power-class groups."
-      ],
-      "references": [
-        "serre-local-fields"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ClassFieldTheory/Theorems/HilbertSymbols/LocalHilbertPairingPerfectExists.lean",
-          "name": "ClassFieldTheory.exists_perfectLocalHilbertPairing"
-        },
-        {
-          "path": "Nyll/ClassFieldTheory/Definitions/HilbertSymbols/IsLocalHilbertPairing.lean",
-          "name": "ClassFieldTheory.HilbertPairing.IsLocalHilbertPairing",
+          "name": "ClassFieldTheory.topologicalGlobalReciprocity",
           "show": true
-        },
-        {
-          "path": "Nyll/ClassFieldTheory/Definitions/HilbertSymbols/HilbertPairing.lean",
-          "name": "ClassFieldTheory.HilbertPairing",
-          "show": true
-        }
-      ]
-    },
-    {
-      "slug": "hasse-norm",
-      "title": "Number fields: the cyclic Hasse norm theorem",
-      "kind": "theorem",
-      "summary": "For a cyclic number-field extension, local norm equations have a global solution.",
-      "statement": [
-        "Let $L/K$ be a finite cyclic Galois extension of number fields and let $a\\in K^\\times$. Then",
-        "$$a\\in N_{L/K}(L^\\times)\\quad\\Longleftrightarrow\\quad a\\in N_{L\\otimes_K K_v\\,/\\,K_v}\\bigl((L\\otimes_K K_v)^\\times\\bigr)\\ \\text{for every place }v.$$",
-        "The right side includes every finite and every infinite completion. The norm after base change is the determinant norm of the resulting finite algebra."
-      ],
-      "discussion": [
-        "The theorem makes a global multiplicative equation testable at every finite and infinite completion. Cyclicity is essential: for more general extensions, an obstruction can remain even when every local norm test succeeds. This is a classical example of the local-to-global principle, treated by Milne through cyclic cohomology and idèle classes together with the limitations of the noncyclic case."
-      ],
-      "history": [
-        "The Hasse norm theorem is a central example of a local-to-global principle. Milne treats it through cyclic cohomology and idèle classes and explains why the corresponding assertion fails for general noncyclic extensions."
-      ],
-      "references": [
-        "milne-cft"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ClassFieldTheory/Theorems/NormTheorems/CyclicHasseNormTheorem.lean",
-          "name": "ClassFieldTheory.cyclicHasseNormTheorem"
-        },
-        {
-          "path": "Nyll/ClassFieldTheory/Definitions/NormTheorems/IsEverywhereLocalNorm.lean",
-          "name": "ClassFieldTheory.IsEverywhereLocalNorm"
-        }
-      ]
-    },
-    {
-      "slug": "abelian-conductor",
-      "title": "Number fields: conductors of abelian extensions",
-      "kind": "theorem",
-      "summary": "A unique least modulus measures which ray class fields contain the extension.",
-      "statement": [
-        "For a finite abelian extension $L/K$ of number fields, there is a unique ray class modulus $\\mathfrak f$ such that, for every modulus $\\mathfrak m$,",
-        "$$L\\text{ embeds over }K\\text{ in a ray class field for }\\mathfrak m\\quad\\Longleftrightarrow\\quad\\mathfrak f\\leq\\mathfrak m.$$",
-        "The order compares the finite exponents and the allowed infinite part. Thus the conclusion specifies the whole upward-closed set of admissible moduli."
-      ],
-      "discussion": [
-        "The conductor packages the congruence conditions needed to realize an extension as a class field. Its finite exponents measure ramification depth, while its infinite part records real places that become complex; comparison with this one modulus decides which ray class fields contain the extension. Ray class groups are the classical means of allowing ramification, developed with conductors in Milne's ideal-theoretic presentation."
-      ],
-      "history": [
-        "Ray class groups are the classical mechanism for allowing ramification in class field theory. Milne develops moduli, conductors, and ray class fields together in the ideal-theoretic presentation of the global theory."
-      ],
-      "references": [
-        "milne-cft"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ClassFieldTheory/Theorems/ConductorsAndRayClassFields/ExistsUniqueAbelianConductor.lean",
-          "name": "ClassFieldTheory.existsUnique_abelianConductor"
-        },
-        {
-          "path": "Nyll/ClassFieldTheory/Definitions/ConductorsAndRayClassFields/IsAbelianConductor.lean",
-          "name": "ClassFieldTheory.IsAbelianConductor",
-          "show": true
-        }
-      ]
-    },
-    {
-      "slug": "kronecker-weber",
-      "title": "Number fields: the Kronecker–Weber theorem",
-      "kind": "theorem",
-      "summary": "Every finite abelian extension of the rational numbers embeds into a cyclotomic field.",
-      "statement": [
-        "Every finite abelian extension $L/\\mathbb Q$ is contained in a cyclotomic field. More precisely, there exist an integer $n>0$ and a $\\mathbb Q$-algebra embedding",
-        "$$L\\hookrightarrow\\mathbb Q(\\zeta_n),$$",
-        "where $\\zeta_n$ is a primitive $n$th root of unity."
-      ],
-      "discussion": [
-        "Roots of unity therefore suffice to generate fields containing every finite abelian extension of the rational numbers, and their union is the maximal abelian extension. This gives a concrete model for the broader problem of explicitly generating abelian extensions. As Milne recounts, Hilbert proved the theorem in 1896 after earlier incomplete proofs by Kronecker and Weber."
-      ],
-      "history": [
-        "Milne records Hilbert's 1896 proof following earlier incomplete proofs by Kronecker and Weber. The theorem is the rational-number-field prototype for the broader problem of explicitly generating abelian extensions."
-      ],
-      "references": [
-        "milne-cft"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ClassFieldTheory/Theorems/KroneckerWeber.lean",
-          "name": "ClassFieldTheory.kroneckerWeber"
-        },
-        {
-          "path": "Nyll/ClassFieldTheory/KroneckerWeber/Core.lean",
-          "name": "KroneckerWeber.exists_cyclotomicEmbedding"
         }
       ]
     },
@@ -423,40 +213,93 @@
       ]
     },
     {
-      "slug": "function-field-local-global",
-      "title": "Function fields: compatibility of local and global Artin maps",
+      "slug": "hasse-arf",
+      "title": "Local fields: the Hasse–Arf theorem",
       "kind": "theorem",
-      "summary": "The actual local Artin map agrees with global reciprocity on a one-place idèle and has the arithmetic Frobenius normalization.",
+      "summary": "Upper ramification breaks of a finite abelian local extension are integral.",
       "statement": [
-        "Let $L/K$ be a finite abelian extension of global function fields over a finite field $k$, with compatible rational-parameter structures and principal-divisor data. Let $w$ be a place of $L$ above $v$ of $K$. For $x\\in K_v^\\times$, write $[x]_v\\in C_K$ for the class of the idèle equal to $x$ at $v$ and $1$ elsewhere. Then",
-        "$$\\operatorname{Art}_{w}(x)=\\operatorname{Art}_{L/K}([x]_v)\\quad\\text{in }\\operatorname{Gal}(L/K).$$",
-        "If the ramification index at $w$ is $1$, the decomposition-group Artin map satisfies",
-        "$$\\operatorname{Art}^{D_w}_{w}(x)=\\operatorname{Frob}_w^{\\operatorname{ord}_v(x)}.$$",
-        "Here $\\operatorname{Frob}_w$ induces $y\\mapsto y^{\\#\\kappa(v)}$ on the residue field. In particular a uniformizer maps to arithmetic Frobenius, and local units map to the identity in the unramified case."
+        "Let $L/K$ be a finite abelian extension of nonarchimedean local fields, with compatible valuations. Let $G_i$ be the lower ramification groups, and put",
+        "$$\\varphi(n)=\\frac{1}{|G_0|}\\sum_{i=1}^{n}|G_i|\\quad(n\\in\\mathbb N).$$",
+        "If $G_n\\ne G_{n+1}$, then $\\varphi(n)\\in\\mathbb Z$. The formal statement gives an integer $z$ with the rational equality $\\varphi(n)=z$."
       ],
       "discussion": [
-        "The comparison identifies the independently constructed local and global maps. It permits a global Artin value to be calculated place by place and fixes the Frobenius convention through its residue-field action.",
-        "The unramified formula provides a concrete calculation for every local element, including its valuation and unit part. Local reciprocity and the expression of global reciprocity through local maps are developed together in Milne’s function-field appendix."
+        "Upper numbering can take rational values, but its jumps in the abelian case occur at integers. This restriction on wild ramification underlies the integral conductor exponents of class field theory; nonabelian extensions can have fractional upper jumps. Arf's ramification paper appeared in 1940, and Serre's Local Fields develops the ramification and norm theory surrounding the Hasse–Arf theorem."
       ],
       "history": [
-        "Milne’s Arithmetic Duality Theorems, Chapter I, Appendix A presents local reciprocity with the arithmetic Frobenius convention and its relation to global reciprocity."
+        "Arf's original ramification paper appeared in volume 181 of Crelle's journal in 1940. Serre's Local Fields develops the ramification and norm theory in which the Hasse–Arf theorem is situated."
       ],
       "references": [
-        "milne-adt"
+        "arf-ramification",
+        "serre-local-fields"
       ],
       "lean": [
         {
-          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/LocalGlobalCompatibility.lean",
-          "name": "FunctionField.localArtin_eq_abelianFiniteArtin_placeIdele"
+          "path": "Nyll/ClassFieldTheory/Theorems/HasseArf/HasseArf.lean",
+          "name": "ClassFieldTheory.hasseArf"
         },
         {
-          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/UnramifiedFrobenius.lean",
-          "name": "FunctionField.localDecompositionArtin_eq_unramifiedFrobenius_zpow",
-          "show": true
+          "path": "Nyll/ClassFieldTheory/Definitions/HasseArf/HerbrandFunctionAtLowerIndex.lean",
+          "name": "ClassFieldTheory.herbrandFunctionAtLowerIndex"
+        }
+      ]
+    },
+    {
+      "slug": "hasse-norm",
+      "title": "Number fields: the cyclic Hasse norm theorem",
+      "kind": "theorem",
+      "summary": "For a cyclic number-field extension, local norm equations have a global solution.",
+      "statement": [
+        "Let $L/K$ be a finite cyclic Galois extension of number fields and let $a\\in K^\\times$. Then",
+        "$$a\\in N_{L/K}(L^\\times)\\quad\\Longleftrightarrow\\quad a\\in N_{L\\otimes_K K_v\\,/\\,K_v}\\bigl((L\\otimes_K K_v)^\\times\\bigr)\\ \\text{for every place }v.$$",
+        "The right side includes every finite and every infinite completion. The norm after base change is the determinant norm of the resulting finite algebra."
+      ],
+      "discussion": [
+        "The theorem makes a global multiplicative equation testable at every finite and infinite completion. Cyclicity is essential: for more general extensions, an obstruction can remain even when every local norm test succeeds. This is a classical example of the local-to-global principle, treated by Milne through cyclic cohomology and idèle classes together with the limitations of the noncyclic case."
+      ],
+      "history": [
+        "The Hasse norm theorem is a central example of a local-to-global principle. Milne treats it through cyclic cohomology and idèle classes and explains why the corresponding assertion fails for general noncyclic extensions."
+      ],
+      "references": [
+        "milne-cft"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ClassFieldTheory/Theorems/NormTheorems/CyclicHasseNormTheorem.lean",
+          "name": "ClassFieldTheory.cyclicHasseNormTheorem"
         },
         {
-          "path": "Nyll/ClassFieldTheory/AlgebraicFunctionFieldTheory/Artin/UnramifiedFrobenius.lean",
-          "name": "FunctionField.unramifiedDecompositionFrobenius_residue"
+          "path": "Nyll/ClassFieldTheory/Definitions/NormTheorems/IsEverywhereLocalNorm.lean",
+          "name": "ClassFieldTheory.IsEverywhereLocalNorm"
+        }
+      ]
+    },
+    {
+      "slug": "kronecker-weber",
+      "title": "Number fields: the Kronecker–Weber theorem",
+      "kind": "theorem",
+      "summary": "Every finite abelian extension of the rational numbers embeds into a cyclotomic field.",
+      "statement": [
+        "Every finite abelian extension $L/\\mathbb Q$ is contained in a cyclotomic field. More precisely, there exist an integer $n>0$ and a $\\mathbb Q$-algebra embedding",
+        "$$L\\hookrightarrow\\mathbb Q(\\zeta_n),$$",
+        "where $\\zeta_n$ is a primitive $n$th root of unity."
+      ],
+      "discussion": [
+        "Roots of unity therefore suffice to generate fields containing every finite abelian extension of the rational numbers, and their union is the maximal abelian extension. This gives a concrete model for the broader problem of explicitly generating abelian extensions. As Milne recounts, Hilbert proved the theorem in 1896 after earlier incomplete proofs by Kronecker and Weber."
+      ],
+      "history": [
+        "Milne records Hilbert's 1896 proof following earlier incomplete proofs by Kronecker and Weber. The theorem is the rational-number-field prototype for the broader problem of explicitly generating abelian extensions."
+      ],
+      "references": [
+        "milne-cft"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/ClassFieldTheory/Theorems/KroneckerWeber.lean",
+          "name": "ClassFieldTheory.kroneckerWeber"
+        },
+        {
+          "path": "Nyll/ClassFieldTheory/KroneckerWeber/Core.lean",
+          "name": "KroneckerWeber.exists_cyclotomicEmbedding"
         }
       ]
     }

@@ -151,6 +151,11 @@ class GuideTests(unittest.TestCase):
                      "show": d["name"] == "Example.Faithful"} for d in module["declarations"]]
         entry = {**data["entries"][0], "selected": selected}
         rendered = guides.entry_page(data, entry, {"revision": "a" * 40}, "https://example.org/")
+        self.assertNotIn('<h2>References</h2>', rendered)
+        self.assertNotIn('id="references"', rendered)
+        overview = guides.overview_page(data, [entry], "https://example.org/")
+        self.assertIn("References used in these guides", overview)
+        self.assertIn("https://example.org/groups", overview)
         self.assertEqual(rendered.count('<article class="lean-source">'), 2)
         self.assertIn("∀ n : Nat, n = n", rendered)
         related = rendered.split('<details class="related-sources">')[1].split('</details>')[0]
@@ -416,7 +421,9 @@ def body := "unterminated string ignored by the header reader
                 self.assertIn('href="../"', html)
                 self.assertIn("variable (n : Nat)", html)
                 self.assertIn("Full declaration and proof", html)
-                self.assertIn('href="https://example.org/groups"', html)
+                self.assertNotIn('href="https://example.org/groups"', html)
+                overview = (root / 'output/libraries/pro-c-groups/index.html').read_text()
+                self.assertIn('href="https://example.org/groups"', overview)
                 self.assertNotIn(".bib", html)
                 sitemap = ET.parse(root / "output/sitemap-guides.xml")
                 self.assertEqual(len(sitemap.getroot()), 2)

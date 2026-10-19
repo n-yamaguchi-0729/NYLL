@@ -5,9 +5,9 @@
   "summary": "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions.",
   "overview": [
     "Over a field, an étale scheme can be recovered from its geometric fiber together with the action of the field's Galois group. For a general scheme, finite étale covers are likewise described by finite locally constant sheaves and, on a connected base with a geometric point, by fundamental-group actions. The results explain when changes to a scheme preserve its covers and how its fundamental group combines geometry with the arithmetic of the base field. For a proper scheme over a separably closed field, extending the field to another separably closed field preserves its finite étale covers and its geometric fundamental group.",
-    "The cohomological results describe what can be recovered from local data. The Kummer sequence records the obstruction to extracting a global root, while the selected Hilbert 90 theorem expresses the triviality of line bundles over a characteristic-zero field. Finite direct image is exact, commutes with arbitrary base change, and preserves cohomology in every degree. For a proper scheme over a henselian local ring, restriction to the closed fiber is an isomorphism on H⁰ and injective on H¹ for arbitrary module coefficients. The general higher-degree proper base change and Lefschetz trace formula remain further goals."
+    "For a finite morphism, direct image of étale module sheaves is exact and commutes with arbitrary base change. The resulting cohomology comparison holds in every degree. The general higher-degree proper base change theorem and Lefschetz trace formula remain further goals."
   ],
-  "scopeNote": "The proper constant-field theorem gives an equivalence of finite étale covers over separably closed field extensions. Finite direct image is treated in all cohomological degrees. The general proper henselian comparison here gives H⁰ bijectivity and H¹ injectivity, not H¹ surjectivity, the full higher-degree proper base change theorem, or the general specialization equivalence. A full Lefschetz trace formula is a separate goal.",
+  "scopeNote": "The proper constant-field theorem gives an equivalence of finite étale covers over separably closed field extensions. Finite direct image is treated in all cohomological degrees. The selection does not assert general proper henselian specialization, higher-degree proper base change, or a full Lefschetz trace formula.",
   "references": [
     {
       "id": "sga1",
@@ -33,32 +33,6 @@
   ],
   "entries": [
     {
-      "slug": "etale-schemes-over-a-field",
-      "title": "Étale schemes over a field as continuous Galois sets",
-      "kind": "theorem",
-      "summary": "The geometric fiber over a separable closure gives an equivalence for all étale schemes over a field, including those with infinitely many components.",
-      "statement": [
-        "Let $k$ be a field, let $K$ be a separable closure of $k$, and equip $G=\\operatorname{Aut}_k(K)$ with its Krull topology. There is an equivalence\n$$\\operatorname{Et}/k \\simeq G\\text{-}\\mathbf{Set}_{\\mathrm{disc,cont}}.$$\nOn the right are discrete sets with continuous $G$-action; on the left are schemes étale over $\\operatorname{Spec}k$.",
-        "The forward functor takes the geometric fiber over $\\operatorname{Spec}K$. No finiteness condition is imposed on the entire scheme or the entire Galois set. Continuity nevertheless forces every individual orbit to be finite."
-      ],
-      "discussion": [
-        "Finite Galois orbits correspond to finite separable extensions, while arbitrary disjoint unions account for schemes with infinitely many components. This makes the étale geometry of a point accessible through field Galois theory and provides the basic model for fundamental groups of schemes. Grothendieck's SGA 1 seminar of 1960–61 developed that passage from field extensions to finite covers of schemes. See [Stacks Project, Lemma 58.2.2](https://stacks.math.columbia.edu/tag/03QR)."
-      ],
-      "history": [
-        "Grothendieck's SGA 1 seminar of 1960–61 extended field Galois theory to finite covers of schemes. The classification over a field is the starting example; Stacks Project Lemma 58.2.2 includes arbitrary étale schemes."
-      ],
-      "references": [
-        "sga1",
-        "stacks-project"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleFundamentalGroups/GeometricFiber/EtaleOverFieldEquivalence.lean",
-          "name": "AlgebraicGeometry.Scheme.Etale.equivDiscreteContAction"
-        }
-      ]
-    },
-    {
       "slug": "arithmetic-exact-sequence",
       "title": "The exact sequence of geometric and arithmetic fundamental groups",
       "kind": "theorem",
@@ -81,6 +55,35 @@
         {
           "path": "Nyll/EtaleFundamentalGroups/GeometricFiber/ArithmeticExactSequence.lean",
           "name": "AlgebraicGeometry.FiniteEtale.arithmetic_exactSequence_of_isSepClosure"
+        }
+      ]
+    },
+    {
+      "slug": "finite-locally-constant-sheaves",
+      "title": "Finite étale schemes are equivalent to finite locally constant sheaves",
+      "kind": "theorem",
+      "summary": "The sheaf of sections identifies finite étale schemes with finite locally constant sheaves of sets on the small étale site.",
+      "statement": [
+        "For every scheme $X$, there is an equivalence\n$$\\operatorname{FinEt}(X)\\simeq\\mathbf{Sh}_{\\mathrm{flc}}(X_{\\mathrm{et}},\\mathbf{Set}).$$\nThe right-hand category is the full subcategory of sheaves that are étale locally isomorphic to constant sheaves associated with finite sets.",
+        "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$. No connectedness, noetherianity, quasi-compactness, or assumption that $X$ lies over a field is included."
+      ],
+      "discussion": [
+        "A finite cover can be viewed as a locally varying finite set whose gluing determines both the scheme and its morphisms. On a connected base with a geometric point, this also connects it to continuous finite fundamental-group actions. The correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology, expressed through étale representability. See [Stacks Project, Section 59.64](https://stacks.math.columbia.edu/tag/09Y8)."
+      ],
+      "history": [
+        "This correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology. Stacks Project Lemma 59.64.4 gives the representability statement for the étale site."
+      ],
+      "references": [
+        "stacks-project"
+      ],
+      "lean": [
+        {
+          "path": "Nyll/EtaleCohomology/Constructible/FiniteLocallyConstantEquivalence.lean",
+          "name": "EtaleCohomology.finiteEtaleEquivFiniteLocallyConstantSetSheaf"
+        },
+        {
+          "path": "Nyll/EtaleCohomology/Constructible/FiniteLocallyConstantEquivalence.lean",
+          "name": "EtaleCohomology.finiteEtaleToFiniteLocallyConstantSetSheaf"
         }
       ]
     },
@@ -153,130 +156,6 @@
         {
           "path": "Nyll/EtaleFundamentalGroups/GeometricFiber/ProperConstantExtensionFundamentalGroup.lean",
           "name": "AlgebraicGeometry.FiniteEtale.fundamentalGroupEquivProperConstantExtension_coefficient_naturality"
-        }
-      ]
-    },
-    {
-      "slug": "kummer-sequence",
-      "title": "Exactness of the Kummer sequence on the small étale site",
-      "kind": "theorem",
-      "summary": "When a positive integer is invertible on the scheme, taking its power on the multiplicative group is locally surjective in the étale topology.",
-      "statement": [
-        "Let $X$ be a scheme and $n>0$ an integer whose image in $\\Gamma(X,\\mathcal O_X)$ is a unit. The sheaves on the small étale site form an exact sequence\n$$1\\longrightarrow\\mu_n\\longrightarrow\\mathbf G_m\\xrightarrow{(\\cdot)^n}\\mathbf G_m\\longrightarrow1.$$\nHere $\\mu_n$ is the kernel of the $n$th-power map.",
-        "More concretely, every unit $a\\in\\Gamma(X,\\mathcal O_X)^\\times$ admits a root after a finite étale surjective morphism $f:Y\\to X$: there is $b\\in\\Gamma(Y,\\mathcal O_Y)^\\times$ with $b^n=f^*a$. The cover can be chosen to have degree $n$ at every point."
-      ],
-      "discussion": [
-        "An étale-local root need not descend to a global root. The long exact sequence relates this obstruction to roots-of-unity torsors and torsion in the Picard group, connecting equations for roots with line bundles. Classical Kummer theory studies field extensions obtained by extracting roots; the sheaf sequence carries that viewpoint to schemes, as developed in the Stacks Project. See [Stacks Project, Section 59.28](https://stacks.math.columbia.edu/tag/03PK)."
-      ],
-      "history": [
-        "Classical Kummer theory studies extensions obtained by extracting roots. The sheaf sequence extends that viewpoint from fields to schemes; Stacks Project Section 59.28 develops this formulation and its relation to Picard groups."
-      ],
-      "references": [
-        "stacks-project"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleCohomology/Classical/KummerSequence.lean",
-          "name": "EtaleCohomology.etaleKummerComplex_shortExact"
-        },
-        {
-          "path": "Nyll/EtaleCohomology/Classical/KummerSequence.lean",
-          "name": "EtaleCohomology.exists_finiteEtale_unit_root"
-        },
-        {
-          "path": "Nyll/EtaleCohomology/Classical/KummerSequence.lean",
-          "name": "EtaleCohomology.etaleKummerComplex",
-          "show": true
-        },
-        {
-          "path": "Nyll/EtaleCohomology/Classical/MultiplicativeGroup.lean",
-          "name": "EtaleCohomology.etaleMultiplicativeGroupPower_apply",
-          "show": true
-        }
-      ]
-    },
-    {
-      "slug": "field-hilbert-90",
-      "title": "Hilbert 90: vanishing of étale H¹ of Gₘ over characteristic-zero fields",
-      "kind": "theorem",
-      "summary": "The first étale cohomology of the multiplicative group vanishes over a characteristic-zero field.",
-      "statement": [
-        "Let $K$ be a field of characteristic zero. For the multiplicative group sheaf on the small étale site of $\\operatorname{Spec}K$, the theorem proves\n$$H^1_{\\mathrm{et}}(\\operatorname{Spec}K,\\mathbf G_m)=0.$$\nHere $H^1$ denotes derived sheaf cohomology.",
-        "The current Lean theorem assumes characteristic zero; the classical vanishing statement holds over every field."
-      ],
-      "discussion": [
-        "First cohomology of the multiplicative group classifies line bundles. Over a field, every one-dimensional vector space has a basis, so the corresponding line bundle is trivial. The étale formulation of Hilbert 90 places the classical field-theoretic vanishing within this Picard-group interpretation and connects multiplicative cocycles with descent. The classical theorem holds in every characteristic, beyond the characteristic-zero case stated here. See [Stacks Project, Section 59.24](https://stacks.math.columbia.edu/tag/03P7)."
-      ],
-      "history": [
-        "The étale formulation of Hilbert 90 places a field-theoretic vanishing result within the general identification of first multiplicative-group cohomology with the Picard group. Stacks Project Section 59.24 explains that identification."
-      ],
-      "references": [
-        "stacks-project"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleCohomology/Classical/FieldHilbert90.lean",
-          "name": "EtaleCohomology.etaleMultiplicativeGroup_H1_eq_zero_of_field"
-        }
-      ]
-    },
-    {
-      "slug": "finite-locally-constant-sheaves",
-      "title": "Finite étale schemes are equivalent to finite locally constant sheaves",
-      "kind": "theorem",
-      "summary": "The sheaf of sections identifies finite étale schemes with finite locally constant sheaves of sets on the small étale site.",
-      "statement": [
-        "For every scheme $X$, there is an equivalence\n$$\\operatorname{FinEt}(X)\\simeq\\mathbf{Sh}_{\\mathrm{flc}}(X_{\\mathrm{et}},\\mathbf{Set}).$$\nThe right-hand category is the full subcategory of sheaves that are étale locally isomorphic to constant sheaves associated with finite sets.",
-        "The forward functor sends $Y\\to X$ to its sheaf of sections, $U\\mapsto\\operatorname{Hom}_X(U,Y)$. No connectedness, noetherianity, quasi-compactness, or assumption that $X$ lies over a field is included."
-      ],
-      "discussion": [
-        "A finite cover can be viewed as a locally varying finite set whose gluing determines both the scheme and its morphisms. On a connected base with a geometric point, this also connects it to continuous finite fundamental-group actions. The correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology, expressed through étale representability. See [Stacks Project, Section 59.64](https://stacks.math.columbia.edu/tag/09Y8)."
-      ],
-      "history": [
-        "This correspondence is the algebraic analogue of the relation between covering spaces and locally constant sheaves in topology. Stacks Project Lemma 59.64.4 gives the representability statement for the étale site."
-      ],
-      "references": [
-        "stacks-project"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleCohomology/Constructible/FiniteLocallyConstantEquivalence.lean",
-          "name": "EtaleCohomology.finiteEtaleEquivFiniteLocallyConstantSetSheaf"
-        },
-        {
-          "path": "Nyll/EtaleCohomology/Constructible/FiniteLocallyConstantEquivalence.lean",
-          "name": "EtaleCohomology.finiteEtaleToFiniteLocallyConstantSetSheaf"
-        }
-      ]
-    },
-    {
-      "slug": "proper-henselian-degree-zero",
-      "title": "Proper henselian restriction is an isomorphism on H⁰ and injective on H¹",
-      "kind": "theorem",
-      "summary": "Restriction to the closed fiber is an isomorphism on H⁰ and injective on H¹ for any étale module sheaf on a proper scheme over a henselian local ring.",
-      "statement": [
-        "Let $R$ be a henselian local ring with residue field $\\kappa$, let $f:X\\to\\operatorname{Spec}R$ be proper, and write $i:X_\\kappa\\to X$ for the closed-fiber inclusion. For any commutative coefficient ring $\\Lambda$ and any étale sheaf $F$ of $\\Lambda$-modules on $X$, restriction is bijective:\n$$H^0(X_{\\mathrm{et}},F)\\xrightarrow{\\;\\sim\\;}H^0((X_\\kappa)_{\\mathrm{et}},i^*F).$$",
-        "For the same sheaf and coefficients, the actual restriction map in degree one is injective: $$H^1(X_{\\mathrm{et}},F)\\hookrightarrow H^1((X_\\kappa)_{\\mathrm{et}},i^*F).$$ No noetherianity or torsion condition is imposed. Surjectivity in degree one and the general higher-degree proper base change theorem are not asserted here."
-      ],
-      "discussion": [
-        "Properness and the henselian base make the closed fiber sufficient for recovering global sections. In degree one, two classes that restrict to the same class were already equal on the original scheme. These conclusions hold with arbitrary module coefficients, without noetherianity or torsion assumptions.",
-        "The degree-one injectivity follows from the degree-zero comparison, an injective presentation, and exact direct image for the closed immersion. It is a step within proper base change theory; lifting every closed-fiber H¹ class remains a separate assertion. See [Stacks Project, Section 59.91](https://stacks.math.columbia.edu/tag/095S)."
-      ],
-      "history": [
-        "Proper base change was developed in SGA 4 to control étale cohomology in families. Stacks Project Section 59.91 includes the degree-zero result for henselian pairs, with henselian local rings as a special case."
-      ],
-      "references": [
-        "stacks-project"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/EtaleCohomology/Sites/ProperHenselianH0.lean",
-          "name": "EtaleCohomology.etaleClosedFiber_globalSections_bijective"
-        },
-        {
-          "path": "Nyll/EtaleCohomology/Classical/ProperHenselianH1.lean",
-          "name": "EtaleCohomology.etaleClosedFiber_cohomology_one_injective",
-          "show": true
         }
       ]
     },

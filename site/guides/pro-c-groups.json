@@ -4,8 +4,8 @@
   "repository": "ProCGroups",
   "summary": "The library studies profinite groups through their finite quotients, providing ways to construct maps, determine the ranks of open subgroups, and prove that presented groups are infinite.",
   "overview": [
-    "A pro-C group is built from finite groups in a chosen class C by taking inverse limits. The selected results explain structural consequences: open subgroups of finite-rank free pro-C groups are free with an explicit rank formula, and a topological generator together with finite quotients of every order characterizes the profinite integers.",
-    "Fox derivatives and Crowell exact sequences express relations in modules, while a weighted Golod–Shafarevich criterion detects infinite pro-p groups. For profinite abelian groups, continuous characters recover the original group through Pontryagin biduality. The individual results specify the closure assumptions on C and the groups involved."
+    "A pro-C group is built from finite groups in a chosen class C by taking inverse limits. Open subgroups of finite-rank free pro-C groups are again free, and the Schreier formula determines their ranks.",
+    "The completed Crowell sequence relates kernels of group homomorphisms to completed differential and augmentation modules. A weighted Golod–Shafarevich criterion detects infinite pro-p groups, while Pontryagin biduality recovers profinite abelian groups from their continuous characters. Each result specifies its hypotheses on C and on the groups involved."
   ],
   "scopeNote": "This is a selection, not a claim that every theorem about pro-C groups has been formalized. Closure assumptions on C vary by result. The open-subgroup theorem has a finite basis, and the completed Crowell theorem uses a finite-rank free pro-C source and a separated completed differential module. The duality entry concerns profinite abelian groups, not all locally compact abelian groups.",
   "references": [
@@ -109,58 +109,6 @@
       ]
     },
     {
-      "slug": "fox-fundamental-formula",
-      "title": "Fox’s fundamental formula for group rings",
-      "kind": "theorem",
-      "summary": "A group-ring boundary decomposes into Fox derivatives times the boundaries of the generators.",
-      "statement": [
-        "Let $X$ be finite, $F(X)$ the free group on $X$, $H$ any group, and $\\psi:F(X)\\to H$ a homomorphism. For every $w\\in F(X)$, $$[\\psi(w)]-1=\\sum_{x\\in X}\\frac{\\partial_\\psi w}{\\partial x}\\bigl([\\psi(x)]-1\\bigr)\\quad\\text{in }\\mathbb Z[H].$$ Here $[h]$ denotes the group-ring basis element indexed by $h$, and the derivative is the relative Fox derivative.",
-        "The factors occur in the displayed order. The group ring need not be commutative, so exchanging a derivative with the factor to its right changes the assertion."
-      ],
-      "discussion": [
-        "In a presentation, a relator maps to the identity and has zero boundary, so its Fox vector lies in the kernel of a linear map over the group ring. This makes noncommutative relations accessible to module calculations. Fox introduced the calculus in his 1953 paper, following his study of Alexander’s knot polynomial; Crowell later developed its connection with derived modules."
-      ],
-      "history": [
-        "Fox’s 1953 paper introduced free differential calculus in the free group ring. The subject grew out of his study of Alexander’s knot polynomial. Crowell’s 1971 derived-module construction subsequently gave a universal module interpretation of the associated presentation matrices and exact sequences, connecting the calculus with the homology of covering spaces."
-      ],
-      "references": [
-        "fox-1953",
-        "crowell-1971"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ProCGroups/FoxDifferential/Discrete/FoxCalculus/Boundary.lean",
-          "name": "FoxDifferential.FoxCalculus.relativeFreeGroupFoxDerivative_fundamental_formula"
-        }
-      ]
-    },
-    {
-      "slug": "discrete-crowell-sequence",
-      "title": "Crowell’s exact sequence for a group quotient",
-      "kind": "theorem",
-      "summary": "A surjective group homomorphism yields an exact sequence connecting its kernel to its derived module.",
-      "statement": [
-        "Let $\\psi:G\\twoheadrightarrow H$ be a surjective homomorphism of groups and let $N=\\ker\\psi$. Write $A_\\psi$ for the universal module of $\\psi$-crossed homomorphisms. Then $$0\\longrightarrow N^{\\mathrm{ab}}\\longrightarrow A_\\psi\\longrightarrow\\mathbb Z[H]\\xrightarrow{\\varepsilon}\\mathbb Z\\longrightarrow0$$ is exact.",
-        "The head map sends the class of $n$ to its universal differential; the next map sends the differential of $g$ to $[\\psi(g)]-1$. The last map is augmentation. The action of $H$ on $N^{\\mathrm{ab}}$ comes from conjugation through lifts in $G$."
-      ],
-      "discussion": [
-        "Exactness identifies the differentials with zero boundary and shows that every element of the augmentation ideal is a boundary. For a finite-rank free source, Fox coordinates turn these maps into calculations with a presentation. Crowell’s 1971 paper constructed the derived module by a universal property and developed its exact sequence, motivated in part by Alexander modules and knot groups."
-      ],
-      "history": [
-        "Crowell’s 1971 paper defines the derived module of a homomorphism by a universal property and constructs its module sequence. The motivation includes Alexander modules and knot groups, but the construction applies to general group homomorphisms. Fox derivatives provide coordinates when a free presentation is available."
-      ],
-      "references": [
-        "crowell-1971",
-        "fox-1953"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ProCGroups/CrowellExactSequence/Discrete/Exactness.lean",
-          "name": "CrowellExactSequence.Morishita2024.crowellExactSequence_of_surjective"
-        }
-      ]
-    },
-    {
       "slug": "completed-crowell-sequence",
       "title": "The completed Crowell exact sequence for free pro-C groups",
       "kind": "theorem",
@@ -242,31 +190,6 @@
         {
           "path": "Nyll/ProCGroups/Abelian/ProfiniteBidual.lean",
           "name": "ProCGroups.Duality.profiniteBidualEquiv_apply"
-        }
-      ]
-    },
-    {
-      "slug": "recognizing-profinite-integers",
-      "title": "When a procyclic group is the group of profinite integers",
-      "kind": "theorem",
-      "summary": "A topological generator and finite quotients of every order characterize the additive group of profinite integers.",
-      "statement": [
-        "Let $G$ be a profinite group and let $g\\in G$ topologically generate it. Suppose that for every positive integer $n$ there is an open normal subgroup $U\\trianglelefteq G$ with $|G/U|=n$. Then there is a continuous group isomorphism $$G\\xrightarrow{\\sim}\\widehat{\\mathbb Z}$$ sending $g$ to the compatible residue class of the integer $1$.",
-        "The Lean target is the all-finite-groups integer inverse-limit carrier, written multiplicatively to match the source group API. Its distinguished element is additive integer one, not the additive identity of $\\widehat{\\mathbb Z}$."
-      ],
-      "discussion": [
-        "Procyclicity alone is insufficient: finite cyclic groups and p-adic integers also have topological generators, but lack quotients of some orders. Sending the chosen generator to one makes the cyclic quotient coordinates compatible. Ribes and Zalesskii’s 2010 monograph places the profinite integers within procyclic group theory, where they are distinguished by having finite cyclic quotients of every positive order."
-      ],
-      "history": [
-        "Procyclic groups form a basic part of the structure theory presented in Ribes and Zalesskii’s 2010 monograph. The profinite integers occupy the universal position among them: their finite cyclic quotients range over all positive orders. The recognition theorem expresses that role using a chosen generator."
-      ],
-      "references": [
-        "ribes-zalesskii-2010"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/ProCGroups/Completion/ProfiniteIntegerRecognition.lean",
-          "name": "ProCGroups.Completion.exists_profiniteInteger_equiv_of_generator_and_quotient_orders"
         }
       ]
     }

@@ -20,14 +20,15 @@ function setup(url = "https://preview.test/NYLL/") {
     head: { appendChild(element) { children.push(element); } },
     createElement(tag) { return { tag, attrs: {}, setAttribute(name, value) { this.attrs[name] = value; } }; },
     querySelector(selector) {
+      if (selector === ".search-form") return {};
       const match = selector.match(/^(meta|link)\[(name|property|rel)="([^"]+)"\]$/);
       return match ? children.find((node) => node.tag === match[1] && node.attrs[match[2]] === match[3]) || null : null;
     }
   };
   const history = { state: {}, replaceState(_, __, value) { location.href = new URL(value, location).href; } };
   const context = { base: new URL("https://preview.test/NYLL/"), location, history, document,
-    app: { children: [] }, URL, URLSearchParams, escape: String };
-  vm.runInNewContext(helpers + "\nglobalThis.api = { readRoute, routeHref, href, moduleHref, libraryHref, normalizeLocation, setMetadata };", context);
+    app: { children: [] }, sidebar: {}, URL, URLSearchParams, escape: String };
+  vm.runInNewContext("(() => {" + helpers + "\nglobalThis.api = { readRoute, routeHref, href, moduleHref, libraryHref, normalizeLocation, setMetadata };})()", context);
   return { ...context, meta: (name) => document.querySelector('meta[name="' + name + '"]')?.attrs.content,
     canonical: () => document.querySelector('link[rel="canonical"]')?.href };
 }
@@ -82,8 +83,8 @@ test("the full source catalog has its own canonical route", () => {
 test("empty searches and filters survive normalization, including legacy query precedence", () => {
   const env = setup("https://preview.test/NYLL/?module=X&q=&type=declaration");
   env.api.normalizeLocation();
-  assert.equal(env.location.href, "https://preview.test/NYLL/?q=&type=declaration");
-  assert.equal(env.api.href({ q: "", type: "module" }), "/NYLL/?q=&type=module");
+  assert.equal(env.location.href, "https://preview.test/NYLL/browse/?q=&type=declaration");
+  assert.equal(env.api.href({ q: "", type: "module" }), "/NYLL/browse/?q=&type=module");
 });
 
 test("module metadata uses production canonical URL and strips declaration fragments", () => {
@@ -99,7 +100,7 @@ test("home and library metadata clear search noindex and stale canonical URLs", 
   const env = setup("https://preview.test/NYLL/?q=group&type=module");
   env.api.setMetadata("Search: group · NYLL", "Search.");
   assert.equal(env.meta("robots"), "noindex,follow");
-  assert.equal(env.canonical(), "https://n-yamaguchi-0729.github.io/NYLL/?q=group&type=module");
+  assert.equal(env.canonical(), "https://n-yamaguchi-0729.github.io/NYLL/browse/?q=group&type=module");
   env.location.href = "https://preview.test/NYLL/";
   env.api.setMetadata("Home", "Home description.");
   assert.equal(env.meta("robots"), "index,follow");
@@ -117,4 +118,25 @@ test("reading a restored module URL retains its declaration after history naviga
   assert.equal(restored.kind, "module");
   assert.equal(restored.id, "Nyll.Example.Basic");
   assert.equal(restored.declaration, "a'b");
+});
+
+test("landing page neither loads source data nor rewrites the guide catalog", () => {
+  function landing(url) {
+    let replaced = null;
+    const location = new URL(url);
+    location.replace = value => { replaced = value; };
+    const app = { children: [{}] };
+    const document = {
+      currentScript: { src: "https://preview.test/NYLL/assets/site.js?v=current" },
+      body: { dataset: { staticPage: "home", siteRoot: "https://preview.test/NYLL/" } },
+      querySelector: selector => selector === ".brand" ? {} : null,
+      getElementById: id => id === "main" ? app : null,
+    };
+    vm.runInNewContext(source, { document, location, URL, URLSearchParams });
+    assert.deepEqual(app, { children: [{}] });
+    return replaced;
+  }
+  assert.equal(landing("https://preview.test/NYLL/"), null);
+  assert.equal(landing("https://preview.test/NYLL/?module=Nyll.Example.Basic&decl=x"), "/NYLL/modules/Nyll.Example.Basic/#declaration-x");
+  assert.equal(landing("https://preview.test/NYLL/?q=group"), "/NYLL/browse/?q=group");
 });

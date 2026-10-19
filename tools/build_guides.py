@@ -359,7 +359,6 @@ def source_block(selected: dict) -> str:
 
 
 def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
-    refs = [r for r in guide["references"] if r["id"] in entry["references"]]
     repo_url = f"https://github.com/{OWNER}/{guide['repository']}"
     related = ""
     visible = [s for i, s in enumerate(entry["selected"]) if i == 0 or s.get("show")]
@@ -372,7 +371,6 @@ def entry_page(guide: dict, entry: dict, snapshot: dict, site_url: str) -> str:
 <div class="guide-actions"><a href="{repo_url}">{e(guide['repository'])} on GitHub ↗</a></div></header>
 <section id="statement" class="guide-section mathematical-statement"><h2>Mathematical statement</h2>{paragraphs(entry['statement'])}</section>
 <section id="lean" class="guide-section"><h2>Lean code</h2>{''.join(source_block(s) for s in visible)}{related}</section>
-<section id="references" class="guide-section"><h2>References</h2>{bibliography(refs)}</section>
 <p class="source-version">Published source: <a href="{repo_url}/commit/{snapshot['revision']}">{snapshot['revision'][:8]}</a>.</p>
 <p class="back-link"><a href="../">← All selected results in {e(guide['title'])}</a></p>'''
     return page(entry["title"], entry["summary"], content, 3, f"libraries/{guide['slug']}/{entry['slug']}/", site_url)

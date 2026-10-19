@@ -241,6 +241,14 @@ def page(shell: str, manifest: dict, site_url: str, title: str, description: str
     rendered = replace_one(r'(<nav\b[^>]*\bid="file-tree"[^>]*>).*?(</nav>)', lambda m: m[1] + sidebar(manifest, "./", library, identity if kind == "module" else "") + m[2], rendered)
     revision = manifest["source"]
     rendered = replace_one(r'(<div id="revision"[^>]*>).*?(</div>)', lambda m: m[1] + '<p>Source revision ' + source_link(revision["repo"] + "/tree/" + revision["commit"], revision["commitShort"]) + "</p>" + m[2], rendered)
+    if kind == "home":
+        # The landing page is a guide catalog, not a hidden source browser.
+        for pattern in (r'<aside\b[^>]*\bid="sidebar"[^>]*>.*?</aside>',
+                        r'<button\b[^>]*\bid="tree-toggle"[^>]*>.*?</button>',
+                        r'<button\b[^>]*\bid="sidebar-backdrop"[^>]*>.*?</button>',
+                        r'<form\b[^>]*\bclass="search-form"[^>]*>.*?</form>',
+                        r'<noscript>.*?</noscript>'):
+            rendered = replace_one(pattern, "", rendered)
     # Relative shell assets, home links and form action must work at either root.
     rendered = re.sub(r'\b(href|src|action)="\./([^\"]*)"', lambda m: f'{m[1]}="{prefix}{m[2]}"', rendered)
     rendered = replace_one(r'<title>.*?</title>', lambda _: f"<title>{escape(title)}</title>", rendered)
@@ -275,6 +283,14 @@ def generated_path(output: Path, relative: str) -> Path:
 
 def write_pages(output: Path, shell: str, manifest: dict, modules: dict[str, dict], site_url: str) -> list[str]:
     """Write source pages, deleting only unchanged stale pages in our inventory."""
+    # A changed renderer or stylesheet must not reuse the previous deployment's
+    # cached asset. Hash once per build, before rendering the shared shell.
+    def version_asset(match: re.Match) -> str:
+        asset = output / "assets" / match[2]
+        digest = hashlib.sha256(asset.read_bytes()).hexdigest()[:16]
+        return f'{match[1]}="./assets/{match[2]}?v={digest}"'
+
+    shell = re.sub(r'\b(href|src)="\./assets/([\w.-]+\.(?:css|js))"', version_asset, shell)
     inventory = output / INVENTORY
     previous = {}
     if inventory.is_symlink():

@@ -5,7 +5,7 @@
   "summary": "These papers study how abelian Galois data detect automorphisms and how the geometry of a boundary controls finite covers over the integers.",
   "overview": [
     "This collection develops selected results from two papers on Galois groups and coverings over the integers. The first proves ab-faithfulness for discretely valued fields of mixed characteristic and for positive-dimensional higher local fields. It proves center-freeness of finite-step solvable quotients under ab-faithfulness, and proves slimness directly for infinite finitely generated fields, sub-p-adic fields, and positive-dimensional higher local fields.",
-    "The second explains when removing a horizontal divisor leaves solvable covering theory unchanged. Under its arithmetic boundary condition, it also reduces the extension of a representation across the divisor to the same question for its reduction modulo the maximal ideal. The triviality of the étale fundamental group of the integers supplies a basic arithmetic endpoint."
+    "The second explains when removing a horizontal divisor leaves solvable covering theory unchanged. Under its arithmetic boundary condition, it also reduces the extension of a representation across the divisor to the same question for its reduction modulo the maximal ideal."
   ],
   "scopeNote": "These are selected completed declarations from the ab-faithfulness and solvable-coverings papers. The general Hilbertian application still needs its embedding-problem input, and several examples in the solvable-coverings paper remain outside the selection. Local prototypes are not included.",
   "references": [
@@ -149,33 +149,6 @@
           "path": "Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean",
           "name": "Yamaguchi26AbfaithfulGalois.higherLocalField_finiteStepSolvable_slim",
           "show": true
-        }
-      ]
-    },
-    {
-      "slug": "integers-fundamental-group",
-      "title": "The étale fundamental group of Spec Z is trivial",
-      "kind": "theorem",
-      "summary": "Every geometric base point gives the trivial étale fundamental group of the integers.",
-      "statement": [
-        "For a separably closed field $\\Omega$ and any geometric point $\\xi:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\mathbb Z$,",
-        "$$\\pi_1^{\\mathrm{\\acute et}}(\\operatorname{Spec}\\mathbb Z,\\xi)=1.$$",
-        "The Lean conclusion is that the automorphism group of the geometric fiber functor is a subsingleton."
-      ],
-      "discussion": [
-        "In number-field terms, every nontrivial finite extension of $\\mathbb Q$ ramifies at some finite prime. This rigidity gives a base case for arguments over the integers: extending a covering across all possible boundary can force it to be trivial. The classical proof uses Minkowski's discriminant theorem; Yamaguchi records it as Example 1.4(1), with SGA 1 providing the language of finite étale covers and fundamental groups."
-      ],
-      "history": [
-        "The classical argument uses Minkowski's discriminant theorem to exclude nontrivial number fields unramified at every finite prime. Yamaguchi records the result as Example 1.4(1). SGA 1 supplies the language that expresses the absence of such connected covers as triviality of an étale fundamental group."
-      ],
-      "references": [
-        "yamaguchi-solvable-coverings",
-        "sga1"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot4FundamentalGroupIntegers.lean",
-          "name": "Yamaguchi26SolvableCoverings.fundamental_group_integers_1_4"
         }
       ]
     },

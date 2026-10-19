@@ -90,36 +90,6 @@
   ],
   "entries": [
     {
-      "slug": "infinite-frobenius-quotient",
-      "title": "Infinite Galois quotients with infinitely many split primes",
-      "kind": "theorem",
-      "summary": "There is an infinite quotient in which the selected primes have trivial decomposition groups.",
-      "statement": [
-        "Let $G=\\operatorname{Gal}(M_{2,S}/\\mathbb Q)$ with $S=\\{3,5,7,11,13,17\\}$, where $M_{2,S}$ is the maximal totally real pro-$2$ extension of $\\mathbb Q$ unramified at finite primes outside $S$. There is a sequence of primes $q_n>n$, outside $S$ and congruent to one modulo four, with infinite range, for which $$G/\\overline{\\langle\\!\\langle\\operatorname{Frob}_{q_n}:n\\ge0\\rangle\\!\\rangle}$$ is infinite.",
-        "The accompanying decomposition-group theorem states that the image of the entire decomposition group at each selected prime is trivial in this quotient. This is the group-theoretic condition that will force complete splitting in the corresponding fixed field."
-      ],
-      "discussion": [
-        "At $t=5/12$, the added relations contribute at most $\\sum_{n\\ge0}t^{n+5}=t^5/(1-t)<1/24$, within the initial presentation’s negative margin. A limiting argument imposes them together, forcing complete splitting while leaving finite layers of unbounded degree. This is the Frobenius-cutting mechanism used by Hajir, Maire, and Ramakrishna in their 2019 preprint to construct infinite extensions with bounded ramification and infinitely many split primes."
-      ],
-      "history": [
-        "Hajir, Maire, and Ramakrishna’s 2019 preprint constructs infinite extensions with bounded ramification using refined Golod–Shafarevich estimates. It also obtains infinitely many completely split primes. Frobenius cutting is the key mechanism: additional splitting relations are chosen deep enough that the resulting tower remains infinite."
-      ],
-      "references": [
-        "hajir-maire-ramakrishna-2019",
-        "golod-shafarevich-1964"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/SawinTotallyRealTowers/RealProTwoFrobeniusSequence.lean",
-          "name": "ClassFieldTower.Sawin.exists_sawinInfinite_frobenius_quotient"
-        },
-        {
-          "path": "Nyll/SawinTotallyRealTowers/RealProTwoFrobeniusSequence.lean",
-          "name": "ClassFieldTower.Sawin.exists_sawinInfinite_decomposition_split_quotient"
-        }
-      ]
-    },
-    {
       "slug": "sawin-totally-real-tower",
       "title": "Sawin’s theorem on totally real towers and split primes",
       "kind": "theorem",

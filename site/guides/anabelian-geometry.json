@@ -6,7 +6,7 @@
   "overview": [
     "For a curve over a number field $k$, its arithmetic fundamental group records finite étale covers together with a projection to the absolute Galois group $G_k$. The genus-zero reconstruction theorem shows that this information determines the curve up to $k$-isomorphism when at least three geometric points are removed from a smooth proper geometrically integral genus-zero curve. The compactification need not be a projective line over $k$, and the punctures need not be $k$-rational.",
     "This is weak reconstruction: an isomorphism of the arithmetic groups over $G_k$ yields an isomorphism of curves. Identifying the supplied group isomorphism with the map induced by the recovered curve isomorphism, proving uniqueness in that correspondence, and extending reconstruction to general positive-genus hyperbolic curves remain further goals. The formalized arithmetic result is over number fields.",
-    "Over algebraically closed fields of characteristic zero, the library proves slimness for proper and punctured hyperbolic curves: every open subgroup of the geometric fundamental group has trivial centralizer. A complementary calculation identifies the group of a genus-zero curve with two punctures with $\\widehat{\\mathbb Z}$. This contrast shows the change in geometric group structure when the number of punctures reaches three."
+    "Over algebraically closed fields of characteristic zero, the library proves slimness for proper and punctured hyperbolic curves: every open subgroup of the geometric fundamental group has trivial centralizer."
   ],
   "scopeNote": "Genus-zero weak reconstruction over number fields establishes existence of a curve isomorphism. It does not yet realize a prescribed fundamental-group isomorphism or prove uniqueness in that correspondence. General positive-genus reconstruction, arbitrary finitely generated characteristic-zero base fields, and positive-characteristic analogues are outside the selected reconstruction theorem.",
   "references": [
@@ -111,32 +111,6 @@
         {
           "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/OpenCurveSlim.lean",
           "name": "AnabelianGeometry.isSlim_fundamentalGroup_open_hyperbolic"
-        }
-      ]
-    },
-    {
-      "slug": "two-punctures",
-      "title": "The fundamental group of a twice-punctured genus-zero curve is the profinite integers",
-      "kind": "theorem",
-      "summary": "The actual étale fundamental group is the full profinite completion of the integers, with a chosen topological generator supplied by the conclusion.",
-      "statement": [
-        "Let $K$ be algebraically closed of characteristic $0$. Let $C/K$ be integral, smooth, proper, and of relative dimension $1$, with a supplied two-affine-open cover for computing coherent cohomology. Suppose $\\dim_K H^1(C,\\mathcal O_C)=0$. For two distinct closed points $x,y$ and $U=C\\setminus\\{x,y\\}$, every geometric point $\\xi$ of $U$ admits",
-        "$$e:\\pi_1^{\\mathrm{\\acute et}}(U,\\xi)\\xrightarrow{\\sim}\\widehat{\\mathbb Z},\\qquad \\gamma\\in\\pi_1^{\\mathrm{\\acute et}}(U,\\xi),$$",
-        "such that $\\gamma$ topologically generates the group and $e(\\gamma)=1$. The isomorphism is continuous in both directions."
-      ],
-      "discussion": [
-        "A single topological generator accounts for the covering theory, as it does for the multiplicative group. This is the boundary before the hyperbolic genus-zero case reached by adding a third puncture. Classically, power maps on the multiplicative group lead to the profinite-integer description; SGA 1's theory of finite étale covers lets the calculation be transported to a genus-zero curve without choosing coordinates in advance."
-      ],
-      "history": [
-        "The classical power maps on the multiplicative group lead to the profinite-integer description of its fundamental group in characteristic zero. SGA 1 places this calculation in the general theory of finite étale covers, which allows it to be transported to a genus-zero curve without choosing coordinates in advance."
-      ],
-      "references": [
-        "sga1"
-      ],
-      "lean": [
-        {
-          "path": "Nyll/AnabelianGeometry/GeometricFundamentalGroup/TwoPuncturesFundamentalGroup.lean",
-          "name": "AnabelianGeometry.GeometricFundamentalGroup.exists_fundamentalGroup_profiniteInteger_equiv_of_finrank_H1_eq_zero_complement_pair"
         }
       ]
     }

@@ -62,4 +62,5 @@ into the same output directory and then run `tools/build_guides.py` without
 `--write-lock`. All generated files belong in a task-specific `tmp/` directory
 locally. The deployment workflow uses its disposable `_site` directory.
 
-References are displayed directly on each page; no BibTeX files are generated.
+References are collected on each library overview, not repeated on individual
+result pages. No BibTeX files are generated.

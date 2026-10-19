@@ -5,20 +5,9 @@
 (() => {
   "use strict";
 
-  const publishedLibraries = [
-    { name: "Pro-C Groups", repository: "ProCGroups", slug: "pro-c-groups", description: "The library studies profinite groups through their finite quotients, providing ways to construct maps, determine the ranks of open subgroups, and prove that presented groups are infinite." },
-    { name: "Class Field Theory", repository: "ClassFieldTheory", slug: "class-field-theory", description: "This library studies abelian extensions of local fields, number fields, and global function fields through reciprocity, norm subgroups, and class fields." },
-    { name: "Sawin’s Totally Real Towers", repository: "SawinTotallyRealTowers", slug: "sawin-totally-real-towers", description: "The library constructs totally real number fields of arbitrarily large degree while keeping their root discriminants bounded and the same infinite set of primes completely split." },
-    { name: "Étale Fundamental Groups and Cohomology", repository: "EtaleFundamentalGroupsAndCohomology", slug: "etale-fundamental-groups-and-cohomology", description: "This library describes algebraic covering spaces through their geometric fibers and studies the sheaves they carry, relating fundamental groups to Galois actions and explaining selected cohomological obstructions." },
-    { name: "Generalized Jacobians", repository: "JacobianVarieties", slug: "jacobian-varieties", description: "Generalized Jacobians over arbitrary fields, including ordinary Jacobians at zero modulus, with modulus existence and unique factorization for maps from open curves to commutative algebraic groups." },
-    { name: "Research Papers", repository: "YamaguchiPapersFormalization", slug: "research-papers", description: "These papers study how abelian Galois data detect automorphisms and how the geometry of a boundary controls finite covers over the integers." },
-    { name: "Anabelian Geometry", repository: "AnabelianGeometry", slug: "anabelian-geometry", description: "This library reconstructs genus-zero curves over number fields up to isomorphism from their arithmetic fundamental groups, and proves centralizer rigidity for geometric hyperbolic curves." },
-  ];
-
   const base = new URL("../", document.currentScript.src);
   // Keep shared navigation anchored at the deployment root after SPA navigation.
   document.querySelector(".brand").href = base.href;
-  document.querySelector(".search-form").action = base.href;
   const app = document.getElementById("main");
   const search = document.getElementById("search");
   const popup = document.getElementById("search-popup");
@@ -92,7 +81,7 @@
   function routeHref(route) {
     const path = route.kind === "module" ? "modules/" + encodeRoutePart(route.id) + "/"
       : route.kind === "library" ? "browse/" + encodeRoutePart(route.id) + "/"
-      : route.kind === "catalog" ? "browse/" : "";
+      : ["catalog", "search"].includes(route.kind) ? "browse/" : "";
     const url = new URL(path, base);
     if (route.kind === "search") {
       url.searchParams.set("q", route.query || "");
@@ -146,6 +135,13 @@
   }
   const canonicalBase = metadataRoot();
   const initialRoute = readRoute(location.href);
+  // Keep the landing page static. Legacy source links move to the browser;
+  // the browser never repaints the library guides or adds its tree here.
+  if (!sidebar) {
+    if (initialRoute && initialRoute.kind !== "home") location.replace(routeHref(initialRoute));
+    return;
+  }
+  document.querySelector(".search-form").action = new URL("browse/", base).href;
   let keepInitialContent = Boolean(app.children.length) && initialRoute !== null
     && (document.body.dataset.staticPage || "home") === initialRoute.kind
     && (["home", "catalog"].includes(initialRoute.kind) || document.body.dataset.staticId === initialRoute.id);
@@ -338,14 +334,6 @@
       moduleCache.set(name, request);
     }
     return moduleCache.get(name);
-  }
-
-  function renderHome() {
-    setMetadata(homeTitle, homeDescription);
-    app.innerHTML = `<section class="hero"><span class="eyebrow">NYLL · Lean 4</span><h1><span class="hero-title-wide">NYLL — Lean 4 libraries for<br>number theory and arithmetic geometry</span><span class="hero-title-compact">Number theory and arithmetic geometry in Lean 4</span></h1><p>Explore verified Lean 4 code for number theory and arithmetic geometry, with explanations of selected mathematical results and links to their proofs.</p></section>
-      <section id="published-libraries" class="published-catalog" aria-labelledby="published-heading"><div class="catalog-intro"><h2 id="published-heading">Libraries</h2></div><p class="catalog-description">Explore each library’s scope and selected results, with mathematical explanations, Lean code, and references.</p><ul class="published-list">${publishedLibraries.map((library) => `<li><h3><a href="${new URL(`libraries/${library.slug}/`, base).pathname}">${escape(library.name)} <span aria-hidden="true">→</span></a></h3><p>${escape(library.description)}</p></li>`).join("")}</ul></section>
-      <section class="module-overview"><h2>${routeLink(href({catalog: true}), "All source code →")}</h2><p>Browse the complete NYLL collection by library, module, and declaration. The libraries above are also available as separate distributions with their required dependencies.</p></section>
-      <p class="page-footer">Copyright © 2026 Naganori Yamaguchi. Original code written with OpenAI Codex; adapted sources retain their credits. <a href="https://github.com/n-yamaguchi-0729/NYLL#ai-written-code-and-verification">Authorship, verification, and licenses</a>.</p>`;
   }
 
   function renderCatalog() {
@@ -575,6 +563,7 @@
     const version = ++navigation;
     const route = normalizeLocation();
     if (!route) return;
+    if (route.kind === "home") { location.replace(routeHref(route)); return; }
     window.MathJax?.typesetClear?.([app]);
     currentParams = routeParams(route);
     document.body.dataset.page = route.kind;
@@ -588,7 +577,6 @@
       else if (route.kind === "module") await renderModule(route.id, version);
       else if (route.kind === "library") await renderLibrary(route.id, version);
       else if (route.kind === "catalog") renderCatalog();
-      else renderHome();
       if (version !== navigation) return;
       keepInitialContent = false;
       scrollToRouteTarget(route);
@@ -601,7 +589,7 @@
   function navigate(value) {
     if (!manifest) return false;
     const route = readRoute(new URL(value, location.href));
-    if (!route) return false;
+    if (!route || route.kind === "home") return false;
     history.pushState({}, "", routeHref(route));
     keepInitialContent = false;
     closeSuggestions(); ++suggestionVersion;

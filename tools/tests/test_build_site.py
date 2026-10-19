@@ -350,6 +350,7 @@ class BuildTests(unittest.TestCase):
         (self.project / "Nyll" / "Example").mkdir(parents=True)
         (self.project / "site").mkdir()
         shutil.copyfile(ROOT / "site" / "index.html", self.project / "site" / "index.html")
+        shutil.copytree(ROOT / "site" / "assets", self.project / "site" / "assets")
         (self.project / "Nyll.lean").write_text("import Nyll.Example.All\n")
         (self.project / "Nyll" / "Example" / "All.lean").write_text(
             "import Nyll.Example.Basic\n/-! # Examples\n\nA library description. -/\n")
@@ -387,10 +388,14 @@ class BuildTests(unittest.TestCase):
         catalog = (output / 'browse' / 'index.html').read_text()
         self.assertIn('data-page="catalog"', catalog)
         self.assertIn('href="../browse/Example/"', catalog)
-        self.assertIn('href="../assets/site.css"', catalog)
+        self.assertRegex(catalog, r'href="../assets/site\.css\?v=[a-f0-9]{16}"')
         self.assertIn('All source code', catalog)
-        self.assertIn('href="./browse/Example/"', home)
-        self.assertIn('href="./modules/Nyll/"', home)
+        self.assertNotIn('id="sidebar"', home)
+        self.assertNotIn('id="file-tree"', home)
+        self.assertNotIn('id="tree-toggle"', home)
+        self.assertNotIn('class="search-form"', home)
+        self.assertIn('id="sidebar"', catalog)
+        self.assertIn('href="../modules/Nyll/"', catalog)
         self.assertIn(f'<link rel="canonical" href="{site.SITE_URL}">', home)
         self.assertTrue((output / ".nojekyll").exists())
         sitemap = ElementTree.parse(output / "sitemap-source.xml")
@@ -465,8 +470,8 @@ end Sample
         self.assertNotIn(':= by', html)
         self.assertIn('href="../../modules/Nyll.Example.All/"', html)
         self.assertIn('href="../../browse/Example/"', html)
-        self.assertIn('href="../../assets/site.css"', html)
-        self.assertIn('src="../../assets/site.js"', html)
+        self.assertRegex(html, r'href="../../assets/site\.css\?v=[a-f0-9]{16}"')
+        self.assertRegex(html, r'src="../../assets/site\.js\?v=[a-f0-9]{16}"')
         self.assertIn('class="brand" href="../../"', html)
         self.assertIn('action="../../"', html)
         self.assertIn('data-static-page="module" data-static-id="Nyll.Example.Basic"', html)
@@ -495,7 +500,7 @@ end Sample
                 if tag == 'a':
                     self.links.append(dict(attrs).get('href', ''))
 
-        expected = {site.SITE_URL}
+        expected = {site.SITE_URL, site.SITE_URL + "browse/"}
         expected.update(site.SITE_URL + str(path.relative_to(output).parent) + '/'
                         for kind in ('modules', 'browse') for path in (output / kind).glob('*/index.html'))
         seen, pending = set(), [site.SITE_URL]
@@ -528,8 +533,8 @@ end Sample
         html = module_page.read_text()
         self.assertIn(f'<link rel="canonical" href="{canonical}">', html)
         self.assertIn('Nyll.Odd &amp; &#x27;量.Basic?#', html)
-        home = (output / 'index.html').read_text()
-        self.assertIn('./browse/' + quote(library, safe='') + '/', home)
+        catalog = (output / 'browse/index.html').read_text()
+        self.assertIn('../browse/' + quote(library, safe='') + '/', catalog)
         namespace = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
         locations = [element.text for element in ElementTree.parse(output / 'sitemap-source.xml').findall('.//' + namespace + 'loc')]
         self.assertIn(canonical, locations)
