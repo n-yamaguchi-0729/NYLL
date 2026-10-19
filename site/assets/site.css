@@ -88,6 +88,13 @@ pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
 body[data-page="home"] .layout { grid-template-columns: minmax(0,1fr); }
 body[data-page="home"] .site-header { grid-template-columns: minmax(0,1fr) auto; }
 .main { min-width: 0; width: min(100%, var(--content-width)); justify-self: center; padding: var(--content-top) var(--content-gutter-end) var(--content-bottom) var(--content-gutter); outline: none; }
+/* Library guides and their landing page share one content boundary. */
+body[data-page="home"] .main, .guide-layout { width: auto; justify-self: stretch; margin-left: max(0px, calc((100% - var(--tree) - var(--content-width)) / 2)); padding: var(--content-top) var(--content-gutter-end) var(--content-bottom) var(--content-gutter); }
+body[data-page="home"] .hero { padding-top: 0; }
+body[data-page="home"] .page-footer { margin-bottom: 0; }
+@media (max-width: 900px) {
+  body[data-page="home"] .main, .guide-layout { width: min(100%, var(--content-width)); margin-inline: auto; }
+}
 .sidebar { position: sticky; top: var(--header); height: calc(100vh - var(--header)); min-width: 0; overflow: auto; border-left: 1px solid var(--line); padding: 26px 18px 0; background: var(--bg); display: flex; flex-direction: column; }
 .sidebar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .eyebrow { display: block; font-size: 10px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
