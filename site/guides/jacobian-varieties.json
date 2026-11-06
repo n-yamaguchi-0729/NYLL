@@ -1,7 +1,7 @@
 {
   "slug": "jacobian-varieties",
   "title": "Generalized Jacobians",
-  "repository": "JacobianVarieties",
+  "repository": "GeneralizedJacobianVarieties",
   "summary": "Generalized Jacobians extend the Jacobian of a curve by recording boundary points with multiplicities. This library constructs them in Lean and develops their universal mapping properties.",
   "overview": [
     "The Jacobian turns the geometry of a smooth proper curve into an algebraic group by parametrizing degree-zero line bundles. A generalized Jacobian adds an effective divisor, called a modulus, which records boundary points with multiplicities. This extends the construction to the study of maps from open curves to commutative algebraic groups; the zero modulus recovers the ordinary Jacobian. Serre develops this theory in [Algebraic Groups and Class Fields](https://link.springer.com/book/10.1007/978-1-4612-1035-1).",

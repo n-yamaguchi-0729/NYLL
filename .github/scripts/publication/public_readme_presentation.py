@@ -64,7 +64,7 @@ def presentation(text, primary):
     prefix, body = text[:start.start()], text[start.start():]
     title = prefix.splitlines()[0]
     if key == ('JacobianVarieties',):
-        title = re.sub(r'^# JacobianVarieties\b', '# Generalized Jacobians', title)
+        title = re.sub(r'^# (?:Generalized)?JacobianVarieties\b', '# Generalized Jacobians', title)
     badges = '\n'.join(line for line in prefix.splitlines() if line.startswith('[!['))
     slug, prose = INTRODUCTIONS[key]
     intro = prose.format(nyll=NYLL, guide=f'[mathematical guide]({GUIDES}{slug}/)')
@@ -218,7 +218,7 @@ REPOSITORIES = {
     ('ClassFieldTheory',): 'ClassFieldTheory',
     ('SawinTotallyRealTowers',): 'SawinTotallyRealTowers',
     ('EtaleFundamentalGroups', 'EtaleCohomology'): 'EtaleFundamentalGroupsAndCohomology',
-    ('JacobianVarieties',): 'JacobianVarieties',
+    ('JacobianVarieties',): 'GeneralizedJacobianVarieties',
     ('Yamaguchi26AbfaithfulGalois', 'Yamaguchi26SolvableCoverings'): 'YamaguchiPapersFormalization',
     ('AnabelianGeometry',): 'AnabelianGeometry',
 }

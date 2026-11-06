@@ -27,7 +27,7 @@ REPOSITORIES = {
     "pro-c-groups": "ProCGroups",
     "class-field-theory": "ClassFieldTheory",
     "sawin-totally-real-towers": "SawinTotallyRealTowers",
-    "jacobian-varieties": "JacobianVarieties",
+    "jacobian-varieties": "GeneralizedJacobianVarieties",
     "research-papers": "YamaguchiPapersFormalization",
     "anabelian-geometry": "AnabelianGeometry",
 }

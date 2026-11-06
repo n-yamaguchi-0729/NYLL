@@ -46,7 +46,7 @@ dependencies. Their READMEs describe the included results and assumptions.
 | [Pro-C Groups](https://github.com/n-yamaguchi-0729/ProCGroups) | Profinite and pro-C groups, free pro-C groups, and completed group algebras. |
 | [Class Field Theory](https://github.com/n-yamaguchi-0729/ClassFieldTheory) | Local fields, number fields and global function fields; reciprocity, norm subgroups and class fields. |
 | [Sawin's Totally Real Towers](https://github.com/n-yamaguchi-0729/SawinTotallyRealTowers) | Sawin's totally real tower theorem and related results of Martinet and Shafarevich. |
-| [Generalized Jacobians](https://github.com/n-yamaguchi-0729/JacobianVarieties) | Generalized Jacobians over arbitrary fields, with ordinary Jacobians at zero modulus; modulus existence and unique Abel factorization. |
+| [Generalized Jacobians](https://github.com/n-yamaguchi-0729/GeneralizedJacobianVarieties) | Generalized Jacobians over arbitrary fields, with ordinary Jacobians at zero modulus; modulus existence and unique Abel factorization. |
 | [Research Papers](https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization) | Results on ab-faithful Galois actions and solvable coverings. |
 | [Anabelian Geometry](https://github.com/n-yamaguchi-0729/AnabelianGeometry) | Genus-zero weak reconstruction over number fields and geometric hyperbolic slimness. Weak reconstruction proves existence of a curve isomorphism; realizing the supplied group isomorphism and uniqueness in that correspondence remain unfinished. |
 

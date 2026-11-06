@@ -78,6 +78,23 @@ def output_bytes(output):
 
 
 class GuideTests(unittest.TestCase):
+    def test_generalized_jacobian_repository_rename_preserves_routes_and_modules(self):
+        guide = json.loads((ROOT / "site/guides/jacobian-varieties.json").read_text(encoding="utf-8"))
+        guides.validate_guide(guide)
+        self.assertEqual(guide["repository"], "GeneralizedJacobianVarieties")
+        self.assertEqual(guide["slug"], "jacobian-varieties")
+        paths = [target["path"] for entry in guide["entries"] for target in entry["lean"]]
+        self.assertTrue(any(path.startswith("Nyll/JacobianVarieties/") for path in paths))
+        self.assertTrue(all((ROOT / path).is_file() for path in paths))
+        self.assertFalse(any("GeneralizedJacobianVarieties" in path for path in paths))
+        rendered = guides.overview_page(guide, [], guides.SITE_URL)
+        self.assertIn('href="https://github.com/n-yamaguchi-0729/GeneralizedJacobianVarieties"', rendered)
+        self.assertIn("GeneralizedJacobianVarieties on GitHub", rendered)
+        self.assertNotIn("github.com/n-yamaguchi-0729/JacobianVarieties", rendered)
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("https://github.com/n-yamaguchi-0729/GeneralizedJacobianVarieties", readme)
+        self.assertNotIn("github.com/n-yamaguchi-0729/JacobianVarieties", readme)
+
     def test_private_distribution_is_excluded_from_public_guides_and_review_lock(self):
         retired = "etale-fundamental-groups-and-cohomology"
         self.assertNotIn(retired, guides.REPOSITORIES)

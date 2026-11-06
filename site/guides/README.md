@@ -10,6 +10,10 @@ publication manifest, and includes the declaration, its local Lean context, and
 immutable links to the standalone repository and its originating NYLL commit.
 It does not execute Lean or claim to replace kernel verification.
 
+The Generalized Jacobians guide fetches `GeneralizedJacobianVarieties`. Its
+existing `jacobian-varieties` route and `Nyll.JacobianVarieties` source paths stay
+stable when the standalone GitHub repository is renamed.
+
 Library overviews introduce the subject before describing the formalization:
 explain the central objects or question, add relevant origins or source literature,
 then state what this library develops. Use two focused paragraphs, not a catalogue
