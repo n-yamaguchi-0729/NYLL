@@ -78,6 +78,16 @@ def output_bytes(output):
 
 
 class GuideTests(unittest.TestCase):
+    def test_private_distribution_is_excluded_from_public_guides_and_review_lock(self):
+        retired = "etale-fundamental-groups-and-cohomology"
+        self.assertNotIn(retired, guides.REPOSITORIES)
+        self.assertNotIn("EtaleFundamentalGroupsAndCohomology", guides.REPOSITORIES.values())
+        lock = json.loads((ROOT / "site/guides/review-lock.json").read_text(encoding="utf-8"))
+        self.assertEqual(set(lock["dependencyHashes"]), set(guides.REPOSITORIES))
+        self.assertFalse(any(key.startswith(retired + "/") for key in lock["fingerprints"]))
+        self.assertTrue(all(key.split("/", 1)[0] in guides.REPOSITORIES
+                            for key in lock["fingerprints"]))
+
     def test_declaration_diagnostic_distinguishes_context_from_proof_changes(self):
         # The separate dependency lock deliberately guards the whole file too.
         first = parsed("namespace Example\nvariable (n : Nat)\ntheorem result : n = n := by rfl\nend Example\n")
