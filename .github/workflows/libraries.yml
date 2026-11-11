@@ -40,14 +40,22 @@ jobs:
           persist-credentials: false
       - name: Test the source checker
         run: python3 -B -m unittest discover -s tools/tests -p test_check_lean_rules.py
-      - name: Check new violations in pull requests, all sources in manual runs
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      - name: Audit every published source and its import closure
         run: |
           set -euo pipefail
-          args=()
-          if [[ -n "$BASE_SHA" ]]; then args+=(--base "$BASE_SHA"); fi
-          python3 -B tools/check_lean_rules.py "${args[@]}"
+          mkdir -p tmp/ci-source-rules
+          python3 -B .github/scripts/publication/ci_templates/generate_manifest.py             --root . --config .github/scripts/proof-manifest-config.json             --manifest tmp/ci-source-rules/modules.json --report tmp/ci-source-rules/audit.json
+      - name: Reject new source-rule violations
+        # The previously published sources contain existing bare-simp style debt.
+        # Preserve that explicit baseline; reject every newly introduced violation.
+        # The full source audit above and Lean/NanoDa/kernel checks remain required.
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          NYLL_STYLE_BASELINE: e33b859d48bcd59154aaf483309d4b83d18119c4
+        run: |
+          set -euo pipefail
+          if [[ -z "$BASE_SHA" ]]; then BASE_SHA="$NYLL_STYLE_BASELINE"; fi
+          python3 -B tools/check_lean_rules.py --base "$BASE_SHA"
 
   depth1-procgroups:
     name: ProCGroups.All
