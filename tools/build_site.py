@@ -300,7 +300,7 @@ def pi1_provenance(root: Path) -> dict[str, dict]:
         return {}
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-        if data["schema"] != "nyll.pi1.provenance.v1":
+        if data["schema"] not in {"nyll.pi1.provenance.v1", "nyll.pi1.provenance.public-extract.v1"}:
             raise ValueError("Unsupported pi1 provenance schema")
         files = data["local_source_snapshot"]["files"]
         result = {entry["path"]: entry for entry in files}
