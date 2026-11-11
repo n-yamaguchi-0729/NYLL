@@ -11,7 +11,12 @@ on:
       - .github/workflows/libraries.yml
       - .github/workflows/library-stage.yml
       - .github/workflows/proof-check.yml
+      - .github/workflows/cache-release.yml
       - .github/scripts/**
+      - tools/check_lean_rules.py
+      - tools/cache_sources.py
+      - tools/tests/test_check_lean_rules.py
+      - AGENTS.md
   workflow_dispatch:
 
 permissions:
@@ -22,8 +27,28 @@ concurrency:
   cancel-in-progress: false
 
 # Each job hands its reusable artifacts to the next job before a new runner starts.
-# Continue after source diagnostics; each failed job still makes the workflow fail.
+# Failed stages stop dependent jobs; partial artifacts are preserved for a later retry.
 jobs:
+  source-rules:
+    name: Check Lean source rules
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Test the source checker
+        run: python3 -B -m unittest discover -s tools/tests -p test_check_lean_rules.py
+      - name: Check new violations in pull requests, all sources in manual runs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ -n "$BASE_SHA" ]]; then args+=(--base "$BASE_SHA"); fi
+          python3 -B tools/check_lean_rules.py "${args[@]}"
+
   depth1-procgroups:
     name: ProCGroups.All
     uses: ./.github/workflows/library-stage.yml
@@ -34,7 +59,6 @@ jobs:
   depth1-valuedfield:
     name: ValuedFieldTheory.All
     needs: depth1-procgroups
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth1-valuedfield
@@ -43,7 +67,6 @@ jobs:
   depth1-galoiscohomology:
     name: GaloisCohomology.All
     needs: depth1-valuedfield
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth1-galoiscohomology
@@ -52,25 +75,134 @@ jobs:
   depth1-schemetheory:
     name: SchemeTheory.All
     needs: depth1-galoiscohomology
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth1-schemetheory
       target: +Nyll.SchemeTheory.All
 
-  depth2-classfield:
-    name: ClassFieldTheory.All
+  depth2-classfield-algebra:
+    name: ClassFieldTheory.Algebra
     needs: depth1-schemetheory
-    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-algebra
+      library: ClassFieldTheory.Algebra
+
+  depth2-classfield-abstractclassfieldtheory:
+    name: ClassFieldTheory.AbstractClassFieldTheory
+    needs: depth2-classfield-algebra
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-abstractclassfieldtheory
+      library: ClassFieldTheory.AbstractClassFieldTheory
+
+  depth2-classfield-localfieldtheory:
+    name: ClassFieldTheory.LocalFieldTheory
+    needs: depth2-classfield-abstractclassfieldtheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-localfieldtheory
+      library: ClassFieldTheory.LocalFieldTheory
+
+  depth2-classfield-ramificationtheory:
+    name: ClassFieldTheory.RamificationTheory
+    needs: depth2-classfield-localfieldtheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-ramificationtheory
+      library: ClassFieldTheory.RamificationTheory
+
+  depth2-classfield-lubintate:
+    name: ClassFieldTheory.LubinTate
+    needs: depth2-classfield-ramificationtheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-lubintate
+      library: ClassFieldTheory.LubinTate
+
+  depth2-classfield-algebraicnumbertheory:
+    name: ClassFieldTheory.AlgebraicNumberTheory
+    needs: depth2-classfield-lubintate
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-algebraicnumbertheory
+      library: ClassFieldTheory.AlgebraicNumberTheory
+
+  depth2-classfield-algebraicfunctionfieldtheory:
+    name: ClassFieldTheory.AlgebraicFunctionFieldTheory
+    needs: depth2-classfield-algebraicnumbertheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-algebraicfunctionfieldtheory
+      library: ClassFieldTheory.AlgebraicFunctionFieldTheory
+
+  depth2-classfield-kummertheory:
+    name: ClassFieldTheory.KummerTheory
+    needs: depth2-classfield-algebraicfunctionfieldtheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-kummertheory
+      library: ClassFieldTheory.KummerTheory
+
+  depth2-classfield-localclassfieldtheory-classformation:
+    name: ClassFieldTheory.LocalClassFieldTheory.ClassFormation
+    needs: depth2-classfield-kummertheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-localclassfieldtheory-classformation
+      library: ClassFieldTheory.LocalClassFieldTheory.ClassFormation
+
+  depth2-classfield-localclassfieldtheory-lubintateapplication:
+    name: ClassFieldTheory.LocalClassFieldTheory.LubinTateApplication
+    needs: depth2-classfield-localclassfieldtheory-classformation
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-localclassfieldtheory-lubintateapplication
+      library: ClassFieldTheory.LocalClassFieldTheory.LubinTateApplication
+
+  depth2-classfield-localclassfieldtheory-finite:
+    name: ClassFieldTheory.LocalClassFieldTheory.Finite
+    needs: depth2-classfield-localclassfieldtheory-lubintateapplication
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-localclassfieldtheory-finite
+      library: ClassFieldTheory.LocalClassFieldTheory.Finite
+
+  depth2-classfield-localclassfieldtheory:
+    name: ClassFieldTheory.LocalClassFieldTheory
+    needs: depth2-classfield-localclassfieldtheory-finite
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-localclassfieldtheory
+      library: ClassFieldTheory.LocalClassFieldTheory
+
+  depth2-classfield-globalclassfieldtheory:
+    name: ClassFieldTheory.GlobalClassFieldTheory
+    needs: depth2-classfield-localclassfieldtheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-globalclassfieldtheory
+      library: ClassFieldTheory.GlobalClassFieldTheory
+
+  depth2-classfield-kroneckerweber:
+    name: ClassFieldTheory.KroneckerWeber
+    needs: depth2-classfield-globalclassfieldtheory
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield-kroneckerweber
+      library: ClassFieldTheory.KroneckerWeber
+
+  depth2-classfield:
+    name: ClassFieldTheory
+    needs: depth2-classfield-kroneckerweber
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth2-classfield
-      target: +Nyll.ClassFieldTheory.All
+      library: ClassFieldTheory
 
   depth2-curves:
     name: AlgebraicCurves.All
     needs: depth2-classfield
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth2-curves
@@ -79,7 +211,6 @@ jobs:
   depth2-fundamental:
     name: EtaleFundamentalGroups.All
     needs: depth2-curves
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth2-fundamental
@@ -88,7 +219,6 @@ jobs:
   depth2-cohomology:
     name: EtaleCohomology.All
     needs: depth2-fundamental
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth2-cohomology
@@ -97,7 +227,6 @@ jobs:
   depth2-abelianvarieties:
     name: AbelianVarieties.All
     needs: depth2-cohomology
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth2-abelianvarieties
@@ -106,7 +235,6 @@ jobs:
   depth3-sawin:
     name: SawinTotallyRealTowers.All
     needs: depth2-abelianvarieties
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth3-sawin
@@ -115,7 +243,6 @@ jobs:
   depth3-jacobians:
     name: JacobianVarieties.All
     needs: depth3-sawin
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth3-jacobians
@@ -124,7 +251,6 @@ jobs:
   depth3-abfaithful:
     name: Yamaguchi26AbfaithfulGalois.All
     needs: depth3-jacobians
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth3-abfaithful
@@ -133,7 +259,6 @@ jobs:
   depth3-solvable:
     name: Yamaguchi26SolvableCoverings.All
     needs: depth3-abfaithful
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth3-solvable
@@ -142,7 +267,6 @@ jobs:
   depth3-anabelian:
     name: AnabelianGeometry.All
     needs: depth3-solvable
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth3-anabelian
@@ -152,7 +276,6 @@ jobs:
   all:
     name: All
     needs: depth3-anabelian
-    if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: all
@@ -170,4 +293,15 @@ jobs:
     with:
       config: .github/scripts/proof-manifest-config.json
       partition: true
+      cache-prefix: nyll-proof-v1
+
+  publish-cache:
+    name: Publish verified Lean cache
+    needs: [source-rules, verify]
+    if: github.event.repository.private == false && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/cache-release.yml
+    with:
+      cache-kind: modern
       cache-prefix: nyll-proof-v1

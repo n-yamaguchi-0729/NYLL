@@ -9,12 +9,46 @@ if [[ "${GITHUB_ACTIONS:-}" != true || "${RUNNER_ENVIRONMENT:-}" != github-hoste
   echo 'This disk-guarded build is restricted to ephemeral GitHub-hosted runners.' >&2
   exit 2
 fi
-if (( $# < 2 )) || [[ ! "$1" =~ ^(depth[123](-[a-z0-9-]+)?|all)$ ]]; then
-  echo 'Usage: library-build.sh depthN[-library]|all +Module ...' >&2
+if (( $# < 1 )) || [[ ! "$1" =~ ^(depth[123](-[a-z0-9-]+)?|library-[a-z0-9-]+|all)$ ]]; then
+  echo 'Usage: library-build.sh library-name --library Prefix | all +Nyll.All' >&2
   exit 2
 fi
 stage="$1"
 shift
+if [[ "${1:-}" == --library ]]; then
+  if (( $# != 2 )); then
+    echo 'A library stage requires exactly one audited prefix.' >&2
+    exit 2
+  fi
+  library="$2"
+  plan_dir="tmp/ci-libraries/$stage-plan"
+  python3 -B "${LIBRARY_PLANNER:-.github/scripts/build_stage.py}" --root . --library "$library" \
+    --config "${LIBRARY_CONFIG:-.github/scripts/manifest-config.json}" \
+    --output "$plan_dir" --plan-only
+  python3 -B - "$plan_dir/receipt.json" > "$plan_dir/targets.txt" <<'PY'
+import json
+import sys
+with open(sys.argv[1], encoding="utf-8") as stream:
+    plan = json.load(stream)
+if not plan["planOnly"] or plan["exitCode"] != 0:
+    raise SystemExit("Invalid audited library frontier")
+for module in plan["frontier"]:
+    print("+" + module)
+PY
+  mapfile -t targets < "$plan_dir/targets.txt"
+  if (( ${#targets[@]} == 0 )); then
+    echo "No included sources in $library; the final owner stage checks all included modules."
+    exit 0
+  fi
+  set -- "${targets[@]}"
+fi
+if (( $# == 0 )); then
+  echo 'Missing Lake target.' >&2
+  exit 2
+fi
+if [[ "$stage" == all ]]; then
+  set -- "$@" +Nyll
+fi
 for target in "$@"; do
   if [[ ! "$target" =~ ^\+[A-Za-z0-9_.]+$ ]]; then
     echo 'Invalid Lake target.' >&2
@@ -48,7 +82,7 @@ if (( free_kib < minimum_free_kib )); then
 fi
 
 # Give Lake and tee one process group, so a capacity failure stops this stage only.
-setsid bash -c 'set -o pipefail; lake --wfail --no-ansi build "${@:2}" 2>&1 | tee "$1"' \
+setsid bash -c 'set -o pipefail; log="$1"; shift; lake --wfail --no-ansi build "$@" 2>&1 | tee "$log"' \
   bash "$log" "$@" &
 build_pid=$!
 capacity_failed=false

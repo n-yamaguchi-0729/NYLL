@@ -6,8 +6,12 @@ on:
       stage:
         required: true
         type: string
+      library:
+        required: false
+        type: string
+        default: ''
       target:
-        required: true
+        required: false
         type: string
 
 permissions:
@@ -103,8 +107,16 @@ jobs:
         shell: bash
         env:
           LIBRARY_STAGE: ${{ inputs.stage }}
+          LIBRARY_PLANNER: .github/scripts/publication/ci_templates/build_stage.py
+          LIBRARY_CONFIG: .github/scripts/proof-manifest-config.json
+          LIBRARY_SELECTOR: ${{ inputs.library }}
           LIBRARY_TARGET: ${{ inputs.target }}
-        run: bash .github/scripts/library-build.sh "$LIBRARY_STAGE" "$LIBRARY_TARGET"
+        run: |
+          if [[ -n "$LIBRARY_SELECTOR" ]]; then
+            bash .github/scripts/library-build.sh "$LIBRARY_STAGE" --library "$LIBRARY_SELECTOR"
+          else
+            bash .github/scripts/library-build.sh "$LIBRARY_STAGE" "$LIBRARY_TARGET"
+          fi
 
       - name: Measure reusable cache and require archive headroom
         id: capacity
