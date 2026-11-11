@@ -211,6 +211,8 @@ def desired_ci(repo, record):
             (repo / ".github/workflows/lean.yml").read_text(), library_stages(ordered)).encode()
     desired[".github/workflows/cache-release.yml"] = (TEMPLATES / "cache-release.yml").read_bytes()
     desired[".github/scripts/cache-export.py"] = (TEMPLATES / "cache-export.py").read_bytes()
+    desired[".github/workflows/cache-notes.yml"] = (TEMPLATES / "cache-notes.yml").read_bytes()
+    desired[".github/scripts/cache-notes.py"] = (TEMPLATES / "cache-notes.py").read_bytes()
     return desired
 
 
