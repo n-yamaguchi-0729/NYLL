@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Equivalence
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Constant module sheaves from constant underlying set sheaves
@@ -34,6 +36,8 @@ full faithfulness of the constant set-sheaf functor is an explicit input.
 The proof uses Mathlib's `constantSheafAdj_counit_w` and the affine étale site
 to supply preservation of sheafification by the module forgetful functor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

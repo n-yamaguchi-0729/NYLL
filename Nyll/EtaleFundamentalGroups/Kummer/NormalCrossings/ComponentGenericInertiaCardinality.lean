@@ -4,12 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Ramification.BaseChange.Equiv
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SurjectiveComponentInertiaCoprimality
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.NormalCardinality
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamification.AtLargerPrime
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Ramification.BaseChange.Equiv
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SurjectiveComponentInertiaCoprimality
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.NormalCardinality
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamification.AtLargerPrime
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 
 /-!
 # Inertia cardinality at a fixed boundary component
@@ -19,6 +25,8 @@ the component generic stalk as its prime localization.  This identifies the
 ramification index seen in every specialized stalk with one fixed index at
 the component generic point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -55,7 +63,7 @@ theorem stalkSpecializationEquivLocalization_comp_stalkSpecializes
   apply RingHom.ext
   intro a
   simp only [stalkSpecializationEquivLocalization, RingEquiv.toRingHom_eq_coe,
-    RingEquiv.coe_ringHom_trans, Iso.commRingCatIsoToRingEquiv_toRingHom,
+    RingEquiv.toRingHom_trans, Iso.commRingCatIsoToRingEquiv_toRingHom,
     Iso.symm_hom, TopCat.Presheaf.stalkCongr_inv, RingHom.coe_comp,
     RingHom.coe_coe, Function.comp_apply]
   set p : PrimeSpectrum (X.presheaf.stalk y) := specializationPrime hxy
@@ -166,10 +174,10 @@ of an ideal-sheaf complement commute with the generization map. -/
 theorem IdealSheafData.supportComplementFunctionFieldAlgebra_comp_stalkSpecializes
     {X : Scheme.{u}} [IsIntegral X] (I : X.IdealSheafData)
     [Nonempty I.supportComplement] {x y : X} (hxy : x ⤳ y) :
-    letI : Algebra (X.presheaf.stalk x)
+    let : Algebra (X.presheaf.stalk x)
         (I.supportComplement : Scheme).functionField :=
       I.supportComplementFunctionFieldAlgebra x
-    letI : Algebra (X.presheaf.stalk y)
+    let : Algebra (X.presheaf.stalk y)
         (I.supportComplement : Scheme).functionField :=
       I.supportComplementFunctionFieldAlgebra y
     (algebraMap (X.presheaf.stalk x)
@@ -177,12 +185,7 @@ theorem IdealSheafData.supportComplementFunctionFieldAlgebra_comp_stalkSpecializ
           (X.presheaf.stalkSpecializes hxy).hom =
       algebraMap (X.presheaf.stalk y)
         (I.supportComplement : Scheme).functionField := by
-  let : Algebra (X.presheaf.stalk x)
-      (I.supportComplement : Scheme).functionField :=
-    I.supportComplementFunctionFieldAlgebra x
-  let : Algebra (X.presheaf.stalk y)
-      (I.supportComplement : Scheme).functionField :=
-    I.supportComplementFunctionFieldAlgebra y
+  intro sharedOwner1 sharedOwner2
   change
     (I.supportComplement.ι.functionFieldRingEquivOfIsOpenImmersion.toRingHom.comp
       (algebraMap (X.presheaf.stalk x) X.functionField)).comp
@@ -263,25 +266,15 @@ noncomputable def IdealSheafData.componentGenericNormalizationPrimeOver
     let K := (I.supportComplement : Scheme).functionField
     let eta := I.componentGenericPoint Z hZ
     let A := X.presheaf.stalk eta
-    letI : Algebra A K := I.supportComplementFunctionFieldAlgebra eta
-    letI : IsFractionRing A K :=
+    let : Algebra A K := I.supportComplementFunctionFieldAlgebra eta
+    let : IsFractionRing A K :=
       I.supportComplementFunctionField_isFractionRing eta
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
     let B := integralClosure A L
     (IsLocalRing.maximalIdeal A).primesOver B := by
-  dsimp only
-  let K := (I.supportComplement : Scheme).functionField
-  let eta := I.componentGenericPoint Z hZ
-  let A := X.presheaf.stalk eta
-  letI : Algebra A K := I.supportComplementFunctionFieldAlgebra eta
-  letI : IsFractionRing A K :=
-    I.supportComplementFunctionField_isFractionRing eta
-  letI : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
-  let B := integralClosure A L
+  intro K eta A sharedOwner21 sharedOwner22 sharedOwner23 sharedOwner24 B
   letI : FaithfulSMul A B :=
     (faithfulSMul_iff_algebraMap_injective A B).mpr (by
       intro a b hab
@@ -438,53 +431,34 @@ theorem normalizationPrime_ramificationIdx_eq_componentGeneric
     let p := (I.componentBranchPrimeAt Z hZ z hz).asIdeal
     let Aeta := X.presheaf.stalk eta
     let Ax := X.presheaf.stalk x
-    letI : Algebra Aeta K := I.supportComplementFunctionFieldAlgebra eta
-    letI : IsFractionRing Aeta K :=
+    let : Algebra Aeta K := I.supportComplementFunctionFieldAlgebra eta
+    let : IsFractionRing Aeta K :=
       I.supportComplementFunctionField_isFractionRing eta
-    letI : Algebra Ax K := I.supportComplementFunctionFieldAlgebra x
-    letI : IsFractionRing Ax K :=
+    let : Algebra Ax K := I.supportComplementFunctionFieldAlgebra x
+    let : IsFractionRing Ax K :=
       I.supportComplementFunctionField_isFractionRing x
-    letI : Algebra Aeta L :=
+    let : Algebra Aeta L :=
       ((algebraMap K L).comp (algebraMap Aeta K)).toAlgebra
-    letI : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
-    letI : Algebra Ax L :=
+    let : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : Algebra Ax L :=
       ((algebraMap K L).comp (algebraMap Ax K)).toAlgebra
-    letI : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
     let Bx := integralClosure Ax L
     ∀ (q : Ideal Bx), q.IsPrime → q.LiesOver p →
       q.ramificationIdx Ax =
         I.componentGenericNormalizationRamificationIndex Z hZ (L := L) := by
-  dsimp only
-  let K := (I.supportComplement : Scheme).functionField
-  let eta := I.componentGenericPoint Z hZ
-  let x := I.subschemeι z
+  intro K eta x p Aeta Ax sharedOwner13 sharedOwner14 sharedOwner15 sharedOwner16 sharedOwner17
+    sharedOwner18 sharedOwner19 sharedOwner20 Bx
   let hxy := I.componentGenericPoint_specializes_subschemeι Z hZ z hz
   let pSpec := specializationPrime hxy
-  let p := pSpec.asIdeal
   let : p.IsPrime := pSpec.isPrime
-  let Aeta := X.presheaf.stalk eta
-  let Ax := X.presheaf.stalk x
   let V := Localization.AtPrime p
-  let : Algebra Aeta K := I.supportComplementFunctionFieldAlgebra eta
-  let : IsFractionRing Aeta K :=
-    I.supportComplementFunctionField_isFractionRing eta
-  let : Algebra Ax K := I.supportComplementFunctionFieldAlgebra x
-  let : IsFractionRing Ax K :=
-    I.supportComplementFunctionField_isFractionRing x
   let : IsIntegrallyClosed Ax :=
     IsNormalIntegral.stalk_isIntegrallyClosed x
-  let : Algebra Aeta L :=
-    ((algebraMap K L).comp (algebraMap Aeta K)).toAlgebra
-  let : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra Ax L :=
-    ((algebraMap K L).comp (algebraMap Ax K)).toAlgebra
-  let : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
   let Beta := integralClosure Aeta L
-  let Bx := integralClosure Ax L
   intro q hqPrime hqOver
   let : q.IsPrime := hqPrime
-  let : q.LiesOver p := by
-    simpa only [p, pSpec, hxy, IdealSheafData.componentBranchPrimeAt] using hqOver
+  let : q.LiesOver p := hqOver
   let : Algebra V K :=
     localizationAtPrimeToFractionFieldAlgebra (K := K) p
   let : IsScalarTower Ax V K :=
@@ -511,10 +485,8 @@ theorem normalizationPrime_ramificationIdx_eq_componentGeneric
   let eBase : Aeta ≃+* V :=
     stalkSpecializationEquivLocalization hxy
   have hBaseK :
-      (algebraMap V K).comp eBase.toRingHom = algebraMap Aeta K := by
-    simpa only [pSpec, p, Aeta, V, eta] using
-      I.supportComplementFunctionFieldAlgebra_comp_stalkSpecializationEquiv
-        hxy
+      (algebraMap V K).comp eBase.toRingHom = algebraMap Aeta K :=
+    I.supportComplementFunctionFieldAlgebra_comp_stalkSpecializationEquiv hxy
   have hBaseL :
       (algebraMap V L).comp eBase.toRingHom = algebraMap Aeta L := by
     apply RingHom.ext
@@ -591,29 +563,18 @@ theorem normalizationInertia_card_eq_componentGenericRamificationIndex
     let x := I.subschemeι z
     let p := (I.componentBranchPrimeAt Z hZ z hz).asIdeal
     let Ax := X.presheaf.stalk x
-    letI : Algebra Ax K := I.supportComplementFunctionFieldAlgebra x
-    letI : IsFractionRing Ax K :=
+    let : Algebra Ax K := I.supportComplementFunctionFieldAlgebra x
+    let : IsFractionRing Ax K :=
       I.supportComplementFunctionField_isFractionRing x
-    letI : Algebra Ax L :=
+    let : Algebra Ax L :=
       ((algebraMap K L).comp (algebraMap Ax K)).toAlgebra
-    letI : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
     let Bx := integralClosure Ax L
     ∀ (q : Ideal Bx), q.IsPrime → q.LiesOver p →
       Nat.card (q.toAddSubgroup.inertia Gal(L/K)) =
         I.componentGenericNormalizationRamificationIndex Z hZ (L := L) := by
-  dsimp only
-  let K := (I.supportComplement : Scheme).functionField
-  let x := I.subschemeι z
+  intro K x p Ax sharedOwner13 sharedOwner14 sharedOwner15 sharedOwner16 Bx
   let pSpec := I.componentBranchPrimeAt Z hZ z hz
-  let p := pSpec.asIdeal
-  let Ax := X.presheaf.stalk x
-  let : Algebra Ax K := I.supportComplementFunctionFieldAlgebra x
-  let : IsFractionRing Ax K :=
-    I.supportComplementFunctionField_isFractionRing x
-  let : Algebra Ax L :=
-    ((algebraMap K L).comp (algebraMap Ax K)).toAlgebra
-  let : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
-  let Bx := integralClosure Ax L
   let : IsIntegrallyClosed Ax :=
     IsNormalIntegral.stalk_isIntegrallyClosed x
   let : p.IsPrime := pSpec.2
@@ -698,35 +659,22 @@ theorem forall_prime_componentGenericNormalizationRamificationIndex_coprime
     (hZ : Z ∈ irreducibleComponents D.1.subscheme)
     [Nonempty D.1.supportComplement]
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W) :
-    letI : IsIntegral D.1.supportComplement :=
+    let : IsIntegral D.1.supportComplement :=
       isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
     let K := (D.1.supportComplement : Scheme).functionField
     let L := W.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : FiniteDimensional K L :=
+    let : FiniteDimensional K L :=
       EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
     ∀ p : ℕ, p.Prime →
       Nat.Coprime
         (D.1.componentGenericNormalizationRamificationIndex Z hZ (L := L)) p := by
-  dsimp only
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let K := (D.1.supportComplement : Scheme).functionField
-  let L := W.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois K L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
-  intro p hp
+  intro sharedOwner3 sharedOwner4 K L sharedOwner5 sharedOwner6 sharedOwner7 p hp
   obtain ⟨z, hz, hchar, hsource⟩ :=
     hSurjective.forall_prime_exists_componentNormalizationInertia_coprime
       D hNC Z hZ W hW p hp
@@ -766,32 +714,20 @@ theorem HasSurjectiveComponentsOverIntegers.componentGenericNormalizationRamific
     (hZ : Z ∈ irreducibleComponents D.1.subscheme)
     [Nonempty D.1.supportComplement]
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W) :
-    letI : IsIntegral D.1.supportComplement :=
+    let : IsIntegral D.1.supportComplement :=
       isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
     let K := (D.1.supportComplement : Scheme).functionField
     let L := W.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : FiniteDimensional K L :=
+    let : FiniteDimensional K L :=
       EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
     D.1.componentGenericNormalizationRamificationIndex Z hZ (L := L) = 1 := by
-  dsimp only
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let K := (D.1.supportComplement : Scheme).functionField
-  let L := W.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois K L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
+  intro sharedOwner3 sharedOwner4 K L sharedOwner5 sharedOwner6 sharedOwner7
   apply Nat.eq_one_iff_not_exists_prime_dvd.mpr
   intro p hp hpdvd
   have hcoprime :=
@@ -818,32 +754,19 @@ theorem IsHorizontalOver.componentGenericNormalizationInertia_card_eq_ramificati
     let K := (D.1.supportComplement : Scheme).functionField
     let eta := D.1.componentGenericPoint Z hZ
     let Aeta := X.presheaf.stalk eta
-    letI : Algebra Aeta K :=
+    let : Algebra Aeta K :=
       D.1.supportComplementFunctionFieldAlgebra eta
-    letI : IsFractionRing Aeta K :=
+    let : IsFractionRing Aeta K :=
       D.1.supportComplementFunctionField_isFractionRing eta
-    letI : Algebra Aeta L :=
+    let : Algebra Aeta L :=
       ((algebraMap K L).comp (algebraMap Aeta K)).toAlgebra
-    letI : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
     let Beta := integralClosure Aeta L
     let Qeta : Ideal Beta :=
       D.1.componentGenericNormalizationPrime Z hZ (L := L)
     Nat.card (Qeta.toAddSubgroup.inertia Gal(L/K)) =
       D.1.componentGenericNormalizationRamificationIndex Z hZ (L := L) := by
-  dsimp only
-  let K := (D.1.supportComplement : Scheme).functionField
-  let eta := D.1.componentGenericPoint Z hZ
-  let Aeta := X.presheaf.stalk eta
-  let : Algebra Aeta K :=
-    D.1.supportComplementFunctionFieldAlgebra eta
-  let : IsFractionRing Aeta K :=
-    D.1.supportComplementFunctionField_isFractionRing eta
-  let : Algebra Aeta L :=
-    ((algebraMap K L).comp (algebraMap Aeta K)).toAlgebra
-  let : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
-  let Beta := integralClosure Aeta L
-  let Qeta : Ideal Beta :=
-    D.1.componentGenericNormalizationPrime Z hZ (L := L)
+  intro K eta Aeta sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6 Beta Qeta
   let P : Ideal Aeta := IsLocalRing.maximalIdeal Aeta
   let : IsIntegrallyClosed Aeta :=
     IsNormalIntegral.stalk_isIntegrallyClosed eta
@@ -899,57 +822,34 @@ theorem forall_prime_componentGenericNormalizationInertia_card_coprime
     (hZ : Z ∈ irreducibleComponents D.1.subscheme)
     [Nonempty D.1.supportComplement]
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W) :
-    letI : IsIntegral D.1.supportComplement :=
+    let : IsIntegral D.1.supportComplement :=
       isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
     let K := (D.1.supportComplement : Scheme).functionField
     let L := W.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : FiniteDimensional K L :=
+    let : FiniteDimensional K L :=
       EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
     let eta := D.1.componentGenericPoint Z hZ
     let Aeta := X.presheaf.stalk eta
-    letI : Algebra Aeta K :=
+    let : Algebra Aeta K :=
       D.1.supportComplementFunctionFieldAlgebra eta
-    letI : IsFractionRing Aeta K :=
+    let : IsFractionRing Aeta K :=
       D.1.supportComplementFunctionField_isFractionRing eta
-    letI : Algebra Aeta L :=
+    let : Algebra Aeta L :=
       ((algebraMap K L).comp (algebraMap Aeta K)).toAlgebra
-    letI : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
     let Beta := integralClosure Aeta L
     let Qeta : Ideal Beta :=
       D.1.componentGenericNormalizationPrime Z hZ (L := L)
     ∀ p : ℕ, p.Prime →
       Nat.Coprime (Nat.card (Qeta.toAddSubgroup.inertia Gal(L/K))) p := by
-  dsimp only
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let K := (D.1.supportComplement : Scheme).functionField
-  let L := W.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois K L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
-  let eta := D.1.componentGenericPoint Z hZ
-  let Aeta := X.presheaf.stalk eta
-  let : Algebra Aeta K :=
-    D.1.supportComplementFunctionFieldAlgebra eta
-  let : IsFractionRing Aeta K :=
-    D.1.supportComplementFunctionField_isFractionRing eta
-  let : Algebra Aeta L :=
-    ((algebraMap K L).comp (algebraMap Aeta K)).toAlgebra
-  let : IsScalarTower Aeta K L := IsScalarTower.of_algebraMap_eq' rfl
-  let Beta := integralClosure Aeta L
-  let Qeta : Ideal Beta :=
-    D.1.componentGenericNormalizationPrime Z hZ (L := L)
+  intro sharedOwner3 sharedOwner4 K L sharedOwner5 sharedOwner6 sharedOwner7 eta Aeta sharedOwner8
+    sharedOwner9 sharedOwner10 sharedOwner11 Beta Qeta
   let Base := Spec (CommRingCat.of (ULift.{u} ℤ))
   let e : Base.residueField (genericPoint Base) ≃+* ℚ :=
     specULiftZGenericResidueFieldEquivQ
@@ -984,53 +884,32 @@ theorem HasSurjectiveComponentsOverIntegers.componentNormalizationInertia_eq_bot
     [Nonempty D.1.supportComplement]
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)
     (z : D.1.subscheme) (hz : z ∈ Z) :
-    letI : IsIntegral D.1.supportComplement :=
+    let : IsIntegral D.1.supportComplement :=
       isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
     let K := (D.1.supportComplement : Scheme).functionField
     let L := W.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : FiniteDimensional K L :=
+    let : FiniteDimensional K L :=
       EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
     let x := D.1.subschemeι z
     let p := (D.1.componentBranchPrimeAt Z hZ z hz).asIdeal
     let Ax := X.presheaf.stalk x
-    letI : Algebra Ax K := D.1.supportComplementFunctionFieldAlgebra x
-    letI : IsFractionRing Ax K :=
+    let : Algebra Ax K := D.1.supportComplementFunctionFieldAlgebra x
+    let : IsFractionRing Ax K :=
       D.1.supportComplementFunctionField_isFractionRing x
-    letI : Algebra Ax L :=
+    let : Algebra Ax L :=
       ((algebraMap K L).comp (algebraMap Ax K)).toAlgebra
-    letI : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
     let Bx := integralClosure Ax L
     ∀ (q : Ideal Bx), q.IsPrime → q.LiesOver p →
       q.toAddSubgroup.inertia Gal(L/K) = ⊥ := by
-  dsimp only
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let K := (D.1.supportComplement : Scheme).functionField
-  let L := W.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois K L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
-  let x := D.1.subschemeι z
-  let p := (D.1.componentBranchPrimeAt Z hZ z hz).asIdeal
-  let Ax := X.presheaf.stalk x
-  let : Algebra Ax K := D.1.supportComplementFunctionFieldAlgebra x
-  let : IsFractionRing Ax K :=
-    D.1.supportComplementFunctionField_isFractionRing x
-  let : Algebra Ax L :=
-    ((algebraMap K L).comp (algebraMap Ax K)).toAlgebra
-  let : IsScalarTower Ax K L := IsScalarTower.of_algebraMap_eq' rfl
-  let Bx := integralClosure Ax L
+  intro sharedOwner3 sharedOwner4 K L sharedOwner5 sharedOwner6 sharedOwner7 x p Ax sharedOwner8
+    sharedOwner9 sharedOwner10 sharedOwner11 Bx
   let Base := Spec (CommRingCat.of (ULift.{u} ℤ))
   let e : Base.residueField (genericPoint Base) ≃+* ℚ :=
     specULiftZGenericResidueFieldEquivQ

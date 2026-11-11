@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Nyll.SchemeTheory.Normalization.NativeAutomorphismRingMaps
-import Mathlib.Algebra.Ring.Hom.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Nyll.SchemeTheory.Normalization.NativeAutomorphismRingMaps
+public import Mathlib.Algebra.Ring.Hom.Defs
 
 /-!
 # Detecting intrinsic inertia identity on coefficients
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Ring.Hom.Defs
 The native inertia subgroup retains its underlying coefficient automorphism.
 Consequently its identity is detected by the literal coefficient ring map.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

@@ -10,17 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Hilbert.CoverFinrankPieceEqClosedImmersionFlatFinitePresentation
-import Nyll.AlgebraicCurves.Hilbert.IdealMemIffAppAwayToSectionEqZeroPolynomial
-import Nyll.AlgebraicCurves.Hilbert.PointHilbertFunctionOfMemIff
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Nyll.AlgebraicCurves.Hilbert.FinrankPieceEqEvalClosedImmersion
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.CoverFinrankPieceEqClosedImmersionFlatFinitePresentation
+public import Nyll.AlgebraicCurves.Hilbert.IdealMemIffAppAwayToSectionEqZeroPolynomial
+public import Nyll.AlgebraicCurves.Hilbert.PointHilbertFunctionOfMemIff
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Nyll.AlgebraicCurves.Hilbert.FinrankPieceEqEvalClosedImmersion
 
 /-!
 # Uniform bounds for geometric fibre ideals on local Hilbert charts
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -235,8 +241,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 theorem _root_.AlgebraicGeometry.HilbertFunctor.exists_uniform_cover_geomFibre_ideal_eq_point
     (n : ℕ) :
-    ∃ D₀ : Polynomial ℚ → ℕ, ∀ (A : Type) [CommRing A]
-      (Z : Scheme.{0}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A)),
+    ∃ D₀ : Polynomial ℚ → ℕ, ∀ (A : Type u) [CommRing A]
+      (Z : Scheme.{u}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A)),
       IsClosedImmersion ι → Flat (ι ≫ ProjSpace.π A n) → LocallyOfFinitePresentation (ι ≫
         ProjSpace.π A n) →
       ∃ (J : Type) (_ : Fintype J) (r : J → A), Ideal.span (Set.range r) = ⊤ ∧
@@ -245,8 +251,8 @@ theorem _root_.AlgebraicGeometry.HilbertFunctor.exists_uniform_cover_geomFibre_i
             (∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) ∧
             ∃ d₁ : ℕ, ∀ d : ℕ, d₁ ≤ d → (Module.finrank K (piece I d) : ℚ) = P.eval (d : ℚ)),
           ∀ (m : ℕ), D₀ P ≤ m →
-            ∀ (k : Type) [Field k] [IsAlgClosed k] [Algebra A k], IsUnit (algebraMap A k (r j)) →
-            ∃ (q : Point k n (hilbertFunctionOf n P m)) (Zk : Scheme.{0})
+            ∀ (k : Type u) [Field k] [IsAlgClosed k] [Algebra A k], IsUnit (algebraMap A k (r j)) →
+            ∃ (q : Point k n (hilbertFunctionOf n P m)) (Zk : Scheme.{u})
               (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)) (e : Zk ⟶ Z),
               IsClosedImmersion ιk ∧
               IsPullback e (ιk ≫ ProjSpace.π k n) (ι ≫ ProjSpace.π A n) (Spec.map
@@ -267,7 +273,8 @@ theorem _root_.AlgebraicGeometry.HilbertFunctor.exists_uniform_cover_geomFibre_i
                           den_mem := ⟨d, rfl⟩ })) = 0))  := by
   classical
   choose G hG using fun P : Polynomial ℚ =>
-    exists_forall_finrank_piece_eq_eval_of_isClosedImmersion_of_forall_mem_iff_of_eventually_eq n P
+    exists_forall_finrank_piece_eq_eval_of_isClosedImmersion_of_forall_mem_iff_of_eventually_eq.{u}
+      n P
   refine ⟨G, ?_⟩
   intro A _ Z ι hι hfl hfp
   obtain ⟨J, hJ, r, hspan, hj⟩ :=
@@ -278,7 +285,7 @@ theorem _root_.AlgebraicGeometry.HilbertFunctor.exists_uniform_cover_geomFibre_i
   refine ⟨P, hPw, ?_⟩
   intro m hm k _ _ _ hunit
   have := hι
-  let Zk : Scheme.{0} := pullback ι (ProjSpace.map A k n)
+  let Zk : Scheme.{u} := pullback ι (ProjSpace.map A k n)
   let ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) := pullback.snd ι
     (ProjSpace.map A k n)
   let e : Zk ⟶ Z := pullback.fst ι (ProjSpace.map A k n)

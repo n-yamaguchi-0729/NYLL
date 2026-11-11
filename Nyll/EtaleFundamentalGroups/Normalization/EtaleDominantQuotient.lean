@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Dominant domain quotients of étale algebras over normal domains
@@ -16,6 +18,8 @@ and remains faithful over the base is an idempotent factor, hence étale.
 The generic fibre selects its primitive idempotent; smooth base change of
 integral closure descends that idempotent to the original algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

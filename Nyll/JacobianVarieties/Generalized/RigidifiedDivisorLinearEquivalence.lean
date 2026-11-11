@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
 
 /-!
 # Linear equivalence with the actual modulus normalization
@@ -16,6 +18,8 @@ restriction agrees with its canonical section on the full modulus. This is the
 geometric section criterion underlying the rational-function congruence in the
 modulus divisor-class comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

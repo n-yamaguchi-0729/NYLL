@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Mem of mul eval2 mem of forall coeff mem maximal Ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

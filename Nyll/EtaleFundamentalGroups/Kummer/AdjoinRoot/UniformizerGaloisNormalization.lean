@@ -4,29 +4,31 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletion
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletionTower
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerNormalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.GaloisPrimeTo
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.CharP.Invertible
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletion
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletionTower
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerNormalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.GaloisPrimeTo
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.CharP.Invertible
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Prime-to-p Galois normalization over an arbitrary DVR
@@ -46,6 +48,8 @@ This is the local normalized base-change calculation in Stacks Project
 58.30.3, https://stacks.math.columbia.edu/tag/0C0R. Passing from these local
 normalizations to a global smooth proper cover is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

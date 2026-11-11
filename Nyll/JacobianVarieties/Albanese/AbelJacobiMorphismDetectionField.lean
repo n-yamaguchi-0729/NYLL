@@ -5,18 +5,20 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Albanese.AbelJacobiHomDetectionField
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
 
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiHomDetectionField
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 
 /-!
 # Uniqueness of pointed Abel–Jacobi factorizations over any field
@@ -31,6 +33,8 @@ The group law and Abel–Jacobi map are the same witnesses supplied by the exist
 arbitrary-field construction. No characteristic or genus restriction is imposed.
 This theorem proves uniqueness; existence of a factorization is a separate claim.
 -/
+
+@[expose] public section
 
 noncomputable section
 

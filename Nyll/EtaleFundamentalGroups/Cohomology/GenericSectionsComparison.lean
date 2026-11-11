@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.MultiplicativeGroupStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
-import Nyll.SchemeTheory.Affine.SpecBaseChangeSectionsMap
-import Nyll.SchemeTheory.Sheaves.StalkRefinement
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.MultiplicativeGroupStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
+public import Nyll.SchemeTheory.Affine.SpecBaseChangeSectionsMap
+public import Nyll.SchemeTheory.Sheaves.StalkRefinement
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.SchemeTheory.Sheaves.UnitStalks
 
 /-!
 # Actual generic sections and the geometric-stalk tensor diagram
@@ -19,6 +23,8 @@ refinement where this comparison is bijective. Consequently the comparison
 on actual geometric stalks is bijective, without assuming a comparison
 between their colimits.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -407,14 +413,7 @@ theorem geometricGenericUnitStalk_scalar
         (Φ.toPresheafFiber W t
           (CategoryTheory.GrothendieckTopology.Point.additiveUnitsPresheaf P) z)) =
       Additive.ofMul (Units.map (geometricStalkFractionFieldMap φ).toMonoidHom a.toMul) := by
-  let s := Spec.map (CommRingCat.ofHom φ)
-  let j := Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))
-  let Φ := Scheme.pointSmallEtale s
-  let P := etaleBaseChangedSections j
-  let z : (CategoryTheory.GrothendieckTopology.Point.additiveUnitsPresheaf P).obj (op W) :=
-    Additive.ofMul (Units.map
-      (((Scheme.ΓSpecIso (CommRingCat.of (FractionRing R))).inv ≫
-        (pullback.snd W.hom j).appTop).hom.toMonoidHom) a.toMul)
+  intro s j Φ P z
   change (Units.map (geometricGenericSectionsStalkEquiv R φ).toMonoidHom).toAdditive
     (CategoryTheory.GrothendieckTopology.Point.unitStalkMap Φ P
       (Φ.toPresheafFiber W t

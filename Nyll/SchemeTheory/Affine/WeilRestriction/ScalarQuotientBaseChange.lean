@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
-import Mathlib.Algebra.Group.Units.Equiv
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Change of coefficients for the literal scalar quotient
@@ -17,6 +19,8 @@ coefficient base-change comparison over every test algebra. This is the
 algebraic comparison; its compatibility with the represented group schemes
 is a separate construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

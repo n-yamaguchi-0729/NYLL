@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE
-import Nyll.JacobianVarieties.Picard.LineBundles.CrossSectionsIsFrameOn
+module
 
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE
+public import Nyll.JacobianVarieties.Picard.LineBundles.CrossSectionsIsFrameOn
+
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
 /-!
 # Cross sections comparing deformation class representatives
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -101,22 +105,20 @@ abbrev ι {U : (XA c A).Opens} {U' : (XD c A).Opens} (h : σ c A ⁻¹ᵁ U = U'
     Γ(XA c A, U) →+* Γ(XD c A, U') :=
   ((σ c A).appLE U U' h.ge).hom
 
-private def _root_.CoverCross.eps (U' : (XD c A).Opens) : Γ(XD c A, U') :=
+/-- The nilpotent parameter in the sections of the dual-number thickening. -/
+def eps (U' : (XD c A).Opens) : Γ(XD c A, U') :=
   let : Algebra (DualNumber A) Γ(XD c A, U') :=
     algebraOfHom (pullback.snd c (specMap R (DualNumber A))) U'
   algebraMap (DualNumber A) Γ(XD c A, U') DualNumber.eps
 
-export _root_.CoverCross (eps)
-
-private theorem _root_.CoverCross.eps_mul_eps (U' : (XD c A).Opens) :
+/-- The nilpotent parameter squares to zero on every open. -/
+theorem eps_mul_eps (U' : (XD c A).Opens) :
     eps (c := c) (A := A) U' * eps U' = 0 := by
   let : Algebra (DualNumber A) Γ(XD c A, U') :=
     algebraOfHom (pullback.snd c (specMap R (DualNumber A))) U'
   change algebraMap (DualNumber A) Γ(XD c A, U') DualNumber.eps * algebraMap (DualNumber A) _
     DualNumber.eps = 0
   rw [← map_mul, DualNumber.eps_mul_eps, map_zero]
-
-export _root_.CoverCross (eps_mul_eps)
 
 /-- Restriction preserves the nilpotent parameter on the thickening. -/
 theorem map_eps {U' V' : (XD c A).Opens} (hV : V' ≤ U') :

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Basic
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.Inseparable
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.ConstructibleTopology
-import Mathlib.Topology.Spectral.Prespectral
-import Mathlib.Topology.WithTopology
+module
+
+public import Mathlib.Topology.Basic
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.Inseparable
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Topology.Spectral.Prespectral
+public import Mathlib.Topology.WithTopology
 
 /-!
 # Avoiding a compact open set by a neighborhood
@@ -19,6 +21,8 @@ import Mathlib.Topology.WithTopology
 The proof takes a finite constructible-open cover of the compact open set
 by complements of compact open neighborhoods of the specified point.
 -/
+
+@[expose] public section
 
 open TopologicalSpace Topology
 

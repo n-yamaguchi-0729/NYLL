@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleDiagram
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleNeighborhoods
-import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
-import Nyll.SchemeTheory.RingTheory.Localization.CommAlgPrincipal
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
-import Mathlib.Algebra.Category.AlgCat.FilteredColimits
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleDiagram
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleNeighborhoods
+public import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
+public import Nyll.SchemeTheory.RingTheory.Localization.CommAlgPrincipal
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
+public import Mathlib.Algebra.Category.AlgCat.FilteredColimits
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Defs
 
 
 /-!
@@ -31,6 +33,8 @@ coefficient squares and unit cancellation give its representative in the
 étale diagram. Equality is detected by the actual inclusions into the upper
 invariant localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -134,7 +138,7 @@ variable [IsDomain A] [IsIntegrallyClosed A]
 /-- The accepted localized finite-level colimit supplies a representative;
 the actual étale denominator-refinement theorem then places it on one of
 the constructed étale neighborhoods. -/
-private theorem finiteLevelEtale_exists_rep
+theorem finiteLevelEtale_exists_rep
     (z : (finiteLevelInertiaLocalizationCocone A K L Q).pt) :
     ∃ (X : N) (x : (finiteLevelEtaleDiagram A K L Q).obj X),
       finiteLevelEtaleNeighborhoodInclusion A K L Q X x = z := by

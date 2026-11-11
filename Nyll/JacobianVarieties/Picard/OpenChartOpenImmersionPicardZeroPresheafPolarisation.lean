@@ -10,55 +10,57 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
-import Nyll.SchemeTheory.LocalGeometry.LocalRepresentabilityULift
-import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.AffineLimit
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundle
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDivRestrict
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.InvertibleISupportedIn
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackLineBundlePullbackIso
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.InvertibleRigidifyLineBundleTensorIdealModulePullbackIso
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.RigidifyLineBundleTensorIdealModulePullbackIsoPullback
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInIEqMul
-import Nyll.JacobianVarieties.Picard.Divisors.RelativeDivisorSupportedInRigidifyIso
-import Nyll.JacobianVarieties.Picard.Divisors.RelativeDivisorEqPullbackRigidifyIso
-import Nyll.JacobianVarieties.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1FibreTwoAffineCover
-import Nyll.JacobianVarieties.Picard.LineBundles.OpensRangeSubsetIffSupportZeroSchemeIdealSubset
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverLinearEquivSectionsOf
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealIsoPullbackModuleComparison
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealMulLeftCancel
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModuleMaps
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+public import Nyll.SchemeTheory.LocalGeometry.LocalRepresentabilityULift
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.AffineLimit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundle
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDivRestrict
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.InvertibleISupportedIn
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackLineBundlePullbackIso
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.InvertibleRigidifyLineBundleTensorIdealModulePullbackIso
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.RigidifyLineBundleTensorIdealModulePullbackIsoPullback
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInIEqMul
+public import Nyll.JacobianVarieties.Picard.Divisors.RelativeDivisorSupportedInRigidifyIso
+public import Nyll.JacobianVarieties.Picard.Divisors.RelativeDivisorEqPullbackRigidifyIso
+public import Nyll.JacobianVarieties.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1FibreTwoAffineCover
+public import Nyll.JacobianVarieties.Picard.LineBundles.OpensRangeSubsetIffSupportZeroSchemeIdealSubset
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverLinearEquivSectionsOf
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealIsoPullbackModuleComparison
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealMulLeftCancel
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModuleMaps
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
 
 /-!
 # Open Picard charts from a polarisation
@@ -66,6 +68,8 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPic
 The vanishing of first cohomology and the support of zero schemes cut out an open
 parameter space. Universal effective divisors give its chart and its lifting property.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

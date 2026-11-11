@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
-import Mathlib.Basic.Finite.Sum
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
+public import Mathlib.Basic.Finite.Sum
 
 /-!
 # Finite type of binary coproducts
@@ -19,6 +21,8 @@ The product of the two original local generating covers is again a cover.
 On each product chart both finite generating families restrict, and their
 disjoint union generates the actual categorical coproduct.
 -/
+
+@[expose] public section
 
 noncomputable section
 

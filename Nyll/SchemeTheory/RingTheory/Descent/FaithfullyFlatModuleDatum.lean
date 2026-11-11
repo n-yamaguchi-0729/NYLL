@@ -14,11 +14,13 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.Equalizer
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.Tactic.Convert
+module
+
+public import Mathlib.RingTheory.Flat.Equalizer
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.Tactic.Convert
 
 /-!
 # Effective faithfully flat descent for a module datum
@@ -28,6 +30,8 @@ back to the given module. This differs from the canonical Amitsur equalizer of a
 already descended module. Public assumptions and conclusions are those of the pinned
 upstream theorem; implementation-only coaction helpers are private.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleDatum
 

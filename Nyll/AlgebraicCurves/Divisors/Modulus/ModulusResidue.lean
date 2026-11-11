@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusIdeal
-import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusIdeal
+public import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Residue fields of the closed points of a modulus
@@ -19,6 +21,8 @@ residue field. Its compatibility with the function-field embedding upgrades
 the actual stalk comparison to a residue-field algebra equivalence. Thus the
 closed point belonging to a place has precisely that place's residue degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

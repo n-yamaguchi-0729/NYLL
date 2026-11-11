@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Is Local Ring exists forall sub sum mem span pair of prime of not associated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

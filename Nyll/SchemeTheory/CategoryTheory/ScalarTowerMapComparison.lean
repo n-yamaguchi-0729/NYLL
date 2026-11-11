@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 
 /-! # Maps and equivariant comparisons along a functor tower
 
 The actual one-step comparison squares give the composite comparison squares.
 The equivariant group comparison is retained together with the two object comparisons.
 -/
+
+@[expose] public section
 
 open scoped CategoryTheory.MonObj CategoryTheory.Obj
 

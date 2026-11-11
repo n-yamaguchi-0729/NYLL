@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
-import Nyll.EtaleCohomology.Constructible.Stratification
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
+module
+
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
+public import Nyll.EtaleCohomology.Constructible.Stratification
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
 
 /-!
 # Constructible étale sheaves of modules
@@ -29,6 +31,8 @@ noetherian.
 Finite type locally constant sheaves satisfy this definition. Adapted finite
 stratifications can be refined simultaneously using actual fiber products.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferenceTameOrder
-import Nyll.AlgebraicCurves.Places.Orders.GroupPowerSeriesPositiveOrders
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinateAlgebra
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferenceTameOrder
+public import Nyll.AlgebraicCurves.Places.Orders.GroupPowerSeriesPositiveOrders
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinateAlgebra
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
 
 /-! # Actual integral points for sufficiently ramified tame group differences
 
@@ -18,6 +22,8 @@ the power-series ring of the Laurent valuation ring. Its generic point is
 the original moving-versus-constant group difference, and its entire residue
 series is the unit. Integrality and finite generation are constructed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

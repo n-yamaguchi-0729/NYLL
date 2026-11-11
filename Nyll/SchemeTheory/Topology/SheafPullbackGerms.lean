@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.SheafPullbackStalks
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.Topology.SheafPullbackStalks
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Germs and the actual inverse-image adjunction
@@ -15,6 +17,8 @@ with the unit of its actual pullback-pushforward adjunction.
 
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.Height
-import Nyll.SchemeTheory.RingTheory.Dimension.LocalRingKrullDimensionQuotientSpanSingletonAddOne
+module
+
+public import Mathlib.RingTheory.Ideal.Height
+public import Nyll.SchemeTheory.RingTheory.Dimension.LocalRingKrullDimensionQuotientSpanSingletonAddOne
 
 /-!
 # Ideal height map quotient Mk span singleton add one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

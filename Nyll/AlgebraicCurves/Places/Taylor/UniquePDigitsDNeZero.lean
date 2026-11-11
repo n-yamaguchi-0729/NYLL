@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
 
 /-!
 # Exists Unique p Digits of D ne zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

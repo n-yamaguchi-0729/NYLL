@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # The twisting sheaf and its coordinate sections
@@ -27,6 +29,8 @@ its actual coordinate sections used in subsequent denominator
 clearing arguments; no graded presentation of an arbitrary coherent
 sheaf is assumed or asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

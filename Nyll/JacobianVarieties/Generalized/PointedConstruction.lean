@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareKernelScheme
-import Nyll.JacobianVarieties.Generalized.PoincareProjectionSurjectivity
-import Nyll.JacobianVarieties.Picard.GenusDimension
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareKernelScheme
+public import Nyll.JacobianVarieties.Generalized.PoincareProjectionSurjectivity
+public import Nyll.JacobianVarieties.Picard.GenusDimension
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!
 # Construction over a field with a chosen curve section and positive modulus
@@ -17,6 +19,8 @@ the concrete frame construction. No Picard representation is an input here.
 The constructed commutative group represents the modulus Picard-zero sheaf
 and has smooth relative dimension `genus + degree - 1`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

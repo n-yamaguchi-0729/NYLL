@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantDescent
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.RingTheory.Derivation.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
-import Nyll.AlgebraicCurves.Divisors.ConstantExtension.PrincipalConstantExtension
-import Nyll.AlgebraicCurves.FunctionFields.Constants.DerivationConstantExtensionMapMem
-import Nyll.AlgebraicCurves.Places.Orders.OrdNegTranscendental
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantDescent
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.RingTheory.Derivation.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
+public import Nyll.AlgebraicCurves.Divisors.ConstantExtension.PrincipalConstantExtension
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.DerivationConstantExtensionMapMem
+public import Nyll.AlgebraicCurves.Places.Orders.OrdNegTranscendental
 
 /-!
 # Divisor exists torsion descent of constant Field Extension
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

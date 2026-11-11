@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierPointSums
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackFoldrTwistIso
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierPointSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackFoldrTwistIso
 
 /-! # Actual relative point divisors and function-field multiplicities -/
+
+@[expose] public section
 
 noncomputable section
 

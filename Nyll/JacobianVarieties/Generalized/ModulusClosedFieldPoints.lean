@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.FppfAlgebraicallyClosedPoint
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+module
+
+public import Nyll.SchemeTheory.Topology.FppfAlgebraicallyClosedPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
 
 /-!
 # Actual rigidified classes and generalized Jacobian points over a closed field
@@ -17,12 +19,16 @@ of the generalized Jacobian. The comparison sends the actual canonical point
 difference to the value of the constructed Abel morphism.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
 
 open CategoryTheory Opposite
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

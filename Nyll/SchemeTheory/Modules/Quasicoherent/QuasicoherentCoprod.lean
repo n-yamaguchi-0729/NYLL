@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
 
 /-!
 # Quasicoherence of actual binary coproducts
@@ -18,6 +20,8 @@ On each affine chart the tilde adjunction carries the coproduct of the
 two section modules to the actual sheaf coproduct. Restriction preserves
 this coproduct, so the affine criterion gives global quasicoherence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Module Flat bijective ker Base Change Hom and nonempty homology base Change linear Equiv
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -95,7 +99,7 @@ theorem _root_.Module.Flat.bijective_kerBaseChangeHom_and_nonempty_homology_base
     {M N P : Type u} [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] [AddCommGroup P]
       [Module R P]
     (f : M →ₗ[R] N) (g : N →ₗ[R] P) (hfg : g ∘ₗ f = 0) :
-    letI : AddCommGroup ↥(LinearMap.ker (g.baseChange T)) :=
+    let : AddCommGroup ↥(LinearMap.ker (g.baseChange T)) :=
       Submodule.addCommGroup (M := T ⊗[R] N) (LinearMap.ker (g.baseChange T))
     Function.Bijective (TwoChartCech.kerBaseChangeHom g T) ∧
     Nonempty
@@ -109,8 +113,7 @@ theorem _root_.Module.Flat.bijective_kerBaseChangeHom_and_nonempty_homology_base
         Module.Finite T (↥(LinearMap.ker (g.baseChange T)) ⧸
           (LinearMap.range (f.baseChange T)).comap (LinearMap.ker (g.baseChange T)).subtype)) := by
   classical
-  let iK' : AddCommGroup ↥(LinearMap.ker (g.baseChange T)) :=
-    Submodule.addCommGroup (M := T ⊗[R] N) (LinearMap.ker (g.baseChange T))
+  intro iK'
   have hfK : ∀ m, f m ∈ LinearMap.ker g := fun m => by
     rw [LinearMap.mem_ker, ← LinearMap.comp_apply, hfg, LinearMap.zero_apply]
   have hfB : ∀ m, f.codRestrict (LinearMap.ker g) hfK m ∈

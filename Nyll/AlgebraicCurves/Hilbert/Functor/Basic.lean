@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Rat.Floor
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Data.Rat.Floor
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.Tactic.Ext
 
 /-!
 # Basic
 -/
+
+@[expose] public section
 
 /-- Each homogeneous component in finitely many variables is a finite module. -/
 instance MvPolynomial.finiteHomogeneousSubmodule (σ R : Type*) [CommSemiring R] [Finite σ]

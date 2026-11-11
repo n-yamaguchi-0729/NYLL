@@ -10,35 +10,39 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.RingHom.Locally
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Away.Lemmas
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.Tactic.Push
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomSmoothLocusLePreimage
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomFiberInclusionMemSmoothLocus
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.RingHom.Locally
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Away.Lemmas
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.Tactic.Push
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomSmoothLocusLePreimage
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.HomFiberInclusionMemSmoothLocus
 
 /-!
 # exists mem and smooth Of Relative Dimension one of smooth Of Relative Dimension opens
 Restrict pullback snd
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricallyConnectedSections
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverSeparablyClosed
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Spec
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricallyConnectedSections
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverSeparablyClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Spec
 
 /-!
 # Invariance of arbitrary étale sections under separably closed base extension
@@ -21,6 +23,8 @@ and quasi-compact with geometrically connected fibres. The original étale
 global-section pullback map is therefore bijective, with no finite type or
 constructibility restrictions (Stacks Project, Lemma 59.39.5).
 -/
+
+@[expose] public section
 
 noncomputable section
 

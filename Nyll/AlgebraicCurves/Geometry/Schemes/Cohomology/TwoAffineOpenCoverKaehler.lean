@@ -10,12 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Mathlib.RingTheory.Kaehler.Basic
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 Kähler differentials and their Čech data on a two-affine-open cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusKernelPresheaf
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusKernelPresheaf
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-! # Exactness at the actual modulus Picard-zero group sheaf -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -16,6 +20,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

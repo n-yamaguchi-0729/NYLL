@@ -6,6 +6,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Models.FunctionFields.ApplyGenericPointEqAlgEquivFunctionField
 import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelGenericPointEvaluation
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveGenericUnitsVanishing
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveGenericUnitCechPrimitives
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveUnitCechLifts
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveKummerCechBoundary
+import Nyll.AlgebraicCurves.Models.FunctionFields.CurveMultiplicativeGroupVanishing
 import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelGeometricGenericLift
 import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelIsoAlgEquiv
 import Nyll.AlgebraicCurves.Models.FunctionFields.CurveModelIsoFieldEquivSymmFunctionFieldGermEq

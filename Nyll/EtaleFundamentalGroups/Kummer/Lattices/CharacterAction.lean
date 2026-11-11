@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.FiniteAbelian.Duality
-import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Cover
+module
+
+public import Mathlib.GroupTheory.FiniteAbelian.Duality
+public import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Cover
 
 /-!
 # Character action on a finite-index lattice cover
@@ -16,20 +18,24 @@ these characters separate the quotient degrees.  Consequently their common
 fixed subalgebra is exactly the image of the subgroup lattice algebra.
 -/
 
+@[expose] public section
+
 namespace EtaleFundamentalGroups.Kummer
 
 universe u v
 
 noncomputable section
 
-private def latticeCharacterWeight
+/-- The coefficient weight obtained by pulling a quotient character back to the lattice. -/
+def latticeCharacterWeight
     {k : Type u} {L : Type v} [CommRing k] [AddCommGroup L]
     (H : AddSubgroup L) (χ : Multiplicative (L ⧸ H) →* kˣ) :
     Multiplicative L →* k :=
   (Units.coeHom k).comp
     (χ.comp (QuotientAddGroup.mk' H).toMultiplicative)
 
-private def latticeCharacterMonomial
+/-- The lattice monomial multiplied by its quotient-character weight. -/
+def latticeCharacterMonomial
     {k : Type u} {L : Type v} [CommRing k] [AddCommGroup L]
     (H : AddSubgroup L) (χ : Multiplicative (L ⧸ H) →* kˣ) :
     Multiplicative L →* AddMonoidAlgebra k L :=
@@ -38,7 +44,8 @@ private def latticeCharacterMonomial
     ((latticeCharacterWeight H χ).prod
       (MonoidHom.id (Multiplicative L)))
 
-private def latticeCharacterAlgHom
+/-- Extend the weighted lattice monomials to an algebra homomorphism. -/
+def latticeCharacterAlgHom
     {k : Type u} {L : Type v} [CommRing k] [AddCommGroup L]
     (H : AddSubgroup L) (χ : Multiplicative (L ⧸ H) →* kˣ) :
     AddMonoidAlgebra k L →ₐ[k] AddMonoidAlgebra k L :=
@@ -53,10 +60,15 @@ private theorem latticeCharacterAlgHom_single
     latticeCharacterAlgHom H χ (AddMonoidAlgebra.single l a) =
       AddMonoidAlgebra.single l
         (a * (χ (Multiplicative.ofAdd (QuotientAddGroup.mk' H l)) : k)) := by
-  simp [latticeCharacterAlgHom, latticeCharacterMonomial,
-    latticeCharacterWeight, Algebra.smul_def]
+  simp only [latticeCharacterAlgHom, latticeCharacterMonomial, latticeCharacterWeight,
+    AddMonoidAlgebra.lift_single, MonoidHom.coe_comp, Function.comp_apply, MonoidHom.prod_apply,
+    AddMonoidHom.coe_toMultiplicative, QuotientAddGroup.coe_mk', toAdd_ofAdd, Units.coeHom_apply,
+    MonoidHom.id_apply, AddMonoidAlgebra.singleHom_apply, Algebra.smul_def,
+    AddMonoidAlgebra.coe_algebraMap, Algebra.algebraMap_self, RingHom.coe_id, id_eq,
+    AddMonoidAlgebra.single_mul_single, zero_add, QuotientAddGroup.mk'_apply]
 
-private def latticeCharacterAlgEquiv
+/-- The inverse quotient character inverts the diagonal algebra homomorphism. -/
+def latticeCharacterAlgEquiv
     {k : Type u} {L : Type v} [CommRing k] [AddCommGroup L]
     (H : AddSubgroup L) (χ : Multiplicative (L ⧸ H) →* kˣ) :
     AddMonoidAlgebra k L ≃ₐ[k] AddMonoidAlgebra k L :=
@@ -66,12 +78,16 @@ private def latticeCharacterAlgEquiv
     (by
       apply AddMonoidAlgebra.algHom_ext
       · intro l
-        simp [latticeCharacterAlgHom_single]
+        simp only [AlgHom.coe_comp, Function.comp_apply, latticeCharacterAlgHom_single,
+          QuotientAddGroup.mk'_apply, MonoidHom.inv_apply, one_mul, Units.inv_mul, AlgHom.coe_id,
+          id_eq]
       · ext)
     (by
       apply AddMonoidAlgebra.algHom_ext
       · intro l
-        simp [latticeCharacterAlgHom_single]
+        simp only [AlgHom.coe_comp, Function.comp_apply, latticeCharacterAlgHom_single,
+          QuotientAddGroup.mk'_apply, one_mul, MonoidHom.inv_apply, Units.mul_inv, AlgHom.coe_id,
+          id_eq]
       · ext)
 
 /-- The canonical diagonal action of quotient-lattice characters on the
@@ -86,14 +102,17 @@ def latticeCharacterAction
     apply AlgEquiv.coe_toAlgHom_injective
     apply AddMonoidAlgebra.algHom_ext
     · intro l
-      simp [latticeCharacterAlgEquiv, latticeCharacterAlgHom_single]
+      simp only [latticeCharacterAlgEquiv, AlgEquiv.coe_toAlgHom, AlgEquiv.ofAlgHom_apply,
+        latticeCharacterAlgHom_single, QuotientAddGroup.mk'_apply, MonoidHom.one_apply,
+        Units.val_one, mul_one, AlgEquiv.one_apply]
     · ext
   map_mul' χ ψ := by
     apply AlgEquiv.coe_toAlgHom_injective
     apply AddMonoidAlgebra.algHom_ext
     · intro l
-      simp [latticeCharacterAlgEquiv, latticeCharacterAlgHom_single,
-        AlgEquiv.mul_apply, mul_comm]
+      simp only [latticeCharacterAlgEquiv, AlgEquiv.coe_toAlgHom, AlgEquiv.ofAlgHom_apply,
+        latticeCharacterAlgHom_single, QuotientAddGroup.mk'_apply, MonoidHom.mul_apply,
+        Units.val_mul, one_mul, AlgEquiv.mul_apply, mul_comm]
     · ext
 
 @[simp]
@@ -116,8 +135,14 @@ theorem latticeCharacterAction_coeff
   | of m =>
       by_cases h : m = l
       · subst m
-        simp [AddMonoidAlgebra.of]
-      · simp [AddMonoidAlgebra.of, h]
+        simp only [AddMonoidAlgebra.of, MulHom.toFun_eq_coe, MonoidHom.coe_mk, OneHom.coe_mk,
+          AddMonoidAlgebra.ofMagma_apply, toAdd_ofAdd, latticeCharacterAction_single,
+          QuotientAddGroup.mk'_apply, one_mul, AddMonoidAlgebra.coeff_single,
+          Finsupp.single_eq_same]
+      · simp only [AddMonoidAlgebra.of, MulHom.toFun_eq_coe, MonoidHom.coe_mk, OneHom.coe_mk,
+        AddMonoidAlgebra.ofMagma_apply, toAdd_ofAdd, latticeCharacterAction_single,
+        QuotientAddGroup.mk'_apply, one_mul, AddMonoidAlgebra.coeff_single, ne_eq, h,
+        not_false_eq_true, Finsupp.single_eq_of_ne', zero_mul]
   | add x y hx hy =>
       rw [map_add]
       change

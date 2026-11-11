@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionAssociator
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionBraiding
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionRightUnitor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.CategoryTheory.Monoidal.Internal.Module
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionAssociator
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionBraiding
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionRightUnitor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.CategoryTheory.Monoidal.Internal.Module
 
 /-!
 # The actual section algebras of a commutative algebra object
@@ -20,6 +22,8 @@ module-monoid construction supplies its ring and algebra structures,
 retaining the original additive group and scalar action. Braiding gives
 commutativity. Restrictions are the original module restriction maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,7 +36,8 @@ namespace AlgebraicGeometry.Scheme.Modules.AlgebraObject
 
 variable {X : Scheme.{u}} (F : X.Modules) [MonObj F]
 
-private abbrev sectionModule (U : X.Opens) : ModuleCat.{u} Γ(X, U) :=
+/-- Sections of the sheaf algebra as a module over the coefficient section ring. -/
+abbrev sectionModule (U : X.Opens) : ModuleCat.{u} Γ(X, U) :=
   ModuleCat.of Γ(X, U) Γ(F, U)
 
 private theorem section_one_mul (U : X.Opens) (r : Γ(X, U)) (x : Γ(F, U)) :
@@ -69,7 +74,8 @@ private theorem section_mul_assoc (U : X.Opens) (x y z : Γ(F, U)) :
   simpa only [Hom.comp_app, CategoryTheory.comp_apply, whiskerRight_app_tensorSections,
     associator_hom_app_tensorSections, whiskerLeft_app_tensorSections] using h
 
-@[instance_reducible] private def sectionMonoid (U : X.Opens) :
+/-- The monoid object on sections induced by the sheaf multiplication and unit. -/
+@[instance_reducible] def sectionMonoid (U : X.Opens) :
     MonObj (sectionModule F U) where
   one := ModuleCat.ofHom
     (show Γ(X, U) →ₗ[Γ(X, U)] Γ(F, U) from (η[F].val.app (op U)).hom)
@@ -100,7 +106,8 @@ private theorem section_mul_assoc (U : X.Opens) (x y z : Γ(F, U)) :
 
 variable [IsCommMonObj F]
 
-@[instance_reducible] private def sectionCommRing (U : X.Opens) :
+/-- The commutative ring structure induced on sections of a commutative sheaf algebra. -/
+@[instance_reducible] def sectionCommRing (U : X.Opens) :
     CommRing (sectionModule F U) := by
   let : MonObj (sectionModule F U) := sectionMonoid F U
   refine { ModuleCat.MonModuleEquivalenceAlgebra.MonObj.toRing (sectionModule F U) with

@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperFieldBaseChange
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperFieldBaseChange
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # The actual closed fiber of the strict local specialization model
@@ -25,6 +28,8 @@ invariance proves that the geometric-fiber map is an equivalence on finite
 étale covers. This is the field-comparison part of Stacks 58.16; it does not
 assert the separate henselian proper comparison with the total space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Iso
-import Mathlib.Order.DirectedInverseSystem
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackIsoInvertible
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.IsoPullbackIsoPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.Order.DirectedInverseSystem
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackIsoInvertible
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.IsoPullbackIsoPullback
 
 /-!
 # Scheme Modules exists is Invertible pullback map iso unit nonempty pullback iso of is
 Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

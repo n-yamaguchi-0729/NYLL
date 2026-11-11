@@ -8,6 +8,10 @@ import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.Is
 import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleFromBoundaryStalks
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumBoundaryNormalizationExtension
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFiberComparison
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 
 /-!
 # Boundary stalks of the connected punctured normalization

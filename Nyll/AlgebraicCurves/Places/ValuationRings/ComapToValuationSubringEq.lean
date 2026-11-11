@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubringFiniteDimensional
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists comap to Valuation Subring eq of ne top of is Algebraic

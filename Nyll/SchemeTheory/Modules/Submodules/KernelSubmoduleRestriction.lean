@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentExtension
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentExtension
 
 /-!
 # Restricting the actual kernel subsheaf extension
@@ -16,6 +18,8 @@ inclusion. Transporting that comparison along open restriction gives the
 embedded geometric restriction isomorphism needed for affine extraction
 and for preservation of prescribed local generators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

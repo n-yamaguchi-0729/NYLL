@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOne
-import Nyll.JacobianVarieties.Generalized.ModulusTwoPointDifference
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOne
+public import Nyll.JacobianVarieties.Generalized.ModulusTwoPointDifference
 
 /-!
 # Actual tensor action and difference on intrinsic Picard-one
@@ -16,6 +18,8 @@ A point of the complement proves nonemptiness and therefore supplies an actual
 torsor on each test scheme. The fieldwise closure proofs use the original
 rigidified classes and the proved algebraic triviality of arbitrary point differences.
 -/
+
+@[expose] public section
 
 noncomputable section
 

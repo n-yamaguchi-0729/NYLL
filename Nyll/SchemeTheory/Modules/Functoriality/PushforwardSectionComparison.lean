@@ -4,24 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PushforwardCoefficients
-import Nyll.SchemeTheory.Modules.Sections.NativeSectionObjects
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Terminal
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.Algebra.Module.LinearMap.Defs
-import Mathlib.Algebra.Group.Hom.Defs
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PushforwardCoefficients
+public import Nyll.SchemeTheory.Modules.Sections.NativeSectionObjects
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.Algebra.Module.LinearMap.Defs
+public import Mathlib.Algebra.Group.Hom.Defs
 
 /-!
 # Comparison of pushforward sections
 
 Compares the existing section modules through the prescribed coefficient and restriction maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,29 +69,27 @@ def sourceModulePresheaf {R : CommRingCat.{u}} {X : Scheme.{u}}
       (Limits.initialOpOfTerminal Limits.isTerminalTop) M.val) ⋙
         ModuleCat.restrictScalars j.pushforwardGlobalCoefficient
 
-private def restrictedModule {R A : CommRingCat.{u}} (σ : R →+* A)
+/-- A section module with scalars restricted along the specified coefficient map. -/
+def restrictedModule {R A : CommRingCat.{u}} (σ : R →+* A)
     (N : ModuleCat.{u} A) : ModuleCat.{u} R :=
   (ModuleCat.restrictScalars σ).obj N
 
-private def coefficientCongr {R A : CommRingCat.{u}} (σ τ : R →+* A)
+/-- Equal coefficient maps induce an isomorphism between their scalar restrictions. -/
+def coefficientCongr {R A : CommRingCat.{u}} (σ τ : R →+* A)
     (h : σ = τ) (N : ModuleCat.{u} A) :
     restrictedModule σ N ≅ restrictedModule τ N :=
   eqToIso (congrArg (fun ρ : R →+* A => restrictedModule ρ N) h)
 
-private lemma coefficientCongr_hom_apply {R A : CommRingCat.{u}} (σ τ : R →+* A)
-    (h : σ = τ) (N : ModuleCat.{u} A) (x : N) :
-    (coefficientCongr σ τ h N).hom x = x := by
-  subst τ
-  rfl
-
-private def targetSectionComponent {R : CommRingCat.{u}} {X : Scheme.{u}}
+/-- Target pushforward sections have the prescribed restricted coefficient module. -/
+def targetSectionComponent {R : CommRingCat.{u}} {X : Scheme.{u}}
     (j : X ⟶ Spec R) (M : X.Modules) (V : (Spec R).Opens) :
     (pushforwardModulePresheaf j M).obj (op V) ≅
       restrictedModule (j.targetSectionCoefficient V) (j.sectionComparisonModule M V) :=
   Iso.refl (show ModuleCat.{u} R from
     restrictedModule (j.targetSectionCoefficient V) (j.sectionComparisonModule M V))
 
-private def sourceSectionComponent {R : CommRingCat.{u}} {X : Scheme.{u}}
+/-- Source sections have the prescribed restricted coefficient module. -/
+def sourceSectionComponent {R : CommRingCat.{u}} {X : Scheme.{u}}
     (j : X ⟶ Spec R) (M : X.Modules) (V : (Spec R).Opens) :
     (sourceModulePresheaf j M).obj (op (j.sectionComparisonOpen V)) ≅
       restrictedModule (j.sourceSectionCoefficient V) (j.sectionComparisonModule M V) :=
@@ -109,7 +111,8 @@ def sourceModuleOnTarget {R : CommRingCat.{u}} {X : Scheme.{u}}
     (j : X ⟶ Spec R) (M : X.Modules) : (Spec R).Opensᵒᵖ ⥤ ModuleCat.{u} R :=
   (Opens.map j.base).op ⋙ sourceModulePresheaf j M
 
-private def sectionIsoOnTarget {R : CommRingCat.{u}} {X : Scheme.{u}}
+/-- The section comparison over an open of the target scheme. -/
+def sectionIsoOnTarget {R : CommRingCat.{u}} {X : Scheme.{u}}
     (j : X ⟶ Spec R) (M : X.Modules) (V : (Spec R).Opens) :
     (pushforwardModulePresheaf j M).obj (op V) ≅ (sourceModuleOnTarget j M).obj (op V) :=
   pushforwardSectionIso j M V
@@ -153,7 +156,8 @@ private lemma additive_naturality {R : CommRingCat.{u}} {X : Scheme.{u}}
     componentAddHom_eq_id, AddMonoidHom.comp_id]
   exact restrictionAddHom_eq j M i
 
-private lemma sectionIsoOnTarget_naturality {R : CommRingCat.{u}} {X : Scheme.{u}}
+/-- The section comparison commutes with restriction along target opens. -/
+lemma sectionIsoOnTarget_naturality {R : CommRingCat.{u}} {X : Scheme.{u}}
     (j : X ⟶ Spec R) (M : X.Modules) {U V : (Spec R).Opens} (i : U ⟶ V) :
     (pushforwardModulePresheaf j M).map i.op ≫ (sectionIsoOnTarget j M U).hom =
       (sectionIsoOnTarget j M V).hom ≫ (sourceModuleOnTarget j M).map i.op := by

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteGeneratingSections
-import Nyll.SchemeTheory.Modules.Localization.SectionLocalization
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.RingTheory.Localization.Finiteness
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteGeneratingSections
+public import Nyll.SchemeTheory.Modules.Localization.SectionLocalization
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.RingTheory.Localization.Finiteness
 
 /-!
 # Affine sections of finite-type quasicoherent modules
@@ -27,6 +29,8 @@ opens subordinate to the given generator cover span the unit ideal of
 an affine chart, and the native section-localization maps allow the
 existing finite-localization theorem to extract finitely many generators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

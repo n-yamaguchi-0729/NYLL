@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GradedReesAlgebra
+module
+
+public import Nyll.SchemeTheory.RingTheory.GradedReesAlgebra
 
 /-!
 # Degree-one generation of the Rees algebra
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.RingTheory.GradedReesAlgebra
 The degree-one elements associated to the original ideal generate the actual
 Rees subalgebra. This identifies the degree-one affine charts of its Proj.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Nilpotent.Lemmas
+module
+
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Nilpotent.Lemmas
 
 /-!
 # Flat base change of a ring map with nilpotent kernel elements
@@ -14,6 +16,8 @@ Exactness of tensoring with a flat algebra represents every element killed
 by base change using elements of the original kernel. Their images are
 nilpotent, so the resulting finite sum is nilpotent as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

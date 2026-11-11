@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists ord eq one of ord sum eq one

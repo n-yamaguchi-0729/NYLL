@@ -10,20 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # Mv Polynomial finrank piece sup span singleton succ add finrank piece eq of forall mul mem
 imp
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -37,7 +43,7 @@ noncomputable section
 
 namespace P2mWs6HP
 
-variable {K : Type} [Field K] {n : ℕ}
+variable {K : Type u} [Field K] {n : ℕ}
 
 /-- The degree-d homogeneous polynomials belonging to the ideal J. -/
 abbrev Jd (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (d : ℕ) : Submodule K
@@ -48,7 +54,7 @@ abbrev Jd (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (d : ℕ) : Submodule K
 theorem mem_Jd (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (d : ℕ) (p :
   ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) K d)) : p ∈ Jd J d ↔ (p : MvPolynomial (Fin (n
   + 1)) K) ∈ J := by
-  simp [Jd, Submodule.mem_comap, Submodule.restrictScalars_mem]
+  rfl
 
 /-- Multiplication by the homogeneous linear polynomial, raising degree by one. -/
 noncomputable def mulLin (ℓ : MvPolynomial (Fin (n + 1)) K) (hℓ : ℓ.IsHomogeneous 1) (d : ℕ) :
@@ -57,8 +63,12 @@ noncomputable def mulLin (ℓ : MvPolynomial (Fin (n + 1)) K) (hℓ : ℓ.IsHomo
   toFun p := ⟨(p : MvPolynomial (Fin (n + 1)) K) * ℓ, by
     rw [MvPolynomial.mem_homogeneousSubmodule]
     exact ((MvPolynomial.mem_homogeneousSubmodule d p.1).mp p.2).mul hℓ⟩
-  map_add' p q := by ext; simp [add_mul]
-  map_smul' c p := by ext; simp [MvPolynomial.smul_eq_C_mul, mul_assoc]
+  map_add' p q := by
+    apply Subtype.ext
+    exact add_mul (p : MvPolynomial (Fin (n + 1)) K) q ℓ
+  map_smul' c p := by
+    apply Subtype.ext
+    exact smul_mul_assoc c (p : MvPolynomial (Fin (n + 1)) K) ℓ
 
 theorem mulLin_apply (ℓ : MvPolynomial (Fin (n + 1)) K) (hℓ : ℓ.IsHomogeneous 1) (d : ℕ) (p :
   ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) K d)) :
@@ -92,7 +102,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 open P2mWs6HP in
 theorem finrank_piece_sup_span_singleton_succ_add_finrank_piece_eq_of_forall_mul_mem_imp
-    (n : ℕ) (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (n : ℕ) (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈ J)
     (ℓ : MvPolynomial (Fin (n + 1)) K) (hℓ : ℓ.IsHomogeneous 1)
     (hcolon : ∀ (d : ℕ) (F : MvPolynomial (Fin (n + 1)) K), F.IsHomogeneous d → ℓ * F ∈ J → F ∈ J)

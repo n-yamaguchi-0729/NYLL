@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-! # The generic residue field of the ordinary integer spectrum -/
+
+@[expose] public section
 
 noncomputable section
 

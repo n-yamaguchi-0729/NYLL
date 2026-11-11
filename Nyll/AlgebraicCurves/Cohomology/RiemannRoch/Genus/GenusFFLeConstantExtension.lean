@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.BaseChange.EllMapDomainEqConstantExtension
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.IndexOfSpecialtyMapDomainEqZero
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusRiemannIndexCurve
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
-import Nyll.AlgebraicCurves.Cohomology.IndexOfSpecialtyEqFinrankH1
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
-import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.BaseChange.EllMapDomainEqConstantExtension
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.IndexOfSpecialtyMapDomainEqZero
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusRiemannIndexCurve
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
+public import Nyll.AlgebraicCurves.Cohomology.IndexOfSpecialtyEqFinrankH1
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
+public import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
 
 /-!
 # Genus FF le of constant Field Extension of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameBaseChange
-import Nyll.JacobianVarieties.Generalized.FrameCover
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRelativeRepresentation
-import Nyll.SchemeTheory.WeilRestriction.GluedRepresentable
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameBaseChange
+public import Nyll.JacobianVarieties.Generalized.FrameCover
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRelativeRepresentation
+public import Nyll.SchemeTheory.WeilRestriction.GluedRepresentable
 
 /-!
 # Representing the scalar frames of an invertible family
@@ -19,6 +21,8 @@ the changes of frame rather than replacing the family by a product.
 For a finite positive-rank scheme over a field the unit representer is
 supplied by the concrete projective norm open, without an extra hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

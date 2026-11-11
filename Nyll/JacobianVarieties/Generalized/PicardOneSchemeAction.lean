@@ -5,12 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicAction
-import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
-import Nyll.JacobianVarieties.Generalized.Construction
-import Mathlib.CategoryTheory.Monoidal.Cartesian.FunctorCategory
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicAction
+public import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.FunctorCategory
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # The canonical tensor action on the actual intrinsic Picard-one scheme -/
+
+@[expose] public section
 
 noncomputable section
 

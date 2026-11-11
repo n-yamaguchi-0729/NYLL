@@ -5,15 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleIsFrameOnApp
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleIsFrameOnApp
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Canonical rigidification of an effective Cartier divisor away from the modulus
@@ -28,6 +30,8 @@ nonempty type of module isomorphisms.
 This file does not yet identify divisor classes with the modulus Picard sheaf,
 nor prove compatibility with addition or modulus-principal divisors.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -73,7 +77,7 @@ def sectionRestrictionIso {M : X.Modules} (hM : Scheme.Modules.IsInvertible M)
     (havoid : ∀ y : D, i.base y ∉ (zeroSchemeIdeal s).support) :
     (Scheme.Modules.pullback i).obj M ≅ 𝟙_ D.Modules := by
   let hsection : IsIso (pullbackSection i s) :=
-    isIso_pullbackSection_of_avoids_support i hM s havoid
+    by exact isIso_pullbackSection_of_avoids_support i hM s havoid
   exact (asIso (pullbackSection i s)).symm
 
 /-- The inverse trivialization is the specified section, rather than an

@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothMaximalIdealEqSpanPerfectField
+module
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothMaximalIdealEqSpanPerfectField
 
 /-!
 # Algebra Smooth of is Integrally Closed of krull Dim LE one of perfect Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

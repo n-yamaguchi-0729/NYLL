@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! # Polynomial coordinates of the formal difference of an affine-line map
 
@@ -20,6 +22,8 @@ Jacobson radical, so this point factors through every open identity
 neighbourhood. An affine such neighbourhood therefore supplies actual
 polynomial coefficients in all orders, with the expected unit constant term.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -68,11 +72,13 @@ namespace AffineLineGroupFormalDifference
 
 variable {K : Type u} [CommRing K]
 
-private abbrev scalarSpec (A : Type u) [CommRing A] [Algebra K A] :
+/-- The spectrum of a coefficient algebra as a scheme over the coefficient ring. -/
+abbrev scalarSpec (A : Type u) [CommRing A] [Algebra K A] :
     Over (Spec (.of K)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K A)))
 
-private def scalarSpecMap {A B : Type u} [CommRing A] [CommRing B]
+/-- An algebra homomorphism induces the corresponding morphism of spectra over the base. -/
+def scalarSpecMap {A B : Type u} [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B] (f : A →ₐ[K] B) :
     scalarSpec (K := K) B ⟶ scalarSpec (K := K) A :=
   Over.homMk (Spec.map (CommRingCat.ofHom f.toRingHom)) (by
@@ -104,7 +110,8 @@ private theorem scalarSpecMap_id (A : Type u) [CommRing A] [Algebra K A] :
 def shift : Polynomial K →ₐ[K] PowerSeries (Polynomial K) :=
   Polynomial.aeval (PowerSeries.C Polynomial.X + PowerSeries.X)
 
-private def constantInclusion : Polynomial K →ₐ[K] PowerSeries (Polynomial K) where
+/-- Include a polynomial as a constant series in the new formal parameter. -/
+def constantInclusion : Polynomial K →ₐ[K] PowerSeries (Polynomial K) where
   toRingHom := PowerSeries.C
   commutes' a := (PowerSeries.algebraMap_apply (r := a)).symm
 
@@ -195,7 +202,8 @@ theorem lift_fac (τ : Over.mk (Spec.map
     lift τ V hunit ≫ V.ι = difference τ :=
   IsOpenImmersion.lift_fac _ _ _
 
-private def identityLift (V : G.left.Opens)
+/-- Factor the unit section through an open neighbourhood containing its image. -/
+def identityLift (V : G.left.Opens)
     (hunit : Set.range (1 : Over.mk (𝟙 (Spec (.of K))) ⟶ G).left ⊆ V) :
     Spec (.of K) ⟶ V.toScheme :=
   IsOpenImmersion.lift V.ι (1 : Over.mk (𝟙 (Spec (.of K))) ⟶ G).left (by

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Finsupp.Pi
-import Mathlib.RingTheory.AdicCompletion.Functoriality
+module
+
+public import Mathlib.LinearAlgebra.Finsupp.Pi
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
 
 /-!
 # Finite coefficient vectors in completed free modules
@@ -18,6 +20,8 @@ the same finite matrix acting on their coordinates.
 These computation rules keep the coefficients of a finite relation
 unchanged when its direct sum is completed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

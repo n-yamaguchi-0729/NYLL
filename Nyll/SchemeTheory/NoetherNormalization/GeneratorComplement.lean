@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.Trdeg
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.StdBasis
+module
+
+public import Nyll.SchemeTheory.NoetherNormalization.Trdeg
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.StdBasis
 
 /-!
 # Completing linear normalizing coordinates by original generators
@@ -18,6 +20,8 @@ in the linear span of a prescribed generating tuple.  This file develops the
 finite-dimensional exchange argument which completes those elements by a
 subset of the original tuple.
 -/
+
+@[expose] public section
 
 noncomputable section
 

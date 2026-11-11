@@ -10,17 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Tactic.SplitIfs
-import Mathlib.Tactic.Conv
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Tactic.SplitIfs
+public import Mathlib.Tactic.Conv
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # exists linear Equiv base Change piece map
 -/
+
+@[expose] public section
+
+universe uA uB uR
 
 section ProofImplementation
 
@@ -34,7 +40,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace HilbPieceBC
 
-variable {n : ℕ} {A B : Type} [CommRing A] [CommRing B] [Algebra A B]
+variable {n : ℕ} {A : Type uA} {B : Type uB} [CommRing A] [CommRing B] [Algebra A B]
 
 omit [Algebra A B] in
 theorem homogeneousComponent_map (φ : A →+* B) (d : ℕ) (p : MvPolynomial (Fin (n + 1)) A) :
@@ -46,7 +52,8 @@ theorem homogeneousComponent_map (φ : A →+* B) (d : ℕ) (p : MvPolynomial (F
   · rfl
   · exact (map_zero φ).symm
 
-theorem degree_eq_of_mem_support {R : Type} [CommRing R] {p : MvPolynomial (Fin (n + 1)) R} {d : ℕ}
+theorem degree_eq_of_mem_support {R : Type uR} [CommRing R]
+    {p : MvPolynomial (Fin (n + 1)) R} {d : ℕ}
     (hp : p.IsHomogeneous d) {s : Fin (n + 1) →₀ ℕ} (hs : s ∈ p.support) : s.degree = d := by
   have h := hp (mem_support_iff.mp hs)
   have : (Finsupp.degree s : ℕ) = Finsupp.weight (fun _ => 1) s := by
@@ -191,7 +198,7 @@ noncomputable def E : B ⊗[A] piece I d →ₗ[B] piece (I' (B := B) I) d :=
 theorem E_tmul (b : B) (p : SA (n := n) (A := A) d) :
     E (B := B) I d (b ⊗ₜ[A] Submodule.Quotient.mk p) = b • Submodule.Quotient.mk (gd (B := B) d p)
       := by
-  simp [E, LinearMap.liftBaseChange_tmul, gbar_mk]
+  simp only [E, LinearMap.liftBaseChange_tmul, gbar_mk]
 
 /-- The tensor representing a monomial of the selected degree, and zero for other degrees. -/
 noncomputable def v : (Fin (n + 1) →₀ ℕ) → B ⊗[A] piece I d := fun s =>
@@ -242,7 +249,8 @@ theorem Psi'_map (p : MvPolynomial (Fin (n + 1)) A) (hp : p.IsHomogeneous d) :
       TensorProduct.smul_tmul, ← Submodule.Quotient.mk_smul]
     congr 2
     apply Subtype.ext
-    simp [w, smul_monomial]
+    change p.coeff s • (monomial s (1 : A)) = monomial s (p.coeff s)
+    rw [smul_monomial, smul_eq_mul, mul_one]
   rw [hmap, map_sum, Finset.sum_congr rfl hterm, ← TensorProduct.tmul_sum, hp_sum]
   congr 1
   simp only [← Submodule.mkQ_apply, map_sum]
@@ -316,7 +324,10 @@ theorem E_Psi (hI : ∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) (z
     rw [map_smul, E_tmul, one_smul, ← Submodule.Quotient.mk_smul]
     congr 1
     apply Subtype.ext
-    simp [w, smul_monomial, map_monomial]
+    change (q : MvPolynomial (Fin (n + 1)) B).coeff s •
+        MvPolynomial.map (algebraMap A B) (monomial s (1 : A)) =
+      monomial s ((q : MvPolynomial (Fin (n + 1)) B).coeff s)
+    rw [map_monomial, map_one, smul_monomial, smul_eq_mul, mul_one]
   conv_lhs => rw [(q : MvPolynomial (Fin (n + 1)) B).as_sum, map_sum, map_sum]
   rw [Finset.sum_congr rfl hterm, hq_sum]
   simp only [← Submodule.mkQ_apply, map_sum]
@@ -344,7 +355,7 @@ attribute [local simp] HilbPieceBC.gd_apply_coe
 
 
 theorem _root_.AlgebraicGeometry.HilbertFunctor.exists_linearEquiv_baseChange_piece_map
-    (n : ℕ) (A B : Type) [CommRing A] [CommRing B] [Algebra A B]
+    (n : ℕ) (A : Type uA) (B : Type uB) [CommRing A] [CommRing B] [Algebra A B]
     (I : Ideal (MvPolynomial (Fin (n + 1)) A))
     (hI : ∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) :
     (∀ q ∈ I.map (MvPolynomial.map (algebraMap A B)), ∀ d : ℕ,

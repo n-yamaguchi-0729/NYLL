@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafChartRestriction
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousNumerators
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousCoordinateDivision
-import Mathlib.Algebra.Group.Equiv.Defs
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Data.Fin.Basic
-import Mathlib.Data.Fin.SuccPred
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Choose
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafChartRestriction
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousNumerators
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousCoordinateDivision
+public import Mathlib.Algebra.Group.Equiv.Defs
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Data.Fin.Basic
+public import Mathlib.Data.Fin.SuccPred
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Choose
 
 /-!
 # Recovering a homogeneous polynomial from an actual twisting-sheaf section
@@ -35,6 +37,8 @@ division removes the excess denominator and yields a degree-`d`
 homogeneous polynomial. Thus the native polynomial-section map is
 bijective over every coefficient ring, including in projective dimension zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -102,10 +106,12 @@ powered transition function of the twisting sheaf. -/
 theorem exists_twistingSection_coefficients (d : ℕ)
     (z : Γ((twistingSheaf R n).tensorPow d, ⊤)) :
     ∃ c : ∀ i : Fin (n + 1), Γ(Proj 𝒜, standardOpen R n i),
-      (∀ i : Fin (n + 1), c i • res ((twistingSheaf R n).tensorPow d)
-          (le_top : standardOpen R n i ≤ ⊤)
-          (tensorPowSection (twistingCoordinateSection R n i) d) =
-        res ((twistingSheaf R n).tensorPow d) (le_top : standardOpen R n i ≤ ⊤) z) ∧
+      (∀ i : Fin (n + 1), c i •
+          (((twistingSheaf R n).tensorPow d).presheaf.map
+            (homOfLE (le_top : standardOpen R n i ≤ ⊤)).op).hom
+              (tensorPowSection (twistingCoordinateSection R n i) d) =
+        (((twistingSheaf R n).tensorPow d).presheaf.map
+          (homOfLE (le_top : standardOpen R n i ≤ ⊤)).op).hom z) ∧
       ∀ i j : Fin (n + 1),
         rO (inf_le_left : standardOpen R n i ⊓ standardOpen R n j ≤ standardOpen R n i)
             (c i) =

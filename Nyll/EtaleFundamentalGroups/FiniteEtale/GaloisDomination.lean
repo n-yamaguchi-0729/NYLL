@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Galois.Decomposition
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+module
+
+public import Mathlib.CategoryTheory.Galois.Decomposition
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
 
 /-!
 # Domination by finite-etale Galois covers
@@ -15,6 +17,8 @@ Galois object.  This file specializes the abstract Galois-category theorem
 to finite-etale schemes, choosing a geometric fiber functor canonically from
 an arbitrary point of the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

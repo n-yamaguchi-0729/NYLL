@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.SModEq.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
+module
+
+public import Mathlib.LinearAlgebra.SModEq.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
 
 /-!
 # Completeness of modules annihilated by an ideal power
@@ -18,6 +20,8 @@ completeness of the coefficient ring is needed.
 This applies to the actual finite stages of a formal module system over
 an affine coordinate ring, even when that coordinate ring is not complete.
 -/
+
+@[expose] public section
 
 namespace IsAdicComplete
 

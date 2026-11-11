@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoModels
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitOpenEquations
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoModels
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitOpenEquations
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Actual overlap isomorphisms at one common stage
@@ -16,6 +18,8 @@ pullbacks of finite-etale models all descend to the same original stage.
 Each overlap is treated over its own restricted inverse system; no cover
 of an overlap is assumed finite etale over the entire ambient base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

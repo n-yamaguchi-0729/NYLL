@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.UnramifiedIntrinsicInertia
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Group.Equiv.Defs
-import Mathlib.RingTheory.Etale.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.UnramifiedIntrinsicInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Group.Equiv.Defs
+public import Mathlib.RingTheory.Etale.Basic
 
 /-!
 # Original inertia of an etale normalization
@@ -21,6 +23,8 @@ No Noetherian, DVR, or henselian hypothesis is imposed.
 
 Reference: https://stacks.math.columbia.edu/tag/0BTF
 -/
+
+@[expose] public section
 
 noncomputable section
 

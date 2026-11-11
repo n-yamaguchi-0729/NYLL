@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.Orders.OrdEqFinset
-import Mathlib.LinearAlgebra.Charpoly.BaseChange
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.Orders.OrdEqFinset
+public import Mathlib.LinearAlgebra.Charpoly.BaseChange
 
 /-!
 # Divisor pullback Along pushforward Along eq add of norm Formula Along
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

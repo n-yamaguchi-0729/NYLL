@@ -14,9 +14,11 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Tensor-product comparisons in algebra descent
@@ -24,6 +26,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 The comparison of two given tensor-product identifications respects scalars and
 homogeneous pieces, and identifies its invariant elements with the original equalizer.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismInverseLimit
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedComposition
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
-import Mathlib.CategoryTheory.Category.Preorder
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismInverseLimit
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedComposition
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Nyll.ProCGroups.InverseSystems.Basic
 
 /-!
 # The actual finite étale pullback diagram of an inverse system
@@ -17,6 +20,8 @@ The functors and cone maps are the canonical scheme pullbacks.  Their unit and
 composition coherence is proved from the projection-based pullback coherence
 theorems, including all equalities of the original diagram's scheme maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

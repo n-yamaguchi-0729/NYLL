@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealInertiaConjugate
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugate
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationDecomposition
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgInertiaRingMaps
-import Nyll.SchemeTheory.Normalization.AmbientNormalizationGroupMap
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Group.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealInertiaConjugate
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugate
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationDecomposition
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgInertiaRingMaps
+public import Nyll.SchemeTheory.Normalization.AmbientNormalizationGroupMap
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Group.Basic
 
 /-!
 # Conjugation compatibility of normalization restriction
@@ -21,6 +23,8 @@ import Mathlib.Algebra.Group.Basic
 Proves that normalization restriction intertwines original finite-field inertia conjugation with
 intrinsic normalization inertia conjugation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

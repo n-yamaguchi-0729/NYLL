@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.SchemeTheory.Sheaves.UnitStalks
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.SchemeTheory.Sheaves.UnitStalks
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Nyll.EtaleCohomology.Sites.BaseChange
 
 /-!
 # Actual geometric stalks of the multiplicative group and its direct image
@@ -19,6 +22,8 @@ Use the single shared filtered-unit comparison for both the original
 unit sheaf and its direct image. The latter ring stalk is the filtered
 colimit of the actual base-changed rings of sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

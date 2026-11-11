@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitFaithful
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitAction
-import Nyll.GaloisCohomology.Topology.GaloisFiniteStageTuples
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitFaithful
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitAction
+public import Nyll.GaloisCohomology.Topology.GaloisFiniteStageTuples
 
 /-!
 # Finite-stage realization of geometric-section-valued functions
@@ -16,13 +18,15 @@ cochain are realized over one finite Galois field. The coefficient
 transition is actual restriction, not an assumed comparison.
 -/
 
+@[expose] public section
+
 noncomputable section
 universe u v
 open CategoryTheory Limits Opposite AlgebraicGeometry
 
 namespace EtaleCohomology
 
-variable (K : Type u) [Field K] [CharZero K]
+variable (K : Type u) [Field K]
 variable (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u})
 variable [TopologicalSpace (finiteGaloisSectionColimit K F)]
   [DiscreteTopology (finiteGaloisSectionColimit K F)]
@@ -40,7 +44,7 @@ theorem exists_finiteGalois_section_tuple
           (s (fun i => AlgEquiv.restrictNormalHom M (a i))) = z a := by
   classical
   obtain ⟨L, zL, hL⟩ :=
-    GaloisCohomology.exists_finiteGalois_factor_continuous_tuple_discrete z hz
+    GaloisCohomology.exists_finiteGalois_factor_absolute_tuple_discrete K z hz
   have : Fintype Gal(L/K) := AlgEquiv.fintype K L
   obtain ⟨E, sE, hE⟩ := finiteGaloisSectionColimit_exists_common_stage K F zL
   obtain ⟨M, hM⟩ := IsFiltered.sup_objs_exists ({E, L} :
@@ -77,7 +81,7 @@ theorem exists_finiteGalois_section_tuple
     ((hE _).trans (hL a)))
 
 
-omit [CharZero K] [TopologicalSpace (finiteGaloisSectionColimit K F)]
+omit [TopologicalSpace (finiteGaloisSectionColimit K F)]
   [DiscreteTopology (finiteGaloisSectionColimit K F)] in
 /-- An actual finite-stage realization of an equivariant geometric-section-valued
 function is equivariant for the actual finite Galois action. -/
@@ -90,9 +94,9 @@ theorem finiteGalois_section_tuple_equivariant
       finiteGaloisSectionColimitι K F M
         (s (fun i => AlgEquiv.restrictNormalHom M (a i))) = z a)
     (hz : ∀ (σ : Gal(AlgebraicClosure K/K)) (a : ι → Gal(AlgebraicClosure K/K)),
-      z (fun i => σ * a i) = (finiteGaloisSectionColimitAction K F σ).hom (z a))
+      z (fun i => σ * a i) = (finiteGaloisSectionColimitAction K F σ).asIso.hom (z a))
     (τ : Gal(M/K)) (b : ι → Gal(M/K)) :
-    s (fun i => τ * b i) = (fieldGaloisSheafAction K M F τ).hom (s b) := by
+    s (fun i => τ * b i) = (fieldGaloisSheafAction K M F τ).asIso.hom (s b) := by
   classical
   let r : Gal(AlgebraicClosure K/K) →* Gal(M/K) := AlgEquiv.restrictNormalHom M
   have hr : Function.Surjective r := AlgEquiv.restrictNormalHom_surjective _
@@ -112,13 +116,13 @@ theorem finiteGalois_section_tuple_equivariant
   apply finiteGaloisSectionColimitι_injective K F M
   have hact := ConcreteCategory.congr_hom
     (finiteGaloisSectionColimitAction_ι K F σ M) (s b)
-  have hact' : (finiteGaloisSectionColimitAction K F σ).hom
+  have hact' : (finiteGaloisSectionColimitAction K F σ).asIso.hom
       (finiteGaloisSectionColimitι K F M (s b)) =
-      finiteGaloisSectionColimitι K F M ((fieldGaloisSheafAction K M F τ).hom (s b)) :=
+      finiteGaloisSectionColimitι K F M ((fieldGaloisSheafAction K M F τ).asIso.hom (s b)) :=
     hact.trans (congrArg (fun g => finiteGaloisSectionColimitι K F M
-      ((fieldGaloisSheafAction K M F g).hom (s b))) hσ)
+      ((fieldGaloisSheafAction K M F g).asIso.hom (s b))) hσ)
   exact hsσa.trans ((hz σ a).trans
-    ((congrArg (fun x => (finiteGaloisSectionColimitAction K F σ).hom x) hsa).symm.trans
+    ((congrArg (fun x => (finiteGaloisSectionColimitAction K F σ).asIso.hom x) hsa).symm.trans
       hact'))
 
 end EtaleCohomology

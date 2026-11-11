@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
 
 /-!
 # Residue fields of exhaustive subalgebra stages
@@ -19,6 +21,8 @@ ambient ring gives a diagram of actual residue fields. Its canonical cocone has
 the ambient residue field as its colimit: every fraction has numerator and
 denominator in a common stage, and every cocone leg is injective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

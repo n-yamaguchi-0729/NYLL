@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafH0
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.AffineExactSequenceSections
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafAffSES
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafH0
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.AffineExactSequenceSections
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafAffSES
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Actual global-section lifts from vanishing of the kernel's first cohomology
@@ -23,6 +25,8 @@ corrects local lifts to a compatible family. The actual augmentation and
 gluing equivalences then yield a global preimage under the original
 sheaf morphism, rather than under a separately chosen section map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

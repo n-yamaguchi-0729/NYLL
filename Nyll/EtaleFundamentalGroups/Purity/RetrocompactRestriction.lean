@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.RetrocompactSectionExtension
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
-import Nyll.SchemeTheory.WeilRestriction.Sheaf
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.RetrocompactSectionExtension
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
+public import Nyll.SchemeTheory.WeilRestriction.Sheaf
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Full faithfulness over a retrocompact dense open
@@ -22,6 +24,8 @@ section. The constructed global extension applies exactly to the original
 hypotheses of Stacks 0BSA: retrocompactness, closed complement points, and
 connected punctured strict stalks. The ambient scheme is arbitrary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

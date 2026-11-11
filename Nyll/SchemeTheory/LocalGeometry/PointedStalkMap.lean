@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
-import Mathlib.Algebra.Category.Ring.Instances
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+public import Mathlib.Algebra.Category.Ring.Instances
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Ordinary stalk maps for a specified square of field-valued points
@@ -24,6 +26,8 @@ The construction also commutes with the actual ordinary-stalk map of a
 specialization. This supplies the local-ring part of the naturality
 diagram in Stacks Project, Lemma 58.16.1.
 -/
+
+@[expose] public section
 
 noncomputable section
 

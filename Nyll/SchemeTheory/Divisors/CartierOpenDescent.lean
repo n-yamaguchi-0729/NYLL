@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+module
+
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 
 /-!
 # Descent of effective Cartier ideals through open immersions
@@ -15,6 +17,8 @@ An affine neighbourhood in the source has an actual affine open image, with
 isomorphic section rings. Thus a principal regular generator transports to
 that image. This supplies the local descent used by the Rees-chart cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

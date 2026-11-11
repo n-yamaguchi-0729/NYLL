@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PullbackCohomology
-import Nyll.EtaleCohomology.Frobenius.SheafComparison
-import Nyll.EtaleCohomology.Sites.ConstantPullbackComparison
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+module
+
+public import Nyll.EtaleCohomology.Classical.PullbackCohomology
+public import Nyll.EtaleCohomology.Frobenius.SheafComparison
+public import Nyll.EtaleCohomology.Sites.ConstantPullbackComparison
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-!
 # Absolute finite-field Frobenius is trivial on étale cohomology
@@ -21,6 +23,8 @@ This is the finite-field q-power instance of the baffling theorem. It does
 not identify the base change of Frobenius on a scheme defined over the
 finite field with absolute Frobenius after extending the constant field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConnectedConstants
-import Nyll.EtaleCohomology.Sites.ModuleConstant
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.ConnectedConstants
+public import Nyll.EtaleCohomology.Sites.ModuleConstant
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
 
 /-!
 # Constant module sheaves on connected schemes
@@ -19,6 +21,8 @@ then prove invertibility of the unit, hence full faithfulness.
 
 The coefficient ring, module and connected scheme are arbitrary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,21 +11,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.JacobianVarieties.Picard.Points.SchemeHomOverExtAlgebraicClosurePointReduced
-import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.JacobianVarieties.Picard.Points.SchemeHomOverExtAlgebraicClosurePointReduced
+public import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
 
 /-!
 # Geometric-point extensionality over a localized integer ring
@@ -33,6 +35,8 @@ import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
 Smoothness makes the representing scheme reduced, so the reduced geometric-point
 extensionality theorem identifies morphisms agreeing on algebraic-closure-valued points.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

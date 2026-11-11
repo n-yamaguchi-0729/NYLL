@@ -17,6 +17,7 @@ import Nyll.AlgebraicCurves.Differentials.Residues.FibreResidueIdentityAlong
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
 import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place is Regular At and has Simple Pole At and has Simple Residue sum trace Along of
@@ -465,8 +466,7 @@ attribute [-instance] AlgebraicCurve.IsCurveOver.instNontrivialKaehler
   CoherentBaseChange.TwoTermComplex.C1_addCommGroup CoherentBaseChange.TwoTermComplex.C0_free
   CoherentBaseChange.TwoTermComplex.C1_finite CoherentBaseChange.TwoTermComplex.C0_finite
   CoherentBaseChange.TwoTermComplex.C1_free AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField AlgebraicCurve.instHasLocalResidue
+   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
   AlgebraicCurve.Place.instIsLocalHom_restrictSubringHom

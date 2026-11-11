@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseScalars
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialDescent
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseScalars
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialDescent
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Homogeneous polynomials and actual global twisting-sheaf modules
@@ -27,6 +29,8 @@ with actual coordinate denominator removal, this gives an `R`-linear
 equivalence with the original global section module used by the native
 sheaf-to-Čech construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

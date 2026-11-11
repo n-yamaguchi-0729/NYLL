@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # A normalization prime over a scheme point
@@ -16,6 +18,8 @@ selection is made here once, together with its prime and lying-over instances,
 so divisorial applications do not take existence of a normalization branch as
 an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,17 +36,12 @@ noncomputable def schemePointNormalizationPrimeOver
     {L : Type u} [Field L] [Algebra X.functionField L] :
     let A := X.presheaf.stalk x
     let K : Type u := X.functionField
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
     let B := integralClosure A L
     (IsLocalRing.maximalIdeal A).primesOver B := by
-  let A := X.presheaf.stalk x
-  let K : Type u := X.functionField
-  letI : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
-  let B := integralClosure A L
+  intro A K sharedDefinitionOwner3 sharedDefinitionOwner4 B
   letI : FaithfulSMul A B :=
     (faithfulSMul_iff_algebraMap_injective A B).mpr (by
       intro a b hab
@@ -60,15 +59,11 @@ noncomputable def schemePointNormalizationPrime
     {L : Type u} [Field L] [Algebra X.functionField L] :
     let A := X.presheaf.stalk x
     let K : Type u := X.functionField
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
     Ideal (integralClosure A L) := by
-  let A := X.presheaf.stalk x
-  let K : Type u := X.functionField
-  letI : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+  intro A K sharedDefinitionOwner3 sharedDefinitionOwner4
   exact (schemePointNormalizationPrimeOver (L := L) x).1
 
 instance schemePointNormalizationPrime_isPrime
@@ -76,15 +71,11 @@ instance schemePointNormalizationPrime_isPrime
     {L : Type u} [Field L] [Algebra X.functionField L] :
     let A := X.presheaf.stalk x
     let K : Type u := X.functionField
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
     (schemePointNormalizationPrime (L := L) x).IsPrime := by
-  let A := X.presheaf.stalk x
-  let K : Type u := X.functionField
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+  intro A K sharedOwner1 sharedOwner2
   exact (schemePointNormalizationPrimeOver (L := L) x).2.1
 
 instance schemePointNormalizationPrime_liesOver
@@ -92,16 +83,12 @@ instance schemePointNormalizationPrime_liesOver
     {L : Type u} [Field L] [Algebra X.functionField L] :
     let A := X.presheaf.stalk x
     let K : Type u := X.functionField
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
     (schemePointNormalizationPrime (L := L) x).LiesOver
       (IsLocalRing.maximalIdeal A) := by
-  let A := X.presheaf.stalk x
-  let K : Type u := X.functionField
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+  intro A K sharedOwner1 sharedOwner2
   exact (schemePointNormalizationPrimeOver (L := L) x).2.2
 
 end EtaleFundamentalGroups

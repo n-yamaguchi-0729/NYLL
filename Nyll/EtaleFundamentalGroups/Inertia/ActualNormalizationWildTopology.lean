@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaTopology
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaCompact
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaContinuity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.Constructions
-import Mathlib.Topology.Algebra.Group.Subgroup
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaTopology
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaCompact
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaContinuity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.Constructions
+public import Mathlib.Topology.Algebra.Group.Subgroup
 
 /-!
 # Compact wild inertia in the original topology
@@ -25,6 +27,8 @@ Every finite wild condition is closed because its actual restriction is
 locally constant. The original wild subgroup is their intersection, hence
 compact in the existing Krull/subgroup topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

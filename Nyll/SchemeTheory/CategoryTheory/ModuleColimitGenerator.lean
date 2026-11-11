@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Kernels
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Basic
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Kernels
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-!
 # The coefficient module detects isomorphisms of cocontinuous functors
@@ -20,6 +22,8 @@ by two coproducts of the coefficient module. Thus a natural transformation
 between colimit-preserving functors is invertible everywhere once its
 component on the coefficient module is invertible.
 -/
+
+@[expose] public section
 
 noncomputable section
 

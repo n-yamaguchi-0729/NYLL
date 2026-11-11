@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalizationAtPrimeDVR
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DVRPrimesOverIntegralClosureEqRange
+module
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.RamificationInertia.Basic
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.LinearAlgebra.Dimension.Localization
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalizationAtPrimeDVR
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DVRPrimesOverIntegralClosureEqRange
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.RamificationInertia.Basic
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.LinearAlgebra.Dimension.Localization
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 
 /-!
 # Valuation Subring finrank residue Field le and forall mul inv mem and forall eq of gauss
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -768,7 +772,7 @@ theorem finite_and_finrank_eq_inertiaDeg_and_le
   refine ⟨hfin, hfr, ?_⟩
   calc
     P₁.inertiaDeg B ≤ P₁.ramificationIdx B * P₁.inertiaDeg B :=
-      Nat.le_mul_of_pos_left _ (Ideal.ramificationIdx_pos P₁ B)
+      Nat.le_mul_of_pos_left _ (Ideal.ramificationIdx_pos B P₁)
     _ ≤ ∑ P : (maximalIdeal B).primesOver ↥(integralClosure B F),
         P.1.ramificationIdx B * P.1.inertiaDeg B := by
       exact Finset.single_le_sum

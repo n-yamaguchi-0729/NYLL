@@ -4,20 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteAlgebraSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.RingTheory.Ideal.Quotient.Noetherian
-import Mathlib.RingTheory.Kaehler.TensorProduct
-import Mathlib.RingTheory.Nakayama
-import Mathlib.RingTheory.Smooth.Fiber
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteAlgebraSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Kaehler.TensorProduct
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.RingTheory.Smooth.Fiber
+public import Mathlib.RingTheory.Smooth.Flat
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
 
 /-!
 # Effectivity of finite étale adic algebra systems
@@ -32,6 +35,8 @@ and their kernels are the extended ideal powers. The annihilation of each
 stage is derived from its quotient-ring algebra structure. No algebraization,
 projectivity of the limit, or recovery isomorphism is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

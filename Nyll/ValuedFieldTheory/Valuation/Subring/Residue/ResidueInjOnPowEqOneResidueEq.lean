@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Mathlib.Algebra.Ring.GeomSum
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+public import Mathlib.Algebra.Ring.GeomSum
 
 /-!
 # Valuation Subring residue inj On pow eq one and exists residue eq of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

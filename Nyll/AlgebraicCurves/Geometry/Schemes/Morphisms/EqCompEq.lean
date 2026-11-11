@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Equalizer
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.TermCongr
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Equalizer
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.TermCongr
 
 /-!
 # eq of comp eq of residue comp eq of formally Unramified
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

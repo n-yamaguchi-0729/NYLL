@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestriction
-import Nyll.SchemeTheory.RingTheory.Localization.ArtinianUnitLifting
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestriction
+public import Nyll.SchemeTheory.RingTheory.Localization.ArtinianUnitLifting
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # Surjectivity of the actual finite-algebra unit restriction -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
-import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
-import Mathlib.CategoryTheory.Sites.IsSheafFor
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
 
 /-!
 # The group law of the descended global representation
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Sites.IsSheafFor
 The global classifying equivalence preserves the operations constructed on matching
 local points. Equality is checked after the actual descent cover using separatedness.
 -/
+
+@[expose] public section
 
 universe u
 

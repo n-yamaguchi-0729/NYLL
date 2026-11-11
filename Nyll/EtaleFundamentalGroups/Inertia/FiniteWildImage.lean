@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Group.Subgroup.Map
-import Mathlib.GroupTheory.PGroup
-import Mathlib.GroupTheory.Sylow
+module
+
+public import Mathlib.Algebra.Group.Subgroup.Map
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.GroupTheory.Sylow
 
 /-!
 # Surjective images of distinguished finite p-subgroups
@@ -15,6 +17,8 @@ A normal p-subgroup of prime-to-p index is the unique Sylow subgroup.
 Consequently a surjective homomorphism sends any p-subgroup of prime-to-p
 index onto that distinguished subgroup. No preservation premise is used.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

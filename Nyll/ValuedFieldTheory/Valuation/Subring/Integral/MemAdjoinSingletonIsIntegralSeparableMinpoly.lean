@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Valuation.Integral
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Discriminant
-import Mathlib.FieldTheory.SeparableDegree
-import Mathlib.Algebra.Polynomial.Splits
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Valuation.Integral
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Discriminant
+public import Mathlib.FieldTheory.SeparableDegree
+public import Mathlib.Algebra.Polynomial.Splits
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Valuation Subring mem adjoin singleton of is Integral of separable minpoly
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

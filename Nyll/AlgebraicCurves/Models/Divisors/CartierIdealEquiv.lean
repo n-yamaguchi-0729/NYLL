@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierPointDecomposition
-import Nyll.SchemeTheory.Divisors.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierPointDecomposition
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
 
 /-!
 # Effective Cartier ideals and nonnegative place divisors
@@ -17,6 +19,8 @@ The exact point-ideal decomposition gives both directions of the
 correspondence. Uniqueness of powers in the actual discrete valuation rings
 also proves additivity of the constructed multiplicity under ideal products.
 -/
+
+@[expose] public section
 
 noncomputable section
 

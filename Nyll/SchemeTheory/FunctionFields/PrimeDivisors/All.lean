@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Centered
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.CenteredTransport
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Counting
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Dedekind
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.DegreeOne
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Infinity
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.InseparableCounting
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.IntegralClosure
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.PrimesOver
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Transport
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Centered
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.CenteredTransport
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Counting
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Dedekind
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.DegreeOne
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Infinity
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.InseparableCounting
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.IntegralClosure
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.PrimesOver
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Transport
 
 /-!
 # Prime divisors of function fields

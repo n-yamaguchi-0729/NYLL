@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.PointSections
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.PointSections
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
 # Changing the coefficient ring of a finite étale point
@@ -16,6 +18,8 @@ with its spectrum morphism. This construction is natural in the cover,
 respects composition of coefficient maps, and agrees with postcomposition
 on the actual section-algebra homomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -81,7 +85,7 @@ theorem pointHomAlgEquiv_pointHomBaseChange (σ : A →ₐ[H] B)
     (x : Over.mk (Spec.algebraMap H A) ⟶ X.toComma) :
     pointHomAlgEquiv H B X (pointHomBaseChange H A B σ X x) =
       σ.comp (pointHomAlgEquiv H A X x) := by
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   refine congrArg (fun k : Γ(X.left, ⊤) ⟶ CommRingCat.of B => k.hom) ?_
   apply Spec.map_injective
   calc

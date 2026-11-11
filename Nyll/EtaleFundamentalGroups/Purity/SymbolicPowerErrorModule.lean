@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
-import Nyll.EtaleFundamentalGroups.Purity.SymbolicPowerErrorArtinian
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
+public import Nyll.EtaleFundamentalGroups.Purity.SymbolicPowerErrorArtinian
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # The Artinian error between symbolic and ordinary powers
@@ -18,6 +20,8 @@ is an Artinian `R`-module.  A common denominator outside `P` annihilates
 this image, as does `P^n`.  The image is therefore a finite module over the
 Artinian quotient by `P^n + (s)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -9,6 +9,8 @@ module
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
 public import Nyll.SchemeTheory.Etale.OverField.Decomposition
 public import Nyll.EtaleFundamentalGroups.ContinuousActions.TopCatCompat
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # The geometric fiber as a continuous Galois set
@@ -202,14 +204,16 @@ noncomputable def geometricFiber :
     { obj := fun X ↦
         { V := TopCat.of (Over.mk (ξ k K) ⟶ X.toComma)
           ρ :=
-            { toFun := fun g ↦ TopCat.ofHom
-                ⟨fun x ↦ g • x, continuous_of_discreteTopology⟩
+            { toFun := fun g ↦ End.of (TopCat.ofHom
+                ⟨fun x ↦ g • x, continuous_of_discreteTopology⟩)
               map_one' := by
+                apply End.ext
                 apply TopCat.ext
                 intro x
                 exact one_smul _ x
               map_mul' := by
                 intro g h
+                apply End.ext
                 apply TopCat.ext
                 intro x
                 exact mul_smul g h x } }

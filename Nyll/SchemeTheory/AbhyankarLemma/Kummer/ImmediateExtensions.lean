@@ -4,8 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.NormValue
-import Nyll.ValuedFieldTheory.LocalField.Unramified.ResidueLifting
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.NormValue
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.ResidueLifting
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveFactorization
 
 /-!
 # The immediate prime-to-p step in tame ramification
@@ -15,6 +21,8 @@ argument: a monic polynomial whose reduction admits no nontrivial coprime
 factorization and has a residue root is a pure power of the corresponding
 linear factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -296,7 +304,6 @@ theorem finrank_eq_one_of_valueSubgroup_eq_of_residue_surjective_of_coprime
     (IsLocalRing.residue_ne_zero_iff_isUnit epsilonW).2 hepsilonUnit
   let algVL : Algebra V L :=
     ((algebraMap K L).comp V.subtype).toAlgebra
-  let : Algebra V L := algVL
   let : SMul V L := algVL.toSMul
   let : SMul V K := (inferInstance : Algebra V K).toSMul
   let : IsScalarTower V K L :=

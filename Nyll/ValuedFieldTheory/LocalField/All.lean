@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.All
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.All
-import Nyll.ValuedFieldTheory.LocalField.GroupTheory.All
-import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.All
-import Nyll.ValuedFieldTheory.LocalField.NormUnits
-import Nyll.ValuedFieldTheory.LocalField.Padic.All
-import Nyll.ValuedFieldTheory.LocalField.Unramified.All
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.All
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.All
+public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.All
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.All
+public import Nyll.ValuedFieldTheory.LocalField.NormUnits
+public import Nyll.ValuedFieldTheory.LocalField.Padic.All
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.All
 
 /-!
 # Valued field theory: LocalField

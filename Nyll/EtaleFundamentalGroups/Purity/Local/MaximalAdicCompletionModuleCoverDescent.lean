@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleGluingData
-import Mathlib.Algebra.Category.ModuleCat.Descent
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleGluingData
+public import Mathlib.Algebra.Category.ModuleCat.Descent
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
 
 /-!
 # Faithfully flat descent for the maximal-adic module cover
@@ -29,6 +32,8 @@ identified, at the level of its degree-zero and degree-one diagrams, with such
 a full cover descent coalgebra.  Its chart comparison isomorphisms are derived
 from those diagram identifications; they are not fields of the structure.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -269,7 +274,8 @@ noncomputable def principalBaseChangeIso
 
 end MaximalAdicModuleCoverDescentDatum
 
-private def eqLocusCongr
+/-- Compatible linear equivalences identify the equalizers of two pairs of maps. -/
+def eqLocusCongr
     {A B A' B' : Type u}
     [AddCommGroup A] [AddCommGroup B] [AddCommGroup A'] [AddCommGroup B']
     [Module R A] [Module R B] [Module R A'] [Module R B']

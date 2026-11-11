@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Mathlib.LinearAlgebra.Vandermonde
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.LinearAlgebra.Vandermonde
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-! # Splitting a deformed finite separable algebra over a formal disc
 
@@ -25,6 +27,8 @@ The scalar structure on power series is the given deformation `τ`. No tower
 through the constant embedding of the coefficient field is installed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped TensorProduct
@@ -36,7 +40,8 @@ variable {E F Ω : Type*} [Field E] [Field F] [Field Ω]
   [FiniteDimensional E F] [Algebra.IsSeparable E F]
 
 omit [FiniteDimensional E F] [Algebra.IsSeparable E F] in
-private theorem embedding_residue_compat
+/-- A residue-field embedding is compatible with the given base-ring reduction. -/
+theorem embedding_residue_compat
     (τ : E →+* PowerSeries Ω)
     (hτ : constantCoeff.comp τ = algebraMap E Ω)
     (ι : F →ₐ[E] Ω) :

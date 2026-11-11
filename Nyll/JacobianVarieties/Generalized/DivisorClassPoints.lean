@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorZeroClassAbel
-import Nyll.JacobianVarieties.Generalized.RigidifiedEulerZeroComparison
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
-import Nyll.JacobianVarieties.Generalized.ModulusIdentityPointComparison
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorZeroClassAbel
+public import Nyll.JacobianVarieties.Generalized.RigidifiedEulerZeroComparison
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusIdentityPointComparison
 
 /-!
 # Full-modulus degree-zero divisor classes are generalized Jacobian points
@@ -18,6 +20,8 @@ modulus, its full valuation multiplicities, the proved principal kernel and
 divisor representatives, and the constructed generalized Jacobian. All choices
 of sections and a two-affine cover are supplied by the given curve geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,7 +40,8 @@ variable {K : Type u} [Field K] [IsAlgClosed K]
   {F : Type v} [Field F] [Algebra K F]
   (M : CurveModel K F) [GeometricallyIntegral M.toBase]
 
-private def comparisonCover : M.C.TwoAffineOpenCover := by
+/-- A two-affine cover supplied by a closed point of the smooth proper curve. -/
+def comparisonCover : M.C.TwoAffineOpenCover := by
   have : JacobsonSpace M.C := LocallyOfFiniteType.jacobsonSpace M.toBase
   have hx := nonempty_inter_closedPoints
     (Z := (Set.univ : Set M.C)) Set.univ_nonempty isOpen_univ.isLocallyClosed

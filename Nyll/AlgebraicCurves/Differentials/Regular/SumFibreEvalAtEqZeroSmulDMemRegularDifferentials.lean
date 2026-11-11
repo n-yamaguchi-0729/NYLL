@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.RatFunc.IntermediateField
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Differentials.Regular.Regular
-import Nyll.AlgebraicCurves.Differentials.Local.Order
-import Nyll.AlgebraicCurves.Differentials.Local.Uniformizer
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.Differentials.Residues.Basic
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremKAlgClosed
-import Nyll.AlgebraicCurves.Differentials.Residues.HasCanonicalLocalResidueK
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.Differentials.Logarithmic.LocalUnitDerivativeRegular
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
+module
+
+public import Mathlib.FieldTheory.RatFunc.IntermediateField
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.Differentials.Local.Uniformizer
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.Differentials.Residues.Basic
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremKAlgClosed
+public import Nyll.AlgebraicCurves.Differentials.Residues.HasCanonicalLocalResidueK
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.LocalUnitDerivativeRegular
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
 
 /-!
 # Sum fibre eval At eq zero of smul D mem regular Differentials
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -56,8 +60,6 @@ attribute [-instance]
   kw_ffgc_continuousSMul_adicCompletionComap
   kw_ffgc_isScalarTower_integersCompletionCompletion
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -396,8 +398,6 @@ attribute [-instance]
   kw_ffgc_continuousSMul_adicCompletionComap
   kw_ffgc_isScalarTower_integersCompletionCompletion
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

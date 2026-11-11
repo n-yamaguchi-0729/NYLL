@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.StrictExactness
-import Mathlib.LinearAlgebra.Finsupp.Pi
-import Mathlib.RingTheory.Filtration
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.StrictExactness
+public import Mathlib.LinearAlgebra.Finsupp.Pi
+public import Mathlib.RingTheory.Filtration
 
 /-!
 # Completion of direct sums of one finite exact sequence
@@ -17,6 +19,8 @@ The explicit bound therefore supplies exactness after completion for
 these direct sums. This is the uniform estimate used to prove flatness
 of the completion of an arbitrary free module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,20 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.DedekindDomain.AdicValuation
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.RingTheory.RamificationInertia.Inertia
-import Mathlib.RingTheory.HopkinsLevitzki
-import Mathlib.Algebra.Module.LinearMap.End
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DVRFiniteLocallyPrincipalOverring
+module
+
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+public import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.RingTheory.RamificationInertia.Inertia
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.Algebra.Module.LinearMap.End
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DVRFiniteLocallyPrincipalOverring
+public import Nyll.SchemeTheory.RingTheory.Localization.InertiaDegree
 
 /-!
 # Is Local Ring length quotient map maximal Ideal eq finsum ramification Idx mul inertia Deg
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -79,21 +84,8 @@ theorem mem_nonunits_iff_eq_zero_or {L : Type*} [Field L] (B : ValuationSubring 
 theorem inertiaDeg_maximalIdeal_eq_one_of_isLocalization {R : Type*} [CommRing R]
     (p : Ideal R) [p.IsMaximal] (Rₚ : Type*) [CommRing Rₚ] [Algebra R Rₚ]
     [IsLocalization.AtPrime Rₚ p] [IsLocalRing Rₚ] :
-    (maximalIdeal Rₚ).inertiaDeg R = 1 := by
-  have : (maximalIdeal Rₚ).LiesOver p :=
-    ⟨(IsLocalization.AtPrime.under_maximalIdeal Rₚ p).symm⟩
-  rw [Ideal.inertiaDeg_eq_of_isMaximal p (maximalIdeal Rₚ)]
-  let e := IsLocalization.AtPrime.equivQuotMaximalIdeal p Rₚ
-  have he : ∀ c, e c = algebraMap (R ⧸ p) (Rₚ ⧸ maximalIdeal Rₚ) c := by
-    intro c
-    obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c
-    rfl
-  let e' : (R ⧸ p) ≃ₗ[R ⧸ p] (Rₚ ⧸ maximalIdeal Rₚ) :=
-    { e with
-      map_smul' := fun c x => by
-        change e (c * x) = c • e x
-        rw [map_mul, Algebra.smul_def, he] }
-  rw [← e'.finrank_eq, Module.finrank_self]
+    (maximalIdeal Rₚ).inertiaDeg R = 1 :=
+  _root_.IsLocalization.AtPrime.inertiaDeg_maximalIdeal_eq_one p Rₚ
 
 variable (C D₁) in
 /-- The condition that the valuation subring contains the two base rings and lies over the base

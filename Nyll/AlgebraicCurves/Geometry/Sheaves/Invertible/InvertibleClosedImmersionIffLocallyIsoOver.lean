@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleClosedImmersionIffLocallyIsoOverUnit
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitSectionNeZero
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDualMonoidalV2
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleClosedImmersionIffLocallyIsoOverUnit
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitSectionNeZero
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDualMonoidalV2
 
 /-!
 # Scheme Modules Is Invertible exists is Closed Immersion forall iff locally Iso Over of
 flat of is Proper
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

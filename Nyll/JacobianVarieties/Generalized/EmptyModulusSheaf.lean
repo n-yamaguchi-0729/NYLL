@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.EmptyModulus
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.JacobianVarieties.Generalized.EmptyModulus
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # The empty-modulus Picard sheaf is the ordinary relative Picard sheaf
@@ -18,6 +20,8 @@ forgetful map is a local bijection and becomes an isomorphism upon fppf
 sheafification, without a section or field hypothesis on the curve.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -25,6 +29,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 
 namespace AlgebraicGeometry.GeneralizedJacobian.EmptyModulus
+
+attribute [local instance] empty_baseChange
 
 variable {R : Type u} [CommRing R] {X D : Scheme.{u}}
   (c : X ⟶ Spec (CommRingCat.of R)) (i : D ⟶ X) [IsEmpty D]

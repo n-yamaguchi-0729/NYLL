@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftIsSmoothAt
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftIsSmoothAt
 
 /-!
 # Henselian Local Ring exists Unique section and ker eq span of formally Unramified of is
 Localization
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

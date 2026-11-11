@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
-import Mathlib.FieldTheory.PrimitiveElement
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
+public import Mathlib.FieldTheory.PrimitiveElement
 
 /-! # Formal lifting with a prescribed residue embedding
 
@@ -14,6 +16,8 @@ into a third coefficient field has a unique lift with the prescribed residue
 embedding. A primitive element and its separable minimal polynomial construct
 the lift. Uniqueness then proves compatibility with actual field embeddings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ExactSequence
-import Nyll.JacobianVarieties.Generalized.ModulusForgetfulScalarExtension
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Nyll.JacobianVarieties.Generalized.ExactSequence
+public import Nyll.JacobianVarieties.Generalized.ModulusForgetfulScalarExtension
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-! # The canonical scalar-extension diagram of actual kernel group sheaves -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,7 +69,7 @@ def modulusKernelDiagramScalarExtensionIso :
     (modulusForgetfulIdentitySheaf_divisorScalarExtension D L).symm
 
 /-- Restriction to the extended slice preserves equalizers, as can be checked on presheaves. -/
-private instance scalarExtension_preservesEqualizers :
+theorem scalarExtension_preservesEqualizers :
     PreservesLimitsOfShape WalkingParallelPair
       (Scheme.fppfTopology.overMapPullback CommGrpCat.{u + 1} (specMap K L)) := by
   let P := Scheme.fppfTopology.overMapPullback CommGrpCat.{u + 1} (specMap K L)
@@ -77,6 +81,8 @@ private instance scalarExtension_preservesEqualizers :
         (Functor.whiskeringLeft _ _ CommGrpCat.{u + 1}).obj (Over.map (specMap K L)).op)
     infer_instance
   exact preservesLimitsOfShape_of_reflects_of_preserves P V
+
+attribute [local instance] scalarExtension_preservesEqualizers
 
 variable [IsProper c] [SmoothOfRelativeDimension 1 c] [GeometricallyIntegral c]
 

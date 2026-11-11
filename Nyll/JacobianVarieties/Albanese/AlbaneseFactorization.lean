@@ -4,26 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.AlbaneseChartGlue
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
-import Nyll.AlgebraicCurves.Geometry.Picard.AbelJacobi.AbelJacobiFamily
-import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.InvModuleProdKerGraphTensorModulePowIsoPointDifferenceModule
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalSumMap
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
-import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitLocalRing
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.Data.List.OfFn
+module
+
+public import Nyll.JacobianVarieties.Albanese.AlbaneseChartGlue
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
+public import Nyll.AlgebraicCurves.Geometry.Picard.AbelJacobi.AbelJacobiFamily
+public import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.InvModuleProdKerGraphTensorModulePowIsoPointDifferenceModule
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalSumMap
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+public import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitLocalRing
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.Data.List.OfFn
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # The glued divisor sum factors the actual Abel--Jacobi morphism
 
@@ -31,6 +34,8 @@ Adding copies of the fixed base point makes a single moving point into a divisor
 of the degree used in the chart construction. Its normalized line bundle is the
 point-minus-basepoint bundle and its sum is the original pointed morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

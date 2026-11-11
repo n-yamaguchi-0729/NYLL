@@ -4,38 +4,55 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Mathlib.CategoryTheory.Yoneda
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.CategoryTheory.Yoneda
 
 /-!
 # The actual identity geometric stalk over a separably closed field
 
 The identity geometric point is corepresented by the identity étale object.
 Consequently its actual global-section germ is an isomorphism, for arbitrary
-module sheaves, by the terminal-object calculation of the defining colimit.
+coefficient categories with the required colimits, by the terminal-object
+calculation of the defining colimit.
 -/
+
+@[expose] public section
 
 noncomputable section
 
-universe u
+universe u vA uA vF
 
 open AlgebraicGeometry CategoryTheory Limits Opposite
 
 namespace EtaleCohomology
 
-/-- The actual germ at the identity geometric point identifies global
-sections over a separably closed field with the geometric stalk. -/
-theorem etaleGlobalSectionsGerm_identity_isIso
+/-- The literal global-section germ at the identity geometric point,
+for any coefficient category with small colimits. -/
+def etaleIdentityGlobalSectionsGerm
     (k : Type u) [Field k] [IsSepClosed k]
-    (Λ : Type u) [CommRing Λ]
-    (F : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u} Λ)) :
-    IsIso (etaleGlobalSectionsGerm (𝟙 (Spec (CommRingCat.of k))) Λ F) := by
+    (A : Type uA) [Category.{vA} A] [HasColimitsOfSize.{u, u} A]
+    (F : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology A) :
+    F.obj.obj (op (Scheme.Etale.mk (𝟙 (Spec (CommRingCat.of k))))) ⟶
+      (Scheme.pointSmallEtale (𝟙 (Spec (CommRingCat.of k)))).sheafFiber.obj F :=
+  (Scheme.pointSmallEtale (𝟙 (Spec (CommRingCat.of k)))).toPresheafFiber
+    (Scheme.Etale.mk (𝟙 (Spec (CommRingCat.of k))))
+    (Over.homMk (𝟙 (Spec (CommRingCat.of k))) (Category.comp_id _)) F.obj
+
+/-- Corepresentability of the identity point identifies the actual global
+sections with the stalk, independently of the coefficient category. -/
+theorem etaleIdentityGlobalSectionsGerm_isIso
+    (k : Type u) [Field k] [IsSepClosed k]
+    (A : Type uA) [Category.{vA} A] [HasColimitsOfSize.{u, u} A]
+    (F : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology A) :
+    IsIso (etaleIdentityGlobalSectionsGerm k A F) := by
   let S : Scheme.{u} := Spec (CommRingCat.of k)
   let T : S.Etale := Scheme.Etale.mk (𝟙 S)
   let Φ := Scheme.pointSmallEtale (𝟙 S)
@@ -57,22 +74,26 @@ theorem etaleGlobalSectionsGerm_identity_isIso
   rw [← ht₀]
   exact hGerm
 
-
-/-- Over a separably closed field, invertibility on the actual module of
-global sections detects invertibility of an arbitrary module-sheaf morphism. -/
-theorem etaleModuleHom_isIso_of_globalSections_of_isSepClosed
+/-- Over a separably closed field, global sections detect isomorphisms
+for any concrete coefficient category detected by its underlying sets. -/
+theorem etaleHom_isIso_of_globalSections_of_isSepClosed
     (k : Type u) [Field k] [IsSepClosed k]
-    (Λ : Type u) [CommRing Λ]
-    {F G : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u} Λ)}
+    (A : Type uA) [Category.{vA} A] [HasColimitsOfSize.{u, u} A]
+    {FC : A → A → Type vF} {CC : A → Type u}
+    [∀ (X Y : A), FunLike (FC X Y) (CC X) (CC Y)]
+    [ConcreteCategory.{u} A FC] [(forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u, u} (forget A)]
+    [(Spec (CommRingCat.of k)).smallEtaleTopology.HasSheafCompose (forget A)]
+    {F G : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology A}
     (η : F ⟶ G) [IsIso (η.hom.app (op (Scheme.Etale.mk (𝟙 _))))] : IsIso η := by
   let S : Scheme.{u} := Spec (CommRingCat.of k)
   let Φ := Scheme.pointSmallEtale (𝟙 S)
   let T : S.Etale := Scheme.Etale.mk (𝟙 S)
   let v : Φ.fiber.obj T := Over.homMk (𝟙 S) (Category.comp_id (𝟙 S))
-  let γF := etaleGlobalSectionsGerm (𝟙 S) Λ F
-  let γG := etaleGlobalSectionsGerm (𝟙 S) Λ G
-  have hγF : IsIso γF := etaleGlobalSectionsGerm_identity_isIso k Λ F
-  have hγG : IsIso γG := etaleGlobalSectionsGerm_identity_isIso k Λ G
+  let γF := etaleIdentityGlobalSectionsGerm k A F
+  let γG := etaleIdentityGlobalSectionsGerm k A G
+  have hγF : IsIso γF := etaleIdentityGlobalSectionsGerm_isIso k A F
+  have hγG : IsIso γG := etaleIdentityGlobalSectionsGerm_isIso k A G
   have hη : IsIso (η.hom.app (op T)) :=
     inferInstanceAs (IsIso (η.hom.app
       (op (Scheme.Etale.mk (𝟙 (Spec (CommRingCat.of k)))))))
@@ -89,8 +110,24 @@ theorem etaleModuleHom_isIso_of_globalSections_of_isSepClosed
     intro x
     exact Set.mem_iUnion.mpr ⟨PUnit.unit, x, rfl⟩
   have hpoints := Scheme.isConservative_pointSmallEtale s hcover
-  apply ((hpoints.jointlyReflectIsomorphisms (ModuleCat.{u} Λ)).isIso_iff η).mpr
+  apply ((hpoints.jointlyReflectIsomorphisms A).isIso_iff η).mpr
   rintro ⟨_, ⟨i⟩⟩
   exact hStalk
+
+/-- The original module-valued global-section germ is the generic identity germ. -/
+theorem etaleGlobalSectionsGerm_identity_isIso
+    (k : Type u) [Field k] [IsSepClosed k]
+    (Λ : Type u) [CommRing Λ]
+    (F : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u} Λ)) :
+    IsIso (etaleGlobalSectionsGerm (𝟙 (Spec (CommRingCat.of k))) Λ F) :=
+  etaleIdentityGlobalSectionsGerm_isIso k (ModuleCat.{u} Λ) F
+
+/-- The original module-valued criterion uses the common coefficient-independent proof. -/
+theorem etaleModuleHom_isIso_of_globalSections_of_isSepClosed
+    (k : Type u) [Field k] [IsSepClosed k]
+    (Λ : Type u) [CommRing Λ]
+    {F G : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u} Λ)}
+    (η : F ⟶ G) [IsIso (η.hom.app (op (Scheme.Etale.mk (𝟙 _))))] : IsIso η :=
+  etaleHom_isIso_of_globalSections_of_isSepClosed k (ModuleCat.{u} Λ) η
 
 end EtaleCohomology

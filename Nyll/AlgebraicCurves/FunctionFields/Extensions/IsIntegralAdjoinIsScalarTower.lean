@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
 
 /-!
 # Is Integral adjoin of is Scalar Tower
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

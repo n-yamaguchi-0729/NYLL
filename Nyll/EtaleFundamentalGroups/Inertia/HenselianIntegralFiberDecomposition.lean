@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiber
-import Nyll.SchemeTheory.RingTheory.Idempotents.JacobsonIdempotentRigidity
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.LocalRing.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiber
+public import Nyll.SchemeTheory.RingTheory.Idempotents.JacobsonIdempotentRigidity
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.LocalRing.Basic
 
 
 /-!
@@ -24,6 +26,8 @@ the required equations. Each member keeps its prescribed prime support.
 This constructs the finite family used in the strict-Henselian step of
 external Stacks tag 0BSR. It does not assume a decomposition or its equations.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

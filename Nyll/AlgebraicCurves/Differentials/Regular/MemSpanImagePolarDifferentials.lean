@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Regular.Polar
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch
-import Nyll.AlgebraicCurves.Differentials.Regular.MapMemPolarDifferentials
-import Nyll.AlgebraicCurves.Differentials.Regular.FiniteFinrankPolarDifferentialsEq
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.FiniteFinrankRegularDifferentialsEqGenus
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtensionAlgClosed
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusEqGenusFF
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosedTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosedTranscendental
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
-import Nyll.AlgebraicCurves.Cohomology.WeilDualityAdelicFunctionFieldRiemannRoch
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqConstantExtensionAlgClosed
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Regular.Polar
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch
+public import Nyll.AlgebraicCurves.Differentials.Regular.MapMemPolarDifferentials
+public import Nyll.AlgebraicCurves.Differentials.Regular.FiniteFinrankPolarDifferentialsEq
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.FiniteFinrankRegularDifferentialsEqGenus
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtensionAlgClosed
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusEqGenusFF
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosedTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosedTranscendental
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
+public import Nyll.AlgebraicCurves.Cohomology.WeilDualityAdelicFunctionFieldRiemannRoch
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqConstantExtensionAlgClosed
 
 /-!
 # Mem span image polar Differentials of constant Field Extension of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -54,8 +58,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -527,8 +529,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

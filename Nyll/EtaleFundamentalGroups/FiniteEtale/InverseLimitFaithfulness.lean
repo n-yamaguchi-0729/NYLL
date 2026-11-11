@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualFaithfulness
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualFaithfulness
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Faithfulness of the finite etale model localization
@@ -15,6 +17,8 @@ Geometric equality descent for the original inverse limit supplies eventual
 equality at an actual stage. The categorical fraction argument then makes
 the comparison from the cartesian model localization faithful.
 -/
+
+@[expose] public section
 
 noncomputable section
 

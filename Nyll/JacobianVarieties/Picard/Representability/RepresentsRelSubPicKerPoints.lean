@@ -10,24 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+module
 
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Dual-number kernel points and rigidified line bundles
 
 Reduction-trivial points of a representing Picard scheme give rigidified dual-number deformations.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -72,6 +77,36 @@ noncomputable def RepresentsRelSubPic.kerPointsToRigKer
     rw [← hx] at one_iso
     exact ⟨h.poincare.pullbackAlongPullbackAlongIso x.1 (dualNumberReductionOver R A) ≪≫
       one_iso.some⟩⟩
+
+/-- The rigidified deformation class has a representative given by the
+pullback of the original Poincare bundle. -/
+theorem RepresentsRelSubPic.kerPointsToRigKer_eq_mk
+    (h : RepresentsRelSubPic c ε (algEquivZeroCut c ε) D)
+    (A : Type u) [CommRing A] [Algebra R A] :
+    let L := RepresentsRelSubPic.relativeGroupLaw (P := algEquivZeroGroupCut c ε) h
+    ∀ x : { x : SchemeHomOver (Scheme.TwoAffineOpenCover.specMap R (DualNumber A)) D.toBase //
+        dualNumberReduction R A ≫ x.1 = (L.one (Scheme.TwoAffineOpenCover.specMap R A)).1 },
+      ∃ M : RigKerDualNumber.Carrier c ε A,
+        h.kerPointsToRigKer A x = Quotient.mk _ M ∧ M.1 = h.poincare.pullbackAlong x.1 := by
+  intro L x
+  unfold RepresentsRelSubPic.kerPointsToRigKer
+  exact ⟨_, rfl, rfl⟩
+
+/-- Equality with the original kernel-point class gives an isomorphism of
+its representative line bundle with the original Poincare pullback. -/
+theorem RepresentsRelSubPic.nonempty_iso_of_mk_eq_kerPointsToRigKer
+    (h : RepresentsRelSubPic c ε (algEquivZeroCut c ε) D)
+    (A : Type u) [CommRing A] [Algebra R A] :
+    let L := RepresentsRelSubPic.relativeGroupLaw (P := algEquivZeroGroupCut c ε) h
+    ∀ (x : { x : SchemeHomOver (Scheme.TwoAffineOpenCover.specMap R (DualNumber A)) D.toBase //
+        dualNumberReduction R A ≫ x.1 = (L.one (Scheme.TwoAffineOpenCover.specMap R A)).1 })
+      (M : RigKerDualNumber.Carrier c ε A),
+      Quotient.mk _ M = h.kerPointsToRigKer A x →
+        Nonempty (M.1.L ≅ (h.poincare.pullbackAlong x.1).L) := by
+  intro L x M hM
+  obtain ⟨N, hN, hN1⟩ := h.kerPointsToRigKer_eq_mk A x
+  have hMN : Nonempty (M.1.L ≅ N.1.L) := Quotient.exact (hM.trans hN)
+  simpa only [hN1] using hMN
 
 end KerPoints
 

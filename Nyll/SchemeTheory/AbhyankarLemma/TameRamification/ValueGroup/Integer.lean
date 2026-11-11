@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValueGroup
-import Mathlib.Data.Int.ModEq
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValueGroup
+public import Mathlib.Data.Int.ModEq
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Basic
 
 /-!
 # Integer value-group arithmetic
@@ -14,6 +17,8 @@ The tame Abhyankar value-group step reduces to lcm arithmetic in a rank-one
 integer value group.  This file isolates that arithmetic without assuming any
 field-theoretic ramification comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafPushforwardCech
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeHom
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafPushforwardCech
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeHom
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-!
 # Native Čech cohomology along a scheme isomorphism
@@ -30,6 +32,8 @@ particular, the comparison can transport Serre vanishing across the
 canonical scheme isomorphism for projective-space base change.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -38,7 +42,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-private def schemeIsoPullbackUnitIso {X Y : Scheme.{u}} (e : Y ≅ X) (M : X.Modules) :
+/-- The adjunction unit for pullback along a scheme isomorphism, as an isomorphism. -/
+def schemeIsoPullbackUnitIso {X Y : Scheme.{u}} (e : Y ≅ X) (M : X.Modules) :
     M ≅ (pushforward e.hom).obj ((pullback e.hom).obj M) := by
   have : (pushforward e.hom).IsEquivalence :=
     (pushforwardIsoEquivalence e).isEquivalence_functor

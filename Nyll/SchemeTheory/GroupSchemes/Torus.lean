@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Nyll.SchemeTheory.GroupSchemes.SplitTorus
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorus
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-! # Split and geometric tori on actual group schemes over fields
 
@@ -14,6 +16,8 @@ A torus is geometrically isomorphic to the actual integral-character split model
 with a fixed finite rank. The splitting condition is imposed on algebraically closed
 geometric field extensions, and is therefore preserved by every field extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalFundamentalGroup
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.HeightOneCyclotomicInertia
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.HeightOneCyclotomicInertia
 
 /-!
 # Cyclotomic vanishing for canonical divisorial quotients
@@ -14,6 +16,8 @@ For an abelian finite-etale Galois cover, geometric integrality of a rational
 height-one residue field and odd inertia force the image of the corrected
 canonical fundamental-group quotient to vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,15 +41,15 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [Algebra A K] [IsFractionRing A K]
@@ -62,18 +66,8 @@ theorem
                 (K := K) (L := L) P Q).range) 2 →
           (localizedNormalizationInertiaFieldCanonicalHom
               (K := K) (L := L) P Q).range = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instAlgAK instFracAK
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    A instCommA instDomainA instRegularA instAlgAK instFracAK
     instAlgAL instTowerAKL P instPPrime hP Q instQPrime instQLiesOver
     instAlgk hgeo hCoprime
   have hSourceCoprime :

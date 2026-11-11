@@ -10,15 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.MvPolynomial.Localization
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.MvPolynomial.Localization
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Mv Polynomial mem ideal iff forall map mem map localization Away
 -/
 
+@[expose] public section
+
 section ProofImplementation
+
+universe u v w
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs
 namespace MvPolynomial_mem_ideal_iff_forall_map_mem_map_localizationAway
@@ -29,7 +35,7 @@ namespace P3LocalMem
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-theorem exists_pow_C_mul_mem {σ : Type} {A : Type} [CommRing A] (a : A)
+theorem exists_pow_C_mul_mem {σ : Type v} {A : Type u} [CommRing A] (a : A)
     (I : Ideal (MvPolynomial σ A)) (f : MvPolynomial σ A)
     (h : MvPolynomial.map (algebraMap A (Localization.Away a)) f ∈
         Ideal.map (MvPolynomial.map (algebraMap A (Localization.Away a))) I) :
@@ -54,7 +60,8 @@ theorem exists_pow_C_mul_mem {σ : Type} {A : Type} [CommRing A] (a : A)
 end P3LocalMem
 
 theorem _root_.MvPolynomial.mem_ideal_iff_forall_map_mem_map_localizationAway
-    {σ : Type} (A : Type) [CommRing A] {ι : Type} (r : ι → A) (hr : Ideal.span (Set.range r) = ⊤)
+    {σ : Type v} (A : Type u) [CommRing A] {ι : Type w}
+    (r : ι → A) (hr : Ideal.span (Set.range r) = ⊤)
     (I : Ideal (MvPolynomial σ A)) (f : MvPolynomial σ A) :
     f ∈ I ↔ ∀ i : ι,
       MvPolynomial.map (algebraMap A (Localization.Away (r i))) f ∈

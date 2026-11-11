@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionBaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionSerreVanishing
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionBaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionSerreVanishing
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Closed projective Serre vanishing after actual coefficient change
@@ -33,6 +35,8 @@ Only the new coefficient ring needs to be Noetherian. The coherent
 module on the literal pullback is arbitrary, so the theorem applies to
 the actual Rees image tensored with pulled back coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

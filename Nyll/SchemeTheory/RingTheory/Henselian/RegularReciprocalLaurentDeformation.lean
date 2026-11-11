@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
 
 /-! # The generic field deformation of the actual regular-block base map
 
@@ -15,6 +17,8 @@ not merely on its parameter. Its reciprocal parameter is translated by T.
 This is the actual generic base change used for the regular-block trace.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped nonZeroDivisors
@@ -23,7 +27,8 @@ namespace LaurentSeries
 
 variable {K L : Type*} [Field K] [Field L] [Algebra K L]
 
-private def nativePowerSeriesInclusion : PowerSeries K →ₐ[K] LaurentSeries K where
+/-- The canonical inclusion of power series into Laurent series as an algebra map. -/
+def nativePowerSeriesInclusion : PowerSeries K →ₐ[K] LaurentSeries K where
   toRingHom := HahnSeries.ofPowerSeries ℤ K
   commutes' _ := rfl
 
@@ -32,7 +37,8 @@ extension field. -/
 def regularBlockCoefficients (i : LaurentSeries K →ₐ[K] L) : PowerSeries K →ₐ[K] L :=
   i.comp nativePowerSeriesInclusion
 
-private def regularReciprocalPowerSeriesMap (i : LaurentSeries K →ₐ[K] L) :
+/-- The reciprocal deformation with coefficients in the given extension field. -/
+def regularReciprocalPowerSeriesMap (i : LaurentSeries K →ₐ[K] L) :
     PowerSeries K →ₐ[K] PowerSeries L :=
   (PowerSeries.mapAlgHom (regularBlockCoefficients i)).comp
     PowerSeries.reciprocalParameterDeformation
@@ -49,7 +55,8 @@ private theorem constantCoeff_regularReciprocalPowerSeriesMap
     PowerSeries.constantCoeff_reciprocalParameterDeformation]
   rfl
 
-private theorem regularReciprocalPowerSeriesMap_isUnit
+/-- A nonzero integral denominator becomes a unit under reciprocal deformation. -/
+theorem regularReciprocalPowerSeriesMap_isUnit
     (i : LaurentSeries K →ₐ[K] L) (f : PowerSeries K) (hf : f ≠ 0) :
     IsUnit (regularReciprocalPowerSeriesMap i f) := by
   apply PowerSeries.isUnit_iff_constantCoeff.mpr

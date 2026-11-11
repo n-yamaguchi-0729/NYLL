@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # Actual pullback comparisons for a cone in an over category
@@ -15,6 +17,8 @@ The comparison is built from the chosen scheme pullbacks.  Its components
 preserve both projections, and their naturality is proved by those projections.
 No limiting or cofilteredness hypothesis is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,7 +53,8 @@ theorem overInverseLimitTransition_snd (A : Over S) (i : I) :
       pullback.snd A.hom c.pt.hom ≫ (c.π.app i).left :=
   pullback.lift_snd _ _ _
 
-private def overInverseLimitComponent (A : Over S) (i : I) :
+/-- The canonical pullback isomorphism from the cone point through a chosen stage. -/
+def overInverseLimitComponent (A : Over S) (i : I) :
     pullback A.hom c.pt.hom ≅
       pullback (pullback.snd A.hom (D.obj i).hom) (c.π.app i).left :=
   pullback.congrHom (rfl : A.hom = A.hom) (Over.w (c.π.app i)).symm ≪≫
@@ -64,7 +69,8 @@ private theorem overInverseLimitComponent_hom_fst_fst (A : Over S) (i : I) :
     pullback.lift_fst, Category.comp_id]
   rfl
 
-private theorem overInverseLimitComponent_hom_snd (A : Over S) (i : I) :
+/-- The pullback comparison preserves the projection to the cone point. -/
+theorem overInverseLimitComponent_hom_snd (A : Over S) (i : I) :
     (overInverseLimitComponent D c A i).hom ≫
         pullback.snd (pullback.snd A.hom (D.obj i).hom) (c.π.app i).left =
       pullback.snd A.hom c.pt.hom := by

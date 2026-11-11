@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
 # The actual sequence of adic quotients of a module
@@ -22,6 +24,8 @@ is linearly equivalent to the original module. The inverse is constructed
 by the completeness lifting theorem for the strictly increasing sequence
 `n + 1`, and every quotient class is preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

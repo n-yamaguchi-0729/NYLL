@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+module
+
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
 
 /-!
 # Naturality of the dual-number overlap unit
 -/
 
+
+@[expose] public section
 
 section ProofImplementation
 

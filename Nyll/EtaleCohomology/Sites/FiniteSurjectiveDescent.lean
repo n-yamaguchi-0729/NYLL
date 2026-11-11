@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FiniteCechStalkLift
-import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
-import Nyll.EtaleCohomology.Sites.FiniteSurjectiveUnit
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Nyll.EtaleCohomology.Sites.SectionImageGluing
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.FiniteCechStalkLift
+public import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
+public import Nyll.EtaleCohomology.Sites.FiniteSurjectiveUnit
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Nyll.EtaleCohomology.Sites.SectionImageGluing
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Descent of sections along arbitrary finite surjections
@@ -23,6 +25,8 @@ finite direct-image stalk comparison puts the direct-image section in the
 unit's image on every stalk. The unit is a monomorphism, so these local
 preimages glue uniquely.
 -/
+
+@[expose] public section
 
 noncomputable section
 

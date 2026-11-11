@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LaurentSeries
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.HahnSeries.Multiplication
-import Mathlib.Algebra.Module.RingHom
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
+module
+
+public import Mathlib.RingTheory.LaurentSeries
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.HahnSeries.Multiplication
+public import Mathlib.Algebra.Module.RingHom
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
 
 /-!
 # Ring Hom laurent Series derivative eq of kaehler Differential D eq smul
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

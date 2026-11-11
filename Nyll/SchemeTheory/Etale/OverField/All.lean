@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.OverField.ConnectedSourceToCoproduct
-import Nyll.SchemeTheory.Etale.OverField.Decomposition
+module
+
+public import Nyll.SchemeTheory.Etale.OverField.ConnectedSourceToCoproduct
+public import Nyll.SchemeTheory.Etale.OverField.Decomposition
 
 /-! Canonical aggregate for SchemeTheory.Etale.OverField. -/

@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Data.Finsupp.Defs
-import Mathlib.Data.Finsupp.Single
-import Mathlib.LinearAlgebra.Finsupp.Defs
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.Finsupp.Pi
-import Mathlib.RingTheory.Ideal.Finsupp
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Data.Finsupp.Defs
+public import Mathlib.Data.Finsupp.Single
+public import Mathlib.LinearAlgebra.Finsupp.Defs
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.Finsupp.Pi
+public import Mathlib.RingTheory.Ideal.Finsupp
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
 # Original quotient-free coefficient maps
@@ -30,6 +32,8 @@ linear combination after the coefficient map. Thus an original generating
 family gives the corresponding actual quotient-free presentation, without
 choosing a different family or assuming the factorization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

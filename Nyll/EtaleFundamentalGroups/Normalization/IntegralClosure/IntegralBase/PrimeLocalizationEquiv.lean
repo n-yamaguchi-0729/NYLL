@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
-import Nyll.SchemeTheory.RingTheory.Localization.AtMappedPrimeEquiv
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
+public import Nyll.SchemeTheory.RingTheory.Localization.AtMappedPrimeEquiv
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
 
 /-!
 # Prime-local integral-closure comparison through an integral base
@@ -20,6 +22,8 @@ equivalence and then through localization of the original base.  The final
 equivalence is over the local ring at the literal contraction of the input
 prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -127,7 +131,7 @@ noncomputable def integralClosureIntegralBasePrimeLocalizationAlgEquiv
   exact Ebase.trans Elocal
 
 /-- Elaborate the Away rings after fixing their underlying rings and algebra. -/
-private def integralBaseAwayMapEtale
+def integralBaseAwayMapEtale
     {R D : Type*} [CommRing R] [CommRing D] [Algebra R D]
     (f : R) : Prop :=
   (Localization.awayMap (algebraMap R D) f).Etale
@@ -179,7 +183,10 @@ theorem localization_awayMap_integralClosureIntegralBasePrime_etale_of_localized
       Localization.AtPrime q :=
     integralClosureIntegralBasePrimeLocalizationAlgEquiv
       (K := K) Q
-  exact localization_awayMap_etale_of_algEquiv E.symm f hAway
+  exact localization_awayMap_etale_of_algEquiv
+    (A := Localization.AtPrime P)
+    (D₀ := Localization.AtPrime q) (D₁ := Localization.AtPrime Q)
+    E.symm f hAway
 
 end EtaleFundamentalGroups
 

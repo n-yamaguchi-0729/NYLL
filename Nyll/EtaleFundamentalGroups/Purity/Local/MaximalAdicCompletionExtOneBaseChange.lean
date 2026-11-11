@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.FinitePresentationExtOneBaseChange
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionExtTorsion
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.FinitePresentationExtOneBaseChange
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionExtTorsion
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 
 /-!
 # Ext¹ base change to a maximal-adic completion
@@ -21,6 +23,8 @@ is an equivalence of `R`-modules.  The proof is the direct composite of the
 torsion tensor-unit equivalence with flat finite-presentation base change for
 `Ext¹`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

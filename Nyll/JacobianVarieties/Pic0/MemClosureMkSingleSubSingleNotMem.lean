@@ -14,6 +14,7 @@ import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
 import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardZero
 
 /-!
 # Generators of the degree-zero Picard group avoiding a finite set

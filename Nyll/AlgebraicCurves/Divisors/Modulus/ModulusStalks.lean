@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
-import Nyll.AlgebraicCurves.Models.LocalGeometry.ClosedPointRangeStalkEq
-import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Ideal.Maps
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Nyll.AlgebraicCurves.Models.LocalGeometry.ClosedPointRangeStalkEq
+public import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Ideal.Maps
 
 /-!
 # Modulus congruence in the actual stalks of a smooth proper curve
@@ -25,6 +27,8 @@ does not assert the global correspondence with effective Cartier divisors or
 compatibility with extension of the base field. No curve model or stalk
 comparison is taken as additional input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

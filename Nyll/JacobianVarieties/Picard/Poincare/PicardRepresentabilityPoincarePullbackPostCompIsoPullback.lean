@@ -10,29 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
-import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.JacobianVarieties.Picard.Rigidification.PoincareRigidifiedPullbackComposition
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackRigidifyIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackFstRigidifyIso
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
+public import Mathlib.Util.WithWeakNamespace
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
+public import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.JacobianVarieties.Picard.Rigidification.PoincareRigidifiedPullbackComposition
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackRigidifyIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackFstRigidifyIso
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
 /-!
 # Poincare fibres and rigidification over a field
 
 Pulling back a classified rigidified bundle along a field-valued point recovers the
 underlying pulled-back invertible module, using triviality of rigidification over a field.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

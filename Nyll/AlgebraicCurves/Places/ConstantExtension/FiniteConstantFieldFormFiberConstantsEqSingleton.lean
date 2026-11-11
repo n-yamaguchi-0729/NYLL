@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.ZMod
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.Places.ConstantExtension.RamificationIndexForgetConstantsEqOneConstantExtension
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantFieldDegreeFormula
+module
+
+public import Mathlib.Algebra.Algebra.ZMod
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.RamificationIndexForgetConstantsEqOneConstantExtension
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantFieldDegreeFormula
 
 /-!
 # Place exists finite constant Field form fiber Constants eq singleton
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

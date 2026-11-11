@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
-import Nyll.EtaleCohomology.Sites.PullbackSectionFactors
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
+public import Nyll.EtaleCohomology.Sites.PullbackSectionFactors
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # The actual strict-local section comparison for direct image
@@ -22,6 +24,8 @@ The construction applies to arbitrary scheme morphisms and module sheaves.
 Quasi-compactness, quasi-separatedness, and properness enter only in later
 proofs that the appropriate comparison maps are isomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Dimension.PuncturedHypersurfacePrime
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Tactic.Push
+module
+
+public import Nyll.SchemeTheory.RingTheory.Dimension.PuncturedHypersurfacePrime
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Tactic.Push
 
 /-!
 # Height-one primes containing an element of a local ring
@@ -16,6 +18,8 @@ This file proves the local-ring prime-existence statement of Stacks Project
 Tag 0BJG. A prime chain selects a positive-dimensional component of a
 hypersurface, and localization decreases the positive height.
 -/
+
+@[expose] public section
 
 open IsLocalRing
 

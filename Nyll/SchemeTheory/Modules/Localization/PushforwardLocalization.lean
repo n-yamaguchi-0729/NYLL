@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Localization.GlobalSectionLocalization
-import Nyll.SchemeTheory.Modules.Functoriality.PushforwardSectionComparison
-import Nyll.SchemeTheory.Modules.Functoriality.PushforwardCoefficients
-import Nyll.SchemeTheory.Modules.Sections.NativeSectionObjects
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.QuasiSeparated
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.Modules.Localization.GlobalSectionLocalization
+public import Nyll.SchemeTheory.Modules.Functoriality.PushforwardSectionComparison
+public import Nyll.SchemeTheory.Modules.Functoriality.PushforwardCoefficients
+public import Nyll.SchemeTheory.Modules.Sections.NativeSectionObjects
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Quasicoherent pushforward along quasi-compact open immersions
@@ -27,6 +29,8 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 Proves localization of pushforward sections for a quasicoherent module along a quasi-compact
 open immersion into an affine scheme. This gives quasicoherence of the direct image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

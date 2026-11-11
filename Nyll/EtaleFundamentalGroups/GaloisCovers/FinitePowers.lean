@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
 
 /-!
 # All finite powers of an actual Galois cover
@@ -14,6 +16,8 @@ to a distinguished first coordinate. These deck graphs decompose every
 finite positive power of a Galois object. The proof uses the actual fiber
 functor and its simply transitive deck action.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w
@@ -27,7 +31,7 @@ variable {C : Type u} [Category.{v} C] [GaloisCategory C]
 coordinate the identity. -/
 def galoisPowerGraph (X : C) (n : ℕ) (σ : Fin n → Aut X) :
     X ⟶ ∏ᶜ fun _ : Fin (n + 1) => X :=
-  Pi.lift (Fin.cases (𝟙 X) (fun i => (σ i).hom))
+  Pi.lift (Fin.cases (𝟙 X) (fun i => (σ i).asIso.hom))
 
 /-- The union of all actual deck graphs in a finite positive power. -/
 def galoisPowerMap (X : C) [IsGalois X] (n : ℕ) :
@@ -57,7 +61,7 @@ theorem galoisPowerMap_isIso (F : C ⥤ FintypeCat.{w}) [FiberFunctor F]
       Sigma.ι_comp_desc, Pi.lift_comp_π, Fin.cases_zero,
       Functor.map_id, FintypeCat.id_apply]
   have h₁ (σ : Fin n → Aut X) (x : F.obj X) (i : Fin n) :
-      F.map (Pi.π B i.succ) (a σ x) = F.map (σ i).hom x := by
+      F.map (Pi.π B i.succ) (a σ x) = F.map (σ i).asIso.hom x := by
     simp only [a, A, B, galoisPowerMap, galoisPowerGraph,
       ← FintypeCat.comp_apply, ← Functor.map_comp,
       Sigma.ι_comp_desc, Pi.lift_comp_π, Fin.cases_succ]
@@ -81,7 +85,7 @@ theorem galoisPowerMap_isIso (F : C ⥤ FintypeCat.{w}) [FiberFunctor F]
     · intro z
       let x := F.map (Pi.π B 0) z
       have hex (i : Fin n) : ∃ σ : Aut X,
-          F.map σ.hom x = F.map (Pi.π B i.succ) z :=
+          F.map σ.asIso.hom x = F.map (Pi.π B i.succ) z :=
         evaluation_aut_surjective_of_isGalois F X x _
       let σ : Fin n → Aut X := fun i => Classical.choose (hex i)
       refine ⟨F.map (Sigma.ι A σ) x, ?_⟩

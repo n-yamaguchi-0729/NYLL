@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
 
 /-!
 # Is Regular Diff dlog of dvd ord
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -84,8 +88,7 @@ private theorem isRegularDiff_dlog_of_dvd_ord_impl
   obtain ⟨w, hw⟩ := v.exists_unit_mul_zpow hg hπ
   obtain ⟨m, hm⟩ := hdvd v
   set uF : F := ((w : v.toValuationSubring) : F) with huF
-  have huF0 : uF ≠ 0 := by
-    simp [huF, ne_eq, ZeroMemClass.coe_eq_zero]
+  have huF0 : uF ≠ 0 := fun h0 => w.ne_zero (Subtype.ext h0)
   have hpmp : (π : F) ^ v.ord g = ((π : F) ^ m) ^ p := by
     rw [hm, mul_comm, zpow_mul, zpow_natCast]
   have hpm0 : (π : F) ^ m ≠ 0 := zpow_ne_zero m hπF

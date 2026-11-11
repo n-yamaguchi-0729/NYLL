@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.CorrectedDivisorSumOverlap
-import Nyll.JacobianVarieties.Generalized.ModulusBasepointDivisorClass
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.CorrectedDivisorSumOverlap
+public import Nyll.JacobianVarieties.Generalized.ModulusBasepointDivisorClass
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # The constructed local sums respect the actual corrected zero-sheaf class -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ExtensionByZeroBaseChange
-import Nyll.SchemeTheory.Etale.FrobeniusSquare
+module
+
+public import Nyll.EtaleCohomology.Sites.ExtensionByZeroBaseChange
+public import Nyll.SchemeTheory.Etale.FrobeniusSquare
 
 /-!
 # Frobenius and actual extension by zero
@@ -14,6 +16,8 @@ The Frobenius square of an open immersion is cartesian. The actual
 extension-by-zero base-change comparison therefore commutes extension by
 zero with the existing Frobenius inverse-image functors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

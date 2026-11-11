@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.FrobeniusOver
-import Nyll.SchemeTheory.Morphisms.EtaleRadicial
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.Morphisms.FrobeniusOver
+public import Nyll.SchemeTheory.Morphisms.EtaleRadicial
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Relative Frobenius of étale schemes
@@ -19,6 +21,8 @@ flat. The relative Frobenius of an étale scheme is consequently an étale,
 surjective, universally injective morphism and hence an isomorphism.
 This works for arbitrary étale schemes, without an affineness assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -107,10 +111,14 @@ namespace AlgebraicGeometry.Scheme.Etale
 variable (k : Type u) [Field k] [Fintype k] (X : Scheme.{u})
   [X.Over (Spec (.of k))]
 
-private local instance etaleOverFiniteField (U : X.Etale) :
+/-- An étale object retains the structural map to the original finite field. -/
+@[instance_reducible] def etaleOverFiniteField (U : X.Etale) :
     U.left.Over (Spec (.of k)) := ⟨U.hom ≫ (X ↘ Spec (.of k))⟩
 
-private def finiteFieldFrobeniusPullbackObjIso (U : X.Etale) :
+attribute [local instance] etaleOverFiniteField
+
+/-- Relative finite-field Frobenius identifies the original étale object with its pullback. -/
+def finiteFieldFrobeniusPullbackObjIso (U : X.Etale) :
     U ≅ (MorphismProperty.Over.pullback
       (show MorphismProperty Scheme.{u} from @AlgebraicGeometry.Etale) ⊤
         (X.finiteFieldFrobenius k)).obj U := by

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.DirectSum.Finsupp
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.DirectSum.Finsupp
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Valuation Subring tensor Product exists primitive factor
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -31,7 +35,7 @@ theorem _root_.ValuationSubring.tensorProduct_exists_primitive_factor
     (A : ValuationSubring K') (hK : ∀ c : K, algebraMap K K' c ∈ A) (σ : A →+* K)
     (_hker : RingHom.ker σ = maximalIdeal A)
     (hsec : ∀ c : K, σ ⟨algebraMap K K' c, hK c⟩ = c) :
-    letI : Algebra K A := ((algebraMap K K').codRestrict A.toSubring hK).toAlgebra
+    let : Algebra K A := ((algebraMap K K').codRestrict A.toSubring hK).toAlgebra
     let hσAlg : A →ₐ[K] F :=
       { toRingHom := (algebraMap K F).comp σ
         commutes' := fun c ↦ congrArg (algebraMap K F) (hsec c) }
@@ -40,8 +44,8 @@ theorem _root_.ValuationSubring.tensorProduct_exists_primitive_factor
     ∀ z : TensorProduct K F A, z ≠ 0 →
       ∃ a : A, a ≠ 0 ∧ ∃ z' : TensorProduct K F A,
         z = ((1 : F) ⊗ₜ[K] a) * z' ∧ Ψ z' ≠ 0 := by
+  intro sharedOwner1
   classical
-  let : Algebra K A := ((algebraMap K K').codRestrict A.toSubring hK).toAlgebra
   intro hσAlg Ψ z hz
   let e := Module.Basis.ofVectorSpace K F
   let eqv : TensorProduct K F A ≃ₗ[K] _ →₀ A :=

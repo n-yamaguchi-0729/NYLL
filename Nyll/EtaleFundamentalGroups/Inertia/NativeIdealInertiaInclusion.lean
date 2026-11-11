@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeIdealInertiaConjugate
-import Mathlib.Algebra.Group.Subgroup.Map
-import Mathlib.Algebra.Group.Subgroup.Ker
-import Mathlib.RingTheory.Ideal.Pointwise
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeIdealInertiaConjugate
+public import Mathlib.Algebra.Group.Subgroup.Map
+public import Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.RingTheory.Ideal.Pointwise
 
 /-!
 # Ideal inertia included into its actual stabilizer
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Ideal.Pointwise
 The subgroup order and pointwise ideal-action interfaces are closed here,
 with only a ring and its acting group. The map is the literal inclusion.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

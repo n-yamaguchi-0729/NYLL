@@ -93,13 +93,10 @@ universe u
 theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.finite_sections_of_isProper
     (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [IsProper f]
     (𝓝 : X.Modules) (h𝓝 : Scheme.Modules.IsInvertible 𝓝) :
-    letI : Algebra k Γ(X, ⊤) := ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ ⊤ le_top).hom.toAlgebra
-    letI : Module k Γ(𝓝, ⊤) := Module.compHom _ (algebraMap k Γ(X, ⊤))
+    let : Algebra k Γ(X, ⊤) := ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ ⊤ le_top).hom.toAlgebra
+    let : Module k Γ(𝓝, ⊤) := Module.compHom _ (algebraMap k Γ(X, ⊤))
     Module.Finite k Γ(𝓝, ⊤) := by
-  let instA : Algebra k Γ(X, ⊤) := ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ ⊤
-    le_top).hom.toAlgebra
-  let instM : Module k Γ(𝓝, ⊤) := Module.compHom _ (algebraMap k Γ(X, ⊤))
-  change Module.Finite k Γ(𝓝, ⊤)
+  intro instA instM
   have : CompactSpace ↥X := QuasiCompact.compactSpace_of_compactSpace f
   obtain ⟨𝒦⟩ := AlgebraicGeometry.Scheme.OrderedAffineCover.nonempty_of_compactSpace X
   have hfin := AlgebraicGeometry.OModulePresheaf.cechFinite_ofModules_of_locallyTrivial f 𝓝

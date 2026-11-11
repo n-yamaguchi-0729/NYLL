@@ -41,18 +41,13 @@ noncomputable def higherRadicalFieldOverLowerGenericFiberAlgEquiv
     let Rₙ := AdjoinRoot (X ^ N - C varpi)
     let F := lowerRadicalField (K := K) e N beta
     let K' := higherRadicalFieldOverLower (K := K) e N beta
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
     (K ⊗[V] Rₙ) ≃ₐ[K] K' := by
-  dsimp only
-  let V := base.valuationSubring
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let F := lowerRadicalField (K := K) e N beta
+  intro V Rₙ F
   let Kₙ : IntermediateField K Omega :=
     IntermediateField.adjoin K ({beta} : Set Omega)
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
-  letI : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
+  intro K' sharedOwner11
   let eKₙ : Kₙ ≃ₐ[K] K' :=
     { toFun := fun z ↦ ⟨z.1, z.2⟩
       invFun := fun z ↦ ⟨z.1, z.2⟩
@@ -79,19 +74,17 @@ noncomputable def higherRadicalFieldOverLowerRootAlgebra
     let Rₙ := AdjoinRoot (X ^ N - C varpi)
     let F := lowerRadicalField (K := K) e N beta
     let K' := higherRadicalFieldOverLower (K := K) e N beta
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
     Algebra Rₙ K' := by
-  dsimp only
+  intro Rₙ
   let V := base.valuationSubring
-  let F := lowerRadicalField (K := K) e N beta
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
+  intro F K'
   letI : IsFractionRing V K := base.valuationSubring_isFractionRing
   letI : Algebra V F :=
     ((algebraMap K F).comp (algebraMap V K)).toAlgebra
   letI : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
-  letI : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
+  intro sharedOwner11
   letI : IsScalarTower K F K' := IsScalarTower.of_algebraMap_eq' rfl
   letI : Algebra V K' :=
     ((algebraMap K K').comp (algebraMap V K)).toAlgebra
@@ -113,24 +106,19 @@ theorem higherRadicalFieldOverLower_isFractionRing
     let Rₙ := AdjoinRoot (X ^ N - C varpi)
     let F := lowerRadicalField (K := K) e N beta
     let K' := higherRadicalFieldOverLower (K := K) e N beta
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-    letI : Algebra Rₙ K' :=
+    let : Algebra Rₙ K' :=
       higherRadicalFieldOverLowerRootAlgebra
         (e := e) base hN varpi hvarpiPrime beta hbetaPow
     IsFractionRing Rₙ K' := by
-  dsimp only
+  intro Rₙ F K' sharedOwner1 sharedOwner2
   let V := base.valuationSubring
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let F := lowerRadicalField (K := K) e N beta
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
   let : IsFractionRing V K := base.valuationSubring_isFractionRing
   let : IsIntegrallyClosed V :=
     base.valuationSubring_isIntegrallyClosed
   let : IsDomain Rₙ :=
     isDomain_adjoinRoot_X_pow_sub_C_of_prime hN varpi hvarpiPrime
-  let : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
   let : Algebra V F :=
     ((algebraMap K F).comp (algebraMap V K)).toAlgebra
   let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
@@ -138,9 +126,6 @@ theorem higherRadicalFieldOverLower_isFractionRing
   let : Algebra V K' :=
     ((algebraMap K K').comp (algebraMap V K)).toAlgebra
   let : IsScalarTower V K K' := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra Rₙ K' :=
-    higherRadicalFieldOverLowerRootAlgebra
-      (e := e) base hN varpi hvarpiPrime beta hbetaPow
   exact isFractionRing_of_genericFiberAlgEquiv
     (higherRadicalFieldOverLowerGenericFiberAlgEquiv
       (e := e) base hN varpi hvarpiPrime beta hbetaPow)
@@ -161,68 +146,47 @@ theorem higherRadicalFieldOverLower_root_isScalarTower
     let Rₙ := AdjoinRoot (X ^ N - C varpi)
     let F := lowerRadicalField (K := K) e N beta
     let K' := higherRadicalFieldOverLower (K := K) e N beta
-    letI : Algebra V F :=
+    let : Algebra V F :=
       ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-    letI : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
     let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
       pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha (by
         change (beta ^ (N / e)) ^ e =
           algebraMap K Omega (varpi : K)
         rw [← pow_mul]
         rw [Nat.div_mul_cancel hdiv, hbetaPow])
-    letI : Algebra Rₑ F :=
+    let : Algebra Rₑ F :=
       (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-    letI : Algebra Rₑ K' :=
+    let : Algebra Rₑ K' :=
       ((algebraMap F K').comp (algebraMap Rₑ F)).toAlgebra
-    letI : Algebra Rₙ K' :=
+    let : Algebra Rₙ K' :=
       higherRadicalFieldOverLowerRootAlgebra
         (e := e) base hN varpi hvarpiPrime beta hbetaPow
     let higherRootMap : Rₑ →ₐ[V] Rₙ :=
       adjoinRootPowerMapOfDvd hdiv varpi
-    letI : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
+    let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
     IsScalarTower Rₑ Rₙ K' := by
-  dsimp only
-  let V := base.valuationSubring
-  let alpha := beta ^ (N / e)
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let F := lowerRadicalField (K := K) e N beta
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
+  intro V alpha Rₑ Rₙ F K' sharedOwner3 sharedOwner4 eRₑ sharedOwner6 sharedOwner7 sharedOwner8
+    sharedOwner9 higherRootMap sharedOwner10
   let : IsFractionRing V K := base.valuationSubring_isFractionRing
   let : IsIntegrallyClosed V :=
     base.valuationSubring_isIntegrallyClosed
-  let : Algebra V F :=
-    ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-  let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
   have halphaPow : alpha ^ e =
       algebraMap K Omega (varpi : K) := by
     rw [show alpha ^ e = beta ^ ((N / e) * e) by
       simp only [alpha, pow_mul]]
     rw [Nat.div_mul_cancel hdiv, hbetaPow]
-  let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
-    pureRadicalGenericFiberAlgEquiv
-      he varpi hvarpiPrime alpha halphaPow
   let : Algebra Rₑ F :=
-    (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-  let : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
+    sharedOwner6
   let : IsScalarTower K F K' := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra Rₑ K' :=
-    ((algebraMap F K').comp (algebraMap Rₑ F)).toAlgebra
   let eRₙ : (K ⊗[V] Rₙ) ≃ₐ[K] K' :=
     higherRadicalFieldOverLowerGenericFiberAlgEquiv
       (e := e) base hN varpi hvarpiPrime beta hbetaPow
   let : Algebra V K' :=
     ((algebraMap K K').comp (algebraMap V K)).toAlgebra
   let : IsScalarTower V K K' := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra Rₙ K' :=
-    higherRadicalFieldOverLowerRootAlgebra
-      (e := e) base hN varpi hvarpiPrime beta hbetaPow
-  let higherRootMap : Rₑ →ₐ[V] Rₙ :=
-    adjoinRootPowerMapOfDvd hdiv varpi
-  let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
   have hRₙRoot :
       (((genericFiberRightAlgHom eRₙ)
           (AdjoinRoot.root (X ^ N - C varpi)) : K') : Omega) = beta := by
@@ -285,23 +249,16 @@ noncomputable def higherRadicalFractionFieldAlgEquivHigherField
     let Rₙ := AdjoinRoot (X ^ N - C varpi)
     let F := lowerRadicalField (K := K) e N beta
     let K' := higherRadicalFieldOverLower (K := K) e N beta
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-    letI : Algebra Rₙ K' :=
+    let : Algebra Rₙ K' :=
       higherRadicalFieldOverLowerRootAlgebra
         (e := e) base hN varpi hvarpiPrime beta hbetaPow
     Froot ≃ₐ[Rₙ] K' := by
-  dsimp only
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let F := lowerRadicalField (K := K) e N beta
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
+  intro Rₙ F K'
   letI : IsDomain Rₙ :=
     isDomain_adjoinRoot_X_pow_sub_C_of_prime hN varpi hvarpiPrime
-  letI : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-  letI : Algebra Rₙ K' :=
-    higherRadicalFieldOverLowerRootAlgebra
-      (e := e) base hN varpi hvarpiPrime beta hbetaPow
+  intro sharedOwner11 sharedOwner12
   letI : IsFractionRing Rₙ K' :=
     higherRadicalFieldOverLower_isFractionRing
       (e := e) base hN varpi hvarpiPrime beta hbetaPow

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalSubextension
-import Mathlib.FieldTheory.IntermediateField.Algebraic
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalSubextension
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Tame ramification for algebraic valued extensions
@@ -21,6 +24,8 @@ The definitions below use the characteristic of the actual residue field of
 the valuation on `K`; there is no independent natural-number parameter that
 could be filled by an unrelated prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

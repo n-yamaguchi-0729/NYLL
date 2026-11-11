@@ -10,16 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
-import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.RelativePic0DesignationBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
+public import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
 /-!
 # Kernel point comparison under base transport
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -88,18 +94,19 @@ open _root_.AlgebraicGeometry
 /-- Transport a morphism over a base along an equality of its structure morphisms. -/
 def castBase {B Y X : Scheme.{u}} {s s' : Y ⟶ B} {f : X ⟶ B} (e : s = s') (a : SchemeHomOver s f) :
     SchemeHomOver s' f :=
-  ⟨a.1, a.2.trans e⟩
+  _root_.NeronModelInfra.SchemeHomOver.castBase e a
 
 /-- Transporting the base equality leaves the underlying morphism unchanged. -/
 @[scoped simp] theorem castBase_coe {B Y X : Scheme.{u}} {s s' : Y ⟶ B} {f : X ⟶ B} (e : s = s')
-    (a : SchemeHomOver s f) : (castBase e a).1 = a.1 := rfl
+    (a : SchemeHomOver s f) : (castBase e a).1 = a.1 :=
+  _root_.NeronModelInfra.SchemeHomOver.castBase_coe e a
 
 /-- Multiplication of points commutes with transport of the base equality. -/
 theorem mul_castBase {R : Type u} [CommRing R] {A T : Scheme.{u}} {f : A ⟶ Spec (CommRingCat.of R)}
     (G : RelativeGroupLaw R f) {s s' : T ⟶ Spec (CommRingCat.of R)} (e : s = s') (a b :
       SchemeHomOver s f) :
-    G.mul s' (castBase e a) (castBase e b) = castBase e (G.mul s a b) := by
-  subst e; rfl
+    G.mul s' (castBase e a) (castBase e b) = castBase e (G.mul s a b) :=
+  _root_.GoodReductionJacobian.RelativeGroupLaw.mul_castBase G e a b
 
 /-- Lift a point to the pullback along the specified base morphism. -/
 def liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingCat.of R)}
@@ -107,7 +114,7 @@ def liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingC
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R')) (a : SchemeHomOver (t ≫ specMap R R')
       D.toBase) :
     SchemeHomOver t (D.baseChange R').toBase :=
-  ⟨pullback.lift a.1 t a.2, pullback.lift_snd _ _ _⟩
+  _root_.GoodReductionJacobian.RelativePic0Designation.baseChangeLift D R' t a
 
 /-- The first projection of a lifted point is the original point. -/
 @[scoped simp] theorem liftPt_fst {R : Type u} [CommRing R] {C : Scheme.{u}}
@@ -116,7 +123,7 @@ def liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingC
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R')) (a : SchemeHomOver (t ≫ specMap R R')
       D.toBase) :
     (liftPt D R' t a).1 ≫ pullback.fst D.toBase (specMap R R') = a.1 :=
-  pullback.lift_fst _ _ _
+  _root_.GoodReductionJacobian.RelativePic0Designation.baseChangeLift_fst D R' t a
 
 /-- A point of the pullback is determined by its first projection. -/
 theorem eq_liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingCat.of R)}
@@ -124,11 +131,8 @@ theorem eq_liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (Co
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R')) (z : SchemeHomOver t (D.baseChange
       R').toBase)
     (a : SchemeHomOver (t ≫ specMap R R') D.toBase)
-    (hz : z.1 ≫ pullback.fst D.toBase (specMap R R') = a.1) : z = liftPt D R' t a := by
-  apply Subtype.ext
-  apply pullback.hom_ext
-  · exact hz.trans (liftPt_fst D R' t a).symm
-  · exact z.2.trans (pullback.lift_snd _ _ _).symm
+    (hz : z.1 ≫ pullback.fst D.toBase (specMap R R') = a.1) : z = liftPt D R' t a :=
+  _root_.GoodReductionJacobian.RelativePic0Designation.eq_baseChangeLift D R' t z a hz
 
 /-- Compare the Poincare modules at a point and its base change lift. -/
 theorem poincare_liftPt_iso {R : Type u} [CommRing R] {C : Scheme.{u}}

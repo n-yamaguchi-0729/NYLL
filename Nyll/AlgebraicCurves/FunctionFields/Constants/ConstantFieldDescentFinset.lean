@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Analysis.Complex.Cardinality
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Mathlib.Basic.Complex.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Classification
-import Mathlib.RingTheory.Algebraic.Cardinality
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
+module
+
+public import Mathlib.Analysis.Complex.Cardinality
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Basic.Complex.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Classification
+public import Mathlib.RingTheory.Algebraic.Cardinality
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
 
 /-!
 # Exists constant Field Descent finset
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -106,7 +110,7 @@ theorem isAlgebraic_of_rational_relation {k Φ : Type*} [Field k] [Field Φ] [Al
     simp only [q, finsetSum_coeff, coeff_C_mul_X_pow]
     rw [Finset.sum_eq_single j]
     · rw [ite_eq_left rfl]
-    · intro b _ hb; simp [Ne.symm hb]
+    · intro b _ hb; simp only [Ne.symm hb, ↓reduceIte]
     · intro h; exact absurd hj h
   refine ⟨q, ?_, ?_⟩
   · obtain ⟨j₀, hj₀, hne⟩ := hne
@@ -154,7 +158,7 @@ theorem descent_abstract {k F : Type*} [Field k] [Field F] [Algebra k F]
   have htop₀ : k⟮x₀, y₀⟯ = (⊤ : IntermediateField k F₀) := by
     apply IntermediateField.lift_injective
     rw [lift_adjoin, lift_top]
-    simp [Set.image_insert_eq, Set.image_singleton, x₀, y₀, hF₀]
+    simp only [Set.image_insert_eq, Set.image_singleton, hF₀, x₀, y₀]
   have hfin₀ : FiniteDimensional k⟮x₀⟯ F₀ := by
     have h1 : FiniteDimensional k⟮x₀⟯ k⟮x₀⟯⟮y₀⟯ := adjoin.finiteDimensional hyint
     have h2 : k⟮x₀⟯⟮y₀⟯ = ⊤ := by
@@ -258,9 +262,11 @@ theorem core (K : Type u) (F : Type v) [Field K] [Field F]
       ∃ p₀ : K₀[X], p₀.map (algebraMap K₀ K) = p := fun p hp =>
     (mem_lifts _).1 ((lifts_iff_coeffs_subset_range _).2 (hp.trans hCK₀))
   have hrC : ∀ j ∈ J, ((r j).coeffs : Set K) ⊆ C := fun j hj c hc =>
-    Set.mem_union_left _ (Set.mem_biUnion hj (by simp [hc]))
+    Set.mem_union_left _ (Set.mem_biUnion hj (by simp only [Finset.coe_union, Set.mem_union, hc,
+      SetLike.mem_coe, true_or]))
   have hsC : ∀ j ∈ J, ((s j).coeffs : Set K) ⊆ C := fun j hj c hc =>
-    Set.mem_union_left _ (Set.mem_biUnion hj (by simp [hc]))
+    Set.mem_union_left _ (Set.mem_biUnion hj (by simp only [Finset.coe_union, Set.mem_union,
+      SetLike.mem_coe, hc, or_true]))
   have htC : ∀ z ∈ t, ∀ i ∈ (P z).support ∪ (Q z).support,
       ((rp z i).coeffs : Set K) ⊆ C ∧ ((sp z i).coeffs : Set K) ⊆ C ∧
         ((rq z i).coeffs : Set K) ⊆ C ∧ ((sq z i).coeffs : Set K) ⊆ C := by
@@ -270,7 +276,11 @@ theorem core (K : Type u) (F : Type v) [Field K] [Field F]
       intro c hc
       refine Set.mem_union_right _ ?_
       exact Set.mem_biUnion (Finset.mem_coe.2 hz) (Set.mem_biUnion (Finset.mem_coe.2 hi) hc)
-    refine ⟨?_, ?_, ?_, ?_⟩ <;> intro c hc <;> apply hsub <;> simp [hc]
+    refine ⟨?_, ?_, ?_, ?_⟩ <;> intro c hc <;> apply hsub
+    · exact Finset.mem_union_left _ (Finset.mem_union_left _ hc)
+    · exact Finset.mem_union_left _ (Finset.mem_union_right _ hc)
+    · exact Finset.mem_union_right _ (Finset.mem_union_left _ hc)
+    · exact Finset.mem_union_right _ (Finset.mem_union_right _ hc)
   have hr₀ : ∀ j, ∃ p₀ : K₀[X], j ∈ J → p₀.map (algebraMap K₀ K) = r j := fun j => by
     by_cases hj : j ∈ J
     · obtain ⟨p₀, hp₀⟩ := hlift _ (hrC j hj); exact ⟨p₀, fun _ => hp₀⟩

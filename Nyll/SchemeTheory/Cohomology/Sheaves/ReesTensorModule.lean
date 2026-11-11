@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageModule
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesProjectiveSerre
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePullback
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensor
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageModule
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesProjectiveSerre
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePullback
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # The actual Rees image with coherent sheaf coefficients
@@ -32,6 +34,8 @@ For projective space over a Noetherian ring, the native Serre theorem
 therefore gives one bound for every positive cohomological degree of this
 actual coefficient sheaf on the original Rees cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

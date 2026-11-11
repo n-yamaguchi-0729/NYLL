@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.TwoTermComplexSectionsEquivBaseChange
-import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.CoherentBaseChangeTwoTermComplexOneTmulNeZero
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.BasicOpenFrameFramePullback
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.TwoTermComplexSectionsEquivBaseChange
+public import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.CoherentBaseChangeTwoTermComplexOneTmulNeZero
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.BasicOpenFrameFramePullback
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
 
 /-!
 # Scheme Modules Is Invertible exists nonempty pullback preimage basic Open iso unit of
 forall sections linear Equiv
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

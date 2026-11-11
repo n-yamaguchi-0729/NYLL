@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulusRestriction
-import Nyll.AlgebraicCurves.Models.Sections.RationalSectionRatio
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionDifferenceIdeal
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulusRestriction
+public import Nyll.AlgebraicCurves.Models.Sections.RationalSectionRatio
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionDifferenceIdeal
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-! # Ratios of equally rigidified sections satisfy the full modulus -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,7 +45,7 @@ theorem congruentOne_coeff_ratio_of_pullback_eq
     (M.placeOfPoint x).CongruentOne (M.cartierMultiplicity I hI x)
       (M.ffEquiv.symm (M.C.germToFunctionField U.1 (coeff s U.1 τ.hom)) /
         M.ffEquiv.symm (M.C.germToFunctionField U.1 (coeff t U.1 τ.hom))) := by
-  let : Nonempty U.1 := ⟨⟨x.1, hx⟩⟩
+  intro sharedOwner1
   obtain ⟨a, ha⟩ := hL.isUnit_coeff_germ_of_notMem_support s U τ x.1 hx hs
   obtain ⟨b, hb⟩ := hL.isUnit_coeff_germ_of_notMem_support t U τ x.1 hx ht
   have hdiff : (a : M.C.presheaf.stalk x.1) - (b : M.C.presheaf.stalk x.1) ∈

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitAction
-import Mathlib.RepresentationTheory.Continuous.TopRep
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitAction
+public import Mathlib.RepresentationTheory.Continuous.TopRep
 
 /-!
 # Continuous absolute Galois action on geometric sections
@@ -14,6 +16,8 @@ Every section comes from a finite Galois extension, so its orbit map
 factors through that finite Galois group. Thus the actual colimit action
 has open stabilizers for the discrete topology on sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -34,10 +38,10 @@ omit [DiscreteTopology (finiteGaloisSectionColimit K F)] in
 theorem finiteGaloisSectionColimitAction_continuous_orbit
     (x : finiteGaloisSectionColimit K F) :
     Continuous (fun σ : Gal(AlgebraicClosure K/K) =>
-      (finiteGaloisSectionColimitAction K F σ).hom x) := by
+      (finiteGaloisSectionColimitAction K F σ).asIso.hom x) := by
   obtain ⟨E, s, rfl⟩ := finiteGaloisSectionColimit_exists_stage K F x
   let g : Gal(E/K) → finiteGaloisSectionColimit K F :=
-    fun τ => finiteGaloisSectionColimitι K F E ((fieldGaloisSheafAction K E F τ).hom s)
+    fun τ => finiteGaloisSectionColimitι K F E ((fieldGaloisSheafAction K E F τ).asIso.hom s)
   have hg : Continuous g := continuous_of_discreteTopology
   have hr : Continuous (AlgEquiv.restrictNormalHom
       (F := K) (K₁ := AlgebraicClosure K) E) :=
@@ -51,14 +55,14 @@ theorem finiteGaloisSectionColimitAction_continuous_orbit
 theorem finiteGaloisSectionColimitAction_isOpen_stabilizer
     (x : finiteGaloisSectionColimit K F) :
     IsOpen {σ : Gal(AlgebraicClosure K/K) |
-      (finiteGaloisSectionColimitAction K F σ).hom x = x} :=
+      (finiteGaloisSectionColimitAction K F σ).asIso.hom x = x} :=
   (isOpen_discrete ({x} : Set (finiteGaloisSectionColimit K F))).preimage
     (finiteGaloisSectionColimitAction_continuous_orbit K F x)
 
 /-- The actual absolute Galois action is jointly continuous. -/
 theorem finiteGaloisSectionColimitAction_continuous :
     Continuous (fun p : Gal(AlgebraicClosure K/K) × finiteGaloisSectionColimit K F =>
-      (finiteGaloisSectionColimitAction K F p.1).hom p.2) :=
+      (finiteGaloisSectionColimitAction K F p.1).asIso.hom p.2) :=
   continuous_prod_of_discrete_right.mpr
     (fun x => finiteGaloisSectionColimitAction_continuous_orbit K F x)
 
@@ -72,12 +76,12 @@ def finiteGaloisSectionColimitContRepresentation :
       map_one' := by
         apply ContinuousLinearMap.ext
         intro x
-        exact congrArg (fun a => a.hom x)
+        exact congrArg (fun a => a.asIso.hom x)
           (map_one (finiteGaloisSectionColimitAction K F))
       map_mul' σ τ := by
         apply ContinuousLinearMap.ext
         intro x
-        exact congrArg (fun a => a.hom x)
+        exact congrArg (fun a => a.asIso.hom x)
           (map_mul (finiteGaloisSectionColimitAction K F) σ τ) }
 
 end Discrete

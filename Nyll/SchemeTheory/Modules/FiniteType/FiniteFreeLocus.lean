@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
-import Nyll.SchemeTheory.Modules.Localization.SectionLocalization
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.Topology.Sets.Opens
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
+public import Nyll.SchemeTheory.Modules.Localization.SectionLocalization
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.Topology.Sets.Opens
 
 /-!
 # The finite locally free locus of a native module sheaf
@@ -30,6 +32,8 @@ If the locus covers the scheme, every affine section module is flat.
 The proof uses free sections on smaller basic opens and the original
 quasicoherent restriction maps to descend flatness from those localizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

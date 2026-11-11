@@ -13,15 +13,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionRightUnitor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionAssociator
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionRightUnitor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionAssociator
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 
 /-!
 # Multiplication of tensor powers of a local section
 -/
+
+@[expose] public section
 
 universe u
 

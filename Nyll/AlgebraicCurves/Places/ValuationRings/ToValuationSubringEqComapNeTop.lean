@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists to Valuation Subring eq comap of ne top
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -34,13 +38,6 @@ open _root_.AlgebraicCurve.Place
 section SinglePlace
 
 variable {K F : Type*} [Field K] [Field F] [Algebra K F] (v : Place K F)
-
-private theorem exists_ord_pos : ∃ f : F, f ≠ 0 ∧ 0 < v.ord f := by
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  refine ⟨(π : F), ?_, ?_⟩
-  · simpa [ne_eq, ZeroMemClass.coe_eq_zero] using hπ.ne_zero
-  · rw [v.ord_coe_irreducible hπ]
-    exact one_pos
 
 end SinglePlace
 

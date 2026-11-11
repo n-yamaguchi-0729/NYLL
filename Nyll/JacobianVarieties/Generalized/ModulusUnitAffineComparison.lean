@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameCoordinates
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarFunctor
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameCoordinates
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarFunctor
 
 /-! The intrinsic modulus-unit functor on actual affine tests. -/
+
+@[expose] public section
 
 noncomputable section
 

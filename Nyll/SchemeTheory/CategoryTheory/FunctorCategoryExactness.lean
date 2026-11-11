@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Category.Grp.Preadditive
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+module
+
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.Preadditive
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 
 /-!
 # Pointwise exactness in abelian functor categories
@@ -21,6 +23,8 @@ Exactness is detected by all evaluation functors. This packages the
 homology comparison once, without expanding a concrete presheaf's
 definition inside its kernel proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe v u v' u'

@@ -4,51 +4,59 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftIsSmoothAt
-import Nyll.SchemeTheory.RingTheory.Henselian.CompleteOrthogonalIdempotentsLocalRingQuotient
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLift
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
-import Nyll.SchemeTheory.RingTheory.Henselian.TameInverseRoot
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
-import Nyll.SchemeTheory.RingTheory.Henselian.RationalFunctionFormalTranslation
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianCyclicIdempotent
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFactorization
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteDomainLocal
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteIdempotent
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegral
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralClosureUnits
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralCyclicIdempotent
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianNilIdeal
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianOrthogonalIdempotents
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
-import Nyll.SchemeTheory.RingTheory.Henselian.IsIdempotentElemMapEq
-import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
-import Nyll.SchemeTheory.RingTheory.Henselian.LocalRing
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeModuleFinite
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteQuotientSpanPowMem
-import Nyll.SchemeTheory.RingTheory.Henselian.MonicDvdEval
-import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiberDegree
-import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPoint
-import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPointLift
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueSectionKerEqSpanFormallySmooth
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueSectionKerEqSpanFormallyUnramified
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
-import Nyll.SchemeTheory.RingTheory.Henselian.TameUniformizerNormalization
-import Nyll.SchemeTheory.RingTheory.Henselian.TameLaurentNormalization
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslation
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslationOrder
-import Nyll.SchemeTheory.RingTheory.Henselian.SeparatingFormalTranslationComparison
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentRootOfUnityAutomorphisms
-import Nyll.SchemeTheory.RingTheory.Henselian.TensorSplittingOfEmbeddings
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalEmbeddingLiftAlgebra
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalTensorSplittingOfEmbeddings
-import Nyll.SchemeTheory.RingTheory.Henselian.RegularReciprocalLaurentDeformation
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteLocalGeometricPoints
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableNormalizationDVR
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.SmoothCompletionApproximation
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftIsSmoothAt
+public import Nyll.SchemeTheory.RingTheory.Henselian.CompleteOrthogonalIdempotentsLocalRingQuotient
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLift
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameInverseRoot
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
+public import Nyll.SchemeTheory.RingTheory.Henselian.RationalFunctionFormalTranslation
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianCyclicIdempotent
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFactorization
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteDomainLocal
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteIdempotent
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegral
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralClosureUnits
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralCyclicIdempotent
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianNilIdeal
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianOrthogonalIdempotents
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
+public import Nyll.SchemeTheory.RingTheory.Henselian.IsIdempotentElemMapEq
+public import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
+public import Nyll.SchemeTheory.RingTheory.Henselian.LocalRing
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeModuleFinite
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteQuotientSpanPowMem
+public import Nyll.SchemeTheory.RingTheory.Henselian.MonicDvdEval
+public import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiberDegree
+public import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPoint
+public import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPointLift
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueSectionKerEqSpanFormallySmooth
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueSectionKerEqSpanFormallyUnramified
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameUniformizerNormalization
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameLaurentNormalization
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslation
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslationOrder
+public import Nyll.SchemeTheory.RingTheory.Henselian.SeparatingFormalTranslationComparison
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentRootOfUnityAutomorphisms
+public import Nyll.SchemeTheory.RingTheory.Henselian.TensorSplittingOfEmbeddings
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalEmbeddingLiftAlgebra
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalTensorSplittingOfEmbeddings
+public import Nyll.SchemeTheory.RingTheory.Henselian.RegularReciprocalLaurentDeformation
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteLocalGeometricPoints
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteFlatPointReduction
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableNormalizationDVR
+public import Nyll.SchemeTheory.RingTheory.Henselian.FilteredColimit
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.PrincipalCompletionApproximation
+public import Nyll.SchemeTheory.RingTheory.Henselian.NormalLocalResiduePowerRoots

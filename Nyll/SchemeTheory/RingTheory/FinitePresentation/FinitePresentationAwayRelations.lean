@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.Tactic.Choose
 
 
 /-!
@@ -33,6 +35,8 @@ This is a ring-local ingredient for finite algebra approximation as used in
 Stacks, Tags 0817 and 09YZ. It does not assert the existence of compatible
 global algebra models or an extension of every algebra on an open subscheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

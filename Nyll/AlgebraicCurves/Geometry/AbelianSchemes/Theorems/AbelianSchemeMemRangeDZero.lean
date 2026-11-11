@@ -10,22 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Pi
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DEqDComapSliceEq
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.UnitPullbackUnitPullbackSubMem
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.UnitPullbackComapIdApply
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.HSuccEquivUnitPullbackId
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveSpecIsoInvCompAppTop
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Pi
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DEqDComapSliceEq
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.UnitPullbackUnitPullbackSubMem
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.UnitPullbackComapIdApply
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.HSuccEquivUnitPullbackId
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveSpecIsoInvCompAppTop
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
 
 /-!
 # Descent of Čech coboundaries for an abelian scheme
@@ -33,6 +35,8 @@ import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCocha
 Descend a degree-zero coboundary from the unit pullback using the comparison
 of sections over the base.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

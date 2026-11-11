@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.Kummer.OpenKummerArithmeticRootFiber
+import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootFiberTransitivity
 
 /-!
 # Full coefficient-root torsor on the original arithmetic Kummer fiber

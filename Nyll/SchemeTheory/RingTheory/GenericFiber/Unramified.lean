@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
-import Mathlib.RingTheory.Unramified.Field
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
+public import Mathlib.RingTheory.Unramified.Field
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
 
 /-!
 # Generic fibers of unramified domains
@@ -17,6 +19,8 @@ import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
 The generic fiber of a dominant, essentially finite type formally unramified
 map of domains is a field. In particular, this applies to étale algebras.
 -/
+
+@[expose] public section
 
 noncomputable section
 

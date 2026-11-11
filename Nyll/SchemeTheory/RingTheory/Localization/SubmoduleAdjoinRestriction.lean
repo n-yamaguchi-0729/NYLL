@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.SubmoduleAdjoinLocalization
-import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.SubmoduleAdjoinLocalization
+public import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Generated algebras under an actual localized submodule restriction
@@ -18,6 +20,8 @@ localized submodule follows from denominators of its own sections. The
 previous generated-algebra localization theorem then applies to the
 literal algebra restriction. No submodule-comparison premise is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,7 +60,8 @@ theorem localized'_eq_of_isLocalizedModule_restrict (hf : ∀ x ∈ N, f x ∈ N
     rw [algebraMap_smul, hy']
     exact hmem
 
-private theorem adjoinRestrictionTo_mapsTo (hf : ∀ x ∈ N, f x ∈ N') :
+/-- The ambient algebra map sends the first generated algebra into the second. -/
+theorem adjoinRestrictionTo_mapsTo (hf : ∀ x ∈ N, f x ∈ N') :
     ∀ x ∈ Algebra.adjoin R (N : Set B), f x ∈ Algebra.adjoin R' (N' : Set B') := by
   change Algebra.adjoin R (N : Set B) ≤
     ((Algebra.adjoin R' (N' : Set B')).restrictScalars R).comap f

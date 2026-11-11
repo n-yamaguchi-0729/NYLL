@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalTensor
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalTensor
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Correspondence with the original native algebras
@@ -18,6 +20,8 @@ one-tensor scope. The categorical interface is then identified with that
 native object. The equivalence below has arbitrary native algebra equivalences
 as its inverse input, and proves both round trips.
 -/
+
+@[expose] public section
 
 noncomputable section
 

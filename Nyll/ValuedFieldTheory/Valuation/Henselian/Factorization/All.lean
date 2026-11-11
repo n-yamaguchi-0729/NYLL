@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.AdicLimits
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Assembly
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Basic
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.CoefficientMinimum
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Complete
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DegreeBounds
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DivisionBounds
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.ErrorPowers
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.FiniteApproximation
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.InfiniteApproximation
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Iteration
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.PrincipalLimits
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Step
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Truncation
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.WeakLimits
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.AdicLimits
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Assembly
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Basic
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.CoefficientMinimum
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Complete
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DegreeBounds
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DivisionBounds
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.ErrorPowers
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.FiniteApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.InfiniteApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Iteration
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.PrincipalLimits
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Step
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Truncation
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.WeakLimits
 
 /-!
 # Henselian polynomial factorization

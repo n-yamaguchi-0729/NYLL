@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Adjunction.Whiskering
-import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
-import Nyll.SchemeTheory.Sheaves.OverExtension
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Adjunction.Whiskering
+public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+public import Nyll.SchemeTheory.Sheaves.OverExtension
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
 
 /-!
 # Free abelian representables and actual sheaf sections
@@ -17,6 +19,8 @@ The free abelian sheaves used in mathlib's `Sheaf.cohomologyPresheaf`
 corepresent evaluation. We record this equivalence and its two naturalities
 so that local lifting of sections can be applied to the actual Ext groups.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe v u

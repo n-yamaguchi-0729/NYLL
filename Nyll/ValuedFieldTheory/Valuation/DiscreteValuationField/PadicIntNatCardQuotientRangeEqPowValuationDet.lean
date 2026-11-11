@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Data.ZMod.Basic
-import Mathlib.LinearAlgebra.Determinant
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.LinearAlgebra.FreeModule.Finite.Quotient
-import Mathlib.NumberTheory.Padics.PadicIntegers
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.LinearAlgebra.Determinant
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Quotient
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Ext
 
 /-!
 # Padic Int nat Card quotient range eq pow valuation det
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgebraicEquivalenceIffEulerCharSectionsOfEq
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.ModulesInvertibleEulerCharSectionsOfTensorEqAddSub
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.InvertibleIdealEulerCharSectionsOfTensorInvModuleEq
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgebraicEquivalenceEulerCharSectionsOfTensorEq
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgebraicEquivalenceIffEulerCharSectionsOfEq
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.ModulesInvertibleEulerCharSectionsOfTensorEqAddSub
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.InvertibleIdealEulerCharSectionsOfTensorInvModuleEq
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgebraicEquivalenceEulerCharSectionsOfTensorEq
 
 /-! # Euler degree of actual modulus-rigidified classes -/
+
+@[expose] public section
 
 noncomputable section
 

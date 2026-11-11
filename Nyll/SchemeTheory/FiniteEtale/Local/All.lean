@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Local.OfTargetLocalizations
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Local.OfTargetLocalizations
 
 /-! Canonical aggregate for SchemeTheory.FiniteEtale.Local. -/

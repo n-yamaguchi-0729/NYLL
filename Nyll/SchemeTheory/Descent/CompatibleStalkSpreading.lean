@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.StalkSpreading
-import Nyll.SchemeTheory.LocalGeometry.StalkDominantNeighborhood
-import Nyll.SchemeTheory.Morphisms.DominantBaseChange
-import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Nyll.SchemeTheory.Descent.StalkSpreading
+public import Nyll.SchemeTheory.LocalGeometry.StalkDominantNeighborhood
+public import Nyll.SchemeTheory.Morphisms.DominantBaseChange
+public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!+# Spreading a stalk section compatibly with an existing open section
 
@@ -18,6 +20,8 @@ section extends to a neighborhood with the same agreement on the overlap.
 The open need not be quasi-compact. Compatibility is obtained from actual
 dominance after deleting the components which miss the chosen point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
-import Nyll.SchemeTheory.WeilRestriction.Restriction
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupPullbackIso
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+module
+
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupPullbackIso
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # Scalar extension of the constructed generalized Jacobian group scheme
@@ -18,6 +21,8 @@ The carrier is the actual scheme pullback. Its group operation classifies tensor
 product in the restricted Picard-zero group sheaf. The previously proved whole
 divisor comparison identifies this group with the construction over the new field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

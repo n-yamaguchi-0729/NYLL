@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteRamificationDiagram
-import Nyll.ProCGroups.ProC.InverseLimits.Predicates
-import Mathlib.Algebra.Group.Subgroup.Ker
-import Mathlib.Algebra.Group.Subgroup.Lattice
-import Mathlib.Topology.Algebra.Group.Subgroup
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteRamificationDiagram
+public import Nyll.ProCGroups.ProC.InverseLimits.Predicates
+public import Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.Algebra.Group.Subgroup.Lattice
+public import Mathlib.Topology.Algebra.Group.Subgroup
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # Every conclusion of the absolute DVR ramification theorem
@@ -22,6 +24,8 @@ separable roots target. Equivariance uses the residue action computed from
 the SAME map in the first exact sequence. The original-input theorem
 constructs this certificate; no conclusion is an input assumption.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

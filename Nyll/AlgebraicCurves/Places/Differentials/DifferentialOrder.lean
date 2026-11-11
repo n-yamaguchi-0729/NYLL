@@ -15,27 +15,31 @@ https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/P2M/Sol/S_AlgebraicCurve_Place_ordDiff_eq_ordDifferential_of_perfectField.lean
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonneg
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.IsAlgebraicAdjoinTranscendental
-import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
-import Mathlib.FieldTheory.Perfect
-import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
-import Nyll.AlgebraicCurves.Differentials.Local.Order
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveIffTranscendentalFiniteDimensional
-import Nyll.AlgebraicCurves.Differentials.Regular.Regular
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonneg
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.IsAlgebraicAdjoinTranscendental
+public import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
+public import Mathlib.FieldTheory.Perfect
+public import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveIffTranscendentalFiniteDimensional
+public import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
 
 /-!
 # Place ord Diff eq ord diff Coeff
 -/
+
+@[expose] public section
 
 section
 

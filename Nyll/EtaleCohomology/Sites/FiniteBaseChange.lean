@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChangeStalkCompatibility
-import Nyll.EtaleCohomology.Sites.BaseChangeStalkProducts
-import Nyll.EtaleCohomology.Sites.DirectImageBaseChange
-import Nyll.EtaleCohomology.Sites.FinitePushforwardStalkSurjectivity
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChangeStalkCompatibility
+public import Nyll.EtaleCohomology.Sites.BaseChangeStalkProducts
+public import Nyll.EtaleCohomology.Sites.DirectImageBaseChange
+public import Nyll.EtaleCohomology.Sites.FinitePushforwardStalkSurjectivity
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Finite direct image commutes with arbitrary base change
@@ -32,6 +34,8 @@ This proves Stacks Project 59.55.3 for arbitrary commutative module
 coefficients and arbitrary base-change morphisms. The finite morphism need
 not be flat or finitely presented.
 -/
+
+@[expose] public section
 
 noncomputable section
 

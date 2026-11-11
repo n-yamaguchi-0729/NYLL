@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Projective lifting over the actual quotient ring
@@ -27,6 +29,8 @@ restricted to the original scalars.
 The resulting splitting lift keeps a prescribed further reduction. It is
 the successive-step construction for compatible projective adic systems.
 -/
+
+@[expose] public section
 
 noncomputable section
 

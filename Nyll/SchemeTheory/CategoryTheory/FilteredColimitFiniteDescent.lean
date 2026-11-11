@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.Hypercover.One
-import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Multiequalizer
+module
+
+public import Mathlib.CategoryTheory.Sites.Hypercover.One
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
+public import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Multiequalizer
 
 /-!
 # Finite descent for filtered colimits of abelian presheaves
@@ -19,6 +21,8 @@ A finite degree-one hypercover imposes finitely many matching conditions.
 Filtered colimits of abelian groups commute with its multiequalizer, so
 descent for this hypercover passes to the presheaf colimit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

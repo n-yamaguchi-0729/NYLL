@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Associator
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.Tactic.Choose
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Associator
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.Tactic.Choose
 
 /-!
 # Tensoring sections with a local frame
@@ -30,6 +32,8 @@ the first factor. These local sections agree and glue in that factor.
 The first factor is arbitrary; quasicoherence or local freeness of that
 factor is not needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

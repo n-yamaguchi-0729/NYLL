@@ -11,18 +11,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Noetherian.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceQuasicoherentTwist
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceCoherentTwistFlat
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceQuasicoherentTwist
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceCoherentTwistFlat
 
 /-!
 # Proj Space finite H0 twist and finite HSucc twist of is Closed Immersion
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

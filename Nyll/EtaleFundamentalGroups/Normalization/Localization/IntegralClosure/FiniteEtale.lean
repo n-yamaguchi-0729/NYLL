@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.StalkMap
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleFromBoundaryStalks
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.StalkMap
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleFromBoundaryStalks
 
 /-!
 # Finite etaleness of a relative normalization from affine charts
@@ -16,6 +18,8 @@ prime-local algebra maps into finite etaleness of the actual global
 normalization morphism.  A boundary form allows the local calculation to be
 restricted to points outside an open locus where etaleness is already known.
 -/
+
+@[expose] public section
 
 noncomputable section
 

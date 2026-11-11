@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameOrder
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameFactorization
-import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteResidueFields
-import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
-import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphisms
-import Nyll.SchemeTheory.Normalization.NativeNormalizationPrime
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameOrder
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameFactorization
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteResidueFields
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphisms
+public import Nyll.SchemeTheory.Normalization.NativeNormalizationPrime
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Ramification arithmetic on the original finite normalization
@@ -27,6 +29,8 @@ ramification identity with its literal inseparable residue degree. The
 original DVR and field extension supply all normalization arithmetic before
 the residue-field calculation is applied.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

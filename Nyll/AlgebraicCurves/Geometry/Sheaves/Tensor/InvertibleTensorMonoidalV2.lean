@@ -10,20 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Monoidal.Category
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.SheafificationMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.SheafificationMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
 
 /-!
 # Scheme Modules Is Invertible tensor monoidal V2
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -74,14 +80,8 @@ theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.tensor_monoidalV2 {
   AlgebraicGeometry.Scheme.{u}}
     {L M : X.Modules} (hL : AlgebraicGeometry.Scheme.Modules.IsInvertible L)
     (hM : AlgebraicGeometry.Scheme.Modules.IsInvertible M) :
-    AlgebraicGeometry.Scheme.Modules.IsInvertible (L ⊗ M) := by
-  refine ⟨fun x => ?_⟩
-  obtain ⟨U, hxU, ⟨eU⟩⟩ := hL.1 x
-  obtain ⟨U', hxU', ⟨eU'⟩⟩ := hM.1 x
-  refine ⟨U ⊓ U', ⟨hxU, hxU'⟩, ⟨?_⟩⟩
-  exact pullbackTensorObjIso (U ⊓ U').ι L M ≪≫
-    (trivializationOfLE inf_le_left L eU ⊗ᵢ trivializationOfLE inf_le_right M eU') ≪≫
-    λ_ (𝟙_ _)
+    AlgebraicGeometry.Scheme.Modules.IsInvertible (L ⊗ M) :=
+  _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.tensor hL hM
 end AlgebraicCurves.Geometry.Sheaves.Proofs.Scheme_Modules_IsInvertible_tensor_monoidalV2
 end ProofImplementation
 

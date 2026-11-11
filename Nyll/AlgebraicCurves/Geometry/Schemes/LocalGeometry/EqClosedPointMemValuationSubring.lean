@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 
 /-!
 # Scheme exists eq closed Point and forall mem of valuation Subring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

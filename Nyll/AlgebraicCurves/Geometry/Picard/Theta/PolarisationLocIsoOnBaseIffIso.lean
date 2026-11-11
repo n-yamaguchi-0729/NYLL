@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
 
 /-!
 # Polarisation loc Iso On Base iff nonempty iso of is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

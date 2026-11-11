@@ -15,21 +15,23 @@ https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536
 -/
 
 
-import Nyll.JacobianVarieties.Picard.Cohomology.SeparableChartSections
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSubsingletonH1Fibre
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.HasChartSectionsGeometricFibreRiemannRochImpEq
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.EulerCharFibreSectionTwistTensorIdealModuleEqOne
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
-import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+module
+
+public import Nyll.JacobianVarieties.Picard.Cohomology.SeparableChartSections
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSubsingletonH1Fibre
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.HasChartSectionsGeometricFibreRiemannRochImpEq
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.EulerCharFibreSectionTwistTensorIdealModuleEqOne
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
+public import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
 
 /-! # Effective-divisor charts after a finite separable extension
 
@@ -37,6 +39,8 @@ Actual chart sections give cohomology-vanishing opens which cover the represente
 Picard scheme. On each open, an actual effective divisor of a common positive
 degree has normalized line bundle equal to the Poincare restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Cohomology.AbelianSchemeInvertibleCoeffPosEulerCharTensorPowEq
 import Nyll.JacobianVarieties.Picard.Cohomology.CurveModelIsoUnitEulerCharSectionsOfEq
 import Nyll.JacobianVarieties.Picard.Cohomology.EulerCharFibreLineBundleTensorIdealModuleEqOne
 import Nyll.JacobianVarieties.Picard.Cohomology.EulerCharPullbackFirstLineSectionTwistTensorIdealModuleEq
@@ -16,7 +15,6 @@ import Nyll.JacobianVarieties.Picard.Cohomology.FinrankH0FibreEqOneSubsingletonH
 import Nyll.JacobianVarieties.Picard.Cohomology.FinrankH0UnitFibreAtEqOne
 import Nyll.JacobianVarieties.Picard.Cohomology.FinrankH1UnitFibreAtEq
 import Nyll.JacobianVarieties.Picard.Cohomology.InjectiveSubsingletonH1SectionsOfTensor
-import Nyll.JacobianVarieties.Picard.Cohomology.InvariantAmpleBundleEulerPolynomial
 import Nyll.JacobianVarieties.Picard.Cohomology.InvertiblePullbackIsoFoldrSectionTwistTensor
 import Nyll.JacobianVarieties.Picard.Cohomology.IsClosedSetOfFibreLeFinrankH0
 import Nyll.JacobianVarieties.Picard.Cohomology.IsClosedSetOfFibreLeFinrankH1

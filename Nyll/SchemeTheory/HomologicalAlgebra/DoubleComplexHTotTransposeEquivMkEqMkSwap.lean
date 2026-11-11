@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Group.Even
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Ring.Commute
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
+module
+
+public import Mathlib.Algebra.Group.Even
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Ring.Commute
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
 
 /-!
 # Double Complex exists HTot transpose equiv mk eq mk swap
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

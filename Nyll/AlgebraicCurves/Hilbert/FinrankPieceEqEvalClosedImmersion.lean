@@ -10,29 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Tactic.Omega
-import Lean.Elab.Tactic.NormCast
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
-import Nyll.SchemeTheory.RingTheory.Polynomial.NatEqMacaulayPowLeMacaulayPow
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialLeFinrankPiece
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSupSpanSingletonSuccAddFinrankPieceEq
-import Nyll.AlgebraicCurves.Hilbert.MemXPowMulMem
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialSumCMulXMulMemImp
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Lean.Elab.Tactic.NormCast
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.SmallFieldModel
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
+public import Nyll.SchemeTheory.RingTheory.Polynomial.NatEqMacaulayPowLeMacaulayPow
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialLeFinrankPiece
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSupSpanSingletonSuccAddFinrankPieceEq
+public import Nyll.AlgebraicCurves.Hilbert.MemXPowMulMem
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialSumCMulXMulMemImp
 
 /-!
 # exists forall finrank piece eq eval of is Closed Immersion of forall mem iff of eventually
 eq
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -54,6 +61,21 @@ def IsHilbPoly (n : ℕ) (P : Polynomial ℚ) : Prop :=
   ∃ (K : Type) (_ : Field K) (I : Ideal (MvPolynomial (Fin (n + 1)) K)),
     (∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) ∧
     ∃ d₁ : ℕ, ∀ d : ℕ, d₁ ≤ d → (Module.finrank K (piece I d) : ℚ) = P.eval (d : ℚ)
+
+/-- An arbitrary-universe homogeneous quotient supplies the original small-field witness for
+`IsHilbPoly`; the polynomial and every graded-piece dimension are preserved. -/
+theorem isHilbPoly_of_homogeneous_eventually_eq
+    (n : ℕ) (P : Polynomial ℚ) (K : Type u) [Field K]
+    (I : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (hI : ∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I)
+    (D : ℕ) (hP : ∀ d : ℕ, D ≤ d →
+      (Module.finrank K (piece I d) : ℚ) = P.eval (d : ℚ)) : IsHilbPoly n P := by
+  obtain ⟨K₀, hK₀, -, J, hJ, -, hdim⟩ :=
+    exists_small_field_homogeneous_ideal_finrank_piece_eq n K I hI
+  refine ⟨K₀, hK₀, J, hJ, D, ?_⟩
+  intro d hd
+  rw [hdim d]
+  exact hP d hd
 
 theorem exists_gotz (n : ℕ) (P : Polynomial ℚ) (hP : IsHilbPoly n P) :
     ∃ g : ℕ, 1 ≤ g ∧ ∃ H : ℕ → ℕ, (∀ e : ℕ, g ≤ e → (H e : ℚ) = P.eval (e : ℚ)) ∧
@@ -81,7 +103,7 @@ theorem gnum_eq (n : ℕ) (P : Polynomial ℚ) (h : IsHilbPoly n P) : gnum n P =
 
 variable {n : ℕ}
 
-theorem isHomogeneous_of_forall {K : Type} [CommRing K] (I : Ideal (MvPolynomial (Fin (n + 1)) K))
+theorem isHomogeneous_of_forall {K : Type u} [CommRing K] (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hI : ∀ p ∈ I, ∀ i : ℕ, homogeneousComponent i p ∈ I) :
     I.IsHomogeneous (homogeneousSubmodule (Fin (n + 1)) K) := by
   intro i p hp
@@ -90,7 +112,7 @@ theorem isHomogeneous_of_forall {K : Type} [CommRing K] (I : Ideal (MvPolynomial
       = homogeneousComponent i p from decomposition.decompose'_apply p i]
   exact hI p hp i
 
-theorem forall_of_isHomogeneous {K : Type} [CommRing K] (I : Ideal (MvPolynomial (Fin (n + 1)) K))
+theorem forall_of_isHomogeneous {K : Type u} [CommRing K] (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hI : I.IsHomogeneous (homogeneousSubmodule (Fin (n + 1)) K)) :
     ∀ p ∈ I, ∀ i : ℕ, homogeneousComponent i p ∈ I := by
   intro p hp i
@@ -100,7 +122,7 @@ theorem forall_of_isHomogeneous {K : Type} [CommRing K] (I : Ideal (MvPolynomial
       = homogeneousComponent i p from decomposition.decompose'_apply p i] at this
   exact this
 
-theorem homogeneous_sup_span_singleton {K : Type} [CommRing K] (I : Ideal (MvPolynomial (Fin (n +
+theorem homogeneous_sup_span_singleton {K : Type u} [CommRing K] (I : Ideal (MvPolynomial (Fin (n +
   1)) K))
     (hI : ∀ p ∈ I, ∀ i : ℕ, homogeneousComponent i p ∈ I)
     (ℓ : MvPolynomial (Fin (n + 1)) K) {e : ℕ} (hℓ : ℓ.IsHomogeneous e) :
@@ -129,8 +151,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 open GotzReg in
 theorem exists_forall_finrank_piece_eq_eval_of_isClosedImmersion_of_forall_mem_iff_of_eventually_eq
     (n : ℕ) (P : Polynomial ℚ) :
-    ∃ G : ℕ, ∀ (k : Type) [Field k] [IsAlgClosed k]
-      (Zk : Scheme.{0}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)),
+    ∃ G : ℕ, ∀ (k : Type u) [Field k] [IsAlgClosed k]
+      (Zk : Scheme.{u}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)),
         IsClosedImmersion ιk →
       ∀ (I : Ideal (MvPolynomial (Fin (n + 1)) k)),
         (∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) →
@@ -153,7 +175,8 @@ theorem exists_forall_finrank_piece_eq_eval_of_isClosedImmersion_of_forall_mem_i
   refine ⟨max (gnum n P) (gnum n Q), ?_⟩
   intro k _ _ Zk ιk hι I hhom hZ hev d hd
   obtain ⟨D₁, hD₁⟩ := hev
-  have hP : IsHilbPoly n P := ⟨k, inferInstance, I, hhom, D₁, hD₁⟩
+  have hP : IsHilbPoly n P :=
+    isHilbPoly_of_homogeneous_eventually_eq n P k I hhom D₁ hD₁
   obtain ⟨hg1, H, hHP, hHmax⟩ := (exists_gotz n P hP).choose_spec
   rw [gnum_eq n P hP] at hd
   set g : ℕ := (exists_gotz n P hP).choose with hg
@@ -201,7 +224,8 @@ theorem exists_forall_finrank_piece_eq_eval_of_isClosedImmersion_of_forall_mem_i
       I e') : ℚ)
         = (Module.finrank k (piece I (e' + 1)) : ℚ) := by exact_mod_cast hs
     linarith
-  have hQ' : IsHilbPoly n Q := ⟨k, inferInstance, I ⊔ Ideal.span {ℓ}, hhom', D₁ + 1, hQev⟩
+  have hQ' : IsHilbPoly n Q :=
+    isHilbPoly_of_homogeneous_eventually_eq n Q k (I ⊔ Ideal.span {ℓ}) hhom' (D₁ + 1) hQev
   obtain ⟨hg1', H', hH'P, hH'max⟩ := (exists_gotz n Q hQ').choose_spec
   rw [gnum_eq n Q hQ'] at hd
   set g' : ℕ := (exists_gotz n Q hQ').choose with hg'

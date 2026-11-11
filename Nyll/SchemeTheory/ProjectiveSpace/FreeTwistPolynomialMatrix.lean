@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
-import Nyll.SchemeTheory.Modules.Tensor.FiniteFreeSections
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalSections
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPresentation
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.Logic.Equiv.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
+public import Nyll.SchemeTheory.Modules.Tensor.FiniteFreeSections
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalSections
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPresentation
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.Logic.Equiv.Basic
 
 /-!
 # Actual polynomial matrices presenting coherent projective sheaves
@@ -36,6 +38,8 @@ Applying the comparison to the constructed finite cokernel presentation
 gives a genuine homogeneous polynomial matrix whose native cokernel is
 a twist of the given coherent sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

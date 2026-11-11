@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionGeometry
-import Mathlib.LinearAlgebra.Basis.Prod
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.Algebra.Module.Projective
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionGeometry
+public import Mathlib.LinearAlgebra.Basis.Prod
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.Algebra.Module.Projective
 
 /-! # Constructing split coordinates for finite-algebra unit restriction -/
+
+@[expose] public section
 
 noncomputable section
 

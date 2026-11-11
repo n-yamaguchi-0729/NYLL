@@ -4,12 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
-import Nyll.JacobianVarieties.Generalized.ModulusForgetfulScalarExtension
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupBaseChange
+module
+
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusForgetfulScalarExtension
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupBaseChange
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
 
 /-! # Scalar extension of the actual generalized-Jacobian projection -/
+
+@[expose] public section
 
 noncomputable section
 

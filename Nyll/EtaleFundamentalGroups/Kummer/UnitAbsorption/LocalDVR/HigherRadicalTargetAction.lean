@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FiniteToStandardDVF
 import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
 import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.ExactRootTargetAction
+import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
 
 /-!
 # A selected exact root action through the finite unit factor
@@ -101,41 +102,41 @@ theorem
     let Cq := AdjoinRoot factor.q
     let Eunit : IntermediateField L (AlgebraicClosure L) :=
       IntermediateField.adjoin L ({factor.delta} : Set (AlgebraicClosure L))
-    letI : IsDomain Cq :=
+    let : IsDomain Cq :=
       higherRadicalUnitFactor_adjoinRoot_isDomain
         base target varpi pi N beta factor
-    letI : Algebra.Etale W Cq := factor.q_etale
-    letI : Module.Finite W Cq := factor.q_finite
+    let : Algebra.Etale W Cq := factor.q_etale
+    let : Module.Finite W Cq := factor.q_finite
     let eCq : (L ⊗[W] Cq) ≃ₐ[L] Eunit :=
       adjoinRootGenericFactorAlgEquiv factor.q factor.unitFactorEquiv
-    letI : Algebra Cq Eunit :=
+    let : Algebra Cq Eunit :=
       (genericFiberRightAlgHom eCq).toRingHom.toAlgebra
-    letI : IsFractionRing Cq Eunit :=
+    let : IsFractionRing Cq Eunit :=
       isFractionRing_of_genericFiberAlgEquiv eCq
-    letI : IsFractionRing V K := base.valuationSubring_isFractionRing
-    letI : FaithfulSMul V L :=
+    let : IsFractionRing V K := base.valuationSubring_isFractionRing
+    let : FaithfulSMul V L :=
       FaithfulSMul.of_field_isFractionRing V L K L
-    letI : Algebra V Eunit :=
+    let : Algebra V Eunit :=
       ((algebraMap W Eunit).comp (algebraMap V W)).toAlgebra
-    letI : IsScalarTower V W Eunit :=
+    let : IsScalarTower V W Eunit :=
       IsScalarTower.of_algebraMap_eq' rfl
-    letI : IsScalarTower V L Eunit := by
+    let : IsScalarTower V L Eunit := by
       apply IsScalarTower.of_algebraMap_eq
       intro z
       change algebraMap W Eunit (algebraMap V W z) =
         algebraMap L Eunit (algebraMap V L z)
       rw [IsScalarTower.algebraMap_apply V W L,
         ← IsScalarTower.algebraMap_apply W L Eunit]
-    letI : Algebra Prefix Eunit :=
+    let : Algebra Prefix Eunit :=
       ((algebraMap L Eunit).comp (algebraMap Prefix L)).toAlgebra
-    letI : IsScalarTower V Prefix Eunit := by
+    let : IsScalarTower V Prefix Eunit := by
       apply IsScalarTower.of_algebraMap_eq
       intro z
       change algebraMap V Eunit z =
         algebraMap L Eunit (algebraMap Prefix L (algebraMap V Prefix z))
       rw [← IsScalarTower.algebraMap_apply V Prefix L,
         ← IsScalarTower.algebraMap_apply V L Eunit]
-    letI : FaithfulSMul V Eunit := FaithfulSMul.trans V L Eunit
+    let : FaithfulSMul V Eunit := FaithfulSMul.trans V L Eunit
     let exactRoot :=
       AdjoinRoot.root
         (X ^ ramificationIndex base target - C varpi)
@@ -151,54 +152,11 @@ theorem
           x i.castSucc =
             algebraMap Prefix Eunit (iteratedRadicalRoot V n a i)) ∧
         x (Fin.last r) = z := by
-  dsimp only
-  let V := base.valuationSubring
-  let W := target.valuationSubring
-  let Prefix := iteratedRadical V r n a
-  let Cq := AdjoinRoot factor.q
-  let Eunit : IntermediateField L (AlgebraicClosure L) :=
-    IntermediateField.adjoin L ({factor.delta} : Set (AlgebraicClosure L))
-  let : IsDomain Cq :=
-    higherRadicalUnitFactor_adjoinRoot_isDomain
-      base target varpi pi N beta factor
-  let : Algebra.Etale W Cq := factor.q_etale
-  let : Module.Finite W Cq := factor.q_finite
-  let eCq : (L ⊗[W] Cq) ≃ₐ[L] Eunit :=
-    adjoinRootGenericFactorAlgEquiv factor.q factor.unitFactorEquiv
-  let : Algebra Cq Eunit :=
-    (genericFiberRightAlgHom eCq).toRingHom.toAlgebra
-  let : IsFractionRing Cq Eunit :=
-    isFractionRing_of_genericFiberAlgEquiv eCq
-  let : IsFractionRing V K := base.valuationSubring_isFractionRing
-  let : FaithfulSMul V L :=
-    FaithfulSMul.of_field_isFractionRing V L K L
-  let : Algebra V Eunit :=
-    ((algebraMap W Eunit).comp (algebraMap V W)).toAlgebra
-  let : IsScalarTower V W Eunit :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let : IsScalarTower V L Eunit := by
-    apply IsScalarTower.of_algebraMap_eq
-    intro t
-    change algebraMap W Eunit (algebraMap V W t) =
-      algebraMap L Eunit (algebraMap V L t)
-    rw [IsScalarTower.algebraMap_apply V W L,
-      ← IsScalarTower.algebraMap_apply W L Eunit]
-  let : Algebra Prefix Eunit :=
-    ((algebraMap L Eunit).comp (algebraMap Prefix L)).toAlgebra
-  let : IsScalarTower V Prefix Eunit := by
-    apply IsScalarTower.of_algebraMap_eq
-    intro t
-    change algebraMap V Eunit t =
-      algebraMap L Eunit
-        (algebraMap Prefix L (algebraMap V Prefix t))
-    rw [← IsScalarTower.algebraMap_apply V Prefix L,
-      ← IsScalarTower.algebraMap_apply V L Eunit]
-  let : FaithfulSMul V Eunit := FaithfulSMul.trans V L Eunit
-  let exactRoot :=
-    AdjoinRoot.root
-      (X ^ ramificationIndex base target - C varpi)
-  let z : Eunit :=
-    algebraMap Cq Eunit (factor.radicalToUnitFactor exactRoot)
+  intro V W Prefix Cq Eunit sharedOwner1 sharedOwner2 sharedOwner3 eCq sharedOwner4 sharedOwner5
+    sharedOwner6 sharedOwner7 sharedOwner8 sharedOwner9 sharedOwner10 sharedOwner11 sharedOwner12
+    sharedOwner13 exactRoot z sharedOwner14 sharedOwner15
+  let : IsScalarTower V L Eunit := sharedOwner10
+  let : IsScalarTower V Prefix Eunit := sharedOwner12
   have hN : 0 < N := by
     rw [← hExact]
     exact ramificationIndex_pos_of_moduleFinite base target
@@ -356,7 +314,7 @@ theorem
           (algebraMap K L).comp (algebraMap V₀ K) := by
       rw [← IsScalarTower.algebraMap_eq V₀ W₀ L,
         ← IsScalarTower.algebraMap_eq V₀ K L]
-    letI : base.valuation.HasExtension target.valuation :=
+    let _ : base.valuation.HasExtension target.valuation :=
       EtaleFundamentalGroups.standardDVFOfDVR_hasExtension
         (algebraMap V₀ W₀) hcomm
     ∀ [CharZero base.residueField],
@@ -394,19 +352,8 @@ theorem
                       base target varpi pi N beta,
                     ExactUnitFactorPrefixAction
                       base target n a varpi N pi beta factor := by
-  dsimp only
-  intro _ r n a hn _ _ varpi hvarpi pi unit hpi hdecomp
+  intro base target hcomm baseExtension _ r n a hn _ _ varpi hvarpi pi unit hpi hdecomp
     beta hbetaPow _
-  let base := EtaleFundamentalGroups.standardDVFOfDVR V₀ K
-  let target := EtaleFundamentalGroups.standardDVFOfDVR W₀ L
-  have hcomm :
-      (algebraMap W₀ L).comp (algebraMap V₀ W₀) =
-        (algebraMap K L).comp (algebraMap V₀ K) := by
-    rw [← IsScalarTower.algebraMap_eq V₀ W₀ L,
-      ← IsScalarTower.algebraMap_eq V₀ K L]
-  let : base.valuation.HasExtension target.valuation :=
-    EtaleFundamentalGroups.standardDVFOfDVR_hasExtension
-      (algebraMap V₀ W₀) hcomm
   obtain ⟨hFiniteDimensional, hValuationFinite, hExact⟩ :=
     EtaleFundamentalGroups.standardDVFOfDVR_finite_ramificationData_eq_of_moduleFinite
       (V := V₀) (W := W₀) (K := K) (L := L) N hRam

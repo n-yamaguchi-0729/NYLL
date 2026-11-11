@@ -4,13 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusNormBoundary
-import Nyll.JacobianVarieties.Generalized.PoincareKernelScheme
-import Nyll.JacobianVarieties.Generalized.PoincareProjectionSurjectivity
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusNormBoundary
+public import Nyll.JacobianVarieties.Generalized.PoincareKernelScheme
+public import Nyll.JacobianVarieties.Generalized.PoincareProjectionSurjectivity
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # The actual identity fibre as the modulus-unit quotient group -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -20,6 +30,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite NeronModelIn
 open GoodReductionJacobian AlgebraicGeometry.RelPicard
 open SchemeTheory.Affine AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

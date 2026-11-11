@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Local cover extensions at generic boundary points
@@ -16,6 +18,8 @@ actual overlap of the local spectrum with the open is its puncture. Local
 purity therefore supplies an extending cover, retaining an isomorphism on
 the original overlap. This is the local input for Stacks `0EY7`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

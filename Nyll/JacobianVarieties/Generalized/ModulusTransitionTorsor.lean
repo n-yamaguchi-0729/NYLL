@@ -4,13 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionForgetful
-import Nyll.JacobianVarieties.Generalized.ModulusNormKernel
-import Nyll.SchemeTheory.GroupSchemes.KernelTranslation
+module
+
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionForgetful
+public import Nyll.JacobianVarieties.Generalized.ModulusNormKernel
+public import Nyll.SchemeTheory.GroupSchemes.KernelTranslation
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
 
 /-! # The actual translation square for changing-modulus transitions -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -18,6 +27,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

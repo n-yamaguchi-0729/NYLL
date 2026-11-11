@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
 
 /-!
 # Scheme Modules unit Aut Section trans and unit Aut Section refl
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

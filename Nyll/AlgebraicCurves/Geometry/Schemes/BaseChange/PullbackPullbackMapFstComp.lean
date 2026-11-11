@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # is Pullback pullback Map fst comp of is Pullback of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Preadditive.Biproducts
+module
+
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # A cokernel presentation of an extension
@@ -16,6 +18,8 @@ middle term, the middle term is a cokernel of a map from the kernel of that
 epimorphism to the sum of its source and the subobject. This supplies the
 presentation used in the local constancy proof for extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits

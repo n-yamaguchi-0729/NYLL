@@ -3,9 +3,11 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparableGluing
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableCoverRecovery
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparableGluing
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableCoverRecovery
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
 
 /-!
 # Pure Inseparable Descent
@@ -13,6 +15,8 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePull
 Actual finite étale covers descend through an arbitrary purely inseparable
 extension of the constant field.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

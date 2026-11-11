@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
 
 /-!
 # abelian Scheme Property Bundle prod Str
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

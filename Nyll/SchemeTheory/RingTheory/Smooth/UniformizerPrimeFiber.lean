@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Ring.Equiv
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Mathlib.Algebra.Ring.Equiv
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # A uniformizer is prime on a flat chart with integral closed fibre
@@ -26,6 +28,8 @@ This supplies the prime parameter required by the root-normalization
 calculation from the integral closed-fibre chart constructed geometrically.
 No domain hypothesis on the entire algebra is needed for this step.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

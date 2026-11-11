@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.RingHom.Integral
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.RingHom.Integral
 
 /-!
 # The actual section ring of a proper integral henselian family
@@ -28,6 +30,8 @@ This supplies the integral henselian base in the Stein-factorization route
 to Stacks 0A0B. Connectedness of the affinization fibers is a separate
 geometric assertion and is not assumed or claimed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

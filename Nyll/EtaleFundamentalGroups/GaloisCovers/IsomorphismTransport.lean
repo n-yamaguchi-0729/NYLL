@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.FintypeCat
-import Mathlib.CategoryTheory.Galois.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.FintypeCat
+public import Mathlib.CategoryTheory.Galois.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Galois covers under actual isomorphisms
@@ -30,6 +32,8 @@ their homeomorphisms, automorphisms by conjugation or faithful pullback,
 and degree by the actual cartesian square. These comparisons let finite
 coefficient models be flattened through a tower of intermediate fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -79,8 +83,9 @@ theorem isGalois_pullback_and_card_aut_of_isIso
   have hInjective : Function.Injective (F.mapAut Y) := by
     intro σ τ hστ
     apply Aut.ext
+    apply Iso.ext
     apply F.map_injective
-    exact congrArg Iso.hom hστ
+    exact congrArg (fun a => a.asIso.hom) hστ
   have hLower : Nat.card (Aut Y) ≤ Nat.card (Aut P) :=
     Nat.card_le_card_of_injective (F.mapAut Y) hInjective
   let s : S := Classical.choice (inferInstance : Nonempty S)

@@ -4,30 +4,33 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FiniteHenselianSections
-import Nyll.EtaleCohomology.Sites.FiniteStrictLocalDescent
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Abelian.Exact
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Mathlib.CategoryTheory.Sites.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Sites.FiniteHenselianSections
+public import Nyll.EtaleCohomology.Sites.FiniteStrictLocalDescent
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Exactness of finite direct image on étale sheaves
@@ -43,6 +46,8 @@ coefficients transports the result to any commutative coefficient ring.
 This is Stacks Project 59.55.2(2), without finiteness assumptions on the base.
 The product description of a direct-image stalk in part (1) is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

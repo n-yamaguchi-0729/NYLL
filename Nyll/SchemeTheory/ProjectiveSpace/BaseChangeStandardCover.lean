@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.MorphismProperty.Limits
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
 
 /-!
 # The actual standard cover of a projective-space base change
@@ -26,6 +28,8 @@ covers therefore agree, with their original ordered index type.
 This identifies the cover used by the native Serre comparison with
 the first-projection cover used by the existing Rees coefficient maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,7 +48,8 @@ local notation "𝒜A" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A
 local notation "Y" => pullback (π R n) (Spec.map (CommRingCat.ofHom (algebraMap R A)))
 local notation "p" => pullback.fst (π R n) (Spec.map (CommRingCat.ofHom (algebraMap R A)))
 
-private theorem firstProjection_isAffineHom : IsAffineHom p :=
+/-- The first projection of affine base change is an affine morphism. -/
+theorem firstProjection_isAffineHom : IsAffineHom p :=
   MorphismProperty.IsStableUnderBaseChange.of_isPullback (P := @IsAffineHom.{u})
     (self := isAffineHom_isStableUnderBaseChange)
     (IsPullback.of_hasPullback (π R n)

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.AffineKernel
-import Nyll.JacobianVarieties.Generalized.FrameGeometry
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+module
+
+public import Nyll.JacobianVarieties.Generalized.AffineKernel
+public import Nyll.JacobianVarieties.Generalized.FrameGeometry
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 
 /-!
 # The actual Poincaré frame quotient
@@ -20,6 +22,8 @@ geometrically connected.
 Identification with the degree-zero modulus Picard sheaf, its group law,
 and the basepoint-free generalized Jacobian remain separate theorems.
 -/
+
+@[expose] public section
 
 noncomputable section
 

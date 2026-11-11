@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.Topology.Sheaves.Module
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.Topology.Sheaves.Module
 
 /-!
 # Actual presentations under scheme pullback and open restriction
@@ -26,6 +28,8 @@ canonical affine spectrum. Finally, the native open-to-slice equivalence
 transports an actual restricted presentation to the corresponding local
 presentation on the original scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # Proj Space is Pullback comp and comp eq map of is Scalar Tower
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

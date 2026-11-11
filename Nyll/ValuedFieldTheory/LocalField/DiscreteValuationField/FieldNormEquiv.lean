@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNorm
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNorm
 
 /-!
 # Field-norm subgroups under algebra equivalence
@@ -13,6 +15,8 @@ An algebra equivalence over the base field preserves the field norm and
 therefore identifies the corresponding norm subgroups of the base unit
 group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

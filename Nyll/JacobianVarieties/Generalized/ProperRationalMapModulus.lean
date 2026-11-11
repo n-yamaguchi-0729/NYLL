@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ProperTargetModulus
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoCompEqOpenImmersion
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ValuationRingStalkSmoothOfRelativeDimensionOne
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+module
+
+public import Nyll.JacobianVarieties.Generalized.ProperTargetModulus
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoCompEqOpenImmersion
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ValuationRingStalkSmoothOfRelativeDimensionOne
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
 
 /-! # Modulus existence for rational maps to abelian varieties
 
@@ -16,6 +18,8 @@ missing point, using the valuation rings of the smooth curve. The extension
 is unique and has empty modulus. Consequently every effective modulus whose
 complement is the given domain satisfies the full geometric condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

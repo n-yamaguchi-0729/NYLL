@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.PunctureSectionSpreading
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoModels
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoDescent
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.Descent.PunctureSectionSpreading
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoModels
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoDescent
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Isomorphism spreading over a punctured neighborhood
@@ -22,6 +24,8 @@ with an actual open neighborhood. The original local isomorphism is retained
 under the native pullback comparisons. This supplies the overlap comparison
 needed to glue local extensions in Stacks Project, Lemma 58.21.6 (`0EY7`).
 -/
+
+@[expose] public section
 
 noncomputable section
 

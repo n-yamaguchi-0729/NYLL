@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Inseparable
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Inseparable
 
 /-!
 # Density of a punctured local spectrum after flat base change
@@ -20,6 +22,8 @@ the generalization from a chosen puncture point. Every remaining point is
 already in the inverse image. No finite-presentation or quasi-compactness
 assumption on the flat morphism is needed.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

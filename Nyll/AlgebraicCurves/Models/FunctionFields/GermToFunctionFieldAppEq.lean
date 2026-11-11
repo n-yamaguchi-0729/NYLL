@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Topology.Sober
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.CategoryTheory.Category.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Topology.Sober
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.CategoryTheory.Category.Basic
 
 /-!
 # Germ To Function Field app eq of from Spec Stalk comp eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

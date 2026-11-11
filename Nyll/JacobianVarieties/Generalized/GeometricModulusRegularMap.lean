@@ -4,22 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusAtlasGluing
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusPointEvaluation
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelChangeBasepoint
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
-import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMapPoint
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
-import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusAtlasGluing
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusPointEvaluation
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelChangeBasepoint
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMapPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
+public import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # The actual group morphism constructed over an arbitrary field
 
@@ -28,6 +32,8 @@ point formula identifies multiplication with addition under the original
 full-modulus evaluation. The geometric-point criterion then proves the
 group law for this same regular map.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,11 +55,13 @@ variable {K : Type u} [Field K] {C : Scheme.{u}}
   (q : SchemeHomOver ((modulusComplement (modulusCurveMap D)).ι ≫ c) G.X.hom)
   (hmod : geometricRegularMapHasModulus c D G (Over.homMk q.1 q.2))
 
-private abbrev geometricModulusBasepoint :
+/-- The chosen original modulus-complement point in over-category coordinates. -/
+abbrev geometricModulusBasepoint :
     Over.mk (𝟙 (Spec (CommRingCat.of K))) ⟶
       Over.mk ((modulusComplement (modulusCurveMap D)).ι ≫ c) := Over.homMk ε.1 ε.2
 
-private abbrev geometricModulusTargetMap :
+/-- The specified original target map in over-category coordinates. -/
+abbrev geometricModulusTargetMap :
     Over.mk ((modulusComplement (modulusCurveMap D)).ι ≫ c) ⟶ G.X := Over.homMk q.1 q.2
 
 omit [IsSeparated G.X.hom] in

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.CategoryTheory.Functor.EpiMono
-import Mathlib.RingTheory.Finiteness.Finsupp
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.RingTheory.Finiteness.Finsupp
 
 /-!
 # Finite generating sections on an affine scheme
@@ -19,6 +21,8 @@ module under the fully faithful tilde functor. The actual quasicoherent
 counit isomorphism identifies its target with the original global sections.
 Faithfulness reflects epimorphisms, so the resulting linear map is surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

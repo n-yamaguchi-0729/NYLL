@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Stratification
-import Nyll.EtaleCohomology.Constructible.TopologicalStratification
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Basic.Finite.Defs
-import Mathlib.Data.Fintype.Basic
-import Mathlib.Data.Set.Image
-import Mathlib.Data.Set.Lattice.Indexed
-import Mathlib.Topology.Constructible
-import Mathlib.Topology.LocallyClosed
+module
+
+public import Nyll.EtaleCohomology.Constructible.Stratification
+public import Nyll.EtaleCohomology.Constructible.TopologicalStratification
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Basic.Finite.Defs
+public import Mathlib.Data.Fintype.Basic
+public import Mathlib.Data.Set.Image
+public import Mathlib.Data.Set.Lattice.Indexed
+public import Mathlib.Topology.Constructible
+public import Mathlib.Topology.LocallyClosed
 
 /-!
 # Scheme strata realizing constructible partitions
@@ -31,6 +33,8 @@ constructible subsets admits such an actual scheme stratification subordinate
 to it. No noetherianity or quasi-compactness assumption is required.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u v
@@ -41,10 +45,12 @@ namespace EtaleCohomology
 
 variable {X : Scheme.{u}} {s : Set X}
 
-private def locallyClosedOpen (hs : IsLocallyClosed s) : X.Opens :=
+/-- The open coborder in which the locally closed subset is closed. -/
+def locallyClosedOpen (hs : IsLocallyClosed s) : X.Opens :=
   ⟨coborder s, hs.isOpen_coborder⟩
 
-private def locallyClosedIdeal (hs : IsLocallyClosed s) :
+/-- The vanishing ideal of the subset inside its open coborder. -/
+def locallyClosedIdeal (hs : IsLocallyClosed s) :
     (locallyClosedOpen hs).toScheme.IdealSheafData :=
   Scheme.IdealSheafData.vanishingIdeal
     ⟨(locallyClosedOpen hs).ι ⁻¹' s, isClosed_preimage_val_coborder⟩

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.BaseChange
-import Mathlib.FieldTheory.SeparableDegree
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.BaseChange
+public import Mathlib.FieldTheory.SeparableDegree
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Finite composita of unramified extensions
@@ -16,6 +19,8 @@ the unramified base-change theorem to one extension along the other and then use
 of residue separability and multiplicativity of the field and residue
 degrees.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -89,7 +94,6 @@ theorem finiteUnramifiedExtension_trans
       change d x = g (f x)
       rw [hd]
       rfl
-  let : IsScalarTower k m ell := residueTower
   let kmResidueModule : Module k m := inferInstance
   let mellResidueModule : Module m ell := inferInstance
   let kellResidueModule : Module k ell := inferInstance

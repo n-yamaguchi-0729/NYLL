@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.TameUniformizerNormalization
-import Mathlib.RingTheory.LaurentSeries
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameUniformizerNormalization
+public import Mathlib.RingTheory.LaurentSeries
 
 /-! # Order-preserving tame normalization of the entire Laurent field
 
 The constructed power-series parameter change extends through the fraction
 ring and preserves every Laurent order, including poles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.Polynomial.ScaleRoots
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.Polynomial.ScaleRoots
+public import Mathlib.RingTheory.RingHom.Etale
 
 
 /-!
@@ -31,6 +33,8 @@ The denominator is nonzero in the local stage because its germ is nonzero.
 No injectivity of localized germ maps, normalization comparison, or normality
 of the geometric stalk is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

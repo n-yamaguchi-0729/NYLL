@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Actual finiteness hypotheses for raw overlap Hom descent
@@ -16,6 +18,8 @@ are open subschemes of affine models, and are compact because the original
 base is quasi-separated. Their ambient maps are locally finitely presented.
 No overlap is claimed finite over the whole ambient base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

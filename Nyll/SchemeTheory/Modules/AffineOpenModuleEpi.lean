@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.AffineModuleEpi
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Functor.EpiMono
+module
+
+public import Nyll.SchemeTheory.Modules.AffineModuleEpi
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # Epimorphisms over actual affine opens
@@ -18,6 +20,8 @@ site when the target is quasicoherent. The proof first uses the actual
 canonical spectrum of the affine open, then transports through restriction
 and the equivalence with the slice site.
 -/
+
+@[expose] public section
 
 noncomputable section
 

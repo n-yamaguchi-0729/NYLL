@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.FieldNormImage
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.ValueImage
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.FieldNormImage
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.ValueImage
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Norm
 
 /-!
 # Local-top comparisons for powered Galois ramification images
@@ -13,6 +16,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Nonarchimede
 This file records the lower local-top residue-degree consequences forced by
 the powered embedded-base-unit image inside a field-norm subgroup.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Modules.Localization.LocallyTrivialSectionsLocalization
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertiblePullbackSectionEqZeroIffMemSupport
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPow
-import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
+module
+
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Modules.Localization.LocallyTrivialSectionsLocalization
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertiblePullbackSectionEqZeroIffMemSupport
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPow
+public import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
 
 /-!
 # Nonvanishing sections of sufficiently positive twists
 
 Local frames extend after multiplying by powers of projective coordinate sections.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

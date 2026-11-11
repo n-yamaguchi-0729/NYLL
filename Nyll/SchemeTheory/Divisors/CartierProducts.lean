@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.Regular.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.Regular.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Finite sums of effective Cartier divisors
@@ -21,6 +23,8 @@ of each local defining equation. Their product is again a non-zero-divisor
 and generates the product ideal sheaf. This constructs the effective Cartier
 property for arbitrary finite products, including the empty divisor.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open scoped BigOperators

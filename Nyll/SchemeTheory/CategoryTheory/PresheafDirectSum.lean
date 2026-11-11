@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.DirectSum.Basic
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.DirectSum.Basic
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-!
 # Pointwise direct sums of presheaves
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 Discrete coproducts of additive-group-valued presheaves are computed
 objectwise by direct sums. Every section has finite support in this description.
 -/
+
+@[expose] public section
 
 universe u v w
 

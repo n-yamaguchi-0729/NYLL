@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.LocallyBijective
+module
+
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-!
 # Fppf sections at an algebraically closed field
@@ -17,6 +19,8 @@ the maximal sieve: a nonempty finite-type member has a rational closed point,
 which gives a section. Thus a local bijection of presheaves is an actual
 bijection at every algebraically closed field-valued test object.
 -/
+
+@[expose] public section
 
 noncomputable section
 

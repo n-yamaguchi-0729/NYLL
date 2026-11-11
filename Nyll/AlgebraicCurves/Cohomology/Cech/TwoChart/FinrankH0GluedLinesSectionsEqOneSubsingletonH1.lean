@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSections
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Algebra.Algebra.Subalgebra.Prod
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.SplitIfs
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSections
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Algebra.Subalgebra.Prod
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
 
 /-!
 # Two Chart Cech finrank H0 glued Lines Sections eq one and subsingleton H1
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

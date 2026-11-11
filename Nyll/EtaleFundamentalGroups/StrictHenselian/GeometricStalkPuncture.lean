@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # The closed fiber and puncture of the actual geometric stalk
@@ -30,6 +32,8 @@ closed point, and the actual punctured stalk spectrum is the base change of
 the punctured base spectrum. No finiteness, reducedness, normality, dimension,
 or separability assumption on the chosen geometric overfield is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

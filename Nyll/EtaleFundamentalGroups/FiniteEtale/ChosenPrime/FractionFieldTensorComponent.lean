@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # Field-tensor coordinates for an actual chosen generic component
@@ -22,6 +24,8 @@ and its prime localization across that canonical comparison.  In
 particular, a component produced by `EtaleChosenPrimeLocalFactor` is not
 reselected after passing to fraction fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -72,16 +76,13 @@ noncomputable def finiteBaseFractionFieldTensorAlgEquiv
     [IsScalarTower R (FractionRing R) L] :
     let K := FractionRing R
     let E := FractionRing C
-    letI : Algebra C (E ⊗[K] L) :=
+    let : Algebra C (E ⊗[K] L) :=
       finiteBaseFractionFieldTensorAlgebra (R := R) (C := C) (L := L)
     (C ⊗[R] L) ≃ₐ[C] (E ⊗[K] L) := by
-  dsimp only
-  let K := FractionRing R
-  let E := FractionRing C
+  intro K E
   letI : IsScalarTower R K E :=
     FractionRing.isScalarTower_liftAlgebra R E
-  letI : Algebra C (E ⊗[K] L) :=
-    finiteBaseFractionFieldTensorAlgebra (R := R) (C := C) (L := L)
+  intro sharedOwner3
   letI : Algebra L (C ⊗[R] L) :=
     Algebra.TensorProduct.rightAlgebra
   letI : Algebra L (E ⊗[K] L) :=
@@ -178,21 +179,14 @@ noncomputable def finiteBaseFractionFieldTensorIntegralClosureAlgEquiv
     (m : Ideal (C ⊗[R] L)) [m.IsMaximal] :
     let n := finiteBaseFractionFieldTensorIdeal
       (R := R) (C := C) (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       finiteBaseFractionFieldTensorIdeal_isMaximal
         (R := R) (C := C) (L := L) m
-    letI : Algebra C (GenericTensorFieldComponent n) :=
+    let : Algebra C (GenericTensorFieldComponent n) :=
       genericTensorFieldComponentLeftScalarAlgebra (R := C) n
     integralClosure C (FiniteEtaleGenericFiberComponent m) ≃ₐ[C]
       integralClosure C (GenericTensorFieldComponent n) := by
-  dsimp only
-  let n := finiteBaseFractionFieldTensorIdeal
-    (R := R) (C := C) (L := L) m
-  letI : n.IsMaximal :=
-    finiteBaseFractionFieldTensorIdeal_isMaximal
-      (R := R) (C := C) (L := L) m
-  letI : Algebra C (GenericTensorFieldComponent n) :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := C) n
+  intro n sharedOwner1 sharedOwner2
   let E := finiteBaseFractionFieldTensorComponentAlgEquiv
     (R := R) (C := C) (L := L) m
   exact E.mapIntegralClosure

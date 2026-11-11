@@ -6,10 +6,12 @@ Authors: Nailin Guan, Yuyang Zhao, Jujian Zhang,
 Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGalois
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGalois
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # The original fraction-field Galois comparison preserves the Krull topology
@@ -22,6 +24,8 @@ Krull neighborhood continuously. Compactness gives continuity of its inverse.
 The finite-basis argument adapts `InfiniteGalois.restrictNormalHom_continuous`
 from Mathlib/FieldTheory/Galois/Profinite.lean at revision 065356127b1dc0016f66b7283ce0ce2c4055aa55.
 -/
+
+@[expose] public section
 
 noncomputable section
 

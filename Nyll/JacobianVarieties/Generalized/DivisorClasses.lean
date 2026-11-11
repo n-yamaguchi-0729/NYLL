@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
-import Nyll.JacobianVarieties.Pic0.MkEqNotMemSupport
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Nyll.JacobianVarieties.Pic0.MkEqNotMemSupport
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Divisor classes with a modulus
@@ -16,6 +18,8 @@ These are abstract divisor class groups, not a construction of a representing sc
 The congruence uses units of the local ring modulo the full power of its maximal ideal.
 The degree-zero quotient forgets the modulus to the existing `AlgebraicCurve.Pic0`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

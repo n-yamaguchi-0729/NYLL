@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinateAlgebra
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinateAlgebra
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! # Actual affine coordinates of an integral group point
 
@@ -14,6 +16,8 @@ chosen affine identity neighbourhood. Its actual generic coordinates therefore
 lift to integral series, whose reduction is the unit augmentation in all degrees.
 This is the converse to constructing integral points from generator bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

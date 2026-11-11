@@ -4,30 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.SchemeTheory.LocalGeometry.AffineAwayChart
-import Nyll.SchemeTheory.LocalGeometry.SmoothGenericNormal
-import Nyll.SchemeTheory.LocalGeometry.SmoothPrimeFiberCharts
-import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Group.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Galois.GaloisObjects
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Topology.Irreducible
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.SchemeTheory.LocalGeometry.AffineAwayChart
+public import Nyll.SchemeTheory.LocalGeometry.SmoothGenericNormal
+public import Nyll.SchemeTheory.LocalGeometry.SmoothPrimeFiberCharts
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Topology.Irreducible
 
 /-!
 # A common Galois order on the actual smooth generic charts
@@ -45,6 +47,8 @@ open gives dominance, and full faithfulness of restriction supplies the
 actual automorphism equivalence. Thus all such local normalizations can
 use one global Galois order as their root exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

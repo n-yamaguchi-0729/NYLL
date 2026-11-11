@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.Algebra.Group.Units.Hom
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
+module
+
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.Group.Units.Hom
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 /-!
 # Valuation Subring exists le forall mem iff apply mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -149,7 +153,7 @@ theorem coe_mem_nonunits_composite_iff (x : O) :
         have hu : IsUnit x := by
           refine isUnit_iff_exists_inv.mpr ⟨⟨(x : F)⁻¹, hxO⟩, ?_⟩
           apply Subtype.ext
-          simp [hx0]
+          exact mul_inv_cancel₀ hx0
         exact ((hu.map res).ne_zero h).elim
     · right
       intro hmem
@@ -164,7 +168,7 @@ theorem coe_mem_nonunits_composite_iff (x : O) :
         have hu : IsUnit x := by
           refine isUnit_iff_exists_inv.mpr ⟨⟨(x : F)⁻¹, hxO⟩, ?_⟩
           apply Subtype.ext
-          simp [hx0]
+          exact mul_inv_cancel₀ hx0
         exact (hu.map res).ne_zero
       obtain ⟨hx', hres⟩ := exists_inv_mem O res hker (x : F) x.2 (by simpa using h0)
       have := (coe_mem_composite_iff O res hker W ⟨(x : F)⁻¹, hx'⟩).mp hmem

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.AlgebraicRamificationDetection
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.AlgebraicRamificationDetection
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Wild inertia in residue characteristic zero
@@ -21,6 +23,8 @@ This supplies the residue-characteristic-zero wild-inertia assertion of
 Stacks Project Tag 0BUA for valuation subrings, including infinite extensions.
 It does not require Henselianity, discreteness, or a perfect residue field.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

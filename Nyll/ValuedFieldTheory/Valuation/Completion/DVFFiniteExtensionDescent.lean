@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFFiniteSeparableGenerator
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFFiniteSeparableGenerator
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Descending finite separable extensions of a valuation completion
@@ -18,6 +20,8 @@ A generator separable over the original field gives a finite separable
 intermediate field. Its scalar extension maps onto the given extension of
 the completion, and the equality of degrees makes this actual map injective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

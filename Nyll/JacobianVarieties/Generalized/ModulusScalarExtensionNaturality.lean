@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
 
 /-! # Naturality of scalar extension for the actual modulus Picard groups -/
+
+@[expose] public section
 
 noncomputable section
 

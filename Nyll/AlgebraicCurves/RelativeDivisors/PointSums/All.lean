@@ -11,3 +11,4 @@ import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
 import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
 import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.SplittingCover
 import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.TupleOfSplitDivisor
+import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.PointKernelPullback

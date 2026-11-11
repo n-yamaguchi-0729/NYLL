@@ -4,8 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentNormalizationEtale
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentNormalizationEtale
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
 
 /-!
 # Normalization etaleness at arbitrary height-one boundary primes
@@ -15,6 +20,8 @@ the canonical branch prime of an irreducible component through the chosen
 point.  This identifies the arbitrary prime with the input expected by the
 fixed-component normalization theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,19 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Basic
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.PullbackCone
-import Mathlib.CategoryTheory.MorphismProperty.Representable
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.CategoryTheory.Yoneda
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
-import Mathlib.Util.WithWeakNamespace
+module
+
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Basic
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.PullbackCone
+public import Mathlib.CategoryTheory.MorphismProperty.Representable
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.CategoryTheory.Yoneda
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+public import Mathlib.Util.WithWeakNamespace
 
 /-!
 # Charts of a total presheaf over an open subscheme
@@ -30,6 +32,8 @@ import Mathlib.Util.WithWeakNamespace
 A representable restriction supplies a chart of the total presheaf. Its pointwise
 factorization and pullback properties make this chart a relative open immersion.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseChange
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.CategoryTheory.MorphismProperty.Limits
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseChange
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
 
 /-!
 # The actual projective closed embedding after coefficient change
@@ -31,6 +33,8 @@ The two original structure maps, coordinate inverse-image cover, and
 pulled back twisting line are retained by explicit comparisons. No
 identification of either scheme or line bundle is additional data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

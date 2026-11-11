@@ -11,16 +11,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.RingTheory.Unramified.LocalStructure
-import Mathlib.Tactic.Algebraize
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.RingTheory.Unramified.LocalStructure
+public import Mathlib.Tactic.Algebraize
 
 /-!
 # Quasi-finiteness from formal unramifiedness
 
 A formally unramified morphism locally of finite type is locally quasi-finite.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

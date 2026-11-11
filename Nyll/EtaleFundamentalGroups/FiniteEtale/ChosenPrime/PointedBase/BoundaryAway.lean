@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RingHom.Etale
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.HenselianBoundaryAway
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.RootRefinedComponentLocal
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Mathlib.RingTheory.RingHom.Etale
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.HenselianBoundaryAway
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.RootRefinedComponentLocal
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # Primitive boundary Away map on the pointed-base chosen component
@@ -28,6 +30,8 @@ The component produced here is a quotient of
 component, not yet a component of a full radical cover.  The latter requires
 a further chosen-component refinement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

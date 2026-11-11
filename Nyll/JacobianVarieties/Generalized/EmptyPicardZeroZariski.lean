@@ -5,13 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.EmptyModulusZero
-import Nyll.JacobianVarieties.Generalized.ModulusDegreeZero
-import Nyll.JacobianVarieties.Generalized.OrdinaryZeroRepresentation
-import Nyll.JacobianVarieties.Generalized.PointedConstruction
-import Mathlib.AlgebraicGeometry.Cover.Open
+module
+
+public import Nyll.JacobianVarieties.Generalized.EmptyModulusZero
+public import Nyll.JacobianVarieties.Generalized.ModulusDegreeZero
+public import Nyll.JacobianVarieties.Generalized.OrdinaryZeroRepresentation
+public import Nyll.JacobianVarieties.Generalized.PointedConstruction
+public import Mathlib.AlgebraicGeometry.Cover.Open
 
 /-! # Actual bundles representing the degree-zero-modulus Picard sheaf -/
+
+@[expose] public section
 
 noncomputable section
 

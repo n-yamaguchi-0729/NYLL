@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
-import Mathlib.RingTheory.GradedAlgebra.RingHom
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
+public import Mathlib.RingTheory.GradedAlgebra.RingHom
 
 /-!
 # Composition of the actual projective coefficient maps
@@ -19,6 +21,8 @@ graded polynomial homomorphisms. The Proj construction then identifies
 the actual composite of the corresponding scheme morphisms with the
 direct coefficient map. No comparison of scheme morphisms is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

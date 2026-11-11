@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponentTarget
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.TowerIdealOver
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorTowerIntermediate
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Completion
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponentTarget
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.TowerIdealOver
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorTowerIntermediate
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Completion
 
 /-!
 # The prescribed completed root component selected by a normalization prime
@@ -19,6 +21,8 @@ equip the intermediate component with its canonical complete valuation, and
 apply the arbitrary-exponent complete Abhyankar factor theorem.  The only
 arithmetic hypothesis is the intrinsic divisibility `e(Q) ∣ N`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,45 +60,45 @@ theorem integralClosure_completedChosenRootTensorComponent_etale
     let H := standardDVFCompletionCompleteDVF V K
     let Vhat := H.valuationSubring
     let Khat := standardDVFCompletionField V K
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
-    letI : IsLocalHom (algebraMap V Vhat) :=
+    let : IsLocalHom (algebraMap V Vhat) :=
       standardDVRToCompletion_isLocalHom V K
-    letI : Module.FaithfullyFlat V Vhat :=
+    let : Module.FaithfullyFlat V Vhat :=
       standardDVRCompletionValuationSubring_faithfullyFlat
         (V := V) (K := K)
-    letI : Algebra K Khat := standardDVFCompletionAlgebra V K
-    letI : Algebra V Khat :=
+    let : Algebra K Khat := standardDVFCompletionAlgebra V K
+    let : Algebra V Khat :=
       standardDVFCompletionBaseAlgebra (V := V) (K := K)
-    letI : SMul K Khat := (standardDVFCompletionAlgebra V K).toSMul
-    letI : SMul V Khat :=
+    let : SMul K Khat := (standardDVFCompletionAlgebra V K).toSMul
+    let : SMul V Khat :=
       (standardDVFCompletionBaseAlgebra (V := V) (K := K)).toSMul
-    letI : IsScalarTower V K Khat :=
+    let : IsScalarTower V K Khat :=
       standardDVFCompletion_isScalarTower (V := V) (K := K)
-    letI : IsScalarTower V Vhat Khat :=
+    let : IsScalarTower V Vhat Khat :=
       standardDVRCompletionValuationSubring_isScalarTower
         (V := V) (K := K)
     let varpiHat : Vhat :=
       standardDVRCompletionValuationSubringElement V K pi
     let Rn := AdjoinRoot (X ^ N - Polynomial.C varpiHat)
-    letI : IsDomain Rn :=
+    let : IsDomain Rn :=
       completeDVFRootRing_isDomain H varpiHat
         (standardDVRCompletionValuationSubringElement_isUniformizer
           V K pi hpi) N hN
     let F := FractionRing Rn
-    letI : Algebra Khat F :=
+    let : Algebra Khat F :=
       completeDVFRootFractionFieldAlgebra H varpiHat
         (standardDVRCompletionValuationSubringElement_isUniformizer
           V K pi hpi) N hN
-    letI : IsScalarTower Vhat Khat F :=
+    let : IsScalarTower Vhat Khat F :=
       completeDVFRootFractionField_isScalarTower H varpiHat
         (standardDVRCompletionValuationSubringElement_isUniformizer
           V K pi hpi) N hN
-    letI : Algebra K F :=
+    let : Algebra K F :=
       ((algebraMap Khat F).comp (algebraMap K Khat)).toAlgebra
-    letI : IsScalarTower K Khat F :=
+    let : IsScalarTower K Khat F :=
       IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-    letI : FiniteDimensional Khat F :=
+    let : FiniteDimensional Khat F :=
       pureRadicalFractionField_finiteDimensional hN varpiHat
         (completeDVFUniformizer_prime H varpiHat
           (standardDVRCompletionValuationSubringElement_isUniformizer
@@ -113,56 +117,15 @@ theorem integralClosure_completedChosenRootTensorComponent_etale
           (K := K) (F := Khat) (F' := F) (L := L) m = n ∧
         Algebra.Etale Rn (integralClosure Rn P) := by
   classical
-  let H := standardDVFCompletionCompleteDVF V K
-  let Vhat := H.valuationSubring
-  let Khat := standardDVFCompletionField V K
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  let : IsLocalHom (algebraMap V Vhat) :=
-    standardDVRToCompletion_isLocalHom V K
-  let : Module.FaithfullyFlat V Vhat :=
-    standardDVRCompletionValuationSubring_faithfullyFlat
-      (V := V) (K := K)
-  let : Algebra K Khat := standardDVFCompletionAlgebra V K
-  let : Algebra V Khat :=
-    standardDVFCompletionBaseAlgebra (V := V) (K := K)
-  let : SMul K Khat := (standardDVFCompletionAlgebra V K).toSMul
-  let : SMul V Khat :=
-    (standardDVFCompletionBaseAlgebra (V := V) (K := K)).toSMul
-  let : IsScalarTower V K Khat :=
-    standardDVFCompletion_isScalarTower (V := V) (K := K)
-  let : IsScalarTower V Vhat Khat :=
-    standardDVRCompletionValuationSubring_isScalarTower
-      (V := V) (K := K)
-  let varpiHat : Vhat :=
-    standardDVRCompletionValuationSubringElement V K pi
+  intro H Vhat Khat algVVhat hLocal hFlat algKKhat algVKhat
+    smulKKhat smulVKhat hVKhat hVVhatKhat varpiHat Rn hDomain F
+    algKhatF hVhatKhatF algKF hKKhatF hFinite hmax hres n
   have hvarpiHat : H.valuation.IsUniformizer (varpiHat : Khat) :=
     standardDVRCompletionValuationSubringElement_isUniformizer
       V K pi hpi
   let : CharZero H.residueField :=
     charZero_standardDVFCompletionCompleteDVF_residueField
       V K hCharZero
-  let Rn := AdjoinRoot (X ^ N - Polynomial.C varpiHat)
-  let : IsDomain Rn :=
-    completeDVFRootRing_isDomain H varpiHat hvarpiHat N hN
-  let F := FractionRing Rn
-  let : Algebra Khat F :=
-    completeDVFRootFractionFieldAlgebra H varpiHat hvarpiHat N hN
-  let : IsScalarTower Vhat Khat F :=
-    completeDVFRootFractionField_isScalarTower
-      H varpiHat hvarpiHat N hN
-  let : Algebra K F :=
-    ((algebraMap Khat F).comp (algebraMap K Khat)).toAlgebra
-  let : IsScalarTower K Khat F :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  let : FiniteDimensional Khat F :=
-    pureRadicalFractionField_finiteDimensional hN varpiHat
-      (completeDVFUniformizer_prime H varpiHat hvarpiHat)
-  let hmax := standardDVRToCompletion_maximalIdeal_map_eq V K
-  let hres := standardDVRToCompletion_residueFieldMap_bijective V K
-  let n := completedGenericTensorChosenIdeal
-    (R := V) (R' := Vhat) (C := C) (K := K) (L := L) (K' := Khat)
-    hmax hres Q.1
   let : n.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
     (R := V) (R' := Vhat) (C := C) (K := K) (L := L) (K' := Khat)
     hmax hres Q.1

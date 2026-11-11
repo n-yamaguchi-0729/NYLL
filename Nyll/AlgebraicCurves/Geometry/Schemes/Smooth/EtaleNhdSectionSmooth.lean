@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Tactic.Choose
-import Batteries.Tactic.Init
-import Mathlib.Tactic.Set
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Tactic.Choose
+public import Batteries.Tactic.Init
+public import Mathlib.Tactic.Set
 
 /-!
 # exists etale nhd section of smooth
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

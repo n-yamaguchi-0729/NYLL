@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardFunctor
-import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullbackTensor
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Hom.Defs
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardFunctor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullbackTensor
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Hom.Defs
 
 /-!
 # The group-valued modulus Picard presheaf
@@ -19,6 +21,8 @@ structure. The actual pullback tensor comparison proves that changes of test sch
 are group homomorphisms. The underlying set presheaf is the chosen-rigidification
 presheaf, with no representability or sheaf condition assumed.
 -/
+
+@[expose] public section
 
 universe u
 

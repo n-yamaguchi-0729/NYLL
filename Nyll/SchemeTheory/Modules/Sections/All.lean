@@ -4,28 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.FibreProductSectionsBijective
-import Nyll.SchemeTheory.Modules.Sections.FiniteSectionsLocallyTrivial
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.Sections.NativeSectionObjects
-import Nyll.SchemeTheory.Modules.Sections.NativeSectionRestriction
-import Nyll.SchemeTheory.Modules.Sections.RankAtStalkSectionsEqOne
-import Nyll.SchemeTheory.Modules.Sections.SectionRing
-import Nyll.SchemeTheory.Modules.Sections.SectionRingConstruction
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Nyll.SchemeTheory.Modules.Sections.AffinePullbackUnit
-import Nyll.SchemeTheory.Modules.Sections.AffineRestriction
-import Nyll.SchemeTheory.Modules.Sections.ClosedPullbackFreeSections
-import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
-import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Sections.KernelSections
-import Nyll.SchemeTheory.Modules.Sections.NilpotentQuotientGeneration
-import Nyll.SchemeTheory.Modules.Sections.RestrictSemilinear
-import Nyll.SchemeTheory.Modules.Sections.PullbackFreeComposition
-import Nyll.SchemeTheory.Modules.Sections.PullbackFreeSections
-import Nyll.SchemeTheory.Modules.Sections.GlobalGeneratingSections
-import Nyll.SchemeTheory.Modules.Sections.ImageSections
-import Nyll.SchemeTheory.Modules.Sections.PullbackQuotientCokernel
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.BidualEvaluation
+public import Nyll.SchemeTheory.Modules.Sections.AffineIhomSections
+public import Nyll.SchemeTheory.Modules.Sections.FibreProductSectionsBijective
+public import Nyll.SchemeTheory.Modules.Sections.FiniteSectionsLocallyTrivial
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.Sections.NativeSectionObjects
+public import Nyll.SchemeTheory.Modules.Sections.NativeSectionRestriction
+public import Nyll.SchemeTheory.Modules.Sections.RankAtStalkSectionsEqOne
+public import Nyll.SchemeTheory.Modules.Sections.SectionRing
+public import Nyll.SchemeTheory.Modules.Sections.SectionRingConstruction
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Nyll.SchemeTheory.Modules.Sections.AffinePullbackUnit
+public import Nyll.SchemeTheory.Modules.Sections.AffineRestriction
+public import Nyll.SchemeTheory.Modules.Sections.ClosedPullbackFreeSections
+public import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
+public import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Sections.KernelSections
+public import Nyll.SchemeTheory.Modules.Sections.NilpotentQuotientGeneration
+public import Nyll.SchemeTheory.Modules.Sections.RestrictSemilinear
+public import Nyll.SchemeTheory.Modules.Sections.PullbackFreeComposition
+public import Nyll.SchemeTheory.Modules.Sections.PullbackFreeSections
+public import Nyll.SchemeTheory.Modules.Sections.GlobalGeneratingSections
+public import Nyll.SchemeTheory.Modules.Sections.ImageSections
+public import Nyll.SchemeTheory.Modules.Sections.PullbackQuotientCokernel

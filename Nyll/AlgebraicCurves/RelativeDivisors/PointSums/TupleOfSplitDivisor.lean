@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-! # Actual sections and Cartier ideals from a split divisor scheme
 
@@ -15,6 +17,8 @@ The components of a coproduct decomposition of the divisor subscheme are
 constructed as sections. Their disjoint closed images give coprime graph
 ideals, whose product is the original full Cartier ideal over any test scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicBaseResidue
-import Nyll.ProCGroups.Boundary.CyclotomicInversion
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicBaseResidue
+public import Nyll.ProCGroups.Boundary.CyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealResidueComparison
 
 /-!
 # Cyclotomic vanishing for normalization inertia of a Galois cover
@@ -16,6 +19,8 @@ functions, so the comparison with the function-field Galois group uses its
 opposite group.  This file combines that comparison with cyclotomic
 conjugation and the odd-order abelian criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,14 +42,14 @@ theorem finiteEtaleGaloisCover_subgroup_eq_bot_of_forall_isConj_inv
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional X.functionField Y.left.functionField :=
+    let : FiniteDimensional X.functionField Y.left.functionField :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois X.functionField Y.left.functionField :=
+    let : _root_.IsGalois X.functionField Y.left.functionField :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ (I : Subgroup
         (Y.left.functionField ≃ₐ[X.functionField] Y.left.functionField))
@@ -53,16 +58,7 @@ theorem finiteEtaleGaloisCover_subgroup_eq_bot_of_forall_isConj_inv
           (Y.left.functionField ≃ₐ[X.functionField] Y.left.functionField),
         gamma ∈ I → IsConj gamma gamma⁻¹) →
       Nat.Coprime (Nat.card I) 2 → I = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional X.functionField Y.left.functionField :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois X.functionField Y.left.functionField :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  intro I _ hConj hCoprime
+  intro sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 I _ hConj hCoprime
   let e := finiteEtaleAutOpFunctionFieldMulEquiv Y hY
   let f :
       (Y.left.functionField ≃ₐ[X.functionField] Y.left.functionField) →*
@@ -83,8 +79,8 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
@@ -113,9 +109,7 @@ theorem
         Nat.Coprime
           (Nat.card (P.toAddSubgroup.inertia Gal(L/K))) 2 →
         P.toAddSubgroup.inertia Gal(L/K) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1 sharedOwner2
   let : Algebra X.functionField Y.left.functionField :=
     finiteEtaleFunctionFieldAlgebra Y
   let : FiniteDimensional X.functionField Y.left.functionField :=

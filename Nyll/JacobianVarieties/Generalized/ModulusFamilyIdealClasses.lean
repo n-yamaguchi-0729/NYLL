@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdeal
-import Nyll.JacobianVarieties.Generalized.RigidifiedSquareEquivalence
-import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdeal
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSquareEquivalence
+public import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
 
 /-! # Recovering the original full-modulus class from the canonical ideal family -/
+
+@[expose] public section
 
 noncomputable section
 

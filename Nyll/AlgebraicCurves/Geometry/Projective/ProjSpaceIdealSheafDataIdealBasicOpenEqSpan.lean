@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.GradedMonoid
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Elementwise
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.GroupTheory.MonoidLocalization.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Nyll.SchemeTheory.Sheaves.IdealSheafDataComapEqOpenCover
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.GradedMonoid
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Elementwise
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.GroupTheory.MonoidLocalization.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Nyll.SchemeTheory.Sheaves.IdealSheafDataComapEqOpenCover
 
 /-!
 # Proj Space exists ideal Sheaf Data ideal basic Open eq span
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,28 +4,30 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.ClosedNeighborhoods
-import Nyll.EtaleCohomology.Sites.ClosedImmersionStalks
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Nyll.EtaleCohomology.Sites.RestrictionAdjunction
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.SchemeTheory.Morphisms.ClosedImmersionLift
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.CategoryTheory.Sites.Point.Conservative
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.ClosedNeighborhoods
+public import Nyll.EtaleCohomology.Sites.ClosedImmersionStalks
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Nyll.EtaleCohomology.Sites.RestrictionAdjunction
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.SchemeTheory.Morphisms.ClosedImmersionLift
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
 
 /-!
 # Fully faithful direct image for a closed immersion
@@ -38,6 +40,8 @@ isomorphism on stalks inside the closed subscheme and an epimorphism globally.
 
 The schemes and commutative coefficient ring are arbitrary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

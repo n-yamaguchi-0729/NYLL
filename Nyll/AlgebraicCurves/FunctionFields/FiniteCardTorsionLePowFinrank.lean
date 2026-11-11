@@ -10,25 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierBLinearIndependent
-import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierOperatorUnique
-import Nyll.AlgebraicCurves.Differentials.Logarithmic.IsRegularDiffDlogDvdOrd
-import Mathlib.FieldTheory.Perfect
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.FieldTheory.Finite.Basic
-import Mathlib.Data.Fintype.BigOperators
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
+public import Nyll.AlgebraicCurves.Differentials.Cartier.CartierBLinearIndependent
+public import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
+public import Nyll.AlgebraicCurves.Differentials.Cartier.CartierOperatorUnique
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.IsRegularDiffDlogDvdOrd
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.FieldTheory.Finite.Basic
+public import Mathlib.Data.Fintype.BigOperators
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 
 /-!
 # Finite and card torsion le pow finrank
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

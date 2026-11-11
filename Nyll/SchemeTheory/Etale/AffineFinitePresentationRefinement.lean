@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.AffineLocalFactorDescent
-import Nyll.SchemeTheory.Etale.IntegralRefinement
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+module
+
+public import Nyll.SchemeTheory.Etale.AffineLocalFactorDescent
+public import Nyll.SchemeTheory.Etale.IntegralRefinement
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
 
 
 /-!
@@ -29,6 +31,8 @@ This proves the affine-base case of the finite-presentation refinement in
 Stacks Project, Tag 09Z0. Arbitrary qcqs-base globalization and proper base
 change are separate remaining steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

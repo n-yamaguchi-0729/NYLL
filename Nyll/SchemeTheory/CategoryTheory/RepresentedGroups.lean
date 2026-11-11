@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 
 /-!
 # Maps between represented commutative group presheaves
@@ -13,6 +15,8 @@ The group presheaves may live in a larger universe than the hom sets. Their
 actual representing equivalences transport the group laws and turn natural
 group homomorphisms into morphisms of the same represented group objects.
 -/
+
+@[expose] public section
 
 noncomputable section
 

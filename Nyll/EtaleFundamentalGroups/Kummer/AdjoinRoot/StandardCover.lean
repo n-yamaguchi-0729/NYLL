@@ -4,30 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.RingHom.Finite
-import Mathlib.RingTheory.RingHom.FinitePresentation
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.RingHom.Finite
+public import Mathlib.RingTheory.RingHom.FinitePresentation
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
 
 /-!
 # The standard Kummer morphism and its étale restriction
@@ -47,6 +49,8 @@ calculations are in `ReducedBoundary`; the scheme-level tame conclusion is
 not asserted here.
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

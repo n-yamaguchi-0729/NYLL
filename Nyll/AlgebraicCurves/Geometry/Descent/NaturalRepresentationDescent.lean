@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
 
 /-!
 # A natural local comparison preserves the canonical descent action
@@ -13,6 +15,8 @@ A natural transformation need only be invertible after the actual descent
 cover. Transporting a local representation along that local isomorphism
 preserves its scheme-valued descent action exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMap
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapTranslation
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMap
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapTranslation
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
 
 /-! # Scalar extension of the geometric full-modulus factor
 
@@ -25,6 +27,8 @@ factor over the original field supplies the extended modulus condition.
 Its comparison with the extended group factor follows from Abel uniqueness.
 No algebraic closedness of either ground field is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

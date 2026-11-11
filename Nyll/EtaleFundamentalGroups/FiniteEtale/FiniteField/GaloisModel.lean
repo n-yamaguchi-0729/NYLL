@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteTowerModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisStage
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GlobalModel
-import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.FieldTheory.IntermediateField.Algebraic
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteTowerModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisStage
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GlobalModel
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # A finite coefficient model of a geometric Galois cover
@@ -36,6 +38,8 @@ preserve both the cover and the cardinality of its automorphism group.
 No Galois closure is taken, so prime-to-characteristic orders remain
 prime to the characteristic at this finite model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

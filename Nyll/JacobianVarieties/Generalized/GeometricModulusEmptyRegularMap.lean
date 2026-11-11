@@ -4,17 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapRestriction
-import Nyll.JacobianVarieties.Generalized.GeometricModulusTorsorRegularMap
-import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
-import Nyll.JacobianVarieties.Generalized.ModulusComplementFiniteExtension
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneAbelEquivariantUniqueness
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapRestriction
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusTorsorRegularMap
+public import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementFiniteExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneAbelEquivariantUniqueness
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # Degree-zero geometric modulus over an arbitrary field
 
@@ -24,6 +27,8 @@ geometric modulus constructs the group factor, and the degree-one comparison
 and density extend its Abel identity to the original degree-zero modulus.
 The resulting equivariant pair is suitable for finite-separable descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

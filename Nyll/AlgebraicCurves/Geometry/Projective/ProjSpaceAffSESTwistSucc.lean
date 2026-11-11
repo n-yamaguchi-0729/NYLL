@@ -10,29 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceHomTwistValEqMulInjective
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivH0HSuccCokerTwist
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
+module
+
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceHomTwistValEqMulInjective
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivH0HSuccCokerTwist
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
 
 /-!
 # Proj Space exists aff SES twist succ of forall mul eq zero imp
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

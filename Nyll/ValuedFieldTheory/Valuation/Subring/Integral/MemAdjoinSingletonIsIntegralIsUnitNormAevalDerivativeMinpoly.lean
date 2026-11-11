@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Discriminant
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.Discriminant
+public import Mathlib.RingTheory.Norm.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Valuation Subring mem adjoin singleton of is Integral of is Unit norm aeval derivative
 minpoly
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

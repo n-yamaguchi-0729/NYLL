@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.CenteredTransport
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.IntegralClosure
-import Nyll.SchemeTheory.PlaneCurves.MonicProjection
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Counting
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Polynomial.Quotient
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.CenteredTransport
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.IntegralClosure
+public import Nyll.SchemeTheory.PlaneCurves.MonicProjection
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Counting
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Adjoin.Polynomial.Transcendental
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Polynomial.Quotient
 
 /-!
 # Prime divisors at infinity
@@ -25,6 +28,8 @@ The construction is stated for actual subalgebras of the ambient function
 field.  In particular, no auxiliary place or valuation-extension relation is
 postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -782,14 +787,14 @@ function-field change of parameter.
 theorem card_nonfiniteCoordinatePrimeDivisor_le_finrank_of_isSeparable
     {f : BivariatePolynomial K} (hirr : Irreducible f)
     (hmonic : (yPolynomial f).Monic) :
-    letI : IsDomain (CoordinateRing f) :=
+    let : IsDomain (CoordinateRing f) :=
       coordinateRing_isDomain hirr
-    letI : Algebra (ProjectionBase K) (CoordinateRing f) :=
+    let : Algebra (ProjectionBase K) (CoordinateRing f) :=
       projectionAlgebra f
-    letI : Algebra (ProjectionBase K)
+    let : Algebra (ProjectionBase K)
         (FractionRing (CoordinateRing f)) :=
       inferInstance
-    letI : Algebra
+    let : Algebra
         (FractionRing
           (InfinityModel (K := K) (projectionParameter (K := K) f)))
         (FractionRing (CoordinateRing f)) :=
@@ -809,13 +814,7 @@ theorem card_nonfiniteCoordinatePrimeDivisor_le_finrank_of_isSeparable
               (InfinityModel (K := K)
                 (projectionParameter (K := K) f)))
             (FractionRing (CoordinateRing f)) := by
-  let : IsDomain (CoordinateRing f) :=
-    coordinateRing_isDomain hirr
-  let : Algebra (ProjectionBase K) (CoordinateRing f) :=
-    projectionAlgebra f
-  let : Algebra (ProjectionBase K)
-      (FractionRing (CoordinateRing f)) :=
-    projectionFractionAlgebra f
+  intro coordinateDomain projectionBaseAlgebra projectionFractionOwner
   let : IsScalarTower (ProjectionBase K) (CoordinateRing f)
       (FractionRing (CoordinateRing f)) :=
     inferInstance
@@ -823,11 +822,7 @@ theorem card_nonfiniteCoordinatePrimeDivisor_le_finrank_of_isSeparable
     coordinateRing_isIntegral f hmonic
   let t : FractionRing (CoordinateRing f) :=
     projectionParameter (K := K) f
-  let : Algebra
-      (FractionRing (InfinityModel (K := K) t))
-      (FractionRing (CoordinateRing f)) :=
-    infinityFunctionFieldAlgebra (K := K) t
-  intro hfinite hseparable
+  intro infinityAlgebra hfinite hseparable
   have hinjective :
       Function.Injective
         (algebraMap (ProjectionBase K)

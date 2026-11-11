@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
 
 /-! # The actual Abel morphism has its full modulus
 
@@ -21,6 +23,8 @@ divisor-class comparison. This also proves the converse to universal
 factorization, without replacing the modulus condition by a factorization
 assumption in its definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

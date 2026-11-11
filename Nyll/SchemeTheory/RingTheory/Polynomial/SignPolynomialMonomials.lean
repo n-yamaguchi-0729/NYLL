@@ -4,20 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Data.Multiset.Basic
-import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
-import Mathlib.Data.Finsupp.Multiset
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.List.Induction
-import Mathlib.Algebra.Ring.Parity
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Data.Multiset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
+public import Mathlib.Data.Finsupp.Multiset
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.List.Induction
+public import Mathlib.Algebra.Ring.Parity
 
 /-! # Even monomials are products of quadratic monomials
 
 This supplies the concrete monomial factorization needed by Stacks Project,
 Tag 0BTE, including the case of zero variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

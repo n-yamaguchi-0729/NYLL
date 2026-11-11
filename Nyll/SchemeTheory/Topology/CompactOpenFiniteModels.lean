@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Category.TopCat.OpenNhds
-import Mathlib.Topology.Order.UpperLowerSetTopology
-import Mathlib.Topology.QuasiSeparated
-import Mathlib.Topology.Sets.Compacts
-import Mathlib.Topology.Sheaves.Alexandrov
-import Mathlib.Topology.Spectral.Hom
-import Mathlib.Topology.Spectral.Prespectral
+module
+
+public import Mathlib.Topology.Category.TopCat.OpenNhds
+public import Mathlib.Topology.Order.UpperLowerSetTopology
+public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.Topology.Sets.Compacts
+public import Mathlib.Topology.Sheaves.Alexandrov
+public import Mathlib.Topology.Spectral.Hom
+public import Mathlib.Topology.Spectral.Prespectral
 
 /-!
 # Coherent finite models of compact-open families
@@ -27,6 +29,8 @@ among all open neighborhoods on a prespectral space. These are actual
 finite models for sheaf approximation; no sheaf descent is assumed.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,7 +53,8 @@ abbrev Space (S : Finset (CompactOpens X)) : TopCat.{u} :=
 instance finite_space (S : Finset (CompactOpens X)) : Finite (Space S) :=
   Finite.of_equiv (Set.range (pattern S)) WithUpperSet.toUpperSet
 
-private def quotientFn (S : Finset (CompactOpens X)) (x : X) : Space S :=
+/-- Send a point to its realized compact-open membership pattern. -/
+def quotientFn (S : Finset (CompactOpens X)) (x : X) : Space S :=
   WithUpperSet.toUpperSet ⟨pattern S x, ⟨x, rfl⟩⟩
 
 /-- The open intersection specified by a realized pattern. -/
@@ -135,7 +140,8 @@ theorem quotient_isSpectralMap [CompactSpace X] [QuasiSeparatedSpace X]
   exact (Set.toFinite W).isCompact_biUnion
     (fun p _ => principalPreimage_isCompact S p)
 
-private def restrictPattern {S T : Finset (CompactOpens X)} (h : S ⊆ T) :
+/-- Restrict a realized membership pattern to a smaller family of compact opens. -/
+def restrictPattern {S T : Finset (CompactOpens X)} (h : S ⊆ T) :
     Set.range (pattern T) →o Set.range (pattern S) where
   toFun p := ⟨(fun U : S => (⟨U.1, h U.2⟩ : T)) ⁻¹' p.1, by
     obtain ⟨x, hx⟩ := p.2

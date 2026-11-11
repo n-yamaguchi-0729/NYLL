@@ -4,20 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusPointEvaluation
-import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
-import Nyll.JacobianVarieties.Generalized.ModulusPointClassification
-import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.CorrectedDivisorSumField
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusPointEvaluation
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusPointClassification
+public import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.CorrectedDivisorSumField
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # The regular family sum and the actual additive point evaluation -/
+
+@[expose] public section
 
 noncomputable section
 

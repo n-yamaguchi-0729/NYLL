@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Local.Order
-import Nyll.AlgebraicCurves.Differentials.Logarithmic.PrincipalUnitDifferential
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremFunctionField
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.PrincipalUnitDifferential
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremFunctionField
 
 /-!
 # A modulus for additive rational functions
@@ -20,6 +22,8 @@ pole order plus one. The proof uses the actual residue theorem for smooth
 function fields and the principal-unit differential estimate. It also gives
 the unique local symbols through the proved modulus construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,10 +47,8 @@ theorem logarithmicDifferential_zpow (g : Fˣ) (n : ℤ) :
 
 variable [IsAlgClosed K] [Algebra.EssFiniteType K F] [IsCurveOver K F]
 
-local instance : HasPrincipalDivisors K F := IsCurveOver.hasPrincipalDivisors
-local instance : Nontrivial Ω[F⁄K] := IsCurveOver.instNontrivialKaehler
-local instance : ∀ v : Place K F, v.DCoordGenerates := dCoordGenerates_of_isCurveOver
-local instance : HasCanonicalLocalResidueKStar K F := instHasCanonicalLocalResidueKStar
+attribute [local instance] IsCurveOver.toHasPrincipalDivisors IsCurveOver.instNontrivialKaehler
+  dCoordGenerates_of_isCurveOver _root_.AlgebraicCurve.instHasCanonicalLocalResidueKStar
 
 namespace Place
 
@@ -113,7 +115,7 @@ theorem trace_localResidue_mul_dlog_of_integral (v : Place K F) {f : F}
 
 end Place
 
-local instance : HasCanonicalDivisor (K := K) (F := F) := hasCanonicalDivisor_of_isCurveOver
+attribute [local instance] hasCanonicalDivisor_of_isCurveOver
 
 open AlgebraicCurves.Differentials.Residues.Proofs in
 open ResidueTheorem_functionField_of_smoothOfRelativeDimension_one.FFP in

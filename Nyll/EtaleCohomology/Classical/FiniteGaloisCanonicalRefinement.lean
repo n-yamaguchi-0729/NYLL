@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
-import Mathlib.FieldTheory.Normal.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
+public import Mathlib.FieldTheory.Normal.Basic
 
 /-!
 # Canonical finite Galois refinements
@@ -15,6 +17,8 @@ source automorphism to the canonical inclusion. Thus local sheaf lifting
 really occurs in the canonical filtered diagram, not just after an
 unrelated embedding.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -100,7 +104,6 @@ theorem finiteGaloisEtaleHom_correct_to_canonical
 /-- Every covering sieve of a finite Galois stage contains a canonical
 transition to a larger finite Galois subfield of the fixed algebraic closure. -/
 theorem exists_canonical_finiteGalois_mem_covering_sieve
-    [CharZero K]
     (E : FiniteGaloisIntermediateField K (AlgebraicClosure K))
     (S : Sieve (finiteGaloisEtaleObject K E))
     (hS : S ∈ (Spec (.of K)).smallEtaleTopology _) :

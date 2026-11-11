@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Unramified.LocalStructure
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!
 # Henselian Local Ring exists alg Hom lift of etale
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs
 namespace HenselianLocalRing_exists_algHom_lift_of_etale
 
-universe u
+universe u v
 
 open Polynomial IsLocalRing
 
@@ -79,7 +83,7 @@ section IsStandardEtaleSections
 variable {R : Type u} [CommRing R] [HenselianLocalRing R]
 
 theorem isStandardEtale_residueSection_exists
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.IsStandardEtale R S]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.IsStandardEtale R S]
     (φ : S →ₐ[R] ResidueField R) :
     ∃ ret : S →ₐ[R] R, ∀ s : S, algebraMap R (ResidueField R) (ret s) = φ s := by
   obtain ⟨Pres⟩ := Algebra.IsStandardEtale.nonempty_standardEtalePresentation (R := R) (S := S)
@@ -96,7 +100,7 @@ section Gluing
 variable {R : Type u} [CommRing R] [HenselianLocalRing R]
 
 theorem etale_residueSection_exists_of_henselianLocalRing
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.Etale R S]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.Etale R S]
     (φ : S →ₐ[R] ResidueField R) :
     ∃ ret : S →ₐ[R] R, ∀ s : S, algebraMap R (ResidueField R) (ret s) = φ s := by
   have : (RingHom.ker φ.toRingHom).IsPrime := RingHom.ker_isPrime φ.toRingHom
@@ -129,7 +133,7 @@ end W2Port
 
 theorem _root_.HenselianLocalRing.exists_algHom_lift_of_etale
     {R : Type u} [CommRing R] [HenselianLocalRing R]
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.Etale R S]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.Etale R S]
     (φ : S →ₐ[R] IsLocalRing.ResidueField R) :
     ∃ ψ : S →ₐ[R] R, ∀ s : S, algebraMap R (IsLocalRing.ResidueField R) (ψ s) = φ s :=
   W2Port.etale_residueSection_exists_of_henselianLocalRing S φ

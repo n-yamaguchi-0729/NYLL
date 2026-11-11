@@ -10,16 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDeg
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDeg
+public import Mathlib.Algebra.Polynomial.Eval.Defs
 
 /-!
 # Place ramification Index eq div gcd nat Abs ord of is Splitting Field X pow sub C
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -169,7 +174,7 @@ theorem exists_eq_algebraMap_of_pow_eq_one {x : F'} {m : ℕ} (hm : 0 < m) (hx :
     ∃ ζ : K, algebraMap K F' ζ = x := by
   have hint : IsIntegral K x := by
     refine ⟨X ^ m - 1, monic_X_pow_sub_C 1 hm.ne', ?_⟩
-    simp [hx]
+    rw [Polynomial.eval₂_sub, Polynomial.eval₂_X_pow, Polynomial.eval₂_one, hx, sub_self]
   have hirr := minpoly.irreducible hint
   have hdeg := IsAlgClosed.degree_eq_one_of_irreducible K hirr
   obtain ⟨ζ, hζ⟩ := minpoly.mem_range_of_degree_eq_one K x hdeg

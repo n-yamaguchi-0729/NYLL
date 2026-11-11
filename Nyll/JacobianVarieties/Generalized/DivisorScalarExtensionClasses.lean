@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarClasses
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarClasses
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
 
 /-! # Raw scalar extension for the actual extended relative divisor -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,21 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperFieldBaseChange
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
-import Nyll.EtaleFundamentalGroups.StrictHenselian.ProperClosedFiberComparison
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.Pi1.Affine.Over
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperFieldBaseChange
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.ProperClosedFiberComparison
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.Pi1.Affine.Over
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # The geometric closed fiber in the actual strict local total space
@@ -34,6 +37,8 @@ proper comparison for extensions of separably closed fields. It requires
 neither flatness nor Noetherianity. Essential surjectivity is a separate part
 of Stacks Project, Lemma 58.9.1, https://stacks.math.columbia.edu/tag/0A48.
 -/
+
+@[expose] public section
 
 noncomputable section
 

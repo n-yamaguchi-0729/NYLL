@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
-import Mathlib.RingTheory.Invariant.Galois
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Mathlib.RingTheory.Ideal.Over
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
+public import Mathlib.RingTheory.Invariant.Galois
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Mathlib.RingTheory.Ideal.Over
 
 /-!
 # Residue actions in finite-etale Galois-cover quotients
@@ -17,6 +19,8 @@ The residue action of the normalization-prime decomposition group has ideal
 inertia as its kernel, both internally and after mapping the kernel into the
 full categorical finite quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

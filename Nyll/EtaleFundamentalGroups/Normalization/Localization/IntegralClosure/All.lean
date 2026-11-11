@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.FiniteEtale
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.IsoOver
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.StalkMap
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.FiniteEtale
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.IsoOver
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.StalkMap
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Normalization.Localization.IntegralClosure. -/

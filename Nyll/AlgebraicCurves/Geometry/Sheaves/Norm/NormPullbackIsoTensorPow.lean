@@ -10,30 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.RingTheory.Norm.Defs
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Nyll.SchemeTheory.Modules.Norm.NormFrameTransition
-import Nyll.SchemeTheory.Modules.Frames.IsoAppEqIsFrameOn
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
-import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.RingTheory.Norm.Defs
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Nyll.SchemeTheory.Modules.Norm.NormFrameTransition
+public import Nyll.SchemeTheory.Modules.Frames.IsoAppEqIsFrameOn
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
+public import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
 
 /-!
 # Scheme Modules nonempty norm Module pullback iso tensor Pow
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -172,9 +176,9 @@ theorem exists_idx (π : X ⟶ Y) [IsFinite π] [Flat π] [LocallyOfFinitePresen
 theorem norm_app_eq_pow (π : X ⟶ Y) (d : ℕ) {W : Y.Opens} {e : Fin d → Γ(OX π, W)} (he :
   BasisClause π d W e)
     (g : Γ(Y, W)) :
-    letI : Algebra Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := (π.app W).hom.toAlgebra
+    let : Algebra Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := (π.app W).hom.toAlgebra
     Algebra.norm Γ(Y, W) (π.app W g) = g ^ d := by
-  let : Algebra Γ(Y, W) Γ(X, π ⁻¹ᵁ W) := (π.app W).hom.toAlgebra
+  intro sharedOwner1
   obtain ⟨b₀, -⟩ := he W (le_refl W)
   let idl : Γ(X, π ⁻¹ᵁ W) ≃ₗ[Γ(Y, W)] Γ(OX π, W) :=
     { toFun := fun x => (show Γ(OX π, W) from x)

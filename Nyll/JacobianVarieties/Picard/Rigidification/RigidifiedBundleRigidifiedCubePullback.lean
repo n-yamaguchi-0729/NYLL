@@ -10,10 +10,12 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+module
+
+public import Mathlib.Util.WithWeakNamespace
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
 
 /-!
 # Pullback of a rigidified line bundle on a triple product
@@ -22,6 +24,8 @@ A base-change square compatible with multiplication also preserves the unit sect
 The induced map on triple products therefore pulls back both the line bundle and
 its rigidification along the cube section.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.CoefficientCover
-import Nyll.SchemeTheory.Gluing.RecoveredLocalModel
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Nyll.SchemeTheory.Gluing.CoefficientCover
+public import Nyll.SchemeTheory.Gluing.RecoveredLocalModel
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-! Actual recovered local charts and overlap maps after arbitrary base change. -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits AlgebraicGeometry

@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Fiber
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatFinitePresentation
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTopFiberToSpecResidueField
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopIsMaximal
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppIsAffineOpen
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppBijectiveAppTopMorphismRestrict
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatFinitePresentation
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTopFiberToSpecResidueField
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopIsMaximal
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppIsAffineOpen
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppBijectiveAppTopMorphismRestrict
 
 /-!
 # bijective app of is Proper of flat of forall bijective app Top fiber To Spec Residue Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

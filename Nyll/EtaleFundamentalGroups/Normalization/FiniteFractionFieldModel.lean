@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteSubalgebraLocalization
-import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteSubalgebraLocalization
+public import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
 
 /-!
 # Finite normalization models at a prime with the original fraction field
@@ -17,6 +19,8 @@ Generators at the selected prime and at the generic point produce one
 finite subalgebra of the original extension field. The actual inclusion
 realizes both localizations, so its fraction field remains that same field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

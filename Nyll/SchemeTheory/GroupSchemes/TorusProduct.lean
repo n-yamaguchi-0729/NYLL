@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Torus
-import Nyll.SchemeTheory.GroupSchemes.SplitTorusSchemePoints
-import Nyll.SchemeTheory.CategoryTheory.CommGroupPoints
-import Mathlib.Logic.Equiv.Fin.Basic
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Torus
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorusSchemePoints
+public import Nyll.SchemeTheory.CategoryTheory.CommGroupPoints
+public import Mathlib.Logic.Equiv.Fin.Basic
 
 /-! # Products of actual torus group schemes -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -82,7 +86,7 @@ private theorem splitTorusProductPointEquiv_right (T : Over (Spec (CommRingCat.o
         (splitTorusPointEquiv R s T (x ≫ snd _ _)))) (Fin.natAdd r i) = _
   rw [MulEquiv.apply_symm_apply, Fin.append_right]
 
-private theorem splitTorusProductPointEquiv_naturality
+theorem splitTorusProductPointEquiv_naturality
     {T T' : Over (Spec (CommRingCat.of R))} (f : T ⟶ T')
     (x : T' ⟶ (product (splitTorus R r) (splitTorus R s)).X) :
     splitTorusProductPointEquiv R r s T (f ≫ x) =

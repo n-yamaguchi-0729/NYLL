@@ -23,6 +23,7 @@ import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.MapAppUnitPullbackEqUni
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafSectionsLinearRes
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafTensor
+import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafTensorComparison
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OdOext
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OresOext

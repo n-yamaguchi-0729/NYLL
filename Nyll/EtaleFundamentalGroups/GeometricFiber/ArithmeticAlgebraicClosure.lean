@@ -3,19 +3,24 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableDescent
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AlgebraicClosureTower
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ArithmeticExact
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ArithmeticMap
-import Nyll.EtaleFundamentalGroups.GeometricFiber.SeparableInjectivity
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableDescent
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AlgebraicClosureTower
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ArithmeticExact
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ArithmeticMap
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.SeparableInjectivity
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldTower
 
 /-!
 # Arithmetic Algebraic Closure
 
 The geometric map is injective after extension to an algebraic closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits
@@ -107,15 +112,13 @@ private theorem separableClosureProjection_fundamentalGroupHom_comparison
       ∃ c : π₁ᵉᵗ(xi ≫ pL), ∀ a : π₁ᵉᵗ(xi),
         hpoint ▸ fundamentalGroupHom pK (xi ≫ r) (fundamentalGroupHom r xi a) =
           MulAut.conj c (fundamentalGroupHom pL xi a) := by
-  let r := separableClosureProjection k L X f
-  let pK := pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k (separableClosure k L)))) f
-  let pL := pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k L))) f
+  intro r pK pL
   have hp : pL = r ≫ pK := (separableClosureProjection_comp_snd k L X f).symm
   have hpoint : (xi ≫ r) ≫ pK = xi ≫ pL := by
     rw [Category.assoc, ← hp]
   let t : pullback pL ⋙ fiber xi ≅ fiber (xi ≫ pL) :=
     pullbackCompositeFiberIsoOfEq r pK pL hp xi (xi ≫ pL) hpoint
-  refine ⟨hpoint, (pullbackFiberIso pL xi).symm ≪≫ t, ?_⟩
+  refine ⟨hpoint, Aut.of ((pullbackFiberIso pL xi).symm ≪≫ t), ?_⟩
   intro a
   rw [fundamentalGroupHom_comp_transport_eq_autHomOfCompIso r pK pL hp xi (xi ≫ pL) hpoint]
   exact fundamentalGroupHom_eq_conj_of_comparison pL xi t a

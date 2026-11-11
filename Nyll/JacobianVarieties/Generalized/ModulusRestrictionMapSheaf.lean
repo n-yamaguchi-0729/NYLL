@@ -4,16 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
 
 /-! # Restriction maps of actual modulus Picard-zero group sheaves -/
+
+@[expose] public section
 
 noncomputable section
 
 universe u
 
 open CategoryTheory Opposite
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsomorphism
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsomorphism
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 
 /-!
 # Actual isomorphism descent along inverse limits
@@ -14,6 +16,8 @@ An isomorphism between the pullbacks of two finite-etale models descends to
 an actual isomorphism at a later stage. The comparison with the given map
 is retained under the literal native pullback-composition isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

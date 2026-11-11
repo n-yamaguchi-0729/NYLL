@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechCup
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.MapAppUnitPullbackEqUnitPullbackComp
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroEqUnitPullbackSubUnitPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DEqDComapSliceEq
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAppTopFibre
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechCup
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.MapAppUnitPullbackEqUnitPullbackComp
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroEqUnitPullbackSubUnitPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DEqDComapSliceEq
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAppTopFibre
 
 /-!
 # Abelian Scheme Property Bundle exists d eq unit Pullback mul sub fst sub snd of d one eq
 zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

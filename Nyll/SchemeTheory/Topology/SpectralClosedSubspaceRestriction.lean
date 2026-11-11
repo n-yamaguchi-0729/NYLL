@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Maps.Proper.Basic
-import Mathlib.Topology.QuasiSeparated
-import Mathlib.Topology.Sober
-import Mathlib.Topology.Spectral.Basic
-import Nyll.SchemeTheory.Topology.SpectralClosedRestriction
+module
+
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Maps.Proper.Basic
+public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.Topology.Sober
+public import Mathlib.Topology.Spectral.Basic
+public import Nyll.SchemeTheory.Topology.SpectralClosedRestriction
 
 /-!
 # The closed-support reduction for spectral restriction
@@ -23,6 +25,8 @@ as required in Stacks Project, tag 09ZG.
 Reference: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

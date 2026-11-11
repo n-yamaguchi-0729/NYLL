@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
+module
+
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
 
 /-!
 # Boundary Away at the same prime after maximal-adic completion
@@ -33,6 +35,8 @@ to the localization at the same mapped prime `pHat`.  No tensor/local-factor
 equivalence and no independently selected completed prime is used.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped TensorProduct
@@ -44,7 +48,7 @@ universe uR uE
 /-- The etaleness predicate for a literal Away map, named so dependent
 completion targets do not force the elaborator to reconstruct their
 localized commutative-ring structures in a theorem signature. -/
-private abbrev localizationAwayMapEtale
+abbrev localizationAwayMapEtale
     {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
     (f : R) : Prop :=
   (Localization.awayMap (algebraMap R S) f).Etale
@@ -305,32 +309,25 @@ theorem adicCompletion_finiteEtale_samePrime_boundaryAway
     (f : R) :
     let Rhat := AdicCompletion (IsLocalRing.maximalIdeal R) R
     let T := Rhat ⊗[R] E
-    letI : Algebra Rhat T := Algebra.TensorProduct.leftAlgebra
-    letI : Algebra E T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra Rhat T := Algebra.TensorProduct.leftAlgebra
+    let : Algebra E T := Algebra.TensorProduct.rightAlgebra
     let pHat := p.map (algebraMap E T)
-    let hpHat : pHat.IsMaximal :=
-      (adicCompletion_finiteEtale_closedPrime (R := R) (S := E) p).1
-    letI : pHat.IsPrime := hpHat.isPrime
+    let hgeometry := adicCompletion_finiteEtale_closedPrime (R := R) (S := E) p
+    let hpHat : pHat.IsMaximal := hgeometry.1
+    let : pHat.IsPrime := hpHat.isPrime
     let hpHatOver : pHat.LiesOver (IsLocalRing.maximalIdeal Rhat) :=
-      (adicCompletion_finiteEtale_closedPrime (R := R) (S := E) p).2.1
-    letI : pHat.LiesOver (IsLocalRing.maximalIdeal Rhat) := hpHatOver
+      hgeometry.2.1
+    let : pHat.LiesOver (IsLocalRing.maximalIdeal Rhat) := hpHatOver
     let D := Localization.AtPrime pHat
-    letI : Algebra Rhat D :=
+    let : Algebra Rhat D :=
       ((algebraMap T D).comp (algebraMap Rhat T)).toAlgebra
     localizationAwayMapEtale (R := Rhat) (S := D)
       (algebraMap R Rhat f) := by
-  dsimp only
-  let Rhat := AdicCompletion (IsLocalRing.maximalIdeal R) R
-  let T := Rhat ⊗[R] E
-  let : Algebra Rhat T := Algebra.TensorProduct.leftAlgebra
-  let : Algebra E T := Algebra.TensorProduct.rightAlgebra
-  let pHat := p.map (algebraMap E T)
-  have hgeometry :=
-    adicCompletion_finiteEtale_closedPrime (R := R) (S := E) p
-  let : pHat.IsPrime := hgeometry.1.isPrime
+  intro Rhat T sharedOwner1 sharedOwner2 pHat hgeometry sharedOwner3 sharedOwner4 sharedOwner5
+    sharedOwner6 D
+  let : pHat.IsPrime := sharedOwner4
   let : pHat.LiesOver (IsLocalRing.maximalIdeal Rhat) :=
-    hgeometry.2.1
-  let D := Localization.AtPrime pHat
+    sharedOwner6
   let canonicalRhatD : Algebra Rhat D := inferInstance
   let : HenselianLocalRing Rhat :=
     { is_henselian := fun g hg x hx hderivative ↦ by
@@ -340,15 +337,12 @@ theorem adicCompletion_finiteEtale_samePrime_boundaryAway
   let : Algebra.Etale Rhat T := hgeometry.2.2.2
   have hCanonicalEtale :
       @Algebra.Etale Rhat D _ _ canonicalRhatD :=
-    etale_localizationAtPrime_of_henselian_of_etale pHat
-  let compositeRhatD : Algebra Rhat D :=
-    ((algebraMap T D).comp (algebraMap Rhat T)).toAlgebra
+    etale_localizationAtPrime_of_henselian_of_etale (R := Rhat) (S := T) pHat
   have hTower : @IsScalarTower Rhat T D
       (inferInstance : Algebra Rhat T).toSMul
       (inferInstance : Algebra T D).toSMul
-      canonicalRhatD.toSMul := by
-    let : Algebra Rhat D := canonicalRhatD
-    infer_instance
+      canonicalRhatD.toSMul := inferInstance
+  intro compositeRhatD
   have hAlgebra : canonicalRhatD = compositeRhatD := by
     apply Algebra.algebra_ext
     intro x
@@ -358,7 +352,6 @@ theorem adicCompletion_finiteEtale_samePrime_boundaryAway
   have hCompositeEtale :
       @Algebra.Etale Rhat D _ _ compositeRhatD :=
     hAlgebra ▸ hCanonicalEtale
-  let : Algebra Rhat D := compositeRhatD
   let : Algebra.Etale Rhat D := hCompositeEtale
   exact localizationAwayMapEtale_of_etale
     (R := Rhat) (S := D) (algebraMap R Rhat f)

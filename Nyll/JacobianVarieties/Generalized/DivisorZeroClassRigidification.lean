@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorClassRigidification
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorDegree
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorClassRigidification
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorDegree
 
 /-! # Degree-zero divisor classes and actual algebraically trivial rigidified bundles -/
+
+@[expose] public section
 
 noncomputable section
 

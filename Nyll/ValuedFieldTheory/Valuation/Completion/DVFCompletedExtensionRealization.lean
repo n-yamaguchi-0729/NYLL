@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFFiniteExtensionDescent
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
-import Mathlib.Algebra.Ring.Hom.Defs
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFFiniteExtensionDescent
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
+public import Mathlib.Algebra.Ring.Hom.Defs
 
 /-!
 # Realizing finite extensions as actual valuation completions
@@ -17,6 +19,8 @@ localized integral closure. The two actual tensor maps identify its
 completion with the prescribed extension, preserving both embeddings.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

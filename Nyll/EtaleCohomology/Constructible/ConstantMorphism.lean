@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantPresentation
-import Nyll.EtaleCohomology.Sites.ConstantRepresentable
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Sites.ModuleRestriction
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Nyll.EtaleCohomology.Sites.SheafFunctors
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantPresentation
+public import Nyll.EtaleCohomology.Sites.ConstantRepresentable
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.ModuleRestriction
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
 
 /-!
 # Local constant models for morphisms of constant module sheaves
@@ -22,6 +24,8 @@ sheaf is, on an actual étale covering, induced by a module homomorphism.
 The models and their commutative squares are constructed from finite local
 lifts of the sheafification presentation.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

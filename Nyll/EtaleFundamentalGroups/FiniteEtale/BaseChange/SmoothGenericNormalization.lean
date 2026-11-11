@@ -4,39 +4,41 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.SmoothCharacteristicZeroNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.SmoothGaloisNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.RootChartNormalization
-import Nyll.EtaleFundamentalGroups.GaloisCovers.SmoothGenericCharts
-import Nyll.SchemeTheory.LocalGeometry.DVRFiberCover
-import Nyll.SchemeTheory.LocalGeometry.SmoothGenericNormal
-import Nyll.SchemeTheory.Normalization.IntegralOpen
-import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Galois.Basic
-import Mathlib.CategoryTheory.Galois.GaloisObjects
-import Mathlib.CategoryTheory.MorphismProperty.Basic
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.SmoothCharacteristicZeroNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.SmoothGaloisNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.RootChartNormalization
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SmoothGenericCharts
+public import Nyll.SchemeTheory.LocalGeometry.DVRFiberCover
+public import Nyll.SchemeTheory.LocalGeometry.SmoothGenericNormal
+public import Nyll.SchemeTheory.Normalization.IntegralOpen
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Galois.Basic
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
+public import Mathlib.CategoryTheory.MorphismProperty.Basic
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Extending a whole smooth generic Galois cover by normalization
@@ -64,6 +66,8 @@ https://stacks.math.columbia.edu/tag/0C0R. Properness is not required for
 this extension step. Descending arbitrary geometric generic covers and
 comparing them with the special fibre are subsequent steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

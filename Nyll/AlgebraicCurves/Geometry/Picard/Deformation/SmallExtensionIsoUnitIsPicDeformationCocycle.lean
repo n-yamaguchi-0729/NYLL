@@ -10,36 +10,40 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Tactic.Omega
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.LinearAlgebra.Dual.Defs
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.Tactic.Ext
-import Mathlib.Algebra.Module.Projective
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Abel
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionMemMapRangeIsFibreReading
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingEqZero
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.TransitionEqMulMul
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsoUnit
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.LinearAlgebra.Dual.Defs
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.Tactic.Ext
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Abel
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionMemMapRangeIsFibreReading
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingEqZero
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.TransitionEqMulMul
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsoUnit
 
 /-!
 # Small Extension nonempty iso unit of is Pic Deformation Cocycle of forall mem range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

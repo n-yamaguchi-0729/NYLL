@@ -11,13 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Product
 -/
+
+@[expose] public section
 
 noncomputable section
 

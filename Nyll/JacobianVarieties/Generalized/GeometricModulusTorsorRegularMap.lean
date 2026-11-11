@@ -4,24 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMap
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.PicardOneAbelEquivariantUniqueness
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
-import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
-import Nyll.SchemeTheory.Morphisms.SeparatedQuasiCompactDescent
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Nyll.JacobianVarieties.Generalized.ModulusTorsorRegularMap
-import Nyll.JacobianVarieties.Generalized.GeometricModulusScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusComplementFiniteExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
-import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
-import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMap
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.PicardOneAbelEquivariantUniqueness
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
+public import Nyll.SchemeTheory.Morphisms.SeparatedQuasiCompactDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Nyll.JacobianVarieties.Generalized.ModulusTorsorRegularMap
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementFiniteExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+public import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
+public import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # Positive geometric modulus and regular torsor factorization
 
@@ -31,6 +35,8 @@ geometric principal-divisor condition supplies the group factor; no group
 or torsor factor is part of the hypotheses. Existence of a complement point
 and descent without one are separate tasks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

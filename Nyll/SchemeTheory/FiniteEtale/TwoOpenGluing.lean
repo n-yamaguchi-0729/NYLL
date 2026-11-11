@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.MorphismProperty.Comma
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
 
 /-!
 # Gluing finite étale covers over two open subschemes
@@ -20,6 +22,8 @@ The glued scheme is the pushout of their open overlap; the Cartesian squares
 over the two base opens prove that its structural morphism is finite étale.
 This supplies the two-open gluing step in Stacks Project, Tag 0EY7.
 -/
+
+@[expose] public section
 
 noncomputable section
 

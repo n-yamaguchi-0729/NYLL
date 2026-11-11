@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodExistence
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.NatIso
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodExistence
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.NatIso
 
 /-!
 # Equality of finite étale morphisms after shrinking a neighbourhood
@@ -32,6 +34,8 @@ This is the eventual-equality assertion needed for faithfulness on germs
 in [Stacks Project, Tag 0BLN](https://stacks.math.columbia.edu/tag/0BLN).
 No category of germs or categorical colimit is constructed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

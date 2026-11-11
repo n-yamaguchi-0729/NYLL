@@ -4,35 +4,37 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffinePresentation
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineSyzygies
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelPresentations
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelSyzygies
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelFreeSections
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.Sections.ClosedPullbackFreeSections
-import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
-import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Sections.KernelSections
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.LinearAlgebra.Finsupp.Defs
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffinePresentation
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineSyzygies
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelPresentations
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelSyzygies
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelFreeSections
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.Sections.ClosedPullbackFreeSections
+public import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
+public import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Sections.KernelSections
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.LinearAlgebra.Finsupp.Defs
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Original affine sections of the native closed-level syzygies
@@ -49,6 +51,8 @@ with a frame for the twist, and their kernels are exactly the original
 adic ideal multiples. These conclusions concern the kernels on the
 thickenings, not the kernels of the unreduced ambient free presentations.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -248,7 +252,8 @@ variable
     moduleSheaf f I V n ⊗ L.tensorPow d)
   (t : Γ(L.tensorPow d, U)) (ht : IsFrameOn t (U : X.Opens))
 
-private abbrev generatorSections (n : ℕ) :
+/-- The chosen generators viewed as global sections at each closed level. -/
+abbrev generatorSections (n : ℕ) :
     K → Γ(tensor (moduleSheaf f I V n) (L.tensorPow d), ⊤) :=
   freeHomTopSectionsEquiv (tensor (moduleSheaf f I V n) (L.tensorPow d)) K (α n)
 
@@ -272,7 +277,8 @@ theorem levelFreeSectionsEquiv_presentation (n : ℕ)
     (levelUnit_levelPresentation f I V (L.tensorPow d)
       (show X.Modules from SheafOfModules.free K) n (α n))
 
-private theorem levelPresentationKernel_map (n : ℕ) :
+/-- The free-section equivalence sends affine syzygies to the presentation kernel. -/
+theorem levelPresentationKernel_map (n : ℕ) :
     (affineSyzygyKernel f I V L d K
       (generatorSections f I K V L d α) U t ht n).map
         (levelFreeSectionsEquiv f I K U n).toLinearMap =
@@ -290,7 +296,8 @@ private theorem levelPresentationKernel_map (n : ℕ) :
     change affinePresentationMap f I V L d K
       (generatorSections f I K V L d α) U t ht n
         ((levelFreeSectionsEquiv f I K U n).symm y) = 0
-    rw [← levelFreeSectionsEquiv_presentation,
+    rw [← levelFreeSectionsEquiv_presentation f I K U V L d α t ht n
+      ((levelFreeSectionsEquiv f I K U n).symm y),
       (levelFreeSectionsEquiv f I K U n).apply_symm_apply]
     exact hy
 
@@ -367,7 +374,8 @@ variable (hα : ∀ n : ℕ, α (n + 1) ≫ (moduleTransition f I V n ▷ L.tens
 
 include hα in
 omit [Finite K] [(L.tensorPow d).IsQuasicoherent] in
-private theorem generatorSections_transition (n : ℕ) (k : K) :
+/-- The chosen generating sections commute with the closed-level transitions. -/
+theorem generatorSections_transition (n : ℕ) (k : K) :
     (moduleTransition f I V n ▷ L.tensorPow d).app ⊤
         (generatorSections f I K V L d α (n + 1) k) =
       generatorSections f I K V L d α n k := by

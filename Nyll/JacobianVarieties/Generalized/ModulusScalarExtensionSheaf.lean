@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionNaturality
-import Nyll.JacobianVarieties.Generalized.PicardGroupSheaf
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionNaturality
+public import Nyll.JacobianVarieties.Generalized.PicardGroupSheaf
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
+public import Mathlib.CategoryTheory.Sites.CoverLifting
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # Scalar extension of the actual modulus Picard group sheaves
@@ -18,12 +21,16 @@ The proved group-presheaf comparison therefore commutes with actual fppf
 sheafification, retaining the canonical map from chosen-rigidified classes.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
 
 open CategoryTheory
 open AlgebraicGeometry.SmoothProperCurve
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

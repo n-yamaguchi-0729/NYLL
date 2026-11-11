@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedCover
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedCover
 
 /-!
 # Fundamental groups of pointed pullbacks
@@ -15,6 +17,8 @@ the geometric point to every pullback of that cover.  The fundamental group
 at this lifted point is the inverse image of the original point stabilizer
 under the homomorphism on étale fundamental groups.
 -/
+
+@[expose] public section
 
 noncomputable section
 

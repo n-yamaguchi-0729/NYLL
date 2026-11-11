@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+module
+
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Exists Unique centre place of is Proper
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -70,13 +75,12 @@ open CentreL2 in
 theorem _root_.AlgebraicCurve.existsUnique_centre_place_of_isProper
     (k : Type u) [Field k] [IsAlgClosed k] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k))
     [IsIntegral C] [IsProper c] :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     ∀ v : Place k C.functionField, ∃! z : C, (∀ s : C.presheaf.stalk z,
           v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) ≤ 1 ∧
           (s ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk z) →
             v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) < 1)) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
-  intro v
+  intro sharedOwner1 v
   have hVC : ValuativeCriterion c := by
     have h : IsProper c := inferInstance
     rw [IsProper.eq_valuativeCriterion] at h

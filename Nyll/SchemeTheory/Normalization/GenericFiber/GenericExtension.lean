@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
 
 /-!
 # Generic fibres of relative normalizations
@@ -14,6 +16,8 @@ The normalization of an integral scheme in an algebraic extension of its
 function field recovers that extension on the generic fibre.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
@@ -21,11 +25,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 variable (X : Scheme.{u}) [IsIntegral X] (L : Type u) [Field L]
   [Algebra X.functionField L]

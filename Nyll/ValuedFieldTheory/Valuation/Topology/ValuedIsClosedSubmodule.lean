@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.Topology.Algebra.Valued.NormedValued
-import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.RingTheory.Valuation.RankOne
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.Topology.Algebra.Valued.NormedValued
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import Mathlib.RingTheory.Valuation.RankOne
 
 /-!
 # Valued is Closed submodule of finite Dimensional of is Closed subfield
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

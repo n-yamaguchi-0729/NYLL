@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Degree.AlgHomLaurentSeriesDegEqOne
-import Nyll.AlgebraicCurves.Places.Completion
-import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
-import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
-import Mathlib.FieldTheory.RatFunc.AsPolynomial
-import Mathlib.Topology.Algebra.UniformRing
+module
+
+public import Nyll.AlgebraicCurves.Places.Degree.AlgHomLaurentSeriesDegEqOne
+public import Nyll.AlgebraicCurves.Places.Completion
+public import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.Topology.Algebra.UniformRing
 
 /-! # Actual Laurent identification of a degree-one place completion
 
@@ -19,6 +21,8 @@ orders identifies the uniformities. Uniqueness of uniform completion then
 gives an algebra equivalence preserving the original embedding and valuation.
 No algebraic closure of the constant field is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

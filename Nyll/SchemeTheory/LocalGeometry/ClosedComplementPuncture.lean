@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Topology.Inseparable
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Topology.Inseparable
 
 /-!
 # Stalk punctures when the open complement consists of closed points
@@ -17,6 +19,8 @@ Every generization of a missing point, other than that point itself,
 lies in the original open. Its pullback to the actual local spectrum is
 therefore the punctured spectrum, without finiteness assumptions on X.
 -/
+
+@[expose] public section
 
 noncomputable section
 

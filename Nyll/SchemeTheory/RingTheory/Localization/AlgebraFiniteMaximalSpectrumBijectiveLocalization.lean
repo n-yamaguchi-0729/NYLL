@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Spectrum.Maximal.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Artinian.Instances
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.Tactic.LinearCombination
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
+module
+
+public import Mathlib.RingTheory.Spectrum.Maximal.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Artinian.Instances
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
 
 /-!
 # Algebra finite maximal Spectrum and bijective localization of module finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

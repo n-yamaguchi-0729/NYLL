@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.EtaleFundamentalGroups.Purity.LocallyConnectedRestriction
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkUnibranchCriterion
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.EtaleFundamentalGroups.Purity.LocallyConnectedRestriction
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkUnibranchCriterion
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.Topology.Sober
 
 /-!
 # Nonempty opens of irreducible geometrically unibranch schemes
@@ -29,6 +31,8 @@ surjectivity of the canonical fundamental group map. The scheme is arbitrary:
 normality, reducedness, Noetherianity, and quasi-compactness are not assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -39,7 +43,7 @@ universe u
 
 namespace AlgebraicGeometry.FiniteEtale
 
-private theorem puncturedGeometricStalk_nonempty_of_nonempty_open_complement
+theorem puncturedGeometricStalk_nonempty_of_nonempty_open_complement
     {X : Scheme.{u}} [IrreducibleSpace X]
     (U : X.Opens) (hU : (U : Set X).Nonempty) (x : X) (hx : x ∉ U)
     {Ω : Type u} [Field Ω]

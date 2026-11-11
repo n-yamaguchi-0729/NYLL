@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-!
 # Taking integral closure inside an intermediate integral closure
@@ -20,6 +22,8 @@ may have several components. This is used to replace the actual finite
 étale algebra on an away open by its full generic algebra when forming
 the relative normalization over the original base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

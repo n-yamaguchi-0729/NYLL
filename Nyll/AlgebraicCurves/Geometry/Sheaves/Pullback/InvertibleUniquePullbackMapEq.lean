@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleBijectivePresheafMapInf
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleBijectivePresheafMapInf
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
 
 /-!
 # Scheme Modules Is Invertible exists Unique pullback map eq of is Integrally Closed stalk
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

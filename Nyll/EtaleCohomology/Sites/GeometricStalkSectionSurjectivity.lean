@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FinitePullbackRepresentativeGluing
-import Nyll.EtaleCohomology.Sites.GeometricStalkMatchedCoverDescent
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
-import Nyll.EtaleCohomology.Sites.PullbackRepresentativeOverlap
+module
+
+public import Nyll.EtaleCohomology.Sites.FinitePullbackRepresentativeGluing
+public import Nyll.EtaleCohomology.Sites.GeometricStalkMatchedCoverDescent
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
+public import Nyll.EtaleCohomology.Sites.PullbackRepresentativeOverlap
 
 /-!
 # Surjectivity of the actual strict-local section comparison
@@ -23,6 +25,8 @@ module sheaves under a quasi-compact quasi-separated morphism (Stacks
 Project, Theorem 59.53.1), with the constructed strict-local ring and its
 actual stalk comparison map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

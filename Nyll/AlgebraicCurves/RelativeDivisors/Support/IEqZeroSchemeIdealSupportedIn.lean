@@ -10,38 +10,45 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalProperties.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.IsTensorProduct
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleInvertibleZeroSchemeIdealFlat
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.InvertibleISupportedIn
+module
+
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Nyll.SchemeTheory.RingTheory.PushoutKernel
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalProperties.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.IsTensorProduct
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleInvertibleZeroSchemeIdealFlat
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.InvertibleISupportedIn
 
 /-!
 # Rel Eff Cartier Div exists I eq zero Scheme Ideal of supported In
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -137,36 +144,7 @@ theorem ker_algebraMap_eq_map_ker
     [IsScalarTower R B P] [IsScalarTower R C P] [Algebra.IsPushout R B C P]
     (hC : Function.Surjective (algebraMap R C)) :
     RingHom.ker (algebraMap B P) = (RingHom.ker (algebraMap R C)).map (algebraMap R B) := by
-  let e : B ⊗[R] C ≃ₐ[B] P := Algebra.IsPushout.equiv R B C P
-  have h1 : algebraMap B P = e.toRingEquiv.toRingHom.comp
-      (Algebra.TensorProduct.includeLeft (R := R) (S := R) (A := B) (B := C)).toRingHom := by
-    ext b
-    simp [e]
-  rw [h1, RingHom.ker_comp_of_injective _ e.toRingEquiv.injective]
-  let g : R →ₐ[R] C := Algebra.ofId R C
-  have h2 : (Algebra.TensorProduct.includeLeft (R := R) (S := R) (A := B) (B := C)).toRingHom =
-      (Algebra.TensorProduct.map (AlgHom.id R B) g).toRingHom.comp
-        (Algebra.TensorProduct.includeLeft (R := R) (S := R) (A := B) (B := R)).toRingHom := by
-    ext b
-    simp [g]
-  have h3 : RingHom.ker (Algebra.TensorProduct.map (AlgHom.id R B) g).toRingHom =
-      (RingHom.ker (algebraMap R C)).map
-        (Algebra.TensorProduct.includeRight (R := R) (A := B) (B := R)).toRingHom := by
-    simpa only [AlgHom.ker_coe, AlgHom.coe_ideal_map, AlgHom.toRingHom_eq_coe,
-      g, Algebra.toRingHom_ofId] using
-      (Algebra.TensorProduct.lTensor_ker (A := B) g hC)
-  rw [h2, ← RingHom.comap_ker, h3]
-  let r : B ⊗[R] R ≃ₐ[R] B := Algebra.TensorProduct.rid R R B
-  have h4 : (Algebra.TensorProduct.includeLeft (R := R) (S := R) (A := B) (B := R)).toRingHom =
-      (r.toRingEquiv.symm : B →+* B ⊗[R] R) := by
-    ext b
-    apply r.toRingEquiv.injective
-    simp [r]
-  have h5 : (algebraMap R B) = (r.toRingEquiv : B ⊗[R] R →+* B).comp
-      (Algebra.TensorProduct.includeRight (R := R) (A := B) (B := R)).toRingHom := by
-    ext x
-    simp [r, Algebra.smul_def]
-  rw [h4, h5, ← Ideal.map_map, Ideal.comap_coe, Ideal.map_coe, Ideal.comap_symm]
+  exact _root_.Algebra.IsPushout.ker_algebraMap_eq_map_ker R B C P hC
 
 end Algebra.IsPushout
 
@@ -182,12 +160,7 @@ theorem ker_eq_map_ker_of_isPushout {R B C P : CommRingCat.{u}} {f : R ⟶ B} {g
     {inl : B ⟶ P} {inr : C ⟶ P} (h : IsPushout f g inl inr)
     (hg : Function.Surjective g.hom) :
     RingHom.ker inl.hom = (RingHom.ker g.hom).map f.hom := by
-  algebraize [f.hom, g.hom, inl.hom, inr.hom, inl.hom.comp f.hom]
-  have hw : inl.hom.comp f.hom = inr.hom.comp g.hom := by
-    simpa only [CommRingCat.hom_comp] using congr(($(h.w)).hom)
-  have : IsScalarTower R C P := .of_algebraMap_eq' hw
-  have : Algebra.IsPushout R B C P := CommRingCat.isPushout_iff_isPushout.mp h
-  exact Algebra.IsPushout.ker_algebraMap_eq_map_ker R B C P hg
+  exact _root_.CommRingCat.ker_eq_map_ker_of_isPushout h hg
 
 end CommRingCat
 
@@ -237,44 +210,19 @@ variable {X Y : Scheme.{u}}
 
 theorem ideal_comap_top [IsAffine X] [IsAffine Y] (I : X.IdealSheafData) (f : Y ⟶ X) :
     (I.comap f).ideal ⟨⊤, isAffineOpen_top Y⟩ =
-      (I.ideal ⟨⊤, isAffineOpen_top X⟩).map f.appTop.hom := by
-  have : IsAffine I.subscheme := isAffine_of_isAffineHom I.subschemeι
-  have H := isPushout_appTop_of_isPullback (IsPullback.of_hasPullback f I.subschemeι)
-  have := CommRingCat.ker_eq_map_ker_of_isPushout H
-    (I.subschemeι_app_surjective ⟨⊤, isAffineOpen_top X⟩)
-  rw [← ker_subschemeι_app I ⟨⊤, isAffineOpen_top X⟩, comap, Scheme.Hom.ker_apply]
-  exact this
+      (I.ideal ⟨⊤, isAffineOpen_top X⟩).map f.appTop.hom :=
+  _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_top I f
 
 
 theorem ideal_comap_of_le (I : X.IdealSheafData) (f : Y ⟶ X) (U : X.affineOpens)
     (V : Y.affineOpens) (hVU : (V : Y.Opens) ≤ f ⁻¹ᵁ (U : X.Opens)) :
-    (I.comap f).ideal V = (I.ideal U).map (f.appLE U V hVU).hom := by
-  suffices key : ∀ (U' : X.affineOpens) (V' : Y.affineOpens),
-      U' = ⟨(U : X.Opens).ι ''ᵁ ⊤, by simpa only [Scheme.Opens.ι_image_top] using U.2⟩ →
-      V' = ⟨(V : Y.Opens).ι ''ᵁ ⊤, by simpa only [Scheme.Opens.ι_image_top] using V.2⟩ →
-      ∀ (e : (V' : Y.Opens) ≤ f ⁻¹ᵁ (U' : X.Opens)),
-        (I.comap f).ideal V' = (I.ideal U').map (f.appLE U' V' e).hom from
-    key U V (Subtype.ext (U : X.Opens).ι_image_top.symm)
-      (Subtype.ext (V : Y.Opens).ι_image_top.symm) hVU
-  rintro _ _ rfl rfl e
-  have : IsAffine (U : X.Opens) := U.2
-  have : IsAffine (V : Y.Opens) := V.2
-  have h := ideal_comap_top (I.comap (U : X.Opens).ι) (f.resLE U V hVU)
-  rw [← comap_comp, Scheme.Hom.resLE_comp_ι, comap_comp,
-    ideal_comap_of_isOpenImmersion (I.comap f) (V : Y.Opens).ι,
-    ideal_comap_of_isOpenImmersion I (U : X.Opens).ι] at h
-  simp only [Scheme.Opens.ι_appIso, Iso.refl_inv, Scheme.Hom.appTop,
-    Scheme.Hom.resLE_app_top] at h
-  convert h using 2 <;> try rfl
-  congr 1
-  simp only [Scheme.Opens.topIso_hom, Scheme.Opens.topIso_inv, eqToHom_op]
-  erw [Scheme.Hom.map_appLE_assoc, Scheme.Hom.appLE_map]
+    (I.comap f).ideal V = (I.ideal U).map (f.appLE U V hVU).hom :=
+  _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_le I f U V hVU
 
 theorem ideal_comap_of_isAffineHom (I : X.IdealSheafData) (f : Y ⟶ X) [IsAffineHom f]
     (U : X.affineOpens) :
-    (I.comap f).ideal ⟨f ⁻¹ᵁ U, U.2.preimage f⟩ = (I.ideal U).map (f.app U).hom := by
-  rw [Scheme.Hom.app_eq_appLE]
-  exact ideal_comap_of_le I f U ⟨f ⁻¹ᵁ U, U.2.preimage f⟩ le_rfl
+    (I.comap f).ideal ⟨f ⁻¹ᵁ U, U.2.preimage f⟩ = (I.ideal U).map (f.app U).hom :=
+  _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isAffineHom I f U
 
 end AlgebraicGeometry.Scheme.IdealSheafData
 

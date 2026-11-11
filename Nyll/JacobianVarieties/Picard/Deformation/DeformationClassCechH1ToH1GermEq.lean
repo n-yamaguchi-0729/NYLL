@@ -10,31 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Topology.Irreducible
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassCrossSections
-import Nyll.AlgebraicCurves.Cohomology.CechH1ToH1MkEqCechH1ToH1Mk
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldInfMemLSpaceOnInterPlacesOf
+module
 
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Topology.Irreducible
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassCrossSections
+public import Nyll.AlgebraicCurves.Cohomology.CechH1ToH1MkEqCechH1ToH1Mk
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldInfMemLSpaceOnInterPlacesOf
+
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 /-!
 # Independence of the affine cover for deformation classes
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -111,7 +117,6 @@ theorem germToFunctionField_map {X : Scheme.{u}} [IrreducibleSpace X] {U V : X.O
       = (X.germToFunctionField U).hom s := by
   rw [← CategoryTheory.ConcreteCategory.comp_apply]
   erw [TopCat.Presheaf.germ_res]
-  try rfl
 
 end CoverGlue
 

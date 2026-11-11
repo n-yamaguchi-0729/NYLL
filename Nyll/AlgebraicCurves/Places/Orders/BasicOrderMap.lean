@@ -11,6 +11,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists of order Map

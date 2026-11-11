@@ -5,15 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Descent.NoetherianImageIdempotentLift
-import Nyll.SchemeTheory.Morphisms.ProperIntegralHenselianSections
-import Nyll.SchemeTheory.Affine.ConnectedOfGlobalSections
-import Nyll.SchemeTheory.Morphisms.ChowDatumProj
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.Algebra.Ring.Idempotent
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
+module
+
+public import Nyll.SchemeTheory.Descent.NoetherianImageIdempotentLift
+public import Nyll.SchemeTheory.Morphisms.ProperIntegralHenselianSections
+public import Nyll.SchemeTheory.Affine.ConnectedOfGlobalSections
+public import Nyll.SchemeTheory.Morphisms.ChowDatumProj
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.Algebra.Ring.Idempotent
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 
 /-!
 # Connected closed fibers of proper integral henselian families
@@ -26,6 +28,8 @@ zero or one. Connectedness then descends through the actual surjective Chow
 morphism. No Noetherian or finite-presentation assumption is made on the
 original henselian base or proper family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

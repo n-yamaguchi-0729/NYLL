@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.ReesTensorCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.ReesTensorCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Homogeneous retracts of actual Rees tensor Čech cohomology
@@ -24,6 +26,8 @@ vanishing for every actual ideal-power tensor complex. This is a degree
 extraction theorem; the geometric supply of Rees cohomology vanishing
 is separate from the constructed maps proved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

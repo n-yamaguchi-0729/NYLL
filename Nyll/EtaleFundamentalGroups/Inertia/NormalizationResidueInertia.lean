@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationPointRigidity
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationPointRigidity
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # Literal point-and-residue inertia on an unramified normalization
@@ -17,6 +19,8 @@ The proved normalization rigidity therefore makes that endomorphism the
 identity. This uses the original point-and-residue condition directly,
 without defining a substitute inertia group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

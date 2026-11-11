@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+module
+
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
 # Actual affine section quotients under closed base change
@@ -23,6 +25,8 @@ as a quotient, without postulating a quotient presentation of the source.
 The structural coefficient calculations also retain the factorization
 through a specified quotient of the base ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

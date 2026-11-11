@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LinearDisjoint
-import Mathlib.LinearAlgebra.TensorProduct.Subalgebra
+module
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosedTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
-import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroIsAlgebraic
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqConstantExtensionAlgClosed
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
-import Nyll.AlgebraicCurves.Cohomology.IndexOfSpecialtyEqFinrankH1
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantFieldDegreeFormula
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ForgetConstantsRestrictEq
+public import Mathlib.RingTheory.LinearDisjoint
+public import Mathlib.LinearAlgebra.TensorProduct.Subalgebra
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosedTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
+public import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroIsAlgebraic
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqConstantExtensionAlgClosed
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+public import Nyll.AlgebraicCurves.Cohomology.IndexOfSpecialtyEqFinrankH1
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantFieldDegreeFormula
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ForgetConstantsRestrictEq
 
 /-!
 # Genus FF eq of constant Field Extension of finite of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -545,7 +549,8 @@ theorem linearDisjoint (φ : F →ₐ[K] F)
   | zero =>
     intro c hc _ i
     by_contra hi
-    have hmem : i ∈ Finset.univ.filter fun i => c i ≠ 0 := by simp [hi]
+    have hmem : i ∈ Finset.univ.filter fun i => c i ≠ 0 :=
+      Finset.mem_filter.mpr ⟨Finset.mem_univ _, hi⟩
     have := Finset.card_pos.mpr ⟨i, hmem⟩
     omega
   | succ N ih =>
@@ -588,7 +593,8 @@ theorem linearDisjoint (φ : F →ₐ[K] F)
         simp only [d, b, hc'zero i hci, map_zero, sub_self]
     have hdcard : (Finset.univ.filter fun i => d i ≠ 0).card ≤ N := by
       have h1 := Finset.card_le_card hdsupp
-      have h2 : i₀ ∈ Finset.univ.filter fun i => c i ≠ 0 := by simp [hi₀]
+      have h2 : i₀ ∈ Finset.univ.filter fun i => c i ≠ 0 :=
+        Finset.mem_filter.mpr ⟨Finset.mem_univ _, hi₀⟩
       rw [Finset.card_erase_of_mem h2] at h1
       omega
     have hd0 := ih d hdcard hreld
@@ -1011,7 +1017,7 @@ theorem isIntegral_adjoin_ψ {t y : F₀}
       refine RingHom.ext fun r => ?_
       change ((e r : (IntermediateField.adjoin k ({t} : Set F₀)).map (ψ F Ω)) :
         FΩ (k := k) (F₀ := F₀) (F := F) Ω) = ψ F Ω (r : F₀)
-      simp [e]
+      exact IntermediateField.coe_equivMap_apply _ _ r
     rw [Polynomial.eval₂_map, hcomp]
     have h := Polynomial.hom_eval₂ p (algebraMap (IntermediateField.adjoin k ({t} : Set F₀)) F₀)
       (ψ F Ω).toRingHom y

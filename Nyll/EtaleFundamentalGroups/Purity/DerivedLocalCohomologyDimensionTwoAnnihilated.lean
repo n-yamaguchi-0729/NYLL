@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyAnnihilatedTop
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyAnnihilatedTop
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Dimension-two local cohomology with an annihilated coefficient module
@@ -14,6 +16,8 @@ The parameter-pair and coefficient-vanishing results are the
 two-dimensional specializations of the general parameter-list construction
 and annihilated-coefficient top-degree bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

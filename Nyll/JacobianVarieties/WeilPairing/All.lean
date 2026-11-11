@@ -32,3 +32,13 @@ import Nyll.JacobianVarieties.WeilPairing.DivisionDifference
 import Nyll.JacobianVarieties.WeilPairing.ConstantExtension
 
 import Nyll.JacobianVarieties.WeilPairing.TransportedDivisorialPairing
+import Nyll.JacobianVarieties.WeilPairing.NativeDivisionEvaluation
+import Nyll.JacobianVarieties.WeilPairing.NativePointedDivisionEvaluation
+import Nyll.JacobianVarieties.WeilPairing.NativeDivisionCharacter
+import Nyll.JacobianVarieties.WeilPairing.NormDescentEvaluation
+import Nyll.JacobianVarieties.WeilPairing.CyclicNormDescent
+import Nyll.JacobianVarieties.WeilPairing.PrimeToCharacteristicNondegeneracy
+import Nyll.JacobianVarieties.WeilPairing.CyclicNormCupPrimitive
+import Nyll.JacobianVarieties.WeilPairing.CyclicNormCupFieldTransport
+import Nyll.JacobianVarieties.WeilPairing.NativeCyclicNormCupPrimitive
+import Nyll.JacobianVarieties.WeilPairing.FiniteFieldNondegeneracy

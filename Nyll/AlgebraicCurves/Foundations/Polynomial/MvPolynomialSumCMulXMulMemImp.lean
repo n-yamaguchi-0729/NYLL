@@ -10,31 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.Algebra.MonoidAlgebra.Module
-import Mathlib.Algebra.MvPolynomial.Funext
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
-import Nyll.SchemeTheory.RingTheory.Polynomial.NatEqMacaulayPowLeMacaulayPow
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccEqMacaulayPow
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMemMulMem
+module
+
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.Algebra.MonoidAlgebra.Module
+public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
+public import Nyll.SchemeTheory.RingTheory.Polynomial.NatEqMacaulayPowLeMacaulayPow
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccEqMacaulayPow
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMemMulMem
 
 /-!
 # Mv Polynomial exists forall sum C mul X mul mem imp of forall exists X pow mul mem
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -47,7 +53,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace D2SOL
 
-variable (n : ℕ) (K : Type) [Field K]
+variable (n : ℕ) (K : Type u) [Field K]
 
 local notation "𝒜" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) K
 
@@ -201,7 +207,7 @@ theorem exists_eval_ne_zero [Infinite K] {G : MvPolynomial (Fin (n + 1)) K} (hG 
 end D2SOL
 
 theorem _root_.MvPolynomial.exists_forall_sum_C_mul_X_mul_mem_imp_of_forall_exists_X_pow_mul_mem
-    (n : ℕ) (K : Type) [Field K] [Infinite K] (I : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (n : ℕ) (K : Type u) [Field K] [Infinite K] (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hI : ∀ p ∈ I, ∀ i : ℕ, homogeneousComponent i p ∈ I)
     (hsat : ∀ (d : ℕ) (F : MvPolynomial (Fin (n + 1)) K), F.IsHomogeneous d →
       (∀ i : Fin (n + 1), ∃ N : ℕ, MvPolynomial.X i ^ N * F ∈ I) → F ∈ I) :

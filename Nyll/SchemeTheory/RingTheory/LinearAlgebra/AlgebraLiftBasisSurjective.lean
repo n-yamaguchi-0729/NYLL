@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Charpoly.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Nakayama
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SplitIfs
+module
+
+public import Mathlib.LinearAlgebra.Charpoly.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SplitIfs
 
 /-!
 # Algebra exists lift basis of surjective of monogenic special Fibre
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -144,7 +148,8 @@ theorem main
   let s : R → R' := Function.surjInv hπ
   have hs : ∀ r, π (s r) = r := Function.surjInv_eq hπ
   let j₀ : Fin d := ⟨0, hd0⟩
-  have hvB0 : vB j₀ = 1 := by rw [hvB]; simp [j₀]
+  have hvB0 : vB j₀ = 1 := by
+    exact (hvB j₀).trans (pow_zero y)
   have hP0 : ∀ j : Fin d, vB.repr (e i₀) j = if j = j₀ then 1 else 0 := fun j => by
     rw [he, ← hvB0, vB.repr_self, Finsupp.single_apply]
     by_cases h : j = j₀
@@ -169,7 +174,7 @@ theorem main
     change ∑ j, P' i₀ j • pb.basis j = 1
     rw [Finset.sum_eq_single j₀]
     · simp only [P', ite_true, one_smul, hpb]
-      simp [j₀]
+      exact pow_zero (AdjoinRoot.root χ')
     · intro j _ hj
       simp only [P', ite_true, ite_eq_right hj, zero_smul]
     · intro h; exact absurd (Finset.mem_univ j₀) h

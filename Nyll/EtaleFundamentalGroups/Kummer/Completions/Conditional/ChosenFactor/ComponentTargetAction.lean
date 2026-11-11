@@ -50,26 +50,13 @@ noncomputable def completedChosenFactorComponentResidueLift_of_mem_or_eq_one
         rw [AdicCompletion.maximalIdeal_eq_map]
         exact Ideal.mem_map_of_mem (algebraMap A Ahat) ha
       · exact Or.inr hOne
-    letI : IsLocalRing Bhat :=
+    let _ : IsLocalRing Bhat :=
       isLocalRing_iteratedRadical_of_mem_or_eq_one n aHat hn hstageHat
     ∀ {M : Type u} [Field M] [Algebra Bhat M],
       ∀ (q : Ideal (integralClosure Bhat M)) [q.IsPrime]
         [q.LiesOver (IsLocalRing.maximalIdeal Bhat)],
         Algebra.Etale Bhat (integralClosure Bhat M) → CommAlgCat Ahat := by
-  dsimp only
-  intro M _ _ q _ _ hEtale
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let aHat : Fin r → Ahat := fun i ↦ algebraMap A Ahat (a i)
-  let Bhat := iteratedRadical Ahat r n aHat
-  have hstageHat : ∀ i,
-      aHat i ∈ IsLocalRing.maximalIdeal Ahat ∨ n i = 1 := fun i ↦ by
-    rcases hstage i with ha | hOne
-    · left
-      rw [AdicCompletion.maximalIdeal_eq_map]
-      exact Ideal.mem_map_of_mem (algebraMap A Ahat) ha
-    · exact Or.inr hOne
-  letI : IsLocalRing Bhat :=
-    isLocalRing_iteratedRadical_of_mem_or_eq_one n aHat hn hstageHat
+  intro Ahat aHat Bhat hstageHat localBhat M _ _ q _ _ hEtale
   have hmaxFG : (IsLocalRing.maximalIdeal Ahat).FG := by
     rw [AdicCompletion.maximalIdeal_eq_map]
     exact Ideal.FG.map
@@ -230,7 +217,7 @@ def HasCompletedChosenFactorComponentTargetAction
       rw [AdicCompletion.maximalIdeal_eq_map]
       exact Ideal.mem_map_of_mem (algebraMap A Ahat) ha
     · exact Or.inr hOne
-  letI : IsLocalRing Bhat :=
+  let : IsLocalRing Bhat :=
     isLocalRing_iteratedRadical_of_mem_or_eq_one n aHat hn hstageHat
   ∀ [IsDomain Bhat],
     ∀ {M : Type u} [Field M]
@@ -251,11 +238,11 @@ def HasCompletedChosenFactorComponentTargetAction
             IsIntegralClosure.isFractionRing_of_finite_extension
               Bhat (FractionRing Bhat) M C
           exact localizationAtPrimeToFractionFieldAlgebra (K := M) q
-        letI : Algebra D M := dComponentAlgebra
+        let : Algebra D M := dComponentAlgebra
         let aComponentAlgebra : Algebra Ahat M :=
           ((algebraMap Bhat M).comp (algebraMap Ahat Bhat)).toAlgebra
-        letI : Algebra Ahat M := aComponentAlgebra
-        letI : IsScalarTower Ahat Bhat M :=
+        let : Algebra Ahat M := aComponentAlgebra
+        let : IsScalarTower Ahat Bhat M :=
           IsScalarTower.of_algebraMap_eq' rfl
         Nonempty
             ((Bhat ⊗[Ahat] CResidue) ≃ₐ[Bhat] D) ∧
@@ -289,21 +276,10 @@ theorem
     (hstage : ∀ i,
       a i ∈ IsLocalRing.maximalIdeal A ∨ n i = 1) :
     HasCompletedChosenFactorComponentTargetAction n a hn hstage := by
-  unfold HasCompletedChosenFactorComponentTargetAction
-  dsimp only
-  intro _ M _ _ _ _ _ q _ _ hEtale
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let aHat : Fin r → Ahat := fun i ↦ algebraMap A Ahat (a i)
-  let Bhat := iteratedRadical Ahat r n aHat
-  have hstageHat : ∀ i,
-      aHat i ∈ IsLocalRing.maximalIdeal Ahat ∨ n i = 1 := fun i ↦ by
-    rcases hstage i with ha | hOne
-    · left
-      rw [AdicCompletion.maximalIdeal_eq_map]
-      exact Ideal.mem_map_of_mem (algebraMap A Ahat) ha
-    · exact Or.inr hOne
-  let : IsLocalRing Bhat :=
-    isLocalRing_iteratedRadical_of_mem_or_eq_one n aHat hn hstageHat
+  delta HasCompletedChosenFactorComponentTargetAction
+  intro Ahat aHat Bhat hstageHat localBhat domainBhat M fieldM algebraBhatM
+    algebraFractionM towerBhatFractionM finiteFractionM q primeQ liesOverQ hEtale
+    D CResidue dComponentAlgebra algebraDM aComponentAlgebra algebraAhatM towerAhatBhatM
   have hmaxFG : (IsLocalRing.maximalIdeal Ahat).FG := by
     rw [AdicCompletion.maximalIdeal_eq_map]
     exact Ideal.FG.map
@@ -314,7 +290,6 @@ theorem
       hmaxFG n aHat hn hstageHat
   let C := integralClosure Bhat M
   let : Algebra.Etale Bhat C := hEtale
-  let D := Localization.AtPrime q
   let : Module.Finite Bhat D :=
     moduleFinite_localizationAtPrime_of_henselian_of_etale q
   let : Algebra.Etale Bhat D :=
@@ -323,7 +298,7 @@ theorem
     isLocalHom_algebraMap_localizationAtPrime_of_liesOver_maximalIdeal q
   let aDAlgebra : Algebra Ahat D :=
     ((algebraMap Bhat D).comp (algebraMap Ahat Bhat)).toAlgebra
-  let : Algebra Ahat D := aDAlgebra
+  let : SMul Ahat D := aDAlgebra.toSMul
   let : IsScalarTower Ahat Bhat D :=
     IsScalarTower.of_algebraMap_eq' rfl
   let qD := IsLocalRing.maximalIdeal D
@@ -343,9 +318,6 @@ theorem
             ← hQOver.over]
           exact IsLocalRing.maximalIdeal.isMaximal Bhat
     exact IsLocalRing.eq_maximalIdeal hQMaximal
-  let CResidue :=
-    completedChosenFactorComponentResidueLift_of_mem_or_eq_one
-      n a hn hstage (M := M) q hEtale
   let F := FractionRing D
   let bFracAlgebra : Algebra Bhat F :=
     ((algebraMap D F).comp (algebraMap Bhat D)).toAlgebra
@@ -366,9 +338,6 @@ theorem
   let : IsFractionRing C M :=
     IsIntegralClosure.isFractionRing_of_finite_extension
       Bhat (FractionRing Bhat) M C
-  let dComponentAlgebra : Algebra D M :=
-    localizationAtPrimeToFractionFieldAlgebra (K := M) q
-  let : Algebra D M := dComponentAlgebra
   let : IsScalarTower C D M :=
     localizationAtPrimeToFractionField_isScalarTower (K := M) q
   let : IsScalarTower Bhat D M := by
@@ -382,11 +351,6 @@ theorem
         IsScalarTower.algebraMap_apply C D M _
       _ = algebraMap D M (algebraMap Bhat D z) := by
         rw [IsScalarTower.algebraMap_apply Bhat C D z]
-  let aComponentAlgebra : Algebra Ahat M :=
-    ((algebraMap Bhat M).comp (algebraMap Ahat Bhat)).toAlgebra
-  let : Algebra Ahat M := aComponentAlgebra
-  let : IsScalarTower Ahat Bhat M :=
-    IsScalarTower.of_algebraMap_eq' rfl
   let eDM : F ≃ₐ[D] M :=
     integralClosureLocalizationFractionRingAlgEquiv
       (B := Bhat) (K := FractionRing Bhat) (M := M) q

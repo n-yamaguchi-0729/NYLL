@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.SurjectiveOnStalks
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.QuasiFinite.Weakly
-import Mathlib.RingTheory.ZariskisMainTheorem
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
+module
+
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.SurjectiveOnStalks
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.QuasiFinite.Weakly
+public import Mathlib.RingTheory.ZariskisMainTheorem
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
 
 /-!
 # Henselian Local Ring module Finite quotient span and exists pow mem of is Localization At
 Prime of mem non Zero Divisors
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

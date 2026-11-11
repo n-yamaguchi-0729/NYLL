@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.AlgebraicCurves.Models.Construction.Basic
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Values of a regular group-valued map at function-field places
 
@@ -13,6 +16,8 @@ The evaluator is constructed from the actual morphism and the original target
 point group. It agrees with the morphism on the open curve and is zero at the
 remaining places. No point-value compatibility needs to be supplied separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

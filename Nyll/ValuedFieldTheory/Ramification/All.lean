@@ -4,16 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.ClosedSubgroups
-import Nyll.ValuedFieldTheory.Ramification.Different
-import Nyll.ValuedFieldTheory.Ramification.Filtration
-import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.All
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.All
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.All
-import Nyll.ValuedFieldTheory.Ramification.InertiaCardinality
-import Nyll.ValuedFieldTheory.Ramification.LocalField.All
-import Nyll.ValuedFieldTheory.Ramification.ProfiniteInvariant
-import Nyll.ValuedFieldTheory.Ramification.RamificationIndexComparison
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.InertiaLifting
+public import Nyll.ValuedFieldTheory.Ramification.InertiaSubgroup
+public import Nyll.ValuedFieldTheory.Ramification.ClosedSubgroups
+public import Nyll.ValuedFieldTheory.Ramification.Different
+public import Nyll.ValuedFieldTheory.Ramification.Filtration
+public import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.All
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.All
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.All
+public import Nyll.ValuedFieldTheory.Ramification.InertiaCardinality
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.All
+public import Nyll.ValuedFieldTheory.Ramification.ProfiniteInvariant
+public import Nyll.ValuedFieldTheory.Ramification.RamificationIndexComparison
 
 /-!
 # Valued field theory: Ramification

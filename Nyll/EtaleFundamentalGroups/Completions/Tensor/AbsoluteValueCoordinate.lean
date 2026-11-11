@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Nyll.ValuedFieldTheory.Valuation.Completion.TensorProductDecomposition
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Nyll.ValuedFieldTheory.Valuation.Completion.TensorProductDecomposition
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completion
 
 /-!
 # Selecting an absolute-value completion from a tensor component
@@ -20,6 +23,8 @@ of one of the canonical coordinate maps.  The coordinate is obtained from the
 prime-spectrum classification of a finite product; it is not supplied as an
 assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

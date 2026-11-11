@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemAssociatedGraded
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemAssociatedGraded
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Original kernels of a finite projective adic system
@@ -27,6 +29,8 @@ The calculation on pure tensors uses the actual projections of the given
 system; no independent recovery isomorphism or flatness of the limit is
 an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,7 +48,8 @@ variable {R : Type u} [CommRing R] [IsNoetherianRing R]
   (hker : ∀ n : ℕ, (t n).ker = I ^ (n + 1) • (⊤ : Submodule R (M (n + 1))))
   (hpow : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule R (M n)) = ⊥)
 
-private def firstReductionEquiv :
+/-- Reduction of compatible sections modulo the ideal recovers the first stage. -/
+def firstReductionEquiv :
     ((sections M t) ⧸ (I • (⊤ : Submodule R (sections M t)))) ≃ₗ[R] M 0 :=
   (Submodule.quotEquivOfEq (I • (⊤ : Submodule R (sections M t)))
     (I ^ (0 + 1) • (⊤ : Submodule R (sections M t))) (by rw [pow_one])).trans

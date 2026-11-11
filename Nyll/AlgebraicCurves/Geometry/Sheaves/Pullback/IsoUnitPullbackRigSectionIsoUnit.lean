@@ -10,26 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Separation.Basic
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Separation.Basic
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
 
 /-!
 # Scheme Modules nonempty iso unit of forall pullback rig Section iso unit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

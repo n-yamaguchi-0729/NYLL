@@ -5,11 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
-import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
 
 /-! # Actual Abel classes commute with restriction of the whole modulus -/
+
+@[expose] public section
 
 noncomputable section
 

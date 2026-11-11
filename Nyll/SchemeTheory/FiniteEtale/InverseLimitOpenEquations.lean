@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Simultaneous equations over inverse-limit overlaps
@@ -18,6 +20,8 @@ inverse systems. A finite family of equations over different such opens
 holds at one common original stage. Finiteness is required only over each
 open, not over the ambient scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

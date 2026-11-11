@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!+# The largest open extension of an etale section
 
@@ -17,6 +19,8 @@ given section on their overlaps. Their pairwise agreement follows from
 the dense open and the separated-unramified equalizer. The base need not
 be reduced, and no local existence assertion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

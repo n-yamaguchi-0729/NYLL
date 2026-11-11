@@ -18,6 +18,7 @@ import Nyll.AlgebraicCurves.Models.Charts.NotIsAffineProper
 import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveIffTranscendentalFiniteDimensional
 import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.IsPrincipalIdealRing
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Exists centre and finite set Of centre of is Closed singleton
@@ -117,7 +118,7 @@ theorem _root_.AlgebraicCurve.exists_centre_and_finite_setOf_centre_of_isClosed_
     [IsIntegral C] [IsProper c]
     (hK : letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra; IsCurveOver k C.functionField)
     (z : C) (hz : IsClosed ({z} : Set C)) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     (∃ v : Place k C.functionField, (∀ s : C.presheaf.stalk z,
           v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) ≤ 1 ∧
           (s ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk z) →
@@ -126,8 +127,8 @@ theorem _root_.AlgebraicCurve.exists_centre_and_finite_setOf_centre_of_isClosed_
           v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) ≤ 1 ∧
           (s ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk z) →
             v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) < 1))}.Finite := by
+  intro sharedOwner1
   classical
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
   let φ : C.presheaf.stalk z →+* C.functionField := algebraMap (C.presheaf.stalk z) C.functionField
   have hφinj : Function.Injective φ := IsFractionRing.injective (C.presheaf.stalk z) C.functionField
   have hzη : z ≠ genericPoint C := CentreL2b.ne_genericPoint_of_isClosed k c hK z hz

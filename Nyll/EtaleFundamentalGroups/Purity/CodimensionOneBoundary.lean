@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.Order.KrullDimension
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.Topology.Inseparable
-import Mathlib.Topology.Irreducible
-import Mathlib.Topology.Closure
-import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.Maps.Basic
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.Topology.Sober
-import Mathlib.Tactic.NormNum
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.Order.KrullDimension
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.Topology.Inseparable
+public import Mathlib.Topology.Irreducible
+public import Mathlib.Topology.Closure
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.Maps.Basic
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Topology.Sober
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Codimension-one points of a dense-open boundary
@@ -38,6 +40,8 @@ https://stacks.math.columbia.edu/tag/0H2W
 
 Neither regularity nor an assumed extension of a cover is used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

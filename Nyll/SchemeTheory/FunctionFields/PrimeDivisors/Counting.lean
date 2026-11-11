@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Dedekind
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.PrimesOver
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Dedekind
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.PrimesOver
 
 /-!
 # Counting prime divisors over a base prime
@@ -15,6 +17,8 @@ that center determines the divisor.  Thus prime divisors whose centers lie
 over a fixed base prime inject into the set of primes over that base prime.
 The ramification--inertia count then bounds their number by the module rank.
 -/
+
+@[expose] public section
 
 noncomputable section
 

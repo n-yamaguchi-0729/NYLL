@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Grp.Adjunctions
-import Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+public import Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Units commute with the actual stalk construction
@@ -19,6 +21,8 @@ Both an element and its inverse descend to a common stage of the
 filtered diagram. The inverse identity then descends to a refinement.
 This compares actual stalks of unit presheaves with units of ring stalks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

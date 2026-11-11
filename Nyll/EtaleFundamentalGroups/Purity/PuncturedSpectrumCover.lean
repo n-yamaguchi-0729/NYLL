@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.Algebra.Module.SpanRank
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.Algebra.Module.SpanRank
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # A finite affine cover of a punctured local spectrum
@@ -18,6 +20,8 @@ This file constructs that cover on the actual punctured spectrum, proves its
 charts affine, and identifies every chart with the spectrum of the canonical
 away localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

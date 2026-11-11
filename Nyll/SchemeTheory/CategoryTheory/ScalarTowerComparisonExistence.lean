@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerMapComparison
-import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerMapComparison
+public import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
 
 /-! # Equivariant tower comparisons from actual single-step witnesses
 
@@ -13,6 +15,8 @@ Three single-step comparisons supply the group, acted-on object and source
 comparisons for a functor tower. Their action laws and both map squares are
 composed while the witnesses remain abstract.
 -/
+
+@[expose] public section
 
 noncomputable section
 

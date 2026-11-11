@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.TameInverseRoot
-import Nyll.AlgebraicCurves.Places.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameInverseRoot
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-! # Exact coefficient orders of the tame parameter displacement
 
@@ -14,6 +16,8 @@ Hensel's constructed root gives the branch change for `s = π^e` under
 has order exactly `e*n+1`. Zero coefficients are handled separately, respecting
 the library convention `ord 0 = 0`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

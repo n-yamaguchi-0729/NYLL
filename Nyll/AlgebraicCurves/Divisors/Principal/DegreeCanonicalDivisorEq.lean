@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Local.Order
-import Nyll.AlgebraicCurves.Differentials.Local.Uniformizer
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.Differentials.Residues.Basic
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosed
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosed
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.DegreeCanonicalDivisorEq
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.Differentials.Local.Uniformizer
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.Differentials.Residues.Basic
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosed
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosed
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.DegreeCanonicalDivisorEq
 
 /-!
 # Degree canonical Divisor eq of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -50,8 +54,6 @@ attribute [-instance]
   kw_ffgc_continuousSMul_adicCompletionComap
   kw_ffgc_isScalarTower_integersCompletionCompletion
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

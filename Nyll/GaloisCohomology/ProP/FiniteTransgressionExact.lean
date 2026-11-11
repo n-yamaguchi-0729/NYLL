@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionLinear
-import Nyll.GaloisCohomology.ProP.FreeProPH2Cocycle
+module
+
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionLinear
+public import Nyll.GaloisCohomology.ProP.FreeProPH2Cocycle
 
 /-!
 # Exactness of finite transgression
@@ -14,6 +16,8 @@ Restriction of an ambient mod-`p` character to a normal subgroup is conjugation 
 This file proves the missing converse to the finite transgression kernel theorem: an invariant
 character has zero factor-set class exactly when it is such a restriction.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

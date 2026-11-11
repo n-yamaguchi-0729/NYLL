@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! # Actual formal lifts of simple roots
 
@@ -19,6 +21,8 @@ No power-series root is assumed. The coefficient pole estimate for this
 nonlinear algebraic root is a subsequent theorem, not a consequence claimed
 from Hensel's theorem here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

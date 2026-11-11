@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Algebra.Algebra.Subalgebra.Prod
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.SplitIfs
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSectionsEqOneSubsingletonH1
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSections
+module
+
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Algebra.Subalgebra.Prod
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSectionsEqOneSubsingletonH1
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSections
 
 /-!
 # Two Chart Cech finrank H0 sub finrank H1 glued Lines Sections
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

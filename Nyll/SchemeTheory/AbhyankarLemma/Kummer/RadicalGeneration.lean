@@ -4,8 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Definitions
-import Nyll.ValuedFieldTheory.LocalField.Unramified.BasicInvariants
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Definitions
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.BasicInvariants
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.HenselLemma
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
 
 /-!
 # Radical sources for tame extensions
@@ -21,6 +27,8 @@ value is the value of the corresponding power.
 This is source data from the actual quotient `w(Lˣ)/v(Kˣ)`, not a
 certificate for the final generation statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

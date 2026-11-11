@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkObjectSpreading
-import Nyll.SchemeTheory.Descent.PunctureIsoSpreading
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkObjectSpreading
+public import Nyll.SchemeTheory.Descent.PunctureIsoSpreading
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Compatible spreading of a finite etale stalk cover
@@ -21,6 +23,8 @@ isomorphism. First spread the local cover, then spread the overlap
 isomorphism inside an affine neighborhood. The resulting covers and
 comparison are transported back through the canonical open-image maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

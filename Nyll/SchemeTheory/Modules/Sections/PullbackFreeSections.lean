@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Limits.Final
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Limits.Final
 
 /-!
 # Original free generators under pullback
@@ -22,6 +24,8 @@ original pulled-back free generator to the corresponding generator.
 The calculation uses the actual adjunction unit and the actual
 coproduct inclusion, with no choice of bases or extra trivialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Basic.Complex.Basic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantFieldDescentFinset
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+module
+
+public import Mathlib.Basic.Complex.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantFieldDescentFinset
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
 
 /-!
 # Exists constant Field Descent
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

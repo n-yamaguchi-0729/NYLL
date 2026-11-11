@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientCanonicalFundamentalGroup
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientCanonicalFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
 
 /-!
 # Canonical fundamental-group quotients and boundary inertia
@@ -15,6 +17,8 @@ usual fundamental-group morphism of spectra.  For a split normal-crossings
 boundary its image is the normalization-prime inertia group, and that image
 has order prime to the selected residue characteristic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

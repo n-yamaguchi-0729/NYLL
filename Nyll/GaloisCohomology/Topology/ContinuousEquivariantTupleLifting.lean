@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
+public import Nyll.GaloisCohomology.Topology.HomogeneousContinuousCochainsFunctor
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
 
 /-!
 # Lifting homogeneous continuous cochains
@@ -14,6 +17,8 @@ A surjective map with discrete target coefficients lifts homogeneous cochains
 when the source action is jointly continuous. Normalizing the first coordinate
 makes an arbitrary section equivariant without averaging.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -202,13 +207,8 @@ theorem homogeneousCochains_map_exact [LocallyCompactSpace G]
 /-- Actual homogeneous continuous cochains as a functor of the coefficient
 topological representation. -/
 def homogeneousContinuousCochainsFunctor :
-    TopRep.{u} ℤ G ⥤ CochainComplex (TopModuleCat.{u} ℤ) ℕ where
-  obj := homogeneousCochains
-  map φ := ContinuousCohomology.cochainsMap (ContinuousMonoidHom.id G) φ
-  map_id A := ContinuousCohomology.cochainsMap_id A
-  map_comp φ ψ :=
-    ContinuousCohomology.cochainsMap_comp (ContinuousMonoidHom.id G)
-      (ContinuousMonoidHom.id G) φ ψ
+    TopRep.{u} ℤ G ⥤ CochainComplex (TopModuleCat.{u} ℤ) ℕ :=
+  homogeneousContinuousCochainsFunctorOver ℤ G
 
 /-- The actual homogeneous continuous cochain functor is additive. -/
 instance homogeneousContinuousCochainsFunctor_additive [LocallyCompactSpace G] :

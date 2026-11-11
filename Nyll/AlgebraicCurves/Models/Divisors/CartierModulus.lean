@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierStalkMultiplicity
-import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
-import Nyll.SchemeTheory.Divisors.StalkIdealSupport
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierStalkMultiplicity
+public import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
+public import Nyll.SchemeTheory.Divisors.StalkIdealSupport
 
 /-!
 # The function-field modulus of an actual Cartier divisor
@@ -16,6 +18,8 @@ It vanishes exactly outside the Cartier support, which is finite on a proper
 curve. Thus the scheme modulus supplies an actual finitely supported
 function-field modulus with its complete multiplicities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

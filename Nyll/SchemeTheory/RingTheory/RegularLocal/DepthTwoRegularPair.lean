@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Regular pairs in local rings of depth at least two
 -/
+
+@[expose] public section
 
 open RingTheory IsLocalRing
 

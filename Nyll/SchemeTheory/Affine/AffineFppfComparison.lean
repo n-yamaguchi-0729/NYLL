@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.Global
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
-import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.Global
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
+public import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
 # Extending affine-test comparisons to the big fppf site
@@ -18,6 +20,8 @@ natural comparison on affine tests therefore identifies the fppf
 sheafifications on the whole big site. The proof uses the dense-subsite
 equivalence and its compatibility with sheafification.
 -/
+
+@[expose] public section
 
 noncomputable section
 

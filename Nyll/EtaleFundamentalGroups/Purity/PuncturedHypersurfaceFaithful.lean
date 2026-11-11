@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodFaithful
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.Topology.Connected.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodFaithful
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # Faithful restriction to a punctured hypersurface
@@ -20,6 +22,8 @@ hypersurface. Consequently finite étale restriction to its actual pullback
 is faithful. This proves the dimension case of Stacks 58.19.2 (`0BLG`);
 its component-intersection case is the general connected-component theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

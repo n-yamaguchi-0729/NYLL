@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldGaloisAction
-import Nyll.EtaleCohomology.Classical.RepresentableCechTerms
-import Nyll.EtaleCohomology.Sites.GaloisPowerSections
-import Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldGaloisAction
+public import Nyll.EtaleCohomology.Classical.RepresentableCechTerms
+public import Nyll.EtaleCohomology.Sites.GaloisPowerSections
+public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
 
 /-!
 # Actual opposite-deck section representations
@@ -17,6 +19,8 @@ The established contravariant deck action is bundled as an integer-linear
 representation. The same coefficients occur in the actual geometric
 Cech complex and the standard group-cohomology resolution.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -32,17 +36,17 @@ def finiteEtaleDeckSectionsRep (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (Y : FiniteEtale X) :
     Rep.{u} ℤ (Aut Y)ᵐᵒᵖ :=
   Rep.of
-    { toFun := fun σ => ((finiteEtaleSheafDeckAction X F Y σ).hom).hom.toIntLinearMap
+    { toFun := fun σ => ((finiteEtaleSheafDeckAction X F Y σ).asIso.hom).hom.toIntLinearMap
       map_one' := by
         apply LinearMap.ext
         intro s
-        change (finiteEtaleSheafDeckAction X F Y 1).hom s = s
+        change (finiteEtaleSheafDeckAction X F Y 1).asIso.hom s = s
         rw [map_one]
         rfl
       map_mul' σ τ := by
         apply LinearMap.ext
         intro s
-        exact congrArg (fun a => a.hom s) (map_mul (finiteEtaleSheafDeckAction X F Y) σ τ) }
+        exact congrArg (fun a => a.asIso.hom s) (map_mul (finiteEtaleSheafDeckAction X F Y) σ τ) }
 
 /-- The bundled representation acts by actual geometric pullback. -/
 theorem finiteEtaleDeckSectionsRep_apply (X : Scheme.{u})
@@ -50,7 +54,7 @@ theorem finiteEtaleDeckSectionsRep_apply (X : Scheme.{u})
     (σ : (Aut Y)ᵐᵒᵖ)
     (s : F.obj.obj (op ((finiteEtaleInclusion X).obj Y))) :
     (finiteEtaleDeckSectionsRep X F Y).ρ σ s =
-      F.obj.map ((finiteEtaleInclusion X).map (MulOpposite.unop σ).hom).op s := rfl
+      F.obj.map ((finiteEtaleInclusion X).map (MulOpposite.unop σ).asIso.hom).op s := rfl
 
 /-- Actual coefficient morphisms induce equivariant maps of deck
 section representations. -/
@@ -64,7 +68,7 @@ def finiteEtaleDeckSectionsRepMap (X : Scheme.{u}) (Y : FiniteEtale X)
         intro s
         exact ConcreteCategory.congr_hom (C := AddCommGrpCat.{u})
           (η.hom.naturality
-            ((finiteEtaleInclusion X).map (MulOpposite.unop σ).hom).op) s⟩
+            ((finiteEtaleInclusion X).map (MulOpposite.unop σ).asIso.hom).op) s⟩
 
 /-- Evaluation of an actual geometric section on a tuple of actual
 deck transformations, in homogeneous coordinates. -/
@@ -76,7 +80,7 @@ def homogeneousDeckSection (X : Scheme.{u}) [ConnectedSpace X]
     (g : Fin (n + 1) → (Aut Y)ᵐᵒᵖ) :
     F.obj.obj (op ((finiteEtaleInclusion X).obj Y)) :=
   F.obj.map ((finiteEtaleInclusion X).map
-    (Pi.lift fun i => (MulOpposite.unop (g i)).hom)).op z
+    (Pi.lift fun i => (MulOpposite.unop (g i)).asIso.hom)).op z
 
 /-- Homogeneous geometric evaluation is equivariant for the actual
 opposite-deck action, as required by the standard group resolution. -/
@@ -90,18 +94,18 @@ theorem homogeneousDeckSection_equivariant (X : Scheme.{u}) [ConnectedSpace X]
       (finiteEtaleDeckSectionsRep X F Y).ρ σ
         (homogeneousDeckSection X F Y n z g) := by
   have hg :
-      (Pi.lift fun i => (MulOpposite.unop (σ * g i)).hom) =
-        (MulOpposite.unop σ).hom ≫
-          (Pi.lift fun i => (MulOpposite.unop (g i)).hom) := by
+      (Pi.lift fun i => (MulOpposite.unop (σ * g i)).asIso.hom) =
+        (MulOpposite.unop σ).asIso.hom ≫
+          (Pi.lift fun i => (MulOpposite.unop (g i)).asIso.hom) := by
     apply Pi.hom_ext
     intro i
     rw [Pi.lift_comp_π, Category.assoc, Pi.lift_comp_π]
     rfl
   change F.obj.map ((finiteEtaleInclusion X).map
-      (Pi.lift fun i => (MulOpposite.unop (σ * g i)).hom)).op z =
-    F.obj.map ((finiteEtaleInclusion X).map (MulOpposite.unop σ).hom).op
+      (Pi.lift fun i => (MulOpposite.unop (σ * g i)).asIso.hom)).op z =
+    F.obj.map ((finiteEtaleInclusion X).map (MulOpposite.unop σ).asIso.hom).op
       (F.obj.map ((finiteEtaleInclusion X).map
-        (Pi.lift fun i => (MulOpposite.unop (g i)).hom)).op z)
+        (Pi.lift fun i => (MulOpposite.unop (g i)).asIso.hom)).op z)
   rw [hg, Functor.map_comp, op_comp, F.obj.map_comp]
   rfl
 
@@ -115,7 +119,7 @@ theorem homogeneousDeckSection_normalized (X : Scheme.{u}) [ConnectedSpace X]
     homogeneousDeckSection X F Y n z (Fin.cases 1 (fun i => MulOpposite.op (σ i))) =
       galoisPowerSectionsAddEquiv X F Y n z σ := by
   let g : Fin (n + 1) → (Aut Y)ᵐᵒᵖ := Fin.cases 1 (fun i => MulOpposite.op (σ i))
-  have hg : (Pi.lift fun i => (MulOpposite.unop (g i)).hom) =
+  have hg : (Pi.lift fun i => (MulOpposite.unop (g i)).asIso.hom) =
       galoisPowerGraph Y n σ := by
     apply Pi.hom_ext
     intro i
@@ -123,7 +127,7 @@ theorem homogeneousDeckSection_normalized (X : Scheme.{u}) [ConnectedSpace X]
     erw [Pi.lift_comp_π, Pi.lift_comp_π]
     exact Fin.cases rfl (fun _ => rfl) i
   change F.obj.map ((finiteEtaleInclusion X).map
-    (Pi.lift fun i => (MulOpposite.unop (g i)).hom)).op z = _
+    (Pi.lift fun i => (MulOpposite.unop (g i)).asIso.hom)).op z = _
   rw [hg, galoisPowerSectionsAddEquiv_apply]
 
 /-- Actual geometric sections are determined by homogeneous deck
@@ -298,7 +302,7 @@ def geometricSectionStandardDeckHomAddEquiv
     erw [Finsupp.linearCombination_single, Finsupp.linearCombination_single,
       Finsupp.linearCombination_single, one_smul, one_smul, one_smul]
     exact (F.obj.map ((finiteEtaleInclusion X).map
-      (Pi.lift fun i => (MulOpposite.unop (g i)).hom)).op).hom.map_add s t
+      (Pi.lift fun i => (MulOpposite.unop (g i)).asIso.hom)).op).hom.map_add s t
 
 /-- Homogeneous evaluation commutes with every actual geometric face. -/
 theorem homogeneousDeckSection_face (X : Scheme.{u}) [ConnectedSpace X]
@@ -311,17 +315,17 @@ theorem homogeneousDeckSection_face (X : Scheme.{u}) [ConnectedSpace X]
       (F.obj.map ((finiteEtaleInclusion X).map (geometricCechFace Y n i)).op z) g =
         homogeneousDeckSection X F Y n z (fun j => g (i.succAbove j)) := by
   have hg :
-      (Pi.lift fun j => (MulOpposite.unop (g j)).hom) ≫ geometricCechFace Y n i =
-        Pi.lift (fun j => (MulOpposite.unop (g (i.succAbove j))).hom) := by
+      (Pi.lift fun j => (MulOpposite.unop (g j)).asIso.hom) ≫ geometricCechFace Y n i =
+        Pi.lift (fun j => (MulOpposite.unop (g (i.succAbove j))).asIso.hom) := by
     apply Pi.hom_ext
     intro j
     dsimp only [geometricCechFace]
     erw [Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π, Pi.lift_comp_π]
   change F.obj.map ((finiteEtaleInclusion X).map
-      (Pi.lift fun j => (MulOpposite.unop (g j)).hom)).op
+      (Pi.lift fun j => (MulOpposite.unop (g j)).asIso.hom)).op
       (F.obj.map ((finiteEtaleInclusion X).map (geometricCechFace Y n i)).op z) =
     F.obj.map ((finiteEtaleInclusion X).map
-      (Pi.lift fun j => (MulOpposite.unop (g (i.succAbove j))).hom)).op z
+      (Pi.lift fun j => (MulOpposite.unop (g (i.succAbove j))).asIso.hom)).op z
   rw [← ConcreteCategory.comp_apply, ← F.obj.map_comp, ← op_comp,
     ← Functor.map_comp, hg]
 
@@ -364,7 +368,7 @@ theorem geometricSectionToStandardDeckHom_d
   erw [geometricSectionToStandardDeckHom_single,
     Rep.standardComplex.d_apply, Rep.standardComplex.d_of, map_sum]
   change F.obj.map ((finiteEtaleInclusion X).map
-      (Pi.lift fun j => (MulOpposite.unop (g j)).hom)).op
+      (Pi.lift fun j => (MulOpposite.unop (g j)).asIso.hom)).op
       (∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) •
         F.obj.map ((finiteEtaleInclusion X).map (geometricCechFace Y n i)).op z) =
     ∑ i : Fin (n + 2), (geometricSectionToStandardDeckHom X F Y n z).hom

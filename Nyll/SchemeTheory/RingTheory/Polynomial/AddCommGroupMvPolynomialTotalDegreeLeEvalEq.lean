@@ -10,20 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Funext
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SimpRw
-import Mathlib.Tactic.SplitIfs
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialHomogeneous
+public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SimpRw
+public import Mathlib.Tactic.SplitIfs
 
 /-!
 # Add Comm Group exists mv Polynomial total Degree le eval eq of forall exists polynomial
 zsmul add
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -37,31 +42,17 @@ variable {R : Type*}
 
 theorem mvPolynomial_eq_of_forall_eval_intCast_eq [CommRing R] [IsDomain R] [CharZero R]
     {ι : Type*} {p q : MvPolynomial ι R}
-    (h : ∀ c : ι → ℤ, eval (fun i => (c i : R)) p = eval (fun i => (c i : R)) q) : p = q := by
-  refine MvPolynomial.funext_set (fun _ => Set.range (Int.cast : ℤ → R))
-    (fun _ => Set.infinite_range_of_injective Int.cast_injective) ?_
-  intro x hx
-  choose c hc using fun i => hx i (Set.mem_univ i)
-  have hx' : x = fun i => (c i : R) := funext fun i => (hc i).symm
-  subst hx'
-  exact h c
+    (h : ∀ c : ι → ℤ, eval (fun i => (c i : R)) p = eval (fun i => (c i : R)) q) : p = q :=
+  open MvPolynomial_isHomogeneous_of_forall_eval_intCast_mul_eq_pow_mul.P2mPolyLines
+    renaming mvPolynomial_eq_of_forall_eval_intCast_eq → integerEvaluationExt in
+  integerEvaluationExt h
 
 theorem eval_mul_of_isHomogeneous [CommRing R] {ι : Type*} {φ : MvPolynomial ι R} {n : ℕ}
     (hφ : φ.IsHomogeneous n) (t : R) (x : ι → R) :
-    eval (fun i => t * x i) φ = t ^ n * eval x φ := by
-  simp only [MvPolynomial.eval_eq, Finset.mul_sum]
-  refine Finset.sum_congr rfl fun d hd => ?_
-  have hdeg : ∑ i ∈ d.support, d i = n := by
-    have h1 := hφ (mem_support_iff.mp hd)
-    have h2 : (Finsupp.weight (1 : ι → ℕ)) d = Finsupp.degree d := by
-      rw [Finsupp.degree_eq_weight_one]; rfl
-    rw [h2, Finsupp.degree_apply] at h1
-    exact h1
-  have hprod : ∏ i ∈ d.support, (t * x i) ^ d i = t ^ n * ∏ i ∈ d.support, x i ^ d i := by
-    rw [← hdeg, ← Finset.prod_pow_eq_pow_sum, ← Finset.prod_mul_distrib]
-    exact Finset.prod_congr rfl fun i _ => mul_pow t (x i) (d i)
-  rw [hprod]
-  ring
+    eval (fun i => t * x i) φ = t ^ n * eval x φ :=
+  open MvPolynomial_isHomogeneous_of_forall_eval_intCast_mul_eq_pow_mul.P2mPolyLines
+    renaming eval_mul_of_isHomogeneous → homogeneousEvaluationMul in
+  homogeneousEvaluationMul hφ t x
 
 section Lines
 

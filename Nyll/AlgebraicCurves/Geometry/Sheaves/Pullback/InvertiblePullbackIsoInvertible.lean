@@ -10,30 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.Order.DirectedInverseSystem
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.PullbackGlueOfCocycleIso
-import Nyll.SchemeTheory.Modules.IsoAppEqISupEqTop
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleGlueOfCocycle
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Descent.UnitCocycleComapEqIsDirectLimit
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleIsAffineOpenIsFrameOnPreimage
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.Order.DirectedInverseSystem
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.PullbackGlueOfCocycleIso
+public import Nyll.SchemeTheory.Modules.IsoAppEqISupEqTop
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleGlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Descent.UnitCocycleComapEqIsDirectLimit
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleIsAffineOpenIsFrameOnPreimage
 
 /-!
 # Scheme Modules exists is Invertible nonempty pullback iso of is Invertible of is Direct
 Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

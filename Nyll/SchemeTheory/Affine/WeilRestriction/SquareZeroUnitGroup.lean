@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentIdealGroup
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitLogCoordinates
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentIdealGroup
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitLogCoordinates
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
 
 /-! # Square-zero unit kernels are actual vector groups in every characteristic -/
+
+@[expose] public section
 
 noncomputable section
 

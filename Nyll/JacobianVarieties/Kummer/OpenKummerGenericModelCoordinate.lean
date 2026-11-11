@@ -3,8 +3,10 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.JacobianVarieties.Kummer.OpenKummerGenericRootLift
-import Mathlib.FieldTheory.RatFunc.AsPolynomial
+module
+
+public import Nyll.JacobianVarieties.Kummer.OpenKummerGenericRootLift
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 
 /-! # The same generic fibre root in its actual rational model chart
 
@@ -12,6 +14,8 @@ Compose the retained normalization-lift equation with the actual model chart.
 The resulting RatFunc embedding sends X to the very same chosen fibre root.
 No equality between separately chosen fibre coordinates is postulated.
 -/
+@[expose] public section
+
 noncomputable section
 open AlgebraicGeometry CategoryTheory CategoryTheory.PreGaloisCategory TopologicalSpace
 open JacobianVarieties.Kummer
@@ -45,7 +49,7 @@ theorem exists_arithmeticKummerFiber_genericModelCoordinate
     let W := M.openKummerCover S n hn w j hj hi
     let g := j.functionFieldMap hj (M.ffEquiv (w.val : F))
     let A := AdjoinRoot (Polynomial.X ^ (n : ℕ) - Polynomial.C g)
-    letI := kummerGeometricRootAction M S n w j hj hi hn ξ
+    let := kummerGeometricRootAction M S n w j hj hi hn ξ
     ∀ (h : W.left ⟶ C) (eRoot : A ≃+* RatFunc K),
       eRoot (AdjoinRoot.root (Polynomial.X ^ (n : ℕ) - Polynomial.C g)) = RatFunc.X →
       (M.openKummerGenericMap S n w j hj).toNormalization ≫ h =
@@ -62,8 +66,7 @@ theorem exists_arithmeticKummerFiber_genericModelCoordinate
           ∃ ψ : RatFunc K →+* Ω, ψ RatFunc.X = β.val ∧
             (fiberLiftEquiv ξ W (e.symm β)).val ≫ h =
               Spec.map (CommRingCat.ofHom ψ) ≫ q := by
-  intro η ξ W g A h eRoot hroot hmodel
-  let := kummerGeometricRootAction M S n w j hj hi hn ξ
+  intro η ξ W g A rootAction h eRoot hroot hmodel
   obtain ⟨e, hscale, hG, hLift⟩ :=
     exists_arithmeticKummerFiber_genericRootEquiv_with_lift (Ω := Ω) M S n w j hj hi hn
   refine ⟨e, hscale, hG, fun β => ?_⟩

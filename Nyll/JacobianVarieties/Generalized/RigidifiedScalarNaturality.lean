@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedScalarTensor
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullbackTensor
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedScalarTensor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullbackTensor
 
 /-! # The actual scalar boundary commutes with scheme pullbacks -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -58,7 +62,7 @@ theorem scalarClass_pullback (a : Γ(D, ⊤)ˣ) :
     classesPullback f g w (scalarClass i a) =
       scalarClass i' (Units.map g.appTop.hom.toMonoidHom a) := by
   have ha : (unitAutEquivUnits D').symm (Units.map g.appTop.hom.toMonoidHom a) =
-      restrictUnitAut g ((unitAutEquivUnits D).symm a) := by
+      Aut.of (restrictUnitAut g ((unitAutEquivUnits D).symm a).asIso) := by
     apply (unitAutEquivUnits D').injective
     calc
       _ = Units.map g.appTop.hom.toMonoidHom a :=
@@ -68,9 +72,9 @@ theorem scalarClass_pullback (a : Γ(D, ⊤)ˣ) :
         congrArg (Units.map g.appTop.hom.toMonoidHom)
           ((unitAutEquivUnits D).apply_symm_apply a).symm
       _ = _ := (unitAutEquivUnits_restrict g _).symm
-  change classOf ((unitWith i ((unitAutEquivUnits D).symm a)).pullback f g w) =
+  change classOf ((unitWith i ((unitAutEquivUnits D).symm a).asIso).pullback f g w) =
     classOf (unitWith i' ((unitAutEquivUnits D').symm
-      (Units.map g.appTop.hom.toMonoidHom a)))
+      (Units.map g.appTop.hom.toMonoidHom a)).asIso)
   rw [ha]
   exact Quotient.sound ⟨unitWithPullbackIso f g w _⟩
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite generators under the actual scheme pullback
@@ -25,6 +27,8 @@ data on the inverse-image affine cover.
 The construction uses neither finite generation of the relations nor
 Noetherian, separation, or flatness assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

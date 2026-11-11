@@ -10,30 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.Ideal
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackOpenCover
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.Ideal
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackOpenCover
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
 
 /-!
 Closed immersion charts for the triviality locus of a rigidified line bundle glue globally.
 Their kernels agree on affine overlaps and define the required closed subscheme.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -279,9 +283,8 @@ theorem ker_emb_app_eq {U V : X.affineOpens} (hVU : (V : X.Opens) ≤ U) :
     rw [RingHom.mem_ker] at hx
     change (((Z V).emb).app V).hom x = 0
     rw [← ha', Scheme.Hom.comp_app]
-    first
-      | (simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply, hx, map_zero])
-      | (erw [CommRingCat.hom_comp]; rw [RingHom.comp_apply, hx, map_zero])
+    erw [CommRingCat.hom_comp]
+    rw [RingHom.comp_apply, hx, map_zero]
   · intro x hx
     let h : ((Z U).emb ⁻¹ᵁ (V : X.Opens) : Scheme.{0}) ⟶ X := ((Z U).emb ⁻¹ᵁ (V : X.Opens)).ι ≫ (Z
       U).emb
@@ -294,9 +297,8 @@ theorem ker_emb_app_eq {U V : X.affineOpens} (hVU : (V : X.Opens) ≤ U) :
     rw [← ker_app_res (Z U).emb V]
     change x ∈ RingHom.ker (h.app V).hom
     rw [RingHom.mem_ker, ← hb', Scheme.Hom.comp_app]
-    first
-      | (simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply, hx0, map_zero])
-      | (erw [CommRingCat.hom_comp]; rw [RingHom.comp_apply, hx0, map_zero])
+    erw [CommRingCat.hom_comp]
+    rw [RingHom.comp_apply, hx0, map_zero]
 
 /-- The chart kernel localizes to the kernel on a basic open. -/
 theorem ker_emb_app_map_basicOpen (W : X.affineOpens) (s : Γ(X, (W : X.Opens))) :
@@ -382,9 +384,8 @@ theorem main
       change x ∈ RingHom.ker (ψ.1.app V).hom
       rw [← ker_app_res ψ.1 V, RingHom.mem_ker]
       rw [← h₀', Scheme.Hom.comp_app]
-      first
-        | (simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply, hx0, map_zero])
-        | (erw [CommRingCat.hom_comp]; rw [RingHom.comp_apply, hx0, map_zero])
+      erw [CommRingCat.hom_comp]
+      rw [RingHom.comp_apply, hx0, map_zero]
     exact ⟨IsClosedImmersion.lift I.subschemeι ψ.1
       (by rw [Scheme.IdealSheafData.ker_subschemeι]; exact hle),
       IsClosedImmersion.lift_fac _ _ _⟩

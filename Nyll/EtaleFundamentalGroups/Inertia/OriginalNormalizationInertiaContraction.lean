@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaBaseLocalization
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Ideal.GoingUp
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaBaseLocalization
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Ideal.GoingUp
 
 /-!
 # Every local normalization inertia comes from the original affine prime
@@ -16,6 +18,8 @@ base's maximal ideal. Its literal contraction therefore lies over the
 original base prime. Localization returns the same prime, and the original
 Galois inertia subgroups agree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

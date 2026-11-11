@@ -10,43 +10,47 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.RatFunc.IntermediateField
-import Mathlib.LinearAlgebra.Dimension.Free
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.Differentials.Regular.Regular
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Differentials.Residues.Canonical
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.FiniteFinrankRegularDifferentialsEqGenus
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.Divisors.Principal.HasPrincipalDivisorsTranscendental
-import Nyll.AlgebraicCurves.Differentials.Logarithmic.LocalUnitDerivativeRegular
-import Nyll.AlgebraicCurves.Places.Degree.DegNeZeroFiniteDimensionalAdjoin
-import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.TwoMulGenusSubTwoEqDegreeCanonical
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosed
-import Nyll.AlgebraicCurves.FunctionFields.Rational.InstIsCurveOverRatFunc
-import Nyll.AlgebraicCurves.Divisors.Principal.InstHasCanonicalDivisorRatFuncPerfectField
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusRatFuncEqZero
-import Nyll.AlgebraicCurves.Places.Degree.DegEqOneAlgClosed
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosed
-import Nyll.AlgebraicCurves.Divisors.Principal.DegreeCanonicalDivisorEq
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusEqGenusFF
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqAlgEquiv
-import Nyll.AlgebraicCurves.Cohomology.WeilDualityAdelicFunctionFieldRiemannRoch
+module
+
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.RatFunc.IntermediateField
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Differentials.Residues.Canonical
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.FiniteFinrankRegularDifferentialsEqGenus
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.Divisors.Principal.HasPrincipalDivisorsTranscendental
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.LocalUnitDerivativeRegular
+public import Nyll.AlgebraicCurves.Places.Degree.DegNeZeroFiniteDimensionalAdjoin
+public import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.StichtenothGenusExists
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.TwoMulGenusSubTwoEqDegreeCanonical
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosed
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.InstIsCurveOverRatFunc
+public import Nyll.AlgebraicCurves.Divisors.Principal.InstHasCanonicalDivisorRatFuncPerfectField
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusRatFuncEqZero
+public import Nyll.AlgebraicCurves.Places.Degree.DegEqOneAlgClosed
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosed
+public import Nyll.AlgebraicCurves.Divisors.Principal.DegreeCanonicalDivisorEq
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusEqGenusFF
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqAlgEquiv
+public import Nyll.AlgebraicCurves.Cohomology.WeilDualityAdelicFunctionFieldRiemannRoch
 
 /-!
 # Finsum ramification Index Along sub one eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -417,8 +421,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

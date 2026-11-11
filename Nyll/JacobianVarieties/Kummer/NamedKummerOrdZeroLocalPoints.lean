@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Kummer.OpenKummerGenericRootFiber
 import Nyll.JacobianVarieties.Kummer.PlaceOrdZeroKummerCover
+import Nyll.EtaleCohomology.Classical.KummerRootCover
 
 /-!
 # The same named generic Kummer fiber on an order-zero local cover
@@ -41,8 +42,8 @@ theorem exists_arithmeticKummerFiber_ordZeroLocalPoints
     let W := M.openKummerCover S n hn w j hj hi
     let ι : F →+* Ω := (algebraMap X.functionField Ω).comp
       ((j.functionFieldMap hj).comp M.ffEquiv.toRingHom)
-    letI : Algebra F Ω := ι.toAlgebra
-    letI := kummerGeometricRootAction M S n w j hj hi hn ξ
+    let : Algebra F Ω := ι.toAlgebra
+    let := kummerGeometricRootAction M S n w j hj hi hn ξ
     ∃ e : (FiniteEtale.fiber ξ).obj W ≃
         {b : Ω // b ^ (n : ℕ) = ι (w.val : F)},
       (∀ (ζ : rootsOfUnity (n : ℕ) K) x,
@@ -52,20 +53,16 @@ theorem exists_arithmeticKummerFiber_ordZeroLocalPoints
           (toAut (FiniteEtale.fiber η) (Ω ≃ₐ[X.functionField] Ω) σ) • x)).val =
             σ (e x).val) ∧
       ∀ (v : Place K F) (hv : v.ord (w.val : F) = 0),
-        letI : Algebra v.toValuationSubring Ω :=
+        let : Algebra v.toValuationSubring Ω :=
           (ι.comp (algebraMap v.toValuationSubring F)).toAlgebra
         let T := EtaleCohomology.kummerRootAlgebra (n : ℕ) (v.ordZeroUnit w.val hv)
         ∃ E : (FiniteEtale.fiber ξ).obj W ≃ (T →ₐ[v.toValuationSubring] Ω),
           ∀ x, E x (AdjoinRoot.root _) = (e x).val := by
-  intro η ξ W ι
-  let : Algebra F Ω := ι.toAlgebra
-  let := kummerGeometricRootAction M S n w j hj hi hn ξ
+  intro η ξ W ι coefficientAlgebra rootAction
   obtain ⟨e, heμ, heG⟩ := exists_arithmeticKummerFiber_genericRootEquiv
     M S n w j hj hi hn (Ω := Ω)
   refine ⟨e, heμ, heG, ?_⟩
-  intro v hv T
-  let : Algebra v.toValuationSubring Ω :=
-    (ι.comp (algebraMap v.toValuationSubring F)).toAlgebra
+  intro v hv valuationAlgebra T
   let : IsScalarTower v.toValuationSubring F Ω := IsScalarTower.of_algebraMap_eq' rfl
   let r := Place.ordZeroKummerPointEquivRoots v w.val hv (n : ℕ) Ω
   refine ⟨e.trans r.symm, ?_⟩

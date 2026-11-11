@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Picard.GenusDimension
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothRelativeDimension
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothSmoothOfRelativeDimension
+module
+
+public import Nyll.JacobianVarieties.Picard.GenusDimension
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothRelativeDimension
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothSmoothOfRelativeDimension
 
 /-!
 # Dimension and geometric integrality of the descended Jacobian
@@ -19,6 +21,8 @@ dimension is compared, after the actual finite extension, with the dimension of
 the represented Picard scheme. Comparison of affine smooth charts determines the
 integer dimension, including over imperfect fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorRigidification
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorProducts
-import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorRigidification
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorProducts
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
 
 /-!
 # Effective divisor compatibility of the actual rigidified divisor map
@@ -16,6 +18,8 @@ actual effective Cartier ideal to its canonically rigidified inverse ideal.
 The proof uses equality of the original ideal with the product of its point
 ideals, retaining every multiplicity and the chosen section normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

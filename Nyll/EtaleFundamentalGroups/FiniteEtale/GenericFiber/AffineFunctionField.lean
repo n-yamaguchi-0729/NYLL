@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.WholeFractionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.RingHom.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.WholeFractionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.RingHom.Finite
 
 /-!
 # The actual generic fibre of an affine finite étale cover
@@ -30,6 +32,8 @@ The construction retains the original structure morphism and the maps of
 global sections. It is used to compare a normalized root extension with
 the actual original cover, before extending the comparison over overlaps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

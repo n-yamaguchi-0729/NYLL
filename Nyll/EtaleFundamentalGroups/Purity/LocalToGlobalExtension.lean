@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.GenericComplementCoverExtension
-import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
-import Nyll.SchemeTheory.FiniteEtale.MaximalOpenExtension
-import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.GenericComplementCoverExtension
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
+public import Nyll.SchemeTheory.FiniteEtale.MaximalOpenExtension
+public import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Topology.Sober
 
 /-!
 # Extending finite étale covers by local purity
@@ -23,6 +25,8 @@ At a generic missing point, local purity, spreading, and two-open gluing
 would enlarge a maximal extension. Consequently its domain is the whole
 scheme. This proves Stacks Project, Lemma 58.21.6 (tag `0EY7`).
 -/
+
+@[expose] public section
 
 noncomputable section
 

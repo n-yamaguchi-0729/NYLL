@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousLocalizationAwayFlatFromZeroRingHomCompAlgebraMap
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousLocalizationAwayFlatFromZeroRingHomCompAlgebraMap
 
 /-!
 # Homogeneous Localization Away flat quotient Mk comp of forall flat piece
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

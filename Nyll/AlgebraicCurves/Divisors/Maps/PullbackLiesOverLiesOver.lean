@@ -14,6 +14,7 @@ import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
 import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapRingHom
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Divisor pullback Along lies Over of lies Over

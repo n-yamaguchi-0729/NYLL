@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalSubextension
-import Nyll.ValuedFieldTheory.LocalField.Unramified.Composition
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalSubextension
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.Composition
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Finite support in the maximal unramified field
@@ -15,6 +18,8 @@ of a simple intermediate field and stability under finite composita imply that e
 elements already belongs to a single finite unramified subextension.  This is
 the finite-support fact used in the maximal-residue theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -88,7 +93,7 @@ theorem finiteUnramifiedSubextension_finset_iSup
       have hs' : ∀ j ∈ s,
           FiniteUnramifiedSubextension v w hExt (F j) := by
         intro j hjs
-        exact hs j (by simp [hjs])
+        exact hs j (Finset.mem_insert_of_mem hjs)
       have hS := ih hs'
       rcases hE with ⟨hfinE, hEunramified⟩
       rcases hS with ⟨hfinS, hSunramified⟩

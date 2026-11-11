@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
 
 /-!
 # Existence of a chosen local normalization factor
@@ -15,6 +17,8 @@ chosen-localization theorem then makes its localization finite etale over `B`,
 with a unique closed prime, while retaining the literal primitive `A`-away
 map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

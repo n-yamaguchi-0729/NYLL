@@ -4,10 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceCompletedFiber
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.HenselianCompletedFiberSelection
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
-import Nyll.SchemeTheory.FunctionFields.StructureMorphism
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceCompletedFiber
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.HenselianCompletedFiberSelection
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Completion
 
 /-! # The integral graph family and its selected completed components
 
@@ -19,6 +25,8 @@ Applying the Henselian block theorem identifies the selected components by
 the centres of their original places; no integral model or component
 partition is an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

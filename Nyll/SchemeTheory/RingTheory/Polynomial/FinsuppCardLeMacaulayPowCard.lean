@@ -10,63 +10,67 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.Algebra.Group.Finsupp
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Nat.Defs
-import Mathlib.Algebra.Group.Semigroup
-import Mathlib.Algebra.Notation.Pi.Defs
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Algebra.Order.Group.Nat
-import Mathlib.Algebra.Order.Sub.Defs
-import Mathlib.Algebra.Order.Sub.Unbundled.Basic
-import Mathlib.Basic.Finite.Defs
-import Mathlib.Basic.Logic.Basic
-import Mathlib.Data.Finset.Card
-import Mathlib.Data.Finset.Defs
-import Mathlib.Data.Finset.Disjoint
-import Mathlib.Data.Finset.Empty
-import Mathlib.Data.Finset.Erase
-import Mathlib.Data.Finset.Filter
-import Mathlib.Data.Finset.Image
-import Mathlib.Data.Finset.Insert
-import Mathlib.Data.Finset.Lattice.Basic
-import Mathlib.Data.Finset.Max
-import Mathlib.Data.Finset.Range
-import Mathlib.Data.Finset.Union
-import Mathlib.Data.Finsupp.Defs
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Single
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Fintype.Basic
-import Mathlib.Data.Fintype.Defs
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.Data.Nat.Init
-import Mathlib.Data.Set.Defs
-import Mathlib.Data.Set.Finite.Basic
-import Mathlib.Data.Set.Insert
-import Mathlib.Data.Set.Operations
-import Mathlib.Order.Basic
-import Mathlib.Order.Defs.LinearOrder
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.Order.Disjoint
-import Mathlib.Order.Preorder.Finsupp
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.Finsupp
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Algebra.Group.Semigroup
+public import Mathlib.Algebra.Notation.Pi.Defs
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Group.Nat
+public import Mathlib.Algebra.Order.Sub.Defs
+public import Mathlib.Algebra.Order.Sub.Unbundled.Basic
+public import Mathlib.Basic.Finite.Defs
+public import Mathlib.Basic.Logic.Basic
+public import Mathlib.Data.Finset.Card
+public import Mathlib.Data.Finset.Defs
+public import Mathlib.Data.Finset.Disjoint
+public import Mathlib.Data.Finset.Empty
+public import Mathlib.Data.Finset.Erase
+public import Mathlib.Data.Finset.Filter
+public import Mathlib.Data.Finset.Image
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.Data.Finset.Lattice.Basic
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Finset.Range
+public import Mathlib.Data.Finset.Union
+public import Mathlib.Data.Finsupp.Defs
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Single
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Fintype.Basic
+public import Mathlib.Data.Fintype.Defs
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Data.Nat.Basic
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Data.Nat.Init
+public import Mathlib.Data.Set.Defs
+public import Mathlib.Data.Set.Finite.Basic
+public import Mathlib.Data.Set.Insert
+public import Mathlib.Data.Set.Operations
+public import Mathlib.Order.Basic
+public import Mathlib.Order.Defs.LinearOrder
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.Order.Disjoint
+public import Mathlib.Order.Preorder.Finsupp
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # Finsupp card le macaulay Pow card of forall sub single mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -97,7 +101,7 @@ theorem tower_bound : ∀ (e : ℕ) (b : ℕ → ℕ) (c : ℕ), b (e + 1) ≤ 1
       rcases Nat.eq_zero_or_pos (b 0) with h0 | h0
       · have hc : c = 0 := by rw [h0] at h4'; simpa using h4'
         rw [hc, h0, zero_add, zero_add]
-        rcases (show b 1 = 0 ∨ b 1 = 1 by omega) with h | h <;> rw [h] <;> norm_num
+        rcases (show b 1 = 0 ∨ b 1 = 1 by omega) with h | h <;> rw [h] <;> decide
       · have hb1 := h2' h0
         have hp : (b 0 + 1 + 1).choose 2 = (b 0 + 1) + (b 0 + 1).choose 2 := by
           have := Nat.choose_succ_succ' (b 0 + 1) 1; rw [Nat.choose_one_right] at this; exact this

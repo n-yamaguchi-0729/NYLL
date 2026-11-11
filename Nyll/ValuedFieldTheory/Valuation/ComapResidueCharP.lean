@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
-import Mathlib.Algebra.CharP.Defs
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
+public import Mathlib.Algebra.CharP.Defs
 
 /-!
 # Residue characteristic under pullback of valuations
@@ -14,6 +16,8 @@ The residue-field characteristic of a valuation subring is preserved by pullback
 field embedding. The proof compares natural-number casts with membership in the
 nonunits.
 -/
+
+@[expose] public section
 
 namespace ValuationSubring
 

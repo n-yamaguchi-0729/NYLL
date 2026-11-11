@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationFiniteH
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationFiniteH
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Vanishing through a graded presentation
@@ -18,6 +20,8 @@ constructed connecting cocycle and then exhibits a boundary in the
 original Čech complex. This is the dimension-shifting step of Serre
 vanishing for finitely generated graded modules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

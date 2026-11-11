@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Nyll.EtaleCohomology.Sites.FieldFiniteCover
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+module
+
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Nyll.EtaleCohomology.Sites.FieldFiniteCover
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 
 /-!
 # Finite étale effacement of actual field cohomology classes
@@ -19,6 +21,8 @@ one, the connecting class vanishes after locally lifting the corresponding
 section; higher degrees follow by dimension shifting and naturality of Ext
 composition. No field/Galois comparison or acyclicity assumption is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -12,13 +12,15 @@ Authors of the unrigidified construction: Naganori Yamaguchi (assisted by OpenAI
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitField
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitField
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 
 /-!
 # The unrigidified degree-zero Picard presheaf
@@ -27,6 +29,8 @@ The geometric-fibre condition is invariant under tensoring with a base line bund
 It therefore defines an actual subfunctor of relative classes. At a chosen section,
 normalization identifies this subfunctor with the existing pointed Picard-zero functor.
 -/
+
+@[expose] public section
 
 universe u
 

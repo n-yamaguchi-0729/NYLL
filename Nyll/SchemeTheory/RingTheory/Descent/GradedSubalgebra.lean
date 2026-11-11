@@ -14,11 +14,13 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousIdealMap
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousIdealMap
 
 /-!
 # Descent of a grading to a homogeneous subalgebra
@@ -27,6 +29,8 @@ The grading is the inverse image of the upstairs homogeneous pieces. Its direct-
 retractions compare scalar extension degree by degree; this is a concrete construction,
 independent of how the subalgebra was obtained.
 -/
+
+@[expose] public section
 
 open TensorProduct DirectSum
 
@@ -39,7 +43,8 @@ variable {S : Type u} [CommRing S] (S' : Type u) [CommRing S'] [Algebra S S']
   (𝒜' : ℕ → Submodule S' A') [GradedAlgebra 𝒜']
   (A : Subalgebra S A')
 
-private def 𝒜 (n : ℕ) : Submodule S A := ((𝒜' n).restrictScalars S).comap A.val.toLinearMap
+/-- The homogeneous submodules obtained by intersecting the ambient grading with the subalgebra. -/
+def 𝒜 (n : ℕ) : Submodule S A := ((𝒜' n).restrictScalars S).comap A.val.toLinearMap
 
 omit [GradedAlgebra 𝒜'] in
 private theorem mem_𝒜 {n : ℕ} {a : A} : a ∈ 𝒜 S' A' 𝒜' A n ↔ (a : A') ∈ 𝒜' n := Iff.rfl

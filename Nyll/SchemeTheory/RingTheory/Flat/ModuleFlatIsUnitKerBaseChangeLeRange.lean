@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.RingTheory.Support
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatKerBaseChangeLeRange
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatBijectiveKerBaseChangeHomHomologyBaseChangeLinearEquiv
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.RingTheory.Support
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatKerBaseChangeLeRange
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatBijectiveKerBaseChangeHomHomologyBaseChangeLinearEquiv
 
 /-!
 # Module Flat exists forall is Unit ker base Change le range of ker base Change residue
 Field le range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

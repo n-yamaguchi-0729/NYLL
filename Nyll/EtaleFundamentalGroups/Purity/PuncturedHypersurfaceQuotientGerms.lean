@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceGerms
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodDiagram
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.CategoryTheory.Functor.Category
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.Whiskering
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceGerms
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodDiagram
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.CategoryTheory.Functor.Category
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Restriction of neighbourhood germs to the actual quotient puncture
@@ -37,6 +39,8 @@ faithfulness or comparison hypothesis.
 
 Source: https://stacks.math.columbia.edu/tag/0BLN
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComposition
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComposition
 
 /-!
 # Composition of the concrete inverse-image stalk maps
@@ -15,6 +17,8 @@ The actual adjunction units and direct-image component maps commute with
 composition of scheme morphisms. This identifies the two successive maps
 on stalks through the chosen inverse-image composition isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

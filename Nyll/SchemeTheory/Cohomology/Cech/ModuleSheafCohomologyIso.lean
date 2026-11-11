@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Native module-sheaf isomorphisms on Čech cohomology
@@ -20,6 +22,8 @@ cohomology are inverse as well. Thus the comparison on cohomology uses
 the original section maps, including when the native isomorphism is a
 tensor associator or a multiplication of twisting powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

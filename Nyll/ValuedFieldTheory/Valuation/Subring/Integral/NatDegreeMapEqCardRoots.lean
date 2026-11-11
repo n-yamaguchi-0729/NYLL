@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.Algebra.Polynomial.Lifts
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Valuation Subring nat Degree map eq card roots of splits
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

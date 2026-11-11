@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionTowerKernel
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgDecompositionGroup
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Subgroup.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionTowerKernel
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgDecompositionGroup
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Subgroup.Basic
 
 /-!
 # Actual finite decomposition restrictions
@@ -21,6 +23,8 @@ The actual surjective original-decomposition maps and their proved kernel inclus
 construct the canonical restriction between finite intrinsic decomposition groups.
 Its computation law proves surjectivity and finite tower composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Limits.Shapes.Terminal
-import Mathlib.Topology.Sheaves.Alexandrov
-import Mathlib.Topology.Sheaves.Stalks
-import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+public import Mathlib.Topology.Sheaves.Alexandrov
+public import Mathlib.Topology.Sheaves.Stalks
+public import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
 
 /-!
 # Principal-neighborhood stalks in finite compact-open models
@@ -18,6 +20,8 @@ category defining the actual stalk. A singleton compact-open model
 recovers its generating compact open at every point of that open.
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

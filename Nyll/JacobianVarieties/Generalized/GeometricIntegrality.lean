@@ -4,18 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.GroupProjectionConnected
-import Nyll.JacobianVarieties.Generalized.GroupProjectionGeometry
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.GroupProjectionConnected
+public import Nyll.JacobianVarieties.Generalized.GroupProjectionGeometry
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-! # Geometric integrality of the generalized Jacobian and its forgetting fibres
 
 These statements hold over the original field and for every effective modulus.
 The fibre statement includes fibres over non-rational points of the ordinary Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

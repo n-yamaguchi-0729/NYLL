@@ -5,22 +5,28 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
-import Nyll.JacobianVarieties.Generalized.PicardOneTransitionFunctoriality
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
-import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
-import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
+public import Nyll.JacobianVarieties.Generalized.PicardOneTransitionFunctoriality
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
+public import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Actual torsor and group morphisms are jointly determined by the Abel morphism -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -534,15 +540,10 @@ theorem abelOneMap_equivariantPair_tower
       FLM.map ((picardOneScalarExtensionIso c D L).hom ≫ fL) =
         e.inv.app (picardOne c D) ≫
           ((picardOneScalarExtensionIso c D M).hom ≫ fM) ≫ e.hom.app Q := by
-  intro FKL FLM FKM cL DL cM DM HL HM actionL actionM
-  let w : specMap L M ≫ specMap K L = specMap K M := by
-    change Spec.map _ ≫ Spec.map _ = Spec.map _
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq K L M]
-  let e : FKM ≅ FKL ⋙ FLM :=
-    (eqToIso (congrArg
-      (fun a : Spec (CommRingCat.of M) ⟶ Spec (CommRingCat.of K) => Over.pullback a) w)).symm ≪≫
-        Over.pullbackComp (specMap L M) (specMap K L)
+  intro _FKL _FLM _FKM _cL _DL _cM _DM _HL _HM _actionL _actionM
+    φL fL φM fM hAbelL hfL hAbelM hfM _w e _eB
   exact abelOneMap_equivariantPair_tower_core c D (H := H) (Q := Q) L M q e
+    φL fL φM fM hAbelL hfL hAbelM hfM
 
 /-- A torsor factor has the same geometric value as a factor over the
 final field whenever the two source points project to the same original

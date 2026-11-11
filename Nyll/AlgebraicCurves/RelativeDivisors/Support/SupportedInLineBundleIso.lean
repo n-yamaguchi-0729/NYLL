@@ -10,38 +10,42 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.Tactic.Algebraize
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleCoeffIdealLeIdealZeroSchemeIdealEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataRangeModuleIotaAppInjective
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.OfUnitSectionSectionDualApp
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorPullbackIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.FinrankBaseChangeSectionsEqOne
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.Tactic.Algebraize
+public import Mathlib.Tactic.Ext
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleCoeffIdealLeIdealZeroSchemeIdealEq
+public import Nyll.SchemeTheory.Sheaves.IdealSheafDataRangeModuleIotaAppInjective
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.OfUnitSectionSectionDualApp
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorPullbackIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.FinrankBaseChangeSectionsEqOne
 
 /-!
 # Rel Eff Cartier Div supported In of line Bundle iso of forall zero Scheme supported In
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -76,14 +80,11 @@ def toBidual (M : C) : M ⟶ (ihom ((ihom M).obj (𝟙_ C))).obj (𝟙_ C) :=
 omit [BraidedCategory C] in
 theorem unitIsoSelf_inv (X : C) :
     (MonoidalClosed.unitIsoSelf X).inv = MonoidalClosed.curry (λ_ X).hom := by
-  have h := unit_conjugateEquiv (Adjunction.id (C := C)) (ihom.adjunction (𝟙_ C))
-    (leftUnitorNatIso C).hom X
-  dsimp at h
-  erw [Category.id_comp] at h
-  change (conjugateEquiv (Adjunction.id (C := C)) (ihom.adjunction (𝟙_ C))
-    (leftUnitorNatIso C).hom).app X = _
-  rw [h, MonoidalClosed.curry_eq]
-  try rfl
+  have h : 𝟙 X ≫ (MonoidalClosed.unitIsoSelf X).inv =
+      (ihom.coev (𝟙_ C)).app X ≫ (ihom (𝟙_ C)).map (λ_ X).hom :=
+    unit_conjugateEquiv (Adjunction.id (C := C)) (ihom.adjunction (𝟙_ C))
+      (leftUnitorNatIso C).hom X
+  simpa only [Category.id_comp, MonoidalClosed.curry_eq] using h
 
 theorem toBidual_comp_pre_app_comp_unitIsoSelf_hom {M : C} (ι : M ⟶ 𝟙_ C) :
     toBidual M ≫ (MonoidalClosed.pre (MonoidalClosed.curry' ι)).app (𝟙_ C) ≫
@@ -365,11 +366,9 @@ theorem zeroSchemeIdeal_zero {X : Scheme.{u}} {M : X.Modules} :
   rintro _ ⟨φ, rfl⟩
   have h0 : Scheme.Modules.restrictSection (0 : 𝟙_ X.Modules ⟶ M) U.1 = 0 := rfl
   simp only [SetLike.mem_coe, Scheme.Modules.coeff, h0, map_zero]
-  first
-    | exact Ideal.zero_mem _
-    | (rw [show Scheme.Modules.ofUnitSection ⊤ (0 : Γ(𝟙_ ((U.1 : Scheme.{u})).Modules, ⊤)) = 0 from
-      rfl, map_zero]
-       exact Ideal.zero_mem _)
+  rw [show Scheme.Modules.ofUnitSection ⊤ (0 : Γ(𝟙_ ((U.1 : Scheme.{u})).Modules, ⊤)) = 0 from
+    rfl, map_zero]
+  exact Ideal.zero_mem _
 
 theorem fibre
     {R : Type u} [CommRing R] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of R)) (U : C.Opens)

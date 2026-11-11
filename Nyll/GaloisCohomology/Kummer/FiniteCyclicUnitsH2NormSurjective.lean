@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.FiniteCyclicBaseUnitsH2
-import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
+module
+
+public import Nyll.GaloisCohomology.Kummer.FiniteCyclicBaseUnitsH2
+public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
 
 /-!
 # Cyclic unit H² vanishes when the actual field norm is surjective
@@ -13,6 +15,8 @@ import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
 This uses the existing periodic H² calculation and base-unit representatives.
 The norm hypothesis is the actual algebra norm, rather than a separate cohomology model.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 
@@ -43,7 +47,7 @@ theorem finiteCyclicUnitsH2_eq_zero_of_norm_surjective
       refine ⟨Additive.ofMul (Units.mk0 v hv0), ?_⟩
       apply Units.ext
       change ((Additive.toMul
-        ((Rep.ofAlgebraAutOnUnits K M).norm.hom
+        ((Rep.ofAlgebraAutOnUnits K M).norm.asHom.hom
           (Additive.ofMul (Units.mk0 v hv0))) : Mˣ) : M) =
         algebraMap K M (u : K)
       exact (groupCohomology.norm_ofAlgebraAutOnUnits_eq

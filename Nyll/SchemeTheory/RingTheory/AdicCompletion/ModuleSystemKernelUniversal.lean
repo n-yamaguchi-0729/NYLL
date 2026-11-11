@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemHom
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemKernel
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientSequence
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemHom
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemKernel
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientSequence
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # The actual kernel object of finite adic module systems
@@ -31,6 +33,8 @@ be the stage of this kernel system.
 This supplies the affine universal property in the construction of
 https://stacks.math.columbia.edu/tag/087X.
 -/
+
+@[expose] public section
 
 noncomputable section
 

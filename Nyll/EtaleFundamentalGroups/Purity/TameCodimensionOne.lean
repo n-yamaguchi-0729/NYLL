@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.TameDVREquiv
-import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Topology.Closure
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.TameDVREquiv
+public import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Topology.Closure
 
 /-!
 # Tameness at the actual codimension-one boundary stalks
@@ -38,6 +40,8 @@ theorem. Thus changing the presentation of a genuine generic pullback does
 not require an additional ramification-comparison assumption.
 https://stacks.math.columbia.edu/tag/0BSE
 -/
+
+@[expose] public section
 
 noncomputable section
 

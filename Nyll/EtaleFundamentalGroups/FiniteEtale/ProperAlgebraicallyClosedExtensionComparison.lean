@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionBaseChange
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionValuation
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionBaseChange
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionValuation
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Recovery from the rational fibre of a proper constant model
@@ -29,6 +31,8 @@ This is the geometric existence step of Stacks Project, Lemma 58.9.3,
 https://stacks.math.columbia.edu/tag/0A49. No essential-surjectivity statement
 over a henselian local base is assumed or used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

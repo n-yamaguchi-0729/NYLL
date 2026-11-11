@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.DirectSumExactness
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-import Mathlib.Tactic.Abel
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.DirectSumExactness
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+public import Mathlib.Tactic.Abel
 
 /-!
 # Actual stabilization of kernels in adic reductions
@@ -31,6 +33,8 @@ comparison, or Artin--Rees bound is an input.
 
 https://stacks.math.columbia.edu/tag/087X
 -/
+
+@[expose] public section
 
 noncomputable section
 

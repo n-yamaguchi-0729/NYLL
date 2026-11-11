@@ -10,44 +10,47 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Norm.Defs
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleGlueOfCocycle
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.GlueOfCocycleTwistIso
-import Nyll.SchemeTheory.Modules.Descent.UnitCocycleTrivializations
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.PullbackGlueOfCocycleIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertibleMemPullbackPreimageIsoUnit
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.NormSectionsMulMapEqNorm
-import Nyll.SchemeTheory.Modules.Norm.NormFrameTransition
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackPreimageIsoUnit
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.RefinementIsFrameOnNormMapEqNormFunSmul
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Norm.Defs
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleGlueOfCocycle
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.GlueOfCocycleTwistIso
+public import Nyll.SchemeTheory.Modules.Descent.UnitCocycleTrivializations
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.PullbackGlueOfCocycleIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertibleMemPullbackPreimageIsoUnit
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.NormSectionsMulMapEqNorm
+public import Nyll.SchemeTheory.Modules.Norm.NormFrameTransition
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackPreimageIsoUnit
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.RefinementIsFrameOnNormMapEqNormFunSmul
 
 /-!
 # Scheme Modules exists norm is Invertible tensor pullback norm Module of is Finite of is
 Integrally Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -321,7 +324,8 @@ theorem map_smul' {M : Z.Modules} {A B : Z.Opens} (hBA : B ≤ A) (r : Γ(Z, A))
       hBA).op m :=
   M.val.map_smul (homOfLE hBA).op r m
 
-private noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict {U : ι →
+/-- Restrict a unit cocycle to smaller opens with the same index set. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict {U : ι →
   Z.Opens}
     (c : UnitCocycle U) (W : ι → Z.Opens) (hW : ∀ i, W i ≤ U i) : UnitCocycle W where
   u i j := GlueOfCocycle.rO (inf_le_inf (hW i) (hW j)) (c.u i j)
@@ -331,19 +335,6 @@ private noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.re
     exact c.cocycle_le i j k _ _ _
 
 
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    modifyEnv fun env => addAlias env
-      ("AlgebraicCurves.Cohomology.Proofs.NormOfInvertibleModules." ++
-        "AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict").toName target
-  | none => pure ()
 
 @[scoped simp] private theorem _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict_u {U :
   ι → Z.Opens}
@@ -351,19 +342,6 @@ run_cmd
     (c.restrict W hW).u i j = GlueOfCocycle.rO (inf_le_inf (hW i) (hW j)) (c.u i j) := rfl
 
 
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict_u".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    modifyEnv fun env => addAlias env
-      ("AlgebraicCurves.Cohomology.Proofs.NormOfInvertibleModules." ++
-        "AlgebraicGeometry.Scheme.Modules.UnitCocycle.restrict_u").toName target
-  | none => pure ()
 
 
 
@@ -508,7 +486,8 @@ section kitD
 
 variable {Z : Scheme.{u}} {ι κ : Type u}
 
-private noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict {U :
+/-- Restrict a unit cocycle along a refinement of its index set and opens. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict {U :
   ι → Z.Opens}
     (c : UnitCocycle U) (f : κ → ι) (W : κ → Z.Opens) (hW : ∀ k, W k ≤ U (f k)) : UnitCocycle W
       where
@@ -519,19 +498,6 @@ private noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.re
     exact c.cocycle_le (f k) (f l) (f m) _ _ _
 
 
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    modifyEnv fun env => addAlias env
-      ("AlgebraicCurves.Cohomology.Proofs.NormOfInvertibleModules." ++
-        "AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict").toName target
-  | none => pure ()
 
 @[scoped simp] private theorem
   _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict_u {U : ι → Z.Opens}
@@ -540,19 +506,6 @@ run_cmd
       l)) := rfl
 
 
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict_u".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    modifyEnv fun env => addAlias env
-      ("AlgebraicCurves.Cohomology.Proofs.NormOfInvertibleModules." ++
-        "AlgebraicGeometry.Scheme.Modules.UnitCocycle.reindexRestrict_u").toName target
-  | none => pure ()
 
 
 
@@ -1044,7 +997,8 @@ theorem clauseD (h : Qual π L) {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (π' : X' �
     (fun y' => ((isFrameOn_glueFrame c' y').map (homOfLE (hWM' y'))).mono (hWM' y'))
     hM'
 
-private noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.refine {Z :
+/-- The unit cocycle on a refining family of open subsets. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.refine {Z :
   Scheme.{u}} {ι κ : Type u}
     {U : ι → Z.Opens} (c : UnitCocycle U) (T : κ → Z.Opens) (r : κ → ι) (hT : ∀ k, T k ≤ U (r k)) :
       UnitCocycle T where
@@ -1055,19 +1009,6 @@ private noncomputable def _root_.AlgebraicGeometry.Scheme.Modules.UnitCocycle.re
     exact c.cocycle_le (r k) (r l) (r m) _ _ _
 
 
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.UnitCocycle.refine".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    modifyEnv fun env => addAlias env
-      ("AlgebraicCurves.Cohomology.Proofs.NormOfInvertibleModules." ++
-        "AlgebraicGeometry.Scheme.Modules.UnitCocycle.refine").toName target
-  | none => pure ()
 
 
 theorem transitions_refine {Z : Scheme.{u}} {ι κ : Type u} {U : ι → Z.Opens} (c : UnitCocycle U) {M

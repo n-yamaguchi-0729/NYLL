@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GaloisSections
-import Nyll.SchemeTheory.FiniteEtale.Forget.Extensive
-import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveSheaves
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Types.Products
+module
+
+public import Nyll.EtaleCohomology.Sites.GaloisSections
+public import Nyll.SchemeTheory.FiniteEtale.Forget.Extensive
+public import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveSheaves
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
 
 /-!
 # Actual sheaf sections on finite etale coproducts
@@ -20,6 +23,8 @@ finite disjoint coproducts to products. This supplies arbitrary coefficient
 sections on the deck-graph decomposition of a Galois cover's self-product.
 No local-constancy or finiteness assumption on the coefficient sheaf is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -114,7 +119,7 @@ theorem galoisSelfProductSectionsEquiv_apply
     (Y : FiniteEtale X) [CategoryTheory.PreGaloisCategory.IsGalois Y]
     (s : F.obj.obj (op ((finiteEtaleInclusion X).obj (Y ⨯ Y)))) (σ : Aut Y) :
     galoisSelfProductSectionsEquiv X F Y s σ =
-      F.obj.map ((finiteEtaleInclusion X).map (prod.lift (𝟙 Y) σ.hom)).op s := by
+      F.obj.map ((finiteEtaleInclusion X).map (prod.lift (𝟙 Y) σ.asIso.hom)).op s := by
   rw [galoisSelfProductSectionsEquiv, Equiv.trans_apply,
     finiteEtaleSheafCoproductSectionsEquiv_apply]
   change F.obj.map ((finiteEtaleInclusion X).map (Sigma.ι (fun _ : Aut Y => Y) σ)).op

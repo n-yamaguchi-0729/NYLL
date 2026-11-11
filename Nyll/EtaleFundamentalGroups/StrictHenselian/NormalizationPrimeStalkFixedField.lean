@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantPrimeLocalizationMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkInertiaRange
-import Nyll.SchemeTheory.RingTheory.Localization.SubalgebraPrime
-import Nyll.SchemeTheory.RingTheory.Ramification.InertiaFixedIntegralMultiple
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Field.Basic
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantPrimeLocalizationMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkInertiaRange
+public import Nyll.SchemeTheory.RingTheory.Localization.SubalgebraPrime
+public import Nyll.SchemeTheory.RingTheory.Ramification.InertiaFixedIntegralMultiple
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Field.Basic
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The actual geometric-stalk fraction image is the inertia-fixed field
@@ -29,6 +31,8 @@ that numerator. The original coefficient is still nonzero in the ambient
 field, so division in the actual stalk fraction ring gives the required
 preimage. The reverse implication is the existing forward inertia theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

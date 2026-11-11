@@ -4,33 +4,36 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Limits.IsLimit
 
 /-!
 # A finite presentation of an actual projective twist
@@ -47,6 +50,8 @@ The result is an actual isomorphism from the categorical cokernel. The
 conversion of its matrix entries to homogeneous polynomials is separate.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -59,7 +64,8 @@ open Scheme.Modules
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-private theorem finiteType_free {X : Scheme.{u}} (I : Type u) [Finite I] :
+/-- A finite free sheaf of modules has finite type. -/
+theorem finiteType_free {X : Scheme.{u}} (I : Type u) [Finite I] :
     (SheafOfModules.free (R := X.ringCatSheaf) I).IsFiniteType := by
   let G := SheafOfModules.free.generatingSections (R := X.ringCatSheaf) I
   let q := G.localGeneratorsData
@@ -69,7 +75,8 @@ private theorem finiteType_free {X : Scheme.{u}} (I : Type u) [Finite I] :
     exact ⟨inferInstanceAs (Finite I)⟩
   exact q.isFiniteType hq
 
-private def cokernelOfMappedKernel
+/-- An epimorphism onto the mapped kernel gives the original mapped cokernel. -/
+def cokernelOfMappedKernel
     {C D : Type*} [Category C] [Category D] [Abelian C]
     [HasZeroMorphisms D] [HasCokernels D]
     (T : C ⥤ D) [T.PreservesZeroMorphisms]
@@ -84,6 +91,30 @@ private def cokernelOfMappedKernel
   let hd : IsColimit (c.map T) := CokernelCofork.mapIsColimit c hc T
   let he := isCokernelEpiComp hd q (h := q ≫ T.map (kernel.ι f)) rfl
   exact (cokernelIsCokernel (q ≫ T.map (kernel.ι f))).coconePointUniqueUpToIso he
+
+/-- The existing mapped-kernel cokernel comparison retains the original
+mapped quotient morphism. -/
+theorem cokernelOfMappedKernel_projection
+    {C D : Type*} [Category C] [Category D] [Abelian C]
+    [HasZeroMorphisms D] [HasCokernels D]
+    (T : C ⥤ D) [T.PreservesZeroMorphisms]
+    {P A : C} (f : P ⟶ A) [Epi f]
+    [PreservesColimit (parallelPair (kernel.ι f) 0) T]
+    {Q : D} (q : Q ⟶ T.obj (kernel f)) [Epi q] :
+    cokernel.π (q ≫ T.map (kernel.ι f)) ≫ (cokernelOfMappedKernel T f q).hom =
+      T.map f := by
+  let c : CokernelCofork (kernel.ι f) :=
+    CokernelCofork.ofπ f (kernel.condition f)
+  let hc : IsColimit c := Abelian.epiIsCokernelOfKernel
+    (KernelFork.ofι (kernel.ι f) (kernel.condition f)) (kernelIsKernel f)
+  let hd : IsColimit (c.map T) := CokernelCofork.mapIsColimit c hc T
+  let he := isCokernelEpiComp hd q (h := q ≫ T.map (kernel.ι f)) rfl
+  change cokernel.π (q ≫ T.map (kernel.ι f)) ≫
+    ((cokernelIsCokernel (q ≫ T.map (kernel.ι f))).coconePointUniqueUpToIso he).hom =
+      T.map f
+  exact IsColimit.comp_coconePointUniqueUpToIso_hom
+    (cokernelIsCokernel (q ≫ T.map (kernel.ι f))) he WalkingParallelPair.one
+
 
 private theorem finiteType_kernel_generatingSections
     {X : Scheme.{u}} [IsLocallyNoetherian X]

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.FiniteInvariantCoefficients
-import Nyll.GaloisCohomology.Topology.InvariantCoefficientSubrepresentation
-import Nyll.GaloisCohomology.Topology.ContinuousEquivariantTupleLifting
-import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
+module
+
+public import Nyll.GaloisCohomology.Topology.FiniteInvariantCoefficients
+public import Nyll.GaloisCohomology.Topology.InvariantCoefficientSubrepresentation
+public import Nyll.GaloisCohomology.Topology.ContinuousEquivariantTupleLifting
+public import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
 
 /-!
 # Finite coefficient realizations of actual continuous cochains
@@ -16,6 +18,8 @@ A bounded-torsion discrete continuous cochain on a compact group factors
 through an actual finite invariant coefficient subrepresentation. Its
 closedness is reflected by the injective coefficient inclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

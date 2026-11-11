@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FinitePresentationExistence
-import Nyll.GaloisCohomology.ProP.H2FiniteStageFamily
-import Nyll.GaloisCohomology.ProP.RelationRankH2
-import Nyll.GaloisCohomology.ProP.TrivialZModP
-import Nyll.ProCGroups.FiniteGeneration.Basic
-import Nyll.ProCGroups.GolodShafarevich.FiniteCriterion
-import Nyll.ProCGroups.ProC.InverseLimits.Predicates
-import Nyll.ProCGroups.ProP.GeneratorRank
-import Nyll.ProCGroups.ProP.Presentation.RelationCardinal
-import Mathlib.Algebra.Field.ZMod
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.Connected.TotallyDisconnected
-import Mathlib.Topology.Separation.Basic
-import Mathlib.Topology.Separation.Hausdorff
+module
+
+public import Nyll.GaloisCohomology.ProP.FinitePresentationExistence
+public import Nyll.GaloisCohomology.ProP.H2FiniteStageFamily
+public import Nyll.GaloisCohomology.ProP.RelationRankH2
+public import Nyll.GaloisCohomology.ProP.TrivialZModP
+public import Nyll.ProCGroups.FiniteGeneration.Basic
+public import Nyll.ProCGroups.GolodShafarevich.FiniteCriterion
+public import Nyll.ProCGroups.ProC.InverseLimits.Predicates
+public import Nyll.ProCGroups.ProP.GeneratorRank
+public import Nyll.ProCGroups.ProP.Presentation.RelationCardinal
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.Connected.TotallyDisconnected
+public import Mathlib.Topology.Separation.Basic
+public import Mathlib.Topology.Separation.Hausdorff
 
 /-!
 # Finite Golod--Shafarevich bound in terms of H²
@@ -28,6 +30,8 @@ For a finite nontrivial pro-p group, finite cochains supply finite-dimensional H
 constructed finite minimal presentation identifies its relation rank with that dimension.
 Thus no presentation or finite-presentation hypothesis is required in the numerical bound.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.ProP
 

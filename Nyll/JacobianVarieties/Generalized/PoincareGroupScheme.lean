@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRepresentability
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRepresentability
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 
 /-!
 # The commutative group scheme on the constructed Poincaré frame quotient
@@ -15,6 +17,8 @@ The proved representation transports the actual modulus Picard-zero group
 sheaf to the same glued scheme. In particular, this does not replace the
 extension by a product with the ordinary Picard scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

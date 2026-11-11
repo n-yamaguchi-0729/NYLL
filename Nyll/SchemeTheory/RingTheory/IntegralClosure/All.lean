@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.AlgebraIntegralClosureLe
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.AlgebraIsIntegralTrace
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralClosureSplitProduct
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralHeights
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegrallyClosedIntegralClosureEqAdjoinRootXPowSubC
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegrallyClosedIsIntegrallyClosedIn
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.SubalgebraIsIntegrallyClosedAdjoinSingleton
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.SubalgebraMemIsIntegral
+module
+
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.Normalization
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.AlgebraIntegralClosureLe
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.AlgebraIsIntegralTrace
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralClosureSplitProduct
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralHeights
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegrallyClosedIntegralClosureEqAdjoinRootXPowSubC
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegrallyClosedIsIntegrallyClosedIn
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.SubalgebraIsIntegrallyClosedAdjoinSingleton
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.SubalgebraMemIsIntegral

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LocalProperties.Exactness
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.RingTheory.Flat.Localization
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPushoutAppTopPullbackFstAppTopPullbackSnd
+module
+
+public import Mathlib.RingTheory.LocalProperties.Exactness
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.Flat.Localization
+public import Nyll.SchemeTheory.BaseChange.AffineGlobalSections
 
 /-!
 # bijective app Top of forall is Maximal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

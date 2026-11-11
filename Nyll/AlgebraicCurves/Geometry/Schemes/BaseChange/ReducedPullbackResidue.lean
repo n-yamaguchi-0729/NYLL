@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.StructureSheaf
-import Mathlib.RingTheory.LocalProperties.Basic
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.StructureSheaf
+public import Mathlib.RingTheory.LocalProperties.Basic
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 
 /-!
 # is Reduced pullback residue of forall is Reduced stalk quotient
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

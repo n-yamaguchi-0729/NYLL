@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDegreeOne
-import Nyll.JacobianVarieties.Generalized.ModulusForgetfulSurjectivity
-import Nyll.JacobianVarieties.Generalized.ModulusKernelPresheaf
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDegreeOne
+public import Nyll.JacobianVarieties.Generalized.ModulusForgetfulSurjectivity
+public import Nyll.JacobianVarieties.Generalized.ModulusKernelPresheaf
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! # Forgetting a rational reduced modulus is an isomorphism of fppf group sheaves -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -16,6 +21,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

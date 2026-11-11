@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
-import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.SplittingCover
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Mathlib.Data.List.OfFn
+module
+
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+public import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.SplittingCover
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Mathlib.Data.List.OfFn
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Additivity of the actual regular divisor sum
@@ -20,6 +23,8 @@ section tuples. Tuple evaluation and the epimorphism supplied by the flat
 surjective cover then prove additivity on the original test scheme.
 This retains multiplicities and works over nonreduced bases.
 -/
+
+@[expose] public section
 
 noncomputable section
 

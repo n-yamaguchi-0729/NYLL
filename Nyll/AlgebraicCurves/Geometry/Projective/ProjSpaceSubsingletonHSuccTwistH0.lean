@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # Proj Space forall subsingleton HSucc twist and forall H0 exists of finrank piece eq zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

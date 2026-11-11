@@ -5,19 +5,21 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
-import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.Morphisms.ReducedSmooth
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
 
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
+public import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoPullback
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Mathlib.Algebra.Group.Subgroup.Ker
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 
 /-!
 # Abel–Jacobi homomorphism detection over any field
@@ -32,6 +34,8 @@ fibre. Generation of its Picard group proves equality on geometric points; densi
 on the smooth Picard representation proves equality of the original morphisms.
 This is uniqueness of an Albanese factorization, not its existence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

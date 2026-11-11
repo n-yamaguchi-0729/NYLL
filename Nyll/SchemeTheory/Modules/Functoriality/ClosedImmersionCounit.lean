@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Iso
-import Mathlib.Topology.Maps.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.Topology.Maps.Basic
 
 /-!
 # The actual pullback counit for a closed immersion
@@ -25,6 +27,8 @@ triangle identity makes the direct image of the original counit its
 inverse, and detection by pushforward proves that the counit is an
 isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

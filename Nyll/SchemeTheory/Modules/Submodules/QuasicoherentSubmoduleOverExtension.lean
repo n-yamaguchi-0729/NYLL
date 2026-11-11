@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentExtension
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentExtension
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # Literal extension of quasicoherent subsheaves on an open subscheme
@@ -24,6 +26,8 @@ slice site. The kernel of the map to the direct image of the quotient
 extends the input, and the embedded restriction isomorphism gives equality
 of the native submodules. This is the submodule assertion of Stacks 01PE(2).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -59,7 +63,8 @@ private theorem isQuasicoherent_sheafOfModulesEquivOver
     V.overEquivalence.inverse α (V.sheafOfModulesEquivOverUnit R)
     (M := M)
 
-private def submoduleOverInclusion
+/-- The inclusion of a slice-site submodule into the native restricted module. -/
+def submoduleOverInclusion
     {X : Scheme.{u}} (F : X.Modules) (V : X.Opens) (N : (F.over V).Submodule) :
     (overEquiv V).functor.obj N.toSheafOfModules ⟶ F.restrict V.ι :=
   (overEquiv V).functor.map N.ι ≫ ((overFunctorEquiv V).app F).hom

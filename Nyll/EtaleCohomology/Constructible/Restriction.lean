@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Constructible.Stratification
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.Data.Set.Disjoint
-import Mathlib.Topology.Constructible
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Constructible.Stratification
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.Data.Set.Disjoint
+public import Mathlib.Topology.Constructible
 
 /-!
 # Restriction of constructible étale sheaves
@@ -27,6 +29,8 @@ affine scheme and proves restriction to an arbitrary open subscheme preserves
 constructibility. No noetherianity or quasi-compactness of the open immersion
 is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

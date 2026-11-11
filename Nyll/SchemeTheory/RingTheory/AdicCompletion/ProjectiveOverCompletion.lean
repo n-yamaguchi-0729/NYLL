@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientRingComparison
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Ring.CompTypeclasses
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientRingComparison
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Ring.CompTypeclasses
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Projectivity over the original affine coefficient completion
@@ -33,13 +35,16 @@ projective, hence flat. Neither completeness of the original coefficient
 ring nor flatness of the constructed module is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace AdicModuleSystem
 
 universe u v
 
-private def semilinearEquivOfSurjectiveAlgebraMap
+/-- A linear equivalence respects quotient scalars along the given algebra equivalence. -/
+def semilinearEquivOfSurjectiveAlgebraMap
     {R S T P Q : Type*} [CommRing R] [CommRing S] [CommRing T]
     [Algebra R S] [Algebra R T] [AddCommGroup P] [AddCommGroup Q]
     [Module R P] [Module R Q] [Module S P] [Module T Q]

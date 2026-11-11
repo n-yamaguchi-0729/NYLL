@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Fibre
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteLocallyQuasiFiniteSchemeFibreEndo
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreSchemeNsmulEqSchemeFibreEndo
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePropertyBundleFibreStr
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreMulComm
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawLocallyQuasiFiniteSchemeNsmulIsUnit
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFlatSchemeNsmulFiniteAbelianSchemePropertyBundle
+module
+
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Fibre
+public import Nyll.SchemeTheory.Fibers.SchemeFibreEndo
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteLocallyQuasiFiniteSchemeFibreEndo
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreSchemeNsmulEqSchemeFibreEndo
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePropertyBundleFibreStr
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreMulComm
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawLocallyQuasiFiniteSchemeNsmulIsUnit
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFlatSchemeNsmulFiniteAbelianSchemePropertyBundle
 
 /-!
 # Relative Group Law is Finite and flat scheme Nsmul of is Unit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

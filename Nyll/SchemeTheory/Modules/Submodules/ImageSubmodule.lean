@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Abelian.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Abelian.Basic
 
 /-!
 # Actual image subsheaves
@@ -17,6 +19,8 @@ The image is the native kernel submodule of the actual cokernel projection.
 Its comparison with the abelian image gives an epimorphic corestriction,
 and the categorical image universal property gives its least-submodule property.
 -/
+
+@[expose] public section
 
 noncomputable section
 

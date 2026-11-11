@@ -119,7 +119,7 @@ def pairHom (f : X ⟶ Y) (V : Over X)
     (Limits.pullback.lift_snd _ _ _)
 
 @[reassoc]
-private lemma pairHom_fst (f : X ⟶ Y) (V : Over X)
+lemma pairHom_fst (f : X ⟶ Y) (V : Over X)
     (η : (Over.pullback (Limits.pullback.fst f f)).obj V ⟶
       (Over.pullback (Limits.pullback.snd f f)).obj V)
     (a b : T ⟶ X) (w : a ≫ f = b ≫ f) :
@@ -129,7 +129,7 @@ private lemma pairHom_fst (f : X ⟶ Y) (V : Over X)
   Limits.pullback.lift_fst _ _ _
 
 @[reassoc]
-private lemma pairHom_snd (f : X ⟶ Y) (V : Over X)
+lemma pairHom_snd (f : X ⟶ Y) (V : Over X)
     (η : (Over.pullback (Limits.pullback.fst f f)).obj V ⟶
       (Over.pullback (Limits.pullback.snd f f)).obj V)
     (a b : T ⟶ X) (w : a ≫ f = b ≫ f) :

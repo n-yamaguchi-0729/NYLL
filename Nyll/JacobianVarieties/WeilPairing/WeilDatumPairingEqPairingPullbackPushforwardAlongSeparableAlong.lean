@@ -10,13 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.JacobianVarieties.WeilPairing.Divisorial
-import Nyll.JacobianVarieties.Pic0.PushforwardAlong
-import Nyll.AlgebraicCurves.Divisors.Maps.EvaluationMaps
+module
+
+public import Mathlib.Util.WithWeakNamespace
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.JacobianVarieties.WeilPairing.Divisorial
+public import Nyll.JacobianVarieties.Pic0.PushforwardAlong
+public import Nyll.AlgebraicCurves.Divisors.Maps.EvaluationMaps
 
 /-!
 # Weil pairing and separable transfer
@@ -24,6 +26,8 @@ import Nyll.AlgebraicCurves.Divisors.Maps.EvaluationMaps
 Compare the two divisor evaluations using pullback and the field norm.
 The original algebra structure along the field homomorphism supplies each comparison.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

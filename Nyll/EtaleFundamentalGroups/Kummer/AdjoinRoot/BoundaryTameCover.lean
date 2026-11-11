@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryTamePrimes
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryTamePrimes
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # Tameness of the actual boundary generic fibre of a standard root cover
@@ -40,6 +42,8 @@ The arbitrary-scheme codimension-one predicate and its affine-stalk
 comparison are separate from this statement.
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

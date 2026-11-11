@@ -16,7 +16,7 @@ import Nyll.AlgebraicCurves.Differentials.Cartier.DlogCartierOperatorFixed
 import Nyll.AlgebraicCurves.Differentials.Logarithmic.IsRegularDiffDlogDvdOrd
 import Nyll.AlgebraicCurves.Differentials.Logarithmic.DvdOrdIsRegularDiffDlog
 import Nyll.AlgebraicCurves.Divisors.Degree.DegZeroOrdEqMulDvdOrd
-import Nyll.JacobianVarieties.Pic0.MkEqDvdOrdMemTorsion
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.MkEqDvdOrdMemTorsion
 
 /-!
 The image of the torsion logarithmic differential map is the space of regular Cartier-fixed

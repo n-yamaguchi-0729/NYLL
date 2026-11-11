@@ -5,16 +5,23 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneRestriction
-import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicAction
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneRestriction
+public import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicAction
 
 /-! # Restriction of whole modulus frames is equivariant for the actual sheaf action -/
+
+@[expose] public section
 
 noncomputable section
 
 universe u
 
 open CategoryTheory Opposite
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

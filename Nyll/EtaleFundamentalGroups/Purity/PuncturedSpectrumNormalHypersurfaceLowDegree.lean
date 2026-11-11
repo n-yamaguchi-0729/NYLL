@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyLegacyComparison
-import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyRegularSequence
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyLegacyComparison
+public import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyRegularSequence
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Low-degree local cohomology for punctured hypersurfaces
@@ -17,6 +19,8 @@ regular pair in the maximal ideal kills degree-one derived local cohomology.
 This is the low-degree source available for a connectedness argument around a
 principal hypersurface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

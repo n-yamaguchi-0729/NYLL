@@ -10,39 +10,44 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Finprod
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.LinearAlgebra.Dimension.Localization
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.DedekindDomain.AdicValuation
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.NumberTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.RamificationInertia.Inertia
-import Mathlib.RingTheory.RamificationInertia.Basic
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Algebra.BigOperators.Finprod
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.Dimension.Localization
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.NumberTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.RamificationInertia.Inertia
+public import Mathlib.RingTheory.RamificationInertia.Basic
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.RingTheory.Localization.InertiaDegree
 
 /-!
 # Valuation Subring finsum ramification Idx mul inertia Deg eq finrank
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -76,21 +81,8 @@ theorem mem_maximalIdeal_iff_inv_not_mem {L : Type*} [Field L] (C : ValuationSub
 theorem inertiaDeg_maximalIdeal_eq_one_of_isLocalization {R : Type*} [CommRing R]
     (p : Ideal R) [p.IsMaximal] (Rₚ : Type*) [CommRing Rₚ] [Algebra R Rₚ]
     [IsLocalization.AtPrime Rₚ p] [IsLocalRing Rₚ] :
-    (maximalIdeal Rₚ).inertiaDeg R = 1 := by
-  have : (maximalIdeal Rₚ).LiesOver p :=
-    ⟨(IsLocalization.AtPrime.under_maximalIdeal Rₚ p).symm⟩
-  rw [Ideal.inertiaDeg_eq_of_isMaximal p (maximalIdeal Rₚ)]
-  let e := IsLocalization.AtPrime.equivQuotMaximalIdeal p Rₚ
-  have he : ∀ c, e c = algebraMap (R ⧸ p) (Rₚ ⧸ maximalIdeal Rₚ) c := by
-    intro c
-    obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c
-    rfl
-  let e' : (R ⧸ p) ≃ₗ[R ⧸ p] (Rₚ ⧸ maximalIdeal Rₚ) :=
-    { e with
-      map_smul' := fun c x => by
-        change e (c * x) = c • e x
-        rw [map_mul, Algebra.smul_def, he] }
-  rw [← e'.finrank_eq, Module.finrank_self]
+    (maximalIdeal Rₚ).inertiaDeg R = 1 :=
+  _root_.IsLocalization.AtPrime.inertiaDeg_maximalIdeal_eq_one p Rₚ
 
 /-- The condition that the valuation ring restricts to the given base valuation ring. -/
 def Over (B : ValuationSubring F) : Prop := ∀ x : K, algebraMap K F x ∈ B ↔ x ∈ A
@@ -106,26 +98,25 @@ theorem coe_algebraMap_overAlgebra (B : ValuationSubring F) (h : Over A B) (a : 
     ((algebraMap A B a : B) : F) = algebraMap K F a := rfl
 
 theorem isScalarTower_overAlgebra (B : ValuationSubring F) (h : Over A B) :
-    letI := overAlgebra B h
+    let := overAlgebra B h
     IsScalarTower A B F := by
-  let := overAlgebra B h
+  intro sharedOwner1
   refine IsScalarTower.of_algebraMap_eq fun a => ?_
   change algebraMap K F a = ((algebraMap A B a : B) : F)
   rfl
 
 theorem algebraMap_overAlgebra_injective (B : ValuationSubring F) (h : Over A B) :
-    letI := overAlgebra B h
+    let := overAlgebra B h
     Function.Injective (algebraMap A B) := by
-  let := overAlgebra B h
-  intro a b hab
+  intro sharedOwner1 a b hab
   have := congrArg (fun z : B => (z : F)) hab
   simp only [coe_algebraMap_overAlgebra] at this
   exact Subtype.ext ((algebraMap K F).injective this)
 
 theorem comap_maximalIdeal_overAlgebra (B : ValuationSubring F) (h : Over A B) :
-    letI := overAlgebra B h
+    let := overAlgebra B h
     (maximalIdeal B).comap (algebraMap A B) = maximalIdeal A := by
-  let := overAlgebra B h
+  intro sharedOwner1
   ext a
   rw [Ideal.mem_comap]
   by_cases ha0 : (a : K) = 0

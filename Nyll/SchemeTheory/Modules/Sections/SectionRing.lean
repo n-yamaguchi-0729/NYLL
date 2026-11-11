@@ -13,9 +13,11 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.RingTheory.GradedAlgebra.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.RingTheory.GradedAlgebra.Basic
 
 /-!
 # Section rings of invertible module sheaves
@@ -24,6 +26,8 @@ The graded section-ring condition identifies degree `n` with global sections of 
 `n`th tensor power. The direct-sum construction in `SectionRingConstruction` satisfies these
 compatibilities without an assumed section-ring witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

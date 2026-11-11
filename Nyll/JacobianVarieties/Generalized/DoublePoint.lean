@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.LocalUnitTransition
-import Nyll.JacobianVarieties.Generalized.SinglePoint
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseIsRational
-import Mathlib.Algebra.Group.Equiv.TypeTags
+module
+
+public import Nyll.JacobianVarieties.Generalized.LocalUnitTransition
+public import Nyll.JacobianVarieties.Generalized.SinglePoint
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseIsRational
+public import Mathlib.Algebra.Group.Equiv.TypeTags
 
 /-!
 # The additive kernel at a double rational point
@@ -20,6 +22,8 @@ the additive residue field, hence with the additive base field. The resulting
 abstract group isomorphism depends on a chosen uniformizer; no representing
 group scheme is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # The support of the actual ideal of a closed point -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Actual kernels of projective presentations under reduction
@@ -28,6 +30,8 @@ Thus the restricted transition has precisely its original ideal multiple
 as kernel. The finite projective kernel is constructed from this same
 splitting; it is not supplied as an extra hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

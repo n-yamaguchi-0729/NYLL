@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteUnramifiedNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Finiteness
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteUnramifiedNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Finiteness
 
 /-!
 # Étale neighborhoods of finite domain models over a normal domain
@@ -17,6 +19,8 @@ Opening the unramified locus first avoids assuming finite presentation or
 Noetherianity. The dominant-domain criterion supplies étaleness afterwards.
 This is the spreading step for the original local criterion in Tag 0BTF.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitExact
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitInvariants
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitTopology
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitExact
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitInvariants
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitTopology
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Functorial geometric Galois sections
@@ -15,6 +18,8 @@ Actual sheaf morphisms induce equivariant maps on geometric sections.
 The degree-zero comparison with actual global sections is natural in
 the coefficient sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -29,40 +34,40 @@ variable (K : Type u) [Field K]
 theorem finiteGaloisSectionColimitAction_naturality
     {F G : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (η : F ⟶ G) (σ : Gal(AlgebraicClosure K/K)) :
-    (finiteGaloisSectionColimitAction K F σ).hom ≫
+    (finiteGaloisSectionColimitAction K F σ).asIso.hom ≫
         (finiteGaloisSectionColimitFunctor K).map η =
       (finiteGaloisSectionColimitFunctor K).map η ≫
-        (finiteGaloisSectionColimitAction K G σ).hom := by
+        (finiteGaloisSectionColimitAction K G σ).asIso.hom := by
   apply ConcreteCategory.hom_ext
   intro x
   obtain ⟨E, s, rfl⟩ := finiteGaloisSectionColimit_exists_stage K F x
   let a := (finiteGaloisSectionColimitFunctor K).map η
   let e := η.hom.app (op (finiteGaloisEtaleObject K E))
   let τ := AlgEquiv.restrictNormalHom E σ
-  change a ((finiteGaloisSectionColimitAction K F σ).hom
+  change a ((finiteGaloisSectionColimitAction K F σ).asIso.hom
       (finiteGaloisSectionColimitι K F E s)) =
-    (finiteGaloisSectionColimitAction K G σ).hom
+    (finiteGaloisSectionColimitAction K G σ).asIso.hom
       (a (finiteGaloisSectionColimitι K F E s))
   have hm (t : F.obj.obj (op (finiteGaloisEtaleObject K E))) :
       a (finiteGaloisSectionColimitι K F E t) =
         finiteGaloisSectionColimitι K G E (e t) :=
     ConcreteCategory.congr_hom (finiteGaloisSectionColimitFunctor_map_ι K η E) t
-  have hf : (finiteGaloisSectionColimitAction K F σ).hom
+  have hf : (finiteGaloisSectionColimitAction K F σ).asIso.hom
       (finiteGaloisSectionColimitι K F E s) =
-        finiteGaloisSectionColimitι K F E ((fieldGaloisSheafAction K E F τ).hom s) :=
+        finiteGaloisSectionColimitι K F E ((fieldGaloisSheafAction K E F τ).asIso.hom s) :=
     ConcreteCategory.congr_hom (finiteGaloisSectionColimitAction_ι K F σ E) s
-  have hg : (finiteGaloisSectionColimitAction K G σ).hom
+  have hg : (finiteGaloisSectionColimitAction K G σ).asIso.hom
       (finiteGaloisSectionColimitι K G E (e s)) =
         finiteGaloisSectionColimitι K G E
-          ((fieldGaloisSheafAction K E G τ).hom (e s)) :=
+          ((fieldGaloisSheafAction K E G τ).asIso.hom (e s)) :=
     ConcreteCategory.congr_hom (finiteGaloisSectionColimitAction_ι K G σ E) (e s)
-  have he : e ((fieldGaloisSheafAction K E F τ).hom s) =
-      (fieldGaloisSheafAction K E G τ).hom (e s) :=
+  have he : e ((fieldGaloisSheafAction K E F τ).asIso.hom s) =
+      (fieldGaloisSheafAction K E G τ).asIso.hom (e s) :=
     ConcreteCategory.congr_hom (fieldGaloisSheafAction_naturality K E η τ) s
   exact (congrArg a hf).trans ((hm _).trans
     ((congrArg (finiteGaloisSectionColimitι K G E) he).trans
       (hg.symm.trans
-        (congrArg (fun y => (finiteGaloisSectionColimitAction K G σ).hom y) (hm s).symm))))
+        (congrArg (fun y => (finiteGaloisSectionColimitAction K G σ).asIso.hom y) (hm s).symm))))
 
 /-- The actual coefficient map as an equivariant linear map of geometric sections. -/
 def finiteGaloisSectionColimitRepMap

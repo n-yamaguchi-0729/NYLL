@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.Topology.Sheaves.Functors
-import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
-import Nyll.SchemeTheory.Topology.ClosedDiscreteRestriction
-import Nyll.SchemeTheory.Topology.ClosedDiscreteRestrictionMono
-import Nyll.SchemeTheory.Topology.SpectralClosedSubspaceRestriction
+module
+
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.Topology.Sheaves.Functors
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteRestriction
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteRestrictionMono
+public import Nyll.SchemeTheory.Topology.SpectralClosedSubspaceRestriction
 
 /-!
 # Extending discrete-valued sections on a closed support
@@ -26,6 +28,8 @@ their explicit subtype coordinates.
 Reference: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

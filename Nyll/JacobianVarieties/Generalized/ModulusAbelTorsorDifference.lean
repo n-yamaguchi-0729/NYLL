@@ -5,11 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneMap
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneMap
 
 /-! # The pointed Abel class is the actual difference in the intrinsic Picard-one torsor -/
+
+@[expose] public section
 
 noncomputable section
 

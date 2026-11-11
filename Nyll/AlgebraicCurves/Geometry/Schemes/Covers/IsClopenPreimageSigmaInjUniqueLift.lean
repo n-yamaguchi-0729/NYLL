@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.Topology.Compactness.Compact
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.Basic
 
 /-!
 # Scheme is Clopen preimage sigma Inj and exists Unique lift of hom sigma
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
 namespace AlgebraicCurves.Geometry.Schemes.Proofs
 namespace Scheme_isClopen_preimage_sigmaInj_and_existsUnique_lift_of_hom_sigma
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
 
 namespace CoprodPtsA
 
-variable {σ : Type u} (H : σ → Scheme.{u}) {T : Scheme.{u}} (u : T ⟶ ∐ H)
-
-theorem range_sigmaι_eq (i : σ) :
+/-- The point-set identification for an index in the same universe as the schemes. -/
+theorem range_sigmaι_eq {σ : Type u} (H : σ → Scheme.{u}) (i : σ) :
     Set.range (Sigma.ι H i).base = sigmaMk H '' Set.range (Sigma.mk i) := by
   ext y
   constructor
@@ -39,9 +43,29 @@ theorem range_sigmaι_eq (i : σ) :
   · rintro ⟨_, ⟨x, rfl⟩, rfl⟩
     exact ⟨x, (sigmaMk_mk H i x).symm⟩
 
+variable {σ : Type v} [Small.{u} σ] (H : σ → Scheme.{u}) {T : Scheme.{u}}
+  (u : T ⟶ ∐ H)
+
 theorem isClosed_opensRange (i : σ) : IsClosed ((Sigma.ι H i).opensRange : Set ↥(∐ H)) := by
-  rw [Scheme.Hom.coe_opensRange, range_sigmaι_eq]
-  exact (sigmaMk H).isClosed_image.mpr isClosed_range_sigmaMk
+  have hcompl : ((Sigma.ι H i).opensRange : Set ↥(∐ H))ᶜ =
+      ⋃ (j : σ) (_ : j ≠ i), ((Sigma.ι H j).opensRange : Set ↥(∐ H)) := by
+    ext x
+    constructor
+    · intro hx
+      obtain ⟨j, y, rfl⟩ := (sigmaOpenCover H).exists_eq x
+      have hji : j ≠ i := by
+        intro h
+        subst j
+        exact hx ⟨y, rfl⟩
+      exact Set.mem_iUnion.mpr ⟨j, Set.mem_iUnion.mpr ⟨hji, ⟨y, rfl⟩⟩⟩
+    · intro hx hi
+      obtain ⟨j, hj⟩ := Set.mem_iUnion.mp hx
+      obtain ⟨hji, hxj⟩ := Set.mem_iUnion.mp hj
+      exact (Set.disjoint_iff.mp
+        (Opens.coe_disjoint.mpr (disjoint_opensRange_sigmaι H j i hji))) ⟨hxj, hi⟩
+  apply isOpen_compl_iff.mp
+  rw [hcompl]
+  exact isOpen_iUnion fun j => isOpen_iUnion fun _ => (Sigma.ι H j).opensRange.isOpen
 
 theorem iSup_opensRange : (⨆ i, (Sigma.ι H i).opensRange) = ⊤ := by
   exact (sigmaOpenCover H).iSup_opensRange
@@ -99,7 +123,7 @@ end CoprodPtsA
 
 theorem
   _root_.AlgebraicGeometry.Scheme.isClopen_preimage_sigmaInj_and_existsUnique_lift_of_hom_sigma
-    {σ : Type u} (H : σ → Scheme.{u}) {T : Scheme.{u}} (u : T ⟶ ∐ H) :
+    {σ : Type v} [Small.{u} σ] (H : σ → Scheme.{u}) {T : Scheme.{u}} (u : T ⟶ ∐ H) :
     (∀ i, IsClosed ((u ⁻¹ᵁ (Sigma.ι H i).opensRange : T.Opens) : Set T)) ∧
     (∀ i j, i ≠ j → Disjoint (u ⁻¹ᵁ (Sigma.ι H i).opensRange) (u ⁻¹ᵁ (Sigma.ι H j).opensRange)) ∧
     (⨆ i, u ⁻¹ᵁ (Sigma.ι H i).opensRange) = ⊤ ∧

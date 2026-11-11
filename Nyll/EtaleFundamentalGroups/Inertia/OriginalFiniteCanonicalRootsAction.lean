@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameEquivariance
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationDecomposition
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationResidueComparison
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameEquivariance
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationDecomposition
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationResidueComparison
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # Original residue actions on finite tame roots
@@ -17,6 +19,8 @@ import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 Constructs the root map induced by an original residue automorphism and identifies it with the
 action of the corresponding normalization stabilizer image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

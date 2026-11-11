@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormEqSumFiberOver
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPos
-import Mathlib.FieldTheory.KummerExtension
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.Algebra.Ring.GeomSum
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormEqSumFiberOver
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPos
+public import Mathlib.FieldTheory.KummerExtension
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.Algebra.Ring.GeomSum
 
 /-!
 # Place ramification Index eq one of forall dvd ord
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

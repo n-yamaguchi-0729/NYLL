@@ -10,41 +10,45 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.Algebra.GradedMonoid
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Data.Fintype.Lattice
-import Mathlib.GroupTheory.MonoidLocalization.Basic
-import Mathlib.GroupTheory.MonoidLocalization.MonoidWithZero
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.Algebra.GradedMonoid
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Data.Fintype.Lattice
+public import Mathlib.GroupTheory.MonoidLocalization.Basic
+public import Mathlib.GroupTheory.MonoidLocalization.MonoidWithZero
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
 
 /-!
 # Proj Space exists linear Equiv H0 HSucc coker twist of ker eq sup
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Prime root polynomials over normal domains
@@ -18,6 +20,8 @@ coefficient map, so primality descends to the original polynomial ring.
 Consequently the actual root chart is a domain in arbitrary dimension;
 no unique factorization or DVR hypothesis is needed.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

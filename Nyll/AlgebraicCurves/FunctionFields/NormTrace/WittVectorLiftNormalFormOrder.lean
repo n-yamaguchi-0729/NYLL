@@ -10,14 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.TransferInstance
-import Mathlib.RingTheory.WittVector.Complete
-import Mathlib.RingTheory.WittVector.Truncated
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LiftNormalFormStructureConstants
+module
+
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.TableAlgebra
+public import Mathlib.Algebra.Module.TransferInstance
+public import Mathlib.RingTheory.WittVector.Complete
+public import Mathlib.RingTheory.WittVector.Truncated
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LiftNormalFormStructureConstants
 
 /-!
 # Exists witt Vector lift of normal Form Order
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -34,227 +39,202 @@ namespace WittLiftNF
 section TableAlgebra
 
 /-- Structure constants of a commutative unital multiplication table. -/
-structure Table (R : Type*) [CommRing R] (N : ℕ) where
-  /-- The structure constants for multiplication in the indexed basis. -/
-  γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R
-  /-- The zeroth basis vector acts as the multiplicative identity. -/
-  unit : ∀ j k, γ 0 j k = if j = k then 1 else 0
-  /-- The structure constants are symmetric in the two multiplicands. -/
-  comm : ∀ i j k, γ i j k = γ j i k
-  /-- The structure constants satisfy the associativity equations. -/
-  assoc : ∀ i j l m, ∑ k, γ i j k * γ k l m = ∑ k, γ j l k * γ i k m
+abbrev Table (R : Type*) [CommRing R] (N : ℕ) :=
+  _root_.TableAlgebra.Table R N
+
+namespace Table
+
+export _root_.TableAlgebra.Table (mk γ unit comm assoc)
+
+end Table
 
 variable {R : Type*} [CommRing R] {N : ℕ}
 
 /-- The product of coordinate vectors determined by structure constants. -/
 def cst (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (x y : Fin (N + 1) → R) :
     Fin (N + 1) → R :=
-  fun m => ∑ i, ∑ j, x i * y j * γ i j m
+  _root_.TableAlgebra.cst γ x y
 
 theorem cst_apply (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (x y : Fin (N + 1) → R)
-    (m : Fin (N + 1)) : cst γ x y m = ∑ i, ∑ j, x i * y j * γ i j m := rfl
+    (m : Fin (N + 1)) : cst γ x y m = ∑ i, ∑ j, x i * y j * γ i j m :=
+  _root_.TableAlgebra.cst_apply γ x y m
 
 theorem sum3_rot (f : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) :
-    ∑ q, ∑ l, ∑ t, f q l t = ∑ l, ∑ t, ∑ q, f q l t := by
-  calc ∑ q, ∑ l, ∑ t, f q l t = ∑ l, ∑ q, ∑ t, f q l t := Finset.sum_comm
-    _ = ∑ l, ∑ t, ∑ q, f q l t := Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    ∑ q, ∑ l, ∑ t, f q l t = ∑ l, ∑ t, ∑ q, f q l t :=
+  _root_.TableAlgebra.sum3_rot f
 
 theorem sum4_rot (f : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) :
-    ∑ q, ∑ t, ∑ k, ∑ l, f q t k l = ∑ k, ∑ l, ∑ t, ∑ q, f q t k l := by
-  calc ∑ q, ∑ t, ∑ k, ∑ l, f q t k l = ∑ q, ∑ k, ∑ t, ∑ l, f q t k l :=
-        Finset.sum_congr rfl fun q _ => Finset.sum_comm
-    _ = ∑ q, ∑ k, ∑ l, ∑ t, f q t k l :=
-        Finset.sum_congr rfl fun q _ => Finset.sum_congr rfl fun k _ => Finset.sum_comm
-    _ = ∑ k, ∑ q, ∑ l, ∑ t, f q t k l := Finset.sum_comm
-    _ = ∑ k, ∑ l, ∑ q, ∑ t, f q t k l := Finset.sum_congr rfl fun k _ => Finset.sum_comm
-    _ = ∑ k, ∑ l, ∑ t, ∑ q, f q t k l :=
-        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    ∑ q, ∑ t, ∑ k, ∑ l, f q t k l = ∑ k, ∑ l, ∑ t, ∑ q, f q t k l :=
+  _root_.TableAlgebra.sum4_rot f
 
 theorem cst_cst_left (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
     (a b c : Fin (N + 1) → R) (s : Fin (N + 1)) :
-    cst γ (cst γ a b) c s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γ k l q * γ q t s := by
-  simp only [cst, Finset.sum_mul, Finset.mul_sum]
-  rw [sum4_rot]
-  refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-    Finset.sum_congr rfl fun t _ => Finset.sum_congr rfl fun q _ => ?_
-  ring
+    cst γ (cst γ a b) c s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γ k l q * γ q t s :=
+  _root_.TableAlgebra.cst_cst_left γ γ a b c s
 
 theorem cst_cst_right (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
     (a b c : Fin (N + 1) → R) (s : Fin (N + 1)) :
-    cst γ a (cst γ b c) s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γ l t q * γ k q s := by
-  simp only [cst, Finset.sum_mul, Finset.mul_sum]
-  refine Finset.sum_congr rfl fun k _ => ?_
-  rw [sum3_rot]
-  refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun t _ =>
-    Finset.sum_congr rfl fun q _ => ?_
-  ring
+    cst γ a (cst γ b c) s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γ l t q * γ k q s :=
+  _root_.TableAlgebra.cst_cst_right γ γ a b c s
 
 theorem cst_comm_of (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
-    (hc : ∀ i j k, γ i j k = γ j i k) (a b : Fin (N + 1) → R) : cst γ a b = cst γ b a := by
-  funext m
-  rw [cst_apply, cst_apply, Finset.sum_comm]
-  refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
-  rw [hc j i m]; ring
+    (hc : ∀ i j k, γ i j k = γ j i k) (a b : Fin (N + 1) → R) : cst γ a b = cst γ b a :=
+  _root_.TableAlgebra.cst_comm_of γ hc a b
 
 theorem cst_add_left (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (a a' b : Fin (N + 1) → R) :
-    cst γ (a + a') b = cst γ a b + cst γ a' b := by
-  funext m
-  simp only [cst, Pi.add_apply, add_mul, Finset.sum_add_distrib]
+    cst γ (a + a') b = cst γ a b + cst γ a' b :=
+  _root_.TableAlgebra.cst_add_left γ a a' b
 
 theorem cst_add_right (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (a b b' : Fin (N + 1) → R) :
-    cst γ a (b + b') = cst γ a b + cst γ a b' := by
-  funext m
-  simp only [cst, Pi.add_apply, mul_add, add_mul, Finset.sum_add_distrib]
+    cst γ a (b + b') = cst γ a b + cst γ a b' :=
+  _root_.TableAlgebra.cst_add_right γ a b b'
 
 theorem cst_smul_left (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (z : R)
-    (a b : Fin (N + 1) → R) : cst γ (z • a) b = z • cst γ a b := by
-  funext m
-  simp only [cst, Pi.smul_apply, smul_eq_mul, Finset.mul_sum, mul_assoc]
+    (a b : Fin (N + 1) → R) : cst γ (z • a) b = z • cst γ a b :=
+  _root_.TableAlgebra.cst_smul_left γ z a b
 
 theorem cst_zero_left (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (b : Fin (N + 1) → R) :
-    cst γ 0 b = 0 := by
-  funext m; simp [cst]
+    cst γ 0 b = 0 :=
+  _root_.TableAlgebra.cst_zero_left γ b
 
 theorem cst_single_single (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (i j : Fin (N + 1)) :
-    cst γ (Pi.single i 1) (Pi.single j 1) = fun m => γ i j m := by
-  funext m
-  rw [cst_apply, Finset.sum_eq_single i, Finset.sum_eq_single j]
-  · simp only [Pi.single_eq_same, one_mul]
-  · intro b _ hb; simp [Pi.single_eq_of_ne hb]
-  · intro h; exact absurd (Finset.mem_univ j) h
-  · intro b _ hb; simp [Pi.single_eq_of_ne hb]
-  · intro h; exact absurd (Finset.mem_univ i) h
+    cst γ (Pi.single i 1) (Pi.single j 1) = fun m => γ i j m :=
+  _root_.TableAlgebra.cst_single_single γ i j
 
 theorem cst_unit_left (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
     (h1 : ∀ j k, γ 0 j k = if j = k then 1 else 0) (b : Fin (N + 1) → R) :
-    cst γ (Pi.single 0 1) b = b := by
-  funext m
-  rw [cst_apply, Finset.sum_eq_single 0]
-  · simp only [Pi.single_eq_same, one_mul, h1]
-    rw [Finset.sum_eq_single m]
-    · simp only [ite_true, mul_one]
-    · intro j _ hj; simp [hj]
-    · intro h; exact absurd (Finset.mem_univ m) h
-  · intro i _ hi; simp [Pi.single_eq_of_ne hi]
-  · intro h; exact absurd (Finset.mem_univ (0 : Fin (N + 1))) h
+    cst γ (Pi.single 0 1) b = b :=
+  _root_.TableAlgebra.cst_unit_left γ h1 b
 
 /-- The algebra with the given multiplication table. -/
-structure TAlg (T : Table R N) where
-  /-- The coordinates of an algebra element in the indexed basis. -/
-  coord : Fin (N + 1) → R
+abbrev TAlg (T : Table R N) := _root_.TableAlgebra.TAlg T
+
+namespace TAlg
+
+export _root_.TableAlgebra.TAlg (mk coord)
+
+end TAlg
 
 namespace TAlg
 
 variable (T : Table R N)
 
-@[scoped ext] theorem ext {x y : TAlg T} (h : x.coord = y.coord) : x = y := by
-  cases x; cases y; congr
+@[scoped ext] theorem ext {x y : TAlg T}
+    (h : (_root_.TableAlgebra.TAlg.coord x) = (_root_.TableAlgebra.TAlg.coord y)) : x = y :=
+  _root_.TableAlgebra.TAlg.ext T h
 
 /-- The coordinate equivalence of the table algebra. -/
-def equiv : TAlg T ≃ (Fin (N + 1) → R) where
-  toFun := coord
-  invFun := TAlg.mk
-  left_inv _ := rfl
-  right_inv _ := rfl
+def equiv : TAlg T ≃ (Fin (N + 1) → R) :=
+  _root_.TableAlgebra.TAlg.equiv T
 
-scoped instance : AddCommGroup (TAlg T) := (equiv T).addCommGroup
+scoped instance : AddCommGroup (TAlg T) :=
+  _root_.TableAlgebra.TAlg.instAddCommGroup T
 
-scoped instance instModule : Module R (TAlg T) := (equiv T).addEquiv.module R
+scoped instance instModule : Module R (TAlg T) :=
+  _root_.TableAlgebra.TAlg.instModule T
 
-@[scoped simp] theorem coord_add (x y : TAlg T) : (x + y).coord = x.coord + y.coord := rfl
-@[scoped simp] theorem coord_zero : (0 : TAlg T).coord = 0 := rfl
-@[scoped simp] theorem coord_neg (x : TAlg T) : (-x).coord = -x.coord := rfl
-@[scoped simp] theorem coord_sub (x y : TAlg T) : (x - y).coord = x.coord - y.coord := rfl
-@[scoped simp] theorem coord_smul (z : R) (x : TAlg T) : (z • x).coord = z • x.coord := rfl
-@[scoped simp] theorem coord_mk (v : Fin (N + 1) → R) : (TAlg.mk v : TAlg T).coord = v := rfl
+@[scoped simp] theorem coord_add (x y : TAlg T) :
+    (_root_.TableAlgebra.TAlg.coord (x + y)) =
+      (_root_.TableAlgebra.TAlg.coord x) + (_root_.TableAlgebra.TAlg.coord y) :=
+  _root_.TableAlgebra.TAlg.coord_add T x y
+@[scoped simp] theorem coord_zero : (_root_.TableAlgebra.TAlg.coord (0 : TAlg T)) = 0 :=
+  _root_.TableAlgebra.TAlg.coord_zero T
+@[scoped simp] theorem coord_neg (x : TAlg T) :
+    (_root_.TableAlgebra.TAlg.coord (-x)) = -(_root_.TableAlgebra.TAlg.coord x) :=
+  _root_.TableAlgebra.TAlg.coord_neg T x
+@[scoped simp] theorem coord_sub (x y : TAlg T) :
+    (_root_.TableAlgebra.TAlg.coord (x - y)) =
+      (_root_.TableAlgebra.TAlg.coord x) - (_root_.TableAlgebra.TAlg.coord y) :=
+  _root_.TableAlgebra.TAlg.coord_sub T x y
+@[scoped simp] theorem coord_smul (z : R) (x : TAlg T) :
+    (_root_.TableAlgebra.TAlg.coord (z • x)) = z • (_root_.TableAlgebra.TAlg.coord x) :=
+  _root_.TableAlgebra.TAlg.coord_smul T z x
+@[scoped simp] theorem coord_mk (v : Fin (N + 1) → R) :
+    (_root_.TableAlgebra.TAlg.coord (TAlg.mk v : TAlg T)) = v :=
+  _root_.TableAlgebra.TAlg.coord_mk T v
 
 /-- The linear coordinate equivalence of the table algebra. -/
 def linearEquiv : TAlg T ≃ₗ[R] (Fin (N + 1) → R) :=
-  { equiv T with
-    map_add' := fun _ _ => rfl
-    map_smul' := fun _ _ => rfl }
+  _root_.TableAlgebra.TAlg.linearEquiv T
 
-@[scoped simp] theorem linearEquiv_apply (x : TAlg T) : linearEquiv T x = x.coord := rfl
+@[scoped simp] theorem linearEquiv_apply (x : TAlg T) :
+    linearEquiv T x = (_root_.TableAlgebra.TAlg.coord x) :=
+  _root_.TableAlgebra.TAlg.linearEquiv_apply T x
 @[scoped simp] theorem linearEquiv_symm_apply (v : Fin (N + 1) → R) : (linearEquiv T).symm v =
   TAlg.mk v :=
-  rfl
+  _root_.TableAlgebra.TAlg.linearEquiv_symm_apply T v
 
 theorem coord_sum {ι : Type*} (s : Finset ι) (f : ι → TAlg T) :
-    (∑ i ∈ s, f i).coord = ∑ i ∈ s, (f i).coord := by
-  change linearEquiv T (∑ i ∈ s, f i) = ∑ i ∈ s, linearEquiv T (f i)
-  exact map_sum _ _ _
+    (_root_.TableAlgebra.TAlg.coord (∑ i ∈ s, f i)) =
+      ∑ i ∈ s, (_root_.TableAlgebra.TAlg.coord (f i)) :=
+  _root_.TableAlgebra.TAlg.coord_sum T s f
 
-scoped instance : Mul (TAlg T) := ⟨fun x y => TAlg.mk (cst T.γ x.coord y.coord)⟩
+scoped instance : Mul (TAlg T) :=
+  _root_.TableAlgebra.TAlg.instMul T
 
-scoped instance : One (TAlg T) := ⟨TAlg.mk (Pi.single 0 1)⟩
+scoped instance : One (TAlg T) :=
+  _root_.TableAlgebra.TAlg.instOne T
 
-@[scoped simp] theorem coord_mul (x y : TAlg T) : (x * y).coord = cst T.γ x.coord y.coord := rfl
-@[scoped simp] theorem coord_one : (1 : TAlg T).coord = Pi.single 0 1 := rfl
+@[scoped simp] theorem coord_mul (x y : TAlg T) :
+    (_root_.TableAlgebra.TAlg.coord (x * y)) =
+      cst (_root_.TableAlgebra.Table.γ T) (_root_.TableAlgebra.TAlg.coord x)
+        (_root_.TableAlgebra.TAlg.coord y) :=
+  _root_.TableAlgebra.TAlg.coord_mul T x y
+@[scoped simp] theorem coord_one : (_root_.TableAlgebra.TAlg.coord (1 : TAlg T)) = Pi.single 0 1 :=
+  _root_.TableAlgebra.TAlg.coord_one T
 
-theorem mul_comm' (x y : TAlg T) : x * y = y * x := by
-  ext1; simp only [coord_mul]; exact cst_comm_of T.γ T.comm _ _
+theorem mul_comm' (x y : TAlg T) : x * y = y * x :=
+  _root_.TableAlgebra.TAlg.mul_comm' T x y
 
-theorem mul_assoc' (x y z : TAlg T) : x * y * z = x * (y * z) := by
-  ext1
-  simp only [coord_mul]
-  funext s
-  rw [cst_cst_left, cst_cst_right]
-  refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-    Finset.sum_congr rfl fun t _ => ?_
-  rw [T.assoc k l t s]
+theorem mul_assoc' (x y z : TAlg T) : x * y * z = x * (y * z) :=
+  _root_.TableAlgebra.TAlg.mul_assoc' T x y z
 
-theorem one_mul' (x : TAlg T) : 1 * x = x := by
-  ext1; simp only [coord_mul, coord_one]; exact cst_unit_left T.γ T.unit _
+theorem one_mul' (x : TAlg T) : 1 * x = x :=
+  _root_.TableAlgebra.TAlg.one_mul' T x
 
-scoped instance instCommRing : CommRing (TAlg T) where
-  __ := (inferInstance : AddCommGroup (TAlg T))
-  mul := (· * ·)
-  one := 1
-  mul_assoc := mul_assoc' T
-  one_mul := one_mul' T
-  mul_one x := by rw [mul_comm']; exact one_mul' T x
-  zero_mul x := by ext1; simp only [coord_mul, coord_zero]; exact cst_zero_left _ _
-  mul_zero x := by rw [mul_comm']; ext1; simp only [coord_mul, coord_zero]; exact cst_zero_left _ _
-  left_distrib x y z := by ext1; simp only [coord_mul, coord_add]; exact cst_add_right _ _ _ _
-  right_distrib x y z := by ext1; simp only [coord_mul, coord_add]; exact cst_add_left _ _ _ _
-  mul_comm := mul_comm' T
+scoped instance instCommRing : CommRing (TAlg T) :=
+  _root_.TableAlgebra.TAlg.instCommRing T
 
-theorem smul_mul_assoc' (z : R) (x y : TAlg T) : (z • x) * y = z • (x * y) := by
-  ext1; simp only [coord_mul, coord_smul]; exact cst_smul_left _ _ _ _
+theorem smul_mul_assoc' (z : R) (x y : TAlg T) : (z • x) * y = z • (x * y) :=
+  _root_.TableAlgebra.TAlg.smul_mul_assoc' T z x y
 
 scoped instance instAlgebra : Algebra R (TAlg T) :=
-  Algebra.ofModule (smul_mul_assoc' T) fun z x y => by
-    rw [mul_comm', smul_mul_assoc', mul_comm']
+  _root_.TableAlgebra.TAlg.instAlgebra T
 
 /-- The coordinate basis of the table algebra. -/
-def basis : Module.Basis (Fin (N + 1)) R (TAlg T) := Module.Basis.ofEquivFun (linearEquiv T)
+def basis : Module.Basis (Fin (N + 1)) R (TAlg T) :=
+  _root_.TableAlgebra.TAlg.basis T
 
-theorem basis_apply (i : Fin (N + 1)) : basis T i = TAlg.mk (Pi.single i 1) := by
-  rw [basis, Module.Basis.coe_ofEquivFun]; rfl
+theorem basis_apply (i : Fin (N + 1)) : basis T i = TAlg.mk (Pi.single i 1) :=
+  _root_.TableAlgebra.TAlg.basis_apply T i
 
-theorem coord_basis (i : Fin (N + 1)) : (basis T i).coord = Pi.single i 1 := by
-  rw [basis_apply]
+theorem coord_basis (i : Fin (N + 1)) :
+    (_root_.TableAlgebra.TAlg.coord (basis T i)) = Pi.single i 1 :=
+  _root_.TableAlgebra.TAlg.coord_basis T i
 
-theorem basis_repr_apply (x : TAlg T) (k : Fin (N + 1)) : (basis T).repr x k = x.coord k := by
-  rw [basis, Module.Basis.ofEquivFun_repr_apply]; rfl
+theorem basis_repr_apply (x : TAlg T) (k : Fin (N + 1)) :
+    (basis T).repr x k = (_root_.TableAlgebra.TAlg.coord x) k :=
+  _root_.TableAlgebra.TAlg.basis_repr_apply T x k
 
-theorem basis_zero : basis T 0 = 1 := by
-  ext1; rw [coord_basis, coord_one]
+theorem basis_zero : basis T 0 = 1 :=
+  _root_.TableAlgebra.TAlg.basis_zero T
 
 theorem basis_mul_basis_coord (i j : Fin (N + 1)) :
-    (basis T i * basis T j).coord = fun m => T.γ i j m := by
-  rw [coord_mul, coord_basis, coord_basis, cst_single_single]
+    (_root_.TableAlgebra.TAlg.coord (basis T i * basis T j)) =
+      fun m => (_root_.TableAlgebra.Table.γ T) i j m :=
+  _root_.TableAlgebra.TAlg.basis_mul_basis_coord T i j
 
 theorem repr_basis_mul_basis (i j k : Fin (N + 1)) :
-    (basis T).repr (basis T i * basis T j) k = T.γ i j k := by
-  rw [basis_repr_apply, basis_mul_basis_coord]
+    (basis T).repr (basis T i * basis T j) k = (_root_.TableAlgebra.Table.γ T) i j k :=
+  _root_.TableAlgebra.TAlg.repr_basis_mul_basis T i j k
 
-theorem algebraMap_coord (f : R) : (algebraMap R (TAlg T) f).coord = Pi.single 0 f := by
-  rw [Algebra.algebraMap_eq_smul_one, coord_smul, coord_one, ← Pi.single_smul, smul_eq_mul, mul_one]
+theorem algebraMap_coord (f : R) :
+    (_root_.TableAlgebra.TAlg.coord (algebraMap R (TAlg T) f)) = Pi.single 0 f :=
+  _root_.TableAlgebra.TAlg.algebraMap_coord T f
 
-theorem eq_sum_coord_smul_basis (x : TAlg T) : x = ∑ i, x.coord i • basis T i := by
-  conv_lhs => rw [← (basis T).sum_repr x]
-  simp only [basis_repr_apply]
+theorem eq_sum_coord_smul_basis (x : TAlg T) :
+    x = ∑ i, (_root_.TableAlgebra.TAlg.coord x) i • basis T i :=
+  _root_.TableAlgebra.TAlg.eq_sum_coord_smul_basis T x
 
 end TAlg
 
@@ -296,21 +276,25 @@ def tableOfBasis (he : e 0 = 1) : Table R N where
   assoc := repr_mul_assoc e
 
 @[scoped simp] theorem tableOfBasis_γ (he : e 0 = 1) (i j k : Fin (N + 1)) :
-    (tableOfBasis e he).γ i j k = e.repr (e i * e j) k := rfl
+    (_root_.TableAlgebra.Table.γ (tableOfBasis e he)) i j k = e.repr (e i * e j) k := rfl
 
 end OfBasis
 
 /-- Apply a ring homomorphism to the structure constants of a multiplication table. -/
 def Table.map {R' : Type*} [CommRing R'] (T : Table R N) (f : R →+* R') : Table R' N where
-  γ i j k := f (T.γ i j k)
-  unit j k := by rw [T.unit]; split_ifs <;> simp only [map_one, map_zero]
-  comm i j k := by rw [T.comm]
+  γ i j k := f ((_root_.TableAlgebra.Table.γ T) i j k)
+  unit j k := by
+    rw [(_root_.TableAlgebra.Table.unit T)]; split_ifs <;>
+      simp only [map_one, map_zero]
+  comm i j k := by rw [(_root_.TableAlgebra.Table.comm T)]
   assoc i j l m := by
-    have h := congrArg f (T.assoc i j l m)
+    have h := congrArg f ((_root_.TableAlgebra.Table.assoc T) i j l m)
     simpa only [map_sum, map_mul] using h
 
 @[scoped simp] theorem Table.map_γ {R' : Type*} [CommRing R'] (T : Table R N) (f : R →+* R')
-    (i j k : Fin (N + 1)) : (T.map f).γ i j k = f (T.γ i j k) := rfl
+    (i j k : Fin (N + 1)) :
+    (_root_.TableAlgebra.Table.γ (T.map f)) i j k =
+      f ((_root_.TableAlgebra.Table.γ T) i j k) := rfl
 
 end TableAlgebra
 
@@ -505,15 +489,15 @@ def table0 : Table ((TruncatedWittVector p 1 K)[X]) n :=
 omit [IsDomain B] [IsIntegrallyClosed B] in
 omit [IsAlgClosed K] [CharP K p] in
 theorem table0_γ (i j k : Fin (n + 1)) :
-    (table0 p D).γ i j k =
+    (_root_.TableAlgebra.Table.γ (table0 p D)) i j k =
       (D.b.repr (D.b i * D.b j) k).map
         ((rhoZeroEquiv p K).symm : K ≃+* TruncatedWittVector p 1 K).toRingHom := rfl
 omit [IsDomain B] [IsIntegrallyClosed B] in
 omit [IsAlgClosed K] [CharP K p] in
-theorem good_table0 : Good p D 0 (table0 p D).γ where
-  unit := (table0 p D).unit
-  comm := (table0 p D).comm
-  assoc := (table0 p D).assoc
+theorem good_table0 : Good p D 0 (_root_.TableAlgebra.Table.γ (table0 p D)) where
+  unit := (_root_.TableAlgebra.Table.unit (table0 p D))
+  comm := (_root_.TableAlgebra.Table.comm (table0 p D))
+  assoc := (_root_.TableAlgebra.Table.assoc (table0 p D))
   deg i j k hi hj := by
     rw [table0_γ, Polynomial.natDegree_map_eq_of_injective (RingEquiv.injective _)]
     exact D.hdeg i j k hi hj
@@ -548,7 +532,7 @@ theorem exists_step (m : ℕ)
 def stage : (m : ℕ) →
     {γ : Fin (n + 1) → Fin (n + 1) → Fin (n + 1) → (TruncatedWittVector p (m + 1) K)[X] //
       Good p D m γ}
-  | 0 => ⟨(table0 p D).γ, good_table0 p D⟩
+  | 0 => ⟨(_root_.TableAlgebra.Table.γ (table0 p D)), good_table0 p D⟩
   | m + 1 => ⟨(exists_step p D m (stage m).1 (stage m).2).choose,
       (exists_step p D m (stage m).1 (stage m).2).choose_spec.1⟩
 
@@ -656,7 +640,8 @@ def tableLim : Table ((𝕎 K)[X]) n where
     simp only [Polynomial.map_sum, Polynomial.map_mul, map_truncate_Γlim]
     exact (stage p D m).2.assoc i j l m'
 
-theorem tableLim_γ (i j k : Fin (n + 1)) : (tableLim p D).γ i j k = Γlim p D i j k := rfl
+theorem tableLim_γ (i j k : Fin (n + 1)) :
+    (_root_.TableAlgebra.Table.γ (tableLim p D)) i j k = Γlim p D i j k := rfl
 
 theorem natDegree_Γlim_le (i j k : Fin (n + 1)) (hi : i ≠ 0) (hj : j ≠ 0) :
     (Γlim p D i j k).natDegree ≤ D.d i + D.d j - D.d k := by
@@ -677,7 +662,8 @@ theorem map_constantCoeff_Γlim (i j k : Fin (n + 1)) :
   rw [constantCoeff_eq_rho_comp_truncate p K, ← Polynomial.map_map, map_truncate_Γlim]
   exact (stage p D 0).2.red i j k
 
-private abbrev _root_.WittLiftNF.red : (𝕎 K)[X] →+* K[X] := Polynomial.mapRingHom
+/-- Reduction of Witt-vector polynomial coefficients to the residue field. -/
+abbrev _root_.WittLiftNF.red : (𝕎 K)[X] →+* K[X] := Polynomial.mapRingHom
   (WittVector.constantCoeff : 𝕎 K →+* K)
 
 open _root_.WittLiftNF
@@ -685,13 +671,13 @@ omit [IsAlgClosed K] [CharP K p] in
 theorem red_apply (f : (𝕎 K)[X]) : red p f = f.map (WittVector.constantCoeff : 𝕎 K →+* K) := rfl
 
 theorem red_Γlim (i j k : Fin (n + 1)) :
-    red p ((tableLim p D).γ i j k) = D.b.repr (D.b i * D.b j) k :=
+    red p ((_root_.TableAlgebra.Table.γ (tableLim p D)) i j k) = D.b.repr (D.b i * D.b j) k :=
   map_constantCoeff_Γlim p D i j k
 
 open scoped TAlg
 
 /-- The reduction map on coordinates from the lifted algebra to the original basis algebra. -/
-def piFun (x : TAlg (tableLim p D)) : B := ∑ i, red p (x.coord i) • D.b i
+def piFun (x : TAlg (tableLim p D)) : B := ∑ i, red p ((_root_.TableAlgebra.TAlg.coord x) i) • D.b i
 
 theorem piFun_add (x y : TAlg (tableLim p D)) : piFun p D (x + y) = piFun p D x + piFun p D y := by
   simp only [piFun, TAlg.coord_add, Pi.add_apply, map_add, add_smul, Finset.sum_add_distrib]
@@ -714,7 +700,9 @@ theorem b_mul_b (i j : Fin (n + 1)) :
 theorem piFun_mul (x y : TAlg (tableLim p D)) :
     piFun p D (x * y) = piFun p D x * piFun p D y := by
   have hL : piFun p D (x * y) =
-      ∑ m, ∑ i, ∑ j, (red p (x.coord i) * red p (y.coord j) * D.b.repr (D.b i * D.b j) m) •
+      ∑ m, ∑ i, ∑ j,
+        (red p ((_root_.TableAlgebra.TAlg.coord x) i) *
+          red p ((_root_.TableAlgebra.TAlg.coord y) j) * D.b.repr (D.b i * D.b j) m) •
         D.b m := by
     rw [piFun]
     refine Finset.sum_congr rfl fun m _ => ?_
@@ -724,7 +712,9 @@ theorem piFun_mul (x y : TAlg (tableLim p D)) :
     refine Finset.sum_congr rfl fun j _ => ?_
     rw [map_mul, map_mul, red_Γlim]
   have hR : piFun p D x * piFun p D y =
-      ∑ i, ∑ j, ∑ m, (red p (x.coord i) * red p (y.coord j) * D.b.repr (D.b i * D.b j) m) •
+      ∑ i, ∑ j, ∑ m,
+        (red p ((_root_.TableAlgebra.TAlg.coord x) i) *
+          red p ((_root_.TableAlgebra.TAlg.coord y) j) * D.b.repr (D.b i * D.b j) m) •
         D.b m := by
     rw [piFun, piFun, Finset.sum_mul_sum]
     refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
@@ -741,10 +731,13 @@ def piB : TAlg (tableLim p D) →+* B where
   toFun := piFun p D
   map_one' := piFun_one p D
   map_mul' := piFun_mul p D
-  map_zero' := by simp [piFun]
+  map_zero' := by
+    simp only [piFun, TAlg.coord_zero, Pi.zero_apply, map_zero, zero_smul,
+      Finset.sum_const_zero]
   map_add' := piFun_add p D
 
-theorem piB_apply (x : TAlg (tableLim p D)) : piB p D x = ∑ i, red p (x.coord i) • D.b i := rfl
+theorem piB_apply (x : TAlg (tableLim p D)) :
+    piB p D x = ∑ i, red p ((_root_.TableAlgebra.TAlg.coord x) i) • D.b i := rfl
 
 theorem piB_algebraMap (f : (𝕎 K)[X]) :
     piB p D (algebraMap (𝕎 K)[X] (TAlg (tableLim p D)) f) =

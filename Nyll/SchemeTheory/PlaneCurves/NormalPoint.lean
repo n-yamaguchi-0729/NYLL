@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
-import Nyll.SchemeTheory.PlaneCurves.Dimension
-import Nyll.SchemeTheory.PlaneCurves.Geometric
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
+public import Nyll.SchemeTheory.PlaneCurves.Dimension
+public import Nyll.SchemeTheory.PlaneCurves.Geometric
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 
 /-!
 # The prime divisor centered at a normal rational point
@@ -20,6 +22,8 @@ realizes that local ring as its canonical valuation subring in the fraction
 field of the coordinate ring, proves that its residue field has degree one
 over the constant field, and characterizes it by its center.
 -/
+
+@[expose] public section
 
 noncomputable section
 

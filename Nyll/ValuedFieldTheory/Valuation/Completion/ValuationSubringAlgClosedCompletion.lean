@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Valuation.RankOne
-import Mathlib.Topology.Algebra.Valued.WithVal
-import Mathlib.Topology.Algebra.Valued.NormedValued
-import Mathlib.Analysis.Normed.Field.Dense
-import Mathlib.Tactic.Push
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Valuation.RankOne
+public import Mathlib.Topology.Algebra.Valued.WithVal
+public import Mathlib.Topology.Algebra.Valued.NormedValued
+public import Mathlib.Analysis.Normed.Field.Dense
+public import Mathlib.Tactic.Push
 
 /-!
 # Valuation Subring is Alg Closed completion of mul Archimedean value Group
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,48 +10,51 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Lean.Elab.Command
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.ConcreteCategory.Forget
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Functor.Category
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.Geometry.RingedSpace.Basic
-import Mathlib.Topology.Category.TopCat.Opens
-import Mathlib.Topology.Maps.Basic
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrameCriterion
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.ConcreteCategory.Forget
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.CategoryTheory.Functor.Category
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.Geometry.RingedSpace.Basic
+public import Mathlib.Topology.Category.TopCat.Opens
+public import Mathlib.Topology.Maps.Basic
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrameCriterion
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
 
 /-!
 # Scheme Modules exists is Invertible pullback iso of milnor Square
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -197,7 +200,9 @@ section FibreProduct
 variable {A B C : X.Modules} (a : A ⟶ C) (b : B ⟶ C) (U : X.Opens)
 
 /-- The pullback cone on sections obtained by preservation of the module-sheaf pullback. -/
-def secIsLimit : IsLimit (PullbackCone.mk ((secFunctor U).map (pullback.fst a b))
+def secIsLimit : IsLimit (PullbackCone.mk
+    (f := (secFunctor U).map a) (g := (secFunctor U).map b)
+    ((secFunctor U).map (pullback.fst a b))
     ((secFunctor U).map (pullback.snd a b))
     (by rw [← Functor.map_comp, ← Functor.map_comp, pullback.condition])) :=
   isLimitOfHasPullbackOfPreservesLimit (secFunctor U) a b
@@ -305,7 +310,8 @@ lemma cond {U : W.Opens} (s : Γ(glued hsq L₁ L₂ φ, U)) :
   exact (aMap_app hsq L₁ L₂ φ U (c₁ s)).symm.trans
     (h.trans (bMap_app (j₂ := j₂) L₂ U (c₂ s)))
 
-private def _root_.AlgebraicGeometry.Scheme.Modules.MilnorPatch.mk {U : W.Opens} (s₁ : Γ(L₁, i₁ ⁻¹ᵁ
+/-- Glue two compatible sections on the two pieces. -/
+def _root_.AlgebraicGeometry.Scheme.Modules.MilnorPatch.mk {U : W.Opens} (s₁ : Γ(L₁, i₁ ⁻¹ᵁ
   U)) (s₂ : Γ(L₂, i₂ ⁻¹ᵁ U))
     (h : tr hsq _ U (φ.hom.app _ (pullbackLocalSection j₁ s₁)) = pullbackLocalSection j₂ s₂) :
     Γ(glued hsq L₁ L₂ φ, U) :=
@@ -375,23 +381,6 @@ private lemma _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn.bijective_self {
   have hb := h le_rfl le_rfl
   rwa [map_id'] at hb
 
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.IsFrameOn.bijective_self".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-      modifyEnv fun env => addAlias env
-        ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-          "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-          "AlgebraicGeometry.Scheme.Modules.IsFrameOn.bijective_self").toName target
-  | none => pure ()
-
-
 private lemma _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn.unit_smul {M : X.Modules} {U V :
   X.Opens} {s : Γ(M, U)} (hs : IsFrameOn s V) {u : Γ(X, U)}
     (hu : IsUnit u) : IsFrameOn (u • s) V := by
@@ -413,23 +402,6 @@ private lemma _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn.unit_smul {M : X
     simp only [Function.comp_apply, mul_smul]
   rw [heq]
   exact (hs hWU hWV).comp hbij
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.IsFrameOn.unit_smul".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-      modifyEnv fun env => addAlias env
-        ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-          "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-          "AlgebraicGeometry.Scheme.Modules.IsFrameOn.unit_smul").toName target
-  | none => pure ()
-
 
 lemma app_apply_map (f : X ⟶ Y) {U V : Y.Opens} (e : V ≤ U) (s : Γ(Y, U)) :
     f.app V (Y.presheaf.map (homOfLE e).op s) =
@@ -875,124 +847,10 @@ end Main
 
 end AlgebraicGeometry.Scheme.Modules.MilnorPatch
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme.Modules"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme.Modules.MilnorPatch")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme.Modules")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
 
 end
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme.Modules"),
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare." ++
-        "AlgebraicGeometry.Scheme.Modules.MilnorPatch")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+namespace AlgebraicGeometry.Scheme.Modules.MilnorPatch
 
 open _root_.AlgebraicGeometry.Scheme.Modules AlgebraicGeometry.Scheme.Modules in
 theorem _root_.AlgebraicGeometry.Scheme.Modules.exists_isInvertible_pullback_iso_of_milnorSquare
@@ -1018,6 +876,9 @@ theorem _root_.AlgebraicGeometry.Scheme.Modules.exists_isInvertible_pullback_iso
             ((Scheme.Modules.pullbackComp j₂ i₂).app L).inv ≫ (Scheme.Modules.pullback j₂).map
               α₂.hom :=
   AlgebraicGeometry.Scheme.Modules.MilnorPatch.exists_isInvertible hsq L₁ L₂ φ hmil hL₁ hL₂
+
+end AlgebraicGeometry.Scheme.Modules.MilnorPatch
+
 end Scheme_Modules_exists_isInvertible_pullback_iso_of_milnorSquare
 end AlgebraicCurves.Geometry.Sheaves.Proofs
 end ProofImplementation

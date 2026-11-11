@@ -5,12 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.CategoryTheory.Yoneda
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Yoneda
+public import Nyll.SchemeTheory.WeilRestriction.Sheaf
 
 /-!
 # Fullness from descent of finite etale sections
@@ -20,6 +23,8 @@ change by a section. Descending that section and evaluating it gives the
 original morphism. This supplies a shared proof for geometric and Henselian
 section-descent theorems.
 -/
+
+@[expose] public section
 
 noncomputable section
 

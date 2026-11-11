@@ -14,6 +14,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 public import Mathlib.RingTheory.RingHom.Finite
 public import Mathlib.RingTheory.RingHom.Etale
+public import Nyll.SchemeTheory.Affine.WeilRestriction.FiniteEtale
+public import Nyll.SchemeTheory.WeilRestriction.Sheaf
 
 /-!
 # Finite étale internal Homs over an affine base

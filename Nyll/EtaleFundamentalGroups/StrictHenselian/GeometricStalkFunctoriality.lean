@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Functoriality of the actual geometric stalk
@@ -27,6 +29,8 @@ The fields need not be separably closed. In particular this construction
 applies to geometric points and to the strict local schemes used in
 Stacks Project, Section 58.16, https://stacks.math.columbia.edu/tag/0BUP.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -105,7 +109,7 @@ theorem pointedEtalePullback_naturality {W V : T.Etale} (g : W ⟶ V)
   · change (a ≫ q) ≫ rV = b ≫ rV
     rw [Category.assoc, hq', ha', hb']
 
-private theorem geometricStalkPullbackCocone_naturality
+theorem geometricStalkPullbackCocone_naturality
     {W V : T.Etale} (g : W ⟶ V)
     (w : (Scheme.pointEtaleNeighborhoods t).fiber.obj W) :
     g.left.appTop ≫ (pullback.fst W.hom f).appTop ≫

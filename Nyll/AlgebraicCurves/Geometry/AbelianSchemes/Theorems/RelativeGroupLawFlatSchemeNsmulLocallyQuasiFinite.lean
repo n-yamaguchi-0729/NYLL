@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.Tactic.Algebraize
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatIsLocalHom
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.LocallyQuasiFiniteKrullDimensionStalkQuotientEqZero
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.KrullDimensionStalkEqLocallyQuasiFiniteEndomorphism
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.IsIntegralSmooth
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.Tactic.Algebraize
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatIsLocalHom
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.LocallyQuasiFiniteKrullDimensionStalkQuotientEqZero
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.KrullDimensionStalkEqLocallyQuasiFiniteEndomorphism
+public import Nyll.SchemeTheory.LocalGeometry.IntegralSmooth
 
 /-!
 # Relative Group Law flat scheme Nsmul of locally Quasi Finite of field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

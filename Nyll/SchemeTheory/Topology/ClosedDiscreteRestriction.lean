@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Stalks
-import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
-import Nyll.SchemeTheory.Topology.SheafPullbackGerms
+module
+
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Stalks
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
+public import Nyll.SchemeTheory.Topology.SheafPullbackGerms
 
 /-!
 # Actual restriction of discrete functions on a closed support
@@ -22,6 +24,8 @@ Reference: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean constructions and proofs are original.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -32,7 +36,8 @@ namespace SchemeTheory
 
 variable {X Y : TopCat.{u}}
 
-private def supportOpenPreimageMap (f : X ⟶ Y) (C : Set Y) (U : Opens Y) :
+/-- Map the support over an inverse-image open to the support over the original open. -/
+def supportOpenPreimageMap (f : X ⟶ Y) (C : Set Y) (U : Opens Y) :
     TopCat.of {x : (f ⁻¹' C : Set X) // f x.1 ∈ U} ⟶
       TopCat.of {y : C // y.1 ∈ U} :=
   TopCat.ofHom ⟨fun x => ⟨⟨f x.1.1, x.1.2⟩, x.2⟩,

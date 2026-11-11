@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.RepresentableCechTerms
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+module
+
+public import Nyll.EtaleCohomology.Classical.RepresentableCechTerms
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-!
 # Geometric Cech faces under finite-product-preserving functors
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 Canonical product comparison identifies the actual face maps. This is
 used for the inclusion of finite etale covers into the small etale site.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v u' v'

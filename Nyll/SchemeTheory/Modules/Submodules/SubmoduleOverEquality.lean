@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
 
 /-!
 # Exact restriction equalities for the finite-open induction
@@ -13,6 +15,8 @@ Equality on a slice gives equality of every actual section submodule
 below that slice. It is therefore inherited by smaller slices, and the
 native gluing has the exact prescribed restrictions on both opens.
 -/
+
+@[expose] public section
 
 noncomputable section
 

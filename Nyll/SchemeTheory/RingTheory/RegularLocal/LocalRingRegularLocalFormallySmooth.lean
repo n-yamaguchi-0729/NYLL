@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueSectionKerEqSpanFormallySmooth
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingletonMap
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalIsDomainIsIntegrallyClosed
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueSectionKerEqSpanFormallySmooth
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingletonMap
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalIsDomainIsIntegrallyClosed
 
 /-!
 # Is Local Ring is Regular Local Ring of formally Smooth of formally Unramified polynomial
 of henselian Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

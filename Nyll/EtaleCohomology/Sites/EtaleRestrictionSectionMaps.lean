@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ModuleRestriction
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Nyll.EtaleCohomology.Sites.ModuleRestriction
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Actual pulled sections under the étale restriction identification
@@ -21,9 +23,11 @@ local factor. The proof uses adjunction uniqueness and the actual
 base-change counit on the small étale sites.
 -/
 
+@[expose] public section
+
 noncomputable section
 
-universe u
+universe u v w
 
 open AlgebraicGeometry CategoryTheory Limits Opposite
 
@@ -38,15 +42,32 @@ private theorem sectionRestrictionDiagram
   rw [Category.assoc, hn, ← Category.assoc, hη, hr]
 
 variable {X Y : Scheme.{u}} (q : Y ⟶ X) [Etale q]
-  (R : Type u) [CommRing R]
 
-private theorem restrictionUnit_app
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} R)) (U : X.Etale) :
-    ((etaleRestrictionPushforwardAdjunction q (ModuleCat.{u} R)).unit.app F).hom.app
+/-- The actual restriction adjunction unit is the original site counit on sections,
+for arbitrary coefficient categories. -/
+theorem etaleRestrictionUnit_app
+    {A : Type v} [Category.{w} A]
+    (F : Sheaf X.smallEtaleTopology A) (U : X.Etale) :
+    ((etaleRestrictionPushforwardAdjunction q A).unit.app F).hom.app
         (op U) = F.obj.map ((etalePostcomposeBaseChangeAdjunction q).counit.app U).op := by
   change (𝟙 _) ≫ F.obj.map
     ((etalePostcomposeBaseChangeAdjunction q).counit.app U).op ≫ (𝟙 _) = _
   rw [Category.id_comp, Category.comp_id]
+
+/-- The original site counit cancels the actual lifted local factor. -/
+theorem etalePostcomposeBaseChangeLift_counit
+    {U : X.Etale} {V : Y.Etale}
+    (l : V.left ⟶ U.left) (hl : l ≫ U.hom = V.hom ≫ q) :
+    (etalePostcompose q).map (etaleBaseChangeLift q l hl) ≫
+        (etalePostcomposeBaseChangeAdjunction q).counit.app U =
+      MorphismProperty.Over.homMk
+        (P := show MorphismProperty Scheme.{u} from @Etale) (Q := ⊤)
+        (A := (etalePostcompose q).obj V) (B := U) l hl := by
+  apply MorphismProperty.Over.Hom.ext
+  change pullback.lift l V.hom hl ≫ pullback.fst U.hom q = l
+  exact pullback.lift_fst _ _ _
+
+variable (R : Type u) [CommRing R]
 
 private theorem pullbackRestrictionUnit_app
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} R)) (U : X.Etale) :
@@ -58,19 +79,7 @@ private theorem pullbackRestrictionUnit_app
     (Adjunction.unit_leftAdjointUniq_hom_app
       (etalePullbackPushforwardAdjunction q R)
       (etaleRestrictionPushforwardAdjunction q (ModuleCat.{u} R)) F)).trans
-        (restrictionUnit_app q R F U)
-
-private theorem postcomposeBaseChangeLift_counit
-    {U : X.Etale} {V : Y.Etale}
-    (l : V.left ⟶ U.left) (hl : l ≫ U.hom = V.hom ≫ q) :
-    (etalePostcompose q).map (etaleBaseChangeLift q l hl) ≫
-        (etalePostcomposeBaseChangeAdjunction q).counit.app U =
-      MorphismProperty.Over.homMk
-        (P := show MorphismProperty Scheme.{u} from @Etale) (Q := ⊤)
-        (A := (etalePostcompose q).obj V) (B := U) l hl := by
-  apply MorphismProperty.Over.Hom.ext
-  change pullback.lift l V.hom hl ≫ pullback.fst U.hom q = l
-  exact pullback.lift_fst _ _ _
+        (etaleRestrictionUnit_app q F U)
 
 /-- Under the canonical restriction identification, the actual pulled
 section is the ordinary restriction along its original local factor. -/
@@ -95,7 +104,7 @@ theorem etalePullbackSectionMap_restrictionIso
       (etaleBaseChangeLift q l hl).op
   · exact pullbackRestrictionUnit_app q R F U
   · exact (F.obj.map_comp _ _).symm.trans
-      (congrArg (fun a => F.obj.map a.op) (postcomposeBaseChangeLift_counit q l hl))
+      (congrArg (fun a => F.obj.map a.op) (etalePostcomposeBaseChangeLift_counit q l hl))
 
 omit [Etale q] in
 /-- Pulling global sections through a scheme isomorphism is invertible

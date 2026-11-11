@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackLocalRepresentatives
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.FieldTheory.SeparableClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackLocalRepresentatives
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.FieldTheory.SeparableClosure
 
 /-!
 # Finite affine representatives of inverse-image sections
@@ -21,6 +23,8 @@ are open immersions. The proof refines the actual local equality opens
 and then takes a finite subcover; no continuity or descent hypothesis on
 the arbitrary coefficient sheaf is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

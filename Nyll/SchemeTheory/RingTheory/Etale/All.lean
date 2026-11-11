@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Etale.AdjoinRootEtaleFiniteXPowSubC
-import Nyll.SchemeTheory.RingTheory.Etale.AlgebraEtaleReducedReduced
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointBound
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointGlobalBound
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleLocalResidueSeparation
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleSplitting
-import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
-import Nyll.SchemeTheory.RingTheory.Etale.IntegrallyClosedIntegralClosureEqAdjoinEtaleFinite
-import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
+module
+
+public import Nyll.SchemeTheory.RingTheory.Etale.AdjoinRootEtaleFiniteXPowSubC
+public import Nyll.SchemeTheory.RingTheory.Etale.AlgebraEtaleReducedReduced
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointBound
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointGlobalBound
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleLocalResidueSeparation
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleSplitting
+public import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
+public import Nyll.SchemeTheory.RingTheory.Etale.IntegrallyClosedIntegralClosureEqAdjoinEtaleFinite
+public import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
+public import Nyll.SchemeTheory.RingTheory.Etale.FiniteFieldFrobeniusFixedQuotient

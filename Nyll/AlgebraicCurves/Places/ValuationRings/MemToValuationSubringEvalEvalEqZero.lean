@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Mathlib.Algebra.Polynomial.Bivariate
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Mathlib.Algebra.Polynomial.Bivariate
 
 /-!
 # Place mem to Valuation Subring of eval Eval eq zero of eval leading Coeff ne zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

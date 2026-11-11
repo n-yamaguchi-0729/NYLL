@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Ideal exists forall iff map eq bot of forall away
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

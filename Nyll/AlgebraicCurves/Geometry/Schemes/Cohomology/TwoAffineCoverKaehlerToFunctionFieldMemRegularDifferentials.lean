@@ -15,6 +15,7 @@ import Nyll.AlgebraicCurves.Differentials.Regular.Regular
 import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerToFunctionFieldEqSmulDCoord
 import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfUnionEqUnivSupEqTop
 import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.NotIsAffineProper
+import Nyll.AlgebraicCurves.Models.Points.Places
 
 /-!
 # Scheme Two Affine Open Cover kaehler To Function Field mem regular Differentials
@@ -47,9 +48,9 @@ theorem
     (c : X ⟶ Spec (CommRingCat.of k))
     [IsIntegral X] [IsProper c] [SmoothOfRelativeDimension 1 c] [Nonempty 𝒱.U0] [Nonempty 𝒱.U1]
     (ω : (𝒱.kaehlerSections c).H0) :
-    letI := (baseToFunctionField c).toAlgebra
+    let := (baseToFunctionField c).toAlgebra
     kaehlerToFunctionField c 𝒱.U0 ω.val.1 ∈ regularDifferentials k X.functionField := by
-  let := (baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   have h0ne : (𝒱.U0 : Set X).Nonempty := by
     obtain ⟨x⟩ := (inferInstance : Nonempty 𝒱.U0); exact ⟨x.1, x.2⟩
   have h1ne : (𝒱.U1 : Set X).Nonempty := by

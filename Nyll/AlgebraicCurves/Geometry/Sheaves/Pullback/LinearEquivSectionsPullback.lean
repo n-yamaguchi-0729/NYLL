@@ -10,22 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.TensorProduct.Basic
-import Nyll.SchemeTheory.Modules.Quasicoherent.TildePullback
-import Nyll.SchemeTheory.Modules.Quasicoherent.TildeLocalization
-import Nyll.SchemeTheory.Modules.Quasicoherent.IsoBaseChangeSectionsIsoFromTildeGamma
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Nyll.SchemeTheory.Modules.Quasicoherent.TildePullback
+public import Nyll.SchemeTheory.Modules.Quasicoherent.TildeLocalization
+public import Nyll.SchemeTheory.Modules.Quasicoherent.IsoBaseChangeSectionsIsoFromTildeGamma
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
 
 /-!
 # Sections after pullback along a closed immersion
 
 Local triviality identifies pulled-back sections with scalar extension on affine opens.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -627,7 +632,7 @@ theorem Kfwd_tmul (a : Γ(Y, i ⁻¹ᵁ U)) (m : Γ(M, U)) :
     let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
     Kfwd i U hU M (a ⊗ₜ[Γ(X, U)] m)
       = ((a : S₁ i U) ⊗ₜ[Γ(X, U)] (ρlin U hU M m) : T₁ i U hU M) := by
-  let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+  intro sharedOwner1
   exact TensorProduct.liftAddHom_tmul _ _ a m
 
 /-- The bilinear inverse comparison on scalar coefficients and sections. -/
@@ -659,9 +664,9 @@ def Kbwd : letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebr
 
 omit [IsAffineHom i] in
 theorem Kbwd_tmul (a : Γ(Y, i ⁻¹ᵁ U)) (n : N' U hU M) :
-    letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+    let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
     Kbwd i U hU M ((a : S₁ i U) ⊗ₜ[Γ(X, U)] n : T₁ i U hU M) = Kbwd₀ i U hU M a n := by
-  let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+  intro sharedOwner1
   exact TensorProduct.liftAddHom_tmul _ _ a n
 
 /-- The linear equivalence between the two scalar-extension models. -/
@@ -834,11 +839,12 @@ abbrev P : Type u := (Γ(MY i M, i ⁻¹ᵁ U) : Type u)
 abbrev instRP : Module Γ(X, U) (P i U M) := Module.compHom (P i U M) (i.app U).hom
 
 omit [IsAffineHom i] in
-theorem isScalarTower_RSP : letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
-    letI := instRP i U M; IsScalarTower Γ(X, U) Γ(Y, i ⁻¹ᵁ U) (P i U M) :=
-  letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
-  letI := instRP i U M
-  IsScalarTower.of_algebraMap_smul fun _ _ => rfl
+theorem isScalarTower_RSP :
+    let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+    let := instRP i U M
+    IsScalarTower Γ(X, U) Γ(Y, i ⁻¹ᵁ U) (P i U M) := by
+  intro sectionsAlgebra restrictedModule
+  exact IsScalarTower.of_algebraMap_smul fun _ _ => rfl
 
 omit [IsAffineHom i] in
 theorem unit_smul (b : Γ(X, U)) (m : Γ(M, U)) :
@@ -871,22 +877,22 @@ def e₀ : letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebr
 
 omit [IsAffineHom i] in
 theorem e₀_tmul (a : Γ(Y, i ⁻¹ᵁ U)) (m : Γ(M, U)) :
-    letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
-    e₀ i U M (a ⊗ₜ[Γ(X, U)] m) = a • η i U M m :=
-  let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
-  letI := instRP i U M
-  haveI := isScalarTower_RSP i U M
-  LinearMap.liftBaseChange_tmul Γ(Y, i ⁻¹ᵁ U) (ηR i U M) a m
+    let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+    e₀ i U M (a ⊗ₜ[Γ(X, U)] m) = a • η i U M m := by
+  intro sectionsAlgebra
+  let := instRP i U M
+  have := isScalarTower_RSP i U M
+  exact LinearMap.liftBaseChange_tmul Γ(Y, i ⁻¹ᵁ U) (ηR i U M) a m
 
 theorem θ_e₀ (z : letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
       Γ(Y, i ⁻¹ᵁ U) ⊗[Γ(X, U)] Γ(M, U)) :
-    letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+    let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
     θ i U hU M (e₀ i U M z) = (σ i U hU M).hom.app ⊤ ((β i U hU M).hom (κ i U hU M z)) := by
-  let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+  intro sharedOwner1
   induction z using TensorProduct.inductionOn with
   | add x y hx hy =>
     simp only [map_add, hx, hy]
-    first | rfl | exact (map_add _ _ _).symm
+    exact (((σ i U hU M).hom.app ⊤).hom.map_add _ _).symm
   | tmul a m =>
     rw [e₀_tmul, κ_tmul]
     have hβ := β_tmul i U hU M a (ρ U hU M m)
@@ -921,9 +927,9 @@ theorem bijective_e₀
           ((Scheme.Modules.pullbackPushforwardAdjunction (Spec.map (i.app U))).unit.app N) ≫
         (Scheme.Modules.pushforwardSpecCompΓIso (i.app U)).hom.app
           ((Scheme.Modules.pullback (Spec.map (i.app U))).obj N)))) :
-    letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+    let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
     Function.Bijective (e₀ i U M) := by
-  let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+  intro sharedOwner1
   have hM' : IsIso (M' U hU M).fromTildeΓ := hB2c _ (locallyTrivial_pullback (iU U hU) M htriv)
   have hβ : IsIso (β i U hU M) := hC1 _ hM'
   have bβ : Function.Bijective (β i U hU M).hom := by
@@ -962,12 +968,12 @@ theorem main
           ((Scheme.Modules.pullbackPushforwardAdjunction (Spec.map (i.app U))).unit.app N) ≫
         (Scheme.Modules.pushforwardSpecCompΓIso (i.app U)).hom.app
           ((Scheme.Modules.pullback (Spec.map (i.app U))).obj N)))) :
-    letI : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+    let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
     ∃ e : Γ(Y, i ⁻¹ᵁ U) ⊗[Γ(X, U)] Γ(M, U) ≃ₗ[Γ(Y, i ⁻¹ᵁ U)] Γ((Scheme.Modules.pullback i).obj M, i
       ⁻¹ᵁ U),
       ∀ m : Γ(M, U), e (1 ⊗ₜ m) = (((Scheme.Modules.pullbackPushforwardAdjunction i).unit.app
         M).app U).hom m := by
-  let : Algebra Γ(X, U) Γ(Y, i ⁻¹ᵁ U) := (i.app U).hom.toAlgebra
+  intro sharedOwner1
   refine ⟨LinearEquiv.ofBijective (e₀ i U M) (bijective_e₀ i U hU M htriv hB2c hC1), fun m => ?_⟩
   rw [LinearEquiv.ofBijective_apply, e₀_tmul, one_smul]
   rfl

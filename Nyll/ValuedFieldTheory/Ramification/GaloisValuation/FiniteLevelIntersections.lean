@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.AbsoluteGalois.FiniteExtensionCorrespondence
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteGaloisLevel
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.AbsoluteGalois.FiniteExtensionCorrespondence
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteGaloisLevel
 
 /-!
 # Finite-level ramification intersections for a complete discretely valued field
@@ -18,6 +20,8 @@ been proved, so neither intersection is identified with a canonical absolute
 ramification filtration.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

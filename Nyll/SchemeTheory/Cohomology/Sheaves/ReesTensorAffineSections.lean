@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageAffineCoefficients
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageModule
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorModule
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorRestrictions
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSectionRestriction
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageAffineCoefficients
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageModule
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorModule
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorRestrictions
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSectionRestriction
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Native Rees tensor sections on the original affine intersections
@@ -31,6 +33,8 @@ Every face restriction commutes with this additive equivalence. The
 two presheaves keep their original base rings; their section groups are
 compared without replacing either scalar action.
 -/
+
+@[expose] public section
 
 noncomputable section
 

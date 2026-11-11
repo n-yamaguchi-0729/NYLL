@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The actual open complement under base change -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.FiniteDiagonal
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.ResidueSeparableTower
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.FiniteDiagonal
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.ResidueSeparableTower
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Ramification.Unramified. -/

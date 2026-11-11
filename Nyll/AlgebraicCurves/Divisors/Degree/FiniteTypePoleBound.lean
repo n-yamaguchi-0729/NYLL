@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 
 /-!
 # Finite pole bounds for actual affine coordinate maps
@@ -18,6 +20,8 @@ support, the entire coordinate map lands in the actual valuation ring.
 This is a pole-bound supplier for rational maps; no reciprocity or modulus
 condition for the target group is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

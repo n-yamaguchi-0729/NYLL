@@ -4,20 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
-import Mathlib.Algebra.Category.Grp.Ulift
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Adjunction.Additive
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheaf
+module
+
+public import Nyll.SchemeTheory.HomologicalAlgebra.HomFromSingle
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+public import Mathlib.Algebra.Category.Grp.Ulift
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 
 /-!
@@ -32,6 +36,8 @@ The existing sections remain in `AddCommGrpCat.{u}`; the target uses the
 canonical `AddCommGrpCat.uliftFunctor` to express that universe boundary.
 No new sheaf-cohomology definition or derived comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,7 +59,8 @@ variable (X : Scheme.{u})
 
 local notation "T" => (⊤_ X.Etale)
 
-private def integerHomSectionsEquiv (F : (Sheaf X.smallEtaleTopology AddCommGrpCat.{u})) :
+/-- Maps from the constant integer sheaf are actual global sections. -/
+def integerHomSectionsEquiv (F : (Sheaf X.smallEtaleTopology AddCommGrpCat.{u})) :
     (((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
       (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ F) ≃+ F.obj.obj (op T) :=
   ((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u} terminalIsTerminal).homAddEquiv
@@ -77,96 +84,33 @@ private lemma integerHomSectionsEquiv_naturality
     ((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u} terminalIsTerminal).homEquiv
       (AddCommGrpCat.of (ULift.{u} ℤ)) F a) (φ.hom.app (op T))
 
-private def cochainSectionsEquiv
-    (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) ℤ) (n : ℤ) :
-    Cochain ((CochainComplex.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) 0).obj
+/-- The constant-integer Hom functor identifies naturally with the canonical
+universe lift of actual global sections. -/
+def etaleIntegerHomSectionsIso :
+    preadditiveCoyoneda.obj (op
       ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
-        (AddCommGrpCat.of (ULift.{u} ℤ)))) K n ≃+
-      (K.X n).obj.obj (op T) :=
-  (Cochain.fromSingleEquiv (zero_add n)).trans (integerHomSectionsEquiv X (K.X n))
-
-private lemma cochainSectionsEquiv_d
-    (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) ℤ) (i j : ℤ)
-    (z : Cochain
-      ((CochainComplex.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) 0).obj
-        ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
-          (AddCommGrpCat.of (ULift.{u} ℤ)))) K i) :
-    cochainSectionsEquiv X K j (HomComplex.δ i j z) =
-      (K.d i j).hom.app (op T) (cochainSectionsEquiv X K i z) := by
-  obtain ⟨a, rfl⟩ := Cochain.fromSingleMk_surjective z i (zero_add i)
-  have hδ : HomComplex.δ i j (Cochain.fromSingleMk a (zero_add i)) =
-      Cochain.fromSingleMk (a ≫ K.d i j) (zero_add j) :=
-    Cochain.δ_fromSingleMk a (zero_add i) j j (zero_add j)
-  simp only [cochainSectionsEquiv, AddEquiv.trans_apply, hδ,
-    Cochain.fromSingleEquiv_fromSingleMk]
-  exact integerHomSectionsEquiv_naturality X a (K.d i j)
-
-private lemma cochainSectionsEquiv_postcomp
-    {K L : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) ℤ} (φ : K ⟶ L) (n : ℤ)
-    (z : Cochain
-      ((CochainComplex.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) 0).obj
-        ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
-          (AddCommGrpCat.of (ULift.{u} ℤ)))) K n) :
-    cochainSectionsEquiv X L n (z.comp (Cochain.ofHom φ) (add_zero n)) =
-      (φ.f n).hom.app (op T) (cochainSectionsEquiv X K n z) := by
-  obtain ⟨a, rfl⟩ := Cochain.fromSingleMk_surjective z n (zero_add n)
-  rw [← Cochain.fromSingleMk_postcomp]
-  simp only [cochainSectionsEquiv, AddEquiv.trans_apply, Cochain.fromSingleEquiv_fromSingleMk]
-  exact integerHomSectionsEquiv_naturality X a (φ.f n)
+        (AddCommGrpCat.of (ULift.{u} ℤ)))) ≅
+      ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj (op T)) ⋙
+        AddCommGrpCat.uliftFunctor.{u + 1, u} :=
+  NatIso.ofComponents
+    (fun F => ((integerHomSectionsEquiv X F).trans AddEquiv.ulift.symm).toAddCommGrpIso)
+    (by
+      intro F G φ
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro a
+      change ULift.up (integerHomSectionsEquiv X G (a ≫ φ)) =
+        ULift.up (φ.hom.app (op T) (integerHomSectionsEquiv X F a))
+      exact congrArg ULift.up (integerHomSectionsEquiv_naturality X a φ))
 
 /-- The actual Hom complex from the constant integer sheaf in degree zero.
 Its maps are ordinary postcomposition of cochains by the given chain map. -/
 def etaleHomFromIntegerFunctor :
     CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) ℤ ⥤
-      CochainComplex AddCommGrpCat.{u + 1} ℤ where
-  obj K := CochainComplex.HomComplex
-    ((CochainComplex.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) 0).obj
-      ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
-        (AddCommGrpCat.of (ULift.{u} ℤ)))) K
-  map φ :=
-    { f := fun n => AddCommGrpCat.ofHom
-        { toFun := fun z => z.comp (Cochain.ofHom φ) (add_zero n)
-          map_zero' := Cochain.zero_comp _ _
-          map_add' := fun z w => Cochain.add_comp z w (Cochain.ofHom φ) (add_zero n) }
-      comm' := fun i j _ => by
-        apply AddCommGrpCat.hom_ext
-        apply AddMonoidHom.ext
-        intro z
-        exact HomComplex.δ_comp_ofHom z φ j }
-  map_id K := by
-    apply HomologicalComplex.hom_ext
-    intro n
-    apply AddCommGrpCat.hom_ext
-    apply AddMonoidHom.ext
-    intro z
-    exact Cochain.comp_id z
-  map_comp φ ψ := by
-    apply HomologicalComplex.hom_ext
-    intro n
-    apply AddCommGrpCat.hom_ext
-    apply AddMonoidHom.ext
-    intro z
-    change z.comp (Cochain.ofHom (φ ≫ ψ)) (add_zero n) =
-      (z.comp (Cochain.ofHom φ) (add_zero n)).comp (Cochain.ofHom ψ) (add_zero n)
-    rw [Cochain.ofHom_comp]
-    exact (Cochain.comp_assoc_of_second_is_zero_cochain z
-      (Cochain.ofHom φ) (Cochain.ofHom ψ) (add_zero n)).symm
-
-private def homFromIntegerSectionsIso
-    (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) ℤ) :
-    (etaleHomFromIntegerFunctor X).obj K ≅
-      ((((sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj (op T)) ⋙
-        AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (ComplexShape.up ℤ)).obj K :=
-  HomologicalComplex.Hom.isoOfComponents
-    (fun n => ((cochainSectionsEquiv X K n).trans AddEquiv.ulift.symm).toAddCommGrpIso)
-    (by
-      intro i j _
-      apply AddCommGrpCat.hom_ext
-      apply AddMonoidHom.ext
-      intro z
-      change ULift.up ((K.d i j).hom.app (op T) (cochainSectionsEquiv X K i z)) =
-        ULift.up (cochainSectionsEquiv X K j (HomComplex.δ i j z))
-      exact congrArg ULift.up (cochainSectionsEquiv_d X K i j z).symm)
+      CochainComplex AddCommGrpCat.{u + 1} ℤ :=
+  homFromSingleFunctor
+    ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
+      (AddCommGrpCat.of (ULift.{u} ℤ)))
 
 /-- The natural cochain isomorphism from the raw constant-integer Hom complex
 to the canonical universe lift of the existing global-sections complex.
@@ -175,16 +119,9 @@ def etaleHomFromIntegerSectionsIso :
     etaleHomFromIntegerFunctor X ≅
       (((sheafSections X.smallEtaleTopology AddCommGrpCat.{u}).obj (op T)) ⋙
         AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (ComplexShape.up ℤ) :=
-  NatIso.ofComponents (homFromIntegerSectionsIso X) (by
-    intro K L φ
-    apply HomologicalComplex.hom_ext
-    intro n
-    apply AddCommGrpCat.hom_ext
-    apply AddMonoidHom.ext
-    intro z
-    change ULift.up (cochainSectionsEquiv X L n
-        (z.comp (Cochain.ofHom φ) (add_zero n))) =
-      ULift.up ((φ.f n).hom.app (op T) (cochainSectionsEquiv X K n z))
-    exact congrArg ULift.up (cochainSectionsEquiv_postcomp X φ n z))
+  homFromSingleIso
+      ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
+        (AddCommGrpCat.of (ULift.{u} ℤ))) ≪≫
+    NatIso.mapHomologicalComplex (etaleIntegerHomSectionsIso X) (ComplexShape.up ℤ)
 
 end EtaleCohomology

@@ -10,43 +10,50 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.MonoidAlgebra.Module
-import Mathlib.Algebra.MvPolynomial.Funext
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMacaulayPowFinrankPieceSupAddLe
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMemMulMem
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialRelationMemSpanHomogeneousMemSpan
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.MonoidAlgebra.Module
+public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMacaulayPowFinrankPieceSupAddLe
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMemMulMem
 
 /-!
 # Mv Polynomial finrank piece add two eq macaulay Pow of finrank piece succ eq macaulay Pow
 -/
+
+@[expose] public section
+
+universe u v
 
 section ProofImplementation
 
@@ -67,7 +74,7 @@ variable {n : ℕ}
 
 section Pieces
 
-variable {L : Type} [Field L]
+variable {L : Type u} [Field L]
 
 /-- The part of the ideal lying in the specified homogeneous component. -/
 noncomputable def Ik (I : Ideal (MvPolynomial (Fin (n + 1)) L)) (d : ℕ) :
@@ -224,55 +231,15 @@ end Pieces
 
 section Regen
 
-variable {L : Type} [Field L]
+variable {L : Type u} [Field L]
 
 theorem exists_eq_sum_X_mul (k : ℕ) (g : MvPolynomial (Fin (n + 1)) L) (hg : g.IsHomogeneous (k +
   1)) :
     ∃ q : Fin (n + 1) → MvPolynomial (Fin (n + 1)) L, (∀ i, (q i).IsHomogeneous k) ∧ g = ∑ i, X i *
-      q i := by
-  classical
-  have hg' : g ∈ (Submodule.span L ((fun μ : Fin (n + 1) →₀ ℕ => monomial μ (1 : L)) ''
-      {μ : Fin (n + 1) →₀ ℕ | μ.degree = k + 1}) : Submodule L (MvPolynomial (Fin (n + 1)) L)) := by
-    have : g ∈ homogeneousSubmodule (Fin (n + 1)) L (k + 1) := hg
-    rw [homogeneousSubmodule_eq_finsupp_supported, AddMonoidAlgebra.supported_eq_span_single]
-      at this
-    exact this
-  clear hg
-  induction hg' using Submodule.span_induction with
-  | mem x hx =>
-      obtain ⟨μ, hμ, rfl⟩ := hx
-      have hμ' : μ.degree = k + 1 := hμ
-      have hne : μ ≠ 0 := by rintro rfl; rw [map_zero] at hμ'; omega
-      obtain ⟨i, hi⟩ : ∃ i, μ i ≠ 0 := by
-        by_contra h; push Not at h; exact hne (Finsupp.ext h)
-      have hle : Finsupp.single i 1 ≤ μ := Finsupp.single_le_iff.mpr (Nat.one_le_iff_ne_zero.mpr hi)
-      have hdeg : (μ - Finsupp.single i 1).degree = k := by
-        have h1 : μ - Finsupp.single i 1 + Finsupp.single i 1 = μ := tsub_add_cancel_of_le hle
-        have h2 := congrArg Finsupp.degree h1
-        rw [map_add, Finsupp.degree_single, hμ'] at h2
-        omega
-      refine ⟨Pi.single i (monomial (μ - Finsupp.single i 1) 1), fun j => ?_, ?_⟩
-      · by_cases hj : j = i
-        · subst hj; rw [Pi.single_eq_same]; exact isHomogeneous_monomial _ hdeg
-        · rw [Pi.single_eq_of_ne hj]; exact isHomogeneous_zero _ _ _
-      · rw [Finset.sum_eq_single i (fun j _ hj => by rw [Pi.single_eq_of_ne hj, mul_zero])
-          (fun h => (h (Finset.mem_univ i)).elim), Pi.single_eq_same]
-        change (monomial μ (1 : L)) = monomial (Finsupp.single i 1) 1 * monomial (μ -
-          Finsupp.single i 1) 1
-        rw [monomial_mul_monomial, one_mul, add_tsub_cancel_of_le hle]
-  | zero => exact ⟨0, fun _ => isHomogeneous_zero _ _ _, by
-      simp only [Pi.zero_apply, mul_zero, Finset.sum_const_zero]⟩
-  | add x y _ _ hx hy =>
-      obtain ⟨q₁, hq₁, rfl⟩ := hx
-      obtain ⟨q₂, hq₂, rfl⟩ := hy
-      exact ⟨q₁ + q₂, fun i => (hq₁ i).add (hq₂ i), by
-        rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl fun i _ =>
-          by rw [Pi.add_apply, mul_add]⟩
-  | smul c x _ hx =>
-      obtain ⟨q, hq, rfl⟩ := hx
-      refine ⟨fun i => C c * q i, fun i => (hq i).C_mul c, ?_⟩
-      rw [smul_eq_C_mul, Finset.mul_sum]
-      exact Finset.sum_congr rfl fun i _ => by rw [mul_left_comm]
+      q i :=
+  open MvPolynomial_relation_mem_span_of_forall_isHomogeneous_mem_span.GotzRegD
+    renaming exists_eq_sum_X_mul → homogeneousExpansion in
+  homogeneousExpansion k g hg
 
 theorem finrank_piece_succ_eq_zero {I : Ideal (MvPolynomial (Fin (n + 1)) L)} {k : ℕ}
     (h : Module.finrank L (piece I k) = 0) : Module.finrank L (piece I (k + 1)) = 0 := by
@@ -352,7 +319,7 @@ end Regen
 
 section BaseChange
 
-variable (K L : Type) [Field K] [Field L] [Algebra K L]
+variable (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L]
 
 theorem finrank_piece_map (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈ J) (d : ℕ) :
@@ -377,7 +344,7 @@ end BaseChange
 
 section Core
 
-variable {L : Type} [Field L]
+variable {L : Type u} [Field L]
 
 theorem isHomogeneous_linearForm (a : Fin (n + 1) → L) :
     (∑ i, C (a i) * X i : MvPolynomial (Fin (n + 1)) L).IsHomogeneous 1 :=
@@ -452,7 +419,7 @@ theorem core {m : ℕ} (hm : 1 ≤ m) : ∀ (N : ℕ) (J : Ideal (MvPolynomial (
 
 end Core
 
-theorem main (n m : ℕ) (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+theorem main (n m : ℕ) (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∃ s : Set (MvPolynomial (Fin (n + 1)) K), (∀ p ∈ s, p.IsHomogeneous m) ∧ J = Ideal.span s)
     (hmax : Module.finrank K (piece J (m + 1)) = Nat.macaulayPow m (Module.finrank K (piece J m))) :
     Module.finrank K (piece J (m + 2)) = Nat.macaulayPow (m + 1) (Module.finrank K (piece J (m +
@@ -480,7 +447,7 @@ end GotzStep
 open MvPolynomial AlgebraicGeometry.HilbertFunctor in
 theorem
   _root_.MvPolynomial.finrank_piece_add_two_eq_macaulayPow_of_finrank_piece_succ_eq_macaulayPow
-    (n m : ℕ) (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (n m : ℕ) (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∃ s : Set (MvPolynomial (Fin (n + 1)) K), (∀ p ∈ s, p.IsHomogeneous m) ∧ J = Ideal.span s)
     (hmax : Module.finrank K (piece J (m + 1)) = Nat.macaulayPow m (Module.finrank K (piece J m))) :
     Module.finrank K (piece J (m + 2)) = Nat.macaulayPow (m + 1) (Module.finrank K (piece J (m +

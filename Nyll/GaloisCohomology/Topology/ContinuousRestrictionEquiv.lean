@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
+module
+
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
 
 /-!
 # Restriction along a continuous group equivalence
@@ -12,6 +14,8 @@ import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
 Restriction of arbitrary continuous coefficients along a group equivalence
 is injective on actual continuous cohomology.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open scoped Topology

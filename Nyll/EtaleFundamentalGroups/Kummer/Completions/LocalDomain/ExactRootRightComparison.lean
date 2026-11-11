@@ -9,6 +9,7 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
 import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.RightDomain
+import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AdicPower
 
 /-!
 # Exact right comparison without a Noetherian complete base

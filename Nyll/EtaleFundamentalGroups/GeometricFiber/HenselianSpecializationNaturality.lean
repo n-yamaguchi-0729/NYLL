@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.PointSections
-import Nyll.SchemeTheory.FiniteEtale.PointSectionsBaseChange
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecializationNaturality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecialization
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Mathlib.CategoryTheory.FintypeCat
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.PointSections
+public import Nyll.SchemeTheory.FiniteEtale.PointSectionsBaseChange
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecializationNaturality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecialization
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Mathlib.CategoryTheory.FintypeCat
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
 
 /-!
 # Naturality of the actual Henselian specialization fiber isomorphism
@@ -32,6 +35,8 @@ fundamental groups of fibers of an arbitrary proper family.
 
 Mathematical context: https://stacks.math.columbia.edu/tag/0BUP
 -/
+
+@[expose] public section
 
 noncomputable section
 

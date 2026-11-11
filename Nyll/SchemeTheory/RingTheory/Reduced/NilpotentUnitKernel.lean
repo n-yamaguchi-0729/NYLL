@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentPrincipalUnits
-import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentExponential
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+module
+
+public import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentPrincipalUnits
+public import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentExponential
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-! # Actual unit kernels of nilpotent algebra extensions -/
+
+@[expose] public section
 
 noncomputable section
 

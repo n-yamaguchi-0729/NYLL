@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Tactic.Choose
-import Mathlib.Topology.Category.TopCat.Opens
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Topology.Sets.Opens
+module
+
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Tactic.Choose
+public import Mathlib.Topology.Category.TopCat.Opens
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Topology.Sets.Opens
 
 /-!
 # Scheme Hom app injective and exists of forall is Affine Open
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

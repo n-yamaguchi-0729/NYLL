@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedEulerDegree
-import Nyll.JacobianVarieties.Generalized.DivisorRigidification
-import Nyll.AlgebraicCurves.Models.Points.IsRationalPointPlace
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFiniteFinrankSubschemeIotaKerPow
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedEulerDegree
+public import Nyll.JacobianVarieties.Generalized.DivisorRigidification
+public import Nyll.AlgebraicCurves.Models.Points.IsRationalPointPlace
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFiniteFinrankSubschemeIotaKerPow
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
 
 /-! # The actual divisor-to-bundle map preserves degree -/
+
+@[expose] public section
 
 noncomputable section
 

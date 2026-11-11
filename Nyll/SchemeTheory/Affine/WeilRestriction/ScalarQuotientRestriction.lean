@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestriction
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestriction
 
 /-! # Actual unit fibres after taking the scalar quotient -/
+
+@[expose] public section
 
 noncomputable section
 

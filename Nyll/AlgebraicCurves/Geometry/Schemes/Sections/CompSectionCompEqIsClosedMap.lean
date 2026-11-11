@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.Tactic.CategoryTheory.Reassoc
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.Tactic.CategoryTheory.Reassoc
 
 /-!
 # comp section comp eq of is Closed Map of surjective app
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

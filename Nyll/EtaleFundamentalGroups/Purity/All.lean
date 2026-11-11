@@ -4,6 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.EtaleFundamentalGroups.Purity.FiniteBoundaryExtension
+import Nyll.EtaleFundamentalGroups.Purity.BoundaryScalarHartogs
+import Nyll.EtaleFundamentalGroups.Purity.AffineReflexiveExtension
+import Nyll.EtaleFundamentalGroups.Purity.PointwiseNormalBranchCriterion
+import Nyll.EtaleFundamentalGroups.Purity.PointwiseNormalPurity
+import Nyll.EtaleFundamentalGroups.Purity.PointwiseFlatPurity
+import Nyll.EtaleFundamentalGroups.Purity.FiniteNormalBranchCriterion
+import Nyll.EtaleFundamentalGroups.Purity.RegularBoundaryPurity
+import Nyll.EtaleFundamentalGroups.Purity.RegularBoundaryFullyFaithful
+import Nyll.EtaleFundamentalGroups.Purity.RegularBoundaryExtension
 import Nyll.EtaleFundamentalGroups.Purity.AffineCompleteBaseChange
 import Nyll.EtaleFundamentalGroups.Purity.ArtinianParameterChoice
 import Nyll.EtaleFundamentalGroups.Purity.ArtinianSecondaryAnnihilator
@@ -115,7 +125,6 @@ import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyExtVanishing
 import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyProjectiveDimension
 import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyRegularSequence
 import Nyll.EtaleFundamentalGroups.Purity.LocalPrimeCoheightOne
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerQuotientLength
 import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerTorsionSocle
 import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
 import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
@@ -208,9 +217,14 @@ import Nyll.EtaleFundamentalGroups.Purity.RetrocompactRestriction
 import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
 import Nyll.EtaleFundamentalGroups.Purity.TameCodimensionOne
 import Nyll.EtaleFundamentalGroups.Purity.DVRBoundaryEnlargement
-
-
-
+import Nyll.EtaleFundamentalGroups.Purity.FlatBoundaryPurity
+import Nyll.EtaleFundamentalGroups.Purity.FiniteBoundaryExtensionDepth
+import Nyll.EtaleFundamentalGroups.Purity.BoundaryExtensionUniqueness
+import Nyll.EtaleFundamentalGroups.Purity.CanonicalFiniteExtension
+import Nyll.EtaleFundamentalGroups.Purity.BoundaryExtensionHom
+import Nyll.EtaleFundamentalGroups.Purity.CanonicalFiniteExtensionUnique
+import Nyll.EtaleFundamentalGroups.Purity.CanonicalFiniteExtensionBaseChange
+import Nyll.EtaleFundamentalGroups.Purity.CanonicalFiniteExtensionEnlargement
 
 /-!
 # Purity infrastructure

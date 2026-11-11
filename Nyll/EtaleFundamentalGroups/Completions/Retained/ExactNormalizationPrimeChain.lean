@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Retained.NormalizationPrimeChain
-import Nyll.EtaleFundamentalGroups.Completions.Retained.RegularBranchPrimeChain
-import Nyll.EtaleFundamentalGroups.Ramification.Tensor.FiniteFlat
-import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FlatLocalAscent
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.PrimeRootCover
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.RegularPairNoetherian
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.MinimalLocalizationDomain
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.NormalLocalizationDVR
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.NormalizationPrimeChain
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.RegularBranchPrimeChain
+public import Nyll.EtaleFundamentalGroups.Ramification.Tensor.FiniteFlat
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FlatLocalAscent
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.PrimeRootCover
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.RegularPairNoetherian
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.MinimalLocalizationDomain
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.NormalLocalizationDVR
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 
 /-!
 # An exact retained branch in one completed normalization component
@@ -32,6 +34,8 @@ normalization prime is deliberately not declared to have the same index:
 that final equality additionally needs normality of the localized tensor
 factor (equivalently, vertical ramification index one).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -162,43 +166,43 @@ def HasNormalizationChain
   let hRhatGeometry :=
     Kummer.maximalAdicCompletion_regularPair_geometry
       (B := R) (x := y) (y := z) hreg hgen
-  letI : IsDomain Rhat := hRhatGeometry.1
+  let : IsDomain Rhat := hRhatGeometry.1
   let T := MaximalAdicFiniteBaseChange R S
-  letI : Algebra Rhat T := maximalAdicFiniteBaseChangeLeftAlgebra R S
+  let : Algebra Rhat T := maximalAdicFiniteBaseChangeLeftAlgebra R S
   let P := p.map (maximalAdicFiniteBaseChangeIncludeRight R S).toRingHom
-  letI : data.N.IsPrime := data.hNPrime
-  letI : data.N.LiesOver (⊥ : Ideal Rhat) := ⟨by
+  let : data.N.IsPrime := data.hNPrime
+  let : data.N.LiesOver (⊥ : Ideal Rhat) := ⟨by
     change (⊥ : Ideal Rhat) =
       data.N.comap (maximalAdicFiniteBaseChangeIncludeLeft R S).toRingHom
     exact data.hNOver.symm⟩
-  letI : data.Q.IsPrime := data.hQPrime
-  letI : P.IsMaximal := data.hPMaximal
+  let : data.Q.IsPrime := data.hQPrime
+  let : P.IsMaximal := data.hPMaximal
   let K := FractionRing R
   let Khat := FractionRing Rhat
   let rLAlgebra : Algebra R L :=
     ((algebraMap S L).comp (algebraMap R S)).toAlgebra
-  letI : Algebra R L := rLAlgebra
-  letI : IsScalarTower R S L := IsScalarTower.of_algebraMap_eq' rfl
-  letI : FaithfulSMul R L := FaithfulSMul.trans R S L
-  letI : Algebra K L := FractionRing.liftAlgebra R L
-  letI : IsScalarTower R K L := FractionRing.isScalarTower_liftAlgebra R L
+  let : Algebra R L := rLAlgebra
+  let : IsScalarTower R S L := IsScalarTower.of_algebraMap_eq' rfl
+  let : FaithfulSMul R L := FaithfulSMul.trans R S L
+  let : Algebra K L := FractionRing.liftAlgebra R L
+  let : IsScalarTower R K L := FractionRing.isScalarTower_liftAlgebra R L
   let rKhatAlgebra : Algebra R Khat :=
     ((algebraMap Rhat Khat).comp (algebraMap R Rhat)).toAlgebra
-  letI : Algebra R Khat := rKhatAlgebra
-  letI : Module.FaithfullyFlat R Rhat :=
+  let : Algebra R Khat := rKhatAlgebra
+  let : Module.FaithfullyFlat R Rhat :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
-  letI : @IsScalarTower R Rhat Khat
+  let : @IsScalarTower R Rhat Khat
       (inferInstance : Algebra R Rhat).toSMul
       (inferInstance : Algebra Rhat Khat).toSMul
       rKhatAlgebra.toSMul :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  letI : @FaithfulSMul R Khat rKhatAlgebra.toSMul := by
+  let : @FaithfulSMul R Khat rKhatAlgebra.toSMul := by
     apply (@faithfulSMul_iff_algebraMap_injective
       R Khat _ _ rKhatAlgebra).mpr
     exact (IsFractionRing.injective Rhat Khat).comp
       (FaithfulSMul.algebraMap_injective R Rhat)
-  letI : Algebra K Khat := FractionRing.liftAlgebra R Khat
-  letI : @IsScalarTower R K Khat
+  let : Algebra K Khat := FractionRing.liftAlgebra R Khat
+  let : @IsScalarTower R K Khat
       (inferInstance : Algebra R K).toSMul
       (inferInstance : Algebra K Khat).toSMul
       rKhatAlgebra.toSMul :=
@@ -406,56 +410,14 @@ private theorem adicRetainedExactTensorPrimeData_hasNormalizationChain
     AdicRetainedExactTensorPrimeData.HasNormalizationChain
       (L := L) z hreg hgen data := by
   classical
-  unfold AdicRetainedExactTensorPrimeData.HasNormalizationChain
-  dsimp only
-  let Rhat := AdicCompletion (maximalIdeal R) R
-  have hcompletion :=
-    Kummer.maximalAdicCompletion_regularPair_geometry hreg hgen
-  let : IsDomain Rhat := hcompletion.1
-  let T := MaximalAdicFiniteBaseChange R S
-  let : Algebra Rhat T := maximalAdicFiniteBaseChangeLeftAlgebra R S
-  let P := p.map (maximalAdicFiniteBaseChangeIncludeRight R S).toRingHom
-  let : data.N.IsPrime := data.hNPrime
-  let : data.N.LiesOver (⊥ : Ideal Rhat) := ⟨by
-    change (⊥ : Ideal Rhat) =
-      data.N.comap (maximalAdicFiniteBaseChangeIncludeLeft R S).toRingHom
-    exact data.hNOver.symm⟩
-  let : data.Q.IsPrime := data.hQPrime
-  let : P.IsMaximal := data.hPMaximal
-  let K := FractionRing R
-  let Khat := FractionRing Rhat
-  let rLAlgebra : Algebra R L :=
-    ((algebraMap S L).comp (algebraMap R S)).toAlgebra
-  let : Algebra R L := rLAlgebra
-  let : IsScalarTower R S L := IsScalarTower.of_algebraMap_eq' rfl
-  let : FaithfulSMul R L := FaithfulSMul.trans R S L
-  let : Algebra K L := FractionRing.liftAlgebra R L
-  let : IsScalarTower R K L := FractionRing.isScalarTower_liftAlgebra R L
-  let rKhatAlgebra : Algebra R Khat :=
-    ((algebraMap Rhat Khat).comp (algebraMap R Rhat)).toAlgebra
-  let : Algebra R Khat := rKhatAlgebra
-  let : Module.FaithfullyFlat R Rhat :=
-    Module.FaithfullyFlat.of_flat_of_isLocalHom
-  let : @IsScalarTower R Rhat Khat
-      (inferInstance : Algebra R Rhat).toSMul
-      (inferInstance : Algebra Rhat Khat).toSMul
-      rKhatAlgebra.toSMul :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  let : @FaithfulSMul R Khat rKhatAlgebra.toSMul := by
-    apply (@faithfulSMul_iff_algebraMap_injective
-      R Khat _ _ rKhatAlgebra).mpr
-    exact (IsFractionRing.injective Rhat Khat).comp
-      (FaithfulSMul.algebraMap_injective R Rhat)
-  let : Algebra K Khat := FractionRing.liftAlgebra R Khat
-  let : @IsScalarTower R K Khat
-      (inferInstance : Algebra R K).toSMul
-      (inferInstance : Algebra K Khat).toSMul
-      rKhatAlgebra.toSMul :=
-    FractionRing.isScalarTower_liftAlgebra R Khat
-  simpa [P] using
-    (exists_retainedCompletedNormalizationPrimeChain
-      (R := R) (R' := Rhat) (S := S) (K := K) (L := L)
-      (K' := Khat) data.N data.Q P data.hNQ data.hQP)
+  delta AdicRetainedExactTensorPrimeData.HasNormalizationChain
+  intro Rhat hRhatGeometry domainRhat T algebraRhatT P primeN liesOverN primeQ maximalP
+    K Khat rLAlgebra algebraRL towerRSL faithfulRL algebraKL towerRKL
+    rKhatAlgebra algebraRKhat faithfullyFlatRRhat towerRRhatKhat faithfulRKhat
+    algebraKKhat towerRKKhat
+  exact exists_retainedCompletedNormalizationPrimeChain
+    (R := R) (R' := Rhat) (S := S) (K := K) (L := L)
+    (K' := Khat) data.N data.Q P data.hNQ data.hQP
 
 /-- Retain an exact regular branch through maximal-adic completion and lift
 its prime chain to the normalization of the one generic component selected

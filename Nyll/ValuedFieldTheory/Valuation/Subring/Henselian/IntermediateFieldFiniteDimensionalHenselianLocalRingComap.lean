@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
 
-import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
-import Nyll.SchemeTheory.RingTheory.Henselian.LocalRing
-import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne
-import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.DVRAlgebraMapMemFinite
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Valuation.LocalSubring
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.IsIntegral
+public import Nyll.SchemeTheory.RingTheory.Henselian.LocalRing
+public import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.DVRAlgebraMapMemFinite
 
 /-!
 # Valuation Subring exists intermediate Field finite Dimensional henselian Local Ring comap
 of henselian Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -237,9 +241,9 @@ theorem isNoetherianRing_and_henselianLocalRing_comap_of_eq_top {L : Type*} [Fie
 theorem isFractionRing_of_range {L : Type*} [Field L] (A : ValuationSubring L) (K₀ : Subfield L)
     {A₀ : Type*} [CommRing A₀] (ι₀ : A₀ →+* K₀) (hinj : Function.Injective ι₀)
     (hrange : ∀ z : K₀, (z : L) ∈ A → ∃ a, ι₀ a = z) :
-    letI : Algebra A₀ K₀ := ι₀.toAlgebra
+    let : Algebra A₀ K₀ := ι₀.toAlgebra
     IsFractionRing A₀ K₀ := by
-  let : Algebra A₀ K₀ := ι₀.toAlgebra
+  intro sharedOwner1
   have : FaithfulSMul A₀ K₀ := (faithfulSMul_iff_algebraMap_injective A₀ K₀).mpr hinj
   refine IsFractionRing.of_field A₀ K₀ (fun z => ?_)
   by_cases hz : (z : L) ∈ A

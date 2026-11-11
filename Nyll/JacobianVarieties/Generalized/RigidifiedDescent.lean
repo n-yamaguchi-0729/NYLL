@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleIsoToDescentDataIsAffineHom
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleToDescentDataMapBijective
-import Mathlib.CategoryTheory.Sites.Descent.DescentData
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleIsoToDescentDataIsAffineHom
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Descent.InvertibleToDescentDataMapBijective
+public import Mathlib.CategoryTheory.Sites.Descent.DescentData
 
 /-!
 # Effective descent of a chosen rigidification
@@ -22,6 +24,8 @@ The proof first descends the invertible sheaf. It then descends the trivializati
 and its inverse using the bijection on morphisms, and checks both inverse identities
 by injectivity. No descent or representability conclusion is assumed as data.
 -/
+
+@[expose] public section
 
 universe u
 

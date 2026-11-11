@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.CharP.Frobenius
-import Mathlib.Algebra.GroupWithZero.Associated
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Algebra.Polynomial.RingDivision
-import Mathlib.Algebra.Polynomial.Degree.Domain
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.FieldTheory.Minpoly.Field
-import Mathlib.FieldTheory.Separable
-import Mathlib.FieldTheory.Perfect
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.RingTheory.PowerBasis
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.CharP.Frobenius
+public import Mathlib.Algebra.GroupWithZero.Associated
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Algebra.Polynomial.RingDivision
+public import Mathlib.Algebra.Polynomial.Degree.Domain
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.FieldTheory.Minpoly.Field
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.RingTheory.PowerBasis
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
 
 
 /-!
 # Pth Power Kernel
 -/
+
+@[expose] public section
 
 open Polynomial IntermediateField
 
@@ -46,14 +50,14 @@ theorem mem_of_isSeparable_of_pow_mem
   have hx_int : IsIntegral B x := by
     refine ⟨X ^ ℓ - C (⟨x ^ ℓ, hxp⟩ : B), ?_, ?_⟩
     · exact monic_X_pow_sub_C _ hℓ.out.ne_zero
-    · simp [Polynomial.eval₂_sub, hcoe]
+    · simp only [eval₂_sub, eval₂_X_pow, eval₂_C, hcoe, sub_self]
   have hdvd : minpoly B x ∣ X ^ ℓ - C (⟨x ^ ℓ, hxp⟩ : B) :=
     minpoly.dvd B x
-      (by simp [Polynomial.aeval_def, Polynomial.eval₂_sub, hcoe])
+      (by simp only [aeval_def, eval₂_sub, eval₂_X_pow, eval₂_C, hcoe, sub_self])
   have hmap_dvd : (minpoly B x).map (algebraMap B F) ∣ (X - C x) ^ ℓ := by
     have h1 : (X ^ ℓ - C (⟨x ^ ℓ, hxp⟩ : B) : Polynomial B).map (algebraMap B F)
         = X ^ ℓ - C (x ^ ℓ) := by
-      simp [Polynomial.map_sub, Polynomial.map_pow, hcoe]
+      simp only [Polynomial.map_sub, Polynomial.map_pow, map_X, map_C, hcoe, map_pow]
     have h2 : (X - C x : Polynomial F) ^ ℓ = X ^ ℓ - C (x ^ ℓ) := by
       have h := sub_pow_char (X : Polynomial F) (C x)
       rwa [← map_pow] at h
@@ -96,7 +100,7 @@ def pthPowers : Subfield F := (frobenius F ℓ).fieldRange
 
 theorem mem_pthPowers_iff {y : F} :
     y ∈ pthPowers F ℓ ↔ ∃ g : F, g ^ ℓ = y := by
-  simp [pthPowers, RingHom.mem_fieldRange, frobenius_def]
+  simp only [pthPowers, RingHom.mem_fieldRange, frobenius_def]
 
 theorem natCast_mem_pthPowers (n : ℕ) : ((n : F)) ∈ pthPowers F ℓ := by
   induction n with
@@ -178,7 +182,7 @@ theorem isIntegral_pthPowers (t : F) :
         pthPowers F ℓ) = t ^ ℓ := rfl
   refine ⟨X ^ ℓ - C (⟨t ^ ℓ, (mem_pthPowers_iff F ℓ).mpr ⟨t, rfl⟩⟩ :
     pthPowers F ℓ), monic_X_pow_sub_C _ hℓ.out.ne_zero, ?_⟩
-  simp [Polynomial.eval₂_sub, hcoe]
+  simp only [eval₂_sub, eval₂_X_pow, eval₂_C, hcoe, sub_self]
 
 theorem minpoly_pthPowers_natDegree_le (t : F) :
     (minpoly (pthPowers F ℓ) t).natDegree ≤ ℓ := by
@@ -189,7 +193,7 @@ theorem minpoly_pthPowers_natDegree_le (t : F) :
       ∣ X ^ ℓ - C (⟨t ^ ℓ, (mem_pthPowers_iff F ℓ).mpr ⟨t, rfl⟩⟩ :
         pthPowers F ℓ) :=
     minpoly.dvd _ t
-      (by simp [Polynomial.aeval_def, Polynomial.eval₂_sub, hcoe])
+      (by simp only [aeval_def, eval₂_sub, eval₂_X_pow, eval₂_C, hcoe, sub_self])
   have hne : (X ^ ℓ - C (⟨t ^ ℓ, (mem_pthPowers_iff F ℓ).mpr ⟨t, rfl⟩⟩ :
       pthPowers F ℓ) : _) ≠ 0 :=
     (monic_X_pow_sub_C _ hℓ.out.ne_zero).ne_zero

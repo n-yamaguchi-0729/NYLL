@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.InflationTransgressionRange
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
-import Mathlib.RepresentationTheory.Continuous.Basic
-import Mathlib.RepresentationTheory.Continuous.TopRep
-import Mathlib.Topology.ContinuousMap.Algebra
-import Mathlib.Topology.ContinuousMap.Basic
-import Mathlib.Topology.ContinuousMap.Defs
-import Mathlib.Algebra.Group.Defs
-import Mathlib.Algebra.Group.Basic
+module
+
+public import Nyll.GaloisCohomology.ProP.InflationTransgressionRange
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
+public import Mathlib.RepresentationTheory.Continuous.Basic
+public import Mathlib.RepresentationTheory.Continuous.TopRep
+public import Mathlib.Topology.ContinuousMap.Algebra
+public import Mathlib.Topology.ContinuousMap.Basic
+public import Mathlib.Topology.ContinuousMap.Defs
+public import Mathlib.Algebra.Group.Defs
+public import Mathlib.Algebra.Group.Basic
 
 /-!
 # Primitives for continuous inflation--transgression exactness
@@ -21,6 +23,8 @@ This file extracts the normalized degree-one primitive of an inflated degree-two
 uses its restriction to the open normal subgroup to reconstruct the invariant continuous
 character occurring in transgression.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

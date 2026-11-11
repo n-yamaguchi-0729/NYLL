@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.Topology.Sheaves.Skyscraper
-import Nyll.SchemeTheory.Topology.FiniteModelStalkComparison
-import Nyll.SchemeTheory.Topology.FiniteModelStalkColimit
-import Nyll.SchemeTheory.Topology.FiniteModelSheafDiagram
+module
+
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.Topology.Sheaves.Skyscraper
+public import Nyll.SchemeTheory.Topology.FiniteModelStalkComparison
+public import Nyll.SchemeTheory.Topology.FiniteModelStalkColimit
+public import Nyll.SchemeTheory.Topology.FiniteModelSheafDiagram
 
 /-!
 # Every sheaf is the colimit of its actual finite-model approximations
@@ -25,6 +27,8 @@ This supplies the finite-model reduction used in the proof of Stacks
 Project, tag 09ZG: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean constructions and proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Analysis.Calculus.FDeriv.Basic
-import Mathlib.Algebra.Module.ZLattice.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FinsetNormAppLESubLtImpFalse
+module
+
+public import Mathlib.Analysis.Calculus.FDeriv.Basic
+public import Mathlib.Algebra.Module.ZLattice.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FinsetNormAppLESubLtImpFalse
 
 /-!
 # exists finset forall point Equiv eq coe mem ball of differentiable On app LE of is
 Separated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

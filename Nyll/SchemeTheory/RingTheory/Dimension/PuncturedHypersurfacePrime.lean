@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.LocalRing.Quotient
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Nonclosed points of local hypersurfaces
@@ -15,6 +18,8 @@ A principal hypersurface in a Noetherian local ring of dimension at least
 two contains a prime different from the maximal ideal. The same construction
 on a prime quotient produces a point on a specified irreducible component.
 -/
+
+@[expose] public section
 
 open IsLocalRing
 

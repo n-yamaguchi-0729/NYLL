@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.AffineUnramifiedSubfield
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGaloisTopology
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.AffineUnramifiedSubfield
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGaloisTopology
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # The maximal unramified field inside the original separable closure
@@ -17,6 +19,8 @@ subfields and their integral closures. The actual automorphism comparison
 then identifies the kernel with the fixing condition over the original K.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory
@@ -26,11 +30,6 @@ open scoped nonZeroDivisors
 namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u v
-
-private local instance fieldSpecQuasiCompact
-    {F : Type u} [Field F] {S : Scheme.{u}} (f : Spec (.of F) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 variable (A : Type u) (K : Type v) (L : Type u)
   [CommRing A] [IsDomain A] [IsIntegrallyClosed A]

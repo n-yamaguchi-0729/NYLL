@@ -22,7 +22,7 @@ import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
 import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
 import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.LocallyFreeOneIffInvertible
+import Nyll.SchemeTheory.Modules.Invertible.RankOne
 import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqZeroSchemeIdealSupportedIn
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDual
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor

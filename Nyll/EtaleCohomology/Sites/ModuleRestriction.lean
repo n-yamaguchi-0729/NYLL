@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Sites.Localization
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.CoverLifting
+public import Mathlib.CategoryTheory.Sites.Localization
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
 # Restriction of constant module sheaves
@@ -24,6 +26,8 @@ restriction of the constant sheaf on the target is constructed from the
 sheafification unit. Cocontinuity proves that this map is an isomorphism and
 the explicit unit formula keeps track of actual constant sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

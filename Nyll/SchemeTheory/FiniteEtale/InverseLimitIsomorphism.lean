@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.NatIso
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.NatIso
 
 /-!
 # Isomorphisms and finite equation families at inverse-system stages
@@ -16,6 +18,8 @@ Native Hom descent supplies an inverse map, and native eventual equality
 makes both inverse equations hold at a common actual stage. No projection
 is assumed faithfully flat, surjective, or faithful on finite-etale covers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

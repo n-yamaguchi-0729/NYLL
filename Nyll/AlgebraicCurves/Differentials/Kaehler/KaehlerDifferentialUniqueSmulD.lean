@@ -11,16 +11,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Algebraic.Defs
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Algebraic.Defs
 
 /-!
 # Kaehler Differential exists unique smul D of transcendental
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

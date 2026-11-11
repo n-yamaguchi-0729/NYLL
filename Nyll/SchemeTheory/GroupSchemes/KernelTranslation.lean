@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.CategoryTheory.Limits.Types.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 
 /-! # Translation by an actual identity kernel -/
+
+@[expose] public section
 
 noncomputable section
 

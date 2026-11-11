@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Exactness of finite-field tame characters
@@ -17,6 +19,8 @@ import Mathlib.Algebra.Group.Subgroup.Ker
 Constructs the original finite-field canonical tame morphism and an independent principal-unit
 wild subgroup. Proves surjectivity and identifies that subgroup as the kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

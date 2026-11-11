@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.RamificationInvariants
 
 /-!
 # Lower-branch common-top Abhyankar consequences
@@ -12,6 +15,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Br
 This file exposes the common-top index-one, unramified, and tame endpoints
 whose inputs are total tameness of the two lower valued extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

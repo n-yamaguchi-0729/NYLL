@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Mathlib.Tactic.Choose
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Valuation Subring exists padic Int forall apply eq pow appr mul of pow eq of residue eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -150,8 +154,10 @@ theorem _root_.ValuationSubring.exists_padicInt_forall_apply_eq_pow_appr_mul_of_
         exact h.trans ih
   let f : ∀ k : ℕ, Polynomial ℤ →+* ZMod (ℓ ^ k) := fun k => (Polynomial.aeval (R := ℤ) (e k : ZMod
     (ℓ ^ k))).toRingHom
-  have hfX : ∀ k, f k X = (e k : ZMod (ℓ ^ k)) := fun k => by simp [f]
-  have hfC : ∀ k (z : ℤ), f k (C z) = (z : ZMod (ℓ ^ k)) := fun k z => by simp [f]
+  have hfX : ∀ k, f k X = (e k : ZMod (ℓ ^ k)) := fun k =>
+    Polynomial.aeval_X (e k : ZMod (ℓ ^ k))
+  have hfC : ∀ k (z : ℤ), f k (C z) = (z : ZMod (ℓ ^ k)) := fun k z =>
+    Polynomial.aeval_C (e k : ZMod (ℓ ^ k)) z
   have hfc : ∀ (k1 k2 : ℕ) (hk : k1 ≤ k2), (ZMod.castHom (pow_dvd_pow ℓ hk) (ZMod (ℓ ^ k1))).comp
     (f k2) = f k1 := by
     intro k1 k2 hk

@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.Adjoin.Polynomial.Basic
-import Mathlib.RingTheory.Trace.Basic
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.Algebra.Polynomial.BigOperators
-import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Adjoin.Polynomial.Basic
+public import Mathlib.RingTheory.Trace.Basic
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 
 /-!
 # Place exists gram denominator of mul Table
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

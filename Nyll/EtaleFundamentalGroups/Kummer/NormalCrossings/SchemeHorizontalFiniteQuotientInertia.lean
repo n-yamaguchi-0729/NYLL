@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.EtaleBranchCharacteristicZero
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.GaloisComponentInertiaImage
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.EtaleBranchCharacteristicZero
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.GaloisComponentInertiaImage
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Finite-quotient inertia along horizontal normal-crossings boundaries
@@ -21,6 +24,8 @@ characteristic.
 Only local Noetherianity is used.  In particular, there is no finite-type or
 Nagata hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Nyll.SchemeTheory.Sheaves.IdealSheafDataReducedSubschemeVanishingIdealLeKer
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Nyll.SchemeTheory.Sheaves.IdealSheafDataReducedSubschemeVanishingIdealLeKer
 
 /-!
 # Is Closed Immersion exists Unique comp eq of range subset of is Reduced
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

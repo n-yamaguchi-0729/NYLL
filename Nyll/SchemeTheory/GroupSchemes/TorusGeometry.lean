@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Torus
-import Nyll.SchemeTheory.GroupSchemes.SplitTorusSmooth
-import Mathlib.Algebra.MonoidAlgebra.NoZeroDivisors
-import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Torus
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorusSmooth
+public import Mathlib.Algebra.MonoidAlgebra.NoZeroDivisors
+public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Geometry of actual tori over fields
 
@@ -16,6 +18,8 @@ Smoothness descends from the split torus over an algebraic closure. Connectednes
 descends along the surjective field extension, and the same proof on every base
 change proves geometric connectedness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

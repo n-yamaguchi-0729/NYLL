@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.Topology.Sheaves.LocalPredicate
+module
+
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Topology.Sheaves.LocalPredicate
 
 /-!
 # The actual constant sheaf as discrete-valued functions
@@ -21,6 +23,8 @@ This is the constant-sheaf comparison used in the Stacks Project,
 tag 09ZG: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

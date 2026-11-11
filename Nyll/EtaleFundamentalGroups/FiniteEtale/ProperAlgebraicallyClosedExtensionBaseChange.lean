@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Coefficient maps and rational fibres in the proper comparison
@@ -15,6 +17,8 @@ The rational fibre is obtained by an actual section of the coefficient
 base-change projection. Its two coordinates and the composition law for
 coefficient changes are used in the closed-fibre comparison for Stacks 0A49.
 -/
+
+@[expose] public section
 
 noncomputable section
 

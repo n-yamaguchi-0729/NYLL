@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.IdempotentDescent
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.IdempotentDescent
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -26,6 +28,8 @@ on every tensor ring is the prescribed `baseChangeAction`, and the output
 retains each literal cocone image. This supplies the finite action data for
 the actual étale-neighborhood step of Stacks tag 0BST.
 -/
+
+@[expose] public section
 
 noncomputable section
 

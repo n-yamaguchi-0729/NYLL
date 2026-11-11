@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Core
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Core
 
 /-!
 # Tame ramification predicates
@@ -14,6 +16,8 @@ This file defines tame ramification directly for the ambient valued extension
 and Henselian discretely valued fields use the same definitions through their
 canonical `toDVF` projections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

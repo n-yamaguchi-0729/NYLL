@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCechTriple
-import Mathlib.AlgebraicGeometry.RelativeGluing
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCechTriple
+public import Mathlib.AlgebraicGeometry.RelativeGluing
 
 /-!
 # A directed principal-open refinement of a punctured spectrum
@@ -16,6 +18,8 @@ of the selected generators.  Singleton subsets recover the original cover,
 while union represents intersection.  This makes the refinement locally
 directed and suitable as the base cover of relative gluing data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

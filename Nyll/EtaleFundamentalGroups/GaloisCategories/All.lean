@@ -35,6 +35,7 @@ import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismInverseLimit
 import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedSectionDescent
 import Nyll.EtaleFundamentalGroups.GaloisCategories.AutFunctorComparison
 import Nyll.EtaleFundamentalGroups.GaloisCategories.PointStabilizerMorphism
+import Nyll.EtaleFundamentalGroups.GaloisCategories.NormalDomination
 import Nyll.EtaleFundamentalGroups.GaloisCategories.CoverTransport
 import Nyll.EtaleFundamentalGroups.GaloisCategories.CoverTransportFiber
 

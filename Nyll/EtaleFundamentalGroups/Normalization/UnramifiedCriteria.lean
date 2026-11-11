@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
-import Nyll.EtaleFundamentalGroups.Normalization.GlobalLocalUnramifiedCriterion
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedFiberDegree
-import Nyll.EtaleFundamentalGroups.Normalization.GlobalFiberDegreeCriterion
-import Nyll.EtaleFundamentalGroups.Normalization.AffineInertiaCriterion
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselization
-import Mathlib.Tactic.TFAE
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
+public import Nyll.EtaleFundamentalGroups.Normalization.GlobalLocalUnramifiedCriterion
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedFiberDegree
+public import Nyll.EtaleFundamentalGroups.Normalization.GlobalFiberDegreeCriterion
+public import Nyll.EtaleFundamentalGroups.Normalization.AffineInertiaCriterion
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselization
+public import Mathlib.Tactic.TFAE
 
 /-!
 # The original eight normalization criteria and the Galois inertia criterion
@@ -23,6 +25,8 @@ neighborhoods or an assumed local comparison replaces their original maps.
 Reference: https://stacks.math.columbia.edu/tag/0BTF
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -30,11 +34,6 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 /-- The definition in Stacks Project Section 58.11: the base is unramified
 in the field extension if its actual normalization morphism is unramified. -/

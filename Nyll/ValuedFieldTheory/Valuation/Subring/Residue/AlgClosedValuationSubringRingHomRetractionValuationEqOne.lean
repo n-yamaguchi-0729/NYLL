@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Jacobson.Ring
-import Nyll.ValuedFieldTheory.Valuation.Subring.RingHomExtend
+module
+
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Nyll.ValuedFieldTheory.Valuation.Subring.RingHomExtend
 
 /-!
 # Is Alg Closed exists valuation Subring ring Hom retraction forall valuation eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

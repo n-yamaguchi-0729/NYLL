@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableRoots
-import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableResidueGroup
-import Nyll.EtaleFundamentalGroups.Inertia.PrimeToRootsInverseSystem
-import Mathlib.Algebra.CharP.Invertible
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableRoots
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableResidueGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.PrimeToRootsInverseSystem
+public import Mathlib.Algebra.CharP.Invertible
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Native absolute residue fields and their literal full roots target
@@ -22,6 +24,8 @@ The residue conclusions below are an OUTPUT certificate. Its constructor
 uses algebraic closedness and standard separable-closure facts in this
 field-only owner, before the original fraction field or groups are joined.
 -/
+
+@[expose] public section
 
 noncomputable section
 

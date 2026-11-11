@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.LocalProperties.Basic
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.TensorProduct.Free
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ExteriorPowerDeterminants
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ExteriorPowerRangeMapSubtypeEqMaximalIdealSmulTop
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.LocalProperties.Basic
+public import Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ExteriorPowerDeterminants
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ExteriorPowerRangeMapSubtypeEqMaximalIdealSmulTop
 
 /-!
 # Ideal span algebra Norm eq of ker eq span of is Discrete Valuation Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

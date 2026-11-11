@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.Order.KrullDimension
-import Mathlib.Data.Finset.Sort
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.Order.KrullDimension
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Valuation Subring finite prime Spectrum of ring Krull Dim lt top
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.AffineFiniteSubalgebraRefinement
-import Nyll.SchemeTheory.Etale.LocalFactorBaseChange
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+module
+
+public import Nyll.SchemeTheory.Etale.AffineFiniteSubalgebraRefinement
+public import Nyll.SchemeTheory.Etale.LocalFactorBaseChange
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
 
 /-!
 # Finite subalgebras on each actual affine base chart
@@ -24,6 +26,8 @@ through the native affine-chart square. Base change of the original local
 lifts and finite-image descent then produce a finite subalgebra inside the
 original direct-image sections on this chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

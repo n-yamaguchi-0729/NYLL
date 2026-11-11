@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.JacobianVarieties.Generalized.UnpointedConstruction
 import Nyll.JacobianVarieties.Generalized.PointedComparison
 import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # Compatibility of the descended generalized Jacobian with every pointed construction -/
 

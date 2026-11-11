@@ -4,25 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ExtensionByZero
-import Nyll.EtaleCohomology.Sites.StalkAdjunction
-import Nyll.EtaleCohomology.Sites.Stalks
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.Algebra.Homology.ShortComplex.Basic
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Preadditive.Biproducts
+module
+
+public import Nyll.EtaleCohomology.Sites.ExtensionByZero
+public import Nyll.EtaleCohomology.Sites.StalkAdjunction
+public import Nyll.EtaleCohomology.Sites.Stalks
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.Algebra.Homology.ShortComplex.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Stalks and exactness of extension by zero
@@ -40,6 +42,8 @@ Reference: https://stacks.math.columbia.edu/tag/03S2
 -/
 
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -51,7 +55,8 @@ namespace EtaleCohomology
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U)
 
-private def openGeometricFiberEquiv (V : U.Etale) :
+/-- A geometric lift through the open immersion is a lift over the open subscheme. -/
+def openGeometricFiberEquiv (V : U.Etale) :
     (Scheme.pointSmallEtale (s ≫ j)).fiber.obj ((openEtaleInclusion j).obj V) ≃
       (Scheme.pointSmallEtale s).fiber.obj V where
   toFun a := CategoryTheory.Over.homMk a.left (by

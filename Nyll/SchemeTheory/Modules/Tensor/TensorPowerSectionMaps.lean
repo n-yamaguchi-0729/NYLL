@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorUnitObjIsoHomAppPullbackLocalSectionUnitSection
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorUnitObjIsoHomAppPullbackLocalSectionUnitSection
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Actual tensor-power section formulas for comparison maps
@@ -24,6 +26,8 @@ original tensor-power sections to the powers of the original images.
 The pullback formula uses the actual adjunction-unit section at every
 stage and includes the unit section in degree zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

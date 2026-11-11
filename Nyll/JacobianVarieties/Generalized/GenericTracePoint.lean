@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.StructureMorphism
-import Mathlib.CategoryTheory.Comma.Over.Basic
+module
+
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 /-! # Generic points for evaluating curve traces
 
@@ -13,6 +15,8 @@ The actual function-field point factors through every nonempty open of an
 integral scheme. Scalar algebra maps provide its evaluation points over
 extensions and formal rings.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

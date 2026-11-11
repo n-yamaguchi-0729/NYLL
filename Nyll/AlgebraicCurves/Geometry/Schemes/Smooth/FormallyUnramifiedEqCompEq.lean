@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Category.TopCat.EpiMono
-import Mathlib.Tactic.Set
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Category.TopCat.EpiMono
+public import Mathlib.Tactic.Set
 
 /-!
 # Formally Unramified eq of comp eq of is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

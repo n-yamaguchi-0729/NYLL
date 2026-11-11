@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Torus
-import Nyll.SchemeTheory.Morphisms.SeparatedQuasiCompactDescent
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Torus
+public import Nyll.SchemeTheory.Morphisms.SeparatedQuasiCompactDescent
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Separatedness and quasi-compactness of actual tori -/
+
+@[expose] public section
 
 noncomputable section
 

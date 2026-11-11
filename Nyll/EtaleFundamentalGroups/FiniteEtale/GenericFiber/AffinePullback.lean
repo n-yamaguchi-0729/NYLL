@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.AffineFunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.AffineFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The original affine cover in the generic pullback square
@@ -29,6 +31,8 @@ tensor comparison, and then transports the affine square back to the
 original scheme. Thus the resulting square retains the original cover
 morphism, which is needed when comparing root extensions on overlaps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

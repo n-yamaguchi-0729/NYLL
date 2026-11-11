@@ -4,24 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Frames.FrameHomExt
-import Nyll.SchemeTheory.Modules.Frames.BasicOpenFrame
-import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
-import Nyll.SchemeTheory.Modules.Frames.BasisPullbackFieldPoint
-import Nyll.SchemeTheory.Modules.Frames.FrameDescent
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Frames.FrameLinearCombination
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnIsUnit
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnSheafificationAdjunctionUnitIotaMulti
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
-import Nyll.SchemeTheory.Modules.Frames.IsoAppEqIsFrameOn
-import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
-import Nyll.SchemeTheory.Modules.Frames.ProjectivePresentationFromFrames
-import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
-import Nyll.SchemeTheory.Modules.Frames.ScalarFrames
-import Nyll.SchemeTheory.Modules.Frames.SpanningFrameDescent
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.FrameHomExt
+public import Nyll.SchemeTheory.Modules.Frames.BasicOpenFrame
+public import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
+public import Nyll.SchemeTheory.Modules.Frames.BasisPullbackFieldPoint
+public import Nyll.SchemeTheory.Modules.Frames.FrameBridge
+public import Nyll.SchemeTheory.Modules.Frames.FrameDescent
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Frames.FrameLinearCombination
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnIsUnit
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnSheafificationAdjunctionUnitIotaMulti
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
+public import Nyll.SchemeTheory.Modules.Frames.IsoAppEqIsFrameOn
+public import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
+public import Nyll.SchemeTheory.Modules.Frames.ProjectivePresentationFromFrames
+public import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
+public import Nyll.SchemeTheory.Modules.Frames.ScalarFrames
+public import Nyll.SchemeTheory.Modules.Frames.SpanningFrameDescent

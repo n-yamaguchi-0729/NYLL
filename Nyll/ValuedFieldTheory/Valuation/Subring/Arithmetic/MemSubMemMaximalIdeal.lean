@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
 
 /-!
 # Valuation Subring mem and sub mem maximal Ideal of gauss Presentation of coe eq of coeff
 Map residue comp eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

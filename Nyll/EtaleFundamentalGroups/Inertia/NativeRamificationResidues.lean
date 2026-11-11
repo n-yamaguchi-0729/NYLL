@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.PrimeToRootsInverseSystem
-import Nyll.EtaleFundamentalGroups.Inertia.RestrictedPrimeToRootsGroupSystem
-import Nyll.ProCGroups.InverseSystems.Basic
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.PrimeToRootsInverseSystem
+public import Nyll.EtaleFundamentalGroups.Inertia.RestrictedPrimeToRootsGroupSystem
+public import Nyll.ProCGroups.InverseSystems.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
 
 /-!
 # Native residue data for the ramification diagram
@@ -16,6 +18,8 @@ Only the two coefficient fields and the actual set of invertible natural
 exponents are stored. The target is computed as the literal root inverse
 limit over these degrees. No root group or comparison is supplied separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaComparison
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaComparison
 
 /-!
 # Inertia at a contracted normalization prime
@@ -15,6 +17,8 @@ has a canonical contraction in the original normalization.  This file
 packages the corresponding inertia-cardinality comparison without asking
 the caller to supply that contraction or its lying-over proof separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

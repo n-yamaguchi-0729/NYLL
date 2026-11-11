@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FieldFiniteCover
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Limits.Types.Filtered
+module
+
+public import Nyll.EtaleCohomology.Sites.FieldFiniteCover
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-!
 # The actual finite Galois section diagram
@@ -16,6 +18,8 @@ Finite Galois subfields of the algebraic closure index actual etale
 objects. Transition maps are the literal field inclusions on spectra,
 and the section diagram uses actual sheaf restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

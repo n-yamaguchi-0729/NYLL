@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Kaehler.Polynomial
-import Mathlib.RingTheory.Kaehler.JacobiZariski
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.Unramified
-import Mathlib.RingTheory.Etale.Basic
+module
+
+public import Mathlib.RingTheory.Kaehler.Polynomial
+public import Mathlib.RingTheory.Kaehler.JacobiZariski
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.Unramified
+public import Mathlib.RingTheory.Etale.Basic
 
 /-!
 # Algebra Formally Smooth formally Smooth and formally Unramified aeval of exists Unique
 smul D eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

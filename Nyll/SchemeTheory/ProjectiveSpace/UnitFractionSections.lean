@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Actual structure-sheaf sections as free homogeneous fractions
@@ -32,6 +34,8 @@ is therefore bijective on every nonempty coordinate intersection. Its
 linear equivalence retains the original structural scalar action and
 commutes with the actual restriction maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

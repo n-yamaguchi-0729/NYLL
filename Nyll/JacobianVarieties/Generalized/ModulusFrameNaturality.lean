@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameClass
-import Nyll.JacobianVarieties.Generalized.RigidifiedFrameNaturality
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameClass
+public import Nyll.JacobianVarieties.Generalized.RigidifiedFrameNaturality
 
 /-! Naturality of the actual modulus-frame classification under parameter restriction. -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -95,22 +99,19 @@ theorem modulusFrameTestEquiv_apply (T : Over S)
         (T' := Over.mk (baseChangeSnd (modulusBaseMap D)
           (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s)))
         (modulusTestIso D s T).hom e := by
+  let restrictionIso :=
+    (RigidifiedLineBundle.restrictionComparison
+      (i := modulusFamilyInclusion D s) (i' := modulusFamilyInclusion D (T.hom ≫ s))
+      (baseChangeSnd c (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))
+      (baseChangeSnd (modulusBaseMap D) (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))
+      (modulusFamilyInclusion_naturality D
+        (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))).app L
   have h := frameDomainEquiv_trans_apply
     (((framePresheaf ((Scheme.Modules.pullback (modulusFamilyInclusion D s)).obj L)).mapIso
       (modulusTestIso D s T).op).toEquiv)
-    ((RigidifiedLineBundle.restrictionComparison
-      (i := modulusFamilyInclusion D s) (i' := modulusFamilyInclusion D (T.hom ≫ s))
-      (baseChangeSnd c (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))
-      (baseChangeSnd (modulusBaseMap D) (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))
-      (modulusFamilyInclusion_naturality D
-        (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))).app L) e
+    restrictionIso e
   exact h.trans (congrArg
-    (fun z => (RigidifiedLineBundle.restrictionComparison
-      (i := modulusFamilyInclusion D s) (i' := modulusFamilyInclusion D (T.hom ≫ s))
-      (baseChangeSnd c (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))
-      (baseChangeSnd (modulusBaseMap D) (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))
-      (modulusFamilyInclusion_naturality D
-        (⟨T.hom, rfl⟩ : SchemeHomOver (T.hom ≫ s) s))).app L ≪≫ z)
+    (fun z => restrictionIso ≪≫ z)
     (framePresheaf_mapIso_apply
       ((Scheme.Modules.pullback (modulusFamilyInclusion D s)).obj L)
       (modulusTestIso D s T) e))

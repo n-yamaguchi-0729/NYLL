@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteIff
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFinitePushforwardIff
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Module.Equiv.Basic
+module
+
+public import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteIff
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFinitePushforwardIff
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.Module.Equiv.Basic
 
 /-!
 # Čech cohomology of the actual direct image sheaf
@@ -27,6 +29,8 @@ preimage-cover comparison. The resulting cochain and cohomology
 equivalences use the original native restriction maps. Scheme
 isomorphisms are included as a special case.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -78,7 +82,8 @@ theorem pushforwardSectionsOverBaseEquiv_restriction {U V : X.Opens} (h : U ≤ 
       (toOModulePresheaf f ((pushforward g).obj M)).res h
         (pushforwardSectionsOverBaseEquiv f g M V x) := rfl
 
-private def nativePushforwardCochainComparison (K : X.OrderedAffineCover) (q : ℕ) :
+/-- Compare cochains using the identity on each original direct-image section. -/
+def nativePushforwardCochainComparison (K : X.OrderedAffineCover) (q : ℕ) :
     (OModulePresheaf.pushforward f g (toOModulePresheaf (g ≫ f) M)).cochain K q ≃ₗ[R]
       (toOModulePresheaf f ((pushforward g).obj M)).cochain K q :=
   LinearEquiv.piCongrRight (fun s : K.Idx q =>

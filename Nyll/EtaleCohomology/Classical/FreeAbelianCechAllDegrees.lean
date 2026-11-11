@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicTopology.ExtraDegeneracy
-import Mathlib.Algebra.Category.Grp.Adjunctions
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Homology.SingleHomology
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Abelian
+module
+
+public import Mathlib.AlgebraicTopology.ExtraDegeneracy
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Homology.SingleHomology
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Sites.Abelian
 
 /-!
 # Positive-degree exactness of the free Cech complex
@@ -20,6 +22,8 @@ For a nonempty set, the existing extra-degeneracy contraction applies.
 For an empty set, every term is zero. This pointwise calculation is used
 for the actual free Cech resolution of sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w
@@ -65,7 +69,8 @@ theorem freeAbelianSetCechComplex_exactAt_succ (A : Type u) (n : ℕ) :
     exact (HomologicalComplex.exactAt_iff_isZero_homology _ _).mpr
       (hz.of_iso (ed.homotopyEquiv.toHomologyIso (n + 1)))
 
-private def setTerminalArrow : Type u ⥤ Arrow (Type u) where
+/-- The functor assigning to a set its arrow to the terminal set. -/
+def setTerminalArrow : Type u ⥤ Arrow (Type u) where
   obj A := Arrow.mk (terminal.from A)
   map f := Arrow.homMk f (𝟙 _) (terminal.hom_ext _ _)
   map_id A := by

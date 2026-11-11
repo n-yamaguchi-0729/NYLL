@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.Residue.ResidueValuationSubring
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Residue.ResidueValuationSubring
 
 /-!
 # Valuation Subring ring Krull Dim residue Valuation Subring of Prime eq krull Dim Icc
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

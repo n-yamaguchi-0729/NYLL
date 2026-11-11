@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Detecting absolute ramification on finite Galois layers
@@ -17,6 +19,8 @@ principal-unit condition involves one unit, which already lies in one such
 finite layer. No Henselianity or residue-characteristic hypothesis is used.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

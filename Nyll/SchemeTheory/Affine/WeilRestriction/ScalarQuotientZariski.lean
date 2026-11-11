@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormSchemeRepresentation
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientLocalBijection
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormSchemeRepresentation
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientLocalBijection
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Actual Zariski lifts of the projective norm quotient
@@ -17,6 +19,8 @@ parameter scheme has smooth charts and smooth pairwise intersections.
 These explicit lifts avoid choosing arbitrary fppf covers with possible
 nilpotents when applying divisor-sum descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

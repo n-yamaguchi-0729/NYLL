@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.Grp.Ulift
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-import Mathlib.RingTheory.ClassGroup.Basic
-import Mathlib.RingTheory.PicardGroup
-import Mathlib.Data.Int.Order.Units
-import Mathlib.Algebra.GroupWithZero.Units.Fintype
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Algebra.Group.Subgroup.Finite
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.Ulift
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import Mathlib.RingTheory.ClassGroup.Basic
+public import Mathlib.RingTheory.PicardGroup
+public import Mathlib.Data.Int.Order.Units
+public import Mathlib.Algebra.GroupWithZero.Units.Fintype
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Algebra.Group.Subgroup.Finite
 
 /-!
 # Fppf Cohomology LES
 -/
+
+@[expose] public section
 
 universe w' w v u
 

@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Dimension
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Dimension
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! Relative dimension of the concrete projective norm open and scalar quotient group scheme. -/
+
+@[expose] public section
 
 noncomputable section
 universe u

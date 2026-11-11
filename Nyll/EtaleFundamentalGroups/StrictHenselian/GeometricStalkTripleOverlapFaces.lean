@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorLocal
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTripleTensorLocal
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Logic.Function.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorLocal
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTripleTensorLocal
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Actual localization maps from double to triple geometric-stalk overlaps
@@ -27,6 +29,8 @@ assumed. Composition of these localization maps is already supplied by
 This remains local overlap algebra for Stacks 0BSB, not effective descent of
 finite etale covers or the fundamental-group exact sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

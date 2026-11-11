@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RelativeNormalization
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.StandardCover
-import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
-import Nyll.SchemeTheory.Normalization.Affine
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RelativeNormalization
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.StandardCover
+public import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+public import Nyll.SchemeTheory.Normalization.Affine
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # The actual normalization of a standard Kummer chart
@@ -39,6 +41,8 @@ Lemma 58.31.6. It does not assert the étale chart-existence theorem 58.31.5
 or the descent of these local descriptions to arbitrary schemes.
 https://stacks.math.columbia.edu/tag/0BSE
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.Topology.Sober
+module
+
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.Topology.Sober
 
 /-!+# A neighborhood dominated by the actual local spectrum
 
@@ -19,6 +21,8 @@ is in the range of the stalk map.
 This provides compatible shrinking in the local connectedness criteria
 without imposing normality or Noetherianity on the local rings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

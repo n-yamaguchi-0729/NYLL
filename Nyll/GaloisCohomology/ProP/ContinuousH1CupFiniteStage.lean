@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousH1CupProductRestriction
-import Nyll.ProCGroups.Cohomology.ContinuousMapFiniteStage
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousH1CupProductRestriction
+public import Nyll.ProCGroups.Cohomology.ContinuousMapFiniteStage
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
 
 /-!
 # Finite-stage realization of the canonical continuous H¹ cup
@@ -15,6 +17,8 @@ Two continuous mod-`p` characters of a pro-`p` group factor through one
 common finite `p`-group quotient.  Restriction naturality then identifies
 their canonical cup with inflation of the cup of the descended characters.
 -/
+
+@[expose] public section
 
 open scoped Topology
 

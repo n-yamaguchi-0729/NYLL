@@ -10,29 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.LinearAlgebra.Dimension.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.Tactic.Algebraize
-import Mathlib.Tactic.TermCongr
-import Mathlib.Tactic.Set
-import Batteries.Tactic.OpenPrivate
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+import all Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.LinearAlgebra.Dimension.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.Tactic.Algebraize
+public import Mathlib.Tactic.TermCongr
+public import Mathlib.Tactic.Set
+public import Batteries.Tactic.OpenPrivate
 
 /-!
 # Scheme Hom finrank morphism Restrict eq finrank
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

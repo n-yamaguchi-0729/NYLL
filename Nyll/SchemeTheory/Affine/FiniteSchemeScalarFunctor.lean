@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
 
 /-!
 # The actual scalar-unit quotient as a functor on affine tests
@@ -13,6 +15,8 @@ Both its values and its maps come from the actual base-changed finite
 scheme. The natural tensor comparison identifies it as a group-valued
 functor with the algebraic scalar quotient used in the norm-open construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

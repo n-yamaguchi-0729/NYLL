@@ -5,18 +5,20 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.CategoryTheory.Sites.Point.Comap
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Limits.FinallySmall
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Mathlib.CategoryTheory.Sites.Point.Comap
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Limits.FinallySmall
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # The actual unit on an inverse-image stalk
@@ -27,6 +29,8 @@ the adjunction unit is an isomorphism. The proof uses the stalk/skyscraper
 adjunctions and computes the map on representing sections; it requires no
 initiality of the functor between pointed neighborhoods.
 -/
+
+@[expose] public section
 
 noncomputable section
 

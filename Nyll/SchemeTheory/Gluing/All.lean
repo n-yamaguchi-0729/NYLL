@@ -4,18 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.Recovery
-import Nyll.SchemeTheory.Gluing.RelativeOverlap
-import Nyll.SchemeTheory.Gluing.RelativePullback
-import Nyll.SchemeTheory.Gluing.CommonCover
-import Nyll.SchemeTheory.Gluing.OverCover
-import Nyll.SchemeTheory.Gluing.CoefficientCover
-import Nyll.SchemeTheory.Gluing.RecoveredLocalModel
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Nyll.SchemeTheory.Gluing.RelativePullbackRecovery
-import Nyll.SchemeTheory.Gluing.RelativeChartBaseChange
-import Nyll.SchemeTheory.Gluing.RecoveredChartTransport
-import Nyll.SchemeTheory.Gluing.RecoveredPullbackOverlaps
-import Nyll.SchemeTheory.Gluing.RecoveredOverlapTransport
+module
+
+public import Nyll.SchemeTheory.Gluing.OpenSubschemes
+public import Nyll.SchemeTheory.Gluing.Recovery
+public import Nyll.SchemeTheory.Gluing.RelativeOverlap
+public import Nyll.SchemeTheory.Gluing.RelativePullback
+public import Nyll.SchemeTheory.Gluing.CommonCover
+public import Nyll.SchemeTheory.Gluing.OverCover
+public import Nyll.SchemeTheory.Gluing.CoefficientCover
+public import Nyll.SchemeTheory.Gluing.RecoveredLocalModel
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Nyll.SchemeTheory.Gluing.RelativePullbackRecovery
+public import Nyll.SchemeTheory.Gluing.RelativeChartBaseChange
+public import Nyll.SchemeTheory.Gluing.RecoveredChartTransport
+public import Nyll.SchemeTheory.Gluing.RecoveredPullbackOverlaps
+public import Nyll.SchemeTheory.Gluing.RecoveredOverlapTransport
 
 /-! General scheme gluing and recovery. -/

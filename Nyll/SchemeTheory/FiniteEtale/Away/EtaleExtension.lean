@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Boundary Away maps through an etale extension
@@ -21,6 +23,8 @@ Noetherian hypothesis is needed: after localizing both targets at the same
 source element, the second map is etale by localization and restriction of
 scalars, and the two literal Away maps compose.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,7 +70,7 @@ theorem localization_awayMap_etale_of_etale_extension
   let : IsScalarTower C T U :=
     IsScalarTower.of_algebraMap_eq fun c ↦ by
       change mapCDU c = mapTU (algebraMap C T c)
-      simp [mapTU]
+      simp only [IsLocalization.Away.lift_eq, mapTU]
   have hcomp : mapTU.comp mapST = mapSU := by
     apply IsLocalization.ringHom_ext (Submonoid.powers f)
     ext a
@@ -76,14 +80,14 @@ theorem localization_awayMap_etale_of_etale_extension
           mapTU (algebraMap C T (algebraMap A C a)) := by
         rw [show mapST (algebraMap A S a) =
             algebraMap C T (algebraMap A C a) by
-          simp [mapST, S, T, fC, IsLocalization.Away.map]]
-      _ = mapCDU (algebraMap A C a) := by simp [mapTU]
+          simp only [IsLocalization.Away.map, IsLocalization.map_eq, T, fC, S, mapST]]
+      _ = mapCDU (algebraMap A C a) := by simp only [IsLocalization.Away.lift_eq, mapTU]
       _ = algebraMap D U
           (algebraMap C D (algebraMap A C a)) := rfl
       _ = algebraMap D U (algebraMap A D a) := by
         rw [IsScalarTower.algebraMap_apply A C D a]
       _ = mapSU (algebraMap A S a) := by
-        simp [mapSU, S, U, fD, IsLocalization.Away.map]
+        simp only [IsLocalization.Away.map, IsLocalization.map_eq, U, fD, S, mapSU]
   let : Algebra S U := mapSU.toAlgebra
   let : IsScalarTower S T U :=
     IsScalarTower.of_algebraMap_eq fun x ↦

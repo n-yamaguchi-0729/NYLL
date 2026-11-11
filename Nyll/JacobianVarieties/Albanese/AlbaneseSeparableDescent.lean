@@ -5,35 +5,37 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Albanese.AbelJacobiMorphismDetectionField
-import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiPointClassBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.PicardRepresentabilityBaseChange
-import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
-import Nyll.SchemeTheory.Morphisms.ReducedSmooth
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.CategoryTheory.EffectiveEpi.Basic
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.RingTheory.RingHom.Finite
+module
+
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiMorphismDetectionField
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
+public import Nyll.SchemeTheory.BaseChange.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiPointClassBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.PicardRepresentabilityBaseChange
+public import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
+public import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.CategoryTheory.EffectiveEpi.Basic
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.RingTheory.RingHom.Finite
 
 /-!
 # Descent of an actual Albanese factorization
@@ -42,6 +44,8 @@ The factorization over a finite separable extension descends along its finite
 faithfully flat spectrum map. Equality on the overlap follows from actual
 geometric point classes and uniqueness among all scheme morphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

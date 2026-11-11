@@ -4,19 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Mathlib.LinearAlgebra.Vandermonde
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.LinearAlgebra.Vandermonde
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-! # Tensor splitting by a complete family of actual embeddings
 
 Evaluation in `n` distinct embeddings of a separable extension of degree `n`
 is an algebra equivalence. The target field need not be algebraically closed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

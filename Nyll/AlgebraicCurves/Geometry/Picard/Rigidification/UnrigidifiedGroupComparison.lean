@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 
 /-!
 # The group comparison between pointed and unrigidified Picard classes
@@ -14,6 +16,8 @@ import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 Forgetting rigidification preserves tensor products on actual representatives.
 The normalization equivalence is therefore an equivalence of commutative groups.
 -/
+
+@[expose] public section
 
 universe u
 

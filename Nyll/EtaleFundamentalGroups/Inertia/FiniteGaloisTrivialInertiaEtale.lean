@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisInvariantNeighborhood
-import Nyll.EtaleFundamentalGroups.Inertia.EtaleNormalizationInertia
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Algebra.Subalgebra.Operations
-import Mathlib.Algebra.Group.Subgroup.Lattice
-import Mathlib.Algebra.Group.Submonoid.Membership
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
-import Mathlib.RingTheory.Smooth.Locus
-import Mathlib.RingTheory.Unramified.Locus
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisInvariantNeighborhood
+public import Nyll.EtaleFundamentalGroups.Inertia.EtaleNormalizationInertia
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Algebra.Subalgebra.Operations
+public import Mathlib.Algebra.Group.Subgroup.Lattice
+public import Mathlib.Algebra.Group.Submonoid.Membership
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
+public import Mathlib.RingTheory.Smooth.Locus
+public import Mathlib.RingTheory.Unramified.Locus
 
 /-!
 # A finite Galois normalization with trivial inertia is etale
@@ -32,6 +34,8 @@ of the normalization as a module is assumed.
 
 Reference: https://stacks.math.columbia.edu/tag/0BTF
 -/
+
+@[expose] public section
 
 noncomputable section
 

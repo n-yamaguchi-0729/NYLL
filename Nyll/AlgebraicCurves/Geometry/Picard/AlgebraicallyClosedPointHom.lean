@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
-import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+public import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
 
 /-! # Actual group homomorphisms detected on algebraically closed ground-field points -/
+
+@[expose] public section
 
 noncomputable section
 

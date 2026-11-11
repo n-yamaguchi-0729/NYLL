@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitAction
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitFaithful
-import Mathlib.RepresentationTheory.Invariants
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitAction
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitFaithful
+public import Mathlib.RepresentationTheory.Invariants
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
 
 /-!
 # Actual global sections as absolute Galois invariants
@@ -15,6 +18,8 @@ Finite-stage sections embed in the geometric section colimit. An
 absolute-Galois-invariant section is therefore already invariant at
 its finite Galois stage and descends by actual sheaf descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -80,12 +85,12 @@ theorem finiteGaloisBaseToColimit_injective :
 theorem finiteGaloisBaseToColimit_invariant
     (s : F.obj.obj (op (Scheme.Etale.mk (𝟙 (Spec (.of K))))))
     (σ : Gal(AlgebraicClosure K/K)) :
-    (finiteGaloisSectionColimitAction K F σ).hom
+    (finiteGaloisSectionColimitAction K F σ).asIso.hom
       (finiteGaloisBaseToColimit K F s) = finiteGaloisBaseToColimit K F s := by
   let E : FiniteGaloisIntermediateField K (AlgebraicClosure K) := ⊥
   let t := F.obj.map (finiteEtaleCoverBaseMap (Spec (.of K))
     (FiniteEtale.mk (ξ K E))).op s
-  have ht : (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).hom t = t :=
+  have ht : (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).asIso.hom t = t :=
     finiteEtaleSheaf_restrict_invariant (Spec (.of K))
       ((sheafCompose (Spec (.of K)).smallEtaleTopology (forget AddCommGrpCat.{u})).obj F)
       (FiniteEtale.mk (ξ K E)) s
@@ -100,11 +105,11 @@ theorem finiteGaloisBaseToColimit_invariant
 theorem exists_base_section_of_finiteGaloisColimit_invariant
     (x : finiteGaloisSectionColimit K F)
     (hx : ∀ σ : Gal(AlgebraicClosure K/K),
-      (finiteGaloisSectionColimitAction K F σ).hom x = x) :
+      (finiteGaloisSectionColimitAction K F σ).asIso.hom x = x) :
     ∃ s : F.obj.obj (op (Scheme.Etale.mk (𝟙 (Spec (.of K))))),
       finiteGaloisBaseToColimit K F s = x := by
   obtain ⟨E, t, rfl⟩ := finiteGaloisSectionColimit_exists_stage K F x
-  have ht (τ : Gal(E/K)) : (fieldGaloisSheafAction K E F τ).hom t = t := by
+  have ht (τ : Gal(E/K)) : (fieldGaloisSheafAction K E F τ).asIso.hom t = t := by
     obtain ⟨σ, rfl⟩ :=
       (AlgEquiv.restrictNormalHom_surjective (F := K) (E := AlgebraicClosure K)
         (K₁ := E)) τ
@@ -115,15 +120,15 @@ theorem exists_base_section_of_finiteGaloisColimit_invariant
   let F₀ := (sheafCompose (Spec (.of K)).smallEtaleTopology
     (forget AddCommGrpCat.{u})).obj F
   have hinv (τ : Aut Y) :
-      F₀.obj.map ((finiteEtaleInclusion (Spec (.of K))).map τ.hom).op t = t := by
+      F₀.obj.map ((finiteEtaleInclusion (Spec (.of K))).map τ.asIso.hom).op t = t := by
     obtain ⟨σ, hσ⟩ :=
       (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K E).surjective
         (MulOpposite.op τ)
     have hh := ht σ
     change F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map
       (MulOpposite.unop
-        (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K E σ)).hom).op t =
-      t at hh
+        (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K E σ)).asIso.hom).op
+        t = t at hh
     rw [hσ] at hh
     exact hh
   have : PreGaloisCategory.IsGalois Y :=

@@ -10,28 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Algebra.Order.BigOperators.Group.Multiset
-import Mathlib.Algebra.Polynomial.BigOperators
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Polynomial.Splits
-import Mathlib.Data.Matrix.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.RingTheory.Valuation.Integers
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.BigOperators.Group.Multiset
+public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Polynomial.Splits
+public import Mathlib.Data.Matrix.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.RingTheory.Valuation.Integers
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Valued exists forall v sub eq one and v det eq one of v sub sum div lt one
 -/
+
+@[expose] public section
+
+universe uK uΓ uι un
 
 section ProofImplementation
 
@@ -45,7 +51,7 @@ open _root_.Valued
 namespace GenericUnimodular
 open _root_.Valued
 
-variable {K : Type} [Field K] {Γ₀ : Type} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
+variable {K : Type uK} [Field K] {Γ₀ : Type uΓ} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
 
 local notation "𝓋" => (Valued.v : Valuation K Γ₀)
 
@@ -113,7 +119,7 @@ lemma exists_forall_one_le_v_sub [IsAlgClosed K] (F : Finset K) :
 
 section det
 
-variable {n : Type} [Fintype n] [DecidableEq n]
+variable {n : Type un} [Fintype n] [DecidableEq n]
 
 /-- The ideal of integral elements whose valuation is strictly less than one. -/
 def resIdeal : Ideal (𝓋).integer where
@@ -178,7 +184,7 @@ end det
 
 section cleared
 
-variable {ι : Type} [Fintype ι] [DecidableEq ι] {r : ℕ}
+variable {ι : Type uι} [Fintype ι] [DecidableEq ι] {r : ℕ}
 
 /-- The interpolation product omitting the factor at the chosen index. -/
 def L (t : ι → K) (a : ι) (x : K) : K := ∏ a' ∈ Finset.univ.erase a, (x - t a')
@@ -330,7 +336,7 @@ lemma exists_v_eval_eq_one_avoiding [IsAlgClosed K] (p : K[X]) (x₀ : K) (hx₀
     rw [Valuation.map_sub_eq_of_lt_right Valued.v (hx₀.trans_lt hα1),
       Valuation.map_sub_eq_of_lt_right Valued.v (hx.trans_lt hα1)]
 
-lemma exists_points [IsAlgClosed K] {ι : Type} [Fintype ι] [DecidableEq ι] (t : ι → K)
+lemma exists_points [IsAlgClosed K] {ι : Type uι} [Fintype ι] [DecidableEq ι] (t : ι → K)
     (ht : ∀ a, 𝓋 (t a) ≤ 1) (htsep : ∀ a a' : ι, a ≠ a' → 1 ≤ 𝓋 (t a - t a'))
     {r : ℕ} (m : Fin r → Fin r → ι → ℤ) (a₀ : Fin r → ι)
     (hdet : 𝓋 (Matrix.of (fun i j : Fin r => ((m i j (a₀ i) : ℤ) : K))).det = 1)
@@ -375,9 +381,9 @@ end Valued.GenericUnimodular
 
 open Valued.GenericUnimodular in
 theorem _root_.Valued.exists_forall_v_sub_eq_one_and_v_det_eq_one_of_v_sub_sum_div_lt_one
-    (K : Type) [Field K] {Γ₀ : Type} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀] [IsAlgClosed
-      K]
-    {ι : Type} [Fintype ι] (t : ι → K)
+    (K : Type uK) [Field K] {Γ₀ : Type uΓ} [LinearOrderedCommGroupWithZero Γ₀]
+    [Valued K Γ₀] [IsAlgClosed K]
+    {ι : Type uι} [Fintype ι] (t : ι → K)
     (ht : ∀ a : ι, Valued.v (t a) ≤ 1) (htsep : ∀ a a' : ι, a ≠ a' → 1 ≤ Valued.v (t a - t a'))
     {r : ℕ} (m : Fin r → Fin r → ι → ℤ) (a₀ : Fin r → ι)
     (hdet : Valued.v (Matrix.of (fun i j : Fin r => ((m i j (a₀ i) : ℤ) : K))).det = 1)

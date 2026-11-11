@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.MvPolynomial.Ideal
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.RingTheory.MvPolynomial.Ideal
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Mv Polynomial exists skew eq sum mul X of sum mul X eq zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -66,10 +70,14 @@ theorem aux : ∀ (m : ℕ) (B : Type u) [CommRing B] (c : Fin m → MvPolynomia
     let ψ : MvPolynomial (Fin (n + 1)) B ≃ₐ[B] MvPolynomial (Fin n) (Polynomial B) :=
       (renameEquiv B (_root_.finSuccEquiv n)).trans (optionEquivRight B (Fin n))
     have hψ0 : ψ (X 0) = C Polynomial.X := by
-      simp [ψ, renameEquiv, rename_X, finSuccEquiv_zero]
+      change optionEquivRight B (Fin n)
+        (rename (_root_.finSuccEquiv n) (X 0)) = C Polynomial.X
+      rw [rename_X, finSuccEquiv_zero, optionEquivRight_X_none]
     have hψs : ∀ i : Fin n, ψ (X i.succ) = X i := by
       intro i
-      simp [ψ, renameEquiv, rename_X, finSuccEquiv_succ]
+      change optionEquivRight B (Fin n)
+        (rename (_root_.finSuccEquiv n) (X i.succ)) = X i
+      rw [rename_X, finSuccEquiv_succ, optionEquivRight_X_some]
     have hrel : ψ (c 0) * C Polynomial.X + ∑ i : Fin n, ψ (c i.succ) * X i = 0 := by
       have h := congrArg ψ hc
       rw [map_sum, Fin.sum_univ_succ, map_zero, map_mul, hψ0] at h

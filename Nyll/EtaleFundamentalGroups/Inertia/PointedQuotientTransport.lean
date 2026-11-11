@@ -4,8 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PointedQuotientTransport
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PointedQuotientTransport
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 
 /-!
 # Transport of pointed local finite-cover quotients
@@ -13,6 +18,8 @@ import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
 The finite monodromy obtained from a scheme morphism is natural when the
 composite geometric fiber is transported to another chosen base point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,14 +44,14 @@ theorem finiteEtaleGaloisCoverQuotientOfMorphism_transport
       AlgebraicGeometry.FiniteEtale.fiber xi')
     (Y : AlgebraicGeometry.FiniteEtale U) (hY : IsGalois Y)
     (y : (AlgebraicGeometry.FiniteEtale.fiber xi').obj Y) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     Inertia.finiteEtaleGaloisCoverQuotientOfMorphism
         j xi Y hY (p.inv.app Y y) =
       (EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom
         xi' Y hY y).comp
         (p.conjAut.toMonoidHom.comp
           (AlgebraicGeometry.FiniteEtale.fundamentalGroupHom j xi).toMonoidHom) := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   change
     (finiteEtaleGaloisCoverQuotientMonoidHom
       (xi ≫ j) Y hY (p.inv.app Y y)).comp

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LaurentSeries
-import Nyll.AlgebraicCurves.Differentials.Residues.Basic
-import Nyll.AlgebraicCurves.Places.Differentials.CanonicalLocalResidueDataKResDifferentialCoeffDMulInvEqOne
-import Nyll.AlgebraicCurves.Places.Differentials.CanonicalLocalResidueDataKResDifferentialCoeffDMulPowInvEqZero
+module
+
+public import Mathlib.RingTheory.LaurentSeries
+public import Nyll.AlgebraicCurves.Differentials.Residues.Basic
+public import Nyll.AlgebraicCurves.Places.Differentials.CanonicalLocalResidueDataKResDifferentialCoeffDMulInvEqOne
+public import Nyll.AlgebraicCurves.Places.Differentials.CanonicalLocalResidueDataKResDifferentialCoeffDMulPowInvEqZero
 
 /-!
 # Place algebra Map coeff neg one eq local Residue mul differential Coeff D
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -27,8 +31,6 @@ namespace AlgebraicCurves.Places.Proofs.PlaceResidueCoefficient
 open _root_.IsDedekindDomain.HeightOneSpectrum in
 attribute [-instance]
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

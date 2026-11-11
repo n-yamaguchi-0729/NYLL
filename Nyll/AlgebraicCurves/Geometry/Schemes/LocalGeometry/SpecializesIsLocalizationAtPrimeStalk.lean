@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # Scheme exists specializes is Localization at Prime stalk
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,24 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Tactic.Omega
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
-import Mathlib.Algebra.MonoidAlgebra.Module
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialSkewEqSumMulX
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
+public import Mathlib.Algebra.MonoidAlgebra.Module
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialSkewEqSumMulX
 
 /-!
 # Mv Polynomial relation mem span of forall is Homogeneous mem span
 -/
+
+@[expose] public section
+
+universe u v
 
 section ProofImplementation
 
@@ -40,7 +46,7 @@ open MvPolynomial
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-variable {L : Type} [Field L] {n : ℕ}
+variable {L : Type u} [Field L] {n : ℕ}
 
 theorem decompose_eq (q : MvPolynomial (Fin (n + 1)) L) (d : ℕ) :
     (DirectSum.decompose (homogeneousSubmodule (Fin (n + 1)) L) q d : MvPolynomial (Fin (n + 1)) L)
@@ -125,7 +131,7 @@ theorem exists_eq_sum_mul_of_span {N q : ℕ} (u : Fin N → MvPolynomial (Fin (
           _ = ∑ j, (∑ i, X i * d i j) * u j := by
               rw [Finset.sum_comm]; exact Finset.sum_congr rfl fun j _ => by rw [Finset.sum_mul]
 
-theorem sum_sum_eq_zero_of_alternating {M : Type} [AddCommGroup M] {N : ℕ} (f : Fin N → Fin N → M)
+theorem sum_sum_eq_zero_of_alternating {M : Type v} [AddCommGroup M] {N : ℕ} (f : Fin N → Fin N → M)
     (hskew : ∀ ν μ, f ν μ = -f μ ν) (hdiag : ∀ ν, f ν ν = 0) : ∑ ν, ∑ μ, f ν μ = 0 := by
   rw [← Finset.sum_product']
   refine Finset.sum_ninvolution Prod.swap (fun a => ?_) (fun a ha => ?_) (fun a => Finset.mem_univ
@@ -259,7 +265,7 @@ end GotzRegD
 
 open MvPolynomial in
 theorem _root_.MvPolynomial.relation_mem_span_of_forall_isHomogeneous_mem_span
-    (n m g : ℕ) (K : Type) [Field K] (F : Fin g → MvPolynomial (Fin (n + 1)) K)
+    (n m g : ℕ) (K : Type u) [Field K] (F : Fin g → MvPolynomial (Fin (n + 1)) K)
     (hF : ∀ i, (F i).IsHomogeneous m)
     (hspan : ∀ w : MvPolynomial (Fin (n + 1)) K, w.IsHomogeneous m → w ∈ Submodule.span K
       (Set.range F))

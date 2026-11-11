@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothRelativeDimension
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothSmoothOfRelativeDimension
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothRelativeDimension
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothSmoothOfRelativeDimension
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
 # Descent of the dimension of a connected smooth scheme
@@ -16,6 +18,8 @@ After smoothness and connectedness have descended, the constant smooth dimension
 is determined on any nonempty scalar extension. Comparing actual smooth charts
 proves the equality without an additional dimension hypothesis over the base.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
 
 /-!
 # Abelian Galois covers under dense preimmersion pullback
@@ -15,6 +17,8 @@ Galois property but also commutativity of the cover automorphism group.  The
 automorphism map is injective by faithfulness and is surjective because both
 Galois automorphism groups have the same finite-etale rank.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,8 +57,9 @@ theorem pullback_obj_aut_isMulCommutative_of_isPreimmersion_of_isDominant
   have hAutInj : Function.Injective (F.mapAut W) := by
     intro σ τ hστ
     apply Aut.ext
+    apply Iso.ext
     apply F.map_injective
-    exact congrArg Iso.hom hστ
+    exact congrArg (fun a => a.asIso.hom) hστ
   let u : U := Classical.choice (inferInstance : Nonempty U)
   let Omega := AlgebraicClosure (U.residueField u)
   let xi : Spec (.of Omega) ⟶ U :=

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.AdditiveLocalSymbolFormula
-import Nyll.AlgebraicCurves.Divisors.Modulus.MultiplicativeModulus
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.AdditiveLocalSymbolFormula
+public import Nyll.AlgebraicCurves.Divisors.Modulus.MultiplicativeModulus
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
 
 /-!
 # Moduli for vector and split-torus rational maps
@@ -16,6 +18,8 @@ modulus. This applies in arbitrary characteristic and makes no assumption
 that a general commutative unipotent group is a vector group.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace AlgebraicCurve.Modulus
@@ -23,7 +27,7 @@ namespace AlgebraicCurve.Modulus
 variable {K F ι : Type*} [Field K] [Field F] [Algebra K F]
   [IsAlgClosed K] [Algebra.EssFiniteType K F] [IsCurveOver K F] [Finite ι]
 
-local instance : HasPrincipalDivisors K F := IsCurveOver.hasPrincipalDivisors
+attribute [local instance] IsCurveOver.toHasPrincipalDivisors
 
 /-- A rational map to a finite-dimensional vector group has a full modulus. -/
 theorem exists_vector_modulus (f : ι → F) :

@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CoefficientPullback
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldLimit
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ModelOverlap
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredStageRecovery
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.SchemePairDescent
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Galois.Basic
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Topology.Connected.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CoefficientPullback
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldLimit
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ModelOverlap
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredStageRecovery
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.SchemePairDescent
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Galois.Basic
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # Preserving the Galois group at a finite coefficient stage
@@ -44,6 +46,8 @@ The input cover here is an existing model over the base field. Applying
 this result after finite coefficient descent of an arbitrary geometric
 cover gives the Galois model used in specialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -93,22 +97,22 @@ theorem exists_finiteIntermediateField_galois_stage
     hCoeff.flip.isoPullback_hom_snd
   let F : FiniteEtale U ⥤ Scheme.{u} := FiniteEtale.forget U ⋙ Over.forget U
   let a (σ : Aut P) : Aut Q := (Aut.autMulEquivOfIso e).symm σ
-  let α (σ : Aut P) : Aut V := F.mapIso (a σ)
-  have hα (σ : Aut P) : (α σ).hom ≫ l = l :=
-    MorphismProperty.Over.w (a σ).hom
+  let α (σ : Aut P) : Aut V := F.mapAut Q (a σ)
+  have hα (σ : Aut P) : (α σ).asIso.hom ≫ l = l :=
+    MorphismProperty.Over.w (a σ).asIso.hom
   have hαL (σ : Aut P) :
-      (α σ).hom ≫ pullback.fst φL (y ≫ f) = pullback.fst φL (y ≫ f) := by
+      (α σ).asIso.hom ≫ pullback.fst φL (y ≫ f) = pullback.fst φL (y ≫ f) := by
     simpa only [Category.assoc, hlFst] using
       congrArg (fun h : V ⟶ U => h ≫ pullback.fst φL f) (hα σ)
   have hαX (σ : Aut P) :
-      (α σ).hom ≫ pullback.snd φL (y ≫ f) ≫ y =
+      (α σ).asIso.hom ≫ pullback.snd φL (y ≫ f) ≫ y =
         pullback.snd φL (y ≫ f) ≫ y := by
     simpa only [Category.assoc, hlSnd] using
       congrArg (fun h : V ⟶ U => h ≫ pullback.snd φL f) (hα σ)
   obtain ⟨s, hs, g, hg⟩ := exists_finiteIntermediateField_schemePairHom_family
     k L X f (fun _ : Aut P => Y.left) (fun _ : Aut P => Y.left)
     (fun _ : Aut P => y) (fun _ : Aut P => y)
-    (fun σ : Aut P => (α σ).hom) hαX hαL
+    (fun σ : Aut P => (α σ).asIso.hom) hαX hαL
   let H := IntermediateField.adjoin k (s : Set L)
   let φH := Spec.map (CommRingCat.ofHom (algebraMap k H))
   let ψ := Spec.map (CommRingCat.ofHom H.val.toRingHom)
@@ -141,9 +145,9 @@ theorem exists_finiteIntermediateField_galois_stage
   have : ConnectedSpace N.left := inferInstanceAs (ConnectedSpace V₀)
   have : IsConnected N := FiniteEtale.isConnected_of_connectedSpace_left N
   have hgIso (σ : Aut P) : IsIso (g σ) := by
-    have : IsIso (α σ).hom := (α σ).isIso_hom
+    have : IsIso (α σ).asIso.hom := (α σ).asIso.isIso_hom
     exact isIso_of_constantFieldStageHom k L Y.left Y.left (y ≫ f) (y ≫ f) s
-      (α σ).hom (g σ) (hαL σ) (hg σ).1 (hg σ).2.2
+      (α σ).asIso.hom (g σ) (hαL σ) (hg σ).1 (hg σ).2.2
   have hgBase (σ : Aut P) : g σ ≫ l₀ = l₀ := by
     apply pullback.hom_ext
     · simpa only [Category.assoc, hl₀Fst] using (hg σ).1
@@ -155,8 +159,8 @@ theorem exists_finiteIntermediateField_galois_stage
     have : IsIso (g σ) := hgIso σ
     exact asIso_hom (g σ)
   let τ (σ : Aut P) : Aut N :=
-    MorphismProperty.Over.isoMk (A := N) (B := N) (γ σ) (hgBase σ)
-  let forgetAutHom (t : Aut N) : V₀ ⟶ V₀ := t.hom.left
+    Aut.of (MorphismProperty.Over.isoMk (A := N) (B := N) (γ σ) (hgBase σ))
+  let forgetAutHom (t : Aut N) : V₀ ⟶ V₀ := t.asIso.hom.left
   have hτHom (σ : Aut P) : forgetAutHom (τ σ) = g σ := by
     exact (MorphismProperty.Over.isoMk_hom_left (A := N) (B := N) (γ σ)
       (hgBase σ)).trans (hγHom σ)
@@ -164,18 +168,19 @@ theorem exists_finiteIntermediateField_galois_stage
     intro σ σ' hσσ'
     have hgg : g σ = g σ' := by
       simpa only [hτHom] using congrArg forgetAutHom hσσ'
-    have hrec : (α σ).hom ≫ cY = (α σ').hom ≫ cY :=
+    have hrec : (α σ).asIso.hom ≫ cY = (α σ').asIso.hom ≫ cY :=
       (hg σ).2.2.symm.trans
         ((congrArg (fun h : V₀ ⟶ V₀ => cY ≫ h) hgg).trans (hg σ').2.2)
     have hcYs : cY ≫ pullback.snd φH (y ≫ f) = pullback.snd φL (y ≫ f) :=
       Over.w ((constantFieldInverseLimitOverCone k L Y.left (y ≫ f)).π.app (op s))
-    have hαeq : (α σ).hom = (α σ').hom := by
+    have hαeq : (α σ).asIso.hom = (α σ').asIso.hom := by
       apply pullback.hom_ext
       · exact (hαL σ).trans (hαL σ').symm
       · simpa only [Category.assoc, hcYs] using
           congrArg (fun h : V ⟶ V₀ => h ≫ pullback.snd φH (y ≫ f)) hrec
     apply (Aut.autMulEquivOfIso e).symm.injective
     apply Aut.ext
+    apply Iso.ext
     exact F.map_injective hαeq
   have hLower : Nat.card (Aut P) ≤ Nat.card (Aut N) :=
     Nat.card_le_card_of_injective τ hτ

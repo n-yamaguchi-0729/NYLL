@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackPresentation
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Topology.Sheaves.Module
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackPresentation
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Topology.Sheaves.Module
 
 /-!
 # Quasicoherence of the actual scheme pullback
@@ -26,6 +28,8 @@ target's canonical affine cover. Generator index sets are retained, so
 the same construction also supports finite-type pullback without assuming
 finite presentation of the source sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

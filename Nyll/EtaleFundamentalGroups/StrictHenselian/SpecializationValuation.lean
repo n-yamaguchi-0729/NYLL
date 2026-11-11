@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SeparablyClosedFractionHenselian
-import Nyll.ValuedFieldTheory.Valuation.ResidueAlgebraicClosedness
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SeparablyClosedFractionHenselian
+public import Nyll.ValuedFieldTheory.Valuation.ResidueAlgebraicClosedness
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Valuation rings realizing the ring diagram of specialization
@@ -26,6 +28,8 @@ This is the ring construction in the proof of Stacks Project, Lemma
 58.16.3, https://stacks.math.columbia.edu/tag/0C0M. The comparison of
 fundamental groups of proper geometric fibres is a separate assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,7 +49,8 @@ image of the local source ring. The source map need not be injective. -/
 def specializationValuationSubring : ValuationSubring Ω :=
   Classical.choose (IsLocalRing.exists_factor_valuationRing φ)
 
-private theorem specializationValuation_mem (a : A) :
+/-- The specialization map takes its values in the chosen valuation subring. -/
+theorem specializationValuation_mem (a : A) :
     φ a ∈ (specializationValuationSubring φ).toSubring :=
   Classical.choose (Classical.choose_spec (IsLocalRing.exists_factor_valuationRing φ)) a
 

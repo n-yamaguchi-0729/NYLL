@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Limits.Cones
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.Limits.Cones
 
 /-!
 # Actual scheme-theoretic image diagrams
@@ -16,6 +18,8 @@ A map into the vertex of a scheme cone gives compatible scheme-theoretic
 images at every stage. The image transition maps are constructed by the
 closed-immersion kernel factorization, and preserve affine transitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,7 +38,8 @@ abbrev stage (i : I) : Scheme.{u} := (j ≫ c.π.app i).image
 /-- The actual image inclusion into the ambient stage. -/
 abbrev inclusion (i : I) : stage D c j i ⟶ D.obj i := (j ≫ c.π.app i).imageι
 
-private lemma transition_kernel {i k : I} (f : i ⟶ k) :
+/-- The image at the next stage contains the image of the current stage under its transition. -/
+lemma transition_kernel {i k : I} (f : i ⟶ k) :
     (inclusion D c j k).ker ≤ (inclusion D c j i ≫ D.map f).ker := by
   change (j ≫ c.π.app k).ker.subschemeι.ker ≤
     ((j ≫ c.π.app i).ker.subschemeι ≫ D.map f).ker

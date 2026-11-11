@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Basic.Finite.Prod
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.Data.Set.Disjoint
-import Mathlib.Data.Set.Lattice.Indexed
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.Data.Set.Disjoint
+public import Mathlib.Data.Set.Lattice.Indexed
+public import Mathlib.Topology.Constructible
 
 /-!
 # Finite constructible stratifications by immersions
@@ -27,6 +29,8 @@ The fiber products of two stratifications give a common refinement, with
 actual projection morphisms to both original strata. No assumption of
 noetherianity, quasi-compactness, or a ground field is made.
 -/
+
+@[expose] public section
 
 noncomputable section
 

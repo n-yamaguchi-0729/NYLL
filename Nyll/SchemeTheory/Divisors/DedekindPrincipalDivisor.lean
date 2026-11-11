@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DedekindDomain.Factorization
-import Mathlib.RingTheory.DedekindDomain.AdicValuation
-import Mathlib.RingTheory.Valuation.Discrete.Basic
-import Nyll.SchemeTheory.Divisors.DVRUnitQuotient
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Unramified.LocalStructure
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
-import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Spectrum.Maximal.Topology
-import Mathlib.Topology.JacobsonSpace
+module
+
+public import Mathlib.RingTheory.DedekindDomain.Factorization
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.Valuation.Discrete.Basic
+public import Nyll.SchemeTheory.Divisors.DVRUnitQuotient
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Unramified.LocalStructure
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
+public import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Spectrum.Maximal.Topology
+public import Mathlib.Topology.JacobsonSpace
 
 /-!
 # Principal divisors on an affine Dedekind domain
@@ -22,6 +24,8 @@ import Mathlib.Topology.JacobsonSpace
 The finite-support and uniqueness assertions reuse Mathlib's factorization
 of fractional ideals. The kernel consists exactly of the original ring units.
 -/
+
+@[expose] public section
 
 noncomputable section
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -64,14 +68,14 @@ def principalDivisorAddHom : Additive Kˣ →+ (HeightOneSpectrum R →₀ ℤ) 
   toFun a := divisorFinsupp R K (spanSingleton R⁰ (a.toMul : K))
   map_zero' := by
     change divisorFinsupp R K (spanSingleton R⁰ (1 : K)) = 0
-    rw [spanSingleton_one, divisorFinsupp_one]
+    rw [map_one, divisorFinsupp_one]
   map_add' a b := by
     apply Finsupp.ext
     intro v
     change count K v (spanSingleton R⁰ ((a.toMul : K) * (b.toMul : K))) =
       count K v (spanSingleton R⁰ (a.toMul : K)) +
         count K v (spanSingleton R⁰ (b.toMul : K))
-    rw [← spanSingleton_mul_spanSingleton]
+    rw [map_mul]
     exact count_mul K v
       (spanSingleton_ne_zero_iff.mpr a.toMul.ne_zero)
       (spanSingleton_ne_zero_iff.mpr b.toMul.ne_zero)
@@ -84,7 +88,7 @@ theorem principalDivisorAddHom_eq_zero_iff (a : Additive Kˣ) :
   change divisorFinsupp R K (spanSingleton R⁰ (a.toMul : K)) = 0 ↔ _
   rw [← divisorFinsupp_one R K,
     divisorFinsupp_eq_iff R K (spanSingleton_ne_zero_iff.mpr a.toMul.ne_zero) one_ne_zero]
-  rw [← spanSingleton_one (S := R⁰) (P := K)]
+  rw [← map_one (spanSingleton R⁰ : K →*₀ FractionalIdeal R⁰ K)]
   constructor
   · intro h
     obtain ⟨u, hu⟩ := (spanSingleton_eq_spanSingleton (S := R⁰)).mp h.symm
@@ -183,7 +187,7 @@ theorem valuation_eq_exp_neg_principalDivisor
   have hI : spanSingleton R⁰ (a.toMul : K) =
       spanSingleton R⁰ ((algebraMap R K) (s : R))⁻¹ *
         (Ideal.span ({r} : Set R) : FractionalIdeal R⁰ K) := by
-    rw [coeIdeal_span_singleton, spanSingleton_mul_spanSingleton]
+    rw [coeIdeal_span_singleton, ← map_mul]
     apply congrArg (spanSingleton R⁰)
     rw [← hrs, IsFractionRing.mk'_eq_div, div_eq_mul_inv, mul_comm]
   have hc := count_well_defined K v
@@ -238,7 +242,8 @@ universe u
 variable (R K : Type u) [CommRing R] [IsDedekindDomain R]
   [Field K] [Algebra R K] [IsFractionRing R K]
 
-private def principalDivisorCoefficientAt
+/-- Extract the principal-divisor coefficient at the original height-one prime. -/
+def principalDivisorCoefficientAt
     (v : HeightOneSpectrum R) : Additive Kˣ →+ ℤ :=
   (Finsupp.lapply (R := ℤ) v).toAddMonoidHom.comp (principalDivisorAddHom R K)
 
@@ -860,9 +865,7 @@ theorem affineEtaleDivisorPullback_comp
     affineEtaleDivisorPullback (R := S) (S := T)
       (affineEtaleDivisorPullback (R := R) (S := S) D) =
     affineEtaleDivisorPullback (R := R) (S := T) D := by
-  dsimp only
-  have hS : IsDedekindDomain S :=
-    IsDedekindDomain.of_essFiniteType_formallyUnramified R S
+  intro hS
   have hcontract (w : HeightOneSpectrum T) :
       heightOneSpectrumContractionOfEtale (R := R) (S := S)
         (heightOneSpectrumContractionOfEtale (R := S) (S := T) w) =

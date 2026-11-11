@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.EtaleRegularity
-import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
-import Nyll.SchemeTheory.Affine.ChartStalkLocalization
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.Nilpotent.Basic
+module
+
+public import Nyll.SchemeTheory.Divisors.EtaleRegularity
+public import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
+public import Nyll.SchemeTheory.Affine.ChartStalkLocalization
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Nilpotent.Basic
 
 /-!
 # Integral affine objects in the small etale site
@@ -23,6 +25,8 @@ For a Dedekind base, every small etale object is covered by integral affine
 etale objects. The proof uses regularity ascent on stalks, local irreducibility,
 and the affine-open basis; the resulting inclusion is cover-dense.
 -/
+
+@[expose] public section
 
 noncomputable section
 open AlgebraicGeometry CategoryTheory

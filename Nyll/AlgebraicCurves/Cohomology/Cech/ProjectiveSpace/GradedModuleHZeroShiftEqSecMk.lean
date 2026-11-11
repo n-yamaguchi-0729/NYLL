@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModulePresentationHZeroShiftEqSecMk
-import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModuleHZeroPiFDShiftEqSecMk
-import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModuleSubsingletonCohomologyShift
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationKerIsFG
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModulePresentationHZeroShiftEqSecMk
+public import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModuleHZeroPiFDShiftEqSecMk
+public import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModuleSubsingletonCohomologyShift
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationKerIsFG
 
 /-!
 # Proj Space Cech Graded Module exists forall H zero shift eq sec mk of is FG
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

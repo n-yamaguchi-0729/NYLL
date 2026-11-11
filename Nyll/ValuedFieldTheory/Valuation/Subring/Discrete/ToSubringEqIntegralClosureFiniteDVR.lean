@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
 
 /-!
 # Valuation Subring to Subring eq integral Closure and finite and is Discrete Valuation Ring
 of henselian
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -106,12 +110,12 @@ theorem isLocalRing_of_isDomain_of_moduleFinite
     change f₀ * f₀ = f₀
     ext I
     by_cases hI : I = M₁
-    · subst hI; simp [f₀]
-    · simp [f₀, hI]
+    · subst hI; simp only [f₀, Pi.mul_apply, Pi.single_eq_same, one_mul]
+    · simp only [f₀, Pi.mul_apply, Pi.single_eq_of_ne hI, mul_zero]
   have hf₀0 : f₀ ≠ 0 := by
     intro h
     have := congrFun h M₁
-    simp [f₀] at this
+    simp only [f₀, Pi.single_eq_same, Pi.zero_apply] at this
     exact M₁.isMaximal.ne_top (Ideal.Quotient.zero_eq_one_iff.mp this.symm)
   have hf₀1 : f₀ ≠ 1 := by
     intro h
@@ -149,7 +153,7 @@ end S17Hens
 namespace S17Hens
 
 open Polynomial in
-theorem mem_of_isIntegral {K F : Type} [Field K] [Field F] [Algebra K F]
+theorem mem_of_isIntegral {K : Type u} {F : Type v} [Field K] [Field F] [Algebra K F]
     (O : ValuationSubring K) [Algebra O F] [IsScalarTower O K F]
     (O' : ValuationSubring F) (hO' : ∀ x : K, algebraMap K F x ∈ O' ↔ x ∈ O)
     {y : F} (hy : IsIntegral O y) : y ∈ O' := by
@@ -200,7 +204,8 @@ theorem mem_of_isIntegral {K F : Type} [Field K] [Field F] [Algebra K F]
   exact lt_irrefl _ this
 
 theorem valuationSubring_eq_integralClosure_of_henselian
-    {K F : Type} [Field K] [Field F] [Algebra K F] [FiniteDimensional K F] [Algebra.IsSeparable K F]
+    {K : Type u} {F : Type v} [Field K] [Field F] [Algebra K F]
+    [FiniteDimensional K F] [Algebra.IsSeparable K F]
     (O : ValuationSubring K) [IsDiscreteValuationRing O] [HenselianLocalRing O]
     [Algebra O F] [IsScalarTower O K F]
     (O' : ValuationSubring F) (hO' : ∀ x : K, algebraMap K F x ∈ O' ↔ x ∈ O) :
@@ -309,7 +314,8 @@ universe u v
 
 
 theorem toSubring_eq_integralClosure_and_finite_and_isDiscreteValuationRing_of_henselian
-    {K F : Type} [Field K] [Field F] [Algebra K F] [FiniteDimensional K F] [Algebra.IsSeparable K F]
+    {K : Type u} {F : Type v} [Field K] [Field F] [Algebra K F]
+    [FiniteDimensional K F] [Algebra.IsSeparable K F]
     (O : ValuationSubring K) [IsDiscreteValuationRing O] [HenselianLocalRing O]
     [Algebra O F] [IsScalarTower O K F]
     (O' : ValuationSubring F) (hO' : ∀ x : K, algebraMap K F x ∈ O' ↔ x ∈ O) :

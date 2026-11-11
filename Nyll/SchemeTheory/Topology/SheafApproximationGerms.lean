@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.FiniteModelSheafTransitions
-import Nyll.SchemeTheory.Topology.SheafPullbackGerms
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.Topology.FiniteModelSheafTransitions
+public import Nyll.SchemeTheory.Topology.SheafPullbackGerms
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Germs of actual sheaf approximation maps
@@ -19,6 +21,8 @@ to be principal opens gives the stalk calculation for finite models.
 
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

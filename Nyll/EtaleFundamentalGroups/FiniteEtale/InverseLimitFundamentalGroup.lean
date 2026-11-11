@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
-import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
-import Nyll.ProCGroups.InverseSystems.StagewiseIso
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
+public import Nyll.ProCGroups.InverseSystems.StagewiseIso
 
 /-!
 # The original fundamental-group maps in the pullback inverse system
@@ -15,6 +17,8 @@ The canonical pullback-fiber isomorphisms identify stage automorphisms with
 the original geometric-point fundamental groups.  The intertwining equation
 retains the given scheme transition and the cone-induced point equality.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -39,10 +43,11 @@ private theorem conjAut_autHomOfCompIso
       (isoWhiskerLeft H e₁).conjAut
           (((whiskeringLeft C₀ C₁ FintypeCat.{w}).obj H).mapAut F₁ a) =
         (((whiskeringLeft C₀ C₁ FintypeCat.{w}).obj H).mapAut G₁ (e₁.conjAut a)) := by
+    apply Aut.ext
     apply Iso.ext
     apply NatTrans.ext
     funext A
-    simp only [Iso.conjAut_hom, Iso.conj_apply, NatTrans.comp_app]
+    simp only [Iso.conjAut_hom, Iso.conj_apply_asHom, NatTrans.comp_app]
     rfl
   change e₀.conjAut
       (r.conjAut (((whiskeringLeft C₀ C₁ FintypeCat.{w}).obj H).mapAut F₁ a)) =

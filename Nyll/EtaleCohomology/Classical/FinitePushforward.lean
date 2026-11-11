@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.Etale
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Nyll.EtaleCohomology.Sites.FinitePushforwardExact
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Preadditive.Biproducts
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.Etale
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Nyll.EtaleCohomology.Sites.FinitePushforwardExact
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Finite direct image and classical étale cohomology
@@ -33,6 +35,8 @@ direct-image functor zero. The proof maps an injective resolution and uses
 its exactness in positive degrees. This proves part (2) of Stacks Project
 59.55.2 and its cohomological consequences (https://stacks.math.columbia.edu/tag/03QP).
 -/
+
+@[expose] public section
 
 noncomputable section
 

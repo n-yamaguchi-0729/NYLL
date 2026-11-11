@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Degree.TameRationalCompletedTensorSplitting
-import Nyll.AlgebraicCurves.Places.Degree.TameBoundaryCommonBase
+module
+
+public import Nyll.AlgebraicCurves.Places.Degree.TameRationalCompletedTensorSplitting
+public import Nyll.AlgebraicCurves.Places.Degree.TameBoundaryCommonBase
 
 /-! # All boundary embeddings over one actual completed base
 
@@ -16,6 +18,8 @@ then rebundles those same ring maps under the reference scalar algebra.
 No comparison of base embeddings, splitting, or valuation estimate is
 assumed: exact common contact and the original native field maps supply them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

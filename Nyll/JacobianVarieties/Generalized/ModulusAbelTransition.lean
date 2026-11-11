@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneTransitionFunctoriality
-import Nyll.JacobianVarieties.Generalized.PicardOneRestrictionScheme
-import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneTransitionFunctoriality
+public import Nyll.JacobianVarieties.Generalized.PicardOneRestrictionScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # The pointed Abel square for the full modulus transition
 
@@ -17,6 +20,8 @@ The intrinsic torsor transition is equivariant for the actual group transition.
 Taking coordinates at corresponding Abel points therefore gives the pointed
 Abel square over any field, without a pointwise density argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

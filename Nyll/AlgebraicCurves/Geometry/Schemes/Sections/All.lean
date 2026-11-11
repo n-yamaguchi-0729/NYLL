@@ -21,10 +21,7 @@ import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSnd
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndResidue
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectivePresheafMapInf
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.CompSectionCompEqIsClosedMap
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.DenseSetOfSectionAlgClosed
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.EqAppLEMapEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.EqSection
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FinrankSectionsPushforwardThickeningInjectiveUnitAppIff
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FinsetNormAppLESubLtImpFalse
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomAppInjectiveIsAffineOpen

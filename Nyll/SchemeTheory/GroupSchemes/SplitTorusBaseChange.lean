@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Torus
-import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
-import Mathlib.RingTheory.HopfAlgebra.TensorProduct
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Torus
+public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
+public import Mathlib.RingTheory.HopfAlgebra.TensorProduct
 
 /-! # The actual split torus commutes with extension of scalars -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -27,11 +31,17 @@ def splitTorusAlgebraBaseChange :
   BialgEquiv.ofAlgEquiv (AddMonoidAlgebra.scalarTensorEquiv R S).symm
     (by
       ext m
-      simp [AddMonoidAlgebra.scalarTensorEquiv_symm_single])
+      simp only [AlgHom.coe_comp, AlgEquiv.coe_toAlgHom, Function.comp_apply,
+        AddMonoidAlgebra.scalarTensorEquiv_symm_single, Bialgebra.counitAlgHom_apply,
+        TensorProduct.counit_tmul, AddMonoidAlgebra.isGroupLikeElem_single_one,
+        IsGroupLikeElem.counit_eq_one, CommSemiring.counit_apply, one_smul])
     (by
       ext m
-      simp [AddMonoidAlgebra.scalarTensorEquiv_symm_single,
-        TensorProduct.comul_tmul])
+      simp only [AlgHom.coe_comp, Function.comp_apply, Bialgebra.comulAlgHom_apply,
+        AddMonoidAlgebra.isGroupLikeElem_single_one, IsGroupLikeElem.comul_eq_tmul_self,
+        Algebra.TensorProduct.map_tmul, AlgEquiv.coe_toAlgHom,
+        AddMonoidAlgebra.scalarTensorEquiv_symm_single, TensorProduct.comul_tmul,
+        CommSemiring.comul_apply, TensorProduct.AlgebraTensorModule.tensorTensorTensorComm_tmul])
 
 /-- The actual scheme pullback of the split torus is its split model over the new ring. -/
 def splitTorusBaseChangeIso :

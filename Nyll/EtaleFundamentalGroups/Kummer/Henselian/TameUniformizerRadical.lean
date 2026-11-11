@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UnitRoot
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UnitRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
 
 /-!
 # A uniformizer radical for a totally tamely ramified Henselian DVF extension
@@ -23,6 +25,8 @@ Hensel's lemma absorbs the unit in the uniformizer comparison.  The resulting
 root of a base uniformizer has an Eisenstein minimal polynomial of full degree,
 hence generates the target field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -117,7 +121,7 @@ theorem exists_uniformizer_radical_generator_of_moduleFinite_of_charZeroResidue
   let α : L := (αS : L)
   have hαS : αS ^ n = integerMap base.toDVF target.toDVF ϖ := by
     calc
-      αS ^ n = δ ^ n * π ^ n := by simp [αS, mul_pow]
+      αS ^ n = δ ^ n * π ^ n := by exact mul_pow δ π n
       _ = (u : target.valuationSubring) * π ^ n := by rw [hδ]
       _ = integerMap base.toDVF target.toDVF ϖ := hdecomp.symm
   have hαpow : α ^ n = algebraMap K L (ϖ : K) := by
@@ -143,7 +147,7 @@ theorem exists_uniformizer_radical_generator_of_moduleFinite_of_charZeroResidue
   have hf_monic : f.Monic := by
     exact monic_X_pow_sub_C (ϖ : K) hn_pos.ne'
   have hf_root : Polynomial.aeval α f = 0 := by
-    simp [f, hαpow]
+    simp only [f, aeval_sub, map_pow, aeval_X, aeval_C, hαpow, sub_self]
   have hf_minpoly : f = minpoly K α :=
     minpoly.eq_of_irreducible_of_monic hf_irreducible hf_root hf_monic
   have hα_integral : IsIntegral K α := IsIntegral.of_finite K α

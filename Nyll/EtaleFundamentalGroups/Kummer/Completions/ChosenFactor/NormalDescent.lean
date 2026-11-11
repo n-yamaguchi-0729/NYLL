@@ -42,15 +42,12 @@ theorem tensorChosenFactorRight_faithfullyFlat
     [Algebra A B] [Algebra A C] [Algebra B D]
     [Module.FaithfullyFlat A B]
     (e : (B ⊗[A] C) ≃ₐ[B] D) :
-    letI : Algebra C D :=
+    let : Algebra C D :=
       (e.toRingEquiv.toRingHom.comp
         (Algebra.TensorProduct.includeRight :
           C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
     Module.FaithfullyFlat C D := by
-  let : Algebra C D :=
-    (e.toRingEquiv.toRingHom.comp
-      (Algebra.TensorProduct.includeRight :
-        C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
+  intro sharedOwner1
   let eComm : (C ⊗[A] B) ≃ₐ[C] D := by
     refine
       { toRingEquiv :=
@@ -77,17 +74,13 @@ theorem tensorChosenFactorRight_isIntegrallyClosed
     [Module.FaithfullyFlat A B] [Module.FaithfullyFlat A C]
     [IsDomain D] [IsIntegrallyClosed D]
     (e : (B ⊗[A] C) ≃ₐ[B] D) :
-    letI : Algebra C D :=
+    let : Algebra C D :=
       (e.toRingEquiv.toRingHom.comp
         (Algebra.TensorProduct.includeRight :
           C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
-    letI : IsDomain C := tensorChosenFactorRight_isDomain e
+    let : IsDomain C := tensorChosenFactorRight_isDomain e
     IsIntegrallyClosed C := by
-  let : Algebra C D :=
-    (e.toRingEquiv.toRingHom.comp
-      (Algebra.TensorProduct.includeRight :
-        C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
-  let : IsDomain C := tensorChosenFactorRight_isDomain e
+  intro sharedOwner1 sharedOwner2
   let : Module.FaithfullyFlat C D :=
     tensorChosenFactorRight_faithfullyFlat e
   exact isIntegrallyClosed_of_faithfullyFlat C D

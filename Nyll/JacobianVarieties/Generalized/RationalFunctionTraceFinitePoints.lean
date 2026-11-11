@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceFiniteFibre
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceFiniteFibre
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Finite trace points with a polar boundary
 
@@ -13,6 +16,8 @@ A coordinate with negative orders at all omitted source points has every
 finite rational parameter in its actual trace domain. The lifts preserve the
 original point morphisms, so they can be used in full Cartier-fibre evaluation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

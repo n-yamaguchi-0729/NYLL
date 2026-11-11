@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
+module
+
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
 
 /-!
 # Finite-stage descent of a strict-Henselian chosen factor
@@ -20,6 +22,8 @@ The equations in the conclusion use the literal tensor-product cocone maps.
 They retain the chosen factor and all of its distinguished coordinates; the
 finite-stage factor is not reselected after descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -90,9 +94,7 @@ theorem
           (eᵢ.symm.toAlgHom.restrictScalars R) =
         (e.symm.toAlgHom.restrictScalars R).comp
           (filteredTensorToColimitAlgHom c i (A := R)) := by
-  dsimp only
-  let e : (c.pt ⊗[R] B) ≃ₐ[c.pt] (c.pt ⊗[R] R) :=
-    strictHenselianChosenFactorTensorAlgEquiv q hunique
+  intro e
   exact exists_tensorProduct_algEquiv_stage_of_filteredColimit
     (R := R) (B := B) (D := R) F c hc e
 

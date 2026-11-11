@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.Localization.Ideal
+module
+
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.Localization.Ideal
 
 /-!
 # Fiber Localization Quotient
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -69,7 +73,8 @@ private theorem mem_iff_one_tmul_mem
 
 end FiberLemmas
 
-private theorem quotientComposite_eq_zero
+/-- The composite coefficient map vanishes on the base ideal after quotienting its image. -/
+theorem quotientComposite_eq_zero
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (p : Ideal A) (Bq : Type w) [CommRing Bq] [Algebra B Bq]
     (a : A) (ha : a ∈ p) :
@@ -87,7 +92,8 @@ private theorem isUnit_quotientMk_of_notMem
       (algebraMap B Bq b)) :=
   (IsLocalization.map_units (M := q.primeCompl) Bq ⟨b, hb⟩).map (Ideal.Quotient.mk _)
 
-private noncomputable def quotientMap
+/-- The induced coefficient map between the base quotient and the localized quotient. -/
+noncomputable def quotientMap
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (p : Ideal A) (Bq : Type w) [CommRing Bq] [Algebra B Bq] :
     A ⧸ p →+* Bq ⧸ (p.map (algebraMap A B)).map (algebraMap B Bq) :=
@@ -104,7 +110,8 @@ private theorem quotientMap_mk
         (algebraMap B Bq (algebraMap A B a)) :=
   rfl
 
-private theorem quotientMap_isUnit
+/-- Nonzero elements of the base-domain quotient become units in the localized quotient. -/
+theorem quotientMap_isUnit
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (p : Ideal A) [p.IsPrime] (q : Ideal B) [q.IsPrime] [q.LiesOver p]
     (Bq : Type w) [CommRing Bq] [Algebra B Bq] [IsLocalization.AtPrime Bq q]
@@ -120,7 +127,8 @@ private theorem quotientMap_isUnit
   rw [quotientMap_mk]
   exact isUnit_quotientMk_of_notMem p q Bq (algebraMap A B a) hb
 
-private noncomputable def residueFieldMap
+/-- Extend the base quotient map to its fraction field inside the localized quotient. -/
+noncomputable def residueFieldMap
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (p : Ideal A) [p.IsPrime] (q : Ideal B) [q.IsPrime] [q.LiesOver p]
     (Bq : Type w) [CommRing Bq] [Algebra B Bq] [IsLocalization.AtPrime Bq q] :

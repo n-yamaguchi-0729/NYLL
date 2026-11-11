@@ -12,10 +12,12 @@ Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b3
 Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierStalkMultiplicity
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierStalkMultiplicity
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Local generator orders are the constructed Cartier multiplicities
@@ -24,6 +26,8 @@ The rational function of any actual local ideal generator has valuation equal
 to the complete Cartier multiplicity. This supplies the coefficient comparison
 between section ratios and differences of effective Cartier divisors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

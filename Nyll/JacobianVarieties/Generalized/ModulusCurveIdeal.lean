@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealComapOpenImmersion
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealComapOpenImmersion
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
 
 /-! # The actual Cartier ideal of the full modulus on the original curve -/
+
+@[expose] public section
 
 noncomputable section
 

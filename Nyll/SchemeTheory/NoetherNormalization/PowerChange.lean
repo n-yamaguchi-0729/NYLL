@@ -4,8 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.IntegralRelation
-import Mathlib.RingTheory.NoetherNormalization
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.Ring.Equiv
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.Data.List.Indexes
+public import Nyll.SchemeTheory.NoetherNormalization.IntegralRelation
+public import Mathlib.RingTheory.NoetherNormalization
 
 /-!
 # Power-triangular normalization over an arbitrary field
@@ -21,6 +30,8 @@ The distinguished variable is `X 0`.  Every other variable `X i` is sent to
 a fixed nonzero polynomial then acquire distinct degrees in `X 0`, so the
 transformed polynomial has invertible leading coefficient over every field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,6 +51,12 @@ def powerNormalizationExponent
     (F : MvPolynomial (Fin (n + 1)) K) (i : Fin (n + 1)) : ℕ :=
   powerNormalizationBase F ^ i.1
 
+/-- Every original power-coding exponent is positive, since its base is at least two. -/
+theorem powerNormalizationExponent_pos
+    (F : MvPolynomial (Fin (n + 1)) K) (i : Fin (n + 1)) :
+    0 < powerNormalizationExponent F i :=
+  pow_pos (Nat.lt_add_right F.totalDegree (Nat.zero_lt_succ 1)) _
+
 /--
 The power-triangular algebra map fixing `X 0` and sending every other `X i`
 to `X i + c • X 0 ^ powerNormalizationExponent F i`.
@@ -56,22 +73,27 @@ noncomputable abbrev powerChangeFirstAux
 theorem powerChangeFirstAux_X_zero
     (F : MvPolynomial (Fin (n + 1)) K) (c : K) :
     powerChangeFirstAux F c (X 0) = X 0 := by
-  simp [powerChangeFirstAux]
+  exact (MvPolynomial.aeval_X _ (0 : Fin (n + 1))).trans (ite_eq_left rfl)
 
 @[simp]
 theorem powerChangeFirstAux_X_succ
     (F : MvPolynomial (Fin (n + 1)) K) (c : K) (i : Fin n) :
     powerChangeFirstAux F c (X i.succ) =
       X i.succ + c • X 0 ^ powerNormalizationExponent F i.succ := by
-  simp [powerChangeFirstAux]
+  exact (MvPolynomial.aeval_X _ i.succ).trans (ite_eq_right (Fin.succ_ne_zero i))
 
 theorem powerChangeFirstAux_comp_neg
     (F : MvPolynomial (Fin (n + 1)) K) (c : K) :
     (powerChangeFirstAux F c).comp (powerChangeFirstAux F (-c)) =
       AlgHom.id K (MvPolynomial (Fin (n + 1)) K) := by
-  rw [comp_aeval, ← MvPolynomial.aeval_X_left]
-  ext i v
-  cases i using Fin.cases <;> simp [powerChangeFirstAux]
+  apply MvPolynomial.algHom_ext
+  intro i
+  refine Fin.cases ?_ (fun j => ?_) i
+  · rw [AlgHom.comp_apply, powerChangeFirstAux_X_zero,
+      powerChangeFirstAux_X_zero, AlgHom.id_apply]
+  · rw [AlgHom.comp_apply, powerChangeFirstAux_X_succ, map_add, map_smul, map_pow,
+      powerChangeFirstAux_X_succ, powerChangeFirstAux_X_zero, AlgHom.id_apply,
+      neg_smul, add_neg_cancel_right]
 
 /-- The power-triangular substitution as an algebra equivalence. -/
 noncomputable abbrev powerChangeFirstEquiv
@@ -124,9 +146,13 @@ lemma degreeOf_zero_powerChange_monomial {a : K} (ha : a ≠ 0) :
         Polynomial.X ^ r i.succ) ^ v i.succ ≠ 0 :=
     pow_ne_zero (v i.succ)
       (leadingCoeff_ne_zero.mp <| by
-        simp [powerNormalizationExponent, powerNormalizationBase, add_comm,
-          leadingCoeff_X_pow_add_C])
-  rw [natDegree_mul (by simp [ha])
+        rw [add_comm (Polynomial.C _),
+          leadingCoeff_X_pow_add_C (powerNormalizationExponent_pos F i.succ)]
+        exact one_ne_zero)
+  have hCa : finSuccEquiv K n (MvPolynomial.C a) ≠ 0 :=
+    (RingEquiv.map_ne_zero_iff (finSuccEquiv K n).toRingEquiv).2
+      (MvPolynomial.C_ne_zero.mpr ha)
+  rw [natDegree_mul hCa
       (mul_ne_zero (pow_ne_zero _ Polynomial.X_ne_zero)
         (Finset.prod_ne_zero_iff.mpr (fun i _ => h i))),
     natDegree_mul (pow_ne_zero _ Polynomial.X_ne_zero)
@@ -152,7 +178,7 @@ lemma degreeOf_powerChange_ne_of_ne
   refine power_weightedSum_ne F v w (fun i => ?_) (fun i => ?_) hne <;>
   exact lt_of_le_of_lt
     ((monomial_le_degreeOf i ‹_›).trans (degreeOf_le_totalDegree F i))
-    (by simp [powerNormalizationBase])
+    (Nat.lt_add_of_pos_left (Nat.zero_lt_succ 1))
 
 lemma leadingCoeff_finSuccEquiv_powerChange_monomial :
     (finSuccEquiv K n
@@ -169,13 +195,11 @@ lemma leadingCoeff_finSuccEquiv_powerChange_monomial :
           ((finSuccEquiv K n)
             ((powerChangeFirstAux F 1) (X j))).leadingCoeff = 1 :=
       fun j => by
-        by_cases hj : j = 0
-        · simp [hj, finSuccEquiv_apply]
-        · simp only [powerChangeFirstAux, aeval_eq_bind₁, bind₁_X_right,
-            ite_eq_right hj, one_smul, map_add, map_pow]
-          obtain ⟨i, rfl⟩ := Fin.exists_succ_eq.mpr hj
-          simp [finSuccEquiv_X_succ, finSuccEquiv_X_zero,
-            powerNormalizationExponent, powerNormalizationBase, add_comm]
+        refine Fin.cases ?_ (fun i => ?_) j
+        · rw [powerChangeFirstAux_X_zero, finSuccEquiv_X_zero, leadingCoeff_X]
+        · rw [powerChangeFirstAux_X_succ, one_smul, map_add, map_pow,
+            finSuccEquiv_X_succ, finSuccEquiv_X_zero, add_comm (Polynomial.C _)]
+          exact leadingCoeff_X_pow_add_C (powerNormalizationExponent_pos F i.succ)
     simp only [h, one_pow, Finset.prod_const_one, mul_one]
   exact fun i => pow_zero _
 
@@ -284,7 +308,9 @@ theorem aeval_powerChangeFirst_powerCoordinates
     refine Fin.cases ?_ ?_ i
     · simp only [ite_true, MvPolynomial.aeval_X, powerCoordinatesFirst_zero]
     · intro j
-      simp [powerCoordinatesFirst, powerTailCoordinatesFirst]
+      rw [ite_eq_right (Fin.succ_ne_zero j), one_smul, map_add, map_pow,
+        MvPolynomial.aeval_X, MvPolynomial.aeval_X, powerCoordinatesFirst_succ,
+        powerCoordinatesFirst_zero, sub_add_cancel]
   rw [hpoints]
 
 /--
@@ -398,7 +424,8 @@ theorem adjoin_range_eq_adjoin_powerTailCoordinatesFirst_union
       rw [show x j.succ =
           powerTailCoordinatesFirst F x j +
             x 0 ^ powerNormalizationExponent F j.succ by
-        simp [powerTailCoordinatesFirst]]
+        exact (sub_add_cancel (x j.succ)
+          (x 0 ^ powerNormalizationExponent F j.succ)).symm]
       exact Subalgebra.add_mem _ ht
         (Subalgebra.pow_mem _ hx₀
           (powerNormalizationExponent F j.succ))
@@ -442,7 +469,8 @@ theorem isIntegral_of_mem_adjoin_range_powerFirst
         exact isIntegral_algebraMap
       rw [show x j.succ =
           t j + x 0 ^ powerNormalizationExponent F j.succ by
-        simp [t, powerTailCoordinatesFirst]]
+        exact (sub_add_cancel (x j.succ)
+          (x 0 ^ powerNormalizationExponent F j.succ)).symm]
       exact ht.add (hfirst'.pow _)
   | algebraMap a =>
       have ha_mem : algebraMap K A a ∈ S :=

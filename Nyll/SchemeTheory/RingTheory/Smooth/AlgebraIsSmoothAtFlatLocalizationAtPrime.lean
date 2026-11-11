@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Smooth.Flat
+module
+
+public import Mathlib.RingTheory.Smooth.Flat
 
 /-!
 # Algebra Is Smooth At flat localization at Prime
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -23,7 +27,7 @@ namespace Algebra_IsSmoothAt_flat_localization_atPrime
 
 open Algebra
 
-theorem _root_.Algebra.IsSmoothAt.flat_localization_atPrime (R A : Type) [CommRing R] [CommRing A]
+theorem _root_.Algebra.IsSmoothAt.flat_localization_atPrime (R A : Type*) [CommRing R] [CommRing A]
   [Algebra R A]
     [Algebra.FinitePresentation R A] (p : Ideal A) [p.IsPrime] [Algebra.IsSmoothAt R p] :
     Module.Flat R (Localization.AtPrime p) := by

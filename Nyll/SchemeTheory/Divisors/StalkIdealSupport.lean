@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.SubschemeStalk
+module
+
+public import Nyll.SchemeTheory.Divisors.SubschemeStalk
 
 /-! # The support of an ideal sheaf detected by its actual stalk ideal -/
+
+@[expose] public section
 
 noncomputable section
 

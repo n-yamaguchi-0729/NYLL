@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.SingleRadical
-import Nyll.ValuedFieldTheory.LocalField.Unramified.RamificationIndexTower
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.SingleRadical
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.RamificationIndexTower
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Ramification in towers of radical extensions
@@ -14,6 +18,8 @@ The ramification index is the cardinality of the actual
 value-group quotient.  This file records its multiplicativity in a tower and
 then applies the one-radical calculation successively.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -122,17 +128,13 @@ private theorem residueFiniteDimensional_for_tameResidueFieldMap
     let k := IsLocalRing.ResidueField V
     let ell := IsLocalRing.ResidueField W
     let f : k →+* ell := tameResidueFieldMap v w hExt
-    letI : Algebra k ell := f.toAlgebra
+    let : Algebra k ell := f.toAlgebra
     FiniteDimensional k ell := by
-  let V := LubinTate.Valuations.exponentialValuationSubring v
-  let W := LubinTate.Valuations.exponentialValuationSubring w
+  intro V W
   let i := unramifiedValuationRingValuationRingMap v w hExt
   let : IsLocalHom i :=
     unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
-  let k := IsLocalRing.ResidueField V
-  let ell := IsLocalRing.ResidueField W
-  let f : k →+* ell := tameResidueFieldMap v w hExt
-  let : Algebra k ell := f.toAlgebra
+  intro k ell f residueAlgebra
   let algebraModule : Module k ell :=
     (inferInstance : Algebra k ell).toModule
   let : Algebra V W := i.toAlgebra
@@ -165,14 +167,9 @@ private theorem exponentialResidueDegree_eq_finrank_tameResidueFieldMap
     let k := IsLocalRing.ResidueField V
     let ell := IsLocalRing.ResidueField W
     let f : k →+* ell := tameResidueFieldMap v w hExt
-    letI : Algebra k ell := f.toAlgebra
+    let : Algebra k ell := f.toAlgebra
     exponentialResidueDegree v w hExt = Module.finrank k ell := by
-  let V := LubinTate.Valuations.exponentialValuationSubring v
-  let W := LubinTate.Valuations.exponentialValuationSubring w
-  let k := IsLocalRing.ResidueField V
-  let ell := IsLocalRing.ResidueField W
-  let f : k →+* ell := tameResidueFieldMap v w hExt
-  let : Algebra k ell := f.toAlgebra
+  intro V W k ell f residueAlgebra
   let algebraModule : Module k ell :=
     (inferInstance : Algebra k ell).toModule
   let i := exponentialValuationRingMap v w hExt
@@ -404,7 +401,7 @@ theorem exponentialRamificationIndex_eq_finrank_of_radical_family
           rw [hPE, hEFdegree]
         _ = Module.finrank K F := Module.finrank_mul_finrank K E F
   have hPS : P (IntermediateField.adjoin K (↑S : Set L)) :=
-    IntermediateField.induction_on_adjoin_finset S P hbase hstep
+    IntermediateField.induction_on_adjoin_finset S (motive := P) hbase hstep
   rw [hS, hgen] at hPS
   let wTop := exponentialValuationRestrict w
     (⊤ : IntermediateField K L)

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitAffineComparison
-import Nyll.SchemeTheory.Affine.AffineFppfComparison
-import Nyll.SchemeTheory.Affine.RelativeSectionsOnSpectra
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitAffineComparison
+public import Nyll.SchemeTheory.Affine.AffineFppfComparison
+public import Nyll.SchemeTheory.Affine.RelativeSectionsOnSpectra
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-!
 # Representation of the intrinsic modulus-unit sheaf
@@ -20,6 +22,8 @@ actual frame also gives a representation of the scalar-frame sheaf.
 The Poincaré family over the ordinary Jacobian need not have a global
 frame; its local represented charts still have to be glued.
 -/
+
+@[expose] public section
 
 noncomputable section
 

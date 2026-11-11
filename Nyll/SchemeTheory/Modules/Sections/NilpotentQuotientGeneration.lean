@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.NilpotentSurjectivity
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Functor.EpiMono
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.NilpotentSurjectivity
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Actual generating sections lifted through nilpotent quotients
@@ -35,6 +37,8 @@ the actual first-cohomology calculation. The local kernel and power
 annihilation inputs are precisely the affine properties supplied by
 the constructed adic cover sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

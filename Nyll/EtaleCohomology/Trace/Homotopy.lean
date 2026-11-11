@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Trace.Complex
-import Mathlib.Algebra.Homology.HomotopyCategory
-import Mathlib.CategoryTheory.Linear.LinearFunctor
+module
+
+public import Nyll.EtaleCohomology.Trace.Complex
+public import Mathlib.Algebra.Homology.HomotopyCategory
+public import Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-!
 # Trace on actual homotopy classes
@@ -15,6 +17,8 @@ The alternating trace descends through the native homotopy-category quotient.
 It is linear, cyclic, and invariant under isomorphisms between bounded finite
 projective complexes in that category.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,12 +34,14 @@ variable [∀ i : ℤ, Module.Finite R (C.X i)]
   [∀ i : ℤ, Module.Projective R (C.X i)]
 variable (a b : ℤ) [C.IsStrictlyGE a] [C.IsStrictlyLE b]
 
-private def homotopyTraceValue
+/-- Evaluate the alternating trace on a representative of a homotopy class. -/
+def homotopyTraceValue
     (f : (HomotopyCategory.quotient _ _).obj C ⟶
       (HomotopyCategory.quotient _ _).obj C) : R :=
   boundedComplexTrace R C a b f.out
 
-private theorem homotopyTraceValue_map (f : C ⟶ C) :
+/-- The trace of a mapped chain endomorphism is its alternating trace. -/
+theorem homotopyTraceValue_map (f : C ⟶ C) :
     homotopyTraceValue R C a b ((HomotopyCategory.quotient _ _).map f) =
       boundedComplexTrace R C a b f :=
   boundedComplexTrace_homotopy R C a b (HomotopyCategory.homotopyOutMap f)

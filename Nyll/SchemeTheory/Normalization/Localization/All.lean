@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
+module
+
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
 
 /-!
 # Localization of integral closures

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Homological.ContCohomology.LowDegree
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
+module
+
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.LowDegree
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
 
 /-!
 # Naturality of the actual degree-zero continuous comparison
@@ -14,6 +16,8 @@ The existing degree-zero continuous-cohomology isomorphism with invariants
 respects coefficient maps. The proof uses the actual cycle inclusion and
 evaluation at the identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

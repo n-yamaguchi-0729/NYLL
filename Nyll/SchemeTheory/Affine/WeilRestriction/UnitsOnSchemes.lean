@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.Units
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.Units
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
 
 /-!
 # Actual units on scheme-valued tests
@@ -18,6 +20,8 @@ actual scheme fibre product, naturally on arbitrary test schemes.
 This file proves the natural equivalence of the underlying presheaves.
 Compatibility with scalar multiplication and the quotient is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # The naive Picard presheaf with chosen modulus trivializations
@@ -17,6 +19,8 @@ base change of the whole modulus scheme. The transition functions preserve that 
 This is the presheaf of compatible-isomorphism classes, before fppf sheafification; it is not
 asserted to be a representing scheme or the relative Picard sheaf when the modulus is empty.
 -/
+
+@[expose] public section
 
 universe u
 

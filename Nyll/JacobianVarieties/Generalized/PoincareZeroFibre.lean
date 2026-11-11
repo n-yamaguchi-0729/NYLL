@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameTest
-import Nyll.JacobianVarieties.Generalized.FrameBaseChange
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRelativeRepresentation
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameTest
+public import Nyll.JacobianVarieties.Generalized.FrameBaseChange
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRelativeRepresentation
 
 /-!
 # The zero fibre of the Poincaré frame scheme
@@ -16,6 +18,8 @@ trivializes its restriction to the full modulus. Scalar-frame coordinates
 then identify the scheme fibre with the already constructed scalar-unit
 quotient, including nonreduced moduli.
 -/
+
+@[expose] public section
 
 noncomputable section
 

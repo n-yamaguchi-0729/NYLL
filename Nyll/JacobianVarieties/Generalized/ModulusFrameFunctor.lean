@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameFunctor
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameFunctor
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
 # The intrinsic scalar-frame functor of a family over a finite modulus
@@ -20,6 +22,8 @@ fppf sheafification retains the resulting local gluing data.
 This definition applies in particular to a Poincaré bundle restricted to
 the modulus. It does not assume a representing scheme or global frame.
 -/
+
+@[expose] public section
 
 noncomputable section
 

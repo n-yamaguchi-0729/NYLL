@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeInertia
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeInertiaFixedImage
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeInertia
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeInertiaFixedImage
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # The actual strict-stalk fraction field inside the original ambient field
@@ -31,6 +33,8 @@ those properties, and the two prescribed ambient maps agree literally.
 No reverse fixed-image equality or field comparison is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry
@@ -41,7 +45,8 @@ open EtaleFundamentalGroups.Inertia
 
 universe u v w
 
-private def injectiveFractionLift
+/-- Extend an injective ring homomorphism to the fraction ring of its source. -/
+def injectiveFractionLift
     {R : Type u} {F : Type v} [CommRing R] [Field F]
     (f : R →+* F) (hf : Function.Injective f) : FractionRing R →+* F := by
   have : IsDomain R := hf.isDomain f
@@ -78,7 +83,9 @@ private theorem injectiveFractionLift_comp_endomorphism
     _ = (injectiveFractionLift f hf).comp (algebraMap R (FractionRing R)) :=
       (injectiveFractionLift_comp f hf).symm
 
-private def normalizationPrimeAmbientMap
+/-- The normalization-prime localization map into the original ambient field,
+using the canonical fraction-ring algebra. -/
+def normalizationPrimeAmbientMap
     (A : Type u) (L : Type v) [CommRing A] [IsDomain A] [Field L]
     [Algebra A L] [FaithfulSMul A L] [Algebra.IsAlgebraic A L]
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] : Localization.AtPrime Q →+* L := by
@@ -122,7 +129,9 @@ variable (A L : Type u)
   (Q : Ideal (integralClosure A L)) [Q.IsPrime]
 
 omit [IsIntegrallyClosed A] [IsLocalRing A] in
-private def normalizationStalkAmbientMap :
+/-- The geometric stalk maps to the original ambient field through the
+normalization-prime localization. -/
+def normalizationStalkAmbientMap :
     let : HenselianLocalRing (Localization.AtPrime Q) :=
       (integralClosure_primeLocalization_strictHenselian_of_algebraic A L Q).1
     let : IsSepClosed (IsLocalRing.ResidueField (Localization.AtPrime Q)) :=
@@ -134,7 +143,9 @@ private def normalizationStalkAmbientMap :
   exact (normalizationPrimeAmbientMap A L Q).comp
     (geometricStalkToHenselian (integralClosurePrimeBaseMap A L Q))
 
-private theorem normalizationStalkAmbientMap_injective
+/-- The geometric-stalk map to the ambient field is injective when the
+normalization prime lies over the closed point of the local base. -/
+theorem normalizationStalkAmbientMap_injective
     (hQ : Q.under A = IsLocalRing.maximalIdeal A) :
     let : HenselianLocalRing (Localization.AtPrime Q) :=
       (integralClosure_primeLocalization_strictHenselian_of_algebraic A L Q).1

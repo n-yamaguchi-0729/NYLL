@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
 
 /-!
 # Hilbert ramification theory: character exactness
@@ -14,6 +16,8 @@ constructed in `CharacterMap`.  It is the exactness part of
 the inertia-character exact sequence that does not require the finite-cardinality
 surjectivity argument onto the full group `Hom(Delta/Gamma, lambda*)`.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory
 

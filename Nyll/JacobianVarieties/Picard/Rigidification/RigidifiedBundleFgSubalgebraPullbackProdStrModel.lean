@@ -10,26 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.RingTheory.FiniteType
-import Mathlib.Order.DirectedInverseSystem
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFgSubalgebraAbelianSchemePropertyBundlePullback
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawPullbackCompEqMulEq
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsCommutative
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackPullbackMapFstComp
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackMapIsoUnitPullbackIso
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.Order.DirectedInverseSystem
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFgSubalgebraAbelianSchemePropertyBundlePullback
+public import Nyll.AbelianVarieties.Geometry.RelativeGroupLawPullbackCompEqMulEq
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsCommutative
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackPullbackMapFstComp
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackMapIsoUnitPullbackIso
 
 /-!
 # Finitely generated models of the product rigidification
@@ -37,6 +39,8 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackMapIsoUn
 The group law, its product and a rigidified line bundle descend together to a
 finitely generated subalgebra, with the cube pullback comparisons preserved.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

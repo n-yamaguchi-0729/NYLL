@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationConclusions
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationRamificationData
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueExactness
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueDVR
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildDecompositionNormal
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildProP
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildTopology
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildCharZero
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameDegreeDirected
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCoordinateSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterKernel
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterEquivariance
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientEquiv
-import Mathlib.Algebra.CharP.Invertible
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationConclusions
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationRamificationData
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueDVR
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildDecompositionNormal
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildProP
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildTopology
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildCharZero
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameDegreeDirected
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCoordinateSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterKernel
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterEquivariance
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientEquiv
+public import Mathlib.Algebra.CharP.Invertible
 
 /-!
 # The original DVR ramification theorem
@@ -38,6 +40,8 @@ here from proved suppliers and is never a hypothesis.
 
 https://stacks.math.columbia.edu/tag/0BUA
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

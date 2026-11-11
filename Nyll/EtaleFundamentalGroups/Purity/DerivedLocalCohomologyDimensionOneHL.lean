@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
-import Mathlib.RingTheory.KrullDimension.LocalRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
+public import Mathlib.RingTheory.KrullDimension.LocalRing
 
 /-!
 # Hartshorne--Lichtenbaum vanishing in dimension one
@@ -16,6 +18,8 @@ different from the maximal ideal contains no nonzero element and is the zero
 ideal.  Positive-degree vanishing for zero support then proves the
 dimension-one Hartshorne--Lichtenbaum source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RingHom.Integral
-import Nyll.EtaleFundamentalGroups.Kummer.Laurent.DiagonalRadical
+module
+
+public import Mathlib.RingTheory.RingHom.Integral
+public import Nyll.EtaleFundamentalGroups.Kummer.Laurent.DiagonalRadical
 
 /-!
 # Integrality of finite-index lattice covers
@@ -15,6 +17,8 @@ monic radical extension.  This file uses that presentation to prove that the
 original monoid-algebra map is integral.  It is the first ring-theoretic input
 needed to compare the explicit cover with an actual normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

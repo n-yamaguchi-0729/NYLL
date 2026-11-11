@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZero
-import Nyll.SchemeTheory.Topology.FppfAlgebraicallyClosedPoint
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZero
+public import Nyll.SchemeTheory.Topology.FppfAlgebraicallyClosedPoint
 
 /-! # Equality of actual rigidified classes on geometric tests -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.Etale
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.Etale
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Classical cohomology and closed direct image
@@ -26,6 +28,8 @@ sheaf. The resulting comparison is natural and is linear for module coefficients
 There are no finite-field, noetherian, or finiteness hypotheses.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

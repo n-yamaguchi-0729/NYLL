@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.UnramifiedPointRigidity
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Nyll.SchemeTheory.Morphisms.UnramifiedPointRigidity
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Point rigidity of actual normalization endomorphisms
@@ -16,6 +18,8 @@ Normalization of an integral source is integral and its structure map is
 separated. If this structure map is unramified, fixing a nonempty test
 morphism forces an actual normalization endomorphism to be the identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

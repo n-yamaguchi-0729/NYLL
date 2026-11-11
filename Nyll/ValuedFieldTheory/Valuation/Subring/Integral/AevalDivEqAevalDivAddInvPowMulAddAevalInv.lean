@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.AevalDivEqAevalDivAddAevalInvDiv
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.AevalDivEqAevalDivAddAevalInvDiv
 
 /-!
 # Valuation Subring exists aeval div eq aeval div add inv pow mul add aeval inv
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -30,16 +34,25 @@ variable {L : Type*} [Field L] (A : ValuationSubring L)
 /-- The condition that all coefficients of a polynomial belong to the valuation ring. -/
 def ACoeff (p : L[X]) : Prop := ∀ j, p.coeff j ∈ A
 
-theorem ACoeff.zero : ACoeff A (0 : L[X]) := fun j => by simp [A.zero_mem]
+theorem ACoeff.zero : ACoeff A (0 : L[X]) := fun j => by simp only [coeff_zero, A.zero_mem]
 
 theorem ACoeff.C {a : L} (ha : a ∈ A) : ACoeff A (C a) := fun j => by
-  rw [coeff_C]; split_ifs <;> simp [ha, A.zero_mem]
+  rw [coeff_C]
+  split_ifs
+  · exact ha
+  · exact A.zero_mem
 
 theorem ACoeff.X : ACoeff A (X : L[X]) := fun j => by
-  rw [coeff_X]; split_ifs <;> simp [A.one_mem, A.zero_mem]
+  rw [coeff_X]
+  split_ifs
+  · exact A.one_mem
+  · exact A.zero_mem
 
 theorem ACoeff.X_pow (n : ℕ) : ACoeff A ((Polynomial.X : L[X]) ^ n) := fun j => by
-  rw [coeff_X_pow]; split_ifs <;> simp [A.one_mem, A.zero_mem]
+  rw [coeff_X_pow]
+  split_ifs
+  · exact A.one_mem
+  · exact A.zero_mem
 
 theorem ACoeff.add {p q : L[X]} (hp : ACoeff A p) (hq : ACoeff A q) : ACoeff A (p + q) :=
   fun j => by rw [coeff_add]; exact add_mem (hp j) (hq j)

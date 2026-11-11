@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import Mathlib.AlgebraicGeometry.Geometrically.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Tactic.Algebraize
-import Nyll.SchemeTheory.RingTheory.Reduced.AlgebraTensorReducedPerfectField
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Geometrically.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Tactic.Algebraize
+public import Nyll.SchemeTheory.RingTheory.Reduced.AlgebraTensorReducedPerfectField
 
 /-!
 # Geometrically Reduced of is Reduced of perfect Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

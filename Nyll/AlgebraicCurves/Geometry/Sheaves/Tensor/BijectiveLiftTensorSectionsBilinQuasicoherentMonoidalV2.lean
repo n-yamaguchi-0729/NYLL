@@ -10,32 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Basic
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.RingTheory.LocalProperties.Submodule
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Basic
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.BijectiveLiftTensorSectionsBilinQuasicoherent
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
 
 /-!
 # Tensor sections on affine opens
 
 The tensor-sections map of quasicoherent modules is bijective on affine opens.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -325,28 +331,9 @@ theorem tensorBOEquiv_resT (U : X.Opens) (hU : IsAffineOpen U) (g : Γ(X, U)) (z
 theorem theta_injective {R : Type u} [CommRing R] (π : X ⟶ Spec (.of R))
     (hL : (OModulePresheaf.ofModules π L).IsQuasicoherent) (hM : (OModulePresheaf.ofModules π
       M).IsQuasicoherent)
-    (U : X.Opens) (hU : IsAffineOpen U) : Function.Injective (theta L M U) := by
-  rw [injective_iff_map_eq_zero]
-  intro z hz
-  let s : Set Γ(X, U) := {g | TensorProduct.map (resBO L U g) (resBO M U g) z = 0}
-  have hspan : Ideal.span s = ⊤ := by
-    rw [← hU.self_le_iSup_basicOpen_iff]
-    intro x hx
-    obtain ⟨W, i, hxW, hW⟩ := exists_resT_eq_of_theta_eq L M U z 0 (by rw [hz, map_zero]) hx
-    obtain ⟨g, hgW, hxg⟩ := hU.exists_basicOpen_le ⟨x, hxW⟩ hx
-    refine TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨g, ?_⟩, hxg⟩
-    change TensorProduct.map (resBO L U g) (resBO M U g) z = 0
-    have h1 : resT L M U (homOfLE (X.basicOpen_le g)) z = 0 := by
-      have : homOfLE (X.basicOpen_le g) = homOfLE hgW ≫ i := Subsingleton.elim _ _
-      rw [this, resT_comp, hW, ← resT_comp, map_zero]
-    rw [← tensorBOEquiv_resT L M U hU g z, h1, map_zero]
-  have : ∀ r : s, IsLocalizedModule (.powers r.1) (resBO L U r.1) := fun r =>
-    isLocalizedModule_resBO L U r.1 π hL hU
-  have : ∀ r : s, IsLocalizedModule (.powers r.1) (resBO M U r.1) := fun r =>
-    isLocalizedModule_resBO M U r.1 π hM hU
-  exact Module.eq_zero_of_isLocalized_span s hspan
-    (fun r : s => Γ(L, X.basicOpen r.1) ⊗[Γ(X, U)] Γ(M, X.basicOpen r.1))
-    (fun r : s => TensorProduct.map (resBO L U r.1) (resBO M U r.1)) z (fun r => r.2)
+    (U : X.Opens) (hU : IsAffineOpen U) : Function.Injective (theta L M U) :=
+  (Scheme.Modules.bijective_lift_tensorSectionsBilin_of_isQuasicoherent
+    π hL hM ⟨U, hU⟩).1
 
 end Injective
 
@@ -418,85 +405,9 @@ theorem exists_pow_smul_sub_eq_zero (y : Γ(L ⊗ M, U)) (g g' : Γ(X, U))
   exact ⟨m, hm⟩
 
 include hL hM hU in
-theorem theta_surjective : Function.Surjective (theta L M U) := by
-  classical
-  intro y
-  let S : Set Γ(X, U) := {g | ∃ (z : Γ(L, U) ⊗[Γ(X, U)] Γ(M, U)) (n : ℕ),
-    resBO (L ⊗ M) U g (theta L M U z) = resBO (L ⊗ M) U g (g ^ n • y)}
-  have hS : Ideal.span S = ⊤ := by
-    rw [← hU.self_le_iSup_basicOpen_iff]
-    intro x hx
-    obtain ⟨g, hxg, z, n, h⟩ := exists_basicOpen_theta_res L M π hL hM U hU y hx
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨g, z, n, h⟩, hxg⟩
-  obtain ⟨s, hsS, hs1⟩ := Submodule.mem_span_finite_of_mem_span ((Ideal.eq_top_iff_one _).mp hS)
-  have hs : Ideal.span (s : Set Γ(X, U)) = ⊤ := (Ideal.eq_top_iff_one _).mpr hs1
-  have hdata : ∀ g : s, ∃ (z : Γ(L, U) ⊗[Γ(X, U)] Γ(M, U)) (n : ℕ),
-      resBO (L ⊗ M) U g.1 (theta L M U z) = resBO (L ⊗ M) U g.1 ((g.1 : Γ(X, U)) ^ n • y) :=
-    fun g => hsS g.2
-  choose z₀ n hz₀ using hdata
-  obtain ⟨N, hnN⟩ : ∃ N : ℕ, ∀ g : s, n g ≤ N := ⟨Finset.univ.sup n, fun g => Finset.le_sup
-    (Finset.mem_univ g)⟩
-  have hdata₁ : ∀ g : s, ∃ z : Γ(L, U) ⊗[Γ(X, U)] Γ(M, U),
-      resBO (L ⊗ M) U g.1 (theta L M U z) = resBO (L ⊗ M) U g.1 ((g.1 : Γ(X, U)) ^ N • y) := by
-    intro g
-    refine ⟨(g.1 : Γ(X, U)) ^ (N - n g) • z₀ g, ?_⟩
-    have := bump L M U y g.1 (z₀ g) (n g) (N - n g) (hz₀ g)
-    rwa [Nat.sub_add_cancel (hnN g)] at this
-  choose z₁ hz₁ using hdata₁
-  have hcoc : ∀ p : s × s, ∃ m : ℕ,
-      ((p.1.1 : Γ(X, U)) * p.2.1) ^ m • ((p.2.1 : Γ(X, U)) ^ N • z₁ p.1 - (p.1.1 : Γ(X, U)) ^ N •
-        z₁ p.2) = 0 :=
-    fun p => exists_pow_smul_sub_eq_zero L M π hL hM U hU y p.1.1 p.2.1 (z₁ p.1) (z₁ p.2) N (hz₁
-      p.1) (hz₁ p.2)
-  choose m hm using hcoc
-  obtain ⟨K, hmK⟩ : ∃ K : ℕ, ∀ p, m p ≤ K := ⟨Finset.univ.sup m, fun p => Finset.le_sup
-    (Finset.mem_univ p)⟩
-  have hdata₂ : ∀ g : s, ∃ z : Γ(L, U) ⊗[Γ(X, U)] Γ(M, U),
-      resBO (L ⊗ M) U g.1 (theta L M U z) = resBO (L ⊗ M) U g.1 ((g.1 : Γ(X, U)) ^ (K + N) • y) ∧
-      z = (g.1 : Γ(X, U)) ^ K • z₁ g :=
-    fun g => ⟨_, bump L M U y g.1 (z₁ g) N K (hz₁ g), rfl⟩
-  choose z₂ hz₂ hz₂def using hdata₂
-  have hcocycle : ∀ g g' : s, (g'.1 : Γ(X, U)) ^ (K + N) • z₂ g = (g.1 : Γ(X, U)) ^ (K + N) • z₂ g'
-    := by
-    intro g g'
-    have h' : ((g.1 : Γ(X, U)) * g'.1) ^ K • ((g'.1 : Γ(X, U)) ^ N • z₁ g - (g.1 : Γ(X, U)) ^ N •
-      z₁ g') = 0 := by
-      have := congrArg (fun t => ((g.1 : Γ(X, U)) * g'.1) ^ (K - m (g, g')) • t) (hm (g, g'))
-      simp only [smul_zero, smul_smul, ← pow_add, Nat.sub_add_cancel (hmK (g, g'))] at this
-      exact this
-    rw [smul_sub, smul_smul, smul_smul, sub_eq_zero] at h'
-    rw [hz₂def, hz₂def, smul_smul, smul_smul]
-    convert h' using 2 <;> ring
-  have hspanpow : Ideal.span (Set.range fun g : s => (g.1 : Γ(X, U)) ^ (K + N)) = ⊤ := by
-    have := Ideal.span_pow_eq_top (s : Set Γ(X, U)) hs (K + N)
-    rwa [Set.image_eq_range] at this
-  obtain ⟨c, hc⟩ := Ideal.mem_span_range_iff_exists_fun.mp ((Ideal.eq_top_iff_one _).mp hspanpow)
-  have hzz : ∀ g₀ : s, (g₀.1 : Γ(X, U)) ^ (K + N) • (∑ g : s, c g • z₂ g) = z₂ g₀ := by
-    intro g₀
-    rw [Finset.smul_sum]
-    calc ∑ g : s, (g₀.1 : Γ(X, U)) ^ (K + N) • (c g • z₂ g)
-        = ∑ g : s, (c g * (g.1 : Γ(X, U)) ^ (K + N)) • z₂ g₀ := by
-            refine Finset.sum_congr rfl fun g _ => ?_
-            rw [smul_comm, hcocycle g g₀, smul_smul]
-      _ = (∑ g : s, c g * (g.1 : Γ(X, U)) ^ (K + N)) • z₂ g₀ := by rw [Finset.sum_smul]
-      _ = z₂ g₀ := by rw [hc, one_smul]
-  have hloc : ∀ g₀ : s, resBO (L ⊗ M) U g₀.1 (theta L M U (∑ g : s, c g • z₂ g)) = resBO (L ⊗ M) U
-    g₀.1 y := by
-    intro g₀
-    have : IsLocalization.Away (g₀.1 : Γ(X, U)) Γ(X, X.basicOpen (g₀.1 : Γ(X, U))) :=
-      hU.isLocalization_basicOpen _
-    have hu : IsUnit (algebraMap Γ(X, U) Γ(X, X.basicOpen (g₀.1 : Γ(X, U))) ((g₀.1 : Γ(X, U)) ^ (K
-      + N))) := by
-      rw [map_pow]; exact (IsLocalization.Away.algebraMap_isUnit (g₀.1 : Γ(X, U))).pow (K + N)
-    have key : (g₀.1 : Γ(X, U)) ^ (K + N) • resBO (L ⊗ M) U g₀.1 (theta L M U (∑ g : s, c g • z₂
-      g)) =
-        (g₀.1 : Γ(X, U)) ^ (K + N) • resBO (L ⊗ M) U g₀.1 y := by
-      rw [← map_smul, ← map_smul, hzz, (hz₂ g₀), map_smul]
-    exact (hu.smul_left_cancel).mp key
-  refine ⟨∑ g : s, c g • z₂ g, ?_⟩
-  exact TopCat.Sheaf.eq_of_locally_eq' (⟨(L ⊗ M).presheaf, (L ⊗ M).isSheaf⟩ : TopCat.Sheaf Ab X)
-    (fun g : s => X.basicOpen (g.1 : Γ(X, U))) U (fun g => homOfLE (X.basicOpen_le _))
-    ((hU.self_le_iSup_basicOpen_iff).mpr hs) (theta L M U (∑ g : s, c g • z₂ g)) y hloc
+theorem theta_surjective : Function.Surjective (theta L M U) :=
+  (Scheme.Modules.bijective_lift_tensorSectionsBilin_of_isQuasicoherent
+    π hL hM ⟨U, hU⟩).2
 
 end Glue
 

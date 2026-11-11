@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.Regular.IsSMulRegular
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Regular.IsSMulRegular
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Is Local Ring exists of List pair eq maximal Ideal and is Regular of is Discrete Valuation
 Ring quotient
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

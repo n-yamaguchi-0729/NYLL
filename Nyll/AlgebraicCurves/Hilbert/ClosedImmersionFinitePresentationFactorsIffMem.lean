@@ -11,7 +11,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFinitePresentationFactorsIff
 import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleProjectiveIdealFgTmulEqZeroIffMapEqBot

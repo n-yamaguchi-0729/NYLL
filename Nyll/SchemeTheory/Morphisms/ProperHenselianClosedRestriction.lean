@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Morphisms.ProperIntegralHenselianConnectedFiber
-import Nyll.SchemeTheory.Divisors.Reduced
-import Nyll.SchemeTheory.Topology.SpectralClosedRestriction
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.Topology.Irreducible
+module
+
+public import Nyll.SchemeTheory.Morphisms.ProperIntegralHenselianConnectedFiber
+public import Nyll.SchemeTheory.Divisors.Reduced
+public import Nyll.SchemeTheory.Topology.SpectralClosedRestriction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.Topology.Irreducible
 
 /-!
 # Closed-fiber intersections and constant sections of arbitrary proper schemes
@@ -24,6 +26,8 @@ restriction theorem then extends every locally constant function from the
 closed fiber of an arbitrary proper scheme. No integrality assumption is
 made on the ambient proper scheme, including finite refinements of it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

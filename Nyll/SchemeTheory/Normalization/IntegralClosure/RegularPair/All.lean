@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.Basic
-import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.TraceDual
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.Basic
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.TraceDual
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Normalization.IntegralClosure.RegularPair. -/

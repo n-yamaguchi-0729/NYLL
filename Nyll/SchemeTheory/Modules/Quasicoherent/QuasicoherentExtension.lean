@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Extending actual quasicoherent subobjects across a quasi-compact open
@@ -20,6 +22,8 @@ For a monomorphism `φ : G ⟶ F|U`, the extension is the actual kernel of
 
 This is the geometric kernel construction for Stacks, Tag 01PE(2).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,7 +60,8 @@ theorem submoduleExtensionMap_restrict_counit
       rw [← Category.assoc, (restrictAdjunction j).left_triangle_components F]
       exact Category.id_comp (cokernel.π φ)
 
-private def monoCokernelKernelIso
+/-- A monomorphism identifies its source with the kernel of its cokernel. -/
+def monoCokernelKernelIso
     {X : Scheme.{u}} {M N : X.Modules} (φ : M ⟶ N) [Mono φ] :
     kernel (cokernel.π φ) ≅ M :=
   (limit.isLimit (parallelPair (cokernel.π φ) 0)).conePointUniqueUpToIso

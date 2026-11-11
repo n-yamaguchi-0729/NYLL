@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelTwists
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionPushforwardUnit
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Iso
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelTwists
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionPushforwardUnit
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Iso
 
 /-!
 # Original quotient units on the finite étale cover tower
@@ -27,6 +29,8 @@ A morphism to a cover module that becomes invertible on its level
 therefore constructs an isomorphism from the original pullback
 quotient, and composition with the original unit recovers that morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

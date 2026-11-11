@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Trace.Perfect
-import Mathlib.Algebra.Category.ModuleCat.Biproducts
-import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
+module
+
+public import Nyll.EtaleCohomology.Trace.Perfect
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.FiniteProjectiveTrace
 
 /-!
 # Trace additivity for a coherent mapping-cone endomorphism
@@ -18,6 +21,8 @@ annihilates that term. These statements concern the actual coherent cone map;
 they do not assert additivity for an arbitrary morphism of distinguished
 triangles over a nonreduced coefficient ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

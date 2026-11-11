@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Completion along an extended ideal
@@ -18,6 +20,8 @@ quotient maps in every degree come from the actual equality of the
 restricted submodules `I^n M = (IS)^n M`. They commute with transition maps,
 so the comparison preserves the original maps from the module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

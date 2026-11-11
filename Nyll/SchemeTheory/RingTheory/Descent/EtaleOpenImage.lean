@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleSource
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatOnOpenImage
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Ideal.Lattice
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleSource
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatOnOpenImage
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Ideal.Lattice
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Smooth.Flat
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 
 /-!
@@ -25,6 +27,8 @@ image supplies its defining ideal. Localizing at an element of that ideal
 makes the source cover faithfully flat, and genuine source étale descent
 supplies finite presentation as well as formal étaleness.
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

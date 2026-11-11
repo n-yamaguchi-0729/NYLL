@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.EtaleDominantQuotient
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Unramified.LocalStructure
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.EtaleDominantQuotient
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!
 # Dominant unramified domains over normal domains
@@ -17,6 +19,8 @@ as quotients of standard étale algebras. Their dominant domain quotients are
 étale, and locality on the target gives the conclusion, including finite
 presentation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

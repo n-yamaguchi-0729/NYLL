@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.SchemeTheory.HomologicalAlgebra.ModuleProjectiveComplexQuasiIso
-import Nyll.SchemeTheory.HomologicalAlgebra.ModuleQuasiIsoBaseChange
-import Nyll.SchemeTheory.HomologicalAlgebra.ModuleFinrankAddAlternatingSumFinrankEq
+module
+
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.SchemeTheory.HomologicalAlgebra.ModuleProjectiveComplexQuasiIso
+public import Nyll.SchemeTheory.HomologicalAlgebra.ModuleQuasiIsoBaseChange
+public import Nyll.SchemeTheory.HomologicalAlgebra.ModuleFinrankAddAlternatingSumFinrankEq
 
 /-!
 # Module exists forall alternating Sum finrank cohomology base Change eq of flat complex of
 is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

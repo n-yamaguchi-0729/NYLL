@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameMorphism
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteOriginalCanonicalTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
-import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphisms
-import Nyll.SchemeTheory.Normalization.NativeNormalizationPrime
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameMorphism
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteOriginalCanonicalTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphisms
+public import Nyll.SchemeTheory.Normalization.NativeNormalizationPrime
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Canonical tame exactness on the original normalization
@@ -25,6 +27,8 @@ Constructs the intrinsic canonical tame morphism and principal-unit wild subgrou
 Galois extension. Proves surjectivity onto the full roots group and identifies the wild subgroup
 as its kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

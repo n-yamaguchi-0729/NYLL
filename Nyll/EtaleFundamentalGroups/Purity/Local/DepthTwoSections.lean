@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.RegularPairHartogs
-import Nyll.SchemeTheory.RingTheory.RegularLocal.DepthTwoRegularPair
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Nyll.SchemeTheory.Affine.RegularPairHartogs
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.DepthTwoRegularPair
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Global sections over punctures of depth at least two
@@ -19,6 +21,8 @@ The actual restriction map on a finite flat scheme over a Noetherian local
 ring of depth at least two is an isomorphism. A regular pair in the base
 stays regular in its flat section algebra, so Hartogs extension applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

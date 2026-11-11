@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Orders.GroupPowerSeriesPositiveOrders
-import Nyll.SchemeTheory.GroupSchemes.IntegralGroupPowerSeriesCoordinates
+module
+
+public import Nyll.AlgebraicCurves.Places.Orders.GroupPowerSeriesPositiveOrders
+public import Nyll.SchemeTheory.GroupSchemes.IntegralGroupPowerSeriesCoordinates
 
 /-! # Positive coordinate orders of integral group points reducing to the unit
 
 The integral point itself, rather than assumed coordinate estimates, supplies
 positive orders for every centered affine coordinate in every degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

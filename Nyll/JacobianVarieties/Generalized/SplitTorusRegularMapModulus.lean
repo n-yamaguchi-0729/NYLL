@@ -4,18 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.VectorGroupRegularMapModulus
-import Nyll.SchemeTheory.GroupSchemes.SplitTorusSchemePoints
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
-import Nyll.AlgebraicCurves.FunctionFields.Rational.SeparatingRationalPresentation
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.AlgebraicCurves.Divisors.Modulus.SplitAffineModulus
-import Nyll.AlgebraicCurves.Divisors.Modulus.MultiplicativeModulus
-import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Mathlib.Algebra.Group.Units.Equiv
+module
+
+public import Nyll.JacobianVarieties.Generalized.VectorGroupRegularMapModulus
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorusSchemePoints
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.SeparatingRationalPresentation
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.AlgebraicCurves.Divisors.Modulus.SplitAffineModulus
+public import Nyll.AlgebraicCurves.Divisors.Modulus.MultiplicativeModulus
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Effective moduli for actual split-torus morphisms
 
@@ -31,6 +34,8 @@ unit coordinate is bounded by the prescribed multiplicities.
 The base field is algebraically closed. No assertion about a nonsplit torus
 or an arbitrary commutative group is made here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

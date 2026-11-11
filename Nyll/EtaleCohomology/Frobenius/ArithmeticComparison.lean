@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
-import Nyll.SchemeTheory.Etale.Frobenius
-import Nyll.SchemeTheory.Morphisms.FiniteFieldConstantAction
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
+public import Nyll.SchemeTheory.Etale.Frobenius
+public import Nyll.SchemeTheory.Morphisms.FiniteFieldConstantAction
+public import Nyll.SchemeTheory.Morphisms.FrobeniusBaseChange
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Geometric and arithmetic Frobenius on constant étale cohomology
@@ -21,6 +24,8 @@ The resulting equality concerns the canonical pullback maps on abelian
 constant-coefficient cohomology in every degree. No composition law for
 cohomology or comparison with a separately supplied Galois action is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,8 +42,7 @@ local notation "b" => Spec.map (CommRingCat.ofHom (algebraMap k Ω))
 local notation "f" => (X ↘ Spec (CommRingCat.of k))
 local notation "Y" => pullback f b
 
-private local instance constantPullbackOver : (Y).Over (Spec (.of k)) :=
-  ⟨pullback.fst f b ≫ f⟩
+attribute [local instance] Scheme.constantPullbackOver
 
 /-- The actual étale base-change functors for geometric Frobenius and
 inverse arithmetic Frobenius on the constants are naturally isomorphic. -/

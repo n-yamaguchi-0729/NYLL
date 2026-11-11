@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.GroupTheory.FinitePGroupInvariants
-import Nyll.GaloisCohomology.Topology.InvariantCoefficientExactness
-import Nyll.GaloisCohomology.Topology.TrivialIntegralCoefficientLine
-import Nyll.GaloisCohomology.Topology.TrivialDegreeTwoCocycles
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
-import Mathlib.LinearAlgebra.Quotient.Card
+module
+
+public import Nyll.GaloisCohomology.GroupTheory.FinitePGroupInvariants
+public import Nyll.GaloisCohomology.Topology.InvariantCoefficientExactness
+public import Nyll.GaloisCohomology.Topology.TrivialIntegralCoefficientLine
+public import Nyll.GaloisCohomology.Topology.TrivialDegreeTwoCocycles
+public import Mathlib.Algebra.Homology.HomologySequenceLemmas
+public import Mathlib.LinearAlgebra.Quotient.Card
+public import Nyll.GaloisCohomology.ProP.TrivialZModP
 
 /-!
 # Finite coefficients with p-group action image
@@ -20,6 +23,8 @@ The proof uses an actual invariant line, its actual coefficient quotient,
 and the long exact sequence. No p-group assumption is made on the abstract
 acting group.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

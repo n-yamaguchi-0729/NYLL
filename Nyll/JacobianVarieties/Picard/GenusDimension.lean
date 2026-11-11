@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
-import Nyll.JacobianVarieties.Picard.RelativeDimension
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
+public import Nyll.JacobianVarieties.Picard.RelativeDimension
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
 
 /-!
 # The dimension of a represented Jacobian equals the geometric genus
@@ -21,6 +23,8 @@ The genus here is fixed by the original curve and its actual geometric function
 field, independently of the choice of point, affine cover, or Picard representation.
 No assumption on the characteristic or algebraic closedness is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

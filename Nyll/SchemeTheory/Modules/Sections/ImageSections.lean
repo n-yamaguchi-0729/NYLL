@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.LocalMorphisms
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Abelian.Images
+module
+
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Abelian.Images
 
 /-!
 # Actual affine sections of the image sheaf
@@ -25,6 +27,8 @@ The resulting linear equivalence keeps the original inclusion and
 commutes with actual restriction maps. This permits affine image
 presheaves, including the Rees image, to be compared with a native sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteCanonicalTameMorphism
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteRootsGroupMap
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinate
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameNormalizationMap
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteRawTameValue
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteCanonicalTameMorphism
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteRootsGroupMap
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinate
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameNormalizationMap
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteRawTameValue
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
 
 /-!
 # Ambient scalar values of finite canonical characters
@@ -22,6 +24,8 @@ Projects the SAME finite canonical character and actual residue-root embedding
 to their ambient residue scalar. The one-stage construction closes the finite
 root group before the finite inertia tower compares two stages.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
+module
+
+public import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
 
 /-!
 # Factorization into functions with prescribed exact contact orders
@@ -22,6 +24,8 @@ characteristic gives the tame test functions over a perfect ground field;
 neither a characteristic hypothesis nor separability is needed for the
 factorization itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

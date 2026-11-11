@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.GroupTheory.ContinuousQuotientEquiv
-import Nyll.ValuedFieldTheory.LocalField.GroupTheory.IntegerMultipleSubgroup
-import Nyll.ValuedFieldTheory.LocalField.GroupTheory.PowerIndex
+module
 
-import Nyll.ValuedFieldTheory.LocalField.GroupTheory.QuotientPowers
+public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.ContinuousQuotientEquiv
+public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.IntegerMultipleSubgroup
+public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.PowerIndex
+
+public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.QuotientPowers
 
 /-!
 # Group-theoretic infrastructure for local field theory

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnitKernel
-import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Finsupp
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnitKernel
+public import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Finsupp
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Actual free sections on a closed subscheme
@@ -29,6 +31,8 @@ module over the quotient ring. The equivalence retains every original
 coefficient vector and its original pullback section.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -37,7 +41,8 @@ open CategoryTheory Opposite AdicModuleSystem
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-private theorem quotientFreeCoefficients_kernel
+/-- The kernel of coefficient reduction is the ideal times the free module. -/
+theorem quotientFreeCoefficients_kernel
     {R : Type u} [CommRing R] (J : Ideal R) (K : Type u) :
     (quotientFreeCoefficients J K).ker = J • (⊤ : Submodule R (K →₀ R)) := by
   let q : R →ₗ[R] R ⧸ J := (Ideal.Quotient.mkₐ R J).toLinearMap
@@ -63,7 +68,8 @@ def closedFreeCoefficientMap :
     (((pullbackPushforwardAdjunction f).unit.app P).val.app (op U.1)).hom
   η.comp (finiteFreeSectionsEquiv K U.1).toLinearMap
 
-private theorem closedFreeCoefficientMap_kernel :
+/-- The defining ideal gives the kernel of the original closed-pullback coefficient map. -/
+theorem closedFreeCoefficientMap_kernel :
     (closedFreeCoefficientMap f K U).ker =
       RingHom.ker (f.app U.1).hom • (⊤ : Submodule Γ(Y, U.1) (K →₀ Γ(Y, U.1))) := by
   let P : Y.Modules := SheafOfModules.free K
@@ -86,7 +92,8 @@ private theorem closedFreeCoefficientMap_kernel :
       Submodule.comap_top]
   exact h
 
-private theorem closedFreeCoefficientMap_surjective :
+/-- Every affine section of the closed pullback has an original free coefficient vector. -/
+theorem closedFreeCoefficientMap_surjective :
     Function.Surjective (closedFreeCoefficientMap f K U) := by
   let P : Y.Modules := SheafOfModules.free K
   have : P.IsQuasicoherent :=

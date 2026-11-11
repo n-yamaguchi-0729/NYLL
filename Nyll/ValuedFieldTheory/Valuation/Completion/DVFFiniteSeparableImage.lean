@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 
 /-!
 # Finite images over the actual valuation completion
@@ -18,6 +20,8 @@ images of a finite linear basis. Those images remain integral after extending
 the scalars to the completion. Neither Henselianity nor separability is needed.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

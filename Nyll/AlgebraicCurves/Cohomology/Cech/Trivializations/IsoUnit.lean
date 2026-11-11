@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
-import Nyll.SchemeTheory.Modules.Functoriality.UniqueIsoPullbackMapIsoEq
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsUnitTransitionTransitionFaceMulEq
+module
+
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
+public import Nyll.SchemeTheory.Modules.Functoriality.UniqueIsoPullbackMapIsoEq
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsUnitTransitionTransitionFaceMulEq
 
 /-!
 # Scheme Modules Cech Trivialisation nonempty iso unit of forall transition eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

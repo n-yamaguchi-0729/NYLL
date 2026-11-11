@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Nyll.SchemeTheory.Modules.Functoriality.FlatSectionsBaseChange
-import Nyll.SchemeTheory.Modules.Frames.SpanningFrameDescent
-import Nyll.SchemeTheory.Modules.Frames.ProjectivePresentationFromFrames
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationBaseChange
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationIso
-import Mathlib.LinearAlgebra.TensorProduct.Finiteness
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Nyll.SchemeTheory.Modules.Functoriality.FlatSectionsBaseChange
+public import Nyll.SchemeTheory.Modules.Frames.SpanningFrameDescent
+public import Nyll.SchemeTheory.Modules.Frames.ProjectivePresentationFromFrames
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationBaseChange
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationIso
+public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 
 /-! Faithfully flat descent of projective presentations. -/
+
+@[expose] public section
 
 universe u
 

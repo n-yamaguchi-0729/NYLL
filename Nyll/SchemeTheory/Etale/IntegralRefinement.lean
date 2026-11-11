@@ -4,27 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.FiniteAffineCover
-import Nyll.SchemeTheory.Etale.GeometricFiberBound
-import Nyll.SchemeTheory.Etale.NormalizationRemainderDegree
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Nyll.SchemeTheory.Morphisms.QuasiFinite
-import Nyll.SchemeTheory.Normalization.IntegralOpen
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Mono
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Topology.Compactness.Compact
+module
+
+public import Nyll.SchemeTheory.Etale.FiniteAffineCover
+public import Nyll.SchemeTheory.Etale.GeometricFiberBound
+public import Nyll.SchemeTheory.Etale.NormalizationRemainderDegree
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Nyll.SchemeTheory.Morphisms.QuasiFinite
+public import Nyll.SchemeTheory.Normalization.IntegralOpen
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Mono
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Topology.Compactness.Compact
 
 
 /-!
@@ -40,6 +42,8 @@ The result is an integral surjective morphism which Zariski locally
 factors through the original étale cover. The later strengthening to a
 finite morphism of finite presentation is not asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

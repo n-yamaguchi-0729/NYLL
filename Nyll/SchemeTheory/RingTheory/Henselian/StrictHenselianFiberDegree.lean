@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianOrthogonalIdempotents
-import Nyll.SchemeTheory.RingTheory.Idempotents.OrthogonalIdempotentsDegree
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianOrthogonalIdempotents
+public import Nyll.SchemeTheory.RingTheory.Idempotents.OrthogonalIdempotentsDegree
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # Generic splitting from a full-degree strictly Henselian fiber
@@ -17,6 +19,8 @@ Lift the closed fiber's complete orthogonal family in an arbitrary integral
 algebra, map it through the actual embedding into a finite-dimensional
 algebra, and use the generic degree bound to obtain a split algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

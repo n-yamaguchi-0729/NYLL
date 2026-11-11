@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Invertible.UnitAutomorphisms
-import Mathlib.GroupTheory.QuotientGroup.Defs
+module
+
+public import Nyll.SchemeTheory.Modules.Invertible.UnitAutomorphisms
+public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-!
 # Frames of a fixed module modulo scalars from the base
@@ -15,6 +17,8 @@ extends to a unit on the base scheme. Choosing one actual frame identifies
 these classes with the quotient of units by base scalars. The classes
 themselves do not assume a trivialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -28,18 +32,19 @@ variable {Y S : Scheme.{u}} {M : Y.Modules}
 
 /-- The actual unit carrying one trivialization of a fixed module to another. -/
 def frameRatio (e f : M ≅ 𝟙_ Y.Modules) : Γ(Y, ⊤)ˣ :=
-  unitAutEquivUnits Y (e.symm ≪≫ f)
+  unitAutEquivUnits Y (Aut.of (e.symm ≪≫ f))
 
 theorem frameRatio_self (e : M ≅ 𝟙_ Y.Modules) : frameRatio e e = 1 := by
-  have he : (e.symm ≪≫ e : Aut (𝟙_ Y.Modules)) = (1 : Aut (𝟙_ Y.Modules)) :=
-    CategoryTheory.Iso.ext e.inv_hom_id
+  have he : Aut.of (e.symm ≪≫ e) = (1 : Aut (𝟙_ Y.Modules)) :=
+    Aut.ext (CategoryTheory.Iso.ext e.inv_hom_id)
   exact (congrArg (unitAutEquivUnits Y) he).trans (map_one (unitAutEquivUnits Y))
 
 /-- Composition of changes of frame is multiplication of their actual units. -/
 theorem frameRatio_mul (e f g : M ≅ 𝟙_ Y.Modules) :
     frameRatio e f * frameRatio f g = frameRatio e g := by
-  have he : ((e.symm ≪≫ f) ≪≫ (f.symm ≪≫ g) : Aut (𝟙_ Y.Modules)) =
-      e.symm ≪≫ g := by
+  have he : Aut.of ((e.symm ≪≫ f) ≪≫ (f.symm ≪≫ g)) =
+      Aut.of (e.symm ≪≫ g) := by
+    apply Aut.ext
     apply CategoryTheory.Iso.ext
     change (e.inv ≫ f.hom) ≫ (f.inv ≫ g.hom) = e.inv ≫ g.hom
     rw [Category.assoc, f.hom_inv_id_assoc]
@@ -53,17 +58,17 @@ theorem frameRatio_symm (e f : M ≅ 𝟙_ Y.Modules) :
 /-- Coordinates of a frame relative to one actual reference frame. -/
 def frameCoordinates (e : M ≅ 𝟙_ Y.Modules) : (M ≅ 𝟙_ Y.Modules) ≃ Γ(Y, ⊤)ˣ where
   toFun := frameRatio e
-  invFun a := e ≪≫ (unitAutEquivUnits Y).symm a
+  invFun a := e ≪≫ ((unitAutEquivUnits Y).symm a).asIso
   left_inv f := by
-    have he := (unitAutEquivUnits Y).symm_apply_apply (e.symm ≪≫ f)
+    have he := (unitAutEquivUnits Y).symm_apply_apply (Aut.of (e.symm ≪≫ f))
     apply CategoryTheory.Iso.ext
-    change e.hom ≫ ((unitAutEquivUnits Y).symm (frameRatio e f)).hom = f.hom
-    exact (congrArg (fun a : Aut (𝟙_ Y.Modules) => e.hom ≫ a.hom) he).trans
+    change e.hom ≫ ((unitAutEquivUnits Y).symm (frameRatio e f)).asIso.hom = f.hom
+    exact (congrArg (fun a : Aut (𝟙_ Y.Modules) => e.hom ≫ a.asIso.hom) he).trans
       (e.hom_inv_id_assoc f.hom)
   right_inv a := by
-    have he : (e.symm ≪≫ (e ≪≫ (unitAutEquivUnits Y).symm a) : Aut (𝟙_ Y.Modules)) =
+    have he : Aut.of (e.symm ≪≫ (e ≪≫ ((unitAutEquivUnits Y).symm a).asIso)) =
         (unitAutEquivUnits Y).symm a :=
-      CategoryTheory.Iso.ext (e.inv_hom_id_assoc _)
+      Aut.ext (CategoryTheory.Iso.ext (e.inv_hom_id_assoc _))
     exact (congrArg (unitAutEquivUnits Y) he).trans
       ((unitAutEquivUnits Y).apply_symm_apply a)
 
@@ -131,7 +136,8 @@ variable {N : Y.Modules}
 leaves their ratio unchanged. -/
 theorem frameRatio_precomp (a : N ≅ M) (e f : M ≅ 𝟙_ Y.Modules) :
     frameRatio (a ≪≫ e) (a ≪≫ f) = frameRatio e f := by
-  have he : ((a ≪≫ e).symm ≪≫ (a ≪≫ f) : Aut (𝟙_ Y.Modules)) = e.symm ≪≫ f := by
+  have he : Aut.of ((a ≪≫ e).symm ≪≫ (a ≪≫ f)) = Aut.of (e.symm ≪≫ f) := by
+    apply Aut.ext
     apply CategoryTheory.Iso.ext
     change (e.inv ≫ a.inv) ≫ (a.hom ≫ f.hom) = e.inv ≫ f.hom
     rw [Category.assoc, a.inv_hom_id_assoc]

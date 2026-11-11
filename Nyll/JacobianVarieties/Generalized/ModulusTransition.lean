@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMapSheaf
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMapSheaf
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Canonical transitions between constructed generalized Jacobians
 
@@ -17,6 +19,8 @@ The transition represents restriction of the actual trivialization on the
 whole modulus. Ideal containment supplies a canonical closed inclusion, so
 no auxiliary modulus morphism is needed when divisors are ordered.
 -/
+
+@[expose] public section
 
 noncomputable section
 

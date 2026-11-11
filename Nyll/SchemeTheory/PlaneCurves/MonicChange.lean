@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.LinearChange
-import Nyll.SchemeTheory.PlaneCurves.MonicProjection
-import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+module
+
+public import Nyll.SchemeTheory.NoetherNormalization.LinearChange
+public import Nyll.SchemeTheory.PlaneCurves.MonicProjection
+public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 
 /-!
 # Monic linear representatives of plane curves
@@ -17,6 +19,8 @@ an invertible linear change of the two affine coordinates makes the leading
 coefficient in the projection variable a unit.  Multiplication by that unit's
 inverse then gives a monic equation defining the same principal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -212,7 +216,7 @@ theorem map_equationIdeal_linearChangeY
     (equationIdeal f).map (linearChangeY c).toRingEquiv.toRingHom =
       equationIdeal (linearChangeY c f) := by
   rw [equationIdeal, Ideal.map_span, Set.image_singleton, equationIdeal]
-  simp only [RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, AlgEquiv.coe_ringEquiv]
+  simp only [RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, AlgEquiv.coe_toRingEquiv]
 
 
 /-- The invertible linear change descends to the two coordinate rings. -/

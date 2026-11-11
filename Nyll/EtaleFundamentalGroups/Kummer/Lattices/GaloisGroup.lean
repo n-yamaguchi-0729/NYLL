@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.RingTheory.IsGaloisGroup.Defs
-import Nyll.EtaleFundamentalGroups.Kummer.Lattices.CharacterAction
+module
+
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.RingTheory.IsGaloisGroup.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.Lattices.CharacterAction
 
 /-!
 # Galois group of a finite lattice cover
@@ -21,6 +23,8 @@ The action, algebra structure, and finiteness proof are named definitions, not
 global instances.  This lets fraction-field consumers reuse exactly the same
 action while keeping instance search local.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 
@@ -52,9 +56,9 @@ inclusion, hence the induced map of lattice algebras, is injective. -/
 theorem latticeMapDomainFaithfulSMul
     {k : Type u} {L : Type v} [CommRing k] [AddCommGroup L]
     (H : AddSubgroup L) :
-    letI := latticeMapDomainAlgebra (k := k) H
+    let := latticeMapDomainAlgebra (k := k) H
     FaithfulSMul (AddMonoidAlgebra k H) (AddMonoidAlgebra k L) := by
-  let := latticeMapDomainAlgebra (k := k) H
+  intro sharedOwner1
   rw [faithfulSMul_iff_algebraMap_injective]
   change Function.Injective (AddMonoidAlgebra.mapDomain H.subtype)
   exact AddMonoidAlgebra.mapDomain_injective H.subtype_injective
@@ -93,12 +97,11 @@ theorem latticeCharacter_isGaloisGroup
     (H : AddSubgroup L) [Finite (L ⧸ H)]
     [HasEnoughRootsOfUnity k
       (Monoid.exponent (Multiplicative (L ⧸ H)))] :
-    letI := latticeCharacterMulSemiringAction (k := k) H
-    letI := latticeMapDomainAlgebra (k := k) H
+    let := latticeCharacterMulSemiringAction (k := k) H
+    let := latticeMapDomainAlgebra (k := k) H
     IsGaloisGroup (Multiplicative (L ⧸ H) →* kˣ)
       (AddMonoidAlgebra k H) (AddMonoidAlgebra k L) := by
-  let := latticeCharacterMulSemiringAction (k := k) H
-  let := latticeMapDomainAlgebra (k := k) H
+  intro sharedOwner1 sharedOwner2
   have hfixed :
       {x : AddMonoidAlgebra k L |
           ∀ χ : Multiplicative (L ⧸ H) →* kˣ,

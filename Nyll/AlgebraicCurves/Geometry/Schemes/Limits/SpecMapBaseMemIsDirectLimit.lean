@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.BigOperators
-import Mathlib.Data.Finset.Order
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Push
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.BigOperators
+public import Mathlib.Data.Finset.Order
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Push
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
 
 /-!
 # exists forall spec Map base mem of is Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

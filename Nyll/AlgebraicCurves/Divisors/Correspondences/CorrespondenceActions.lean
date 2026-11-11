@@ -12,15 +12,19 @@ Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b3
 Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.Divisors.Maps.MapComposition
-import Nyll.AlgebraicCurves.Divisors.Correspondences.CorrespondenceFibers
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.Divisors.Maps.MapComposition
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.CorrespondenceFibers
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 
 /-!
 # Correspondence Actions
 -/
+
+@[expose] public section
 
 section
 

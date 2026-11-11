@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionCover
-import Nyll.SchemeTheory.Descent.AffineTransitionOverlap
-import Nyll.SchemeTheory.Descent.AffineTransitionRange
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionCover
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverlap
+public import Nyll.SchemeTheory.Descent.AffineTransitionRange
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 /-!
 # Descending a covering with its full overlap condition
@@ -22,6 +24,8 @@ original model overlap, a later coefficient stage satisfies the same open
 condition. This uses quasi-compact overlap descent and the literal native
 overlap isomorphism; it does not use any continuity statement for sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

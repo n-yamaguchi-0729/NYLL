@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Invariant.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Invariant.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 
 /-!
@@ -22,6 +24,8 @@ every invariant tensor comes from the tensor product of the fixed subalgebra.
 The resulting algebra equivalence uses the actual action on the second tensor
 factor and the canonical inclusion of the fixed subalgebra.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 
@@ -63,7 +67,8 @@ private theorem actionDifference_exact :
     funext g
     exact sub_eq_zero.mpr (r.property g)
 
-private def invariantTensorHom :
+/-- Base change maps the original invariants into the invariants of the tensor action. -/
+def invariantTensorHom :
     (A ⊗[B] FixedPoints.subalgebra B R G) →ₐ[A]
       FixedPoints.subalgebra A (A ⊗[B] R) G :=
   (Algebra.TensorProduct.map (AlgHom.id A A) (FixedPoints.subalgebra B R G).val).codRestrict
@@ -77,7 +82,8 @@ private def invariantTensorHom :
       | add x y hx hy =>
           rw [map_add, smul_add, hx, hy])
 
-private theorem invariantTensorHom_bijective [Finite G] [Module.Flat B A] :
+/-- Flat base change makes the canonical map on finite-group invariants bijective. -/
+theorem invariantTensorHom_bijective [Finite G] [Module.Flat B A] :
     Function.Bijective (invariantTensorHom B A R G) := by
   classical
   let : Fintype G := Fintype.ofFinite G

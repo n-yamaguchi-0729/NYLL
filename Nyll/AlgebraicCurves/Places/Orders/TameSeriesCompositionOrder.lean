@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.RingTheory.PowerSeries.Substitution
-import Mathlib.Tactic.Linarith
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.RingTheory.PowerSeries.Substitution
+public import Mathlib.Tactic.Linarith
 
 /-! # All-orders growth after a tame parameter substitution
 
@@ -16,6 +18,8 @@ After multiplication by a coefficient of order at least `-c*m`, only
 `(e-c+1)*n` for the actual composition. Vanishing coefficients are kept
 separate because the place convention is `ord 0 = 0`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

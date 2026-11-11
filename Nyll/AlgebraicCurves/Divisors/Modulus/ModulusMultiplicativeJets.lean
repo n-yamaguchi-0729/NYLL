@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusJets
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusJets
 
 /-!
 # Multiplicative approximation with zeros and poles
@@ -18,6 +20,8 @@ the other places in the modulus.
 The input approximation theorem is the proved place approximation imported by
 `ModulusJets`; no approximation assumption or local-symbol existence is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.Unramified
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.Unramified
+public import Mathlib.Tactic.Choose
 
 /-!
 # Ring Hom formally Smooth and formally Unramified of directed union
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

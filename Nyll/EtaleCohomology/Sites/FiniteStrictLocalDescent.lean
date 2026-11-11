@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.FiniteStrictLocalSection
-import Nyll.SchemeTheory.Affine.SpecBaseChangeSectionsMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.SchemeTheory.Etale.FiniteStrictLocalSection
+public import Nyll.SchemeTheory.Affine.SpecBaseChangeSectionsMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Mathlib.Algebra.Category.Ring.FinitePresentation
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Spreading sections of covers of finite schemes
@@ -33,6 +35,8 @@ finitely presented over the base.
 This supplies the finite-data descent step in the finite direct-image
 argument of Stacks Project, Section 59.55.
 -/
+
+@[expose] public section
 
 noncomputable section
 

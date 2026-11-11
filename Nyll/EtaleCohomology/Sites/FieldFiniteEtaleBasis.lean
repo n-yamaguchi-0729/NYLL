@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GaloisSections
-import Nyll.SchemeTheory.Etale.OverField.Decomposition
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
-import Mathlib.CategoryTheory.Sites.DenseSubsite.OneHypercoverDense
+module
+
+public import Nyll.EtaleCohomology.Sites.GaloisSections
+public import Nyll.SchemeTheory.Etale.OverField.Decomposition
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
+public import Mathlib.CategoryTheory.Sites.DenseSubsite.OneHypercoverDense
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # The finite etale basis of a field
@@ -18,6 +21,8 @@ small etale site of a field. Thus the existing inclusion of finite etale
 objects is cover dense, in every characteristic. This is the geometric
 input for passing between field sheaves and their finite-cover values.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w

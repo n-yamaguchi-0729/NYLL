@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardFunctor
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.CategoryTheory.Sites.LocallyBijective
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardFunctor
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-!
 # The fppf sheaf of modulus-rigidified line-bundle classes
@@ -23,6 +25,8 @@ For empty modulus this construction still performs sheafification; it does not
 identify the naive classes with a relative Picard scheme's points. The local
 image and equality results specify the relationship with actual bundles.
 -/
+
+@[expose] public section
 
 universe u
 

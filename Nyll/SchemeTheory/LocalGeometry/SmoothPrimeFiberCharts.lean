@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.SmoothIntegralFiberCharts
-import Nyll.SchemeTheory.RingTheory.Smooth.UniformizerPrimeFiber
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Group.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.RingHom.Smooth
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.SmoothIntegralFiberCharts
+public import Nyll.SchemeTheory.RingTheory.Smooth.UniformizerPrimeFiber
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.RingHom.Smooth
 
 /-!
 # Smooth affine charts with a prime special-fibre parameter
@@ -36,6 +38,8 @@ calculation are supplied by smoothness and an actual affine shrinking.
 No integral source, integral closed fibre, or prime chart parameter is
 assumed in the final existence theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

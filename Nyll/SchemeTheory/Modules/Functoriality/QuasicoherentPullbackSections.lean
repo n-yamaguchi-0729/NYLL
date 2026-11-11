@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSectionComposition
-import Nyll.SchemeTheory.Modules.Functoriality.SpecPullbackSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
-import Nyll.SchemeTheory.Modules.Sections.AffinePullbackUnit
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSectionComposition
+public import Nyll.SchemeTheory.Modules.Functoriality.SpecPullbackSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
+public import Nyll.SchemeTheory.Modules.Sections.AffinePullbackUnit
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Actual pullback sections for arbitrary affine opens
@@ -29,6 +31,8 @@ comparison therefore identifies this precise scalar-adjoint map with
 the already constructed spectrum map. Neither invertibility of a
 comparison nor a chosen affine presentation is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

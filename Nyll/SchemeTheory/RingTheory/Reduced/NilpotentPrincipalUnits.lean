@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Nilpotent.Basic
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Algebra.Group.TypeTags.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Nilpotent.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Algebra.Group.TypeTags.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Principal-unit layers of a nilpotent ideal
@@ -20,6 +22,8 @@ congruent to one modulo `J`. Thus every positive successive layer of the
 principal-unit filtration is an actual additive ideal layer. The filtration
 terminates for every nilpotent ideal, including ideals in truncated algebras.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.ReesChartFractions
-import Mathlib.Algebra.Ring.NonZeroDivisors
+module
+
+public import Nyll.SchemeTheory.RingTheory.ReesChartFractions
+public import Mathlib.Algebra.Ring.NonZeroDivisors
 
 /-!
 # The chart of a regular principal ideal
@@ -14,6 +16,8 @@ The actual coefficient map to the chart at its regular generator is a ring
 isomorphism. This is the affine calculation for invariance of a blowup along
 an effective Cartier divisor (Stacks Project, Section 31.33).
 -/
+
+@[expose] public section
 
 noncomputable section
 

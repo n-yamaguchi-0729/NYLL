@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Mathlib.CategoryTheory.Galois.Prorepresentability
-import Mathlib.CategoryTheory.Galois.Topology
-import Mathlib.GroupTheory.Index
-import Mathlib.GroupTheory.IndexNormal
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Mathlib.Topology.Algebra.Group.Quotient
-import Mathlib.Topology.Algebra.MulAction
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Mathlib.CategoryTheory.Galois.Prorepresentability
+public import Mathlib.CategoryTheory.Galois.Topology
+public import Mathlib.GroupTheory.Index
+public import Mathlib.GroupTheory.IndexNormal
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Mathlib.Topology.Algebra.Group.Quotient
+public import Mathlib.Topology.Algebra.MulAction
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # The cyclic quotient supplied by a connected double cover
@@ -26,6 +28,8 @@ is discrete. Identifying this two-element quotient with the cyclic group
 constructs a continuous surjection; Galoisness or a quotient map is not
 an additional input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

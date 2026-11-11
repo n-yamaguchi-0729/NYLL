@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Laurent.CyclicCover
-import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Smith.SignNormalization
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Laurent.CyclicCover
+public import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Smith.SignNormalization
 
 /-!
 # Finite diagonal Laurent covers as iterated radicals
@@ -17,6 +19,8 @@ coordinate and the one-variable cyclic Laurent equivalence removes the new
 diagonal exponent.  All maps are explicit ring homomorphisms; no noncanonical
 algebra structures or scalar towers are installed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -68,7 +72,7 @@ def nestedLaurentDiagonalMap (R : Type u) [CommRing R] :
           (nestedLaurentDiagonalMap R r (Fin.init n)))
 
 /-- Split a tuple into its last coordinate and its initial tuple. -/
-private def finLastInitAddEquiv (r : ℕ) :
+def finLastInitAddEquiv (r : ℕ) :
     (Fin (r + 1) → ℤ) ≃+ (ℤ × (Fin r → ℤ)) :=
   { (Fin.snocEquiv (fun _ : Fin (r + 1) ↦ ℤ)).symm with
     map_add' := by
@@ -84,7 +88,7 @@ private def nestedLaurentMonomial (R : Type u) [CommRing R] :
         (nestedLaurentMonomial R r (Fin.init x) a)
 
 /-- The ordinary `Fin r` Laurent algebra as the nested Laurent presentation. -/
-private def finLaurentRingEquiv (R : Type u) [CommRing R] :
+def finLaurentRingEquiv (R : Type u) [CommRing R] :
     (r : ℕ) → AddMonoidAlgebra R (Fin r → ℤ) ≃+* nestedLaurent R r
   | 0 => (AddMonoidAlgebra.uniqueAlgEquiv R (Fin 0 → ℤ)).toRingEquiv
   | r + 1 =>
@@ -128,11 +132,11 @@ private theorem finLaurentRingEquiv_single
         finLaurentRingEquiv_single]
 
 /-- Coordinatewise multiplication by the positive diagonal entries. -/
-private def finDiagonalAddMonoidHom {r : ℕ} (n : Fin r → ℕ) :
+def finDiagonalAddMonoidHom {r : ℕ} (n : Fin r → ℕ) :
     (Fin r → ℤ) →+ (Fin r → ℤ) where
   toFun x i := (n i : ℤ) * x i
   map_zero' := by ext i; exact mul_zero _
-  map_add' x y := by ext; simp [mul_add]
+  map_add' x y := by ext; simp only [Pi.add_apply, mul_add]
 
 private theorem nestedLaurentDiagonalMap_monomial
     {R : Type u} [CommRing R] :
@@ -171,13 +175,15 @@ private theorem finLaurentRingEquiv_comp_diagonal
         (finLaurentRingEquiv R r).toRingHom := by
   apply AddMonoidAlgebra.ringHom_ext
   · intro a
-    simp [AddMonoidAlgebra.mapDomain_single,
-      finLaurentRingEquiv_single,
-      nestedLaurentDiagonalMap_monomial, finDiagonalAddMonoidHom]
+    simp only [RingEquiv.toRingHom_eq_coe, finDiagonalAddMonoidHom, RingHom.coe_comp,
+      RingHom.coe_coe, Function.comp_apply, AddMonoidAlgebra.mapDomainRingHom_apply,
+      AddMonoidHom.coe_mk, ZeroHom.coe_mk, AddMonoidAlgebra.mapDomain_single, Pi.zero_apply,
+      mul_zero, finLaurentRingEquiv_single, nestedLaurentDiagonalMap_monomial]
   · intro x
-    simp [AddMonoidAlgebra.mapDomain_single,
-      finLaurentRingEquiv_single,
-      nestedLaurentDiagonalMap_monomial, finDiagonalAddMonoidHom]
+    simp only [RingEquiv.toRingHom_eq_coe, finDiagonalAddMonoidHom, RingHom.coe_comp,
+      RingHom.coe_coe, Function.comp_apply, AddMonoidAlgebra.mapDomainRingHom_apply,
+      AddMonoidHom.coe_mk, ZeroHom.coe_mk, AddMonoidAlgebra.mapDomain_single,
+      finLaurentRingEquiv_single, nestedLaurentDiagonalMap_monomial]
 
 /--
 Positive diagonal exponents give an iterated radical ring equivalent to the
@@ -219,7 +225,8 @@ theorem exists_nestedDiagonalRadicalRingEquiv
             e₀ (1 : T₀) (1 : ℤ))
       have hp : Associated (pA.map c) pB := by
         have h : pA.map c = pB := by
-          simp [pA, pB, hcu]
+          simp only [Polynomial.map_sub, Polynomial.map_pow, map_X, map_C, RingHom.coe_coe, hcu, pA,
+            pB]
         rw [h]
       let transport : AdjoinRoot pA ≃+* AdjoinRoot pB :=
         AdjoinRoot.mapRingEquiv c pA pB hp
@@ -239,7 +246,7 @@ theorem exists_nestedDiagonalRadicalRingEquiv
           AdjoinRoot.of pB
             (c (AddMonoidAlgebra.mapRingHom ℤ
               (nestedDiagonalRadicalBase R r nInit) x)) by
-        simp [transport]]
+        simp only [AdjoinRoot.coe_mapRingEquiv, AdjoinRoot.map_of, RingHom.coe_coe, transport]]
       rw [show eLast (AdjoinRoot.of pB
           (c (AddMonoidAlgebra.mapRingHom ℤ
             (nestedDiagonalRadicalBase R r nInit) x))) =

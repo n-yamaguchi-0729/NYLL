@@ -5,11 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelPullback
-import Nyll.JacobianVarieties.Generalized.ModulusPointDifference
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelPullback
+public import Nyll.JacobianVarieties.Generalized.ModulusPointDifference
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
 
 /-! # Actual modulus Abel point differences lie in Picard-zero -/
+
+@[expose] public section
 
 noncomputable section
 

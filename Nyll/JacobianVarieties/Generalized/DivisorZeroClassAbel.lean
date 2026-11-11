@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorZeroClassRigidification
-import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorZeroClassRigidification
+public import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
 
 /-! # The concrete divisor comparison preserves the full-modulus Abel class -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Divisors.Maps.MapSupport
-import Nyll.AlgebraicCurves.Places.Restriction.PairwiseDisjointFiber
-import Nyll.AlgebraicCurves.Places.Basic
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Divisors.Maps.MapSupport
+public import Nyll.AlgebraicCurves.Places.Restriction.PairwiseDisjointFiber
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Divisor eval Fun pullback of is Purely Inseparable
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

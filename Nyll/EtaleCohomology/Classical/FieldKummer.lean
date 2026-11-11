@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldHilbert90
-import Nyll.EtaleCohomology.Classical.KummerSequence
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
-import Mathlib.Algebra.Group.TypeTags.Basic
-import Mathlib.Algebra.Group.Units.Equiv
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldHilbert90
+public import Nyll.EtaleCohomology.Classical.KummerSequence
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Mathlib.Algebra.Group.TypeTags.Basic
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
-# Kummer classes over a characteristic-zero field
+# Kummer classes and finite effacement over fields
 
 The actual derived étale H¹ with roots-of-unity coefficients is computed as
 field units modulo nth powers. The map is the connecting homomorphism of the
@@ -23,13 +25,14 @@ Surjectivity uses the proved geometric Hilbert 90 theorem; the kernel is
 computed using exactness and the actual power map on units.
 
 This is the field case of the cohomology sequence in Stacks Project, Section
-59.28 (https://stacks.math.columbia.edu/tag/03PK). Characteristic zero is the
-scope of the existing Hilbert 90 supplier used here. This does not assert the
-general Picard-group comparison or the positive-characteristic case.
+59.28 (https://stacks.math.columbia.edu/tag/03PK). The field-unit quotient
+interface below retains its characteristic-zero convenience hypothesis. The
+results supplied with an explicit invertible exponent, including the actual
+degree-two injection, apply in every characteristic.
 -/
 
 /-!
-# Kummer cohomology over characteristic-zero fields
+# Kummer effacement and degree-two injectivity for invertible exponents
 
 Geometric Hilbert 90 makes the actual Kummer boundary surjective in degree
 one. Consequently every roots-of-unity H1 class has a finite etale effacing
@@ -38,6 +41,8 @@ roots of unity into Gm induces an injection on derived sheaf cohomology.
 No comparison with Galois cohomology is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -45,14 +50,16 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Abelian Limits Opposite
 
 namespace EtaleCohomology
 
-private theorem fieldKummerExponentUnit (K : Type u) [Field K] [CharZero K]
+/-- Every positive exponent is invertible on the spectrum of a characteristic-zero field. -/
+theorem fieldKummerExponentUnit (K : Type u) [Field K] [CharZero K]
     {n : ℕ} (hn : 0 < n) : IsUnit (n : Γ(Spec (.of K), ⊤)) := by
   let e := (Scheme.ΓSpecIso (CommRingCat.of K)).commRingCatIsoToRingEquiv
   apply (MulEquiv.isUnit_map e).mp
   simpa only [map_natCast] using
     (isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr (Nat.ne_of_gt hn)) : IsUnit (n : K))
 
-private def fieldUnitsH0Equiv (K : Type u) [Field K] :
+/-- Degree-zero cohomology of the multiplicative group over a field is its group of units. -/
+def fieldUnitsH0Equiv (K : Type u) [Field K] :
     Sheaf.H.{u} (etaleMultiplicativeGroupSheaf (Spec (.of K))) 0 ≃+ Additive Kˣ :=
   (Sheaf.H.equiv₀ (etaleMultiplicativeGroupSheaf (Spec (.of K)))
     (MorphismProperty.Over.mkIdTerminal
@@ -141,7 +148,7 @@ def etaleFieldKummerEquiv (K : Type u) [Field K] [CharZero K]
 /-- Hilbert 90 also vanishes at the terminal object in the actual cohomology
 presheaf, through the proved terminal-object comparison. -/
 theorem etaleMultiplicativeGroup_H1_terminal_eq_zero_of_field
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     (a : Sheaf.H'.{u} (etaleMultiplicativeGroupSheaf (Spec (.of K))) 1
       (Scheme.Etale.mk (𝟙 (Spec (.of K))))) : a = 0 := by
   let hT : IsTerminal (Scheme.Etale.mk (𝟙 (Spec (.of K)))) :=
@@ -157,7 +164,7 @@ theorem etaleMultiplicativeGroup_H1_terminal_eq_zero_of_field
 /-- Every actual roots-of-unity H1 class over a field is the Kummer class
 of a unit section. -/
 theorem etaleKummerBoundary_surjective_of_field
-    (K : Type u) [Field K] [CharZero K] {n : ℕ}
+    (K : Type u) [Field K] {n : ℕ}
     (hn : 0 < n) (hnK : IsUnit (n : Γ(Spec (.of K), ⊤))) :
     Function.Surjective
       (etaleKummerBoundary (Spec (.of K)) hn hnK
@@ -181,10 +188,10 @@ theorem etaleKummerBoundary_surjective_of_field
   rw [Equiv.symm_apply_apply]
   exact hb
 
-/-- Every actual roots-of-unity H1 class over a characteristic-zero field
+/-- Every actual roots-of-unity H1 class over a field, for an invertible exponent,
 is killed by an actual finite etale cover of degree exactly n. -/
 theorem exists_degree_n_cover_killing_rootsOfUnity_H1_of_field
-    (K : Type u) [Field K] [CharZero K] {n : ℕ}
+    (K : Type u) [Field K] {n : ℕ}
     (hn : 0 < n) (hnK : IsUnit (n : Γ(Spec (.of K), ⊤)))
     (a : Sheaf.H'.{u} (etaleRootsOfUnitySheaf (Spec (.of K)) n) 1
       (Scheme.Etale.mk (𝟙 (Spec (.of K))))) :
@@ -207,7 +214,7 @@ def etaleRootsOfUnityH2ToMultiplicativeGroup (X : Scheme.{u}) (n : ℕ) :
 /-- Geometric Hilbert 90 proves injectivity on actual derived H2, without
 assuming a field/Galois or Brauer comparison. -/
 theorem etaleRootsOfUnityH2ToMultiplicativeGroup_injective_of_field
-    (K : Type u) [Field K] [CharZero K] {n : ℕ}
+    (K : Type u) [Field K] {n : ℕ}
     (hn : 0 < n) (hnK : IsUnit (n : Γ(Spec (.of K), ⊤))) :
     Function.Injective (etaleRootsOfUnityH2ToMultiplicativeGroup (Spec (.of K)) n) := by
   apply (AddMonoidHom.ker_eq_bot_iff _).mp

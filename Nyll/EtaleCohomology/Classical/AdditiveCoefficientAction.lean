@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Grp.Preadditive
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.Algebra.Module.End
+module
+
+public import Mathlib.Algebra.Category.Grp.Preadditive
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.Algebra.Module.End
 
 /-!
 # Coefficient actions transported by an additive functor
@@ -15,6 +17,8 @@ Scalar endomorphisms of the coefficient group induce scalar endomorphisms of
 its image. This constructs the module structure and proves linearity of the
 induced maps, without changing the underlying additive groups.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -27,7 +31,8 @@ namespace EtaleCohomology.Classical
 variable (F : AddCommGrpCat.{u} ⥤ AddCommGrpCat.{v}) [F.Additive]
   (R : Type w) [Semiring R] (A : AddCommGrpCat.{u}) [Module R A]
 
-private def scalarEnd (r : R) : A ⟶ A :=
+/-- The additive endomorphism given by multiplication by a coefficient. -/
+def scalarEnd (r : R) : A ⟶ A :=
   AddCommGrpCat.ofHom (smulAddHom R A r)
 
 private theorem scalarEnd_one : scalarEnd R A 1 = 𝟙 A := by

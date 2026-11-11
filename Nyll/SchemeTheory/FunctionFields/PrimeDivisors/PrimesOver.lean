@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RamificationInertia.Basic
+module
+
+public import Mathlib.RingTheory.RamificationInertia.Basic
 
 /-!
 # Counting primes above a prime ideal
@@ -14,6 +16,8 @@ the rank of a finite flat extension immediately bounds the number of primes
 above a fixed prime.  This file records that consequence in a form convenient
 for the prime-divisor counts in Fried--Jarden, Lemma 6.2.2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

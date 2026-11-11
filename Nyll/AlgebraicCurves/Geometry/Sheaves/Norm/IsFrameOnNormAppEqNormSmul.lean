@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Norm.Defs
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.ExteriorPower.Det
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.SchemeTheory.Modules.Norm.NormFrames
-import Nyll.SchemeTheory.Modules.ExteriorPower.ExteriorPowerMapAppUnitIotaMultiEqDetSmul
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+module
+
+public import Mathlib.RingTheory.Norm.Defs
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.ExteriorPower.Det
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.SchemeTheory.Modules.Norm.NormFrames
+public import Nyll.SchemeTheory.Modules.ExteriorPower.ExteriorPowerMapAppUnitIotaMultiEqDetSmul
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
 
 /-!
 # Norms of local frames
 
 The determinant of multiplication computes the coefficient of a norm-module frame.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,30 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothGenericNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RootDVRModel
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothGenericNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RootDVRModel
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Extending a geometric generic Galois cover over a finite DVR base
@@ -52,6 +54,8 @@ family with its special fibre is a subsequent step. For an arbitrary
 geometric generic field, a separate constant-field comparison reduces
 the cover to the separable closure used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,3 +11,4 @@ import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.RelativePic0DesignationBaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.TransportSectionTwistBaseChangeIso
+import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.SectionIdeal

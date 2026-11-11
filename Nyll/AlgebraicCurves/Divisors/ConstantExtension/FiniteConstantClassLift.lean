@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
-import Nyll.GaloisCohomology.FieldTheory.FiniteActionHilbert90
-import Mathlib.FieldTheory.Finite.GaloisField
-import Mathlib.Tactic.Abel
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
+public import Nyll.GaloisCohomology.FieldTheory.FiniteActionHilbert90
+public import Mathlib.FieldTheory.Finite.GaloisField
+public import Mathlib.Tactic.Abel
 
 /-!
 # Fixed representatives over finite constant fields
@@ -16,6 +18,8 @@ For an actual semilinear action extending the full finite constant-field Galois
 action, an invariant divisor class has an invariant divisor representative.
 The obstruction is removed using the finite-field norm and field Hilbert 90.
 -/
+
+@[expose] public section
 
 noncomputable section
 

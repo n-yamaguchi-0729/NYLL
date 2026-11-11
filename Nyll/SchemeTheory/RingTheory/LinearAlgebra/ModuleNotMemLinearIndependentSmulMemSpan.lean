@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.RingTheory.Finiteness.Nakayama
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SimpRw
+module
+
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.RingTheory.Finiteness.Nakayama
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SimpRw
 
 /-!
 # Module exists forall not Mem and linear Independent and smul mem span of finrank base
 Change eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

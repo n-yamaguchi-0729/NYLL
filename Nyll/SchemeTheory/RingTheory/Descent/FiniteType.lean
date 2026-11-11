@@ -13,21 +13,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.Chevalley
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.RingTheory.Flat.FiniteSubalgebra
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.TensorProduct.MvPolynomial
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.RingTheory.Flat.FiniteSubalgebra
 
 /-!
 # Faithfully flat descent of finite type
@@ -36,6 +38,8 @@ Finite generation of an algebra descends along a faithfully flat finitely presen
 extension. Polynomial presentations and finite subalgebra models supply the generators
 over the original base.
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.StructureSheaf
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.StructureSheaf
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Ext
 
 /-!
 # mem map maximal Ideal of stalk Map mem map maximal Ideal of iso pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

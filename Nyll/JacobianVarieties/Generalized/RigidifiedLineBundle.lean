@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+module
+
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
 
 /-!
 # Line bundles with a chosen trivialization along a modulus
@@ -21,6 +23,8 @@ This file constructs objects, their compatible isomorphisms, tensor products, an
 along a commuting square. `Classes` denotes the naive quotient by compatible isomorphisms;
 no sheafification or representability assertion is implicit in that name.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
-import Nyll.AlgebraicCurves.Places.ValuationRings.UniqueCentrePlaceProper
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
-import Mathlib.AlgebraicGeometry.Stalk
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
+public import Nyll.AlgebraicCurves.Places.ValuationRings.UniqueCentrePlaceProper
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Completion
 
 /-! # Completed components selected by the actual Henselian regular block
 
@@ -26,6 +30,8 @@ regular/boundary matching or integral extension is assumed here. The base
 ring is kept general so the statement applies directly to the actual
 `K[[s]]` family after the completed-base identification.
 -/
+
+@[expose] public section
 
 noncomputable section
 

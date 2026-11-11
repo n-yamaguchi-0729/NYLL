@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Projective.AffineLineFormalCancellation
-import Nyll.AlgebraicCurves.Places.Orders.IntegralGroupPowerSeriesOrders
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Projective.AffineLineFormalCancellation
+public import Nyll.AlgebraicCurves.Places.Orders.IntegralGroupPowerSeriesOrders
 
 /-! # Constancy from an integral formal difference at infinity
 
@@ -14,6 +16,8 @@ possibly ramified extension of the infinity valuation, forces constancy of
 the original affine-line morphism. The proof extracts its actual polynomial
 coordinates in every degree, so it remains valid in positive characteristic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

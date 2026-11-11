@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Representability.AlgEquivZeroCutAlgClosed
 import Nyll.JacobianVarieties.Picard.Representability.AlgEquivZeroCutChartData
 import Nyll.JacobianVarieties.Picard.Representability.AlgEquivZeroCutFiniteMapDataDVR
 import Nyll.JacobianVarieties.Picard.Representability.AlgEquivZeroCutOpenCharts

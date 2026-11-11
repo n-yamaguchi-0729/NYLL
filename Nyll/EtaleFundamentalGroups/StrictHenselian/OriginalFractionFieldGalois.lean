@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Original displayed fraction fields and the canonical same-universe field
@@ -19,6 +21,8 @@ extension on the original ambient automorphisms an equivalence, leaving
 every underlying automorphism unchanged. This permits using common-universe
 scheme APIs without changing the independently supplied original K.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.Tactic.Abel
 
 /-!
 # Adic exactness from an explicit filtration estimate
@@ -23,6 +25,8 @@ coordinate by coordinate from a single Artin–Rees bound. Neither
 exactness after completion nor the existence of a completed lift is an
 input to this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

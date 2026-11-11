@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.GroupTheory.MonoidLocalization.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafHomogeneousRatios
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.GroupTheory.MonoidLocalization.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring
 
 /-!
 # Common homogeneous numerators for actual projective chart functions
@@ -26,6 +28,8 @@ chart functions admit a common denominator exponent, as large as any
 specified lower bound. The construction retains each numerator and the
 exact equation in the native structure-sheaf sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

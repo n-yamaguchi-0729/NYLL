@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
-import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SndApplyEqNotMemSupport
+module
+
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SndApplyEqNotMemSupport
 
 /-! # The open complement of an actual relative modulus is nonempty -/
+
+@[expose] public section
 
 universe u
 

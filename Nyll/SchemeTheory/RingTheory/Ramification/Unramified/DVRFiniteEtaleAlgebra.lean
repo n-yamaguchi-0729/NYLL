@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Etale.Pi
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.TensorProduct.Pi
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Etale.Pi
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.TensorProduct.Pi
 
 /-!
 # Unramified normalization of a finite étale generic fibre
@@ -26,6 +28,8 @@ Its generic fibre recovers the original algebra. This supplies the algebraic
 extension at a codimension-one point used in
 [Stacks Project, Tag 0H2W](https://stacks.math.columbia.edu/tag/0H2W).
 -/
+
+@[expose] public section
 
 noncomputable section
 

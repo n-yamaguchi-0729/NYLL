@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingFractionCoefficients
-import Nyll.SchemeTheory.ProjectiveSpace.UnitFractionEvaluation
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Sheaves.FrameSectionEquivalence
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Data.Finset.Max
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingFractionCoefficients
+public import Nyll.SchemeTheory.ProjectiveSpace.UnitFractionEvaluation
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPolynomialSections
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Sheaves.FrameSectionEquivalence
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Data.Finset.Max
 
 /-!
 # Actual twisting-sheaf sections as shifted homogeneous fractions
@@ -30,6 +32,8 @@ transition, so the resulting section is independent of the coordinate.
 This gives an actual linear equivalence on every nonempty coordinate
 intersection, compatible with the original sheaf restrictions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

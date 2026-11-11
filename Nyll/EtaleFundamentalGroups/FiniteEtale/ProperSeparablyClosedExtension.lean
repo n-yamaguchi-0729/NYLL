@@ -4,22 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtension
-import Nyll.EtaleFundamentalGroups.FiniteEtale.UniversalHomeomorphism
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
-import Nyll.SchemeTheory.Affine.CoefficientPullbackSquare
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.Pi1.Affine.Over
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Mathlib.CategoryTheory.Equivalence
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtension
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.UniversalHomeomorphism
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
+public import Nyll.SchemeTheory.Affine.CoefficientPullbackSquare
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.Pi1.Affine.Over
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
+public import Mathlib.CategoryTheory.Equivalence
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
 
 /-!
 # Proper comparison for separably closed coefficient fields
@@ -32,6 +35,8 @@ gives the comparison for the original separably closed fields. This allows
 the residue field of a strict henselization to be used without imposing
 perfectness or algebraic closedness on it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

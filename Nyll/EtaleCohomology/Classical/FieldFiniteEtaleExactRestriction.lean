@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FieldFiniteEtaleBasis
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+module
+
+public import Nyll.EtaleCohomology.Sites.FieldFiniteEtaleBasis
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
 /-!
 # Exact restriction to the finite etale site of a field
@@ -20,6 +22,8 @@ actual Ext groups in every degree, including the original coefficient
 and constant-integer objects. This is an exact-category comparison, not
 an assumption about a cohomology theory.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

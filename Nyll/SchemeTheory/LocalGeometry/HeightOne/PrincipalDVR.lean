@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # A Noetherian-free DVR criterion in dimension one
@@ -22,6 +24,8 @@ where a global `IsNoetherianRing` instance on the completion is not
 available.  A retained generic component supplies the dimension bound, and
 the exact vertical-fibre calculation supplies the principal maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkInertia
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkGaloisRestriction
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationGaloisInvariant
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaDiagram
-import Mathlib.RingTheory.Invariant.Profinite
-import Mathlib.RingTheory.Ideal.Pointwise
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkInertia
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkGaloisRestriction
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationGaloisInvariant
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaDiagram
+public import Mathlib.RingTheory.Invariant.Profinite
+public import Mathlib.RingTheory.Ideal.Pointwise
 
 /-!
 # Original local inertia and the literal strict-henselization fraction fields
@@ -23,6 +25,8 @@ geometric stalk and its literal fraction-field embedding. The union of the
 original local inertia groups equals the union of the subgroups fixing
 these actual embedded fraction fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

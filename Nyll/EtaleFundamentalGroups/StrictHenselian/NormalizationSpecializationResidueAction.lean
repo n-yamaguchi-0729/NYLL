@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationFiniteEtaleSpecialization
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueAction
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationFiniteEtaleSpecialization
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueAction
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
+public import Nyll.SchemeTheory.RingTheory.Ramification.StabilizerLocalizationAction
 
 /-!
 # Specialization uses the original residue action
@@ -16,6 +20,8 @@ is the already constructed original normalization residue map. Equality is
 checked on the original normalization coefficients, which surject onto the
 residue field at the maximal prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationMonodromyGroup
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTranslations
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldMonodromyLift
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationMonodromyGroup
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTranslations
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMultiplicationAlgebraicPoints
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldMonodromyLift
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Actual multiplication-cover action at an arbitrary geometric point
@@ -17,6 +21,8 @@ Transport through a path to the unit identifies actual monodromy with
 translation by the same torsion point on every geometric fibre. Naturality
 against the deck translation proves the comparison; it is not an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,28 +48,10 @@ theorem multiplicationFiber_smul_eq_translation
     (z : (FiniteEtale.fiber ξ).obj (G.multiplicationCover hc n)) :
     g • z = (FiniteEtale.fiber ξ).map
       (G.torsionDeckTranslation hc n
-        (G.multiplicationMonodromy hc n (continuousConjAut τ g))).hom z := by
-  let W := G.multiplicationCover hc n
-  let t := G.multiplicationMonodromy hc n (continuousConjAut τ g)
-  let d := G.torsionDeckTranslation hc n t
-  have hτinj : Function.Injective (τ.hom.app W) := by
-    intro x y h
-    exact (FintypeCat.hom_inv_id_apply (τ.app W) x).symm.trans
-      ((congrArg (τ.inv.app W) h).trans (FintypeCat.hom_inv_id_apply (τ.app W) y))
-  apply hτinj
-  apply (G.multiplicationCoverFiberEquivTorsion hc n).injective
-  have hτg : τ.hom.app W (g • z) =
-      (continuousConjAut τ g) • τ.hom.app W z := by
-    change τ.hom.app W (g.hom.app W z) =
-      τ.hom.app W (g.hom.app W (τ.inv.app W (τ.hom.app W z)))
-    exact (congrArg (fun w => τ.hom.app W (g.hom.app W w))
-      (FintypeCat.hom_inv_id_apply (τ.app W) z)).symm
-  have hτd : τ.hom.app W ((FiniteEtale.fiber ξ).map d.hom z) =
-      (FiniteEtale.fiber (G.one (𝟙 (Spec (.of K)))).1).map d.hom (τ.hom.app W z) :=
-    ConcreteCategory.congr_hom (τ.hom.naturality d.hom) z
-  rw [hτg, hτd, G.multiplicationCoverFiberEquivTorsion_smul hc n,
-    G.fiberEquiv_map_torsionDeckTranslation hc n]
-  exact add_comm _ _
+        (G.multiplicationMonodromy hc n (continuousConjAut τ g))).asIso.hom z := by
+  have hn : IsUnit ((n : ℕ) : K) :=
+    isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr n.ne_zero)
+  exact UnitMultiplication.fiber_smul_eq_translation G hc ξ ⟨n, hn⟩ τ g z
 
 /-- The transported monodromy acts on the actual point of the group scheme
 by its actual group law, at the chosen geometric point. -/

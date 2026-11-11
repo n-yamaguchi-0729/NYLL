@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.RamificationInertia.Unramified
+module
+
+public import Mathlib.NumberTheory.RamificationInertia.Unramified
 
 /-!
 # The Dedekind ramification-index criterion for unramifiedness
@@ -16,6 +18,8 @@ ramification index one.
 
 No completeness or Henselian hypothesis is involved.
 -/
+
+@[expose] public section
 
 namespace TameAbhyankar.SGA1
 
@@ -33,9 +37,7 @@ theorem isUnramifiedAt_iff_residue_isSeparable_and_ramificationIdx_eq_one
     Algebra.IsUnramifiedAt R P ↔
       Algebra.IsSeparable (P.under R).ResidueField P.ResidueField ∧
         Ideal.ramificationIdx' (P.under R) P = 1 := by
-  let _ : Algebra (Localization.AtPrime (P.under R))
-      (Localization.AtPrime P) :=
-    Localization.AtPrime.algebraOfLiesOver (P.under R) P
+  intro localizationAlgebra
   have hram := Ideal.IsDedekindDomain.ramificationIdx'_eq_one_iff
     (R := R) (S := S) (p := P.under R) (P := P) hP Ideal.map_comap_le
   rw [Algebra.isUnramifiedAt_iff_map_eq R (P.under R) P, hram]

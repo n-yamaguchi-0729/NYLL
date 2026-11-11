@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
-import Nyll.EtaleCohomology.Sites.ProperClosedFieldSections
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
+public import Nyll.EtaleCohomology.Sites.ProperClosedFieldSections
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Evaluation of proper strict-local sections in the geometric field
@@ -23,6 +25,8 @@ chosen inverse-image composition isomorphism and literal projection equality
 identify its target with the original inverse-image sheaf on the geometric
 fibre, without any additional comparison assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

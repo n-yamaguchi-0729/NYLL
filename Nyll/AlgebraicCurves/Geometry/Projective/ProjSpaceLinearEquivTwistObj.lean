@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Tactic.Ring
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+module
+
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Tactic.Ring
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
 
 /-!
 # Proj Space exists linear Equiv twist Obj of le pullback Chart
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

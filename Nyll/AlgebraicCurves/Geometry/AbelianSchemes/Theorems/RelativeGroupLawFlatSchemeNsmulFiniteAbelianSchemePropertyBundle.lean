@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Fibre
-import Nyll.SchemeTheory.RingTheory.Localization.FiberLocalizationQuotient
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.AffineFiberStalkLocalization
-import Nyll.SchemeTheory.RingTheory.Flat.FibralCriterion
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreSchemeNsmulEqSchemeFibreEndo
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePropertyBundleFibreStr
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFlatSchemeNsmulFiniteField
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.SchemeTheory.Fibers.SchemeFibreEndo
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Fibre
+public import Nyll.SchemeTheory.RingTheory.Localization.FiberLocalizationQuotient
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.AffineFiberStalkLocalization
+public import Nyll.SchemeTheory.RingTheory.Flat.FibralCriterion
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreSchemeNsmulEqSchemeFibreEndo
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePropertyBundleFibreStr
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFlatSchemeNsmulFiniteField
 
 /-!
 # Relative Group Law flat scheme Nsmul of is Finite of abelian Scheme Property Bundle
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

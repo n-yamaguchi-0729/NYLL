@@ -4,14 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantPresentation
-import Nyll.SchemeTheory.Etale.OverField.Decomposition
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.FieldTheory.Galois.GaloisClosure
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantPresentation
+public import Nyll.SchemeTheory.Etale.OverField.Decomposition
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.FieldTheory.Galois.GaloisClosure
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.Normal.Closure
+public import Mathlib.FieldTheory.SeparableClosure
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite étale refinements over a field
@@ -26,6 +31,8 @@ global section after an actual connected finite étale cover. This is the
 local lifting input for comparing field étale cohomology with finite
 Galois stages; no cohomology comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -110,10 +117,10 @@ def finiteGaloisEtaleObject (K : Type u) [Field K]
   have : Etale (Spec.map (CommRingCat.ofHom (algebraMap K E))) := h.toEtale
   exact Scheme.Etale.mk (Spec.map (CommRingCat.ofHom (algebraMap K E)))
 
-/-- A covering sieve of any pointed object over a characteristic-zero field
+/-- A covering sieve of any pointed étale object over a field
 has an actual finite Galois refinement over the original base field. -/
 theorem exists_finiteGalois_mem_covering_sieve_of_field_object
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     (V : (Spec (.of K)).Etale) (x : V.left)
     (S : Sieve V)
     (hS : S ∈ (Spec (.of K)).smallEtaleTopology _) :
@@ -126,10 +133,17 @@ theorem exists_finiteGalois_mem_covering_sieve_of_field_object
   let : Field (L y) := (hfield y).toField
   let : Algebra K (L y) := (a y).hom.toAlgebra
   have : Module.Finite K (L y) := (hsep y).1
+  have : Algebra.IsSeparable K (L y) := (hsep y).2
+  have : Algebra.IsSeparable K
+      (IntermediateField.normalClosure K (L y) (AlgebraicClosure K)) := by
+    rw [normalClosure_def]
+    have : ∀ b : L y →ₐ[K] AlgebraicClosure K, Algebra.IsSeparable K b.fieldRange :=
+      fun b => AlgEquiv.Algebra.isSeparable (AlgEquiv.ofInjectiveField b)
+    exact IntermediateField.isSeparable_iSup K (AlgebraicClosure K)
   let E : FiniteGaloisIntermediateField K (AlgebraicClosure K) :=
     { toIntermediateField := IntermediateField.normalClosure K (L y) (AlgebraicClosure K)
       finiteDimensional := inferInstance
-      isGalois := inferInstance }
+      isGalois := ⟨⟩ }
   let b : L y →ₐ[K] E :=
     (normalClosure.algHomEquiv K (L y) (AlgebraicClosure K)).symm
       IsAlgClosed.lift
@@ -149,10 +163,10 @@ theorem exists_finiteGalois_mem_covering_sieve_of_field_object
         exact b.commutes k)
   exact ⟨E, l ≫ g, S.downward_closed hg l⟩
 
-/-- In characteristic zero, a cover of the base field can be refined
+/-- A cover of any base field can be refined
 inside its algebraic closure by an actual finite Galois extension. -/
 theorem exists_finiteGalois_mem_covering_sieve_of_field
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     (S : Sieve (Scheme.Etale.mk (𝟙 (Spec (.of K)))))
     (hS : S ∈ (Spec (.of K)).smallEtaleTopology _) :
     ∃ (E : FiniteGaloisIntermediateField K (AlgebraicClosure K))
@@ -164,7 +178,7 @@ theorem exists_finiteGalois_mem_covering_sieve_of_field
 /-- A finite family of actual sections lifts simultaneously through a
 sheaf epimorphism after a single actual finite Galois refinement. -/
 theorem exists_finiteGalois_lift_finite_sections_of_field
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     {F G : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (η : F ⟶ G) [Epi η]
     (V : (Spec (.of K)).Etale) (x : V.left)

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.ZMod.Basic
-import Mathlib.LinearAlgebra.Matrix.Defs
-import Mathlib.Tactic.Linarith.Frontend
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SplitIfs
+module
+
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.LinearAlgebra.Matrix.Defs
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SplitIfs
 
 /-!
 # ZMod chord Matrix transpose eq neg
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

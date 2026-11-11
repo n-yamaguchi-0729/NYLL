@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneFamily
-import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneFamily
+public import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
 
 /-! # The intrinsic Abel morphism over an arbitrary field, without a rational point -/
+
+@[expose] public section
 
 noncomputable section
 

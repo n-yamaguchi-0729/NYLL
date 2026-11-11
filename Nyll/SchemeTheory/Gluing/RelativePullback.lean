@@ -5,9 +5,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Andrew Yang, Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RelativeOverlap
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
+module
+
+public import Nyll.SchemeTheory.Gluing.RelativeOverlap
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 
 /-!
 # Scheme gluing after actual pullback equations
@@ -20,6 +22,8 @@ https://github.com/leanprover-community/mathlib4/blob/065356127b1dc0016f66b7283c
 The inverse-limit consumer supplies both relations using actual eventual
 equality, with no equality-reflection assumption on the limit projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Topology.KrullDimension
-import Mathlib.RingTheory.KrullDimension.Polynomial
-import Mathlib.RingTheory.KrullDimension.Field
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
+module
+
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
 
 /-!
 # Proj Space topological Krull Dim le of is Closed Immersion
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

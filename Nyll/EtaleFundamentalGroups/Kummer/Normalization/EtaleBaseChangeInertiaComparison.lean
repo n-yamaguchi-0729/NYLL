@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaCardinality
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaCardinality
 
 /-!
 # Inertia cardinality across an etale function-field base change
@@ -13,6 +15,8 @@ This file combines the selected-component normalization theorem with the
 ramification-index square and the normal-Noetherian inertia-cardinality
 formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

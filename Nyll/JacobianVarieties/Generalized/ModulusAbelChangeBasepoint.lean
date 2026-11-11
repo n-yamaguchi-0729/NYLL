@@ -5,10 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # Changing the actual Abel basepoint gives the specified tensor translation -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -16,6 +22,8 @@ universe u
 
 open CategoryTheory Opposite
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

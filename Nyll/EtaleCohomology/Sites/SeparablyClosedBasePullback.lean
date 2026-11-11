@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConnectedModuleConstants
-import Nyll.EtaleCohomology.Sites.ConstantPullback
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Nyll.EtaleCohomology.Sites.SeparablyClosedFieldSheaves
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.EssentialImage
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Nyll.EtaleCohomology.Sites.ConnectedModuleConstants
+public import Nyll.EtaleCohomology.Sites.ConstantPullback
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Nyll.EtaleCohomology.Sites.SeparablyClosedFieldSheaves
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.EssentialImage
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Pullback from a separably closed field to a connected scheme
@@ -23,6 +25,8 @@ Thus actual inverse image is fully faithful, and its original unit gives
 an isomorphism on global sections. No finite-type, finiteness or
 constructibility hypothesis is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

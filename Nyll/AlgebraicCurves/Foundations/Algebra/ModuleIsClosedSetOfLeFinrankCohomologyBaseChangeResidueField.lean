@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechIsClosedSetOfLeFinrankKerBaseChange
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechIsClosedSetOfLeFinrankKerBaseChange
 
 /-!
 # Module is Closed set Of le finrank cohomology base Change residue Field of projective
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

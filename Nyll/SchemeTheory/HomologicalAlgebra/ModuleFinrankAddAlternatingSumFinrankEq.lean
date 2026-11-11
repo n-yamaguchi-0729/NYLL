@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Module finrank add alternating Sum finrank eq of finite complex
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

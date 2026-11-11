@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
-import Nyll.JacobianVarieties.Generalized.RigidifiedCongr
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCongr
 
 /-! # Transport of chosen rigidifications across an isomorphism of squares -/
+
+@[expose] public section
 
 noncomputable section
 

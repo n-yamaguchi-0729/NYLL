@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubringFiniteDimensional
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists forall mem and mem nonunits iff not is Unit of is Local Ring

@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.Trace.FiniteFreeDiscriminant
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.Trace.PointwiseFlatPurity
+public import Nyll.SchemeTheory.RingTheory.Ramification.Trace.FiniteFlatHeightOneCriterion
+public import Nyll.SchemeTheory.RingTheory.Ramification.Trace.FiniteFreeDiscriminant
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Ramification.Trace. -/

@@ -14,15 +14,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Scalar extension assembled from homogeneous pieces
 
 The inverse is defined on each homogeneous component and extended through the direct sum.
 -/
+
+@[expose] public section
 
 open TensorProduct DirectSum
 
@@ -36,7 +40,8 @@ variable {S : Type u} [CommRing S] (T : Type u) [CommRing T] [Algebra S T]
   (𝓑 : ℕ → Submodule T B) [GradedAlgebra 𝓑]
   (ϑ : A →ₐ[S] B) (hϑdeg : ∀ n, ∀ x ∈ 𝓐 n, ϑ x ∈ 𝓑 n)
 
-private abbrev piece (n : ℕ) : 𝓐 n →ₗ[S] (𝓑 n).restrictScalars S :=
+/-- The degreewise linear map induced by the grading-preserving algebra homomorphism. -/
+abbrev piece (n : ℕ) : 𝓐 n →ₗ[S] (𝓑 n).restrictScalars S :=
   ϑ.toLinearMap.restrict (p := 𝓐 n) (q := (𝓑 n).restrictScalars S) (hϑdeg n)
 
 private abbrev φ : A ⊗[S] T →ₐ[S] B :=

@@ -4,28 +4,30 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisDVRModel
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.StrictHenselianRootEmbedding
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisDVRModel
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.StrictHenselianRootEmbedding
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # A geometric generic cover after an embedded finite DVR root extension
@@ -48,6 +50,8 @@ The extension across the special fibre is a subsequent step. The given
 geometric field is assumed separable over the original fraction field;
 in particular, it may be the chosen separable closure of that field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

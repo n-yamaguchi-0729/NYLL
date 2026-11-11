@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Places.Ramification.CardFiberOverMulRamificationIndexMulInertiaDeg
 import Nyll.AlgebraicCurves.Places.Ramification.EqFinrankLtTwoMulRamificationIndex
+import Nyll.AlgebraicCurves.Places.Ramification.FiberCenterResidueComparison
 import Nyll.AlgebraicCurves.Places.Ramification.FiniteRamification
 import Nyll.AlgebraicCurves.Places.Ramification.FiniteSetOfCardFiberAlongNeFinrankAlong
 import Nyll.AlgebraicCurves.Places.Ramification.FinsetNotMemRamificationIndexEqOne

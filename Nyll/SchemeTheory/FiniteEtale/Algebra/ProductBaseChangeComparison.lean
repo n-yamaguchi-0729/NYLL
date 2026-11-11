@@ -39,7 +39,7 @@ theorem baseChangeAlgebra_isScalarTower
     [IsScalarTower R B M] :
     let : Algebra (S ⊗[R] B) (S ⊗[R] M) := baseChangeAlgebra R S B M;
     IsScalarTower S (S ⊗[R] B) (S ⊗[R] M) := by
-  let : Algebra (S ⊗[R] B) (S ⊗[R] M) := baseChangeAlgebra R S B M
+  intro tensorAlgebra
   exact IsScalarTower.of_algebraMap_eq'
     (map (AlgHom.id S S) (IsScalarTower.toAlgHom R B M)).comp_algebraMap.symm
 
@@ -50,7 +50,7 @@ theorem baseChangeAlgebra_algebraMap_tmul
     let : Algebra (S ⊗[R] B) (S ⊗[R] M) := baseChangeAlgebra R S B M;
     algebraMap (S ⊗[R] B) (S ⊗[R] M) (s ⊗ₜ[R] b) =
       s ⊗ₜ[R] algebraMap B M b := by
-  let : Algebra (S ⊗[R] B) (S ⊗[R] M) := baseChangeAlgebra R S B M
+  intro tensorAlgebra
   exact map_tmul (AlgHom.id S S) (IsScalarTower.toAlgHom R B M) s b
 
 /-- Interchanging the coefficient base change and the model base change.
@@ -61,7 +61,7 @@ def rightBaseChangeInterchange
     [IsScalarTower R B M] :
     let : Algebra S (B ⊗[R] S) := rightAlgebra;
     ((B ⊗[R] S) ⊗[B] M) ≃ₐ[S] (S ⊗[R] M) := by
-  let : Algebra S (B ⊗[R] S) := rightAlgebra
+  intro rightAlgebraOwner
   let e : ((B ⊗[R] S) ⊗[B] M) ≃+* (S ⊗[R] M) :=
     (Algebra.TensorProduct.comm B (B ⊗[R] S) M).toRingEquiv.trans
       ((cancelBaseChange R B M M S).toRingEquiv.trans
@@ -80,7 +80,7 @@ theorem rightBaseChangeInterchange_tmul
     [IsScalarTower R B M] (b : B) (s : S) (m : M) :
     let : Algebra S (B ⊗[R] S) := rightAlgebra;
     rightBaseChangeInterchange R B S M ((b ⊗ₜ[R] s) ⊗ₜ[B] m) = s ⊗ₜ[R] (b • m) := by
-  let : Algebra S (B ⊗[R] S) := rightAlgebra
+  intro rightAlgebraOwner
   change Algebra.TensorProduct.comm R M S
     (cancelBaseChange R B M M S
       (Algebra.TensorProduct.comm B (B ⊗[R] S) M
@@ -94,7 +94,7 @@ theorem rightBaseChangeInterchange_symm_tmul_smul
     let : Algebra S (B ⊗[R] S) := rightAlgebra;
     (rightBaseChangeInterchange R B S M).symm (s ⊗ₜ[R] (b • m)) =
       (b ⊗ₜ[R] s) ⊗ₜ[B] m := by
-  let : Algebra S (B ⊗[R] S) := rightAlgebra
+  intro rightAlgebraOwner
   apply (rightBaseChangeInterchange R B S M).injective
   rw [AlgEquiv.apply_symm_apply, rightBaseChangeInterchange_tmul]
 

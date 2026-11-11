@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+module
+
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Exact transport of injective resolutions
@@ -17,6 +19,8 @@ An exact additive functor preserving injective objects transports an actual
 injective resolution. The augmentation is transported through the canonical
 single-complex isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

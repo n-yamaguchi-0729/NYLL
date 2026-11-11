@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.Localization.Module
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.FieldSimp
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Localization.Module
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Finrank adjoin eq card of mul mem span of fractions
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -118,10 +122,10 @@ theorem span_eq_top
       { toFun := fun t => ⟨v * t, mul_mem_span y s hmul hv t.2⟩
         map_add' := fun a b => by
           apply Subtype.ext
-          simp [mul_add]
+          exact mul_add v (a : E) b
         map_smul' := fun c a => by
           apply Subtype.ext
-          simp [IntermediateField.smul_def, smul_eq_mul, mul_left_comm] }
+          exact mul_smul_comm c v (a : E) }
     have hinj : Function.Injective φ := by
       intro a b hab
       have : v * (a : E) = v * (b : E) := congrArg (fun z : W => (z : E)) hab

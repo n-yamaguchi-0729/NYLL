@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PadicReductionContinuous
-import Mathlib.NumberTheory.Padics.ProperSpace
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PadicReductionContinuous
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # The topological inverse limit of prime-power residue rings
@@ -17,6 +19,8 @@ constructed by the universal property of the p-adic completion, and is
 continuous because reduction is a continuous bijection from a compact space
 to a Hausdorff space. No limit comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -68,7 +72,8 @@ def residueProjection (n : ℕ) : compatibleResidues p →+* ZMod (p ^ n) where
   map_zero' := rfl
   map_add' _ _ := rfl
 
-private theorem residueProjection_compatible (m n : ℕ) (h : m ≤ n) :
+/-- The finite residue projections commute with reduction between levels. -/
+theorem residueProjection_compatible (m n : ℕ) (h : m ≤ n) :
     (ZMod.castHom (pow_dvd_pow p h) _).comp (residueProjection p n) =
       residueProjection p m := by
   apply RingHom.ext

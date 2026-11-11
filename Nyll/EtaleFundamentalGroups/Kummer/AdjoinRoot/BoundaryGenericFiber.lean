@@ -4,24 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # The actual generic fiber of a boundary Kummer cover
@@ -39,6 +41,8 @@ separate assertion. The comparison itself does not require the exponent
 to be invertible.
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

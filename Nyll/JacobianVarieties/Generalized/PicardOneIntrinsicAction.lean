@@ -5,18 +5,25 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicTorsor
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
-import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-import Mathlib.CategoryTheory.Sites.LocallySurjective
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicTorsor
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
+public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-! # The intrinsic tensor action on sheaf sections, with its actual group-action laws -/
+
+@[expose] public section
 
 noncomputable section
 
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory CartesianMonoidalCategory
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

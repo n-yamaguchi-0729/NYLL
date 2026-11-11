@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Constants.MemSpanRangeAlgebraMapConstantExtensionAlgClosed
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.MemSpanRangeAlgebraMapConstantExtensionAlgClosed
 
 /-!
 # Constant-field span membership in characteristic zero
 
 The general constant-field theorem supplies the characteristic-zero specialization.
 -/
+
+@[expose] public section
 
 open AlgebraicCurve
 

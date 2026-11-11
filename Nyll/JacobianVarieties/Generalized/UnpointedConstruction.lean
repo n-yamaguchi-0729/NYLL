@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PointedAffineNeighborhood
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
-import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
-import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
-import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatFiniteTypeGeometry
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+module
+
+public import Nyll.JacobianVarieties.Generalized.PointedAffineNeighborhood
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
+public import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
+public import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatFiniteTypeGeometry
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The positive-modulus generalized Jacobian over an arbitrary field
@@ -27,6 +29,8 @@ descends the universal class and its complete representation to the base field.
 No rational point over the ground field, separability, representation, or
 surjectivity is supplied as an additional assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

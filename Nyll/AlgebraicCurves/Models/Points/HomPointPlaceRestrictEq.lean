@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Models.FunctionFields.HomAlgHom
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Models.FunctionFields.HomAlgHom
 
 /-!
 # Curve Model exists hom point Equiv Place restrict eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

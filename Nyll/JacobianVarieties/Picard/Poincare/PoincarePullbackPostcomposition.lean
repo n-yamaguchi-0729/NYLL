@@ -18,7 +18,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
 import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 import Nyll.JacobianVarieties.Picard.Rigidification.PoincareRigidifiedPullbackComposition
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackRigidifyIso

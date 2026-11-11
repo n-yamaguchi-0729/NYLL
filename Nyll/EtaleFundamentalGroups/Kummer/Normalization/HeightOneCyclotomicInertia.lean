@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.ActionComparison
-import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCyclotomicInertia
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.SchemeStalkDVR
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.DVRCyclotomicInversion
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.ActionComparison
+public import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCyclotomicInertia
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.SchemeStalkDVR
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.DVRCyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
 
 /-!
 # Cyclotomic inversion at a height-one normalization prime
@@ -21,6 +24,8 @@ prime divisor.  This file applies the divisorial-residue cyclotomic theorem
 to the localized normalization and transports the resulting inertia statement
 back to the original normalization prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -110,17 +115,17 @@ noncomputable def schemePointResidueEquivDecompositionResidueField
     [CharZero (X.residueField x)] :
     let A := X.presheaf.stalk x
     let K : Type u := X.functionField
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L :=
+    let : IsScalarTower A K L :=
       IsScalarTower.of_algebraMap_eq' rfl
-    letI : IsDiscreteValuationRing A :=
+    let : IsDiscreteValuationRing A :=
       isDiscreteValuationRing_stalk_of_isRegularAt_of_coheight_eq_one
         x hregular hx
     let B := integralClosure A L
-    letI : IsFractionRing B L :=
+    let : IsFractionRing B L :=
       IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-    letI : IsDedekindDomain B :=
+    let : IsDedekindDomain B :=
       IsIntegralClosure.isDedekindDomain A K L B
     ∀ (Q : Ideal B) [Q.IsPrime]
       [Q.LiesOver (IsLocalRing.maximalIdeal A)],
@@ -130,25 +135,10 @@ noncomputable def schemePointResidueEquivDecompositionResidueField
       X.residueField x ≃+*
         decompositionResidueField K
           (TameAbhyankar.SGA1.idealLocalizationValuationSubring B L Q hQ) := by
-  dsimp only
-  let A := X.presheaf.stalk x
-  let K : Type u := X.functionField
-  letI : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  letI : IsScalarTower A K L :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  letI : IsDiscreteValuationRing A :=
-    isDiscreteValuationRing_stalk_of_isRegularAt_of_coheight_eq_one
-      x hregular hx
+  intro A K algebraAL towerAKL discreteA B fractionBL dedekindB Q instPrime instLiesOver hQ
   letI : CharZero (IsLocalRing.ResidueField A) := by
     change CharZero (X.residueField x)
     infer_instance
-  let B := integralClosure A L
-  letI : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-  letI : IsDedekindDomain B :=
-    IsIntegralClosure.isDedekindDomain A K L B
-  intro Q instPrime instLiesOver
   letI : Q.IsMaximal :=
     Ideal.IsMaximal.of_liesOver_isMaximal Q
       (IsLocalRing.maximalIdeal A)
@@ -172,12 +162,12 @@ theorem
     [Algebra k (X.residueField x)] :
     let A := X.presheaf.stalk x
     let K : Type u := X.functionField
-    letI : Algebra A L :=
+    let : Algebra A L :=
       ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-    letI : IsScalarTower A K L :=
+    let : IsScalarTower A K L :=
       IsScalarTower.of_algebraMap_eq' rfl
     let B := integralClosure A L
-    letI : MulSemiringAction Gal(L/K) B :=
+    let : MulSemiringAction Gal(L/K) B :=
       IsIntegralClosure.MulSemiringAction A K L B
     ∀ (Q : Ideal B) [Q.IsPrime]
       [Q.LiesOver (IsLocalRing.maximalIdeal A)],
@@ -187,23 +177,13 @@ theorem
         ∀ sigma : Q.toAddSubgroup.inertia Gal(L/K),
           IsConj (sigma : Gal(L/K))
             ((sigma⁻¹ : Q.toAddSubgroup.inertia Gal(L/K)) : Gal(L/K)) := by
-  dsimp only
-  let A := X.presheaf.stalk x
-  let K : Type u := X.functionField
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L :=
-    IsScalarTower.of_algebraMap_eq' rfl
+  intro A K algebraAL towerAKL B fieldAction Q instPrime instLiesOver hgeo
   let : IsDiscreteValuationRing A :=
     isDiscreteValuationRing_stalk_of_isRegularAt_of_coheight_eq_one
       x hregular hx
   let : Algebra k (IsLocalRing.ResidueField A) := by
     change Algebra k (X.residueField x)
     infer_instance
-  let B := integralClosure A L
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  intro Q instPrime instLiesOver hgeo
   exact
     (open _root_.TameAbhyankar.SGA1 in
       idealInertia_isConj_inv_of_geometricallyIntegral_dvrNormalizationResidue_of_ratEquiv
@@ -219,25 +199,25 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ (x : X) (_hregular : X.IsRegularAt x)
       (_hx : Order.coheight x = 1) [Algebra k (X.residueField x)],
       let A := X.presheaf.stalk x
-      letI : Algebra A L :=
+      let : Algebra A L :=
         ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-      letI : IsScalarTower A K L :=
+      let : IsScalarTower A K L :=
         IsScalarTower.of_algebraMap_eq' rfl
       let B := integralClosure A L
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
       ∀ (Q : Ideal B) [Q.IsPrime]
         [Q.LiesOver (IsLocalRing.maximalIdeal A)],
@@ -247,27 +227,9 @@ theorem
           Nat.Coprime
               (Nat.card (Q.toAddSubgroup.inertia Gal(L/K))) 2 →
             Q.toAddSubgroup.inertia Gal(L/K) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro x _hregular _hx instAlgk
-  let A := X.presheaf.stalk x
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let B := integralClosure A L
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  intro Q instPrime instLiesOver hgeo hCoprime
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    x _hregular _hx instAlgk
+    A algebraAL towerAKL B fieldAction Q instPrime instLiesOver hgeo hCoprime
   apply finiteEtaleGaloisCover_subgroup_eq_bot_of_forall_isConj_inv
     Y hY (Q.toAddSubgroup.inertia Gal(L/K))
   · intro gamma hgamma
@@ -336,20 +298,14 @@ theorem
     let Z := Spec (CommRingCat.of (A ⧸ P))
     let f : Z ⟶ Spec (CommRingCat.of k) :=
       Spec.map (CommRingCat.ofHom (algebraMap k (A ⧸ P)))
-    letI : Algebra k Z.functionField := f.functionFieldAlgebra
+    let : Algebra k Z.functionField := f.functionFieldAlgebra
     let e := Scheme.primeResidueFieldEquivQuotientFunctionField P
-    letI : Algebra k P.ResidueField :=
+    let : Algebra k P.ResidueField :=
       (e.symm.toRingHom.comp (algebraMap k Z.functionField)).toAlgebra
     ∀ sigma : Q.toAddSubgroup.inertia Gal(L/K),
       IsConj (sigma : Gal(L/K))
         ((sigma⁻¹ : Q.toAddSubgroup.inertia Gal(L/K)) : Gal(L/K)) := by
-  let Z := Spec (CommRingCat.of (A ⧸ P))
-  let f : Z ⟶ Spec (CommRingCat.of k) :=
-    Spec.map (CommRingCat.ofHom (algebraMap k (A ⧸ P)))
-  let : Algebra k Z.functionField := f.functionFieldAlgebra
-  let e := Scheme.primeResidueFieldEquivQuotientFunctionField P
-  let : Algebra k P.ResidueField :=
-    (e.symm.toRingHom.comp (algebraMap k Z.functionField)).toAlgebra
+  intro Z f sharedOwner3 e sharedOwner5
   have hgeoResidue : GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k P.ResidueField))) :=
@@ -368,15 +324,15 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [Algebra A K] [IsFractionRing A K]
@@ -390,17 +346,8 @@ theorem
         Nat.Coprime
           (Nat.card (Q.toAddSubgroup.inertia Gal(L/K))) 2 →
         Q.toAddSubgroup.inertia Gal(L/K) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional X.functionField Y.left.functionField :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois X.functionField Y.left.functionField :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instAlgAK instFracAK
+  intro sharedOwner1 sharedOwner2 K L algebraKL finiteKL galoisKL
+    A instCommA instDomainA instRegularA instAlgAK instFracAK
     instAlgAL instTowerAKL P instPPrime _hP Q instQPrime instQLiesOver
     instAlgk hgeo hCoprime
   apply finiteEtaleGaloisCover_subgroup_eq_bot_of_forall_isConj_inv
@@ -423,15 +370,15 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [Algebra A K] [IsFractionRing A K]
@@ -444,17 +391,8 @@ theorem
         Nat.Coprime
             (Nat.card (Q.toAddSubgroup.inertia Gal(L/K))) 2 →
           Q.toAddSubgroup.inertia Gal(L/K) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional X.functionField Y.left.functionField :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois X.functionField Y.left.functionField :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instAlgAK instFracAK
+  intro sharedOwner1 sharedOwner2 K L algebraKL finiteKL galoisKL
+    A instCommA instDomainA instRegularA instAlgAK instFracAK
     instAlgAL instTowerAKL P instPPrime _hP Q instQPrime instQLiesOver
     instAlgk hgeo hCoprime
   let Z := Spec (CommRingCat.of (A ⧸ P))

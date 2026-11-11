@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Actual sheaf approximation maps under refinement of a space
@@ -22,6 +24,8 @@ https://stacks.math.columbia.edu/tag/09ZG.
 The Lean proof is original.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -33,17 +37,20 @@ namespace SchemeTheory
 variable {X Y Z W : TopCat.{u}}
 
 
-private abbrev actualSheafPullback (q : X ⟶ Y) :
+/-- The inverse-image functor for sheaves of types on the given spaces. -/
+abbrev actualSheafPullback (q : X ⟶ Y) :
     CategoryTheory.Sheaf (Opens.grothendieckTopology Y) (Type u) ⥤
       CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u) :=
   TopCat.Sheaf.pullback (Type u) q
 
-private abbrev actualSheafPushforward (q : X ⟶ Y) :
+/-- The direct-image functor for sheaves of types on the given spaces. -/
+abbrev actualSheafPushforward (q : X ⟶ Y) :
     CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u) ⥤
       CategoryTheory.Sheaf (Opens.grothendieckTopology Y) (Type u) :=
   TopCat.Sheaf.pushforward (Type u) q
 
-private abbrev actualSheafAdjunction (q : X ⟶ Y) :
+/-- The inverse-image and direct-image adjunction for sheaves of types. -/
+abbrev actualSheafAdjunction (q : X ⟶ Y) :
     actualSheafPullback q ⊣ actualSheafPushforward q :=
   TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) q
 

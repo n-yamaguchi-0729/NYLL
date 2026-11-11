@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
 
 /-!
 # Boundary-away etaleness after localizing a normalization
@@ -15,6 +17,8 @@ base.  The resulting square is a pushout, so an etale map on a principal
 open of the original normalization remains etale after localization at an
 arbitrary prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,9 +40,9 @@ theorem normalizationLocalization_boundaryAway
       (Localization.awayMap
         (algebraMap A (integralClosure A L)) f).Etale) :
     let R := Localization.AtPrime P
-    letI : Algebra R L :=
+    let : Algebra R L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower A R L :=
+    let : IsScalarTower A R L :=
       localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     RingHom.Etale
       (R := Localization.Away (algebraMap A R f))
@@ -46,12 +50,7 @@ theorem normalizationLocalization_boundaryAway
         (algebraMap R (integralClosure R L) (algebraMap A R f)))
       (Localization.awayMap
         (algebraMap R (integralClosure R L)) (algebraMap A R f)) := by
-  dsimp only
-  let R := Localization.AtPrime P
-  let : Algebra R L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower A R L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
+  intro R sharedOwner1 sharedOwner2
   let := integralClosureLocalizationAlgebra (L := L) P
   let : IsLocalization
       (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)

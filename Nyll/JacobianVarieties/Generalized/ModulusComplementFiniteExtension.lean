@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.SchemeTheory.Morphisms.FiniteExtensionPoint
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.SchemeTheory.Morphisms.FiniteExtensionPoint
 
 /-! # A complement point over a finite separable extension
 
@@ -16,6 +18,8 @@ scalar-extension comparison lifts its point to the complement of the whole
 extended modulus, including every multiplicity. No perfectness assumption
 on the ground field is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

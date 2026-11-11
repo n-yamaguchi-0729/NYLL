@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.EffectiveDivisorRigidification
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorLinearEquivalence
-import Nyll.AlgebraicCurves.Models.Sections.SectionRatioCongruence
-import Nyll.AlgebraicCurves.Models.Sections.RationalSectionDivisor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SectionVanishingClosedSubscheme
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
+module
+
+public import Nyll.JacobianVarieties.Generalized.EffectiveDivisorRigidification
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorLinearEquivalence
+public import Nyll.AlgebraicCurves.Models.Sections.SectionRatioCongruence
+public import Nyll.AlgebraicCurves.Models.Sections.RationalSectionDivisor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SectionVanishingClosedSubscheme
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
 
 /-! # A trivial rigidified divisor class is modulus-principal -/
+
+@[expose] public section
 
 noncomputable section
 

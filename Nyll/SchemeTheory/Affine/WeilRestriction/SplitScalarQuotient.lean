@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
-import Mathlib.RingTheory.TensorProduct.Pi
-import Mathlib.Algebra.Group.Pi.Units
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
+public import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.Algebra.Group.Pi.Units
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-! # Coordinate ratios for an actually split scalar-unit quotient -/
+
+@[expose] public section
 
 noncomputable section
 

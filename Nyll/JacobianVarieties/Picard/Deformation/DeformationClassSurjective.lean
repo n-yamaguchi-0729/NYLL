@@ -10,25 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Module.LinearMap.Defs
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Tactic.LinearCombination
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnIsUnit
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverIsFrameOnPullbackStage
-import Nyll.JacobianVarieties.Picard.LineBundles.ModulesInvertibleIsoUnit
-import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrameCriterion
+module
+
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Module.LinearMap.Defs
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnIsUnit
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverIsFrameOnPullbackStage
+public import Nyll.JacobianVarieties.Picard.LineBundles.ModulesInvertibleIsoUnit
+public import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrameCriterion
 
 /-!
 # Surjectivity of the dual-number deformation class map
@@ -36,6 +38,8 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrameCriteri
 Transition units of the form `1 + ε f` glue an invertible module whose reduction
 and rigidifying section are trivial. Its class maps to the prescribed Cech class.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Cover.Directed
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
-import Mathlib.CategoryTheory.Limits.IsLimit
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Cover.Directed
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import Mathlib.CategoryTheory.Limits.IsLimit
 
 /-!
 # The original affine-morphism source as a colimit of its section spectra
@@ -20,6 +22,8 @@ sections on the inverse-image opens. Their natural isomorphism transports
 the existing colimit of the pulled-back cover to a colimit with vertex the
 original source. No relative-spectrum comparison or effectivity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -39,16 +43,20 @@ def ringDiagram : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} :=
 def diagram : X.AffineZariskiSite ⥤ Scheme.{u} :=
   (ringDiagram g).rightOp ⋙ Scheme.Spec
 
-private abbrev sourceCover : T.OpenCover :=
+/-- The affine Zariski cover of the base pulled back to the source. -/
+abbrev sourceCover : T.OpenCover :=
   (AffineZariskiSite.directedCover X).pullback₁ g
 
-private def sourceDiagram : X.AffineZariskiSite ⥤ Scheme.{u} :=
+/-- The diagram of schemes in the locally directed pullback cover. -/
+def sourceDiagram : X.AffineZariskiSite ⥤ Scheme.{u} :=
   (sourceCover g).functorOfLocallyDirected
 
-private def sourceCocone : Cocone (sourceDiagram g) :=
+/-- The pullback cover cocone with vertex the original source scheme. -/
+def sourceCocone : Cocone (sourceDiagram g) :=
   (sourceCover g).coconeOfLocallyDirected
 
-private def sourceCoconeIsColimit : IsColimit (sourceCocone g) :=
+/-- The original source scheme is the colimit of its pullback cover. -/
+def sourceCoconeIsColimit : IsColimit (sourceCocone g) :=
   (sourceCover g).isColimitCoconeOfLocallyDirected
 
 private theorem sourceCocone_app (U : X.AffineZariskiSite) :
@@ -56,11 +64,13 @@ private theorem sourceCocone_app (U : X.AffineZariskiSite) :
 
 variable [IsAffineHom g]
 
-private def chartIso (U : X.AffineZariskiSite) :
+/-- Identify an affine pullback chart with the spectrum of its section ring. -/
+def chartIso (U : X.AffineZariskiSite) :
     (sourceDiagram g).obj U ≅ Spec Γ(T, g ⁻¹ᵁ U.1) :=
   pullbackRestrictIsoRestrict g U.1 ≪≫ (U.2.preimage g).isoSpec
 
-private theorem chartIso_hom_fromSpec (U : X.AffineZariskiSite) :
+/-- The chart-spectrum isomorphism respects the original source-chart morphism. -/
+theorem chartIso_hom_fromSpec (U : X.AffineZariskiSite) :
     (chartIso g U).hom ≫ (U.2.preimage g).fromSpec = (sourceCocone g).ι.app U := by
   rw [sourceCocone_app]
   change ((pullbackRestrictIsoRestrict g U.1).hom ≫ (U.2.preimage g).isoSpec.hom) ≫
@@ -73,7 +83,8 @@ private theorem diagram_map_fromSpec {U V : X.AffineZariskiSite} (i : U ⟶ V) :
   (V.2.preimage g).map_fromSpec (U.2.preimage g)
     ((Opens.map g.base).map ((AffineZariskiSite.toOpensFunctor X).map i)).op
 
-private def chartDiagramIso : sourceDiagram g ≅ diagram g :=
+/-- The pullback cover diagram is naturally isomorphic to its section-spectrum diagram. -/
+def chartDiagramIso : sourceDiagram g ≅ diagram g :=
   NatIso.ofComponents (chartIso g) (fun {U V : X.AffineZariskiSite} i => by
     let eU : (sourceDiagram g).obj U ≅ (diagram g).obj U := chartIso g U
     let eV : (sourceDiagram g).obj V ≅ (diagram g).obj V := chartIso g V

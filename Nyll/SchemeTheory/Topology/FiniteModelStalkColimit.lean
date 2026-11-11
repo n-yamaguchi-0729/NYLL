@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.Topology.Sheaves.Alexandrov
-import Mathlib.Topology.Sheaves.Stalks
-import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
-import Nyll.SchemeTheory.Topology.FiniteModelPrincipalStalk
+module
+
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.Topology.Sheaves.Alexandrov
+public import Mathlib.Topology.Sheaves.Stalks
+public import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
+public import Nyll.SchemeTheory.Topology.FiniteModelPrincipalStalk
 
 /-!
 # The actual stalk colimit of finite-model principal sections
@@ -22,6 +24,8 @@ The proof uses the concrete filtered-colimit criterion for types.
 The Lean proof is original.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -32,7 +36,8 @@ namespace SchemeTheory.CompactOpenFiniteModel
 
 variable {X : TopCat.{u}}
 
-private theorem sectionOpen_antitone {S T : Finset (CompactOpens X)}
+/-- Refining a finite family shrinks the inverse image of its principal neighborhood. -/
+theorem sectionOpen_antitone {S T : Finset (CompactOpens X)}
     (h : S ⊆ T) (x : X) :
     (Opens.map (quotient T)).obj (Alexandrov.principalOpen (quotient T x)) ≤
       (Opens.map (quotient S)).obj (Alexandrov.principalOpen (quotient S x)) := by

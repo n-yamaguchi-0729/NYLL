@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.GroupWithZero.Units.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatIsUnitKerBaseChangeLeRange
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatProjectiveKerBaseChange
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.RankLocalization
+module
+
+public import Mathlib.Algebra.GroupWithZero.Units.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatIsUnitKerBaseChangeLeRange
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatProjectiveKerBaseChange
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.RankLocalization
 
 /-!
 # Module Flat exists forall is Unit projective ker base Change of ker base Change residue
 Field le range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

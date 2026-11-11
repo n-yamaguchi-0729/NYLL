@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Algebra exists adjoin ne zero mul forall valuation Subring mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

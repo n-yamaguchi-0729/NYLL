@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.RetrocompactStalkSpreading
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
+module
+
+public import Nyll.SchemeTheory.Descent.RetrocompactStalkSpreading
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
 
 /-!
 # Retrocompact compatible spreading through an affine chart
@@ -18,6 +20,8 @@ affine compatible spreading. The resulting section and its overlap equation
 are transported back through the canonical open-image isomorphisms.
 Strict henselizations are not reconstructed or changed in this step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

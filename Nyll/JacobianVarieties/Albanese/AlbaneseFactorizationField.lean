@@ -4,23 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.SeparableAlbaneseFactorization
-import Nyll.JacobianVarieties.Albanese.AlbaneseSeparableDescent
-import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
-import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiPointClassBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.PicardRepresentabilityBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
-import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SmoothPicardRepresentabilityAlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.IsProperGeometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
-import Nyll.AlgebraicCurves.Geometry.Curves.FiniteMapFibreRiemannRochGenus
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange
-import Nyll.SchemeTheory.Morphisms.ReducedSmooth
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.JacobianVarieties.Albanese.SeparableAlbaneseFactorization
+public import Nyll.JacobianVarieties.Albanese.AlbaneseSeparableDescent
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
+public import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiPointClassBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.PicardRepresentabilityBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
+public import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SmoothPicardRepresentabilityAlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.IsProperGeometricallyConnected
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
+public import Nyll.AlgebraicCurves.Geometry.Curves.FiniteMapFibreRiemannRochGenus
+public import Nyll.SchemeTheory.BaseChange.SchemeHomOver
+public import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Actual Abel--Jacobi factorization over an arbitrary field
 
@@ -28,6 +31,8 @@ The factorization over a finite separable extension is identified with the
 native scalar extension of one fixed Abel--Jacobi morphism. Faithfully flat
 descent then gives a factorization over the original field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

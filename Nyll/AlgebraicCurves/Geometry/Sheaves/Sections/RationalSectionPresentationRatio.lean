@@ -5,9 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Models.Sections.RationalSectionRatio
+module
+
+public import Nyll.AlgebraicCurves.Models.Sections.RationalSectionRatio
 
 /-! # An actual meromorphic presentation computes every local section ratio -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,8 +41,7 @@ private theorem germToFunctionField_topIso {X : Scheme.{u}} [IsIntegral X]
     let _ : Nonempty (U.ι ''ᵁ ⊤) :=
       (Scheme.Opens.ι_image_top U).symm ▸ (inferInstance : Nonempty U)
     X.germToFunctionField U (U.topIso.hom a) = X.germToFunctionField (U.ι ''ᵁ ⊤) a := by
-  let : Nonempty (U.ι ''ᵁ ⊤) :=
-    (Scheme.Opens.ι_image_top U).symm ▸ (inferInstance : Nonempty U)
+  intro sharedOwner1
   rw [Scheme.Opens.topIso_hom]
   exact X.presheaf.germ_res_apply' _ _ _ a
 

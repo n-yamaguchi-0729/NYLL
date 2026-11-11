@@ -5,15 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
-import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.Morphisms.ReducedSmooth
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
+public import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Abel–Jacobi maps detect group homomorphisms
@@ -28,6 +30,8 @@ Picard-to-points equivalence, and density of geometric points on a reduced schem
 This proves uniqueness of a possible Albanese factorization. Existence of that
 factorization, and descent of arbitrary-target sums, are separate assertions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

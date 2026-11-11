@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
 
 /-!
 # Place ord nonneg of D eq smul D of ord eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

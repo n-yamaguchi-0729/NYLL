@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Skyscraper
-import Mathlib.Topology.Sheaves.Stalks
-import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
-import Nyll.SchemeTheory.Topology.ClosedDiscreteStalkOutside
-import Nyll.SchemeTheory.Topology.SheafPullbackGerms
-import Nyll.SchemeTheory.Topology.SheafPullbackStalks
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Skyscraper
+public import Mathlib.Topology.Sheaves.Stalks
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteStalkOutside
+public import Nyll.SchemeTheory.Topology.SheafPullbackGerms
+public import Nyll.SchemeTheory.Topology.SheafPullbackStalks
 
 /-!
 # Pullback of a skyscraper as discrete functions on its closed support
@@ -28,6 +30,8 @@ Reference: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean constructions and proofs are original.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -40,7 +44,8 @@ attribute [local instance] Classical.propDecidable
 
 variable {X Y : TopCat.{u}}
 
-private def skyscraperClosedSupportSection (q : X ⟶ Y) (y : Y) (A : Type u)
+/-- A skyscraper section gives a constant function on the inverse image of its closed support. -/
+def skyscraperClosedSupportSection (q : X ⟶ Y) (y : Y) (A : Type u)
     (U : Opens Y) (s : (skyscraperPresheaf y A).obj (op U)) :
     TopCat.of {z : (q ⁻¹' closure ({y} : Set Y) : Set X) // q z.1 ∈ U} ⟶
       TopCat.discrete.obj A := by

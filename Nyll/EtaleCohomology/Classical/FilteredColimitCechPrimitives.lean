@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.RepresentableCechTerms
-import Nyll.EtaleCohomology.Sites.FilteredColimitSectionGluing
-import Mathlib.CategoryTheory.Limits.Types.Filtered
+module
+
+public import Nyll.EtaleCohomology.Classical.RepresentableCechTerms
+public import Nyll.EtaleCohomology.Sites.FilteredColimitSectionGluing
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-!
 # Cech primitives in filtered colimits of injective sheaves
@@ -15,6 +17,8 @@ A cocycle on a quasi-compact geometric Cech term comes from a finite
 stage. Its cocycle equation holds at a later stage, where injectivity
 supplies a primitive. Naturality carries that primitive to the colimit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

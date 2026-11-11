@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbelian
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCover
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbelian
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCover
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
 
 /-!
 # Abelian covers on local normal-crossings complements
@@ -16,6 +18,8 @@ An abelian connected Galois cover of a global divisor complement remains an
 abelian connected Galois cover on the principal local chart supplied by a
 split normal-crossings equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationSpecializationFiber
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidueClosure
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianResidueFundamentalGroup
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendedFiberGaloisAction
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationSpecializationFiber
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidueClosure
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianResidueFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendedFiberGaloisAction
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+public import Mathlib.CategoryTheory.Endomorphism
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
 
 /-!
 # The original ordinary-henselization fundamental group and strict residue
@@ -19,6 +23,8 @@ the automorphisms of the actual strict-stalk residue over the original residue
 field. The original normalization residue field is only a separably closed
 overfield; it is not required to be separable over the base residue field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -242,7 +248,7 @@ theorem normalizationClosedResidueGaloisEquiv_point :
           (IsLocalRing.ResidueField (Localization.AtPrime Q)))).obj X),
         (fiberObjEquivHom (Spec.algebraMap (ordinaryHenselization A)
           (IsLocalRing.ResidueField (Localization.AtPrime Q))) X
-            ((normalizationClosedResidueGaloisEquiv A K L Q hQ σ).hom.app X x)).left =
+            ((normalizationClosedResidueGaloisEquiv A K L Q hQ σ).asIso.hom.app X x)).left =
           Spec.map (CommRingCat.ofHom ρ) ≫
             (fiberObjEquivHom (Spec.algebraMap (ordinaryHenselization A)
               (IsLocalRing.ResidueField (Localization.AtPrime Q))) X x).left := by
@@ -263,7 +269,7 @@ theorem normalizationClosedResidueGaloisEquiv_point :
     RingHom.ext hρ
   have hvalue := normalizationClosedResidueGaloisEquiv_apply A K L Q hQ σ
   exact (congrArg (fun a : π₁ᵉᵗ(Spec.algebraMap H Ω) =>
-    (fiberObjEquivHom (Spec.algebraMap H Ω) X (a.hom.app X x)).left) hvalue).trans
+    (fiberObjEquivHom (Spec.algebraMap H Ω) X (a.asIso.hom.app X x)).left) hvalue).trans
       (point_action_of_eqToIso (normalizationOrdinaryResiduePoint_eq A K L Q hQ)
         (henselianResidueGaloisEquivFundamentalGroup H k e C Ω σ) ρ
         (henselianResidueGaloisEquivFundamentalGroup_point H k e C Ω σ ρ hcoeff) X x)

@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisTrivialInertiaEtale
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.EtaleFundamentalGroups.Normalization.GenericNormalizationChartAction
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedGeometricInertia
-import Nyll.EtaleFundamentalGroups.Inertia.AffineGeometricPoint
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Nyll.SchemeTheory.Normalization.Normal
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.MorphismProperty.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.Algebra.Group.Subgroup.Lattice
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisTrivialInertiaEtale
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.EtaleFundamentalGroups.Normalization.GenericNormalizationChartAction
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedGeometricInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineGeometricPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.MorphismProperty.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.Algebra.Group.Subgroup.Lattice
 
 /-!
 # Original affine inertia criterion for the actual global normalization
@@ -35,6 +37,8 @@ proved chart equivariance and residue-field naturality to identify this with
 the original global fixed-point and trivial-residue-action condition.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -42,11 +46,6 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 /-- Etaleness of the actual global normalization is equivalent to
 etaleness of its original integral closures on all nonempty affine charts. -/

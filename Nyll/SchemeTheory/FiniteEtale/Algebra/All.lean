@@ -4,40 +4,42 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleQuotientLift
-import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSection
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FaithfullyFlatDescent
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteFieldModel
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteCoefficientModel
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FinitelyGeneratedModel
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FilteredColimitModel
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FormallyEtaleNilpotent
-import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianBaseChange
-import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianEtaleSection
-import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianEtaleMapLift
-import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianFullness
-import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianQuotientLift
-import Nyll.SchemeTheory.FiniteEtale.Algebra.IdempotentFactor
-import Nyll.SchemeTheory.FiniteEtale.Algebra.IntegralFiniteModel
-import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonBaseChange
-import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonConservativity
-import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonRigidity
-import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonSection
-import Nyll.SchemeTheory.FiniteEtale.Algebra.NilpotentBaseChange
-import Nyll.SchemeTheory.FiniteEtale.Algebra.SectionFactor
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PrimeRigidity
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleQuotientLift
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSection
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FaithfullyFlatDescent
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteFieldModel
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteCoefficientModel
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FinitelyGeneratedModel
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FilteredColimitModel
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FormallyEtaleNilpotent
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianBaseChange
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianEtaleSection
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianEtaleMapLift
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianFullness
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.HenselianQuotientLift
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.IdempotentFactor
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.IntegralFiniteModel
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonBaseChange
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonConservativity
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonRigidity
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonSection
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.NilpotentBaseChange
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.SectionFactor
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PrimeRigidity
 
 
 /- Canonical aggregate for SchemeTheory.FiniteEtale.Algebra. -/
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecializationNaturality
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteGeometricallyReducedEtale
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteSplitIdempotentSurjectivity
-import Nyll.SchemeTheory.FiniteEtale.Algebra.LocalEtaleFromClosedFiber
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteEtaleSplittingField
-import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleFromLocalizations
-import Nyll.SchemeTheory.FiniteEtale.Algebra.ProductBaseChangeComparison
-import Nyll.SchemeTheory.FiniteEtale.Algebra.UniversalHomeomorphismAlgHom
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteRadicialEssentialSurjectivity
-import Nyll.SchemeTheory.FiniteEtale.Algebra.IntegralRadicialEssentialSurjectivity
-import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSplitting
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecializationNaturality
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteGeometricallyReducedEtale
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteSplitIdempotentSurjectivity
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.LocalEtaleFromClosedFiber
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteEtaleSplittingField
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleFromLocalizations
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.ProductBaseChangeComparison
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.UniversalHomeomorphismAlgHom
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteRadicialEssentialSurjectivity
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.IntegralRadicialEssentialSurjectivity
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSplitting

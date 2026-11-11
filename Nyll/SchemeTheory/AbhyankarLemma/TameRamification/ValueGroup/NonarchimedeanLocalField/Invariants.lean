@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Valuation
-import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.ResidueExtension
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Valuation
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.ResidueExtension
 
 /-!
 # Local-field extension invariants
@@ -14,6 +16,8 @@ This file exposes the elementary divisibility consequences of the canonical
 ramification identity `e * f = [L : K]` for finite separable
 nonarchimedean local-field extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

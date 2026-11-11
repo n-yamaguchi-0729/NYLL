@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Order.Fin.Basic
-import Mathlib.Data.Prod.Lex
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
+module
+
+public import Mathlib.Order.Fin.Basic
+public import Mathlib.Order.Prod.Lex.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
 
 /-!
 # Bi Cech
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -222,7 +226,8 @@ theorem dH_sq (p q : ℕ) : dH F 𝔄 𝔅 (p + 1) q ∘ₗ dH F 𝔄 𝔅 p q =
     rintro ⟨a', b'⟩ hab'
     have hlt : (b' : ℕ) < (a' : ℕ) := by
       simpa [S, Finset.compl_filter, Finset.mem_filter, not_le] using hab'
-    have ha'0 : a' ≠ 0 := fun h => by simp [h] at hlt
+    have ha'0 : a' ≠ 0 := fun h => by simp only [h, Fin.coe_ofNat_eq_mod, Nat.zero_mod,
+      not_lt_zero] at hlt
     refine ⟨(Fin.castSucc b', a'.pred ha'0), ?_, ?_⟩
     · simp only [S, Finset.mem_filter, Finset.mem_univ, true_and, Fin.val_castSucc,
         Fin.val_pred]; omega
@@ -233,7 +238,7 @@ theorem dH_sq (p q : ℕ) : dH F 𝔄 𝔅 (p + 1) q ∘ₗ dH F 𝔄 𝔅 p q =
     have hba : (a : ℕ) ≤ (b : ℕ) := (Finset.mem_filter.mp hab).2
     set a' : Fin (p + 2) := Fin.castLT a (Nat.lt_of_le_of_lt hba b.isLt)
     have halt : a' ≤ b := Fin.le_def.mpr (by simpa [a'] using hba)
-    have hacs : a'.castSucc = a := Fin.eq_of_val_eq (by simp [a'])
+    have hacs : a'.castSucc = a := Fin.eq_of_val_eq (by simp only [Fin.castSucc_castLT, a'])
     have hface : 𝔄.face (𝔄.face s a) b = 𝔄.face (𝔄.face s b.succ) a' := by
       apply Subtype.ext
       change s.1 ∘ (Fin.succAbove a ∘ Fin.succAbove b) = s.1 ∘ (Fin.succAbove b.succ ∘
@@ -281,7 +286,8 @@ theorem dV_sq (p q : ℕ) : dV F 𝔄 𝔅 p (q + 1) ∘ₗ dV F 𝔄 𝔅 p q =
     rintro ⟨a', b'⟩ hab'
     have hlt : (b' : ℕ) < (a' : ℕ) := by
       simpa [S, Finset.compl_filter, Finset.mem_filter, not_le] using hab'
-    have ha'0 : a' ≠ 0 := fun h => by simp [h] at hlt
+    have ha'0 : a' ≠ 0 := fun h => by simp only [h, Fin.coe_ofNat_eq_mod, Nat.zero_mod,
+      not_lt_zero] at hlt
     refine ⟨(Fin.castSucc b', a'.pred ha'0), ?_, ?_⟩
     · simp only [S, Finset.mem_filter, Finset.mem_univ, true_and, Fin.val_castSucc,
         Fin.val_pred]; omega
@@ -292,7 +298,7 @@ theorem dV_sq (p q : ℕ) : dV F 𝔄 𝔅 p (q + 1) ∘ₗ dV F 𝔄 𝔅 p q =
     have hba : (a : ℕ) ≤ (b : ℕ) := (Finset.mem_filter.mp hab).2
     set a' : Fin (q + 2) := Fin.castLT a (Nat.lt_of_le_of_lt hba b.isLt)
     have halt : a' ≤ b := Fin.le_def.mpr (by simpa [a'] using hba)
-    have hacs : a'.castSucc = a := Fin.eq_of_val_eq (by simp [a'])
+    have hacs : a'.castSucc = a := Fin.eq_of_val_eq (by simp only [Fin.castSucc_castLT, a'])
     have hface : 𝔅.face (𝔅.face t a) b = 𝔅.face (𝔅.face t b.succ) a' := by
       apply Subtype.ext
       change t.1 ∘ (Fin.succAbove a ∘ Fin.succAbove b) = t.1 ∘ (Fin.succAbove b.succ ∘

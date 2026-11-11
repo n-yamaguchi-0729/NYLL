@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedScalarBoundary
-import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedScalarBoundary
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
 
 /-! # The scalar boundary preserves actual rigidified tensor products -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -46,7 +50,8 @@ def unitWithTensorIso (a b : 𝟙_ D.Modules ≅ 𝟙_ D.Modules) :
 theorem scalarClass_mul (a b : Γ(D, ⊤)ˣ) :
     scalarClass i (a * b) = scalarClass i a * scalarClass i b := by
   have hab : (unitAutEquivUnits D).symm (a * b) =
-      (unitAutEquivUnits D).symm a ≪≫ (unitAutEquivUnits D).symm b := by
+      Aut.of (((unitAutEquivUnits D).symm a).asIso ≪≫
+        ((unitAutEquivUnits D).symm b).asIso) := by
     apply (unitAutEquivUnits D).injective
     calc
       _ = a * b := (unitAutEquivUnits D).apply_symm_apply (a * b)
@@ -56,9 +61,9 @@ theorem scalarClass_mul (a b : Γ(D, ⊤)ˣ) :
           ((unitAutEquivUnits D).apply_symm_apply a).symm
           ((unitAutEquivUnits D).apply_symm_apply b).symm
       _ = _ := (unitAutEquivUnits_isoTrans D _ _).symm
-  change classOf (unitWith i ((unitAutEquivUnits D).symm (a * b))) =
-    classOf ((unitWith i ((unitAutEquivUnits D).symm a)).tensor
-      (unitWith i ((unitAutEquivUnits D).symm b)))
+  change classOf (unitWith i ((unitAutEquivUnits D).symm (a * b)).asIso) =
+    classOf ((unitWith i ((unitAutEquivUnits D).symm a).asIso).tensor
+      (unitWith i ((unitAutEquivUnits D).symm b).asIso))
   rw [hab]
   exact Quotient.sound ⟨(unitWithTensorIso i _ _).symm⟩
 

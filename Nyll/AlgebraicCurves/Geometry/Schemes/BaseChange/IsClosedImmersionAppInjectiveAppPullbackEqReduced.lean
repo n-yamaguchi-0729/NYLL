@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomAppInjectiveIsAffineOpen
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsClosedImmersionAppInjectiveAppPullbackEqIsAffineOpen
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomAppInjectiveIsAffineOpen
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsClosedImmersionAppInjectiveAppPullbackEqIsAffineOpen
 
 /-!
 # Is Closed Immersion app injective and exists of app pullback eq of is Reduced
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

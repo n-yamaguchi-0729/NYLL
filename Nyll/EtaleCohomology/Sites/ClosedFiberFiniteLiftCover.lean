@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ClosedAdjunction
-import Nyll.EtaleCohomology.Sites.ConstantPresentation
-import Nyll.SchemeTheory.Etale.FiniteRefinement
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Sites.ClosedAdjunction
+public import Nyll.EtaleCohomology.Sites.ConstantPresentation
+public import Nyll.SchemeTheory.Etale.FiniteRefinement
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Finite covers carrying actual local lifts of a closed-fiber section
@@ -33,6 +35,8 @@ The local lifts are retained with their equations against the original
 unit and the original section. Gluing on the finite cover and descent of
 the resulting section are not asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

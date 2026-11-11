@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Etale.Pi
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Etale.Pi
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # Extracting a normalized generic tensor component
@@ -22,6 +24,8 @@ normalizations. Formal étaleness then passes to each literal component.
 Finiteness of integral closure over a normal Noetherian domain supplies
 finite presentation, so each component normalization is étale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

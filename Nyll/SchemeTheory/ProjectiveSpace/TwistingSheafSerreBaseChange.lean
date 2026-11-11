@@ -4,31 +4,33 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafSerreVanishing
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafSchemeIsoCech
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafSerreVanishing
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafSchemeIsoCech
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-!
 # Actual Serre vanishing on a coefficient base change
@@ -44,6 +46,8 @@ bound on the literal pullback, without assuming a graded presentation
 or an independent comparison of its cohomology. The result applies, in
 particular, when the new coefficient ring is a Noetherian Rees algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

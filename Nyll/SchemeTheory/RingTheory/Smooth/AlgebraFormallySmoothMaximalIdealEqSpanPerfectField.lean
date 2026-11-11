@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.SeparablyGenerated
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothMaximalIdealEqSpanSeparableResidueField
+module
+
+public import Mathlib.FieldTheory.SeparablyGenerated
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothMaximalIdealEqSpanSeparableResidueField
 
 /-!
 # Algebra Formally Smooth of maximal Ideal eq span of perfect Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

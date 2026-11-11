@@ -16,6 +16,7 @@ import Nyll.AlgebraicCurves.Differentials.Kaehler.FunctionField
 import Nyll.AlgebraicCurves.Differentials.Regular.Regular
 import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverKaehlerToFunctionFieldMemRegularDifferentials
 import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
+import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Scheme Two Affine Open Cover exists linear Equiv kaehler Sections H0 regular Differentials
@@ -63,10 +64,10 @@ theorem exists_kaehlerToFunctionField_eq_of_forall_mem_placesOf_exists_eq_smul_d
     (hη : letI := (baseToFunctionField c).toAlgebra
       ∀ v : Place k X.functionField, v ∈ placesOf c U → ∃ f ∈ v.toValuationSubring, η = f •
         v.dCoord) :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom c U
+    let := Scheme.TwoAffineOpenCover.algebraOfHom c U
     letI := (baseToFunctionField c).toAlgebra
     ∃ ω : Ω[Γ(X, U)⁄k], kaehlerToFunctionField c U ω = η := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom c U
+  intro sharedOwner1
   let : Algebra k X.functionField := (baseToFunctionField c).toAlgebra
   set φ : Γ(X, U) →+* X.functionField := (X.germToFunctionField U).hom with hφ
   let I : Ideal Γ(X, U) :=

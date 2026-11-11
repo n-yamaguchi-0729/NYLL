@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Lean.Elab.Tactic.Omega
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+module
+
+public import Mathlib.Tactic.Choose
+public import Lean.Elab.Tactic.Omega
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
 
 /-!
 # Proj Space exists twist Obj top forall res eq of mem H0 twist
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

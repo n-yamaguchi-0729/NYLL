@@ -10,12 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
+module
+
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Function Field
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -54,7 +59,6 @@ theorem germToFunctionField_map [IrreducibleSpace X] {U V : X.Opens} [Nonempty U
       = (X.germToFunctionField U).hom s := by
   rw [← CategoryTheory.ConcreteCategory.comp_apply]
   erw [TopCat.Presheaf.germ_res]
-  try rfl
 
 /-- The map on Kähler differentials induced by the germ map from an open to the function field. -/
 def kaehlerToFunctionField (U : X.Opens) [Nonempty U] :
@@ -99,15 +103,14 @@ theorem kaehlerToFunctionField_smul_D (a s : Γ(X, U)) :
 
 theorem kaehlerToFunctionField_map {U V : X.Opens} [Nonempty U] [Nonempty V] (h : V ≤ U)
     (η : letI := Scheme.TwoAffineOpenCover.algebraOfHom c U; Ω[Γ(X, U)⁄k]) :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom c U
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom c V
+    let := Scheme.TwoAffineOpenCover.algebraOfHom c U
+    let := Scheme.TwoAffineOpenCover.algebraOfHom c V
     kaehlerToFunctionField c V
         (KaehlerDifferential.mapOfRingHom (RingHom.id k) (Scheme.TwoAffineOpenCover.restrictAlgHom
           c h).toRingHom
           (RingHom.ext fun r => (Scheme.TwoAffineOpenCover.restrictAlgHom c h).commutes r) η)
       = kaehlerToFunctionField c U η := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom c U
-  let := Scheme.TwoAffineOpenCover.algebraOfHom c V
+  intro sharedOwner1 sharedOwner2
   let := (baseToFunctionField c).toAlgebra
   have hcomp : (X.germToFunctionField V).hom.comp (Scheme.TwoAffineOpenCover.restrictAlgHom c
     h).toRingHom

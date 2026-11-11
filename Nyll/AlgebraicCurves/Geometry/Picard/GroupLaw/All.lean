@@ -6,5 +6,4 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
 import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommRingPicBoundaryHomConductorSquareExact
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
 import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj

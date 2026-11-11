@@ -3,9 +3,11 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.Algebra.Category.Grp.Basic
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
+module
+
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
 
 /-!
 # Sections of an étale restriction
@@ -13,6 +15,8 @@ import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
 Identify the top-open sections of a restricted sheaf with its sections on the
 corresponding object of the base étale site, compatibly with sheaf morphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w

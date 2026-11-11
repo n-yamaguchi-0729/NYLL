@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.WholeNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.AffineFunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.WholeNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.AffineFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The original affine cover after normal base change
@@ -31,6 +33,8 @@ on the boundary complement of a normalized root extension, without
 requiring a chosen abstract component or a supplied comparison to the
 original cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

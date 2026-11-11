@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # The actual affine kernel of a closed-immersion pullback unit
@@ -25,6 +27,8 @@ the actual coefficient map and right exactness of tensor products then
 identify its kernel with the defining ideal times the original section
 module. No quotient-module comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

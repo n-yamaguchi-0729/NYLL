@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceTwistObjTopResEq
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceMemGradeHomogeneousApplyEq
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceTwistObjTopResEq
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceMemGradeHomogeneousApplyEq
 
 /-!
 # Proj Space exists forall H0 twist exists is Homogeneous forall val eq of is Closed
 Immersion
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

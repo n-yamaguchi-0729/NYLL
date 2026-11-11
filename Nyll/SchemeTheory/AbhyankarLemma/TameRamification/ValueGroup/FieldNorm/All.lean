@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Common
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Image
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Common
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Image
 
 /-!
 # Field norms and value groups

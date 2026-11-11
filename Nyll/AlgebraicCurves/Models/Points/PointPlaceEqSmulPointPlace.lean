@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
 
 /-!
 # Curve Model point Equiv Place eq smul point Equiv Place of from Spec Stalk comp eq of
 apply closed Point eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -68,40 +72,11 @@ private theorem functionFieldMapOfIso_germ_apply
           by rwa [genericPoint_eq_of_isOpenImmersion θ]) (θ.app U s) := by
   rw [← CommRingCat.comp_apply, germ_functionFieldMapOfIso]; rfl
 
-private theorem functionFieldMapOfIso_germ_of_comp_eq {Z : Scheme.{u}}
-    (g₂ : Y ⟶ Z) (g₁ : X ⟶ Z) (e : g₁ = θ ≫ g₂)
-    (U : Z.Opens) (h₂ : genericPoint Y ∈ g₂ ⁻¹ᵁ U) (h₁ : genericPoint X ∈ g₁ ⁻¹ᵁ U) (s : Γ(Z, U)) :
-    functionFieldMapOfIso θ (Y.presheaf.germ (g₂ ⁻¹ᵁ U) (genericPoint Y) h₂ (g₂.app U s)) =
-      X.presheaf.germ (g₁ ⁻¹ᵁ U) (genericPoint X) h₁ (g₁.app U s) := by
-  subst e
-  rw [functionFieldMapOfIso_germ_apply]
-  rfl
-
 end FFMap
 
 section ChartValue
 
 variable {R : CommRingCat.{u}} [IsLocalRing R] {X Y : Scheme.{u}}
-
-private theorem stalkClosedPointTo_germ_appIso_inv (ι : Y ⟶ X) [IsOpenImmersion ι] (l : Spec R ⟶
-  Y)
-    (w : Γ(Y, ⊤)) (h : (l ≫ ι).base (IsLocalRing.closedPoint R) ∈ ι ''ᵁ ⊤) :
-    Scheme.stalkClosedPointTo (l ≫ ι) (X.presheaf.germ (ι ''ᵁ ⊤) _ h ((ι.appIso ⊤).inv w)) =
-      Scheme.stalkClosedPointTo l (Y.presheaf.germ ⊤ _ (TopologicalSpace.Opens.mem_top _) w) := by
-  rw [Scheme.stalkClosedPointTo_comp]
-  have hg (y : Y) (hy : ι.base y ∈ ι ''ᵁ ⊤) :
-      ι.stalkMap y (X.presheaf.germ (ι ''ᵁ ⊤) (ι.base y) hy ((ι.appIso ⊤).inv w)) =
-        Y.presheaf.germ ⊤ y (TopologicalSpace.Opens.mem_top _) w := by
-    rw [Scheme.Hom.germ_stalkMap_apply, Scheme.Hom.appIso_inv_app_apply]
-    exact Y.presheaf.germ_res_apply _ y hy w
-  exact congrArg (Scheme.stalkClosedPointTo l) (hg _ h)
-
-private theorem stalkClosedPointTo_SpecMap_germ {A : CommRingCat.{u}} (φ : A ⟶ R) (b : A) :
-    Scheme.stalkClosedPointTo (Spec.map φ) ((Spec A).presheaf.germ ⊤ _
-      (TopologicalSpace.Opens.mem_top _) ((Scheme.ΓSpecIso A).inv b)) =
-      φ b := by
-  rw [← CommRingCat.comp_apply, Scheme.germ_stalkClosedPointTo_Spec, CommRingCat.comp_apply,
-    Iso.inv_hom_id_apply]
 
 end ChartValue
 

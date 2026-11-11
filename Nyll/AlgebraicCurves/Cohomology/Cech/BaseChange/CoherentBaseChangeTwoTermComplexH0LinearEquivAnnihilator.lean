@@ -10,37 +10,41 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.GroupWithZero.Units.Basic
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.LinearAlgebra.Matrix.Rank
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Free
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.GroupWithZero.Units.Basic
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.LinearAlgebra.Matrix.Rank
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
 
 /-!
 # Coherent Base Change Two Term Complex exists nonempty H0 linear Equiv annihilator of fibre
 H0 le one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -247,7 +251,7 @@ def baseChangeCokerEquiv {P Q : Type u} [AddCommGroup P] [Module R P] [AddCommGr
   have hsurj : Function.Surjective (LinearMap.range φ).mkQ := Submodule.mkQ_surjective _
   have hexA : Function.Exact (φ.baseChange A) ((LinearMap.range φ).mkQ.baseChange A) := by
     have h := lTensor_exact A hex hsurj
-    rwa [← LinearMap.baseChange_eq_ltensor, ← LinearMap.baseChange_eq_ltensor] at h
+    rwa [← LinearMap.baseChange_eq_lTensor, ← LinearMap.baseChange_eq_lTensor] at h
   exact hexA.linearEquivOfSurjective (LinearMap.baseChange_surjective A hsurj)
 
 theorem finrank_fibre_eq (𝔭 : PrimeSpectrum R) :
@@ -300,29 +304,29 @@ def pair (v : ι0 G → R) (x : ι0 G → B) : B := ∑ i, algebraMap R B (v i) 
 
 theorem pair_add_left (v v' : ι0 G → R) (x : ι0 G → B) : pair G B (v + v') x = pair G B v x +
   pair G B v' x := by
-  simp [pair, add_mul, Finset.sum_add_distrib]
+  simp only [pair, Pi.add_apply, map_add, add_mul, Finset.sum_add_distrib]
 
 theorem pair_smul_left (r : R) (v : ι0 G → R) (x : ι0 G → B) :
     pair G B (r • v) x = algebraMap R B r * pair G B v x := by
-  simp [pair, Finset.mul_sum, mul_assoc]
+  simp only [pair, Pi.smul_apply, smul_eq_mul, map_mul, Finset.mul_sum, mul_assoc]
 
 theorem pair_sub_left (v v' : ι0 G → R) (x : ι0 G → B) : pair G B (v - v') x = pair G B v x -
   pair G B v' x := by
-  simp [pair, sub_mul, Finset.sum_sub_distrib]
+  simp only [pair, Pi.sub_apply, map_sub, sub_mul, Finset.sum_sub_distrib]
 
 theorem pair_single (i : ι0 G) (x : ι0 G → B) : pair G B (Pi.single i 1) x = x i := by
   rw [pair, Finset.sum_eq_single i]
   · rw [Pi.single_eq_same, map_one, one_mul]
-  · intro j _ hj; simp [hj]
+  · intro j _ hj; simp only [Pi.single_eq_of_ne hj, map_zero, zero_mul]
   · intro h; exact absurd (Finset.mem_univ i) h
 
 theorem pair_add_right (v : ι0 G → R) (x x' : ι0 G → B) : pair G B v (x + x') = pair G B v x +
   pair G B v x' := by
-  simp [pair, mul_add, Finset.sum_add_distrib]
+  simp only [pair, Pi.add_apply, mul_add, Finset.sum_add_distrib]
 
 theorem pair_smul_right (b : B) (v : ι0 G → R) (x : ι0 G → B) : pair G B v (b • x) = b * pair G
   B v x := by
-  simp [pair, Finset.mul_sum, mul_left_comm]
+  simp only [pair, Pi.smul_apply, smul_eq_mul, Finset.mul_sum, mul_left_comm]
 
 theorem pair_eq_zero_of_mem_W {y : ι0 G → R} (hy : y ∈ W G) {x : ι0 G → B} (hx : x ∈ Kmat G B) :
     pair G B y x = 0 := by

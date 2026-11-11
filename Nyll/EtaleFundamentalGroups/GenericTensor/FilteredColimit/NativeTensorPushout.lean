@@ -12,14 +12,18 @@ Kim Morrison, authors Kim Morrison, Joël Riou, and Calle Sönne.
 All are released under Apache 2.0.
 -/
 
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Native ring models for tensor-product pushouts
 -/
+
+@[expose] public section
 
 noncomputable section
 

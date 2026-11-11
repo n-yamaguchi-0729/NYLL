@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSectionSubmodule
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Equivalence
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.Logic.Equiv.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSectionSubmodule
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Equivalence
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.Logic.Equiv.Basic
 
 /-!
 # Morphisms from a free sheaf and original global sections
@@ -26,6 +28,8 @@ The comparison evaluates a morphism on the original free generators.
 Its inverse and composition formulas retain those original maps; no
 quasicoherence or finiteness condition is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

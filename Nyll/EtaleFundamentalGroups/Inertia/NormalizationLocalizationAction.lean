@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationLocalization
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationLocalization
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-!
 # Geometric-point stabilizers under arbitrary affine localization
@@ -17,6 +19,8 @@ original automorphism by the localization universal property. The cartesian
 normalization square then lifts each compatible geometric point, preserving
 its exact stabilizer. No smoothness or finite-presentation condition is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

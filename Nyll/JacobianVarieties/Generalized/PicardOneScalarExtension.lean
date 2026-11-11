@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionAbelClass
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionNaturality
-import Nyll.JacobianVarieties.Generalized.PicardOneFieldDetection
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionAbelClass
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionNaturality
+public import Nyll.JacobianVarieties.Generalized.PicardOneFieldDetection
 
 /-! # Scalar extension preserves the intrinsic degree-one condition -/
+
+@[expose] public section
 
 noncomputable section
 

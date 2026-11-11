@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumDirectedRefinement
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite-etale descent over the directed punctured-spectrum cover

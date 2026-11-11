@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ExtensionByZero
-import Nyll.EtaleCohomology.Sites.ExtensionByZeroStalks
-import Nyll.EtaleCohomology.Sites.SheafAdjunction
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Adjunction.Triple
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Conservative
+module
+
+public import Nyll.EtaleCohomology.Sites.ExtensionByZero
+public import Nyll.EtaleCohomology.Sites.ExtensionByZeroStalks
+public import Nyll.EtaleCohomology.Sites.SheafAdjunction
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Adjunction.Triple
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
 
 /-!
 # Fully faithful adjoints for an open immersion
@@ -39,6 +41,8 @@ just a comparison between the objects at each stalk.
 The schemes and commutative coefficient ring are arbitrary.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelPresentations
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensor
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Functor.EpiMono
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelPresentations
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensor
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 /-!
 # Native syzygies of the original closed-level presentations
@@ -27,6 +29,8 @@ type follow from the original kernel inclusion. The proved presentation
 squares construct transitions between these same kernels and retain
 their inclusions into the original quotient modules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

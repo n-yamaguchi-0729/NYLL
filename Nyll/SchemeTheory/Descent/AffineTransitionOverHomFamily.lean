@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHomFamily
-import Nyll.SchemeTheory.Descent.AffineTransitionOverComparison
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHomFamily
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverComparison
 
 /-!
 # Actual native over-category morphism families at a common stage
@@ -15,6 +17,8 @@ Recovery uses the native cone comparison, with both projection equations
 proved from the chosen pullbacks. This applies to raw gluing overlaps over
 the ambient base without claiming that those overlaps are finite there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

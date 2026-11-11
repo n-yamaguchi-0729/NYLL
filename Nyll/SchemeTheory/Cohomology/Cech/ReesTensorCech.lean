@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Actual Rees tensor coefficients in the original Čech complex
@@ -26,6 +28,8 @@ by extracting that coefficient; it requires no chosen comparison of
 cohomology groups or boundary condition as additional input.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -35,7 +39,8 @@ namespace AlgebraicGeometry.Scheme.Modules.ReesTensor
 variable {A : Type u} [CommRing A] {X : Scheme.{u}}
   (f : X ⟶ Spec (.of A)) (I : Ideal A) (M : X.Modules) (K : X.OrderedAffineCover)
 
-private def cochainMapOfHom {F G : OModulePresheaf f} (φ : OModulePresheaf.Hom F G)
+/-- Apply a coefficient morphism on every intersection of the original affine cover. -/
+def cochainMapOfHom {F G : OModulePresheaf f} (φ : OModulePresheaf.Hom F G)
     (q : ℕ) : F.cochain K q →ₗ[A] G.cochain K q :=
   LinearMap.pi fun s => (φ.app (K.inter s)).comp (LinearMap.proj s)
 

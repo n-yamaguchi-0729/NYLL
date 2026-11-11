@@ -25,6 +25,7 @@ import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.EqGenusFFEllSubEllEq
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
 import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
 import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
+import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
 
 /-!
 # Finite and finrank regular Diffs eq genus FF of is Alg Closed
@@ -50,8 +51,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -240,8 +239,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

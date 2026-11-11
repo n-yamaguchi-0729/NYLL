@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.AlgebraicIndependent.Adjoin
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.Tactic.Conv
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Adjoin
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.Tactic.Conv
 
 /-!
 # Is Alg Closed exists alg Equiv apply eq add algebra Map of transcendental
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -35,12 +39,14 @@ noncomputable def shift (c : ι → K) : MvPolynomial ι K →ₐ[K] MvPolynomia
   aeval fun i => X i + C (c i)
 
 @[scoped simp] theorem shift_X (c : ι → K) (i : ι) : shift c (X i) = X i + C (c i) := by
-  simp [shift]
+  simp only [shift, aeval_eq_bind₁, bind₁_X_right]
 
 theorem shift_comp_shift_neg (c : ι → K) : (shift c).comp (shift (-c)) = AlgHom.id K _ := by
   apply MvPolynomial.algHom_ext
   intro i
-  simp [shift, add_assoc]
+  simp only [shift, aeval_eq_bind₁, Pi.neg_apply, map_neg, AlgHom.coe_comp, Function.comp_apply,
+    bind₁_X_right, map_add, algHom_C, algebraMap_eq, add_assoc, add_neg_cancel, add_zero,
+    AlgHom.coe_id, id_eq]
 
 theorem shift_neg_comp_shift (c : ι → K) : (shift (-c)).comp (shift c) = AlgHom.id K _ := by
   simpa using shift_comp_shift_neg (-c)
@@ -51,10 +57,11 @@ noncomputable def shiftEquiv (c : ι → K) : MvPolynomial ι K ≃ₐ[K] MvPoly
   AlgEquiv.ofAlgHom (shift c) (shift (-c)) (shift_comp_shift_neg c) (shift_neg_comp_shift c)
 
 @[scoped simp] theorem shiftEquiv_X (c : ι → K) (i : ι) : shiftEquiv c (X i) = X i + C (c i) := by
-  simp [shiftEquiv]
+  simp only [shiftEquiv, AlgEquiv.ofAlgHom_apply, shift_X]
 
 @[scoped simp] theorem shiftEquiv_C (c : ι → K) (k : K) : shiftEquiv c (C k) = C k := by
-  simp [shiftEquiv, shift]
+  simp only [shiftEquiv, shift, aeval_eq_bind₁, Pi.neg_apply, map_neg, AlgEquiv.ofAlgHom_apply,
+    algHom_C, algebraMap_eq]
 
 end TranslateTranscendental
 
@@ -84,7 +91,7 @@ theorem _root_.IsAlgClosed.exists_algEquiv_apply_eq_add_algebraMap_of_transcende
     IsFractionRing.ringEquivOfRingEquiv_algebraMap φ.toRingEquiv p
   have hψK : ∀ k : K, ψ (algebraMap K L k) = algebraMap K L k := by
     intro k
-    simp only [ψ, RingEquiv.trans_apply, AlgEquiv.coe_ringEquiv, AlgEquiv.commutes]
+    simp only [ψ, RingEquiv.trans_apply, AlgEquiv.coe_toRingEquiv, AlgEquiv.commutes]
     rw [IsScalarTower.algebraMap_apply K (MvPolynomial B K) (FractionRing (MvPolynomial B K)),
       hφF_alg, MvPolynomial.algebraMap_eq, show φ (C k) = C k from shiftEquiv_C c k,
       ← MvPolynomial.algebraMap_eq,
@@ -93,10 +100,10 @@ theorem _root_.IsAlgClosed.exists_algEquiv_apply_eq_add_algebraMap_of_transcende
   have het : (e (algebraMap (MvPolynomial B K) _ (X t₀)) : K') = t := by
     rw [AlgebraicIndependent.aevalEquivField_algebraMap_apply_coe, aeval_X]
   have hψt : (ψ (e (algebraMap (MvPolynomial B K) _ (X t₀))) : K') = t + algebraMap K K' a := by
-    simp only [ψ, RingEquiv.trans_apply, AlgEquiv.coe_ringEquiv, AlgEquiv.symm_apply_apply]
+    simp only [ψ, RingEquiv.trans_apply, AlgEquiv.coe_toRingEquiv, AlgEquiv.symm_apply_apply]
     rw [hφF_alg, AlgebraicIndependent.aevalEquivField_algebraMap_apply_coe,
       show φ (X t₀) = X t₀ + C (c t₀) from shiftEquiv_X c t₀]
-    simp [c, t₀]
+    simp only [↓reduceIte, map_add, aeval_X, algHom_C, t₀, c]
   let E : K' ≃+* K' := IsAlgClosure.equivOfEquiv K' K' ψ
   have hE : ∀ s : L, E (algebraMap L K' s) = algebraMap L K' (ψ s) :=
     fun s => IsAlgClosure.equivOfEquiv_algebraMap K' K' ψ s

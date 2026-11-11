@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFLeConstantExtension
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.LeGenusFFConstantExtension
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFLeConstantExtension
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.LeGenusFFConstantExtension
 
 /-!
 # Genus FF eq of constant Field Extension of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

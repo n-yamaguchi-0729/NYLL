@@ -10,38 +10,42 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Unramified.Field
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleSplitting
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.CanonicalDivisorGenusRiemannRoch
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.RROpensInjectiveEllSubSumSingleEqOne
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoPullback
-import Nyll.AlgebraicCurves.Geometry.Curves.FiniteMapFibreRiemannRochGenus
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveSectionsInjective
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleLocalResidueSeparation
-import Nyll.SchemeTheory.RingTheory.Polynomial.PolynomialIsUnitAevalSubMemMaximalIdealImpEq
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveClosedImmersionLevelSet
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurvePolynomialIsUnitAevalImpEtaleLevelSet
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Unramified.Field
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleSplitting
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.CanonicalDivisorGenusRiemannRoch
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.RROpensInjectiveEllSubSumSingleEqOne
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoPullback
+public import Nyll.AlgebraicCurves.Geometry.Curves.FiniteMapFibreRiemannRochGenus
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveSectionsInjective
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleLocalResidueSeparation
+public import Nyll.SchemeTheory.RingTheory.Polynomial.PolynomialIsUnitAevalSubMemMaximalIdealImpEq
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveClosedImmersionLevelSet
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurvePolynomialIsUnitAevalImpEtaleLevelSet
 
 /-!
 # Finite etale extensions with chart sections
 
 Finite etale splitting and Riemann-Roch supply the required families of chart sections.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -63,8 +67,6 @@ attribute [-instance]
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
 attribute [-instance]
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -257,7 +259,6 @@ theorem _root_.AlgebraicGeometry.RelPicard.exists_finite_etale_hasChartSections_
   have hplinj : Function.Injective pl := by
     intro m m' h
     have h1 := congrArg (fun q => q.1 ≫ pullback.fst (baseChange F c R') s) (hPinj h)
-    try dsimp only at h1
     rw [key, key] at h1
     exact hσ k s h1
   let S : Finset (Place k L) := Finset.univ.image pl
@@ -306,8 +307,6 @@ attribute [-instance]
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
 attribute [-instance]
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

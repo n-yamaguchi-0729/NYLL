@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Polynomial.UniversalFactorizationRing
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
+module
+
+public import Mathlib.RingTheory.Polynomial.UniversalFactorizationRing
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
 
 /-!
 # Henselian Local Ring exists is Idempotent Elem map eq of module finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -117,7 +121,7 @@ theorem _root_.HenselianLocalRing.exists_isIdempotentElem_map_eq_of_module_finit
     have : (φ : R' →+* k) = ((θ : κ →+* k).comp (ι.symm : Q.ResidueField →+* κ)).comp
         (algebraMap R' Q.ResidueField) := rfl
     rw [this, ← Polynomial.map_map, ← hf'red, Polynomial.map_map]
-    simp [Polynomial.map_pow, Polynomial.map_sub]
+    rw [Polynomial.map_pow, Polynomial.map_sub, Polynomial.map_X, Polynomial.map_C, map_one]
   have hf0 : IsUnit (f.coeff 0) := by
     refine IsLocalRing.notMem_maximalIdeal.mp (fun hmem => ?_)
     have hc := congrArg (fun q => Polynomial.coeff q 0) hfred

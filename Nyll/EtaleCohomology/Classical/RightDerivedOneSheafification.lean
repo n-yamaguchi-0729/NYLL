@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.SchemeTheory.HomologicalAlgebra.RightDerivedOneCokernel
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.SchemeTheory.HomologicalAlgebra.RightDerivedOneCokernel
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Actual first direct image and the cohomology presheaf
@@ -19,6 +21,8 @@ sides. Sheafification and precomposition preserve that cokernel, and
 the sheafification counit identifies its terms with the actual direct
 images. This constructs the comparison as an isomorphism of sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

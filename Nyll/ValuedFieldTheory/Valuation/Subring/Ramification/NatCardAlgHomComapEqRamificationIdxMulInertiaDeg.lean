@@ -10,88 +10,93 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.Algebra.Group.DivInvMonoid
-import Mathlib.Algebra.Group.Equiv.Basic
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.Algebra.GroupWithZero.Units.Lemmas
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.Algebra.Prime.Defs
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.Algebra.Ring.Subsemiring.Basic
-import Mathlib.Data.Finset.Defs
-import Mathlib.Data.Fintype.Card
-import Mathlib.Data.Set.Card
-import Mathlib.Data.Set.Finite.Basic
-import Mathlib.Data.SetLike.Basic
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Galois.IsGaloisGroup
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.Normal.Basic
-import Mathlib.FieldTheory.Normal.Closure
-import Mathlib.FieldTheory.Normal.Defs
-import Mathlib.FieldTheory.Separable
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.GroupTheory.GroupAction.Defs
-import Mathlib.GroupTheory.Index
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.Localization
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.Logic.Equiv.Basic
-import Mathlib.Logic.Equiv.Set
-import Mathlib.NumberTheory.RamificationInertia.Galois
-import Mathlib.NumberTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.DedekindDomain.AdicValuation
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Nonunits
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Ideal.Pointwise
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Invariant.Basic
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.RingTheory.IsGaloisGroup.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.RamificationInertia.Basic
-import Mathlib.RingTheory.RamificationInertia.Inertia
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.SimpleRing.Basic
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.DivInvMonoid
+public import Mathlib.Algebra.Group.Equiv.Basic
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.GroupWithZero.Units.Lemmas
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.Algebra.Prime.Defs
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.Algebra.Ring.Subsemiring.Basic
+public import Mathlib.Data.Finset.Defs
+public import Mathlib.Data.Fintype.Card
+public import Mathlib.Data.Set.Card
+public import Mathlib.Data.Set.Finite.Basic
+public import Mathlib.Basic.SetLike.Basic
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Galois.IsGaloisGroup
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.Normal.Basic
+public import Mathlib.FieldTheory.Normal.Closure
+public import Mathlib.FieldTheory.Normal.Defs
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.GroupTheory.GroupAction.Defs
+public import Mathlib.GroupTheory.Index
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.Localization
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.Logic.Equiv.Basic
+public import Mathlib.Logic.Equiv.Set
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+public import Mathlib.NumberTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Nonunits
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Ideal.Pointwise
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Invariant.Basic
+public import Mathlib.RingTheory.Invariant.Galois
+public import Mathlib.RingTheory.IsGaloisGroup.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.RamificationInertia.Basic
+public import Mathlib.RingTheory.RamificationInertia.Inertia
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.SimpleRing.Basic
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.RingTheory.Localization.InertiaDegree
 
 /-!
 # Valuation Subring nat Card alg Hom comap eq ramification Idx mul inertia Deg
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -152,21 +157,8 @@ theorem mem_nonunits_comap_iff {L L' : Type*} [Field L] [Field L'] (B : Valuatio
 theorem inertiaDeg_maximalIdeal_eq_one_of_isLocalization {R : Type*} [CommRing R]
     (p : Ideal R) [p.IsMaximal] (Rₚ : Type*) [CommRing Rₚ] [Algebra R Rₚ]
     [IsLocalization.AtPrime Rₚ p] [IsLocalRing Rₚ] :
-    (maximalIdeal Rₚ).inertiaDeg R = 1 := by
-  have : (maximalIdeal Rₚ).LiesOver p :=
-    ⟨(IsLocalization.AtPrime.under_maximalIdeal Rₚ p).symm⟩
-  rw [Ideal.inertiaDeg_eq_of_isMaximal p (maximalIdeal Rₚ)]
-  let e := IsLocalization.AtPrime.equivQuotMaximalIdeal p Rₚ
-  have he : ∀ c, e c = algebraMap (R ⧸ p) (Rₚ ⧸ maximalIdeal Rₚ) c := by
-    intro c
-    obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c
-    rfl
-  let e' : (R ⧸ p) ≃ₗ[R ⧸ p] (Rₚ ⧸ maximalIdeal Rₚ) :=
-    { e with
-      map_smul' := fun c x => by
-        change e (c * x) = c • e x
-        rw [map_mul, Algebra.smul_def, he] }
-  rw [← e'.finrank_eq, Module.finrank_self]
+    (maximalIdeal Rₚ).inertiaDeg R = 1 :=
+  _root_.IsLocalization.AtPrime.inertiaDeg_maximalIdeal_eq_one p Rₚ
 
 variable (C) in
 omit K in
@@ -184,9 +176,9 @@ theorem coe_algebraMap_overAlgebra (B : ValuationSubring F) (h : ∀ c : C, alge
     ((algebraMap C B c : B) : F) = algebraMap C F c := rfl
 omit K [IsDomain C] [IsDiscreteValuationRing C] in
 theorem isScalarTower_overAlgebra (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B) :
-    letI := overAlgebra B h
+    let := overAlgebra B h
     IsScalarTower C B F := by
-  let := overAlgebra B h
+  intro sharedOwner1
   exact IsScalarTower.of_algebraMap_eq fun a => rfl
 omit [IsDomain C] [IsDiscreteValuationRing C] in
 include K in
@@ -197,17 +189,16 @@ omit [IsDomain C] [IsDiscreteValuationRing C] in
 include K in
 theorem algebraMap_overAlgebra_injective (B : ValuationSubring F)
     (h : ∀ c : C, algebraMap C F c ∈ B) :
-    letI := overAlgebra B h
+    let := overAlgebra B h
     Function.Injective (algebraMap C B) := by
-  let := overAlgebra B h
-  intro a b hab
+  intro sharedOwner1 a b hab
   have h' : algebraMap C F a = algebraMap C F b := congrArg (fun z : B => (z : F)) hab
   exact algebraMap_injective (C := C) K h'
 omit K in
 theorem comap_maximalIdeal_overAlgebra (B : ValuationSubring F) (h : Over C B) :
-    letI := overAlgebra B h.1
+    let := overAlgebra B h.1
     (maximalIdeal B).comap (algebraMap C B) = maximalIdeal C := by
-  let := overAlgebra B h.1
+  intro sharedOwner1
   ext c
   rw [Ideal.mem_comap, ← h.2 c, ← ValuationSubring.coe_mem_nonunits_iff]
   rfl

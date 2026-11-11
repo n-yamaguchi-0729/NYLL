@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.FiniteCoverTrivialization
-import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Constructible.ModuleUnderlying
-import Nyll.EtaleCohomology.Sites.ConnectedConstants
-import Nyll.EtaleCohomology.Sites.ModuleConstant
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Limits.MorphismProperty
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.EtaleCohomology.Constructible.FiniteCoverTrivialization
+public import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Constructible.ModuleUnderlying
+public import Nyll.EtaleCohomology.Sites.ConnectedConstants
+public import Nyll.EtaleCohomology.Sites.ModuleConstant
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Limits.MorphismProperty
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite étale trivialization of module sheaves
@@ -31,6 +33,8 @@ In particular this applies to finite type locally constant sheaves over any
 finite commutative coefficient ring. No base field or noetherian hypothesis
 is used. Finiteness of the ring is only needed for this last specialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,34 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.Algebra.CharZero.Defs
-import Mathlib.Algebra.Field.Rat
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Nat.Defs
-import Mathlib.Algebra.Group.Semigroup
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Ring.Rat
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.Cast.Basic
-import Mathlib.Data.Nat.Cast.Defs
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.Order.Basic
-import Mathlib.Order.Defs.LinearOrder
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.RingTheory.Polynomial.Pochhammer
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.Algebra.CharZero.Defs
+public import Mathlib.Algebra.Field.Rat
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Algebra.Group.Semigroup
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Ring.Rat
+public import Mathlib.Data.Nat.Basic
+public import Mathlib.Data.Nat.Cast.Basic
+public import Mathlib.Data.Nat.Cast.Defs
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Order.Basic
+public import Mathlib.Order.Defs.LinearOrder
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.RingTheory.Polynomial.Pochhammer
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # Nat exists polynomial forall eval eq of forall eq macaulay Pow
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.PadicH1Comparison
-import Nyll.EtaleCohomology.Classical.RationalAdic
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.PadicH1Comparison
+public import Nyll.EtaleCohomology.Classical.RationalAdic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Linearity of the classical integral ℓ-adic H¹ comparison
@@ -15,6 +17,8 @@ The character group carries pointwise p-adic scalar multiplication. The
 comparison respects this actual action because finite-coefficient H¹ is
 natural for the scalar endomorphisms of its constant coefficient sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -27,7 +31,8 @@ namespace EtaleFundamentalGroups.Cohomology
 variable {X : Scheme.{u}} {Ω : Type u} [Field Ω]
   (ξ : Spec (.of Ω) ⟶ X) (ℓ : ℕ) [Fact ℓ.Prime]
 
-private def scalePadicCharacter (c : ℤ_[ℓ]) (χ : padicCharacters ξ ℓ) :
+/-- Scale a continuous p-adic character pointwise. -/
+def scalePadicCharacter (c : ℤ_[ℓ]) (χ : padicCharacters ξ ℓ) :
     padicCharacters ξ ℓ := Additive.ofMul
   { toFun := fun g => Multiplicative.ofAdd (c * (χ.toMul g).toAdd)
     map_one' := (congrArg (fun z : Multiplicative ℤ_[ℓ] =>

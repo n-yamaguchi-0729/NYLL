@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Tensoring a localization tower
@@ -15,6 +17,8 @@ localization and then extending that algebra gives the same tensor product
 as extending the algebra directly. The comparison remains linear over the
 new base, which need not itself be an algebra over the original localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -31,9 +35,9 @@ def localizationTensorTowerEquiv
     [CommRing R] [CommRing K] [CommRing S] [CommRing B]
     [Algebra R K] [Algebra R S] [Algebra R B] [Algebra K B]
     [IsScalarTower R K B] (M : Submonoid R) [IsLocalization M K] :
-    letI : Algebra K (S ⊗[R] K) := Algebra.TensorProduct.rightAlgebra
+    let : Algebra K (S ⊗[R] K) := Algebra.TensorProduct.rightAlgebra
     ((S ⊗[R] K) ⊗[K] B) ≃ₐ[S] (S ⊗[R] B) := by
-  letI : Algebra K (S ⊗[R] K) := Algebra.TensorProduct.rightAlgebra
+  intro rightTensorAlgebra
   letI : TensorProduct.CompatibleSMul R K (S ⊗[R] K) B :=
     IsLocalization.tensorProduct_compatibleSMul M K (S ⊗[R] K) B
   let e₁ : ((S ⊗[R] K) ⊗[K] B) ≃ₐ[S] ((S ⊗[R] K) ⊗[R] B) :=

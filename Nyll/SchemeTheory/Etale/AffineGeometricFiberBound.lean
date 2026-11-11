@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointGlobalBound
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointGlobalBound
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.SetTheory.Cardinal.Finite
 
 
 /-!
@@ -31,6 +33,8 @@ No tensor-product presentation or assumed point comparison is used.
 This is the affine geometric-fiber supplier for the finite-refinement
 argument of Stacks Project, Tag `09Z0`; the refinement itself remains open.
 -/
+
+@[expose] public section
 
 noncomputable section
 

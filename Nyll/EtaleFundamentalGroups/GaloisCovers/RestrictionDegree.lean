@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.SchemeTheory.Normalization.Normal
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # The common degree on normal charts of a Galois cover
@@ -32,6 +34,8 @@ automorphism equivalence and the Galois function-field calculation give
 the degree equality. Thus normal affine charts use one common Galois
 order as the root exponent in the specialization construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

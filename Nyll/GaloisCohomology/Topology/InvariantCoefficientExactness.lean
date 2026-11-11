@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.DiscreteCoefficientQuotient
-import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
+module
+
+public import Nyll.GaloisCohomology.Topology.DiscreteCoefficientQuotient
+public import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
 
 /-!
 # Exact continuous complexes for actual coefficient images
@@ -14,6 +16,8 @@ An injective coefficient morphism and the actual quotient by its image
 give a short exact sequence of continuous homogeneous module complexes.
 This also applies to submodule inclusions and invariant prime-order lines.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v
@@ -27,7 +31,8 @@ variable (R : Type v) [Ring R] [TopologicalSpace R] [DiscreteTopology R]
   (A B : TopRep.{u} R G) (φ : A ⟶ B)
 
 omit [DiscreteTopology R] [TopologicalSpace G] [IsTopologicalGroup G] in
-private theorem coefficientMapRange_invariant (g : G) :
+/-- The image of an equivariant coefficient map is invariant under the group action. -/
+theorem coefficientMapRange_invariant (g : G) :
     LinearMap.range φ.hom.toContinuousLinearMap.toLinearMap ≤
       (LinearMap.range φ.hom.toContinuousLinearMap.toLinearMap).comap
         (B.ρ g).toLinearMap := by

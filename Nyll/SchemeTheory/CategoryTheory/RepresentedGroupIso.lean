@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # Canonical group isomorphisms from represented group presheaf isomorphisms -/
+
+@[expose] public section
 
 noncomputable section
 

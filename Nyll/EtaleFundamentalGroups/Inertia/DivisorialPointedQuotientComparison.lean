@@ -10,6 +10,7 @@ import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
 import Nyll.EtaleFundamentalGroups.Inertia.PointedQuotientTransport
 import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFundamentalGroup
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
 
 /-!
 # Pointed finite-cover realization of divisorial inertia quotients

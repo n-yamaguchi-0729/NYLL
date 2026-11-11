@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
-import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
-import Mathlib.Algebra.Group.Basic
-import Mathlib.Algebra.Group.MinimalAxioms
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
+public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
+public import Mathlib.Algebra.Group.Basic
+public import Mathlib.Algebra.Group.MinimalAxioms
 
 /-!
 # Tensor operations on chosen rigidifications
@@ -18,6 +20,8 @@ The rigidification on a dual is constructed from evaluation and the original cho
 trivialization. Thus evaluation preserves the chosen trivializations by construction;
 no arbitrary pullback comparison for duals is assumed to have this property.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -184,7 +188,7 @@ private theorem classes_mul_inv (x : Classes i) : x * x⁻¹ = 1 := by
 
 /-- The naive classes form a group under tensor product, with the chosen dual as inverse. -/
 instance classesGroup : Group (Classes i) :=
-  Group.ofRightAxioms classesTensor_assoc classesTensor_unit_right classes_mul_inv
+  Group.ofRightAxioms classesTensor_assoc classesTensor_unit_right (by exact classes_mul_inv)
 
 /-- Every specified line bundle represents its categorical dual as the group inverse. -/
 theorem classOf_dual (M : RigidifiedLineBundle i) : classOf M.dual = (classOf M)⁻¹ := by

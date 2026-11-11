@@ -3,10 +3,12 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.AlgebraicGeometry.Cover.Open
+module
+
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.AlgebraicGeometry.Cover.Open
 
 /-!
 # Recovered relative-overlap equations
@@ -16,6 +18,8 @@ an arbitrary base change, monic recovered chart maps prove the diagonal
 and triple equations. No faithfulness or surjectivity of the base change
 is used: these equations can subsequently be descended to a later stage.
 -/
+
+@[expose] public section
 
 noncomputable section
 

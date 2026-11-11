@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Nyll.SchemeTheory.RingTheory.Henselian.LocalRing
-import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne
+module
+
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Nyll.SchemeTheory.RingTheory.Henselian.LocalRing
+public import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne
 
 /-!
 # Valuation Subring faithfully Flat and is Integral of henselian Local Ring comap
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -198,11 +202,10 @@ theorem isIntegral_of_mem {K : Type u} {L : Type v} [Field K] [Field L] [Algebra
     [HenselianLocalRing ↥(A.comap (algebraMap K L))] [IsDiscreteValuationRing ↥(A.comap (algebraMap
       K L))]
     (y : L) (hy : y ∈ A) :
-    letI : Algebra ↥(A.comap (algebraMap K L)) L :=
+    let : Algebra ↥(A.comap (algebraMap K L)) L :=
       ((algebraMap K L).comp (A.comap (algebraMap K L)).subtype).toAlgebra
     IsIntegral ↥(A.comap (algebraMap K L)) y := by
-  let algL : Algebra ↥(A.comap (algebraMap K L)) L :=
-    ((algebraMap K L).comp (A.comap (algebraMap K L)).subtype).toAlgebra
+  intro algL
   have hKL : IsScalarTower ↥(A.comap (algebraMap K L)) K L := IsScalarTower.of_algebraMap_eq (fun _
     => rfl)
   have hKyL : IsScalarTower ↥(A.comap (algebraMap K L)) ↥(IntermediateField.adjoin K {y}) L :=

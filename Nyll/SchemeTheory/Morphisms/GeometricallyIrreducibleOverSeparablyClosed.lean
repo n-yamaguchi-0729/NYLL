@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
-import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
+public import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Geometric irreducibility over a separably closed field
@@ -20,6 +22,8 @@ topological space. Geometric irreducibility over that algebraically closed
 field then descends to every field extension through an actual surjective
 base-change projection. No finite type assumption is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

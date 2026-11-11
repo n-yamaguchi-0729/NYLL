@@ -4,17 +4,36 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.GroupTheory.PGroupGaloisTower
-import Nyll.GaloisCohomology.GroupTheory.Augmentation
-import Nyll.GaloisCohomology.GroupTheory.Finite
-import Nyll.GaloisCohomology.GroupTheory.Quotient
-import Nyll.GaloisCohomology.GroupTheory.QuotientTower
-import Nyll.GaloisCohomology.GroupTheory.RestrictionKernel
-import Nyll.GaloisCohomology.GroupTheory.Transfer.All
+module
 
-import Nyll.GaloisCohomology.GroupTheory.FiniteOrbitProduct
-import Nyll.GaloisCohomology.GroupTheory.H2FiniteIndexTrace
-import Nyll.GaloisCohomology.GroupTheory.FinitePGroupInvariants
+public import Nyll.GaloisCohomology.GroupTheory.ProjectiveResolutionComparison
+public import Nyll.GaloisCohomology.GroupTheory.PGroupGaloisTower
+public import Nyll.GaloisCohomology.GroupTheory.Augmentation
+public import Nyll.GaloisCohomology.GroupTheory.RepresentationPowers
+public import Nyll.GaloisCohomology.GroupTheory.Finite
+public import Nyll.GaloisCohomology.GroupTheory.Quotient
+public import Nyll.GaloisCohomology.GroupTheory.QuotientTower
+public import Nyll.GaloisCohomology.GroupTheory.RestrictionKernel
+public import Nyll.GaloisCohomology.GroupTheory.Transfer.All
+
+public import Nyll.GaloisCohomology.GroupTheory.BarResolutionNaturality
+public import Nyll.GaloisCohomology.GroupTheory.ShapiroEvaluation
+public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingShapiroComparison
+public import Nyll.GaloisCohomology.GroupTheory.FiniteOrbitProduct
+public import Nyll.GaloisCohomology.GroupTheory.GroupEquivComplexComparison
+public import Nyll.GaloisCohomology.GroupTheory.RepresentationUniverseLift
+public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingEquivalence
+public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingHomologyEquivalence
+public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingConnectingMap
+public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingCoinduction
+public import Nyll.GaloisCohomology.GroupTheory.H2FiniteIndexTrace
+public import Nyll.GaloisCohomology.GroupTheory.FinitePGroupInvariants
+
+
+public import Nyll.GaloisCohomology.GroupTheory.FiniteTorsorInvariants
+public import Nyll.GaloisCohomology.GroupTheory.FiniteTorsorTrace
+public import Nyll.GaloisCohomology.GroupTheory.FiniteTorsorWitt
+public import Nyll.GaloisCohomology.GroupTheory.FiniteTorsorWittClasses
 
 /-!
 # Finite group foundations

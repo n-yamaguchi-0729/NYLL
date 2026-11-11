@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleDivisorRangeEqLSpaceOn
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleCoeffIdealLeIdealZeroSchemeIdealEq
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleDivisorRangeEqLSpaceOn
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleCoeffIdealLeIdealZeroSchemeIdealEq
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-! # A global rational ratio of two nonzero line-bundle sections -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -61,8 +65,7 @@ private theorem germToFunctionField_topIso {X : Scheme.{u}} [IsIntegral X]
     let _ : Nonempty (U.ι ''ᵁ ⊤) :=
       (Scheme.Opens.ι_image_top U).symm ▸ (inferInstance : Nonempty U)
     X.germToFunctionField U (U.topIso.hom a) = X.germToFunctionField (U.ι ''ᵁ ⊤) a := by
-  let : Nonempty (U.ι ''ᵁ ⊤) :=
-    (Scheme.Opens.ι_image_top U).symm ▸ (inferInstance : Nonempty U)
+  intro sharedOwner1
   rw [Scheme.Opens.topIso_hom]
   exact X.presheaf.germ_res_apply' _ _ _ a
 

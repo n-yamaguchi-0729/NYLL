@@ -21,3 +21,6 @@ import Nyll.AlgebraicCurves.Divisors.Modulus.All
 import Nyll.AlgebraicCurves.Divisors.Norm.All
 import Nyll.AlgebraicCurves.Divisors.Principal.All
 import Nyll.AlgebraicCurves.Divisors.Semilinear.All
+import Nyll.AlgebraicCurves.Divisors.KummerEvaluationUnits
+import Nyll.AlgebraicCurves.Divisors.ConstantReindexTower
+import Nyll.AlgebraicCurves.Divisors.PointedPicard

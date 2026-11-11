@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.HenselianRegularBlockLaurentTrace
-import Nyll.SchemeTheory.GroupSchemes.RegularBlockIntegralCoefficients
+module
+
+public import Nyll.JacobianVarieties.Generalized.HenselianRegularBlockLaurentTrace
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockIntegralCoefficients
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
 
 /-! # The actual regular Cartier block over the common integral coefficients
 
@@ -15,6 +18,8 @@ in the over category. In particular, no Cartier ideal or Henselian selected
 block is rebuilt when extending its actual divisor-sum difference to the
 common valuation ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

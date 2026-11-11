@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCechComparison
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleHEquivFD
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistPositiveVanishing
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCechComparison
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleHEquivFD
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistPositiveVanishing
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Vanishing for the actual nonnegative twisting sheaves
@@ -23,6 +25,8 @@ the Laurent-monomial contraction to the actual native twisting sheaf.
 Every positive cocycle is shown to be an actual boundary. No Noetherian
 hypothesis is needed for this free-sheaf step of Serre vanishing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicallyClosedPointHom
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
-import Nyll.JacobianVarieties.Generalized.ModulusAtlasGluing
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyPointEvaluation
-import Nyll.JacobianVarieties.Generalized.ModulusPointEvaluation
-import Nyll.JacobianVarieties.Generalized.GeometricIntegrality
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicallyClosedPointHom
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
+public import Nyll.JacobianVarieties.Generalized.ModulusAtlasGluing
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyPointEvaluation
+public import Nyll.JacobianVarieties.Generalized.ModulusPointEvaluation
+public import Nyll.JacobianVarieties.Generalized.GeometricIntegrality
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
 
 /-! # The constructed regular map for an actual commutative group target
 
@@ -26,6 +28,8 @@ The map uses the group's original operations and the regular morphism's actual
 place values. The only modulus input is the principal-divisor condition.
 The group-homomorphism and Abel-factorization statements are separate theorems.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselization
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFraction
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselization
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFraction
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The original base field and actual ordinary-henselization fraction field
@@ -22,6 +24,8 @@ the original coefficient map, proved on `A` and extended by fraction-field
 uniqueness. The resulting scalar tower makes the original separably closed
 Galois field a separable closure of the actual ordinary fraction field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

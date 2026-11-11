@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Polynomial.Module.Basic
-import Mathlib.LinearAlgebra.DirectSum.TensorProduct
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.ReesAlgebra
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Polynomial.Module.Basic
+public import Mathlib.LinearAlgebra.DirectSum.TensorProduct
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 # Actual coefficients after tensoring the Rees algebra
@@ -27,6 +29,8 @@ before tensoring with a module annihilated by the original ideal. The
 positive-degree coefficient modules are retained in this order.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped DirectSum TensorProduct
@@ -37,13 +41,15 @@ universe u v
 
 variable {R : Type u} [CommRing R] (I : Ideal R)
 
-private def powerFiltration : I.Filtration R where
+/-- The ideal-power filtration of the coefficient ring. -/
+def powerFiltration : I.Filtration R where
   N n := I ^ n
   mono n := Ideal.pow_le_pow_right (Nat.le_succ n)
   smul_le n := by
     rw [Ideal.smul_eq_mul, pow_succ']
 
-private def polynomialModuleEquiv :
+/-- The Rees algebra as the polynomial module of the ideal-power filtration. -/
+def polynomialModuleEquiv :
     ↥(reesAlgebra I) ≃ₗ[R] (powerFiltration I).submodule where
   toFun p := ⟨(PolynomialModule.equivPolynomial (R := R) (S := R)).symm p.val,
     fun n => p.property n⟩

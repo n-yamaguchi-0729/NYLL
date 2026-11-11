@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Adjunction.Unique
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Composition of étale inverse and direct image
@@ -17,6 +19,8 @@ The pullback pasting isomorphism on the small étale sites gives the direct
 image composition isomorphism. The corresponding inverse image comparison
 follows from the constructed adjunctions and uniqueness of left adjoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

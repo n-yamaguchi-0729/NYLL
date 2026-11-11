@@ -4,16 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceDomain
-import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldRatFuncAlgHomApplyXEq
-import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldFiniteRatFuncAlgHom
-import Nyll.AlgebraicCurves.FunctionFields.Rational.SeparatingRationalPresentation
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.AlgebraicCurves.Models.FunctionFields.FiniteFlatHomAlgHom
-import Nyll.AlgebraicCurves.Models.Rational.CurveModelRatFunc
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralAlgClosed
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceDomain
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldRatFuncAlgHomApplyXEq
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.FunctionFieldFiniteRatFuncAlgHom
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.SeparatingRationalPresentation
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.AlgebraicCurves.Models.FunctionFields.FiniteFlatHomAlgHom
+public import Nyll.AlgebraicCurves.Models.Rational.CurveModelRatFunc
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralAlgClosed
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # A regular trace constructed from a nonconstant rational function
 
@@ -23,6 +26,8 @@ one separating rational presentation. The resulting finite flat curve map
 retains its actual function-field comparison. Its graph family constructs
 a regular trace on a nonempty dense open of the rational curve model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -62,11 +62,10 @@ private theorem isLocalHom_of_unique_prime_over_maximal_universe
     [q.LiesOver (maximalIdeal R)]
     (hunique : ∀ Q : Ideal S, Q.IsPrime →
       Q.LiesOver (maximalIdeal R) → Q = q) :
-    letI : IsLocalRing S :=
+    let : IsLocalRing S :=
       isLocalRing_of_unique_prime_over_maximal_universe q hunique
     IsLocalHom (algebraMap R S) := by
-  let : IsLocalRing S :=
-    isLocalRing_of_unique_prime_over_maximal_universe q hunique
+  intro sharedOwner1
   let : Algebra.IsIntegral R S := Algebra.IsIntegral.of_finite R S
   have hqMaximal : q.IsMaximal :=
     Ideal.isMaximal_of_isIntegral_of_isMaximal_under
@@ -89,11 +88,10 @@ private theorem faithfullyFlat_of_unique_prime_over_maximal_universe
     [q.LiesOver (maximalIdeal R)]
     (hunique : ∀ Q : Ideal S, Q.IsPrime →
       Q.LiesOver (maximalIdeal R) → Q = q) :
-    letI : IsLocalRing S :=
+    let : IsLocalRing S :=
       isLocalRing_of_unique_prime_over_maximal_universe q hunique
     Module.FaithfullyFlat R S := by
-  let : IsLocalRing S :=
-    isLocalRing_of_unique_prime_over_maximal_universe q hunique
+  intro sharedOwner1
   let : IsLocalHom (algebraMap R S) :=
     isLocalHom_of_unique_prime_over_maximal_universe q hunique
   exact Module.FaithfullyFlat.of_flat_of_isLocalHom

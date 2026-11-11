@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Submodule
-import Mathlib.Basic.Finite.Sigma
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
+public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Tactic.Choose
 
 
 /-!
@@ -26,6 +28,8 @@ Lemma 28.23.2. That lemma supplies finite-type submodule extension for the
 module approximation used by Tags 01PI, 01PJ and 0817. This file proves the
 ring-local extraction, not quasicoherent-sheaf extension or gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

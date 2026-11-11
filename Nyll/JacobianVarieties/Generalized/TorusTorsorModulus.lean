@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Generalized.TorusRationalMapModulus
 import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
+import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Torus-torsor maps and their unpointed Abel factors
 

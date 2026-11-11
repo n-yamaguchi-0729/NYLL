@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.Nakayama
-import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 
 /-!
 # Is Local Ring mk comp algebra Map surjective of maximal Ideal le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

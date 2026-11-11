@@ -4,9 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionScheme
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionScheme
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! # Group classification of the concrete scalar quotient restriction -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -15,6 +20,7 @@ universe u
 open AlgebraicGeometry CategoryTheory Opposite Module
 
 attribute [local instance] MvPolynomial.gradedAlgebra
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace SchemeTheory.Affine.ScalarQuotientSchemePresheaf
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Generator.Sheaf
-import Mathlib.CategoryTheory.Generator.StrongGenerator
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.ConcreteSheafification
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.Sheaves.LocallySurjective
-import Mathlib.Topology.Spectral.Prespectral
+module
+
+public import Mathlib.CategoryTheory.Generator.Sheaf
+public import Mathlib.CategoryTheory.Generator.StrongGenerator
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.Sheaves.LocallySurjective
+public import Mathlib.Topology.Spectral.Prespectral
 
 /-!
 # Compact-open generators of topological sheaves
@@ -25,6 +27,8 @@ This is the generator part of the finite-presentation argument in the
 Stacks Project, tag 0CAI: https://stacks.math.columbia.edu/tag/0CAI.
 The Lean proof is original and uses Mathlib's sheafified free representables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

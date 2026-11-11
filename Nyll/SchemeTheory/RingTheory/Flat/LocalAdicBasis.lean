@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Flat.NilpotentFlatBasis
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Flat.NilpotentFlatBasis
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # A common basis for the infinitesimal fibres of a flat local module
@@ -27,6 +29,8 @@ module, rather than by independent choices in its quotients.
 This is the module-theoretic input of Stacks, Tag 07QM, part (4), without a
 finiteness assumption on the module or its closed fibre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

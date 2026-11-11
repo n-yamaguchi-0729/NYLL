@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineLine
-import Nyll.JacobianVarieties.Generalized.GenericTracePoint
-import Nyll.SchemeTheory.FunctionFields.GenericFieldSourceNaturality
-import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineLine
+public import Nyll.JacobianVarieties.Generalized.GenericTracePoint
+public import Nyll.SchemeTheory.FunctionFields.GenericFieldSourceNaturality
+public import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
 
 /-! # The affine trace difference is the original generic trace difference
 
@@ -19,6 +21,8 @@ identifies the original generic trace quotient with the full formal difference
 of the already constructed affine-line trace. No comparison of formal trace
 coordinates or completed-field maps is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

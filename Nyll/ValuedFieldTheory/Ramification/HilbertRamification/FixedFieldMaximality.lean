@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationField
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationField
 
 /-!
 # Hilbert ramification theory: fixed-field maximality
@@ -17,6 +19,8 @@ the purely Galois-theoretic part is already available: a subextension lies in
 `Z_w`, `T_w`, or `V_w` exactly when the corresponding canonical subgroup acts
 trivially on it.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory
 

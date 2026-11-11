@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Matching on an actual fppf descent cover
@@ -14,6 +16,8 @@ The singleton cover used by effective descent is covering in the slice fppf
 site. Consequently every actual fppf sheaf satisfies precisely the matching
 condition required by the global representation construction.
 -/
+
+@[expose] public section
 
 universe u
 

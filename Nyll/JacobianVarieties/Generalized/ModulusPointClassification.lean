@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.PicardZeroChartCompatibility
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.PicardZeroChartCompatibility
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! # The same actual point in the type-valued and group-valued classifying maps -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -16,6 +21,8 @@ universe u
 
 open CategoryTheory Opposite
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

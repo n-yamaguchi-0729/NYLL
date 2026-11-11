@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
 
 /-!
 # Shifting a fixed finite graded presentation
@@ -15,6 +17,8 @@ kernel of the shifted presentation is the shift of the original kernel.
 These concrete comparisons make it possible to choose a twist bound
 uniformly while descending through a finite graded resolution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

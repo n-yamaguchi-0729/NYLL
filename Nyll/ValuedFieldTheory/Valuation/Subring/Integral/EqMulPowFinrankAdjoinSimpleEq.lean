@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DVRValuationSubringEqSubMemNonunits
-import Nyll.ValuedFieldTheory.Valuation.Subring.UniqueValuationSubring
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DVRValuationSubringEqSubMemNonunits
+public import Nyll.ValuedFieldTheory.Valuation.Subring.UniqueValuationSubring
 
 /-!
 # Valuation Subring exists eq mul pow finrank and adjoin simple eq of forall valuation
 Subring eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

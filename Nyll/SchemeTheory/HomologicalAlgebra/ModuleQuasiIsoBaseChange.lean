@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Flat.Product
-import Mathlib.LinearAlgebra.TensorProduct.Prod
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatKerBaseChangeEqBotKerLeRange
+module
+
+public import Nyll.SchemeTheory.RingTheory.Flat.Product
+public import Mathlib.LinearAlgebra.TensorProduct.Prod
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatKerBaseChangeEqBotKerLeRange
 
 /-!
 # Module quasi Iso base Change of quasi Iso of flat
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

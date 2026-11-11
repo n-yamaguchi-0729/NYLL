@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.AffineTransitionLocalModel
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.AffineTransitionLocalModel
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Actual finite affine covers for inverse-limit descent
@@ -16,6 +18,8 @@ the restrictions of the given finite-etale cover of the limit. This produces
 all chart models and their recovery isomorphisms at one common stage from
 the original inverse system, without supplying a chart cover as extra data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

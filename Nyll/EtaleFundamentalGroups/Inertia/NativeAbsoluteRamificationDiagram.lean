@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteRamificationResidues
-import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationDiagram
-import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationResidues
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Subgroup.Defs
-import Mathlib.Topology.Constructions
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteRamificationResidues
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationDiagram
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationResidues
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Subgroup.Defs
+public import Mathlib.Topology.Constructions
 
 /-!
 # The native absolute ramification diagram
@@ -21,6 +23,8 @@ full-target character. Its roots action is computed from that SAME residue
 map and the existing coefficient action, rather than stored arbitrarily.
 No exactness, closure, normality, continuity or comparison fact is input data.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

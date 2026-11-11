@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousTransgression
-import Nyll.GaloisCohomology.ProP.H2FiniteStageFamily
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgression
+public import Nyll.GaloisCohomology.ProP.H2FiniteStageFamily
 
 /-!
 # Continuous transgression is killed by degree-two inflation
@@ -14,6 +16,8 @@ For an open normal subgroup, every continuous transgression class lies in the ke
 degree-two inflation.  The proof uses an explicit continuous homogeneous primitive after
 inflation.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

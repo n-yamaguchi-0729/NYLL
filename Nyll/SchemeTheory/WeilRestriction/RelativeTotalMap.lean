@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.OverTotalMap
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalMap
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
 
 /-! Natural maps from a relative family give maps from its total family over the further base. -/
+
+@[expose] public section
 
 noncomputable section
 

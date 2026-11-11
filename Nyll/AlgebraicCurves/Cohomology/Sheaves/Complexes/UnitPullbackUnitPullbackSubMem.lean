@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Fin.Tuple.Sort
-import Mathlib.GroupTheory.Perm.Sign
-import Mathlib.AlgebraicGeometry.Scheme
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechCup
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechOrdered
+module
+
+public import Mathlib.Data.Fin.Tuple.Sort
+public import Mathlib.GroupTheory.Perm.Sign
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechCup
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechOrdered
 
 /-!
 # OModule Presheaf unit Pullback unit Pullback sub mem of d eq zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.OverTotalRepresentation
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.AlgebraicGeometry.Scheme
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalRepresentation
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Total relative families over a further base
@@ -16,6 +18,8 @@ A presheaf over a parameter scheme is viewed on the iterated slice and then
 collected over every parameter map. Its actual representing scheme is unchanged;
 its structure morphism is composed with the parameter scheme's map to the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

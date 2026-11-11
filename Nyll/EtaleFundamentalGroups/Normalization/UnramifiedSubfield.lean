@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointFixedSubfield
-import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointGaloisQuotient
-import Nyll.EtaleFundamentalGroups.Normalization.FiniteEtaleGenericFiber
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointFixedSubfield
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointGaloisQuotient
+public import Nyll.EtaleFundamentalGroups.Normalization.FiniteEtaleGenericFiber
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
 
 /-!
 # Unramified subfields and the generic Galois kernel
@@ -16,6 +18,8 @@ import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
 The generic-fibre comparison identifies the finite subfields coming from
 unramified normalization with the fields fixed by the generic Galois kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -25,11 +29,6 @@ open AlgebraicGeometry.FiniteEtale
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 /-- The generic Galois kernel fixes a finite subfield whose normalization
 is étale. Integrality of normalization supplies the finite cover. -/

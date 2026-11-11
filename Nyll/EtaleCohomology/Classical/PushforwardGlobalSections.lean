@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Global sections of abelian direct images
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 Direct image preserves injectives by its exact inverse-image left adjoint,
 and its global sections agree naturally with those of the source sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -3,22 +3,24 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Presentable.Finite
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.RelativeFiniteFieldTensorDiagram
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Category.Ring.FinitePresentation
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Presentable.Finite
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.RelativeFiniteFieldTensorDiagram
 
 /-!
 # Relative finite-field descent of tensor-product maps
@@ -32,6 +34,8 @@ Maps defined at two finite stages which agree after extension to `L` agree at
 one actual finite intermediate field containing both stages. The equality
 endpoint reuses existing finite-presentation compactness.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,14 +54,16 @@ local instance relativeFiniteTensorPointAlgebra (F₀ : IntermediateField k L) :
   (Algebra.TensorProduct.map (R := k) (S := R) (AlgHom.id R R)
     F₀.toSubalgebra.val).toRingHom.toAlgebra
 
+/-- The algebra structure induced by a finite intermediate-field inclusion. -/
 @[reducible]
-private def stageAction (F₀ E : IntermediateField k L) (hle : F₀ ≤ E) :
+def stageAction (F₀ E : IntermediateField k L) (hle : F₀ ≤ E) :
     Algebra (R ⊗[k] F₀.toSubalgebra) (R ⊗[k] E.toSubalgebra) :=
   (Algebra.TensorProduct.map (R := k) (S := R) (AlgHom.id R R)
     (Subalgebra.inclusion
       (show F₀.toSubalgebra ≤ E.toSubalgebra from hle))).toRingHom.toAlgebra
 
-private def stageTensorLeg (F₀ : FiniteIntermediateFieldIndex k L)
+/-- The literal tensor inclusion from a finite containing field into the ambient field. -/
+def stageTensorLeg (F₀ : FiniteIntermediateFieldIndex k L)
     (E : IntermediateField k L) (hfinite : FiniteDimensional k E)
     (hle : F₀.val ≤ E)
     (B : Type u) [CommRing B] [Algebra (R ⊗[k] F₀.val.toSubalgebra) B] :
@@ -69,18 +75,6 @@ private def stageTensorLeg (F₀ : FiniteIntermediateFieldIndex k L)
   let c := relativeFiniteIntermediateFieldTensorCocone k L R F₀
   let i : Under F₀ := Under.mk (homOfLE (show F₀ ≤ ⟨E, hfinite⟩ from hle))
   with_unfolding_all exact filteredTensorToColimitAlgHom c i (A := B)
-
-private theorem stageTensorLeg_tmul (F₀ : FiniteIntermediateFieldIndex k L)
-    (E : IntermediateField k L) (hfinite : FiniteDimensional k E)
-    (hle : F₀.val ≤ E)
-    (B : Type u) [CommRing B] [Algebra (R ⊗[k] F₀.val.toSubalgebra) B]
-    (x : R ⊗[k] E.toSubalgebra) (b : B) :
-    let : Algebra (R ⊗[k] F₀.val.toSubalgebra) (R ⊗[k] E.toSubalgebra) :=
-      stageAction k L R F₀.val E hle
-    stageTensorLeg k L R F₀ E hfinite hle B (x ⊗ₜ[R ⊗[k] F₀.val.toSubalgebra] b) =
-      Algebra.TensorProduct.map (R := k) (S := R) (AlgHom.id R R) E.toSubalgebra.val x
-        ⊗ₜ[R ⊗[k] F₀.val.toSubalgebra] b := by
-  rfl
 
 /-- Relative Hom descent with the actual finite containing field and literal
 coefficient legs; only the source model is finitely presented. -/
@@ -153,7 +147,8 @@ theorem exists_finiteIntermediateField_tensorProduct_algEquiv_of_finiteModel
   · with_unfolding_all exact hforward
   · with_unfolding_all exact hinverse
 
-private def stageTensorTransition
+/-- The literal tensor transition between two finite fields containing the fixed base. -/
+def stageTensorTransition
     (F₀ : FiniteIntermediateFieldIndex k L)
     (E H : IntermediateField k L)
     (hE : FiniteDimensional k E) (hH : FiniteDimensional k H)
@@ -173,24 +168,6 @@ private def stageTensorTransition
     ⟨H,hH⟩ from hEH))
   let c := F.mapCocone (Over.forgetCocone iH)
   with_unfolding_all exact filteredTensorToColimitAlgHom c (Over.mk u) (A := B)
-
-private theorem stageTensorTransition_tmul
-    (F₀ : FiniteIntermediateFieldIndex k L)
-    (E H : IntermediateField k L)
-    (hE : FiniteDimensional k E) (hH : FiniteDimensional k H)
-    (hF₀E : F₀.val ≤ E) (hF₀H : F₀.val ≤ H) (hEH : E ≤ H)
-    (B : Type u) [CommRing B] [Algebra (R ⊗[k] F₀.val.toSubalgebra) B]
-    (x : R ⊗[k] E.toSubalgebra) (b : B) :
-    let : Algebra (R ⊗[k] F₀.val.toSubalgebra) (R ⊗[k] E.toSubalgebra) :=
-      stageAction k L R F₀.val E hF₀E
-    let : Algebra (R ⊗[k] F₀.val.toSubalgebra) (R ⊗[k] H.toSubalgebra) :=
-      stageAction k L R F₀.val H hF₀H
-    stageTensorTransition k L R F₀ E H hE hH hF₀E hF₀H hEH B
-        (x ⊗ₜ[R ⊗[k] F₀.val.toSubalgebra] b) =
-      Algebra.TensorProduct.map (R := k) (S := R) (AlgHom.id R R)
-          (Subalgebra.inclusion (show E.toSubalgebra ≤ H.toSubalgebra from hEH)) x
-          ⊗ₜ[R ⊗[k] F₀.val.toSubalgebra] b := by
-  rfl
 
 attribute [local instance] EtaleFundamentalGroups.underCommRingCatAlgebra
 

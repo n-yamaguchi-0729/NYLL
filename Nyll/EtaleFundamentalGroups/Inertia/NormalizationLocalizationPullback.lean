@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationLocalization
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationLocalization
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # The canonical normalization pullback for an affine localization
@@ -24,6 +26,8 @@ There are nine data instances: four commutative rings and the five displayed
 algebra edges. Every target has one owner; both compatible paths to `Bm` use
 the same `Algebra R Bm`. The localization and tower instances are propositions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

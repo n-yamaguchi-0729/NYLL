@@ -10,41 +10,45 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.JacobianVarieties.Picard.Deformation.NormCurveChangeDualNumberIsoUnit
-import Nyll.JacobianVarieties.Picard.Representability.PullbackOneIso
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.JacobianVarieties.Picard.Deformation.NormCurveChangeDualNumberIsoUnit
+public import Nyll.JacobianVarieties.Picard.Representability.PullbackOneIso
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
 
 /-! The norm map kills tangent points under the characteristic-rank hypothesis. -/
+
+@[expose] public section
 
 section ProofImplementation
 

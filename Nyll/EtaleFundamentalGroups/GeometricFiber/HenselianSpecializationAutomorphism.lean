@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
 
 /-!
 # Automorphism comparison under actual henselian specialization
@@ -14,6 +16,8 @@ over abstract rings and fields. Callers supply their proved ambient and
 native residue ring-map computations and their actual point-action laws.
 The resulting equality is between the actual fiber automorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,17 +44,17 @@ theorem henselianSpecializationFundamentalGroupEquiv_eq_of_point_actions
     (a : π₁ᵉᵗ(Spec.algebraMap H L))
     (b : π₁ᵉᵗ(Spec.algebraMap H (IsLocalRing.ResidueField R)))
     (ha : ∀ (X : FiniteEtale (Spec (.of H))) (x : (fiber (Spec.algebraMap H L)).obj X),
-      (fiberObjEquivHom (Spec.algebraMap H L) X (a.hom.app X x)).left =
+      (fiberObjEquivHom (Spec.algebraMap H L) X (a.asIso.hom.app X x)).left =
         Spec.map (CommRingCat.ofHom ρ) ≫
           (fiberObjEquivHom (Spec.algebraMap H L) X x).left)
     (hb : ∀ (X : FiniteEtale (Spec (.of H)))
       (x : (fiber (Spec.algebraMap H (IsLocalRing.ResidueField R))).obj X),
       (fiberObjEquivHom (Spec.algebraMap H (IsLocalRing.ResidueField R)) X
-        (b.hom.app X x)).left = Spec.map (CommRingCat.ofHom η) ≫
+        (b.asIso.hom.app X x)).left = Spec.map (CommRingCat.ofHom η) ≫
           (fiberObjEquivHom (Spec.algebraMap H (IsLocalRing.ResidueField R)) X x).left) :
     henselianSpecializationFundamentalGroupEquiv H R L a = b := by
   have ha' (X : FiniteEtale (Spec (.of H))) (x : (fiber (Spec.algebraMap H L)).obj X) :
-      (fiberObjEquivHom (Spec.algebraMap H L) X (a.hom.app X x)).left =
+      (fiberObjEquivHom (Spec.algebraMap H L) X (a.asIso.hom.app X x)).left =
         Spec.map (CommRingCat.ofHom σ.toRingHom) ≫
           (fiberObjEquivHom (Spec.algebraMap H L) X x).left :=
     (ha X x).trans (congrArg (fun r : L →+* L => Spec.map (CommRingCat.ofHom r) ≫

@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.Average
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.FixedField
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.Function
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.Quotient
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.Tower
-import Nyll.ValuedFieldTheory.Ramification.Herbrand.Bounds
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.DepthSum
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.Average
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.FixedField
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.Function
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.Quotient
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.Tower
+public import Nyll.ValuedFieldTheory.Ramification.Herbrand.Bounds
 
 /-!
 # Herbrand theory

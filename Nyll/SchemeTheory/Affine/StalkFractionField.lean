@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Actual affine-stalk fraction rings over the original scheme
@@ -18,6 +20,8 @@ Its inverse Spec map intertwines the original localization morphism with
 the actual scheme-stalk coordinates for generic fibres calculated in a
 prime-localization model. No ring map comparison is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

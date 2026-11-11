@@ -22,19 +22,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.AdicCompletion.Exactness
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.Finiteness.Cardinality
-import Mathlib.RingTheory.LocalRing.Quotient
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.MvPowerSeries.Inverse
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.AdicCompletion.Exactness
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.MvPowerSeries.Inverse
 
 /-!
 # Is Adic Complete of module finite
 -/
+
+@[expose] public section
 
 section IsAdicComplete_of_module_finite
 

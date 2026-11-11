@@ -10,11 +10,15 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Mem range algebra Map of is Algebraic
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

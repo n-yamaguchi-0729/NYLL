@@ -10,15 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackOpenCover
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
+module
+
+public import Mathlib.Util.WithWeakNamespace
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackOpenCover
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
 
 /-!
 # Triviality of rigidified line bundles on an open cover
@@ -26,6 +28,8 @@ import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBiject
 Pullback carries a trivialization to every member of an open cover. Conversely,
 the section comparison for the abelian scheme glues the local trivializations.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

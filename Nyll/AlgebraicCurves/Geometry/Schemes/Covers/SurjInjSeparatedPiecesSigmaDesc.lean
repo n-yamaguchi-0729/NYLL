@@ -10,26 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.FibreH0RankEqPullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.CoverFibreH0RankTensorPowEqEval
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.IsClopenPreimageSigmaInjUniqueLift
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.UniqueHomSigmaDisjointISupEqTop
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.IsZariskiLocalAtTargetSigmaMap
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.SeparatedSigmaDescSeparated
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.FibreH0RankEqPullback
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.CoverFibreH0RankTensorPowEqEval
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.IsClopenPreimageSigmaInjUniqueLift
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.UniqueHomSigmaDisjointISupEqTop
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.IsZariskiLocalAtTargetSigmaMap
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.SeparatedSigmaDescSeparated
 
 /-!
 # Gluing Hilbert polynomial pieces to a separated bijection
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -182,12 +188,13 @@ noncomputable section
 
 namespace H1SIC
 
-variable {S : Type} [CommRing S] {X : Scheme.{0}} (f : X ⟶ Spec (CommRingCat.of S)) (𝓛X : X.Modules)
+variable {S : Type u} [CommRing S] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of S))
+  (𝓛X : X.Modules)
 
 section Pow
 
-variable {S' : Type} [CommRing S'] {s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)} {Z :
-  Scheme.{0}}
+variable {S' : Type u} [CommRing S'] {s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)} {Z :
+  Scheme.{u}}
 
 /-- The tensor power of the line bundle pulled back to the family. -/
 abbrev Lpow (ι : Z ⟶ pullback f s) (d : ℕ) : Z.Modules :=
@@ -195,7 +202,7 @@ abbrev Lpow (ι : Z ⟶ pullback f s) (d : ℕ) : Z.Modules :=
     (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d
 
 /-- The dimension of global sections of the tensor power on a geometric fibre. -/
-abbrev hval (ι : Z ⟶ pullback f s) (k : Type) [Field k] (sk : S' →+* k) (d : ℕ) : ℕ :=
+abbrev hval (ι : Z ⟶ pullback f s) (k : Type u) [Field k] (sk : S' →+* k) (d : ℕ) : ℕ :=
   Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s) (Lpow f 𝓛X ι d) k sk
 
 /--
@@ -203,14 +210,15 @@ The polynomial agrees eventually with the dimensions of global sections on every
 fibre.
 -/
 def HP (ι : Z ⟶ pullback f s) (P : Polynomial ℚ) : Prop :=
-  ∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+  ∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
     ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
       (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
         (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk : ℕ) : ℚ) =
       P.eval (d : ℚ)
 
 theorem HP_iff (ι : Z ⟶ pullback f s) (P : Polynomial ℚ) :
-    HP f 𝓛X ι P ↔ ∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
+    HP f 𝓛X ι P ↔ ∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+      ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
       →
       ((hval f 𝓛X ι k sk d : ℕ) : ℚ) = P.eval (d : ℚ) := Iff.rfl
 
@@ -234,7 +242,7 @@ end Pow
 
 section BC
 
-variable {S' S'' : Type} [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
+variable {S' S'' : Type u} [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
   (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (s'' : Spec (CommRingCat.of S'') ⟶ Spec
     (CommRingCat.of S))
   (hs : Spec.map (CommRingCat.ofHom ψ) ≫ s = s'')
@@ -267,7 +275,7 @@ scoped instance isOpenImmersion_jmap [IsOpenImmersion (Spec.map (CommRingCat.ofH
   MorphismProperty.of_isPullback (isPullback_jmap f ψ s s'' hs).flip inferInstance
 
 omit hs in
-theorem range_eq_of_isPullback {P₀ X₀ Y₀ T₀ : Scheme.{0}} {a : P₀ ⟶ X₀} {b : P₀ ⟶ Y₀} {u : X₀ ⟶ T₀}
+theorem range_eq_of_isPullback {P₀ X₀ Y₀ T₀ : Scheme.{u}} {a : P₀ ⟶ X₀} {b : P₀ ⟶ Y₀} {u : X₀ ⟶ T₀}
   {v : Y₀ ⟶ T₀}
     (h : IsPullback a b u v) : Set.range a = u ⁻¹' Set.range v := by
   rw [← h.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
@@ -279,7 +287,7 @@ theorem opensRange_jmap [IsOpenImmersion (Spec.map (CommRingCat.ofHom ψ))] :
   apply TopologicalSpace.Opens.ext
   simpa using range_eq_of_isPullback (isPullback_jmap f ψ s s'' hs)
 
-variable {Z Z'' : Scheme.{0}} (ι : Z ⟶ pullback f s) (ι'' : Z'' ⟶ pullback f s'') (e : Z'' ⟶ Z)
+variable {Z Z'' : Scheme.{u}} (ι : Z ⟶ pullback f s) (ι'' : Z'' ⟶ pullback f s'') (e : Z'' ⟶ Z)
 
 /-- The isomorphism on tensor powers associated with a commuting base-change diagram. -/
 def powIsoOfComm (hcomm : ι'' ≫ jmap f ψ s s'' hs = e ≫ ι) :
@@ -294,7 +302,7 @@ def powIsoOfComm (hcomm : ι'' ≫ jmap f ψ s s'' hs = e ≫ ι) :
 theorem hval_eq_of_isPullback
     (hpb : IsPullback e (ι'' ≫ pullback.snd f s'') (ι ≫ pullback.snd f s) (Spec.map
       (CommRingCat.ofHom ψ)))
-    (hcomm : ι'' ≫ jmap f ψ s s'' hs = e ≫ ι) (k : Type) [Field k] (sk : S'' →+* k) (d : ℕ) :
+    (hcomm : ι'' ≫ jmap f ψ s s'' hs = e ≫ ι) (k : Type u) [Field k] (sk : S'' →+* k) (d : ℕ) :
     hval f 𝓛X ι'' k sk d = hval f 𝓛X ι k (sk.comp ψ) d :=
   AlgebraicGeometry.Scheme.Modules.geomFibreH0Finrank_eq_of_isPullback ψ (ι ≫ pullback.snd f s)
     (ι'' ≫ pullback.snd f s'') e hpb (Lpow f 𝓛X ι d) (Lpow f 𝓛X ι'' d) (powIsoOfComm f 𝓛X ψ s s''
@@ -312,7 +320,7 @@ theorem HP_of_isPullback
     by rw [hval_eq_of_isPullback f 𝓛X ψ s s'' hs ι ι'' e hpb hcomm]; exact hd d hdd⟩
 
 /-- The pullback of the closed family along the change-of-base morphism. -/
-abbrev bcObj : Scheme.{0} := pullback ι (jmap f ψ s s'' hs)
+abbrev bcObj : Scheme.{u} := pullback ι (jmap f ψ s s'' hs)
 
 /-- The closed-family morphism on the changed base, given by the second pullback projection. -/
 abbrev bcι : bcObj f ψ s s'' hs ι ⟶ pullback f s'' := pullback.snd ι (jmap f ψ s s'' hs)
@@ -383,7 +391,8 @@ noncomputable section
 
 namespace H1SIC
 
-variable {S : Type} [CommRing S] {X : Scheme.{0}} (f : X ⟶ Spec (CommRingCat.of S)) (𝓛X : X.Modules)
+variable {S : Type u} [CommRing S] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of S))
+  (𝓛X : X.Modules)
 
 /--
 A family of representing schemes indexed by Hilbert polynomials, with compatible maps into their
@@ -391,15 +400,15 @@ disjoint union.
 -/
 structure Fam where
   /-- The representing scheme indexed by each Hilbert polynomial. -/
-  C : Polynomial ℚ → Scheme.{0}
+  C : Polynomial ℚ → Scheme.{u}
   /-- The structure morphism of each polynomial-indexed representing scheme. -/
   πC : ∀ P : Polynomial ℚ, C P ⟶ Spec (CommRingCat.of S)
   /-- The point classifying a closed flat family with the specified Hilbert polynomial. -/
-  ptC : ∀ (P : Polynomial ℚ) (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
+  ptC : ∀ (P : Polynomial ℚ) (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
     (CommRingCat.of S))
-        (Z : Scheme.{0}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
+        (Z : Scheme.{u}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
           LocallyOfFinitePresentation (ι ≫ pullback.snd f s) →
-          (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+          (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                 (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk :
@@ -408,24 +417,25 @@ structure Fam where
           SchemeHomOver s (πC P)
   /-- The classifying points for a fixed polynomial commute with base change. -/
   natC : ∀ (P : Polynomial ℚ),
-      (∀ (S' S'' : Type) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
+      (∀ (S' S'' : Type u) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
           (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (s'' : Spec (CommRingCat.of S'')
             ⟶ Spec (CommRingCat.of S))
           (hs : Spec.map (CommRingCat.ofHom ψ) ≫ s = s'')
-          (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+          (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
             pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-          (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
+          (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+            ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
             →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                 (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk :
                   ℕ) : ℚ) =
               P.eval (d : ℚ)))
-          (Z'' : Scheme.{0}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
+          (Z'' : Scheme.{u}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
             Flat (ι'' ≫ pullback.snd f s''))
           (hfp'' : LocallyOfFinitePresentation (ι'' ≫ pullback.snd f s''))
-          (hHP'' : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S'' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀
+          (hHP'' : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S'' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀
             ≤ d →
             ((Scheme.Modules.geomFibreH0Finrank (ι'' ≫ pullback.snd f s'')
               (Nat.rec (motive := fun _ => Z''.Modules) (𝟙_ Z''.Modules)
@@ -441,12 +451,13 @@ structure Fam where
             P S' s Z ι hι hfl hfp hHP).1)
   /-- Every point of a polynomial-indexed component is represented by a closed flat family. -/
   surjC : ∀ (P : Polynomial ℚ),
-      (∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (x :
+      (∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (x :
         SchemeHomOver s (πC P)),
-        ∃ (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+        ∃ (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
           pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-          (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
+          (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+            ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
             →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
@@ -456,20 +467,21 @@ structure Fam where
           ptC P S' s Z ι hι hfl hfp hHP = x)
   /-- Families with equal classifying points are isomorphic over the ambient scheme. -/
   injC : ∀ (P : Polynomial ℚ),
-      (∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-          (Z Z' : Scheme.{0}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
+      (∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+          (Z Z' : Scheme.{u}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
           (hι : IsClosedImmersion ι) (hι' : IsClosedImmersion ι')
           (hfl : Flat (ι ≫ pullback.snd f s)) (hfl' : Flat (ι' ≫ pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)) (hfp' :
             LocallyOfFinitePresentation (ι' ≫ pullback.snd f s))
-          (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
+          (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+            ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
             →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                 (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk :
                   ℕ) : ℚ) =
               P.eval (d : ℚ)))
-          (hHP' : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
+          (hHP' : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
             d →
             ((Scheme.Modules.geomFibreH0Finrank (ι' ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z'.Modules) (𝟙_ Z'.Modules)
@@ -483,19 +495,19 @@ structure Fam where
   /-- Each polynomial-indexed representing scheme is locally of finite presentation. -/
   lfpC : ∀ P : Polynomial ℚ, LocallyOfFinitePresentation (πC P)
   /-- The point of the disjoint union assigned to an arbitrary closed flat family. -/
-  pt : ∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-        (Z : Scheme.{0}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
+  pt : ∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+        (Z : Scheme.{u}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
           LocallyOfFinitePresentation (ι ≫ pullback.snd f s) → SchemeHomOver s (Sigma.desc πC)
   /-- The disjoint-union classifying points commute with base change. -/
   nat :
-      (∀ (S' S'' : Type) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
+      (∀ (S' S'' : Type u) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
           (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (s'' : Spec (CommRingCat.of S'')
             ⟶ Spec (CommRingCat.of S))
           (hs : Spec.map (CommRingCat.ofHom ψ) ≫ s = s'')
-          (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+          (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
             pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-          (Z'' : Scheme.{0}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
+          (Z'' : Scheme.{u}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
             Flat (ι'' ≫ pullback.snd f s''))
           (hfp'' : LocallyOfFinitePresentation (ι'' ≫ pullback.snd f s''))
           (e : Z'' ⟶ Z),
@@ -507,12 +519,13 @@ structure Fam where
             hι hfl hfp).1)
   /-- For a fixed Hilbert polynomial, the classifying point factors through its component. -/
   const :
-      (∀ (P : Polynomial ℚ) (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
+      (∀ (P : Polynomial ℚ) (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
         (CommRingCat.of S))
-          (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+          (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
             pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-          (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
+          (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+            ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d
             →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
@@ -539,11 +552,11 @@ variable (hX₁ : Scheme.Modules.IsInvertible 𝓛X) (hX₂ : Scheme.Modules.Clo
 
 include hX₁ hX₂ in
 theorem eventually_eq_of_range_subset
-    {S' : Type} [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-    (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+    {S' : Type u} [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+    (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
       pullback.snd f s))
     (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-    (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k) (P : Polynomial ℚ)
+    (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k) (P : Polynomial ℚ)
     (hmem : Set.range ⇑(Spec.map (CommRingCat.ofHom sk) ≫ (F.pt S' s Z ι hι hfl hfp).1) ⊆
       ((Sigma.ι F.C P).opensRange : Set ↥(∐ F.C))) :
     ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d → ((hval f 𝓛X ι k sk d : ℕ) : ℚ) = P.eval (d : ℚ) := by
@@ -561,7 +574,7 @@ theorem eventually_eq_of_range_subset
   obtain ⟨j, hj⟩ := hj
   obtain ⟨d₁, hd₁⟩ := hloc j k sk hj
   suffices hPP : P = Pj j by subst hPP; exact ⟨d₁, hd₁⟩
-  let A : Type := Localization.Away (r j)
+  let A : Type u := Localization.Away (r j)
   let ψ : S' →+* A := algebraMap S' A
   have := hι; have := hfl; have := hfp
   have hHPj : HP f 𝓛X (bcι f ψ s _ rfl ι) (Pj j) := by
@@ -597,12 +610,12 @@ theorem eventually_eq_of_range_subset
 include hX₁ hX₂ in
 theorem pieces (Pℚ : Polynomial ℚ) :
     ∃ U : (∐ F.C).Opens, IsClosed (U : Set ↥(∐ F.C)) ∧ QuasiCompact (U.ι ≫ (Sigma.desc F.πC)) ∧
-      ∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-        (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+      ∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+        (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
           pullback.snd f s))
         (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)),
         (Set.range (F.pt S' s Z ι hι hfl hfp).1.base ⊆ (U : Set ↥(∐ F.C)) ↔
-          ∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+          ∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                 (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk :
@@ -689,12 +702,12 @@ namespace H1SIC
 
 namespace Fam
 
-variable {S : Type} [CommRing S] {X : Scheme.{0}} {f : X ⟶ Spec (CommRingCat.of S)} {𝓛X :
+variable {S : Type u} [CommRing S] {X : Scheme.{u}} {f : X ⟶ Spec (CommRingCat.of S)} {𝓛X :
   X.Modules} (F : Fam f 𝓛X)
 
 section Partition
 
-variable {S' : Type} [CommRing S'] (u : Spec (CommRingCat.of S') ⟶ ∐ F.C)
+variable {S' : Type u} [CommRing S'] (u : Spec (CommRingCat.of S') ⟶ ∐ F.C)
 
 /-- The inverse-image open of the component indexed by the polynomial. -/
 abbrev T (P : Polynomial ℚ) : (Spec (CommRingCat.of S')).Opens := u ⁻¹ᵁ (Sigma.ι F.C P).opensRange
@@ -734,7 +747,7 @@ theorem coe_T_eq (P : Polynomial ℚ) :
   (F.exists_idem u P).choose_spec.2
 
 /-- The localization at the idempotent selecting the polynomial-indexed component. -/
-abbrev A (P : Polynomial ℚ) : Type := Localization.Away (F.idem u P)
+abbrev A (P : Polynomial ℚ) : Type u := Localization.Away (F.idem u P)
 
 /-- The localization homomorphism for the polynomial-indexed component. -/
 abbrev ψ (P : Polynomial ℚ) : S' →+* F.A u P := algebraMap S' (F.A u P)
@@ -793,10 +806,10 @@ theorem nonempty_isColimit_jP : Nonempty (IsColimit (Cofan.mk (pullback f s) (F.
     rw [opensRange_jP, opensRange_jP, disjoint_iff, ← Scheme.Hom.preimage_inf, disjoint_iff.mp
       (F.disjoint_T u P Q h), Scheme.Hom.preimage_bot]
 
-variable {Z : Scheme.{0}} (ι : Z ⟶ pullback f s)
+variable {Z : Scheme.{u}} (ι : Z ⟶ pullback f s)
 
 /-- The family restricted by base change to the polynomial-indexed open. -/
-abbrev ZP (P : Polynomial ℚ) : Scheme.{0} := bcObj f (F.ψ u P) s (F.sP u s P) rfl ι
+abbrev ZP (P : Polynomial ℚ) : Scheme.{u} := bcObj f (F.ψ u P) s (F.sP u s P) rfl ι
 
 /-- The closed-family morphism after restriction to the polynomial-indexed open. -/
 abbrev ιP (P : Polynomial ℚ) : F.ZP u s ι P ⟶ pullback f (F.sP u s P) := bcι f (F.ψ u P) s (F.sP u
@@ -886,15 +899,15 @@ namespace H1SIC
 
 namespace Fam
 
-variable {S : Type} [CommRing S] {X : Scheme.{0}} {f : X ⟶ Spec (CommRingCat.of S)} {𝓛X :
+variable {S : Type u} [CommRing S] {X : Scheme.{u}} {f : X ⟶ Spec (CommRingCat.of S)} {𝓛X :
   X.Modules} (F : Fam f 𝓛X)
 
 section Surj
 
-variable {S' : Type} [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+variable {S' : Type u} [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
 
 theorem isPullback_sigmaι_of_desc (u : Spec (CommRingCat.of S') ⟶ ∐ F.C)
-    (Zf : Polynomial ℚ → Scheme.{0}) (ιf : ∀ P, Zf P ⟶ pullback f (F.sP u s P))
+    (Zf : Polynomial ℚ → Scheme.{u}) (ιf : ∀ P, Zf P ⟶ pullback f (F.sP u s P))
     (ι : (∐ Zf) ⟶ pullback f s) (hι : ∀ P, Sigma.ι Zf P ≫ ι = ιf P ≫ F.jP u s P) (P : Polynomial ℚ)
       :
     IsPullback (Sigma.ι Zf P) (ιf P ≫ pullback.snd f (F.sP u s P)) (ι ≫ pullback.snd f s)
@@ -924,7 +937,7 @@ theorem isPullback_sigmaι_of_desc (u : Spec (CommRingCat.of S') ⟶ ∐ F.C)
     exact ⟨_, rfl⟩
 
 theorem surj (x : SchemeHomOver s (Sigma.desc F.πC)) :
-    ∃ (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+    ∃ (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
       pullback.snd f s))
       (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)), F.pt S' s Z ι hι hfl hfp = x := by
   obtain ⟨-, -, -, hlift, -⟩ :=
@@ -962,13 +975,13 @@ theorem surj (x : SchemeHomOver s (Sigma.desc F.πC)) :
     intro P
     rw [Sigma.ι_comp_desc, ← Category.assoc, hιι, Category.assoc, jmap_snd, Category.assoc]
   have hιfl : Flat (ι ≫ pullback.snd f s) := by
-    have : IsZariskiLocalAtSource (@Flat.{0}) :=
+    have : IsZariskiLocalAtSource (@Flat.{u}) :=
       HasRingHomProperty.instIsZariskiLocalAtSource (P := @Flat) (Q := RingHom.Flat)
     rw [hcomp]
     have := hflf
     exact IsZariskiLocalAtSource.sigmaDesc (P := @Flat) (fun P => inferInstance)
   have hιfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s) := by
-    have : IsZariskiLocalAtSource (@LocallyOfFinitePresentation.{0}) :=
+    have : IsZariskiLocalAtSource (@LocallyOfFinitePresentation.{u}) :=
       HasRingHomProperty.instIsZariskiLocalAtSource
         (P := @LocallyOfFinitePresentation) (Q := RingHom.FinitePresentation)
     rw [hcomp]
@@ -1060,18 +1073,18 @@ namespace H1SIC
 
 namespace Fam
 
-variable {S : Type} [CommRing S] {X : Scheme.{0}} {f : X ⟶ Spec (CommRingCat.of S)} {𝓛X :
+variable {S : Type u} [CommRing S] {X : Scheme.{u}} {f : X ⟶ Spec (CommRingCat.of S)} {𝓛X :
   X.Modules} (F : Fam f 𝓛X)
 
 section Inj
 
 variable (hX₁ : Scheme.Modules.IsInvertible 𝓛X) (hX₂ : Scheme.Modules.ClosedImmersionBySections 𝓛X
   f)
-  {S' : Type} [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+  {S' : Type u} [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
 
 include hX₁ hX₂ in
 theorem HP_piece (u : Spec (CommRingCat.of S') ⟶ ∐ F.C)
-    (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+    (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
       pullback.snd f s))
     (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)) (hu : (F.pt S' s Z ι hι hfl hfp).1 =
       u)
@@ -1094,7 +1107,7 @@ theorem HP_piece (u : Spec (CommRingCat.of S') ⟶ ∐ F.C)
       (bc_comm f (F.ψ u P) s _ rfl ι)]
     exact hd d hdd⟩
 include hX₁ hX₂ in
-theorem inj (Z Z' : Scheme.{0}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
+theorem inj (Z Z' : Scheme.{u}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
     (hι : IsClosedImmersion ι) (hι' : IsClosedImmersion ι')
     (hfl : Flat (ι ≫ pullback.snd f s)) (hfl' : Flat (ι' ≫ pullback.snd f s))
     (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)) (hfp' : LocallyOfFinitePresentation
@@ -1203,16 +1216,16 @@ attribute [local instance]
 
 
 theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hilbertPolynomial
-    (S : Type) [CommRing S] {X : Scheme.{0}} (f : X ⟶ Spec (CommRingCat.of S))
+    (S : Type u) [CommRing S] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of S))
     [Flat f] [LocallyOfFinitePresentation f]
     (𝓛X : X.Modules) (hX₁ : Scheme.Modules.IsInvertible 𝓛X) (hX₂ :
       Scheme.Modules.ClosedImmersionBySections 𝓛X f)
-    (C : Polynomial ℚ → Scheme.{0}) (πC : ∀ P : Polynomial ℚ, C P ⟶ Spec (CommRingCat.of S))
-    (ptC : ∀ (P : Polynomial ℚ) (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
+    (C : Polynomial ℚ → Scheme.{u}) (πC : ∀ P : Polynomial ℚ, C P ⟶ Spec (CommRingCat.of S))
+    (ptC : ∀ (P : Polynomial ℚ) (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
       (CommRingCat.of S))
-        (Z : Scheme.{0}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
+        (Z : Scheme.{u}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
           LocallyOfFinitePresentation (ι ≫ pullback.snd f s) →
-          (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+          (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
             ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
               (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                 (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk :
@@ -1220,24 +1233,25 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
               P.eval (d : ℚ)) →
           SchemeHomOver s (πC P))
     (hnatC : ∀ (P : Polynomial ℚ),
-        (∀ (S' S'' : Type) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
+        (∀ (S' S'' : Type u) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
             (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (s'' : Spec (CommRingCat.of
               S'') ⟶ Spec (CommRingCat.of S))
             (hs : Spec.map (CommRingCat.ofHom ψ) ≫ s = s'')
-            (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+            (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
               pullback.snd f s))
             (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-            (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
+            (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+              ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
               d →
               ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
                 (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                   (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk
                     : ℕ) : ℚ) =
                 P.eval (d : ℚ)))
-            (Z'' : Scheme.{0}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
+            (Z'' : Scheme.{u}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
               Flat (ι'' ≫ pullback.snd f s''))
             (hfp'' : LocallyOfFinitePresentation (ι'' ≫ pullback.snd f s''))
-            (hHP'' : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S'' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ,
+            (hHP'' : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S'' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ,
               d₀ ≤ d →
               ((Scheme.Modules.geomFibreH0Finrank (ι'' ≫ pullback.snd f s'')
                 (Nat.rec (motive := fun _ => Z''.Modules) (𝟙_ Z''.Modules)
@@ -1253,12 +1267,13 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
             (ptC P S'' s'' Z'' ι'' hι'' hfl'' hfp'' hHP'').1 = Spec.map (CommRingCat.ofHom ψ) ≫
               (ptC P S' s Z ι hι hfl hfp hHP).1))
     (hsurjC : ∀ (P : Polynomial ℚ),
-        (∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (x :
+        (∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (x :
           SchemeHomOver s (πC P)),
-          ∃ (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+          ∃ (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
             pullback.snd f s))
             (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-            (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
+            (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+              ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
               d →
               ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
                 (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
@@ -1267,20 +1282,21 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
                 P.eval (d : ℚ))),
             ptC P S' s Z ι hι hfl hfp hHP = x))
     (hinjC : ∀ (P : Polynomial ℚ),
-        (∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-            (Z Z' : Scheme.{0}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
+        (∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+            (Z Z' : Scheme.{u}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
             (hι : IsClosedImmersion ι) (hι' : IsClosedImmersion ι')
             (hfl : Flat (ι ≫ pullback.snd f s)) (hfl' : Flat (ι' ≫ pullback.snd f s))
             (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)) (hfp' :
               LocallyOfFinitePresentation (ι' ≫ pullback.snd f s))
-            (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
+            (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+              ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
               d →
               ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
                 (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                   (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk
                     : ℕ) : ℚ) =
                 P.eval (d : ℚ)))
-            (hHP' : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀
+            (hHP' : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀
               ≤ d →
               ((Scheme.Modules.geomFibreH0Finrank (ι' ≫ pullback.snd f s)
                 (Nat.rec (motive := fun _ => Z'.Modules) (𝟙_ Z'.Modules)
@@ -1291,18 +1307,18 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
             ≫ ι' = ι))
     (hproperC : ∀ P : Polynomial ℚ, IsProper (πC P)) (hlfpC : ∀ P : Polynomial ℚ,
       LocallyOfFinitePresentation (πC P))
-    (pt : ∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-        (Z : Scheme.{0}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
+    (pt : ∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+        (Z : Scheme.{u}) (ι : Z ⟶ pullback f s), IsClosedImmersion ι → Flat (ι ≫ pullback.snd f s) →
           LocallyOfFinitePresentation (ι ≫ pullback.snd f s) → SchemeHomOver s (Sigma.desc πC))
     (hnat :
-        (∀ (S' S'' : Type) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
+        (∀ (S' S'' : Type u) [CommRing S'] [CommRing S''] (ψ : S' →+* S'')
             (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (s'' : Spec (CommRingCat.of
               S'') ⟶ Spec (CommRingCat.of S))
             (hs : Spec.map (CommRingCat.ofHom ψ) ≫ s = s'')
-            (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+            (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
               pullback.snd f s))
             (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-            (Z'' : Scheme.{0}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
+            (Z'' : Scheme.{u}) (ι'' : Z'' ⟶ pullback f s'') (hι'' : IsClosedImmersion ι'') (hfl'' :
               Flat (ι'' ≫ pullback.snd f s''))
             (hfp'' : LocallyOfFinitePresentation (ι'' ≫ pullback.snd f s''))
             (e : Z'' ⟶ Z),
@@ -1314,12 +1330,13 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
             (pt S'' s'' Z'' ι'' hι'' hfl'' hfp'').1 = Spec.map (CommRingCat.ofHom ψ) ≫ (pt S' s Z ι
               hι hfl hfp).1))
     (hconst :
-        (∀ (P : Polynomial ℚ) (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
+        (∀ (P : Polynomial ℚ) (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec
           (CommRingCat.of S))
-            (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+            (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
               pullback.snd f s))
             (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s))
-            (hHP : (∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
+            (hHP : (∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k),
+              ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤
               d →
               ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
                 (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
@@ -1327,14 +1344,14 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
                     : ℕ) : ℚ) =
                 P.eval (d : ℚ))),
           (pt S' s Z ι hι hfl hfp).1 = (ptC P S' s Z ι hι hfl hfp hHP).1 ≫ Sigma.ι C P)) :
-      (∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (x :
+      (∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S)) (x :
         SchemeHomOver s (Sigma.desc πC)),
-        ∃ (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+        ∃ (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
           pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)),
           pt S' s Z ι hι hfl hfp = x) ∧
-      (∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-          (Z Z' : Scheme.{0}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
+      (∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+          (Z Z' : Scheme.{u}) (ι : Z ⟶ pullback f s) (ι' : Z' ⟶ pullback f s)
           (hι : IsClosedImmersion ι) (hι' : IsClosedImmersion ι')
           (hfl : Flat (ι ≫ pullback.snd f s)) (hfl' : Flat (ι' ≫ pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)) (hfp' :
@@ -1343,12 +1360,12 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
       IsSeparated (Sigma.desc πC) ∧ LocallyOfFinitePresentation (Sigma.desc πC) ∧
       (∀ Pℚ : Polynomial ℚ, ∃ U : (∐ C).Opens, IsClosed (U : Set ↥(∐ C)) ∧ QuasiCompact (U.ι ≫
         (Sigma.desc πC)) ∧
-        ∀ (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
-          (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+        ∀ (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+          (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
             pullback.snd f s))
           (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)),
           (Set.range (pt S' s Z ι hι hfl hfp).1.base ⊆ (U : Set ↥(∐ C)) ↔
-            ∀ (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
+            ∀ (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
               ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
                 (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
                   (fun _ M => M ⊗ (Scheme.Modules.pullback (ι ≫ pullback.fst f s)).obj 𝓛X) d) k sk
@@ -1362,7 +1379,7 @@ theorem _root_.AlgebraicGeometry.surj_inj_isSeparated_sigmaDesc_of_represents_hi
   · have := hproperC
     exact AlgebraicGeometry.isSeparated_sigmaDesc_of_forall_isSeparated C πC (fun P =>
       inferInstance)
-  · have : IsZariskiLocalAtSource (@LocallyOfFinitePresentation.{0}) :=
+  · have : IsZariskiLocalAtSource (@LocallyOfFinitePresentation.{u}) :=
       HasRingHomProperty.instIsZariskiLocalAtSource
         (P := @LocallyOfFinitePresentation) (Q := RingHom.FinitePresentation)
     exact IsZariskiLocalAtSource.sigmaDesc (P := @LocallyOfFinitePresentation) hlfpC

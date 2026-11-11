@@ -4,9 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Field
+module
+
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Field
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFields
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
 
 /-!
 # The normalization prime in the localized inertia field
@@ -16,6 +22,8 @@ localized form to the normalization in the corresponding inertia fixed field.
 The construction is canonical and remains in the general integral-closure
 setting, without specializing the fields to number fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,8 +64,7 @@ noncomputable def localizedInertiaFieldIntegralClosureAlgHom
     letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
     integralClosure V F →ₐ[V] integralClosure V L := by
-  let V := Localization.AtPrime P
-  let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
+  intro V F
   letI : Algebra V K :=
     localizationAtPrimeToFractionFieldAlgebra (K := K) P
   letI : Algebra V L :=
@@ -99,8 +106,7 @@ noncomputable def localizedNormalizationInertiaFieldPrime
     letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
     letI := localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
     Ideal (integralClosure V F) := by
-  let V := Localization.AtPrime P
-  let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
+  intro V F
   letI : Algebra V K :=
     localizationAtPrimeToFractionFieldAlgebra (K := K) P
   letI : Algebra V L :=
@@ -180,7 +186,7 @@ theorem localizedNormalizationInertiaFieldPrime_liesOver
     (localizedNormalizationInertiaFieldPrime
       (K := K) (L := L) P Q).LiesOver
         (IsLocalRing.maximalIdeal V) := by
-  let V := Localization.AtPrime P
+  intro V
   let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
   let : Algebra V K :=
     localizationAtPrimeToFractionFieldAlgebra (K := K) P
@@ -427,8 +433,9 @@ theorem localizedNormalizationInertiaFieldPrime_ramificationIdx_eq_one
       Qlocal.ramificationIdx V =
         q.ramificationIdx V * Qlocal.ramificationIdx T :=
     Ideal.ramificationIdx_tower (R := V) q Qlocal
-  have hbase0 : Qlocal.ramificationIdx V ≠ 0 :=
-    (Ideal.ramificationIdx_pos Qlocal V).ne'
+  have hbase0 : Qlocal.ramificationIdx V ≠ 0 := by
+    rw [← hbase]
+    exact (Nat.card_pos (α := I)).ne'
   have hrelative0 : Qlocal.ramificationIdx T ≠ 0 := heq ▸ hbase0
   apply Eq.symm
   apply Nat.mul_right_cancel (Nat.pos_of_ne_zero hrelative0)
@@ -451,7 +458,7 @@ theorem localizedNormalizationInertiaFieldPrime_isUnramifiedAt
     Algebra.IsUnramifiedAt V
       (localizedNormalizationInertiaFieldPrime
         (K := K) (L := L) P Q) := by
-  let V := Localization.AtPrime P
+  intro V
   let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
   let : Algebra V K :=
     localizationAtPrimeToFractionFieldAlgebra (K := K) P

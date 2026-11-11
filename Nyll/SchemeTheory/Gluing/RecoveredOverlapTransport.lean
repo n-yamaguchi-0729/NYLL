@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RecoveredChartTransport
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.SchemeTheory.Gluing.RecoveredChartTransport
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Transport of actual recovered overlap squares
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 The actual overlap isomorphism and its compatibility with the functor
 comparison transport both projections of the recovered cartesian square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

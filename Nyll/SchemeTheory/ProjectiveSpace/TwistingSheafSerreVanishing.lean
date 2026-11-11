@@ -4,47 +4,49 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCechComparison
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPositiveVanishing
-import Nyll.SchemeTheory.Cohomology.Cech.FiniteFreeTensorVanishing
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
-import Nyll.SchemeTheory.Cohomology.Sheaves.AffineExactSequenceSections
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafAffSES
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.InvertibleExactness
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Homology.ShortComplex.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Abelian.Exact
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Lean.Elab.Tactic.Omega
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCechComparison
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPositiveVanishing
+public import Nyll.SchemeTheory.Cohomology.Cech.FiniteFreeTensorVanishing
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
+public import Nyll.SchemeTheory.Cohomology.Sheaves.AffineExactSequenceSections
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafAffSES
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.InvertibleExactness
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Homology.ShortComplex.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Serre vanishing for actual coherent module sheaves on projective space
@@ -61,6 +63,8 @@ all positive cohomology groups. Every input in this induction is supplied
 by the native twisting sheaf and its constructed sections; no graded
 presentation or comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

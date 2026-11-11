@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildConjugate
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaDecomposition
-import Mathlib.Algebra.Group.Subgroup.Map
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildConjugate
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaDecomposition
+public import Mathlib.Algebra.Group.Subgroup.Map
 
 /-!
 # The SAME wild subgroup is normal in original decomposition
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Group.Subgroup.Map
 The independent subgroup is included by the actual I-to-D inclusion.
 Its proved stability under original conjugation yields normality in D.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

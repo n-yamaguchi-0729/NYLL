@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.Ramification.NatCardAlgHomComapEqRamificationIdxMulInertiaDeg
-import Nyll.SchemeTheory.RingTheory.Dimension.LocalLengthRamificationFormula
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Ramification.NatCardAlgHomComapEqRamificationIdxMulInertiaDeg
+public import Nyll.SchemeTheory.RingTheory.Dimension.LocalLengthRamificationFormula
 
 /-!
 # Is Local Ring finite and nat Card ring Hom valuation Subring eq length quotient map
 maximal Ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -122,7 +126,7 @@ theorem
         exact hextE φ d
       right_inv := fun σ => by
         apply Subtype.ext
-        apply AlgHom.coe_ringHom_injective
+        apply AlgHom.toRingHom_injective
         apply IsFractionRing.ringHom_ext (A := D) (K := κ)
         intro d
         rw [hextE (resT σ), hres_apply]

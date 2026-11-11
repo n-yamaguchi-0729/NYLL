@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Topology.Maps.Basic
-import Mathlib.Topology.Sets.Opens
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.Topology.Maps.Basic
+public import Mathlib.Topology.Sets.Opens
 
 /-!
 # Descent of open subsets under an fpqc morphism
@@ -18,6 +20,8 @@ set is the literal image. Scheme-theoretic fibre-product points prove its
 saturation, and the quotient topology of a faithfully flat quasi-compact
 morphism proves that this image is open.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Continuous.TopRep
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
+module
+
+public import Mathlib.RepresentationTheory.Continuous.TopRep
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
 
 /-!
 # Invariant coefficient subrepresentations with inherited topology
@@ -14,6 +16,8 @@ The algebraic action is Mathlib's existing subrepresentation. Continuous
 linear restriction gives its inherited topology and the actual inclusion
 into the original topological representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v

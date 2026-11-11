@@ -10,21 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Differentials.Kaehler.Weil
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.Differentials.Residues.Construction
-import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremPerfectField
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
-import Nyll.AlgebraicCurves.Divisors.Principal.InstHasCanonicalDivisorRatFuncPerfectField
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.Weil
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.Differentials.Residues.Construction
+public import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremPerfectField
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
+public import Nyll.AlgebraicCurves.Divisors.Principal.InstHasCanonicalDivisorRatFuncPerfectField
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Residue Theorem function Field of smooth Of Relative Dimension one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -121,13 +127,12 @@ end FFP
 theorem _root_.AlgebraicCurve.residueTheorem_functionField_of_smoothOfRelativeDimension_one
     {k : Type u} [Field k] [PerfectField k] {X : Scheme.{u}}
     (c : X ⟶ Spec (CommRingCat.of k)) [IsIntegral X] [SmoothOfRelativeDimension 1 c] :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     ∀ [AlgebraicCurve.IsCurveOver k X.functionField]
       [∀ v : AlgebraicCurve.Place k X.functionField, v.DCoordGenerates]
       [AlgebraicCurve.HasCanonicalDivisor (K := k) (F := X.functionField)],
       AlgebraicCurve.ResidueTheorem k X.functionField := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
-  intro _ _ _
+  intro sharedOwner1 _ _ _
   have : Smooth c := SmoothOfRelativeDimension.smooth 1 c
   have : Algebra.EssFiniteType k X.functionField := AlgebraicCurve.essFiniteType_functionField c
   exact @FFP.residueTheorem_of_isCurveOver k X.functionField _ _ _ _ _ _ _ _

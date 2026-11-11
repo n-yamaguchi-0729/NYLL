@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regular source stalks of a smooth morphism over a regular affine base
@@ -23,6 +25,8 @@ The result applies after any DVR extension in the normalized-base-change
 argument of Stacks Project, Proposition 58.30.2.
 https://stacks.math.columbia.edu/tag/0C0Q
 -/
+
+@[expose] public section
 
 noncomputable section
 

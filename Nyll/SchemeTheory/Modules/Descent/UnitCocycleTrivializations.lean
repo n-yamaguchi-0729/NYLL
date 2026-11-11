@@ -46,16 +46,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Modules.Frames.IsoAppEqIsFrameOn
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Modules.Frames.IsoAppEqIsFrameOn
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
 
 /-!
 # Scheme Modules exists unit Cocycle map eq smul of is Frame On
 -/
+
+@[expose] public section
 
 section exists_unitCocycle_map_eq_smul_of_isFrameOn
 
@@ -230,19 +235,10 @@ theorem map_refl {A : X.Opens} (m : Γ(M, A)) : M.presheaf.map (homOfLE (le_refl
   rw [Subsingleton.elim (homOfLE (le_refl A)) (𝟙 A), op_id, M.presheaf.map_id]; rfl
 
 theorem isFrameOn_unit_smul_map {A W : X.Opens} (hW : W ≤ A) {s : Γ(M, A)} (hs : IsFrameOn s A)
-    (g : Γ(X, W)) (hg : IsUnit g) : IsFrameOn (g • M.presheaf.map (homOfLE hW).op s) W := by
-  intro W' hW'W _
-  have hg' : IsUnit (X.presheaf.map (homOfLE hW'W).op g) := hg.map _
-  obtain ⟨v, hv⟩ := hg'
-  have hb := hs (hW'W.trans hW) (hW'W.trans hW)
-  have hcomp : (fun a : Γ(X, W') => a • M.presheaf.map (homOfLE hW'W).op (g • M.presheaf.map
-    (homOfLE hW).op s)) =
-      (fun a : Γ(X, W') => a • M.presheaf.map (homOfLE (hW'W.trans hW)).op s) ∘ (fun a => a * ↑v)
-        := by
-    funext a
-    simp only [Function.comp_apply, map_smul', map_map, ← hv, smul_smul]
-  rw [hcomp]
-  exact hb.comp (Units.mulRight_bijective v)
+    (g : Γ(X, W)) (hg : IsUnit g) : IsFrameOn (g • M.presheaf.map (homOfLE hW).op s) W :=
+  open AlgebraicCurves.Geometry.Sheaves.Proofs in
+  open Scheme_Modules_IsFrameOn_exists_isUnit_map_eq_mul_of_iso_tensorUnit.TwoChartCocycle in
+  isFrameOn_unit_smul ((hs.map (homOfLE hW)).mono hW) g hg
 
 end AlgebraicGeometry.Scheme.Modules.GlueRecon
 
@@ -394,19 +390,10 @@ theorem map_refl {A : X.Opens} (m : Γ(M, A)) : M.presheaf.map (homOfLE (le_refl
   rw [Subsingleton.elim (homOfLE (le_refl A)) (𝟙 A), op_id, M.presheaf.map_id]; rfl
 
 theorem isFrameOn_unit_smul_map {A W : X.Opens} (hW : W ≤ A) {s : Γ(M, A)} (hs : IsFrameOn s A)
-    (g : Γ(X, W)) (hg : IsUnit g) : IsFrameOn (g • M.presheaf.map (homOfLE hW).op s) W := by
-  intro W' hW'W _
-  have hg' : IsUnit (X.presheaf.map (homOfLE hW'W).op g) := hg.map _
-  obtain ⟨v, hv⟩ := hg'
-  have hb := hs (hW'W.trans hW) (hW'W.trans hW)
-  have hcomp : (fun a : Γ(X, W') => a • M.presheaf.map (homOfLE hW'W).op (g • M.presheaf.map
-    (homOfLE hW).op s)) =
-      (fun a : Γ(X, W') => a • M.presheaf.map (homOfLE (hW'W.trans hW)).op s) ∘ (fun a => a * ↑v)
-        := by
-    funext a
-    simp only [Function.comp_apply, map_smul', map_map, ← hv, smul_smul]
-  rw [hcomp]
-  exact hb.comp (Units.mulRight_bijective v)
+    (g : Γ(X, W)) (hg : IsUnit g) : IsFrameOn (g • M.presheaf.map (homOfLE hW).op s) W :=
+  open AlgebraicCurves.Geometry.Sheaves.Proofs in
+  open Scheme_Modules_IsFrameOn_exists_isUnit_map_eq_mul_of_iso_tensorUnit.TwoChartCocycle in
+  isFrameOn_unit_smul ((hs.map (homOfLE hW)).mono hW) g hg
 
 end AlgebraicGeometry.Scheme.Modules.GlueRecon
 
@@ -549,19 +536,10 @@ theorem map_refl {A : X.Opens} (m : Γ(M, A)) : M.presheaf.map (homOfLE (le_refl
   rw [Subsingleton.elim (homOfLE (le_refl A)) (𝟙 A), op_id, M.presheaf.map_id]; rfl
 
 theorem isFrameOn_unit_smul_map {A W : X.Opens} (hW : W ≤ A) {s : Γ(M, A)} (hs : IsFrameOn s A)
-    (g : Γ(X, W)) (hg : IsUnit g) : IsFrameOn (g • M.presheaf.map (homOfLE hW).op s) W := by
-  intro W' hW'W _
-  have hg' : IsUnit (X.presheaf.map (homOfLE hW'W).op g) := hg.map _
-  obtain ⟨v, hv⟩ := hg'
-  have hb := hs (hW'W.trans hW) (hW'W.trans hW)
-  have hcomp : (fun a : Γ(X, W') => a • M.presheaf.map (homOfLE hW'W).op (g • M.presheaf.map
-    (homOfLE hW).op s)) =
-      (fun a : Γ(X, W') => a • M.presheaf.map (homOfLE (hW'W.trans hW)).op s) ∘ (fun a => a * ↑v)
-        := by
-    funext a
-    simp only [Function.comp_apply, map_smul', map_map, ← hv, smul_smul]
-  rw [hcomp]
-  exact hb.comp (Units.mulRight_bijective v)
+    (g : Γ(X, W)) (hg : IsUnit g) : IsFrameOn (g • M.presheaf.map (homOfLE hW).op s) W :=
+  open AlgebraicCurves.Geometry.Sheaves.Proofs in
+  open Scheme_Modules_IsFrameOn_exists_isUnit_map_eq_mul_of_iso_tensorUnit.TwoChartCocycle in
+  isFrameOn_unit_smul ((hs.map (homOfLE hW)).mono hW) g hg
 
 end AlgebraicGeometry.Scheme.Modules.GlueRecon
 

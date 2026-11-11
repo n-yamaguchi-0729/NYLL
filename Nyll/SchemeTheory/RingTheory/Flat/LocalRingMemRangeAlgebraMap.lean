@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.Tactic.Algebraize
+module
+
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.Tactic.Algebraize
 
 /-!
 # Is Local Ring mem range algebra Map of flat of is Local Hom
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

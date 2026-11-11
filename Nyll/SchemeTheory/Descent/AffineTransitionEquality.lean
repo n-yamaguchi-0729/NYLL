@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Simultaneous eventual equalities for inverse-limit models
@@ -16,6 +18,8 @@ equation supplier needed for the inverse and triple-cocycle identities in
 gluing descended finite-etale covers. No faithfulness of a limit projection
 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

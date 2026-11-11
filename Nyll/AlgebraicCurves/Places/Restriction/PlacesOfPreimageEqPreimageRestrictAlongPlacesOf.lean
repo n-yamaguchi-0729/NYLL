@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageSubsetPreimageRestrictAlongPlacesOf
-import Nyll.AlgebraicCurves.Places.Restriction.PreimageRestrictAlongPlacesOfSubsetPlacesOfPreimage
+module
+
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageSubsetPreimageRestrictAlongPlacesOf
+public import Nyll.AlgebraicCurves.Places.Restriction.PreimageRestrictAlongPlacesOfSubsetPlacesOfPreimage
 
 /-!
 # Places Of preimage eq preimage restrict Along places Of
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.Data.Quot
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.Data.Quot
 
 /-! # Actual base twists and local triviality of the zero relative class -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -3,10 +3,14 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.Cohomology.IntegralAffineEtaleBasis
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorComparison
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.IntegralAffineEtaleBasis
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorComparison
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
 
 /-!
 # Coordinates on integral affine étale objects
@@ -16,6 +20,8 @@ isomorphic over the base to the spectrum of its ring of global sections. These
 coordinate identifications commute with every arrow in the full subcategory.
 This presents arbitrary arrows as the `Spec.map` of their global-section maps.
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 universe u
@@ -63,22 +69,15 @@ theorem integralAffineCoordinateSpecMap_eq :
   exact @Scheme.isoSpec_inv_naturality A.obj.left (Spec (CommRingCat.of R))
     hA (isAffine_Spec _) A.obj.hom
 
-/-- The coordinate presentation, as an object of the small étale site. -/
-noncomputable def integralAffineCoordinateEtaleObj :
+/-- The coordinate presentation, as an object of the small étale site.
+Its target is the same native object used by the divisor section comparison. -/
+noncomputable abbrev integralAffineCoordinateEtaleObj :
     (Spec (CommRingCat.of R)).Etale := by
-  let φ := integralAffineCoordinateBaseMap R A
-  refine MorphismProperty.Over.mk ⊤ (Spec.map φ) ?_
-  apply (HasRingHomProperty.iff_of_isAffine (P := @Etale) (f := Spec.map φ)).2
-  have e : Arrow.mk ((Spec.map φ).appTop) ≅ Arrow.mk φ := by
-    refine Arrow.isoMk (Scheme.ΓSpecIso (CommRingCat.of R))
-      (Scheme.ΓSpecIso (CommRingCat.of (Γ(A.obj.left, ⊤)))) ?_
-    have hnat := Scheme.SpecΓIdentity.hom.naturality φ
-    change (Spec.map φ).appTop ≫
-        (Scheme.ΓSpecIso (CommRingCat.of (Γ(A.obj.left, ⊤)))).hom =
-      (Scheme.ΓSpecIso (CommRingCat.of R)).hom ≫ φ at hnat
-    exact hnat.symm
-  exact (RingHom.Etale.respectsIso.arrow_mk_iso_iff e).2
-    (integralAffineCoordinateBaseMap_etale R A)
+  let S := Γ(A.obj.left, ⊤)
+  let algRS : Algebra R S := (integralAffineCoordinateBaseMap R A).hom.toAlgebra
+  let : Algebra.Etale R S :=
+    RingHom.etale_algebraMap.mp (integralAffineCoordinateBaseMap_etale R A)
+  exact affineEtaleSpecObject (R := R) (S := S)
 
 /-- The original étale object is canonically isomorphic to its coordinate
 presentation over the base. -/
@@ -179,6 +178,47 @@ theorem integralAffineCoordinate_isDedekindDomain
   let : Algebra.Etale R Γ(A.obj.left, ⊤) :=
     RingHom.etale_algebraMap.mp he
   exact IsDedekindDomain.of_essFiniteType_formallyUnramified R Γ(A.obj.left, ⊤)
+
+variable (A)
+
+/-- The fraction-field scalar structure of the coordinate presentation.
+The lift is constructed once here, so users of the coordinate comparison
+retain the same algebra value instead of expanding the localization lift. -/
+@[instance_reducible]
+noncomputable def integralAffineCoordinateFractionFieldAlgebra :
+    Algebra (FractionRing R) (FractionRing Γ(A.obj.left, ⊤)) := by
+  let S := Γ(A.obj.left, ⊤)
+  have hS : IsDedekindDomain S := integralAffineCoordinate_isDedekindDomain R A
+  let algRS : Algebra R S := (integralAffineCoordinateBaseMap R A).hom.toAlgebra
+  have hE : Algebra.Etale R S :=
+    RingHom.etale_algebraMap.mp (integralAffineCoordinateBaseMap_etale R A)
+  let algRE : Algebra R (FractionRing S) :=
+    ((algebraMap S (FractionRing S)).comp (algebraMap R S)).toAlgebra
+  have hf : @FaithfulSMul R (FractionRing S) algRE.toSMul :=
+    (faithfulSMul_iff_algebraMap_injective R (FractionRing S)).mpr
+      ((IsFractionRing.injective S (FractionRing S)).comp
+        (FaithfulSMul.algebraMap_injective R S))
+  exact FractionRing.liftAlgebra R (FractionRing S)
+
+/-- The fixed coordinate fraction-field lift extends the original
+coordinate map, as witnessed by its scalar tower. -/
+theorem integralAffineCoordinateFractionFieldAlgebra_isScalarTower :
+    let S := Γ(A.obj.left, ⊤)
+    let _ : Algebra R S := (integralAffineCoordinateBaseMap R A).hom.toAlgebra
+    let algRE : Algebra R (FractionRing S) :=
+      ((algebraMap S (FractionRing S)).comp (algebraMap R S)).toAlgebra
+    let algKE := integralAffineCoordinateFractionFieldAlgebra R A
+    @IsScalarTower R (FractionRing R) (FractionRing S)
+      (inferInstance : Algebra R (FractionRing R)).toSMul algKE.toSMul algRE.toSMul := by
+  intro S algRS algRE algKE
+  have hS : IsDedekindDomain S := integralAffineCoordinate_isDedekindDomain R A
+  have hE : Algebra.Etale R S :=
+    RingHom.etale_algebraMap.mp (integralAffineCoordinateBaseMap_etale R A)
+  have hf : @FaithfulSMul R (FractionRing S) algRE.toSMul :=
+    (faithfulSMul_iff_algebraMap_injective R (FractionRing S)).mpr
+      ((IsFractionRing.injective S (FractionRing S)).comp
+        (FaithfulSMul.algebraMap_injective R S))
+  exact FractionRing.isScalarTower_liftAlgebra R (FractionRing S)
 
 /-- The actual divisor and generic-unit quotient sheaves have canonically
 isomorphic sections on every integral affine object of the small étale site. -/

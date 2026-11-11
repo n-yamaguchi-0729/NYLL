@@ -18,6 +18,8 @@ import Nyll.AlgebraicCurves.Differentials.Residues.SumEqZeroHasSimpleResidue
 import Nyll.AlgebraicCurves.Differentials.Residues.MemPolarDifferentialsHasSimpleResidue
 import Nyll.AlgebraicCurves.Differentials.Regular.FiniteFinrankPolarDifferentialsEq
 import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.FiniteFinrankRegularDifferentialsEqGenus
+import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Exists linear Map has Simple Residue ker eq regular range eq sum zero finrank corner
@@ -43,8 +45,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

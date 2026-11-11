@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
-import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
+public import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
 
 /-!
 # Torsion input for maximal-adic Ext base change
@@ -16,6 +18,8 @@ before the flat base-change argument: the same ideal power annihilates every
 `Ext` group with that module in the first variable, and hence the canonical
 tensor unit into the adic completion is an equivalence on that `Ext` group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

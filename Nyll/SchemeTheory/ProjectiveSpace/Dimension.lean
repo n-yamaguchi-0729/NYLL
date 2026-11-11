@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Smooth
-import Mathlib.Logic.Equiv.Fin.Basic
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmooth
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Smooth
+public import Mathlib.Logic.Equiv.Fin.Basic
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-! Projective space has relative dimension equal to its number of affine chart coordinates. -/
+
+@[expose] public section
 
 noncomputable section
 

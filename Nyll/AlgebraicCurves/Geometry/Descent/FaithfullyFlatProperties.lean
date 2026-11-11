@@ -14,13 +14,15 @@ Authors of the faithfully flat generalization: Naganori Yamaguchi (assisted by O
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDescendsAlongSurjectiveInfFlatInfQuasiCompact
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperGeometricallyConnected
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDescendsAlongSurjectiveInfFlatInfQuasiCompact
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperGeometricallyConnected
 
 /-!
 # Geometric properties descend along a faithfully flat affine base change
@@ -28,6 +30,8 @@ import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperGeometricallyConnected
 Flatness, surjectivity and quasi-compactness are the only hypotheses used.
 In particular inseparable finite extensions of fields are covered.
 -/
+
+@[expose] public section
 
 universe u
 

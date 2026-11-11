@@ -10,11 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantSeparatingParameter
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantSeparatingParameter
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.SeparatingTranscendental
 
 /-!
 # Exists finite Dimensional is Separable adjoin of constant Field Extension of perfect Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

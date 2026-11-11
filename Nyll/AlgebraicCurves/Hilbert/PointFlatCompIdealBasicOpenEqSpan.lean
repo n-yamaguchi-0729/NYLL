@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
+module
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousLocalizationAwayFlatQuotientMkComp
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.HomogeneousLocalizationAwayFlatQuotientMkComp
 
 /-!
 # Point flat comp of ideal basic Open eq span
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

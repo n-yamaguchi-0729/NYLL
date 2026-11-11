@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneLocalTranslation
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.UnpointedConstruction
-import Nyll.JacobianVarieties.Generalized.UnpointedEmptyConstruction
-import Nyll.JacobianVarieties.Generalized.PointedAffineNeighborhood
-import Nyll.JacobianVarieties.Generalized.PointedEmptyAffineNeighborhood
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
-import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
-import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
-import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatFiniteTypeGeometry
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneLocalTranslation
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.UnpointedConstruction
+public import Nyll.JacobianVarieties.Generalized.UnpointedEmptyConstruction
+public import Nyll.JacobianVarieties.Generalized.PointedAffineNeighborhood
+public import Nyll.JacobianVarieties.Generalized.PointedEmptyAffineNeighborhood
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
+public import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
+public import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatFiniteTypeGeometry
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
 
 /-!
 # Intrinsic Picard-one without a rational point
@@ -25,6 +27,8 @@ Its local tensor translation represents the restriction of the intrinsic
 Picard-one sheaf on the actual pointed Picard-zero scheme. The canonical action
 then descends this scheme and its universal class to the original field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

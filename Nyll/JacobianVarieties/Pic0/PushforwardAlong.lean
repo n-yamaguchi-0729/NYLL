@@ -11,13 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 
 /-!
 # Pushforward of degree-zero divisor classes
 
 The pushforward of divisors descends to the degree-zero Picard group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

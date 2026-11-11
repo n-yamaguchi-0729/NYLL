@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslation
-import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslation
+public import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
 
 /-! # Integral reciprocal deformation of a regular group-valued block
 
@@ -18,6 +20,8 @@ integral group-valued point whose reduction is the identity. No splitting
 of the original finite-flat block or restriction on its ramification is used.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -26,30 +30,37 @@ namespace PowerSeries
 
 variable {K : Type u} [Field K]
 
-private def reciprocalDenominator : PowerSeries (PowerSeries K) :=
+/-- The denominator of the integral reciprocal parameter deformation. -/
+def reciprocalDenominator : PowerSeries (PowerSeries K) :=
   1 + C (X : PowerSeries K) * X
 
 private theorem reciprocalDenominator_constantCoeff :
     constantCoeff (reciprocalDenominator (K := K)) = 1 := by
-  simp [reciprocalDenominator]
+  rw [reciprocalDenominator, map_add, map_one, map_mul, constantCoeff_X, mul_zero,
+    add_zero]
 
-private def reciprocalDisplacement : PowerSeries (PowerSeries K) :=
+/-- The zero-constant-term displacement used in reciprocal substitution. -/
+def reciprocalDisplacement : PowerSeries (PowerSeries K) :=
   -(C (X : PowerSeries K)) ^ 2 * X *
     invOfUnit (reciprocalDenominator (K := K)) 1
 
 private theorem reciprocalDisplacement_constantCoeff :
     constantCoeff (reciprocalDisplacement (K := K)) = 0 := by
-  simp [reciprocalDisplacement]
+  rw [reciprocalDisplacement, map_mul, map_mul, constantCoeff_X, mul_zero, zero_mul]
 
-private theorem reciprocalDisplacement_hasSubst :
+/-- The reciprocal displacement admits formal power-series substitution. -/
+theorem reciprocalDisplacement_hasSubst :
     HasSubst (reciprocalDisplacement (K := K)) :=
   HasSubst.of_constantCoeff_zero reciprocalDisplacement_constantCoeff
 
 private theorem reciprocalDisplacement_residue :
     map (constantCoeff (R := K)) (reciprocalDisplacement (K := K)) = 0 := by
-  simp [reciprocalDisplacement]
+  rw [reciprocalDisplacement, map_mul, map_mul, map_neg, map_pow, map_C,
+    constantCoeff_X, map_zero, zero_pow (by decide : (2 : ℕ) ≠ 0), neg_zero,
+    zero_mul, zero_mul]
 
-private def reciprocalSubstitution :
+/-- Substitution by the reciprocal displacement as a ring homomorphism. -/
+def reciprocalSubstitution :
     PowerSeries (PowerSeries K) →+* PowerSeries (PowerSeries K) where
   toFun f := subst (reciprocalDisplacement (K := K)) f
   map_one' := by
@@ -152,11 +163,13 @@ namespace AlgebraicGeometry.RegularBlockFormalDeformation
 
 variable {K : Type u} [Field K]
 
-private abbrev scalarSpec (A : Type u) [CommRing A] [Algebra K A] :
+/-- An affine spectrum with its given scalar structure. -/
+abbrev scalarSpec (A : Type u) [CommRing A] [Algebra K A] :
     Over (Spec (.of K)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K A)))
 
-private def scalarSpecMap {A B : Type u} [CommRing A] [CommRing B]
+/-- The morphism of scalar spectra induced by an algebra homomorphism. -/
+def scalarSpecMap {A B : Type u} [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B] (f : A →ₐ[K] B) :
     scalarSpec (K := K) B ⟶ scalarSpec (K := K) A :=
   Over.homMk (Spec.map (CommRingCat.ofHom f.toRingHom)) (by
@@ -178,7 +191,8 @@ private theorem scalarSpecMap_comp {A B C : Type u}
   rw [← Spec.map_comp]
   rfl
 
-private def constantInclusion : PowerSeries K →ₐ[K] PowerSeries (PowerSeries K) where
+/-- Inclusion as constant series in the additional formal parameter. -/
+def constantInclusion : PowerSeries K →ₐ[K] PowerSeries (PowerSeries K) where
   toRingHom := PowerSeries.C
   commutes' a := (PowerSeries.algebraMap_apply (r := a)).symm
 

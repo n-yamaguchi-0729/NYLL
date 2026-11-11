@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusEvaluation
-import Nyll.JacobianVarieties.Generalized.LocalUnitKernel
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusEvaluation
+public import Nyll.JacobianVarieties.Generalized.LocalUnitKernel
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
 
 /-!
 # The divisor-class boundary and local symbols
@@ -17,6 +19,8 @@ For an isolated local jet this is precisely the negative of the single
 local symbol. The boundary here is the existing actual divisor-class
 boundary; no identification with a scheme kernel is postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

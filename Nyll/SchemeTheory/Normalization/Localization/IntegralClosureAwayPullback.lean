@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Integral
 
 /-!
 # The actual away pullback of a normalization in an algebra
@@ -26,6 +28,8 @@ the original coefficient and localization maps. This identifies the
 restriction of a normalized root cover before comparing it to the
 original cover on the boundary complement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

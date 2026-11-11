@@ -4,21 +4,34 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.GaloisCohomology
-import Nyll.GaloisCohomology.Cyclic.Herbrand.All
-import Nyll.GaloisCohomology.Cyclic.IntegralRepUniverse
-import Nyll.GaloisCohomology.Cyclic.NormKernelVanishing
-import Nyll.GaloisCohomology.Cyclic.MultiplicativeHilbert90
-import Nyll.GaloisCohomology.Cyclic.TateComparison
-import Nyll.GaloisCohomology.Cyclic.TateH0.All
+module
 
-import Nyll.GaloisCohomology.Cyclic.LangNormKernel
+public import Nyll.GaloisCohomology.Cyclic.GaloisCohomology
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.All
+public import Nyll.GaloisCohomology.Cyclic.IntegralRepUniverse
+public import Nyll.GaloisCohomology.Cyclic.NormKernelVanishing
+public import Nyll.GaloisCohomology.Cyclic.MultiplicativeHilbert90
+public import Nyll.GaloisCohomology.Cyclic.TateComparison
+public import Nyll.GaloisCohomology.Cyclic.TateH0.All
 
-import Nyll.GaloisCohomology.Cyclic.FixedClassLift
-import Nyll.GaloisCohomology.Cyclic.MultiplicativeLangNorm
-import Nyll.GaloisCohomology.Cyclic.PeriodicNorm
+public import Nyll.GaloisCohomology.Cyclic.LangNormKernel
 
-import Nyll.GaloisCohomology.Cyclic.GeneratorSum
+public import Nyll.GaloisCohomology.Cyclic.FixedClassLift
+public import Nyll.GaloisCohomology.Cyclic.MultiplicativeLangNorm
+public import Nyll.GaloisCohomology.Cyclic.PeriodicNorm
+public import Nyll.GaloisCohomology.Cyclic.IntegralUniverseCohomology
+public import Nyll.GaloisCohomology.Cyclic.IntegralConnectingMapComparison
+public import Nyll.GaloisCohomology.Cyclic.IntegralNormKernelVanishing
+public import Nyll.GaloisCohomology.Cyclic.IntegralCyclicNormComplexes
+public import Nyll.GaloisCohomology.Cyclic.IntegralCyclicNormTransport
+
+public import Nyll.GaloisCohomology.Cyclic.GeneratorSum
+public import Nyll.GaloisCohomology.Cyclic.PermutationCoboundary
+
+public import Nyll.GaloisCohomology.Cyclic.IntegralCoefficientCohomology
+public import Nyll.GaloisCohomology.Cyclic.IntegralShapiro
+public import Nyll.GaloisCohomology.Cyclic.IntegralUniverseShapiro
+public import Nyll.GaloisCohomology.Cyclic.IntegralShapiroComparison
 
 /-!
 # Cyclic cohomology

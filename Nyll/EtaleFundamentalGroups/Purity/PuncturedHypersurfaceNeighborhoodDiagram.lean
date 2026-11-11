@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.Cones
-import Mathlib.Order.Directed
-import Mathlib.Order.OrderDual
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Mathlib.Order.Directed
+public import Mathlib.Order.OrderDual
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 
 /-!
 # The actual neighbourhood diagram of a punctured hypersurface
@@ -27,6 +29,8 @@ isomorphism between the corresponding open subschemes of the hypersurface.
 Thus no comparison map, pullback identification, or limiting property is
 assumed in the neighbourhood system used in Stacks Project, Tag 0BLN.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -83,7 +87,7 @@ theorem preimage_neighborhood_eq (W : Neighborhood R f) :
     rw [Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton_self f)]
     exact z.asIdeal.zero_mem
 
-private theorem neighborhoodPullback_range_eq (W : Neighborhood R f) :
+theorem neighborhoodPullback_range_eq (W : Neighborhood R f) :
     Set.range (Limits.pullback.snd
       (Scheme.puncturedSpectrumOpen R).ι (hypersurfaceMap R f)) =
         Set.range (Limits.pullback.snd W.val.ι (hypersurfaceMap R f)) := by

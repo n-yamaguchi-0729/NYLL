@@ -10,13 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Sym.Card
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Mathlib.Data.Sym.Card
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # exists point hilbert Function Of forall mem iff of forall finrank piece eq
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -57,13 +63,13 @@ theorem finrank_homogeneousSubmodule (A : Type*) [CommRing A] [Nontrivial A] (d 
     (MvPolynomial.basisRestrictSupport A {x : Fin (n + 1) →₀ ℕ | x.degree = d})).trans
       (natCard_degree_eq d)
 
-theorem decompose_eq {A : Type} [CommRing A] (q : MvPolynomial (Fin (n + 1)) A) (d : ℕ) :
+theorem decompose_eq {A : Type u} [CommRing A] (q : MvPolynomial (Fin (n + 1)) A) (d : ℕ) :
     (DirectSum.decompose (homogeneousSubmodule (Fin (n + 1)) A) q d : MvPolynomial (Fin (n + 1)) A)
       =
       homogeneousComponent d q :=
   MvPolynomial.decomposition.decompose'_apply q d
 
-theorem homogeneousComponent_mul_of_lt {A : Type} [CommRing A] {G : MvPolynomial (Fin (n + 1)) A}
+theorem homogeneousComponent_mul_of_lt {A : Type u} [CommRing A] {G : MvPolynomial (Fin (n + 1)) A}
   {m : ℕ}
     (hG : G.IsHomogeneous m) (a : MvPolynomial (Fin (n + 1)) A) {e : ℕ} (he : e < m) :
     homogeneousComponent e (a * G) = 0 := by
@@ -86,7 +92,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 open _root_.AlgebraicCurves.Hilbert.Proofs.HilbertFunctionPoint.P2mWs30PointPackaging in
 theorem exists_point_hilbertFunctionOf_forall_mem_iff_of_forall_finrank_piece_eq
-    (n : ℕ) (k : Type) [Field k] (P : Polynomial ℚ) (m : ℕ)
+    (n : ℕ) (k : Type u) [Field k] (P : Polynomial ℚ) (m : ℕ)
     (I : Ideal (MvPolynomial (Fin (n + 1)) k))
     (_ : ∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I)
     (hP : ∀ d : ℕ, m ≤ d → (Module.finrank k (piece I d) : ℚ) = P.eval (d : ℚ)) :

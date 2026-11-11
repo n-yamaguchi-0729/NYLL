@@ -8,6 +8,7 @@ import Nyll.JacobianVarieties.Generalized.WholeCurveGroupModulus
 import Nyll.JacobianVarieties.Generalized.ProperTargetModulus
 import Nyll.JacobianVarieties.Generalized.GeometricModulusPointedUniversalProperty
 import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
+import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Whole-curve maps to separated groups over arbitrary fields
 

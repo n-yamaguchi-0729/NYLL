@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 
 /-!
 # Is Pullback exists iso Spec quotient comp morphism Restrict eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -105,14 +109,14 @@ theorem _root_.AlgebraicGeometry.IsPullback.exists_iso_Spec_quotient_comp_morphi
     {P P₀ : Scheme.{u}} (p : P ⟶ Spec (CommRingCat.of T')) (p₀ : P₀ ⟶ Spec (CommRingCat.of T))
     (G : P₀ ⟶ P) (hG : IsPullback G p₀ p (Spec.map (CommRingCat.ofHom π)))
     (D : P.Opens) (hD : IsAffineOpen D) :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom p D
+    let := Scheme.TwoAffineOpenCover.algebraOfHom p D
     IsNilpotent ((RingHom.ker π).map (algebraMap T' Γ(P, D))) ∧
     ∃ ε : Spec (CommRingCat.of (Γ(P, D) ⧸ (RingHom.ker π).map (algebraMap T' Γ(P, D)))) ≅ ↑(G ⁻¹ᵁ
       D),
       ε.hom ≫ G ∣_ D ≫ hD.isoSpec.hom =
         Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk ((RingHom.ker π).map (algebraMap T' Γ(P,
           D))))) := by
-  let inst := Scheme.TwoAffineOpenCover.algebraOfHom p D
+  intro inst
   refine ⟨E163TC.isNilpotent_map _ hker, ?_⟩
   have hφ : CommRingCat.ofHom (algebraMap T' Γ(P, D)) =
       (Scheme.ΓSpecIso (.of T')).inv ≫ p.appLE ⊤ D le_top := rfl

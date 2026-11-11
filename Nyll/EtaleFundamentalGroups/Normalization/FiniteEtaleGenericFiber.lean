@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.GenericFieldSource
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
-import Nyll.SchemeTheory.Morphisms.DominantBaseChange
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.Topology.Connected.Basic
+module
+
+public import Nyll.SchemeTheory.FunctionFields.GenericFieldSource
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
+public import Nyll.SchemeTheory.Morphisms.DominantBaseChange
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # Normalization from a finite étale model of the generic fiber
@@ -25,6 +27,8 @@ function-field spectrum with the given field spectrum, transporting the
 normalization isomorphism and its étaleness to the given extension.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits TopologicalSpace
@@ -33,11 +37,6 @@ open CategoryTheory.PreGaloisCategory
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 /-- A finite étale model with actual generic fiber `Spec L` makes the
 normalization of the base in `L` étale. No connectedness or comparison of

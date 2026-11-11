@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingleton
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingleton
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # Is Regular Local Ring quotient span singleton map of left Inverse of irreducible
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Sheaves.Gluing
+module
+
+public import Mathlib.Tactic.Choose
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Sheaves.Gluing
 /-!
 # Scheme Modules exists Unique iso forall pullback map Iso eq of i Sup eq top
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

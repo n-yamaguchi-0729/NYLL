@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Norm.Defs
-import Nyll.SchemeTheory.RingTheory.NormIdentities
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+module
+
+public import Mathlib.RingTheory.Norm.Defs
+public import Nyll.SchemeTheory.RingTheory.NormIdentities
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
 
 /-!
 # Place ord norm sub eq ord eval
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

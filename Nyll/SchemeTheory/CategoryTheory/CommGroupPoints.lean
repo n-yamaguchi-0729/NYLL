@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
 
 /-! # Actual commutative-group points and reconstruction from their natural coordinates -/
+
+@[expose] public section
 
 noncomputable section
 

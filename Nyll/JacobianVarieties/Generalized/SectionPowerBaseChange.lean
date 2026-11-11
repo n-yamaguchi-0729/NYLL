@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPullbackInvModuleIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPullbackInvModuleIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The actual point-power twist under arbitrary base change -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,7 +51,8 @@ theorem sectionBaseChange_ker [IsSeparated c] :
   rw [← Scheme.IdealSheafData.ker_fst_of_isClosedImmersion,
     ← h.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso]
 
-private theorem comap_ideal_pow (I : X.IdealSheafData) {Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :
+/-- Pullback of an ideal sheaf preserves its natural-number powers. -/
+theorem comap_ideal_pow (I : X.IdealSheafData) {Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :
     (I ^ n).comap f = (I.comap f) ^ n := by
   induction n with
   | zero => rw [pow_zero, pow_zero, Scheme.IdealSheafData.one_eq_top,

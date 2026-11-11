@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.UniformRelativeNormalizedSection
-import Nyll.JacobianVarieties.Generalized.RelativeDivisorGeometricDegree
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusCanonicalPointBundle
-import Nyll.JacobianVarieties.Generalized.PicardZero
+module
+
+public import Nyll.JacobianVarieties.Generalized.UniformRelativeNormalizedSection
+public import Nyll.JacobianVarieties.Generalized.RelativeDivisorGeometricDegree
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusCanonicalPointBundle
+public import Nyll.JacobianVarieties.Generalized.PicardZero
 
 /-! # Actual Picard-zero families admit normalized point twists over affine bases -/
+
+@[expose] public section
 
 noncomputable section
 

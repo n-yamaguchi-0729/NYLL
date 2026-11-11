@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PointedProjectionGeometry
-import Nyll.JacobianVarieties.Generalized.ProjectionScalarExtension
-import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDescendsAlongSurjectiveInfFlatInfQuasiCompact
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
+module
+
+public import Nyll.JacobianVarieties.Generalized.PointedProjectionGeometry
+public import Nyll.JacobianVarieties.Generalized.ProjectionScalarExtension
+public import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothDescendsAlongSurjectiveInfFlatInfQuasiCompact
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
 
 /-! # Smoothness of the actual forgetting projection over an arbitrary field -/
+
+@[expose] public section
 
 noncomputable section
 universe u

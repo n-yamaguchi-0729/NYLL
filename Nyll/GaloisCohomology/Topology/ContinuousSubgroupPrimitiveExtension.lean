@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.ReidemeisterSchreier.Profinite.OpenSubgroups.RightQuotient
-import Mathlib.Topology.ContinuousMap.Algebra
-import Mathlib.RepresentationTheory.Continuous.Basic
-import Mathlib.Tactic.Abel
+module
+
+public import Nyll.ProCGroups.ReidemeisterSchreier.Profinite.OpenSubgroups.RightQuotient
+public import Mathlib.Topology.ContinuousMap.Algebra
+public import Mathlib.RepresentationTheory.Continuous.Basic
+public import Mathlib.Tactic.Abel
 
 /-!
 # Extending a continuous degree-two primitive from an open subgroup
@@ -16,6 +18,8 @@ The existing normalized continuous coset retraction extends a subgroup
 primitive. The prism correction makes its boundary equal to the original
 ambient homogeneous cocycle.
 -/
+
+@[expose] public section
 
 noncomputable section
 open scoped Topology

@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
 
 /-!
 # Proj Space exists proj Presentation to Proj eq and locally Trivial
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

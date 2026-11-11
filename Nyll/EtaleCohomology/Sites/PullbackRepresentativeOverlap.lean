@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionEquality
-import Nyll.EtaleCohomology.Sites.PullbackSectionFactors
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionEquality
+public import Nyll.EtaleCohomology.Sites.PullbackSectionFactors
 
 /-!
 # Actual overlap compatibility of inverse-image representatives
@@ -17,6 +19,8 @@ maximal equality-open of the two original restrictions. This is the finite
 matching datum used when descending arbitrary sections from a strict-local
 base; no continuity or descended compatibility is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

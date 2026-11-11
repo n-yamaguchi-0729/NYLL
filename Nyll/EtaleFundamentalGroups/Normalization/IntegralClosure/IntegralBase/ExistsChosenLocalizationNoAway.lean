@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
-import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
 
 /-!
 # Existence of a finite etale local normalization factor
@@ -21,6 +23,8 @@ Unlike the boundary-away refinement, this construction has no away-map input.
 It can therefore be used to choose the local factor before a boundary-away
 property has been produced for it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

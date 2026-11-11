@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Adjoin.FG
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Adjoin.FG
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Subalgebra mem of is Integral of fg of forall is Principal maximal Ideal localization at
 Prime
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

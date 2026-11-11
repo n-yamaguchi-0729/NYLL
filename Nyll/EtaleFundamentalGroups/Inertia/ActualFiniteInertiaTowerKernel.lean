@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationTowerFaithful
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgInertiaCoefficientIdentity
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationCoefficientSquare
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationTowerFaithful
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgInertiaCoefficientIdentity
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationCoefficientSquare
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Kernels of actual finite inertia restrictions
@@ -20,6 +22,8 @@ The actual coefficient cancellation theorem shows that the kernel of the
 larger-stage restriction lies in the kernel of the smaller-stage restriction.
 No factor map or kernel inclusion is supplied as an assumption.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

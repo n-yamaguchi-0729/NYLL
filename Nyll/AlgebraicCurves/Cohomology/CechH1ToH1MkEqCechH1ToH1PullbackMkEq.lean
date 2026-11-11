@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
-import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
+public import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
 
 /-!
 # Cech H1To H1 mk eq of cech H1To H1 pullback Along mk eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

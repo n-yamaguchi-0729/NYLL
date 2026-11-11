@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.StalkSpreading
-import Nyll.SchemeTheory.LocalGeometry.CompactOpenSpecialization
-import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.Descent.StalkSpreading
+public import Nyll.SchemeTheory.LocalGeometry.CompactOpenSpecialization
+public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Compatible spreading from a stalk over a retrocompact open
@@ -21,6 +23,8 @@ compatibility excludes every generization of the chosen point from this
 compact open locus. Constructible compactness then gives a neighborhood
 on which the two actual morphisms agree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

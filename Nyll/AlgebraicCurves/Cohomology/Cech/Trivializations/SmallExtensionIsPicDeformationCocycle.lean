@@ -10,46 +10,50 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.CategoryTheory.Iso
-import Mathlib.LinearAlgebra.Dual.Defs
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.Tactic.CategoryTheory.Reassoc
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.NormNum
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoConjAppTopOneEqAppTop
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsUnitTransitionTransitionFaceMulEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackSurjectiveAppKerAppEqMapKer
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingEq
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingZeroAddMulNegRestrictIsFibreReading
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.ComapTransition
+module
+
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.LinearAlgebra.Dual.Defs
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.Tactic.CategoryTheory.Reassoc
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.NormNum
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoConjAppTopOneEqAppTop
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsUnitTransitionTransitionFaceMulEq
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackSurjectiveAppKerAppEqMapKer
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingEq
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingZeroAddMulNegRestrictIsFibreReading
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.ComapTransition
 
 /-!
 # Small Extension exists is Pic Deformation Cocycle of cech Trivialisation
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.UnpointedConstruction
-import Nyll.JacobianVarieties.Generalized.UnpointedEmptyConstruction
+module
+
+public import Nyll.JacobianVarieties.Generalized.UnpointedConstruction
+public import Nyll.JacobianVarieties.Generalized.UnpointedEmptyConstruction
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The generalized Jacobian for every effective modulus over an arbitrary field
@@ -14,6 +17,8 @@ The zero and positive degree constructions both represent the actual modulus
 Picard-zero group sheaf. This single interface retains the appropriate proved
 construction in each case, including its group law and geometric properties.
 -/
+
+@[expose] public section
 
 noncomputable section
 

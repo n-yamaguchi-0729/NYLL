@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierEisenstein
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierPolynomial
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.PowerBasis
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierEisenstein
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierPolynomial
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.PowerBasis
 
 /-!
 # A cyclic Artin--Schreier extension from an Eisenstein parameter
@@ -28,6 +30,8 @@ input. The output power basis and its minimal polynomial are retained for
 the later Eisenstein residue-field comparison.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

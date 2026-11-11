@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelDifference
-import Nyll.JacobianVarieties.Generalized.PicardTranslation
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelDifference
+public import Nyll.JacobianVarieties.Generalized.PicardTranslation
 
 /-! # Natural Picard-zero classes of the pointed modulus Abel family -/
+
+@[expose] public section
 
 noncomputable section
 

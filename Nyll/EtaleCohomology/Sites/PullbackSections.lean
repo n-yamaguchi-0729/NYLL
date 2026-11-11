@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-!
 # Actual sections pulled through a local factor
@@ -19,6 +21,8 @@ base change. Restricting the existing adjunction unit along this morphism
 pulls sections to the source. Naturality retains equations of local lifts
 against a global section, including along a finite refinement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

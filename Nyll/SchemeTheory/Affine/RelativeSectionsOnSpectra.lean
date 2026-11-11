@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.InternalHom
-import Mathlib.AlgebraicGeometry.Group.Affine
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.InternalHom
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-!
 # Restricting a global-sections functor to coefficient spectra
@@ -15,6 +17,8 @@ The relative Gamma--Spec counit identifies the actual coefficient algebra
 of a spectrum with the original algebra, naturally. Composing this counit
 with an algebra-valued test functor retains its given scalar action.
 -/
+
+@[expose] public section
 
 noncomputable section
 

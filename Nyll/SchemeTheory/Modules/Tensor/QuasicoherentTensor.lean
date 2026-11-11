@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineLocal
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.RestrictTensor
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineLocal
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.RestrictTensor
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Quasicoherence and finite type of the actual sheaf tensor product
@@ -30,6 +32,8 @@ finite generating families are transported back to the original scheme.
 No Noetherian, separation, flatness, or finite-presentation hypothesis
 is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

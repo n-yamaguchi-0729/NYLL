@@ -10,37 +10,41 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.Topology.KrullDimension
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.SheafEulerPolynomialTensorTensorPowEqMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjectiveTwistSectionsMap
-import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivModulesIso
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
-import Nyll.SchemeTheory.HomologicalAlgebra.FiniteDimensionalExactSequences
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceProjPresentationToProjEqLocallyTrivial
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceTopologicalKrullDimLe
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Topology.KrullDimension
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.SheafEulerPolynomialTensorTensorPowEqMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjectiveTwistSectionsMap
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivModulesIso
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
+public import Nyll.SchemeTheory.HomologicalAlgebra.FiniteDimensionalExactSequences
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceProjPresentationToProjEqLocallyTrivial
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceTopologicalKrullDimLe
 
 /-!
 # Proj Space exists polynomial nat Degree le forall euler Char twist std Cover Pullback eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,12 +10,16 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Mathlib.FieldTheory.Relrank
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Mathlib.FieldTheory.Relrank
 
 /-!
 # Finrank Along eq relfinrank field Range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

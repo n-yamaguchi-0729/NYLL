@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
 
 /-!
 # Boundary-away chosen factors after a field comparison
@@ -16,6 +18,8 @@ that transport then retains the literal composite away map from the original
 base.  This separates the field-comparison step from the integral-base
 chosen-factor construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

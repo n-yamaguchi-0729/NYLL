@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.AlgebraicCurves.Places.NormTrace.EvalAtNormEqProdFiber
+import Nyll.AlgebraicCurves.Places.NormTrace.ResidueTrace
 import Nyll.AlgebraicCurves.Places.NormTrace.EvalAtTraceEqSumFiber
 import Nyll.AlgebraicCurves.Places.NormTrace.HasValueNormAlongSeparableAlong
 import Nyll.AlgebraicCurves.Places.NormTrace.MemEvalAtTraceEqSumRamificationIndexSmulEvalAt

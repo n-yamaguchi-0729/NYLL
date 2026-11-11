@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
-import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverHomOverIsFrameOnPullback
+module
+
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
+public import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverHomOverIsFrameOnPullback
 
 /-!
 # Base transport of dual-number deformation classes
 
 Compare the dual-number cover maps and their induced first-cohomology classes.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

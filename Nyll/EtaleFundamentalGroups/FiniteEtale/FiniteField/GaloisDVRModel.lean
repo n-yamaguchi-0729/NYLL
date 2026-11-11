@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisModel
-import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
-import Nyll.SchemeTheory.LocalGeometry.DVRGenericBaseChange
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableNormalizationDVR
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GaloisModel
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
+public import Nyll.SchemeTheory.LocalGeometry.DVRGenericBaseChange
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableNormalizationDVR
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # A Galois model on the generic open of a finite DVR normalization
@@ -40,6 +42,8 @@ automorphism-group order equals that of the original cover, and its
 pullback along the displayed coefficient inclusion recovers that cover.
 Thus this reduction preserves the prime-to-characteristic condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.SpecFlatBaseChangeSections
+module
+
+public import Nyll.SchemeTheory.Affine.SpecFlatBaseChangeSections
 
 /-!
 # The canonical tensor-to-sections map before imposing quasi-compactness
@@ -14,6 +16,8 @@ quasi-separated schemes with flat base change it is the existing
 section equivalence. This distinction permits passage to affine
 refinements in the actual geometric-stalk diagram.
 -/
+
+@[expose] public section
 
 noncomputable section
 

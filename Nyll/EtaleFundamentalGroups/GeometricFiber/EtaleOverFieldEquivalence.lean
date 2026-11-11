@@ -15,6 +15,11 @@ public import Mathlib.Algebra.Group.Action.Sigma
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 
 /-!
 # Étale schemes over a field and discrete Galois sets
@@ -42,8 +47,6 @@ private instance : IsZariskiLocalAtSource
 variable (k K : Type u) [Field k] [Field K] [Algebra k K] [IsSepClosure k K]
 
 private abbrev G := K ≃ₐ[k] K
-
-attribute [local instance] IsSepClosure.sep_closed
 
 private noncomputable def orbitQuotientEquivOfEquivariant
     {H α β : Type u} [Group H] [MulAction H α] [MulAction H β]
@@ -195,6 +198,7 @@ private theorem finiteEtaleComponent_isConnected
     (i : ι) :
     PreGaloisCategory.IsConnected
       (finiteEtaleComponent k L a hField hFiniteSep i) := by
+  let _ : IsSepClosed K := IsSepClosure.sep_closed k
   let : Field (L i) := (hField i).toField
   let : Algebra k (L i) := (a i).hom.toAlgebra
   have hfs := hFiniteSep i
@@ -438,7 +442,7 @@ private lemma geometricFiberDecompositionEquiv_rho
     (g : G k K) (x : Over.mk (ξ k K) ⟶ X.toComma) :
     geometricFiberDecompositionEquiv k K X Z e he
         (ConcreteCategory.hom
-          (((geometricFiber k K).obj X).obj.obj.ρ g) x) =
+          (((geometricFiber k K).obj X).obj.obj.ρ g).asHom x) =
       g • geometricFiberDecompositionEquiv k K X Z e he x := by
   let σ : Spec (.of K) ⟶ Spec (.of K) :=
     Spec.map (CommRingCat.ofHom (g : K →+* K))
@@ -446,7 +450,7 @@ private lemma geometricFiberDecompositionEquiv_rho
     (Spec (.of K)) (x.left ≫ e.inv)
   let xg : Over.mk (ξ k K) ⟶ X.toComma :=
     ConcreteCategory.hom
-      (((geometricFiber k K).obj X).obj.obj.ρ g) x
+      (((geometricFiber k K).obj X).obj.obj.ρ g).asHom x
   let qg := Scheme.homSigmaEquiv (fun i ↦ (Z i).left)
     (Spec (.of K)) (xg.left ≫ e.inv)
   have hxg : xg.left ≫ e.inv = σ ≫ (x.left ≫ e.inv) := by
@@ -638,168 +642,176 @@ private lemma inverseMap_left
             (orbitIndexMap k K f ω)) :=
   rfl
 
+/-- The actual inverse map preserves identities on each orbit summand. -/
+private theorem inverseMap_id (S : DiscreteContAction TopCat (G k K)) :
+    inverseMap k K (𝟙 S) = 𝟙 (inverseObj k K S) := by
+  apply MorphismProperty.Over.Hom.ext
+  apply Sigma.hom_ext
+  intro ω
+  induction ω using Quotient.inductionOn'
+  rename_i a
+  let Y := fun η : MulAction.orbitRel.Quotient (G k K)
+      ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj S) ↦
+    (orbitFiniteEtale k K S η).left
+  have hι :
+      Sigma.ι Y (Quotient.mk'' a) ≫ (inverseMap k K (𝟙 S)).left =
+        (orbitFiniteEtaleMap k K (𝟙 S) (Quotient.mk'' a)).left ≫
+          Sigma.ι Y (Quotient.mk'' a) := by
+    rw [inverseMap_left]
+    exact Sigma.ι_comp_desc _ _
+  have hm : orbitContActionMap k K (𝟙 S) (Quotient.mk'' a) = 𝟙 _ := by
+    apply ObjectProperty.hom_ext
+    apply Action.hom_ext
+    ext x
+    rfl
+  have hf :
+      orbitFiniteEtaleMap k K (𝟙 S) (Quotient.mk'' a) = 𝟙 _ := by
+    change
+      (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
+          (orbitContActionMap k K (𝟙 S) (Quotient.mk'' a)) =
+        𝟙 _
+    rw [hm]
+    exact CategoryTheory.Functor.map_id _ _
+  rw [hf] at hι
+  have hidSource :
+      (𝟙 (orbitFiniteEtale k K S (Quotient.mk'' a)) :
+        orbitFiniteEtale k K S (Quotient.mk'' a) ⟶
+          orbitFiniteEtale k K S (Quotient.mk'' a)).left = 𝟙 _ := rfl
+  have hidTarget :
+      (𝟙 (inverseObj k K S) :
+        inverseObj k K S ⟶ inverseObj k K S).left = 𝟙 _ := rfl
+  have hsource :
+      (𝟙 (orbitFiniteEtale k K S (Quotient.mk'' a)) :
+          orbitFiniteEtale k K S (Quotient.mk'' a) ⟶
+            orbitFiniteEtale k K S (Quotient.mk'' a)).left ≫
+          Sigma.ι Y (Quotient.mk'' a) =
+        Sigma.ι Y (Quotient.mk'' a) := by
+    calc
+      _ = 𝟙 _ ≫ Sigma.ι Y (Quotient.mk'' a) :=
+        congrArg (fun t ↦ t ≫ Sigma.ι Y (Quotient.mk'' a)) hidSource
+      _ = _ := Category.id_comp _
+  have htarget :
+      Sigma.ι Y (Quotient.mk'' a) ≫
+          (𝟙 (inverseObj k K S) :
+            inverseObj k K S ⟶ inverseObj k K S).left =
+        Sigma.ι Y (Quotient.mk'' a) := by
+    calc
+      _ = Sigma.ι Y (Quotient.mk'' a) ≫ 𝟙 _ :=
+        congrArg (fun t ↦ Sigma.ι Y (Quotient.mk'' a) ≫ t) hidTarget
+      _ = _ := Category.comp_id _
+  exact hι.trans (hsource.trans htarget.symm)
+
+/-- The actual inverse map preserves composition on each orbit summand. -/
+private theorem inverseMap_comp {S T U : DiscreteContAction TopCat (G k K)}
+    (f : S ⟶ T) (g : T ⟶ U) :
+    inverseMap k K (f ≫ g) = inverseMap k K f ≫ inverseMap k K g := by
+  apply MorphismProperty.Over.Hom.ext
+  apply Sigma.hom_ext
+  intro ω
+  induction ω using Quotient.inductionOn'
+  rename_i a
+  let YS := fun η : MulAction.orbitRel.Quotient (G k K)
+      ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj S) ↦
+    (orbitFiniteEtale k K S η).left
+  let YT := fun η : MulAction.orbitRel.Quotient (G k K)
+      ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj T) ↦
+    (orbitFiniteEtale k K T η).left
+  let YU := fun η : MulAction.orbitRel.Quotient (G k K)
+      ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj U) ↦
+    (orbitFiniteEtale k K U η).left
+  have hιf :
+      Sigma.ι YS (Quotient.mk'' a) ≫ (inverseMap k K f).left =
+        (orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left ≫
+          Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a)) := by
+    rw [inverseMap_left]
+    exact Sigma.ι_comp_desc _ _
+  have hιg :
+      Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a)) ≫
+          (inverseMap k K g).left =
+        (orbitFiniteEtaleMap k K g
+            (orbitIndexMap k K f (Quotient.mk'' a))).left ≫
+          Sigma.ι YU
+            (orbitIndexMap k K g
+              (orbitIndexMap k K f (Quotient.mk'' a))) := by
+    rw [inverseMap_left]
+    exact Sigma.ι_comp_desc _ _
+  have hιfg :
+      Sigma.ι YS (Quotient.mk'' a) ≫ (inverseMap k K (f ≫ g)).left =
+        (orbitFiniteEtaleMap k K (f ≫ g) (Quotient.mk'' a)).left ≫
+          Sigma.ι YU
+            (orbitIndexMap k K (f ≫ g) (Quotient.mk'' a)) := by
+    rw [inverseMap_left]
+    exact Sigma.ι_comp_desc _ _
+  have hm :
+      orbitContActionMap k K (f ≫ g) (Quotient.mk'' a) =
+        orbitContActionMap k K f (Quotient.mk'' a) ≫
+          orbitContActionMap k K g
+            (orbitIndexMap k K f (Quotient.mk'' a)) := by
+    apply ObjectProperty.hom_ext
+    apply Action.hom_ext
+    ext x
+    rfl
+  have hf :
+      orbitFiniteEtaleMap k K (f ≫ g) (Quotient.mk'' a) =
+        orbitFiniteEtaleMap k K f (Quotient.mk'' a) ≫
+          orbitFiniteEtaleMap k K g
+            (orbitIndexMap k K f (Quotient.mk'' a)) := by
+    change
+      (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
+          (orbitContActionMap k K (f ≫ g) (Quotient.mk'' a)) =
+        (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
+            (orbitContActionMap k K f (Quotient.mk'' a)) ≫
+          (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
+            (orbitContActionMap k K g
+              (orbitIndexMap k K f (Quotient.mk'' a)))
+    rw [hm]
+    exact CategoryTheory.Functor.map_comp _ _ _
+  have hright :
+      Sigma.ι YS (Quotient.mk'' a) ≫
+          ((inverseMap k K f).left ≫ (inverseMap k K g).left) =
+        ((orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left ≫
+          (orbitFiniteEtaleMap k K g
+            (orbitIndexMap k K f (Quotient.mk'' a))).left) ≫
+          Sigma.ι YU
+            (orbitIndexMap k K g
+              (orbitIndexMap k K f (Quotient.mk'' a))) := by
+    calc
+      _ = (Sigma.ι YS (Quotient.mk'' a) ≫
+            (inverseMap k K f).left) ≫ (inverseMap k K g).left :=
+          (Category.assoc _ _ _).symm
+      _ = ((orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left ≫
+            Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a))) ≫
+            (inverseMap k K g).left :=
+          congrArg (fun t ↦ t ≫ (inverseMap k K g).left) hιf
+      _ = _ := by
+          let u := (orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left
+          let v := Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a))
+          let w := (inverseMap k K g).left
+          let z := (orbitFiniteEtaleMap k K g
+            (orbitIndexMap k K f (Quotient.mk'' a))).left
+          let j := Sigma.ι YU
+            (orbitIndexMap k K g
+              (orbitIndexMap k K f (Quotient.mk'' a)))
+          have h₁ : (u ≫ v) ≫ w = u ≫ (v ≫ w) := Category.assoc _ _ _
+          have h₂ : u ≫ (v ≫ w) = u ≫ (z ≫ j) :=
+            congrArg (fun t ↦ u ≫ t) hιg
+          have h₃ : u ≫ (z ≫ j) = (u ≫ z) ≫ j :=
+            (Category.assoc _ _ _).symm
+          exact h₁.trans (h₂.trans h₃)
+  rw [hf] at hιfg
+  change
+    Sigma.ι YS (Quotient.mk'' a) ≫ (inverseMap k K (f ≫ g)).left =
+      Sigma.ι YS (Quotient.mk'' a) ≫
+        ((inverseMap k K f).left ≫ (inverseMap k K g).left)
+  simpa only [MorphismProperty.Comma.comp_left] using hιfg.trans hright.symm
+
 /-- The orbitwise-coproduct inverse functor. -/
 private noncomputable abbrev inverseFunctor :
     DiscreteContAction TopCat (G k K) ⥤ (Spec (.of k)).Etale where
   obj := inverseObj k K
   map := inverseMap k K
-  map_id S := by
-    apply MorphismProperty.Over.Hom.ext
-    apply Sigma.hom_ext
-    intro ω
-    induction ω using Quotient.inductionOn'
-    rename_i a
-    let Y := fun η : MulAction.orbitRel.Quotient (G k K)
-        ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj S) ↦
-      (orbitFiniteEtale k K S η).left
-    have hι :
-        Sigma.ι Y (Quotient.mk'' a) ≫ (inverseMap k K (𝟙 S)).left =
-          (orbitFiniteEtaleMap k K (𝟙 S) (Quotient.mk'' a)).left ≫
-            Sigma.ι Y (Quotient.mk'' a) := by
-      rw [inverseMap_left]
-      exact Sigma.ι_comp_desc _ _
-    have hm : orbitContActionMap k K (𝟙 S) (Quotient.mk'' a) = 𝟙 _ := by
-      apply ObjectProperty.hom_ext
-      apply Action.hom_ext
-      ext x
-      rfl
-    have hf :
-        orbitFiniteEtaleMap k K (𝟙 S) (Quotient.mk'' a) = 𝟙 _ := by
-      change
-        (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
-            (orbitContActionMap k K (𝟙 S) (Quotient.mk'' a)) =
-          𝟙 _
-      rw [hm]
-      exact CategoryTheory.Functor.map_id _ _
-    rw [hf] at hι
-    have hidSource :
-        (𝟙 (orbitFiniteEtale k K S (Quotient.mk'' a)) :
-          orbitFiniteEtale k K S (Quotient.mk'' a) ⟶
-            orbitFiniteEtale k K S (Quotient.mk'' a)).left = 𝟙 _ := rfl
-    have hidTarget :
-        (𝟙 (inverseObj k K S) :
-          inverseObj k K S ⟶ inverseObj k K S).left = 𝟙 _ := rfl
-    have hsource :
-        (𝟙 (orbitFiniteEtale k K S (Quotient.mk'' a)) :
-            orbitFiniteEtale k K S (Quotient.mk'' a) ⟶
-              orbitFiniteEtale k K S (Quotient.mk'' a)).left ≫
-            Sigma.ι Y (Quotient.mk'' a) =
-          Sigma.ι Y (Quotient.mk'' a) := by
-      calc
-        _ = 𝟙 _ ≫ Sigma.ι Y (Quotient.mk'' a) :=
-          congrArg (fun t ↦ t ≫ Sigma.ι Y (Quotient.mk'' a)) hidSource
-        _ = _ := Category.id_comp _
-    have htarget :
-        Sigma.ι Y (Quotient.mk'' a) ≫
-            (𝟙 (inverseObj k K S) :
-              inverseObj k K S ⟶ inverseObj k K S).left =
-          Sigma.ι Y (Quotient.mk'' a) := by
-      calc
-        _ = Sigma.ι Y (Quotient.mk'' a) ≫ 𝟙 _ :=
-          congrArg (fun t ↦ Sigma.ι Y (Quotient.mk'' a) ≫ t) hidTarget
-        _ = _ := Category.comp_id _
-    exact hι.trans (hsource.trans htarget.symm)
-  map_comp f g := by
-    rename_i S T U
-    apply MorphismProperty.Over.Hom.ext
-    apply Sigma.hom_ext
-    intro ω
-    induction ω using Quotient.inductionOn'
-    rename_i a
-    let YS := fun η : MulAction.orbitRel.Quotient (G k K)
-        ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj S) ↦
-      (orbitFiniteEtale k K S η).left
-    let YT := fun η : MulAction.orbitRel.Quotient (G k K)
-        ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj T) ↦
-      (orbitFiniteEtale k K T η).left
-    let YU := fun η : MulAction.orbitRel.Quotient (G k K)
-        ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj U) ↦
-      (orbitFiniteEtale k K U η).left
-    have hιf :
-        Sigma.ι YS (Quotient.mk'' a) ≫ (inverseMap k K f).left =
-          (orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left ≫
-            Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a)) := by
-      rw [inverseMap_left]
-      exact Sigma.ι_comp_desc _ _
-    have hιg :
-        Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a)) ≫
-            (inverseMap k K g).left =
-          (orbitFiniteEtaleMap k K g
-              (orbitIndexMap k K f (Quotient.mk'' a))).left ≫
-            Sigma.ι YU
-              (orbitIndexMap k K g
-                (orbitIndexMap k K f (Quotient.mk'' a))) := by
-      rw [inverseMap_left]
-      exact Sigma.ι_comp_desc _ _
-    have hιfg :
-        Sigma.ι YS (Quotient.mk'' a) ≫ (inverseMap k K (f ≫ g)).left =
-          (orbitFiniteEtaleMap k K (f ≫ g) (Quotient.mk'' a)).left ≫
-            Sigma.ι YU
-              (orbitIndexMap k K (f ≫ g) (Quotient.mk'' a)) := by
-      rw [inverseMap_left]
-      exact Sigma.ι_comp_desc _ _
-    have hm :
-        orbitContActionMap k K (f ≫ g) (Quotient.mk'' a) =
-          orbitContActionMap k K f (Quotient.mk'' a) ≫
-            orbitContActionMap k K g
-              (orbitIndexMap k K f (Quotient.mk'' a)) := by
-      apply ObjectProperty.hom_ext
-      apply Action.hom_ext
-      ext x
-      rfl
-    have hf :
-        orbitFiniteEtaleMap k K (f ≫ g) (Quotient.mk'' a) =
-          orbitFiniteEtaleMap k K f (Quotient.mk'' a) ≫
-            orbitFiniteEtaleMap k K g
-              (orbitIndexMap k K f (Quotient.mk'' a)) := by
-      change
-        (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
-            (orbitContActionMap k K (f ≫ g) (Quotient.mk'' a)) =
-          (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
-              (orbitContActionMap k K f (Quotient.mk'' a)) ≫
-            (AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map
-              (orbitContActionMap k K g
-                (orbitIndexMap k K f (Quotient.mk'' a)))
-      rw [hm]
-      exact CategoryTheory.Functor.map_comp _ _ _
-    have hright :
-        Sigma.ι YS (Quotient.mk'' a) ≫
-            ((inverseMap k K f).left ≫ (inverseMap k K g).left) =
-          ((orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left ≫
-            (orbitFiniteEtaleMap k K g
-              (orbitIndexMap k K f (Quotient.mk'' a))).left) ≫
-            Sigma.ι YU
-              (orbitIndexMap k K g
-                (orbitIndexMap k K f (Quotient.mk'' a))) := by
-      calc
-        _ = (Sigma.ι YS (Quotient.mk'' a) ≫
-              (inverseMap k K f).left) ≫ (inverseMap k K g).left :=
-            (Category.assoc _ _ _).symm
-        _ = ((orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left ≫
-              Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a))) ≫
-              (inverseMap k K g).left :=
-            congrArg (fun t ↦ t ≫ (inverseMap k K g).left) hιf
-        _ = _ := by
-            let u := (orbitFiniteEtaleMap k K f (Quotient.mk'' a)).left
-            let v := Sigma.ι YT (orbitIndexMap k K f (Quotient.mk'' a))
-            let w := (inverseMap k K g).left
-            let z := (orbitFiniteEtaleMap k K g
-              (orbitIndexMap k K f (Quotient.mk'' a))).left
-            let j := Sigma.ι YU
-              (orbitIndexMap k K g
-                (orbitIndexMap k K f (Quotient.mk'' a)))
-            have h₁ : (u ≫ v) ≫ w = u ≫ (v ≫ w) := Category.assoc _ _ _
-            have h₂ : u ≫ (v ≫ w) = u ≫ (z ≫ j) :=
-              congrArg (fun t ↦ u ≫ t) hιg
-            have h₃ : u ≫ (z ≫ j) = (u ≫ z) ≫ j :=
-              (Category.assoc _ _ _).symm
-            exact h₁.trans (h₂.trans h₃)
-    rw [hf] at hιfg
-    change
-      Sigma.ι YS (Quotient.mk'' a) ≫ (inverseMap k K (f ≫ g)).left =
-        Sigma.ι YS (Quotient.mk'' a) ≫
-          ((inverseMap k K f).left ≫ (inverseMap k K g).left)
-    simpa only [MorphismProperty.Comma.comp_left] using hιfg.trans hright.symm
+  map_id := inverseMap_id k K
+  map_comp := inverseMap_comp k K
 
 /-- A geometric point of the coproduct defining `inverseObj` is uniquely a
 geometric point of one orbit summand. -/
@@ -986,8 +998,9 @@ private noncomputable def finiteGeometricFiberEquiv
     (A : ContAction FintypeCat (G k K)) :
     (Over.mk (ξ k K) ⟶
       ((AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.obj A).toComma) ≃
-      (forget₂ (ContAction FintypeCat (G k K)) FintypeCat).obj A :=
-  (AlgebraicGeometry.FiniteEtale.fiberObjEquivHom (ξ k K)
+      (forget₂ (ContAction FintypeCat (G k K)) FintypeCat).obj A := by
+  let : IsSepClosed K := IsSepClosure.sep_closed k
+  exact (AlgebraicGeometry.FiniteEtale.fiberObjEquivHom (ξ k K)
     ((AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.obj A)).symm.trans
       (finiteCounitEquiv k K A)
 
@@ -996,8 +1009,9 @@ private lemma finiteGeometricFiberEquiv_smul
     (x : Over.mk (ξ k K) ⟶
       ((AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.obj A).toComma) :
     finiteGeometricFiberEquiv k K A (g • x) =
-      ConcreteCategory.hom (A.obj.ρ g)
+      ConcreteCategory.hom (A.obj.ρ g).asHom
         (finiteGeometricFiberEquiv k K A x) := by
+  let : IsSepClosed K := IsSepClosure.sep_closed k
   let E := AlgebraicGeometry.FiniteEtale.equivContAction k K
   let Y := E.inverse.obj A
   let e := AlgebraicGeometry.FiniteEtale.fiberObjEquivHom (ξ k K) Y
@@ -1008,13 +1022,13 @@ private lemma finiteGeometricFiberEquiv_smul
       (AlgebraicGeometry.FiniteEtale.algEquiv_smul_fiber_def
         k K Y g z)
   change finiteCounitEquiv k K A (e.symm (g • x)) =
-    ConcreteCategory.hom (A.obj.ρ g)
+    ConcreteCategory.hom (A.obj.ρ g).asHom
       (finiteCounitEquiv k K A (e.symm x))
   rw [hz]
   have hc := ConcreteCategory.congr_hom
     ((E.counitIso.app A).hom.hom.comm g) z
   change finiteCounitEquiv k K A (g • z) =
-    ConcreteCategory.hom (A.obj.ρ g)
+    ConcreteCategory.hom (A.obj.ρ g).asHom
       (finiteCounitEquiv k K A z) at hc
   exact hc
 
@@ -1025,6 +1039,7 @@ private lemma finiteGeometricFiberEquiv_naturality
     finiteGeometricFiberEquiv k K B
         (x ≫ ((AlgebraicGeometry.FiniteEtale.equivContAction k K).inverse.map f).hom) =
       f.hom.hom (finiteGeometricFiberEquiv k K A x) := by
+  let : IsSepClosed K := IsSepClosure.sep_closed k
   let E := AlgebraicGeometry.FiniteEtale.equivContAction k K
   let z := (AlgebraicGeometry.FiniteEtale.fiberObjEquivHom (ξ k K)
     (E.inverse.obj A)).symm x
@@ -1056,7 +1071,7 @@ private lemma inverseObjGeometricFiberEquiv_rho
     (x : Over.mk (ξ k K) ⟶ (inverseObj k K S).toComma) :
     inverseObjGeometricFiberEquiv k K S
         (ConcreteCategory.hom
-          (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g) x) =
+          (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g).asHom x) =
       ⟨(inverseObjGeometricFiberEquiv k K S x).1,
         g • (inverseObjGeometricFiberEquiv k K S x).2⟩ := by
   let Y := fun ω : MulAction.orbitRel.Quotient (G k K)
@@ -1067,7 +1082,7 @@ private lemma inverseObjGeometricFiberEquiv_rho
   let q := Scheme.homSigmaEquiv Y (Spec (.of K)) x.left
   let xg : Over.mk (ξ k K) ⟶ (inverseObj k K S).toComma :=
     ConcreteCategory.hom
-      (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g) x
+      (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g).asHom x
   let qg := Scheme.homSigmaEquiv Y (Spec (.of K)) xg.left
   have hxg : xg.left = σ ≫ x.left := by
     change Spec.map (CommRingCat.ofHom (g : K →+* K)) ≫ x.left =
@@ -1158,7 +1173,7 @@ private lemma inverseObjCounitEquiv_rho
     (x : Over.mk (ξ k K) ⟶ (inverseObj k K S).toComma) :
     inverseObjCounitEquiv k K S
         (ConcreteCategory.hom
-          (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g) x) =
+          (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g).asHom x) =
       g • inverseObjCounitEquiv k K S x := by
   let q := inverseObjGeometricFiberEquiv k K S x
   let E := Equiv.sigmaCongrRight (fun ω ↦
@@ -1168,19 +1183,19 @@ private lemma inverseObjCounitEquiv_rho
     ((forget₂ (DiscreteContAction TopCat (G k K)) TopCat).obj S)).symm
   have hq : inverseObjGeometricFiberEquiv k K S
       (ConcreteCategory.hom
-        (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g) x) =
+        (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g).asHom x) =
       ⟨q.1, g • q.2⟩ :=
     inverseObjGeometricFiberEquiv_rho k K S g x
   have hf := finiteGeometricFiberEquiv_smul k K
     (DiscreteContAction.orbitContAction S q.1) g q.2
   change R (E (inverseObjGeometricFiberEquiv k K S
       (ConcreteCategory.hom
-        (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g) x))) =
+        (((geometricFiber k K).obj (inverseObj k K S)).obj.obj.ρ g).asHom x))) =
     g • R (E q)
   calc
     _ = R (E ⟨q.1, g • q.2⟩) := congrArg (fun z ↦ R (E z)) hq
     _ = R ⟨q.1, ConcreteCategory.hom
-          ((DiscreteContAction.orbitContAction S q.1).obj.ρ g)
+          ((DiscreteContAction.orbitContAction S q.1).obj.ρ g).asHom
           (finiteGeometricFiberEquiv k K
             (DiscreteContAction.orbitContAction S q.1) q.2)⟩ := by
       apply congrArg R
@@ -1267,6 +1282,7 @@ scheme identifies it with the orbitwise inverse of its geometric fiber. -/
 private noncomputable def uncorrectedUnitObjIso
     (X : (Spec (.of k)).Etale) :
     inverseObj k K ((geometricFiber k K).obj X) ≅ X := by
+  let : IsSepClosed K := IsSepClosure.sep_closed k
   choose L a e hField hFiniteSep he using exists_iso_sigmaSpec k X
   let Z (i : X.left) : AlgebraicGeometry.FiniteEtale (Spec (.of k)) :=
     finiteEtaleComponent k L a hField hFiniteSep i
@@ -1462,6 +1478,7 @@ private lemma geometricFiber_map_injective
     {X Y : (Spec (.of k)).Etale} {f g : X ⟶ Y}
     (h : (geometricFiber k K).map f = (geometricFiber k K).map g) :
     f = g := by
+  let _ : IsSepClosed K := IsSepClosure.sep_closed k
   apply MorphismProperty.Over.Hom.ext
   obtain ⟨L, a, e, hField, hFiniteSep, he⟩ :=
     exists_iso_sigmaSpec k X

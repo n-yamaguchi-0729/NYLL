@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
-import Mathlib.CategoryTheory.Sites.SubcanonicalOver
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # The ordinary Picard-zero group sheaf on its existing representing scheme
@@ -17,6 +20,8 @@ sheaf with the already represented ordinary Picard functor. This supplies the
 target of the modulus-forgetting group morphism.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -24,6 +29,8 @@ universe u
 open CategoryTheory Opposite NeronModelInfra GoodReductionJacobian
 open AlgebraicGeometry.RelPicard
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

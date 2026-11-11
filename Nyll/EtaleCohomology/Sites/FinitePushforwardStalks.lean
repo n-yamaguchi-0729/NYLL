@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
-import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.Topology.Sets.Opens
+module
+
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
+public import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.Topology.Sets.Opens
 
 /-!
 # Injectivity of the finite direct-image stalk comparison
@@ -25,6 +27,8 @@ the finite direct-image stalk formula without assuming any local splitting.
 The argument applies to concrete coefficient categories whose forgetful functor
 preserves filtered colimits and sheaves, including sets and modules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

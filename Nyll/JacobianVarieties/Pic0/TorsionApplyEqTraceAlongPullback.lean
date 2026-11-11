@@ -13,7 +13,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.Differentials.Maps.Maps
-import Nyll.JacobianVarieties.Pic0.MkEqDvdOrdMemTorsion
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.MkEqDvdOrdMemTorsion
 import Nyll.AlgebraicCurves.Divisors.Correspondences.CorrespondenceEqOrdNormDlogNormEqTraceAlongPullback
 
 /-!

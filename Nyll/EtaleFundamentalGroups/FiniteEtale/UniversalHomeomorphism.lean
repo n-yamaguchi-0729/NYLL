@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.SchemeTheory.FiniteEtale.AffineUniversalHomeomorphismEquivalence
-import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparableGluing
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
-import Mathlib.AlgebraicGeometry.Cover.Directed
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.AffineUniversalHomeomorphismEquivalence
+public import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparableGluing
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Mathlib.AlgebraicGeometry.Cover.Directed
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Universal homeomorphisms preserve finite étale covers
@@ -28,6 +30,8 @@ group isomorphism.
 Source: Stacks Project, Proposition 58.8.4, Tag 0BQN:
 https://stacks.math.columbia.edu/tag/0BQN
 -/
+
+@[expose] public section
 
 noncomputable section
 

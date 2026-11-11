@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.TensorProductPrime
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.TensorProductPrime
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 
 /-!
@@ -23,6 +25,8 @@ The existing compatible-prime tensor-product theorem then constructs a prime
 with both prescribed contractions. No tensor induction or auxiliary point is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

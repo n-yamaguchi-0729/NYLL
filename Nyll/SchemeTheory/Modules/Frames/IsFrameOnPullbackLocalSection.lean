@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Logic.Function.Basic
-import Mathlib.Tactic.Convert
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorUnitObjIsoHomAppPullbackLocalSectionUnitSection
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.Tactic.Convert
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorUnitObjIsoHomAppPullbackLocalSectionUnitSection
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 /-!
 # Scheme Modules Is Frame On pullback Local Section
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

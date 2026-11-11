@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedOver
-import Mathlib.CategoryTheory.Galois.GaloisObjects
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedOver
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
 
 /-!
 # Relative deck transitivity
@@ -14,6 +16,8 @@ A Galois object remains Galois over an intermediate object. Here the
 essential transitivity assertion is proved directly on the actual
 fiber-over-a-point functor, constructing each relative deck automorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,13 +39,13 @@ theorem relativeDeck_isPretransitive
   intro a b
   change { z : F.obj A // F.map f z = y } at a b
   obtain ⟨σ, hσ⟩ := MulAction.exists_smul_eq (Aut A) a.1 b.1
-  change F.map σ.hom a.1 = b.1 at hσ
-  have hf : σ.hom ≫ f = f := by
+  change F.map σ.asIso.hom a.1 = b.1 at hσ
+  have hf : σ.asIso.hom ≫ f = f := by
     apply evaluation_injective_of_isConnected F A B a.1
-    change F.map (σ.hom ≫ f) a.1 = F.map f a.1
+    change F.map (σ.asIso.hom ≫ f) a.1 = F.map f a.1
     rw [F.map_comp, FintypeCat.comp_apply, hσ]
     exact b.2.trans a.2.symm
-  let τ : Aut (Over.mk f) := Over.isoMk σ hf
+  let τ : Aut (Over.mk f) := Aut.of (Over.isoMk σ.asIso hf)
   refine ⟨τ, ?_⟩
   apply Subtype.ext
   exact hσ

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusTorsorRegularMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusTorsorRegularMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Descent of the equivariant Abel factor
 
@@ -15,6 +17,8 @@ separable descent retain equivariance and the original Abel factorization.
 For positive modulus this constructs the unique pair over the original
 field, without a rational point on the curve or on the target torsor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

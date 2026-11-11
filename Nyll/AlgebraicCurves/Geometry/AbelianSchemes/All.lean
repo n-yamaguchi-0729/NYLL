@@ -12,7 +12,6 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.All
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.All
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.ProjectiveLineConstancy

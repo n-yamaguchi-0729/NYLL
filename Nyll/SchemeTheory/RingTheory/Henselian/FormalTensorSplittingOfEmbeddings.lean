@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # Formal splitting over an actual splitting field
 
@@ -14,6 +16,8 @@ be a Laurent field; algebraic closedness is unnecessary. The actual lifts
 are the existing simple-root lifts. Their evaluation matrix has the given
 residue evaluation matrix, whose nonzero determinant makes it invertible.
 -/
+
+@[expose] public section
 
 noncomputable section
 

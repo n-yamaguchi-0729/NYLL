@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.All
-import Nyll.ValuedFieldTheory.Ramification.All
-import Nyll.ValuedFieldTheory.Valuation.All
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.All
+public import Nyll.ValuedFieldTheory.Ramification.All
+public import Nyll.ValuedFieldTheory.Valuation.All
 
 /-!
 # Valued field theory

@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormEqSumFiberOver
-import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
-import Mathlib.RingTheory.TensorProduct.Free
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormEqSumFiberOver
+public import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Divisor pullback Along pushforward Along eq sum of decomposition
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

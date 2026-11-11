@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.CechStalkCompatibility
-import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.FieldTheory.SeparableClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.CechStalkCompatibility
+public import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.FieldTheory.SeparableClosure
 
 /-!
 # The saturated equality open of a Čech-compatible section
@@ -24,6 +26,8 @@ that object. Equality is transferred through the original geometric stalk,
 using the actual inverse-image unit. The open and its equality are constructed
 from the sheaf; no descent property is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

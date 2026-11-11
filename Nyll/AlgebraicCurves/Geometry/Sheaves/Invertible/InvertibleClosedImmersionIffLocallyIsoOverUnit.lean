@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealIffLocallyIsoOverUnit
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealIffLocallyIsoOverUnit
 
 /-!
 # Scheme Modules Is Invertible exists is Closed Immersion forall iff locally Iso Over unit
 of flat of is Proper
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -484,15 +488,15 @@ def mU (U : T.affineOpens) : letI := algebraOfHom t U; XB c Γ(T, U) ⟶ Limits.
     (by rw [Category.comp_id, Category.id_comp]) (by rw [Category.comp_id, fromSpec_eq])
 
 theorem mU_fst (U : T.affineOpens) :
-    letI := algebraOfHom t U
+    let := algebraOfHom t U
     mU c t U ≫ Limits.pullback.fst c t = fB c Γ(T, U) := by
-  let := algebraOfHom t U
+  intro sharedOwner1
   rw [mU, fB, pullback.lift_fst, Category.comp_id]
 
 theorem mU_snd (U : T.affineOpens) :
-    letI := algebraOfHom t U
+    let := algebraOfHom t U
     mU c t U ≫ Limits.pullback.snd c t = sB c Γ(T, U) ≫ U.2.fromSpec := by
-  let := algebraOfHom t U
+  intro sharedOwner1
   rw [mU, sB, pullback.lift_snd]
 
 variable (U : T.affineOpens) {T' : Scheme.{u}}
@@ -511,10 +515,10 @@ def πU (ψ' : T' ⟶ Spec (.of Γ(T, U))) :
       (pullbackLeftPullbackSndIso c t (ψ' ≫ U.2.fromSpec)).symm
 
 theorem πU_hom_snd (ψ' : T' ⟶ Spec (.of Γ(T, U))) :
-    letI := algebraOfHom t U
+    let := algebraOfHom t U
     (πU c t U ψ').hom ≫ Limits.pullback.snd (Limits.pullback.snd c t) (ψ' ≫ U.2.fromSpec) =
       Limits.pullback.snd (sB c Γ(T, U)) ψ' := by
-  let := algebraOfHom t U
+  intro sharedOwner1
   change ((pullbackLeftPullbackSndIso c (specMap R Γ(T, U)) ψ').hom ≫ (pullback.congrHom rfl _).hom
     ≫
     (pullbackLeftPullbackSndIso c t (ψ' ≫ U.2.fromSpec)).inv) ≫ _ = _
@@ -527,10 +531,10 @@ theorem πU_hom_snd (ψ' : T' ⟶ Spec (.of Γ(T, U))) :
     pullbackLeftPullbackSndIso_hom_snd]
 
 theorem πU_hom_fst (ψ' : T' ⟶ Spec (.of Γ(T, U))) :
-    letI := algebraOfHom t U
+    let := algebraOfHom t U
     (πU c t U ψ').hom ≫ Limits.pullback.fst (Limits.pullback.snd c t) (ψ' ≫ U.2.fromSpec) =
       Limits.pullback.fst (sB c Γ(T, U)) ψ' ≫ mU c t U := by
-  let := algebraOfHom t U
+  intro sharedOwner1
   apply pullback.hom_ext
   · have e1 : (pullbackLeftPullbackSndIso c t (ψ' ≫ U.2.fromSpec)).inv ≫
         Limits.pullback.fst (Limits.pullback.snd c t) (ψ' ≫ U.2.fromSpec) ≫ Limits.pullback.fst c t
@@ -569,12 +573,12 @@ def eU (ψ' : T' ⟶ Spec (.of Γ(T, U))) :
     ((Scheme.Modules.pullbackComp _ _).app N).symm
 
 theorem F_chart_iff (ψ' : T' ⟶ Spec (.of Γ(T, U))) :
-    letI := algebraOfHom t U
+    let := algebraOfHom t U
     F (Limits.pullback.snd c t) N (ψ' ≫ U.2.fromSpec) ↔
       LIO (Limits.pullback.snd (sB c Γ(T, U)) ψ')
         ((Scheme.Modules.pullback (Limits.pullback.fst (sB c Γ(T, U)) ψ')).obj
           ((Scheme.Modules.pullback (mU c t U)).obj N)) := by
-  let := algebraOfHom t U
+  intro sharedOwner1
   constructor
   · intro h
     have h1 := lio_precomp _ (πU c t U ψ').hom _ h
@@ -709,8 +713,8 @@ theorem exists_KI (U : T.affineOpens) : ∃ I : Ideal Γ(T, U), KI c t N U I := 
       hH0' N' Ninv'
       (hN.pullback _) (hNinv.pullback _) hfib' hinv'
   refine ⟨I, fun T' ψ' => ?_⟩
-  rw [F_chart_iff, ← exists_fac_iff I ψ']
-  exact (hI ψ').symm
+  exact (F_chart_iff c t N U ψ').trans
+    ((hI ψ').symm.trans (exists_fac_iff I ψ'))
 
 end KI
 

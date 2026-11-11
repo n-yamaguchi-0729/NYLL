@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugate
-import Nyll.EtaleFundamentalGroups.Inertia.NativeIdealInertiaInclusion
-import Mathlib.Algebra.Group.Subgroup.Map
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugate
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeIdealInertiaInclusion
+public import Mathlib.Algebra.Group.Subgroup.Map
 
 /-!
 # The actual original inertia inside decomposition
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Group.Subgroup.Map
 The two original action names use the identical normalization action value.
 The inclusion is the standard inclusion supplied by ideal inertia stability.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

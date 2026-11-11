@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Flat.Equalizer
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+module
+
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Flat.Equalizer
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Module ker base Change le range and finrank eq of field extension
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

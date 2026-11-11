@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.TwoTermComplexSectionsEquivBaseChange
-import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.CoherentBaseChangeTwoTermComplexH0LinearEquivAnnihilator
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageBasicOpenIsoUnit
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.TwoTermComplexSectionsEquivBaseChange
+public import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.CoherentBaseChangeTwoTermComplexH0LinearEquivAnnihilator
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageBasicOpenIsoUnit
 
 /-!
 # Scheme Modules Is Invertible exists ideal forall locally Iso Over unit iff map eq bot
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

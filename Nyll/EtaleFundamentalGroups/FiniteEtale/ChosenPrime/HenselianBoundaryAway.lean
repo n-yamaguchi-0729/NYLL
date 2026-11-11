@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.BoundaryAway
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.BoundaryAway
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
 
 /-!
 # The primitive Tag boundary Away map over the Henselian pointed base
@@ -21,6 +23,8 @@ theorem is only for the strict/Henselian intermediate ring where
 `HenselianLocalRing` is already available; descent to the original global
 base is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldWildCardinality
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueCharacteristic
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.Group.Subgroup.Finite
-import Mathlib.GroupTheory.PGroup
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldWildCardinality
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueCharacteristic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Group.Subgroup.Finite
+public import Mathlib.GroupTheory.PGroup
 
 /-!
 # Original finite wild inertia over the base residue characteristic
@@ -19,6 +21,8 @@ the characteristic of the base DVR residue field. The same subgroup is a
 p-group in positive residue characteristic and is trivial when that base
 residue field has characteristic zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

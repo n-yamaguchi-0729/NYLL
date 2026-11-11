@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.PicardGroup
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Operations
-import Mathlib.Algebra.Group.Hom.Basic
-import Mathlib.Algebra.Group.Subgroup.Ker
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.Algebra.Group.Units.Hom
-import Mathlib.Algebra.GroupWithZero.Units.Basic
-import Mathlib.Algebra.Module.Submodule.Defs
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.PicardGroup
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Operations
+public import Mathlib.Algebra.Group.Hom.Basic
+public import Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.Group.Units.Hom
+public import Mathlib.Algebra.GroupWithZero.Units.Basic
+public import Mathlib.Algebra.Module.Submodule.Defs
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Comm Ring Pic exists boundary Hom conductor Square exact
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

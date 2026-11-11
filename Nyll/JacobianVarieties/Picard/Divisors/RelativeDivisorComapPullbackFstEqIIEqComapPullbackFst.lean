@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Mathlib.Util.WithWeakNamespace
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Mathlib.Util.WithWeakNamespace
 
 /-!
 # Relative effective divisors and the identity base change
 -/
 
+
+@[expose] public section
 
 section ProofImplementation
 

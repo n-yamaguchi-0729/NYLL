@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
+import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 import Nyll.JacobianVarieties.Generalized.PicardOneTorsor
 import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
 
@@ -15,6 +16,8 @@ noncomputable section
 universe u
 
 open CategoryTheory Opposite
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

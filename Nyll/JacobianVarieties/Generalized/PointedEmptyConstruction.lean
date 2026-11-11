@@ -4,12 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PointedConstruction
-import Nyll.JacobianVarieties.Generalized.EmptyModulusZero
-import Nyll.JacobianVarieties.Generalized.ModulusDegreeZero
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.PointedConstruction
+public import Nyll.JacobianVarieties.Generalized.EmptyModulusZero
+public import Nyll.JacobianVarieties.Generalized.ModulusDegreeZero
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # The degree-zero modulus recovers the ordinary Picard group scheme -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Spectrum.Prime.Jacobson
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
 
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Spectrum.Prime.Jacobson
+public import Mathlib.RingTheory.Valuation.LocalSubring
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
 
 /-!
 # Valuation Subring exists eq units mul prod sub algebra Map of not Mem map maximal Ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmodule
-import Mathlib.Algebra.Module.LocalizedModule.Submodule
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmodule
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # The actual localized range of the affine submodule morphism
@@ -16,6 +18,8 @@ with localization of the original submodule inclusion. The existing
 localization-of-ranges theorem then computes its actual range on every
 principal open, without an assumed comparison map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

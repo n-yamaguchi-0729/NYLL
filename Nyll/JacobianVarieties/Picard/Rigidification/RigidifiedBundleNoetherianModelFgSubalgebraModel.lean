@@ -10,37 +10,43 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.CategoryTheory.EqToHom
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseFacesPullbackCubeIff
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleRigidifiedCubePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullbackUnitStage
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.CategoryTheory.EqToHom
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseFacesPullbackCubeIff
+import all Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseFacesPullbackCubeIff
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleRigidifiedCubePullback
+import all Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleRigidifiedCubePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullbackUnitStage
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
 
 /-!
 # Noetherian models preserving the three unit faces
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

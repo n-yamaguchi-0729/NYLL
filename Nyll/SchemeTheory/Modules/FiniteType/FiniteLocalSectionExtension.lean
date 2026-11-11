@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictedSections
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleRestriction
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictedSections
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleRestriction
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
 
 /-!
 # Actual quasicoherent extensions containing finite local section families
@@ -19,6 +22,8 @@ the extension is finite type on that open and contains the original
 specified sections there. These are the actual inputs for the global
 finite-type extraction theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

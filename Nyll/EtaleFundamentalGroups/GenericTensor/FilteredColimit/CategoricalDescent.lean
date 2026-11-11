@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalPushout
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Filtered.Connected
-import Mathlib.CategoryTheory.Functor.Const
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Limits.Preserves.Over
-import Mathlib.CategoryTheory.Presentable.Finite
-import Mathlib.CategoryTheory.Presentable.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalPushout
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Filtered.Connected
+public import Mathlib.CategoryTheory.Functor.Const
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Preserves.Over
+public import Mathlib.CategoryTheory.Presentable.Finite
+public import Mathlib.CategoryTheory.Presentable.Basic
 
 /-!
 # Finite-presentation descent through the actual pushout functor
@@ -19,6 +21,8 @@ import Mathlib.CategoryTheory.Presentable.Basic
 The only compactness inputs are finite presentability of the two original
 models. No descent map, comparison, or inverse equation is an input field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

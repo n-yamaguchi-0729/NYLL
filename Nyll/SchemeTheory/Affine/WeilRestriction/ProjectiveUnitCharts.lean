@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitOpen
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitOpen
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Normalized local lifts of the projective norm open
@@ -14,6 +16,8 @@ The overlap of the norm chart and a standard projective coordinate chart
 is a localization in either direction. Evaluating the standard ratios
 there supplies normalized coordinates whose norm is a unit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

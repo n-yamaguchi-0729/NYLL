@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
-import Nyll.SchemeTheory.RingTheory.Ramification.LocalRingResidueCharacteristicTransport
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.NumberTheory.RamificationInertia.Ramification
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
+public import Nyll.SchemeTheory.RingTheory.Ramification.LocalRingResidueCharacteristicTransport
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.NumberTheory.RamificationInertia.Ramification
 
 /-!
 # Tameness under compatible changes of DVR and ambient field
@@ -22,6 +24,8 @@ same images of ideals, not an assumed comparison of valuations or fields.
 The characteristic-zero alternative in Stacks Project, Definition
 15.113.7 (tag `09E9`) is preserved as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

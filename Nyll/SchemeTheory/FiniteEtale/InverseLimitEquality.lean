@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Eventual equality of native finite-etale morphisms
@@ -14,6 +16,8 @@ Equality after pullback to the actual inverse limit is detected by a genuine
 later stage. The maps in the conclusion are the native finite-etale pullback
 maps, so the result applies directly to inverse and cocycle equations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

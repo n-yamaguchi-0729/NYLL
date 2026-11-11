@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.Tactic.Algebraize
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatIsAdicComplete
+module
+
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.Tactic.Algebraize
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatIsAdicComplete
 
 /-!
 # bijective app Top of is Proper of flat of is Noetherian Ring of is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -259,43 +263,11 @@ end BaseChange
 
 end SolH0Nloc
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "bijective_appTop_of_isProper_of_flat_of_isNoetherianRing_of_isLocalRing." ++
-        "SolH0Nloc")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped SolH0Nloc
 
 end
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "bijective_appTop_of_isProper_of_flat_of_isNoetherianRing_of_isLocalRing." ++
-        "SolH0Nloc")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped SolH0Nloc
 
 theorem
   _root_.AlgebraicGeometry.bijective_appTop_of_isProper_of_flat_of_isNoetherianRing_of_isLocalRing

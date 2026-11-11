@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
 
 /-!
 # Actual deck graphs in the triple product
@@ -13,6 +15,8 @@ Pairs of successive deck transformations decompose the triple product of
 a Galois object. This gives the actual geometric test family for the
 degree-one Cech cocycle identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w
@@ -24,7 +28,7 @@ variable {C : Type u} [Category.{v} C] [GaloisCategory C]
 
 /-- The graph of two successive actual deck transformations. -/
 def galoisTripleGraph (X : C) (σ τ : Aut X) : X ⟶ X ⨯ (X ⨯ X) :=
-  prod.lift (𝟙 X) (prod.lift σ.hom (σ.hom ≫ τ.hom))
+  prod.lift (𝟙 X) (prod.lift σ.asIso.hom (σ.asIso.hom ≫ τ.asIso.hom))
 
 /-- The coproduct of the actual successive deck graphs. -/
 def galoisTripleProductMap (X : C) [IsGalois X] :
@@ -53,13 +57,13 @@ theorem galoisTripleProductMap_isIso
       ← FintypeCat.comp_apply, ← Functor.map_comp,
       Sigma.ι_comp_desc, prod.lift_fst, Functor.map_id, FintypeCat.id_apply]
   have h₁ (p : Aut X × Aut X) (x : F.obj X) :
-      F.map (prod.snd ≫ prod.fst) (a p x) = F.map p.1.hom x := by
+      F.map (prod.snd ≫ prod.fst) (a p x) = F.map p.1.asIso.hom x := by
     simp only [a, galoisTripleProductMap, galoisTripleGraph,
       ← FintypeCat.comp_apply, ← Functor.map_comp,
       Sigma.ι_comp_desc, ← Category.assoc, prod.lift_snd, prod.lift_fst]
   have h₂ (p : Aut X × Aut X) (x : F.obj X) :
       F.map (prod.snd ≫ prod.snd) (a p x) =
-        F.map p.2.hom (F.map p.1.hom x) := by
+        F.map p.2.asIso.hom (F.map p.1.asIso.hom x) := by
     simp only [a, galoisTripleProductMap, galoisTripleGraph,
       ← FintypeCat.comp_apply, ← Functor.map_comp,
       Sigma.ι_comp_desc, ← Category.assoc, prod.lift_snd]
@@ -104,7 +108,7 @@ theorem galoisTripleProductMap_isIso
         rw [h₁, h₁] at h'
         exact h'
       have hpq₂ : p.2 = q.2 := by
-        apply evaluation_aut_injective_of_isConnected F X (F.map p.1.hom x)
+        apply evaluation_aut_injective_of_isConnected F X (F.map p.1.asIso.hom x)
         have h' : F.map (prod.snd ≫ prod.snd) (a p x) =
             F.map (prod.snd ≫ prod.snd) (a q x) :=
           congrArg (F.map (prod.snd ≫ prod.snd)) h
@@ -123,7 +127,7 @@ theorem galoisTripleProductMap_isIso
       apply hext
       · exact h₀ (σ, τ) x
       · exact (h₁ (σ, τ) x).trans hσ
-      · exact (h₂ (σ, τ) x).trans ((congrArg (F.map τ.hom) hσ).trans hτ)
+      · exact (h₂ (σ, τ) x).trans ((congrArg (F.map τ.asIso.hom) hσ).trans hτ)
   have : IsIso (F.map (galoisTripleProductMap X)) :=
     (ConcreteCategory.isIso_iff_bijective _).mpr hbij
   exact isIso_of_reflects_iso (galoisTripleProductMap X) F

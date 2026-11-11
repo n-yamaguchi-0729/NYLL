@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerKernel
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Subgroup.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerKernel
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Subgroup.Basic
 
 /-!
 # Actual finite inertia restrictions
@@ -21,6 +23,8 @@ The actual surjective original-inertia maps and their proved kernel inclusion
 construct the canonical restriction between finite intrinsic inertia groups.
 Its computation law proves surjectivity and finite tower composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

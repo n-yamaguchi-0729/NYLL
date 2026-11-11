@@ -4,9 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRestrictionAffine
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRestrictionAffine
 
 /-! # Changing-modulus compatibility of the actual fppf group comparison -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -14,6 +19,8 @@ universe u
 
 open CategoryTheory Opposite
 open SchemeTheory.Affine SchemeTheory.Affine.FiniteScheme
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
 

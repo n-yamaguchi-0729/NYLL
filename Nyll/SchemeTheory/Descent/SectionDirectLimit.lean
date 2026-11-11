@@ -10,16 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
-import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
-import Nyll.SchemeTheory.Descent.SectionEqualityDirectLimit
+module
+
+public import Lean.Elab.Command
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
+public import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
+public import Nyll.SchemeTheory.Descent.SectionEqualityDirectLimit
 /-!
 # Scheme exists app eq of is Compact of is Direct Limit
+
+The local compatibility lemmas reuse the section-equality direct-limit API,
+which already supplies the same restriction and tensor-naturality statements.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -33,78 +40,34 @@ noncomputable section
 
 namespace LimitIsoFil
 
-private def _root_.AlgebraicGeometry.Scheme.Hom.appInf {X Y : Scheme.{u}} (π : Y ⟶ X) (V W :
-  X.Opens) :
-    Γ(X, V ⊓ W) ⟶ Γ(Y, π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W) :=
-  π.app (V ⊓ W)
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.appInf".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-      modifyEnv fun env => addAlias env
-        ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-          "Scheme_exists_app_eq_of_isCompact_of_isDirectLimit.AlgebraicGeometry.Scheme." ++
-          "Hom.appInf").toName target
-  | none => pure ()
-
-
 open _root_.AlgebraicGeometry.Scheme.Modules
-
-
-private theorem _root_.AlgebraicGeometry.Scheme.Hom.preimage_mono_inf {X Y : Scheme.{u}} (π : Y ⟶
-  X) {W' V W : X.Opens}
-    (h : W' ≤ V ⊓ W) : π ⁻¹ᵁ W' ≤ π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W := π.preimage_mono h
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.preimage_mono_inf".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-      modifyEnv fun env => addAlias env
-        ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-          "Scheme_exists_app_eq_of_isCompact_of_isDirectLimit.AlgebraicGeometry.Scheme." ++
-          "Hom.preimage_mono_inf").toName target
-  | none => pure ()
 
 lemma appInf_res {X Y : Scheme.{u}} (π : Y ⟶ X) (V W W' : X.Opens) (h : W' ≤ V ⊓ W) (t : Γ(X, V ⊓
   W)) :
-    Y.presheaf.map (homOfLE (π.preimage_mono_inf h)).op (π.appInf V W t) =
-      π.app W' (X.presheaf.map (homOfLE h).op t) := by
-  have e := congrArg (fun k => (ConcreteCategory.hom k) t) (π.naturality (homOfLE h).op)
-  simp only [CategoryTheory.comp_apply] at e
-  exact e.symm
+    Y.presheaf.map (homOfLE (π.preimage_mono h)).op (π.app (V ⊓ W) t) =
+      π.app W' (X.presheaf.map (homOfLE h).op t) :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.appInf_res
+    π V W W' h t
 
 lemma res_res {X : Scheme.{u}} {U V W : X.Opens} (h₁ : V ≤ U) (h₂ : W ≤ V) (s : Γ(X, U)) :
     X.presheaf.map (homOfLE h₂).op (X.presheaf.map (homOfLE h₁).op s) =
-      X.presheaf.map (homOfLE (h₂.trans h₁)).op s := by
-  rw [← CategoryTheory.comp_apply, ← Functor.map_comp]; rfl
+      X.presheaf.map (homOfLE (h₂.trans h₁)).op s :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.res_res
+    h₁ h₂ s
 
 lemma cocycle_res {X Y : Scheme.{u}} (π : Y ⟶ X) {V W W' : X.Opens} (h : W' ≤ V ⊓ W) (t₁ t₂ : Γ(X,
   V ⊓ W))
     (uV : Γ(Y, π ⁻¹ᵁ V)) (uW : Γ(Y, π ⁻¹ᵁ W))
-    (hc : π.appInf V W t₁ * Y.presheaf.map (homOfLE (inf_le_left : π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W ≤ π ⁻¹ᵁ V)).op
+    (hc : π.app (V ⊓ W) t₁ * Y.presheaf.map (homOfLE (π.preimage_mono (inf_le_left : V ⊓ W ≤ V))).op
       uV =
-      Y.presheaf.map (homOfLE (inf_le_right : π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W ≤ π ⁻¹ᵁ W)).op uW * π.appInf V W
+      Y.presheaf.map (homOfLE (π.preimage_mono (inf_le_right : V ⊓ W ≤ W))).op uW * π.app (V ⊓ W)
         t₂) :
     π.app W' (X.presheaf.map (homOfLE h).op t₁) *
         Y.presheaf.map (homOfLE (π.preimage_mono (h.trans inf_le_left))).op uV =
       Y.presheaf.map (homOfLE (π.preimage_mono (h.trans inf_le_right))).op uW *
-        π.app W' (X.presheaf.map (homOfLE h).op t₂) := by
-  have e := congrArg (Y.presheaf.map (homOfLE (π.preimage_mono_inf h)).op) hc
-  rw [map_mul, map_mul, appInf_res, appInf_res, res_res, res_res] at e
-  exact e
+        π.app W' (X.presheaf.map (homOfLE h).op t₂) :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.cocycle_res
+    π h t₁ t₂ uV uW hc
 
 lemma map_swap {K : Type u} [CommRing K] {A A' B B' : Type u} [CommRing A] [CommRing A'] [CommRing
   B] [CommRing B']
@@ -112,71 +75,54 @@ lemma map_swap {K : Type u} [CommRing K] {A A' B B' : Type u} [CommRing A] [Comm
       : A ⊗[K] B) :
     Algebra.TensorProduct.map ψ (AlgHom.id K B') (Algebra.TensorProduct.map (AlgHom.id K A) ρ x) =
       Algebra.TensorProduct.map (AlgHom.id K A') ρ (Algebra.TensorProduct.map ψ (AlgHom.id K B) x)
-        := by
-  rw [← AlgHom.comp_apply, ← Algebra.TensorProduct.map_comp, ← AlgHom.comp_apply, ←
-    Algebra.TensorProduct.map_comp]
-  simp only [AlgHom.comp_id, AlgHom.id_comp]
+        :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.map_swap
+    ψ ρ x
 
 lemma map_one_tmul {K : Type u} [CommRing K] {A A' B : Type u} [CommRing A] [CommRing A'] [CommRing
   B]
     [Algebra K A] [Algebra K A'] [Algebra K B] (ψ : A →ₐ[K] A') (b : B) :
-    Algebra.TensorProduct.map ψ (AlgHom.id K B) ((1 : A) ⊗ₜ[K] b) = (1 : A') ⊗ₜ[K] b := by
-  rw [Algebra.TensorProduct.map_tmul, map_one]; rfl
+    Algebra.TensorProduct.map ψ (AlgHom.id K B) ((1 : A) ⊗ₜ[K] b) = (1 : A') ⊗ₜ[K] b :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.map_one_tmul
+    ψ b
 
 lemma exists_ge₂ {J : Type u} [Preorder J] [Nonempty J] [IsDirected J (· ≤ ·)] {α β : Type*}
   [Finite α] [Finite β]
-    (f : α → J) (g : β → J) : ∃ m : J, (∀ a, f a ≤ m) ∧ ∀ b, g b ≤ m := by
-  classical
-  have := Fintype.ofFinite α; have := Fintype.ofFinite β
-  obtain ⟨m, hm⟩ := Finset.exists_le (Finset.univ.image f ∪ Finset.univ.image g)
-  exact ⟨m, fun a => hm _ (Finset.mem_union_left _ (Finset.mem_image_of_mem f (Finset.mem_univ a))),
-    fun b => hm _ (Finset.mem_union_right _ (Finset.mem_image_of_mem g (Finset.mem_univ b)))⟩
+    (f : α → J) (g : β → J) : ∃ m : J, (∀ a, f a ≤ m) ∧ ∀ b, g b ≤ m :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.exists_ge₂
+    f g
 
 lemma nonempty_iso_pullback_of_fac {X Y Z : Scheme.{u}} (h : X ⟶ Y) (π : Y ⟶ Z) (p : X ⟶ Z) (hp : h
   ≫ π = p)
     (L₁ L₂ : Z.Modules)
     (e : Nonempty ((Scheme.Modules.pullback π).obj L₁ ≅ (Scheme.Modules.pullback π).obj L₂)) :
-    Nonempty ((Scheme.Modules.pullback p).obj L₁ ≅ (Scheme.Modules.pullback p).obj L₂) := by
-  obtain ⟨e⟩ := e
-  exact ⟨((Scheme.Modules.pullbackComp h π).app L₁ ≪≫ (Scheme.Modules.pullbackCongr hp).app
-    L₁).symm ≪≫
-    (Scheme.Modules.pullback h).mapIso e ≪≫
-    ((Scheme.Modules.pullbackComp h π).app L₂ ≪≫ (Scheme.Modules.pullbackCongr hp).app L₂)⟩
+    Nonempty ((Scheme.Modules.pullback p).obj L₁ ≅ (Scheme.Modules.pullback p).obj L₂) :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.nonempty_iso_pullback_of_fac
+    h π p hp L₁ L₂ e
 
 end LimitIsoFil
 
 namespace LimitIsoFil
 
 lemma res_injective_of_eq {Y : Scheme.{u}} {U U' : Y.Opens} (h : U' = U) :
-    Function.Injective (Y.presheaf.map (homOfLE h.le).op) := by
-  intro a b hab
-  have e := congrArg (Y.presheaf.map (homOfLE h.ge).op) hab
-  rw [res_res, res_res] at e
-  have ha : Y.presheaf.map (homOfLE (h.ge.trans h.le)).op a = a := by
-    have : homOfLE (h.ge.trans h.le) = 𝟙 U := rfl
-    rw [this, op_id, Y.presheaf.map_id]; rfl
-  have hb : Y.presheaf.map (homOfLE (h.ge.trans h.le)).op b = b := by
-    have : homOfLE (h.ge.trans h.le) = 𝟙 U := rfl
-    rw [this, op_id, Y.presheaf.map_id]; rfl
-  rwa [ha, hb] at e
+    Function.Injective (Y.presheaf.map (homOfLE h.le).op) :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.res_injective_of_eq
+    h
 
 lemma appLE_app_of_comp_eq {Y Y' X : Scheme.{u}} (c : Y' ⟶ Y) (π : Y ⟶ X) (π' : Y' ⟶ X) (hc : c ≫ π
   = π')
     (U : X.Opens) (e : π' ⁻¹ᵁ U ≤ c ⁻¹ᵁ π ⁻¹ᵁ U) (a : Γ(X, U)) :
-    c.appLE (π ⁻¹ᵁ U) (π' ⁻¹ᵁ U) e (π.app U a) = π'.app U a := by
-  subst hc
-  exact congrArg
-    (fun f : Γ(X, U) ⟶ Γ(Y', (c ≫ π) ⁻¹ᵁ U) => f.hom a)
-    ((Scheme.Hom.comp_appLE c π U ((c ≫ π) ⁻¹ᵁ U) le_rfl).symm.trans
-      (Scheme.Hom.appLE_eq_app (c ≫ π)))
+    c.appLE (π ⁻¹ᵁ U) (π' ⁻¹ᵁ U) e (π.app U a) = π'.app U a :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.appLE_app_of_comp_eq
+    c π π' hc U e a
 
 lemma appLE_appLE_of_comp_eq {Z Y Y' : Scheme.{u}} (c : Y' ⟶ Y) (s : Y ⟶ Z) (d : Y' ⟶ Z) (hc : c ≫
   s = d)
     (U : Z.Opens) (V : Y.Opens) (W : Y'.Opens) (e₁ : V ≤ s ⁻¹ᵁ U) (e₂ : W ≤ c ⁻¹ᵁ V) (e₃ : W ≤ d
       ⁻¹ᵁ U) (z : Γ(Z, U)) :
-    c.appLE V W e₂ (s.appLE U V e₁ z) = d.appLE U W e₃ z := by
-  subst hc
-  rw [← CategoryTheory.comp_apply, Scheme.Hom.appLE_comp_appLE]
+    c.appLE V W e₂ (s.appLE U V e₁ z) = d.appLE U W e₃ z :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.appLE_appLE_of_comp_eq
+    c s d hc U V W e₁ e₂ e₃ z
 
 lemma nat_gamma (K : Type u) [CommRing K] {X : Scheme.{u}} (fX : X ⟶ Spec (CommRingCat.of K))
     (H H' : Type u) [CommRing H] [CommRing H'] [Algebra K H] [Algebra K H'] (ψ : H →ₐ[K] H')
@@ -231,83 +177,9 @@ lemma nat_gamma (K : Type u) [CommRing K] {X : Scheme.{u}} (fX : X ⟶ Spec (Com
           ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))) ⁻¹ᵁ V)
           (by rw [← hc₁]; exact le_rfl) s)) =
       Algebra.TensorProduct.map ψ (AlgHom.id K Γ(X, V)) (Algebra.TensorProduct.comm K Γ(X, V) H (ε
-        V hV s)) := by
-  let instK : ∀ V : X.Opens, Algebra K Γ(X, V) := fun V => Scheme.TwoAffineOpenCover.algebraOfHom
-    fX V
-  let instH : ∀ W : (Limits.pullback fX (Spec.map (CommRingCat.ofHom (algebraMap K H)))).Opens,
-      Algebra K Γ(Limits.pullback fX (Spec.map (CommRingCat.ofHom (algebraMap K H))), W) := fun W =>
-    Scheme.TwoAffineOpenCover.algebraOfHom (Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom
-      (algebraMap K H))) ≫ fX) W
-  let instH' : ∀ W : (Limits.pullback fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))).Opens,
-      Algebra K Γ(Limits.pullback fX (Spec.map (CommRingCat.ofHom (algebraMap K H'))), W) := fun W
-        =>
-    Scheme.TwoAffineOpenCover.algebraOfHom (Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom
-      (algebraMap K H'))) ≫ fX) W
-  intro ε hε1 hε1' ε' hε'1 hε'1' V hV s
-  obtain ⟨x, rfl⟩ : ∃ x, s = (ε V hV).symm x := ⟨ε V hV s, ((ε V hV).symm_apply_apply s).symm⟩
-  rw [AlgEquiv.apply_symm_apply]
-  induction x using TensorProduct.inductionOn with
-  | add x y hx hy => simp only [map_add, hx, hy]
-  | tmul a h =>
-    have split : a ⊗ₜ[K] h = (a ⊗ₜ[K] (1 : H)) * ((1 : Γ(X, V)) ⊗ₜ[K] h) := by
-      rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
-    rw [split, map_mul, map_mul, map_mul, map_mul, map_mul, map_mul]
-    congr 1
-    · have e1 : (ε V hV).symm (a ⊗ₜ[K] (1 : H)) =
-          ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H)))).app V).hom a :=
-            by
-        rw [← hε1 V hV a, AlgEquiv.symm_apply_apply]
-      rw [e1]
-      erw [appLE_app_of_comp_eq c _ _ hc₁ V _ a]
-      erw [hε'1 V hV a]
-      rw [Algebra.TensorProduct.comm_tmul, Algebra.TensorProduct.comm_tmul,
-        Algebra.TensorProduct.map_tmul,
-        map_one]
-      rfl
-    · have e2 : (ε V hV).symm ((1 : Γ(X, V)) ⊗ₜ[K] h) =
-          ((Limits.pullback.snd fX (Spec.map (CommRingCat.ofHom (algebraMap K H)))).appLE ⊤
-            ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H)))) ⁻¹ᵁ V)
-              le_top).hom
-          ((Scheme.ΓSpecIso (CommRingCat.of H)).inv.hom h) := by
-        rw [← hε1' V hV h, AlgEquiv.symm_apply_apply]
-      rw [e2]
-      have e3 : c.appLE ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H))))
-        ⁻¹ᵁ V)
-          ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))) ⁻¹ᵁ V)
-            (by rw [← hc₁]; exact le_rfl)
-          (((Limits.pullback.snd fX (Spec.map (CommRingCat.ofHom (algebraMap K H)))).appLE ⊤
-            ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H)))) ⁻¹ᵁ V)
-              le_top).hom
-            ((Scheme.ΓSpecIso (CommRingCat.of H)).inv.hom h)) =
-          ((Limits.pullback.snd fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))).appLE ⊤
-            ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))) ⁻¹ᵁ V)
-              le_top).hom
-            ((Scheme.ΓSpecIso (CommRingCat.of H')).inv.hom (ψ h)) := by
-        erw [appLE_appLE_of_comp_eq c _ _ hc₂ ⊤ _ _ le_top _ le_top]
-        have hcomp := congrArg
-          (fun f : Γ(Spec (CommRingCat.of H), ⊤) ⟶
-              Γ(Limits.pullback fX (Spec.map (CommRingCat.ofHom (algebraMap K H'))),
-                (Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))) ⁻¹ᵁ V) =>
-            f.hom ((Scheme.ΓSpecIso (CommRingCat.of H)).inv.hom h))
-          (Scheme.Hom.comp_appLE
-            (Limits.pullback.snd fX (Spec.map (CommRingCat.ofHom (algebraMap K H'))))
-            (Spec.map (CommRingCat.ofHom ψ.toRingHom)) ⊤
-            ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))) ⁻¹ᵁ V)
-              le_top)
-        have nat : (Scheme.ΓSpecIso (CommRingCat.of H')).inv.hom (ψ h) =
-            (Spec.map (CommRingCat.ofHom ψ.toRingHom)).appTop.hom ((Scheme.ΓSpecIso (CommRingCat.of
-              H)).inv.hom h) :=
-          congrArg (fun k => (ConcreteCategory.hom k) h) (Scheme.ΓSpecIso_inv_naturality
-            (CommRingCat.ofHom ψ.toRingHom))
-        exact hcomp.trans (congrArg
-          (fun a : Γ(Spec (CommRingCat.of H'), ⊤) =>
-            ((Limits.pullback.snd fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))).appLE ⊤
-              ((Limits.pullback.fst fX (Spec.map (CommRingCat.ofHom (algebraMap K H')))) ⁻¹ᵁ V)
-              le_top).hom a) nat.symm)
-      erw [e3, hε'1' V hV (ψ h)]
-      rw [Algebra.TensorProduct.comm_tmul, Algebra.TensorProduct.comm_tmul,
-        Algebra.TensorProduct.map_tmul]
-      rfl
+        V hV s)) :=
+  Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.LimitIsoFil.nat_gamma
+    K fX H H' ψ c hc₁ hc₂
 
 end LimitIsoFil
 

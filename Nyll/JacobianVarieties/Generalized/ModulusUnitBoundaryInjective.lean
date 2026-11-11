@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitBoundary
-import Mathlib.Algebra.Category.Grp.EpiMono
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitBoundary
+public import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # Injectivity and the actual image of the modulus-unit boundary -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -15,6 +19,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

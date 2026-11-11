@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # Surjectivity of a local map into a localization
@@ -14,6 +16,8 @@ If the image of a local map already contains the numerator ring of a
 localization, localness also puts the inverses of its denominators in the
 image. This is shared by the geometric-stalk double and triple overlaps.
 -/
+
+@[expose] public section
 
 namespace IsLocalization
 

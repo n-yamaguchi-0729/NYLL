@@ -4,10 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRepresentation
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRepresentation
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # The intrinsic modulus-unit quotient as an actual represented group sheaf -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -15,6 +21,8 @@ universe u
 
 open CategoryTheory Module
 open SchemeTheory.Affine SchemeTheory.Affine.FiniteScheme
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
 

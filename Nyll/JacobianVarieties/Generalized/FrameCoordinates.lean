@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitFunctor
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitFunctor
 
 /-!
 # Natural scalar-unit coordinates supplied by an actual frame
@@ -14,6 +16,8 @@ These coordinates commute with restriction on arbitrary test schemes, hence
 identify the actual fppf scalar-frame sheaf with the scalar-unit sheaf on
 this trivialized family. Changes of reference frame remain translations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.FiberDegreeCriterion
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.FiberDegreeCriterion
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
 /-!
 # The original scheme-theoretic fiber degree criterion for normalization
@@ -26,6 +28,8 @@ criterion gives étaleness, and the affine open neighborhoods glue globally.
 This is the original implication `(8) ⇒ (4)` in Stacks Project Tag 0BTF.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -34,11 +38,6 @@ open scoped TensorProduct
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 private theorem normalizationChart_fiber_degree
     (X : Scheme.{u}) [IsIntegral X]

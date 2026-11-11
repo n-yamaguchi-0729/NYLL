@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafTensor
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivModulesQuasicoherent
-import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivModulesPullbackComapTwistPushforwardUnit
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafTensor
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivModulesQuasicoherent
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivModulesPullbackComapTwistPushforwardUnit
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
 
 /-!
 # OModule Presheaf cech Finrank of Modules pullback eq of is Iso
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

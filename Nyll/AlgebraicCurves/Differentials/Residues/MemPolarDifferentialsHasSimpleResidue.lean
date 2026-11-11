@@ -17,6 +17,8 @@ import Nyll.AlgebraicCurves.Differentials.Residues.UniqueHasSimpleResidue
 import Nyll.AlgebraicCurves.Differentials.Residues.SumEqZeroHasSimpleResidue
 import Nyll.AlgebraicCurves.Differentials.Regular.FiniteFinrankPolarDifferentialsEq
 import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Duality.FiniteFinrankRegularDifferentialsEqGenus
+import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Exists mem polar Differentials forall has Simple Residue of sum eq zero
@@ -42,8 +44,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

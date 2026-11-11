@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTracePrincipalDivisor
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjectiveLineGroupConstancy
-import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
-import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineRatFuncModel
-import Nyll.AlgebraicCurves.Models.Points.IsoCompToBaseEqPlaceOfPointCongrEq
-import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTracePrincipalDivisor
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjectiveLineGroupConstancy
+public import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
+public import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineRatFuncModel
+public import Nyll.AlgebraicCurves.Models.Points.IsoCompToBaseEqPlaceOfPointCongrEq
+public import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Whole-curve maps to separated commutative groups have zero modulus
 
@@ -18,6 +21,8 @@ fibres. Constancy on the projective line therefore annihilates every full
 principal-divisor evaluation. No extension of a trace across the boundary
 of a proper open curve is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

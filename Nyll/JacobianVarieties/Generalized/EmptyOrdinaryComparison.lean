@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.UnpointedEmptyConstruction
-import Nyll.JacobianVarieties.Generalized.ExistingJacobianGroupScheme
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.UnpointedEmptyConstruction
+public import Nyll.JacobianVarieties.Generalized.ExistingJacobianGroupScheme
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.JacobianVarieties.Generalized.ExistingJacobianSheafRepresentation
 
 /-!
 # Empty modulus agrees with the existing ordinary Jacobian
@@ -16,6 +19,8 @@ The comparison is an isomorphism to the previously chosen ordinary Jacobian
 with its original tensor-product relative group law. Both sides classify the
 actual fppf group sheaves, including when the curve has no rational point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

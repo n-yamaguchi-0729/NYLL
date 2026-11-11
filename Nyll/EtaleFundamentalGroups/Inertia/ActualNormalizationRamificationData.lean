@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationDiagram
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueDVR
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaDecomposition
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsAction
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaTopology
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildTopology
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugate
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteTameRootsSystem
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationDiagram
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueDVR
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaDecomposition
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsAction
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaTopology
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildTopology
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugate
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteTameRootsSystem
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
 
 /-!
 # The actual original DVR ramification diagram
@@ -25,6 +27,8 @@ original-input owner. The residue-only construction computes exactly the
 existing actual-degree roots system and group, as the computation theorems
 below record. No comparison or mathematical conclusion is a data field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

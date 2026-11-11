@@ -86,12 +86,6 @@ private theorem ord_phi_uniformizer :
       by
   rw [Place.ord_restrictAlong φ hφ w',
     (w'.restrictAlong φ hφ).ord_orderUniformizer (w'.restrictAlong φ hφ).exists_ord_eq_one, mul_one]
-omit [PerfectField K] in
-private theorem ord_phi_uniformizer_ne_zero :
-    w'.ord (φ (w'.restrictAlong φ hφ).orderUniformizer) ≠ 0 := by
-  rw [ord_phi_uniformizer φ hφ w']
-  exact_mod_cast (ramificationIndexAlong_pos φ hφ w').ne'
-
 private theorem hadd (x : F') [FiniteDimensional (IntermediateField.adjoin K ({x} : Set F')) F'] :
     ∀ (a : F') (η : Ω[F'⁄K]), a ≠ 0 → η ≠ 0 → w'.ordDiff (a • η) = w'.ord a + w'.ordDiff η := by
   have : Algebra.IsAlgebraic (IntermediateField.adjoin K ({x} : Set F')) F' :=

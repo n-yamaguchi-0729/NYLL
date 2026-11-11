@@ -4,18 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Away
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Group.Action.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Away
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Group.Action.Basic
 
 /-!
 # Native module localization criteria
 
 Constructs localization from the actual invertibility, fraction and kernel criteria.
 -/
+
+@[expose] public section
 
 noncomputable section
 

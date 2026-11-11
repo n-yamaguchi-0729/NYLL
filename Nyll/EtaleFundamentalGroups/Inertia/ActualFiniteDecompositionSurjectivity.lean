@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteNormalizationActionDiagram
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteNormalizationGaloisSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgDecompositionGroup
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteDecompositionRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteNormalizationActionDiagram
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteNormalizationGaloisSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgDecompositionGroup
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
 
 /-!
 # Surjectivity onto actual finite decomposition
@@ -17,6 +19,8 @@ The proved finite field decomposition image supplies original decomposition
 lifts. The actual coefficient-automorphism surjection then identifies the
 target with the existing intrinsic finite-normalization stabilizer.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

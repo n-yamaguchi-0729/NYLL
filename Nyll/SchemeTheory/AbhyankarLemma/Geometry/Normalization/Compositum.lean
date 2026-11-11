@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldCompositum
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealCompositum
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.TrivialImpliesUnramified
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldCompositum
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealCompositum
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.TrivialImpliesUnramified
 
 /-!
 # Abhyankar's cyclic argument for normalization rings
@@ -17,6 +19,8 @@ ideal-theoretic cyclic projection argument.  The resulting relative inertia
 group is trivial, and hence the right normalization is unramified in the top
 normalization at every chosen maximal prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,49 +49,25 @@ local instance leftNormalizationAlgebra :
     Algebra (integralClosure V M) (integralClosure V E) :=
   normalizationAlgebra (V := V) (K := K) (E := E) M
 
-local instance rightNormalizationAlgebra :
-    Algebra (integralClosure V N) (integralClosure V E) :=
-  normalizationAlgebra (V := V) (K := K) (E := E) N
-
 local instance leftPrime_liesOver (Q : Ideal (integralClosure V E)) :
     Q.LiesOver
       (normalizationLowerPrime (V := V) (K := K) (E := E) M Q) :=
   normalizationLowerPrime_liesOver (V := V) M Q
-
-local instance rightPrime_liesOver (Q : Ideal (integralClosure V E)) :
-    Q.LiesOver
-      (normalizationLowerPrime (V := V) (K := K) (E := E) N Q) :=
-  normalizationLowerPrime_liesOver (V := V) N Q
 
 local instance leftBasePrime_liesOver (Q : Ideal (integralClosure V E)) :
     (normalizationLowerPrime (V := V) (K := K) (E := E) M Q).LiesOver
       (normalizationBasePrime (V := V) (K := K) (E := E) M Q) :=
   normalizationBasePrime_liesOver (V := V) M Q
 
-local instance rightBasePrime_liesOver (Q : Ideal (integralClosure V E)) :
-    (normalizationLowerPrime (V := V) (K := K) (E := E) N Q).LiesOver
-      (normalizationBasePrime (V := V) (K := K) (E := E) N Q) :=
-  normalizationBasePrime_liesOver (V := V) N Q
-
 local instance leftPrime_isMaximal
     (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
     (normalizationLowerPrime (V := V) (K := K) (E := E) M Q).IsMaximal :=
   normalizationLowerPrime_isMaximal (V := V) M Q
 
-local instance rightPrime_isMaximal
-    (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
-    (normalizationLowerPrime (V := V) (K := K) (E := E) N Q).IsMaximal :=
-  normalizationLowerPrime_isMaximal (V := V) N Q
-
 local instance leftBasePrime_isMaximal
     (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
     (normalizationBasePrime (V := V) (K := K) (E := E) M Q).IsMaximal :=
   normalizationBasePrime_isMaximal (V := V) M Q
-
-local instance rightBasePrime_isMaximal
-    (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
-    (normalizationBasePrime (V := V) (K := K) (E := E) N Q).IsMaximal :=
-  normalizationBasePrime_isMaximal (V := V) N Q
 
 noncomputable local instance compositumTopNormalizationAction :
     MulSemiringAction Gal(E/K) (integralClosure V E) :=
@@ -96,10 +76,6 @@ noncomputable local instance compositumTopNormalizationAction :
 noncomputable local instance compositumLeftNormalizationAction :
     MulSemiringAction Gal(M/K) (integralClosure V M) :=
   IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
-
-noncomputable local instance compositumRightNormalizationAction :
-    MulSemiringAction Gal(N/K) (integralClosure V N) :=
-  IsIntegralClosure.MulSemiringAction V K N (integralClosure V N)
 
 /-- The cyclic step of Abhyankar's lemma for the normalizations in two
 normal subextensions which generate the top field.  Separability of the four
@@ -252,7 +228,7 @@ theorem normalizationRelativeInertia_card_eq_one_and_isUnramifiedAt
   have hp :
       normalizationBasePrime (V := V) (K := K) (E := E) N Q ≠ ⊥ :=
     Ring.ne_bot_of_isMaximal_of_not_isField
-      (rightBasePrime_isMaximal (V := V) N Q) hV
+      (leftBasePrime_isMaximal (V := V) N Q) hV
   have hP :
       normalizationLowerPrime (V := V) (K := K) (E := E) N Q ≠ ⊥ :=
     Ideal.ne_bot_of_liesOver_of_ne_bot hp

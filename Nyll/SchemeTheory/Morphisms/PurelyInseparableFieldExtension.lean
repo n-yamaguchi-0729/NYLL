@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # Purely inseparable constant field extensions
@@ -20,6 +22,8 @@ underlying continuous map is therefore a homeomorphism.
 The two scheme-morphism lemmas retain their original namespace and signatures
 from `EtaleFundamentalGroups/FiniteEtale/FiniteField/PurelyInseparablePullback`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

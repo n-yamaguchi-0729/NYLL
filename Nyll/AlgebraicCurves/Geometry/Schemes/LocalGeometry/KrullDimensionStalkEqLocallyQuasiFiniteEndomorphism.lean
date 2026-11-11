@@ -10,72 +10,76 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Submonoid.Membership
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.NeZero
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Basic
-import Mathlib.Data.Set.Disjoint
-import Mathlib.GroupTheory.MonoidLocalization.Away
-import Mathlib.GroupTheory.OreLocalization.Basic
-import Mathlib.Order.BoundedOrder.Basic
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.OreLocalization.Ring
-import Mathlib.RingTheory.QuasiFinite.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.RingTheory.ZariskisMainTheorem
-import Mathlib.Tactic.Conv
-import Mathlib.Topology.Sheaves.CommRingCat
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Topology.Sober
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralHeights
-import Nyll.SchemeTheory.RingTheory.Dimension.AlgebraTrdegQuotientLt
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Submonoid.Membership
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.NeZero
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Basic
+public import Mathlib.Data.Set.Disjoint
+public import Mathlib.GroupTheory.MonoidLocalization.Away
+public import Mathlib.GroupTheory.OreLocalization.Basic
+public import Mathlib.Order.BoundedOrder.Basic
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.OreLocalization.Ring
+public import Mathlib.RingTheory.QuasiFinite.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.RingTheory.ZariskisMainTheorem
+public import Mathlib.Tactic.Conv
+public import Mathlib.Topology.Sheaves.CommRingCat
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Topology.Sober
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralHeights
+public import Nyll.SchemeTheory.RingTheory.Dimension.AlgebraTrdegQuotientLt
 
 /-!
 # ring Krull Dim stalk eq of locally Quasi Finite endomorphism
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

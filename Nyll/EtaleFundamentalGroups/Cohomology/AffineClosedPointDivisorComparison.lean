@@ -3,14 +3,21 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleCohomology.Classical.ClosedPointDivisorSheaf
-import Nyll.EtaleFundamentalGroups.Cohomology.GenericUnitDivisorSections
+module
+
+public import Nyll.EtaleCohomology.Classical.ClosedPointDivisorSheaf
+public import Nyll.EtaleFundamentalGroups.Cohomology.GenericUnitDivisorSections
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
 /-!
 # Affine closed-point divisor sections
 
 Coordinate descriptions of sections of the actual closed-point divisor sheaf
 on an affine Dedekind scheme, and their comparison with generic-unit quotients.
 -/
+@[expose] public section
+
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 open IsDedekindDomain
 universe u
@@ -49,7 +56,8 @@ noncomputable def affineClosedPointDivisorCoefficient
 
 
 omit [IsDedekindDomain R] in
-private theorem affineClosedPointDivisorSheafSection_finiteSupport
+/-- An affine divisor-sheaf section is supported on finitely many closed points. -/
+theorem affineClosedPointDivisorSheafSection_finiteSupport
     [hShape : HasColimitsOfShape (Discrete (closedPoints (Spec (CommRingCat.of R))))
       (Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u})]
     [hQC : QuasiCompact (terminal.from
@@ -273,8 +281,8 @@ theorem affineClosedPointDivisorSectionOfFinsupp_coefficient
       CategoryTheory.Sheaf.instHasColimitsOfShape
     affineClosedPointDivisorCoefficient R hR v
       (affineClosedPointDivisorSectionOfFinsupp R hR D) = D v := by
+  intro X
   classical
-  let X := Spec (CommRingCat.of R)
   let U := affineEtaleSpecObject (R := R) (S := R)
   let x := IsDedekindDomain.HeightOneSpectrum.equivClosedPoints hR v
   let fiberEquiv := affineEtaleClosedPointResidueFiberEquivHeightOneFiber
@@ -390,7 +398,7 @@ private theorem affineClosedPointDivisorComponent_eq_of_coefficient_eq
         (closedPointDivisorSummand X) hShape
         (IsDedekindDomain.HeightOneSpectrum.equivClosedPoints hR v)).hom.app
           (op (affineEtaleSpecObject (R := R) (S := R))))) t := by
-  let X := Spec (CommRingCat.of R)
+  intro X
   let U := affineEtaleSpecObject (R := R) (S := R)
   let x := IsDedekindDomain.HeightOneSpectrum.equivClosedPoints hR v
   let p := @sheafCoproductComponentProjection (closedPoints X) X

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionScheme
-import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
 
 /-! # Simultaneous comparisons for one scalar extension
 
@@ -17,6 +19,8 @@ native actions and preserve the Abel map and an arbitrary map from the complemen
 Keeping these single-step witnesses together permits their composition before
 substituting the concrete scalar-extension isomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

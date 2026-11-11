@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
-import Nyll.SchemeTheory.RingTheory.Henselian.CompleteOrthogonalIdempotentsLocalRingQuotient
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteLocalGeometricPoints
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
+public import Nyll.SchemeTheory.RingTheory.Henselian.CompleteOrthogonalIdempotentsLocalRingQuotient
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteLocalGeometricPoints
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # Sections preserving every geometric point over a strictly local base
@@ -25,6 +27,8 @@ with equality of the specified field-valued morphisms.
 This is the marked geometric step in the finite direct-image stalk formula,
 Stacks Project 59.55.2(1).
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -17,6 +17,7 @@ import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 import Nyll.AlgebraicCurves.Places.ValuationRings.MemIntegralClosureIffPlace
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # LSpace On set Of exists centre eq span integral Closure
@@ -116,15 +117,15 @@ theorem _root_.AlgebraicCurve.lSpaceOn_setOf_exists_centre_eq_span_integralClosu
     [IsIntegral C] [IsProper c]
     (hK : letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra; IsCurveOver k C.functionField)
     (U : C.Opens) [Nonempty U] (hUaff : IsAffineOpen U) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     lSpaceOn {v : Place k C.functionField | ∃ z : C, z ∈ U ∧ (∀ s : C.presheaf.stalk z,
           v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) ≤ 1 ∧
           (s ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk z) →
             v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) < 1))} (0 :
               Divisor k C.functionField) =
       Submodule.span k (integralClosure Γ(C, U) C.functionField : Set C.functionField) := by
+  intro sharedOwner1
   classical
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
   have : IsCurveOver k C.functionField := hK
   have : PerfectField k := inferInstance
   have := AlgebraicCurve.essFiniteType_functionField c

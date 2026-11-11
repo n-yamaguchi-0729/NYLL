@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Unramified.Locus
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.Unramified.Locus
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Spreading unramifiedness around an integral fiber
@@ -16,6 +18,8 @@ presentation assumption. Its closed complement has closed image under an
 integral map, so unramifiedness of one entire fiber spreads to a principal
 neighborhood of the base point.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

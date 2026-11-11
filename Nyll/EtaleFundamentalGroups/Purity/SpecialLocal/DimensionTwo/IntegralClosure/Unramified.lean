@@ -8,6 +8,7 @@ import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.RegularLocalDimension
 import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
 import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
 import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
+import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 
 /-!
 # Codimension-one unramifiedness and two-dimensional purity

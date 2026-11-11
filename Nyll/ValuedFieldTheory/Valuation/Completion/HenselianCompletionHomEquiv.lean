@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExt
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExtension
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianHomDescent
-import Mathlib.Algebra.Algebra.Tower
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExt
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExtension
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianHomDescent
+public import Mathlib.Algebra.Algebra.Tower
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
 
 /-!
 # Correspondence of homomorphisms before and after completion
@@ -16,6 +19,8 @@ The actual extension map is bijective: the original field is embedded in
 its completion, and separable elements descend uniquely to a Henselian
 target. The inverse correspondence retains the original field embeddings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

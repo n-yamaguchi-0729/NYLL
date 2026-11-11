@@ -10,6 +10,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
+import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
 
@@ -61,41 +62,11 @@ variable {K F : Type} [Field K] [Field F] [Algebra K F]
 
 section Exchange
 
-theorem finiteDimensional_adjoin_of_transcendental {x₀ : F} (hx₀ : Transcendental K x₀)
+theorem finiteDimensional_adjoin_of_transcendental {x₀ : F} (_ : Transcendental K x₀)
     (hfd : FiniteDimensional K⟮x₀⟯ F) {t : F} (ht : Transcendental K t) : FiniteDimensional K⟮t⟯ F
       := by
-  have halg₀ : Algebra.IsAlgebraic (Algebra.adjoin K (Set.range fun _ : Fin 1 => x₀)) F := by
-    have : Algebra.IsAlgebraic K⟮x₀⟯ F := Algebra.IsAlgebraic.of_finite _ _
-    rw [Set.range_const]
-    exact IntermediateField.isAlgebraic_adjoin_iff_top.mp this
-  have hb₀ : IsTranscendenceBasis K (fun _ : Fin 1 => x₀) :=
-    isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic.mpr
-      ⟨(algebraicIndependent_singleton_iff (0 : Fin 1)).mpr hx₀, halg₀⟩
-  have htr : Algebra.trdeg K F = Cardinal.mk (Fin 1) := hb₀.cardinalMk_eq_trdeg.symm
-  have hbt : IsTranscendenceBasis K (fun _ : Fin 1 => t) :=
-    AlgebraicIndependent.isTranscendenceBasis_of_trdeg_le_of_finite
-      ((algebraicIndependent_singleton_iff (0 : Fin 1)).mpr ht) htr.le
-  have halg : Algebra.IsAlgebraic K⟮t⟯ F := by
-    have h := hbt.isAlgebraic_field
-    rwa [Set.range_const] at h
-  set L := K⟮t⟯
-  have hint : IsIntegral L x₀ := (halg.isAlgebraic x₀).isIntegral
-  set N : IntermediateField L F := L⟮x₀⟯
-  have : FiniteDimensional L N := IntermediateField.adjoin.finiteDimensional hint
-  have hmem : ∀ s : K⟮x₀⟯, (s : F) ∈ N := by
-    intro s
-    have hle : K⟮x₀⟯ ≤ N.restrictScalars K :=
-      IntermediateField.adjoin_simple_le_iff.mpr (IntermediateField.mem_adjoin_simple_self L x₀)
-    exact hle s.2
-  let : Algebra K⟮x₀⟯ N := RingHom.toAlgebra
-    { toFun := fun s => ⟨(s : F), hmem s⟩
-      map_one' := rfl
-      map_mul' := fun _ _ => rfl
-      map_zero' := rfl
-      map_add' := fun _ _ => rfl }
-  have : IsScalarTower K⟮x₀⟯ N F := IsScalarTower.of_algebraMap_eq fun _ => rfl
-  have : Module.Finite N F := Module.Finite.of_restrictScalars_finite K⟮x₀⟯ N F
-  exact Module.Finite.trans N F
+  let : FiniteDimensional K⟮x₀⟯ F := hfd
+  exact _root_.AlgebraicCurve.finiteDimensional_adjoin_of_transcendental x₀ ht
 
 end Exchange
 

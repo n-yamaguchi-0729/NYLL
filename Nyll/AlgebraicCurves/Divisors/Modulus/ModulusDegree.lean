@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusIdeal
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusResidue
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusIdeal
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusResidue
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
 /-!
 # Scheme ranks and the weighted degree of a modulus
@@ -20,6 +22,8 @@ import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 The rank of a closed point divisor is its actual residue-field degree. Products
 of divisor ideals then add ranks, retaining each multiplicity of the modulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

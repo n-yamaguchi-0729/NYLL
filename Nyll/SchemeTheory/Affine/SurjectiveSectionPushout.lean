@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.RingTheory.RingHom.Surjective
+module
+
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.RingHom.Surjective
 
 /-!
 # Surjectivity in an actual ring-section pushout
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RingHom.Surjective
 This applies native stability of surjective ring maps to the actual
 categorical pushout, retaining all four supplied maps.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

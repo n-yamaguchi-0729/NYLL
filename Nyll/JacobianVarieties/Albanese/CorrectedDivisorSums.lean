@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.SupportedDivisorSums
-import Nyll.JacobianVarieties.Albanese.FiniteSums
+module
+
+public import Nyll.JacobianVarieties.Albanese.SupportedDivisorSums
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Actual divisor-sum morphisms corrected by their degree -/
+
+@[expose] public section
 
 noncomputable section
 

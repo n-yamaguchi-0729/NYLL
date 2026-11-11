@@ -13,6 +13,5 @@ import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivOrderIso
 import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.EquivOrderIsoOrderDual
 import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.FiniteModules
 import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.FiniteToOrderedAffineCoverIff
-import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.FiniteUnit
 import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.FinrankModulesPullbackEq
 import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.OModulePresheafCechPushforward

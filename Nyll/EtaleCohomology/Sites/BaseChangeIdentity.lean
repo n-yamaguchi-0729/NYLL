@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
 
 /-! # The actual identity base change on the small étale site -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -19,7 +23,8 @@ namespace EtaleCohomology
 
 variable (X : Scheme.{u})
 
-private def etaleBaseChangeIdObjIso (U : X.Etale) :
+/-- Pullback along the identity recovers the original étale object. -/
+def etaleBaseChangeIdObjIso (U : X.Etale) :
     (etaleBaseChange (𝟙 X)).obj U ≅ U := by
   let e : pullback U.hom (𝟙 X) ≅ U.left := asIso (pullback.fst U.hom (𝟙 X))
   exact MorphismProperty.Over.isoMk e (by

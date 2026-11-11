@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointSurjective
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Topology.Separation.Hausdorff
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointSurjective
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Topology.Separation.Hausdorff
 
 /-!
 # The fixed field of the generic absolute Galois kernel
@@ -19,6 +21,8 @@ fixed field is Galois over the function field. For a normal integral scheme,
 the fundamental group is canonically the Galois group of this fixed field,
 and the generic absolute Galois map becomes restriction of automorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,13 +44,15 @@ instance genericKernelFixedField_isGalois (X : Scheme.{u}) [IsIntegral X] :
     (IntermediateField.fixedField (genericAbsoluteGaloisHom X).toMonoidHom.ker)
   infer_instance
 
-private def genericClosedKernel (X : Scheme.{u}) [IsIntegral X] :
+/-- The kernel of the generic absolute Galois homomorphism as a closed subgroup. -/
+def genericClosedKernel (X : Scheme.{u}) [IsIntegral X] :
     ClosedSubgroup (SeparableClosure X.functionField ≃ₐ[X.functionField]
       SeparableClosure X.functionField) where
   toSubgroup := (genericAbsoluteGaloisHom X).toMonoidHom.ker
   isClosed' := isClosed_eq (genericAbsoluteGaloisHom X).continuous continuous_const
 
-private local instance genericClosedKernel_normal (X : Scheme.{u}) [IsIntegral X] :
+/-- The closed generic kernel is normal. -/
+local instance genericClosedKernel_normal (X : Scheme.{u}) [IsIntegral X] :
     (genericClosedKernel X).toSubgroup.Normal := by
   change (genericAbsoluteGaloisHom X).toMonoidHom.ker.Normal
   infer_instance
@@ -58,7 +64,8 @@ theorem genericKernelFixedField_fixingSubgroup (X : Scheme.{u}) [IsIntegral X] :
       (genericAbsoluteGaloisHom X).toMonoidHom.ker :=
   InfiniteGalois.fixingSubgroup_fixedField (genericClosedKernel X)
 
-private def genericFundamentalGroupMulEquiv (X : Scheme.{u})
+/-- The generic fundamental group identifies algebraically with the fixed-field Galois group. -/
+def genericFundamentalGroupMulEquiv (X : Scheme.{u})
     [IsIntegral X] [IsNormalIntegral X] :
     π₁ᵉᵗ(X.genericExtensionMorphism (AlgebraicClosure X.functionField)) ≃*
       (genericKernelFixedField X ≃ₐ[X.functionField] genericKernelFixedField X) :=
@@ -81,7 +88,8 @@ private theorem genericFundamentalGroupMulEquiv_apply (X : Scheme.{u})
   rw [e.symm_apply_apply]
   rfl
 
-private theorem genericFundamentalGroupMulEquiv_continuous (X : Scheme.{u})
+/-- The fixed-field comparison is continuous for the Krull topology. -/
+theorem genericFundamentalGroupMulEquiv_continuous (X : Scheme.{u})
     [IsIntegral X] [IsNormalIntegral X] :
     Continuous (genericFundamentalGroupMulEquiv X) := by
   have hq : Topology.IsQuotientMap (genericAbsoluteGaloisHom X) :=

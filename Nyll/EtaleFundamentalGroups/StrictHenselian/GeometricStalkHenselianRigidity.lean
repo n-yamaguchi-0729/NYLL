@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.SchemeTheory.Etale.HenselianLocalSection
-import Nyll.SchemeTheory.Affine.SpecSectionMap
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.SchemeTheory.Etale.HenselianLocalSection
+public import Nyll.SchemeTheory.Affine.SpecSectionMap
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Rigidity of the actual map to a strictly Henselian target
@@ -29,6 +31,8 @@ colimit fixes the constructed ring homomorphism.
 No normalization comparison, inertia action, or fixed-image identification
 is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

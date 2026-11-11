@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.IsBaseChangeHom
+module
+
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.IsBaseChangeHom
 
 /-!
 # Flat base change for `Hom` from a finitely presented module
@@ -19,6 +21,8 @@ result follows from `Module.FinitePresentation.isBaseChange_map`; the
 finite-free case and precomposition compatibility are recorded here for
 downstream use.
 -/
+
+@[expose] public section
 
 noncomputable section
 

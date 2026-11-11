@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Descent.UnitCocycleTrivializations
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Descent.UnitCocycleTrivializations
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
 
 /-!
 # Scheme Modules exists pullback glue Of Cocycle iso
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

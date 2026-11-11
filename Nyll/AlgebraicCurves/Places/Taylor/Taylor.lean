@@ -35,12 +35,16 @@ Place_taylorCoeff_eq_evalAt_mul_inv_pow_of_forall_taylorCoeff_eq_zero
 Place_taylorCoeff_succ_eq_taylorCoeff_taylorRem_one
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Basic
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Taylor
 -/
+
+@[expose] public section
 
 section
 

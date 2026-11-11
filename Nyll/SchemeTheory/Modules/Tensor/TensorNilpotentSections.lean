@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.LocalMorphisms
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
-import Nyll.SchemeTheory.Modules.Tensor.TensorWithFrame
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.NilpotentSurjectivity
-import Mathlib.Algebra.Algebra.Operations
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.Topology.Sets.Opens
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+public import Nyll.SchemeTheory.Modules.Tensor.TensorWithFrame
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.NilpotentSurjectivity
+public import Mathlib.Algebra.Algebra.Operations
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.Topology.Sets.Opens
 
 /-!
 # Nilpotent quotient detection through the original tensor frames
@@ -35,6 +37,8 @@ epimorphisms from their composite with the original twisted quotient.
 Only the untwisted affine kernel and annihilation properties are inputs;
 no properties of the twisted kernel or a new comparison are assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

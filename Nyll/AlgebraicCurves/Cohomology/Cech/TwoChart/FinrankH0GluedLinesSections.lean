@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Prod
-import Mathlib.Algebra.MonoidAlgebra.Support
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.Algebra.Polynomial.Eval.SMul
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Data.Finsupp.Defs
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.RingTheory.Polynomial.DegreeLT
-import Mathlib.Tactic.Push
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Prod
+public import Mathlib.Algebra.MonoidAlgebra.Support
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.Polynomial.Eval.SMul
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Data.Finsupp.Defs
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.RingTheory.Polynomial.DegreeLT
+public import Mathlib.Tactic.Push
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
 
 /-!
 # Two Chart Cech finrank H0 glued Lines Sections of sub one le of neg
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

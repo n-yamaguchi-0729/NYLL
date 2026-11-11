@@ -10,18 +10,22 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.FieldTheory.RatFunc.AsPolynomial
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Rational.Classification
-import Nyll.AlgebraicCurves.Places.Rational.RatFuncSubsingletonSetOfNeOfHeightOneSpectrum
-import Mathlib.FieldTheory.RatFunc.Degree
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+module
+
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
+public import Nyll.AlgebraicCurves.Places.Rational.RatFuncSubsingletonSetOfNeOfHeightOneSpectrum
+public import Mathlib.FieldTheory.RatFunc.Degree
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
 
 /-!
 # Rational Function Field eq place Infty iff forall ne of Height One Spectrum
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Evaluation.DerivativeEvalEvalEvalAtNeZeroOrdSubEqOneEvalAtNeSeparable
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.FieldTheory.Separable
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Evaluation.DerivativeEvalEvalEvalAtNeZeroOrdSubEqOneEvalAtNeSeparable
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Place derivative nonvanishing in characteristic zero
 -/
+
+@[expose] public section
 
 namespace AlgebraicCurve.Place
 

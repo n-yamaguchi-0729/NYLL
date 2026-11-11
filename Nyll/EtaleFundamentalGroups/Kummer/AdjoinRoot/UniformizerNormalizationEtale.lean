@@ -4,31 +4,33 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponent
-import Nyll.EtaleFundamentalGroups.Completions.DVR.IntegralExtensionEtaleDescent
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionResidue
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletion
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletionTower
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.EtalePrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.Torsion.Field
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponent
+public import Nyll.EtaleFundamentalGroups.Completions.DVR.IntegralExtensionEtaleDescent
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionResidue
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletion
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerCompletionTower
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.EtalePrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.Torsion.Field
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Removing ramification by a uniformizer root over an arbitrary DVR
@@ -49,6 +51,8 @@ comparison are absent from the hypotheses. This is the local normalized
 base-change step in Stacks Project, Proposition 58.30.2:
 https://stacks.math.columbia.edu/tag/0C0Q.
 -/
+
+@[expose] public section
 
 noncomputable section
 

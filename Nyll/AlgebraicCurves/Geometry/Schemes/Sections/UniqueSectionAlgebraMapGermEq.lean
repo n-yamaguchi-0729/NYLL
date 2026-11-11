@@ -10,30 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.Algebra.GroupWithZero.Defs
-import Mathlib.Algebra.Ring.Subring.Basic
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Push
-import Mathlib.Topology.Inseparable
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Topology.Sober
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.GroupWithZero.Defs
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Push
+public import Mathlib.Topology.Inseparable
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Topology.Sober
 
 /-!
 # Scheme exists Unique section algebra Map germ eq of forall mem range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceSpecMapCompAwayInclusionEq
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceSpecMapCompAwayInclusionEq
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Morphisms from the projective line to an abelian variety are constant
@@ -18,6 +20,8 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 Each standard chart is the actual affine line. Their constant values agree
 at the common rational point with homogeneous coordinates `(1,1)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
 
 /-!
 # Finrank-coprime common-top branch calculus
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Br
 Field-degree coprimality supplies the lower ramification-index coprimality
 used by the common-top branch theorems.
 -/
+
+@[expose] public section
 
 noncomputable section
 

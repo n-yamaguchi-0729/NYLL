@@ -14,6 +14,7 @@ import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Divisors.Maps.PullbackLiesOverLiesOver
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardAlongLiesOver
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 
 /-!
 # Compatibility of conorm with correspondences

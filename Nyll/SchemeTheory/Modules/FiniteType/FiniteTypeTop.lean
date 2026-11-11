@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Recovering finite type from restriction to the top open
@@ -16,6 +18,8 @@ The singleton family consisting of the top open covers every open.
 The existing finite-type locality theorem therefore recovers global
 finite type from the actual top-slice module used by the open induction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.ProfiniteRingActionRestriction
-import Mathlib.Algebra.Algebra.Subalgebra.Operations
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Ring.Subring.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.ProfiniteRingActionRestriction
+public import Mathlib.Algebra.Algebra.Subalgebra.Operations
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Ring.Subring.Basic
 
 /-!
 # Actual inertia-fixed preimages in a ring-action restriction
@@ -17,6 +19,8 @@ the equality between the actual upper-fixed preimage and the actual lower
 fixed ring. The proof stays in the existing ring-action restriction owner;
 no field, coefficient algebra, or localization is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

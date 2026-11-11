@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRestrictionComparison
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRestrictionBoundary
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionGroup
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionGeometry
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRestrictionComparison
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRestrictionBoundary
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionGroup
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionGeometry
 
 /-! # Actual norm quotient restriction and its generalized Jacobian boundary -/
+
+@[expose] public section
 
 noncomputable section
 

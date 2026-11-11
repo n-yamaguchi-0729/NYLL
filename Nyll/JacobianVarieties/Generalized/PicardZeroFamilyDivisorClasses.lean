@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyDivisorOriginal
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorProducts
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyDivisorOriginal
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorProducts
 
 /-! # Normalized divisor classes on arbitrary noetherian affine bases -/
+
+@[expose] public section
 
 noncomputable section
 

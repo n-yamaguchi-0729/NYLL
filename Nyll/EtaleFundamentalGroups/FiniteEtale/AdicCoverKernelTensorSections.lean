@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverKernelRestriction
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.SchemeTheory.Modules.Tensor.AffineTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.TensorProduct.Associator
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverKernelRestriction
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.SchemeTheory.Modules.Tensor.AffineTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.TensorProduct.Associator
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Actual transition-kernel sections with sheaf coefficients
@@ -26,6 +28,8 @@ On a pure tensor the comparison is the tensor of the original kernel
 comparison with the original coefficient section. No local trivialization
 of the coefficient sheaf is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

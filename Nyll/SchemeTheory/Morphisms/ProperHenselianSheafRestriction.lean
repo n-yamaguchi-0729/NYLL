@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Morphisms.ProperHenselianClosedRestriction
-import Nyll.SchemeTheory.Topology.SpectralClosedSheafRestriction
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Henselian
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Nyll.SchemeTheory.Morphisms.ProperHenselianClosedRestriction
+public import Nyll.SchemeTheory.Topology.SpectralClosedSheafRestriction
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Sheaf sections on a proper henselian closed fiber
@@ -22,6 +24,8 @@ closed fiber. The map is the unit of the topological inverse-image
 adjunction. Connected point-closure intersections come from proper
 henselian geometry, and the spectral restriction theorem applies directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

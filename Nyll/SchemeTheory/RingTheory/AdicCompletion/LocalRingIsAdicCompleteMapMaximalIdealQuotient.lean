@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPowerSeries.Inverse
-import Mathlib.RingTheory.AdicCompletion.Noetherian
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Inverse
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
 
 /-!
 # Is Local Ring is Adic Complete map maximal Ideal quotient
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

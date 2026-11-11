@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PullbackCohomology
-import Nyll.EtaleCohomology.Frobenius.Cohomology
-import Nyll.EtaleCohomology.Sites.ConstantCoefficientComparison
-import Mathlib.CategoryTheory.Sites.Adjunction
+module
+
+public import Nyll.EtaleCohomology.Classical.PullbackCohomology
+public import Nyll.EtaleCohomology.Frobenius.Cohomology
+public import Nyll.EtaleCohomology.Sites.ConstantCoefficientComparison
+public import Mathlib.CategoryTheory.Sites.Adjunction
 
 /-!
 # Constant module coefficients and constant abelian coefficients
@@ -17,6 +19,8 @@ inverse-image coefficient comparison respects the canonical constant-sheaf
 comparisons. Consequently the native coefficient-linear pullback agrees,
 under this comparison, with actual constant abelian pullback in every degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,6 +45,21 @@ def etaleConstantModuleForgetIso :
       (Adjunction.ofIsLeftAdjoint (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}))
   exact constantCommuteCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u})
+
+/-- Forgetting the original constant module coefficients preserves
+their literal sheafification generators on every étale object. -/
+theorem etaleConstantModuleForgetIso_toSheafify (M : ModuleCat.{u} R) (V : X.Etale) :
+    (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).map
+        ((toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj M)).app (op V)) ≫
+      ((etaleConstantModuleForgetIso X R).hom.app M).hom.app (op V) =
+    (toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj
+      ((forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).obj M))).app (op V) := by
+  let : X.smallEtaleTopology.PreservesSheafification
+      (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}) :=
+    Sheaf.preservesSheafification_of_adjunction X.smallEtaleTopology
+      (Adjunction.ofIsLeftAdjoint (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}))
+  exact Sites.constantCommuteCompose_toSheafify X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}) M V
 
 /-- The native constant-module comparison carries the forgotten
 constant-sheaf unit to the abelian constant-sheaf unit. -/

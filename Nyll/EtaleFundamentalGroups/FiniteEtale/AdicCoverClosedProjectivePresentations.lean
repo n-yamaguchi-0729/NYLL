@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverClosedProjectiveLifts
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelPresentations
-import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorNilpotentSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
-import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionGlobalGeneration
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverClosedProjectiveLifts
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelPresentations
+public import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorNilpotentSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
+public import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionGlobalGeneration
 
 /-!
 # Compatible finite presentations on a closed projective family
@@ -19,6 +21,8 @@ thickening. The proof combines eventual generation on the closed family,
 uniform lifting, and the actual nilpotent transition-kernel criterion.
 No generators at higher stages or global lifting assumptions are supplied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

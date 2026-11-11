@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionNaturality
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionNaturality
 
 /-! # Restriction of actual rigidifications commutes with scalar extension -/
+
+@[expose] public section
 
 noncomputable section
 

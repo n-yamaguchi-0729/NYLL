@@ -5,18 +5,20 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Nyll.EtaleCohomology.Sites.PullbackUnitStalks
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Sites.Point.Category
-import Mathlib.CategoryTheory.Sites.Point.Comap
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Nyll.EtaleCohomology.Sites.PullbackUnitStalks
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Sites.Point.Category
+public import Mathlib.CategoryTheory.Sites.Point.Comap
 
 /-!
 # The actual inverse-image unit at a geometric lift
@@ -27,9 +29,11 @@ this component is an isomorphism. No finiteness or closed-immersion
 assumption is imposed on the scheme morphism.
 -/
 
+@[expose] public section
+
 noncomputable section
 
-universe u
+universe u vA uA
 
 open AlgebraicGeometry CategoryTheory Limits Opposite
 
@@ -38,7 +42,7 @@ namespace EtaleCohomology
 private lemma toPresheafFiber_pointHom
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
     {Φ Ψ : J.Point.{u}} (φ : Φ ⟶ Ψ)
-    {A : Type (u + 1)} [Category.{u} A] [HasColimitsOfSize.{u, u} A]
+    {A : Type uA} [Category.{vA} A] [HasColimitsOfSize.{u, u} A]
     (P : Cᵒᵖ ⥤ A) (U : C) (a : Ψ.fiber.obj U) :
     Ψ.toPresheafFiber U a P ≫ φ.presheafFiber.app P =
       Φ.toPresheafFiber U (φ.hom.app U a) P := by
@@ -57,23 +61,24 @@ private lemma geometricLift_eq_baseChangeIso_inv
   rw [Over.mapPullbackAdj, Adjunction.mkOfHomEquiv_homEquiv]
   rfl
 
-variable (Λ : Type u) [CommRing Λ]
-
 local instance representablyFlat_etaleBaseChange_unitStalks :
     RepresentablyFlat (etaleBaseChange q) := flat_of_preservesFiniteLimits _
 
+variable (A : Type uA) [Category.{vA} A] [HasColimitsOfSize.{u, u} A]
+
 /-- The concrete component at a geometric lift is the comapped-point
 restriction map, transported through the existing point comparison. -/
-theorem etalePushforwardStalkComponent_eq_comap
-    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u} Λ)) :
-    (geometricComapSheafFiberIso q s Λ).inv.app ((etalePushforward q Λ).obj G) ≫
+theorem etalePushforwardStalkComponent_eq_comap_generic
+    (G : Sheaf Y.smallEtaleTopology A) :
+    (geometricPointComapIso q s).hom.sheafFiber.app
+        (((etaleBaseChange q).sheafPushforwardContinuous A
+          X.smallEtaleTopology Y.smallEtaleTopology).obj G) ≫
         Sites.restrictionComapStalkMap (etaleBaseChange q)
-          (etaleBaseChange_coverPreserving q) (Scheme.pointSmallEtale s) (ModuleCat.{u} Λ) G =
+          (etaleBaseChange_coverPreserving q) (Scheme.pointSmallEtale s) A G =
       etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ G := by
-  dsimp only [etalePushforward]
   let Φ := Scheme.pointSmallEtale s
   let Ψ := Scheme.pointSmallEtale (s ≫ q)
-  let P := (((etaleBaseChange q).sheafPushforwardContinuous (ModuleCat.{u} Λ)
+  let P := (((etaleBaseChange q).sheafPushforwardContinuous A
     X.smallEtaleTopology Y.smallEtaleTopology).obj G).obj
   let φ : Ψ.presheafFiber.obj P ⟶
       (Φ.comap (etaleBaseChange q) (etaleBaseChange_coverPreserving q)).presheafFiber.obj P :=
@@ -81,7 +86,7 @@ theorem etalePushforwardStalkComponent_eq_comap
   let k : (Φ.comap (etaleBaseChange q) (etaleBaseChange_coverPreserving q)).presheafFiber.obj P ⟶
       Φ.presheafFiber.obj G.obj :=
     Sites.restrictionComapStalkMap (etaleBaseChange q)
-      (etaleBaseChange_coverPreserving q) Φ (ModuleCat.{u} Λ) G
+      (etaleBaseChange_coverPreserving q) Φ A G
   let c : Ψ.presheafFiber.obj P ⟶ Φ.presheafFiber.obj G.obj :=
     etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ G
   change φ ≫ k = c
@@ -94,10 +99,60 @@ theorem etalePushforwardStalkComponent_eq_comap
   change ((Φ.comap (etaleBaseChange q) (etaleBaseChange_coverPreserving q)).toPresheafFiber
       U ((geometricFiberBaseChangeIso q s).inv.app U a) P) ≫ _ = _
   refine (Sites.toPresheafFiber_restrictionComapStalkMap (etaleBaseChange q)
-    (etaleBaseChange_coverPreserving q) Φ (ModuleCat.{u} Λ) G U
+    (etaleBaseChange_coverPreserving q) Φ A G U
     ((geometricFiberBaseChangeIso q s).inv.app U a)).trans ?_
   rw [geometricLift_eq_baseChangeIso_inv]
   exact (toPresheafFiber_etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ G U a).symm
+
+variable [HasProducts.{u} A]
+  (L : Sheaf X.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A)
+  (adj : L ⊣ (etaleBaseChange q).sheafPushforwardContinuous A
+    X.smallEtaleTopology Y.smallEtaleTopology)
+
+/-- The actual inverse-image unit followed by the actual direct-image
+component is an isomorphism at every geometric lift. -/
+theorem etalePullbackUnit_stalkComponent_isIso_generic
+    (F : Sheaf X.smallEtaleTopology A) :
+    IsIso ((Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map
+        (adj.unit.app F) ≫
+      etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ (L.obj F)) := by
+  let Φ := Scheme.pointSmallEtale s
+  let Ψ := Φ.comap (etaleBaseChange q) (etaleBaseChange_coverPreserving q)
+  let η : F ⟶ ((etaleBaseChange q).sheafPushforwardContinuous A
+      X.smallEtaleTopology Y.smallEtaleTopology).obj (L.obj F) :=
+    adj.unit.app F
+  let e := (geometricComapSheafFiberIsoOfCoefficients q s A).inv
+  let k : Ψ.sheafFiber.obj (((etaleBaseChange q).sheafPushforwardContinuous A
+      X.smallEtaleTopology Y.smallEtaleTopology).obj (L.obj F)) ⟶
+      Φ.sheafFiber.obj (L.obj F) :=
+    Sites.restrictionComapStalkMap (etaleBaseChange q)
+      (etaleBaseChange_coverPreserving q) Φ A (L.obj F)
+  have hunit : IsIso (Ψ.sheafFiber.map η ≫ k) :=
+    Sites.unit_restrictionComapStalkMap_isIso (etaleBaseChange q)
+      (etaleBaseChange_coverPreserving q) Φ A
+      L adj F
+  have heq : (Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map η ≫
+      etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ (L.obj F) =
+        e.app F ≫ (Ψ.sheafFiber.map η ≫ k) := by
+    rw [← etalePushforwardStalkComponent_eq_comap_generic]
+    change (Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map η ≫
+      (e.app (((etaleBaseChange q).sheafPushforwardContinuous A
+      X.smallEtaleTopology Y.smallEtaleTopology).obj (L.obj F)) ≫ k) = _
+    rw [← Category.assoc, e.naturality η, Category.assoc]
+  rw [heq]
+  infer_instance
+
+variable (Λ : Type u) [CommRing Λ]
+
+/-- The concrete component at a geometric lift is the comapped-point
+restriction map, transported through the existing point comparison. -/
+theorem etalePushforwardStalkComponent_eq_comap
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    (geometricComapSheafFiberIso q s Λ).inv.app ((etalePushforward q Λ).obj G) ≫
+        Sites.restrictionComapStalkMap (etaleBaseChange q)
+          (etaleBaseChange_coverPreserving q) (Scheme.pointSmallEtale s) (ModuleCat.{u} Λ) G =
+      etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ G :=
+  etalePushforwardStalkComponent_eq_comap_generic q s (ModuleCat.{u} Λ) G
 
 /-- The actual inverse-image unit followed by the actual direct-image
 component is an isomorphism at every geometric lift. -/
@@ -105,39 +160,21 @@ theorem etalePullbackUnit_stalkComponent_isIso
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
     IsIso ((Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map
         ((etalePullbackPushforwardAdjunction q Λ).unit.app F) ≫
-      etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ ((etalePullback q Λ).obj F)) := by
-  let Φ := Scheme.pointSmallEtale s
-  let Ψ := Φ.comap (etaleBaseChange q) (etaleBaseChange_coverPreserving q)
-  let η : F ⟶ (etalePushforward q Λ).obj ((etalePullback q Λ).obj F) :=
-    (etalePullbackPushforwardAdjunction q Λ).unit.app F
-  let e := geometricComapSheafFiberIso q s Λ
-  let k : Ψ.sheafFiber.obj ((etalePushforward q Λ).obj ((etalePullback q Λ).obj F)) ⟶
-      Φ.sheafFiber.obj ((etalePullback q Λ).obj F) :=
-    Sites.restrictionComapStalkMap (etaleBaseChange q)
-      (etaleBaseChange_coverPreserving q) Φ (ModuleCat.{u} Λ) ((etalePullback q Λ).obj F)
-  have hunit : IsIso (Ψ.sheafFiber.map η ≫ k) :=
-    Sites.unit_restrictionComapStalkMap_isIso (etaleBaseChange q)
-      (etaleBaseChange_coverPreserving q) Φ (ModuleCat.{u} Λ)
-      (etalePullback q Λ) (etalePullbackPushforwardAdjunction q Λ) F
-  have heq : (Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map η ≫
-      etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ ((etalePullback q Λ).obj F) =
-        e.inv.app F ≫ (Ψ.sheafFiber.map η ≫ k) := by
-    rw [← etalePushforwardStalkComponent_eq_comap]
-    change (Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map η ≫
-      (e.inv.app ((etalePushforward q Λ).obj ((etalePullback q Λ).obj F)) ≫ k) = _
-    rw [← Category.assoc, e.inv.naturality η, Category.assoc]
-  rw [heq]
-  infer_instance
+      etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩ ((etalePullback q Λ).obj F)) :=
+  etalePullbackUnit_stalkComponent_isIso_generic q s (ModuleCat.{u} Λ)
+    (etalePullback q Λ) (etalePullbackPushforwardAdjunction q Λ) F
 
+omit [HasProducts.{u} A] in
 /-- A section pulled through a commuting square has the germ obtained from
 its original germ by the actual inverse-image unit and lift component. -/
-theorem etalePullbackSectionMap_toPresheafFiber
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ))
+theorem etalePullbackSectionMap_toPresheafFiber_generic
+    (F : Sheaf X.smallEtaleTopology A)
     {U : Y.Etale} {V : X.Etale}
     (l : U.left ⟶ V.left) (hl : l ≫ V.hom = U.hom ≫ q)
     (a : (Scheme.pointSmallEtale s).fiber.obj U) :
-    etalePullbackSectionMap q Λ F l hl ≫
-        (Scheme.pointSmallEtale s).toPresheafFiber U a ((etalePullback q Λ).obj F).obj =
+    ((adj.unit.app F).hom.app (op V) ≫
+      (L.obj F).obj.map (etaleBaseChangeLift q l hl).op) ≫
+        (Scheme.pointSmallEtale s).toPresheafFiber U a (L.obj F).obj =
       (Scheme.pointSmallEtale (s ≫ q)).toPresheafFiber V
           (Over.homMk (a.left ≫ l) (by
             change (Over.mk s ⟶ Over.mk U.hom) at a
@@ -145,12 +182,13 @@ theorem etalePullbackSectionMap_toPresheafFiber
             rw [Category.assoc, hl, ← Category.assoc]
             exact congrArg (fun k : Spec (CommRingCat.of Ω) ⟶ Y => k ≫ q) a.w)) F.obj ≫
         (Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map
-          ((etalePullbackPushforwardAdjunction q Λ).unit.app F) ≫
+          (adj.unit.app F) ≫
         etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩
-          ((etalePullback q Λ).obj F) := by
-  let G : Sheaf Y.smallEtaleTopology (ModuleCat.{u} Λ) := (etalePullback q Λ).obj F
-  let H : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ) := (etalePushforward q Λ).obj G
-  let η : F ⟶ H := (etalePullbackPushforwardAdjunction q Λ).unit.app F
+          (L.obj F) := by
+  let G : Sheaf Y.smallEtaleTopology A := L.obj F
+  let H : Sheaf X.smallEtaleTopology A := ((etaleBaseChange q).sheafPushforwardContinuous A
+      X.smallEtaleTopology Y.smallEtaleTopology).obj G
+  let η : F ⟶ H := adj.unit.app F
   let b : (Scheme.pointSmallEtale (s ≫ q)).fiber.obj V :=
     Over.homMk (a.left ≫ l) (by
       change (Over.mk s ⟶ Over.mk U.hom) at a
@@ -194,6 +232,28 @@ theorem etalePullbackSectionMap_toPresheafFiber
       (Scheme.pointSmallEtale (s ≫ q)).presheafFiber.map η.hom ≫ c
   rw [Category.assoc, (Scheme.pointSmallEtale s).toPresheafFiber_w, hj,
     ← Category.assoc, hn, Category.assoc, hc]
+
+/-- A section pulled through a commuting square has the germ obtained from
+its original germ by the actual inverse-image unit and lift component. -/
+theorem etalePullbackSectionMap_toPresheafFiber
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ))
+    {U : Y.Etale} {V : X.Etale}
+    (l : U.left ⟶ V.left) (hl : l ≫ V.hom = U.hom ≫ q)
+    (a : (Scheme.pointSmallEtale s).fiber.obj U) :
+    etalePullbackSectionMap q Λ F l hl ≫
+        (Scheme.pointSmallEtale s).toPresheafFiber U a ((etalePullback q Λ).obj F).obj =
+      (Scheme.pointSmallEtale (s ≫ q)).toPresheafFiber V
+          (Over.homMk (a.left ≫ l) (by
+            change (Over.mk s ⟶ Over.mk U.hom) at a
+            change (a.left ≫ l) ≫ V.hom = s ≫ q
+            rw [Category.assoc, hl, ← Category.assoc]
+            exact congrArg (fun k : Spec (CommRingCat.of Ω) ⟶ Y => k ≫ q) a.w)) F.obj ≫
+        (Scheme.pointSmallEtale (s ≫ q)).sheafFiber.map
+          ((etalePullbackPushforwardAdjunction q Λ).unit.app F) ≫
+        etalePushforwardStalkComponent q (s ≫ q) ⟨s, rfl⟩
+          ((etalePullback q Λ).obj F) :=
+  etalePullbackSectionMap_toPresheafFiber_generic q s (ModuleCat.{u} Λ)
+    (etalePullback q Λ) (etalePullbackPushforwardAdjunction q Λ) F l hl a
 
 /-- The germ of a global section at a geometric point. -/
 def etaleGlobalSectionsGerm

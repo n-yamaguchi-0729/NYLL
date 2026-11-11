@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOf
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfKerDZeroEqRangeAug
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfAugInjective
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverCompactSpace
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOf
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfKerDZeroEqRangeAug
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfAugInjective
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverCompactSpace
 
 /-!
 # Scheme exists forall eq app LE of forall map eq of bijective
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

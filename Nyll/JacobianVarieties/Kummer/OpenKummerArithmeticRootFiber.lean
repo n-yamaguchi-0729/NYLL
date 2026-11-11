@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Kummer.OpenCurveCoverTorsor
 import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldMonodromyLift
+import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
 
 /-!
 # Root coordinates on the original arithmetic Kummer fiber
@@ -65,7 +66,7 @@ theorem exists_arithmeticKummerFiber_rootEquiv
     let η := Spec.map (CommRingCat.ofHom (algebraMap X.functionField Ω))
     let ξ := η ≫ X.fromSpecStalk (genericPoint X)
     let W := M.openKummerCover S n hn w j hj hi
-    letI := kummerGeometricRootAction M S n w j hj hi hn ξ
+    let := kummerGeometricRootAction M S n w j hj hi hn ξ
     ∃ a : Ωˣ, ∃ e : (FiniteEtale.fiber ξ).obj W ≃ {β : Ω // β ^ (n : ℕ) = (a : Ω)},
       (∀ (ζ : rootsOfUnity (n : ℕ) K) x,
         (e (ζ • x)).val = pointScalar (j ≫ M.toBase) ξ (ζ.val : K) * (e x).val) ∧
@@ -73,8 +74,7 @@ theorem exists_arithmeticKummerFiber_rootEquiv
         (e (FiniteEtale.fundamentalGroupHom (X.fromSpecStalk (genericPoint X)) η
           (toAut (FiniteEtale.fiber η) (Ω ≃ₐ[X.functionField] Ω) σ) • x)).val =
           σ (e x).val := by
-  intro η ξ W
-  let := kummerGeometricRootAction M S n w j hj hi hn ξ
+  intro η ξ W rootAction
   let f := M.openKummerGenericMap S n w j hj
   let π := f.fromNormalization
   obtain ⟨V, _hV, hxV, h, _hh, v, hv, T, hTpow, hTgen, hlift⟩ :=
@@ -137,7 +137,7 @@ theorem exists_arithmeticKummerFiber_rootEquiv
         ⟨(l x).1 ≫ d.hom,
           (Category.assoc _ _ _).trans ((congrArg ((l x).1 ≫ ·) hd).trans (l x).2)⟩ := by
       apply Subtype.ext
-      exact fiberLiftEquiv_naturality ξ (kummerCoverRootScale M S n w j hj hi hn ζ).hom x
+      exact fiberLiftEquiv_naturality ξ (kummerCoverRootScale M S n w j hj hi hn ζ).asIso.hom x
     change (Scheme.ΓSpecIso (.of Ω)).hom (c (l (ζ • x))) = _
     rw [hl]
     change (Scheme.ΓSpecIso (.of Ω)).hom

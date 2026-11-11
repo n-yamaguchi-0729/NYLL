@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
-import Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
+public import Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition
 
 /-!
 # Degree-one prime divisors have rational centers
@@ -18,6 +20,8 @@ degree is one, every residue class is the image of a unique constant, so the
 residues of the two coordinates define a `K`-rational point whose point ideal
 is the center.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -132,7 +136,7 @@ theorem exists_rationalPoint_centerAlong_eq_pointIdeal_of_degree_one
     apply hresidue_bijective.1
     simpa using h
   · rintro h
-    simp [h]
+    rw [h, map_zero]
 
 end FunctionFieldPrimeDivisor
 end Chapter06

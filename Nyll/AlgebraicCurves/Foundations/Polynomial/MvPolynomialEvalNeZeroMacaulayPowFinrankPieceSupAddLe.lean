@@ -10,60 +10,66 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Tactic.Omega
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.Module.LinearMap.Defs
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Division
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.MvPolynomial.Funext
-import Mathlib.Algebra.MvPolynomial.Monad
-import Mathlib.Algebra.MvPolynomial.Rename
-import Mathlib.Algebra.MvPolynomial.Variables
-import Mathlib.Data.Fin.Tuple.Basic
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.LinearAlgebra.LinearIndependent.Basic
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.Set
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Module.LinearMap.Defs
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Division
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.Algebra.MvPolynomial.Rename
+public import Mathlib.Algebra.MvPolynomial.Variables
+public import Mathlib.Data.Fin.Tuple.Basic
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Set
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # Mv Polynomial exists forall eval ne zero macaulay Pow finrank piece sup add le
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -76,7 +82,7 @@ open MvPolynomial
 
 section SemiCont
 
-variable {K : Type} [Field K] {N : ℕ}
+variable {K : Type u} [Field K] {N : ℕ}
 variable {E F : Type*} [AddCommGroup E] [Module K E] [AddCommGroup F] [Module K F]
 
 /-- The linear combination of a finite family of linear maps with the given coefficients. -/
@@ -162,7 +168,7 @@ end SemiCont
 
 section Pieces
 
-variable (K : Type) [Field K] (M : ℕ)
+variable (K : Type u) [Field K] (M : ℕ)
 
 /-- The submodule of homogeneous polynomials of the specified degree. -/
 abbrev HS (m : ℕ) : Submodule K (MvPolynomial (Fin M) K) := homogeneousSubmodule (Fin M) K m
@@ -285,8 +291,8 @@ theorem mulSub_zero (m : ℕ) : mulSub (0 : MvPolynomial (Fin M) K) m = ⊥ := b
     (zero_mul p : (0 : MvPolynomial (Fin M) K) * p = 0)
 
 /-- The dimension of the homogeneous piece minus the dimension of the given submodule. -/
-noncomputable def codim (K : Type) [Field K] (M m : ℕ) (V : Submodule K (MvPolynomial (Fin M) K)) :
-  ℕ :=
+noncomputable def codim (K : Type u) [Field K] (M m : ℕ)
+    (V : Submodule K (MvPolynomial (Fin M) K)) : ℕ :=
   Module.finrank K ↥(HS K M m) - Module.finrank K ↥V
 
 theorem finrank_le_of_le {m : ℕ} {V : Submodule K (MvPolynomial (Fin M) K)} (hV : V ≤ HS K M m) :
@@ -399,7 +405,7 @@ end Pieces
 
 section Restrict
 
-variable {K : Type} [Field K] {N : ℕ}
+variable {K : Type u} [Field K] {N : ℕ}
 
 /-- The negative ratios of the initial coefficients to the last coefficient. -/
 noncomputable def bvec (a : Fin (N + 1) → K) : Fin N → K := fun j => -(a (Fin.castSucc j) / a
@@ -656,7 +662,7 @@ end Restrict
 
 section Main
 
-variable {K : Type} [Field K]
+variable {K : Type u} [Field K]
 
 theorem HS_zero_vars (m : ℕ) : HS K 0 (m + 1) = ⊥ := by
   rw [eq_bot_iff]
@@ -834,7 +840,7 @@ end Main
 
 section Ideals
 
-variable {K : Type} [Field K] {n : ℕ}
+variable {K : Type u} [Field K] {n : ℕ}
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
@@ -901,7 +907,7 @@ end GreenHRT
 
 open MvPolynomial AlgebraicGeometry.HilbertFunctor GreenHRT in
 theorem _root_.MvPolynomial.exists_forall_eval_ne_zero_macaulayPow_finrank_piece_sup_add_le (n d :
-  ℕ) (hd : 1 ≤ d) (K : Type) [Field K] [Infinite K]
+  ℕ) (hd : 1 ≤ d) (K : Type u) [Field K] [Infinite K]
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈
       J) :
     ∃ G : MvPolynomial (Fin (n + 1)) K, G ≠ 0 ∧ ∀ a : Fin (n + 1) → K, MvPolynomial.eval a G ≠ 0 →

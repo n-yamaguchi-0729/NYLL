@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The generic open after a DVR base extension
@@ -30,6 +32,8 @@ Both the original scheme coordinate and the fraction field coordinate
 are retained. This permits a cover descended to a finite coefficient
 field to be used on the actual generic open of a normalized DVR base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

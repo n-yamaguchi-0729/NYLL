@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Nyll.SchemeTheory.Descent.SectionDirectLimit
-import Nyll.SchemeTheory.Descent.SectionEqualityDirectLimit
-import Nyll.SchemeTheory.Descent.OpenCoverDirectLimit
+module
+
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Nyll.SchemeTheory.Descent.SectionDirectLimit
+public import Nyll.SchemeTheory.Descent.SectionEqualityDirectLimit
+public import Nyll.SchemeTheory.Descent.OpenCoverDirectLimit
 /-!
 # Scheme Modules Unit Cocycle exists comap eq of is Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

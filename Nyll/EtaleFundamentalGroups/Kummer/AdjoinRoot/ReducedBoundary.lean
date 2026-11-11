@@ -4,34 +4,36 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerRamification
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+module
+
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerRamification
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # Kummer covers at a reduced boundary
@@ -50,6 +52,8 @@ These are the local algebra and ramification calculations for the standard
 cover in Stacks Project, Example 58.31.4 (tag `0EYF`):
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

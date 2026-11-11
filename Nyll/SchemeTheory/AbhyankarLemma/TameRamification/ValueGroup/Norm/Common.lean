@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Transport
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Transport
 
 /-!
 # Common norm images and value steps
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Transport
 This file generates the two lower value-step inclusions used by the transport
 layer from concrete `ValuedNorm.normSubgroup` containments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

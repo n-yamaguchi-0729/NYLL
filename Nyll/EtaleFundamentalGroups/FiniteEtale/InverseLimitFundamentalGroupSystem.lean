@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFundamentalGroup
+import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
 
 /-!
 # The canonical inverse system of original geometric fundamental groups

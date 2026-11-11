@@ -10,14 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+module
+
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 
 /-!
 # Scheme Pullback is Affine Open and exists alg Equiv tensor sections fst preimage inf snd
 preimage
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -37,8 +42,7 @@ variable {R : Type u} [CommRing R] {X Y : Scheme.{u}}
 theorem fromSpec_comp_eq :
     let := Scheme.TwoAffineOpenCover.algebraOfHom f U
     hU.fromSpec ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R Γ(X, U))) := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom f U
-  change hU.fromSpec ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R Γ(X, U)))
+  intro sharedOwner1
   have h1 : CommRingCat.ofHom (algebraMap R Γ(X, U))
       = (Scheme.ΓSpecIso (.of R)).inv ≫ f.appLE ⊤ U le_top := rfl
   rw [h1, Spec.map_comp, ← Scheme.isoSpec_Spec_inv, ← IsAffineOpen.fromSpec_top,
@@ -60,25 +64,23 @@ scoped instance chart_isOpenImmersion : IsOpenImmersion (chart f g U hU V hV) :=
   unfold chart; infer_instance
 
 theorem chart_fst :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom f U
+    let := Scheme.TwoAffineOpenCover.algebraOfHom f U
     let := Scheme.TwoAffineOpenCover.algebraOfHom g V
     chart f g U hU V hV ≫ pullback.fst f g =
       Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom)) ≫ hU.fromSpec := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom f U
-  let := Scheme.TwoAffineOpenCover.algebraOfHom g V
+  intro sharedOwner1 sharedOwner2
   simp only [chart, Category.assoc, pullback.lift_fst]
   rw [pullbackSpecIso_inv_fst_assoc]
 
 theorem chart_snd :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom f U
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom g V
+    let := Scheme.TwoAffineOpenCover.algebraOfHom f U
+    let := Scheme.TwoAffineOpenCover.algebraOfHom g V
     chart f g U hU V hV ≫ pullback.snd f g =
       Spec.map (CommRingCat.ofHom (R := Γ(Y, V)) (S := Γ(X, U) ⊗[R] Γ(Y, V))
         (RingHomClass.toRingHom
           (Algebra.TensorProduct.includeRight : Γ(Y, V) →ₐ[R] Γ(X, U) ⊗[R] Γ(Y, V)))) ≫
         hV.fromSpec := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom f U
-  let := Scheme.TwoAffineOpenCover.algebraOfHom g V
+  intro sharedOwner1 sharedOwner2
   simp only [chart, Category.assoc, pullback.lift_snd]
   rw [pullbackSpecIso_inv_snd_assoc]
 
@@ -114,8 +116,8 @@ noncomputable def toTensor :
   (chart f g U hU V hV).appLE _ ⊤ (top_le_preimage f g U hU V hV) ≫ (Scheme.ΓSpecIso _).hom
 
 theorem appLE_congr_hom {P Q : Scheme.{u}} {φ ψ : P ⟶ Q} (h : φ = ψ) (U' : Q.Opens) (V' : P.Opens)
-    (e : V' ≤ φ ⁻¹ᵁ U') : φ.appLE U' V' e = ψ.appLE U' V' (h ▸ e) := by
-  subst h; rfl
+    (e : V' ≤ φ ⁻¹ᵁ U') : φ.appLE U' V' e = ψ.appLE U' V' (h ▸ e) :=
+  _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom h U' V' e (h ▸ e)
 
 scoped instance isIso_toTensor : IsIso (toTensor f g U hU V hV) := by
   let := Scheme.TwoAffineOpenCover.algebraOfHom f U
@@ -167,8 +169,7 @@ theorem toTensor_fst (a : Γ(X, U)) :
     let := Scheme.TwoAffineOpenCover.algebraOfHom g V
     (toTensor f g U hU V hV).hom ((pullback.fst f g).appLE U _ inf_le_left a) = a ⊗ₜ[R] (1 : Γ(Y,
       V)) := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom f U
-  let := Scheme.TwoAffineOpenCover.algebraOfHom g V
+  intro sharedOwner1 sharedOwner2
   dsimp only
   unfold toTensor
   rw [← CommRingCat.comp_apply, ← Category.assoc, Scheme.Hom.appLE_comp_appLE,
@@ -183,8 +184,7 @@ theorem toTensor_snd (b : Γ(Y, V)) :
     let := Scheme.TwoAffineOpenCover.algebraOfHom g V
     (toTensor f g U hU V hV).hom ((pullback.snd f g).appLE V _ inf_le_right b) = (1 : Γ(X, U))
       ⊗ₜ[R] b := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom f U
-  let := Scheme.TwoAffineOpenCover.algebraOfHom g V
+  intro sharedOwner1 sharedOwner2
   dsimp only
   unfold toTensor
   rw [← CommRingCat.comp_apply, ← Category.assoc, Scheme.Hom.appLE_comp_appLE,
@@ -235,14 +235,13 @@ noncomputable def tensorAlgEquiv :
     rw [Algebra.TensorProduct.algebraMap_apply, toTensorEquiv_symm_tmul_one, appLE_algebraMap]
 
 theorem tensorAlgEquiv_tmul (a : Γ(X, U)) (b : Γ(Y, V)) :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom f U
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom g V
+    let := Scheme.TwoAffineOpenCover.algebraOfHom f U
+    let := Scheme.TwoAffineOpenCover.algebraOfHom g V
     letI := Scheme.TwoAffineOpenCover.algebraOfHom (pullback.fst f g ≫ f)
       (pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V)
     tensorAlgEquiv f g U hU V hV (a ⊗ₜ[R] b) =
       (pullback.fst f g).appLE U _ inf_le_left a * (pullback.snd f g).appLE V _ inf_le_right b := by
-  let := Scheme.TwoAffineOpenCover.algebraOfHom f U
-  let := Scheme.TwoAffineOpenCover.algebraOfHom g V
+  intro sharedOwner1 sharedOwner2
   have h : a ⊗ₜ[R] b = (a ⊗ₜ[R] (1 : Γ(Y, V))) * ((1 : Γ(X, U)) ⊗ₜ[R] b) := by
     rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
   change (toTensorEquiv f g U hU V hV).symm (a ⊗ₜ[R] b) = _

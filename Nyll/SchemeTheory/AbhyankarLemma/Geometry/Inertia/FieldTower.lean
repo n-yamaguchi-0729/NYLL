@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.DecompositionGroup
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.DecompositionGroup
 
 /-!
 # Inertia in a normal intermediate field
@@ -20,6 +22,8 @@ The kernel is the relative inertia group of `E / M`, embedded by scalar
 restriction.  No completeness, Henselianity, discreteness, or finiteness is
 needed for this kernel calculation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

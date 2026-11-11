@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceFormalEvaluation
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceFormalEvaluation
 
 /-! # The actual completed Cartier fibre of a finite curve map
 
@@ -17,6 +19,8 @@ Thus the completed factors describe the full Cartier fibre itself, not only
 its support or an unlabelled finite algebra of the same dimension.
 
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,22 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Mathlib.Topology.Inseparable
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
-import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageEqPreimageRestrictAlongPlacesOf
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldInfMemLSpaceOnInterPlacesOf
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldMemLSpaceOnPlacesOf
-import Nyll.AlgebraicCurves.Cohomology.CechH1ToH1MkEqCechH1ToH1PullbackMkEq
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Mathlib.Topology.Inseparable
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
+public import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageEqPreimageRestrictAlongPlacesOf
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldInfMemLSpaceOnInterPlacesOf
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldMemLSpaceOnPlacesOf
+public import Nyll.AlgebraicCurves.Cohomology.CechH1ToH1MkEqCechH1ToH1PullbackMkEq
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Cech H1 To H1 corr H1 of pullback spec Map self
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

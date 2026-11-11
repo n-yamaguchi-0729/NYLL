@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineSpace
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.UniqueExtensionToAffine
+module
+
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.UniqueExtensionToAffine
 
 /-!
 # Scheme bijective presheaf map inf of is Integrally Closed stalk
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -73,8 +77,10 @@ theorem bijective_appTop {T : Scheme.{u}} [IsLocallyNoetherian T]
   · intro r₁ r₂ hr
     let φ₁ := E.symm (fun _ => r₁)
     let φ₂ := E.symm (fun _ => r₂)
-    have h1 : E φ₁ PUnit.unit = r₁ := by simp [φ₁]
-    have h2 : E φ₂ PUnit.unit = r₂ := by simp [φ₂]
+    have h1 : E φ₁ PUnit.unit = r₁ := by
+      exact congrFun (E.apply_symm_apply (fun _ => r₁)) PUnit.unit
+    have h2 : E φ₂ PUnit.unit = r₂ := by
+      exact congrFun (E.apply_symm_apply (fun _ => r₂)) PUnit.unit
     have hv : V'.ι ≫ φ₁ = V'.ι ≫ φ₂ := by
       apply E'.injective
       funext i

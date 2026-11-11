@@ -16,9 +16,9 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
 import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
 import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.LocallyFreeOneIffInvertible
+import Nyll.SchemeTheory.Modules.Invertible.RankOne
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataMonoWhiskerLeftModuleIota
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataRangeModuleIotaAppInjective
+import Nyll.SchemeTheory.Sheaves.IdealSheafDataRangeModuleIotaAppInjective
 import Nyll.SchemeTheory.Modules.LocalMorphisms
 import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality

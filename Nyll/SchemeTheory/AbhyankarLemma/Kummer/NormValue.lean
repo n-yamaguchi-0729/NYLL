@@ -4,8 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalGeneration
-import Nyll.ValuedFieldTheory.LocalField.Unramified.HenselianAlgebraicExtension
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalGeneration
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.HenselianAlgebraicExtension
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.AbsoluteValues
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Norm control of value cosets
@@ -15,6 +20,8 @@ that the extension degree times the value of an element is
 the value of its norm.  Thus the order of every value-group coset divides the
 field degree, as required by the tame radical-generation argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

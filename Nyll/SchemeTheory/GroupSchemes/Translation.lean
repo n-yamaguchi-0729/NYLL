@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 
 /-! # Translation on actual group schemes
 
 A section over the base gives an automorphism of the underlying scheme over that
 base. The point formula holds on every parameter scheme, including nonreduced ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

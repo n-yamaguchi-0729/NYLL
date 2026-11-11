@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Actual restriction of affine pullback sections
@@ -23,6 +25,8 @@ This formula uses the actual two section rings at each open. It does not
 choose an identification between coefficient rings belonging to different
 opens, and applies to any subordinate pair of affine opens.
 -/
+
+@[expose] public section
 
 noncomputable section
 

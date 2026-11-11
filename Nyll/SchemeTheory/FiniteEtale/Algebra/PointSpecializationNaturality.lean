@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Naturality of finite étale point specialization in the local ring
@@ -26,6 +28,8 @@ proper-family fundamental-group maps of Stacks, Section 58.16.
 
 Mathematical context: https://stacks.math.columbia.edu/tag/0BUP
 -/
+
+@[expose] public section
 
 noncomputable section
 

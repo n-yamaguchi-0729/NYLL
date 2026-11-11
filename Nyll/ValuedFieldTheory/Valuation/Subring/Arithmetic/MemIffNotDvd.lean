@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
-import Mathlib.Tactic.LinearCombination
-import Mathlib.RingTheory.Noetherian.UniqueFactorizationDomain
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.RingTheory.Noetherian.UniqueFactorizationDomain
 
 /-!
 # Valuation Subring mem iff exists not dvd of prime of forall mem maximal Ideal iff dvd
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafLocalization
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Regular.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.Localization.Defs
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafLocalization
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Regular.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.Localization.Defs
 
 /-!
 # Injective restriction between actual projective charts
@@ -26,6 +28,8 @@ ring, where both its numerator and denominator are coordinate variables.
 Consequently restriction from a chart to any coordinate overlap is
 injective over an arbitrary coefficient ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

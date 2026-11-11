@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
-import Mathlib.Algebra.Module.Torsion.Field
-import Mathlib.FieldTheory.Galois.IsGaloisGroup
-import Mathlib.GroupTheory.Coset.Card
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.RingTheory.IsGaloisGroup.Basic
-import Mathlib.RingTheory.RamificationInertia.Ramification
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
+public import Mathlib.Algebra.Module.Torsion.Field
+public import Mathlib.FieldTheory.Galois.IsGaloisGroup
+public import Mathlib.GroupTheory.Coset.Card
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Invariant.Galois
+public import Mathlib.RingTheory.IsGaloisGroup.Basic
+public import Mathlib.RingTheory.RamificationInertia.Ramification
 
 /-!
 # Tameness of the actual normalization from the Galois degree
@@ -30,6 +32,8 @@ the common exponent needed in the prime to characteristic case of
 Stacks Project, Proposition 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

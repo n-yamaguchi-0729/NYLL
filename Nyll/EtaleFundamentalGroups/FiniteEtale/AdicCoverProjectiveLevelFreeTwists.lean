@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverProjectiveLevels
-import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeHom
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Nyll.SchemeTheory.Modules.Tensor.FiniteFreePullback
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialMatrix
-import Nyll.SchemeTheory.ProjectiveSpace.PolynomialHomPullback
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseChange
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.HomCongr
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverProjectiveLevels
+public import Nyll.SchemeTheory.Modules.Functoriality.BaseChangeHom
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Nyll.SchemeTheory.Modules.Tensor.FiniteFreePullback
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialMatrix
+public import Nyll.SchemeTheory.ProjectiveSpace.PolynomialHomPullback
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafBaseChange
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.HomCongr
 
 /-!
 # Native free twists on the projective adic levels
@@ -36,6 +38,8 @@ This comparison applies directly to morphisms already constructed on the
 original levels of the cover tower.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -50,7 +54,8 @@ open Scheme_Modules_IsLocallyFreeOfRank_pullback.AlgebraicGeometry.Scheme.Module
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-private def pullbackHomEquivOfSchemeIso {X Y : Scheme.{u}} (e : Y ≅ X)
+/-- Pullback along a scheme isomorphism identifies morphisms of module sheaves. -/
+def pullbackHomEquivOfSchemeIso {X Y : Scheme.{u}} (e : Y ≅ X)
     (M N : X.Modules) :
     (M ⟶ N) ≃ ((Scheme.Modules.pullback e.hom).obj M ⟶
       (Scheme.Modules.pullback e.hom).obj N) := by

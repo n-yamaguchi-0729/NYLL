@@ -10,12 +10,14 @@ Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b3
 Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # Descent of finite etale sections through connected fibres
@@ -27,6 +29,8 @@ because degree one is detected after surjective base change. Its inverse
 therefore gives the actual descended section. No connectedness assumption
 on either scheme is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

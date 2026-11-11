@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Prod
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.Prod
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
 
 /-!
 # Linear Equiv exists forall finrank inf map pow add finrank inf le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

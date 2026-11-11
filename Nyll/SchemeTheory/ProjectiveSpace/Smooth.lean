@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Smoothness of projective space
@@ -19,6 +21,8 @@ The standard affine charts are polynomial algebras over the coefficient ring.
 Their existing algebra equivalences identify the chart structure morphisms,
 so smoothness glues over the standard affine open cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Data.Nat.Find
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Data.Nat.Find
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 
 /-!
 # The nonfinite-generator invariant
@@ -28,6 +30,8 @@ positive-characteristic coordinate-modification lemma.
 
 Source: https://stacks.math.columbia.edu/tag/0G1E
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -87,7 +91,8 @@ private theorem exists_ordered_algebra_generators [Algebra.FiniteType R C] :
   rw [Algebra.adjoin_range_eq_range_aeval, ← MvPolynomial.aeval_unique f]
   exact (AlgHom.range_eq_top f).mpr hf
 
-private theorem exists_nonfinite_generator_count [Algebra.FiniteType R C] :
+/-- Some ordered algebra-generating family realizes a nonfinite-generator count. -/
+theorem exists_nonfinite_generator_count [Algebra.FiniteType R C] :
     ∃ d : ℕ, ∃ (r : ℕ) (y : Fin r → C),
       Algebra.adjoin R (Set.range y) = ⊤ ∧ r - integralPrefixLength R y = d := by
   obtain ⟨r, y, hy⟩ := exists_ordered_algebra_generators R C

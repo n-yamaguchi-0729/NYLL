@@ -7,3 +7,4 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.All
 import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.All
 import Nyll.EtaleFundamentalGroups.Pi1.GeometricFiber.All
+import Nyll.EtaleFundamentalGroups.Pi1.Tame.All

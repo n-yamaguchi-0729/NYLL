@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Group.Subgroup.Map
+module
+
+public import Mathlib.Algebra.Group.Subgroup.Map
 
 /-!
 # Induced subgroup restriction from a proved image equality
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Group.Subgroup.Map
 The map is the literal ambient homomorphism on subgroup elements. A proved
 image equality supplies membership and every target element's actual lift.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealCanonicalTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealNormalizationPower
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealCanonicalTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealNormalizationPower
 
 /-!
 # Exactness of original finite canonical characters
@@ -13,6 +15,8 @@ import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealNormalizationPower
 Identifies the kernel of the canonical finite normalization character with original wild inertia
 and proves surjectivity onto the full roots group.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

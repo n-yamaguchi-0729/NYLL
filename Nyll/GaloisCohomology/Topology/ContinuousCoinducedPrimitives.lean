@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousTupleExactness
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousTupleExactness
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Explicit continuous primitives for coinduced coefficients
@@ -14,6 +16,8 @@ Insertion of the evaluation coordinate contracts positive homogeneous
 continuous cocycles with actual coinduced coefficients. This is the
 acyclicity needed for continuous dimension shifting.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.AffineSubmoduleLocalization
-import Nyll.SchemeTheory.Modules.AffineOpenModuleEpi
-import Nyll.SchemeTheory.Modules.Submodules.ImageSubmoduleRestriction
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.LocalizedSubmoduleComparison
-import Nyll.SchemeTheory.RingTheory.FinitePresentation.ModuleFiniteLocalizationModel
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.AffineSubmoduleLocalization
+public import Nyll.SchemeTheory.Modules.AffineOpenModuleEpi
+public import Nyll.SchemeTheory.Modules.Submodules.ImageSubmoduleRestriction
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.LocalizedSubmoduleComparison
+public import Nyll.SchemeTheory.RingTheory.FinitePresentation.ModuleFiniteLocalizationModel
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
+public import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
 
 /-!
 # Finite-type extraction on finitely many principal opens
@@ -23,6 +27,8 @@ restrictions. The principal opens need not cover the whole spectrum.
 This is the affine extraction step of Stacks Tag 01PF, after Tag 01PE has
 supplied the actual quasicoherent extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

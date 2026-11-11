@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.AffineNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.AffineNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Recovering the original away cover from the whole normalization
@@ -37,6 +39,8 @@ comparison is assumed. This is the recovery step for a normalized root
 extension, independently of the separate proof that it is étale along
 the special fibre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

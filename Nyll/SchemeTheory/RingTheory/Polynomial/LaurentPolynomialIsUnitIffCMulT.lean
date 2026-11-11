@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Algebra.Polynomial.RingDivision
+module
+
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Polynomial.RingDivision
 
 /-!
 # Laurent Polynomial is Unit iff exists C mul T
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

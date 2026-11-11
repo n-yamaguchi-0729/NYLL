@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Actual subordinate section units and pullback composition
@@ -21,6 +23,8 @@ that retains both original restricted unit sections.
 The square in the affine application is supplied by `SpecMap_appLE_fromSpec`.
 No section comparison or invertibility assertion is an input here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

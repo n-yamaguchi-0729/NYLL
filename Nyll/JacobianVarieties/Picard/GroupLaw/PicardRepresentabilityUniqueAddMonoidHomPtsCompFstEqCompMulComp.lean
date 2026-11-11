@@ -10,7 +10,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
@@ -20,7 +20,7 @@ import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
 import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.Picard.Poincare.PicardRepresentabilityPoincarePullbackMulIso

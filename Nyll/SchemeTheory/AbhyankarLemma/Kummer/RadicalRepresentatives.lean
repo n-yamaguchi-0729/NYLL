@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.ImmediateExtensions
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.ImmediateExtensions
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Corrected radical representatives for tame extensions
@@ -14,6 +18,8 @@ representative of each actual value-group coset is corrected first by a base
 element and then by a principal-unit root.  The result has the same value
 coset and a prime-to-residue-characteristic power in the base field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

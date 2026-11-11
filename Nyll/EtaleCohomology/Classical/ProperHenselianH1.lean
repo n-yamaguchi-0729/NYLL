@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.ClosedPushforward
-import Nyll.EtaleCohomology.Classical.Localization
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Nyll.EtaleCohomology.Classical.PullbackCoefficients
-import Nyll.EtaleCohomology.Sites.ProperHenselianH0
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
-import Mathlib.RingTheory.Henselian
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.ClosedPushforward
+public import Nyll.EtaleCohomology.Classical.Localization
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Nyll.EtaleCohomology.Classical.PullbackCoefficients
+public import Nyll.EtaleCohomology.Sites.ProperHenselianH0
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Injectivity of henselian proper base change in degree one
@@ -24,6 +26,8 @@ presentation and its quotient, makes restriction injective in degree one.
 The injective presentation belongs to abelian sheaves. No preservation of
 injectivity by forgetting a general coefficient ring is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

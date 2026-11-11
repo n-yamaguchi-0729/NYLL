@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
 
 /-!
 # Henselian Local Ring exists complete Orthogonal Idempotents forall is Local Ring quotient
 of module Finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

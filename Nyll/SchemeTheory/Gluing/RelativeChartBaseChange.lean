@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Nyll.SchemeTheory.Gluing.RelativeOverlap
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+module
+
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Nyll.SchemeTheory.Gluing.RelativeOverlap
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Actual relative chart data after a base change
@@ -16,6 +18,8 @@ structure morphisms, finite-etaleness, and cartesian overlap squares. Any
 transition morphism over the new base then preserves the second chart
 structure map, with no faithful-base-change assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
 
 /-!
 # Faithful finite-stage sections
@@ -13,6 +15,8 @@ Every canonical finite Galois transition is a surjective map of spectra.
 Actual sheaf separatedness therefore makes every transition injective,
 and each finite stage embeds in the actual section colimit.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

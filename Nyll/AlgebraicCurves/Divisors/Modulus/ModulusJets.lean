@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusLocalUnits
-import Nyll.AlgebraicCurves.Places.Orders.AdicValuationSubLe
-import Nyll.AlgebraicCurves.Places.Rational.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusLocalUnits
+public import Nyll.AlgebraicCurves.Places.Orders.AdicValuationSubLe
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
 
 /-!
 # Interpolation of finite local-unit jets
@@ -21,6 +23,8 @@ The approximation theorem is supplied by
 Anthropic FLT attribution. This file applies that theorem without introducing
 any additional approximation hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

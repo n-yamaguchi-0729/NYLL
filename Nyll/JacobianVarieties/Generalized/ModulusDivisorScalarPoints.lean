@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
-import Nyll.JacobianVarieties.Generalized.DivisorRestrictionScalarExtension
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerMapComparison
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+public import Nyll.JacobianVarieties.Generalized.DivisorRestrictionScalarExtension
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerMapComparison
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-! # Actual points and basepoints for the scalar-extended full divisor -/
+
+@[expose] public section
 
 noncomputable section
 

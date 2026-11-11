@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalFlat
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalFlat
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Native formal layers and the original cover-transition kernels
@@ -32,6 +34,8 @@ kernel from the original first-stage module, including its literal scalar
 and projection formula. Completeness of the original affine ring is
 neither needed nor assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

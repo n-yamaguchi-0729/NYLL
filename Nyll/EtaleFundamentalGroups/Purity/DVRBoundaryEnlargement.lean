@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
-import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.FiniteEtale.DVRUnramifiedExtension
-import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Topology.Closure
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
+public import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.FiniteEtale.DVRUnramifiedExtension
+public import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Topology.Closure
 
 /-!
 # Enlarging an existing extension across a codimension-one boundary
@@ -45,6 +47,8 @@ ramification comparison for the newly chosen cover or recompute the
 field factors of that cover. All unramifiedness hypotheses below concern
 the original cover on U.
 -/
+
+@[expose] public section
 
 noncomputable section
 

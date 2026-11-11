@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Notation.Pi.Basic
-import Lean.Elab.Tactic.NormCast
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Notation.Pi.Basic
+public import Lean.Elab.Tactic.NormCast
 
 /-!
 # Coordinate trivializations of shifted homogeneous fractions
@@ -22,6 +24,8 @@ This construction works for any graded module, without regularity of
 its coordinate operators. Any additional factor needed in an equality
 is retained in the witness for equality of localized fractions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

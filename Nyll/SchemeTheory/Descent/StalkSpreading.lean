@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!+# Spreading a stalk morphism with finitely presented target
 
@@ -21,6 +23,8 @@ actual morphism on that neighborhood.
 No injectivity of a germ map, Noetherianity, reducedness, or normality is
 required. This is the local morphism supplier needed for Stacks 0BQF.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationRing
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Tactic.Set
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationRing
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Tactic.Set
 
 /-!
 # Valuation Ring exists ne zero forall smul eq zero of module finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

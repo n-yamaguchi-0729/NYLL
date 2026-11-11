@@ -5,16 +5,18 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Injectivity of the actual unit for a finite surjection
@@ -24,6 +26,8 @@ and finiteness supply a lift of each of these points using the same field.
 The unit followed by its concrete stalk component is an isomorphism, so the
 unit is injective on every stalk of this conservative family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

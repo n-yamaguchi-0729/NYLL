@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.FinCases
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Abel
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoConjAppTopOneEqAppTop
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackSurjectiveAppKerAppEqMapKer
-import Nyll.SchemeTheory.Affine.SeparatedIntersections
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingZeroAddMulNegRestrictIsFibreReading
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingEq
+module
+
+public import Mathlib.Tactic.FinCases
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Abel
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoConjAppTopOneEqAppTop
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackSurjectiveAppKerAppEqMapKer
+public import Nyll.SchemeTheory.Affine.SeparatedIntersections
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingZeroAddMulNegRestrictIsFibreReading
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingEq
 
 /-!
 # Small Extension sub mem range d of is Pic Deformation Cocycle of is Pic Deformation
 Cocycle
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -271,9 +275,9 @@ theorem mem_map_of_isFibreReading {B₁ : Type u} [CommRing B₁] {k : Type u} [
     (U : X.Opens) (W : Xk.Opens) (hW : W ≤ i ⁻¹ᵁ U) (δ : Γ(X, U))
     (w : Module.Dual k V →ₗ[k] (OModulePresheaf.unit fk).obj W)
     (h : IsFibreReading V ι f fk i U W hW δ w) :
-    letI := algebraOfHom f U
+    let := algebraOfHom f U
     δ ∈ Ideal.map (algebraMap B₁ Γ(X, U)) (LinearMap.range ι) := by
-  let := algebraOfHom f U
+  intro sharedOwner1
   obtain ⟨n, v, s, hs, -⟩ := h
   rw [← hs]
   refine Submodule.sum_mem _ fun j _ => Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ ⟨v j, rfl⟩)

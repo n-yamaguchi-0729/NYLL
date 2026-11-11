@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.KrullDimension.Field
-import Mathlib.RingTheory.KrullDimension.Polynomial
-import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+module
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-!
 # Dimension of an irreducible affine plane curve
@@ -19,6 +23,8 @@ correspondence between primes of a quotient and primes above its kernel,
 Krull's principal ideal theorem, and the Krull dimension of a polynomial ring
 in two variables over a field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.SchemeTheory.Sheaves.DerivedHomology
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.SchemeTheory.Sheaves.DerivedHomology
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-!
 # Sections of the actual higher direct image resolution
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 The homology presheaf of an actual direct image resolution is evaluated
 by cohomology on the corresponding geometric base change.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

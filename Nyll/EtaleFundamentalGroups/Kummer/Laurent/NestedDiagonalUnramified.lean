@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Descent
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
-import Nyll.EtaleFundamentalGroups.Kummer.Laurent.DiagonalRadical
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Relative
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.RelativeRadical
+module
+
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
+public import Nyll.EtaleFundamentalGroups.Kummer.Laurent.DiagonalRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Relative
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.RelativeRadical
 
 /-!
 # Formal unramifiedness of a diagonal Laurent radical
@@ -24,6 +26,8 @@ Coefficient extension for additive monoid algebras is handled by its
 canonical pushout square.  Faithful flatness is preserved by this base change,
 and formal unramifiedness is reflected by faithfully-flat descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,9 +51,8 @@ private theorem mapRingHom_faithfullyFlat
     IsScalarTower.of_algebraMap_eq' rfl
   let : IsScalarTower A (AddMonoidAlgebra A M)
       (AddMonoidAlgebra B M) :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext a
-      simp [g, RingHom.algebraMap_toAlgebra])
+    IsScalarTower.of_algebraMap_eq'
+      (AddMonoidAlgebra.mapRingHom_comp_algebraMap (M := M) f).symm
   let : Algebra.IsPushout A (AddMonoidAlgebra A M) B
       (AddMonoidAlgebra B M) :=
     AddMonoidAlgebra.instIsPushout'
@@ -75,9 +78,8 @@ private theorem formallyUnramified_of_mapRingHom
     IsScalarTower.of_algebraMap_eq' rfl
   let : IsScalarTower A (AddMonoidAlgebra A M)
       (AddMonoidAlgebra B M) :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext a
-      simp [g, RingHom.algebraMap_toAlgebra])
+    IsScalarTower.of_algebraMap_eq'
+      (AddMonoidAlgebra.mapRingHom_comp_algebraMap (M := M) f).symm
   let : Algebra.IsPushout A (AddMonoidAlgebra A M) B
       (AddMonoidAlgebra B M) :=
     AddMonoidAlgebra.instIsPushout'

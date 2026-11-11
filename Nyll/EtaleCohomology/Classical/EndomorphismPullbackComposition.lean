@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
-import Nyll.EtaleCohomology.Sites.ConstantPullbackComposition
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
+public import Nyll.EtaleCohomology.Sites.ConstantPullbackComposition
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Composition of cohomological pullback by scheme endomorphisms
@@ -16,6 +18,8 @@ base change supplies a comparison of inverse-image functors. Its action on
 constant coefficients is identified through the composite adjunction.
 The resulting cohomological maps compose in every degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

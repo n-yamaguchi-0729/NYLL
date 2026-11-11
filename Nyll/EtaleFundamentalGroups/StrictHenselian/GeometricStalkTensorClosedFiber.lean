@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorLocal
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Localization.Ideal
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorLocal
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Localization.Ideal
 
 /-!
 # Closed points in the closed fiber of a base-changed geometric stalk
@@ -17,6 +19,8 @@ the prime, localize there. The two primes then have the same contraction
 along the proved isomorphism from the base, so they agree. This supplies
 the closed-complement requirement in the overlap argument of Stacks 0BSB.
 -/
+
+@[expose] public section
 
 noncomputable section
 

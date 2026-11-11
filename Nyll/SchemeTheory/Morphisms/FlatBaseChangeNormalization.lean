@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.ProperNormalization
-import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
+module
+
+public import Nyll.SchemeTheory.Morphisms.ProperNormalization
+public import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
 
 /-!
 # Flat affine base change for a universally closed normalization
@@ -15,6 +17,8 @@ with affinization over an affine base. The flat base-change theorem for
 sections therefore gives the cartesian square for the native normalization
 maps. No connected-fibre or finite-etale hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

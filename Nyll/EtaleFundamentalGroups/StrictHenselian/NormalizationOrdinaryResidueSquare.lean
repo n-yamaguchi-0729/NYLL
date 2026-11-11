@@ -9,6 +9,7 @@ import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationOrdinaryComparis
 import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationSpecializationResidueAction
 import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationStrictResidueAction
 import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationAutomorphism
+import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
 
 /-!
 # The actual ordinary generic/residue fundamental-group square

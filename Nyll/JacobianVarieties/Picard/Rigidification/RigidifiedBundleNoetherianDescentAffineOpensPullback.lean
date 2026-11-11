@@ -10,31 +10,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.Order.DirectedInverseSystem
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawPullbackCompEqMulEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackPullbackMapFstComp
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackMapIsoUnitPullbackIso
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.Order.DirectedInverseSystem
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.AbelianVarieties.Geometry.RelativeGroupLawPullbackCompEqMulEq
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackPullbackMapFstComp
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackMapIsoUnitPullbackIso
 
 /-!
 Noetherian descent of rigidified line bundles on affine opens.
 Finite subalgebra stages descend the group law, the invertible module and its rigidification.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

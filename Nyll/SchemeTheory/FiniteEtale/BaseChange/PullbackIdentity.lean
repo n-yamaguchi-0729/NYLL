@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Identity coherence for the actual finite étale pullback
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 The identity comparison uses the first projection of the chosen pullback.
 Its compatibility with a cone leg is proved by those actual projections.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -25,7 +29,8 @@ universe u
 attribute [local instance] finiteEtaleOverCategoryCoherence
   finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
 
-private def pullbackIdSchemeIso {A X : Scheme.{u}} (f : A ⟶ X) :
+/-- Pullback along the identity is identified by the original first projection. -/
+def pullbackIdSchemeIso {A X : Scheme.{u}} (f : A ⟶ X) :
     Limits.pullback f (𝟙 X) ≅ A where
   hom := Limits.pullback.fst f (𝟙 X)
   inv := Limits.pullback.lift (𝟙 A) f

@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.Algebra.Category.ModuleCat.Products
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
-import Mathlib.CategoryTheory.Monoidal.Closed.Braided
-import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
-import Mathlib.CategoryTheory.Preadditive.Biproducts
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Products
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Actual sections of a finite free tensor product
@@ -32,6 +34,8 @@ The section comparison is linear over the structural coefficient ring
 and commutes with the original restriction maps. No quasicoherence or
 flatness hypothesis is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -64,7 +68,8 @@ def finiteFreeTensorIsoBiproduct (L : X.Modules) :
 
 variable (A : J → X.Modules) (U : X.Opens)
 
-private def biproductSectionsIsLimit : IsLimit
+/-- Evaluation preserves the limit cone of the finite biproduct. -/
+def biproductSectionsIsLimit : IsLimit
     (Fan.mk ((moduleSectionsFunctor U).obj (⨁ A))
       (fun j => (moduleSectionsFunctor U).map (biproduct.π A j))) := by
   let Q := moduleSectionsFunctor U

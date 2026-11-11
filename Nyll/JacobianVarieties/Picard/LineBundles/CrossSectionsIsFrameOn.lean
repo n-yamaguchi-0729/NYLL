@@ -10,30 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.DualNumber
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Order.Lattice
-import Mathlib.Tactic.DefEqTransformations
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring.Basic
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Order.Lattice
+public import Mathlib.Tactic.DefEqTransformations
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring.Basic
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE
 
 /-!
 # Cross sections for frames on dual number thickenings
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -83,22 +87,19 @@ abbrev ι {U : (XA c A).Opens} {U' : (XD c A).Opens} (h : σ c A ⁻¹ᵁ U = U'
     Γ(XA c A, U) →+* Γ(XD c A, U') :=
   ((σ c A).appLE U U' h.ge).hom
 
-private def _root_.CoverCross.eps (U' : (XD c A).Opens) : Γ(XD c A, U') :=
+/-- The dual-number parameter as a section on the original thickening. -/
+def eps (U' : (XD c A).Opens) : Γ(XD c A, U') :=
   let : Algebra (DualNumber A) Γ(XD c A, U') :=
     algebraOfHom (pullback.snd c (specMap R (DualNumber A))) U'
   algebraMap (DualNumber A) Γ(XD c A, U') DualNumber.eps
 
-export _root_.CoverCross (eps)
-
-private theorem _root_.CoverCross.eps_mul_eps (U' : (XD c A).Opens) :
+private theorem eps_mul_eps (U' : (XD c A).Opens) :
     eps (c := c) (A := A) U' * eps U' = 0 := by
   let : Algebra (DualNumber A) Γ(XD c A, U') :=
     algebraOfHom (pullback.snd c (specMap R (DualNumber A))) U'
   change algebraMap (DualNumber A) Γ(XD c A, U') DualNumber.eps * algebraMap (DualNumber A) _
     DualNumber.eps = 0
   rw [← map_mul, DualNumber.eps_mul_eps, map_zero]
-
-export _root_.CoverCross (eps_mul_eps)
 
 /-- Restriction preserves the nilpotent parameter on the thickening. -/
 theorem map_eps {U' V' : (XD c A).Opens} (hV : V' ≤ U') :

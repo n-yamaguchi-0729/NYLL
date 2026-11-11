@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.FormalTranslationSimplePolynomial
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
-import Nyll.AlgebraicCurves.Divisors.Degree.SimpleRootPolynomialDivisorBound
-import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.FormalTranslationSimplePolynomial
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
+public import Nyll.AlgebraicCurves.Divisors.Degree.SimpleRootPolynomialDivisorBound
+public import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
 
 /-! # Effective divisor bounds for actual curve-field formal translations
 
@@ -20,6 +22,8 @@ Both the formal translation and the divisor are constructed from the
 curve-field data; no formal lift or coefficient-growth estimate is assumed
 in the final existence theorem. Global reciprocity is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

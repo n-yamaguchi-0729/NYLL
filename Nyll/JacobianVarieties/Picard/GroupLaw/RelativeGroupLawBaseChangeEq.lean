@@ -15,11 +15,11 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
 import Nyll.JacobianVarieties.Picard.GroupLaw.BaseChangeRelativeGroupLawMulCompat
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup

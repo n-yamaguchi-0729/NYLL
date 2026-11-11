@@ -10,39 +10,43 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Colimit.Module
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Filtered.Connected
-import Mathlib.CategoryTheory.IsConnected
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.CategoryTheory.Limits.Preserves.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Topology.Sets.OpenCover
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.Simps.Basic
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Colimit.Module
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Filtered.Connected
+public import Mathlib.CategoryTheory.IsConnected
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Topology.Sets.OpenCover
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.Simps.Basic
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
 
 /-!
 # Scheme Modules Is Invertible exists is Affine Open is Frame On preimage of is Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -576,7 +580,8 @@ theorem exists_isAffineOpen_isFrameOn_preimage_of_isDirectLimit
       (fun A : Jt => (A.1 : XR.Opens)) hcov (fun A => A.2.1)
   obtain ⟨j⟩ := jo
   let e : ULift.{u} (Fin S.card) → ↥S := fun k => S.equivFin.symm k.down
-  have he : Function.Surjective e := fun A => ⟨ULift.up (S.equivFin A), by simp [e]⟩
+  have he : Function.Surjective e := fun A =>
+    ⟨ULift.up (S.equivFin A), S.equivFin.symm_apply_apply A⟩
   refine ⟨j.1, j.2, S.card, fun k => V (e k), fun k => (hVU (e k)).1, fun cX hX₁ hX₂ => ?_⟩
   have ecX : cX = proj (φ' φ i) (g' g i) (bot_le i) fX hR'.compatibility j := by
     apply pullback.hom_ext

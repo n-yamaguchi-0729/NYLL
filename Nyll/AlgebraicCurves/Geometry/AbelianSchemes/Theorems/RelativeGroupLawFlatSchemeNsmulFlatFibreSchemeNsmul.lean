@@ -11,16 +11,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Fibre
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FlatFinitePresentation
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreSchemeNsmulEqSchemeFibreEndo
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Fibre
+public import Nyll.SchemeTheory.Fibers.SchemeFibreEndo
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FlatFinitePresentation
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFibreSchemeNsmulEqSchemeFibreEndo
 
 /-!
 # Relative Group Law flat scheme Nsmul of forall flat fibre scheme Nsmul
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

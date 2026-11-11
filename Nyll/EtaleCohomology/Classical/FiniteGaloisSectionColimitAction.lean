@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
-import Nyll.EtaleCohomology.Classical.FieldGaloisTransitions
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
+public import Nyll.EtaleCohomology.Classical.FieldGaloisTransitions
 
 /-!
 # Absolute Galois action on actual section colimits
@@ -14,6 +16,8 @@ The finite-stage actions commute with actual restriction along field
 inclusions. They therefore induce an action of the absolute Galois group
 on the actual filtered colimit, with its prescribed action on every stage.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -29,8 +33,8 @@ theorem finiteGaloisSectionDiagram_action_naturality
     (σ : Gal(AlgebraicClosure K/K))
     {E L : FiniteGaloisIntermediateField K (AlgebraicClosure K)} (h : E ⟶ L) :
     (finiteGaloisSectionDiagram K F).map h ≫
-        (fieldGaloisSheafAction K L F (AlgEquiv.restrictNormalHom L σ)).hom =
-      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).hom ≫
+        (fieldGaloisSheafAction K L F (AlgEquiv.restrictNormalHom L σ)).asIso.hom =
+      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).asIso.hom ≫
         (finiteGaloisSectionDiagram K F).map h := by
   let : Algebra E L := (IntermediateField.inclusion h.le).toRingHom.toAlgebra
   have : IsScalarTower K E L :=
@@ -43,10 +47,10 @@ theorem finiteGaloisSectionDiagram_action_naturality
     (IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply E L σ).symm
   apply ConcreteCategory.hom_ext
   intro s
-  change (fieldGaloisSheafAction K L F (AlgEquiv.restrictNormalHom L σ)).hom
+  change (fieldGaloisSheafAction K L F (AlgEquiv.restrictNormalHom L σ)).asIso.hom
       (F.obj.map (fieldGaloisEtaleTransition K E L).op s) =
     F.obj.map (fieldGaloisEtaleTransition K E L).op
-      ((fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).hom s)
+      ((fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).asIso.hom s)
   rw [← hr]
   exact (fieldGaloisSections_transition_action K E L F
     (AlgEquiv.restrictNormalHom L σ) s).symm
@@ -54,24 +58,27 @@ theorem finiteGaloisSectionDiagram_action_naturality
 /-- The absolute Galois action as automorphisms of the actual section diagram. -/
 def finiteGaloisSectionDiagramAction :
     Gal(AlgebraicClosure K/K) →* Aut (finiteGaloisSectionDiagram K F) where
-  toFun σ := NatIso.ofComponents
-    (fun E => fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ))
+  toFun σ := Aut.of <| NatIso.ofComponents
+    (fun E : FiniteGaloisIntermediateField K (AlgebraicClosure K) =>
+      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).asIso)
     (fun h => finiteGaloisSectionDiagram_action_naturality K F σ h)
   map_one' := by
+    apply Aut.ext
     apply Iso.ext
     apply NatTrans.ext
     funext E
-    change (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E 1)).hom = 𝟙 _
+    change (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E 1)).asIso.hom = 𝟙 _
     rw [map_one, map_one]
     rfl
   map_mul' σ τ := by
+    apply Aut.ext
     apply Iso.ext
     apply NatTrans.ext
     funext E
     change (fieldGaloisSheafAction K E F
-      (AlgEquiv.restrictNormalHom E (σ * τ))).hom =
-      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E τ)).hom ≫
-        (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).hom
+      (AlgEquiv.restrictNormalHom E (σ * τ))).asIso.hom =
+      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E τ)).asIso.hom ≫
+        (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).asIso.hom
     rw [map_mul, map_mul]
     rfl
 
@@ -86,25 +93,25 @@ theorem finiteGaloisSectionColimitAction_ι
     (σ : Gal(AlgebraicClosure K/K))
     (E : FiniteGaloisIntermediateField K (AlgebraicClosure K)) :
     finiteGaloisSectionColimitι K F E ≫
-        (finiteGaloisSectionColimitAction K F σ).hom =
-      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).hom ≫
+        (finiteGaloisSectionColimitAction K F σ).asIso.hom =
+      (fieldGaloisSheafAction K E F (AlgEquiv.restrictNormalHom E σ)).asIso.hom ≫
         finiteGaloisSectionColimitι K F E :=
-  colimit.ι_map (finiteGaloisSectionDiagramAction K F σ).hom E
+  colimit.ι_map (finiteGaloisSectionDiagramAction K F σ).asIso.hom E
 
 /-- Actual geometric sections form an integer-linear absolute Galois representation. -/
 def finiteGaloisSectionColimitRep : Rep.{u} ℤ Gal(AlgebraicClosure K/K) :=
   Rep.of
-    { toFun := fun σ => ((finiteGaloisSectionColimitAction K F σ).hom).hom.toIntLinearMap
+    { toFun := fun σ => ((finiteGaloisSectionColimitAction K F σ).asIso.hom).hom.toIntLinearMap
       map_one' := by
         apply LinearMap.ext
         intro s
-        change (finiteGaloisSectionColimitAction K F 1).hom s = s
+        change (finiteGaloisSectionColimitAction K F 1).asIso.hom s = s
         rw [map_one]
         rfl
       map_mul' σ τ := by
         apply LinearMap.ext
         intro s
-        exact congrArg (fun a => a.hom s)
+        exact congrArg (fun a => a.asIso.hom s)
           (map_mul (finiteGaloisSectionColimitAction K F) σ τ) }
 
 end EtaleCohomology

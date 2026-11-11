@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.SubcanonicalOver
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # The projective norm-open is the local scalar quotient
@@ -20,6 +22,8 @@ sections carries each pulled-back chart to an algebra map under which its
 chart function is invertible. Actual normalized units give local lifts,
 and the scalar-orbit calculation gives local injectivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

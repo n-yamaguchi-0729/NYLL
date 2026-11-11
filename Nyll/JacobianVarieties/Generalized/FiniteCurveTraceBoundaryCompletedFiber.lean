@@ -4,9 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceIntegralSelection
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.CompletedCartierBlockRestriction
-import Nyll.AlgebraicCurves.Models.LocalGeometry.CompletedComponentCanonicalCentre
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceIntegralSelection
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.CompletedCartierBlockRestriction
+public import Nyll.AlgebraicCurves.Models.LocalGeometry.CompletedComponentCanonicalCentre
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # The actual boundary completed fibre of the finite curve graph
 
@@ -18,6 +24,8 @@ both its source projection and its native completed-base projection.
 The integral base maps are the ones supplied by the original proper curve
 and its completed valuation rings (or their actual power-series transport).
 -/
+
+@[expose] public section
 
 noncomputable section
 

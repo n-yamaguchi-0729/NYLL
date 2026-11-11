@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianPair
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AlgebraicClosure
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendedFiberGaloisAction
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianPair
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AlgebraicClosure
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendedFiberGaloisAction
 
 /-!
 # The actual closed-point fundamental group of a henselian local ring
@@ -17,6 +19,8 @@ of a separably closed geometric-point field identify the residue Galois group
 with the fundamental group at the actual closed geometric point. An explicit
 residue-field isomorphism permits the original residue field to be retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -111,7 +115,7 @@ theorem henselianResidueGaloisEquivFundamentalGroup_point
     (X : FiniteEtale (Spec (.of H)))
     (x : (fiber (ξ k Ω ≫ henselianClosedPoint H k e)).obj X) :
     (fiberObjEquivHom (ξ k Ω ≫ henselianClosedPoint H k e) X
-      ((henselianResidueGaloisEquivFundamentalGroup H k e C Ω σ).hom.app X x)).left =
+      ((henselianResidueGaloisEquivFundamentalGroup H k e C Ω σ).asIso.hom.app X x)).left =
       Spec.map (CommRingCat.ofHom ρ) ≫
         (fiberObjEquivHom (ξ k Ω ≫ henselianClosedPoint H k e) X x).left :=
   fundamentalGroupHom_point_of_point_action (henselianClosedPoint H k e) (ξ k Ω)

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
 
 /-!
 # Residue separability in a tower of normalization rings
@@ -15,6 +17,8 @@ closures of a Dedekind domain in a finite Galois tower.  It supplies the two
 residue-separability inputs used by the normalization form of Abhyankar's
 lemma.
 -/
+
+@[expose] public section
 
 noncomputable section
 

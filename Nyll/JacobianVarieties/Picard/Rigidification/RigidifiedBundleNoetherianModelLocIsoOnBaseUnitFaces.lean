@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Noetherian.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleFgSubalgebraPullbackProdStrModel
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianModelFgSubalgebraModel
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleFgSubalgebraPullbackProdStrModel
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianModelFgSubalgebraModel
 
 /-!
 # Noetherian models of rigidified bundles with trivial unit faces
 
 Descend the group law and the three face trivializations through finite generated models.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.RestrictSemilinear
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Algebra.Ring.CompTypeclasses
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.RestrictSemilinear
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Algebra.Ring.CompTypeclasses
 
 /-!
 # Original linear sections of the canonical affine restriction
@@ -20,6 +22,8 @@ the actual semilinear section comparison becomes linear over the
 original section ring. This uses the actual `fromSpec` structure map,
 not an arbitrary identification of its coefficient action.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,7 +48,8 @@ theorem fromSpec_appLE_top :
   rw [h, Category.assoc, ← CategoryTheory.Functor.map_comp,
     Subsingleton.elim (k.op ≫ i.op) (𝟙 _), CategoryTheory.Functor.map_id, Category.comp_id]
 
-private theorem fromSpec_coefficient_comp :
+/-- The canonical affine coefficient map followed by restriction is the identity. -/
+theorem fromSpec_coefficient_comp :
     let j := hU.fromSpec
     let hImage : j ''ᵁ ⊤ = U := j.image_top_eq_opensRange.trans hU.opensRange_fromSpec
     (ΓSpecIso Γ(X, U)).inv ≫ (j.appIso ⊤).inv ≫

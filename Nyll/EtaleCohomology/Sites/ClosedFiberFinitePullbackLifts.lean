@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ClosedFiberFiniteLiftCover
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.EtaleCohomology.Sites.ZariskiRestriction
-import Nyll.SchemeTheory.Etale.LocalFactorOpenCover
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.CategoryTheory.MorphismProperty.Comma
+module
+
+public import Nyll.EtaleCohomology.Sites.ClosedFiberFiniteLiftCover
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Nyll.SchemeTheory.Etale.LocalFactorOpenCover
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
 
 /-!
 # Actual Zariski local lifts on the finite refinement
@@ -22,6 +24,8 @@ sections through these factors produces actual sections of inverse image
 on Zariski neighborhoods of the finite source. The equations against the
 original unit are preserved by its naturality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.BranchFinrank
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.LowerCanonical
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.BranchFinrank
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.LowerCanonical
 
 /-!
 # Finrank-coprime common-top endpoints
@@ -13,6 +15,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Lo
 Total tameness converts field-degree coprimality into the lower-index
 coprimality consumed by the common-top endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

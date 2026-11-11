@@ -10,13 +10,17 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusRatFuncEqZeroPerfectField
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusRatFuncEqZeroPerfectField
 
 /-!
 # Genus rat Func eq zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

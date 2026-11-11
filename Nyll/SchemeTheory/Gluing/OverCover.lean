@@ -3,12 +3,16 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.SchemeTheory.Gluing.CommonCover
-import Mathlib.CategoryTheory.Comma.Over.Basic
+module
+
+public import Nyll.SchemeTheory.Gluing.CommonCover
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 /-!
 # Recovering relative schemes from common open covers
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

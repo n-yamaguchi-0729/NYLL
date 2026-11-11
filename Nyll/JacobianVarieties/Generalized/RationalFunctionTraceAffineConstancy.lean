@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineLine
-import Nyll.AlgebraicCurves.Geometry.Projective.AffineLineIntegralCancellation
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineLine
+public import Nyll.AlgebraicCurves.Geometry.Projective.AffineLineIntegralCancellation
 
 /-! # Constancy on the actual affine chart determines the whole trace
 
@@ -13,6 +15,8 @@ The polynomial chart is dense in the original trace domain. For a separated
 target, constancy on that chart therefore proves constancy on the entire
 trace domain, with the same value at the polynomial coordinate zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

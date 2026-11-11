@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameFunctorPullback
-import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameFunctorPullback
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
 
 /-!
 # Base change of the intrinsic scalar-frame sheaf
@@ -15,6 +17,8 @@ frames of a base-changed family. Their ratios change by the actual map
 on units, so the scalar relation is preserved in both directions. This
 gives the comparison of scalar-frame presheaves and their fppf sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

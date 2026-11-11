@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.AffineKernel
-import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedFiniteAlgebraSplit
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+module
+
+public import Nyll.JacobianVarieties.Generalized.AffineKernel
+public import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedFiniteAlgebraSplit
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-! # Splitting the entire algebra of an actual geometrically reduced modulus -/
+
+@[expose] public section
 
 noncomputable section
 

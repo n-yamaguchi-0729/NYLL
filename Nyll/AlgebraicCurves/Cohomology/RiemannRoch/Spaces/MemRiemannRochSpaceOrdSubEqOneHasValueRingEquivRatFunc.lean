@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.FinrankRiemannRochSpaceEqDegreeAddOne
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Mathlib.FieldTheory.RatFunc.IntermediateField
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.RingTheory.Polynomial.DegreeLT
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Evaluation.Value
-import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Nyll.AlgebraicCurves.Places.Rational.Classification
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.FinrankRiemannRochSpaceEqDegreeAddOne
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Mathlib.FieldTheory.RatFunc.IntermediateField
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.RingTheory.Polynomial.DegreeLT
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
+public import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
 
 /-!
 # Exists mem riemann Roch Space ord sub eq one has Value of ring Equiv rat Func
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -173,7 +177,7 @@ theorem natDegree_nodePoly (Z : Finset k) : (nodePoly Z).natDegree = Z.card := b
   simp only [natDegree_X_sub_C, Finset.sum_const, nsmul_eq_mul, mul_one, Nat.cast_id]
 
 theorem eval_nodePoly (Z : Finset k) (a : k) : (nodePoly Z).eval a = ∏ z ∈ Z, (a - z) := by
-  simp [nodePoly, eval_prod]
+  simp only [nodePoly, eval_prod, eval_sub, eval_X, eval_C]
 
 theorem eval_nodePoly_ne_zero {Z : Finset k} {a : k} (ha : a ∉ Z) : (nodePoly Z).eval a ≠ 0 := by
   rw [eval_nodePoly]

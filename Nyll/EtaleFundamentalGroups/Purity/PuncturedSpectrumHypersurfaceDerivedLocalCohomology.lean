@@ -8,6 +8,7 @@ import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyMayerVietoris
 import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyProjectiveDimension
 import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceDisconnectedReduction
+import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
 
 /-!
 # Derived local cohomology of a disconnected punctured hypersurface

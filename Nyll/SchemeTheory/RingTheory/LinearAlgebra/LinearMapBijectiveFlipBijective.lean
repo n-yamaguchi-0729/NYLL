@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Dual.Lemmas
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Nakayama
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Free
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.Tactic.Abel
 
 /-!
 # Linear Map bijective and flip bijective of base Change residue Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

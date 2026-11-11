@@ -4,13 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusNormBoundary
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusNormBoundary
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # The norm-open kernel group of the generalized Jacobian over an arbitrary field -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -20,6 +30,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite NeronModelIn
 open AlgebraicGeometry.RelPicard
 open SchemeTheory.Affine AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

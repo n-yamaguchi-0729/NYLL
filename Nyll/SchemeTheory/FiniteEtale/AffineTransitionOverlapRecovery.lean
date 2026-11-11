@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.AffineTransitionLocalModel
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.AffineTransitionLocalModel
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Actual overlap comparisons from recovered local models
@@ -20,6 +22,8 @@ the identical target, and their composition supplies the overlap isomorphism.
 The only model data here are the local models and their already constructed
 recoveries to the original cover. No overlap comparison is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

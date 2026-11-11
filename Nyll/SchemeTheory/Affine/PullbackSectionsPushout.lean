@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Algebra.Category.Ring.Constructions
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
 
 /-!
 # Scheme Hom is Affine Open preimage and is Pushout of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -80,8 +84,8 @@ theorem _root_.AlgebraicGeometry.Scheme.Hom.isAffineOpen_preimage_and_isPushout_
     (φ : X ⟶ Y) (hφ : IsPullback φ gX gY (Spec.map (CommRingCat.ofHom (algebraMap A B))))
     (U : Y.Opens) (hU : IsAffineOpen U) :
     IsAffineOpen (φ ⁻¹ᵁ U) ∧
-      letI := gY.sectionsAlgebra U; letI := gX.sectionsAlgebra (φ ⁻¹ᵁ U)
-      letI : Algebra Γ(Y, U) Γ(X, φ ⁻¹ᵁ U) := (φ.appLE U (φ ⁻¹ᵁ U) le_rfl).hom.toAlgebra
+      let := gY.sectionsAlgebra U; let := gX.sectionsAlgebra (φ ⁻¹ᵁ U)
+      let : Algebra Γ(Y, U) Γ(X, φ ⁻¹ᵁ U) := (φ.appLE U (φ ⁻¹ᵁ U) le_rfl).hom.toAlgebra
       ∀ [Algebra A Γ(X, φ ⁻¹ᵁ U)] [IsScalarTower A B Γ(X, φ ⁻¹ᵁ U)]
         [IsScalarTower A Γ(Y, U) Γ(X, φ ⁻¹ᵁ U)],
         Algebra.IsPushout A B Γ(Y, U) Γ(X, φ ⁻¹ᵁ U) := by
@@ -91,16 +95,13 @@ theorem _root_.AlgebraicGeometry.Scheme.Hom.isAffineOpen_preimage_and_isPushout_
   have : IsAffineHom φ := hbc.of_isPullback hφ.flip inferInstance
   have hV : IsAffineOpen (φ ⁻¹ᵁ U) := hU.preimage φ
   refine ⟨hV, ?_⟩
-  intro algA ist₁ ist₂
+  intro sourceAlgebra targetAlgebra pullbackAlgebra algA ist₁ ist₂
   have sq : IsPullback (φ ∣_ U) ((φ ⁻¹ᵁ U).ι ≫ gX) (U.ι ≫ gY)
       (Spec.map (CommRingCat.ofHom (algebraMap A B))) :=
     (isPullback_morphismRestrict φ U).paste_vert hφ
   let _ : IsAffine U := hU
   let _ : IsAffine (φ ⁻¹ᵁ U) := hV
   have H := isPushout_appTop_of_isPullback sq.flip
-  let _ := gY.sectionsAlgebra U
-  let _ := gX.sectionsAlgebra (φ ⁻¹ᵁ U)
-  let _ : Algebra Γ(Y, U) Γ(X, φ ⁻¹ᵁ U) := (φ.appLE U (φ ⁻¹ᵁ U) le_rfl).hom.toAlgebra
   refine (CommRingCat.isPushout_iff_isPushout (R := A) (R' := B) (S := Γ(Y, U))
     (S' := Γ(X, φ ⁻¹ᵁ U))).mp ?_
   have e₁ : CommRingCat.ofHom (algebraMap A Γ(Y, U)) =

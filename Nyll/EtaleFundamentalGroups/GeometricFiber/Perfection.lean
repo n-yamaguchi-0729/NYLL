@@ -4,15 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableDescent
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Mathlib.FieldTheory.IsPerfectClosure
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Homeomorph.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableDescent
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
+public import Mathlib.FieldTheory.IsPerfectClosure
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Homeomorph.Defs
+public import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
 
 /-!
 # Perfection invariance
@@ -28,6 +31,8 @@ includes characteristic zero, with exponential characteristic one.
 Source: Stacks Project, Lemma 58.14.2, Tag 0BTW:
 https://stacks.math.columbia.edu/tag/0BTW
 -/
+
+@[expose] public section
 
 noncomputable section
 

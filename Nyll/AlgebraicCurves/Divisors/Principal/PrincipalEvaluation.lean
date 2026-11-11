@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.Algebra.BigOperators.Finprod
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.Algebra.BigOperators.Finprod
 
 /-! # Additive evaluation of actual principal divisors
 
 The principal-divisor theorem supplies finite support, so evaluation in an
 arbitrary commutative group is an actual homomorphism on nonzero functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

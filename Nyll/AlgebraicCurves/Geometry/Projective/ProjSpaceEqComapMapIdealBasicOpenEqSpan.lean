@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
 
 /-!
 # Proj Space eq comap map of ideal basic Open eq span
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -210,7 +214,8 @@ theorem basicOpen_le_preimage :
     Proj.basicOpen 𝒜B (X i) ≤ ProjSpace.map A B n ⁻¹ᵁ Proj.basicOpen 𝒜A (X i) := by
   rw [ProjSpace.map_eq, Proj.map_preimage_basicOpen, ProjSpace.mvMapGraded_X]
 
-private theorem map_mem (e : ℕ) (G : 𝒜A e) : φ (G : MvPolynomial (Fin (n + 1)) A) ∈ 𝒜B e :=
+/-- The coefficient map preserves each homogeneous component. -/
+theorem map_mem (e : ℕ) (G : 𝒜A e) : φ (G : MvPolynomial (Fin (n + 1)) A) ∈ 𝒜B e :=
   (ProjSpace.mvMapGraded A B n).map_mem G.2
 
 

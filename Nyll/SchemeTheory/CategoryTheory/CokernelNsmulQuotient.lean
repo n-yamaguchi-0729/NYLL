@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Preadditive.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.CategoryTheory.Abelian.Basic
+module
+
+public import Mathlib.CategoryTheory.Preadditive.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.CategoryTheory.Abelian.Basic
 
 /-!
 # Cokernels after quotienting by an n-divisible image
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Abelian.Basic
 If multiplication by `n` is epic on `A`, quotienting `B` by the image of
 `A` does not change the cokernel of multiplication by `n` on `B`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

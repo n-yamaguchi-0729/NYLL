@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
-import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
+public import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
 
 /-!
 # Canonical descent of a Picard scheme without a rational basepoint
@@ -21,6 +23,8 @@ the unrigidified base-change comparison make the actual Picard representation a
 representation of a restricted presheaf. Its canonical descent action consequently
 has proved unit and cocycle laws, and finite faithfully flat descent is effective.
 -/
+
+@[expose] public section
 
 universe u
 

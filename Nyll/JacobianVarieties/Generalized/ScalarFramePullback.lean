@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Frames.ScalarFrames
-import Nyll.JacobianVarieties.Generalized.RigidifiedScalars
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.ScalarFrames
+public import Nyll.JacobianVarieties.Generalized.RigidifiedScalars
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
 
 /-! Pulling actual frames and their scalar relation along a commutative base square. -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,8 +34,9 @@ def pullbackFrame (f : Y' ⟶ Y) (e : M ≅ 𝟙_ Y.Modules) :
 theorem frameRatio_pullbackFrame (f : Y' ⟶ Y) (e e' : M ≅ 𝟙_ Y.Modules) :
     frameRatio (pullbackFrame f e) (pullbackFrame f e') =
       Units.map f.appTop.hom.toMonoidHom (frameRatio e e') := by
-  have he : ((pullbackFrame f e).symm ≪≫ pullbackFrame f e' : Aut (𝟙_ Y'.Modules)) =
-      RigidifiedLineBundle.restrictUnitAut f (e.symm ≪≫ e') := by
+  have he : Aut.of ((pullbackFrame f e).symm ≪≫ pullbackFrame f e') =
+      Aut.of (RigidifiedLineBundle.restrictUnitAut f (e.symm ≪≫ e')) := by
+    apply Aut.ext
     apply CategoryTheory.Iso.ext
     change ((Scheme.Modules.pullbackTensorUnitObjIso f).inv ≫
       (Scheme.Modules.pullback f).map e.inv) ≫

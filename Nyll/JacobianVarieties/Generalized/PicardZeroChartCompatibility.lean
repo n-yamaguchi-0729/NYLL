@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.PicardZeroGeometricEquality
+module
+
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGeometricEquality
 
 /-! # Compatibility of the actual divisor atlas in the original zero sheaf -/
+
+@[expose] public section
 
 noncomputable section
 

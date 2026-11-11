@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FiniteRefinementCompatibleLift
-import Nyll.EtaleCohomology.Sites.FiniteSurjectiveDescent
-import Nyll.EtaleCohomology.Sites.ProperLocalSections
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Henselian
+module
+
+public import Nyll.EtaleCohomology.Sites.FiniteRefinementCompatibleLift
+public import Nyll.EtaleCohomology.Sites.FiniteSurjectiveDescent
+public import Nyll.EtaleCohomology.Sites.ProperLocalSections
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Étale H⁰ proper base change over a henselian local ring
@@ -25,6 +27,8 @@ pullback identify its image with the original closed-fiber section.
 There is no noetherian or torsion hypothesis. This is the degree-zero result;
 positive-degree proper base change and Nagata compactification are separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

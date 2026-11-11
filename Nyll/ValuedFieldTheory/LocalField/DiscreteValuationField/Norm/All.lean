@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Basic
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Quotients
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Basic
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Quotients
 
 /-!
 # Norms of discretely valued fields

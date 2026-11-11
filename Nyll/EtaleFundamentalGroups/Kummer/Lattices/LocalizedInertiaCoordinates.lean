@@ -44,18 +44,18 @@ theorem exists_localizedNormalizationInertiaZModSmithEmbedding
       (Monoid.exponent (Multiplicative (L ⧸ H)))] :
     let A₀ := AddMonoidAlgebra k H
     let B := AddMonoidAlgebra k L
-    letI : UniqueSums L := latticeUniqueSums_of_freeIntModule L
-    letI : UniqueSums H :=
+    let : UniqueSums L := latticeUniqueSums_of_freeIntModule L
+    let : UniqueSums H :=
       latticeSubgroupUniqueSums H.toAddSubgroup
-    letI : IsDomain A₀ := inferInstance
-    letI : IsDomain B := inferInstance
-    letI : Algebra A₀ B :=
+    let : IsDomain A₀ := inferInstance
+    let : IsDomain B := inferInstance
+    let : Algebra A₀ B :=
       latticeMapDomainAlgebra H.toAddSubgroup
-    letI : FaithfulSMul A₀ B :=
+    let : FaithfulSMul A₀ B :=
       latticeMapDomainFaithfulSMul H.toAddSubgroup
     let K := FractionRing A₀
     let E := FractionRing B
-    letI : Algebra K E := FractionRing.liftAlgebra A₀ E
+    let : Algebra K E := FractionRing.liftAlgebra A₀ E
     ∀ (A : Type u) [CommRing A] [IsDomain A] [IsRegularRing A]
       [Algebra A K] [IsFractionRing A K]
       [Algebra A E] [IsScalarTower A K E]
@@ -82,9 +82,8 @@ theorem exists_localizedNormalizationInertiaZModSmithEmbedding
                 Function.Injective
                   (eQ.toAddMonoidHom.comp
                     (N.subtype.comp eI.toAddMonoidHom)) := by
-  dsimp only
-  let A₀ := AddMonoidAlgebra k H
-  let B := AddMonoidAlgebra k L
+  intro A₀ B sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6 K E
+    sharedOwner9
   let : Finite (L ⧸ H.toAddSubgroup) := by
     change Finite (L ⧸ H)
     infer_instance
@@ -94,18 +93,6 @@ theorem exists_localizedNormalizationInertiaZModSmithEmbedding
       (Monoid.exponent (Multiplicative (L ⧸ H)))
     infer_instance
   let G := Multiplicative (L ⧸ H.toAddSubgroup) →* kˣ
-  let K := FractionRing A₀
-  let E := FractionRing B
-  let : UniqueSums L := latticeUniqueSums_of_freeIntModule L
-  let : UniqueSums H :=
-    latticeSubgroupUniqueSums H.toAddSubgroup
-  let : IsDomain A₀ := inferInstance
-  let : IsDomain B := inferInstance
-  let : Algebra A₀ B :=
-    latticeMapDomainAlgebra H.toAddSubgroup
-  let : FaithfulSMul A₀ B :=
-    latticeMapDomainFaithfulSMul H.toAddSubgroup
-  let : Algebra K E := FractionRing.liftAlgebra A₀ E
   let : MulSemiringAction G B :=
     latticeCharacterMulSemiringAction H.toAddSubgroup
   let : MulSemiringAction G E :=

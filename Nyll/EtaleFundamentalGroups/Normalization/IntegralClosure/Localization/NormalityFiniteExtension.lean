@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Normality of a retained normalization localization
@@ -21,6 +23,8 @@ removes the global Noetherian/regularity argument formerly used to identify
 the chosen factor with that integral closure.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups
@@ -30,7 +34,7 @@ universe uR uK uM uC uD uOmega
 /-- The canonical algebra on a fraction ring obtained by composing through
 its source domain.  Naming this algebra keeps every downstream tower on the
 same data instead of rebuilding equivalent `SMul` instances. -/
-@[reducible] private noncomputable def fractionRingCompositeAlgebra
+@[reducible] noncomputable def fractionRingCompositeAlgebra
     {C : Type uC} {D : Type uD}
     [CommRing C] [CommRing D] [IsDomain D] [Algebra C D] :
     Algebra C (FractionRing D) :=

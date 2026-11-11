@@ -8,6 +8,7 @@ import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalLocalGaloisDiagram
 import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationOrdinaryBaseSquare
 import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationOrdinaryResidueSquare
 import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedGaloisQuotient
+import Nyll.ProCGroups.Presentations.Profinite
 
 /-!
 # The original local Galois square from the actual henselizations

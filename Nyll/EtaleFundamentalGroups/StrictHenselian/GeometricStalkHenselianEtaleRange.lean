@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.SchemeTheory.Affine.SpecSectionMap
-import Nyll.SchemeTheory.Etale.HenselianLocalSection
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.SchemeTheory.Affine.SpecSectionMap
+public import Nyll.SchemeTheory.Etale.HenselianLocalSection
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Actual affine étale representatives in the Henselian stalk-map range
@@ -24,6 +26,8 @@ identifies its section map with that algebra map. Its germ therefore supplies
 an actual preimage in the geometric stalk. No comparison or surjectivity is
 assumed, and no new colimit is constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.CompositumUnramified
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Conjugation
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFieldTower
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFieldUnramified
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFields
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.NumberFieldPrimes
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.PrimeContractions
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.TowerInvariants
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.ValuedGalois
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.CompositumUnramified
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Conjugation
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFieldTower
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFieldUnramified
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.FixedFields
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.NumberFieldPrimes
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.PrimeContractions
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.TowerInvariants
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.ValuedGalois
 
 /-!
 # Hilbert ramification over Dedekind domains

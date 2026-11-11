@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Coset.Card
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularPair.RootPrimeDVR
+module
+
+public import Mathlib.GroupTheory.Coset.Card
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularPair.RootPrimeDVR
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
 
 /-!
 # Ramification divisibility at a complete prime element
@@ -22,6 +25,8 @@ calculation.  It is the form needed over a finite-etale residue lift of a
 maximal-adic completion, where no global `IsNoetherianRing` instance is
 available.
 -/
+
+@[expose] public section
 
 noncomputable section
 

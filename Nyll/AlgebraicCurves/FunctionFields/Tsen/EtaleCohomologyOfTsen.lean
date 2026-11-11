@@ -4,9 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Tsen.AbsoluteModPTwoCocycleOfTsen
-import Nyll.EtaleCohomology.Classical.FieldEtaleDimensionShift
-import Nyll.EtaleCohomology.Classical.KummerSequence
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Tsen.AbsoluteModPTwoCocycleOfTsen
+public import Nyll.EtaleCohomology.Classical.FieldEtaleDimensionShift
+public import Nyll.EtaleCohomology.Classical.KummerSequence
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.GroupTheory.OrderOfElement
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimit
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitTopology
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionContinuousFunctor
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
 
 /-!
 # Actual derived etale Tsen vanishing
@@ -17,23 +26,26 @@ derived Sheaf.H for every bounded-torsion abelian etale sheaf in degrees
 at least two. No field comparison or vanishing hypothesis is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 open CategoryTheory Limits AlgebraicGeometry
 
 namespace AlgebraicCurve
 
-/-- Actual derived etale cohomology of a characteristic-zero function
+/-- Actual derived etale cohomology of a function
 field over an algebraically closed field vanishes above degree one
 for every abelian coefficient sheaf killed by a nonzero integer. -/
 theorem fieldEtale_cohomology_eq_zero_of_tsen
-    (K : Type) [Field K] [IsAlgClosed K] [CharZero K]
-    {F : Type} [Field F] [Algebra K F]
+    (K : Type u) [Field K] [IsAlgClosed K]
+    {F : Type u} [Field F] [Algebra K F]
     (x : F) (hx : Transcendental K x)
     (hfin : FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F)
-    (S : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{0})
+    (S : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u})
     (m : ℤ) (hm0 : m ≠ 0) (hm : m • 𝟙 S = 0)
-    (n : ℕ) (v : Sheaf.H.{0} S (n + 2)) : v = 0 := by
-  have : CharZero F := charZero_of_injective_algebraMap (algebraMap K F).injective
+    (n : ℕ) (v : Sheaf.H.{u} S (n + 2)) : v = 0 := by
   let T := EtaleCohomology.finiteGaloisSectionColimitTopRepFunctor F
   let X := T.obj S
   have : DiscreteTopology X := ⟨rfl⟩
@@ -58,14 +70,14 @@ theorem fieldEtale_cohomology_eq_zero_of_tsen
   exact he.trans (map_zero e).symm
 
 /-- Actual roots-of-unity cohomology vanishes in every degree at least two
-over a characteristic-zero function field over an algebraically closed field. -/
+over a function field in arbitrary characteristic over an algebraically closed field. -/
 theorem fieldEtale_rootsOfUnity_cohomology_eq_zero_of_tsen
-    (K : Type) [Field K] [IsAlgClosed K] [CharZero K]
-    {F : Type} [Field F] [Algebra K F]
+    (K : Type u) [Field K] [IsAlgClosed K]
+    {F : Type u} [Field F] [Algebra K F]
     (x : F) (hx : Transcendental K x)
     (hfin : FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F)
     (m : ℕ) (hm : 0 < m) (n : ℕ)
-    (v : Sheaf.H.{0}
+    (v : Sheaf.H.{u}
       (EtaleCohomology.etaleRootsOfUnitySheaf (Spec (.of F)) m) (n + 2)) :
     v = 0 := by
   let X := Spec (.of F)
@@ -83,5 +95,30 @@ theorem fieldEtale_rootsOfUnity_cohomology_eq_zero_of_tsen
     (EtaleCohomology.etaleRootsOfUnitySheaf X m) (m : ℤ)
     (Int.natCast_ne_zero.mpr (Nat.ne_of_gt hm)) ?_ n v
   simpa only [natCast_zsmul] using hk
+
+/-- Constant finite abelian coefficients have zero actual étale cohomology
+in every degree at least two, including in positive characteristic.
+Their cardinality supplies the annihilator; no vanishing assumption is input. -/
+theorem fieldEtale_constantFinite_cohomology_eq_zero_of_tsen
+    (K : Type u) [Field K] [IsAlgClosed K]
+    {F : Type u} [Field F] [Algebra K F]
+    (x : F) (hx : Transcendental K x)
+    (hfin : FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F)
+    (A : AddCommGrpCat.{u}) [Finite A] (n : ℕ)
+    (v : Sheaf.H.{u}
+      ((constantSheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u}).obj A)
+      (n + 2)) : v = 0 := by
+  let T := constantSheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u}
+  have hA : (Nat.card A : ℤ) • 𝟙 A = 0 := by
+    ext a
+    change (Nat.card A : ℤ) • a = 0
+    rw [natCast_zsmul]
+    exact card_nsmul_eq_zero'
+  have hS : (Nat.card A : ℤ) • 𝟙 (T.obj A) = 0 := by
+    have h := congrArg (fun f : A ⟶ A => T.map f) hA
+    rw [T.map_zsmul, T.map_id, T.map_zero] at h
+    exact h
+  exact fieldEtale_cohomology_eq_zero_of_tsen K x hx hfin (T.obj A)
+    (Nat.card A : ℤ) (Int.natCast_ne_zero.mpr (Nat.ne_of_gt Nat.card_pos)) hS n v
 
 end AlgebraicCurve

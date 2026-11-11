@@ -10,12 +10,14 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
 
 
 /-!
@@ -27,6 +29,8 @@ natural endomorphism of an abelian sheaf. Scalar multiplication is supplied
 outside this core, so distinct rings of sections and their module actions
 are not simultaneously materialized in the gluing proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,7 +52,7 @@ abbrev res {V W : X.Opens} (h : V ≤ W) : F.obj (op W) → F.obj (op V) :=
 
 /-- Iteration of the fixed natural endomorphism on one open. -/
 abbrev act (n : ℕ) (V : X.Opens) : F.obj (op V) → F.obj (op V) :=
-  fun x => (α ^ n).app (op V) x
+  fun x => (α ^ n).asHom.app (op V) x
 
 lemma res_res {V W Z : X.Opens} (hVW : V ≤ W) (hZV : Z ≤ V)
     (x : F.obj (op W)) : res F hZV (res F hVW x) = res F (hZV.trans hVW) x := by
@@ -59,12 +63,12 @@ lemma res_res {V W Z : X.Opens} (hVW : V ≤ W) (hZV : Z ≤ V)
 lemma res_act {V W : X.Opens} (h : V ≤ W) (n : ℕ) (x : F.obj (op W)) :
     res F h (act F α n W x) = act F α n V (res F h x) := by
   have e := congrArg (fun k : F.obj (op W) ⟶ F.obj (op V) => k x)
-    ((α ^ n).naturality (homOfLE h).op)
+    ((α ^ n).asHom.naturality (homOfLE h).op)
   exact e.symm
 
 lemma act_add (m n : ℕ) (V : X.Opens) (x : F.obj (op V)) :
     act F α (m + n) V x = act F α m V (act F α n V x) := by
-  rw [act, pow_add, End.mul_def, NatTrans.comp_app]
+  rw [act, pow_add, End.mul_asHom, NatTrans.comp_app]
   rfl
 
 lemma act_zero (n : ℕ) (V : X.Opens) : act F α n V 0 = 0 := map_zero _

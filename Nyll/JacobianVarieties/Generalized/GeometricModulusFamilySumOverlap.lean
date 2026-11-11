@@ -4,19 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusFamilySumScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyPointEvaluation
-import Nyll.JacobianVarieties.Generalized.PicardZeroGeometricEquality
-import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
-import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilySumScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyPointEvaluation
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGeometricEquality
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # Full geometric modulus glues the original family sums over every field
 
@@ -26,6 +30,8 @@ two corrected sums. Their proved scalar-extension comparison brings this
 equality back to the original target, and reducedness detects the original
 regular maps. No reducedness of a field-extension overlap is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

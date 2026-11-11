@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.SectionsTopEquivH0Modules
-import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.FinrankModulesPullbackEq
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.SectionsTopEquivH0Modules
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.FinrankModulesPullbackEq
 
 /-!
 # Scheme Modules geom Fibre H0 Finrank id eq finrank sections
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

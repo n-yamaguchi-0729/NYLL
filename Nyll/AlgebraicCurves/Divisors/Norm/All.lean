@@ -22,3 +22,6 @@ import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaFiniteDimensiona
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaSeparable
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardPullbackFinite
 import Nyll.AlgebraicCurves.Divisors.Norm.SumGaloisSmulEqPullbackPushforward
+import Nyll.AlgebraicCurves.Divisors.Norm.CyclicDivisorPrimitive
+import Nyll.AlgebraicCurves.Divisors.Norm.CyclicNormPrefixDivisor
+import Nyll.AlgebraicCurves.Divisors.Norm.CyclicNormCupDivisor

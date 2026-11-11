@@ -4,12 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitGroupRepresentation
-import Nyll.JacobianVarieties.Generalized.RigidifiedScalarNaturality
-import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
-import Nyll.JacobianVarieties.Generalized.ParameterFrameClasses
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitGroupRepresentation
+public import Nyll.JacobianVarieties.Generalized.RigidifiedScalarNaturality
+public import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
+public import Nyll.JacobianVarieties.Generalized.ParameterFrameClasses
 
 /-! # The actual group boundary from modulus units to modulus Picard-zero -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -18,6 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite NeronModelInfra
 open AlgebraicGeometry.RelPicard
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

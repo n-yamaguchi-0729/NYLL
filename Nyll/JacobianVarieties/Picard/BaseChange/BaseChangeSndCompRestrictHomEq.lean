@@ -10,7 +10,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut

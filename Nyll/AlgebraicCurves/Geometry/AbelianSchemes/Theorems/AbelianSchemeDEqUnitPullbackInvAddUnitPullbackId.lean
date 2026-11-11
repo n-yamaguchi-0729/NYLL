@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.Tactic.Abel
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeDEqUnitPullbackMulSubFstSubSnd
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverRefinementPullbackFstSnd
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.LinearMapApplyEqUnitPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.UnitPullbackUnitPullbackSubMem
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroEqUnitPullbackSubUnitPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.HSuccEquivUnitPullbackId
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.Tactic.Abel
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeDEqUnitPullbackMulSubFstSubSnd
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverRefinementPullbackFstSnd
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.LinearMapApplyEqUnitPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.UnitPullbackUnitPullbackSubMem
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroEqUnitPullbackSubUnitPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.HSuccEquivUnitPullbackId
 
 /-!
 # Coboundaries from inversion and identity pullbacks of first cocycles
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

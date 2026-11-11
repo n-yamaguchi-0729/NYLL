@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupComparison
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupSheaf
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupComparison
 
 /-!
 # Forgetting the modulus as a morphism of Picard-zero group sheaves
@@ -15,12 +18,16 @@ along an existing curve section gives the ordinary pointed group presheaf,
 using the already proved multiplicative normalization equivalence.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
 
 open CategoryTheory Opposite NeronModelInfra
 open AlgebraicGeometry.RelPicard
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

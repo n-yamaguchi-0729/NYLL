@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.RingTheory.RingHom.QuasiFinite
-import Mathlib.Tactic.Algebraize
-import Mathlib.Tactic.ClearExclamation
-import Mathlib.Tactic.WLOG
-import Nyll.SchemeTheory.RingTheory.Flat.AlgebraQuasiFiniteFlat
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.RingTheory.RingHom.QuasiFinite
+public import Mathlib.Tactic.Algebraize
+public import Mathlib.Tactic.ClearExclamation
+public import Mathlib.Tactic.WLOG
+public import Nyll.SchemeTheory.RingTheory.Flat.AlgebraQuasiFiniteFlat
 
 /-!
 # Locally Quasi Finite of flat of locally Quasi Finite generic Fiber
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

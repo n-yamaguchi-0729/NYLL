@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UnitRoot
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
-import Mathlib.Algebra.CharP.Invertible
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UnitRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
+public import Mathlib.Algebra.CharP.Invertible
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # A uniformizer radical in prime to residue characteristic degree
@@ -31,6 +33,8 @@ This supplies the positive characteristic radical calculation for
 Stacks Project, Proposition 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

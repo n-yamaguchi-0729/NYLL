@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReductionSystemComparison
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReductionSystemComparison
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Completion of original affine sections from their closed restrictions
@@ -30,6 +32,8 @@ The comparison retains the original module, every original transition,
 and the completion of every original restriction as its components.
 It requires only finite generation of the extended ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

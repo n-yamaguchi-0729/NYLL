@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.Category.Ring.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.Category.Ring.Basic
 
 /-!
 # Coefficients of pushforward section modules
 
 Constructs the prescribed coefficient maps to global and local sections and compares them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

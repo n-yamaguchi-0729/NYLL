@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFundamentalGroupConjugacy
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFundamentalGroup
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFundamentalGroupConjugacy
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFundamentalGroup
 
 /-!
 # Divisorial inertia from the canonical field fundamental-group map
@@ -15,6 +17,8 @@ usual fundamental-group map of spectra after transporting the equality of
 the two base points.  The comparison of fiber functors contributes one
 explicit inner conjugation and no additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

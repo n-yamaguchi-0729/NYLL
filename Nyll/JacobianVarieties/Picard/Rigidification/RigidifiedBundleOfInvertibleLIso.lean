@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Topology.Sets.Opens
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Order.CompleteLattice.Basic
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+module
+
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Order.CompleteLattice.Basic
+public import Mathlib.Tactic.Ext
+public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
 
 /-!
 Over a field, rigidifying an invertible module preserves its underlying line bundle up to
 isomorphism.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

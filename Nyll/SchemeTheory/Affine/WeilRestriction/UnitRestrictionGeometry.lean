@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestriction
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.RingHom.Smooth
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestriction
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.RingHom.Smooth
 
 /-! # Smoothness of unit restriction in split coordinates -/
+
+@[expose] public section
 
 noncomputable section
 

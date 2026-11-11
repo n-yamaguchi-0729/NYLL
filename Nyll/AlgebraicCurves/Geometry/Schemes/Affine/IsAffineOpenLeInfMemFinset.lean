@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # exists is Affine Open le inf forall mem of finset
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

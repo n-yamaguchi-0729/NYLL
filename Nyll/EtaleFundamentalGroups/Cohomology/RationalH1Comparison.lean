@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.LinearAdicH1Comparison
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ValuedFieldTheory.LocalField.Padic.CompactDenominator
-import Mathlib.CategoryTheory.Galois.Topology
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.LinearAdicH1Comparison
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CompactDenominator
+public import Mathlib.CategoryTheory.Galois.Topology
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Classical rational ℓ-adic H¹ and continuous characters
@@ -19,6 +21,8 @@ of continuous Qℓ-valued characters is the scalar extension of its integral
 character module. This identifies ordinary rational ℓ-adic H¹ with actual
 continuous Qℓ-valued characters, without a pro-étale definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,7 +39,8 @@ variable {X : Scheme.{u}} {Ω : Type u} [Field Ω]
 abbrev rationalPadicCharacters : Type (u + 1) :=
   Additive (Aut (FiniteEtale.fiber ξ) →ₜ* Multiplicative ℚ_[ℓ])
 
-private def scaleRationalCharacter (c : ℚ_[ℓ]) (χ : rationalPadicCharacters ξ ℓ) :
+/-- Scale a continuous rational p-adic character pointwise. -/
+def scaleRationalCharacter (c : ℚ_[ℓ]) (χ : rationalPadicCharacters ξ ℓ) :
     rationalPadicCharacters ξ ℓ := Additive.ofMul
   { toFun := fun g => Multiplicative.ofAdd (c * (χ.toMul g).toAdd)
     map_one' := (congrArg (fun z : Multiplicative ℚ_[ℓ] =>

@@ -6,6 +6,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Cohomology.GenericKummerResidue
 import Nyll.EtaleCohomology.Classical.KummerHigherDirectImage
+import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+import Nyll.EtaleCohomology.Classical.KummerSequence
+import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
 
 /-!
 # Generic Kummer first higher direct image and geometric residues

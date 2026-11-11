@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.Topology.Algebra.Group.Subgroup
+module
+
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.Topology.Algebra.Group.Subgroup
 
 /-!
 # Closed normal subgroups detected by finite Galois subfields
@@ -16,6 +18,8 @@ finite Galois subfield of that same fixed field. Thus the subgroup is the
 intersection of the finite Galois restriction kernels containing it.
 This gives the field-theoretic finite-quotient criterion needed in Tag 0BTD.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

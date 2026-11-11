@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafAffSESConnectingHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafAffSESConnectingHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Exactness and lifting for compatible affine sections
@@ -23,6 +25,8 @@ These results retain the original component maps of the given sequence.
 They are used when lifting sections through successive ideal-power
 reductions in formal algebraization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

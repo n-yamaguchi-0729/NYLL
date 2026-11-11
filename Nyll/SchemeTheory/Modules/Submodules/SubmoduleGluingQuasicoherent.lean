@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluing
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluing
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # Quasicoherence of the actual gluing of submodules
@@ -17,6 +19,8 @@ actual section submodules. The local section equalities of `glueOn` thus
 identify its restrictions with the two given quasicoherent modules. The
 native cover-locality theorem supplies quasicoherence of the glued object.
 -/
+
+@[expose] public section
 
 noncomputable section
 

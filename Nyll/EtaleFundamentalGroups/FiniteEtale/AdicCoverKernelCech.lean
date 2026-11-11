@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverKernelTensorSections
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverKernelTensorSections
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Čech comparison for actual transition kernels with coefficients
@@ -28,6 +30,8 @@ quotient cohomology are inverse. Every comparison in this file is
 constructed from the original finite étale cover, its actual infinitesimal
 extensions, and the given quasicoherent coefficient sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

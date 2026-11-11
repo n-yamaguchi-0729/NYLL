@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.Localization.Integral
 
 /-!
 # Inertia-fixed integral numerators
@@ -20,6 +22,8 @@ the resulting actual integral-closure numerator is fixed by the same original
 inertia. No finite extension, fixed-field comparison, or stalk-image premise
 is introduced. The base denominator need not avoid the prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

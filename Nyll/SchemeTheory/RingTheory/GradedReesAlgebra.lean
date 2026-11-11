@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.ReesAlgebra
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.Algebra.DirectSum.Basic
+module
+
+public import Mathlib.RingTheory.ReesAlgebra
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.Algebra.DirectSum.Basic
 
 /-!
 # The native grading of the Rees algebra
@@ -17,6 +19,8 @@ is constructed from polynomial coefficients, without freeness or regularity
 of the ideal. It supplies the graded algebra used by the Proj construction
 of an affine blowup (Stacks Project, Section 31.33).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -73,7 +77,8 @@ private lemma coefficient_sum (x : ⨁ n, homogeneousPart I n) (n : ℕ) :
     simp only [map_add, Subalgebra.coe_add, Polynomial.coeff_add, DirectSum.add_apply,
       Submodule.coe_add, hx, hy]
 
-private def decomposition (p : reesAlgebra I) : ⨁ n, homogeneousPart I n :=
+/-- Decompose a Rees algebra element into its finitely supported homogeneous components. -/
+def decomposition (p : reesAlgebra I) : ⨁ n, homogeneousPart I n :=
   DirectSum.mk (fun n => homogeneousPart I n) p.val.support
     (fun n => component I p n.val)
 
@@ -89,7 +94,8 @@ private lemma decomposition_apply (p : reesAlgebra I) (n : ℕ) :
     change 0 = Polynomial.monomial n (p.val.coeff n)
     rw [hp, map_zero]
 
-private lemma decomposition_leftInverse :
+/-- Summing the homogeneous decomposition recovers the original Rees algebra element. -/
+lemma decomposition_leftInverse :
     Function.LeftInverse (DirectSum.coeAddMonoidHom (homogeneousPart I)) (decomposition I) := by
   intro p
   apply Subtype.ext
@@ -97,7 +103,8 @@ private lemma decomposition_leftInverse :
   intro n
   rw [coefficient_sum, decomposition_apply, component_coeff]
 
-private lemma decomposition_rightInverse :
+/-- Decomposing a sum of homogeneous components recovers the original direct-sum element. -/
+lemma decomposition_rightInverse :
     Function.RightInverse (DirectSum.coeAddMonoidHom (homogeneousPart I)) (decomposition I) := by
   intro x
   apply DFinsupp.ext

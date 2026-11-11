@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.Etale
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.Etale
 
 /-!
 # Residue-trivial finite etale local algebras over a Henselian base
@@ -16,6 +18,8 @@ the usual strict-Henselian splitting argument: instead of assuming that the
 base residue field is separably closed, we use the actual residue-field
 isomorphism of the selected factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

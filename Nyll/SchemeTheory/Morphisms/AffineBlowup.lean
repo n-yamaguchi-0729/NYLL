@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GradedReesAlgebra
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
+module
+
+public import Nyll.SchemeTheory.RingTheory.GradedReesAlgebra
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
 
 /-!
 # The affine blowup as Proj of the actual Rees algebra
@@ -17,6 +19,8 @@ No Noetherianity, regularity of the ideal, or freeness of its powers is used.
 This is the Proj construction of Stacks Project, Section 31.33; its universal
 property and gluing over nonaffine bases are separate subsequent results.
 -/
+
+@[expose] public section
 
 noncomputable section
 

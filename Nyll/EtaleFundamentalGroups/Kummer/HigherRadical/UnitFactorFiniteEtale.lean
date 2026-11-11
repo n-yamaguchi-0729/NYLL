@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
+module
+
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
 
 /-!
 # The literal finite-etale factor over a prescribed higher radical
@@ -16,6 +18,8 @@ finiteness over that lower radical and then base-changes the same factor to
 an arbitrary prescribed higher root.  The final coordinate identity records
 that no new factor is selected by this base change.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,17 +47,12 @@ theorem higherRadicalUnitFactorData_radical_finite
     let e := ramificationIndex base target
     let Rₑ := AdjoinRoot (X ^ e - C varpi)
     let Cq := AdjoinRoot factor.q
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     Module.Finite Rₑ Cq := by
-  dsimp only
+  intro e Rₑ Cq sharedOwner3
   let V := base.valuationSubring
   let W := target.valuationSubring
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
   let : IsScalarTower V Rₑ Cq :=
     IsScalarTower.of_algebraMap_eq fun z ↦
       (factor.radicalToUnitFactor.commutes z).symm
@@ -82,21 +81,12 @@ theorem higherRadicalUnitFactorData_higher_finiteEtale
     let Cq := AdjoinRoot factor.q
     let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
       adjoinRootPowerMapOfDvd hdiv varpi
-    letI : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     Algebra.Etale Rₙ (Rₙ ⊗[Rₑ] Cq) ∧
       Module.Finite Rₙ (Rₙ ⊗[Rₑ] Cq) := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
-    adjoinRootPowerMapOfDvd hdiv varpi
-  let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
+  intro e Rₑ Rₙ Cq higherRootMap sharedOwner1 sharedOwner2
   let : Algebra.Etale Rₑ Cq := factor.radical_etale
   let : Module.Finite Rₑ Cq :=
     higherRadicalUnitFactorData_radical_finite
@@ -122,23 +112,14 @@ theorem higherRadicalUnitFactorData_higher_root_coordinate
     let Cq := AdjoinRoot factor.q
     let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
       adjoinRootPowerMapOfDvd hdiv varpi
-    letI : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     (AdjoinRoot.root (X ^ N - C varpi) ^ (N / e)) ⊗ₜ[Rₑ] (1 : Cq) =
       (1 : Rₙ) ⊗ₜ[Rₑ]
         (AdjoinRoot.root factor.q *
           algebraMap target.valuationSubring Cq pi) := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
-    adjoinRootPowerMapOfDvd hdiv varpi
-  let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
+  intro e Rₑ Rₙ Cq higherRootMap sharedOwner1 sharedOwner2
   rw [← adjoinRootPowerMapOfDvd_root hdiv varpi]
   change algebraMap Rₑ Rₙ
       (AdjoinRoot.root (X ^ e - C varpi)) ⊗ₜ[Rₑ] (1 : Cq) = _

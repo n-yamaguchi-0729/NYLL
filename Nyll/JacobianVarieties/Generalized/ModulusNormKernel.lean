@@ -4,10 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ExactSequence
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+module
+
+public import Nyll.JacobianVarieties.Generalized.ExactSequence
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
 
 /-! # The universal property of the actual norm-boundary kernel -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -15,6 +23,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

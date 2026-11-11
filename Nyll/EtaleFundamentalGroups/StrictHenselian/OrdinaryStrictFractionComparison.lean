@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselizationComparison
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselizationEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFieldTower
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFieldTower
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselizationComparison
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselizationEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFieldTower
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFieldTower
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The actual ordinary-to-strict generic field comparison
@@ -19,6 +21,8 @@ the native map of their fraction fields. Its coefficient equation and the
 proved ordinary universal triangle show that the two actual embeddings in
 the original ambient Galois field form a commuting triangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

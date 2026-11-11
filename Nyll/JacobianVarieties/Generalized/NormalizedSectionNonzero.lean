@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.NormalizedSectionDivisor
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import Nyll.JacobianVarieties.Generalized.NormalizedSectionDivisor
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Nonvanishing of a section normalized on a nonempty modulus -/
+
+@[expose] public section
 
 noncomputable section
 

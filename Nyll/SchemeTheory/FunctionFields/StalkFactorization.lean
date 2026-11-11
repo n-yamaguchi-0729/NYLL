@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.Functoriality
-import Mathlib.AlgebraicGeometry.Stalk
+module
+
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
+public import Mathlib.AlgebraicGeometry.Stalk
 
 /-!
 # Function fields of morphisms factoring through a stalk spectrum
@@ -14,6 +16,8 @@ An injective map out of an integral scheme's stalk gives a dominant
 morphism from the spectrum of its target back to the scheme.  The induced
 function-field map restricts to the original ring map on that stalk.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -98,18 +102,12 @@ theorem functionFieldMap_comp_stalkFunctionField_of_injective
     let g := Spec.map (CommRingCat.ofHom phi) ≫ X.fromSpecStalk x
     let hg : DenseRange g :=
       denseRange_specMap_comp_fromSpecStalk_of_injective x phi hphi
-    letI : Algebra S (Spec (.of S)).functionField :=
+    let : Algebra S (Spec (.of S)).functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of S)
     (g.functionFieldMap hg).comp
         (algebraMap (X.presheaf.stalk x) X.functionField) =
       (algebraMap S (Spec (.of S)).functionField).comp phi := by
-  dsimp only
-  let : Algebra S (Spec (.of S)).functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of S)
-  let g : Spec (.of S) ⟶ X :=
-    Spec.map (CommRingCat.ofHom phi) ≫ X.fromSpecStalk x
-  let hg : DenseRange g :=
-    denseRange_specMap_comp_fromSpecStalk_of_injective x phi hphi
+  intro g hg functionFieldAlgebra
   have hgeneric : g (genericPoint (Spec (.of S))) = genericPoint X :=
     g.map_genericPoint_of_denseRange hg
   let lhs : X.presheaf.stalk x →+* (Spec (.of S)).functionField :=

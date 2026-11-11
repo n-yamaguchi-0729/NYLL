@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantFlatBaseChange
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.RingHomProperties
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.Ideal.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantFlatBaseChange
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.RingHomProperties
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.Ideal.Maps
 
 
 /-!
@@ -34,6 +36,8 @@ coefficient-to-factor bijection additionally identifies this neighborhood
 with the coefficient scheme. Source-local descent from its open image is a
 separate step in Stacks tag 0BST.
 -/
+
+@[expose] public section
 
 noncomputable section
 

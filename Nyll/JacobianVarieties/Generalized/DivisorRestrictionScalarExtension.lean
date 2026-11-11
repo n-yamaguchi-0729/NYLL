@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionScalarExtension
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionScalarExtension
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
 
 /-! # The same actual divisor comparison preserves restriction of rigidifications -/
+
+@[expose] public section
 
 noncomputable section
 

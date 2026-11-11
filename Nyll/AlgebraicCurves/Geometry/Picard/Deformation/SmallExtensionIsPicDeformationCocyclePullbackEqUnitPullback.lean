@@ -10,33 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Data.Fin.Tuple.Sort
-import Mathlib.GroupTheory.Perm.Sign
-import Mathlib.LinearAlgebra.Dual.Defs
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.FinCases
-import Mathlib.Tactic.LinearCombination
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.RefinementTransitionEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionComapRefinementEqAppLE
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingAppLE
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingZeroAddMulNegRestrictIsFibreReading
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsUnitTransitionTransitionFaceMulEq
+module
+
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Data.Fin.Tuple.Sort
+public import Mathlib.GroupTheory.Perm.Sign
+public import Mathlib.LinearAlgebra.Dual.Defs
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.FinCases
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.RefinementTransitionEq
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionComapRefinementEqAppLE
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingAppLE
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmallExtensionIsFibreReadingZeroAddMulNegRestrictIsFibreReading
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.IsUnitTransitionTransitionFaceMulEq
 
 /-!
 # Small Extension exists is Pic Deformation Cocycle pullback eq unit Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

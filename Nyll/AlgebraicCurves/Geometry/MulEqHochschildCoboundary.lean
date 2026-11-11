@@ -10,17 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Localization.NormTrace
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Discriminant
+module
 
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothLinearMapEq
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.TableAlgebra
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Localization.NormTrace
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Discriminant
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothLinearMapEq
 
 /-!
 # Exists mul eq hochschild coboundary of discr ne zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -42,68 +47,42 @@ variable {R : Type*} [CommRing R] {N : ℕ}
 /-- The product of coordinate vectors determined by structure constants. -/
 def cst (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (x y : Fin (N + 1) → R) :
     Fin (N + 1) → R :=
-  fun m => ∑ i, ∑ j, x i * y j * γ i j m
+  _root_.TableAlgebra.cst γ x y
 
 theorem cst_apply (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (x y : Fin (N + 1) → R)
-    (m : Fin (N + 1)) : cst γ x y m = ∑ i, ∑ j, x i * y j * γ i j m := rfl
+    (m : Fin (N + 1)) : cst γ x y m = ∑ i, ∑ j, x i * y j * γ i j m :=
+  _root_.TableAlgebra.cst_apply γ x y m
 
 theorem sum3_rot (f : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) :
-    ∑ q, ∑ l, ∑ t, f q l t = ∑ l, ∑ t, ∑ q, f q l t := by
-  calc ∑ q, ∑ l, ∑ t, f q l t = ∑ l, ∑ q, ∑ t, f q l t := Finset.sum_comm
-    _ = ∑ l, ∑ t, ∑ q, f q l t := Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    ∑ q, ∑ l, ∑ t, f q l t = ∑ l, ∑ t, ∑ q, f q l t :=
+  _root_.TableAlgebra.sum3_rot f
 
 theorem sum4_rot (f : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) :
-    ∑ q, ∑ t, ∑ k, ∑ l, f q t k l = ∑ k, ∑ l, ∑ t, ∑ q, f q t k l := by
-  calc ∑ q, ∑ t, ∑ k, ∑ l, f q t k l = ∑ q, ∑ k, ∑ t, ∑ l, f q t k l :=
-        Finset.sum_congr rfl fun q _ => Finset.sum_comm
-    _ = ∑ q, ∑ k, ∑ l, ∑ t, f q t k l :=
-        Finset.sum_congr rfl fun q _ => Finset.sum_congr rfl fun k _ => Finset.sum_comm
-    _ = ∑ k, ∑ q, ∑ l, ∑ t, f q t k l := Finset.sum_comm
-    _ = ∑ k, ∑ l, ∑ q, ∑ t, f q t k l := Finset.sum_congr rfl fun k _ => Finset.sum_comm
-    _ = ∑ k, ∑ l, ∑ t, ∑ q, f q t k l :=
-        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    ∑ q, ∑ t, ∑ k, ∑ l, f q t k l = ∑ k, ∑ l, ∑ t, ∑ q, f q t k l :=
+  _root_.TableAlgebra.sum4_rot f
 
 theorem cst_cst_left (γo γi : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
     (a b c : Fin (N + 1) → R) (s : Fin (N + 1)) :
-    cst γo (cst γi a b) c s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γi k l q * γo q t s := by
-  simp only [cst, Finset.sum_mul, Finset.mul_sum]
-  rw [sum4_rot]
-  refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-    Finset.sum_congr rfl fun t _ => Finset.sum_congr rfl fun q _ => ?_
-  ring
+    cst γo (cst γi a b) c s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γi k l q * γo q t s :=
+  _root_.TableAlgebra.cst_cst_left γo γi a b c s
 
 theorem cst_cst_right (γo γi : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
     (a b c : Fin (N + 1) → R) (s : Fin (N + 1)) :
-    cst γo a (cst γi b c) s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γi l t q * γo k q s := by
-  simp only [cst, Finset.sum_mul, Finset.mul_sum]
-  refine Finset.sum_congr rfl fun k _ => ?_
-  rw [sum3_rot]
-  refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun t _ =>
-    Finset.sum_congr rfl fun q _ => ?_
-  ring
+    cst γo a (cst γi b c) s = ∑ k, ∑ l, ∑ t, a k * b l * c t * ∑ q, γi l t q * γo k q s :=
+  _root_.TableAlgebra.cst_cst_right γo γi a b c s
 
 theorem cst_comm_of (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R)
-    (hc : ∀ i j k, γ i j k = γ j i k) (a b : Fin (N + 1) → R) : cst γ a b = cst γ b a := by
-  funext m
-  rw [cst_apply, cst_apply, Finset.sum_comm]
-  refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
-  rw [hc j i m]; ring
+    (hc : ∀ i j k, γ i j k = γ j i k) (a b : Fin (N + 1) → R) : cst γ a b = cst γ b a :=
+  _root_.TableAlgebra.cst_comm_of γ hc a b
 
 theorem cst_single_left (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (i : Fin (N + 1))
     (y : Fin (N + 1) → R) (m : Fin (N + 1)) :
-    cst γ (Pi.single i 1) y m = ∑ q, y q * γ i q m := by
-  rw [cst_apply, Finset.sum_eq_single i]
-  · simp only [Pi.single_eq_same, one_mul]
-  · intro b _ hb; simp [Pi.single_eq_of_ne hb]
-  · intro h; exact absurd (Finset.mem_univ i) h
+    cst γ (Pi.single i 1) y m = ∑ q, y q * γ i q m :=
+  _root_.TableAlgebra.cst_single_left γ i y m
 
 theorem cst_single_single (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → R) (i j : Fin (N + 1)) :
-    cst γ (Pi.single i 1) (Pi.single j 1) = fun m => γ i j m := by
-  funext m
-  rw [cst_single_left, Finset.sum_eq_single j]
-  · simp only [Pi.single_eq_same, one_mul]
-  · intro b _ hb; simp [Pi.single_eq_of_ne hb]
-  · intro h; exact absurd (Finset.mem_univ j) h
+    cst γ (Pi.single i 1) (Pi.single j 1) = fun m => γ i j m :=
+  _root_.TableAlgebra.cst_single_single γ i j
 
 /-- The Hochschild coboundary of a linear cochain in coordinates given by the multiplication
 constants. -/

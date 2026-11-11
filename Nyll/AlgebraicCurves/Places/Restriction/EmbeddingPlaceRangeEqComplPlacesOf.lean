@@ -15,6 +15,8 @@ import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverSectio
 import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
 import Nyll.AlgebraicCurves.Models.LocalGeometry.ClosedPointRangeStalkEq
 import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
+import Nyll.AlgebraicCurves.Places.Basic
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Exists embedding place range eq compl places Of of is Sectional
@@ -35,14 +37,14 @@ theorem _root_.AlgebraicCurve.exists_embedding_place_range_eq_compl_placesOf_of_
       (CommRingCat.of k))
     [IsIntegral X] [IsProper c] [SmoothOfRelativeDimension 1 c]
     {ι : Type w} (σ : ι → (Spec (CommRingCat.of k) ⟶ X)) (hσ : 𝒱.IsSectional c σ) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     ∃ p : ι ↪ AlgebraicCurve.Place k X.functionField,
       Set.range p = (AlgebraicCurve.placesOf c 𝒱.U1)ᶜ ∧
       ∀ i, (algebraMap (X.presheaf.stalk ((σ i).base (IsLocalRing.closedPoint k)))
         X.functionField).range =
         (p i).toValuationSubring.toSubring := by
+  intro sharedOwner1
   classical
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
   have hrange : ∀ i, Set.range (σ i).base = {(σ i).base (IsLocalRing.closedPoint k)} := fun i => by
     ext y
     simp only [Set.mem_range, Set.mem_singleton_iff]

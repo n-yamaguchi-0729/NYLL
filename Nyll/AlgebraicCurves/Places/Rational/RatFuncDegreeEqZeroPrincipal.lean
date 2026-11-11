@@ -10,13 +10,17 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.FieldTheory.RatFunc.Basic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Rational.RatFuncDegreeEqZeroEqOrd
+module
+
+public import Mathlib.FieldTheory.RatFunc.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Rational.RatFuncDegreeEqZeroEqOrd
 
 /-!
 # Rational Function Field degree eq zero of is Principal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

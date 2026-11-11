@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Centered
-import Nyll.SchemeTheory.PlaneCurves.MonicChange
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Transport
-import Nyll.SchemeTheory.PlaneCurves.RationalPoints
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Centered
+public import Nyll.SchemeTheory.PlaneCurves.MonicChange
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Transport
+public import Nyll.SchemeTheory.PlaneCurves.RationalPoints
 
 /-!
 # Transport of centered prime divisors
@@ -17,6 +19,8 @@ divisors.  Applied to the monic representative of a plane equation, this
 removes the literal monicity assumption from the separable-projection form of
 Fried--Jarden, Lemma 6.2.2(b).
 -/
+
+@[expose] public section
 
 noncomputable section
 

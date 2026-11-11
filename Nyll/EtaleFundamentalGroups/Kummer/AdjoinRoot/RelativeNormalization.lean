@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootDivisor
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Mathlib.Algebra.Group.Commute.Units
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Ring.NonZeroDivisors
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootDivisor
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Mathlib.Algebra.Group.Commute.Units
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Ring.NonZeroDivisors
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Relative normalization of a standard root cover
@@ -34,6 +36,8 @@ Lemma 58.31.6, on its standard charts. It does not assert the global étale
 chart construction or descent of the resulting normalization.
 https://stacks.math.columbia.edu/tag/0BSE
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.Localization
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafSectionsLinearRes
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceQuasicoherentTwist
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivTwistObj
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.IsLocalizedModuleRes
+module
+
+public import Mathlib.RingTheory.Flat.Localization
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafSectionsLinearRes
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceQuasicoherentTwist
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivTwistObj
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.IsLocalizedModuleRes
 
 /-!
 # Proj Space is Coherent twist and flat
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

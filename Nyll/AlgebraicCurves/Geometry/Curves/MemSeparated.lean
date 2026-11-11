@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.Order.KrullDimension
-import Mathlib.RingTheory.Ideal.Maps
-import Nyll.SchemeTheory.RingTheory.Dimension.IdealIsPrimeLeLeKrullDimensionQuotientEqOne
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveOpensHomCompEq
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.Order.KrullDimension
+public import Mathlib.RingTheory.Ideal.Maps
+public import Nyll.SchemeTheory.RingTheory.Dimension.IdealIsPrimeLeLeKrullDimensionQuotientEqOne
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveOpensHomCompEq
 
 /-!
 # Membership detected by open subsets of smooth proper curves
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
 
 /-!
 # Nondivisibility of a rank-one discrete value group
@@ -13,6 +15,8 @@ For each natural number greater than one, the image of a discrete valuation cont
 nonzero value that is not an nth power. A normalized valuation and uniformizer supply
 the witness.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

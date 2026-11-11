@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslation
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslation
 
 /-! # The sharp coefficient bound for actual Laurent translation
 
@@ -14,6 +16,8 @@ power-series coefficient ring. This gives an actual integral preimage after
 extracting the original Laurent order, including for negative orders.
 Taking coefficients yields the Hasse bound in every characteristic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

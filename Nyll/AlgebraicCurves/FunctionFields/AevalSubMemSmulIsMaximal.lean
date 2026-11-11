@@ -10,64 +10,68 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.GroupWithZero.Associated
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.Module.Submodule.Defs
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Polynomial.Eval.Coeff
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.Algebra.Polynomial.FieldDivision
-import Mathlib.Algebra.Polynomial.RingDivision
-import Mathlib.Algebra.Polynomial.Monomial
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Data.Fin.Embedding
-import Mathlib.Data.Finset.Range
-import Mathlib.Data.Finset.Dedup
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Data.Multiset.Count
-import Mathlib.Data.Multiset.MapFold
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.Logic.Function.Basic
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.DedekindDomain.Ideal.Basic
-import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.Ideal.Basic
-import Mathlib.RingTheory.Ideal.Lattice
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.RingTheory.UniqueFactorizationDomain.Defs
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.GroupWithZero.Associated
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.Module.Submodule.Defs
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Polynomial.Eval.Coeff
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.Polynomial.FieldDivision
+public import Mathlib.Algebra.Polynomial.RingDivision
+public import Mathlib.Algebra.Polynomial.Monomial
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Data.Fin.Embedding
+public import Mathlib.Data.Finset.Range
+public import Mathlib.Data.Finset.Dedup
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Data.Multiset.Count
+public import Mathlib.Data.Multiset.MapFold
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Ideal.Basic
+public import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.Ideal.Basic
+public import Mathlib.RingTheory.Ideal.Lattice
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.RingTheory.UniqueFactorizationDomain.Defs
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Choose
 
 /-!
 # Exists aeval sub mem smul of is Maximal of is Integrally Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

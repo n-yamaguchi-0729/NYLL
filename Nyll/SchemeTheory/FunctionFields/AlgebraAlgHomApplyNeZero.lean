@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Jacobson.Ring
-import Mathlib.RingTheory.Localization.Away.AdjoinRoot
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 
 /-!
 # Algebra exists alg Hom forall apply ne zero of finite Type of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

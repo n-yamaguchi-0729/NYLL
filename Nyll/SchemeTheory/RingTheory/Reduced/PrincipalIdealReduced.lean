@@ -23,14 +23,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.RingTheory.Dimension.HeightOneNormality
+module
+
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.RingTheory.Dimension.HeightOneNormality
 
 /-!
 # Ideal is Reduced quotient span singleton of forall mem associated Primes
 -/
+
+@[expose] public section
 
 section Ideal_isReduced_quotient_span_singleton_of_forall_mem_associatedPrimes
 

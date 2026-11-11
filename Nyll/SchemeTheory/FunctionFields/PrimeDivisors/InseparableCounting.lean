@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Centered
-import Nyll.SchemeTheory.FunctionFields.Valuations.PurelyInseparable
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Centered
+public import Nyll.SchemeTheory.FunctionFields.Valuations.PurelyInseparable
 
 /-!
 # Reducing prime-divisor counts to the separable subextension
@@ -21,6 +23,8 @@ This file first proves the corresponding general counting theorem for
 field may now be a purely inseparable extension of the fraction field of the
 Dedekind model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

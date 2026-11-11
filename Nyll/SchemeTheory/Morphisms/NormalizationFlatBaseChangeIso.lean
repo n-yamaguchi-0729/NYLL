@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.ProperNormalization
-import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
+module
+
+public import Nyll.SchemeTheory.Morphisms.ProperNormalization
+public import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
 
 /-!
 # The native normalization comparison under flat affine base change
@@ -15,6 +17,8 @@ is an isomorphism after flat base change between affine bases. The proof
 compares the two actual pushout squares on global sections, using the
 section isomorphisms of the normalization maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

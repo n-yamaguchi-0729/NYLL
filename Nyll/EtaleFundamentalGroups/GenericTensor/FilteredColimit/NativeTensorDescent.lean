@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorCorrespondence
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorPushout
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.CategoryTheory.HomCongr
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorCorrespondence
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorPushout
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.CategoryTheory.HomCongr
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Descent comparisons retaining the original native tensor actions
@@ -23,6 +25,8 @@ reconstructed from an Under object. Its coefficient naturality is proved from
 the two tensor coprojections. This keeps action normalization out of the
 finite-field descent proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -256,7 +260,7 @@ theorem hom_square (T B D : Type u) [CommRing T] [CommRing B] [CommRing D]
   have hs : l ≫ g₀ = f₀ ≫ r :=
     square_of_conjugated_square (C := CommRingCat.{u})
       a b a' b' l r L M f₀ g₀ hl hr hring
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   exact (congrArg (fun p ↦ p.hom) hs).symm
 
 end EtaleFundamentalGroups.NativeTensorDescent

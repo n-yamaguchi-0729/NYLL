@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCech
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCech
 
 /-!
 # Triple intersections in the principal cover of a punctured spectrum
@@ -15,6 +17,8 @@ product localization and the corresponding three-stage localization, exposes
 the three maps to pairwise intersections, and records the natural
 isomorphisms needed for the finite-etale cocycle condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

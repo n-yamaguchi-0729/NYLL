@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Semiabelian
-import Nyll.SchemeTheory.GroupSchemes.KernelTranslation
-import Nyll.SchemeTheory.GroupSchemes.TorusGeometry
-import Nyll.SchemeTheory.GroupSchemes.TorusSeparatedQuasiCompact
-import Nyll.SchemeTheory.Morphisms.GeometricallyConnectedDescent
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+module
+
+public import Nyll.SchemeTheory.Morphisms.SeparatedQuasiCompactDescent
+public import Nyll.SchemeTheory.GroupSchemes.Semiabelian
+public import Nyll.SchemeTheory.GroupSchemes.KernelTranslation
+public import Nyll.SchemeTheory.GroupSchemes.TorusGeometry
+public import Nyll.SchemeTheory.GroupSchemes.TorusSeparatedQuasiCompact
+public import Nyll.SchemeTheory.Morphisms.GeometricallyConnectedDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 /-! # Geometry of actual semiabelian extensions
 
@@ -19,6 +22,8 @@ projection from the product with its torus kernel. Descent therefore supplies
 geometric connectedness, separatedness and quasi-compactness of the quotient map
 and of the actual middle group.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -77,12 +82,8 @@ theorem projection_isSeparated (E : SemiabelianExtension G) :
 /-- The actual quotient is quasi-compact; quasi-compactness of its cover is not an assumption. -/
 theorem projection_quasiCompact (E : SemiabelianExtension G) :
     QuasiCompact E.projection.hom.hom.hom.left := by
-  have hAff : HasAffineProperty (@QuasiCompact : MorphismProperty Scheme.{u})
-      (fun X _ _ _ => CompactSpace X) :=
-    AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat
   have : IsZariskiLocalAtTarget (@QuasiCompact : MorphismProperty Scheme.{u}) :=
-    @HasAffineProperty.instIsZariskiLocalAtTarget
-      (@QuasiCompact : MorphismProperty Scheme.{u}) (fun X _ _ _ => CompactSpace X) hAff
+    QuasiCompact.isZariskiLocalAtTarget
   exact E.projection_fppf_property (@QuasiCompact) QuasiCompact.descendsAlong_fpqc
     (inferInstanceAs (QuasiCompact E.torus.X.hom))
 

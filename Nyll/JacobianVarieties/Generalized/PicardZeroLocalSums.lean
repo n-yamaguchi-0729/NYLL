@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroDivisorCharts
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroDivisorCharts
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
 
 /-!
 # Actual regular local sums on the constructed generalized Jacobian
@@ -16,6 +18,8 @@ section. Its local sum maps are actual morphisms defined by the proved
 open-curve divisor representers. Their compatibility is a separate modulus
 argument; it is not included as an assumption in the atlas construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

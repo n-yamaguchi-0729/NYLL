@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.FiniteSkyscraperEmbedding
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Nyll.SchemeTheory.Topology.FiniteSkyscraperEmbedding
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Pullback of the finite stalk-skyscraper embedding
@@ -25,6 +27,8 @@ finite product, whose comparison is Mathlib's `PreservesProduct.iso`.
 
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

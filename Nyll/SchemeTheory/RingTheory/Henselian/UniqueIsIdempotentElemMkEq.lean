@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
 
 /-!
 # Henselian Local Ring exists Unique is Idempotent Elem mk eq of module Finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

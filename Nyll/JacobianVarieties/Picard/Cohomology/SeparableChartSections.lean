@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.BaseChange.ChartSectionsBaseChange
-import Nyll.JacobianVarieties.Picard.Representability.FiniteEtaleHasChartSectionsField
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Nyll.JacobianVarieties.Picard.BaseChange.ChartSectionsBaseChange
+public import Nyll.JacobianVarieties.Picard.Representability.FiniteEtaleHasChartSectionsField
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSections
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-! # Picard chart sections after a finite separable field extension
 
@@ -23,6 +25,8 @@ Choose a field factor of the actual finite etale splitting algebra, and transpor
 the base-changed sections through the native iterated-pullback isomorphism.
 The Riemann--Roch condition is preserved by equality of the actual fibre points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

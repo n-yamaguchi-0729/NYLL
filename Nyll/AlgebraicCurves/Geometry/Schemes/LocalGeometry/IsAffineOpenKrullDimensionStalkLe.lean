@@ -10,12 +10,16 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Ideal.Height
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Is Affine Open ring Krull Dim stalk le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

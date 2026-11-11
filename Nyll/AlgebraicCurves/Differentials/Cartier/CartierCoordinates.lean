@@ -11,13 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Cartier.PthPowerKernel
-import Nyll.AlgebraicCurves.Differentials.Local.Order
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Cartier.PthPowerKernel
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 
 /-!
 # Cartier Coordinates
 -/
+
+@[expose] public section
 
 open Polynomial IntermediateField AlgebraicCurve.PthPower
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionImageDiagram
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionImageDiagram
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Recovering a closed subscheme from its stage images
@@ -14,6 +16,8 @@ Sections on affine preimages descend to an actual ambient stage. This detects
 the kernel of a quasi-compact morphism from its stage kernels and supplies the
 universal property of the corresponding scheme-theoretic image limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

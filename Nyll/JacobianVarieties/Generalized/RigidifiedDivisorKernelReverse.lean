@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorKernelForward
-import Nyll.AlgebraicCurves.Models.Sections.PrescribedRationalSection
-import Nyll.AlgebraicCurves.Models.Sections.SectionRatioRestriction
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorKernelForward
+public import Nyll.AlgebraicCurves.Models.Sections.PrescribedRationalSection
+public import Nyll.AlgebraicCurves.Models.Sections.SectionRatioRestriction
 
 /-! # A modulus-principal divisor has trivial actual rigidified class -/
+
+@[expose] public section
 
 noncomputable section
 

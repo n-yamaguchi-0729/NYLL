@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Ext
 
 /-!
 # exterior Power range map subtype eq maximal Ideal smul top
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -127,7 +131,7 @@ theorem Submodule.exists_basis_eq_span_cons_uniformizer_smul {R : Type*} [CommRi
     refine Submodule.add_mem _ (Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, rfl⟩)) ?_
     refine Submodule.span_mono ?_ (hKspan (hdecomp x))
     rintro _ ⟨i, rfl⟩
-    exact ⟨i.succ, by simp [v]⟩
+    exact ⟨i.succ, rfl⟩
   let b : Module.Basis (Fin (n + 1)) R M := Module.Basis.mk hli hsp
   have hb : ∀ i, b i = v i := fun i => Module.Basis.mk_apply hli hsp i
   obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible R
@@ -139,10 +143,13 @@ theorem Submodule.exists_basis_eq_span_cons_uniformizer_smul {R : Type*} [CommRi
     have hx' : x = r • (ϖ • m) + (x - φ x • m) := by rw [smul_smul, hr]; abel
     rw [hx']
     refine Submodule.add_mem _ (Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, ?_⟩)) ?_
-    · simp [hb, v]
+    · exact congrArg (fun z => ϖ • z) (hb 0)
     · refine Submodule.span_mono ?_ (hKspan (hdecomp x))
       rintro _ ⟨i, rfl⟩
-      exact ⟨i.succ, by simp [hb, v]⟩
+      refine ⟨i.succ, ?_⟩
+      change (if i.succ = 0 then ϖ else 1) • b i.succ = (bK i : M)
+      rw [ite_eq_right (Fin.succ_ne_zero i), one_smul, hb,
+        show v i.succ = (bK i : M) from rfl]
   · rw [Submodule.span_le]
     rintro _ ⟨i, rfl⟩
     refine Fin.cases ?_ (fun j => ?_) i

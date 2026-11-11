@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ZariskiRestriction
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.SetSheafFunctors
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.SetSheafFunctors
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Zariski restriction and actual étale base change
@@ -24,6 +26,8 @@ the actual map from topological inverse image to restricted étale inverse
 image, with the corresponding equality of the chosen adjunction units.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u v w
@@ -34,7 +38,8 @@ namespace EtaleCohomology
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-private def zariskiBaseChangeObjIso (U : Y.Opens) :
+/-- Pulling back an open étale object gives the inverse-image open subscheme. -/
+def zariskiBaseChangeObjIso (U : Y.Opens) :
     (etaleBaseChange f).obj ((zariskiToEtale Y).obj U) ≅
       (zariskiToEtale X).obj ((Opens.map f.base).obj U) := by
   let e : Limits.pullback U.ι f ≅ (f ⁻¹ᵁ U).toScheme :=
@@ -79,7 +84,7 @@ def etaleZariskiSetPullbackComparison :
       etaleSetPullback f ⋙ etaleZariskiRestriction X (Type u) :=
   ((mateEquiv (etaleSetPullbackPushforwardAdjunction f)
     (TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) f.base)).symm
-      (etaleZariskiPushforwardIso f (Type u)).hom).natTrans
+      (etaleZariskiPushforwardIso f (Type u)).hom)
 
 /-- The comparison identifies the actual étale adjunction unit with the
 topological adjunction unit followed by the constructed comparison. -/

@@ -10,16 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.BigOperators.Finprod
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Tactic.SimpRw
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
-import Nyll.AlgebraicCurves.Differentials.Kaehler.Weil
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.BigOperators.Finprod
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Tactic.SimpRw
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.Weil
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.Differentials.Residues.Basic
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Cover sum residue eq zero of residue Theorem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

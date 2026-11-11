@@ -18,6 +18,7 @@ import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Models.FunctionFields.ApplyGenericPointEqAlgEquivFunctionField
 import Nyll.AlgebraicCurves.Models.FunctionFields.RangeAlgebraMapFunctionFieldEqIInf
 import Nyll.AlgebraicCurves.Models.LocalGeometry.FiniteIsoStalkMap
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Curve Model finite integral Closure sections of is Iso stalk Map

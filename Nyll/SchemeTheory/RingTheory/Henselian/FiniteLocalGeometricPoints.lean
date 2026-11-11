@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Geometric closed points of finite local algebras
@@ -24,6 +26,8 @@ uniqueness comes from the purely inseparable residue extension.
 No Henselianity or reducedness assumption is needed once the finite algebra
 is local.
 -/
+
+@[expose] public section
 
 noncomputable section
 

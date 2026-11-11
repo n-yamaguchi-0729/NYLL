@@ -11,9 +11,11 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtensionAlgClosed
 
 /-!
 # Extension of places under a constant-field extension in characteristic zero
@@ -21,6 +23,8 @@ import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantEx
 This specialization uses the constant-field extension theorem over any algebraically closed
 base field.
 -/
+
+@[expose] public section
 
 namespace AlgebraicCurve.Place
 

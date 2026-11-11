@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.FieldDivision
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.Topology.Connected.Clopen
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTop
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.FieldDivision
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.Topology.Connected.Clopen
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTop
 
 /-!
 # exists eq snd comp of comp eq const of is Proper
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

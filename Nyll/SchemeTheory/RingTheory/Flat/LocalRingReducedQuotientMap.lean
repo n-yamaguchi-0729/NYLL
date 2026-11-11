@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Flat.Tensor
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.LocalProperties.Reduced
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Flat.Tensor
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.LocalProperties.Reduced
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Abel
 
 /-!
 # Is Local Ring is Reduced quotient map of flat of locally Principal Overring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

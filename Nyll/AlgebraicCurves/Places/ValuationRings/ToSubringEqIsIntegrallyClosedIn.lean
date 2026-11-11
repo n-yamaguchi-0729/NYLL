@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Exists place to Subring eq of is Integrally Closed In of is Noetherian Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

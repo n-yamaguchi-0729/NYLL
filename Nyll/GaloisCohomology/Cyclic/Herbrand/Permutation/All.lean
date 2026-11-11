@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.Lattice
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.LatticeHerbrand
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.Module
+module
+
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.Lattice
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.LatticeHerbrand
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.Module
 
 /-! # Permutation modules and lattices in cyclic cohomology -/

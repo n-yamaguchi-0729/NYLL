@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.LocalField.BaseChange
-import Nyll.ValuedFieldTheory.Ramification.LocalField.Core
-import Nyll.ValuedFieldTheory.Ramification.LocalField.InertiaCard
-import Nyll.ValuedFieldTheory.Ramification.LocalField.FirstRamificationComparison
-import Nyll.ValuedFieldTheory.Ramification.LocalField.ResidueInertia
-import Nyll.ValuedFieldTheory.Ramification.LocalField.Unramified
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.BaseChange
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.Core
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.InertiaCard
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.FirstRamificationComparison
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.ResidueInertia
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.Unramified
 
 /-!
 # Local-field ramification

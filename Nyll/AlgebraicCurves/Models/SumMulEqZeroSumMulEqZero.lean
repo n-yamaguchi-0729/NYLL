@@ -149,8 +149,10 @@ theorem exists_mem_maximalIdeal_map_eq {k F F' : Type u} [Field k] [Field F] [Fi
     have ha0 : (a : F) ≠ 0 := by
       intro h0
       apply not_isUnit_zero (M₀ := ↥P.toValuationSubring)
-      have : (⟨φ (a : F), (hmem _).mp a.2⟩ : ↥P.toValuationSubring) = 0 := Subtype.ext
-        (by simp [h0])
+      have : (⟨φ (a : F), (hmem _).mp a.2⟩ : ↥P.toValuationSubring) = 0 := by
+        apply Subtype.ext
+        change φ (a : F) = (0 : F')
+        rw [h0, map_zero]
       rwa [this] at hunit
     have hinv' := inv_mem_of_isUnit _ _ hunit
     have hinv : (a : F)⁻¹ ∈ (P.restrictAlong φ hφ).toValuationSubring := by

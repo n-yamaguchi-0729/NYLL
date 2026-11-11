@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalSumMap
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivSum
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalSumMap
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.ProdKerGraphComapMapOnProdOver
 
 /-!
 # The test-scheme kernel of the universal divisor sum map
@@ -21,6 +23,8 @@ divisor, its classifying morphisms, and naturality of products of graph ideals.
 This supplies a kernel comparison. It does not assert that arbitrary-target finite
 sums equalize that kernel, nor that principal divisors vanish under such sums.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,7 +48,7 @@ theorem exists_sumMap_with_sameDivisor_kernel
         (hu : u ≫ fibrePowOver.toBase f r = g)
         (hv : v ≫ fibrePowOver.toBase f r = g),
         u ≫ σ = v ≫ σ ↔
-          SameDivisor f (fun i => u ≫ fibrePowOver.proj f r i)
+          SameDivisor (g := g) f (fun i => u ≫ fibrePowOver.proj f r i)
             (fun i => by rw [Category.assoc, fibrePowOver.proj_comp, hu])
             (fun i => v ≫ fibrePowOver.proj f r i)
             (fun i => by rw [Category.assoc, fibrePowOver.proj_comp, hv]) := by

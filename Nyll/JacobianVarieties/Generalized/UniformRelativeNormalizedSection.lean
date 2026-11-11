@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RelativeNormalizedSection
-import Nyll.JacobianVarieties.Generalized.ModulusUniformVanishing
-import Nyll.JacobianVarieties.Generalized.SectionPowerBaseChange
-import Nyll.JacobianVarieties.Generalized.GeometricCohomologyBound
+module
+
+public import Nyll.JacobianVarieties.Generalized.RelativeNormalizedSection
+public import Nyll.JacobianVarieties.Generalized.ModulusUniformVanishing
+public import Nyll.JacobianVarieties.Generalized.SectionPowerBaseChange
+public import Nyll.JacobianVarieties.Generalized.GeometricCohomologyBound
 
 /-!
 # A uniform normalized section for an actual family
@@ -17,6 +19,8 @@ geometric Picard-zero for the bundle, and a uniform genus bound. The point
 powers and all fibre module comparisons are constructed explicitly. Relative
 cohomology then lifts the given modulus frame over the whole affine base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

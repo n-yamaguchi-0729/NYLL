@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianDVF
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.FieldTheory.Separable
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianDVF
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Descending homomorphisms between valuation completions
@@ -19,6 +21,8 @@ separable over the target field. Henselianity places that image in the
 original target field, producing a unique homomorphism before completion.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

@@ -701,11 +701,11 @@ theorem _root_.AlgebraicCurve.Place.hasValue_norm_along_of_separableAlong {K F F
     (hfin : FiniteAlong K φ) (hsep : SeparableAlong K φ)
     (v : Place K F) (g : F') (a : Place K F' → Kˣ)
     (ha : ∀ w ∈ Place.fiberAlong φ hφ v, w.HasValue g (a w)) :
-    letI := algebraAlong φ
+    let := algebraAlong φ
     v.HasValue (Algebra.norm F g)
       (∏ w ∈ Place.fiberAlong φ hφ v,
         (a w : K) ^ (w.ramificationIndexAlong φ * w.inertiaDegAlong φ hφ)) := by
-  let := algebraAlong φ
+  intro sharedOwner1
   have := isScalarTower_along φ
   have := isIntegral_along φ hφ
   have : FiniteDimensional F F' := hfin

@@ -4,24 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineCompletion
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteAlgebraSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.IsLocalizationAtPrimeRingEquivAdicCompletionMaximalIdeal
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineCompletion
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteAlgebraSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.IsLocalizationAtPrimeRingEquivAdicCompletionMaximalIdeal
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
 # The actual completed affine algebra of the finite étale cover tower
@@ -43,6 +45,8 @@ This is affine algebra effectivity for the genuine tower. It does not assert
 coherent algebraization on the ordinary scheme or construct a finite cover
 of that scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

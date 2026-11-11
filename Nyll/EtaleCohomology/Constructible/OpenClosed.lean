@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.FiniteGluing
-import Nyll.EtaleCohomology.Constructible.Locality
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Topology.Constructible
+module
+
+public import Nyll.EtaleCohomology.Constructible.FiniteGluing
+public import Nyll.EtaleCohomology.Constructible.Locality
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Topology.Constructible
 
 /-!
 # Constructibility across an open and its closed complement
@@ -21,6 +23,8 @@ whole scheme when the open image is retrocompact. Affine-local base change
 then proves the criterion on arbitrary schemes. The condition on the open
 image is essential over non-noetherian bases.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

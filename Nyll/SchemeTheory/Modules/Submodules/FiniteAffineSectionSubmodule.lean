@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteLocalSectionExtension
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleExtension
-import Nyll.SchemeTheory.Modules.Quasicoherent.FiniteQuasicoherentSum
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteLocalSectionExtension
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleExtension
+public import Nyll.SchemeTheory.Modules.Quasicoherent.FiniteQuasicoherentSum
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
 
 /-!
 # Finite quasicoherent submodules containing finite affine-local generators
@@ -20,6 +23,8 @@ finite-type quasicoherent submodule with the same restriction. The actual
 finite join retains all of the prescribed generators. The selected opens
 need not cover the scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

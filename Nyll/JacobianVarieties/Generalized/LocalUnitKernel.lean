@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorClasses
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusJets
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Places.Evaluation.Value
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorClasses
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusJets
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.Core
 
 /-!
 # The principal boundary for divisor classes with modulus
@@ -18,6 +21,8 @@ the modulus. The independent constant-field condition `ConstantsAreBase`
 identifies the kernel of this boundary with constants times congruence-one
 functions. This is the rational-function form of Serre's local-unit sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

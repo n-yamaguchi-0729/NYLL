@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.AppTopPullbackMapEqAppTopPullbackFst
-import Nyll.SchemeTheory.Affine.HomeomorphismIdempotentSections
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.Morphisms.AppTopPullbackMapEqAppTopPullbackFst
+public import Nyll.SchemeTheory.Affine.HomeomorphismIdempotentSections
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Lifting idempotent sections of proper closed fibres
@@ -21,6 +23,8 @@ proper formal-functions approximation: the idempotent lifts through the
 homeomorphism from the closed base change to an infinitesimal thickening,
 and a sufficiently thick such lift comes from a global section.
 -/
+
+@[expose] public section
 
 noncomputable section
 

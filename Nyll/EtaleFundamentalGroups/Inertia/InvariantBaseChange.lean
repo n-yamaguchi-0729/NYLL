@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Operations
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Operations
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -19,6 +21,8 @@ needed for this ideal-theoretic statement.
 
 Reference: https://stacks.math.columbia.edu/tag/0BSS
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

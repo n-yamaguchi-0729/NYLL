@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+module
 
-import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+
+public import Mathlib.RingTheory.Polynomial.UniqueFactorization
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
 # Algebra Smooth is Domain and is Integrally Closed of is Localization at Prime
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -53,7 +57,7 @@ theorem _root_.Algebra.Smooth.isDomain_and_isIntegrallyClosed_of_isLocalization_
   have hunit : IsUnit (algebraMap S Sₚ f) := IsLocalization.map_units Sₚ (⟨f, hf⟩ : p.primeCompl)
   let : Algebra Sf Sₚ := (IsLocalization.Away.lift f hunit).toAlgebra
   have : IsScalarTower S Sf Sₚ := IsScalarTower.of_algebraMap_eq fun s => by
-    simp [RingHom.algebraMap_toAlgebra, IsLocalization.Away.lift_eq]
+    exact (IsLocalization.Away.lift_eq f hunit s).symm
   have hle : Submonoid.powers f ≤ p.primeCompl := by
     rintro _ ⟨k, rfl⟩
     exact fun h => hf (hp.mem_of_pow_mem k h)

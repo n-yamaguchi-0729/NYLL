@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Contraction
-import Mathlib.LinearAlgebra.Trace
-import Mathlib.LinearAlgebra.Prod
-import Mathlib.RingTheory.Finiteness.Prod
+module
+
+public import Mathlib.LinearAlgebra.Contraction
+public import Mathlib.LinearAlgebra.Trace
+public import Mathlib.LinearAlgebra.Prod
+public import Mathlib.RingTheory.Finiteness.Prod
 
 /-!
 # Trace on finite projective modules over a commutative ring
@@ -22,6 +24,8 @@ This is the degreewise trace needed for bounded complexes of finite projective
 modules. Traces of complexes and traces over noncommutative rings are separate
 constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

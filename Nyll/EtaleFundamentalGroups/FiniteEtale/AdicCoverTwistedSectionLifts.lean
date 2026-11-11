@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafGlobalLifting
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Tensor.InvertibleCoherence
-import Nyll.SchemeTheory.Modules.Tensor.InvertibleExactness
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Mathlib.Algebra.Homology.ShortComplex.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Monoidal.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafGlobalLifting
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Tensor.InvertibleCoherence
+public import Nyll.SchemeTheory.Modules.Tensor.InvertibleExactness
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Mathlib.Algebra.Homology.ShortComplex.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 # Global lifts in the original finite étale tower after an invertible twist
@@ -38,6 +40,8 @@ No generation or presentation of the formal system is assumed here.
 The concrete kernel cohomology premise is the target of the separate
 Rees comparison and uniform vanishing construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

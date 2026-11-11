@@ -4,26 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericTrivialCover
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericNormalizationEtale
-import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialBaseChangeAlgebra
-import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointSurjective
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
-import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialComposite
-import Nyll.EtaleFundamentalGroups.GaloisCategories.ExactSequence
-import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericTrivialCover
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericNormalizationEtale
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialBaseChangeAlgebra
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointSurjective
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialComposite
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.ExactSequence
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Nyll.ProCGroups.Presentations.Profinite
 
 
 /-!
@@ -37,6 +40,8 @@ trivial through the actual strictly henselian stalk. The existing Galois-categor
 criterion gives surjectivity, trivial composite and closed normal generation
 of the kernel, with the original maps and geometric point retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

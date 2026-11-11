@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedPointedGroup
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
-import Nyll.JacobianVarieties.Albanese.AbelJacobiMorphismDetectionField
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedPointedGroup
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiMorphismDetectionField
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Abel–Jacobi maps into one unpointed Jacobian
@@ -19,6 +22,8 @@ Every basepoint gives an actual point-minus-basepoint classifying morphism into
 the same Jacobian constructed without a rational point. The fixed comparison of
 Picard representations transports both the morphism and its identity formula.
 -/
+
+@[expose] public section
 
 universe u
 

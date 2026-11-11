@@ -6,6 +6,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCategoricalImage
 import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCyclotomicConjugacy
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Canonical field sources for divisorial cyclotomic conjugacy

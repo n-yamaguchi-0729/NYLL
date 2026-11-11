@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.ReesAlgebra
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 # Naturality of actual Rees tensor coefficients
@@ -24,6 +26,8 @@ then commutes with this map.
 This applies to the actual restriction maps between affine section rings;
 it does not require the source and target coefficient rings to coincide.
 -/
+
+@[expose] public section
 
 noncomputable section
 

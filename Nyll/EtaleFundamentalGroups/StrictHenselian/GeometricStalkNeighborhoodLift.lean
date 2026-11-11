@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.Etale.HenselianLocalGeometricLift
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.Etale.HenselianLocalGeometricLift
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # The strict local spectrum maps to its actual étale neighborhoods
@@ -27,6 +29,8 @@ compatible new points on the original neighborhoods. This is the geometric
 input for the composition of specializations in Stacks Project, Lemma
 58.16.2, https://stacks.math.columbia.edu/tag/0BUP.
 -/
+
+@[expose] public section
 
 noncomputable section
 

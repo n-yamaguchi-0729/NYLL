@@ -13,23 +13,25 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
-import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusRiemannIndexCurve
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
-import Nyll.AlgebraicCurves.Places.Rational.RatFuncFiniteDimensionalLSpaceZero
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Linarith.Frontend
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Push
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
+public import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusRiemannIndexCurve
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+public import Nyll.AlgebraicCurves.Places.Rational.RatFuncFiniteDimensionalLSpaceZero
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Push
 
 /-!
 # Common constructions for constant-field descent
@@ -37,6 +39,8 @@ import Mathlib.Tactic.Push
 Principal divisors, one-dimensional Riemann--Roch spaces, and the behavior of
 places above the generic point are shared by the derivation and finite-orbit proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -13,8 +13,10 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
 
 /-!
 # Canonical comparisons for tensor powers of module sheaves
@@ -22,6 +24,8 @@ import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
 Tensor powers add under tensor product, transport along an isomorphism, and commute
 with pullback. Each comparison is constructed recursively from the monoidal structure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

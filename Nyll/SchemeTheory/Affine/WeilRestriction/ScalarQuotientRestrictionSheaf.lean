@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestriction
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitsOnSchemes
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Limits.Types.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestriction
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitsOnSchemes
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-! # The Cartesian restriction square after actual fppf sheafification -/
+
+@[expose] public section
 
 noncomputable section
 

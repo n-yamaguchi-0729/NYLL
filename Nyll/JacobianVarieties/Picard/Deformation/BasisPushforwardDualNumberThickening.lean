@@ -10,36 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Module.Submodule.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.Basic
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE
-import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
+module
+
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Module.Submodule.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.Basic
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.JacobianVarieties.Picard.Deformation.UniqueEqAppLEAddEpsMulAppLE
+public import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
 
 /-!
 # Lifting pushforward bases to dual-number thickenings
@@ -47,6 +49,8 @@ import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
 Lift a basis of the structure-sheaf pushforward through a cartesian dual-number thickening.
 The proof uses the unique constant and infinitesimal decomposition on affine opens.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

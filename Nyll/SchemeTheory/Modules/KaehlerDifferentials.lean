@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Mathlib.RingTheory.Kaehler.Polynomial
-import Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
-import Nyll.SchemeTheory.Modules.ExteriorPower.PresheafExteriorPower
-import Nyll.SchemeTheory.Modules.ExteriorPower.Det
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Mathlib.RingTheory.Kaehler.Polynomial
+public import Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+public import Nyll.SchemeTheory.Modules.ExteriorPower.PresheafExteriorPower
+public import Nyll.SchemeTheory.Modules.ExteriorPower.Det
 /-!
 # Kaehler Module
 -/
+
+@[expose] public section
 
 noncomputable section
 

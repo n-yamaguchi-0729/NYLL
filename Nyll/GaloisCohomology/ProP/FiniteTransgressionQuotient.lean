@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
-import Mathlib.LinearAlgebra.Isomorphisms
+module
+
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
+public import Mathlib.LinearAlgebra.Isomorphisms
 
 /-!
 # Quotient presentation of finite transgression
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Isomorphisms
 The exact kernel calculation for finite transgression identifies invariant characters modulo
 ambient restrictions with the range of finite transgression.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 

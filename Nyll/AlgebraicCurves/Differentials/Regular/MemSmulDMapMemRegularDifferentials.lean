@@ -239,7 +239,8 @@ theorem
       · apply u.ne_zero
         rw [hu]
         apply Subtype.ext
-        simp [hg0]
+        change e⁻¹ * (π * g) = (0 : F')
+        rw [hg0, mul_zero, mul_zero]
       · rw [w.ord_mul (inv_ne_zero he0) (mul_ne_zero hπ0 hg0), w.ord_mul hπ0 hg0, Place.ord_inv,
           horde, hπ1] at h0
         have := (w.mem_iff_ord_nonneg hg0).mp hgmem

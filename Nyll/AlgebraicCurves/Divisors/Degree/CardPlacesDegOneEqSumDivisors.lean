@@ -10,16 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
-import Mathlib.FieldTheory.Finite.GaloisField
-import Mathlib.RingTheory.Discriminant
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Divisors.ConstantExtension.ConstantExtension
+public import Mathlib.FieldTheory.Finite.GaloisField
+public import Mathlib.RingTheory.Discriminant
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Card places deg one eq sum divisors of constant Field Extension
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

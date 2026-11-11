@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.Algebra.Ring.Pi
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Scheme
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.Algebra.Ring.Pi
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
 
 /-!
 # Smooth Proper Curve exists sections injective comp fst eq comp of tensor Product alg Equiv
 pi
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

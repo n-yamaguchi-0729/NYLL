@@ -11,12 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.IsPrincipalIdealRing
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.IsPrincipalIdealRing
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists of valuation Subring of finite Dimensional
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

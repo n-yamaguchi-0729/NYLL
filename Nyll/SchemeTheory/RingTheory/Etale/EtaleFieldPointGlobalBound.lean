@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointBound
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Topology.Compactness.Compact
+module
+
+public import Nyll.SchemeTheory.RingTheory.Etale.EtaleFieldPointBound
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Topology.Compactness.Compact
 
 
 /-!
@@ -27,6 +29,8 @@ giving one finite bound chosen before the target field and base map.
 No nontriviality assumption on either algebra is required. Comparison with
 scheme-theoretic geometric fibers remains a separate step toward 09Z0.
 -/
+
+@[expose] public section
 
 noncomputable section
 

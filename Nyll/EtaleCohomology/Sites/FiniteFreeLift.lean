@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantPresentation
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Sites.ModuleRestriction
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantPresentation
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.ModuleRestriction
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Local lifting of finite free constant sheaves
@@ -22,6 +24,8 @@ Finite intersections of image sieves lift a finite free basis along a sheaf
 epimorphism. The resulting maps on sections define actual sheaf morphisms
 on an étale cover, and the comparison with inverse image is tracked explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

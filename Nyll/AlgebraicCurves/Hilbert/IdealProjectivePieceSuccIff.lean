@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleIdealProjectiveRankAtStalkEqIff
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleIdealProjectiveRankAtStalkEqIff
 
 /-!
 # exists ideal forall projective piece succ iff
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

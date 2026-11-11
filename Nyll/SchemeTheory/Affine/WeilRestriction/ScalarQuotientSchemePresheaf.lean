@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
-import Mathlib.AlgebraicGeometry.Group.Affine
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.CategoryTheory.Yoneda
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientPresheaf
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.CategoryTheory.Yoneda
 
 /-!
 # The scalar quotient presheaf on all schemes
@@ -22,6 +24,8 @@ The universe lift only prepares this genuine group presheaf for ordinary
 sheafification on the big site. Local bijectivity and sheaf representation
 are proved separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

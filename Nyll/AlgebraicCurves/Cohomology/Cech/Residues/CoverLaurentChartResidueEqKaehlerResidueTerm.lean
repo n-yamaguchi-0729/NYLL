@@ -10,21 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LaurentSeries
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Trace.Defs
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.PowerSeries.Derivative
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.Tactic.NormNum
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
-import Nyll.AlgebraicCurves.Differentials.Residues.Basic
-import Nyll.AlgebraicCurves.Foundations.Polynomial.RingHomLaurentSeriesDerivativeEq
-import Nyll.AlgebraicCurves.Places.Differentials.AlgebraMapCoeffNegOneEqLocalResidueMulDifferentialCoeffD
+module
+
+public import Mathlib.RingTheory.LaurentSeries
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Trace.Defs
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.PowerSeries.Derivative
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.Tactic.NormNum
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
+public import Nyll.AlgebraicCurves.Differentials.Residues.Basic
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.RingHomLaurentSeriesDerivativeEq
+public import Nyll.AlgebraicCurves.Places.Differentials.AlgebraMapCoeffNegOneEqLocalResidueMulDifferentialCoeffD
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
 
 /-!
 # Cover Laurent Chart residue eq kaehler Residue Term
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -32,8 +37,6 @@ namespace AlgebraicCurves.Cohomology.Cech.Proofs.Cover_LaurentChart_residue_eq_k
 open _root_.IsDedekindDomain.HeightOneSpectrum in
 attribute [-instance]
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

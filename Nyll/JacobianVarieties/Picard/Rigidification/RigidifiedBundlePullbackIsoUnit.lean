@@ -10,20 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsoPullbackIso
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackLiftFstCompFstSndCompFstProdStr
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseIffIso
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsoPullbackIso
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.PullbackLiftFstCompFstSndCompFstProdStr
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseIffIso
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 Triviality of a rigidified line bundle lifts across a small extension
 when its two unit faces are locally trivial over the base.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

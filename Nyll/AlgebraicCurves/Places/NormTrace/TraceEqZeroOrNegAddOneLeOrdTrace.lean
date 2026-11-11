@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Mathlib.RingTheory.Trace.Quotient
-import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Mathlib.RingTheory.Trace.Quotient
+public import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place trace eq zero or neg add one le ord trace of forall le ord
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -36,20 +41,7 @@ section Generic
 variable {K F : Type*} [Field K] [Field F] [Algebra K F]
 
 theorem ord_nonneg_of_mem (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f :=
-  by
-  rcases eq_or_ne f 0 with rfl | hf0
-  · rw [v.ord_zero]
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨n, u, hu⟩ :=
-    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
-  have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
-    have h := congrArg (Subtype.val) hu
-    push_cast at h
-    rw [zpow_natCast]
-    exact h
-  rw [hcoe, v.ord_unit_smul_zpow u hπ (n : ℤ)]
-  exact Int.natCast_nonneg n
+  _root_.AlgebraicCurve.Place.ord_nonneg_of_mem v hf
 
 theorem mem_of_ord_nonneg (v : Place K F) {f : F} (hf : f ≠ 0) (h : 0 ≤ v.ord f) :
     f ∈ v.toValuationSubring := by

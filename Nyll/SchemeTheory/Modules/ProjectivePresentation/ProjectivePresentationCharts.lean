@@ -22,13 +22,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
 
 /-!
 # Scheme Modules Proj Presentation mem preimage basic Open iff
 -/
+
+@[expose] public section
 
 section ProjPresentation_mem_preimage_basicOpen_iff
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.StalkSpreadingOpen
-import Nyll.SchemeTheory.Etale.UniversalHomeomorphismSections
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Nyll.SchemeTheory.Descent.StalkSpreadingOpen
+public import Nyll.SchemeTheory.Etale.UniversalHomeomorphismSections
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # The generic-point map from full restriction to nonempty opens
@@ -25,6 +27,8 @@ the original fundamental-group surjection and full faithfulness.
 The nonempty-open fullness premise is an ordinary intermediate implication;
 it is supplied by the geometric-unibranch theorem in the original endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

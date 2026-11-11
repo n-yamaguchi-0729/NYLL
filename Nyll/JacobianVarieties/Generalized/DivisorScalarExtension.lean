@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
-import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
+public import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
 
 /-! # The full modulus of the actual scalar-extended relative divisor -/
+
+@[expose] public section
 
 noncomputable section
 

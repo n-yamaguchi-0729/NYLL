@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaCardinality
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaCardinality
 
 /-!
 # From generic composita to integral etale base changes
@@ -15,6 +17,8 @@ by the smaller etale algebra and the old function field: that image is a
 finite-dimensional domain over the old field, hence a field and therefore
 contains the whole new fraction field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

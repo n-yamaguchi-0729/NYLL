@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionDescent
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.Etale.FiniteStrictLocalSchemeGeometricSection
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionDescent
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.Etale.FiniteStrictLocalSchemeGeometricSection
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Spreading finite sections with prescribed geometric lifts
@@ -27,6 +29,8 @@ field, preserves every specified field-valued map.
 This is the simultaneous neighborhood construction in Stacks Project 59.55.2.
 The étale target need not be affine or surjective over the original finite scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

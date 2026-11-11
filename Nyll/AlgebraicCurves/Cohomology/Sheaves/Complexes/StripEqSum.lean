@@ -10,20 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.LinearAlgebra.DirectSum.Finsupp
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenLinearEquivTensorSections
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.EqAppLEMapEq
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.LinearAlgebra.DirectSum.Finsupp
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenLinearEquivTensorSections
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.EqAppLEMapEq
 
 /-!
 # OModule Presheaf exists strip eq sum of forall is Affine Open of slice of bijective
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

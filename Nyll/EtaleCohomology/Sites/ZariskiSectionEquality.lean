@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ZariskiRestriction
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.Types.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Types.Basic
 
 /-!
 # Equality of étale sections on an actual Zariski neighborhood
@@ -19,6 +21,8 @@ An étale neighborhood covers its open image. The small-site sheaf separation
 axiom therefore turns equality on that neighborhood into equality on its
 actual open image in the original scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

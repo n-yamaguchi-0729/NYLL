@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Basic
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.All
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.GroupTheory.All
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.All
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.All
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.All
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.UnramifiedCriterion
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Basic
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.All
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.GroupTheory.All
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.All
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.All
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.All
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.UnramifiedCriterion
 
 /-!
 # Abhyankar lemma: Geometry

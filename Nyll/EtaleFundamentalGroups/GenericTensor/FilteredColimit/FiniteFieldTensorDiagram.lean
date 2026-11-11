@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteSubfieldTensor
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Filtered.Connected
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteSubfieldTensor
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Filtered.Connected
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Constant extensions as colimits with their native tensor actions
@@ -24,6 +26,8 @@ Their inclusions form a filtered diagram with colimit `R ⊗[k] L` for an
 algebraic extension `L/k`. We use the existing finite-coefficient tensor lift
 and flat tensor injectivity, retaining the native tensor actions at each point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingFractionSections
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.UnitFractionEvaluation
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Mathlib.Algebra.Ring.Int.Defs
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.Pi
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingFractionSections
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.UnitFractionEvaluation
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteUnitClosedImmersionProj
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Mathlib.Algebra.Ring.Int.Defs
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.Pi
 
 /-!
 # The actual twisting-sheaf Čech complex and homogeneous fractions
@@ -26,6 +28,8 @@ commutes with the alternating restriction differential, including its
 original integer signs. Both the section maps and the structural base
 action are the ones already supplied by the actual twisting sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,7 +47,8 @@ attribute [local instance] GradedModule.acg GradedModule.modR GradedModule.Frac.
   GradedModule.sec.instAddCommGroup GradedModule.sec.instModule
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-private def restrictionAlongEquality
+/-- Restriction along equal opens identifies the original section modules. -/
+def restrictionAlongEquality
     {R : Type u} [CommRing R] {X : Scheme.{u}} {f : X ⟶ Spec (.of R)}
     (F : OModulePresheaf f) {U V : X.Opens} (h : U = V) :
     F.obj U ≃ₗ[R] F.obj V where

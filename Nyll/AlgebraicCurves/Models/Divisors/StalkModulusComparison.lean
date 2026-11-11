@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Full modulus congruence in the actual curve stalk
@@ -16,6 +18,8 @@ actual scheme stalk and the valuation ring. This equivalence identifies every
 maximal-ideal power, hence also the truncated rings and their unit congruences.
 No reduced-support replacement or unspecified local-ring comparison is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

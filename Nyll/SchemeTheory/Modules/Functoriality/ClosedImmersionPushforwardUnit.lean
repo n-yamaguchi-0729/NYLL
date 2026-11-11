@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionCounit
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Iso
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionCounit
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Iso
 
 /-!
 # The original quotient unit on modules supported on a closed subscheme
@@ -20,6 +22,8 @@ For a morphism that is invertible after pullback, the same naturality
 constructs a comparison from its original pullback quotient to its
 target, retaining the original morphism after composition with the unit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

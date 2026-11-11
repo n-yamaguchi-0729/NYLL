@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Pairwise intersections in the principal cover of a punctured spectrum
@@ -16,6 +18,8 @@ with the spectrum of the localization away from the product of the two
 generators.  The two projections and the associated pullback functors on
 finite etale covers are exposed explicitly for later descent constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

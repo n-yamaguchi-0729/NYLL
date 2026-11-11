@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.FieldTheory.Perfect
-import Mathlib.FieldTheory.Minpoly.Field
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.RingHom.LocallyStandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
-import Mathlib.Tactic.Algebraize
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.FieldTheory.Minpoly.Field
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.RingHom.LocallyStandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
+public import Mathlib.Tactic.Algebraize
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring
 
 /-!
 # Smooth Relative Dimension
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry RingHom
 

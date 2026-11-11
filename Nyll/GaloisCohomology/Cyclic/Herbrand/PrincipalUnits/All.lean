@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.QuotientReps
-import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.QuotientTower
+module
+
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.QuotientReps
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.QuotientTower
 
 /-! # Principal-unit quotient representatives and towers -/

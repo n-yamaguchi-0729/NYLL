@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Basic
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Iso
-import Mathlib.Data.FunLike.Basic
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Convert
-import Mathlib.Topology.Category.TopCat.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Basic
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.Basic.FunLike.Basic
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Convert
+public import Mathlib.Topology.Category.TopCat.Basic
 
 /-!
 # Is Affine Open eq of app LE eq and exists app LE eq of ring Hom
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

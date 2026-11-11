@@ -4,12 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteQuotientRealization
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ChartFunctionFieldCompatibility
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentMappedFiniteQuotientInertia
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EssentiallyEtaleBaseChangeInertiaContraction
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteQuotientNormalizationInertiaCoprimality
-import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteQuotientRealization
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ChartFunctionFieldCompatibility
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentMappedFiniteQuotientInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EssentiallyEtaleBaseChangeInertiaContraction
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteQuotientNormalizationInertiaCoprimality
+public import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaCardinality
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Finite-quotient inertia along a normal-crossings component
@@ -18,6 +27,8 @@ This file transports the local normal-crossings calculation at a selected
 horizontal component to the inertia image in an explicitly prescribed finite
 quotient of the global complement's etale fundamental group.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -178,12 +189,12 @@ private theorem finiteEtaleGaloisCoverIdealInertia_coprime_iff_image_coprime
     (xi : Spec (.of Omega) ⟶ T)
     (Y : FiniteEtale T) (hY : IsGalois Y)
     (y : (FiniteEtale.fiber xi).obj Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
     let K := T.functionField
     let L := Y.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Y
     ∀ (V B : Type u) [CommRing V] [CommRing B]
       [Algebra V K] [IsFractionRing V K]
@@ -192,11 +203,11 @@ private theorem finiteEtaleGaloisCoverIdealInertia_coprime_iff_image_coprime
       [IsScalarTower V K L] [IsScalarTower V B L]
       [IsIntegrallyClosed V] [IsIntegralClosure B V L]
       (Q : Ideal B) (p : ℕ),
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction V K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
           Y hY V B
       let qY :=
@@ -206,22 +217,8 @@ private theorem finiteEtaleGaloisCoverIdealInertia_coprime_iff_image_coprime
         (Subgroup.comap qY (Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ))
       Nat.Coprime (Nat.card H) p ↔
         Nat.Coprime (Nat.card (Q.toAddSubgroup.inertia Gal(L/K))) p := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let K := T.functionField
-  let L := Y.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro V B _ _ _ _ _ _ _ _ _ _ _ _ Q p
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction V K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
-      Y hY V B
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 V B _ _ _ _ _ _ _ _ _ _ _ _ Q p
+    finiteKL fieldAction coverAction qY H
   rw [EtaleFundamentalGroups.Kummer.natCard_finiteEtaleGaloisCoverIdealInertia_image_eq
     xi Y hY y V B Q]
 
@@ -240,12 +237,12 @@ private theorem pullbackComponent_integralClosureInertia_coprime
       transportedPointOfCompIso
         (FiniteEtale.pullback c) (FiniteEtale.pullbackFiberIso c xi) W w)
     (hY : CategoryTheory.PreGaloisCategory.IsGalois Y) (hi : Mono i) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
     let K := T.functionField
     let L := Y.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Y
     ∀ (V B : Type u) [CommRing V] [CommRing B]
       [Algebra V K] [IsFractionRing V K]
@@ -254,11 +251,11 @@ private theorem pullbackComponent_integralClosureInertia_coprime
       [IsScalarTower V K L] [IsScalarTower V B L]
       [IsIntegrallyClosed V] [IsIntegralClosure B V L]
       (Q : Ideal B) (p : ℕ),
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction V K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
           Y hY V B
       let qY :=
@@ -271,26 +268,8 @@ private theorem pullbackComponent_integralClosureInertia_coprime
             (FiniteEtale.galoisPullbackComponentQuotientMonoidHom
               c xi W hW w Y i y hiy hY hi))) p →
         Nat.Coprime (Nat.card (Q.toAddSubgroup.inertia Gal(L/K))) p := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let K := T.functionField
-  let L := Y.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro V B _ _ _ _ _ _ _ _ _ _ _ _ Q p hMapped
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction V K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
-      Y hY V B
-  let qY :=
-    EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom xi Y hY y
-  let H := Subgroup.map qY
-    (Subgroup.comap qY (Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ))
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 V B _ _ _ _ _ _ _ _ _ _ _ _ Q p
+    finiteKL fieldAction coverAction qY H hMapped
   have hH : Nat.Coprime (Nat.card H) p :=
     (FiniteEtale.galoisPullbackComponentQuotientMonoidHom_map_coprime_iff
       c xi W hW w Y i y hiy hY hi H p).mp hMapped
@@ -312,9 +291,8 @@ private theorem transportedComponentBranchData
     let p0 := (D.1.componentBranchPrimeAt Z hZ z hz).asIdeal
     let pA : Ideal A := transportStalkIdeal hfu.symm p0
     pA.IsPrime ∧ pA.height = 1 ∧ CharZero (A ⧸ pA) := by
-  dsimp only
+  intro A p0 pA
   let x := D.1.subschemeι z
-  let p0 := (D.1.componentBranchPrimeAt Z hZ z hz).asIdeal
   let : p0.IsPrime :=
     (D.1.componentBranchPrimeAt Z hZ z hz).isPrime
   have hp0height : p0.height = 1 :=
@@ -394,26 +372,26 @@ private def ComponentNormalizationInertiaCoprimeResult
     {U : Scheme.{u}} (f : U ⟶ X) (u : U)
     (hfu : f u = D.1.subschemeι z) : Prop :=
   let K := (D.1.supportComplement : Scheme).functionField
-  letI : IsIntegral D.1.supportComplement :=
+  let : IsIntegral D.1.supportComplement :=
     isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-  letI : IsIntegral W.left :=
+  let : IsIntegral W.left :=
     EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
   let L := W.left.functionField
-  letI : Algebra K L :=
+  let : Algebra K L :=
     EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : FiniteDimensional K L :=
+  let : FiniteDimensional K L :=
     EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  letI : _root_.IsGalois K L :=
+  let : _root_.IsGalois K L :=
     EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
   let A := X.presheaf.stalk (f u)
-  letI : Algebra A K := D.1.supportComplementFunctionFieldAlgebra (f u)
-  letI : IsFractionRing A K :=
+  let : Algebra A K := D.1.supportComplementFunctionFieldAlgebra (f u)
+  let : IsFractionRing A K :=
     D.1.supportComplementFunctionField_isFractionRing (f u)
-  letI : Algebra A L :=
+  let : Algebra A L :=
     ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+  let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
   let B := integralClosure A L
-  letI : IsFractionRing B L :=
+  let : IsFractionRing B L :=
     IsIntegralClosure.isFractionRing_of_finite_extension A K L B
   let branchPrime : Ideal (X.presheaf.stalk (f u)) :=
     hfu.symm ▸ (D.1.componentBranchPrimeAt Z hZ z hz).asIdeal
@@ -444,74 +422,39 @@ private theorem exists_componentNormalizationInertia_coprime_of_mappedChart
       D.1.HasMappedQuotientIdealInertiaCoprime f u qU p) :
     ComponentNormalizationInertiaCoprimeResult
       D Z hZ z hz p W hW f u hfu := by
-  dsimp only [ComponentNormalizationInertiaCoprimeResult]
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
+  delta ComponentNormalizationInertiaCoprimeResult
+  intro F integralComplement integralW L algebraFL finiteFL galoisFL A algebraAF fractionAF
+    algebraAL towerAFL B fractionBL branchPrime
   let : IsNormalIntegral D.1.supportComplement := inferInstance
   let : IsLocallyNoetherian D.1.supportComplement := inferInstance
   let : IsGalois W := hW
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
   let : Etale f := hf
   let : qU.IsPrime := hqUPrime
-  dsimp only [Scheme.IdealSheafData.HasMappedQuotientIdealInertiaCoprime]
-    at hlocal
-  obtain ⟨P, hqUP, hPheight, r, t, branch, hVdomain, hVregular,
-      hVnormal, hboundary, hLocalNC, hbranch, hqVeq,
-      hlocalizedCharZero, hpV, hcovers⟩ := hlocal
-  let AU := U.presheaf.stalk u
-  let A := X.presheaf.stalk (f u)
+  delta Scheme.IdealSheafData.HasMappedQuotientIdealInertiaCoprime at hlocal
+  extract_lets -descend -merge AU at hlocal
+  obtain ⟨P, hqUP, hPheight, hchart⟩ := hlocal
+  extract_lets -descend -merge V qV at hchart
+  obtain ⟨r, t, branch, hVdomain, hVregular, hVnormal, hboundary, hLocalNC,
+    hbranch, hqVeq, hlocalizedCharZero, hpV, hcovers⟩ := hchart
+  extract_lets -descend -merge domainV regularV normalV boundary hboundary_ne Away
+    domainAway normalAway c at hcovers
   let : IsIntegrallyClosed A :=
     IsNormalIntegral.stalk_isIntegrallyClosed (f u)
-  let V := Localization.AtPrime P.asIdeal
-  let qV := qU.map (algebraMap AU V)
-  let : IsDomain V := hVdomain
-  let : IsRegularRing V := hVregular
-  let : IsIntegrallyClosed V := hVnormal
   let : qV.IsPrime :=
     Ideal.isPrime_map_of_isLocalizationAtPrime P.asIdeal hqUP.le
-  let boundary := boundaryProduct t r
-  have hboundary_ne : boundary ≠ 0 :=
-    EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
-      hLocalNC
-  let Away := Localization.Away boundary
-  let : IsDomain Away :=
-    IsLocalization.Away.isDomain Away hboundary_ne
-  let : IsIntegrallyClosed Away :=
-    isIntegrallyClosed_of_isLocalization Away (Submonoid.powers boundary)
-      (Submonoid.powers_le.mpr
-        (mem_nonZeroDivisors_iff_ne_zero.mpr hboundary_ne))
-  let c := Scheme.IdealSheafData.boundaryAwayToSupportComplement
-    D.1 f u P t hboundary
   have hc : DenseRange c :=
     Scheme.IdealSheafData.boundaryAwayToSupportComplement_denseRange
       D.1 f u P t hboundary_ne hboundary hVdomain
-  let s := genericPoint (Spec (.of Away))
-  let Omega := AlgebraicClosure ((Spec (.of Away)).residueField s)
-  let xiLocal : Spec (.of Omega) ⟶ Spec (.of Away) :=
-    Spec.map (CommRingCat.ofHom
-      (algebraMap ((Spec (.of Away)).residueField s) Omega)) ≫
-      (Spec (.of Away)).fromSpecResidueField s
-  let wLocal : (FiniteEtale.fiber (xiLocal ≫ c)).obj W :=
-    Classical.choice
-      (nonempty_fiber_of_isConnected
-        (FiniteEtale.fiber (xiLocal ≫ c)) W)
-  obtain ⟨Y, i, y, hiy, hY, hi, hQmapped⟩ := hcovers W hW
-  let : IsGalois Y := hY
+  have hcomponent := hcovers W hW
+  extract_lets -descend -merge s Omega xiLocal wLocal at hcomponent
+  obtain ⟨Y, i, y, hiy, hY, hi, hQmapped⟩ := hcomponent
+  extract_lets -descend -merge galoisY integralY KC M algebraKCM algebraVKC algebraVM
+    towerVKCM fractionVKC finiteKCM galoisKCM BLocal fractionBLocalM
+    integralClosureAction normalizationAction at hQmapped
   let : Mono i := hi
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let F := (D.1.supportComplement : Scheme).functionField
-  let KC := (Spec (.of Away)).functionField
-  let L := W.left.functionField
-  let M := Y.left.functionField
   let g := FiniteEtale.pullbackComponentToOriginal c W Y i
   let hg := FiniteEtale.pullbackComponentToOriginal_denseRange c hc W Y i
   let : Algebra F KC := c.functionFieldAlgebraOfDenseRange hc
-  let : Algebra F L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : Algebra KC M :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Y
   let : Algebra L M := g.functionFieldAlgebraOfDenseRange hg
   let : Algebra F M :=
     ((algebraMap KC M).comp (algebraMap F KC)).toAlgebra
@@ -523,41 +466,18 @@ private theorem exists_componentNormalizationInertia_coprime_of_mappedChart
   let : Algebra A V := f.stalkPrimeLocalizationAlgebra u P.asIdeal
   let : SMul A V := (inferInstance : Algebra A V).toSMul
   let : IsScalarTower A AU V := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra V KC :=
-    EtaleFundamentalGroups.localizationAwaySpecFunctionFieldAlgebra
-      boundary hboundary_ne
-  let : IsFractionRing V KC :=
-    EtaleFundamentalGroups.localizationAwaySpecFunctionField_isFractionRing
-      boundary hboundary_ne
   let : Algebra A KC :=
     ((algebraMap V KC).comp (algebraMap A V)).toAlgebra
   let : IsScalarTower A V KC := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra A F := D.1.supportComplementFunctionFieldAlgebra (f u)
-  let : IsFractionRing A F :=
-    D.1.supportComplementFunctionField_isFractionRing (f u)
   let : IsScalarTower A F KC := IsScalarTower.of_algebraMap_eq'
     (Scheme.IdealSheafData.boundaryAway_functionFieldMap_comp_ambientStalk
       D.1 f u P t hboundary_ne hboundary).symm
-  let : Algebra A L :=
-    ((algebraMap F L).comp (algebraMap A F)).toAlgebra
-  let : IsScalarTower A F L := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra V M :=
-    ((algebraMap KC M).comp (algebraMap V KC)).toAlgebra
-  let : IsScalarTower V KC M := IsScalarTower.of_algebraMap_eq' rfl
   let : Algebra A M :=
     ((algebraMap V M).comp (algebraMap A V)).toAlgebra
   let : IsScalarTower A V M := IsScalarTower.of_algebraMap_eq' rfl
   let : IsScalarTower A KC M := IsScalarTower.to₁₃₄ A V KC M
   let : IsScalarTower A F M := IsScalarTower.to₁₂₄ A F KC M
   let : IsScalarTower A L M := IsScalarTower.to₁₃₄ A F L M
-  let : FiniteDimensional F L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois F L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
-  let : FiniteDimensional KC M :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois KC M :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale Y hY
   let : Algebra.EssFiniteType A V :=
     f.stalkPrimeLocalization_essFiniteType_of_etale u P.asIdeal
   let : Algebra.FormallyEtale A V :=
@@ -585,33 +505,15 @@ private theorem exists_componentNormalizationInertia_coprime_of_mappedChart
     rw [IsLocalization.height_map_of_disjoint
       P.asIdeal.primeCompl qU hdisjoint]
     exact hqUheight
-  let : CharZero (V ⧸ qV) := by
-    change CharZero (V ⧸ qU.map (algebraMap AU V))
-    rw [hqVeq]
-    exact hlocalizedCharZero branch hbranch
-  let BLocal := integralClosure V M
-  let : IsFractionRing BLocal M :=
-    IsIntegralClosure.isFractionRing_of_finite_extension V KC M BLocal
-  let integralClosureAction : MulSemiringAction Gal(M/KC) BLocal :=
-    IsIntegralClosure.MulSemiringAction V KC M BLocal
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ BLocal :=
-    EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
-      Y hY V BLocal
+  let : CharZero (V ⧸ qV) :=
+    hqVeq.symm ▸ hlocalizedCharZero branch hbranch
   obtain ⟨Q, hQPrime, hQover⟩ :=
     exists_integralClosurePrime_liesOver
       (V := V) (KC := KC) (M := M) qV
   let : Q.IsPrime := hQPrime
   let : Q.LiesOver qV := hQover
-  let qY :=
-    EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom
-      xiLocal Y hY y
-  let H := Subgroup.map qY
-    (Subgroup.comap qY (Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ))
-  have hMapped : Nat.Coprime
-      (Nat.card (H.map
-        (FiniteEtale.galoisPullbackComponentQuotientMonoidHom
-          c xiLocal W hW wLocal Y i y hiy hY hi))) p := by
-    exact hQmapped Q hQPrime hQover
+  have hMapped := hQmapped Q hQPrime hQover
+  extract_lets -descend -merge qY H at hMapped
   have hQcoprimeIntegralClosure : Nat.Coprime
       (Nat.card
         (letI := integralClosureAction
@@ -652,36 +554,34 @@ theorem ComponentsThroughPointAreHorizontal.exists_componentNormalizationInertia
     (hp : p.Prime) [Nonempty D.1.supportComplement]
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W) :
     let K := (D.1.supportComplement : Scheme).functionField
-    letI : IsIntegral D.1.supportComplement :=
+    let : IsIntegral D.1.supportComplement :=
       isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
     let L := W.left.functionField
-    letI : Algebra K L :=
+    let : Algebra K L :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : FiniteDimensional K L :=
+    let : FiniteDimensional K L :=
       EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
     ∃ (U : Scheme.{u}) (f : U ⟶ X) (u : U)
       (hfu : f u = D.1.subschemeι z), Etale f ∧
       let A := X.presheaf.stalk (f u)
-      letI : Algebra A K := D.1.supportComplementFunctionFieldAlgebra (f u)
-      letI : IsFractionRing A K :=
+      let : Algebra A K := D.1.supportComplementFunctionFieldAlgebra (f u)
+      let : IsFractionRing A K :=
         D.1.supportComplementFunctionField_isFractionRing (f u)
-      letI : Algebra A L :=
+      let : Algebra A L :=
         ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-      letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+      let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
       let branchPrime : Ideal (X.presheaf.stalk (f u)) :=
         hfu.symm ▸ (D.1.componentBranchPrimeAt Z hZ z hz).asIdeal
       ∃ q : Ideal B, q.IsPrime ∧ q.LiesOver branchPrime ∧
         Nat.Coprime (Nat.card (q.toAddSubgroup.inertia Gal(L/K))) p := by
-  dsimp only
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
+  intro K integralComplement integralW L algebraKL finiteKL galoisKL
   let : IsNormalIntegral D.1.supportComplement := inferInstance
   let : IsLocallyNoetherian D.1.supportComplement := inferInstance
   obtain ⟨U, f, u, hfu, hf, -, -, qU, hqUPrime, hqUheight, -,
@@ -689,8 +589,7 @@ theorem ComponentsThroughPointAreHorizontal.exists_componentNormalizationInertia
     hD.exists_etaleStrictChart_component_mappedQuotientIdealInertia_coprime
       D structural Z hZ z hz hNC p hp
   refine ⟨U, f, u, hfu, hf, ?_⟩
-  change ComponentNormalizationInertiaCoprimeResult
-    D Z hZ z hz p W hW f u hfu
+  intro A algebraAK fractionAK algebraAL towerAKL B fractionBL branchPrime
   exact exists_componentNormalizationInertia_coprime_of_mappedChart
     D structural Z hZ z hz hD p W hW U f u hfu hf qU hqUPrime
       hqUheight hqUcomap hlocal
@@ -719,44 +618,44 @@ theorem exists_finiteQuotient_componentNormalizationInertiaImage_coprime
     {G : Type v} [Finite G] [Group G] [TopologicalSpace G]
     [DiscreteTopology G]
     (phi : π₁ᵉᵗ(xi) →ₜ* G) (hphi : Function.Surjective phi) :
-    letI : Nonempty D.1.supportComplement :=
+    let : Nonempty D.1.supportComplement :=
       ⟨xi (genericPoint (Spec (.of Omega)))⟩
-    letI : IsIntegral D.1.supportComplement :=
+    let : IsIntegral D.1.supportComplement :=
       isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-    letI : IsNormalIntegral D.1.supportComplement := inferInstance
-    letI : IsLocallyNoetherian D.1.supportComplement := inferInstance
+    let : IsNormalIntegral D.1.supportComplement := inferInstance
+    let : IsLocallyNoetherian D.1.supportComplement := inferInstance
     ∃ (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)
       (w : (FiniteEtale.fiber xi).obj W) (e : (Aut W)ᵐᵒᵖ ≃* G),
-      letI : IsGalois W := hW
+      let : IsGalois W := hW
       e.toMonoidHom.comp
           (EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom
             xi W hW w) = phi.toMonoidHom ∧
         ∃ (U : Scheme.{u}) (f : U ⟶ X) (u : U)
           (hfu : f u = D.1.subschemeι z), Etale f ∧
           let K := (D.1.supportComplement : Scheme).functionField
-          letI : IsIntegral W.left :=
+          let : IsIntegral W.left :=
             EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
           let L := W.left.functionField
-          letI : Algebra K L :=
+          let : Algebra K L :=
             EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-          letI : FiniteDimensional K L :=
+          let : FiniteDimensional K L :=
             EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-          letI : _root_.IsGalois K L :=
+          let : _root_.IsGalois K L :=
             EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
           let A := X.presheaf.stalk (f u)
-          letI : IsIntegrallyClosed A :=
+          let : IsIntegrallyClosed A :=
             IsNormalIntegral.stalk_isIntegrallyClosed (f u)
-          letI : Algebra A K :=
+          let : Algebra A K :=
             D.1.supportComplementFunctionFieldAlgebra (f u)
-          letI : IsFractionRing A K :=
+          let : IsFractionRing A K :=
             D.1.supportComplementFunctionField_isFractionRing (f u)
-          letI : Algebra A L :=
+          let : Algebra A L :=
             ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-          letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+          let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
           let B := integralClosure A L
-          letI : IsFractionRing B L :=
+          let : IsFractionRing B L :=
             IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-          letI : MulSemiringAction (Aut W)ᵐᵒᵖ B :=
+          let : MulSemiringAction (Aut W)ᵐᵒᵖ B :=
             EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
               W hW A B
           let branchPrime : Ideal (X.presheaf.stalk (f u)) :=
@@ -769,41 +668,19 @@ theorem exists_finiteQuotient_componentNormalizationInertiaImage_coprime
                     xi W hW w)
                   (q.toAddSubgroup.inertia (Aut W)ᵐᵒᵖ)).map
                     phi.toMonoidHom)) p := by
-  dsimp only
-  let : Nonempty D.1.supportComplement :=
-    ⟨xi (genericPoint (Spec (.of Omega)))⟩
-  let : IsIntegral D.1.supportComplement :=
-    isIntegral_of_isOpenImmersion D.1.supportComplement.ι
-  let : IsNormalIntegral D.1.supportComplement := inferInstance
-  let : IsLocallyNoetherian D.1.supportComplement := inferInstance
+  intro nonemptyComplement integralComplement normalComplement noetherianComplement
   obtain ⟨W, hW, w, e, hcomp⟩ :=
     exists_galoisCover_quotient_mulEquiv xi G phi hphi
-  let : IsGalois W := hW
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let K := (D.1.supportComplement : Scheme).functionField
-  let L := W.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois K L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
-  obtain ⟨U, f, u, hfu, hf, q, hqPrime, hqOver, hqCoprime⟩ :=
+  refine ⟨W, hW, w, e, ?_⟩
+  intro galoisW
+  refine ⟨hcomp, ?_⟩
+  obtain ⟨U, f, u, hfu, hf, hPrime⟩ :=
     hD.exists_componentNormalizationInertia_coprime
       D structural Z hZ z hz hNC p hp W hW
-  let A := X.presheaf.stalk (f u)
-  let : IsIntegrallyClosed A :=
-    IsNormalIntegral.stalk_isIntegrallyClosed (f u)
-  let : Algebra A K := D.1.supportComplementFunctionFieldAlgebra (f u)
-  let : IsFractionRing A K :=
-    D.1.supportComplementFunctionField_isFractionRing (f u)
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
+  refine ⟨U, f, u, hfu, hf, ?_⟩
+  intro K integralW L algebraKL finiteKL galoisKL A normalA algebraAK fractionAK
+    algebraAL towerAKL B fractionBL normalizationAction branchPrime
+  obtain ⟨q, hqPrime, hqOver, hqCoprime⟩ := hPrime
   let actionIC : MulSemiringAction Gal(L/K) B :=
     IsIntegralClosure.MulSemiringAction A K L B
   have hqCoprimeIC : Nat.Coprime
@@ -813,15 +690,10 @@ theorem exists_finiteQuotient_componentNormalizationInertiaImage_coprime
     Eq.mpr (congrArg (fun n => Nat.Coprime n p)
       (integralClosure_galInertia_natCard_eq
         (V := A) (KC := K) (M := L) q)) hqCoprime
-  let : MulSemiringAction Gal(L/K) B := actionIC
-  let : MulSemiringAction (Aut W)ᵐᵒᵖ B :=
-    EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
-      W hW A B
   have himage :=
     EtaleFundamentalGroups.Kummer.finiteQuotient_normalizationInertiaImage_coprime
       W A xi w e phi.toMonoidHom hcomp q p hqCoprimeIC
-  exact ⟨W, hW, w, e, hcomp, U, f, u, hfu, hf,
-    q, hqPrime, hqOver, himage⟩
+  exact ⟨q, hqPrime, hqOver, himage⟩
 
 end ComponentsThroughPointAreHorizontal
 

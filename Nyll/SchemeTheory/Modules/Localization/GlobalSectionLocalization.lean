@@ -4,24 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Localization.SectionLocalization
-import Nyll.SchemeTheory.Modules.Localization.LocalizationRestrictionOfScalars
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Terminal
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Nyll.SchemeTheory.Modules.Localization.SectionLocalization
+public import Nyll.SchemeTheory.Modules.Localization.LocalizationRestrictionOfScalars
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.QuasiSeparated
 
 /-!
 # Localization from global sections
 
 Transports the section-localization results through the existing global coefficient modules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

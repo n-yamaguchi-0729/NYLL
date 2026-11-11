@@ -42,22 +42,16 @@ theorem connectedSpace_puncturedSpectrum_quotient_span_singleton_of_topLocalCoho
         (ModuleCat.of C C) d))
     (hTop : ¬ IsZero (EtaleFundamentalGroups.derivedLocalCohomology
       (maximalIdeal C) (ModuleCat.of C C) d)) :
-    letI : Nontrivial (C ⧸ Ideal.span {x}) :=
+    let : Nontrivial (C ⧸ Ideal.span {x}) :=
       Ideal.Quotient.nontrivial_iff.mpr <|
         ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top <|
           (maximalIdeal C).span_singleton_le_iff_mem.mpr hx
-    letI : IsLocalRing (C ⧸ Ideal.span {x}) :=
+    let : IsLocalRing (C ⧸ Ideal.span {x}) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk (Ideal.span {x}))
         Ideal.Quotient.mk_surjective
     ConnectedSpace
       (Scheme.puncturedSpectrum (C ⧸ Ideal.span {x})) := by
-  let : Nontrivial (C ⧸ Ideal.span {x}) :=
-    Ideal.Quotient.nontrivial_iff.mpr <|
-      ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top <|
-        (maximalIdeal C).span_singleton_le_iff_mem.mpr hx
-  let : IsLocalRing (C ⧸ Ideal.span {x}) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk (Ideal.span {x}))
-      Ideal.Quotient.mk_surjective
+  intro sharedOwner1 sharedOwner2
   have hdimThree : ((3 : ℕ∞) : WithBot ℕ∞) ≤ ringKrullDim C := by
     rw [hdim]
     exact_mod_cast hd

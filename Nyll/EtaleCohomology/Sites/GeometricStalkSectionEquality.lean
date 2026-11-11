@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionDescent
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.FieldTheory.SeparableClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionDescent
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.FieldTheory.SeparableClosure
 
 /-!
 # Equality of étale sheaf sections descends from the geometric stalk
@@ -26,6 +28,8 @@ at a finite stage. The coefficient sheaf is arbitrary, with no torsion or
 constructibility hypothesis. This supplies the equality part of the degree
 zero continuity argument in Stacks Project, Theorem 59.53.1.
 -/
+
+@[expose] public section
 
 noncomputable section
 

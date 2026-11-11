@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Polynomial.Eval.SMul
-import Mathlib.Algebra.Polynomial.FieldDivision
-import Mathlib.Algebra.Ring.Subring.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Order.Zorn
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Polynomial.Eval.SMul
+public import Mathlib.Algebra.Polynomial.FieldDivision
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Order.Zorn
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Valuation Subring exists ring Hom extend of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -208,9 +212,9 @@ theorem isLocalRing : IsLocalRing (IsGraph.dom Γ) := by
   rw [map_add, ha, hb, add_zero]
 
 theorem mem_maximalIdeal_iff (x : IsGraph.dom Γ) :
-    haveI := isLocalRing hmax
+    let : IsLocalRing (IsGraph.dom Γ) := isLocalRing hmax
     x ∈ IsLocalRing.maximalIdeal (IsGraph.dom Γ) ↔ (isGraph_of_maximal hmax).hom x = 0 := by
-  have := isLocalRing hmax
+  intro localRing
   rw [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, isUnit_iff hmax, not_not]
 
 end Maximal
@@ -267,7 +271,7 @@ theorem mem_dom_of_hom [IsAlgClosed Ω] (z : L) {F : Type*} [Field F]
   let ι : k →+* Ω := Ideal.Quotient.lift m hΓ.hom hker
   obtain ⟨ω, hω⟩ : ∃ ω : Ω, (h.map ι).eval ω = 0 := by
     by_cases h0 : h = 0
-    · exact ⟨0, by simp [h0]⟩
+    · exact ⟨0, by rw [h0, Polynomial.map_zero, Polynomial.eval_zero]⟩
     · have hdeg : (h.map ι).degree ≠ 0 := by
         rw [degree_map]
         exact fun hd => hhu (isUnit_iff_degree_eq_zero.mpr hd)

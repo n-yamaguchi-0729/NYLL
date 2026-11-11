@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Nakayama
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Noetherian.UniqueFactorizationDomain
-import Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Noetherian.UniqueFactorizationDomain
+public import Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Is Local Ring unique Factorization Monoid of is Principal Ideal Ring quotient
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

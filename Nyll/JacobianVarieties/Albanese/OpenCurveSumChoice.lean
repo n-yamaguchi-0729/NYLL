@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.OpenCurveDivisorSums
-import Nyll.JacobianVarieties.Albanese.CorrectedDivisorSums
+module
+
+public import Nyll.JacobianVarieties.Albanese.OpenCurveDivisorSums
+public import Nyll.JacobianVarieties.Albanese.CorrectedDivisorSums
 
 /-!
 # Chosen actual regular divisor sums
@@ -14,6 +16,8 @@ The data below are constructed from the proved divisor representer and
 descent theorem. Choosing them once for each degree gives regular family
 sum maps with the actual finite flat tuple cover available for evaluation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

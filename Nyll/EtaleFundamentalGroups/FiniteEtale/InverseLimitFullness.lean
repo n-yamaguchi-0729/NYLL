@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Fullness of the finite étale model localization
@@ -15,6 +17,8 @@ Actual finite-étale Hom descent produces a right fraction representing each
 morphism over the limiting scheme.  Fullness is a conclusion of that
 geometric theorem, with the original qcqs and affine-transition inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

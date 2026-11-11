@@ -10,33 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.CharP.Frobenius
-import Mathlib.Algebra.CharP.Lemmas
-import Mathlib.Algebra.Group.Pointwise.Set.Scalar
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Exponent
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.RingTheory.Adjoin.FG
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.CharP.Frobenius
+public import Mathlib.Algebra.CharP.Lemmas
+public import Mathlib.Algebra.Group.Pointwise.Set.Scalar
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Exponent
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.RingTheory.Adjoin.FG
+public import Mathlib.RingTheory.Adjoin.Polynomial.Transcendental
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Mathlib.Tactic.Choose
 
 /-!
 # Algebra finite integral Closure adjoin singleton of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

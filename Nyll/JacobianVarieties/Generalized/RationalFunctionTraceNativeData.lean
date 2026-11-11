@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineLine
-import Nyll.AlgebraicCurves.FunctionFields.Rational.SeparableRationalCoordinate
-import Nyll.AlgebraicCurves.Models.Charts.IsoTwoAffineLineCover
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineLine
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.SeparableRationalCoordinate
+public import Nyll.AlgebraicCurves.Models.Charts.IsoTwoAffineLineCover
 
 /-! # Native field data of the actual reciprocal trace
 
@@ -15,6 +17,8 @@ on the original scheme function fields. Its reciprocal is a rational base
 coordinate whose image is exactly the contact function. No replacement of
 the finite curve map or its Cartier family is involved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Construction
-import Nyll.AlgebraicCurves.Models.Charts.ProperSmoothPlacesAffineCoverGlued
+module
 
-import Mathlib.FieldTheory.RatFunc.IntermediateField
+public import Nyll.AlgebraicCurves.Models.Construction.Construction
+public import Nyll.AlgebraicCurves.Models.Charts.ProperSmoothPlacesAffineCoverGlued
+
+public import Mathlib.FieldTheory.RatFunc.IntermediateField
 
 /-!
 # Curve Model exists curve Model rat Func
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

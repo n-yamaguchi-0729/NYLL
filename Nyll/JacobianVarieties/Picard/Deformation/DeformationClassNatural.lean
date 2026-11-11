@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverIsFrameOnPullbackStage
+module
+
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverIsFrameOnPullbackStage
 
 /-!
 # Naturality of deformation classes under a change of coefficient algebra.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

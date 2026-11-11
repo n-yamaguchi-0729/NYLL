@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # The actual section presheaf of a native module sheaf
@@ -25,6 +27,8 @@ Native quasicoherence supplies the concrete basic-open localization
 conditions. Native quasicoherence and finite type supply finite sections
 on every affine open, hence the existing Čech coherence condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

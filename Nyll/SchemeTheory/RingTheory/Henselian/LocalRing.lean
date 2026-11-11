@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.UniqueIsIdempotentElemMkEq
 
 /-!
 # Henselian Local Ring is Local Ring of is Domain of module Finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -105,12 +109,13 @@ theorem isLocalRing_of_isDomain_of_moduleFinite
     change f₀ * f₀ = f₀
     ext I
     by_cases hI : I = M₁
-    · subst hI; simp [f₀]
-    · simp [f₀, hI]
+    · subst hI
+      simp only [Pi.mul_apply, f₀, Pi.single_eq_same, mul_one]
+    · simp only [Pi.mul_apply, f₀, Pi.single_eq_of_ne hI, zero_mul]
   have hf₀0 : f₀ ≠ 0 := by
     intro h
     have := congrFun h M₁
-    simp [f₀] at this
+    simp only [f₀, Pi.single_eq_same, Pi.zero_apply] at this
     exact M₁.isMaximal.ne_top (Ideal.Quotient.zero_eq_one_iff.mp this.symm)
   have hf₀1 : f₀ ≠ 1 := by
     intro h

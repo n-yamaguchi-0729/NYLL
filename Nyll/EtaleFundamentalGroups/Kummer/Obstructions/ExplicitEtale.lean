@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.EtaleDerivative
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.WildDerivative
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.EtaleDerivative
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.WildDerivative
 
 /-!
 # Failure of etaleness for an explicit wild Kummer equation
@@ -16,6 +18,8 @@ For the Kummer equation `X ^ n - t` on the complement of the prime parameter
 unit.  When the residue characteristic divides `n`, unit descent from the
 boundary says that the same derivative is not a unit.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

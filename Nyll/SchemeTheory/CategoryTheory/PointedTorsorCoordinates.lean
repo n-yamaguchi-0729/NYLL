@@ -5,15 +5,19 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
 /-! # Coordinates and scalar extension of categorical torsors
 
 A monoidal functor transports the actual action and its torsor isomorphism.
 A chosen point then supplies the coordinate morphism and trivialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Generalized.GeneralGeometricModulusExistence
 import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
+import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # An intrinsic Picard-one factor for an actual open-curve group map
 

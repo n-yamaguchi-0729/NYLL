@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapTranslation
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
-import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapTranslation
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneScalarExtension
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # The full geometric modulus condition over an arbitrary field
 
@@ -20,6 +24,8 @@ The condition is tested on the original principal-divisor relation after
 actual extension of the curve, divisor, and target group. It contains no
 assumed factorization, descent datum, or comparison morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

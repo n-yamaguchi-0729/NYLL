@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
-import Nyll.EtaleCohomology.Sites.EtaleSlice
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
-import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.Algebra.Category.Grp.AB
+module
+
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Sites.EtaleSlice
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # Exact etale restriction of abelian coefficients
@@ -24,6 +26,8 @@ Actual etale restriction is exact: limits are computed on the underlying
 presheaves, and its proved adjunction supplies colimit preservation.
 Restriction of the actual unit sheaf is the actual unit sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

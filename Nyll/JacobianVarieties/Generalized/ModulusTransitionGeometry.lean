@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusNormRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusTransitionTorsor
-import Nyll.JacobianVarieties.Generalized.GroupProjectionGeometry
-import Nyll.JacobianVarieties.Generalized.GroupProjectionSurjective
-import Nyll.SchemeTheory.Morphisms.GeometricallyConnectedDescent
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusNormRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusTransitionTorsor
+public import Nyll.JacobianVarieties.Generalized.GroupProjectionGeometry
+public import Nyll.JacobianVarieties.Generalized.GroupProjectionSurjective
+public import Nyll.SchemeTheory.Morphisms.GeometricallyConnectedDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Geometry of the actual changing-modulus transition -/
+
+@[expose] public section
 
 noncomputable section
 

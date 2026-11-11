@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.PrincipalDVR
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.Regular.PairPrimeDichotomy
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.PrincipalDVR
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.Regular.PairPrimeDichotomy
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
 
 /-!
 # The retained root divisor over a completed regular pair is a DVR
@@ -22,6 +24,8 @@ principal, so the Noetherian-free local criterion makes it a DVR.  Adjoining
 a positive root of that parameter and localizing at the root prime is then
 the usual pure-root DVR construction over this local base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

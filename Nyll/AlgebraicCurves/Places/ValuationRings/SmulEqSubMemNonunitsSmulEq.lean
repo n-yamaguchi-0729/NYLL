@@ -11,6 +11,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place smul eq and sub mem nonunits of smul eq of comap eq

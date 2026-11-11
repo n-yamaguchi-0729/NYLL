@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.Henselian
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.Henselian
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
 
 /-!
 # Roots of units over a Henselian local ring
@@ -16,6 +18,8 @@ field, every unit of a Henselian local ring has a root of that exponent.  This
 is the characteristic-zero-compatible unit-absorption step for tame Kummer
 presentations.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.BaseChangeCore
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.BaseChangeCore
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # A base-change polynomial model for unramified extensions
@@ -19,6 +23,8 @@ polynomial vanishing at the mapped generator, and separable reduction.
 
 No finite-dimensionality of `K'/K` is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -105,10 +111,8 @@ private theorem primitive_separable_integral_model_on_commonTop_core
                     (aTop : (L ⊔ K' : IntermediateField K Ω)) = 0 ∧
                   (FRight.map (IsLocalRing.residue
                     (LubinTate.Valuations.exponentialValuationSubring wRight))).Separable := by
+  intro wLeft wRight wTop
   classical
-  let wLeft := exponentialValuationRestrict w L
-  let wRight := exponentialValuationRestrict w K'
-  let wTop := exponentialValuationRestrict w (L ⊔ K')
   let hLeft : ∀ a : K, wLeft (algebraMap K L a) = v a :=
     exponentialValuationRestrict_extends v w hExt L
   let hRight : ∀ a : K, wRight (algebraMap K K' a) = v a :=
@@ -314,9 +318,7 @@ theorem unramifiedBaseChange_exists_commonTop_residue_generator_from_left
                    (LubinTate.Valuations.exponentialValuationSubring wTop) aTop} :
                  Set (IsLocalRing.ResidueField
                    (LubinTate.Valuations.exponentialValuationSubring wTop))) = ⊤) := by
-  let wLeft := exponentialValuationRestrict w L
-  let wRight := exponentialValuationRestrict w K'
-  let wTop := exponentialValuationRestrict w (L ⊔ K')
+  intro wLeft wRight wTop
   let hRightTop : ∀ a : K',
       wTop (algebraMap K' (L ⊔ K' : IntermediateField K Ω) a) =
         wRight a := by
@@ -365,8 +367,7 @@ theorem finiteUnramifiedExtension_commonTop_of_baseChange
     letI : FiniteDimensional K' (L ⊔ K' : IntermediateField K Ω) :=
       finiteDimensional_sup_over_right_of_left L K'
     FiniteUnramifiedExtension wRight wTop hRightTop := by
-  let wRight := exponentialValuationRestrict w K'
-  let wTop := exponentialValuationRestrict w (L ⊔ K')
+  intro wRight wTop
   let hRightTop : ∀ a : K',
       wTop (algebraMap K' (L ⊔ K' : IntermediateField K Ω) a) =
         wRight a := by

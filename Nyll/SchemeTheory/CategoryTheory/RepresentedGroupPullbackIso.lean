@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
-import Nyll.SchemeTheory.WeilRestriction.Restriction
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 
 /-! # The group dictionary for actual pullback of a represented group -/
+
+@[expose] public section
 
 noncomputable section
 

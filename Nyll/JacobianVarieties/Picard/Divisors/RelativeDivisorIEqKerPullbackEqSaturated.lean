@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataComapKerSubschemeIotaCompMapOnProdOverEqSaturated
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataFlatSubschemeInclusionComp
-import Nyll.JacobianVarieties.Picard.Divisors.RelativeDivisorIEqFlat
-import Mathlib.Util.WithWeakNamespace
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataComapKerSubschemeIotaCompMapOnProdOverEqSaturated
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataFlatSubschemeInclusionComp
+public import Nyll.JacobianVarieties.Picard.Divisors.RelativeDivisorIEqFlat
+public import Mathlib.Util.WithWeakNamespace
 
 /-!
 # The saturated closure of an effective divisor over a discrete valuation ring
 -/
 
+
+@[expose] public section
 
 section ProofImplementation
 

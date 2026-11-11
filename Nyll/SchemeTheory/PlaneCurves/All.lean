@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.ConstantExtension
-import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
-import Nyll.SchemeTheory.PlaneCurves.Dimension
-import Nyll.SchemeTheory.PlaneCurves.Geometric
-import Nyll.SchemeTheory.PlaneCurves.MonicChange
-import Nyll.SchemeTheory.PlaneCurves.MonicProjection
-import Nyll.SchemeTheory.PlaneCurves.NormalImpliesSimple
-import Nyll.SchemeTheory.PlaneCurves.NormalPoint
-import Nyll.SchemeTheory.PlaneCurves.PartialDerivatives
-import Nyll.SchemeTheory.PlaneCurves.RationalPoints
-import Nyll.SchemeTheory.PlaneCurves.SimpleImpliesNormal
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.ConstantExtension
+public import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
+public import Nyll.SchemeTheory.PlaneCurves.Dimension
+public import Nyll.SchemeTheory.PlaneCurves.Geometric
+public import Nyll.SchemeTheory.PlaneCurves.MonicChange
+public import Nyll.SchemeTheory.PlaneCurves.MonicProjection
+public import Nyll.SchemeTheory.PlaneCurves.NormalImpliesSimple
+public import Nyll.SchemeTheory.PlaneCurves.NormalPoint
+public import Nyll.SchemeTheory.PlaneCurves.PartialDerivatives
+public import Nyll.SchemeTheory.PlaneCurves.RationalPoints
+public import Nyll.SchemeTheory.PlaneCurves.SimpleImpliesNormal
 
 /-!
 # Affine plane curves

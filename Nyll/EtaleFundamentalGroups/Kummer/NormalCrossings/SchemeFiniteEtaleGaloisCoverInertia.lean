@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeSelectedBranch
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeSelectedBranch
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
 
 /-!
 # Scheme normal crossings and inertia of local Galois covers
@@ -17,6 +19,8 @@ scheme-theoretic strict-normal-crossings data.  Every categorical Galois
 finite-etale cover of the resulting boundary complement then has tame
 normalization inertia along a prime over that selected branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 

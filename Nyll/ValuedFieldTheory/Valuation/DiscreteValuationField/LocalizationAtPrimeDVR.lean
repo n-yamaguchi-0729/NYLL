@@ -10,36 +10,40 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.NeZero
-import Mathlib.Algebra.Order.Monoid.Unbundled.WithTop
-import Mathlib.Algebra.Ring.Defs
-import Mathlib.Data.List.TFAE
-import Mathlib.Data.Nat.Cast.Defs
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Ideal.Lattice
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.NeZero
+public import Mathlib.Algebra.Order.Monoid.Unbundled.WithTop
+public import Mathlib.Algebra.Ring.Defs
+public import Mathlib.Data.List.TFAE
+public import Mathlib.Data.Nat.Cast.Defs
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Ideal.Lattice
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Localization At Prime is Discrete Valuation Ring of height eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

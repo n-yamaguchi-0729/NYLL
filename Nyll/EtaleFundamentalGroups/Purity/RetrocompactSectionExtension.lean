@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.ClosedComplementStalkSection
-import Nyll.SchemeTheory.Descent.RetrocompactAffineChartStalkSpreading
-import Nyll.SchemeTheory.Etale.MaximalSectionExtension
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.ClosedComplementStalkSection
+public import Nyll.SchemeTheory.Descent.RetrocompactAffineChartStalkSpreading
+public import Nyll.SchemeTheory.Etale.MaximalSectionExtension
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Global section extension over a retrocompact dense open
@@ -18,6 +20,8 @@ actual local puncture. Connectedness of the punctured strict stalk gives
 a local section; retrocompact compatible spreading gives a neighborhood
 section. The already constructed maximum extension therefore covers X.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSectionSubmodule
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSectionSubmodule
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Finite section families on an actual open subscheme
@@ -17,6 +19,8 @@ construction produces an actual quasicoherent finite-type local submodule,
 and each specified original section has an actual lift through its inclusion.
 This is the local input for extending finite affine generators globally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Mathlib.Algebra.Module.Submodule.Equiv
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Mathlib.Algebra.Module.Submodule.Equiv
 
 /-!
 # Two Chart Cech Sections nonempty linear Equiv H0 and H1 of linear Equiv
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

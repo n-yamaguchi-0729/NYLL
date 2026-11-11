@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FreeAbelianCechAllDegrees
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.CategoryTheory.Adjunction.Additive
+module
+
+public import Nyll.EtaleCohomology.Classical.FreeAbelianCechAllDegrees
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Actual representable terms of the free Cech complex
@@ -16,6 +18,8 @@ The pointwise free Cech terms of a representable presheaf are the free
 abelian representables of the actual finite powers. This identifies their
 morphisms into a sheaf with actual sections on those powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v

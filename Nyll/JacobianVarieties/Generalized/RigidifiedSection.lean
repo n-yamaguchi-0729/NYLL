@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisor
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
-import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
+public import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
 
 /-!
 # Sections normalized along the full modulus
@@ -17,6 +19,8 @@ an isomorphism with the canonically rigidified inverse ideal of its zero divisor
 The comparison preserves the actual section and hence the actual trivialization,
 including the infinitesimal information on a nonreduced modulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -29,7 +33,8 @@ namespace AlgebraicGeometry.GeneralizedJacobian.RigidifiedLineBundle
 
 variable {X D : Scheme.{u}} {i : D ⟶ X}
 
-private theorem compatible_of_normalized_sections
+/-- An isomorphism preserving normalized sections preserves their rigidifications. -/
+theorem compatible_of_normalized_sections
     (M N : RigidifiedLineBundle i)
     (s : 𝟙_ X.Modules ⟶ M.L) (t : 𝟙_ X.Modules ⟶ N.L)
     (hs : pullbackSection i s ≫ M.trivialization.hom = 𝟙 (𝟙_ D.Modules))

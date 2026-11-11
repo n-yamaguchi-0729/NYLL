@@ -10,33 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.CategoryTheory.MorphismProperty.Basic
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Tactic.Algebraize
-import Mathlib.Tactic.WLOG
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatFinitePresentation
+module
+
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.CategoryTheory.MorphismProperty.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Tactic.Algebraize
+public import Mathlib.Tactic.WLOG
+public import Nyll.SchemeTheory.Fibers.SchemeFibreEndo
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatFinitePresentation
 
 /-!
 # flat of locally Of Finite Presentation of forall flat scheme Fibre Endo
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -51,15 +55,6 @@ open _root_.TensorProduct
 
 
 universe u
-
-local instance : IsZariskiLocalAtTarget (@Flat.{u}) :=
-  HasRingHomProperty.instIsZariskiLocalAtTarget (P := @Flat.{u}) (Q := RingHom.Flat)
-
-local instance : IsZariskiLocalAtSource (@Flat.{u}) :=
-  HasRingHomProperty.instIsZariskiLocalAtSource (P := @Flat.{u}) (Q := RingHom.Flat)
-
-local instance : MorphismProperty.RespectsIso (@Flat.{u}) :=
-  MorphismProperty.IsStableUnderBaseChange.respectsIso
 
 namespace AlgebraicGeometry
 
@@ -177,6 +172,10 @@ theorem flat_of_forall_flat_pullback_snd_fibre
     [Flat (g ≫ pY)] [LocallyOfFinitePresentation (g ≫ pY)] [LocallyOfFinitePresentation pY]
     (hfib : FibrewiseFlat g pY) :
     Flat g := by
+  have : IsZariskiLocalAtTarget (@Flat.{u}) :=
+    HasRingHomProperty.instIsZariskiLocalAtTarget (P := @Flat.{u}) (Q := RingHom.Flat)
+  have : IsZariskiLocalAtSource (@Flat.{u}) :=
+    HasRingHomProperty.instIsZariskiLocalAtSource (P := @Flat.{u}) (Q := RingHom.Flat)
   wlog hS : ∃ R, S = Spec R generalizing S X Y
   · rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @Flat) (S.affineCover.pullback₁ pY)]
     intro i
@@ -292,6 +291,9 @@ theorem _root_.AlgebraicGeometry.flat_of_locallyOfFinitePresentation_of_forall_f
     (h : X ⟶ X) (hh : h ≫ f = f)
     (hfib : ∀ s : S, Flat (schemeFibreEndo f h hh s)) :
     Flat h := by
+  have hlocal : IsZariskiLocalAtSource (@Flat.{u}) :=
+    HasRingHomProperty.instIsZariskiLocalAtSource (P := @Flat.{u}) (Q := RingHom.Flat)
+  have : MorphismProperty.RespectsIso (@Flat.{u}) := hlocal.toRespects
   have hF : Flat (h ≫ f) := by rwa [hh]
   have hL : LocallyOfFinitePresentation (h ≫ f) := by rwa [hh]
   refine flat_of_forall_flat_pullback_snd_fibre h f ?_

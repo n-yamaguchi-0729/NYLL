@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.Henselian.LocalizationComparison
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.Henselian.LocalizationComparison
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Tag coordinates starting from an arbitrary normalization prime
@@ -22,6 +24,8 @@ Thus the chosen Away factor, the input normalization prime, and the produced
 component prime are compared by constructed equivalences.  No comparison
 equivalence or ideal equality is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

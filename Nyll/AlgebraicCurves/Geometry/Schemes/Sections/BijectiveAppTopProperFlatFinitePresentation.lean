@@ -10,37 +10,41 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.Algebra.Ring.ULift
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Descent.SubalgebraStages
-import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
-import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraProperFlatPullback
-import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubalgebraCoeEqNoetherianLocalRingIsUnitIff
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopBijectiveAppTopPullbackSnd
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatNoetherian
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.Algebra.Ring.ULift
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Descent.SubalgebraStages
+public import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
+public import Nyll.SchemeTheory.Descent.FgSubalgebraProperFlatPullback
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubalgebraCoeEqNoetherianLocalRingIsUnitIff
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopBijectiveAppTopPullbackSnd
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatNoetherian
 
 /-!
 # bijective app Top of is Proper of flat of locally Of Finite Presentation of is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

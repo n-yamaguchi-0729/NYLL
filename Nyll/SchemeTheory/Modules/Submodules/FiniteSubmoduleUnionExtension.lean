@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.QuasicoherentSubmoduleOverExtension
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingUnion
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.QuasicoherentSubmoduleOverExtension
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingUnion
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Global representatives of finite submodules glued on a union
@@ -20,6 +22,8 @@ opens. The native quasicoherent extension construction then produces a
 global representative with both exact restrictions and finite type on
 the union. Global finite type is not asserted outside that union.
 -/
+
+@[expose] public section
 
 noncomputable section
 

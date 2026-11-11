@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.SetTheory.Cardinal.Basic
-import Mathlib.SetTheory.Cardinal.Order
-import Mathlib.Analysis.Complex.Cardinality
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Classification
-import Mathlib.RingTheory.Algebraic.Cardinality
-import Mathlib.RingTheory.Algebraic.Integral
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.SetTheory.Cardinal.Basic
+public import Mathlib.SetTheory.Cardinal.Order
+public import Mathlib.Analysis.Complex.Cardinality
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Classification
+public import Mathlib.RingTheory.Algebraic.Cardinality
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalSeparable
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
 
 /-!
 # Exists constant Field Descent correspondence
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

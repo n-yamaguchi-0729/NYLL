@@ -12,6 +12,7 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 
 import Nyll.AlgebraicCurves.Places.Basic
 import Nyll.AlgebraicCurves.Places.Completion
+import Nyll.AlgebraicCurves.Places.CompletionQuotientFiniteness
 import Nyll.AlgebraicCurves.Places.ConstantExtension.All
 import Nyll.AlgebraicCurves.Places.CountNormalizedFactorsSpanSingleton
 import Nyll.AlgebraicCurves.Places.Degree.All
@@ -31,3 +32,5 @@ import Nyll.AlgebraicCurves.Places.SubfieldClosureRangeUnionEqTop
 import Nyll.AlgebraicCurves.Places.Taylor.All
 import Nyll.AlgebraicCurves.Places.UniqueMemIffAdjoinSupIsAlgebraic
 import Nyll.AlgebraicCurves.Places.ValuationRings.All
+import Nyll.AlgebraicCurves.Places.ConstantPointPlace
+import Nyll.AlgebraicCurves.Places.UnramifiedNormalization

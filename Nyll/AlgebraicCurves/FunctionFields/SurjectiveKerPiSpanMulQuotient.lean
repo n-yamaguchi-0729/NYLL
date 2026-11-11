@@ -16,6 +16,7 @@ import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 import Nyll.SchemeTheory.RingTheory.Localization.IsLocalizationAtPrimeSurjectiveKerPiSpanMulQuotient
 import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.OpensRangeAlgebraMapFunctionFieldEqIInf
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Surjective and ker pi span mul quotient of finite

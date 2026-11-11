@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.ClosedPushforward
-import Nyll.EtaleCohomology.Classical.Etale
-import Nyll.EtaleCohomology.Classical.ExactSequence
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Nyll.EtaleCohomology.Sites.Localization
-import Nyll.EtaleCohomology.Sites.ExtensionByZero
-import Nyll.EtaleCohomology.Sites.OpenAdjunction
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.ClosedPushforward
+public import Nyll.EtaleCohomology.Classical.Etale
+public import Nyll.EtaleCohomology.Classical.ExactSequence
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Nyll.EtaleCohomology.Sites.Localization
+public import Nyll.EtaleCohomology.Sites.ExtensionByZero
+public import Nyll.EtaleCohomology.Sites.OpenAdjunction
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # The classical open-closed cohomology sequence
@@ -26,6 +28,8 @@ The closed term is the actual classical cohomology of `Z`, using the proved
 closed direct-image comparison. All three consecutive pairs are exact.
 No ground field, noetherian, constructibility, or torsion assumption is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

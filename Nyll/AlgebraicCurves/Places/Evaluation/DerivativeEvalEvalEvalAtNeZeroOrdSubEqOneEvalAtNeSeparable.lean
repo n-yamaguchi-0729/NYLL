@@ -10,19 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormEqSumFiberOverSeparable
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
-import Nyll.SchemeTheory.RingTheory.NormIdentities
-import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringEvalEvalEqZero
-import Mathlib.FieldTheory.RatFunc.AsPolynomial
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.BivariateGaussMinpoly
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormEqSumFiberOverSeparable
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+public import Nyll.SchemeTheory.RingTheory.NormIdentities
+public import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringEvalEvalEqZero
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 
 /-!
 # Place derivative eval Eval eval At ne zero of ord sub eq one of forall eval At ne of is
 Separable
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -530,72 +535,8 @@ theorem rf_gauss_minpoly {K F : Type*} [Field K] [Field F] [Algebra K F]
           IntermediateField.adjoin K ({z} : Set F)))).eval c
       = ((G.leadingCoeff).map (algebraMap K (IntermediateField.adjoin K ({z} : Set F)))).eval
             ⟨z, IntermediateField.mem_adjoin_simple_self K z⟩
-        * (minpoly (IntermediateField.adjoin K ({z} : Set F)) y).eval c := by
-  set zz : IntermediateField.adjoin K ({z} : Set F) :=
-    ⟨z, IntermediateField.mem_adjoin_simple_self K z⟩ with hzzdef
-  have hzzF : algebraMap (IntermediateField.adjoin K ({z} : Set F)) F zz = z := rfl
-  set φ : K[X] →+* IntermediateField.adjoin K ({z} : Set F) :=
-    (evalRingHom zz).comp (mapRingHom (algebraMap K (IntermediateField.adjoin K ({z} : Set F))))
-    with hφdef
-  have hφapply : ∀ p : K[X], φ p = aeval zz p := by
-    intro p
-    simp only [hφdef, RingHom.coe_comp, Function.comp_apply, coe_mapRingHom, coe_evalRingHom,
-      eval_map_algebraMap]
-  have hψ : ∀ p : K[X], RatFunc.algEquivOfTranscendental z hz (algebraMap K[X] (RatFunc K) p) = φ p
-    := by
-    intro p
-    rw [RatFunc.algEquivOfTranscendental_algebraMap, hφapply]
-    rfl
-  have hφinj : Function.Injective φ := by
-    intro p q hpq
-    rw [← hψ, ← hψ] at hpq
-    exact IsFractionRing.injective K[X] (RatFunc K)
-      ((RatFunc.algEquivOfTranscendental z hz).injective hpq)
-  have hGz : (G.map (mapRingHom (algebraMap K (IntermediateField.adjoin K ({z} : Set F))))).map
-      (evalRingHom zz) = G.map φ := Polynomial.map_map _ _ _
-  have hφF : (algebraMap (IntermediateField.adjoin K ({z} : Set F)) F).comp φ
-      = (evalRingHom z).comp (mapRingHom (algebraMap K F)) := by
-    refine Polynomial.ringHom_ext (fun k => ?_) ?_
-    · simp only [RingHom.comp_apply, coe_mapRingHom, coe_evalRingHom, Polynomial.map_C, eval_C]
-      rw [hφapply, aeval_C]
-      exact (IsScalarTower.algebraMap_apply K (IntermediateField.adjoin K ({z} : Set F)) F k).symm
-    · simp only [RingHom.comp_apply, coe_mapRingHom, coe_evalRingHom, Polynomial.map_X, eval_X]
-      rw [hφapply, aeval_X]
-      exact hzzF
-  have hroot : aeval y (G.map φ) = 0 := by
-    rw [aeval_def, eval₂_map, hφF, ← eval_map, ← Polynomial.map_map, map_evalRingHom_eval]
-    exact hG
-  have hdeg : G.natDegree ≠ 0 := by
-    intro h0
-    have hGC : G = C (G.coeff 0) := eq_C_of_natDegree_eq_zero h0
-    have h1 : algebraMap (IntermediateField.adjoin K ({z} : Set F)) F (φ (G.coeff 0)) = 0 := by
-      rw [← hroot, hGC, Polynomial.map_C, aeval_C, coeff_C_zero]
-    have h2 : φ (G.coeff 0) = 0 := by
-      rwa [map_eq_zero_iff _ (algebraMap (IntermediateField.adjoin K ({z} : Set F)) F).injective]
-        at h1
-    have hc : G.coeff 0 = 0 := hφinj (by rw [h2, map_zero])
-    exact hGirr.ne_zero (by rw [hGC, hc, map_zero])
-  have hprim : G.IsPrimitive := hGirr.isPrimitive hdeg
-  have hirrQ : Irreducible (G.map (algebraMap K[X] (RatFunc K))) :=
-    (hprim.irreducible_iff_irreducible_map_fraction_map (K := RatFunc K)).mp hGirr
-  have hmapψ : Polynomial.mapEquiv (RatFunc.algEquivOfTranscendental z hz).toRingEquiv
-      (G.map (algebraMap K[X] (RatFunc K))) = G.map φ := by
-    rw [mapEquiv_apply, Polynomial.map_map]
-    congr 1
-    refine RingHom.ext fun p => ?_
-    rw [RingHom.comp_apply, ← hψ p]
-    rfl
-  have hirr : Irreducible (G.map φ) := by
-    rw [← hmapψ]
-    exact (MulEquiv.irreducible_iff _).mpr hirrQ
-  have hmin := minpoly.eq_of_irreducible hirr hroot
-  have hlc : (G.map φ).leadingCoeff = φ G.leadingCoeff := leadingCoeff_map_of_injective hφinj G
-  have hlc0 : (G.map φ).leadingCoeff ≠ 0 := leadingCoeff_ne_zero.mpr hirr.ne_zero
-  have hGz_eq : G.map φ = C (φ G.leadingCoeff) * minpoly (IntermediateField.adjoin K ({z} : Set F))
-    y := by
-    rw [← hmin, ← hlc, mul_comm (G.map φ), ← mul_assoc, ← C_mul, mul_inv_cancel₀ hlc0, C_1, one_mul]
-  rw [hGz, hGz_eq, eval_mul, eval_C]
-  rfl
+        * (minpoly (IntermediateField.adjoin K ({z} : Set F)) y).eval c :=
+  _root_.Polynomial.eval_map_evalRingHom_eq_mul_minpoly_of_transcendental hz y G hGirr hG c
 
 end AlgebraicCurve.Place
 

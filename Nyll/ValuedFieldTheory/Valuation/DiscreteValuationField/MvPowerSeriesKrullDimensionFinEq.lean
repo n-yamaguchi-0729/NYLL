@@ -15,11 +15,13 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
-import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.KrullDimension.PID
-import Mathlib.RingTheory.MvPowerSeries.Inverse
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+public import Mathlib.RingTheory.MvPowerSeries.Equiv
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.KrullDimension.PID
+public import Mathlib.RingTheory.MvPowerSeries.Inverse
 
 /-!
 # Dimension of formal power series over a discrete valuation ring
@@ -27,6 +29,8 @@ import Mathlib.RingTheory.MvPowerSeries.Inverse
 Separating one variable gives an ordinary power series ring, whose dimension is one
 more than that of its coefficient ring. Induction starts at the discrete valuation ring.
 -/
+
+@[expose] public section
 
 open AlgebraicCurves.Foundations.Algebra.Proofs.Module_depth_quotSMulTop_succ_eq
 

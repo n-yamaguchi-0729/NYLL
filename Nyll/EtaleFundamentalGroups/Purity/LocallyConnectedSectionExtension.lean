@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.GenericComplementStalkSection
-import Nyll.SchemeTheory.Descent.AffineChartCompatibleStalkSpreading
-import Nyll.SchemeTheory.Etale.MaximalSectionExtension
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.GenericComplementStalkSection
+public import Nyll.SchemeTheory.Descent.AffineChartCompatibleStalkSpreading
+public import Nyll.SchemeTheory.Etale.MaximalSectionExtension
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.Topology.Sober
 
 /-!+# Finite etale section extension from punctured strict-stalk connectedness
 
@@ -22,6 +24,8 @@ The strict stalks are the existing geometric stalks for arbitrary chosen
 separably closed residue geometric points. No reducedness, normality,
 Noetherianity of rings, or retrocompactness of the dense open is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

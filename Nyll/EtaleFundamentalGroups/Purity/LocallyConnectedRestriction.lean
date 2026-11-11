@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.LocallyConnectedSectionExtension
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
-import Nyll.SchemeTheory.WeilRestriction.Sheaf
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.Topology.NoetherianSpace
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.LocallyConnectedSectionExtension
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
+public import Nyll.SchemeTheory.WeilRestriction.Sheaf
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.Topology.NoetherianSpace
 
 /-!
 # Dense-open full faithfulness from local connectedness
@@ -26,6 +28,8 @@ the resulting special case; no locally Noetherian ring hypothesis occurs.
 These are the original Stacks Project statements 0BQG and 0BQF. The dense
 open need not be retrocompact, and the base need not be normal or reduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothSchemeChart
-import Nyll.SchemeTheory.LocalGeometry.AffineAwayChart
-import Nyll.SchemeTheory.Normalization.SourceIso
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothSchemeChart
+public import Nyll.SchemeTheory.LocalGeometry.AffineAwayChart
+public import Nyll.SchemeTheory.Normalization.SourceIso
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # The original generic cover on an actual root chart
@@ -34,6 +36,8 @@ calculation on a global generic cover. No cover comparison, normalization
 comparison, or extension property is assumed in the public statement.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -42,7 +46,8 @@ namespace EtaleFundamentalGroups
 
 universe u
 
-private def affineAwayMap
+/-- An algebra map induces a morphism between the corresponding principal open spectra. -/
+def affineAwayMap
     (A D : Type u) [CommRing A] [CommRing D] [Algebra A D] (r : A) :
     Spec (.of (Localization.Away (algebraMap A D r))) ⟶
       Spec (.of (Localization.Away r)) :=

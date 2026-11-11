@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
-import Nyll.SchemeTheory.WeilRestriction.Restriction
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
 
 /-! # Actual pullback of represented group homomorphisms -/
+
+@[expose] public section
 
 noncomputable section
 

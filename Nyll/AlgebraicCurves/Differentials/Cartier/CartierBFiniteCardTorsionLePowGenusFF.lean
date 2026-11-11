@@ -15,6 +15,7 @@ import Nyll.AlgebraicCurves.FunctionFields.FiniteCardTorsionLePowFinrank
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Differentials.Basic
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 
 /-!
 # Cartier B finite and card torsion le pow genus FF

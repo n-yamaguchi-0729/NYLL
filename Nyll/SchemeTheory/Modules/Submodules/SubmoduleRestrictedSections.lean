@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.FiniteOpenSectionSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteOpenSectionSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
 
 /-!
 # Actual membership from a lifted section on an open subscheme
@@ -15,6 +17,8 @@ A lift through the restricted inclusion therefore gives an element of the
 original native section submodule. This supplies the containment step after
 the geometric kernel extension has recovered its prescribed local module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

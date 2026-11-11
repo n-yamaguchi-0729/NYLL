@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantPullback
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Hypercover.Zero
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantPullback
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Locally constant étale sheaves of modules
@@ -25,6 +27,8 @@ noetherianity, or finiteness of the coefficient ring is imposed here.
 See the definitions and inverse-image property in
 https://stacks.math.columbia.edu/tag/09Y8 .
 -/
+
+@[expose] public section
 
 noncomputable section
 

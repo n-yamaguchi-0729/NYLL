@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Trace.Homotopy
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.Algebra.Homology.DerivedCategory.Linear
-import Mathlib.CategoryTheory.Linear.Basic
-import Mathlib.CategoryTheory.Linear.LinearFunctor
+module
+
+public import Nyll.EtaleCohomology.Trace.Homotopy
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import Mathlib.CategoryTheory.Linear.Basic
+public import Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-!
 # Trace of a perfect object in the actual derived category
@@ -27,6 +29,8 @@ that an étale cohomology complex is perfect; that requires its own geometric
 finiteness and Tor-dimension arguments.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u v w
@@ -38,7 +42,9 @@ namespace EtaleCohomology
 variable (R : Type u) [CommRing R]
 variable [HasDerivedCategory.{w} (ModuleCat.{v} R)]
 
-private def projectiveDerivedHomEquiv
+/-- Localization induces a linear equivalence on morphisms from a bounded-above
+complex of projective modules. -/
+def projectiveDerivedHomEquiv
     (C : CochainComplex (ModuleCat.{v} R) ℤ) (b : ℤ) [C.IsStrictlyLE b]
     [∀ i : ℤ, Module.Projective R (C.X i)]
     (D : HomotopyCategory (ModuleCat.{v} R) (.up ℤ)) :

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameEvaluation
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugateMap
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteCanonicalRootsAction
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameEquivariance
-import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameEvaluation
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertiaConjugateMap
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteCanonicalRootsAction
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameEquivariance
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # Equivariance of original finite-field tame characters
@@ -18,6 +20,8 @@ import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 Proves that the canonical finite-field tame character intertwines decomposition-group
 conjugation with the roots action of the original normalization residue morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

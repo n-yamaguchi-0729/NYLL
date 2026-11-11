@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
-import Nyll.AlgebraicCurves.Divisors.Degree.FormalTranslationDivisorBound
-import Nyll.AlgebraicCurves.Divisors.Degree.PowerSeriesPoleOperations
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
+public import Nyll.AlgebraicCurves.Divisors.Degree.FormalTranslationDivisorBound
+public import Nyll.AlgebraicCurves.Divisors.Degree.PowerSeriesPoleOperations
 
 /-! # Pole bounds on the actual generic formal diagonal
 
@@ -14,6 +16,8 @@ Finite tensors and localization fractions, with the actual inverse-series
 recurrence, supply a linear pole bound for every evaluated local function.
 No growth estimate or local-ring evaluation is assumed as extra data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

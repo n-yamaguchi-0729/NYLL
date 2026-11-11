@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Submodule
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.LinearMap
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.LinearMap
 
 /-!
 # Localization of the actual kernel map in a commutative square
@@ -23,13 +25,16 @@ construction in Stacks, Tag 01PE. It adds no kernel-comparison premise and
 does not yet assert a sheaf-extension or relative approximation theorem.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u v₁ v₂ v₃ v₄
 
 namespace LinearMap
 
-private theorem mapsTo_ker_of_comp_eq
+/-- A commuting square of linear maps sends the first horizontal kernel into the second. -/
+theorem mapsTo_ker_of_comp_eq
     {R : Type u} [CommRing R]
     {M : Type v₁} [AddCommGroup M] [Module R M]
     {M' : Type v₂} [AddCommGroup M'] [Module R M']

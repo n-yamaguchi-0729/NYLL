@@ -10,29 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.CategoryTheory.Category.Basic
-import Mathlib.CategoryTheory.Iso
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormPullbackIsoTensorPow
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerIsomorphisms
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Mathlib.CategoryTheory.Category.Basic
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormPullbackIsoTensorPow
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerIsomorphisms
 
 /-!
 # Scheme Modules exists is Invertible norm Module pullback pullback iso pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -121,11 +126,9 @@ theorem exists_isInvertible_normModule_pullback_pullback_iso_pullback
   obtain ⟨e1⟩ := AlgebraicGeometry.Scheme.Modules.nonempty_normModule_pullback_iso_tensorPow π d hd
     (hM.pullback q)
   obtain ⟨e2⟩ := AlgebraicGeometry.Scheme.Modules.nonempty_pullback_tensorPow_iso q M d
-  have hpow : ∀ n : ℕ, Scheme.Modules.IsInvertible (M.tensorPow n) := fun n => by
-    induction n with
-    | zero => exact Scheme.Modules.isInvertible_unit _
-    | succ n ih => exact ih.tensor hM
-  exact ⟨M.tensorPow d, hpow d, ⟨e1 ≪≫ e2.symm⟩⟩
+  exact ⟨M.tensorPow d,
+    _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorPow hM d,
+    ⟨e1 ≪≫ e2.symm⟩⟩
 end AlgebraicGeometry.Scheme.Modules
 end ProofImplementation
 

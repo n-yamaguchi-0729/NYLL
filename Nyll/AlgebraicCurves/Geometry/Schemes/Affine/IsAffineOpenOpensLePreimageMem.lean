@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.IsAffineOpenLeInfMemFinset
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.IsAffineOpenLeInfMemFinset
 
 /-!
 # exists is Affine Open opens le preimage forall mem of forall finset
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

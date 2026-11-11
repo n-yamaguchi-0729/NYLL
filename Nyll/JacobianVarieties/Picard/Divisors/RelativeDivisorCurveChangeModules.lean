@@ -10,29 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Data.List.FinRange
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackFoldrTwistIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealModuleTensorInvModuleIso
-import Nyll.SchemeTheory.CategoryTheory.MonoidalCategoryIsoTensorIsoTensorUnit
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
+public import Mathlib.Util.WithWeakNamespace
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Data.List.FinRange
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackFoldrTwistIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealModuleTensorInvModuleIso
+public import Nyll.SchemeTheory.CategoryTheory.MonoidalCategoryIsoTensorIsoTensorUnit
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 /-!
 # Pullback of point-divisor modules along a closed curve immersion
 
@@ -40,6 +42,8 @@ The graph squares identify the pulled-back point ideal. Express each ideal
 module and inverse ideal module as the corresponding one-term tensor expression,
 then apply the existing pullback comparison for invertible ideal twists.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -221,12 +225,15 @@ theorem nonempty_curveChange_ofPoint_modules_iso_of_isInvertible
     (i : C ⟶ X) [IsClosedImmersion i] (hi : i ≫ x = c)
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (d : T ⟶ C) (hd : d ≫ c = t)
     (hC : (RelEffCartierDiv.ofPoint c d hd).I.IsInvertible)
-    (hX : (RelEffCartierDiv.ofPoint x (d ≫ i) (by rw [Category.assoc, hi, hd])).I.IsInvertible) :
+    (hX : (RelEffCartierDiv.ofPoint (g := t) x (d ≫ i)
+      (by rw [Category.assoc, hi, hd])).I.IsInvertible) :
     Nonempty ((Scheme.Modules.pullback (curveChange i hi t)).obj
-        (RelEffCartierDiv.ofPoint x (d ≫ i) (by rw [Category.assoc, hi, hd])).lineBundle ≅
+        (RelEffCartierDiv.ofPoint (g := t) x (d ≫ i)
+          (by rw [Category.assoc, hi, hd])).lineBundle ≅
       (RelEffCartierDiv.ofPoint c d hd).lineBundle) ∧
     Nonempty ((Scheme.Modules.pullback (curveChange i hi t)).obj
-        (RelEffCartierDiv.ofPoint x (d ≫ i) (by rw [Category.assoc, hi, hd])).idealModule ≅
+        (RelEffCartierDiv.ofPoint (g := t) x (d ≫ i)
+          (by rw [Category.assoc, hi, hd])).idealModule ≅
       (RelEffCartierDiv.ofPoint c d hd).idealModule) := by
   classical
   set Φ := curveChange i hi t with hΦ

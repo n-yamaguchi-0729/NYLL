@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Henselian
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Valuation Subring henselian Local Ring of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

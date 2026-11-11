@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Topology.Sober
 
 /-!+# The stalk puncture at a generic point of an open complement
 
@@ -17,6 +19,8 @@ open subscheme, the pullback of the open to the actual stalk spectrum is
 exactly the puncture. This supplies the local identification used in the
 Noetherian induction of Stacks 0BQF. No ring Noetherianity is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

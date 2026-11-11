@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.UnitFactor.StrictHenselianLocalization
+module
+
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.UnitFactor.StrictHenselianLocalization
 
 /-!
 # Triviality of the retained unit factor over a strict-Henselian radical
@@ -16,6 +18,8 @@ the unit factor itself is already the base.  Tensoring this bijection first
 with a higher radical and then with its generic fibre preserves the canonical
 left factor bijectively.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,18 +54,13 @@ theorem higherRadicalUnitFactorData_radical_algebraMap_bijective
     let e := ramificationIndex base target
     let Rₑ := AdjoinRoot (X ^ e - C varpi)
     let Cq := AdjoinRoot factor.q
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     Function.Bijective (algebraMap Rₑ Cq) := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Cq := AdjoinRoot factor.q
+  intro e Rₑ Cq sharedOwner3
   let : IsDomain Cq :=
     higherRadicalUnitFactorData_isDomain
       base target varpi pi N beta factor
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
   obtain ⟨q, ⟨eqv⟩⟩ :=
     higherRadicalUnitFactorData_exists_strictHenselian_localizationAlgEquiv
       base target varpi pi N beta factor
@@ -114,21 +113,12 @@ theorem higherRadicalUnitFactorData_higher_includeLeft_bijective
     let Cq := AdjoinRoot factor.q
     let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
       adjoinRootPowerMapOfDvd hdiv varpi
-    letI : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     Function.Bijective
       (Algebra.TensorProduct.includeLeft : Rₙ →ₐ[Rₙ] Rₙ ⊗[Rₑ] Cq) := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
-    adjoinRootPowerMapOfDvd hdiv varpi
-  let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
+  intro e Rₑ Rₙ Cq higherRootMap sharedOwner1 sharedOwner2
   apply Algebra.TensorProduct.includeLeft_bijective
   exact higherRadicalUnitFactorData_radical_algebraMap_bijective
     base target varpi pi N beta factor
@@ -159,23 +149,13 @@ theorem higherRadicalUnitFactorData_higherGenericFiber_includeLeft_bijective
     let Cq := AdjoinRoot factor.q
     let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
       adjoinRootPowerMapOfDvd hdiv varpi
-    letI : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     let Tₙ := Rₙ ⊗[Rₑ] Cq
     Function.Bijective
       (Algebra.TensorProduct.includeLeft : Froot →ₐ[Rₙ] Froot ⊗[Rₙ] Tₙ) := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
-    adjoinRootPowerMapOfDvd hdiv varpi
-  let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
-  let Tₙ := Rₙ ⊗[Rₑ] Cq
+  intro e Rₑ Rₙ Cq higherRootMap sharedOwner1 sharedOwner2 Tₙ
   apply Algebra.TensorProduct.includeLeft_bijective
   exact higherRadicalUnitFactorData_higher_includeLeft_bijective
     base target varpi pi N hdiv beta factor

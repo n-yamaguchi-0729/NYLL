@@ -4,9 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceBoundaryCompletedFiber
-import Nyll.JacobianVarieties.Generalized.HenselianRegularBlockTrace
-import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceBoundaryCompletedFiber
+public import Nyll.JacobianVarieties.Generalized.HenselianRegularBlockTrace
+public import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # Actual power-series graph blocks of the original finite curve map
 
@@ -18,6 +24,8 @@ places outside the source open, retaining both projection formulas. No
 integral graph, selected partition, or matching of completed factors is
 input data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

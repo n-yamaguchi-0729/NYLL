@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
-import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
-import Nyll.AlgebraicCurves.Geometry.Descent.SheafifiedLocalRepresentation
-import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
+public import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
+public import Nyll.AlgebraicCurves.Geometry.Descent.SheafifiedLocalRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The existing unpointed Jacobian represents the actual ordinary Picard sheaf
@@ -18,6 +20,8 @@ Sheafification is an isomorphism on its represented finite-extension slice and
 preserves the canonical action. The same carrier therefore represents the
 actual fppf sheaf, with no claim that the unpointed raw presheaf is a sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

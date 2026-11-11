@@ -10,39 +10,43 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Etale.Kaehler
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.RingHom.FinitePresentation
-import Mathlib.RingTheory.RingHom.FiniteType
-import Mathlib.RingTheory.RingHom.Locally
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Push
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.RingHom.FinitePresentation
+public import Mathlib.RingTheory.RingHom.FiniteType
+public import Mathlib.RingTheory.RingHom.Locally
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Push
 
 /-!
 # exists alg Hom retraction stalk and ker le span sup sq of section of smooth Of Relative
 Dimension one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -60,9 +64,9 @@ open TensorProduct
 variable {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
 
 theorem kerCotangentToTensor_bijective [Algebra.FormallySmooth R A] (e : A →ₐ[R] R) :
-    letI : Algebra A R := e.toRingHom.toAlgebra
+    let : Algebra A R := e.toRingHom.toAlgebra
     Function.Bijective (KaehlerDifferential.kerCotangentToTensor R A R) := by
-  let : Algebra A R := e.toRingHom.toAlgebra
+  intro sharedOwner1
   have : IsScalarTower R A R := IsScalarTower.of_algebraMap_eq' e.comp_algebraMap.symm
   have hsurj : Function.Surjective (algebraMap A R) := fun r => ⟨algebraMap R A r, e.commutes r⟩
   have : Subsingleton Ω[R⁄R] :=
@@ -78,9 +82,9 @@ theorem kerCotangentToTensor_bijective [Algebra.FormallySmooth R A] (e : A →�
 theorem free_tensor_kaehlerDifferential [IsLocalRing R] (e : A →ₐ[R] R)
     (hloc : RingHom.Locally (fun f => RingHom.IsStandardSmoothOfRelativeDimension 1 f) (algebraMap
       R A)) :
-    letI : Algebra A R := e.toRingHom.toAlgebra
+    let : Algebra A R := e.toRingHom.toAlgebra
     Module.Free R (R ⊗[A] Ω[A⁄R]) ∧ Module.finrank R (R ⊗[A] Ω[A⁄R]) = 1 := by
-  let : Algebra A R := e.toRingHom.toAlgebra
+  intro sharedOwner1
   have : IsScalarTower R A R := IsScalarTower.of_algebraMap_eq' e.comp_algebraMap.symm
   obtain ⟨s, hs, hP⟩ := hloc
   have hex : ∃ t ∈ s, IsUnit (e t) := by
@@ -229,13 +233,13 @@ theorem Lpi {R : Type u} [CommRing R] [IsLocalRing R] {X : Scheme.{u}} (c : X �
 theorem LS' {R : Type u} [CommRing R] [IsLocalRing R] {X : Scheme.{u}} (c : X ⟶ Spec
   (CommRingCat.of R))
     [SmoothOfRelativeDimension 1 c] (V : X.Opens) (hV : IsAffineOpen V) (y : V) :
-    letI := stalkAlgebra c (y : X)
+    let := stalkAlgebra c (y : X)
     Algebra.FormallySmooth R (X.presheaf.stalk (y : X)) ∧
     Module.Finite (X.presheaf.stalk (y : X)) Ω[(X.presheaf.stalk (y : X))⁄R] ∧
     ∀ π : X.presheaf.stalk (y : X) →ₐ[R] R,
       Module.Free R (RingHom.ker π.toRingHom).Cotangent ∧ Module.finrank R (RingHom.ker
         π.toRingHom).Cotangent = 1 := by
-  let instRS := stalkAlgebra c (y : X)
+  intro instRS
   have hxV : (y : X) ∈ V := y.2
   let algA : Algebra R Γ(X, V) := ((Scheme.ΓSpecIso (.of R)).inv ≫ c.appLE ⊤ V le_top).hom.toAlgebra
   have : Smooth c := SmoothOfRelativeDimension.smooth 1 c

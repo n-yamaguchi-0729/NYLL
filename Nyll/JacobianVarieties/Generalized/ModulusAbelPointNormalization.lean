@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusCanonicalPointBundle
-import Nyll.JacobianVarieties.Generalized.RigidifiedNormalizedPullback
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusCanonicalPointBundle
+public import Nyll.JacobianVarieties.Generalized.RigidifiedNormalizedPullback
 
 /-! # The actual Abel rigidification is the canonical normalized point rigidification -/
+
+@[expose] public section
 
 noncomputable section
 

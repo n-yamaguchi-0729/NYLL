@@ -4,38 +4,40 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicIntegralClosure
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Complete
-import Nyll.ValuedFieldTheory.Valuation.Henselian.CoprimeFactorLifting
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
-import Nyll.ValuedFieldTheory.Valuation.Henselian.EtaleLifting
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.All
-import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialBounds
-import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialLifting
-import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicReduction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NormedGaloisIsometry
-import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveFactorization
-import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveReduction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.RingEquiv
-import Nyll.ValuedFieldTheory.Valuation.Henselian.SimpleRootFactorization
-import Nyll.ValuedFieldTheory.Valuation.Henselian.StandardEtaleLifting
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueAlgebraicExtensions
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
+module
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.PrincipalUnitRoots
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicIntegralClosure
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Complete
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.CoprimeFactorLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.EtaleLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.All
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialBounds
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicReduction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NormedGaloisIsometry
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveReduction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.RingEquiv
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.SimpleRootFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.StandardEtaleLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueAlgebraicExtensions
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.ArtinSchreier
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrincipalUnitRoots
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
-import Nyll.ValuedFieldTheory.Valuation.Henselian.FiniteResidueRootLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.ArtinSchreier
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.ResiduePowerRootsOfUnity
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.FiniteResidueRootLifting
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.ResiduePowerRootsOfUnity
 
 /-!
 # Henselian valuation theory

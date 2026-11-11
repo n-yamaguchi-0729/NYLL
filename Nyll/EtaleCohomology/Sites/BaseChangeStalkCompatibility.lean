@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.BaseChangeStalkProducts
-import Nyll.EtaleCohomology.Sites.DirectImageBaseChange
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComposition
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Nyll.EtaleCohomology.Sites.BaseChangeStalkProducts
+public import Nyll.EtaleCohomology.Sites.DirectImageBaseChange
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComposition
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # The canonical base-change map on geometric stalk components
@@ -18,6 +20,8 @@ germs to successive geometric lifts. Its mate therefore commutes with the
 inverse-image units on stalks. On a scheme pullback these component equations
 give the canonical product diagram, without any finiteness assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -14,14 +14,16 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Authors of the generalization: Naganori Yamaguchi (assisted by OpenAI Codex).
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
-import Nyll.AlgebraicCurves.Geometry.Schemes.Quotients.QuotientFiniteLocallyFreeEquivalenceRelation
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectivePullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Quotients.QuotientFiniteLocallyFreeEquivalenceRelation
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectivePullback
 
 /-!
 # Effective descent along finite faithfully flat covers
@@ -31,6 +33,8 @@ covering action supplies its descended scheme. Finite presentation is sufficient
 no separability of the covering algebra is needed. In particular this applies to
 arbitrary finite field extensions, including purely inseparable ones.
 -/
+
+@[expose] public section
 
 universe u
 

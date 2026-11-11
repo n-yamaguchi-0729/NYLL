@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1Comparison
-import Nyll.EtaleCohomology.Classical.Adic
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1Comparison
+public import Nyll.EtaleCohomology.Classical.Adic
 
 /-!
 # Classical ℓ-adic H¹ and compatible finite characters
@@ -15,6 +17,8 @@ identifies classical ℓ-adic H¹, defined on the ordinary étale site, with
 compatible systems of continuous characters into `ℤ/ℓ^(n+1)ℤ`. Neither
 pro-étale cohomology nor an unproved limit comparison is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -68,12 +72,14 @@ def compatibleFiniteCharacters (ℓ : ℕ) :
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-private def levelEquiv (n : ℕ) :
+/-- Finite-level H¹ identifies with its continuous cyclic characters. -/
+def levelEquiv (n : ℕ) :
     finiteLevelCohomology X ℓ n 1 ≃+ finiteLevelCharacters ξ ℓ n := by
   have : NeZero ℓ := ⟨(Fact.out : ℓ.Prime).ne_zero⟩
   exact finiteH1CharacterEquiv (ellPowerCoefficients ℓ n) ξ
 
-private theorem levelEquiv_reduction (n : ℕ)
+/-- The finite-level character equivalence commutes with coefficient reduction. -/
+theorem levelEquiv_reduction (n : ℕ)
     (a : finiteLevelCohomology X ℓ (n + 1) 1) :
     finiteLevelCharacterReduction ξ ℓ n (levelEquiv ξ ℓ (n + 1) a) =
       levelEquiv ξ ℓ n (finiteLevelReduction X ℓ n 1 a) := by

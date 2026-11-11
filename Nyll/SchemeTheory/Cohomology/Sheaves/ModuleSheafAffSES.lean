@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Modules.Exactness
-import Nyll.SchemeTheory.Modules.LocalMorphisms
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Modules.Exactness
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Actual affine short exact sequences from native module sheaves
@@ -24,6 +26,8 @@ kernel. Surjectivity on affine opens comes from the actual tilde--Gamma
 comparison for quasicoherent epimorphisms. Surjectivity on nonaffine opens
 is not an input or a conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

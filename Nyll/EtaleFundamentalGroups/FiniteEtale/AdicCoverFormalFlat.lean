@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineProjective
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineProjective
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Flat affine sections and actual layers of the formal cover module
@@ -29,6 +31,8 @@ the original first-stage cover sections. The comparison retains the actual
 native sheaf projection and sends each pure tensor to its actual scalar
 multiple before taking the original associated-graded quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -62,7 +66,8 @@ theorem formalAffineSectionModule_flat (U : X.affineOpens) :
     completedAffineSections_flat_original f I V U
   exact Module.Flat.of_linearEquiv (formalAffineCompletionEquiv f I V U)
 
-private def formalAffineFirstReductionEquiv (U : X.affineOpens) :
+/-- The first reduction of the formal section module is the original first-stage module. -/
+def formalAffineFirstReductionEquiv (U : X.affineOpens) :
     ((formalAffineSectionModule f I V U) ⧸
       ((sectionsIdeal f I U) •
         (⊤ : Submodule Γ(X, U) (formalAffineSectionModule f I V U)))) ≃ₗ[Γ(X, U)]

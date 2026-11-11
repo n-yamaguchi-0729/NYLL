@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeEtale
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeEtale
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.RegularLocalRing.Polynomial
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
 # Smooth algebras over regular rings
@@ -27,6 +29,8 @@ No regularity assertion about the fibres or the source is an additional
 hypothesis.
 https://stacks.math.columbia.edu/tag/0C0Q
 -/
+
+@[expose] public section
 
 noncomputable section
 

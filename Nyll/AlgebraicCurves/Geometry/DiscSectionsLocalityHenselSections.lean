@@ -658,11 +658,11 @@ theorem
     obtain ⟨hrat, hint, hval⟩ := hP
     let χP : ↥S →+* ↥A :=
       { toFun := fun g => ⟨P.evalAt (g : F), (hint g).2⟩
-        map_one' := Subtype.ext (by simp [Place.evalAt_one])
+        map_one' := Subtype.ext P.evalAt_one
         map_mul' := fun g₁ g₂ => Subtype.ext (by
           change P.evalAt ((g₁ * g₂ : ↥S) : F) = P.evalAt (g₁ : F) * P.evalAt (g₂ : F)
           rw [Subring.coe_mul, P.evalAt_mul hrat (hint g₁).1 (hint g₂).1])
-        map_zero' := Subtype.ext (by change P.evalAt ((0 : ↥S) : F) = 0; simp [evalAt_zero])
+        map_zero' := Subtype.ext (evalAt_zero P)
         map_add' := fun g₁ g₂ => Subtype.ext (by
           change P.evalAt ((g₁ + g₂ : ↥S) : F) = P.evalAt (g₁ : F) + P.evalAt (g₂ : F)
           rw [Subring.coe_add, evalAt_add P hrat (hint g₁).1 (hint g₂).1]) }

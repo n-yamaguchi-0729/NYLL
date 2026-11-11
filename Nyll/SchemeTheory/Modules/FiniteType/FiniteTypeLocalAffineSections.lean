@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Nyll.SchemeTheory.Modules.Localization.AffineSectionLocalizationFinite
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Nyll.SchemeTheory.Modules.Localization.AffineSectionLocalizationFinite
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Affine-section finiteness from finite type only on the given open
@@ -19,6 +21,8 @@ open subscheme. Its affine-section finiteness is transported back with the
 existing section and coefficient isomorphisms, then supplied to canonical
 localization. Global finite type of the ambient module is never required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

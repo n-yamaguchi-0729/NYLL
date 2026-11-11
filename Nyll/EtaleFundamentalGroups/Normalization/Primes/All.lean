@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalizationGoingUp
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.GoingUp
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.MinimalLocalizationDomain
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.SchemePoint
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalizationGoingUp
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.GoingUp
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.MinimalLocalizationDomain
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.SchemePoint
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Normalization.Primes. -/

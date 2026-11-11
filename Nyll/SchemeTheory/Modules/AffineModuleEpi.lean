@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.EpiMono
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # Affine epimorphisms from actual global sections
@@ -17,6 +19,8 @@ over a spectrum implies that the actual sheaf morphism is epimorphic.
 The proof uses the native tilde--Gamma counit and preservation of
 epimorphisms by tilde; the source need not be quasicoherent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

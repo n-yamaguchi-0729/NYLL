@@ -10,16 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Nat.Prime.Factorial
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Regular.Polar
-import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsDNeZero
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.Places.Differentials.OrdNonnegDEqSmulD
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.Data.Nat.Prime.Factorial
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Regular.Polar
+public import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsDNeZero
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdNonnegDEqSmulD
 
 /-!
 # Place exists eq smul d Coord and uniformizer pow mul mem of cartier Laws
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -52,20 +57,7 @@ namespace CartierLocalPen12
 variable {K F : Type*} [Field K] [Field F] [Algebra K F]
 
 theorem ord_nonneg_of_mem (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f :=
-  by
-  rcases eq_or_ne f 0 with rfl | hf0
-  · rw [v.ord_zero]
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨n, u, hu⟩ :=
-    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
-  have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
-    have h := congrArg (Subtype.val) hu
-    push_cast at h
-    rw [zpow_natCast]
-    exact h
-  rw [hcoe, v.ord_unit_smul_zpow u hπ (n : ℤ)]
-  exact Int.natCast_nonneg n
+  _root_.AlgebraicCurve.Place.ord_nonneg_of_mem v hf
 
 theorem mem_of_ord_nonneg (v : Place K F) {f : F} (h : 0 ≤ v.ord f) : f ∈ v.toValuationSubring := by
   rcases eq_or_ne f 0 with rfl | hf
@@ -102,10 +94,10 @@ theorem mem_maximalIdeal_of_ord_pos (v : Place K F) {f : F} (h : 0 < v.ord f) (h
   omega
 
 theorem ord_algebraMap (v : Place K F) {c : K} (hc : c ≠ 0) : v.ord (algebraMap K F c) = 0 := by
-  let u : v.toValuationSubringˣ :=
-    ⟨⟨algebraMap K F c, v.algebraMap_mem' c⟩, ⟨algebraMap K F c⁻¹, v.algebraMap_mem' c⁻¹⟩,
-      Subtype.ext (by simp [hc]), Subtype.ext (by simp [hc])⟩
-  exact v.ord_coe_unit u
+  have hu : IsUnit (algebraMap K v.toValuationSubring c) :=
+    (isUnit_iff_ne_zero.mpr hc).map (algebraMap K v.toValuationSubring)
+  rw [← v.coe_algebraMap, ← hu.unit_spec]
+  exact v.ord_coe_unit hu.unit
 
 theorem coeff_unique {t : F} (hDt : D K F t ≠ 0) {g g' : F} (h : g • D K F t = g' • D K F t) : g =
   g' := by

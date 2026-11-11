@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierEisenstein
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.FieldTheory.Minpoly.Field
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.AdjoinRoot
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierEisenstein
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.FieldTheory.Minpoly.Field
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.AdjoinRoot
 
 /-!
 # The integral minimal polynomial of the actual reciprocal root
@@ -21,6 +23,8 @@ integral minimal polynomial with that polynomial, without any valuation
 or Henselianity assumption.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

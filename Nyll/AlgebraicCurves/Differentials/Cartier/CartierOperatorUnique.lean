@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
-import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
-import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCPowSmulDEqZero
-import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCPowPredSmulD
-import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
+public import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
+public import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCPowSmulDEqZero
+public import Nyll.AlgebraicCurves.Differentials.Cartier.KwCartCPowPredSmulD
+public import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 
 /-!
 # Cartier Operator exists Unique
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

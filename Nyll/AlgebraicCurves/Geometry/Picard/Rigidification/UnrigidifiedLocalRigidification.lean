@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
-import Mathlib.AlgebraicGeometry.Cover.Open
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+public import Mathlib.AlgebraicGeometry.Cover.Open
 
 /-!
 # Actual local rigidifications of an unrigidified family
@@ -15,6 +17,8 @@ Zariski cover of the parameter scheme. On that cover the original pulled bundle
 itself is pointed-rigidifiable; no global frame or globally trivial base twist
 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

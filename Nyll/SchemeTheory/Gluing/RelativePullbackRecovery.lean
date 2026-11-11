@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RelativePullback
-import Nyll.SchemeTheory.Gluing.CoefficientCover
-import Nyll.SchemeTheory.Gluing.OverCover
+module
+
+public import Nyll.SchemeTheory.Gluing.RelativePullback
+public import Nyll.SchemeTheory.Gluing.CoefficientCover
+public import Nyll.SchemeTheory.Gluing.OverCover
 
 /-!
 # Recovering the actual glued model after a later base change
@@ -16,6 +18,8 @@ same recovered charts and actual overlaps. Common-cover recovery therefore
 produces an isomorphism over the limit base, retaining the actual structural
 morphism rather than only an isomorphism of underlying schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

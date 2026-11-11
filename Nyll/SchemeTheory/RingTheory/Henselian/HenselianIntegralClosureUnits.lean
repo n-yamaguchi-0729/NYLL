@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Units of integral elements over a Henselian base
@@ -20,6 +22,8 @@ maximal-ideal contraction lies over the maximal ideal of the base.
 Consequently a base-linear field automorphism preserves whether an integral
 element is a unit in the specified normal local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

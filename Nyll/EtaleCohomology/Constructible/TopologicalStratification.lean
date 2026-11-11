@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.Finset.Insert
-import Mathlib.Data.Fintype.Basic
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Data.Fintype.Prod
-import Mathlib.Data.Set.Disjoint
-import Mathlib.Topology.Basic
-import Mathlib.Topology.Constructible
-import Mathlib.Topology.LocallyClosed
+module
+
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.Data.Fintype.Basic
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Data.Fintype.Prod
+public import Mathlib.Data.Set.Disjoint
+public import Mathlib.Topology.Basic
+public import Mathlib.Topology.Constructible
+public import Mathlib.Topology.LocallyClosed
 
 /-!
 # Finite locally closed refinements of constructible sets
@@ -26,6 +28,8 @@ constructible sets. An open retrocompact set and its complement give the
 initial partition; intersections refine two partitions simultaneously.
 No compactness, separation, or noetherian hypothesis is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

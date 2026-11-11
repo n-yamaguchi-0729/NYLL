@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.SplitScalarQuotient
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
-import Nyll.SchemeTheory.GroupSchemes.SplitTorusSchemePoints
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.SplitScalarQuotient
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorusSchemePoints
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
 
 /-! # The actual scalar-unit quotient of a split algebra is a split torus -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -17,6 +21,8 @@ universe u
 
 open AlgebraicGeometry CategoryTheory Opposite Module
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace SchemeTheory.Affine.ScalarQuotientSchemePresheaf
 

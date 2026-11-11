@@ -210,8 +210,8 @@ theorem ne_zero_of_hind {g : ℕ} (y : F') (s : Fin (g + 1) → F')
   intro h
   have := hind (Pi.single i 1) (by
     rw [Finset.sum_eq_single i]
-    · simp [h]
-    · intro j _ hj; simp [Pi.single_eq_of_ne hj]
+    · rw [h, mul_zero]
+    · intro j _ hj; rw [Pi.single_eq_of_ne hj, map_zero, zero_mul]
     · intro hi; exact absurd (Finset.mem_univ i) hi)
   have := congrFun this i
   simp only [Pi.single_eq_same, Pi.zero_apply, one_ne_zero] at this
@@ -268,14 +268,14 @@ theorem _root_.AlgebraicCurve.genusFF_le_of_normalForm
       subst hi
       rw [hr0, one_mul, Finset.sum_eq_single j]
       · rw [Pi.single_eq_same, map_one, one_mul]
-      · intro l _ hl; simp [Pi.single_eq_of_ne hl]
+      · intro l _ hl; rw [Pi.single_eq_of_ne hl, map_zero, zero_mul]
       · intro hj; exact absurd (Finset.mem_univ j) hj
     by_cases hj : j = 0
     · refine ⟨Pi.single i 1, ?_⟩
       subst hj
       rw [hr0, mul_one, Finset.sum_eq_single i]
       · rw [Pi.single_eq_same, map_one, one_mul]
-      · intro l _ hl; simp [Pi.single_eq_of_ne hl]
+      · intro l _ hl; rw [Pi.single_eq_of_ne hl, map_zero, zero_mul]
       · intro hi'; exact absurd (Finset.mem_univ i) hi'
     refine ⟨fun k => rev (d i + d j - d k) (c i j k), ?_⟩
     have hexp : r i * r j = w ^ (d i + d j) * (s i * s j) := by

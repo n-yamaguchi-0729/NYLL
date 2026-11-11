@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
 
 /-!
 # RROpens exists injective forall forall mem ell sub sum single add eq ell of lt card
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -62,13 +66,6 @@ private theorem sub_single_le (G : Divisor K F) (Q : Place K F) :
   have : (0 : ℤ) ≤ Finsupp.single Q 1 v := by
     rw [Finsupp.single_apply]; split_ifs <;> norm_num
   linarith
-
-private theorem degree_sub_sum_single (D : Divisor K F) {S T : Finset (Place K F)}
-    (hS : ∀ v ∈ S, v.deg = 1) (hTS : T ⊆ S) :
-    Divisor.degree (D - ∑ v ∈ T, Finsupp.single v 1) = Divisor.degree D - T.card := by
-  have h : ∀ v ∈ T, Divisor.degree (Finsupp.single v (1 : ℤ)) = 1 := fun v hv => by
-    rw [Divisor.degree_single, hS v (hTS hv), Nat.cast_one, mul_one]
-  rw [map_sub, map_sum, Finset.sum_congr rfl h, Finset.sum_const, nsmul_eq_mul, mul_one]
 
 private theorem degree_sub_sum_univ_single [IsCurveOver K F] (D : Divisor K F) {m : ℕ} (v : Fin m
   → Place K F)

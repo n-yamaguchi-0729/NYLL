@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
 
 /-!
 # The reduced Cartier divisor in a Kummer cover
@@ -22,6 +24,8 @@ These are algebraic inputs to the local ramification analysis of Stacks
 Project, Example 58.31.4 (tag `0EYF`):
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 
@@ -49,8 +53,9 @@ theorem adjoinRoot_root_mem_nonZeroDivisors
       x ^ n * z = (x ^ (n - 1) * x) * z := by
         rw [← pow_succ, Nat.sub_add_cancel (Nat.succ_le_iff.mpr hn)]
       _ = 0 := by rw [mul_assoc, hz, mul_zero]
-  apply hfregular.right_eq_zero_of_smul
-  rw [Algebra.smul_def, AdjoinRoot.algebraMap_eq, ← adjoinRoot_root_pow]
+  apply hfregular
+  change f • z = f • (0 : B)
+  rw [smul_zero, Algebra.smul_def, AdjoinRoot.algebraMap_eq, ← adjoinRoot_root_pow]
   exact hpow
 
 /-- The root ideal is radical precisely when the original principal

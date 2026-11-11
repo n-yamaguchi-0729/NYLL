@@ -31,6 +31,7 @@ import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionFi
 import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.NotIsAffineProper
 import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseDegEqOne
 import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfUnionEqUnivSupEqTop
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Finite-dimensional regular differentials and the function-field genus
@@ -53,8 +54,6 @@ attribute [-instance]
   AlgebraicCurve.Place.kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -137,10 +136,10 @@ open AlgebraicGeometry.Scheme.TwoAffineOpenCover in
 theorem _root_.AlgebraicCurve.finite_and_finrank_kaehlerSections_H0_eq_genusFF_of_isAlgClosed {K :
   Type u} [Field K] [IsAlgClosed K] {C : Scheme.{u}} (𝒱 : C.TwoAffineOpenCover)
     (c : C ⟶ Spec (CommRingCat.of K)) [IsIntegral C] [IsProper c] [SmoothOfRelativeDimension 1 c] :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     Module.Finite K (𝒱.kaehlerSections c).H0 ∧
       Module.finrank K (𝒱.kaehlerSections c).H0 = AlgebraicCurve.genusFF K C.functionField := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   have hcurve : IsCurveOver K C.functionField :=
     isCurveOver_of_isIntegral_of_smoothOfRelativeDimension_one c (RingEquiv.refl _) (fun _ => rfl)
   have : Algebra.EssFiniteType K C.functionField := essFiniteType_functionField c
@@ -220,8 +219,6 @@ attribute [-instance]
   AlgebraicCurve.Place.kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

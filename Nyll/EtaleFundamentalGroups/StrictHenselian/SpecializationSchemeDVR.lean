@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationDVR
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationResidueField
-import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationDVR
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationResidueField
+public import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Strict henselian DVR diagrams for geometric specializations of schemes
@@ -27,6 +29,8 @@ The comparison with a previously chosen fundamental-group specialization
 map requires its additional strict-local lifting data and the proper-fiber
 comparison; neither is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

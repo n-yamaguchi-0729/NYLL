@@ -4,36 +4,38 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.LinearPencilSums
-import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilSections
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UniqueSectionPullbackSectionClosedCover
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InterIInterSupportZeroSchemeIdealEqEmpty
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Nyll.JacobianVarieties.Albanese.LinearPencilSums
+public import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilSections
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UniqueSectionPullbackSectionClosedCover
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InterIInterSupportZeroSchemeIdealEqEmpty
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!+# Finite sums depend only on the line bundle of an effective divisor
 
@@ -42,6 +44,8 @@ transported to a common invertible module, either define an independent pencil
 or differ by a ground-field unit. In the pencil case the actual endpoint ideal
 identifies its finite-flat rank with the prescribed degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

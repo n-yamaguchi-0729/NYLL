@@ -12,12 +12,16 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
+import Nyll.AbelianVarieties.Basic
 
 /-!
-# Scheme data associated to a relative Jacobian designation
+# Scheme data associated to a relative Picard designation
 
-The data records a relative Picard designation, its group law, and a point comparison.
+`RelativePicardSchemeData` records a relative Picard designation, its group law, a point
+comparison and abelian-scheme properties. Its data do not identify this carrier as a Jacobian
+or specify a genus. The actual Jacobian and its relative-dimension theorem are supplied by
+`AlgebraicGeometry.JacobianChallenge.Jacobian` and
+`AlgebraicGeometry.JacobianChallenge.Jacobian.smoothOfRelativeDimension_genus`.
 -/
 
 noncomputable section
@@ -33,8 +37,8 @@ open GoodReductionJacobian
 variable {k : Type u} [Field k]
 
 /-- A relative Picard designation with a group law, point comparison, and abelian-scheme data. -/
-structure JacobianSchemeData (A : Type*) [AddCommGroup A]
-    {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k)) (g : ℕ)
+structure RelativePicardSchemeData (A : Type*) [AddCommGroup A]
+    {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k))
     {T : Scheme.{u}} (σ : T ⟶ Spec (CommRingCat.of k)) where
   /-- The designated relative Picard scheme. -/
   D : RelativePic0Designation k c
@@ -44,19 +48,17 @@ structure JacobianSchemeData (A : Type*) [AddCommGroup A]
   bridge : AvatarSchemeBridge A D L σ
   /-- Smoothness, properness, connected fibres, and existence of the group law. -/
   hAbel : AbelianSchemePropertyBundle k D.toBase
-  /-- An auxiliary proposition; this field alone does not assert a dimension equality. -/
-  hDim : Prop
 
 /-- Form the designated scheme data from a group law and an additive point equivalence. -/
-def JacobianSchemeData.ofCore (A : Type*) [AddCommGroup A]
-    {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k)) (g : ℕ)
+def RelativePicardSchemeData.ofCore (A : Type*) [AddCommGroup A]
+    {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k))
     {J : Scheme.{u}} (f : J ⟶ Spec (CommRingCat.of k))
     (L : RelativeGroupLaw k f)
     (pts : A ≃ SchemeHomOver (𝟙 (Spec (CommRingCat.of k))) f)
     (pts_add : ∀ x y : A, pts (x + y) = L.mul (𝟙 (Spec (CommRingCat.of k))) (pts x) (pts y))
     (hsmooth : Smooth f) (hproper : IsProper f)
     (hconn : ∀ s : Spec (CommRingCat.of k), _root_.IsConnected (f.base ⁻¹' {s})) :
-    JacobianSchemeData A c g (𝟙 (Spec (CommRingCat.of k))) where
+    RelativePicardSchemeData A c (𝟙 (Spec (CommRingCat.of k))) where
   D :=
     { P := J
       toBase := f
@@ -72,6 +74,5 @@ def JacobianSchemeData.ofCore (A : Type*) [AddCommGroup A]
       proper := hproper
       connectedFibres := hconn
       hasGroupLaw := ⟨L⟩ }
-  hDim := True
 
 end MilneJVScheme

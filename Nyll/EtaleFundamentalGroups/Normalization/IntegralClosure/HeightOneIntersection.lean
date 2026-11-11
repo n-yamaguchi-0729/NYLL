@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Polynomial.Eval.Subring
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Polynomial.Tower
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Nyll.EtaleFundamentalGroups.Purity.HeightOne.UFDIntersection
+module
+
+public import Mathlib.Algebra.Polynomial.Eval.Subring
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Polynomial.Tower
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Nyll.EtaleFundamentalGroups.Purity.HeightOne.UFDIntersection
 
 /-!
 # Integral elements detected at the height-one points of a UFD
@@ -22,6 +24,8 @@ using `mem_bot_of_mem_localization_primeElement`.
 This is the codimension-one intersection theorem for the normalization that
 is needed in the two-dimensional local-purity argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

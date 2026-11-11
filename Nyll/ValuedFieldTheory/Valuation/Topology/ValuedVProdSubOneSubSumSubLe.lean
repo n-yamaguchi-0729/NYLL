@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Valued v prod sub one sub sum sub le of forall v sub sub mul sub le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

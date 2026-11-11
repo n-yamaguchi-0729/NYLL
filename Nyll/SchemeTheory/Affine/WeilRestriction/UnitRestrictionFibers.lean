@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionSplitting
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionSurjective
-import Mathlib.AlgebraicGeometry.AffineSpace
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionSplitting
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionSurjective
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-! # Geometric fibres of actual finite-algebra unit restriction -/
+
+@[expose] public section
 
 noncomputable section
 

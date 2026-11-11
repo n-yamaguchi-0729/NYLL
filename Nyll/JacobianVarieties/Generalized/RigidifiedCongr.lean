@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
 
 /-! Actual isomorphic curve-modulus diagrams have equivalent chosen-rigidified classes. -/
+
+@[expose] public section
 
 noncomputable section
 

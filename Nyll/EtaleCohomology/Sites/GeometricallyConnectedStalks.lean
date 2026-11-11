@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.CechSections
-import Nyll.EtaleCohomology.Sites.PullbackStalkComposition
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.EtaleCohomology.Sites.SeparablyClosedBasePullback
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.FieldTheory.SeparableClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.CechSections
+public import Nyll.EtaleCohomology.Sites.PullbackStalkComposition
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.EtaleCohomology.Sites.SeparablyClosedBasePullback
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.FieldTheory.SeparableClosure
 
 /-!
 # Common stalk values over geometrically connected fibres
@@ -27,6 +29,8 @@ lifts. Composition of the actual stalk maps proves the Čech equation.
 No flatness or quasi-compactness hypothesis is needed for this calculation.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -34,11 +38,6 @@ universe u
 open AlgebraicGeometry CategoryTheory Limits Opposite
 
 namespace EtaleCohomology
-
-private def pullback_eq_iso {X Z : Scheme.{u}} (Λ : Type u) [CommRing Λ]
-    {f g : Z ⟶ X} (h : f = g) : etalePullback f Λ ≅ etalePullback g Λ := by
-  cases h
-  exact Iso.refl _
 
 private lemma stalkUnit_eqToIso
     {X Z : Scheme.{u}} (Λ : Type u) [CommRing Λ]

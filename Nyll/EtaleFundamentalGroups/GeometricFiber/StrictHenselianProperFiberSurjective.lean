@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperHomotopyExact
-import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
-import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperHomotopyExact
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
+public import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
 
 /-!
 # Geometric-fibre surjectivity over a strictly henselian local base
@@ -23,6 +27,8 @@ geometric fibres also requires the proper closed-fibre equivalence; it is
 not asserted here. In particular, neither an inverse closed-fibre map nor
 an unproved geometric comparison is an input to these theorems.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -85,5 +91,53 @@ theorem fundamentalGroupHom_smoothProper_geometricFiber_surjective_of_strictHens
   have : GeometricallyReduced f :=
     REDsol.geometricallyReduced_of_smooth f
   exact fundamentalGroupHom_proper_geometricFiber_surjective_of_strictHenselian R f s xi
+
+/-- Geometric-fibre surjectivity with the family morphism first in the
+original pullback, as used by multiplication and specialization covers. -/
+theorem fundamentalGroupHom_smoothProper_fiberFst_surjective_of_strictHenselian
+    (R : Type u) [CommRing R] [HenselianLocalRing R]
+    [IsSepClosed (IsLocalRing.ResidueField R)]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of R))
+    [IsProper f] [Smooth f] [GeometricallyConnected f]
+    {K : Type u} [Field K] [IsSepClosed K]
+    (s : Spec (.of K) ⟶ Spec (.of R))
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (xi : Spec (.of Ω) ⟶ Limits.pullback f s) :
+    Function.Surjective (fundamentalGroupHom (Limits.pullback.fst f s) xi) := by
+  have : ConnectedSpace (show Scheme.{u} from Limits.pullback f s) :=
+    GeometricallyConnected.connectedSpace_of_subsingleton (Limits.pullback.snd f s)
+  have : ConnectedSpace (show Scheme.{u} from Limits.pullback s f) :=
+    GeometricallyConnected.connectedSpace_of_subsingleton (Limits.pullback.fst s f)
+  let e := Limits.pullbackSymmetry f s
+  let T : FiniteEtale (Limits.pullback s f) ≌ FiniteEtale (Limits.pullback f s) :=
+    MorphismProperty.Over.pullbackIso (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ e.symm
+  have : (pullback e.hom).IsEquivalence := T.isEquivalence_functor
+  have he := (fundamentalGroupHom_bijective_of_pullback_isEquivalence e.hom xi).2
+  have hq := fundamentalGroupHom_smoothProper_geometricFiber_surjective_of_strictHenselian
+    R f s (xi ≫ e.hom)
+  have hm : Limits.pullback.fst f s = e.hom ≫ Limits.pullback.snd s f :=
+    (Limits.pullbackSymmetry_hom_comp_snd f s).symm
+  have hpoint : (xi ≫ e.hom) ≫ Limits.pullback.snd s f =
+      xi ≫ Limits.pullback.fst f s :=
+    (Category.assoc _ _ _).trans (congrArg (xi ≫ ·) hm.symm)
+  let transport : π₁ᵉᵗ((xi ≫ e.hom) ≫ Limits.pullback.snd s f) ≃
+      π₁ᵉᵗ(xi ≫ Limits.pullback.fst f s) :=
+    Equiv.cast (congrArg (fun point => π₁ᵉᵗ(point)) hpoint)
+  have transport_apply {p q : Spec (.of Ω) ⟶ X} (h : p = q) (a : π₁ᵉᵗ(p)) :
+      Equiv.cast (congrArg (fun point => π₁ᵉᵗ(point)) h) a = h ▸ a := by
+    cases h
+    rfl
+  intro a
+  obtain ⟨b, rfl⟩ := transport.surjective a
+  obtain ⟨c, rfl⟩ := hq b
+  obtain ⟨γ, rfl⟩ := he c
+  refine ⟨γ, ?_⟩
+  change fundamentalGroupHom (Limits.pullback.fst f s) xi γ =
+    Equiv.cast (congrArg (fun point => π₁ᵉᵗ(point)) hpoint)
+      (fundamentalGroupHom (Limits.pullback.snd s f) (xi ≫ e.hom)
+        (fundamentalGroupHom e.hom xi γ))
+  rw [transport_apply]
+  exact (fundamentalGroupHom_comp_of_eq e.hom (Limits.pullback.snd s f)
+    (Limits.pullback.fst f s) hm xi hpoint γ).symm
 
 end AlgebraicGeometry.FiniteEtale

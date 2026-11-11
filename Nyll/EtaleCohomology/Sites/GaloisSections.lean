@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SelfProduct
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-!
 # Actual Galois descent of small-etale sheaf sections
@@ -21,12 +24,54 @@ proved decomposition of the cover's self-product into deck graphs.
 No Galois/etale cohomology comparison is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 universe u v
 open AlgebraicGeometry CategoryTheory Limits Opposite
 open CategoryTheory.PreGaloisCategory
 
 namespace EtaleCohomology
+
+/-- Any terminal representative of the small étale site has an
+isomorphic structure map to the original scheme. -/
+theorem etaleTerminal_hom_isIso (X : Scheme.{u}) {T : X.Etale}
+    (hT : IsTerminal T) : IsIso T.hom := by
+  let L := Scheme.Etale.forget X ⋙ CategoryTheory.Over.forget X
+  let e : T ≅ Scheme.Etale.mk (𝟙 X) := hT.uniqueUpToIso
+    (MorphismProperty.Over.mkIdTerminal
+      (show MorphismProperty Scheme.{u} from @Etale) X)
+  let e' : T.left ≅ X := L.mapIso e
+  have hw : e'.hom ≫ 𝟙 X = T.hom :=
+    MorphismProperty.Over.w
+      (P := show MorphismProperty Scheme.{u} from @Etale) (Q := ⊤) e.hom
+  have he : e'.hom = T.hom := (Category.comp_id e'.hom).symm.trans hw
+  rw [← he]
+  infer_instance
+
+/-- The actual pullback of two finite étale objects over any terminal
+representative remains finite over the original scheme. -/
+theorem etaleTerminalPullback_finite (X : Scheme.{u}) {T U V : X.Etale}
+    (hT : IsTerminal T) (f : U ⟶ T) (g : V ⟶ T)
+    [IsFinite U.hom] [IsFinite V.hom] : IsFinite (pullback f g).hom := by
+  let L := Scheme.Etale.forget X ⋙ CategoryTheory.Over.forget X
+  have : IsIso T.hom := etaleTerminal_hom_isIso X hT
+  have hg : g.left ≫ T.hom = V.hom :=
+    MorphismProperty.Over.w
+      (P := show MorphismProperty Scheme.{u} from @Etale) (Q := ⊤) g
+  have : IsFinite (g.left ≫ T.hom) := by
+    rw [hg]
+    infer_instance
+  have : IsFinite g.left := IsFinite.of_comp g.left T.hom
+  have hp : IsPullback (pullback.fst f g).left (pullback.snd f g).left
+      f.left g.left := (IsPullback.of_hasPullback f g).map L
+  have : IsFinite (pullback.fst f g).left :=
+    MorphismProperty.of_isPullback (P := @IsFinite) hp.flip inferInstance
+  have hfst : (pullback.fst f g).left ≫ U.hom = (pullback f g).hom :=
+    MorphismProperty.Over.w
+      (P := show MorphismProperty Scheme.{u} from @Etale) (Q := ⊤) (pullback.fst f g)
+  rw [← hfst]
+  infer_instance
 
 /-- The canonical inclusion of finite etale objects into the small etale site. -/
 abbrev finiteEtaleInclusion (X : Scheme.{u}) : FiniteEtale X ⥤ X.Etale :=
@@ -89,13 +134,13 @@ theorem finiteEtaleSheaf_restrict_invariant
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (Type u))
     (Y : FiniteEtale X) (t : F.obj.obj (op (Scheme.Etale.mk (𝟙 X))))
     (σ : Aut Y) :
-    F.obj.map ((finiteEtaleInclusion X).map σ.hom).op
+    F.obj.map ((finiteEtaleInclusion X).map σ.asIso.hom).op
       (F.obj.map (finiteEtaleCoverBaseMap X Y).op t) =
         F.obj.map (finiteEtaleCoverBaseMap X Y).op t := by
-  have h : (finiteEtaleInclusion X).map σ.hom ≫ finiteEtaleCoverBaseMap X Y =
+  have h : (finiteEtaleInclusion X).map σ.asIso.hom ≫ finiteEtaleCoverBaseMap X Y =
       finiteEtaleCoverBaseMap X Y := by
     apply MorphismProperty.Over.Hom.ext
-    exact σ.hom.w
+    exact σ.asIso.hom.w
   rw [← ConcreteCategory.comp_apply, ← F.obj.map_comp, ← op_comp, h]
 
 /-- Sections on the actual finite coproduct are determined by their
@@ -132,7 +177,7 @@ theorem existsUnique_section_of_galois_invariant
     (Y : FiniteEtale X) [IsGalois Y]
     (s : F.obj.obj (op ((finiteEtaleInclusion X).obj Y)))
     (hs : ∀ σ : Aut Y,
-      F.obj.map ((finiteEtaleInclusion X).map σ.hom).op s = s) :
+      F.obj.map ((finiteEtaleInclusion X).map σ.asIso.hom).op s = s) :
     ∃! t : F.obj.obj (op (Scheme.Etale.mk (𝟙 X))),
       F.obj.map (finiteEtaleCoverBaseMap X Y).op t = s := by
   let I : FiniteEtale X ⥤ X.Etale := finiteEtaleInclusion X
@@ -145,7 +190,7 @@ theorem existsUnique_section_of_galois_invariant
         (galoisSelfProductIso Y).hom ≫ prod.fst = 𝟙 Y := by
       rw [← Category.assoc, galoisSelfProductIso_ι, prod.lift_fst]
     have hr : Sigma.ι (fun _ : Aut Y => Y) σ ≫
-        (galoisSelfProductIso Y).hom ≫ prod.snd = σ.hom := by
+        (galoisSelfProductIso Y).hom ≫ prod.snd = σ.asIso.hom := by
       rw [← Category.assoc, galoisSelfProductIso_ι, prod.lift_snd]
     change F.obj.map (I.map (Sigma.ι (fun _ : Aut Y => Y) σ)).op
         (F.obj.map (I.map (galoisSelfProductIso Y).hom).op

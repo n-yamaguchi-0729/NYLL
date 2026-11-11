@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.CorrectedDivisorSumField
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorEvaluationInvariance
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorDifferenceClass
-import Nyll.JacobianVarieties.Generalized.PicardZeroGeometricEquality
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+module
+
+public import Nyll.JacobianVarieties.Generalized.CorrectedDivisorSumField
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorEvaluationInvariance
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorDifferenceClass
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGeometricEquality
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
 
 /-! # Corrected divisor sums agree on reduced overlaps
 
@@ -16,6 +18,8 @@ The equality assumed on the overlap is equality of actual zero-sheaf classes.
 It is converted to equality of raw rigidifications only on field-valued points.
 The full modulus-principal kernel then proves equality of the regular maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

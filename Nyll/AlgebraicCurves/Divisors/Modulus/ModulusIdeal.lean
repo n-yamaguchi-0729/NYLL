@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusStalks
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqProper
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionDVRStalkIsClosed
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusStalks
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqProper
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionDVRStalkIsClosed
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # The actual ideal sheaf of a function-field modulus
@@ -26,6 +28,8 @@ function-field degree, and compatibility with arbitrary field extension, are
 separate assertions and are not assumed in this construction.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
@@ -35,7 +39,8 @@ universe u
 
 namespace AlgebraicCurve.Modulus
 
-private def closedPointIdeal {X : Scheme.{u}} (x : X) (hx : IsClosed ({x} : Set X)) :
+/-- The reduced ideal sheaf defining a closed point. -/
+def closedPointIdeal {X : Scheme.{u}} (x : X) (hx : IsClosed ({x} : Set X)) :
     X.IdealSheafData :=
   Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩
 

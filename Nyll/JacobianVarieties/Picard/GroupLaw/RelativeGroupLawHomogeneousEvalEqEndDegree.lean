@@ -10,12 +10,12 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.EndDegree
-import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawPolynomialEvalEqEndDegreeZpowMul
-import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawEndDegreeNsmulIdPointEqPow
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.EndDegree
+import Nyll.AbelianVarieties.Isogenies.Degree.Polynomial
+import Nyll.AbelianVarieties.Isogenies.Degree.Multiplication
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFiniteFlatSchemeNsmul
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFinite
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeFlatFinite
@@ -226,8 +226,6 @@ attribute [-instance]
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
 attribute [-instance]
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  AlgebraicCurve.Place.instAlgebra_restrictResidueField
-  AlgebraicCurve.Place.instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -742,31 +740,19 @@ variable (L : RelativeGroupLaw K f)
 
 theorem compT_mul {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of K)} (z : SchemeHomOver t f)
     (β γ : SchemeHomOver f f) :
-    z ⊚ (L.mul f β γ) = L.mul t (z ⊚ β) (z ⊚ γ) := by
-  have h := L.mul_natural f t z.1 z.2 β γ
-  have e : ∀ δ : SchemeHomOver f f, GoodReductionJacobian.schemeHomOverComp z.1 z.2 δ = z ⊚ δ :=
-    fun δ => Subtype.ext rfl
-  rw [e, e, e] at h
-  exact h
+    z ⊚ (L.mul f β γ) = L.mul t (z ⊚ β) (z ⊚ γ) :=
+  L.pointEval_mul z β γ
 
 theorem compT_one {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of K)} (z : SchemeHomOver t f) :
-    z ⊚ (L.one f) = L.one t := by
-  have h := L.one_natural f t z.1 z.2
-  have e : GoodReductionJacobian.schemeHomOverComp z.1 z.2 (L.one f) = z ⊚ (L.one f) := Subtype.ext
-    rfl
-  rw [e] at h
-  exact h
+    z ⊚ (L.one f) = L.one t :=
+  L.pointEval_one z
 
 /-- Evaluate relative self-morphisms at the given point as a homomorphism of point groups. -/
 def evalHom {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of K)} (z : SchemeHomOver t f) :
     let _ : Group (SchemeHomOver f f) := L.pointGroup f
     let _ : Group (SchemeHomOver t f) := L.pointGroup t
-    SchemeHomOver f f →* SchemeHomOver t f := by
-  intro sourceGroup targetGroup
-  exact
-    { toFun := fun δ => z ⊚ δ
-      map_one' := compT_one L z
-      map_mul' := fun β γ => compT_mul L z β γ }
+    SchemeHomOver f f →* SchemeHomOver t f :=
+  L.pointEvalHom z
 
 theorem compT_inv {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of K)} (z : SchemeHomOver t f)
     (β : SchemeHomOver f f) :
@@ -799,11 +785,8 @@ theorem compT_zpow {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of K)} (z : Sch
 
 theorem pow_eq_nsmul {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of K)) (x : SchemeHomOver t f)
     (n : ℕ) :
-    let _ : Group (SchemeHomOver t f) := L.pointGroup t; x ^ n = L.nsmul t n x := by
-  intro pointGroup
-  induction n with
-  | zero => rfl
-  | succ n ih => rw [pow_succ, ih]; rfl
+    let _ : Group (SchemeHomOver t f) := L.pointGroup t; x ^ n = L.nsmul t n x :=
+  L.pointGroup_pow_eq_nsmul t x n
 
 theorem id_pow_eq (n : ℕ) :
     let _ : Group (SchemeHomOver f f) := L.pointGroup f

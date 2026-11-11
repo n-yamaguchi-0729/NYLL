@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.DiscreteCoinducedQuotient
-import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
+module
+
+public import Nyll.GaloisCohomology.Topology.DiscreteCoinducedQuotient
+public import Nyll.GaloisCohomology.Topology.ContinuousModuleExactness
 
 /-!
 # Actual continuous dimension shifting by coinduction
@@ -15,6 +17,8 @@ actual quotient of coinduction by constants gives connecting isomorphisms
 in every positive degree. The middle acyclicity is proved by explicit
 continuous primitives, rather than assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

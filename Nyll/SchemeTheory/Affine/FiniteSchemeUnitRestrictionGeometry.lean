@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeUnitRestriction
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionFibers
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeUnitRestriction
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionFibers
 
 /-! # Geometry of unit restriction for actual finite closed subschemes -/
+
+@[expose] public section
 
 noncomputable section
 

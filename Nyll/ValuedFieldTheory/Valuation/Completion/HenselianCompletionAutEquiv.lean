@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomFunctor
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianCompletionHomEquiv
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Group.Units.Equiv
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomFunctor
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianCompletionHomEquiv
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Group.Units.Equiv
 
 /-!
 # Automorphisms and Henselian completion
@@ -16,6 +18,8 @@ The correspondence of homomorphisms respects composition. Passing to units
 therefore gives a group isomorphism of automorphisms, whose action extends
 the original action on the finite separable extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

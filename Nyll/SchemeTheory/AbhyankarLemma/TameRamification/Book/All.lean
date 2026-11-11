@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.BaseChange
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.CompositumValueGroup
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.CyclicIndex
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.FiniteTameDegree
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.IndexAbsorption
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalConverse
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalValueGroup
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.ValueGroup
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.BaseChange
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.CompositumValueGroup
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.CyclicIndex
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.FiniteTameDegree
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.IndexAbsorption
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalConverse
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalValueGroup
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.ValueGroup
 
 /-! Canonical aggregate for `TameRamification.Book`. -/

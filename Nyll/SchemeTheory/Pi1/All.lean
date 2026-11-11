@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.Affine.All
-import Nyll.SchemeTheory.Pi1.Descent.All
-import Nyll.SchemeTheory.Pi1.Etale.All
-import Nyll.SchemeTheory.Pi1.FiniteEtale.All
-import Nyll.SchemeTheory.Pi1.FunctionFields.All
-import Nyll.SchemeTheory.Pi1.Morphisms.All
-import Nyll.SchemeTheory.Pi1.RingTheory.All
+module
+
+public import Nyll.SchemeTheory.Pi1.Affine.All
+public import Nyll.SchemeTheory.Pi1.Descent.All
+public import Nyll.SchemeTheory.Pi1.Etale.All
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.All
+public import Nyll.SchemeTheory.Pi1.FunctionFields.All
+public import Nyll.SchemeTheory.Pi1.Morphisms.All
+public import Nyll.SchemeTheory.Pi1.RingTheory.All

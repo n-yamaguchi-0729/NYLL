@@ -13,6 +13,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Divisor pushforward Along lies Over of lies Over

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.LineBundleSumInvariance
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.JacobianVarieties.Albanese.LineBundleSumInvariance
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Nyll.SchemeTheory.BaseChange.SchemeHomOver
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
 # Line-bundle invariance of sums over arbitrary field-valued test maps
@@ -22,6 +24,8 @@ and its inverse-ideal-module comparison transport the line bundles.
 Line-bundle invariance over the extended field then descends by projection
 from the actual target pullback.
 -/
+
+@[expose] public section
 
 noncomputable section
 

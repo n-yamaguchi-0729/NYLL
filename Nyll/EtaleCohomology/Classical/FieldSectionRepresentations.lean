@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldGaloisAction
-import Mathlib.RepresentationTheory.Rep.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldGaloisAction
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
 
 /-!
 # Representations on actual etale field sections
@@ -16,6 +18,8 @@ representation. Unit sections are equivariantly identified with the existing
 representation on field units, so its group-cohomology theorems apply
 without an assumed action comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -33,17 +37,17 @@ def fieldGaloisSheafSectionsRep
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}) :
     Rep.{u} ℤ Gal(L/K) :=
   Rep.of
-    { toFun := fun σ => ((fieldGaloisSheafAction K L F σ).hom).hom.toIntLinearMap
+    { toFun := fun σ => ((fieldGaloisSheafAction K L F σ).asIso.hom).hom.toIntLinearMap
       map_one' := by
         apply LinearMap.ext
         intro s
-        change (fieldGaloisSheafAction K L F 1).hom s = s
+        change (fieldGaloisSheafAction K L F 1).asIso.hom s = s
         rw [map_one]
         rfl
       map_mul' σ τ := by
         apply LinearMap.ext
         intro s
-        exact congrArg (fun a => a.hom s) (map_mul (fieldGaloisSheafAction K L F) σ τ) }
+        exact congrArg (fun a => a.asIso.hom s) (map_mul (fieldGaloisSheafAction K L F) σ τ) }
 
 /-- Actual coefficient morphisms induce equivariant maps of field-section
 representations. -/

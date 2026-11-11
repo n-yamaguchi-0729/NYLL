@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
 
 /-!
 # Ideal-theoretic inertia in a tower
@@ -14,6 +16,8 @@ normalizations.  It is formulated for equivariant actions on a tower of
 rings, so it can be instantiated by the integral closures occurring in
 SGA 1, Expose X, Lemma 3.6.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleZeroSchemeIdealTensorHom
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleZeroSchemeIdealTensorHom
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
 
 /-!
 # Addition of canonically rigidified effective divisors
@@ -16,6 +18,8 @@ section-preserving inverse-ideal comparison identifies tensor products with
 addition of effective Cartier divisors, and preserves the chosen trivializations
 on the entire modulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

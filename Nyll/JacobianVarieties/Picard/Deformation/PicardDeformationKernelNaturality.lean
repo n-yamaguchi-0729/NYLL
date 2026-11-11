@@ -10,35 +10,40 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerBijective
-import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerMul
-import Nyll.JacobianVarieties.Picard.GroupLaw.PicardRepresentabilityKerPointsMulMemCompMem
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassInjective
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassMapMul
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassNatural
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassSurjective
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerBijective
+public import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerMul
+public import Nyll.JacobianVarieties.Picard.GroupLaw.PicardRepresentabilityKerPointsMulMemCompMem
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassInjective
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassMapMul
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassNatural
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassSurjective
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 /-!
 # Deformation classes of dual-number kernel points
 
 Identify kernel points with deformation classes and compare multiplication and base change.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -219,12 +224,6 @@ theorem Δ_oneK : Δ hD (δ := δ) (oneK hD A) = 0 := by
   simp only [sub_self, add_sub_cancel_right] at h3
   exact h3.symm
 
-theorem kerPointsToRigKer_eq_mk (x : K hD A) :
-    ∃ M : RigKerDualNumber.Carrier c ε A,
-      hD.kerPointsToRigKer A x = Quotient.mk _ M ∧ M.1 = hD.poincare.pullbackAlong x.1 := by
-  unfold RepresentsRelSubPic.kerPointsToRigKer
-  exact ⟨_, rfl, rfl⟩
-
 end K
 
 section Restrict
@@ -255,8 +254,8 @@ variable {𝒱 : X.TwoAffineOpenCover}
 include hδ hδ' in
 theorem Δ_stageK (x : K hD A) :
     Δ hD (δ := δ') (stageK hD A A' g x) = 𝒱.H1stageMap c g (Δ hD (δ := δ) x) := by
-  obtain ⟨M, hM, hM1⟩ := kerPointsToRigKer_eq_mk hD x
-  obtain ⟨N, hN, hN1⟩ := kerPointsToRigKer_eq_mk hD (stageK hD A A' g x)
+  obtain ⟨M, hM, hM1⟩ := hD.kerPointsToRigKer_eq_mk A x
+  obtain ⟨N, hN, hN1⟩ := hD.kerPointsToRigKer_eq_mk A' (stageK hD A A' g x)
   unfold Δ
   rw [hM, hN]
   refine IsDeformationClassMap.natural hδ hδ' g M N ?_

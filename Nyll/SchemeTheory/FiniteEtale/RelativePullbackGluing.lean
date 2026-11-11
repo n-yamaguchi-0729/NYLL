@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RelativePullback
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Nyll.SchemeTheory.FiniteEtale.RelativeGluing
+module
+
+public import Nyll.SchemeTheory.Gluing.RelativePullback
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Nyll.SchemeTheory.FiniteEtale.RelativeGluing
 
 /-!
 # Finite-etale structure on the actual pulled-back gluing
@@ -16,6 +18,8 @@ scheme gluing data. Its local structure morphisms are base changes of the
 original finite-etale maps; their cartesian overlap squares construct a
 finite-etale structural morphism to the later base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

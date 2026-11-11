@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafH0
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
-import Nyll.SchemeTheory.Morphisms.AppTopPullbackMapEqAppTopPullbackFst
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafH0
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
+public import Nyll.SchemeTheory.Morphisms.AppTopPullbackMapEqAppTopPullbackFst
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite actual global sections over a proper morphism
@@ -23,6 +25,8 @@ original sections with their structural base-ring action.
 No finite cover, global generators, cohomology comparison, or finite
 generation of the original global sections is supplied as an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

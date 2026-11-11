@@ -10,9 +10,11 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Faithfully flat descent of integral closure
@@ -21,6 +23,8 @@ An integral domain is integrally closed when a faithfully flat domain extension 
 integrally closed. The proof descends an integral element through the original algebra
 map.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

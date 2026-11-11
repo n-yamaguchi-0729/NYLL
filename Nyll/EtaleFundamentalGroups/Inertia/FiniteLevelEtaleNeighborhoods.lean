@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisInvariantNeighborhood
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
-import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Group.Submonoid.Membership
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.FieldTheory.Galois.GaloisClosure
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteGaloisInvariantNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
+public import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Group.Submonoid.Membership
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.FieldTheory.Galois.GaloisClosure
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 
 /-!
@@ -34,6 +36,8 @@ denominator. It therefore supplies the unit needed by the native Away map.
 This file constructs the actual index and its filteredness; the diagram and
 its colimit are separate declarations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

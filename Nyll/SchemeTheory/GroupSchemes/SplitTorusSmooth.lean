@@ -4,17 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.SplitTorus
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorus
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-! # Smoothness of the actual split torus
 
 The integral character algebra is an iterated Laurent polynomial algebra. Each
 Laurent variable is obtained by localizing a polynomial algebra at its variable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.SequenceLimit
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.CategoryTheory.Limits.Preserves.Limits
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.SequenceLimit
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Limits.Preserves.Limits
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
 
 /-!
 # Actual sections of inverse limits of module sheaves
@@ -25,6 +28,8 @@ No quasicoherence of the inverse limit is asserted or assumed. In an
 adic application, its finite reductions and the associated graded layers
 are compared with the original coherent stages separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

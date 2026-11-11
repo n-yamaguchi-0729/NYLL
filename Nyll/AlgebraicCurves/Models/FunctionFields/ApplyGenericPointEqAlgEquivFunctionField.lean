@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Curve Model apply generic Point eq and nonempty alg Equiv function Field of is Iso stalk
 Map
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -75,9 +80,9 @@ theorem apply_genericPoint_eq_and_nonempty_algEquiv_functionField_of_isIso_stalk
     {F : Type v} [Field F] [Algebra k F] (M : AlgebraicCurve.CurveModel k F)
     (ν : M.C ⟶ C) (hν : ν ≫ c = M.toBase)
     (hbir : IsIso (ν.stalkMap (genericPoint M.C))) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     ν.base (genericPoint M.C) = genericPoint C ∧ Nonempty (F ≃ₐ[k] C.functionField) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   have hx : ν.base (genericPoint M.C) = genericPoint C := by
     apply eq_genericPoint_of_isField
     exact MulEquiv.isField (Field.toIsField M.C.functionField)

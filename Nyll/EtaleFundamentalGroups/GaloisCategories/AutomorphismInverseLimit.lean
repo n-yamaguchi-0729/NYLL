@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismDescent
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
-import Nyll.ProCGroups.InverseSystems.Basic
-import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismDescent
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+public import Nyll.ProCGroups.InverseSystems.Basic
+public import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
 
 /-!
 # Automorphism groups of a category assembled from stages
@@ -19,6 +21,8 @@ continuous comparison bijective.  Compactness then upgrades it to an
 isomorphism of topological groups.  No individual restriction or inverse-limit
 projection is assumed surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,14 +51,14 @@ def stageAutRestriction {i j : I} (hij : i ≤ j) :
 /-- The component formula for the constructed transition homomorphism. -/
 theorem stageAutRestriction_hom_app {i j : I} (hij : i ≤ j)
     (a : Aut (H j ⋙ F)) (A : Cstage i) :
-    (stageAutRestriction Cstage H T e F hij a).hom.app A =
-      F.map ((e hij).hom.app A) ≫ a.hom.app ((T hij).obj A) ≫
+    (stageAutRestriction Cstage H T e F hij a).asIso.hom.app A =
+      F.map ((e hij).hom.app A) ≫ a.asIso.hom.app ((T hij).obj A) ≫
         F.map ((e hij).inv.app A) := by
   have hw :
       (((whiskeringLeft (Cstage i) (Cstage j) FintypeCat.{w}).obj (T hij)).mapAut
-        (H j ⋙ F) a).hom.app A = a.hom.app ((T hij).obj A) := rfl
-  simp only [stageAutRestriction, autHomOfCompIso_apply, Iso.conjAut_hom,
-    Iso.conj_apply, NatTrans.comp_app, Iso.symm_inv, Iso.symm_hom,
+        (H j ⋙ F) a).asIso.hom.app A = a.asIso.hom.app ((T hij).obj A) := rfl
+  simp only [stageAutRestriction, autHomOfCompIso_apply, Iso.conjAut_apply,
+    NatTrans.comp_app, Iso.symm_inv, Iso.symm_hom,
     Iso.trans_hom, Iso.trans_inv, isoWhiskerRight_hom, isoWhiskerRight_inv,
     Functor.associator_hom_app, Functor.associator_inv_app, whiskerRight_app, hw,
     Category.id_comp, Category.comp_id]
@@ -62,15 +66,15 @@ theorem stageAutRestriction_hom_app {i j : I} (hij : i ≤ j)
 /-- The restriction formula expressed as its conjugation square. -/
 theorem stageAutRestriction_commutes {i j : I} (hij : i ≤ j)
     (a : Aut (H j ⋙ F)) (A : Cstage i) :
-    F.map ((e hij).hom.app A) ≫ a.hom.app ((T hij).obj A) =
-      (stageAutRestriction Cstage H T e F hij a).hom.app A ≫
+    F.map ((e hij).hom.app A) ≫ a.asIso.hom.app ((T hij).obj A) =
+      (stageAutRestriction Cstage H T e F hij a).asIso.hom.app A ≫
         F.map ((e hij).hom.app A) := by
   have hcancel : F.map ((e hij).inv.app A) ≫ F.map ((e hij).hom.app A) =
       𝟙 (F.obj ((T hij ⋙ H j).obj A)) :=
     (F.mapIso ((e hij).app A)).inv_hom_id
-  have hunit : a.hom.app ((T hij).obj A) ≫
-      𝟙 (F.obj ((T hij ⋙ H j).obj A)) = a.hom.app ((T hij).obj A) :=
-    Category.comp_id (a.hom.app ((T hij).obj A))
+  have hunit : a.asIso.hom.app ((T hij).obj A) ≫
+      𝟙 (F.obj ((T hij ⋙ H j).obj A)) = a.asIso.hom.app ((T hij).obj A) :=
+    Category.comp_id (a.asIso.hom.app ((T hij).obj A))
   rw [stageAutRestriction_hom_app, Category.assoc, Category.assoc, hcancel, hunit]
 
 variable (d : ∀ i, T (le_rfl : i ≤ i) ≅ 𝟭 (Cstage i))
@@ -118,13 +122,14 @@ include he_id in
 /-- Identity refinement induces the identity on the automorphism group. -/
 theorem stageAutRestriction_id (i : I) (a : Aut (H i ⋙ F)) :
     stageAutRestriction Cstage H T e F (le_rfl : i ≤ i) a = a := by
+  apply Aut.ext
   apply Iso.ext
   apply NatTrans.ext
   funext A
   apply (cancel_mono (F.map ((e (le_rfl : i ≤ i)).hom.app A))).1
   rw [← stageAutRestriction_commutes]
   rw [cone_identity_component Cstage H T e d he_id i A]
-  exact a.hom.naturality ((d i).inv.app A)
+  exact a.asIso.hom.naturality ((d i).inv.app A)
 
 include he_comp in
 /-- Composed refinement induces the composite of the constructed restrictions. -/
@@ -133,6 +138,7 @@ theorem stageAutRestriction_comp {i j k : I}
     stageAutRestriction Cstage H T e F hij
         (stageAutRestriction Cstage H T e F hjk a) =
       stageAutRestriction Cstage H T e F (hij.trans hjk) a := by
+  apply Aut.ext
   apply Iso.ext
   apply NatTrans.ext
   funext A
@@ -142,26 +148,26 @@ theorem stageAutRestriction_comp {i j k : I}
   let Cijk := F.map ((H k).map ((c hij hjk).hom.app A))
   have hc : Eik ≫ Cijk = Eij ≫ Ejk :=
     cone_composition_component Cstage H T e F c he_comp hij hjk A
-  have hn : Cijk ≫ a.hom.app ((T hjk).obj ((T hij).obj A)) =
-      a.hom.app ((T (hij.trans hjk)).obj A) ≫ Cijk :=
-    a.hom.naturality ((c hij hjk).hom.app A)
+  have hn : Cijk ≫ a.asIso.hom.app ((T hjk).obj ((T hij).obj A)) =
+      a.asIso.hom.app ((T (hij.trans hjk)).obj A) ≫ Cijk :=
+    a.asIso.hom.naturality ((c hij hjk).hom.app A)
   apply (cancel_mono (Eij ≫ Ejk)).1
   calc
     (stageAutRestriction Cstage H T e F hij
-        (stageAutRestriction Cstage H T e F hjk a)).hom.app A ≫ (Eij ≫ Ejk) =
-        Eij ≫ ((stageAutRestriction Cstage H T e F hjk a).hom.app
+        (stageAutRestriction Cstage H T e F hjk a)).asIso.hom.app A ≫ (Eij ≫ Ejk) =
+        Eij ≫ ((stageAutRestriction Cstage H T e F hjk a).asIso.hom.app
           ((T hij).obj A) ≫ Ejk) := by
       rw [← Category.assoc, ← stageAutRestriction_commutes, Category.assoc]
-    _ = Eij ≫ (Ejk ≫ a.hom.app ((T hjk).obj ((T hij).obj A))) := by
+    _ = Eij ≫ (Ejk ≫ a.asIso.hom.app ((T hjk).obj ((T hij).obj A))) := by
       rw [← stageAutRestriction_commutes]
-    _ = (Eik ≫ Cijk) ≫ a.hom.app ((T hjk).obj ((T hij).obj A)) := by
+    _ = (Eik ≫ Cijk) ≫ a.asIso.hom.app ((T hjk).obj ((T hij).obj A)) := by
       rw [← Category.assoc, hc]
-    _ = Eik ≫ (a.hom.app ((T (hij.trans hjk)).obj A) ≫ Cijk) := by
+    _ = Eik ≫ (a.asIso.hom.app ((T (hij.trans hjk)).obj A) ≫ Cijk) := by
       rw [Category.assoc, hn]
-    _ = (stageAutRestriction Cstage H T e F (hij.trans hjk) a).hom.app A ≫
+    _ = (stageAutRestriction Cstage H T e F (hij.trans hjk) a).asIso.hom.app A ≫
         (Eik ≫ Cijk) := by
       rw [← Category.assoc, stageAutRestriction_commutes, Category.assoc]
-    _ = (stageAutRestriction Cstage H T e F (hij.trans hjk) a).hom.app A ≫
+    _ = (stageAutRestriction Cstage H T e F (hij.trans hjk) a).asIso.hom.app A ≫
         (Eij ≫ Ejk) := by rw [hc]
 
 /-- The inverse system of actual stage automorphism groups.  Reducibility keeps
@@ -195,12 +201,13 @@ def globalAutRestriction (i : I) : Aut F →ₜ* Aut (H i ⋙ F) where
 theorem globalAutRestriction_compatible {i j : I} (hij : i ≤ j) (a : Aut F) :
     stageAutRestriction Cstage H T e F hij (globalAutRestriction Cstage H F j a) =
       globalAutRestriction Cstage H F i a := by
+  apply Aut.ext
   apply Iso.ext
   apply NatTrans.ext
   funext A
   apply (cancel_mono (F.map ((e hij).hom.app A))).1
   rw [← stageAutRestriction_commutes]
-  exact a.hom.naturality ((e hij).hom.app A)
+  exact a.asIso.hom.naturality ((e hij).hom.app A)
 
 /-- The canonical comparison sends a global automorphism to all its restrictions. -/
 def autInverseLimitComparison :
@@ -237,14 +244,15 @@ include hobj in
 theorem autInverseLimitComparison_injective :
     Function.Injective (autInverseLimitComparison Cstage H T e F d c he_id he_comp) := by
   intro a b hab
+  apply Aut.ext
   apply Iso.ext
   apply NatTrans.ext
   funext X
   obtain ⟨i, A, ⟨q⟩⟩ := hobj X
-  have hA : a.hom.app ((H i).obj A) = b.hom.app ((H i).obj A) :=
-    congrArg (fun p ↦ (p.val i).hom.app A) hab
+  have hA : a.asIso.hom.app ((H i).obj A) = b.asIso.hom.app ((H i).obj A) :=
+    congrArg (fun p ↦ (p.val i).asIso.hom.app A) hab
   apply (cancel_epi (F.map q.hom)).1
-  rw [a.hom.naturality q.hom, b.hom.naturality q.hom, hA]
+  rw [a.asIso.hom.naturality q.hom, b.asIso.hom.naturality q.hom, hA]
 
 include hobj hhom in
 /-- Eventual morphism descent glues each compatible stage family. -/
@@ -252,8 +260,8 @@ theorem autInverseLimitComparison_surjective :
     Function.Surjective (autInverseLimitComparison Cstage H T e F d c he_id he_comp) := by
   intro s
   have hs : ∀ (i j : I) (hij : i ≤ j) (A : Cstage i),
-      F.map ((e hij).hom.app A) ≫ (s.val j).hom.app ((T hij).obj A) =
-        (s.val i).hom.app A ≫ F.map ((e hij).hom.app A) := by
+      F.map ((e hij).hom.app A) ≫ (s.val j).asIso.hom.app ((T hij).obj A) =
+        (s.val i).asIso.hom.app A ≫ F.map ((e hij).hom.app A) := by
     intro i j hij A
     have hcompat : stageAutRestriction Cstage H T e F hij (s.val j) = s.val i :=
       s.property i j hij
@@ -263,6 +271,7 @@ theorem autInverseLimitComparison_surjective :
   refine ⟨a, ?_⟩
   apply Subtype.ext
   funext i
+  apply Aut.ext
   apply Iso.ext
   apply NatTrans.ext
   funext A

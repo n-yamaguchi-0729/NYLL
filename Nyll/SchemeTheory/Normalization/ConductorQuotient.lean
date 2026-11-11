@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.QuotSMulTop
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.QuotSMulTop
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # The normalization quotient of an affine curve
@@ -24,6 +26,8 @@ affine algebra over an arbitrary field is module-finite is kept as the next
 source-producing frontier; mathlib's current integral-closure finiteness
 theorem assumes a finite separable extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

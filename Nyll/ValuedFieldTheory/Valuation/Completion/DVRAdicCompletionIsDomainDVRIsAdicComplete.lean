@@ -10,12 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # Is Discrete Valuation Ring adic Completion is Domain is Discrete Valuation Ring is Adic
 Complete
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

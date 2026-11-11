@@ -4,12 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Nyll.AbelianVarieties.Tate.All
-import Nyll.AbelianVarieties.Reduction.All
+module
+
+public import Nyll.AbelianVarieties.Geometry.All
+public import Nyll.AbelianVarieties.NeronModels.All
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Nyll.AbelianVarieties.Tate.All
+public import Nyll.AbelianVarieties.Reduction.All
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AbelianVarieties.Cohomology.All
+public import Nyll.AbelianVarieties.Isogenies.All
+public import Nyll.AbelianVarieties.LineBundles.All
 
 /-! # Abelian varieties: general geometry, Tate modules and reduction
 
 Depth-two entry point. Curve-specific Picard, Jacobian and generalized-Jacobian
 constructions belong to the depth-three `JacobianVarieties` library.
 -/
+
+@[expose] public section

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.RamificationInvariants
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.ResidueCharacteristic
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.RamificationInvariants
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.ResidueCharacteristic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
 
 /-!
 # Tame ramification in valued towers
@@ -15,6 +18,8 @@ statements use the canonical invariants of `ValuedExtension` directly, so the
 same declarations apply to complete and Henselian discretely valued fields
 through their `toDVF` projections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

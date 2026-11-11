@@ -18,6 +18,8 @@ universe u v w
 open CategoryTheory Opposite
 open AlgebraicGeometry.SmoothProperCurve
 
+attribute [local instance] filteredCommGrpHasColimitsOfShape
+
 namespace AlgebraicGeometry.GeneralizedJacobian
 
 private theorem unitSquare {B : Type v} [Category.{w} B]

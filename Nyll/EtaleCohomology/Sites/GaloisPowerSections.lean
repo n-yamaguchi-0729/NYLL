@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FiniteCoproductSections
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FinitePowers
+module
+
+public import Nyll.EtaleCohomology.Sites.FiniteCoproductSections
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FinitePowers
 
 /-!
 # All-degree actual deck coordinates of sheaf sections
@@ -14,6 +16,8 @@ Sections on every finite positive power of a finite etale Galois cover
 are functions of tuples of actual deck transformations. The equivalence
 is obtained from the geometric deck decomposition and actual sheaf descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

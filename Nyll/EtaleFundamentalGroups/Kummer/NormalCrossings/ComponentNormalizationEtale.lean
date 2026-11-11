@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentGenericInertiaCardinality
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
-import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentGenericInertiaCardinality
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
+public import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
 
 /-!
 # Etaleness at a fixed normal-crossings component
@@ -19,6 +24,8 @@ Every maximal prime of the localized normalization comes from a prime of the
 original normalization, so trivial inertia gives unramifiedness at every
 maximal prime and hence etaleness of the localized normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

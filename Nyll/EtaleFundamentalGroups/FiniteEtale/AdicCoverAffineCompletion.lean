@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.AdicCompletion.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
 
 /-!
 # Effective modules of actual affine sections of the lifted cover tower
@@ -28,6 +30,8 @@ surjectivity, the adic kernels, and stage annihilation are supplied by the
 actual finite cover tower. No completeness of the original affine ring
 or effective module is supplied as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

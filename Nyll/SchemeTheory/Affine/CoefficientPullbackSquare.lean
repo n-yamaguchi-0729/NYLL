@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # The cartesian square of an actual coefficient pullback map
@@ -14,6 +16,8 @@ The two projection formulas for a coefficient change identify its square
 as a pullback. This retains the existing coefficient map and the original
 algebra structures when applying base-change results to it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

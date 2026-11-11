@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharP
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ProCGroup
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharP
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ProCGroup
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # The actual ramification subgroup is pro-p
@@ -20,6 +23,8 @@ The kernels of these continuous restrictions form a Krull neighborhood basis.
 No surjectivity of restriction on ramification groups is required.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

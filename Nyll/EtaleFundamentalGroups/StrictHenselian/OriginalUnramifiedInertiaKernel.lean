@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalInertiaLocalExactSequence
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedSubfield
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceBasePointComparison
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalInertiaLocalExactSequence
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedSubfield
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceBasePointComparison
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Nyll.ProCGroups.Presentations.Profinite
 
 /-!
 # Original inertia and the actual maximal-unramified quotient
@@ -17,6 +20,8 @@ transported by its constructed target fibre isomorphism. The canonical
 original fraction-point map consequently has the same kernel. The independently
 defined maximal unramified subfield therefore has precisely that fixing group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

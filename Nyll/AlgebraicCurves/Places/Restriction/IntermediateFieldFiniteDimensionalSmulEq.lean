@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Hom.Rat
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.Restriction.NatCardSetOfComapEqEqDeg
+module
+
+public import Mathlib.Algebra.Algebra.Hom.Rat
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.Restriction.NatCardSetOfComapEqEqDeg
 
 /-!
 # Place exists intermediate Field finite Dimensional forall smul eq of descent
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

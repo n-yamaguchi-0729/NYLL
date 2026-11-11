@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRepresentability
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRepresentability
 
 /-!
 # Compatibility of the Poincaré parameter with forgetting the modulus
@@ -13,6 +15,8 @@ The ordinary relative class of an actual frame is the class of its Poincaré
 pullback. Local actual frames then give the same assertion for the total
 represented family, using separation of the ordinary Picard sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

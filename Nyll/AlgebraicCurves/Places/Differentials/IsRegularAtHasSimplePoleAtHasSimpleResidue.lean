@@ -10,17 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Regular.Polar
-import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsDNeZero
-import Mathlib.Data.Nat.Prime.Factorial
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.Places.Differentials.OrdNonnegDEqSmulD
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Regular.Polar
+public import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsDNeZero
+public import Mathlib.Data.Nat.Prime.Factorial
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdNonnegDEqSmulD
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
 
 /-!
 # Place is Regular At and has Simple Pole At and has Simple Residue of cartier Laws of
 finite Dimensional
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -56,20 +62,7 @@ namespace CartierLocalPen12
 variable {K F : Type*} [Field K] [Field F] [Algebra K F]
 
 theorem ord_nonneg_of_mem (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f :=
-  by
-  rcases eq_or_ne f 0 with rfl | hf0
-  · rw [v.ord_zero]
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨n, u, hu⟩ :=
-    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
-  have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
-    have h := congrArg (Subtype.val) hu
-    push_cast at h
-    rw [zpow_natCast]
-    exact h
-  rw [hcoe, v.ord_unit_smul_zpow u hπ (n : ℤ)]
-  exact Int.natCast_nonneg n
+  _root_.AlgebraicCurve.Place.ord_nonneg_of_mem v hf
 
 theorem mem_of_ord_nonneg (v : Place K F) {f : F} (h : 0 ≤ v.ord f) : f ∈ v.toValuationSubring := by
   rcases eq_or_ne f 0 with rfl | hf
@@ -106,10 +99,10 @@ theorem mem_maximalIdeal_of_ord_pos (v : Place K F) {f : F} (h : 0 < v.ord f) (h
   omega
 
 theorem ord_algebraMap (v : Place K F) {c : K} (hc : c ≠ 0) : v.ord (algebraMap K F c) = 0 := by
-  let u : v.toValuationSubringˣ :=
-    ⟨⟨algebraMap K F c, v.algebraMap_mem' c⟩, ⟨algebraMap K F c⁻¹, v.algebraMap_mem' c⁻¹⟩,
-      Subtype.ext (by simp [hc]), Subtype.ext (by simp [hc])⟩
-  exact v.ord_coe_unit u
+  have hu : IsUnit (algebraMap K v.toValuationSubring c) :=
+    (isUnit_iff_ne_zero.mpr hc).map (algebraMap K v.toValuationSubring)
+  rw [← v.coe_algebraMap, ← hu.unit_spec]
+  exact v.ord_coe_unit hu.unit
 
 theorem coeff_unique {t : F} (hDt : D K F t ≠ 0) {g g' : F} (h : g • D K F t = g' • D K F t) : g =
   g' := by
@@ -390,15 +383,20 @@ theorem isRegularAt_and_hasSimplePoleAt_and_hasSimpleResidue_of_cartierLaws_of_f
     have htg'max : (⟨t * g', mul_mem htmem hg'mem⟩ : v.toValuationSubring) ∈
       IsLocalRing.maximalIdeal v.toValuationSubring := by
       by_cases hg0 : g' = 0
-      · have : (⟨t * g', mul_mem htmem hg'mem⟩ : v.toValuationSubring) = 0 := Subtype.ext
-          (by simp [hg0])
+      · have : (⟨t * g', mul_mem htmem hg'mem⟩ : v.toValuationSubring) = 0 := by
+          apply Subtype.ext
+          change t * g' = (0 : F)
+          rw [hg0, mul_zero]
         rw [this]; exact Ideal.zero_mem _
       · exact CartierLocalPen12.mem_maximalIdeal_of_ord_pos v
           (by rw [v.ord_mul ht0 hg0, ht]; have := hg'; omega) _
     rw [← hresalg s]
     have heq : (⟨t * (algebraMap K F s * t⁻¹ + g'), hmem'⟩ : v.toValuationSubring) - ⟨algebraMap K
       F s, halgmem s⟩ =
-        ⟨t * g', mul_mem htmem hg'mem⟩ := Subtype.ext (by simp [hval'])
+        ⟨t * g', mul_mem htmem hg'mem⟩ := by
+      apply Subtype.ext
+      change t * (algebraMap K F s * t⁻¹ + g') - algebraMap K F s = t * g'
+      rw [hval', add_sub_cancel_left]
     exact Ideal.Quotient.eq.mpr (by rw [heq]; exact htg'max)
 end AlgebraicCurve.Place
 end ProofImplementation

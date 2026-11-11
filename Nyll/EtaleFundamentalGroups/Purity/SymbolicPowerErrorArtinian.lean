@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Artinian coefficient rings for symbolic-power errors
@@ -16,6 +18,8 @@ If `R / P` has dimension at most one, adjoining an element outside `P` to
 an ordinary power of `P` gives an Artinian quotient.  This supplies the
 coefficient ring for a finite symbolic-power error killed by that element.
 -/
+
+@[expose] public section
 
 noncomputable section
 

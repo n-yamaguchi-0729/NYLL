@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRawFamily
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotalLocalBijection
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRawFamily
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotalLocalBijection
 
 /-!
 # Actual local representatives for the total frame family
@@ -14,6 +16,8 @@ Relative frame sheafification is a local bijection on the actual parameter
 scheme. Passing to the total family preserves this property over the original
 field. Thus the represented family is locally described by actual scalar frames.
 -/
+
+@[expose] public section
 
 noncomputable section
 

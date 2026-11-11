@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.BigOperators.Finprod
-import Mathlib.Algebra.Field.Defs
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SerrePairingInt
-import Nyll.AlgebraicCurves.Cohomology.SerrePairing
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.BigOperators.Finprod
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SerrePairingInt
+public import Nyll.AlgebraicCurves.Cohomology.SerrePairing
 
 /-!
 Identification of the integral Čech Serre pairing with the curve Serre pairing.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

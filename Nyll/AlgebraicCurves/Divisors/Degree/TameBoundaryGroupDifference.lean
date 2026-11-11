@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferenceTameIntegral
-import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalFormalLift
-import Nyll.SchemeTheory.GroupSchemes.IntegralGroupPowerSeries
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferenceTameIntegral
+public import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalFormalLift
+public import Nyll.SchemeTheory.GroupSchemes.IntegralGroupPowerSeries
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
 
 /-! # Integral differences for the actual reciprocal boundary lifts
 
@@ -17,6 +21,8 @@ shift have integral differences reducing to the unit. A finite list of these
 factors, with repetitions retained, has the same property by the group law.
 The finite-flat interior block is not included in this tame assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

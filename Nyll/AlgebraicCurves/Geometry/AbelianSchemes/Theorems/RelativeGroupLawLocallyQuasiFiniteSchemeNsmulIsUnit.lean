@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Morphisms.QuasiFinite
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFormallyUnramifiedSchemeNsmulSqZero
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawEqOneSqZero
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
+module
+
+public import Nyll.SchemeTheory.Morphisms.QuasiFinite
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFormallyUnramifiedSchemeNsmulSqZero
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawEqOneSqZero
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
 
 /-!
 # Relative Group Law locally Quasi Finite scheme Nsmul of is Unit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

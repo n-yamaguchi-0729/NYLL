@@ -4,16 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMultiplicationCover
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTransitions
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTranslations
-import Nyll.AbelianVarieties.Tate.FullTateModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Mathlib.Algebra.Group.Submonoid.Defs
+module
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPoints
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.ProCGroups.Abelian.FullTateModule
+public import Nyll.AbelianVarieties.Tate.FiniteTorsion
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMultiplicationCover
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTransitions
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationTranslations
+public import Nyll.AbelianVarieties.Tate.FullTateModule
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Mathlib.Algebra.Group.Submonoid.Defs
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.AlgebraicPoints
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.ProCGroups.Abelian.FullTateModule
 
 /-!
 # Actual torsion fibres of invertible multiplication covers
@@ -22,6 +25,10 @@ The indices form the multiplicative submonoid of positive integers invertible
 in the ground field. The actual fibre comparison and its transition formula
 work in arbitrary characteristic over a separably closed field.
 -/
+
+@[expose] public section
+
+universe u
 
 noncomputable section
 
@@ -33,7 +40,7 @@ open RelativeGroupLaw_schemeNsmul_comp_eq_comp_schemeNsmul_of_hom.S17Glue
 namespace GoodReductionJacobian.RelativeGroupLaw.UnitMultiplication
 
 /-- The positive multiplication indices invertible in the ground field. -/
-def unitIndices (K : Type) [Field K] : Submonoid ℕ+ where
+def unitIndices (K : Type u) [Field K] : Submonoid ℕ+ where
   carrier := {n | IsUnit ((n : ℕ) : K)}
   one_mem' := by
     change IsUnit ((1 : ℕ) : K)
@@ -45,7 +52,7 @@ def unitIndices (K : Type) [Field K] : Submonoid ℕ+ where
     rw [Nat.cast_mul]
     exact ha.mul hb
 
-variable {K : Type} [Field K] {A : Scheme} {f : A ⟶ Spec (CommRingCat.of K)}
+variable {K : Type u} [Field K] {A : Scheme.{u}} {f : A ⟶ Spec (CommRingCat.of K)}
   (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
 
 /-- The actual multiplication cover at an allowed index. -/
@@ -160,12 +167,12 @@ theorem fiberEquivTorsion_transition
 def translation [IsProper f] [Smooth f] (n : unitIndices K)
     (t : SchemeHomOver (𝟙 (Spec (CommRingCat.of K))) f)
     (ht : G.IsTorsionPoint (𝟙 _) (n.1 : ℕ) t) : Aut (cover G hc n) :=
-  MorphismProperty.Over.isoMk (G.translateIso t)
-    (G.translate_comp_schemeNsmul hc (n.1 : ℕ) t ht)
+  Aut.of (MorphismProperty.Over.isoMk (G.sectionTranslationIso t)
+    (G.translate_comp_schemeNsmul hc (n.1 : ℕ) t ht))
 
-/-- Every allowed actual torsion group is finite over a separably closed field. -/
-theorem finite_torsionLevel [IsSepClosed K] [IsProper f] [Smooth f]
+/-- Every allowed actual torsion group is finite over any field. -/
+theorem finite_torsionLevel [IsProper f] [Smooth f]
     (n : unitIndices K) : Finite (ProCGroups.torsionLevel (G.AlgPoints hc K) n.1) :=
-  Finite.of_equiv _ (fiberEquivTorsion G hc n)
+  G.finite_torsionLevel_of_isUnit hc K n.1 n.2
 
 end GoodReductionJacobian.RelativeGroupLaw.UnitMultiplication

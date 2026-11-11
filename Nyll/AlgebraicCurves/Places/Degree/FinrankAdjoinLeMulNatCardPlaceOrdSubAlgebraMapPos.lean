@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Places.Orders.FinsetSumOrdSubAlgebraMapEqFinrank
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Finrank adjoin le mul nat Card place ord sub algebra Map pos of forall ord le

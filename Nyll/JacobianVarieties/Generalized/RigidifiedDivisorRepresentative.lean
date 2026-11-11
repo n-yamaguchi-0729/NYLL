@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.EventuallyNormalizedSection
-import Nyll.JacobianVarieties.Generalized.NormalizedSectionNonzero
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.JacobianVarieties.Generalized.EventuallyNormalizedSection
+public import Nyll.JacobianVarieties.Generalized.NormalizedSectionNonzero
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
 # Concrete divisor representatives of rigidified line bundles
@@ -18,6 +20,8 @@ from the full modulus. The numerator is the zero divisor of the normalized
 section constructed by twisting at a rational point outside the modulus.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -27,7 +31,8 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.GeneralizedJacobian.RigidifiedLineBundle
 
-private theorem fiberPointIdeal_isInvertible
+/-- The ideal of a section in a smooth curve fibre is invertible. -/
+theorem fiberPointIdeal_isInvertible
     {C S : Scheme.{u}} {c : C ⟶ S} [IsProper c]
     [SmoothOfRelativeDimension 1 c]
     {K : Type u} [Field K] (x : Spec (CommRingCat.of K) ⟶ S)

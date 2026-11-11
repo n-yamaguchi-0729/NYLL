@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
-import Nyll.JacobianVarieties.Generalized.ModulusFamilySumOverlap
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
-import Mathlib.AlgebraicGeometry.Gluing
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilySumOverlap
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Gluing actual regular modulus sums over an algebraically closed field
@@ -17,6 +20,8 @@ class identifies their restrictions, and full modulus invariance makes these
 regular maps equal on the reduced overlaps. Hence they glue to a morphism
 on the actual constructed generalized Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

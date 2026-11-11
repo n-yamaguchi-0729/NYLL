@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.RROpensInjectiveMemEllSubSumSingleAddEqEll
-import Mathlib.Tactic.Linarith
-import Lean.Elab.Tactic.Omega
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.RROpensInjectiveMemEllSubSumSingleAddEqEll
+public import Mathlib.Tactic.Linarith
+public import Lean.Elab.Tactic.Omega
 
 /-! Simultaneous point selection in the nonspecial range, using the common exact-drop theorem. -/
+
+@[expose] public section
 
 universe u v w
 

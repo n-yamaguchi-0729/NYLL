@@ -4,9 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.GaloisFiniteStageFunctions
-import Mathlib.GroupTheory.NoncommPiCoprod
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Nyll.GaloisCohomology.Topology.GaloisFiniteStageFunctions
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.GroupTheory.NoncommPiCoprod
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Nyll.ProCGroups.Cohomology.ContinuousMapFiniteStage
 
 /-!
 # Finite Galois stages for finite tuples
@@ -16,6 +23,8 @@ Galois group factors through one finite Galois field. This extends the
 two-coordinate result to the arbitrary degrees needed for cohomology.
 -/
 
+@[expose] public section
+
 noncomputable section
 open scoped Topology
 open ProCGroups ProCGroups.ProC
@@ -23,6 +32,8 @@ open ProCGroups ProCGroups.ProC
 namespace GaloisCohomology
 
 universe u v w t
+section GaloisExtension
+
 variable {K : Type u} {Ω : Type v} [Field K] [Field Ω]
   [Algebra K Ω] [IsGalois K Ω]
 
@@ -113,5 +124,67 @@ theorem exists_finiteGalois_factor_continuous_tuple_discrete
   have hz' : Continuous z' := hz.subtype_mk (fun a => ⟨a, rfl⟩)
   obtain ⟨E, zE, hE⟩ := exists_finiteGalois_factor_continuous_tuple z' hz'
   exact ⟨E, fun a => (zE a).val, fun a => congrArg Subtype.val (hE a)⟩
+
+end GaloisExtension
+
+/-- A continuous discrete-valued function on a finite power of an arbitrary
+absolute Galois group factors through an actual finite Galois subfield of its
+algebraic closure. Restriction to the separable closure supplies the Galois
+ambient extension; the resulting stage is then mapped into the original closure. -/
+theorem exists_finiteGalois_factor_absolute_tuple_discrete
+    (K : Type u) [Field K]
+    {ι : Type t} [Finite ι]
+    {Y : Type w} [TopologicalSpace Y] [DiscreteTopology Y]
+    (z : (ι → Gal(AlgebraicClosure K/K)) → Y) (hz : Continuous z) :
+    ∃ (M : FiniteGaloisIntermediateField K (AlgebraicClosure K))
+      (zM : (ι → Gal(M/K)) → Y),
+      ∀ a : ι → Gal(AlgebraicClosure K/K),
+        zM (fun i => AlgEquiv.restrictNormalHom M (a i)) = z a := by
+  let c := ValuationTheory.Completion.separableClosureAutContinuousEquiv K
+  let z' : (ι → Gal(SeparableClosure K/K)) → Y :=
+    fun a => z (fun i => c.symm (a i))
+  have hz' : Continuous z' :=
+    hz.comp (continuous_pi fun i => c.symm.continuous.comp (continuous_apply i))
+  obtain ⟨E, zE, hE⟩ := exists_finiteGalois_factor_continuous_tuple_discrete z' hz'
+  let j : SeparableClosure K →ₐ[K] AlgebraicClosure K :=
+    (separableClosure K (AlgebraicClosure K)).val
+  let M₀ : IntermediateField K (AlgebraicClosure K) := E.toIntermediateField.map j
+  let e₀ : E ≃ₐ[K] M₀ := IntermediateField.equivMap E.toIntermediateField j
+  let M : FiniteGaloisIntermediateField K (AlgebraicClosure K) :=
+    { toIntermediateField := M₀
+      finiteDimensional := LinearEquiv.finiteDimensional e₀.toLinearEquiv
+      isGalois := IsGalois.of_algEquiv e₀ }
+  have : IsGalois K M.toIntermediateField := M.isGalois
+  let e : E ≃ₐ[K] M := e₀
+  have he (x : E) : (e x : AlgebraicClosure K) = j (x : SeparableClosure K) :=
+    IntermediateField.coe_equivMap_apply E.toIntermediateField j x
+  have hact (σ : Gal(AlgebraicClosure K/K)) (x : E) :
+      (e (AlgEquiv.restrictNormalHom E (c σ) x) : AlgebraicClosure K) =
+        σ (e x : AlgebraicClosure K) := by
+    rw [he, he]
+    exact (congrArg j (AlgEquiv.restrictNormalHom_apply E.toIntermediateField
+      (c σ) x)).trans
+        (ValuationTheory.Completion.separableClosureAutContinuousEquiv_apply K σ x)
+  have hrestrict (σ : Gal(AlgebraicClosure K/K)) :
+      AlgEquiv.autCongr e.symm (AlgEquiv.restrictNormalHom M σ) =
+        AlgEquiv.restrictNormalHom E (c σ) := by
+    apply AlgEquiv.ext
+    intro x
+    change e.symm (AlgEquiv.restrictNormalHom M σ (e x)) =
+      AlgEquiv.restrictNormalHom E (c σ) x
+    apply e.injective
+    rw [e.apply_symm_apply]
+    apply Subtype.ext
+    exact (AlgEquiv.restrictNormalHom_apply M.toIntermediateField σ (e x)).trans
+      (hact σ x).symm
+  refine ⟨M, fun a => zE (fun i => AlgEquiv.autCongr e.symm (a i)), ?_⟩
+  intro a
+  calc
+    zE (fun i => AlgEquiv.autCongr e.symm
+        (AlgEquiv.restrictNormalHom M (a i))) =
+        zE (fun i => AlgEquiv.restrictNormalHom E (c (a i))) :=
+      congrArg zE (funext (fun i => hrestrict (a i)))
+    _ = z' (fun i => c (a i)) := hE (fun i => c (a i))
+    _ = z a := congrArg z (funext (fun i => c.symm_apply_apply (a i)))
 
 end GaloisCohomology

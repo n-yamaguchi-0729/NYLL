@@ -5,9 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Equivariant morphisms from actual pointed torsors -/
+
+@[expose] public section
 
 noncomputable section
 

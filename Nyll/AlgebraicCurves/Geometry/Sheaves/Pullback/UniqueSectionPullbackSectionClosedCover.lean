@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoHomAppPullbackLocalSectionToUnitSection
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsClosedImmersionAppInjectiveAppPullbackEqReduced
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackUnitIsoHomAppPullbackLocalSectionToUnitSection
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsClosedImmersionAppInjectiveAppPullbackEqReduced
 
 /-!
 # Scheme Modules exists unique section of pullback Section closed Cover
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

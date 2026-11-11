@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! # Integral coefficient extension of an actual regular-block point
 
@@ -14,6 +16,8 @@ formal difference into G(R[[T]]). Its whole residue is the group unit,
 and its generic coefficient extension is computed without replacing the
 original group point or reconstructing a trace.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -52,7 +56,8 @@ open scoped CategoryTheory.MonObj
 
 namespace AlgebraicGeometry.RegularBlockFormalDeformation
 
-private def coefficientMap {K A B : Type u} [Field K] [CommRing A] [CommRing B]
+/-- The native spectrum map induced by an integral coefficient homomorphism. -/
+def coefficientMap {K A B : Type u} [Field K] [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B] (j : A →ₐ[K] B) :
     Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K (PowerSeries B)))) ⟶
       Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K (PowerSeries A)))) :=

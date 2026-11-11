@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The actual original-field, stalk-fraction and ambient-field tower
@@ -26,6 +28,8 @@ canonical algebras attached to these two constructed maps form a genuine
 scalar tower. Fraction-field uniqueness also compares this map with the
 existing canonical FractionRing A map used by the normal-local pi1 sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

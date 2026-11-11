@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.GeneratorComplement
-import Nyll.SchemeTheory.NoetherNormalization.GeneratorReduction
-import Nyll.SchemeTheory.NoetherNormalization.Generators
-import Nyll.SchemeTheory.NoetherNormalization.IntegralRelation
-import Nyll.SchemeTheory.NoetherNormalization.LinearChange
-import Nyll.SchemeTheory.NoetherNormalization.Nonvanishing
-import Nyll.SchemeTheory.NoetherNormalization.PowerChange
-import Nyll.SchemeTheory.NoetherNormalization.Trdeg
+module
+
+public import Nyll.SchemeTheory.NoetherNormalization.GeneratorComplement
+public import Nyll.SchemeTheory.NoetherNormalization.GeneratorReduction
+public import Nyll.SchemeTheory.NoetherNormalization.Generators
+public import Nyll.SchemeTheory.NoetherNormalization.IntegralRelation
+public import Nyll.SchemeTheory.NoetherNormalization.LinearChange
+public import Nyll.SchemeTheory.NoetherNormalization.Nonvanishing
+public import Nyll.SchemeTheory.NoetherNormalization.PowerChange
+public import Nyll.SchemeTheory.NoetherNormalization.Trdeg
 
 /-!
 # Noether normalization

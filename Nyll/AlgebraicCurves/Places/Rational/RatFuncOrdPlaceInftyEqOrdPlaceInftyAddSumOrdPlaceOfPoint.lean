@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
-import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.NatDegreeMapEqCardRoots
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.NatDegreeMapEqCardRoots
 
 /-!
 # Rational Function Field ord place Infty eq ord place Infty add sum ord place Of Point of
 reduction
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -348,7 +352,10 @@ theorem rho_constEmb (a : A) :
     rw [e1, rho_polyK O ρ hρ, RatFunc.algebraMap_C, ← RatFunc.algebraMap_eq_C]
   have hinf : ρ (constEmb A O hO ⟨_, hmA⟩) = 0 := by
     by_cases hm0 : (a : E) - algebraMap K E k = 0
-    · have : constEmb A O hO ⟨_, hmA⟩ = 0 := Subtype.ext (by simp [hm0])
+    · have : constEmb A O hO ⟨_, hmA⟩ = 0 := Subtype.ext (by
+        rw [coe_constEmb]
+        change algebraMap E (RatFunc E) ((a : E) - algebraMap K E k) = 0
+        rw [hm0, map_zero])
       rw [this, map_zero]
     apply map_eq_zero_of_not_isUnit O ρ hker
     intro hu

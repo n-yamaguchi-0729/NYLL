@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.GenusOneAlbanese
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianTateComparison
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
-import Nyll.ProCGroups.Abelian.FullTateModule
-import Nyll.SchemeTheory.Pi1.Affine.Over
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.Topology.JacobsonSpace
+module
+
+public import Nyll.JacobianVarieties.Albanese.GenusOneAlbanese
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianTateComparison
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Nyll.ProCGroups.Abelian.FullTateModule
+public import Nyll.SchemeTheory.Pi1.Affine.Over
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.Topology.JacobsonSpace
 
 /-!
 # The full Tate module comparison for an arbitrary proper genus-one curve
@@ -22,6 +24,8 @@ genus comparison and Abel--Jacobi isomorphism then identify the original curve
 with its constructed Albanese variety. Pullback of finite etale covers transports
 the fundamental group to the actual full Tate module of its algebraic points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

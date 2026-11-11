@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.MemRiemannRochSpaceHasValueZpowMul
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.MemRiemannRochSpaceHasValueZpowMul
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
 
 /-!
 # Finite dimension and dimension formula for a rational Riemann–Roch space
 
 Transport the existing polynomial description along the given field equivalence.
 -/
+
+@[expose] public section
 
 namespace AlgebraicCurves.Cohomology.RiemannRoch.Proofs.FiniteDimFinrankRRSpaceRingEquiv
 

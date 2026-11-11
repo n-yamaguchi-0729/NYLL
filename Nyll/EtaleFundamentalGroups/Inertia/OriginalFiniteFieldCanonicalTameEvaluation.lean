@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameCharacter
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealCanonicalTameCharacter
-import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgCanonicalTameCharacter
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealCanonicalTameCharacter
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # Evaluation of original finite-field tame characters
@@ -18,6 +20,8 @@ import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 Identifies the intrinsic canonical character with the normalized finite ideal character and
 evaluates the original finite-field character on its normalization inertia image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Limits.Final
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Filtered.Final
+public import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Inverse systems of generalized Jacobians and cofinal modulus families -/
+
+@[expose] public section
 
 noncomputable section
 

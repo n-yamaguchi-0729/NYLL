@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleNeighborhoods
-import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.Cones
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleNeighborhoods
+public import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 
 /-!
@@ -27,6 +29,8 @@ extensionality. The stages retain the commutative algebra structures used
 by their supplied étaleness proofs.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits SchemeTheory
@@ -35,7 +39,8 @@ namespace EtaleFundamentalGroups.Inertia
 
 universe u v w
 
-private def awayMap {A : Type*} [CommRing A]
+/-- The algebra map between principal localizations induced by divisibility. -/
+def awayMap {A : Type*} [CommRing A]
     (R S : CommAlgCat A)
     (f : R →ₐ[A] S) (r : R) (s : S) (h : f r ∣ s) :
     localizationAwayCommAlgCat A R r →ₐ[A] localizationAwayCommAlgCat A S s := by
@@ -63,7 +68,8 @@ private theorem awayHom_ext {A R B : Type*}
   ext x
   exact h x
 
-private def awayToPrime {A R S : Type*}
+/-- The algebra map from a principal localization into a prime localization. -/
+def awayToPrime {A R S : Type*}
     [CommRing A] [CommRing R] [CommRing S] [Algebra A R] [Algebra A S]
     (f : R →ₐ[A] S) (r : R) (p : Ideal S) [p.IsPrime] (h : f r ∉ p) :
     localizationAwayCommAlgCat A R r →ₐ[A] Localization.AtPrime p := by

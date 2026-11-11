@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
-import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqProper
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
+public import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqProper
 
 /-! # Realizing an open curve as a full modulus complement
 
@@ -16,6 +18,8 @@ proper integral curve supplies an actual relative effective Cartier divisor.
 Its ideal is the reduced vanishing ideal of that boundary. This construction
 does not require rational boundary points or an algebraically closed field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

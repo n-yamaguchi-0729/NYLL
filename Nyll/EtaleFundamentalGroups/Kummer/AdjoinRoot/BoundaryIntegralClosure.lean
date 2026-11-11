@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.ReducedBoundary
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Ramification.BaseChange.Equiv
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.ReducedBoundary
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Ramification.BaseChange.Equiv
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # The literal integral closure at a reduced Kummer boundary
@@ -39,6 +41,8 @@ away-cover generic fiber in `BoundaryGenericFiber`.
 This is the normalization calculation for Stacks Project, Example 58.31.4
 (tag `0EYF`): https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

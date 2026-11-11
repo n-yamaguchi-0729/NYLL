@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveOverCompletion
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FlatAssociatedGraded
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveOverCompletion
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Original transition layers without a complete coefficient ring
@@ -36,6 +38,8 @@ The pure-tensor formula uses the original compatible sequence and its
 original projections. Completeness of an affine coordinate ring is not
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -62,7 +66,7 @@ def completedSectionsOriginalEval (n : ℕ) : C →ₗ[R] M n :=
   (eval M t n).comp (completedSectionsEquiv M t I hpow).symm.toLinearMap
 
 omit [IsNoetherianRing R] [∀ n : ℕ, Module.Finite R (M n)] in
-private theorem completedPower_restrictScalars (n : ℕ) :
+theorem completedPower_restrictScalars (n : ℕ) :
     (((I.map (algebraMap R (AdicCompletion I R))) ^ (n + 1) •
       (⊤ : Submodule (AdicCompletion I R) C)).restrictScalars R) =
         I ^ (n + 1) • (⊤ : Submodule R C) := by
@@ -111,7 +115,8 @@ theorem completedSectionsOriginalEval_ker (n : ℕ) :
     (completedOriginalReductionEquiv M t I hpow ht hker n).map_eq_zero_iff,
     Submodule.Quotient.mk_eq_zero]
 
-private def completedOriginalLayerEval (n : ℕ) :
+/-- Evaluate the ideal-power filtration in its original finite-stage layer. -/
+def completedOriginalLayerEval (n : ℕ) :
     (I.stableFiltration (⊤ : Submodule R C)).N n →ₗ[R]
       ↥(I ^ n • (⊤ : Submodule R (M n))) :=
   LinearMap.codRestrict (I ^ n • (⊤ : Submodule R (M n)))
@@ -121,7 +126,7 @@ private def completedOriginalLayerEval (n : ℕ) :
       (completedSectionsOriginalEval M t I hpow n) x.property)
 
 include ht hker in
-private theorem completedOriginalLayerEval_surjective (n : ℕ) :
+theorem completedOriginalLayerEval_surjective (n : ℕ) :
     Function.Surjective (completedOriginalLayerEval M t I hpow n) := by
   have hmap : (I ^ n • (⊤ : Submodule R C)).map
       (completedSectionsOriginalEval M t I hpow n) =
@@ -138,7 +143,7 @@ private theorem completedOriginalLayerEval_surjective (n : ℕ) :
   exact ⟨⟨x, hx⟩, Subtype.ext hxy⟩
 
 include ht hker in
-private theorem completedOriginalLayerEval_ker (n : ℕ) :
+theorem completedOriginalLayerEval_ker (n : ℕ) :
     (completedOriginalLayerEval M t I hpow n).ker =
       (I.stableFiltration (⊤ : Submodule R C)).gradeSubmodule n := by
   apply Submodule.ext
@@ -151,7 +156,8 @@ private theorem completedOriginalLayerEval_ker (n : ℕ) :
   exact ⟨fun hx => hiff.mp (congrArg Subtype.val hx),
     fun hx => Subtype.ext (hiff.mpr hx)⟩
 
-private def completedOriginalLayerEquiv (n : ℕ) :
+/-- The associated graded layer identified with its original finite-stage image. -/
+def completedOriginalLayerEquiv (n : ℕ) :
     (I.stableFiltration (⊤ : Submodule R C)).gradeModule n ≃ₗ[R]
       ↥(I ^ n • (⊤ : Submodule R (M n))) :=
   (Submodule.quotEquivOfEq _ _
@@ -169,7 +175,8 @@ private theorem completedOriginalLayerEquiv_mk (n : ℕ)
   rw [LinearMap.quotKerEquivOfSurjective_apply_mk]
   rfl
 
-private def completedOriginalFirstReductionEquiv :
+/-- The first ideal quotient of completed sections identified with the original first stage. -/
+def completedOriginalFirstReductionEquiv :
     (C ⧸ (I • (⊤ : Submodule R C))) ≃ₗ[R] M 0 :=
   (Submodule.quotEquivOfEq _ (I ^ (0 + 1) • (⊤ : Submodule R C))
     (by rw [pow_one])).trans (completedOriginalReductionEquiv M t I hpow ht hker 0)

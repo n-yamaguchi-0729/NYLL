@@ -4,11 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitCoordinates
-import Nyll.SchemeTheory.GroupSchemes.VectorGroup
-import Mathlib.Algebra.Group.Equiv.TypeTags
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitCoordinates
+public import Nyll.SchemeTheory.GroupSchemes.VectorGroup
+public import Mathlib.Algebra.Group.Equiv.TypeTags
+public import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentPrincipalUnits
+public import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentUnitKernel
 
 /-! # Natural exponential coordinates for the actual nilpotent unit kernel -/
+
+@[expose] public section
 
 noncomputable section
 

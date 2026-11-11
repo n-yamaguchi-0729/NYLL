@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # The fraction ring of a prime localization
@@ -17,6 +19,8 @@ actual localizations and identifies the resulting denominator monoid.
 This allows a boundary calculation and a global normalization to use the
 same chosen field, without assuming a comparison of their fraction fields.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

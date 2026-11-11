@@ -14,6 +14,7 @@ import Nyll.AlgebraicCurves.Models.Construction.Basic
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Germ mem l Space On set Of exists centre zero
@@ -30,7 +31,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicCurve
 theorem _root_.AlgebraicCurve.germ_mem_lSpaceOn_setOf_exists_centre_zero
     (k : Type u) [Field k] [IsAlgClosed k] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k))
     [IsIntegral C] [IsProper c] (U : C.Opens) (hU : genericPoint C ∈ U) (t : Γ(C, U)) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     C.presheaf.germ U (genericPoint C) hU t ∈
       lSpaceOn {v : Place k C.functionField | ∃ z : C, z ∈ U ∧
         (∀ s : C.presheaf.stalk z,
@@ -38,8 +39,7 @@ theorem _root_.AlgebraicCurve.germ_mem_lSpaceOn_setOf_exists_centre_zero
           (s ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk z) →
             v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) < 1))} (0 :
               Divisor k C.functionField) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
-  change C.presheaf.germ U (genericPoint C) hU t ∈ lSpaceOn _ (0 : Divisor k C.functionField)
+  intro sharedOwner1
   rw [AlgebraicCurve.mem_lSpaceOn_iff]
   rintro v ⟨z, hzU, hz⟩
   have key : algebraMap (C.presheaf.stalk z) C.functionField (C.presheaf.germ U z hzU t) =

@@ -5,15 +5,19 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.RationalPresentationGlobalSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.RationalSectionPresentationRatio
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealDivisorRangeInvModuleEqLSpaceOn
-import Nyll.AlgebraicCurves.Models.Divisors.CartierGeneratorOrder
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
-import Nyll.AlgebraicCurves.Places.Restriction.PlaceEquivOrdEqEllMapDomainEq
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.RationalPresentationGlobalSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.RationalSectionPresentationRatio
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealDivisorRangeInvModuleEqLSpaceOn
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierGeneratorOrder
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
+public import Nyll.AlgebraicCurves.Places.Restriction.PlaceEquivOrdEqEllMapDomainEq
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
 
 /-! # A prescribed rational function with a Cartier pole bound gives an actual section -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,7 +42,7 @@ private theorem transportedPlace_stalkRange
     let := M.functionFieldAlgebra
     (algebraMap (M.C.presheaf.stalk x.1) M.C.functionField).range =
       (π (M.placeOfPoint x)).toValuationSubring.toSubring := by
-  let := M.functionFieldAlgebra
+  intro sharedOwner1
   apply SetLike.coe_injective
   change Set.range (algebraMap (M.C.presheaf.stalk x.1) M.C.functionField) =
     ((π (M.placeOfPoint x)).toValuationSubring : Set M.C.functionField)

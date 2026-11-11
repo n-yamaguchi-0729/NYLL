@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Composition of inverse-image sections through actual local factors
@@ -18,6 +20,8 @@ the two base-change arrows, and the actual composition-unit equation gives
 the section equation. This extends the global-section composition formula
 to arbitrary source, intermediate and original étale objects.
 -/
+
+@[expose] public section
 
 noncomputable section
 

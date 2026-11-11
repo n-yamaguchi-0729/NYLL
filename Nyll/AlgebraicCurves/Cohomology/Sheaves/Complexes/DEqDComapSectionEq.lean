@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Abel
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayRowsExact
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayDVCompBiAug
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayHomRelHPresheafZero
+module
+
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Abel
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayRowsExact
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayDVCompBiAug
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayHomRelHPresheafZero
 
 /-!
 # Cech coboundaries detected after pullback along a section
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

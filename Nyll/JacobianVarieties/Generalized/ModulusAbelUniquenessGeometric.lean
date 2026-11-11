@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessScheme
-import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
-import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessScheme
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
+public import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
 
 /-!
 # Uniqueness of the pointed generalized Abel factorization over every field
@@ -17,6 +19,8 @@ closed extensions therefore detects every geometric point. Reducedness of
 the constructed generalized Jacobian gives equality of the original group
 scheme morphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

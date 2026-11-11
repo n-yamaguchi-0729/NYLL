@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.Lagrange
-import Nyll.AlgebraicCurves.Geometry.LocalCoboundarySmallExtension
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Lagrange
+public import Nyll.AlgebraicCurves.Geometry.LocalCoboundarySmallExtension
 
 /-!
 # Exists coboundary at infinity of small Extension of split
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -122,7 +126,8 @@ def D2 (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → S[X])
   (∑ k, φ j l k * γ i k m) - (∑ k, γ i j k * φ k l m) + (∑ k, γ j l k * φ i k m) -
     (∑ k, φ i j k * γ k l m)
 
-private def _root_.InfCobSol.assoc (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → S[X]) (i j l m :
+/-- The associativity defect of the polynomial multiplication table. -/
+def _root_.InfCobSol.assoc (γ : Fin (N + 1) → Fin (N + 1) → Fin (N + 1) → S[X]) (i j l m :
   Fin (N + 1)) : S[X] :=
   (∑ k, γ i j k * γ k l m) - ∑ k, γ j l k * γ i k m
 
@@ -360,25 +365,31 @@ theorem main
         ite_true]
     exact hτm j i i' hi hi'
   let TD : Table K n := Tt.map (Polynomial.constantCoeff : K[X] →+* K)
-  have hTD : ∀ i j k, TD.γ i j k = c i j k := by
+  have hTD : ∀ i j k, (_root_.TableAlgebra.Table.γ TD) i j k = c i j k := by
     intro i j k
     change ((tw d 0 γB i j k)).coeff 0 = (γB i j k).coeff (d i + d j - d k)
     rw [tw_apply, coeff_reflect, revAt_zero, zero_add]
   let D := TAlg TD
   let redD : Bt →+* D := TAlg.mapHom Tt TD Polynomial.constantCoeff (fun _ _ _ => rfl)
   set T : Matrix (Fin (n + 1)) (Fin (n + 1)) K := Matrix.of τ with hTdef
-  let χf : D → (Fin (n + 1) → K) := fun x j => ∑ i, x.coord i * τ j i
+  let χf : D → (Fin (n + 1) → K) := fun x j =>
+    ∑ i, (_root_.TableAlgebra.TAlg.coord x) i * τ j i
   have hχmul : ∀ x y, χf (x * y) = χf x * χf y := by
     intro x y; funext j
-    change ∑ m, (cst TD.γ x.coord y.coord m) * τ j m = (∑ i, x.coord i * τ j i) * ∑ k, y.coord k *
-      τ j k
+    change
+      (∑ m, cst (_root_.TableAlgebra.Table.γ TD) (_root_.TableAlgebra.TAlg.coord x)
+        (_root_.TableAlgebra.TAlg.coord y) m * τ j m) =
+      (∑ i, (_root_.TableAlgebra.TAlg.coord x) i * τ j i) *
+        ∑ k, (_root_.TableAlgebra.TAlg.coord y) k * τ j k
     simp only [cst_apply, hTD, Finset.sum_mul]
     rw [Finset.sum_comm]
     refine Finset.sum_congr rfl fun i _ => ?_
     rw [Finset.mul_sum, Finset.sum_comm]
     refine Finset.sum_congr rfl fun k _ => ?_
-    rw [show x.coord i * τ j i * (y.coord k * τ j k) = x.coord i * y.coord k * (τ j i * τ j k)
-      by ring,
+    rw [show (_root_.TableAlgebra.TAlg.coord x) i * τ j i *
+        ((_root_.TableAlgebra.TAlg.coord y) k * τ j k) =
+        (_root_.TableAlgebra.TAlg.coord x) i * (_root_.TableAlgebra.TAlg.coord y) k *
+          (τ j i * τ j k) by ring,
       hτm' j i k, Finset.mul_sum]
     exact Finset.sum_congr rfl fun m _ => by ring
   let χ : D →+* (Fin (n + 1) → K) :=
@@ -387,28 +398,32 @@ theorem main
         funext j
         change ∑ i, (Pi.single 0 1 : Fin (n + 1) → K) i * τ j i = 1
         rw [Finset.sum_eq_single 0]
-        · simp [hτ0]
-        · intro i _ hi; simp [Pi.single_eq_of_ne hi]
+        · rw [Pi.single_eq_same, one_mul, hτ0]
+        · intro i _ hi; rw [Pi.single_eq_of_ne hi, zero_mul]
         · intro h; exact absurd (Finset.mem_univ _) h
       map_mul' := hχmul
       map_zero' := by
         funext j
-        change ∑ i, (0 : D).coord i * τ j i = 0
-        simp [TAlg.coord_zero]
+        change ∑ i, (0 : K) * τ j i = 0
+        simp only [zero_mul, Finset.sum_const_zero]
       map_add' := fun x y => by
         funext j
-        change ∑ i, (x + y).coord i * τ j i = (∑ i, x.coord i * τ j i) + ∑ i, y.coord i * τ j i
+        change (∑ i, (_root_.TableAlgebra.TAlg.coord (x + y)) i * τ j i) =
+          (∑ i, (_root_.TableAlgebra.TAlg.coord x) i * τ j i) +
+            ∑ i, (_root_.TableAlgebra.TAlg.coord y) i * τ j i
         rw [TAlg.coord_add]
         simp only [Pi.add_apply, add_mul, Finset.sum_add_distrib] }
-  have hχ : ∀ x j, χ x j = ∑ i, x.coord i * τ j i := fun x j => rfl
-  have hχT : ∀ x, χ x = T.mulVec x.coord := by
+  have hχ : ∀ x j, χ x j = ∑ i, (_root_.TableAlgebra.TAlg.coord x) i * τ j i :=
+    fun x j => rfl
+  have hχT : ∀ x, χ x = T.mulVec (_root_.TableAlgebra.TAlg.coord x) := by
     intro x; funext j
     rw [hχ, Matrix.mulVec, dotProduct]
     exact Finset.sum_congr rfl fun i _ => by rw [hTdef, Matrix.of_apply, mul_comm]
   have hχinj : Function.Injective χ := by
     intro x y hxy
     ext1
-    have h1 : T.mulVec x.coord = T.mulVec y.coord := by rw [← hχT, ← hχT, hxy]
+    have h1 : T.mulVec (_root_.TableAlgebra.TAlg.coord x) =
+        T.mulVec (_root_.TableAlgebra.TAlg.coord y) := by rw [← hχT, ← hχT, hxy]
     have h2 := congrArg (T⁻¹.mulVec) h1
     rwa [Matrix.mulVec_mulVec, Matrix.mulVec_mulVec, Matrix.nonsing_inv_mul T hτu,
       Matrix.one_mulVec, Matrix.one_mulVec] at h2
@@ -428,7 +443,8 @@ theorem main
   have hscal : χ.comp (redD.comp ((algebraMap K[X] Bt).comp C)) =
       algebraMap K (Fin (n + 1) → K) := by
     refine RingHom.ext fun c0 => funext fun j => ?_
-    change ∑ i, Polynomial.constantCoeff ((algebraMap K[X] Bt (C c0)).coord i) * τ j i = c0
+    change ∑ i, Polynomial.constantCoeff
+      ((_root_.TableAlgebra.TAlg.coord (algebraMap K[X] Bt (C c0))) i) * τ j i = c0
     rw [TAlg.algebraMap_coord, Finset.sum_eq_single 0]
     · rw [Pi.single_eq_same, Polynomial.constantCoeff_apply, coeff_C_zero, hτ0, mul_one]
     · intro i _ hi; rw [Pi.single_eq_of_ne hi, map_zero, zero_mul]
@@ -456,11 +472,12 @@ theorem main
       rw [hev, hq₀]
     have h2 : redD (z - aeval y (q₀.map C)) = 0 :=
       hχinj (by rw [map_sub, map_sub, h1, sub_self, map_zero])
-    have h3 : ∀ k, (z - aeval y (q₀.map C)).coord k ∈ Ideal.span {(X : K[X])} := by
+    have h3 : ∀ k, (_root_.TableAlgebra.TAlg.coord (z - aeval y (q₀.map C))) k ∈
+        Ideal.span {(X : K[X])} := by
       intro k
       rw [Ideal.mem_span_singleton, Polynomial.X_dvd_iff]
-      have := congrArg (fun x : D => x.coord k) h2
-      change ((z - aeval y (q₀.map C)).coord k).coeff 0 = 0 at this
+      have := congrArg (fun x : D => (_root_.TableAlgebra.TAlg.coord x) k) h2
+      change ((_root_.TableAlgebra.TAlg.coord (z - aeval y (q₀.map C))) k).coeff 0 = 0 at this
       exact this
     rw [TAlg.eq_sum_coord_smul_basis Tt (z - aeval y (q₀.map C))]
     exact Submodule.sum_mem _ fun k _ => Submodule.smul_mem_smul (h3 k) Submodule.mem_top

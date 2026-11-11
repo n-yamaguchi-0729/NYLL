@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneMap
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionScheme
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneMap
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionScheme
 
 /-! # The intrinsic Abel scheme square for the actual scalar-extended divisor -/
+
+@[expose] public section
 
 noncomputable section
 

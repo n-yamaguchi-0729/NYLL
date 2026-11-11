@@ -16,6 +16,7 @@ import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Differentials.Logarithmic.LocalUnitDerivativeRegular
 import Nyll.AlgebraicCurves.Places.Restriction.MemComapIffOrdNonneg
 import Nyll.AlgebraicCurves.Places.Basic
+import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 
 /-!
 # Pullback Along mem regular Differentials of is Integral

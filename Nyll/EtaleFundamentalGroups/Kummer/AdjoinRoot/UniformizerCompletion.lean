@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Adic.MappedIdeal
-import Nyll.EtaleFundamentalGroups.Completions.Adic.PowerCofinality
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Adic.MappedIdeal
+public import Nyll.EtaleFundamentalGroups.Completions.Adic.PowerCofinality
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The actual completion of a uniformizer root over an arbitrary DVR
@@ -36,6 +38,8 @@ two-dimensional ring, completeness hypothesis, or comparison map is input.
 This comparison is used to descend the local ramification removal in
 Stacks Project, Proposition 58.30.2, https://stacks.math.columbia.edu/tag/0C0Q.
 -/
+
+@[expose] public section
 
 noncomputable section
 

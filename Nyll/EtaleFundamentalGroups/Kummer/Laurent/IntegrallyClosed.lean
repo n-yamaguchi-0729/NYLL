@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Polynomial.IsIntegral
+module
+
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Polynomial.IsIntegral
 
 /-!
 # Integral closedness of finite lattice Laurent algebras
@@ -18,6 +20,8 @@ closed, and integral closedness survives this localization.  Iterating this
 construction and transporting along the explicit finite-coordinate Laurent
 equivalence gives the result for the lattice target in the Smith presentation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

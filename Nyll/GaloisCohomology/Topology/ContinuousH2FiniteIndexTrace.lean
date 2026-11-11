@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.GroupTheory.H2FiniteIndexTrace
-import Nyll.GaloisCohomology.Topology.ContinuousSubgroupPrimitiveExtension
-import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
+module
+
+public import Nyll.GaloisCohomology.GroupTheory.H2FiniteIndexTrace
+public import Nyll.GaloisCohomology.Topology.ContinuousSubgroupPrimitiveExtension
+public import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
+public import Nyll.GaloisCohomology.Topology.ContinuousRepresentationUniverseLift
 
 /-!
 # Finite-index detection of actual continuous degree-two cohomology
@@ -16,16 +19,20 @@ and the prism correction. The existing algebraic coefficient trace then
 averages this continuous primitive, so the subgroup index kills the class.
 -/
 
+@[expose] public section
+
 noncomputable section
 open CategoryTheory ContRepresentation TopRep
 open ReidemeisterSchreier.Profinite
 
 namespace ContinuousCohomology
 
-variable {R : Type} [CommRing R] [TopologicalSpace R]
-variable {G : Type} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+universe r u v
+
+variable {R : Type r} [CommRing R] [TopologicalSpace R]
+variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G]
-variable (X : TopRep.{0} R G) (H : OpenSubgroup G)
+variable (X : TopRep.{u} R G) (H : OpenSubgroup G)
 
 omit [CompactSpace G] in
 private theorem restricted_degreeTwo_value
@@ -160,5 +167,18 @@ theorem H2_eq_zero_of_primeToIndex_open_restriction
   have ho : addOrderOf v = p := addOrderOf_eq_prime hpv hv
   have hi := index_nsmul_H2_eq_zero_of_open_restriction X H hH v
   exact hindex (ho ▸ addOrderOf_dvd_of_nsmul_eq_zero hi)
+
+/-- The same actual continuous trace applies to independently sized input
+coefficients, using their lifted homogeneous cochains and original subgroup index. -/
+theorem index_nsmul_universeLiftH2_eq_zero_of_open_restriction
+    (X : TopRep.{v} R G)
+    (hH : ∀ w : continuousCohomology 2
+      (TopRep.res (TopRep.universeLiftOpenSubgroup.{u, v} H).toSubgroup.subtype
+        (TopRep.universeLift X)), w = 0)
+    (a : TopRep.universeLiftCohomology X 2) : H.toSubgroup.index • a = 0 := by
+  have h := index_nsmul_H2_eq_zero_of_open_restriction
+    (TopRep.universeLift X) (TopRep.universeLiftOpenSubgroup H) hH a
+  rw [TopRep.universeLiftOpenSubgroup_index] at h
+  exact h
 
 end ContinuousCohomology

@@ -53,3 +53,5 @@ import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
 import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalFormalLift
 import Nyll.AlgebraicCurves.Places.Orders.IntegralGroupPowerSeriesOrders
 import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalInfinity
+import Nyll.AlgebraicCurves.Places.Orders.MinpolyCoefficientOrder
+import Nyll.AlgebraicCurves.Places.Orders.OrderOfSum

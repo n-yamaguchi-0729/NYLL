@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+module
+
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # exists rational Point enumeration of nat Card pullback eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

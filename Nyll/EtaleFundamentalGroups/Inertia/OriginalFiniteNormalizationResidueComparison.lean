@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgStabilizerResidueMorphism
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationDecomposition
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationResidueCoefficient
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Nyll.SchemeTheory.RingTheory.Ramification.NativeAlgebraResidueCoefficient
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgStabilizerResidueMorphism
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationDecomposition
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationResidueCoefficient
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Nyll.SchemeTheory.RingTheory.Ramification.NativeAlgebraResidueCoefficient
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Residue comparison for decomposition restriction
@@ -19,6 +21,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Factors the original normalization residue morphism through decomposition restriction and the
 intrinsic native residue morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

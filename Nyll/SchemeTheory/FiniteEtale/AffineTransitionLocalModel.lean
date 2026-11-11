@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.AffineTransitionCharts
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.AffineTransitionCharts
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Recovered local models of an actual finite-etale cover
@@ -16,6 +18,8 @@ stage cover and construct all local finite-etale models at one later stage.
 The restricted cone maps are proved cartesian, so the recovery maps identify
 the actual base changes of these charts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

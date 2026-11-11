@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.ActionComparison
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
+module
+
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.ActionComparison
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
 
 /-!
 # Cyclic coordinates for localized normalization inertia
@@ -18,6 +20,8 @@ normalization inertia group is cyclic.  This file turns that source theorem
 into a noncomputably chosen additive coordinate system indexed by the actual
 group cardinality.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,7 +38,7 @@ variable [Algebra K L] [Algebra A L] [IsScalarTower A K L]
 variable [IsRegularRing A]
 variable [FiniteDimensional K L] [IsGalois K L]
 
-private theorem localizedNormalizationInertia_isCyclic
+theorem localizedNormalizationInertia_isCyclic
     (P : Ideal A) [P.IsPrime] (hP : P.height = 1)
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
     [CharZero (A ⧸ P)] :

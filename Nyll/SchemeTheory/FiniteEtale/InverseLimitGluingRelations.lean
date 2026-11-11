@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RelativeOverlap
-import Nyll.SchemeTheory.Descent.AffineTransitionOverEquality
+module
+
+public import Nyll.SchemeTheory.Gluing.RelativeOverlap
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverEquality
 
 /-!
 # Actual gluing relations at a common inverse-system stage
@@ -15,6 +17,8 @@ actual limit projection. Eventual equality then proves all of these
 relations at one common original stage. Limit projections need not be
 faithful, flat, or surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

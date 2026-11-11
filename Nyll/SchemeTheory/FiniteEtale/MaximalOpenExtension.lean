@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.Order.Minimal
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Order.Minimal
 
 /-!
 # Maximal open extensions of finite étale covers
@@ -16,6 +18,8 @@ The ascending chain condition on opens gives a maximal open over which a
 given finite étale cover extends. This is maximal among extensions, without
 assuming uniqueness of extensions or compatibility between unrelated ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

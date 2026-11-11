@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
-import Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
+public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
 
 /-!
 # Actual Galois cohomology transition maps
@@ -15,6 +18,8 @@ actual sheaf sections intertwines the two actual Galois actions.
 Consequently it gives the finite-stage transition map in every degree
 of group cohomology.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -50,10 +55,10 @@ theorem fieldGaloisEtaleTransition_deck (σ : Gal(M/K)) :
       (finiteEtaleInclusion (Spec (.of K))).map
         (MulOpposite.unop
           (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K L
-            (AlgEquiv.restrictNormalHom L σ))).hom =
+            (AlgEquiv.restrictNormalHom L σ))).asIso.hom =
     (finiteEtaleInclusion (Spec (.of K))).map
         (MulOpposite.unop
-          (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K M σ)).hom ≫
+          (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K M σ)).asIso.hom ≫
       fieldGaloisEtaleTransition K L M := by
   apply MorphismProperty.Over.Hom.ext
   change Spec.map (CommRingCat.ofHom (algebraMap L M)) ≫
@@ -74,17 +79,17 @@ theorem fieldGaloisSections_transition_action
     (s : F.obj.obj (op ((finiteEtaleInclusion (Spec (.of K))).obj
       (FiniteEtale.mk (ξ K L))))) :
     F.obj.map (fieldGaloisEtaleTransition K L M).op
-        ((fieldGaloisSheafAction K L F (AlgEquiv.restrictNormalHom L σ)).hom s) =
-      (fieldGaloisSheafAction K M F σ).hom
+        ((fieldGaloisSheafAction K L F (AlgEquiv.restrictNormalHom L σ)).asIso.hom s) =
+      (fieldGaloisSheafAction K M F σ).asIso.hom
         (F.obj.map (fieldGaloisEtaleTransition K L M).op s) := by
   change F.obj.map (fieldGaloisEtaleTransition K L M).op
       (F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map
         (MulOpposite.unop
           (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K L
-            (AlgEquiv.restrictNormalHom L σ))).hom).op s) =
+            (AlgEquiv.restrictNormalHom L σ))).asIso.hom).op s) =
     F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map
       (MulOpposite.unop
-        (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K M σ)).hom).op
+        (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K M σ)).asIso.hom).op
       (F.obj.map (fieldGaloisEtaleTransition K L M).op s)
   rw [← ConcreteCategory.comp_apply, ← F.obj.map_comp, ← op_comp,
     fieldGaloisEtaleTransition_deck, op_comp, F.obj.map_comp]

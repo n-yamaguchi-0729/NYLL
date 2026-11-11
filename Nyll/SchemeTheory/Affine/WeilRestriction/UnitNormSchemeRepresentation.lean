@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionSheaf
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionSheaf
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! # The actual norm model represents the unit restriction square -/
+
+@[expose] public section
 
 noncomputable section
 

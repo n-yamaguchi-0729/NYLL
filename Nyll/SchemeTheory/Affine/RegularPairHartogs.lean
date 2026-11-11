@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.PrimePairHartogs
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.SchemeTheory.Affine.PrimePairHartogs
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Hartogs extension for a regular pair
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Two regular parameters suffice to extend sections across their common zero
 locus. The parameters need not be prime, and the ring need not be a domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

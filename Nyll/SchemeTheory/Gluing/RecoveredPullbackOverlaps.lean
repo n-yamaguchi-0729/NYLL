@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Nyll.SchemeTheory.Gluing.CommonCover
+module
+
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Nyll.SchemeTheory.Gluing.CommonCover
 
 /-!
 # Actual overlaps of the recovered pullback charts
@@ -14,6 +16,8 @@ The canonical recovered transition identifies the two chart overlaps inside
 the original recovered scheme. The cartesian assertion follows from the
 already proved chart squares and transition projection equations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

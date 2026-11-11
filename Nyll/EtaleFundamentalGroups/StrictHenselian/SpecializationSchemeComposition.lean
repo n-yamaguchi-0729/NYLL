@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFunctoriality
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Stalk
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFunctoriality
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Stalk
 
 /-!
 # The strict local diagram of a chosen geometric specialization
@@ -27,6 +29,8 @@ specialization. This is the strict-local-ring diagram in the proof of
 Stacks Project, Lemma 58.16.2:
 https://stacks.math.columbia.edu/tag/0BUP.
 -/
+
+@[expose] public section
 
 noncomputable section
 

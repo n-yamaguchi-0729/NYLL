@@ -11,13 +11,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Nyll.JacobianVarieties.WeilPairing.Divisorial
-import Nyll.JacobianVarieties.WeilPairing.DivisorialPairingToHomInjectiveDivisibleCoprime
-import Nyll.JacobianVarieties.Pic0.TorsionBijectiveInjective
-import Mathlib.FieldTheory.RatFunc.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+module
+
+public import Mathlib.Util.WithWeakNamespace
+public import Nyll.JacobianVarieties.WeilPairing.Divisorial
+public import Nyll.JacobianVarieties.WeilPairing.DivisorialPairingToHomInjectiveDivisibleCoprime
+public import Nyll.JacobianVarieties.Pic0.TorsionBijectiveInjective
+public import Mathlib.FieldTheory.RatFunc.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Perfection over an algebraically closed field
@@ -25,6 +27,8 @@ import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 Combine the proved injectivity with finite torsion duality. The divisibility
 hypothesis is retained exactly as supplied by the original theorem.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Semiabelian
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Semiabelian
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 
 /-! # Points in the fibres of a semiabelian extension
 
@@ -13,6 +15,8 @@ Once one lift is given, every other lift is obtained uniquely by multiplication
 by a point of the torus kernel. The equivalence works for every parameter scheme
 and commutes with changing the parameter scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

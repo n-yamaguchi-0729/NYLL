@@ -93,50 +93,49 @@ variable {K : Type u} {F : Type v} [Field K] [Field F] [Algebra K F]
   (RatFunc.algEquivOfTranscendental t htr).toAlgHom.toRingHom.toAlgebra
 
 private theorem isScalarTower (t : F) (htr : Transcendental K t) :
-    letI := ratFuncAlgebra t htr
+    let := ratFuncAlgebra t htr
     IsScalarTower K (RatFunc K) F := by
-  let := ratFuncAlgebra t htr
+  intro sharedOwner1
   refine IsScalarTower.of_algebraMap_eq fun k => ?_
   change algebraMap K F k =
     algebraMap K⟮t⟯ F (RatFunc.algEquivOfTranscendental t htr (algebraMap K (RatFunc K) k))
   rw [AlgEquiv.commutes, ← IsScalarTower.algebraMap_apply]
 
 private theorem isScalarTower_adjoin (t : F) (htr : Transcendental K t) :
-    letI := ratFuncAlgebra t htr
-    letI := ratFuncAlgebraAdjoin t htr
+    let := ratFuncAlgebra t htr
+    let := ratFuncAlgebraAdjoin t htr
     IsScalarTower (RatFunc K) K⟮t⟯ F := by
-  let := ratFuncAlgebra t htr
-  let := ratFuncAlgebraAdjoin t htr
+  intro sharedOwner1 sharedOwner2
   exact IsScalarTower.of_algebraMap_eq fun _ => rfl
 
 private theorem finite_adjoin (t : F) (htr : Transcendental K t) :
-    letI := ratFuncAlgebraAdjoin t htr
+    let := ratFuncAlgebraAdjoin t htr
     Module.Finite (RatFunc K) K⟮t⟯ := by
-  let := ratFuncAlgebraAdjoin t htr
+  intro sharedOwner1
   exact Module.Finite.of_surjective (Algebra.linearMap (RatFunc K) K⟮t⟯)
     (RatFunc.algEquivOfTranscendental t htr).surjective
 
 private theorem isSeparable_adjoin (t : F) (htr : Transcendental K t) :
-    letI := ratFuncAlgebraAdjoin t htr
+    let := ratFuncAlgebraAdjoin t htr
     Algebra.IsSeparable (RatFunc K) K⟮t⟯ := by
-  let := ratFuncAlgebraAdjoin t htr
+  intro sharedOwner1
   refine ⟨fun y => ?_⟩
   obtain ⟨x, rfl⟩ := (RatFunc.algEquivOfTranscendental t htr).surjective y
   exact isSeparable_algebraMap x
 
 private theorem finite (t : F) (htr : Transcendental K t) [FiniteDimensional K⟮t⟯ F] :
-    letI := ratFuncAlgebra t htr
+    let := ratFuncAlgebra t htr
     FiniteDimensional (RatFunc K) F := by
-  let := ratFuncAlgebra t htr
+  intro sharedOwner1
   let := ratFuncAlgebraAdjoin t htr
   have := isScalarTower_adjoin t htr
   have := finite_adjoin t htr
   exact Module.Finite.trans K⟮t⟯ F
 
 private theorem isSeparable (t : F) (htr : Transcendental K t) [Algebra.IsSeparable K⟮t⟯ F] :
-    letI := ratFuncAlgebra t htr
+    let := ratFuncAlgebra t htr
     Algebra.IsSeparable (RatFunc K) F := by
-  let := ratFuncAlgebra t htr
+  intro sharedOwner1
   let := ratFuncAlgebraAdjoin t htr
   have := isScalarTower_adjoin t htr
   have := isSeparable_adjoin t htr

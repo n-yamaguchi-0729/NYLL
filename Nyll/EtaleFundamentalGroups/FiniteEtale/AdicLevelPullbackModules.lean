@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePullback
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackQuotientTransition
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePullback
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackQuotientTransition
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Actual module quotients on the adic thickenings
@@ -28,6 +30,8 @@ level remains quasicoherent. Finite type is retained as well. In the
 free case these are the actual free modules on the thickenings, as
 opposed to a fixed ambient free module used at every level.
 -/
+
+@[expose] public section
 
 noncomputable section
 

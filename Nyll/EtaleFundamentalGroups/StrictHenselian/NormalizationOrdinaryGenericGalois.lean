@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFieldTower
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueAction
-import Nyll.EtaleFundamentalGroups.GeometricFiber.TransportedFieldSourcePoint
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFieldTower
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueAction
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.TransportedFieldSourcePoint
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+public import Mathlib.CategoryTheory.Endomorphism
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
 
 /-!
 # The actual ordinary generic-point map on the original decomposition group
@@ -18,6 +22,8 @@ automorphism. The native generic-point scheme morphism then gives the actual
 map to the ordinary-henselization fundamental group. Its point action is the
 original ambient automorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -153,7 +159,7 @@ theorem normalizationOrdinaryGenericGaloisMap_point :
       (X : FiniteEtale (Spec (ordinaryHenselization A)))
       (x : (fiber (Spec.algebraMap (ordinaryHenselization A) L)).obj X),
       (fiberObjEquivHom (Spec.algebraMap (ordinaryHenselization A) L) X
-        ((normalizationOrdinaryGenericGaloisMap A K L Q hQ d).hom.app X x)).left =
+        ((normalizationOrdinaryGenericGaloisMap A K L Q hQ d).asIso.hom.app X x)).left =
         Spec.map (CommRingCat.ofHom d.val.toRingHom) ≫
           (fiberObjEquivHom (Spec.algebraMap (ordinaryHenselization A) L) X x).left := by
   intro actualAmbientAlgebra d X x

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.EmptyModulusSheaf
-import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.EmptyModulusSheaf
+public import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
 
 /-!
 # The empty-modulus Picard-zero group sheaf
@@ -15,11 +18,15 @@ Consequently the proved empty-modulus local bijection restricts to zero classes
 and respects their tensor groups.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
 
 open CategoryTheory Opposite
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian.EmptyModulus
 

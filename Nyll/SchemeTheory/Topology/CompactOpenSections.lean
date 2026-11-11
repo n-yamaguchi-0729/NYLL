@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Limits.Preserves.Filtered
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.Topology.Sheaves.Limits
-import Nyll.SchemeTheory.Topology.FiniteCoverFilteredColimit
+module
+
+public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.Topology.Sheaves.Limits
+public import Nyll.SchemeTheory.Topology.FiniteCoverFilteredColimit
 
 /-!
 # Compact-open sections preserve filtered colimits
@@ -21,6 +23,8 @@ proves that the actual sheaf sections functor preserves filtered colimits.
 Reference: https://stacks.math.columbia.edu/tag/009F.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

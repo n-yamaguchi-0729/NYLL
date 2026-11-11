@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
 
 /-! # Restricting an actual modulus rigidification
 
@@ -15,6 +17,8 @@ A commuting morphism of whole moduli pulls back the chosen trivialization,
 leaves the underlying line-bundle class unchanged, and preserves tensor product.
 No inverse to the modulus morphism is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

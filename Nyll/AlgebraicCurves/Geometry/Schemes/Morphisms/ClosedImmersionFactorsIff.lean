@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.DefEqTransformations
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionCompEqIffIdealEqBot
-import Nyll.SchemeTheory.RingTheory.Localization.IdealIffMapEqBotAway
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.DefEqTransformations
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionCompEqIffIdealEqBot
+public import Nyll.SchemeTheory.RingTheory.Localization.IdealIffMapEqBotAway
 
 /-!
 # exists is Closed Immersion forall factors iff of ideal Cut
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

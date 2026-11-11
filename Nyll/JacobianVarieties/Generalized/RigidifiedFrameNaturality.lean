@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FixedBundleFrames
-import Nyll.JacobianVarieties.Generalized.FrameFunctor
+module
+
+public import Nyll.JacobianVarieties.Generalized.FixedBundleFrames
+public import Nyll.JacobianVarieties.Generalized.FrameFunctor
 
 /-!
 # Naturality of rigidifications constructed from actual restriction frames
@@ -14,6 +16,8 @@ The canonical module comparison preserves the chosen frame when commuting
 curve-modulus squares are pasted. This statement retains both the underlying
 line bundle and the compatibility of its trivialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

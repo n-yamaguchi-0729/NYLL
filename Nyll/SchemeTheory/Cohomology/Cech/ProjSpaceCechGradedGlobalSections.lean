@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.LinearAlgebra.Pi
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.LinearAlgebra.Pi
 
 /-!
 # Evaluation of graded numerators as global sections
@@ -23,6 +25,8 @@ These maps retain the literal numerator. They are the maps whose eventual
 surjectivity permits compatible formal global generators to be lifted
 through finite graded presentations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

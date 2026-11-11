@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
 
 /-!
 # Automorphisms of the generic pullback of a Galois cover
@@ -14,6 +16,8 @@ Pullback to the generic point preserves the full deck-transformation group
 of a finite-etale Galois cover over a normal integral locally Noetherian
 scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -25,7 +29,8 @@ namespace EtaleFundamentalGroups
 
 universe u
 
-private theorem genericExtensionMorphism_self_isDominant
+/-- The generic-point morphism has dense image. -/
+theorem genericExtensionMorphism_self_isDominant
     (X : Scheme.{u}) [IsIntegral X] :
     IsDominant (X.genericExtensionMorphism X.functionField) := by
   constructor
@@ -39,7 +44,8 @@ private theorem genericExtensionMorphism_self_isDominant
   exact ⟨IsLocalRing.closedPoint X.functionField,
     X.genericExtensionMorphism_apply_closedPoint X.functionField⟩
 
-private theorem genericExtensionMorphism_self_isPreimmersion
+/-- The generic-point morphism is a preimmersion. -/
+theorem genericExtensionMorphism_self_isPreimmersion
     (X : Scheme.{u}) [IsIntegral X] :
     IsPreimmersion (X.genericExtensionMorphism X.functionField) := by
   rw [Scheme.genericExtensionMorphism]
@@ -64,7 +70,7 @@ noncomputable def finiteEtaleAutGenericPullbackMulEquiv
     (Z : FiniteEtale X) (hZ : IsGalois Z) :
     let eta := X.genericExtensionMorphism X.functionField
     Aut Z ≃* Aut ((FiniteEtale.pullback eta).obj Z) := by
-  let eta := X.genericExtensionMorphism X.functionField
+  intro eta
   letI : IsDominant eta := genericExtensionMorphism_self_isDominant X
   letI : IsPreimmersion eta := genericExtensionMorphism_self_isPreimmersion X
   letI : IsGalois Z := hZ
@@ -81,8 +87,9 @@ noncomputable def finiteEtaleAutGenericPullbackMulEquiv
   have hAutInj : Function.Injective (F.mapAut Z) := by
     intro sigma tau h
     apply Aut.ext
+    apply Iso.ext
     apply F.map_injective
-    exact congrArg Iso.hom h
+    exact congrArg (fun a : Aut (F.obj Z) => a.asIso.hom) h
   let x : Spec (.of X.functionField) := Classical.choice inferInstance
   let Omega := AlgebraicClosure ((Spec (.of X.functionField)).residueField x)
   let xi : Spec (.of Omega) ⟶ Spec (.of X.functionField) :=
@@ -120,8 +127,8 @@ theorem finiteEtaleAutGenericPullbackMulEquiv_apply
     [IsLocallyNoetherian X]
     (Z : FiniteEtale X) (hZ : IsGalois Z) (sigma : Aut Z) :
     finiteEtaleAutGenericPullbackMulEquiv Z hZ sigma =
-      (FiniteEtale.pullback
-        (X.genericExtensionMorphism X.functionField)).mapIso sigma := by
+      Aut.of ((FiniteEtale.pullback
+        (X.genericExtensionMorphism X.functionField)).mapIso sigma.asIso) := by
   rfl
 
 end EtaleFundamentalGroups

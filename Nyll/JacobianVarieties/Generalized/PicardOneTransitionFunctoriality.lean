@@ -5,12 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneRestrictionScheme
-import Nyll.JacobianVarieties.Generalized.PicardOneRestrictionAction
-import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneRestrictionScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneRestrictionAction
+public import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
 
 /-! # Actual degree-one torsor transitions, their composition, and equivariance -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Units on the complement of a boundary product
@@ -14,6 +16,8 @@ then every parameter occurring in that product becomes a unit on the boundary
 complement.  This is the elementary algebraic input used by the explicit
 Kummer charts.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

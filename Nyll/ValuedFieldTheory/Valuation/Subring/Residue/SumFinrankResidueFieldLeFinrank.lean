@@ -10,11 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
+module
+
+public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 /-!
 # Valuation Subring sum finrank residue Field le finrank of forall mem iff
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

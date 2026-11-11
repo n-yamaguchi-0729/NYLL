@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.All
-import Nyll.SchemeTheory.Cohomology.Sheaves.All
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.All
+public import Nyll.SchemeTheory.Cohomology.Sheaves.All
 
 /-!
 General scheme-theoretic foundations and their direct child modules.

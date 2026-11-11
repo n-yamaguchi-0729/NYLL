@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.LinearAlgebra.Lagrange
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.LinearAlgebra.Lagrange
 
 /-!
 # Place exists uniformizing separating form
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

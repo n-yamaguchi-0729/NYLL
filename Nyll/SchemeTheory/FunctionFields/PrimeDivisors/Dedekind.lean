@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
-import Mathlib.RingTheory.DedekindDomain.AdicValuation
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation
 
 /-!
 # Prime divisors finite on a Dedekind model
@@ -14,6 +16,8 @@ This file identifies a prime divisor of a fraction field which is finite on a
 Dedekind model with the height-one prime at its center.  In particular, the
 center is automatically nonzero and determines the valuation subring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

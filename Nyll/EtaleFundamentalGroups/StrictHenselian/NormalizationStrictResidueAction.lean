@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueAction
-import Nyll.EtaleFundamentalGroups.Inertia.NativeResidueRingAction
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSeparableResidueSequence
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkResidue
-import Nyll.SchemeTheory.RingTheory.Ramification.NativeMaximalResidue
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueAction
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeResidueRingAction
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSeparableResidueSequence
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkResidue
+public import Nyll.SchemeTheory.RingTheory.Ramification.NativeMaximalResidue
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # The original decomposition action on the actual strict-stalk residue
@@ -20,6 +22,8 @@ homomorphism to the residue field of the actual strict stalk. Its coefficient
 formula is the original normalization residue action in κ(B_Q). Its kernel
 and surjectivity are the already proved original inertia/decomposition sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

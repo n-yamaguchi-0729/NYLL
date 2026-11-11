@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitCoordinates
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormSchemeRepresentation
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitGroupScheme
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
-import Mathlib.AlgebraicGeometry.AffineSpace
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitCoordinates
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormSchemeRepresentation
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitGroupScheme
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
+public import Mathlib.AlgebraicGeometry.AffineSpace
 
 /-! # The affine group scheme of the actual nilpotent unit kernel -/
+
+@[expose] public section
 
 noncomputable section
 

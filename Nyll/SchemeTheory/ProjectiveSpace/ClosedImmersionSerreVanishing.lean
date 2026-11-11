@@ -4,27 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
-import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafPushforwardCech
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
-import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Nyll.SchemeTheory.Modules.Tensor.AffineProjectionFormula
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafSerreVanishing
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafCohomologyIso
+public import Nyll.SchemeTheory.Cohomology.Cech.ModuleSheafPushforwardCech
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
+public import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Nyll.SchemeTheory.Modules.Tensor.AffineProjectionFormula
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerComparison
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafSerreVanishing
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!
 # Serre vanishing on an actual projective closed subscheme
@@ -41,6 +43,8 @@ graded presentation nor vanishing of the closed subscheme is supplied
 as additional data.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -55,7 +59,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 variable (R : Type u) [CommRing R] (n : ℕ)
 
-private theorem twistingPower_quasicoherent (d : ℕ) :
+/-- Every tensor power of the twisting sheaf is quasicoherent. -/
+theorem twistingPower_quasicoherent (d : ℕ) :
     SheafOfModules.IsQuasicoherent
       (R := (Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)).ringCatSheaf)
       ((twistingSheaf R n).tensorPow d) := by

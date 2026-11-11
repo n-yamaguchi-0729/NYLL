@@ -4,13 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteRegularLocalPurity
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompletionDescentFrontier
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityNormalization
-import Mathlib.RingTheory.Regular.Flat
-import Nyll.SchemeTheory.Normalization.Normal
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteRegularLocalPurity
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompletionDescentFrontier
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityNormalization
+public import Mathlib.RingTheory.Regular.Flat
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumDimensionTwoPurity
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Punctured purity from strict-normal-crossings stalk data
@@ -20,6 +26,8 @@ crossings point to complete-local punctured purity.  It also records exactly
 what survives after maximal-adic completion, before any normality theorem for
 the completed regular local ring is invoked.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -215,7 +223,7 @@ theorem IsStrictNormalCrossingsAt.exists_maximalAdicCompletion_extension_of_dime
   apply
     EtaleFundamentalGroups.exists_maximalAdicCompletion_extension_of_regularSystem_length_two
       (List.ofFn t) hparams.1 hparams.2
-  simp [hd]
+  rw [List.length_ofFn, hd]
 
 /-- At the same complete strict-normal-crossings stalk, the canonical
 function-field normalization of every connected punctured cover is already

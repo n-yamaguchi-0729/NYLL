@@ -4,25 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryTameCover
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.SchemeTheory.Affine.StalkFractionField
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.TameDVREquiv
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.FieldTheory.Separable
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryTameCover
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.SchemeTheory.Affine.StalkFractionField
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.TameDVREquiv
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
 
 /-!
 # Tameness over the actual boundary stalk of a standard root cover
@@ -40,6 +43,8 @@ This is the boundary-stalk calculation for Stacks Project, Example 58.31.4
 (tag `0EYF`), not yet the global arbitrary-scheme codimension-one predicate.
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

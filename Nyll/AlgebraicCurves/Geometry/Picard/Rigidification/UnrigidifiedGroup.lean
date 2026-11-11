@@ -12,11 +12,13 @@ Authors of the unrigidified construction: Naganori Yamaguchi (assisted by OpenAI
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Data.Quot
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Data.Quot
 
 /-!
 # The commutative group of unrigidified Picard-zero classes
@@ -24,6 +26,8 @@ import Mathlib.Data.Quot
 Tensor product and actual tensor inverses give the group structure without a
 section. Pullback is a group homomorphism.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Actual eventual morphism descent between different original stages
@@ -16,6 +18,8 @@ The existing scheme morphism-descent theorem then descends their morphism.
 The proved pullback coherence returns it to the exact transition objects used
 by the automorphism assembly theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

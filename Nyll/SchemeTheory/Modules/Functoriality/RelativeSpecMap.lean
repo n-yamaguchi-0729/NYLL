@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # Morphisms between actual relative spectra
@@ -16,6 +18,8 @@ the gluing diagrams and hence of the constructed colimits. When the
 structure triangle commutes, this morphism is over the original base.
 The construction respects identities, composition, and isomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

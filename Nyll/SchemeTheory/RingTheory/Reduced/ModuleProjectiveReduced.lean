@@ -10,33 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.Algebra.Module.Projective
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.RingTheory.Nilpotent.Defs
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
-import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Free
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.LocalProperties.Projective
-import Mathlib.RingTheory.LocalProperties.Reduced
-import Mathlib.RingTheory.Localization.Integer
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Nilpotent.Lemmas
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Nilpotent.Defs
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+public import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.LocalProperties.Projective
+public import Mathlib.RingTheory.LocalProperties.Reduced
+public import Mathlib.RingTheory.Localization.Integer
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Nilpotent.Lemmas
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Module projective of is Reduced of finrank fiber const
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -95,9 +99,9 @@ theorem subsingleton_residue_tensor_coker (𝔭 : PrimeSpectrum R) {ι : Type v}
       ((LinearMap.range φ).mkQ.baseChange (κ 𝔭)) := by
     have := lTensor_exact (κ 𝔭) (LinearMap.exact_map_mkQ_range φ)
       (Submodule.Quotient.mk_surjective _)
-    simpa only [LinearMap.baseChange_eq_ltensor] using this
+    simpa only [LinearMap.baseChange_eq_lTensor] using this
   have hsurj : Function.Surjective ((LinearMap.range φ).mkQ.baseChange (κ 𝔭)) := by
-    rw [LinearMap.baseChange_eq_ltensor]
+    rw [LinearMap.baseChange_eq_lTensor]
     exact LinearMap.lTensor_surjective _ (Submodule.Quotient.mk_surjective _)
   have hker : LinearMap.ker ((LinearMap.range φ).mkQ.baseChange (κ 𝔭)) = ⊤ := by
     rw [LinearMap.exact_iff.mp hexact, hrange]
@@ -129,7 +133,7 @@ theorem baseChange_injective_of_le [Module.Finite R M] {e : ℕ}
       ((LinearMap.range φ).mkQ.baseChange (κ 𝔮)) := by
     have := lTensor_exact (κ 𝔮) (LinearMap.exact_map_mkQ_range φ)
       (Submodule.Quotient.mk_surjective _)
-    simpa only [LinearMap.baseChange_eq_ltensor] using this
+    simpa only [LinearMap.baseChange_eq_lTensor] using this
   have hsurjφ : Function.Surjective (φ.baseChange (κ 𝔮)) := by
     rw [← LinearMap.range_eq_top, ← LinearMap.exact_iff.mp hexact, LinearMap.ker_eq_top]
     ext x
@@ -247,6 +251,18 @@ theorem projective_of_isReduced_of_finrank_const [IsReduced R] [Module.FinitePre
 end FittingFree
 
 end CBCSol
+
+/-- Constant fibre rank over a reduced ring gives freeness at each specified prime.
+This local statement requires finite generation, not finite presentation. -/
+theorem _root_.Module.free_localizedModule_of_isReduced_of_finrank_fiber_const
+    {R : Type u} [CommRing R] [IsReduced R]
+    {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M]
+    {e : ℕ} (h : ∀ 𝔮 : PrimeSpectrum R,
+      Module.finrank 𝔮.asIdeal.ResidueField (𝔮.asIdeal.ResidueField ⊗[R] M) = e)
+    (𝔭 : PrimeSpectrum R) :
+    Module.Free (Localization.AtPrime 𝔭.asIdeal)
+      (LocalizedModule 𝔭.asIdeal.primeCompl M) :=
+  CBCSol.free_localizedModule_of_isReduced h 𝔭
 
 theorem _root_.Module.projective_of_isReduced_of_finrank_fiber_const {R : Type u} [CommRing R]
     [IsReduced R] {M : Type v} [AddCommGroup M] [Module R M] [Module.FinitePresentation R M]

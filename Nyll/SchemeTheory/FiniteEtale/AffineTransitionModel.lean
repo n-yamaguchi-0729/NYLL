@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.FilteredColimitSpec
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.FilteredColimitSpec
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Finite-etale models for arbitrary inverse systems of affine schemes
@@ -18,6 +20,8 @@ the cover through that ring cocone and transfer it back with `isoSpec` and
 the canonical pullback-composition isomorphisms. Recovery is along the
 original cone projection, without integrality or injectivity assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

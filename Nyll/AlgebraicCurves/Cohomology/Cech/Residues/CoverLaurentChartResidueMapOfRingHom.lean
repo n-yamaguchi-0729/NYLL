@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.HahnSeries.Multiplication
-import Mathlib.RingTheory.HahnSeries.Basic
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
+module
+
+public import Mathlib.RingTheory.HahnSeries.Multiplication
+public import Mathlib.RingTheory.HahnSeries.Basic
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
 
 /-!
 Compatibility of Laurent-chart residues with the map induced by a ring homomorphism.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

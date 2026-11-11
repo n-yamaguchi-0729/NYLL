@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionBraiding
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionBraiding
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
 
 /-!
 # Commutativity of rigidified tensor products
@@ -20,6 +22,8 @@ comparison on local tensor sections, using the pullback adjunction and sheafific
 Consequently the ordinary braiding preserves the chosen rigidifications, so the naive
 compatible-isomorphism classes form a commutative group.
 -/
+
+@[expose] public section
 
 universe u
 

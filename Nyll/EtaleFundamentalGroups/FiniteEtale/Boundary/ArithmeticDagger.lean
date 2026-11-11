@@ -35,23 +35,16 @@ theorem galoisPullback_satisfiesResidueCharacteristicTwoBoundaryCondition
     (D : EffectiveCartierDivisor X) (p : X ⟶ S)
     (hD : D.SatisfiesResidueCharacteristicTwoBoundaryCondition p)
     (Y : FiniteEtale X) (hY : CategoryTheory.PreGaloisCategory.IsGalois Y) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsNormalIntegral Y.left :=
+    let : IsNormalIntegral Y.left :=
       isNormalIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       isLocallyNoetherian_left_finiteEtale Y
     let D' : EffectiveCartierDivisor Y.left := D.comapFiniteEtale Y
     D'.SatisfiesResidueCharacteristicTwoBoundaryCondition (Y.hom ≫ p) := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsNormalIntegral Y.left :=
-    isNormalIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    isLocallyNoetherian_left_finiteEtale Y
-  let D' : EffectiveCartierDivisor Y.left := D.comapFiniteEtale Y
+  intro sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 D'
   have hstable := D.galoisPullback_stability p hD Y hY
   dsimp only at hstable
   rcases hstable with ⟨hreduced, hhorizontal, hregular, hcomponents⟩
@@ -80,23 +73,16 @@ theorem galoisPullback_satisfiesResidueCharacteristicTwoBoundaryCondition_overIn
     (D : EffectiveCartierDivisor X)
     (hD : D.SatisfiesResidueCharacteristicTwoBoundaryConditionOverIntegers)
     (Y : FiniteEtale X) (hY : CategoryTheory.PreGaloisCategory.IsGalois Y) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsNormalIntegral Y.left :=
+    let : IsNormalIntegral Y.left :=
       isNormalIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       isLocallyNoetherian_left_finiteEtale Y
     let D' : EffectiveCartierDivisor Y.left := D.comapFiniteEtale Y
     D'.SatisfiesResidueCharacteristicTwoBoundaryConditionOverIntegers := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsNormalIntegral Y.left :=
-    isNormalIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    isLocallyNoetherian_left_finiteEtale Y
-  let D' : EffectiveCartierDivisor Y.left := D.comapFiniteEtale Y
+  intro sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 D'
   let p : X ⟶ Spec (CommRingCat.of (ULift.{u} ℤ)) :=
     specULiftZIsTerminal.from X
   have hgeneral :=

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ExtensionByZero
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Mathlib.CategoryTheory.Adjunction.Unique
+module
+
+public import Nyll.EtaleCohomology.Sites.ExtensionByZero
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Extension by zero under arbitrary base change
@@ -19,6 +21,8 @@ hypothesis is required.
 
 Reference: https://stacks.math.columbia.edu/tag/03S2
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftIsSmoothAt
-import Mathlib.Algebra.Polynomial.Eval.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftIsSmoothAt
+public import Mathlib.Algebra.Polynomial.Eval.Defs
 
 /-!
 # Henselian Local Ring exists Unique section and ker eq span of formally Smooth of formally
 Unramified
 -/
 
+@[expose] public section
+
 section ProofImplementation
+
+universe u v
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs.SmoothHenselianSection
 
@@ -26,8 +32,8 @@ open IsLocalRing Polynomial
 
 namespace HenselSections
 
-variable {A : Type} [CommRing A]
-variable {S : Type} [CommRing S] [Algebra A[X] S]
+variable {A : Type u} [CommRing A]
+variable {S : Type v} [CommRing S] [Algebra A[X] S]
 
 theorem algebraMap_A [Algebra A S] [IsScalarTower A A[X] S] (a : A) :
     algebraMap A S a = algebraMap A[X] S (C a) := by
@@ -311,8 +317,8 @@ open _root_.IsLocalRing _root_.Polynomial
 
 
 theorem existsUnique_section_and_ker_eq_span_of_formallySmooth_of_formallyUnramified
-    {A : Type} [CommRing A] [IsNoetherianRing A] [HenselianLocalRing A]
-    {S : Type} [CommRing S] [IsLocalRing S]
+    {A : Type u} [CommRing A] [IsNoetherianRing A] [HenselianLocalRing A]
+    {S : Type v} [CommRing S] [IsLocalRing S]
     (φ : Polynomial A →+* S) (hφs : φ.FormallySmooth) (hφu : φ.FormallyUnramified) (hφf :
       φ.EssFiniteType)
     (χ₀ : S →+* ResidueField A) (hχ₀ : RingHom.ker χ₀ = maximalIdeal S)

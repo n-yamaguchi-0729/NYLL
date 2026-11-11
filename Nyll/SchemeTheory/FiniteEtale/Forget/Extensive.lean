@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Mathlib.CategoryTheory.Extensive
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Mathlib.CategoryTheory.Extensive
 
 /-!
 # Disjoint finite coproducts of finite etale schemes
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Extensive
 Extensivity is inherited from schemes through the actual forgetful functor,
 which preserves pullbacks and finite coproducts and reflects isomorphisms.
 -/
+
+@[expose] public section
 
 open CategoryTheory Limits
 

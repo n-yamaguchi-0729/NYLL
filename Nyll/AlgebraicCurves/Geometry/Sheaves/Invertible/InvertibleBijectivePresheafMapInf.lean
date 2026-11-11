@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectivePresheafMapInf
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectivePresheafMapInf
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 
 /-!
 # Scheme Modules Is Invertible bijective presheaf map inf of is Integrally Closed stalk
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

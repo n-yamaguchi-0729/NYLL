@@ -98,23 +98,22 @@ theorem etaleChosenLocalFactor_finalComponent_boundaryAway_local
       Dₚ ≃ₐ[Cₚ] Localization.AtPrime p') :
     let Cₚ := Localization.AtPrime P
     let Pm := GenericTensorFieldComponent m
-    letI : Algebra Cₚ Pm :=
+    let : Algebra Cₚ Pm :=
       genericTensorFieldComponentLeftScalarAlgebra (R := Cₚ) m
     let Dfinal := Localization.AtPrime p
-    letI : Algebra Cₚ Dfinal := inferInstance
+    let : Algebra Cₚ Dfinal := inferInstance
     let fCₚ : Cₚ := algebraMap C Cₚ (algebraMap R C f)
     @Algebra.Etale
       (Localization.Away fCₚ)
       (Localization.Away (algebraMap Cₚ Dfinal fCₚ))
       _ _
       (Localization.awayMap (algebraMap Cₚ Dfinal) fCₚ).toAlgebra := by
-  dsimp only
+  intro Cₚ Pm sharedOwner1 Dfinal sharedOwner2 fCₚ
   let Q := etaleChosenAwayPrime e P'
   let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
   let : Q.LiesOver P' :=
     etaleChosenAwayPrime_liesOver e P' heP'
   let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
   let Dₚ := Localization.AtPrime Q
   let : Algebra Cₚ Dₚ :=
     Localization.AtPrime.algebraOfLiesOver P Q
@@ -128,10 +127,7 @@ theorem etaleChosenLocalFactor_finalComponent_boundaryAway_local
   let : q.IsMaximal :=
     genericTensorTowerSecondIdeal_isMaximal
       (K := K) (F := F) (F' := F') (L := L) m
-  let Pm := GenericTensorFieldComponent m
   let Pq := GenericTensorFieldComponent q
-  let : Algebra Cₚ Pm :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := Cₚ) m
   let : Algebra Cₚ Pq :=
     genericTensorFieldComponentLeftScalarAlgebra (R := Cₚ) q
   let p' := genericTensorTowerFinalComponentIntegralClosurePrime
@@ -143,10 +139,7 @@ theorem etaleChosenLocalFactor_finalComponent_boundaryAway_local
       Localization.AtPrime p' :=
     genericTensorTowerFinalComponentIntegralClosureLocalizationAlgEquiv
       (B := Cₚ) (K := K) (F := F) (F' := F') (L := L) m p
-  let Dfinal := Localization.AtPrime p
-  let : Algebra Cₚ Dfinal := inferInstance
   let Etotal : Dₚ ≃ₐ[Cₚ] Dfinal := ETag.trans Efinal.symm
-  let fCₚ : Cₚ := algebraMap C Cₚ (algebraMap R C f)
   have hTag :
       @Algebra.Etale
         (Localization.Away fCₚ)

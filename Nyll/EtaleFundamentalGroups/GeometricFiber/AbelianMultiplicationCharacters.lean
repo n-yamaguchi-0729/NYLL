@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianTateComparison
 import Nyll.ProCGroups.Abelian.FullTateCharacters
+import Nyll.ProCGroups.Abelian.FullTateModule
 
 /-!
 # Finite-exponent characters factor through actual multiplication covers

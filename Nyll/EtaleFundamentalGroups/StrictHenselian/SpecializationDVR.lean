@@ -4,27 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVR
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.PowerSeries.Inverse
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVR
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Strict henselian DVR diagrams for geometric points of a noetherian local ring
@@ -46,6 +48,8 @@ separate assertion.
 
 Reference: https://stacks.math.columbia.edu/tag/0C0N.
 -/
+
+@[expose] public section
 
 noncomputable section
 

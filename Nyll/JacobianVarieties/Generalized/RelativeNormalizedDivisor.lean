@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.NormalizedSectionNonzero
-import Nyll.JacobianVarieties.Generalized.RigidifiedNormalizedPullback
-import Nyll.JacobianVarieties.Generalized.PicardFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.RelativeDivisorIEqZeroSchemeIdealEulerCharEqSmoothFibre
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.JacobianVarieties.Generalized.NormalizedSectionNonzero
+public import Nyll.JacobianVarieties.Generalized.RigidifiedNormalizedPullback
+public import Nyll.JacobianVarieties.Generalized.PicardFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.RelativeDivisorIEqZeroSchemeIdealEulerCharEqSmoothFibre
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
 # Effective divisors of normalized families
@@ -19,6 +21,8 @@ geometric fibre. The fibre Euler characteristic determines the degree, and
 the actual zero scheme is a finite flat relative Cartier divisor. Its
 canonical modulus rigidification recovers the original family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Mathlib.Algebra.Polynomial.Bivariate
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Mathlib.Algebra.Polynomial.Bivariate
 
 /-!
 # Place exists sub algebra Map eval At eq mul of derivative eval Eval ne zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

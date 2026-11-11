@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothGeometricGaloisExtension
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ProperGeometricGaloisModel
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.SmoothGeometricGaloisExtension
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ProperGeometricGaloisModel
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Smooth proper extension for the originally specified geometric field
@@ -49,6 +51,8 @@ https://stacks.math.columbia.edu/tag/0C0R. The subsequent proper henselian
 comparison is needed to deduce the specialization statement on
 fundamental groups.
 -/
+
+@[expose] public section
 
 noncomputable section
 

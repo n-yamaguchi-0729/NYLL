@@ -4,25 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePullback
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreeLocus
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineLocal
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteBySections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteBySectionsFinite
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteGeneratingSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteLocalSectionExtension
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeCoprod
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeIteratedSlice
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocalAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePushforward
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeRestriction
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSubopen
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTilde
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTop
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreePushforward
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreeTransport
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreeCoherence
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreeDual
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePullback
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteFreeLocus
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineLocal
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeKernel
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteBySections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteBySectionsFinite
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteGeneratingSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteLocalSectionExtension
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeCoprod
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeIteratedSlice
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocalAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePushforward
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeRestriction
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSubopen
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTilde
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTop

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.Tactic.Push
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealComapOpenCover
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.Tactic.Push
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealComapOpenCover
 
 /-!
 # Scheme Ideal Sheaf Data Is Invertible of comap of support subset range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

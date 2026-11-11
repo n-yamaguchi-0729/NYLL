@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteResidueFields
-import Mathlib.FieldTheory.Galois.GaloisClosure
-import Mathlib.FieldTheory.Minpoly.Basic
-import Mathlib.FieldTheory.Normal.Basic
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Invariant.Galois
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteResidueFields
+public import Mathlib.FieldTheory.Galois.GaloisClosure
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.FieldTheory.Normal.Basic
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Invariant.Galois
 
 /-!
 # Normality of the actual normalization residue extension
@@ -22,6 +24,8 @@ theorem. Its splitting polynomial transports through the actual quotient
 coefficient map. This proves normality for the possibly infinite original
 Galois extension, including the zero-prime and base-field cases.
 -/
+
+@[expose] public section
 
 noncomputable section
 

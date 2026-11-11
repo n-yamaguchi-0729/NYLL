@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.TorusRationalMapModulus
-import Nyll.JacobianVarieties.Generalized.ProperRationalMapModulus
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.TorusRationalMapModulus
+public import Nyll.JacobianVarieties.Generalized.ProperRationalMapModulus
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 
 /-! # Full moduli for product targets
 
@@ -22,6 +24,8 @@ two projections do. Pullback preserves the joint injectivity of the two
 projections. In particular, a map to a torus times an abelian variety has
 the modulus given by its original domain, over every ground field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

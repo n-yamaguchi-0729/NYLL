@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.RingTheory.Idempotents
+module
+
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.Idempotents
 
 /-!
 # A full-degree orthogonal family splits a finite algebra
@@ -17,6 +19,8 @@ at least the dimension of the algebra, the explicit sum of scalar multiples
 is a bijective algebra map from a product of copies of the base field.
 No separability or reducedness hypothesis is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Operations
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.Algebra.Algebra.Operations
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Surjectivity lifted across a nilpotent module quotient
@@ -22,6 +24,8 @@ surjectivity of the first map when a power of `J` annihilates `M`.
 This is the generator-lifting step used on the original affine modules
 of an adic sheaf tower.
 -/
+
+@[expose] public section
 
 universe u v w z
 

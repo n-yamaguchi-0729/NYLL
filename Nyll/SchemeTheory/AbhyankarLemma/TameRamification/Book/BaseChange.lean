@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
-import Nyll.ValuedFieldTheory.LocalField.Unramified.BaseChange
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalConverse
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.BaseChange
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalConverse
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Finite tame base change for exponential valuations
@@ -16,6 +20,8 @@ This file constructs the maximal-unramified inclusion and transported
 radical presentation used by finite tame base change.  All dependencies are
 production CFT and SchemeTheory APIs.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -185,7 +191,6 @@ theorem maximalUnramifiedSubextension_mem_commonTop_maximal
   have hxEΩ : (x : Ω) ∈ EΩ := ⟨(x : L), hxE, rfl⟩
   have hxA : (x : Ω) ∈ A := (show EΩ ≤ A from le_sup_left) hxEΩ
   let : Algebra K' Ω := K'.val.toAlgebra
-  let : Algebra K' Top := algRightTop
   let topValRight : Top →ₐ[K'] Ω :=
     { toRingHom := Top.val.toRingHom
       commutes' := by intro a; rfl }

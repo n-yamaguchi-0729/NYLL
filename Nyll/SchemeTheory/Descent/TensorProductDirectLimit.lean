@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
-import Mathlib.Order.DirectedInverseSystem
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+module
+
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
+public import Mathlib.Order.DirectedInverseSystem
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
 /-!
 # Algebra Tensor Product is Direct Limit map of is Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -34,7 +38,9 @@ theorem map_id_eq_rTensor {R₀ : Type v} [CommRing R₀] {A A' : Type w} [CommR
     (B : Type w) [CommRing B] [Algebra R₀ B] (φ : A →ₐ[R₀] A') (x : A ⊗[R₀] B) :
     Algebra.TensorProduct.map φ (AlgHom.id R₀ B) x = LinearMap.rTensor B φ.toLinearMap x := by
   induction x using TensorProduct.inductionOn with
-  | tmul a b => simp [Algebra.TensorProduct.map_tmul, LinearMap.rTensor_tmul]
+  | tmul a b =>
+      rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, LinearMap.rTensor_tmul]
+      rfl
   | add x y hx hy => rw [map_add, map_add, hx, hy]
 
 end TensorDL17
@@ -111,7 +117,9 @@ theorem _root_.Algebra.TensorProduct.isDirectLimit_map_of_isDirectLimit
     induction z using TensorProduct.inductionOn with
     | tmul r b =>
       obtain ⟨i, a, ha⟩ := hR.surj r
-      exact ⟨i, a ⊗ₜ b, by simp [Algebra.TensorProduct.map_tmul, ha]⟩
+      exact ⟨i, a ⊗ₜ b, by
+        rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
+          IsScalarTower.toAlgHom_apply, ha]⟩
     | add x y hx hy =>
       obtain ⟨i, xi, hxi⟩ := hx
       obtain ⟨j, yj, hyj⟩ := hy

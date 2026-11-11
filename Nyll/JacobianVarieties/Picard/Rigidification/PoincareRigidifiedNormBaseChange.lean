@@ -16,7 +16,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
 import Nyll.SchemeTheory.Modules.Invertible.Rigidify
 import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
 import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange

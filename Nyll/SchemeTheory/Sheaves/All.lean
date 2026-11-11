@@ -4,17 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Sheaves.DerivedHomology
-import Nyll.SchemeTheory.Sheaves.FreeAbelianLocalSurjection
-import Nyll.SchemeTheory.Sheaves.Gluing
-import Nyll.SchemeTheory.Sheaves.IdealHom
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Nyll.SchemeTheory.Sheaves.IdealSheafDataComapEqOpenCover
-import Nyll.SchemeTheory.Sheaves.IdealSheafDataReducedSubschemeVanishingIdealLeKer
-import Nyll.SchemeTheory.Sheaves.IsIsoOnBasis
-import Nyll.SchemeTheory.Sheaves.OverExtension
-import Nyll.SchemeTheory.Sheaves.RestrictOpen
-import Nyll.SchemeTheory.Sheaves.StalkRefinement
-import Nyll.SchemeTheory.Sheaves.UnitStalks
+module
+
+public import Nyll.SchemeTheory.Sheaves.IdealSheafModule
+public import Nyll.SchemeTheory.Sheaves.IdealSheafFiniteSubideals
+public import Nyll.SchemeTheory.Sheaves.IdealSheafDataRangeModuleIotaAppInjective
+public import Nyll.SchemeTheory.Sheaves.DerivedHomology
+public import Nyll.SchemeTheory.Sheaves.FreeAbelianLocalSurjection
+public import Nyll.SchemeTheory.Sheaves.Gluing
+public import Nyll.SchemeTheory.Sheaves.IdealHom
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Nyll.SchemeTheory.Sheaves.IdealSheafDataComapEqOpenCover
+public import Nyll.SchemeTheory.Sheaves.IdealSheafDataReducedSubschemeVanishingIdealLeKer
+public import Nyll.SchemeTheory.Sheaves.IsIsoOnBasis
+public import Nyll.SchemeTheory.Sheaves.OverExtension
+public import Nyll.SchemeTheory.Sheaves.RestrictOpen
+public import Nyll.SchemeTheory.Sheaves.StalkRefinement
+public import Nyll.SchemeTheory.Sheaves.UnitStalks
+
+
+public import Nyll.SchemeTheory.Sheaves.IdealModuleRationalComparison
+public import Nyll.SchemeTheory.Sheaves.IdealModuleLocalGenerators
+public import Nyll.SchemeTheory.Sheaves.IdealModuleFrames
 
 /-! Canonical aggregate for sheaves of modules on schemes. -/

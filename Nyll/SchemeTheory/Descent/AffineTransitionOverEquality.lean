@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Eventual equations of actual relative scheme models
@@ -17,6 +19,8 @@ maps to that stage are quasi-compact and locally of finite type. The existing
 raw affine-transition equality theorem supplies eventual equality of their
 native `Over.pullback` maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

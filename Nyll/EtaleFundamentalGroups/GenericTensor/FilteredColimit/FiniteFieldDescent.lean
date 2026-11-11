@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorCorrespondence
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Category.Ring.FinitePresentation
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorCorrespondence
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
 
 /-!
 # Map descent to an actual finite constant extension
@@ -23,6 +25,8 @@ Native tensor algebras are compared directly with their categorical pushouts.
 The original algebra actions are retained throughout, and the literal field
 inclusion squares follow from the native pushout comparison's naturality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

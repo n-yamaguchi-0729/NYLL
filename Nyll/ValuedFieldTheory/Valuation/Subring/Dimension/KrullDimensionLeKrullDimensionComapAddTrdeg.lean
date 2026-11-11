@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.BigOperators.Finsupp.Basic
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.Order.GroupWithZero.Basic
-import Mathlib.Data.Finset.Max
-import Mathlib.Order.KrullDimension
-import Mathlib.Order.RelSeries
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.RingTheory.AlgebraicIndependent.Defs
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.SetTheory.Cardinal.ENat
-import Mathlib.Tactic.Push
+module
+
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.BigOperators.Finsupp.Basic
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Order.KrullDimension
+public import Mathlib.Order.RelSeries
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.SetTheory.Cardinal.ENat
+public import Mathlib.Tactic.Push
 
 /-!
 # Valuation Subring ring Krull Dim le ring Krull Dim comap add trdeg
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -55,7 +59,7 @@ lemma zpow_eq_one_imp {γ : Γ₀} (h1 : γ < 1) {m : ℤ} (hm : γ ^ m = 1) : m
   rcases le_or_gt 0 m with hpos | hneg
   · obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le hpos
     have := key n hm
-    simp [this]
+    exact congrArg (fun n : ℕ => (n : ℤ)) this
   · have hm' : γ ^ (-m) = 1 := by rw [zpow_neg, hm, inv_one]
     obtain ⟨n, hn⟩ := Int.eq_ofNat_of_zero_le (neg_nonneg.mpr hneg.le)
     rw [hn] at hm'

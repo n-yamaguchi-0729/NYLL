@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.OverTotalLocalBijection
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
-import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalLocalBijection
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
+public import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! Local bijections of relative families induce local bijections of their total families. -/
+
+@[expose] public section
 
 universe u w
 

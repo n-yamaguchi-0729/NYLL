@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.RingTheory.TensorProduct.Free
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
-import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
-import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexEqFinrank
-import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
-import Nyll.AlgebraicCurves.Places.Rational.Classification
-import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
+public import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
+public import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexEqFinrank
+public import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
+public import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
 
 /-!
 # Place eq of forall valuation sub lt one of constant Field Extension
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

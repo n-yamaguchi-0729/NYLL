@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # The actual geometric stalk has a separable residue extension
@@ -22,6 +24,8 @@ extension. The existing local germ map sends that residue element to the
 original stalk residue, so its separability follows through the actual local
 maps. No separability of the entire chosen geometric overfield is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

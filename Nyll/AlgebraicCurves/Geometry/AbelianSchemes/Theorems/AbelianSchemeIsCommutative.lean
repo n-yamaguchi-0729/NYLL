@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Group.Basic
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeSchemeHomOverCompMulEqMul
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Group.Basic
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeSchemeHomOverCompMulEqMul
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
 
 /-!
 # Commutativity of abelian scheme group laws
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

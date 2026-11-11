@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.AffineGeometricFiberBound
-import Nyll.SchemeTheory.Etale.GeometricFiberNeighborhood
-import Nyll.SchemeTheory.Etale.NormalizationRemainder
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.SetTheory.Cardinal.NatCard
-import Mathlib.Topology.Closure
+module
+
+public import Nyll.SchemeTheory.Etale.AffineGeometricFiberBound
+public import Nyll.SchemeTheory.Etale.GeometricFiberNeighborhood
+public import Nyll.SchemeTheory.Etale.NormalizationRemainder
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.SetTheory.Cardinal.NatCard
+public import Mathlib.Topology.Closure
 
 
 /-!
@@ -38,6 +40,8 @@ degree-decrease step in the affine case of Stacks Project, Tag 09Z0.
 The uniform bound for a general qcqs target, the integral refinement and
 finite-presentation descent remain separate tasks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

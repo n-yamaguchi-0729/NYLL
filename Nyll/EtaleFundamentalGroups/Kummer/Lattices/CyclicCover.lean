@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.FiniteAbelian.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Cover
+module
+
+public import Mathlib.GroupTheory.FiniteAbelian.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Cover
 
 /-!
 # Cyclic quotient coordinates for a finite-index lattice cover
@@ -14,6 +16,8 @@ A finite quotient lattice admits cyclic coordinates.  Composing those
 coordinates with the quotient map gives a grading of the ambient lattice
 algebra whose degree-zero subalgebra is the original lattice algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

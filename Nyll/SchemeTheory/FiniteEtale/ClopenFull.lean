@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.ClopenPullback
-import Nyll.SchemeTheory.Topology.ConnectedComponentsMap
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryFan
-import Mathlib.Topology.Sets.Closeds
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.ClopenPullback
+public import Nyll.SchemeTheory.Topology.ConnectedComponentsMap
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryFan
+public import Mathlib.Topology.Sets.Closeds
 
 /-!
 # Clopen descent from fullness of finite étale pullback
@@ -32,6 +34,8 @@ This proves, in particular, the connected-component consequence of full
 faithfulness discussed in Stacks Project, Section 58.19, Tag `0BLE`.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
@@ -40,7 +44,8 @@ universe u
 
 namespace AlgebraicGeometry.FiniteEtale
 
-private theorem section_descent_of_pullback_full
+/-- Fullness of finite etale pullback descends sections of finite etale covers. -/
+theorem section_descent_of_pullback_full
     {X Y : Scheme.{u}} (f : X ⟶ Y) [(FiniteEtale.pullback f).Full]
     (W : FiniteEtale Y) (a : X ⟶ W.left) (ha : a ≫ W.hom = f) :
     ∃ s : Y ⟶ W.left, s ≫ W.hom = 𝟙 Y ∧ f ≫ s = a := by

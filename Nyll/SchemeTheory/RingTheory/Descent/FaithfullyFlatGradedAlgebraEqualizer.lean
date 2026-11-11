@@ -14,10 +14,12 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatAlgebraEqualizer
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatAlgebraEqualizer
 
 /-!
 # Homogeneous invariants of faithfully flat algebra descent
@@ -26,6 +28,8 @@ The degree-preserving hypothesis makes every homogeneous component of an invaria
 upstairs element invariant. The ungraded bijectivity statement is reused directly;
 its proof is not duplicated in this file.
 -/
+
+@[expose] public section
 
 universe u
 

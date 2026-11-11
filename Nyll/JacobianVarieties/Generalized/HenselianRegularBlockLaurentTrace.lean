@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.HenselianRegularBlockTrace
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
-import Nyll.JacobianVarieties.Albanese.SupportedDivisorSumAdditivity
-import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
+module
+
+public import Nyll.JacobianVarieties.Generalized.HenselianRegularBlockTrace
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
+public import Nyll.JacobianVarieties.Albanese.SupportedDivisorSumAdditivity
+public import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
 
 /-! # The regular block on the common Laurent coefficient field
 
@@ -21,6 +24,8 @@ sum naturality. These equalities retain the full Cartier ideals and can be
 combined with supportedDivisorSum_mul and the boundary-block comparison.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -31,7 +36,8 @@ open scoped CategoryTheory.MonObj nonZeroDivisors
 
 namespace JacobianVarieties.Albanese
 
-private def scalarPointMap {K A B : Type u} [CommRing K] [CommRing A] [CommRing B]
+/-- The map of coefficient spectra induced by a scalar algebra homomorphism. -/
+def scalarPointMap {K A B : Type u} [CommRing K] [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B] (f : A →ₐ[K] B) :
     Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K B))) ⟶
       Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K A))) :=

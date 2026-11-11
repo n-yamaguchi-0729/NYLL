@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.SeparablyGenerated
-import Mathlib.RingTheory.AlgebraicIndependent.Adjoin
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Unramified.Field
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import Mathlib.RingTheory.TensorProduct.Pi
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.FieldTheory.SeparablyGenerated
+public import Mathlib.RingTheory.AlgebraicIndependent.Adjoin
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Unramified.Field
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.MvPolynomial
+public import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.Tactic.Ring
 
 /-!
 # Algebra Tensor Product is Reduced of perfect Field of is Reduced
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -197,10 +201,10 @@ theorem exists_denom (z : K ⊗[k] FractionRing (MvPolynomial ι k)) :
       rw [map_mul, Algebra.TensorProduct.tmul_mul_tmul, one_mul]
     have i₁ : inclPoly k K ι ((1 : K) ⊗ₜ s₁) = (1 : K) ⊗ₜ algebraMap _ (FractionRing (MvPolynomial
       ι k)) s₁ := by
-      simp [inclPoly]
+      exact Algebra.TensorProduct.map_tmul _ _ _ _
     have i₂ : inclPoly k K ι ((1 : K) ⊗ₜ s₂) = (1 : K) ⊗ₜ algebraMap _ (FractionRing (MvPolynomial
       ι k)) s₂ := by
-      simp [inclPoly]
+      exact Algebra.TensorProduct.map_tmul _ _ _ _
     rw [e, mul_add, map_add, map_mul, map_mul, i₁, i₂, ← h₁, ← h₂]
     ring
 
@@ -209,7 +213,7 @@ theorem liftFrac_injective : Function.Injective (liftFrac k K ι) := by
   intro z hz
   obtain ⟨s, hs, w, hw⟩ := exists_denom k K ι z
   have h1 : liftFrac k K ι (inclPoly k K ι w) = 0 := by rw [← hw, map_mul, hz, mul_zero]
-  have hw0 : w = 0 := liftFrac_inclPoly_injective k K ι (by simpa using h1)
+  have hw0 : w = 0 := liftFrac_inclPoly_injective k K ι (by simpa only [map_zero] using h1)
   rw [hw0, map_zero] at hw
   have hsF : algebraMap (MvPolynomial ι k) (FractionRing (MvPolynomial ι k)) s ≠ 0 :=
     fun h => hs ((IsFractionRing.injective _ _) (by rw [h, map_zero]))
@@ -262,7 +266,9 @@ theorem injective_liftToE :
       (toEAlgHom K x hx) (fun _ _ => Commute.all _ _)) = (liftFrac k K ι).comp e.toAlgHom := by
     apply Algebra.TensorProduct.ext'
     intro a f
-    simp [liftFrac, toEAlgHom, e]
+    exact (congrArg (liftFrac k K ι)
+      (Algebra.TensorProduct.map_tmul (AlgHom.id k K)
+        hx.aevalEquivField.symm.toAlgHom a f)).symm
   rw [hfac]
   exact (liftFrac_injective k K ι).comp e.injective
 

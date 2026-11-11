@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Util.WithWeakNamespace
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertibleIsoUnitPullbackSquareZero
+module
+
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Util.WithWeakNamespace
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertibleIsoUnitPullbackSquareZero
 
 /-!
 # Triviality of an invertible module over dual numbers
 
 A trivial reduction lifts across the square-zero kernel of the dual-number projection.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

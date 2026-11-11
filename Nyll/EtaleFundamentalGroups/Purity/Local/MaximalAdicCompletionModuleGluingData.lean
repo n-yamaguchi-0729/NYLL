@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedEqualizer
-import Mathlib.Algebra.Category.ModuleCat.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedEqualizer
+public import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-!
 # Module data for maximal-adic formal gluing
@@ -20,6 +22,8 @@ For the standard datum attached to an `R`-module `M`, the completion chart is
 the overlap maps are the canonical localization maps.  The mixed equalizer
 theorem identifies the resulting global-sections module with `M`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -177,75 +181,68 @@ section MaximalAdic
 variable (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 variable (M : Type w) [AddCommGroup M] [Module R M]
 
-private abbrev GluingRhat :=
-  AdicCompletion (maximalIdeal R) R
-
-private abbrev GluingGeneratorIndex :=
-  AlgebraicGeometry.Scheme.puncturedSpectrumGeneratorIndex R
-
-private abbrev gluingGenerator (i : GluingGeneratorIndex R) : R :=
-  AlgebraicGeometry.Scheme.puncturedSpectrumGenerator R i
-
-private abbrev GluingPowers (i : GluingGeneratorIndex R) : Submonoid R :=
-  Submonoid.powers (gluingGenerator R i)
+/-- Powers of the chosen generator for a principal gluing chart. -/
+abbrev maximalAdicCompletionGluingPowers
+    (i : MaximalAdicCompletionMixed.GeneratorIndex R) : Submonoid R :=
+  Submonoid.powers (MaximalAdicCompletionMixed.generator R i)
 
 /-- The standard formal-gluing datum attached to an `R`-module. -/
 def maximalAdicCompletionStandardModuleGluingDatum :
-    ModuleFormalGluingDatum R (GluingGeneratorIndex R) where
-  completion := ModuleCat.of R (GluingRhat R ⊗[R] M)
-  principal i := ModuleCat.of R (LocalizedModule (GluingPowers R i) M)
+    ModuleFormalGluingDatum.{u, u, max u w} R
+      (MaximalAdicCompletionMixed.GeneratorIndex R) where
+  completion := ModuleCat.of R (MaximalAdicCompletionMixed.Rhat R ⊗[R] M)
+  principal i := ModuleCat.of R (LocalizedModule (maximalAdicCompletionGluingPowers R i) M)
   completionLocalOverlap i :=
     ModuleCat.of R
-      (LocalizedModule (GluingPowers R i) (GluingRhat R ⊗[R] M))
+      (LocalizedModule (maximalAdicCompletionGluingPowers R i)
+        (MaximalAdicCompletionMixed.Rhat R ⊗[R] M))
   principalOverlap i j :=
     ModuleCat.of R
-      (LocalizedModule (GluingPowers R j)
-        (LocalizedModule (GluingPowers R i) M))
+      (LocalizedModule (maximalAdicCompletionGluingPowers R j)
+        (LocalizedModule (maximalAdicCompletionGluingPowers R i) M))
   completionRestriction i := ModuleCat.ofHom <|
     LocalizedModule.mkLinearMap
-      (GluingPowers R i) (GluingRhat R ⊗[R] M)
+      (maximalAdicCompletionGluingPowers R i) (MaximalAdicCompletionMixed.Rhat R ⊗[R] M)
   localToCompletionOverlap i := ModuleCat.ofHom <|
-    IsLocalizedModule.map (GluingPowers R i)
-      (LocalizedModule.mkLinearMap (GluingPowers R i) M)
+    IsLocalizedModule.map (maximalAdicCompletionGluingPowers R i)
+      (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M)
       (LocalizedModule.mkLinearMap
-        (GluingPowers R i) (GluingRhat R ⊗[R] M))
-      (TensorProduct.mk R (GluingRhat R) M 1)
+        (maximalAdicCompletionGluingPowers R i)
+        (MaximalAdicCompletionMixed.Rhat R ⊗[R] M))
+      (TensorProduct.mk R (MaximalAdicCompletionMixed.Rhat R) M 1)
   localRestrictionLeft i j := ModuleCat.ofHom <|
-    LocalizedModule.mkLinearMap (GluingPowers R j)
-      (LocalizedModule (GluingPowers R i) M)
+    LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R j)
+      (LocalizedModule (maximalAdicCompletionGluingPowers R i) M)
   localRestrictionRight i j := ModuleCat.ofHom <|
-    IsLocalizedModule.map (GluingPowers R j)
-      (LocalizedModule.mkLinearMap (GluingPowers R j) M)
-      (LocalizedModule.mkLinearMap (GluingPowers R j)
-        (LocalizedModule (GluingPowers R i) M))
-      (LocalizedModule.mkLinearMap (GluingPowers R i) M)
-
-private abbrev StandardGluingDatum :=
-  maximalAdicCompletionStandardModuleGluingDatum R M
+    IsLocalizedModule.map (maximalAdicCompletionGluingPowers R j)
+      (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R j) M)
+      (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R j)
+        (LocalizedModule (maximalAdicCompletionGluingPowers R i) M))
+      (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M)
 
 /-- The canonical completion/localization tuple is a section of the
 standard formal-gluing datum. -/
 def maximalAdicCompletionStandardModuleGluingMap :
-    M →ₗ[R] (StandardGluingDatum R M).Sections :=
-  LinearMap.codRestrict (StandardGluingDatum R M).Sections
-    ((TensorProduct.mk R (GluingRhat R) M 1).prod <|
+    M →ₗ[R] (maximalAdicCompletionStandardModuleGluingDatum R M).Sections :=
+  LinearMap.codRestrict (maximalAdicCompletionStandardModuleGluingDatum R M).Sections
+    ((TensorProduct.mk R (MaximalAdicCompletionMixed.Rhat R) M 1).prod <|
       LinearMap.pi fun i ↦
-        LocalizedModule.mkLinearMap (GluingPowers R i) M) <| by
+        LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M) <| by
           intro m
           apply Prod.ext
           · exact (maximalAdicCompletionMixedEqualizerMap R M m).2
           · funext i j
             change LocalizedModule.mk (LocalizedModule.mk m 1) 1 =
-              IsLocalizedModule.map (GluingPowers R j)
-                (LocalizedModule.mkLinearMap (GluingPowers R j) M)
-                (LocalizedModule.mkLinearMap (GluingPowers R j)
-                  (LocalizedModule (GluingPowers R i) M))
-                (LocalizedModule.mkLinearMap (GluingPowers R i) M)
+              IsLocalizedModule.map (maximalAdicCompletionGluingPowers R j)
+                (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R j) M)
+                (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R j)
+                  (LocalizedModule (maximalAdicCompletionGluingPowers R i) M))
+                (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M)
                 (LocalizedModule.mk m 1)
             symm
             exact IsLocalizedModule.map_LocalizedModules
-              (GluingPowers R j)
-              (LocalizedModule.mkLinearMap (GluingPowers R i) M) m 1
+              (maximalAdicCompletionGluingPowers R j)
+              (LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M) m 1
 
 omit [IsNoetherianRing R] in
 @[simp]
@@ -257,7 +254,7 @@ theorem maximalAdicCompletionStandardModuleGluingMap_completion (m : M) :
 omit [IsNoetherianRing R] in
 @[simp]
 theorem maximalAdicCompletionStandardModuleGluingMap_localization
-    (m : M) (i : GluingGeneratorIndex R) :
+    (m : M) (i : MaximalAdicCompletionMixed.GeneratorIndex R) :
     (maximalAdicCompletionStandardModuleGluingMap R M m).1.2 i =
       LocalizedModule.mk m 1 :=
   rfl
@@ -266,8 +263,8 @@ theorem maximalAdicCompletionStandardModuleGluingMap_localization
 element.  This is the degree-zero source used before the completion
 component is imposed. -/
 def maximalAdicCompletionStandardPuncturedCechMap :
-    M →ₗ[R] (StandardGluingDatum R M).PuncturedCechSections :=
-  (StandardGluingDatum R M).sectionsToPuncturedCech.comp
+    M →ₗ[R] (maximalAdicCompletionStandardModuleGluingDatum R M).PuncturedCechSections :=
+  (maximalAdicCompletionStandardModuleGluingDatum R M).sectionsToPuncturedCech.comp
     (maximalAdicCompletionStandardModuleGluingMap R M)
 
 omit [IsNoetherianRing R] in
@@ -275,7 +272,7 @@ omit [IsNoetherianRing R] in
 theorem maximalAdicCompletionStandardPuncturedCechMap_apply
     (m : M) :
     (maximalAdicCompletionStandardPuncturedCechMap R M m).1 =
-      fun i ↦ LocalizedModule.mkLinearMap (GluingPowers R i) M m :=
+      fun i ↦ LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M m :=
   rfl
 
 /-- The kernel of restriction to the punctured Cech diagram is
@@ -284,16 +281,16 @@ theorem exists_pow_annihilates_of_standardPuncturedCechMap_eq_zero
     (m : M)
     (hm : maximalAdicCompletionStandardPuncturedCechMap R M m = 0) :
     ∃ n : ℕ, ∀ r : ((maximalIdeal R) ^ n : Ideal R), r.1 • m = 0 := by
-  have hloc : ∀ i : GluingGeneratorIndex R,
-      LocalizedModule.mkLinearMap (GluingPowers R i) M m = 0 := by
+  have hloc : ∀ i : MaximalAdicCompletionMixed.GeneratorIndex R,
+      LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M m = 0 := by
     intro i
     have hm' := congrArg (fun z ↦ z.1 i) hm
-    change LocalizedModule.mkLinearMap (GluingPowers R i) M m = 0 at hm'
+    change LocalizedModule.mkLinearMap (maximalAdicCompletionGluingPowers R i) M m = 0 at hm'
     exact hm'
   have hspan :
-      Ideal.span (Set.range (gluingGenerator R)) = maximalIdeal R := by
+      Ideal.span (Set.range (MaximalAdicCompletionMixed.generator R)) = maximalIdeal R := by
     have hrange :
-        Set.range (gluingGenerator R) = (maximalIdeal R).generators := by
+        Set.range (MaximalAdicCompletionMixed.generator R) = (maximalIdeal R).generators := by
       ext x
       constructor
       · rintro ⟨i, rfl⟩
@@ -303,14 +300,14 @@ theorem exists_pow_annihilates_of_standardPuncturedCechMap_eq_zero
     rw [hrange]
     exact (maximalIdeal R).span_generators
   exact exists_pow_annihilates_of_localizedModule_mk_eq_zero
-    (maximalIdeal R).fg_of_isNoetherianRing (gluingGenerator R) hspan m hloc
+    (maximalIdeal R).fg_of_isNoetherianRing (MaximalAdicCompletionMixed.generator R) hspan m hloc
 
 /-- The `H^0` of the standard completion/principal Cech datum is the
 original module.  This is the object-level source for formal-gluing
 effectivity; comparison with arbitrary datum components is handled
 separately. -/
 noncomputable def maximalAdicCompletionStandardModuleGluingSectionsEquiv :
-    M ≃ₗ[R] (StandardGluingDatum R M).Sections :=
+    M ≃ₗ[R] (maximalAdicCompletionStandardModuleGluingDatum R M).Sections :=
   LinearEquiv.ofBijective
     (maximalAdicCompletionStandardModuleGluingMap R M) <| by
       constructor

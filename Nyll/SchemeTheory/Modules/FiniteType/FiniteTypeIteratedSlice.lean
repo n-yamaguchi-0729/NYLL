@@ -5,10 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joël Riou; Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePushforward
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePushforward
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # Finite type and quasicoherence on iterated slice sites
@@ -22,6 +24,8 @@ quasicoherent-data construction at Mathlib revision
 065356127b1dc0016f66b7283ce0ce2c4055aa55:
 https://github.com/leanprover-community/mathlib4/blob/065356127b1dc0016f66b7283ce0ce2c4055aa55/Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean
 -/
+
+@[expose] public section
 
 noncomputable section
 

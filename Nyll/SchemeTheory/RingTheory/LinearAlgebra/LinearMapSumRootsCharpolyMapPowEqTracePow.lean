@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DirectSum.LinearMap
-import Mathlib.LinearAlgebra.Charpoly.BaseChange
-import Mathlib.LinearAlgebra.Eigenspace.Triangularizable
-import Mathlib.LinearAlgebra.Eigenspace.Zero
-import Mathlib.Tactic.SimpRw
+module
+
+public import Mathlib.Algebra.DirectSum.LinearMap
+public import Mathlib.LinearAlgebra.Charpoly.BaseChange
+public import Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+public import Mathlib.LinearAlgebra.Eigenspace.Zero
+public import Mathlib.Tactic.SimpRw
 
 /-!
 # Linear Map sum roots charpoly map pow eq trace pow
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

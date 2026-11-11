@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Spectrum.PrimeSpectrumApplyEqApply
-import Nyll.SchemeTheory.RingTheory.Spectrum.PrimeSpectrumRangeComapEqZeroLocusKer
-import Nyll.SchemeTheory.RingTheory.Spectrum.RingHomIsPushoutEqLocus
+module
+
+public import Nyll.SchemeTheory.RingTheory.Spectrum.PrimeSpectrumApplyEqApply
+public import Nyll.SchemeTheory.RingTheory.Spectrum.PrimeSpectrumRangeComapEqZeroLocusKer
+public import Nyll.SchemeTheory.RingTheory.Spectrum.RingHomIsPushoutEqLocus

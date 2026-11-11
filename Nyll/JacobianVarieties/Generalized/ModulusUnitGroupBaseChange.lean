@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
 import Nyll.JacobianVarieties.Generalized.ModulusUnitGroupRepresentation
+import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! # Arbitrary base change of the intrinsic modulus-unit group sheaf
 
@@ -19,6 +20,8 @@ noncomputable section
 universe u
 
 open CategoryTheory CategoryTheory.Limits
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
 

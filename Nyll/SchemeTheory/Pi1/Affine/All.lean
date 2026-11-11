@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.Affine.GeometricIrreducibility
-import Nyll.SchemeTheory.Pi1.Affine.Over
-import Nyll.SchemeTheory.Pi1.Affine.Property
+module
+
+public import Nyll.SchemeTheory.Pi1.Affine.GeometricIrreducibility
+public import Nyll.SchemeTheory.Pi1.Affine.Over
+public import Nyll.SchemeTheory.Pi1.Affine.Property

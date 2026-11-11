@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationGroup
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationGroup
 
 /-!
 # Hilbert ramification theory: ramification field
@@ -15,6 +17,8 @@ the definitions of `G_w`, `I_w`, `R_w`, `Z_w`, `T_w`, and `V_w`; here we record
 the tower-level Galois correspondence for `G(L / V_w)` as a subgroup of
 `G(L / Z_w)`.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory
 

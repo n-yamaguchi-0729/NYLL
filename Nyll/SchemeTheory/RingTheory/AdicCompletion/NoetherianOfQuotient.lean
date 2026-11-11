@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesApproximation
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.SModEq.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Finiteness.Ideal
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesApproximation
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.SModEq.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring
 
 /-!
 # Noetherian completion from a Noetherian quotient
@@ -34,6 +36,8 @@ combination of the chosen generators. Thus the proof does not assume
 that ideals are closed. Applying this construction to the completion and
 its actual quotient gives Stacks, Tag 05GH.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,18 +11,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppTopUniversallyClosed
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppProper
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppTopUniversallyClosed
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppProper
 
 /-!
 # bijective app of is Proper of flat of geometrically Reduced of geometrically Connected
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -11,16 +11,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.NoZeroSMulDivisors.Defs
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Localization.Free
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Mathlib.RingTheory.Localization.Finiteness
+public import Mathlib.Algebra.NoZeroSMulDivisors.Defs
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Localization.Free
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Module exists not Mem and free localized Module of is Integrally Closed of ring Krull Dim
 le one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

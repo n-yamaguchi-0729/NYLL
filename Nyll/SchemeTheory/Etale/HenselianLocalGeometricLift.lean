@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Prescribed geometric lifts from a strictly local spectrum
@@ -17,6 +19,8 @@ spectrum once a field-valued point over its closed point has been fixed.
 The construction applies the actual section theorem to the fiber product.
 The pointing field can be any extension of the residue field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.SeparablyGenerated
-import Mathlib.Data.Set.Image
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Mathlib.RingTheory.TensorProduct.Pi
-import Mathlib.RingTheory.Unramified.Field
+module
+
+public import Mathlib.FieldTheory.SeparablyGenerated
+public import Mathlib.Data.Set.Image
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.RingTheory.Unramified.Field
 
 /-!
 # Algebra is Reduced tensor Product of perfect Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -42,12 +46,16 @@ theorem isDomain_tensorProduct_of_isFractionRing [IsDomain (P ⊗[k] L)] :
   have : IsScalarTower P (P ⊗[k] L) (E ⊗[k] L) := by
     refine IsScalarTower.of_algebraMap_eq (R := P) (S := P ⊗[k] L) (A := E ⊗[k] L) fun x => ?_
     rw [hf, Algebra.TensorProduct.algebraMap_apply, Algebra.TensorProduct.algebraMap_apply]
-    simp [f]
+    simpa only [AlgHom.id_apply, IsScalarTower.toAlgHom_apply,
+      Algebra.algebraMap_self_apply] using
+      (Algebra.TensorProduct.map_tmul (IsScalarTower.toAlgHom k P E)
+        (AlgHom.id k L) x (1 : L)).symm
   have H : (algebraMap (P ⊗[k] L) (E ⊗[k] L)).comp
       Algebra.TensorProduct.includeRight.toRingHom =
       Algebra.TensorProduct.includeRight.toRingHom := by
     ext x
-    simp [hf, f]
+    change f ((1 : P) ⊗ₜ[k] x) = (1 : E) ⊗ₜ[k] x
+    rw [Algebra.TensorProduct.map_tmul, map_one, AlgHom.id_apply]
   have : IsLocalization (Algebra.algebraMapSubmonoid (P ⊗[k] L) (nonZeroDivisors P))
       (E ⊗[k] L) :=
     IsLocalization.tensorProduct_tensorProduct k L (nonZeroDivisors P) E H
@@ -64,7 +72,7 @@ theorem isDomain_tensorProduct_of_isFractionRing [IsDomain (P ⊗[k] L)] :
   apply hx0
   apply hinj
   rw [map_zero]
-  simpa [Algebra.TensorProduct.algebraMap_apply] using h
+  exact h
 
 end PurelyTranscendental
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
-import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
+module
+
+public import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
+public import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
 
 /-! # Weighted coefficient bounds for algebraic formal equations
 
@@ -20,6 +22,8 @@ equation remains a separate algebraic step. The existence of the actual
 formal root is supplied by `FormalSimpleRoot`, not assumed by an existence
 theorem in this file.
 -/
+
+@[expose] public section
 
 noncomputable section
 

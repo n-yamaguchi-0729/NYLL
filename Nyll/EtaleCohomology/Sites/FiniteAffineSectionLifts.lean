@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.Grp.Kernels
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.Kernels
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Finite affine coverings carrying local section lifts
@@ -23,6 +25,8 @@ On a quasi-compact étale object, a section in the local image of a map of
 abelian presheaves lifts over a finite affine étale covering. The lifts are
 obtained by restricting actual local preimages to affine open neighborhoods.
 -/
+
+@[expose] public section
 
 noncomputable section
 

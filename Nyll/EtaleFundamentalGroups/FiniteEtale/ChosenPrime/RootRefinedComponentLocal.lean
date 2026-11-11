@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.FractionFieldTensorComponent
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.FractionFieldTensorComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
 
 /-!
 # The chosen Tag prime in a root-refined generic component
@@ -19,6 +21,8 @@ prime.
 The final endpoint combines the literal fraction-field tensor coordinate
 with `genericTensorRefineChosenComponentIntegralClosureLocalizationAlgEquiv`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -126,7 +130,7 @@ theorem exists_pointedRootRefinedComponent_localizationAlgEquiv
     (q : Ideal (integralClosure C
       (FiniteEtaleGenericFiberComponent m))) [q.IsPrime] :
     let K := FractionRing R
-    letI : Algebra C K := pointedBaseReverseFractionRingAlgebra pointed
+    let : Algebra C K := pointedBaseReverseFractionRingAlgebra pointed
     ∃ (n : MaximalSpectrum (K ⊗[K] L)),
       letI : Algebra C (GenericTensorFieldComponent n.asIdeal) :=
         genericTensorFieldComponentLeftScalarAlgebra
@@ -137,8 +141,7 @@ theorem exists_pointedRootRefinedComponent_localizationAlgEquiv
         Nonempty
           (Localization.AtPrime q ≃ₐ[C]
             Localization.AtPrime p.asIdeal) := by
-  dsimp only
-  let K := FractionRing R
+  intro K cToK
   let E := FractionRing C
   let eFrac : K ≃ₐ[R] E := pointedFractionRingAlgEquiv pointed
   let : Algebra K E := finiteBaseFractionRingAlgebra
@@ -149,8 +152,6 @@ theorem exists_pointedRootRefinedComponent_localizationAlgEquiv
     pointedFractionRingReverseAlgebra pointed
   let : Algebra E K := reverse
   let : SMul E K := reverse.toSMul
-  let cToK : Algebra C K :=
-    pointedBaseReverseFractionRingAlgebra pointed
   let : Algebra C K := cToK
   let : SMul C K := cToK.toSMul
   have hKE : algebraMap K E = eFrac.toRingHom := by

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionExact
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionQuotient
+module
+
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionExact
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionQuotient
 
 /-!
 # Quotient presentation of finite-stage transgression
@@ -13,6 +15,8 @@ import Nyll.GaloisCohomology.ProP.FiniteTransgressionQuotient
 At a finite quotient stage, invariant characters modulo restrictions of continuous degree-one
 characters identify with the range of finite transgression.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.ProP
 

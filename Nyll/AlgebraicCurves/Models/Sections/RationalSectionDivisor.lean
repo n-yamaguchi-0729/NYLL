@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Sections.RationalSectionRatio
-import Nyll.AlgebraicCurves.Models.Divisors.CartierGeneratorOrder
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.NonzeroSectionCartier
+module
+
+public import Nyll.AlgebraicCurves.Models.Sections.RationalSectionRatio
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierGeneratorOrder
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.NonzeroSectionCartier
 
 /-!
 # The divisor of the actual ratio of two line-bundle sections
@@ -18,6 +20,8 @@ Cartier multiplicities, including all nonreduced multiplicities. The formula
 is available for any function with these local ratios, so a separately proved
 modulus congruence applies to the very same function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

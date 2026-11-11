@@ -11,13 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+module
 
-import Nyll.SchemeTheory.CategoryTheory.Pullback
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+
+public import Nyll.SchemeTheory.CategoryTheory.Pullback
 
 /-!
 # Scheme Hom finrank pullback Map of comp eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

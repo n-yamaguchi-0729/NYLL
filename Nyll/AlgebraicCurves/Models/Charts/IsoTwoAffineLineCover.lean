@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Rational.CurveModelRatFunc
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Models.Construction.Construction
+module
+
+public import Nyll.AlgebraicCurves.Models.Rational.CurveModelRatFunc
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Models.Construction.Construction
 
 /-!
 # Curve Model exists iso of two Affine Line Cover
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -119,7 +123,7 @@ theorem exists_algEquiv_ratFunc_inv : ∃ σ : RF ≃ₐ[κ] RF, σ XX = XX⁻¹
     have key' : (σ.comp σ).toRingHom.comp (algebraMap (Polynomial κ) RF) =
         (AlgHom.id κ RF).toRingHom.comp (algebraMap (Polynomial κ) RF) :=
       congrArg AlgHom.toRingHom key
-    exact AlgHom.coe_ringHom_injective (IsLocalization.ringHom_ext (nonZeroDivisors (Polynomial κ))
+    exact AlgHom.toRingHom_injective (IsLocalization.ringHom_ext (nonZeroDivisors (Polynomial κ))
       key')
   refine ⟨AlgEquiv.ofAlgHom σ σ hσσ hσσ, hσX, ?_⟩
   change σ XX⁻¹ = XX

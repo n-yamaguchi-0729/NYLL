@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # Dedekind domains from essentially finite type unramified algebras
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Unramified.LocalRing
 An essentially finite type formally unramified domain over a Dedekind domain
 is Dedekind, without assuming module-finiteness over the base.
 -/
+
+@[expose] public section
 
 namespace IsDedekindDomain
 

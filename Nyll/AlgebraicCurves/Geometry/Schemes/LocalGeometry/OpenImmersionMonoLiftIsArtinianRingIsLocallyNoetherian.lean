@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Artinian.Ring
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.OpenImmersionMonoLiftIsArtinianRingLocalRing
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.RingTheory.Artinian.Ring
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.OpenImmersionMonoLiftIsArtinianRingLocalRing
 
 /-!
 # is Open Immersion of mono of forall exists lift of is Artinian Ring of is Locally
 Noetherian
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

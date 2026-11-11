@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Normalizing in a normal affine scheme or its fraction field
@@ -16,6 +18,8 @@ If `B` is integrally closed, an element of its fraction field integral over
 canonically isomorphic. This isomorphism intertwines automorphisms and,
 on spectra, the relative-normalization deck maps and their point stabilizers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

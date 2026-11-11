@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Maps.Basic
+module
+
+public import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Maps.Basic
 
 
 /-!
@@ -29,6 +31,8 @@ In particular this applies to every proper morphism over a local ring. It is
 the covering-detection input for descent from the closed fiber in the
 proper-local comparison. It asserts no cohomological base-change theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

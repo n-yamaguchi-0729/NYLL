@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTorsionFiber
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperGroupScheme
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Mathlib.CategoryTheory.Galois.Topology
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawSchemeNsmulCompEqCompSchemeNsmul
+module
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPoints
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.ProCGroups.Abelian.FullTateModule
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTorsionFiber
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperGroupScheme
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Mathlib.CategoryTheory.Galois.Topology
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawSchemeNsmulCompEqCompSchemeNsmul
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.AlgebraicPoints
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.ProCGroups.Abelian.FullTateModule
 
 /-!
 # Monodromy at actual torsion points in arbitrary characteristic
@@ -24,6 +26,10 @@ For every invertible positive integer, the actual multiplication fibre is a
 torsor under its torsion points. Deck translations prove that unit monodromy
 is an additive map to the actual torsion group.
 -/
+
+@[expose] public section
+
+universe u
 
 noncomputable section
 
@@ -35,22 +41,25 @@ open scoped FintypeCatDiscrete
 
 namespace GoodReductionJacobian.RelativeGroupLaw.UnitMultiplication
 
-variable {K : Type} [Field K]
-  {A : Scheme} {f : A ⟶ Spec (.of K)}
+variable {K : Type u} [Field K]
+  {A : Scheme.{u}} {f : A ⟶ Spec (.of K)}
   (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
 
-private theorem scalarIdentity_specMap :
+/-- The self-algebra structure induces the identity on the field spectrum. -/
+theorem scalarIdentity_specMap :
     Spec.map (CommRingCat.ofHom (algebraMap K K)) = 𝟙 (Spec (CommRingCat.of K)) := by
   change Spec.map (CommRingCat.ofHom (RingHom.id K)) = _
   rw [CommRingCat.ofHom_id]
   exact Spec.map_id (CommRingCat.of K)
 
-private def torsionPointSection (n : unitIndices K)
+/-- The original section underlying the allowed torsion point. -/
+def torsionPointSection (n : unitIndices K)
     (t : ProCGroups.torsionLevel (G.AlgPoints hc K) n.1) :
     SchemeHomOver (𝟙 (Spec (CommRingCat.of K))) f :=
   ⟨(AlgPoints.toPoint t.1).1, (AlgPoints.toPoint t.1).2.trans (scalarIdentity_specMap (K := K))⟩
 
-private theorem torsionPointSection_isTorsion (n : unitIndices K)
+/-- The original section is killed by its specified multiplication index. -/
+theorem torsionPointSection_isTorsion (n : unitIndices K)
     (t : ProCGroups.torsionLevel (G.AlgPoints hc K) n.1) :
     G.IsTorsionPoint (𝟙 (Spec (CommRingCat.of K))) (n.1 : ℕ)
       (torsionPointSection G hc n t) := by
@@ -105,20 +114,23 @@ theorem monodromy_continuous (n : unitIndices K) :
     Continuous (fiberEquivTorsion G hc n)).comp
       (continuous_id.smul continuous_const)
 
-private def torsionDeckTranslation (n : unitIndices K)
+omit [IsSepClosed K] in
+/-- The actual deck translation attached to an allowed torsion point. -/
+def torsionDeckTranslation (n : unitIndices K)
     (t : ProCGroups.torsionLevel (G.AlgPoints hc K) n.1) :
     Aut (cover G hc n) :=
   translation G hc n (torsionPointSection G hc n t)
     (torsionPointSection_isTorsion G hc n t)
 
 
-private theorem fiberEquiv_map_torsionDeckTranslation (n : unitIndices K)
+/-- The original torsion-fibre coordinate computes the deck translation. -/
+theorem fiberEquiv_map_torsionDeckTranslation (n : unitIndices K)
     (t : ProCGroups.torsionLevel (G.AlgPoints hc K) n.1)
     (z : (FiniteEtale.fiber (G.one (𝟙 (Spec (CommRingCat.of K)))).1).obj
       (cover G hc n)) :
     fiberEquivTorsion G hc n
         ((FiniteEtale.fiber (G.one (𝟙 (Spec (CommRingCat.of K)))).1).map
-          (torsionDeckTranslation G hc n t).hom z) =
+          (torsionDeckTranslation G hc n t).asIso.hom z) =
       fiberEquivTorsion G hc n z + t := by
   let e : Spec (CommRingCat.of K) ⟶ A := (G.one (𝟙 _)).1
   let s : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of K) :=
@@ -137,16 +149,16 @@ private theorem fiberEquiv_map_torsionDeckTranslation (n : unitIndices K)
   apply AlgPoints.toPoint_injective
   apply Subtype.ext
   change (AlgPoints.toPoint (fiberEquivTorsion G hc n
-      ((FiniteEtale.fiber e).map (torsionDeckTranslation G hc n t).hom z)).1).1 =
+      ((FiniteEtale.fiber e).map (torsionDeckTranslation G hc n t).asIso.hom z)).1).1 =
     (AlgPoints.toPoint ((fiberEquivTorsion G hc n z).1 + t.1)).1
   rw [AlgPoints.toPoint_add, fiberEquivTorsion_toPoint G]
   have h := FiniteEtale.fiberObjEquivHom_naturality e
-    (torsionDeckTranslation G hc n t).hom z
+    (torsionDeckTranslation G hc n t).asIso.hom z
   let q : Spec (CommRingCat.of K) ⟶ A :=
     (FiniteEtale.fiberObjEquivHom e (cover G hc n) z).left
   let q' : Spec (CommRingCat.of K) ⟶ A :=
     (FiniteEtale.fiberObjEquivHom e (cover G hc n)
-      ((FiniteEtale.fiber e).map (torsionDeckTranslation G hc n t).hom z)).left
+      ((FiniteEtale.fiber e).map (torsionDeckTranslation G hc n t).asIso.hom z)).left
   have hleft : q' = q ≫ G.translate u := congrArg
     (fun r : Over.mk e ⟶ (cover G hc n).toComma => r.left) h.symm
   have hp : p.1 = q :=
@@ -175,17 +187,17 @@ theorem fiberEquivTorsion_smul (n : unitIndices K)
   let d : Aut (cover G hc n) := torsionDeckTranslation G hc n t
   have hunit : fiberEquivTorsion G hc n (unit G hc n) = 0 :=
     (fiberEquivTorsion G hc n).apply_symm_apply 0
-  have hz : (FiniteEtale.fiber e).map d.hom (unit G hc n) = z := by
+  have hz : (FiniteEtale.fiber e).map d.asIso.hom (unit G hc n) = z := by
     apply (fiberEquivTorsion G hc n).injective
     exact (fiberEquiv_map_torsionDeckTranslation G hc n t (unit G hc n)).trans
       ((congrArg (fun x => x + t) hunit).trans (zero_add t))
   calc
     fiberEquivTorsion G hc n (g • z) =
         fiberEquivTorsion G hc n
-          (g • (FiniteEtale.fiber e).map d.hom (unit G hc n)) :=
+          (g • (FiniteEtale.fiber e).map d.asIso.hom (unit G hc n)) :=
       congrArg (fun x => fiberEquivTorsion G hc n (g • x)) hz.symm
     _ = fiberEquivTorsion G hc n
-        ((FiniteEtale.fiber e).map d.hom (g • unit G hc n)) := by
+        ((FiniteEtale.fiber e).map d.asIso.hom (g • unit G hc n)) := by
       rw [mulAction_naturality]
     _ = monodromy G hc n g + t :=
       fiberEquiv_map_torsionDeckTranslation G hc n t (g • unit G hc n)

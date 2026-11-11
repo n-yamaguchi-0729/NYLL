@@ -10,19 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Etale.Field
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
-import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
-import Nyll.AlgebraicCurves.Places.Orders.UniqueValuationSubLtOne
-import Nyll.AlgebraicCurves.FunctionFields.Constants.MemSpanRangeAlgebraMapConstantExtension
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+public import Mathlib.RingTheory.Etale.Field
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
+public import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubring
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
+public import Nyll.AlgebraicCurves.Places.Orders.UniqueValuationSubLtOne
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.MemSpanRangeAlgebraMapConstantExtension
 
 /-!
 # Exists derivation constant Field Extension map mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -106,47 +111,9 @@ theorem finiteDimensional_adjoin_of_transcendental {L F : Type*} [Field L] [Fiel
       FiniteDimensional (IntermediateField.adjoin L ({x} : Set F)) F)
     {f : F} (hf : Transcendental L f) :
     FiniteDimensional (IntermediateField.adjoin L ({f} : Set F)) F := by
-  classical
   obtain ⟨x, -, hxfin⟩ := hF
-  set Ex := IntermediateField.adjoin L ({x} : Set F) with hEx
-  set Ef := IntermediateField.adjoin L ({f} : Set F) with hEf
-  have := hxfin
-  have halgx : Algebra.IsAlgebraic (Algebra.adjoin L ({x} : Set F)) F := by
-    have : Algebra.IsAlgebraic Ex F := Algebra.IsAlgebraic.of_finite Ex F
-    exact Algebra.IsAlgebraic.trans (Algebra.adjoin L ({x} : Set F)) Ex F
-  have htr : Algebra.trdeg L F ≤ 1 := by
-    have h := Algebra.IsAlgebraic.trdeg_le_cardinalMk L ({x} : Set F)
-    simpa using h
-  have hind : AlgebraicIndependent L ((↑) : ({f} : Set F) → F) := by
-    have : Subsingleton ({f} : Set F) := Set.subsingleton_coe _ |>.mpr (Set.subsingleton_singleton)
-    exact (algebraicIndependent_singleton_iff (⟨f, Set.mem_singleton f⟩ : ({f} : Set F))).mpr hf
-  have hB : IsTranscendenceBasis L ((↑) : ({f} : Set F) → F) :=
-    hind.isTranscendenceBasis_of_trdeg_le_of_finite (by simpa using htr)
-  have halg : Algebra.IsAlgebraic Ef F := by
-    have h := hB.isAlgebraic_field
-    rwa [Subtype.range_coe] at h
-  let bx := Module.finBasis Ex F
-  let T : Set F := insert x (Set.range bx)
-  have : Finite T := ((Set.finite_range bx).insert x).to_subtype
-  have hT : ∀ t ∈ T, IsIntegral Ef t := fun t _ => (Algebra.IsAlgebraic.isAlgebraic t).isIntegral
-  have hfin : FiniteDimensional Ef (IntermediateField.adjoin Ef T) :=
-    IntermediateField.finiteDimensional_adjoin hT
-  have htop : IntermediateField.adjoin Ef T = ⊤ := by
-    rw [eq_top_iff]
-    intro y _
-    have hyL : y ∈ IntermediateField.adjoin L T := by
-      rw [← bx.sum_repr y]
-      refine sum_mem fun i _ => ?_
-      rw [Algebra.smul_def]
-      refine mul_mem ?_ (IntermediateField.subset_adjoin L T (Set.mem_insert_of_mem _ ⟨i, rfl⟩))
-      exact IntermediateField.adjoin.mono L _ _
-        (Set.singleton_subset_iff.mpr (Set.mem_insert x _)) (bx.repr y i).2
-    have hle : IntermediateField.adjoin L T ≤ (IntermediateField.adjoin Ef T).restrictScalars L :=
-      IntermediateField.adjoin_le_iff.mpr (IntermediateField.subset_adjoin Ef T)
-    exact hle hyL
-  rw [htop] at hfin
-  exact LinearEquiv.finiteDimensional
-    (IntermediateField.topEquiv (F := Ef) (E := F)).toLinearEquiv
+  let : FiniteDimensional (IntermediateField.adjoin L ({x} : Set F)) F := hxfin
+  exact _root_.AlgebraicCurve.finiteDimensional_adjoin_of_transcendental x hf
 
 variable (K : Type*) [Field K]
 
@@ -542,7 +509,8 @@ theorem ord_sum_le [IsAlgClosed K] [IsCurveOver K F]
     by_cases hr0 : r j = 0
     · have : (⟨algebraMap F F' (r j), hφmem _ (r j).2⟩ : P'.toValuationSubring) = 0 := by
         apply Subtype.ext
-        simp [hr0]
+        change algebraMap F F' (r j : F) = (0 : F')
+        rw [hr0, ZeroMemClass.coe_zero, map_zero]
       rw [this]
       exact Ideal.zero_mem _
     apply mem_maximalIdeal_of_ord_pos P'

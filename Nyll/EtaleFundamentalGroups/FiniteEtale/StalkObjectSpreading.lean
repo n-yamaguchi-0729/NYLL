@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Finite-etale covers spread from an actual stalk
@@ -20,6 +22,8 @@ actual cover of that neighborhood, retaining the native stalk comparison.
 This is the object-spreading step in Stacks 0BPA and 0BQ5. It does not
 assume that the base is affine, quasi-compact, or quasi-separated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

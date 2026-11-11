@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeFiniteEtaleGaloisCoverInertia
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealCoprimality
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeFiniteEtaleGaloisCoverInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealCoprimality
 
 /-!
 # Scheme normal crossings and inertia in pointed finite Galois quotients
@@ -15,6 +17,8 @@ The strict-normal-crossings chart at a height-two point selects a height-one bra
 normalization-prime inertia over that branch maps to a subgroup of every pointed finite Galois
 quotient whose order is prime to the selected residue characteristic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

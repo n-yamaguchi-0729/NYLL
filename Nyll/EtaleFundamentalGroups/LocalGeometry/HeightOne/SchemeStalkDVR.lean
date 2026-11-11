@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Discrete valuation stalks at regular codimension-one points
@@ -15,6 +17,8 @@ A regular point of coheight one on an integral scheme has a discrete
 valuation local ring.  This is the scheme-level entry point for divisorial
 normalization and inertia results.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

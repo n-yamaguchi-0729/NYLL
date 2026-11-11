@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.ValueGroup
-import Mathlib.GroupTheory.Archimedean
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
-import Mathlib.RingTheory.Int.Basic
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.ValueGroup
+public import Mathlib.GroupTheory.Archimedean
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import Mathlib.RingTheory.Int.Basic
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Coprime indices in a discrete book value group
@@ -17,6 +20,8 @@ infinite cyclic additive group.  In an infinite cyclic group, two subgroups
 which generate the whole group have coprime indices.  This file records that
 group-theoretic fact and specializes it to actual book value subgroups.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,13 +35,11 @@ open AlgebraicNumberTheory.Valuations
 theorem int_addSubgroup_index_coprime_of_sup_eq_top
     (A B : AddSubgroup ℤ) (hsup : A ⊔ B = ⊤) :
     Nat.Coprime A.index B.index := by
-  obtain ⟨a, ha⟩ := Int.subgroup_cyclic A
-  obtain ⟨b, hb⟩ := Int.subgroup_cyclic B
-  have ha' : A = AddSubgroup.zmultiples a :=
-    ha.trans (AddSubgroup.zmultiples_eq_closure a).symm
-  have hb' : B = AddSubgroup.zmultiples b :=
-    hb.trans (AddSubgroup.zmultiples_eq_closure b).symm
-  rw [ha', hb'] at hsup ⊢
+  obtain ⟨a, ha⟩ :=
+    (A.isAddCyclic_iff_exists_zmultiples_eq_top).mp (AddSubgroup.isAddCyclic A)
+  obtain ⟨b, hb⟩ :=
+    (B.isAddCyclic_iff_exists_zmultiples_eq_top).mp (AddSubgroup.isAddCyclic B)
+  rw [← ha, ← hb] at hsup ⊢
   rw [Int.index_zmultiples, Int.index_zmultiples,
     ← Int.isCoprime_iff_nat_coprime]
   have hone : (1 : ℤ) ∈

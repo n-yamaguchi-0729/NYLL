@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePushforward
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypePushforward
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
 
 /-!
 # Finite type under actual open restriction and slice equivalence
@@ -19,6 +22,8 @@ The native site-equivalence coefficient isomorphisms transport the actual
 finite local generating families in both directions. These comparisons
 connect slice-site finite type with the geometric restriction functor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

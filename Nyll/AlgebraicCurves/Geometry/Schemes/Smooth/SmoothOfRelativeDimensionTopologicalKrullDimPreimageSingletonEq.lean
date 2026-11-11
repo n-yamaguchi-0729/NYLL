@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Fiber
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionLeTopologicalKrullDim
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionTopologicalKrullDimLe
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionLeTopologicalKrullDim
+public import Nyll.SchemeTheory.Morphisms.SmoothRelativeDimension
 
 /-!
 # Smooth Of Relative Dimension topological Krull Dim preimage singleton eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

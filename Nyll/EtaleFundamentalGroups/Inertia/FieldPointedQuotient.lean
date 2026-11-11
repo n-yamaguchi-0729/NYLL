@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFundamentalGroupConjugacy
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFunctoriality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
-import Nyll.EtaleFundamentalGroups.Inertia.PointedQuotientTransport
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFundamentalGroupConjugacy
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFunctoriality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
+public import Nyll.EtaleFundamentalGroups.Inertia.PointedQuotientTransport
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
 
 /-!
 # Pointed finite quotients over abstract fields
@@ -18,6 +21,8 @@ The actual pointed quotient and its canonical restriction map are constructed
 and compared before choosing an intermediate field or a separable closure.
 Their geometric points therefore use the same field structures throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

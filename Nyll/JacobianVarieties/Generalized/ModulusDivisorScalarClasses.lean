@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
-import Nyll.JacobianVarieties.Generalized.ModulusComplementBaseChange
-import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusIsoComparison
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementBaseChange
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusIsoComparison
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
 
 /-! # Scalar extension of the actual normalized divisor-family classes
 
@@ -18,6 +20,8 @@ specified normalized section is preserved, including the nonreduced modulus.
 These formulas apply before sheafification, so actual equality of rigidified
 families over a geometric parameter can be moved to the scalar-extended curve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

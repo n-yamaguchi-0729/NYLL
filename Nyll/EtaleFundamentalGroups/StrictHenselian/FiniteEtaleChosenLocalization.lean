@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsSepClosed
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
 
 /-!
 # A chosen closed factor of a finite etale algebra over a strict Henselian base
@@ -15,6 +18,8 @@ residue-field map bijective.  The pointed Henselian theorem then identifies
 the corresponding localization with the base.  Unlike an existence theorem,
 this keeps a prime selected by an independent component construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

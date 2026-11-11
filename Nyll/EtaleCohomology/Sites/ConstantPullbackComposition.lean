@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantPullbackComparison
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantPullbackComparison
 
 /-!
 # Composition of canonical constant-sheaf comparisons
@@ -13,6 +15,8 @@ The adjunction-unit characterization holds at every terminal object.
 Consequently the comparison for the composite adjunction agrees with
 successive constant-sheaf comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

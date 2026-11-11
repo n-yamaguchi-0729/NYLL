@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.MonicChange
-import Mathlib.FieldTheory.AlgebraicClosure
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.MonicChange
+public import Mathlib.FieldTheory.AlgebraicClosure
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-!
 # Monic normalization after a finite constant extension
@@ -16,6 +18,8 @@ over the ground field itself.  Fried--Jarden therefore first passes to a
 suitable finite constant extension.  This file develops that missing
 constant-extension form of linear monic normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

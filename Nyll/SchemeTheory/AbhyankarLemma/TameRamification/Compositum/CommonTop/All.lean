@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.BranchFinrank
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Finrank
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.LowerCanonical
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.PrimeObstruction
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.BranchFinrank
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Finrank
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.LowerCanonical
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.PrimeObstruction
 
 /-!
 # Common-top valued composita

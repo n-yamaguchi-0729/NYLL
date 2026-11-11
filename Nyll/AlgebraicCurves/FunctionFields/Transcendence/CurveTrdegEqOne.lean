@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveFiniteDimensionalAdjoinSimple
-import Mathlib.RingTheory.Unramified.Field
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveFiniteDimensionalAdjoinSimple
+public import Mathlib.RingTheory.Unramified.Field
 
 /-!
 # Is Curve Over trdeg eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

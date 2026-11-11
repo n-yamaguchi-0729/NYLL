@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Tactic.ByContra
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Tactic.ByContra
 
 /-!
 # Is Integrally Closed exists valuation Subring mem iff and nonunits iff of height eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

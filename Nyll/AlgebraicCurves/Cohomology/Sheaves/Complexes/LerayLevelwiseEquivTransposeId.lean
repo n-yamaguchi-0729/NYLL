@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayBicomplex
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayBicomplex
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
 
 /-! Transposition of the identity Leray double complex. -/
+
+@[expose] public section
 
 section ProofImplementation
 

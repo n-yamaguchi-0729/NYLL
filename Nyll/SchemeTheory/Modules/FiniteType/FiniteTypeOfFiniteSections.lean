@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTilde
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTilde
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
 
 /-!
 # Finite type from the actual finite affine section modules
@@ -19,6 +22,8 @@ generating families. The proof transports the finite tilde generators
 through the canonical affine counit and the open-to-slice equivalence.
 No local presentation or finite-type sheaf is assumed as extra data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

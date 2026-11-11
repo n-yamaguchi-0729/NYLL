@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Degree.TameCompletedTensorSplitting
+module
+
+public import Nyll.AlgebraicCurves.Places.Degree.TameCompletedTensorSplitting
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentRootOfUnityAutomorphisms
+public import Nyll.SchemeTheory.RingTheory.Henselian.TensorSplittingOfEmbeddings
 
 /-! # Tame completed factors over the native function field of a rational curve
 
@@ -13,6 +17,8 @@ A rational coordinate is provided by an actual algebra equivalence with
 remain unchanged. This allows the literal curve-model function fields in
 the finite Cartier family to use the normalized tame splitting directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

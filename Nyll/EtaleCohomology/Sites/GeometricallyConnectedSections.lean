@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FpqcSectionDescent
-import Nyll.EtaleCohomology.Sites.GeometricallyConnectedStalks
-import Nyll.EtaleCohomology.Sites.SurjectivePullbackUnit
+module
+
+public import Nyll.EtaleCohomology.Sites.FpqcSectionDescent
+public import Nyll.EtaleCohomology.Sites.GeometricallyConnectedStalks
+public import Nyll.EtaleCohomology.Sites.SurjectivePullbackUnit
 
 /-!
 # Global sections under flat maps with geometrically connected fibres
@@ -15,6 +17,8 @@ Every section of actual inverse image is Čech-compatible by the common
 geometric stalk calculation. Fpqc section descent gives its unique original
 section. The coefficient sheaf is arbitrary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

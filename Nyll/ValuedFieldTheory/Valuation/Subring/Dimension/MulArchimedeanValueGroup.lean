@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Order.Archimedean.Defs
-import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.PowValuationEqValuationNatCastZpow
+module
+
+public import Mathlib.Algebra.Order.Archimedean.Defs
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.PowValuationEqValuationNatCastZpow
 
 /-!
 # Valuation Subring mul Archimedean value Group of is Algebraic of valuation nat Cast lt one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

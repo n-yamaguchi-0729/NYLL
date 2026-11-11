@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
-import Mathlib.FieldTheory.PrimitiveElement
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
+public import Mathlib.FieldTheory.PrimitiveElement
 
 /-! # Formal lifting through a finite separable field extension
 
@@ -14,6 +16,8 @@ coefficient, extends uniquely to a finite separable extension. A primitive
 element and its separable minimal polynomial supply the actual Hensel root;
 the power basis then constructs the homomorphism on the whole extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

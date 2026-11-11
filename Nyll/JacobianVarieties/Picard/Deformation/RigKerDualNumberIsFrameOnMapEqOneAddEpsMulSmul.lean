@@ -10,43 +10,47 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.Algebra.Group.Prod
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.Algebra.Group.Units.Equiv
-import Mathlib.Algebra.Ring.Equiv
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.LinearAlgebra.Prod
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring.Basic
-import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverStageBaseChangeIsosStructureSheaf
-import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverIsFrameOnPullbackStage
-import Nyll.JacobianVarieties.Picard.LineBundles.ModulesInvertibleIsoUnit
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.Prod
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.Algebra.Ring.Equiv
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.LinearAlgebra.Prod
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring.Basic
+public import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverStageBaseChangeIsosStructureSheaf
+public import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverIsFrameOnPullbackStage
+public import Nyll.JacobianVarieties.Picard.LineBundles.ModulesInvertibleIsoUnit
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 
 /-!
 # Local frames and normalized transitions over the dual numbers
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -867,9 +871,6 @@ section Frames2
 variable {R : Type u} [CommRing R] {C : Scheme.{u}} (c : C ⟶ Spec (.of R)) (ε : SchemeHomOver (𝟙
   (Spec (.of R))) c)
   (A : Type u) [CommRing A] [Algebra R A] (𝒱 : C.TwoAffineOpenCover)
-
-local notation "Xε" => Limits.pullback c (specMap R (DualNumber A))
-local notation "XA" => Limits.pullback c (specMap R A)
 
 /-- A rigidified deformation admits a normalized system of local frames. -/
 theorem exists_isSystem (M : RigKerDualNumber.Carrier c ε A) : ∃ f, IsSystem c ε A 𝒱 M f := by

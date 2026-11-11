@@ -10,29 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.SchemeHomOverBaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePropertyBundleFibreStr
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
-import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppProper
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.CompSectionCompEqIsClosedMap
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.BaseChange.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePropertyBundleFibreStr
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
+public import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppProper
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.CompSectionCompEqIsClosedMap
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
 
 /-!
 # Pointed morphisms of abelian schemes preserve multiplication
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
 
 /-! # Tame inverse roots of the formal translation factor
 
@@ -13,6 +15,8 @@ unique series `B` with constant term one and `B^e (1 + X) = 1`. This constructio
 works in positive characteristic without dividing by factorials. Rescaling
 then gives the actual tame parameter change over any coefficient extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

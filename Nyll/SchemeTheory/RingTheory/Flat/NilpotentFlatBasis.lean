@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.Nilpotent.Defs
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.Nilpotent.Defs
 
 /-!
 # Lifting arbitrary bases across a nilpotent maximal ideal
@@ -22,6 +24,8 @@ of that fibre. Neither the module nor the chosen basis is required to be
 finite. This is the form of Stacks, Tag 051F used for the compatible
 infinitesimal quotients of a strict henselization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

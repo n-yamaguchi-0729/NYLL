@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormPolynomial
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormPolynomial
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-! # The actual restriction morphism between finite-algebra unit norm opens -/
+
+@[expose] public section
 
 noncomputable section
 

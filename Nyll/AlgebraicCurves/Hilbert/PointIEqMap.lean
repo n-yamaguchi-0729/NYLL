@@ -10,13 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
 
 /-!
 # exists point I eq map
 -/
+
+@[expose] public section
+
+universe uA uB
 
 section ProofImplementation
 
@@ -26,7 +32,8 @@ open MvPolynomial AlgebraicGeometry.HilbertFunctor
 open scoped TensorProduct
 
 theorem _root_.AlgebraicGeometry.HilbertFunctor.exists_point_I_eq_map
-    (n : ℕ) (h : ℕ → ℕ) (A B : Type) [CommRing A] [CommRing B] [Algebra A B] (P : Point A n h) :
+    (n : ℕ) (h : ℕ → ℕ) (A : Type uA) (B : Type uB)
+    [CommRing A] [CommRing B] [Algebra A B] (P : Point A n h) :
     ∃ Q : Point B n h, Q.I = P.I.map (MvPolynomial.map (algebraMap A B)) := by
   obtain ⟨hhom, hpiece⟩ :=
     AlgebraicGeometry.HilbertFunctor.exists_linearEquiv_baseChange_piece_map n A B P.I P.homogeneous

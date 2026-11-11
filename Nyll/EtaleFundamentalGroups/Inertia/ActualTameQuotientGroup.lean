@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaTopology
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaCompact
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.Topology.Algebra.Group.Quotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaTopology
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaCompact
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.Topology.Algebra.Group.Quotient
 
 /-!
 # The literal original inertia quotient by the independent wild subgroup
@@ -20,6 +22,8 @@ The group, topology and quotient projection are the existing quotient
 constructions on the SAME original inertia and SAME independent subgroup.
 No character or kernel definition enters this native data owner.
 -/
+
+@[expose] public section
 
 noncomputable section
 

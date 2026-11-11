@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FixedBundleFrames
-import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppProper
-import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+module
+
+public import Nyll.JacobianVarieties.Generalized.FixedBundleFrames
+public import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppProper
+public import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 
 /-!
 # Parameter scalars in the classification of modulus frames
@@ -17,6 +19,8 @@ functions as its parameter scheme. Thus ambient units in the fixed-bundle
 classification are exactly parameter units. The hypotheses are supplied for
 every base change of a proper smooth geometrically irreducible curve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Degree.TameCompletedTensorSplitting
+module
+
+public import Nyll.AlgebraicCurves.Places.Degree.TameCompletedTensorSplitting
 
 /-! # One completed base for all equally ramified boundary factors
 
@@ -13,6 +15,8 @@ Laurent equivalences at those points therefore agree on the whole original
 base completion, not just its parameter. The finite-flat interior block is
 not split or subjected to this equal-contact hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

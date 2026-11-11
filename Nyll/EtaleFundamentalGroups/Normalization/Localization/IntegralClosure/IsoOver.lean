@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.StalkMap
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.StalkMap
 
 /-!
 # Stalk comparison through an isomorphism over the base
@@ -14,6 +16,8 @@ integral closure transports the global stalk map to the canonical
 prime-local map.  This is the bridge used after an affine-chart
 normalization comparison has been constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

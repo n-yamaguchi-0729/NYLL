@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionScheme
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionFibers
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitCover
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionScheme
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionFibers
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitCover
 
 /-! # Geometry of actual scalar quotient restriction -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Polynomial.Eval.Defs
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackUnitComposition
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Polynomial.Eval.Defs
 
 /-!
 # Actual sections in a linear pencil
@@ -16,6 +18,8 @@ The section `(1-t)s₀ + ts₁` is formed on the actual product with the affine
 line. Its restrictions along the sections `t = a` are computed through the
 canonical composition and identity isomorphisms for pullback of modules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

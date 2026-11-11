@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
-import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedDescent
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.IsAffineOpenPicardRepresentabilityAlgEquivZeroCut
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
+public import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedDescent
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.IsAffineOpenPicardRepresentabilityAlgEquivZeroCut
 
 /-!
 # Existence of a smooth proper unpointed Picard descent
@@ -26,6 +28,8 @@ This statement retains the local representation and the actual descent compatibi
 Identifying the result with an fppf sheafification and descending its group law are
 separate constructions.
 -/
+
+@[expose] public section
 
 universe u
 

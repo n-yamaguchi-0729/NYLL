@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Simultaneous actual morphism descent for finitely many models
@@ -16,6 +18,8 @@ Transport these projected maps along a finite cofiltered cone and reconstruct
 the maps between stage pullbacks. This retains every original recovery square
 and does not require an overlap model to be finite over the entire base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

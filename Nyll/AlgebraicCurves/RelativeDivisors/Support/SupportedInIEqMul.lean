@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.SupportedInComapEq
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedRestriction
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.SupportedInComapEq
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedRestriction
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
 
 /-!
 # Rel Eff Cartier Div exists supported In I eq mul of supported In
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

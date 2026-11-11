@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitDimension
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitGeometric
-import Mathlib.LinearAlgebra.Dimension.Free
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitDimension
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitGeometric
+public import Mathlib.LinearAlgebra.Dimension.Free
 
 /-!
 # The affine scalar-unit quotient of an actual modulus
@@ -22,6 +24,8 @@ quotient, with relative dimension `degree - 1`.
 The exact-sequence identification with the kernel of a generalized Jacobian
 still requires the construction and classification of that Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

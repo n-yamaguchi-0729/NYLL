@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
-import Nyll.EtaleCohomology.Sites.GaloisCechSections
-import Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
+public import Nyll.EtaleCohomology.Sites.GaloisCechSections
+public import Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
 
 /-!
 # Degree-one Galois acyclicity of actual injective sheaf sections
@@ -16,7 +19,10 @@ field/deck comparison transports its actual action to the bundled
 Galois representation, without assuming injectivity after restriction.
 -/
 
+@[expose] public section
+
 noncomputable section
+universe u
 open CategoryTheory AlgebraicGeometry Opposite
 open AlgebraicGeometry.FiniteEtale
 
@@ -25,27 +31,27 @@ namespace EtaleCohomology
 /-- A cocycle for the actual field action on an injective sheaf has
 an actual section primitive. -/
 theorem exists_injective_fieldGalois_cocycle_primitive
-    (K L : Type) [Field K] [Field L] [Algebra K L]
+    (K L : Type u) [Field K] [Field L] [Algebra K L]
     [FiniteDimensional K L] [IsGalois K L]
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{0}) [Injective F]
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}) [Injective F]
     (c : Gal(L/K) → F.obj.obj
       (op ((finiteEtaleInclusion (Spec (.of K))).obj (FiniteEtale.mk (ξ K L)))))
-    (hc : ∀ σ τ, c (σ * τ) = (fieldGaloisSheafAction K L F σ).hom (c τ) + c σ) :
-    ∃ s, ∀ σ : Gal(L/K), (fieldGaloisSheafAction K L F σ).hom s - s = c σ := by
+    (hc : ∀ σ τ, c (σ * τ) = (fieldGaloisSheafAction K L F σ).asIso.hom (c τ) + c σ) :
+    ∃ s, ∀ σ : Gal(L/K), (fieldGaloisSheafAction K L F σ).asIso.hom s - s = c σ := by
   let Y : FiniteEtale (Spec (.of K)) := FiniteEtale.mk (ξ K L)
   have : CategoryTheory.PreGaloisCategory.IsGalois Y :=
     EtaleFundamentalGroups.fieldFiniteEtaleCover_isGalois K L
   let e := EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K L
   let d (σ : Aut Y) := c (e.symm (MulOpposite.op σ))
   have ha (σ : Aut Y) (s : F.obj.obj (op ((finiteEtaleInclusion (Spec (.of K))).obj Y))) :
-      (fieldGaloisSheafAction K L F (e.symm (MulOpposite.op σ))).hom s =
-        F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map σ.hom).op s := by
+      (fieldGaloisSheafAction K L F (e.symm (MulOpposite.op σ))).asIso.hom s =
+        F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map σ.asIso.hom).op s := by
     change (finiteEtaleSheafDeckAction (Spec (.of K)) F Y
-      (e (e.symm (MulOpposite.op σ)))).hom s = _
+      (e (e.symm (MulOpposite.op σ)))).asIso.hom s = _
     rw [e.apply_symm_apply]
     rfl
   have hd : ∀ σ τ : Aut Y, d (τ * σ) =
-      F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map σ.hom).op (d τ) + d σ := by
+      F.obj.map ((finiteEtaleInclusion (Spec (.of K))).map σ.asIso.hom).op (d τ) + d σ := by
     intro σ τ
     change c (e.symm (MulOpposite.op (τ * σ))) = _
     rw [MulOpposite.op_mul, e.symm.map_mul, hc, ha]

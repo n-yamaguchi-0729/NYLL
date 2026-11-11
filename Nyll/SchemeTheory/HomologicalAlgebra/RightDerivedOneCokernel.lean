@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Mathlib.Algebra.Homology.ShortComplex.Homology
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import Mathlib.Algebra.Homology.ShortComplex.Homology
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # The first right derived functor from an injective presentation
@@ -17,6 +19,8 @@ cokernel of the map from the injective object to the quotient in the
 canonical injective presentation. The proof uses the actual injective
 resolution and its kernel, not a supplied derived-functor comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe v u v' u'

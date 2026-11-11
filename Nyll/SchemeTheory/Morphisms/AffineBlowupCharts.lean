@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.AffineBlowup
-import Nyll.SchemeTheory.RingTheory.ReesChart
+module
+
+public import Nyll.SchemeTheory.Morphisms.AffineBlowup
+public import Nyll.SchemeTheory.RingTheory.ReesChart
+public import Nyll.SchemeTheory.RingTheory.GradedReesAlgebra
+public import Nyll.SchemeTheory.RingTheory.ReesDegreeOne
 
 /-!
 # Degree-one affine charts of the affine blowup
@@ -14,6 +18,8 @@ The actual degree-one generators of the Rees algebra give an affine open
 cover of its Proj. The chart structure maps are the coefficient maps of
 the homogeneous localizations, on which the extended ideal is principal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

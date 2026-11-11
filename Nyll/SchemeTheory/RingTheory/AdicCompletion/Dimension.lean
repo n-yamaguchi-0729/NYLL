@@ -23,18 +23,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Ideal.GoingDown
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalRingLocalRingAdicCompletionIsAdicCompleteMapMaximalIdealEq
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FaithfullyFlat
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Ideal.GoingDown
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalRingLocalRingAdicCompletionIsAdicCompleteMapMaximalIdealEq
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FaithfullyFlat
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Is Local Ring ring Krull Dim adic Completion maximal Ideal eq
 -/
+
+@[expose] public section
 
 section IsLocalRing_ringKrullDim_adicCompletion_maximalIdeal_eq
 

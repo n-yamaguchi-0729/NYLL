@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRawSurjectivity
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRawSurjectivity
 
 /-!
 # Injectivity of the actual total Poincaré frame comparison
@@ -13,6 +15,8 @@ An equality of modulus classes identifies the underlying Poincaré pullbacks.
 Ordinary Poincaré uniqueness then identifies their parameter maps. The already
 proved fixed-parameter frame injection identifies the remaining scalar frames.
 -/
+
+@[expose] public section
 
 noncomputable section
 

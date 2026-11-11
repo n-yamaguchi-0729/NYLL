@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PointConstantFiber
-import Nyll.EtaleCohomology.Sites.PointSkyscraperExact
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Module.ULift
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Preadditive.Projective.Preserves
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.PointConstantFiber
+public import Nyll.EtaleCohomology.Sites.PointSkyscraperExact
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Module.ULift
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Preadditive.Projective.Preserves
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Actual cohomology of small products of point skyscrapers
@@ -28,6 +30,8 @@ sheaf is the original integer object at each point, so this discrete diagram
 is projective. Hence all positive cohomology vanishes, for arbitrary stalk
 coefficients. No injectivity of those coefficients is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

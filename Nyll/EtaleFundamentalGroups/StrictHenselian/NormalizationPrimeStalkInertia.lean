@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaCompact
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFixedField
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.GroupTheory.GroupAction.FixingSubgroup
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaCompact
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFixedField
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.GroupTheory.GroupAction.FixingSubgroup
 
 /-!
 # Original inertia is the group fixing the actual stalk fraction image
@@ -19,6 +21,8 @@ fraction-field embedding. Closedness of the same original inertia subgroup
 and the pinned infinite Galois correspondence then identify its fixing
 group with inertia. The actual embedded field is retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Nyll.SchemeTheory.FiniteEtale.Away.AtUnit
+module
+
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Nyll.SchemeTheory.FiniteEtale.Away.AtUnit
 
 /-!
 # Boundary Away maps for finite towers with an integral etale target
@@ -15,6 +17,8 @@ finite tower therefore makes the literal composite map finitely presented.
 Combining this with target-prime local Away etaleness gives etaleness of the
 literal composite Away map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

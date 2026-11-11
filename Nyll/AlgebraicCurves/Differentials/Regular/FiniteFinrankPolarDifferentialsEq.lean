@@ -10,23 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.RatFunc.IntermediateField
+module
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
-import Nyll.AlgebraicCurves.Differentials.Regular.Polar
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosedCurve
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosed
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Module.Defs
+public import Mathlib.FieldTheory.RatFunc.IntermediateField
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
+public import Nyll.AlgebraicCurves.Differentials.Regular.Polar
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Index.FunctionFieldRiemannRochAlgClosedCurve
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseAlgClosed
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Finite and finrank polar Differentials eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -50,8 +57,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -249,12 +254,8 @@ def toPolar (S : Finset (Place K F)) {ω₀ : Ω[F⁄K]} (hω₀ : ω₀ ≠ 0) 
     LSpace (canonicalDivisorOf hω₀ + polarDivisor S) →ₗ[K]
       polarDifferentials K F (S : Set (Place K F)) where
   toFun h := ⟨(h : F) • ω₀, (smul_mem_polarDifferentials_iff S hω₀ (h : F)).mpr h.2⟩
-  map_add' h₁ h₂ := by
-    ext
-    simp [add_smul]
-  map_smul' c h := by
-    ext
-    simp [smul_assoc]
+  map_add' h₁ h₂ := Subtype.ext (add_smul (h₁ : F) (h₂ : F) ω₀)
+  map_smul' c h := Subtype.ext (smul_assoc c (h : F) ω₀)
 
 theorem toPolar_apply (S : Finset (Place K F)) {ω₀ : Ω[F⁄K]} (hω₀ : ω₀ ≠ 0)
     (h : LSpace (canonicalDivisorOf hω₀ + polarDivisor S)) :

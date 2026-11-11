@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Derivative
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Data.Int.GCD
-import Mathlib.Data.Nat.Choose.Dvd
-import Mathlib.Algebra.Module.NatInt
-import Mathlib.GroupTheory.GroupAction.Ring
-import Mathlib.Algebra.GroupWithZero.Action.Defs
+module
+
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.Derivative
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Data.Int.GCD
+public import Mathlib.Data.Nat.Choose.Dvd
+public import Mathlib.Algebra.Module.NatInt
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.Algebra.GroupWithZero.Action.Defs
 
 /-!
 # Derivation add mul Left pow char
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -116,12 +120,6 @@ private theorem iterate_form (p : ℕ) [Fact p.Prime] [CharP F p] (d : Derivatio
   simp [Nat.choose_zero_right, Nat.choose_self, sseq_zero,
     LinearMap.mulLeft_one, ← Module.End.one_eq_id, mul_one, one_mul]
   abel
-
-private theorem head_b_of_collapse (p : ℕ) [Fact p.Prime] [CharP F p] (d : Derivation R F F) (a : F)
-    (hcollapse : sseq d a p = a ^ p + (d.toLinearMap ^ (p - 1)) a) :
-    (d.toLinearMap + LinearMap.mulLeft R a) ^ p
-      = d.toLinearMap ^ p + LinearMap.mulLeft R (a ^ p + (d.toLinearMap ^ (p - 1)) a) := by
-  rw [iterate_form, hcollapse]
 
 section layer2
 

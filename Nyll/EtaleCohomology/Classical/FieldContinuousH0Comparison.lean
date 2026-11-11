@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionContinuousExact
-import Nyll.GaloisCohomology.Topology.ContinuousH0Naturality
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionContinuousExact
+public import Nyll.GaloisCohomology.Topology.ContinuousH0Naturality
 
 /-!
 # Natural degree-zero comparison for actual field sections
@@ -14,6 +16,8 @@ The actual continuous cohomology in degree zero is naturally actual global
 sections. Both the continuous degree-zero isomorphism and geometric descent
 are the previously proved maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -34,7 +38,9 @@ def finiteGaloisSectionContinuousH0InvariantsNatIso :
     (fun η => ContinuousCohomology.zeroIso_hom_naturality _ _
       (finiteGaloisSectionColimitTopRepMap K η))
 
-private def finiteGaloisSectionInvariantsUnderlyingIso :
+/-- Forgetting the topology identifies continuous section invariants
+with representation invariants. -/
+def finiteGaloisSectionInvariantsUnderlyingIso :
     ((finiteGaloisSectionColimitTopRepFunctor K ⋙
       TopRep.invariantsFunctor ℤ Gal(AlgebraicClosure K/K)) ⋙
       (forget₂ (TopModuleCat.{u} ℤ) (ModuleCat.{u} ℤ) ⋙

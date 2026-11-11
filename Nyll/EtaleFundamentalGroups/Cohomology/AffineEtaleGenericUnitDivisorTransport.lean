@@ -3,19 +3,23 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.Algebra.Category.Grp.Basic
-import Nyll.EtaleCohomology.Classical.ClosedPointDivisorSheaf
-import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
-import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineGenericPointStalkComparison
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorData
-import Nyll.EtaleFundamentalGroups.Cohomology.GenericUnitDivisorSections
+module
+
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Nyll.EtaleCohomology.Classical.ClosedPointDivisorSheaf
+public import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
+public import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineGenericPointStalkComparison
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorData
+public import Nyll.EtaleFundamentalGroups.Cohomology.GenericUnitDivisorSections
 
 /-!
 # Transport of affine generic-unit sections
 
 The transport formula and its naturality are independent of the divisor compatibility theorem.
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 open IsDedekindDomain
@@ -29,7 +33,9 @@ attribute [local irreducible] affineGenericPointUnitQuotientFractionRingIso
 variable {R S : Type u} [CommRing R] [IsDedekindDomain R]
   [CommRing S] [IsDedekindDomain S] [Algebra R S] [Algebra.Etale R S]
 
-private theorem affineObjectToSource_comparison_apply
+/-- The original source transport is the categorical section comparison,
+before expanding that comparison into its three component morphisms. -/
+theorem affineEtaleGenericUnitObjectToSource_comparison_apply
     [algRE : Algebra R (FractionRing S)]
     [hRS : @IsScalarTower R S (FractionRing S)
       (inferInstance : Algebra R S).toSMul
@@ -93,7 +99,7 @@ theorem affineEtaleGenericUnitObjectToSource_apply
           d.hom.hom.app
             (op ((zariskiToEtale (Spec (CommRingCat.of S))).obj ⊤))) s := by
   intro e d
-  exact (affineObjectToSource_comparison_apply (R := R) (S := S) s).trans
+  exact (affineEtaleGenericUnitObjectToSource_comparison_apply (R := R) (S := S) s).trans
     (etaleRestrictionComparisonSectionIso_apply
       (Spec.map (CommRingCat.ofHom (algebraMap R S)))
       (F := affineGenericPointUnitQuotient R)

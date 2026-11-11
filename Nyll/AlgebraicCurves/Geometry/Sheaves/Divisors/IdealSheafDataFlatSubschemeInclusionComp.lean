@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Set
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Set
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
 
 /-!
 # Ideal Sheaf Data flat subscheme Inclusion comp of forall mul mem of is Discrete Valuation
 Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

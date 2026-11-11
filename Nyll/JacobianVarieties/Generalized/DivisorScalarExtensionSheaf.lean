@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusIsoGroupSheaf
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionSheaf
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusIsoGroupSheaf
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionSheaf
 
 /-! # The Picard-zero sheaf of the actual scalar-extended divisor -/
+
+@[expose] public section
 
 noncomputable section
 

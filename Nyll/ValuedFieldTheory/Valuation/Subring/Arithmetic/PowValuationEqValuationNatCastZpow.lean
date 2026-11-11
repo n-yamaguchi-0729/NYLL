@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Coprime.Lemmas
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Data.Rat.Cast.Defs
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Tactic.Conv
-import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.PowValuationEqValuationAlgebraMap
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Coprime.Lemmas
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Rat.Cast.Defs
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Tactic.Conv
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.PowValuationEqValuationAlgebraMap
 
 /-!
 # Valuation Subring exists pow valuation eq valuation nat Cast zpow of is Algebraic
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

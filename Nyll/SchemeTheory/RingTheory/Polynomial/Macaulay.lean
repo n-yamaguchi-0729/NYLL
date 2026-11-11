@@ -38,17 +38,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Lean.Elab.Tactic.Omega
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Mathlib.Order.Monotone.Basic
-import Mathlib.Algebra.Group.Nat.Defs
+module
+
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Mathlib.Order.Monotone.Basic
+public import Mathlib.Algebra.Group.Nat.Defs
 
 /-!
 # Macaulay raising and its binomial expansion
 -/
+
+@[expose] public section
 
 section Nat_MacaulayPow
 

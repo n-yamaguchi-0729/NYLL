@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentRootOfUnityAutomorphisms
-import Nyll.SchemeTheory.RingTheory.Henselian.TensorSplittingOfEmbeddings
-import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionDegEqOne
-import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentRootOfUnityAutomorphisms
+public import Nyll.SchemeTheory.RingTheory.Henselian.TensorSplittingOfEmbeddings
+public import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionDegEqOne
+public import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameLaurentNormalization
 
 /-! # Actual splitting of a tame completed curve-field factor
 
@@ -17,6 +20,8 @@ by roots of unity fixes the whole completed base: continuity extends equality
 from its dense rational-function subfield. The actual completion degree is
 the ramification index, so evaluation in these embeddings splits the tensor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

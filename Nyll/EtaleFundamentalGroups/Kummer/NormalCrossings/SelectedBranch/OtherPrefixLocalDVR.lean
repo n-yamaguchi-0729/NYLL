@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.Etale.Locus
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Local.OverDiscreteValuationRing
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.OtherPrefixEtale
+module
+
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Etale.Locus
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Local.OverDiscreteValuationRing
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.OtherPrefixEtale
 
 /-!
 # Local DVRs after adjoining the selected normalization branch
@@ -21,6 +23,8 @@ etale tensor base change is retained verbatim.
 
 No module-finiteness of either chosen prime localization is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

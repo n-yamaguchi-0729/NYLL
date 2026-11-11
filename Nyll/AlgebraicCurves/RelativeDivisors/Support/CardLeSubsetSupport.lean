@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Artinian.Ring
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+module
+
+public import Mathlib.RingTheory.Artinian.Ring
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
 
 /-!
 # Rel Eff Cartier Div card le of subset support
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
+public import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Finite-tuple coordinates for actual continuous cochains
@@ -14,6 +16,8 @@ For a locally compact group, iterated continuous function spaces are
 continuously and linearly equivalent to continuous functions on finite
 powers. The actual action becomes the diagonal homogeneous action.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

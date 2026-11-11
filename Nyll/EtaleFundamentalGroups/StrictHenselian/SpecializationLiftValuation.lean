@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationResidueField
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationValuation
-import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationResidueField
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationValuation
+public import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # A valuation diagram retaining a chosen geometric specialization
@@ -32,6 +34,8 @@ https://stacks.math.columbia.edu/tag/0C0M. The identification of the
 fundamental-group specialization maps additionally requires the proper
 closed-fiber comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

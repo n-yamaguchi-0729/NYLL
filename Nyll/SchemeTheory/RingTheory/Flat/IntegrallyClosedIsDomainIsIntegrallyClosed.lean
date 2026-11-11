@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.Tactic.Algebraize
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.Tactic.Algebraize
 
 /-!
 # Is Integrally Closed is Domain and is Integrally Closed of flat of is Local Hom
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

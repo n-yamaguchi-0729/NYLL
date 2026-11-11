@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 
 /-!
@@ -25,6 +27,8 @@ This supplies the parallel-arrow construction for the intended filtered
 diagram of finite, finitely presented models. It does not assume or assert
 that diagram's smallness or colimit comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

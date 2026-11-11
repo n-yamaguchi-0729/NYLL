@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.Etale
-import Nyll.EtaleCohomology.Classical.PullbackCoefficients
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.Etale
+public import Nyll.EtaleCohomology.Classical.PullbackCoefficients
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Pullback on classical étale cohomology
@@ -19,6 +21,8 @@ The exact inverse image acts on the actual Ext groups defining `Sheaf.H`.
 The existing comparison for the constant integer sheaf supplies the first
 argument of Ext. No acyclicity or exactness of direct image is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

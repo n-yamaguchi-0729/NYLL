@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodFaithful
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.RingTheory.Dimension.PrimeContainingAtHeightOne
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodFaithful
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.RingTheory.Dimension.PrimeContainingAtHeightOne
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Basic
 
 /-!
 # Neighbourhoods with faithful restriction to the punctured hypersurface
@@ -29,6 +31,8 @@ This proves the neighbourhood-existence assertion in
 [Stacks Project, Tag 0BLN](https://stacks.math.columbia.edu/tag/0BLN).
 The categorical-colimit assertion is a separate statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

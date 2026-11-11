@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
-import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
-import Mathlib.NumberTheory.Wilson
-import Nyll.AlgebraicCurves.Differentials.Kaehler.DerivationAddMulLeftPowChar
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+module
+
+public import Nyll.AlgebraicCurves.Geometry.NonzeroDifferential
+public import Nyll.AlgebraicCurves.Places.Taylor.PDigitsUnique
+public import Mathlib.NumberTheory.Wilson
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.DerivationAddMulLeftPowChar
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 
 /-!
 # Exists dlog of cartier Operator fixed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

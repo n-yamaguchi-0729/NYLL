@@ -10,17 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.Algebra.GroupWithZero.Units.Basic
-import Mathlib.Algebra.Ring.Subring.Basic
-import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubringFiniteDimensional
-import Nyll.AlgebraicCurves.Places.Degree.DegNeZeroFiniteDimensionalAdjoin
-import Nyll.AlgebraicCurves.Places.Degree.DegEqOneAlgClosed
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.Algebra.GroupWithZero.Units.Basic
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Nyll.AlgebraicCurves.Places.ValuationRings.BasicValuationSubringFiniteDimensional
+public import Nyll.AlgebraicCurves.Places.Degree.DegNeZeroFiniteDimensionalAdjoin
+public import Nyll.AlgebraicCurves.Places.Degree.DegEqOneAlgClosed
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists place comap algebra Map eq of finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConnectedConstants
-import Nyll.EtaleCohomology.Sites.ModuleConstant
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Mathlib.CategoryTheory.Yoneda
+module
+
+public import Nyll.EtaleCohomology.Sites.ConnectedConstants
+public import Nyll.EtaleCohomology.Sites.ModuleConstant
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.CategoryTheory.Yoneda
 
 /-!
 # Arbitrary étale sheaves over a separably closed field are constant
@@ -29,6 +31,8 @@ triangle identity and this conservativity make its counit invertible.
 The resulting constant models use the original global sections. Neither
 the set nor the coefficient module is assumed finite or constructible.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -15,7 +15,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
 import Nyll.SchemeTheory.Modules.Invertible.Rigidify
 import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackRigidifyIso

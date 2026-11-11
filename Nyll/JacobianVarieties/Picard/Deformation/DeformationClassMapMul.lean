@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.Tactic.LinearCombination
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+module
+
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
 
 /-!
 # Compatibility of deformation classes with tensor multiplication.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

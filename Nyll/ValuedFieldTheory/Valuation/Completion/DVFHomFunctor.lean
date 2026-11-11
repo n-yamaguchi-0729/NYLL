@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExtension
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExt
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExtension
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExt
 
 /-!
 # Functoriality of homomorphisms on valuation completions
@@ -13,6 +15,8 @@ import Nyll.ValuedFieldTheory.Valuation.Completion.DVFHomExt
 The extension formula on original field elements and extensionality over
 the base completion imply preservation of identities and composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

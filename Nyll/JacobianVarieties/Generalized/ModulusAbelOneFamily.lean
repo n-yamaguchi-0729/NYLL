@@ -5,9 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOne
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOne
 
 /-! # The intrinsic modulus Picard-one Abel family without a basepoint -/
+
+@[expose] public section
 
 noncomputable section
 

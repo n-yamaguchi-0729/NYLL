@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Unramified.LocalRing
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothFormallySmoothFormallyUnramifiedAeval
+module
+
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallySmoothFormallySmoothFormallyUnramifiedAeval
 
 /-!
 # Algebra Formally Smooth exists formally Unramified aeval and maximal Ideal eq of finrank
 kaehler Differential eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedSubfield
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Topology.Separation.Hausdorff
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedSubfield
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Topology.Separation.Hausdorff
 
 /-!
 # The original maximal-unramified Galois quotient
@@ -18,6 +20,8 @@ finite unramified subextensions. Its proved equality with the actual
 fraction-point kernel fixed field now supplies the topological quotient,
 including the exact equation identifying the scheme map with restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Invariants
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Invariants
 
 /-!
 # Galois valued-extension invariant bridges
@@ -14,6 +16,8 @@ whose canonical valuations form an extension. These identities keep the later
 ramification-image comparison tied to the actual ramification index and
 residue-field degree instead of assuming a separate endpoint comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

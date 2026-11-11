@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Reduced.IntegralPurelyInseparableLocalTensor
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.SchemeTheory.RingTheory.Reduced.IntegralPurelyInseparableLocalTensor
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Domains in local étale neighborhoods of a geometrically unibranch ring
@@ -22,6 +24,8 @@ For a reduced geometrically unibranch local ring, the integral closure in
 its fraction field supplies exactly these inputs. No domain assertion about
 the étale neighborhood or geometric stalk is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

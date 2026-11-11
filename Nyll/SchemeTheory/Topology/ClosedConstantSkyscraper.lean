@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Skyscraper
-import Mathlib.Topology.Sober
+module
+
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Skyscraper
+public import Mathlib.Topology.Sober
 
 /-!
 # Skyscrapers as closed-supported constant sheaves
@@ -24,6 +26,8 @@ closed subset.
 This supplies the closed-constant comparison in Stacks Project, tag 0CAL:
 https://stacks.math.columbia.edu/tag/0CAL. The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -57,7 +61,8 @@ def constantToSkyscraper (x : X) (A : Type u) :
         skyscraperPresheaf_map]
       apply ((ite_eq_right hV).symm.ndrec terminalIsTerminal).hom_ext
 
-private lemma constantToSkyscraper_app_isIso (x : X) (A : Type u)
+/-- The constant-to-skyscraper map is an isomorphism on every open containing the point. -/
+lemma constantToSkyscraper_app_isIso (x : X) (A : Type u)
     (U : (Opens X)ᵒᵖ) (hx : x ∈ U.unop) :
     IsIso ((constantToSkyscraper x A).app U) := by
   dsimp only [constantToSkyscraper, Functor.const_obj_obj, skyscraperPresheaf_obj]

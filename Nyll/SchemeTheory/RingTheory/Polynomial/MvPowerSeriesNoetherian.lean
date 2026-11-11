@@ -22,13 +22,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPowerSeries.Equiv
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Equiv
 
 /-!
 # Noetherianity of formal power series in finitely many variables
 
 Use Mathlib's canonical instance for a finite variable type.
 -/
+
+@[expose] public section
 
 section MvPowerSeries_isNoetherianRing_of_finite
 

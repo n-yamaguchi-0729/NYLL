@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameZariski
-import Nyll.JacobianVarieties.Generalized.PointedConstruction
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameZariski
+public import Nyll.JacobianVarieties.Generalized.PointedConstruction
 
 /-!
 # Actual rigidified bundles on affine open covers of modulus Picard-zero
@@ -16,6 +18,8 @@ modulus Picard-zero sheaf is represented by specified rigidified bundles
 on an affine open cover. In particular this applies to its universal
 section on the constructed smooth generalized Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

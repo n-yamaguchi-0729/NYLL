@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
 
 /-!
 # Abstract universality of the modulus divisor quotient
@@ -15,6 +17,8 @@ The point formula retains the residue-field degree. These are statements
 about the divisor quotient; algebraicity of the induced scheme map is a
 separate geometric assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

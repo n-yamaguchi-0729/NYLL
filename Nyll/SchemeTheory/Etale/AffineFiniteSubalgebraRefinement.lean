@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.AffineLocalFactorDescent
-import Nyll.SchemeTheory.Etale.IntegralRefinement
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
+module
+
+public import Nyll.SchemeTheory.Etale.AffineLocalFactorDescent
+public import Nyll.SchemeTheory.Etale.IntegralRefinement
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
 
 /-!
 # Actual finite subalgebras retaining the original local factorizations
@@ -23,6 +25,8 @@ This supplies local finite subalgebras for global submodule extension; it
 does not reconstruct affine descent or assert that the subalgebras already
 extend compatibly across a nonaffine base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

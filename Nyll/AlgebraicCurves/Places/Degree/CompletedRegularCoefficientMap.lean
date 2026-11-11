@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
-import Nyll.AlgebraicCurves.Places.Degree.TameCompletedTensorSplitting
-import Nyll.SchemeTheory.RingTheory.Henselian.RegularReciprocalLaurentDeformation
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
+public import Nyll.AlgebraicCurves.Places.Degree.TameCompletedTensorSplitting
+public import Nyll.SchemeTheory.RingTheory.Henselian.RegularReciprocalLaurentDeformation
+public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Nyll.AlgebraicCurves.FunctionFields.NormTrace.CompletionTraceSumSeparable
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameLaurentNormalization
 
 /-! # The regular coefficient map into the common Laurent valuation ring
 
@@ -18,6 +23,8 @@ of the tame normalization retains valuation preservation on the whole
 completed field. No continuity assumption on arbitrary formal series maps
 is used to infer these integral properties.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -80,7 +87,8 @@ section Base
 variable {B : Type*} [Field B] [Algebra K B] [Algebra B F]
   [IsScalarTower K B F] [Algebra.IsIntegral B F]
 
-private def completedBaseAlgHom (w : Place K F) :
+/-- The map from the restricted completion to the original completion preserves base scalars. -/
+def completedBaseAlgHom (w : Place K F) :
     (w.restrict B).adicCompletion →ₐ[K] w.adicCompletion where
   toRingHom := kw_ffgc_adicCompletionComap B w
   commutes' a := by
@@ -91,7 +99,8 @@ private def completedBaseAlgHom (w : Place K F) :
       ← IsScalarTower.algebraMap_apply K B F,
       ← IsScalarTower.algebraMap_apply K F w.adicCompletion]
 
-private def completedBaseIntegerAlgHom (w : Place K F) :
+/-- The induced map on completion integers preserves the same base scalars. -/
+def completedBaseIntegerAlgHom (w : Place K F) :
     (w.restrict B).adicCompletionIntegers →ₐ[K] w.adicCompletionIntegers where
   toRingHom := kw_ffgc_adicCompletionComapIntegers B w
   commutes' a := by

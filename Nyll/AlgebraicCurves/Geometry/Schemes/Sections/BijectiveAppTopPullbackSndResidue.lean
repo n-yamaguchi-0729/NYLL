@@ -10,8 +10,8 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.IsPreconnectedPreimageClosedPoint
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
+import Nyll.SchemeTheory.Fibers.ClosedPointConnected
+import Nyll.SchemeTheory.Morphisms.ProperGlobalSectionsFinite
 
 /-!
 # Global sections on residue fibres of reduced proper schemes
@@ -141,17 +141,19 @@ theorem bijective_of_finite_of_isReduced_of_idempotent {κ : Type*} [Field κ] [
     have hv : IsIdempotentElem v := by
       change v * v = v
       funext K
-      by_cases hK : K = I <;> simp [v, hK]
+      by_cases hK : K = I
+      · simp only [v, Pi.mul_apply, ite_eq_left hK, one_mul]
+      · simp only [v, Pi.mul_apply, ite_eq_right hK, mul_zero]
     have he : IsIdempotentElem (E.symm v) := by
       change E.symm v * E.symm v = E.symm v
       rw [← map_mul, hv.eq]
     rcases hidem _ he with h0 | h1
     · have : v = 0 := by simpa using congrArg E h0
       have := congrFun this I
-      simp [v] at this
+      simp only [v, ite_eq_left rfl, Pi.zero_apply, one_ne_zero] at this
     · have : v = 1 := by simpa using congrArg E h1
       have := congrFun this J
-      simp [v, Ne.symm hIJ] at this
+      simp only [v, ite_eq_right (Ne.symm hIJ), Pi.one_apply, zero_ne_one] at this
   obtain ⟨M, hM⟩ := Ideal.exists_maximal A
   have : IsLocalRing A :=
     IsLocalRing.of_unique_max_ideal ⟨M, hM, fun N hN => congrArg MaximalSpectrum.asIdeal (huniq ⟨N,

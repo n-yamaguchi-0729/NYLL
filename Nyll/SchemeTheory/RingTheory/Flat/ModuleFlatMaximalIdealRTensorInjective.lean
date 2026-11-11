@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.Tensor
-import Mathlib.RingTheory.Filtration
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Tensor
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.Tactic.Abel
 
 /-!
 # Module flat of maximal Ideal r Tensor injective of is Local Hom
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

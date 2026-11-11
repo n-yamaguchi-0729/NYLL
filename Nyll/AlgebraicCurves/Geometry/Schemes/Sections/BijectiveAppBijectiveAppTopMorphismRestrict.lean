@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.EqToHom
-import Mathlib.CategoryTheory.Opposites
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.EqToHom
+public import Mathlib.CategoryTheory.Opposites
 
 /-!
 # bijective app of bijective app Top morphism Restrict
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

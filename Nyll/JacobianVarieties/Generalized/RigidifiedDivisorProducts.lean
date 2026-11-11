@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorTensor
-import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorTensor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPow
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-! # Powers and finite products of canonically rigidified divisor ideals -/
+
+@[expose] public section
 
 noncomputable section
 

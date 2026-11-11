@@ -5,25 +5,27 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ClosedZariskiComparison
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Nyll.EtaleCohomology.Sites.ClosedAdjunction
-import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.SchemeTheory.Morphisms.ClosedImmersionLift
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.EtaleCohomology.Sites.ClosedZariskiComparison
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Nyll.EtaleCohomology.Sites.ClosedAdjunction
+public import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.SchemeTheory.Morphisms.ClosedImmersionLift
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Stalks of the pulled-back original closed-fiber unit
@@ -34,6 +36,8 @@ inverse-image stalk isomorphism and closed-unit stalk isomorphism therefore
 make the pulled-back original unit an isomorphism on that geometric stalk.
 Its underlying Zariski stalk map is consequently a monomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

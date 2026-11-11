@@ -11,13 +11,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Places.Rational.Basic
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Germ To Function Field mem l Space On places Of
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -39,11 +45,11 @@ theorem _root_.AlgebraicCurve.germToFunctionField_mem_lSpaceOn_placesOf
     {K : Type u} [Field K] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of K))
     [IsIntegral C]
     (U : C.Opens) [Nonempty (U : C.Opens)] (s : Γ(C, U)) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     (C.germToFunctionField U).hom s ∈
       AlgebraicCurve.lSpaceOn (AlgebraicCurve.placesOf c U) (0 : AlgebraicCurve.Divisor K
         C.functionField) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   rintro v ⟨x, hxU, -, hvx⟩
   simp only [Finsupp.coe_zero, Pi.zero_apply, WithZero.exp_zero]
   rw [← Place.mem_iff_adicValuation_le_one]

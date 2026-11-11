@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
-import Nyll.SchemeTheory.Pi1.Affine.Over
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
+public import Nyll.SchemeTheory.Pi1.Affine.Over
 
 /-!
 # Transporting finite-etale extensions across a source isomorphism
@@ -14,6 +16,8 @@ An extension problem is unchanged when its source is replaced by an
 isomorphic scheme.  This file records the comparison at the level of actual
 finite-etale objects and actual pullback isomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

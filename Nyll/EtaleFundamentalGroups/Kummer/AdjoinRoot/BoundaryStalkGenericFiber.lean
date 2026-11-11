@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.SchemeTheory.Affine.StalkFractionField
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.SchemeTheory.Affine.StalkFractionField
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The standard root cover over the actual boundary-stalk fraction ring
@@ -31,6 +33,8 @@ conditions to every field factor of the finite-etale coordinate algebra,
 so it is a prerequisite for the full codimension-one assertion of `0EYF`.
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

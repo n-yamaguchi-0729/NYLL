@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameSheaf
-import Nyll.JacobianVarieties.Generalized.PoincareTotalFamily
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameSheaf
+public import Nyll.JacobianVarieties.Generalized.PoincareTotalFamily
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
 
 /-!
 # The total Poincaré frame family has actual modulus Picard classes
@@ -15,6 +17,8 @@ The relative frame classification gives a natural map over the original field.
 Its universal value on the constructed frame scheme pulls back to the class of
 every represented frame-family section. Picard-zero classification is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

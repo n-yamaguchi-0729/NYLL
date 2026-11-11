@@ -4,27 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.FiniteEtale.DVRUnramifiedExtension
-import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
-import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
-import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.FiniteEtale.DVRUnramifiedExtension
+public import Nyll.SchemeTheory.FiniteEtale.TwoOpenGluing
+public import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Topology.Sober
 
 /-!
 # Extending a cover across a DVR boundary point
@@ -46,6 +48,8 @@ The theorem treats a DVR boundary point. Extending simultaneously across
 all such points and applying purity to the remaining regular boundary are
 separate steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Frame coordinates with the original base module structures
@@ -20,6 +22,8 @@ the original structural morphism, and it commutes with restriction.
 Both sides use exactly the section modules supplied to the native
 sheaf-to-Čech construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

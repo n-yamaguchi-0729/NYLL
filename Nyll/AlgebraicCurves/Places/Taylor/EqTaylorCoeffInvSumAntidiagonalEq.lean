@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.NatAntidiagonal
-import Nyll.AlgebraicCurves.Places.Taylor.Taylor
+module
+
+public import Mathlib.Algebra.BigOperators.NatAntidiagonal
+public import Nyll.AlgebraicCurves.Places.Taylor.Taylor
 
 /-!
 # Place eq taylor Coeff inv of forall sum antidiagonal eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
-import Mathlib.AlgebraicGeometry.AffineSpace
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+public import Mathlib.AlgebraicGeometry.AffineSpace
 
 /-! # The vector group and its actual additive points on every test scheme -/
+
+@[expose] public section
 
 noncomputable section
 

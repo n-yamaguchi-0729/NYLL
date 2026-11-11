@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.PullbackCohomology
-import Nyll.EtaleCohomology.Sites.ConstantPullbackComparison
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.PullbackCohomology
+public import Nyll.EtaleCohomology.Sites.ConstantPullbackComparison
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Cohomological pullback under an actual site isomorphism
@@ -18,6 +20,8 @@ The comparison of inverse-image functors induced by a natural isomorphism
 of site functors intertwines their actual maps on classical cohomology.
 The constant-sheaf comparisons are identified by their adjunction units.
 -/
+
+@[expose] public section
 
 noncomputable section
 

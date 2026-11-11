@@ -44,7 +44,8 @@ theorem solution
     Algebra.TensorProduct.lift (Algebra.ofId K' F') (IsScalarTower.toAlgHom K F F')
       (fun _ _ => Commute.all _ _)
   have hμ_tmul : ∀ (a : K') (y : F), μ (a ⊗ₜ y) = algebraMap K' F' a * algebraMap F F' y :=
-    fun a y => by simp [μ]
+    fun a y => by simp only [Algebra.TensorProduct.lift_tmul, Algebra.ofId_apply,
+      IsScalarTower.coe_toAlgHom', μ]
   have hμ : Function.Injective μ := by
     rw [injective_iff_map_eq_zero]
     intro z hz
@@ -56,7 +57,8 @@ theorem solution
     have hcomp : (μ.toLinearMap : K' ⊗[K] F → F') ∘ (B : _ → K' ⊗[K] F) =
         fun i => algebraMap F F' (bF i) := by
       funext i
-      simp [B, Algebra.TensorProduct.basis_apply, hμ_tmul]
+      simp only [AlgHom.coe_toLinearMap, Function.comp_apply, Algebra.TensorProduct.basis_apply,
+        hμ_tmul, map_one, one_mul, B]
     have hz' : Finsupp.linearCombination K' (fun i => algebraMap F F' (bF i)) (B.repr z) = 0 := by
       rw [← hcomp, ← Finsupp.apply_linearCombination, B.linearCombination_repr]
       exact hz
@@ -78,10 +80,13 @@ theorem solution
     exact ⟨⟨r, hadj hr⟩, ⟨s, hadj hs⟩, hrs⟩
   let θ : K' ⊗[K] F ≃ₐ[K] K' ⊗[K] F := Algebra.TensorProduct.congr τ AlgEquiv.refl
   have hθ : ∀ (a : K') (y : F), θ (a ⊗ₜ y) = τ a ⊗ₜ y := fun a y => by
-    simp [θ, Algebra.TensorProduct.congr_apply, Algebra.TensorProduct.map_tmul]
+    simp only [Algebra.TensorProduct.congr_apply, AlgEquiv.refl_toAlgHom,
+      Algebra.TensorProduct.map_tmul, AlgEquiv.coe_toAlgHom, AlgHom.coe_id, id_eq, θ]
   let ΦS : S ≃+* S := (e.symm.toRingEquiv.trans θ.toRingEquiv).trans e.toRingEquiv
   have hΦS : ∀ z, ΦS (e z) = e (θ z) := fun z => by
-    simp [ΦS]
+    simp only [AlgEquiv.symm_toRingEquiv, RingEquiv.symm_mk, AlgEquiv.toEquiv_eq_coe,
+      AlgEquiv.symm_toEquiv_eq_symm, RingEquiv.coe_trans, RingEquiv.coe_mk, EquivLike.coe_coe,
+      Function.comp_apply, AlgEquiv.symm_apply_apply, ΦS]
   let Φ : F' ≃+* F' := IsFractionRing.ringEquivOfRingEquiv ΦS
   have hΦ : ∀ s : S, Φ (s : F') = ((ΦS s : S) : F') := fun s =>
     IsFractionRing.ringEquivOfRingEquiv_algebraMap ΦS s

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaContraction
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeProductSurjectivity
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaContraction
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeProductSurjectivity
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
 
 /-!
 # Inertia after an essentially etale base change
@@ -16,6 +18,8 @@ This file extends the normalization-prime comparison from etale base
 change to the essentially etale maps which occur after localizing an
 etale stalk at a prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -356,9 +360,7 @@ theorem
     q.IsPrime ∧ q.LiesOver p ∧
       Nat.card (Q.toAddSubgroup.inertia Gal(M/KC)) =
         Nat.card (q.toAddSubgroup.inertia Gal(L/F)) := by
-  let q := Q.comap
-    (integralClosureEtaleBaseChangeHom
-      (A := A) (C := C) (L := L) (M := M))
+  intro q
   obtain ⟨hqPrime, hqOver, hram⟩ :=
     (
 normalization_ramificationIdx_eq_at_essentiallyEtale_contraction_of_functionFieldProduct_surjective

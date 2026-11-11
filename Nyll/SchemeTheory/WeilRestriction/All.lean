@@ -4,24 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.WeilRestriction.Affine
-import Nyll.SchemeTheory.WeilRestriction.BaseChange
-import Nyll.SchemeTheory.WeilRestriction.Congr
-import Nyll.SchemeTheory.WeilRestriction.CoverHypercover
-import Nyll.SchemeTheory.WeilRestriction.DirectedCover
-import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
-import Nyll.SchemeTheory.WeilRestriction.GluedComparison
-import Nyll.SchemeTheory.WeilRestriction.GluedRepresentable
-import Nyll.SchemeTheory.WeilRestriction.GluedUniversal
-import Nyll.SchemeTheory.WeilRestriction.GluingData
-import Nyll.SchemeTheory.WeilRestriction.IteratedSlice
-import Nyll.SchemeTheory.WeilRestriction.LocalIsomorphism
-import Nyll.SchemeTheory.WeilRestriction.LocalRepresenterDiagram
-import Nyll.SchemeTheory.WeilRestriction.LocalRepresenters
-import Nyll.SchemeTheory.WeilRestriction.Restriction
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotalLocalBijection
-import Nyll.SchemeTheory.WeilRestriction.Sheaf
+module
+
+public import Nyll.SchemeTheory.WeilRestriction.Affine
+public import Nyll.SchemeTheory.WeilRestriction.BaseChange
+public import Nyll.SchemeTheory.WeilRestriction.Congr
+public import Nyll.SchemeTheory.WeilRestriction.CoverHypercover
+public import Nyll.SchemeTheory.WeilRestriction.DirectedCover
+public import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
+public import Nyll.SchemeTheory.WeilRestriction.GluedComparison
+public import Nyll.SchemeTheory.WeilRestriction.GluedRepresentable
+public import Nyll.SchemeTheory.WeilRestriction.GluedUniversal
+public import Nyll.SchemeTheory.WeilRestriction.GluingData
+public import Nyll.SchemeTheory.WeilRestriction.IteratedSlice
+public import Nyll.SchemeTheory.WeilRestriction.LocalIsomorphism
+public import Nyll.SchemeTheory.WeilRestriction.LocalRepresenterDiagram
+public import Nyll.SchemeTheory.WeilRestriction.LocalRepresenters
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotalMap
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotalLocalBijection
+public import Nyll.SchemeTheory.WeilRestriction.Sheaf
 
 /-! Canonical aggregate for SchemeTheory.WeilRestriction. -/

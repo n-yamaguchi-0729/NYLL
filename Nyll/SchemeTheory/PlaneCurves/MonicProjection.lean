@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Algebra.MvPolynomial.Equiv
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Algebraic.Integral
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Algebraic.Integral
 
 /-!
 # Monic projections of affine plane curves
@@ -19,6 +21,8 @@ coordinate ring is a finite free algebra over the polynomial ring in `X`.
 After passing to fraction fields, the same rank is the degree in `Y`, hence
 is bounded by the total degree of the equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -168,7 +172,7 @@ def coordinateRingEquivProjection (f : BivariatePolynomial K) :
   exact
     { (coordinateRingEquivProjectionModel f).toRingEquiv with
       commutes' := fun a => by
-        simp [RingHom.algebraMap_toAlgebra] }
+        exact (coordinateRingEquivProjectionModel f).apply_symm_apply _ }
 
 /-- The monic quotient power basis, transported to the coordinate ring. -/
 def coordinateRingPowerBasis

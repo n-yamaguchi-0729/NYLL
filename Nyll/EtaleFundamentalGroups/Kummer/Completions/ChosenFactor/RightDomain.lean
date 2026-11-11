@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.Basic
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactorCoordinates
+module
+
+public import Mathlib.RingTheory.Flat.Basic
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactorCoordinates
 
 /-!
 # Domain structure on the right coordinate of a chosen tensor factor
@@ -16,6 +18,8 @@ domain structure on the actual chosen factor pulls back to `C`.  This avoids
 using Noetherianity of the complete two-dimensional base merely to prove
 that its explicit finite residue lift is a domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,13 +37,11 @@ theorem tensorChosenFactorRight_algebraMap_injective
     [Algebra A B] [Algebra A C] [Algebra B D]
     [FaithfulSMul A B] [Module.Flat A C]
     (e : (B ⊗[A] C) ≃ₐ[B] D) :
-    letI : Algebra C D :=
+    let : Algebra C D :=
       (e.toRingEquiv.toRingHom.comp
         (Algebra.TensorProduct.includeRight : C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
     Function.Injective (algebraMap C D) := by
-  let : Algebra C D :=
-    (e.toRingEquiv.toRingHom.comp
-      (Algebra.TensorProduct.includeRight : C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
+  intro sharedOwner1
   change Function.Injective
     (e.toRingEquiv.toRingHom.comp
       (Algebra.TensorProduct.includeRight : C →ₐ[A] B ⊗[A] C).toRingHom)
@@ -55,13 +57,11 @@ theorem tensorChosenFactorRight_isDomain
     [Algebra A B] [Algebra A C] [Algebra B D]
     [FaithfulSMul A B] [Module.Flat A C] [IsDomain D]
     (e : (B ⊗[A] C) ≃ₐ[B] D) :
-    letI : Algebra C D :=
+    let : Algebra C D :=
       (e.toRingEquiv.toRingHom.comp
         (Algebra.TensorProduct.includeRight : C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
     IsDomain C := by
-  let : Algebra C D :=
-    (e.toRingEquiv.toRingHom.comp
-      (Algebra.TensorProduct.includeRight : C →ₐ[A] B ⊗[A] C).toRingHom).toAlgebra
+  intro sharedOwner1
   exact Function.Injective.isDomain (algebraMap C D)
     (tensorChosenFactorRight_algebraMap_injective e)
 

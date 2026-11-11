@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
 import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.TupleOfSplitDivisor
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Evaluating the actual finite curve trace on a split fibre
 

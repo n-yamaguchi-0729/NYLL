@@ -302,14 +302,6 @@ private lemma liftCoefficients_homForward
   rw [MvPolynomial.aeval_X]
   exact coeffAssignment_homForward (P := P) h x.1 x.2
 
-private def weilHomEquiv :
-    (HomRing (R := R) (A := A) (B := B) P →ₐ[R] C) ≃
-      (B →ₐ[R] C ⊗[R] A) where
-  toFun := homForward (P := P)
-  invFun := liftCoefficients (P := P)
-  left_inv := liftCoefficients_homForward (P := P)
-  right_inv := homForward_liftCoefficients (P := P)
-
 private lemma homForward_comp
     {D : Type u} [CommRing D] [Algebra R D]
     (h : HomRing (R := R) (A := A) (B := B) P →ₐ[R] C)

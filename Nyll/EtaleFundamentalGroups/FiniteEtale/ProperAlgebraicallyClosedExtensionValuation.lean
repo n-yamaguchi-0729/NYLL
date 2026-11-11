@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationValuation
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationValuation
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # A valuation comparison between a coefficient embedding and a rational point
@@ -25,6 +27,8 @@ argument in Stacks Project, Lemma 58.9.3,
 https://stacks.math.columbia.edu/tag/0A49. In particular, the residue triangle
 is proved from the centre of the valuation; it is not supplied as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Tactic.FinCases
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Tactic.FinCases
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Partial derivatives on affine plane curves
@@ -18,6 +20,8 @@ point as a combination of the two translated coordinates, the construction
 controls the values of both coefficients: they are the two partial
 derivatives at the point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -59,9 +63,10 @@ theorem exists_coordinate_decomposition_with_partialAt
   induction g using MvPolynomial.induction_on with
   | C c =>
       refine ⟨0, 0, ?_, ?_, ?_⟩
-      · simp [polynomialEval]
-      · simp [polynomialEval]
-      · simp [polynomialEval]
+      · simp only [polynomialEval, algHom_C, Algebra.algebraMap_self, RingHom.id_apply, sub_self,
+        Fin.isValue, mul_zero, add_zero]
+      · simp only [polynomialEval, map_zero, Fin.isValue, derivation_C]
+      · simp only [polynomialEval, map_zero, Fin.isValue, derivation_C]
   | add g h hg hh =>
       obtain ⟨ug, vg, hg_decomp, hug, hvg⟩ := hg
       obtain ⟨uh, vh, hh_decomp, huh, hvh⟩ := hh
@@ -92,7 +97,8 @@ theorem exists_coordinate_decomposition_with_partialAt
           simp only [map_add, map_mul, polynomialEval_X,
             MvPolynomial.pderiv_X_self, mul_one]
           rw [hu]
-          simp [polynomialEval]
+          simp only [Fin.isValue, polynomialEval, aeval_eq_eval, algHom_C, Algebra.algebraMap_self,
+            RingHomCompTriple.comp_apply, add_left_inj]
           ring
         · rw [MvPolynomial.pderiv_mul]
           simp only [map_mul, polynomialEval_X,
@@ -122,7 +128,8 @@ theorem exists_coordinate_decomposition_with_partialAt
           simp only [map_add, map_mul, polynomialEval_X,
             MvPolynomial.pderiv_X_self, mul_one]
           rw [hv]
-          simp [polynomialEval]
+          simp only [Fin.isValue, polynomialEval, aeval_eq_eval, algHom_C, Algebra.algebraMap_self,
+            RingHomCompTriple.comp_apply, add_left_inj]
           ring
 
 end AffinePlaneCurve

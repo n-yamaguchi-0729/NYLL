@@ -10,23 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.RingTheory.FiniteType
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFgSubalgebraAbelianSchemePropertyBundlePullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraPullbackFinitePresentation
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawPullbackCompEqMulEq
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianDescentAffineOpensPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.RingTheory.FiniteType
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawFgSubalgebraAbelianSchemePropertyBundlePullback
+public import Nyll.SchemeTheory.Descent.FgSubalgebraPullbackFinitePresentation
+public import Nyll.AbelianVarieties.Geometry.RelativeGroupLawPullbackCompEqMulEq
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianDescentAffineOpensPullback
 
 /-!
 # Noetherian models on affine opens
@@ -34,6 +36,8 @@ import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianDe
 A rigidified line bundle and its group-law model descend to a finitely generated base
 over the integers on each affine open of the parameter scheme.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentPrincipalUnits
-import Mathlib.RingTheory.Nilpotent.Exp
-import Mathlib.Tactic.NormNum
+module
+
+public import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentPrincipalUnits
+public import Mathlib.RingTheory.Nilpotent.Exp
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Exponential and logarithm for a nilpotent ideal in characteristic zero
@@ -17,6 +19,8 @@ induction on the nilpotence exponent, using the exact first-order term and
 then the smaller ideal `I²`. The inverse therefore supplies a logarithm
 without analytic convergence or a reducedness hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,7 +45,8 @@ theorem exp_sub_one_sub_mem_pow_two (I : Ideal R) {a : R}
     exp_eq_one_add_of_sq_zero hsq]
   ring
 
-private def nilpotentExpUnit (a : R) (ha : IsNilpotent a) : Rˣ where
+/-- The finite exponential of a nilpotent element, with inverse the exponential of its negative. -/
+def nilpotentExpUnit (a : R) (ha : IsNilpotent a) : Rˣ where
   val := IsNilpotent.exp a
   inv := IsNilpotent.exp (-a)
   val_inv := IsNilpotent.exp_mul_exp_neg_self ha

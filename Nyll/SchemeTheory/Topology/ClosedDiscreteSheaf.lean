@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.LocalPredicate
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.LocalPredicate
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Stalks of discrete-valued functions on a closed support
@@ -22,6 +24,8 @@ The constructions keep the actual evaluation and germ formulas visible
 for the closed-support pullback and restriction comparisons.
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

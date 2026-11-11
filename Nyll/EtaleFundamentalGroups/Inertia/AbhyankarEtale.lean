@@ -60,11 +60,10 @@ theorem integralClosure_etale_of_abhyankar_dvr
           Nat.card
             ((normalizationLowerPrime (V := V) (K := K) (E := E) N Q).toAddSubgroup.inertia
               Gal(N/K))) :
-    letI : Algebra (integralClosure V N) (integralClosure V E) :=
+    let : Algebra (integralClosure V N) (integralClosure V E) :=
       normalizationAlgebra (V := V) (K := K) (E := E) N
     Algebra.Etale (integralClosure V N) (integralClosure V E) := by
-  let : Algebra (integralClosure V N) (integralClosure V E) :=
-    normalizationAlgebra (V := V) (K := K) (E := E) N
+  intro sharedOwner1
   let : Algebra.IsSeparable K N :=
     Algebra.isSeparable_tower_bot_of_isSeparable (F := K) N E
   let : IsGalois K N :=

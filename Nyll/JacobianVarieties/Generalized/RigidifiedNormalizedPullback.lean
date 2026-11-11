@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSection
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullbackTensor
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSection
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullbackTensor
 
 /-! # Pullback preserves the actual section normalized along the full modulus -/
+
+@[expose] public section
 
 noncomputable section
 

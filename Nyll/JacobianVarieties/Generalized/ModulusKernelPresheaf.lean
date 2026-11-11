@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitBoundaryInjective
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseTwist
-import Mathlib.CategoryTheory.Sites.LocallyBijective
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitBoundaryInjective
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseTwist
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # The actual forgetful kernel and its local scalar representatives -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -17,6 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite NeronModelInfra
 open AlgebraicGeometry.RelPicard
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

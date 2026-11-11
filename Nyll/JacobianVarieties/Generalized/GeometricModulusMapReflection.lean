@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 
 /-! # Reflection of the full modulus through group embeddings
 
@@ -23,6 +25,8 @@ condition. Pullback preserves monomorphisms, so the same reflection holds
 over every algebraically closed extension, in particular for a closed
 immersion of commutative group schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

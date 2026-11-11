@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
-import Nyll.SchemeTheory.FunctionFields.AffineFunctionFieldNaturality
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Mathlib.Algebra.Polynomial.Taylor
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
+public import Nyll.SchemeTheory.FunctionFields.AffineFunctionFieldNaturality
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Mathlib.Algebra.Polynomial.Taylor
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Detecting actual constancy from the full formal difference
@@ -23,6 +25,8 @@ already constructed in `AffineLineGroupFormalDifference` are polynomial
 coefficients. Positive order at infinity forces each such positive-degree
 coefficient to vanish. The argument uses the full series, in every degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

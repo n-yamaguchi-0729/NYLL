@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The fraction-field tower for a completed uniformizer root
@@ -26,6 +28,8 @@ the uniqueness of fraction-field extension.
 This characteristic-free comparison is shared by the characteristic-zero
 and tame normalization descent arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

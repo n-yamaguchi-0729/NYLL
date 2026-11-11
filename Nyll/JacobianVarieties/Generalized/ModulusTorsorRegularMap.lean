@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
-import Nyll.JacobianVarieties.Generalized.GeometricModulusScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneAbelEquivariantUniqueness
-import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusEmptyRegularMap
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneAbelEquivariantUniqueness
+public import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Regular torsor maps from the full modulus condition
 
@@ -19,6 +21,8 @@ with any effective modulus factors uniquely through the intrinsic Picard-one tor
 The group morphism is constructed from the actual coordinate map's modulus;
 neither a group factor nor a torsor factor is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

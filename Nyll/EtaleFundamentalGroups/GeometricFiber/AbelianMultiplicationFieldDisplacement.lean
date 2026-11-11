@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianMultiplicationAlgebraicPoints
+import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMultiplicationAlgebraicPoints
 
 /-!
 # Field Galois displacement of actual algebraic division points
@@ -25,7 +26,7 @@ variable {K : Type} [Field K] [IsAlgClosed K] [CharZero K]
   (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
   {L : Type} [Field L] [Algebra K L]
   {Ω : Type} [Field Ω] [Algebra K Ω] [Algebra L Ω]
-  [IsScalarTower K L Ω] [IsSepClosed Ω] [IsSepClosure L Ω]
+  [IsScalarTower K L Ω] [IsSepClosed Ω]
 
 omit [IsAlgClosed K] in
 /-- Coefficient Galois action is the actual fibre action on the algebraic
@@ -42,15 +43,9 @@ theorem multiplicationFiberAlgPoint_field_smul
       (toAut (FiniteEtale.fiber η) (Ω ≃ₐ[L] Ω) σ)
     (σ.restrictScalars K) • G.multiplicationFiberAlgPoint hc ξ n z =
       G.multiplicationFiberAlgPoint hc ξ n (g • z) := by
-  intro ξ η g
-  have hfield := FiniteEtale.fundamentalGroupHom_field_fiberLift j.1
-    (G.multiplicationCover hc n) σ z
-  apply AlgPoints.toPoint_injective
-  apply Subtype.ext
-  change Spec.map (CommRingCat.ofHom σ.toRingHom) ≫
-      (G.multiplicationFiberPoint hc (η ≫ j.1) n z).1 =
-    (G.multiplicationFiberPoint hc (η ≫ j.1) n (g • z)).1
-  exact hfield.symm
+  have hn : IsUnit ((n : ℕ) : K) :=
+    isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr n.ne_zero)
+  exact UnitMultiplication.fiberAlgPoint_field_smul G hc j ⟨n, hn⟩ σ z
 
 /-- The Galois displacement of an actual algebraic division point is the
 base change of its actual multiplication-monodromy torsion point. -/
@@ -72,18 +67,8 @@ theorem multiplicationFiberAlgPoint_field_displacement
         G.multiplicationFiberAlgPoint hc ξ n z =
       AlgPoints.map (Algebra.ofId K Ω)
         (G.multiplicationMonodromy hc n (continuousConjAut τ g)).1 := by
-  intro ξ η g
-  let Q := G.multiplicationFiberAlgPoint hc ξ n z
-  let t := AlgPoints.map (Algebra.ofId K Ω)
-    (G.multiplicationMonodromy hc n (continuousConjAut τ g)).1
-  calc
-    (σ.restrictScalars K) • Q - Q =
-        G.multiplicationFiberAlgPoint hc ξ n (g • z) - Q :=
-      congrArg (fun P : G.AlgPoints hc Ω => P - Q)
-        (G.multiplicationFiberAlgPoint_field_smul hc j n σ z)
-    _ = (Q + t) - Q :=
-      congrArg (fun P : G.AlgPoints hc Ω => P - Q)
-        (G.multiplicationFiberAlgPoint_smul hc ξ n τ g z)
-    _ = t := add_sub_cancel_left Q t
+  have hn : IsUnit ((n : ℕ) : K) :=
+    isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr n.ne_zero)
+  exact UnitMultiplication.fiberAlgPoint_field_displacement G hc j ⟨n, hn⟩ τ σ z
 
 end GoodReductionJacobian.RelativeGroupLaw

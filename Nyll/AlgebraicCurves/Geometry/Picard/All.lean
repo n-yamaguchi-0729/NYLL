@@ -33,3 +33,6 @@ import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.All
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.All
 import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.All
 import Nyll.AlgebraicCurves.Geometry.Picard.Theta.All
+import Nyll.AlgebraicCurves.Geometry.Picard.CurveModelAlgebraicPoints
+import Nyll.AlgebraicCurves.Geometry.Picard.DivisionPullback
+import Nyll.AlgebraicCurves.Geometry.Picard.DivisionPullbackCocycle

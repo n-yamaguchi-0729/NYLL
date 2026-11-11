@@ -10,16 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Valuation.Discrete.Basic
-import Mathlib.RingTheory.Valuation.ExtendToLocalization
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Valuation.Discrete.Basic
+public import Mathlib.RingTheory.Valuation.ExtendToLocalization
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Valuation exists le one iff exists eq mk of forall exists eq pow mul
 -/
 
+@[expose] public section
+
 section ProofImplementation
+
+universe u v
 
 namespace AlgebraicCurves.Valuations.Proofs
 namespace Valuation_exists_le_one_iff_exists_eq_mk_of_forall_exists_eq_pow_mul
@@ -28,7 +34,7 @@ open WithZero
 
 namespace LOCRING
 
-variable {M : Type} [CommRing M] [IsDomain M] {K : Type} [Field K] (φ : M →+* K) (t : M)
+variable {M : Type u} [CommRing M] [IsDomain M] {K : Type v} [Field K] (φ : M →+* K) (t : M)
 
 theorem exp_unique (ht0 : t ≠ 0) (ht : φ t = 0) {n m : ℕ} {G G' : M} (hG : φ G ≠ 0) (hG' : φ G' ≠ 0)
     (h : t ^ n * G = t ^ m * G') : n = m := by
@@ -108,20 +114,20 @@ noncomputable def val0 (ht0 : t ≠ 0) (ht : φ t = 0) : Valuation M ℤᵐ⁰ :
       rw [Nat.cast_zero, neg_zero, exp_zero]
     map_mul' := fun F F' => by
       by_cases hF : F = 0
-      · simp [hF]
+      · simp only [hF, zero_mul, ↓reduceIte, mul_ite, mul_zero, ite_self]
       by_cases hF' : F' = 0
-      · simp [hF']
+      · simp only [hF', mul_zero, ↓reduceIte]
       rw [ite_eq_right (mul_ne_zero hF hF'), ite_eq_right hF, ite_eq_right hF', ordT_mul φ t hfac
         ht0 ht hF hF', ← exp_add]
       push_cast
       ring_nf
     map_add_le_max' := fun F F' => by
       by_cases hF : F = 0
-      · simp [hF]
+      · simp only [hF, zero_add, ↓reduceIte, zero_le, sup_of_le_right, Std.le_refl]
       by_cases hF' : F' = 0
-      · simp [hF']
+      · simp only [hF', add_zero, ↓reduceIte, zero_le, sup_of_le_left, Std.le_refl]
       by_cases hFF' : F + F' = 0
-      · simp [hFF']
+      · simp only [hFF', ↓reduceIte, le_max_iff, zero_le, or_self]
       rw [ite_eq_right hFF', ite_eq_right hF, ite_eq_right hF']
       have := min_le_ordT_add φ t hfac ht0 ht hF hF' hFF'
       rw [le_max_iff, exp_le_exp, exp_le_exp]
@@ -149,7 +155,7 @@ end LOCRING
 
 namespace LOCRING
 
-variable {M : Type} [CommRing M] [IsDomain M] {K : Type} [Field K] (φ : M →+* K) (t : M)
+variable {M : Type u} [CommRing M] [IsDomain M] {K : Type v} [Field K] (φ : M →+* K) (t : M)
 variable (hfac : ∀ F : M, F ≠ 0 → ∃ (n : ℕ) (G : M), F = t ^ n * G ∧ φ G ≠ 0) (ht0 : t ≠ 0) (ht : φ
   t = 0)
 
@@ -306,8 +312,8 @@ noncomputable def psi : ↥(val φ t hfac ht0 ht).valuationSubring →+* K where
 end LOCRING
 
 theorem _root_.Valuation.exists_le_one_iff_exists_eq_mk_of_forall_exists_eq_pow_mul
-    (M : Type) [CommRing M] [IsDomain M] (K : Type) [Field K] (φ : M →+* K) (t : M) (ht0 : t ≠ 0)
-      (ht : φ t = 0)
+    (M : Type u) [CommRing M] [IsDomain M] (K : Type v) [Field K]
+    (φ : M →+* K) (t : M) (ht0 : t ≠ 0) (ht : φ t = 0)
     (hfac : ∀ F : M, F ≠ 0 → ∃ (n : ℕ) (G : M), F = t ^ n * G ∧ φ G ≠ 0) :
     ∃ v : Valuation (FractionRing M) ℤᵐ⁰,
       (∀ x : FractionRing M, v x ≤ 1 ↔

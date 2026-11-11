@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareModulusFamily
-import Nyll.JacobianVarieties.Generalized.ModulusFramesZero
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareModulusFamily
+public import Nyll.JacobianVarieties.Generalized.ModulusFramesZero
 
 /-!
 # The Poincaré frame scheme maps to the modulus Picard-zero sheaf
@@ -15,6 +17,8 @@ This constructs the natural map and its universal sheaf class. Proving that this
 map is an isomorphism, and hence obtaining generalized Jacobian representation,
 remains separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

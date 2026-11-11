@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # A selected tensor component in its chosen normalization localization
@@ -23,6 +25,8 @@ It also records both tensor-factor coordinates, especially the right factor
 `L`; no component equality, comparison equivalence, right-map bijectivity,
 or local etaleness is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -76,27 +80,17 @@ noncomputable def
       Ideal (integralClosure B M))
     [q.IsPrime] :
     let M := GenericTensorFieldComponent m
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-    letI := genericTensorFieldComponentLeftScalar_isScalarTower (B := B) m
+    let := genericTensorFieldComponentLeftScalar_isScalarTower (B := B) m
     let E := integralClosure B M
-    letI : IsFractionRing E M :=
+    let : IsFractionRing E M :=
       IsIntegralClosure.isFractionRing_of_finite_extension B F M E
     let D := Localization.AtPrime q
-    letI : Algebra D M :=
+    let : Algebra D M :=
       localizationAtPrimeToFractionFieldAlgebra (K := M) q
     M ≃ₐ[D] FractionRing D := by
-  dsimp only
-  let M := GenericTensorFieldComponent m
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-  letI := genericTensorFieldComponentLeftScalar_isScalarTower (B := B) m
-  let E := integralClosure B M
-  letI : IsFractionRing E M :=
-    IsIntegralClosure.isFractionRing_of_finite_extension B F M E
-  let D := Localization.AtPrime q
-  letI : Algebra D M :=
-    localizationAtPrimeToFractionFieldAlgebra (K := M) q
+  intro M sharedOwner1 sharedOwner2 E sharedOwner3 D sharedOwner4
   exact
     (integralClosureLocalizationFractionRingAlgEquiv
       (B := B) (K := F) (M := M) q).symm

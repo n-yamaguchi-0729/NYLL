@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.AffineSourceColimit
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
-import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Nyll.SchemeTheory.Modules.AffineSourceColimit
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
+public import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # The original source maps to its generated relative algebra model
@@ -20,6 +22,8 @@ original affine-morphism source gives the scheme morphism. Its composite
 with the generated model's structure morphism is the original morphism.
 Consequently source surjectivity supplies surjectivity of the model.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,7 +51,8 @@ def generatedDiagramMap :
     (Functor.whiskerLeft (AffineZariskiSite.toOpensFunctor X).op
       (GeneratedAlgebra.inclusion (structureMap g) N.toSubmodule)).rightOp Scheme.Spec
 
-private def generatedCocone : Cocone (AffineSourceColimit.diagram g) where
+/-- The generated-ring chart maps form a cocone on the original affine-source diagram. -/
+def generatedCocone : Cocone (AffineSourceColimit.diagram g) where
   pt := GeneratedAlgebra.scheme (structureMap g) N
   ι := generatedDiagramMap g N ≫
     (colimit.cocone (GeneratedAlgebra.gluingData (structureMap g) N).functor).ι

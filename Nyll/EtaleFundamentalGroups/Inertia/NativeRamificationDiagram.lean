@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationResidues
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Subgroup.Defs
-import Mathlib.Topology.Constructions
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationResidues
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Subgroup.Defs
+public import Mathlib.Topology.Constructions
 
 /-!
 # The native data of the two ramification sequences
@@ -17,6 +19,8 @@ and existing topologies. It stores no exactness, normality, surjectivity,
 comparison or other conclusion. The roots target is computed from the
 residue data, so it cannot be replaced by an unrelated abstract group.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

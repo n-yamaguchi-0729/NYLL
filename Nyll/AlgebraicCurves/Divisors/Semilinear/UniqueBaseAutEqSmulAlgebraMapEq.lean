@@ -55,7 +55,10 @@ noncomputable def twistHom (σ : K' ≃+* K') (φ : F ≃+* F)
 theorem twistHom_tmul (σ : K' ≃+* K') (φ : F ≃+* F)
     (h : ∀ a : K, ∀ c : K', ∀ y : F, σ (a • c) ⊗ₜ[K] φ y = σ c ⊗ₜ[K] φ (a • y)) (c : K') (y : F) :
     twistHom σ φ h (c ⊗ₜ y) = σ c ⊗ₜ φ y := by
-  simp [twistHom, TensorProduct.liftAddHom_tmul]
+  simp only [twistHom, RingHom.toAddMonoidHom_eq_coe, RingEquiv.toRingHom_eq_coe,
+    TensorProduct.liftAddHom_tmul, AddMonoidHom.coe_mk, ZeroHom.coe_mk, AddMonoidHom.coe_comp,
+    LinearMap.toAddMonoidHom_coe, AddMonoidHom.coe_ofClass, RingHom.coe_coe, Function.comp_apply,
+    TensorProduct.mk_apply]
 include hτ in
 theorem twist_compat : ∀ a : K, ∀ c : K', ∀ y : F,
     τ (a • c) ⊗ₜ[K] (SemilinearAut.toRingAut g) y = τ c ⊗ₜ[K] (SemilinearAut.toRingAut g) (a • y)
@@ -88,18 +91,18 @@ noncomputable def twist : K' ⊗[K] F ≃+* K' ⊗[K] F where
   invFun := twistHom τ.symm (SemilinearAut.toRingAut g).symm (twist_compat_symm g τ hτ)
   left_inv x := by
     induction x using TensorProduct.inductionOn with
-    | tmul c y => simp [twistHom_tmul]
+    | tmul c y => simp only [twistHom_tmul, RingEquiv.symm_apply_apply]
     | add x y hx hy => simp only [map_add, hx, hy]
   right_inv x := by
     induction x using TensorProduct.inductionOn with
-    | tmul c y => simp [twistHom_tmul]
+    | tmul c y => simp only [twistHom_tmul, RingEquiv.apply_symm_apply]
     | add x y hx hy => simp only [map_add, hx, hy]
   map_add' x y := map_add _ x y
   map_mul' x y := by
     induction x using TensorProduct.inductionOn with
     | tmul c z =>
       induction y using TensorProduct.inductionOn with
-      | tmul c' z' => simp [twistHom_tmul, Algebra.TensorProduct.tmul_mul_tmul]
+      | tmul c' z' => simp only [Algebra.TensorProduct.tmul_mul_tmul, twistHom_tmul, map_mul]
       | add y y' hy hy' => simp only [mul_add, map_add, hy, hy']
     | add x x' hx hx' => simp only [add_mul, map_add, hx, hx']
 
@@ -132,7 +135,8 @@ theorem solution
     Algebra.TensorProduct.lift (Algebra.ofId K' F') (IsScalarTower.toAlgHom K F F')
       (fun _ _ => Commute.all _ _)
   have hμ_tmul : ∀ (a : K') (y : F), μ (a ⊗ₜ y) = algebraMap K' F' a * algebraMap F F' y :=
-    fun a y => by simp [μ]
+    fun a y => by simp only [Algebra.TensorProduct.lift_tmul, Algebra.ofId_apply,
+      IsScalarTower.coe_toAlgHom', μ]
   have hμ : Function.Injective μ := by
     rw [injective_iff_map_eq_zero]
     intro z hz
@@ -144,7 +148,8 @@ theorem solution
     have hcomp : (μ.toLinearMap : K' ⊗[K] F → F') ∘ (B : _ → K' ⊗[K] F) =
         fun i => algebraMap F F' (bF i) := by
       funext i
-      simp [B, Algebra.TensorProduct.basis_apply, hμ_tmul]
+      simp only [AlgHom.coe_toLinearMap, Function.comp_apply, Algebra.TensorProduct.basis_apply,
+        hμ_tmul, map_one, one_mul, B]
     have hz' : Finsupp.linearCombination K' (fun i => algebraMap F F' (bF i)) (B.repr z) = 0 := by
       rw [← hcomp, ← Finsupp.apply_linearCombination, B.linearCombination_repr]
       exact hz
@@ -166,7 +171,9 @@ theorem solution
     exact ⟨⟨r, hadj hr⟩, ⟨s, hadj hs⟩, hrs⟩
   let θ : K' ⊗[K] F ≃+* K' ⊗[K] F := twist g τ hτ
   let ΦS : S ≃+* S := (e.symm.toRingEquiv.trans θ).trans e.toRingEquiv
-  have hΦS : ∀ z, ΦS (e z) = e (θ z) := fun z => by simp [ΦS]
+  have hΦS : ∀ z, ΦS (e z) = e (θ z) := fun z => by simp only [AlgEquiv.symm_toRingEquiv,
+    RingEquiv.symm_mk, AlgEquiv.toEquiv_eq_coe, AlgEquiv.symm_toEquiv_eq_symm, RingEquiv.coe_trans,
+    RingEquiv.coe_mk, EquivLike.coe_coe, Function.comp_apply, AlgEquiv.symm_apply_apply, ΦS]
   let Φ : F' ≃+* F' := IsFractionRing.ringEquivOfRingEquiv ΦS
   have hΦ : ∀ s : S, Φ (s : F') = ((ΦS s : S) : F') := fun s =>
     IsFractionRing.ringEquivOfRingEquiv_algebraMap ΦS s

@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.RingTheory.PrincipalIdealDomain
+module
+
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Mathlib.RingTheory.PrincipalIdealDomain
 
 /-!
 # Subalgebra is Integrally Closed adjoin singleton of transcendental
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

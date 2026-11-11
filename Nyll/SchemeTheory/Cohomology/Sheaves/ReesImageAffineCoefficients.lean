@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageModule
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.Algebra.Ring.Subring.Basic
-import Mathlib.RingTheory.ReesAlgebra
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesImageModule
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 # Affine coefficients of the native Rees image
@@ -24,6 +26,8 @@ inclusion. Coefficient membership and monomial lifting are supplied by
 the existing Rees construction; the new comparison retains the native
 module action and every face restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -92,7 +96,8 @@ def imageAffinePolynomial {i : ℕ} (s : K.Idx i) :
         (polynomial_projection_scalar I q K s a)).trans
           (Polynomial.smul_eq_C_mul (p := ΦC I q K s v) a).symm))
 
-private theorem imageAffinePolynomial_mem {i : ℕ} (s : K.Idx i)
+/-- The polynomial coordinates of an image section lie in the Rees algebra. -/
+theorem imageAffinePolynomial_mem {i : ℕ} (s : K.Idx i)
     (x : imageAffineModuleOverOriginal I q K s) :
     imageAffinePolynomial I q K s x ∈ reesAlgebra (I.map (alg q (K.inter s))) := by
   classical
@@ -131,14 +136,16 @@ private theorem rees_mem_Sθ {i : ℕ} (s : K.Idx i)
     exact (mem_reesAlgebra_iff _ _).mp p.property n
   exact (Polynomial.sum_monomial_eq p.val) ▸ hsum
 
-private def imageAffineReesMap {i : ℕ} (s : K.Idx i) :
+/-- The polynomial-coordinate map from affine image sections to the Rees algebra. -/
+def imageAffineReesMap {i : ℕ} (s : K.Idx i) :
     imageAffineModuleOverOriginal I q K s →ₗ[Γ(P, K.inter s)]
       ↥(reesAlgebra (I.map (alg q (K.inter s)))) where
   toFun x := ⟨imageAffinePolynomial I q K s x, imageAffinePolynomial_mem I q K s x⟩
   map_add' x y := Subtype.ext ((imageAffinePolynomial I q K s).map_add x y)
   map_smul' a x := Subtype.ext ((imageAffinePolynomial I q K s).map_smul a x)
 
-private theorem imageAffineReesMap_bijective {i : ℕ} (s : K.Idx i) :
+/-- The affine image-section map to the Rees algebra is bijective. -/
+theorem imageAffineReesMap_bijective {i : ℕ} (s : K.Idx i) :
     Function.Bijective (imageAffineReesMap I q K s) := by
   let W := (K' I q K).inter (indexEquiv I q K s)
   have hW : IsAffineOpen W := by

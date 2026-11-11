@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOne
-import Nyll.JacobianVarieties.Generalized.ModulusTwoPointDifference
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.CoverLifting
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOne
+public import Nyll.JacobianVarieties.Generalized.ModulusTwoPointDifference
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.CoverLifting
 
 /-!
 # Actual local translations of intrinsic Picard-one
@@ -16,6 +18,8 @@ A point over any base change identifies the restriction of intrinsic Picard-one
 with the restriction of Picard-zero. The construction works on the original
 curve and its actual point classes, without assuming a ground-field point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

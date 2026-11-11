@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
-import Mathlib.Algebra.Torsor.Defs
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+public import Mathlib.Algebra.Torsor.Defs
 
 /-!
 # Actual translations of the modulus Picard-zero presheaf
@@ -19,6 +21,8 @@ isomorphism of their fppf sheafifications. No representability hypothesis enters
 this construction. For the class of a point outside the modulus this is the
 pointed degree-one component; identifying it independently of a point is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

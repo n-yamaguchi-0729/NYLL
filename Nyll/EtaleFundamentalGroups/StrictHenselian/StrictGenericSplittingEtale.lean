@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorDescent
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
-import Nyll.EtaleFundamentalGroups.StrictHenselian.AffineNeighborhoodFaithfullyFlat
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
-import Mathlib.RingTheory.Localization.Away.AdjoinRoot
-import Mathlib.RingTheory.TensorProduct.Pi
-import Mathlib.RingTheory.FinitePresentation
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorDescent
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.AffineNeighborhoodFaithfullyFlat
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
+public import Mathlib.RingTheory.Localization.Away.AdjoinRoot
+public import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.RingTheory.FinitePresentation
 
 
 /-!
@@ -25,6 +27,8 @@ and smooth base change of integral closure then prove that the original
 normalization is étale. No normalization comparison for the infinite
 strict-henselization map is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

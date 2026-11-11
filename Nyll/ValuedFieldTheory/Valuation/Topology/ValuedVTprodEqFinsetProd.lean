@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.Algebra.InfiniteSum.Defs
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.Topology.Neighborhoods
-import Mathlib.Order.Filter.AtTopBot.Defs
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Order.Filter.Defs
+module
+
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.Algebra.InfiniteSum.Defs
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.Topology.Neighborhoods
+public import Mathlib.Order.Filter.AtTopBot.Defs
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Order.Filter.Defs
 
 /-!
 # Valued v tprod eq finset Prod of forall not mem v eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

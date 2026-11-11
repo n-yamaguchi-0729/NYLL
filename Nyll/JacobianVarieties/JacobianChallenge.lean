@@ -11,15 +11,18 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
-import Nyll.JacobianVarieties.Picard.AbelJacobi.UnpointedAbelJacobi
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedAlbanese
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
+public import Nyll.JacobianVarieties.Picard.AbelJacobi.UnpointedAbelJacobi
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedAlbanese
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Jacobians of smooth proper curves in the over category
@@ -30,6 +33,8 @@ The genus is the geometric function-field genus, also identified with actual
 structure-sheaf cohomology. These declarations implement all nine
 statements of the algebraic-geometric Jacobian challenge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

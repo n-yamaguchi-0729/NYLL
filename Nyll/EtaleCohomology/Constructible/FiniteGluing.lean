@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.GeometricStratification
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Constructible.Stratification
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Basic.Finite.Sigma
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.Constructible
-import Nyll.EtaleCohomology.Sites.SheafFunctors
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.GeometricStratification
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Constructible.Stratification
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.Constructible
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
 
 /-!
 # Finite adapted stratifications from local pieces
@@ -29,6 +31,8 @@ pieces. Thus containment of images is never used as an unproved scheme lift.
 This gives finite stratifications from finite retrocompact open covers, and
 from affine neighborhoods on quasi-compact quasi-separated schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

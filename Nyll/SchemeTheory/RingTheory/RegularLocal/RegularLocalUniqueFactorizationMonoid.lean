@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Nyll.SchemeTheory.RingTheory.Localization.LocalRingMemMaximalIdealNotMemSqMinimalPrimesNotMem
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingleton
-import Nyll.SchemeTheory.RingTheory.Localization.LocalRingUniqueFactorizationMonoid
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalRingMemMaximalIdealNotMemSqMinimalPrimesNotMem
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientSpanSingleton
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalRingUniqueFactorizationMonoid
 
 /-!
 # Is Regular Local Ring unique Factorization Monoid of ring Krull Dim le two
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -41,9 +45,13 @@ theorem isPrincipalIdealRing_of_maximalIdeal_eq_bot (S : Type*) [CommRing S] [Is
     (h : maximalIdeal S = ⊥) : IsPrincipalIdealRing S := by
   refine ⟨fun I => ?_⟩
   by_cases hI : I = ⊤
-  · exact ⟨⟨1, by simp [hI]⟩⟩
+  · refine ⟨⟨1, ?_⟩⟩
+    change I = Ideal.span ({1} : Set S)
+    rw [hI, Ideal.span_singleton_one]
   · have hIbot : I = ⊥ := le_bot_iff.mp (h ▸ IsLocalRing.le_maximalIdeal hI)
-    exact ⟨⟨0, by simp [hIbot]⟩⟩
+    refine ⟨⟨0, ?_⟩⟩
+    change I = Ideal.span ({0} : Set S)
+    rw [hIbot, Ideal.span_singleton_zero]
 
 end AB2UFD
 

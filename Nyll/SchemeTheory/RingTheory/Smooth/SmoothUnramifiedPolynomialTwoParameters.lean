@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Smooth.SmoothDifferentialGeneratorTwoParameters
-import Nyll.SchemeTheory.RingTheory.Smooth.RingHomFormallySmoothFormallyUnramifiedEval2RingHomUniqueEqSmulD
+module
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.SmoothDifferentialGeneratorTwoParameters
+public import Nyll.SchemeTheory.RingTheory.Smooth.RingHomFormallySmoothFormallyUnramifiedEval2RingHomUniqueEqSmulD
 
 /-!
 # Ring Hom formally Smooth and formally Unramified eval2 Ring Hom of maximal Ideal eq span
 pair
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

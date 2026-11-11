@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.Algebra.Algebra.Pi
+module
+
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.Algebra.Algebra.Pi
 
 /-! # Concrete splitting of a reduced finite algebra over an algebraically closed field -/
+
+@[expose] public section
 
 noncomputable section
 

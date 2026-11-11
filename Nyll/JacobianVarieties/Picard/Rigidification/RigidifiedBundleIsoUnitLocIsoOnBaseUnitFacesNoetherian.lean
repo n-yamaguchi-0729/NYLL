@@ -10,36 +10,40 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.RingTheory.LocalRing.Defs
-import Mathlib.RingTheory.Noetherian.Defs
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionFinitePresentationIff
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.OpenImmersionMonoLiftIsArtinianRingIsLocallyNoetherian
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoOpenImmersion
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundlePullbackIsoUnit
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundlePullbackOneIsoUnit
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeProdStrCommRing
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.RingTheory.LocalRing.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionFinitePresentationIff
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.OpenImmersionMonoLiftIsArtinianRingIsLocallyNoetherian
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.IsoOpenImmersion
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundlePullbackIsoUnit
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundlePullbackOneIsoUnit
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeProdStrCommRing
 
 /-!
 # The noetherian unit-face criterion
 
 Infinitesimal lifting makes the closed triviality locus open, then connected fibres make it all.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

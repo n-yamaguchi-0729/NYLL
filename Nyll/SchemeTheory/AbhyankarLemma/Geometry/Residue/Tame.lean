@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # Tame inertia forces a separable residue extension
@@ -15,6 +17,8 @@ lemma.  It works at an arbitrary nonzero maximal ideal of a finite Galois
 extension of Dedekind domains; no completeness or Henselian hypothesis is
 used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,22 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Nilpotent.Basic
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.Algebra.Group.Units.Equiv
-import Mathlib.Tactic.LinearCombination
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
+module
+
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Nilpotent.Basic
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.SchemeTheory.Modules.Frames.FrameTransitions
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Injectivity of deformation classes from changes of local frames.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

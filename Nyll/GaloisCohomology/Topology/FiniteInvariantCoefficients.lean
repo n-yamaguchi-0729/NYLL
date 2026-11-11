@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Continuous.TopRep
-import Mathlib.RingTheory.Finiteness.Cardinality
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.DiscreteSubset
-import Mathlib.GroupTheory.FiniteAbelian.Basic
-import Mathlib.GroupTheory.Sylow
-import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Mathlib.RepresentationTheory.Continuous.TopRep
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.DiscreteSubset
+public import Mathlib.GroupTheory.FiniteAbelian.Basic
+public import Mathlib.GroupTheory.Sylow
+public import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Finite invariant coefficients in discrete continuous representations
@@ -21,6 +23,8 @@ discrete continuous representation lies in a finite invariant submodule.
 The construction reuses finite compact images and the existing finiteness
 theorem for spans over finite rings.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v

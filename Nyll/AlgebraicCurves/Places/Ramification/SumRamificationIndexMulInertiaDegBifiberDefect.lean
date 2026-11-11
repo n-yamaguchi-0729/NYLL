@@ -10,29 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.GroupTheory.GroupAction.Quotient
-import Mathlib.GroupTheory.Index
-import Mathlib.Data.Set.Card
-import Mathlib.Tactic.Group
-import Mathlib.Tactic.Ring
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Normal.Basic
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.Restriction.RestrictEq
-import Nyll.AlgebraicCurves.Places.Restriction.AlgEquivSmulEqRestrictEq
-import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
-import Nyll.AlgebraicCurves.Places.Ramification.RamificationIndexEqRestrictEq
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqRestrictEq
-import Nyll.AlgebraicCurves.Places.Ramification.CardFiberOverMulRamificationIndexMulInertiaDeg
-import Nyll.AlgebraicCurves.Places.Ramification.RamificationIndexComp
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegAlongComp
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+module
+
+public import Nyll.ProCGroups.GroupTheory.MulActionNcardOrbitInterOrbitMulCard
+public import Mathlib.GroupTheory.GroupAction.Quotient
+public import Mathlib.GroupTheory.Index
+public import Mathlib.Data.Set.Card
+public import Mathlib.Tactic.Group
+public import Mathlib.Tactic.Ring
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Normal.Basic
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.Restriction.RestrictEq
+public import Nyll.AlgebraicCurves.Places.Restriction.AlgEquivSmulEqRestrictEq
+public import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
+public import Nyll.AlgebraicCurves.Places.Ramification.RamificationIndexEqRestrictEq
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqRestrictEq
+public import Nyll.AlgebraicCurves.Places.Ramification.CardFiberOverMulRamificationIndexMulInertiaDeg
+public import Nyll.AlgebraicCurves.Places.Ramification.RamificationIndexComp
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegAlongComp
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
 
 /-!
 # Place sum ramification Index mul inertia Deg bifiber defect
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -45,11 +50,9 @@ namespace WK2ADev2
 section Helpers
 
 private theorem card_eq_mul_of_card_fiber {α β : Type*} [Finite α] [Finite β] (f : α → β) (c : ℕ)
-    (hc : ∀ b, Nat.card {a // f a = b} = c) : Nat.card α = Nat.card β * c := by
-  classical
-  have := Fintype.ofFinite β
-  rw [Nat.card_congr (Equiv.sigmaFiberEquiv f).symm, Nat.card_sigma, Finset.sum_congr rfl
-    (fun b _ => hc b), Finset.sum_const, Finset.card_univ, smul_eq_mul, Nat.card_eq_fintype_card]
+    (hc : ∀ b, Nat.card {a // f a = b} = c) : Nat.card α = Nat.card β * c :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  MulAction_ncard_orbit_inter_orbit_mul_card.S11Orbit.card_eq_mul_of_card_fiber f c hc
 
 private theorem card_eq_sum_card_fiber {α β : Type*} [Finite α] [Fintype β] (f : α → β) :
     Nat.card α = ∑ b : β, Nat.card {a // f a = b} := by
@@ -58,74 +61,28 @@ private theorem card_eq_sum_card_fiber {α β : Type*} [Finite α] [Fintype β] 
 private theorem card_preimage_eq_mul_of_card_fiber {α β : Type*} [Finite α] [Finite β] (f : α → β)
   (c : ℕ)
     (hc : ∀ b, Nat.card {a // f a = b} = c) (t : Set β) :
-    Nat.card {a // f a ∈ t} = Nat.card t * c := by
-  refine card_eq_mul_of_card_fiber (fun a : {a // f a ∈ t} => (⟨f a.1, a.2⟩ : t)) c ?_
-  rintro ⟨b, hb⟩
-  rw [← hc b]
-  exact Nat.card_congr
-    { toFun := fun a => ⟨a.1.1, congrArg Subtype.val a.2⟩
-      invFun := fun a => ⟨⟨a.1, show f a.1 ∈ t by rw [a.2]; exact hb⟩, Subtype.ext a.2⟩
-      left_inv := fun a => by ext; rfl
-      right_inv := fun a => by ext; rfl }
+    Nat.card {a // f a ∈ t} = Nat.card t * c :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  MulAction_ncard_orbit_inter_orbit_mul_card.S11Orbit.card_preimage_eq_mul_of_card_fiber f c hc t
 
 variable {G : Type*} [Group G] {X : Type*} [MulAction G X]
 
 private theorem card_fiber_smul_eq (x : X) (g₀ : G) :
-    Nat.card {g : G // g • x = g₀ • x} = Nat.card (stabilizer G x) := by
-  refine Nat.card_congr
-    { toFun := fun g => ⟨g₀⁻¹ * g.1, by rw [mem_stabilizer_iff, mul_smul, g.2, inv_smul_smul]⟩
-      invFun := fun s => ⟨g₀ * s.1, by rw [mul_smul, s.2]⟩
-      left_inv := fun g => Subtype.ext (mul_inv_cancel_left g₀ g.1)
-      right_inv := fun s => Subtype.ext (inv_mul_cancel_left g₀ s.1) }
+    Nat.card {g : G // g • x = g₀ • x} = Nat.card (stabilizer G x) :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  MulAction_ncard_orbit_inter_orbit_mul_card.S11Orbit.card_fiber_smul_eq x g₀
 
 private theorem card_smul_mem_eq [Finite G] (H : Subgroup G) (x : X) (B : Set X) :
-    Nat.card {h : H // (h : G) • x ∈ B} = (orbit H x ∩ B).ncard * Nat.card (stabilizer H x) := by
-  have : Finite (orbit H x) := Set.finite_range _ |>.to_subtype
-  have hfib : ∀ o : orbit H x, Nat.card {h : H // (⟨h • x, mem_orbit x h⟩ : orbit H x) = o} =
-      Nat.card (stabilizer H x) := by
-    rintro ⟨_, ⟨h₀, rfl⟩⟩
-    rw [← card_fiber_smul_eq x h₀]
-    exact Nat.card_congr (Equiv.subtypeEquivRight fun h => by simp [Subtype.ext_iff])
-  have := card_preimage_eq_mul_of_card_fiber (fun h : H => (⟨h • x, mem_orbit x h⟩ : orbit H x))
-    (Nat.card (stabilizer H x)) hfib {o | (o : X) ∈ B}
-  rw [← Nat.card_coe_set_eq]
-  have E : ↥(orbit H x ∩ B) ≃ ↥{o : orbit H x | (o : X) ∈ B} :=
-    { toFun := fun y => ⟨⟨y.1, y.2.1⟩, y.2.2⟩
-      invFun := fun o => ⟨o.1.1, o.1.2, o.2⟩
-      left_inv := fun y => rfl
-      right_inv := fun o => rfl }
-  rw [Nat.card_congr E]
-  exact this
+    Nat.card {h : H // (h : G) • x ∈ B} = (orbit H x ∩ B).ncard * Nat.card (stabilizer H x) :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  MulAction_ncard_orbit_inter_orbit_mul_card.S11Orbit.card_smul_mem_eq H x B
 
 private theorem card_pair_set [Finite G] (H₁ H₂ : Subgroup G) (x₁ x₂ : X) :
     Nat.card {p : H₁ × H₂ // (p.1 : G) • x₁ = (p.2 : G) • x₂} =
       (orbit H₁ x₁ ∩ orbit H₂ x₂).ncard * Nat.card (stabilizer H₂ x₂)
-        * Nat.card (stabilizer H₁ x₁) := by
-  let M := {h₂ : H₂ // (h₂ : G) • x₂ ∈ orbit H₁ x₁}
-  have hM : Nat.card M = (orbit H₁ x₁ ∩ orbit H₂ x₂).ncard * Nat.card (stabilizer H₂ x₂) := by
-    rw [Set.inter_comm]; exact card_smul_mem_eq H₂ x₂ (orbit H₁ x₁)
-  rw [← hM]
-  refine card_eq_mul_of_card_fiber
-    (fun a : {p : H₁ × H₂ // (p.1 : G) • x₁ = (p.2 : G) • x₂} =>
-      (⟨a.1.2, ⟨a.1.1, a.2⟩⟩ : M)) _ ?_
-  rintro ⟨h₂, ⟨h₁, hh⟩⟩
-  have hh' : (h₁ : G) • x₁ = (h₂ : G) • x₂ := hh
-  rw [← card_fiber_smul_eq x₁ (h₁ : H₁)]
-  refine Nat.card_congr
-    { toFun := fun a => ⟨a.1.1.1, ?_⟩
-      invFun := fun h => ⟨⟨(h.1, h₂), ?_⟩, rfl⟩
-      left_inv := ?_
-      right_inv := ?_ }
-  · have e2 : a.1.1.2 = h₂ := congrArg (fun m : M => (m : H₂)) a.2
-    change ((a.1.1.1 : H₁) : G) • x₁ = ((h₁ : H₁) : G) • x₁
-    rw [hh']
-    exact a.1.2.trans (by rw [e2])
-  · change ((h.1 : H₁) : G) • x₁ = (h₂ : G) • x₂
-    rw [← hh']; exact h.2
-  · rintro ⟨⟨⟨a₁, a₂⟩, ha⟩, ha'⟩
-    have e2 : a₂ = h₂ := congrArg (fun m : M => (m : H₂)) ha'
-    subst e2; rfl
-  · intro h; rfl
+        * Nat.card (stabilizer H₁ x₁) :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  MulAction_ncard_orbit_inter_orbit_mul_card.S11Orbit.card_pair_set H₁ H₂ x₁ x₂
 
 end Helpers
 
@@ -254,7 +211,7 @@ private theorem card_pairA_eq [Finite G] (H₁ H₂ : Subgroup G) (x₁ x₂ : X
     · rw [ite_eq_left ⟨ht, hP⟩]
       obtain ⟨h₂, hh₂, h₁, hh₁, hg⟩ := hP
       have hbase : ((⟨h₂⁻¹, H₂.inv_mem hh₂⟩ : H₂) : G)⁻¹ * ((⟨h₁, hh₁⟩ : H₁) : G) = g := by
-        simp [hg]
+        rw [hg, inv_inv]
       rw [← card_fiber_psi_eq_of_base H₁ H₂ ⟨h₁, hh₁⟩ ⟨h₂⁻¹, H₂.inv_mem hh₂⟩ hbase]
       refine Nat.card_congr
         { toFun := fun a => ⟨a.1.1, a.2⟩
@@ -589,7 +546,7 @@ private theorem cover_disjoint_of_index [Finite G] (H₁ H₂ : Subgroup G) (s :
     · rw [ite_eq_left hP]
       obtain ⟨h₂, hh₂, h₁, hh₁, hg⟩ := hP
       exact (card_fiber_psi_eq_of_base (g := g) H₁ H₂ ⟨h₁, hh₁⟩ ⟨h₂⁻¹, H₂.inv_mem hh₂⟩
-        (by simp [hg])).symm
+        (by rw [hg, inv_inv])).symm
     · rw [ite_eq_right hP]
       exact (card_fiber_psi_eq_zero H₁ H₂ hP).symm
   have hD2 : Nat.card {g : G // ∃ h₂ ∈ H₂, ∃ h₁ ∈ H₁, g = h₂ * s⁻¹ * h₁} * Nat.card H₂
@@ -745,9 +702,6 @@ variable (K : Type*) [Field K] [Algebra K F] [Algebra K M] [IsScalarTower K F M]
 attribute [local instance] galAction
 
 variable {K F M}
-
-private theorem gal_smul_def (g : M ≃ₐ[F] M) (W : Place K M) :
-    g • W = SemilinearAut.ofAlgAut (g.restrictScalars K) • W := rfl
 
 variable {L : Type*} [Field L] [Algebra F L] [Algebra L M] [IsScalarTower F L M]
 

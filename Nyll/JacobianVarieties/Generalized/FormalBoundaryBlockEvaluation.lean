@@ -4,17 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.FormalProductFieldSplitting
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.TupleOfSplitDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqProdKerGraphSupportedIn
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
-import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalEmbeddingLiftAlgebra
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
-import Mathlib.Algebra.BigOperators.Fin
-import Nyll.AlgebraicCurves.Divisors.Degree.TameBoundaryGroupDifference
+module
+
+public import Nyll.SchemeTheory.Normalization.FormalProductFieldSplitting
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.TupleOfSplitDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.IEqProdKerGraphSupportedIn
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+public import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalEmbeddingLiftAlgebra
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
+public import Mathlib.Algebra.BigOperators.Fin
+public import Nyll.AlgebraicCurves.Divisors.Degree.TameBoundaryGroupDifference
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # Actual formal tuple and sum of the completed boundary Cartier block
 
@@ -25,6 +33,8 @@ of the original divisor determines its number of labels, and the represented
 sum is evaluated on that tuple. No tuple ideal or divisor-sum comparison is
 assumed in this calculation.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -279,7 +289,8 @@ private theorem formal_boundary_block_tuple_and_sum
       s.tupleMap_toBase s.tuple_ideal (commGroupRelativeLaw G) q s.sum s.tuple_sum
       t xs A hA hIopen
 
-private def boundaryScalarPointMap
+/-- The contravariant map of scalar points induced by an algebra homomorphism. -/
+def boundaryScalarPointMap
     {K A B : Type u} [CommRing K] [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B] (f : A →ₐ[K] B) :
     Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K B))) ⟶
@@ -450,7 +461,8 @@ private def boundaryPrecompHom
   map_one' := MonObj.comp_one f
   map_mul' p q := MonObj.comp_mul f p q
 
-private theorem laurent_coefficient_tower
+/-- The completed-base tower expressed using the Laurent coefficient algebra action. -/
+theorem laurent_coefficient_tower
     {K E : Type u} [Field K] [Field E] [Algebra K E]
     [Algebra E (LaurentSeries K)] [IsScalarTower K E (LaurentSeries K)] :
     @IsScalarTower K E (LaurentSeries K)

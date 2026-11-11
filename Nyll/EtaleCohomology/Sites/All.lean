@@ -28,6 +28,7 @@ import Nyll.EtaleCohomology.Sites.MateComparison
 import Nyll.EtaleCohomology.Sites.ModuleSetComparison
 import Nyll.EtaleCohomology.Sites.ModuleConstant
 import Nyll.EtaleCohomology.Sites.ConstantPullback
+import Nyll.EtaleCohomology.Sites.ConstantPullbackSections
 import Nyll.EtaleCohomology.Sites.PullbackComposition
 import Nyll.EtaleCohomology.Sites.PullbackStalks
 import Nyll.EtaleCohomology.Sites.ExtensionByZero
@@ -134,3 +135,11 @@ import Nyll.EtaleCohomology.Sites.GeometricPullbackSections
 import Nyll.EtaleCohomology.Sites.PointConstantFiber
 import Nyll.EtaleCohomology.Sites.PointSkyscraperCoefficients
 import Nyll.EtaleCohomology.Sites.ProperGeometricFiberSections
+import Nyll.EtaleCohomology.Sites.EtaleRestrictionGeometricStalks
+import Nyll.EtaleCohomology.Sites.EtaleRestrictionRepresentedBaseChange
+import Nyll.EtaleCohomology.Sites.PullbackEquivalence
+import Nyll.EtaleCohomology.Sites.EtaleRestrictionGluing
+import Nyll.EtaleCohomology.Sites.EtaleIntegralAffineCover
+import Nyll.EtaleCohomology.Sites.ConstantPullbackCompositionAcrossSites
+import Nyll.EtaleCohomology.Sites.ConstantModuleLocalSections
+import Nyll.EtaleCohomology.Sites.GeometricallyConnectedUnit

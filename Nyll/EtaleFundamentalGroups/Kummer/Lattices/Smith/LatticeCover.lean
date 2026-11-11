@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.LinearAlgebra.FreeModule.Finite.Quotient
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Quotient
 
 /-!
 # Smith coordinates for a finite-index lattice cover
@@ -15,6 +17,8 @@ integer lattices is diagonal.  The same Smith choice identifies the quotient
 with a product of cyclic groups, while functoriality of additive monoid
 algebras turns the inclusion into a commutative square of algebra maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

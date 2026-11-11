@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.ConstantMorphism
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Sites.ConstantPullback
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleCohomology.Constructible.ConstantMorphism
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Sites.ConstantPullback
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Kernels and cokernels of finite type locally constant sheaves
@@ -22,6 +24,8 @@ The finite local models of the actual sheaf morphism give the kernel and
 cokernel models. Noetherian coefficients are needed for kernels; cokernels
 are finite type over any commutative ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

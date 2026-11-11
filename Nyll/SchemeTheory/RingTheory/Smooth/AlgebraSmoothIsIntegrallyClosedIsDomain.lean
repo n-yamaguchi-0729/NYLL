@@ -10,24 +10,28 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.SmoothAtPrimeNormality
+module
 
-import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+public import Nyll.SchemeTheory.RingTheory.Descent.SmoothAtPrimeNormality
+
+public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 
 /-!
 # Algebra Smooth is Integrally Closed of is Domain
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs
 namespace Algebra_Smooth_isIntegrallyClosed_of_isDomain
 
-universe u
+universe u v
 
 theorem _root_.Algebra.Smooth.isIntegrallyClosed_of_isDomain (R : Type u) [CommRing R] [IsDomain R]
   [IsIntegrallyClosed R]
-    (S : Type u) [CommRing S] [IsDomain S] [Algebra R S] [Algebra.Smooth R S] : IsIntegrallyClosed
+    (S : Type v) [CommRing S] [IsDomain S] [Algebra R S] [Algebra.Smooth R S] : IsIntegrallyClosed
       S := by
   apply IsIntegrallyClosed.of_localization_maximal
   intro p _ hp

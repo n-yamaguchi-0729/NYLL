@@ -10,11 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.MemSubMemNonunits
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.MemSubMemNonunits
+public import Nyll.ValuedFieldTheory.Valuation.Subring.ValuationMulEqOneSupEqTop
 
 /-!
 # Valuation Subring exists sub mem nonunits of finrank le card
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -135,73 +140,11 @@ theorem sum_ne_zero (hV : V.comap (algebraMap F F') = O) (hW : W.comap (algebraM
   rw [hHW] at hlowW
   exact lt_irrefl 1 hlowW
 
+open ValuationSubring_exists_valuation_mul_eq_one_of_forall_sup_eq_top.ValuationSubring in
+/-- Compatibility form of valuation-ring incomparability over an algebraic extension. -/
 theorem eq_of_le [Algebra.IsAlgebraic F F'] (hV : V.comap (algebraMap F F') = O)
-    (hW : W.comap (algebraMap F F') = O) (hVW : V ≤ W) : V = W := by
-  classical
-  refine le_antisymm hVW fun x hxW => ?_
-  by_contra hxV
-  have hx0 : x ≠ 0 := by
-    rintro rfl
-    exact hxV (ValuationSubring.zero_mem V)
-  set y : F' := x⁻¹ with hy
-  have hyV : y ∈ V := (V.mem_or_inv_mem x).resolve_left hxV
-  have hyV1 : V.valuation y < 1 := by
-    rw [← ValuationSubring.mem_nonunits_iff, ValuationSubring.mem_nonunits_iff_or]
-    right
-    rw [hy, inv_inv]
-    exact hxV
-  have hyW1 : W.valuation y = 1 := by
-    have h1 : W.valuation x ≤ 1 := (W.valuation_le_one_iff x).mpr hxW
-    have h2 : W.valuation y ≤ 1 := (W.valuation_le_one_iff y).mpr (hVW hyV)
-    rw [hy, map_inv₀] at h2 ⊢
-    have hne : W.valuation x ≠ 0 := (Valuation.ne_zero_iff _).mpr hx0
-    have h3 : 1 ≤ W.valuation x := (inv_le_one₀ (zero_lt_iff.mpr hne)).mp h2
-    rw [le_antisymm h1 h3, inv_one]
-  obtain ⟨p, hp0, hpy⟩ := Algebra.IsAlgebraic.isAlgebraic (R := F) y
-  obtain ⟨k0, hk0, hmax⟩ := Finset.exists_max_image p.support
-    (fun k => O.valuation (p.coeff k)) (Polynomial.support_nonempty.mpr hp0)
-  have hc0 : p.coeff k0 ≠ 0 := Polynomial.mem_support_iff.mp hk0
-  have hv0 : O.valuation (p.coeff k0) ≠ 0 := (Valuation.ne_zero_iff _).mpr hc0
-  set c : ℕ → F := fun k => (p.coeff k0)⁻¹ * p.coeff k with hc
-  have hcO : ∀ k, c k ∈ O := by
-    intro k
-    rw [← O.valuation_le_one_iff]
-    simp only [hc, map_mul, map_inv₀]
-    by_cases hk : k ∈ p.support
-    · calc (O.valuation (p.coeff k0))⁻¹ * O.valuation (p.coeff k)
-          ≤ (O.valuation (p.coeff k0))⁻¹ * O.valuation (p.coeff k0) :=
-            mul_le_mul' le_rfl (hmax k hk)
-        _ = 1 := inv_mul_cancel₀ hv0
-    · rw [Polynomial.notMem_support_iff.mp hk, map_zero, mul_zero]
-      exact zero_le
-  have hck0 : O.valuation (c k0) = 1 := by
-    simp only [hc, map_mul, map_inv₀]
-    exact inv_mul_cancel₀ hv0
-  have hex : ∃ k, O.valuation (c k) = 1 := ⟨k0, hck0⟩
-  set j := Nat.find hex with hjdef
-  have hj : O.valuation (c j) = 1 := Nat.find_spec hex
-  have hlow : ∀ k < j, O.valuation (c k) < 1 := fun k hk =>
-    lt_of_le_of_ne ((O.valuation_le_one_iff _).mpr (hcO k)) (Nat.find_min hex hk)
-  have hcj0 : c j ≠ 0 := by
-    intro h
-    rw [h, map_zero] at hj
-    exact zero_ne_one hj
-  have hpj : p.coeff j ≠ 0 := by
-    intro h
-    apply hcj0
-    simp only [hc, h, mul_zero]
-  have hjN : j < p.natDegree + 1 := Nat.lt_succ_of_le (Polynomial.le_natDegree_of_ne_zero hpj)
-  have hrel : ∑ k ∈ Finset.range (p.natDegree + 1), algebraMap F F' (c k) * y ^ k = 0 := by
-    have h := hpy
-    rw [Polynomial.aeval_eq_sum_range' (Nat.lt_succ_self _) y] at h
-    have hfac : ∑ k ∈ Finset.range (p.natDegree + 1), algebraMap F F' (c k) * y ^ k =
-        algebraMap F F' (p.coeff k0)⁻¹ *
-          ∑ k ∈ Finset.range (p.natDegree + 1), p.coeff k • y ^ k := by
-      rw [Finset.mul_sum]
-      refine Finset.sum_congr rfl fun k _ => ?_
-      simp only [hc, map_mul, Algebra.smul_def, mul_assoc]
-    rw [hfac, h, mul_zero]
-  exact sum_ne_zero hV hW hVW hyV1 hyW1 c hcO hjN hj hlow hrel
+    (hW : W.comap (algebraMap F F') = O) (hVW : V ≤ W) : V = W :=
+  IndepMember.eq_of_le hV hW hVW
 
 end Incomparable
 

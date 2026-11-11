@@ -4,16 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMap
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusAbelTransition
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
-import Nyll.JacobianVarieties.Generalized.ModulusMapRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.DivisorRestrictionScalarExtension
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusRegularMap
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelTransition
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.DivisorRestrictionScalarExtension
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBaseSubscheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
 
 /-! # Enlarging a geometric modulus over the original field
 
@@ -21,6 +24,8 @@ The actual group factor for the smaller positive modulus and the actual
 modulus transition give the restricted factor. Its Abel identity supplies
 the geometric principal-divisor condition, retaining all multiplicities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

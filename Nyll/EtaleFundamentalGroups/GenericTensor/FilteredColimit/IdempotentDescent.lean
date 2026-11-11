@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -25,6 +27,8 @@ the original literal cocone images. The other tensor factor is arbitrary.
 This is finite idempotent data needed by the external Stacks tag 0BSR. It does
 not assert that prime fibers or their residue extensions have descended.
 -/
+
+@[expose] public section
 
 noncomputable section
 

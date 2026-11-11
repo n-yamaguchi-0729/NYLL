@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleEqualizer
-import Nyll.SchemeTheory.RingTheory.Descent.ModuleBaseChangeHomExt
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleEqualizer
+public import Nyll.SchemeTheory.RingTheory.Descent.ModuleBaseChangeHomExt
 
 /-!
 # Descent of module homomorphisms along a faithfully flat algebra
@@ -15,6 +17,8 @@ full-faithfulness statement.  An `S`-linear map between two extended modules
 comes from the base precisely when its values on the canonical generators
 belong to the target equalizer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

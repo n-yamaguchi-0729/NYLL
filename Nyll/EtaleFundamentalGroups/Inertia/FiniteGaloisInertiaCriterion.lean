@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Finite Galois quotients killing every original normalization inertia
@@ -16,6 +18,8 @@ restriction kills all inertia in an arbitrary Galois normalization exactly
 when every inertia group in the finite normalization is trivial. Neither
 normalization is assumed module finite over the base.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

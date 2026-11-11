@@ -4,7 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Branch
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.Field
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Index
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.RamificationInvariants
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
 
 /-!
 # Common-top prime obstructions
@@ -12,6 +18,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.Br
 Prime divisors of a nontrivial common primitive quotient obstruct
 coprimality of the two upper ramification indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

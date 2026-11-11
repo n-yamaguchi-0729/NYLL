@@ -22,27 +22,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.Determinant
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import Mathlib.RingTheory.Norm.Defs
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.Modules.Norm.NormFrames
-import Nyll.SchemeTheory.Modules.ExteriorPower.SheafificationAdjunctionUnitIotaMultiEqDetSmul
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnSheafificationAdjunctionUnitIotaMulti
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.ExteriorPower.Det
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.Determinant
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+public import Mathlib.RingTheory.Norm.Defs
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.Modules.Norm.NormFrames
+public import Nyll.SchemeTheory.Modules.ExteriorPower.SheafificationAdjunctionUnitIotaMultiEqDetSmul
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnSheafificationAdjunctionUnitIotaMulti
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.ExteriorPower.Det
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Modules.ExteriorPower.PresheafExteriorPower
 
 /-!
 # Scheme Modules exists is Frame On norm Module forall map eq norm smul of is Frame On
 preimage
 -/
+
+@[expose] public section
 
 section GeneralNormFrameTransition
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.RingTheory.Etale.StandardEtale
-import Mathlib.RingTheory.Unramified.LocalStructure
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.RingTheory.Etale.StandardEtale
+public import Mathlib.RingTheory.Unramified.LocalStructure
+public import Mathlib.SetTheory.Cardinal.Finite
 
 
 /-!
@@ -25,6 +27,8 @@ target field. No tensor-product decomposition or assumed fiber comparison
 is introduced. Finite-cover aggregation and conversion to cardinalities of
 scheme-theoretic geometric fibers remain subsequent steps toward 09Z0.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,21 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Tactic.Omega
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Push
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Push
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # Mv Polynomial le finrank piece of forall succ eq macaulay Pow of eventually eq
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -37,7 +43,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace GotzmannB29
 
-theorem lt_of_lt {n : ℕ} {K : Type} [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+theorem lt_of_lt {n : ℕ} {K : Type u} [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈ J)
     (H : ℕ → ℕ) (g : ℕ) (hg : 1 ≤ g) (hH : ∀ e, g ≤ e → H (e + 1) = Nat.macaulayPow e (H e))
     (d : ℕ) (hd : g ≤ d) (hlt : Module.finrank K (piece J d) < H d) :
@@ -56,7 +62,7 @@ theorem lt_of_lt {n : ℕ} {K : Type} [Field K] (J : Ideal (MvPolynomial (Fin (n
         _ < Nat.macaulayPow e (H e) := Nat.macaulayPow_lt_macaulayPow_of_lt (by omega) (ih h)
         _ = H (e + 1) := (hH e (by omega)).symm
 
-theorem le_finrank_piece {n : ℕ} {K : Type} [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+theorem le_finrank_piece {n : ℕ} {K : Type u} [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈ J)
     (H : ℕ → ℕ) (g : ℕ) (hg : 1 ≤ g) (hH : ∀ e, g ≤ e → H (e + 1) = Nat.macaulayPow e (H e))
     (hev : ∃ D₀ : ℕ, ∀ e, D₀ ≤ e → Module.finrank K (piece J e) = H e)
@@ -74,7 +80,7 @@ open GotzmannB29 in
 theorem _root_.MvPolynomial.le_finrank_piece_of_forall_succ_eq_macaulayPow_of_eventually_eq
     (n g : ℕ) (hg : 1 ≤ g) (H : ℕ → ℕ)
     (hH : ∀ e : ℕ, g ≤ e → H (e + 1) = Nat.macaulayPow e (H e))
-    (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈ J)
     (hev : ∃ D : ℕ, ∀ e : ℕ, D ≤ e → Module.finrank K (piece J e) = H e) :
     ∀ d : ℕ, g ≤ d → H d ≤ Module.finrank K (piece J d) := by

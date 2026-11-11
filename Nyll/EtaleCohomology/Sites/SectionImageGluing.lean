@@ -5,8 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joël Riou, Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.Sheaf
+module
+
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Gluing a section in the local image of an injective sheaf morphism
@@ -16,6 +18,8 @@ This is the single-section version of the gluing argument in
 `Mathlib/CategoryTheory/Sites/LocallyBijective.lean` by Joël Riou.
 Only the image sieve of the specified section needs to cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

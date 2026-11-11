@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.SModEq.Basic
-import Mathlib.LinearAlgebra.SModEq.Pow
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Finiteness.Cardinality
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Nakayama
-import Mathlib.Tactic.Abel
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.SModEq.Basic
+public import Mathlib.LinearAlgebra.SModEq.Pow
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.Tactic.Abel
 
 /-!
 # Effectivity of finite adic module systems
@@ -36,6 +38,8 @@ sheaves; it does not assert Grothendieck existence on a proper scheme.
 
 Background: https://stacks.math.columbia.edu/tag/00M9.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
-import Nyll.EtaleFundamentalGroups.GaloisCategories.EquivalenceFunctoriality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.EquivalenceFunctoriality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Fundamental groups under proper separably closed constant extension
@@ -21,6 +23,8 @@ with this isomorphism, with the equalities of geometric points recorded explicit
 The automorphism-group argument also applies to disconnected schemes and to
 arbitrary field-valued points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

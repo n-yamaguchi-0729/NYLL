@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.Algebra.Module.LocalizedModule.Submodule
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.LocalProperties.FinitePresentation
-import Mathlib.RingTheory.LocalProperties.Submodule
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+module
+
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.LocalProperties.FinitePresentation
+public import Mathlib.RingTheory.LocalProperties.Submodule
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Module finite projective ker base Change of forall exists is Unit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -77,10 +81,14 @@ theorem _root_.Module.finite_projective_ker_baseChange_of_forall_exists_isUnit
     fun a => IsLocalizedModule.of_linearEquiv _ _ _
   have hf0 : ∀ (a : t) (x : A) (c : C0), f0 a (x ⊗ₜ c) = algebraMap A (L a) x ⊗ₜ c := by
     intro a x c
-    simp [f0, e0, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, Algebra.smul_def]
+    simp only [LinearEquiv.restrictScalars_toLinearMap, LinearMap.coe_comp,
+      LinearMap.coe_restrictScalars, LinearEquiv.coe_coe, Function.comp_apply, mk_apply,
+      AlgebraTensorModule.cancelBaseChange_tmul, Algebra.smul_def, mul_one, f0, e0]
   have hf1 : ∀ (a : t) (x : A) (c : C1), f1 a (x ⊗ₜ c) = algebraMap A (L a) x ⊗ₜ c := by
     intro a x c
-    simp [f1, e1, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, Algebra.smul_def]
+    simp only [LinearEquiv.restrictScalars_toLinearMap, LinearMap.coe_comp,
+      LinearMap.coe_restrictScalars, LinearEquiv.coe_coe, Function.comp_apply, mk_apply,
+      AlgebraTensorModule.cancelBaseChange_tmul, Algebra.smul_def, mul_one, f1, e1]
   have hmap : ∀ a : t, IsLocalizedModule.map (Submonoid.powers (a : A)) (f0 a) (f1 a) (δ.baseChange
     A) =
       (δ.baseChange (L a)).restrictScalars A := by
@@ -89,7 +97,9 @@ theorem _root_.Module.finite_projective_ker_baseChange_of_forall_exists_isUnit
     rw [IsLocalizedModule.map_comp]
     apply TensorProduct.AlgebraTensorModule.curry_injective
     ext x
-    simp [hf0, hf1, LinearMap.baseChange_tmul]
+    simp only [AlgebraTensorModule.curry_apply, LinearMap.restrictScalars_comp, curry_apply,
+      LinearMap.coe_comp, LinearMap.coe_restrictScalars, Function.comp_apply,
+      LinearMap.baseChange_tmul, hf1, map_one, LinearMap.restrictScalars_trans, hf0]
   let eF : ∀ a : t, (L a) ⊗[A] (A ⊗[R] F) ≃ₗ[A] (L a) ⊗[R] F :=
     fun a => (TensorProduct.AlgebraTensorModule.cancelBaseChange R A (L a) (L a) F).restrictScalars
       A
@@ -99,7 +109,9 @@ theorem _root_.Module.finite_projective_ker_baseChange_of_forall_exists_isUnit
     fun a => IsLocalizedModule.of_linearEquiv _ _ _
   have hfF : ∀ (a : t) (x : A) (c : F), fF a (x ⊗ₜ c) = algebraMap A (L a) x ⊗ₜ c := by
     intro a x c
-    simp [fF, eF, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, Algebra.smul_def]
+    simp only [LinearEquiv.restrictScalars_toLinearMap, LinearMap.coe_comp,
+      LinearMap.coe_restrictScalars, LinearEquiv.coe_coe, Function.comp_apply, mk_apply,
+      AlgebraTensorModule.cancelBaseChange_tmul, Algebra.smul_def, mul_one, fF, eF]
   have hmapΘ : ∀ a : t, IsLocalizedModule.map (Submonoid.powers (a : A)) (fF a) (f0 a)
     (Θ.baseChange A) =
       (Θ.baseChange (L a)).restrictScalars A := by
@@ -108,7 +120,9 @@ theorem _root_.Module.finite_projective_ker_baseChange_of_forall_exists_isUnit
     rw [IsLocalizedModule.map_comp]
     apply TensorProduct.AlgebraTensorModule.curry_injective
     ext x
-    simp [hf0, hfF, LinearMap.baseChange_tmul]
+    simp only [AlgebraTensorModule.curry_apply, LinearMap.restrictScalars_comp, curry_apply,
+      LinearMap.coe_comp, LinearMap.coe_restrictScalars, Function.comp_apply,
+      LinearMap.baseChange_tmul, hf0, map_one, LinearMap.restrictScalars_trans, hfF]
   let Kl : ∀ a : t, Submodule A ((L a) ⊗[R] C0) := fun a => (LinearMap.ker (δ.baseChange (L
     a))).restrictScalars A
   have hkerEq : ∀ a : t, LinearMap.ker (IsLocalizedModule.map (Submonoid.powers (a : A)) (f0 a) (f1

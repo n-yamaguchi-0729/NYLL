@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ExistingJacobianSheafRepresentation
-import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
-import Mathlib.CategoryTheory.Sites.IsSheafFor
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ExistingJacobianSheafRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
 
 /-!
 # The actual ordinary sheaf represents the existing unpointed group law
@@ -16,6 +19,8 @@ raw local class. Tensor products are therefore compatible with the already
 constructed relative group law, using separatedness of the actual fppf sheaf.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -23,6 +28,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.RelPicard AlgebraicGeometry.SmoothProperCurve
 open AlgebraicGeometry.GeneralizedJacobian NeronModelInfra GoodReductionJacobian
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace JacobianVarieties.Picard.Unpointed
 

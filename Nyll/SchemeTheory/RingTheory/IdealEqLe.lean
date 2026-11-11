@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Ideal eq of le of mem of mem minimal Primes iff not Mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

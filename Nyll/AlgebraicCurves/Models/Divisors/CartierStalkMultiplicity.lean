@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.StalkModulusComparison
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.SchemeTheory.Divisors.SubschemeStalk
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.StalkModulusComparison
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.SchemeTheory.Divisors.SubschemeStalk
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # Multiplicities of the actual Cartier modulus at closed points
@@ -18,6 +20,8 @@ multiplicity and identifies the actual modulus stalk with the corresponding
 truncated valuation ring. Congruence to one is exactly restriction to one under
 the original closed immersion's stalk map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.FilteredColimitFiniteDescent
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Limits.Types.Multiequalizer
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.FilteredColimitFiniteDescent
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Limits.Types.Multiequalizer
 
 /-!
 # Separated filtered colimits on quasi-compact étale objects
@@ -19,6 +21,8 @@ Local equality of two sections of a filtered presheaf colimit can be checked
 on finitely many members of an étale covering of a quasi-compact object.
 Finite descent for the colimit then implies equality of the sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

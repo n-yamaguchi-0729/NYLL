@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
-import Nyll.SchemeTheory.Etale.AffineFiniteSubalgebraRefinement
-import Nyll.SchemeTheory.Etale.LocalFactorOpenCover
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
-import Mathlib.Algebra.Ring.Subring.Basic
-import Mathlib.Topology.Sets.OpenCover
+module
+
+public import Nyll.SchemeTheory.Modules.Localization.GeneratedAlgebraLocalization
+public import Nyll.SchemeTheory.Etale.AffineFiniteSubalgebraRefinement
+public import Nyll.SchemeTheory.Etale.LocalFactorOpenCover
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.Topology.Sets.OpenCover
 
 /-!
 # Local factors of the generated model from actual chart subalgebras
@@ -25,6 +27,8 @@ local factors of the whole generated model through the original cover.
 Only the chosen base charts are used. There is no existence assumption for
 a global finite submodule, and no claim that its construction is complete.
 -/
+
+@[expose] public section
 
 noncomputable section
 

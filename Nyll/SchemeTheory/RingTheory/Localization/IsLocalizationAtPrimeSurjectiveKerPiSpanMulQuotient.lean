@@ -10,33 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.Data.Set.Image
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Mathlib.RingTheory.Finiteness.Ideal
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Coprime.Lemmas
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Finiteness.Finsupp
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.Algebra.Group.Pointwise.Set.Basic
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.Data.Set.Image
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Coprime.Lemmas
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Finiteness.Finsupp
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.Algebra.Group.Pointwise.Set.Basic
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Is Localization At Prime surjective and ker pi span mul quotient of module Finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -600,7 +604,6 @@ theorem _root_.IsLocalization.AtPrime.surjective_and_ker_pi_span_mul_quotient_of
           algebraMap A K (t * s - 1) * b * (algebraMap A K s)⁻¹ := by
         simp only [map_sub, map_mul, map_one]
         field_simp
-        try ring
       rw [this]
       exact mul_inv_mem_locSub k (𝔪 z) (key z ht hb) hs
     · intro g hg

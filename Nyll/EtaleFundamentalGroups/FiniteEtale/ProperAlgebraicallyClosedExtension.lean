@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionComparison
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionModel
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AlgebraicallyClosedConstantExtension
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Equivalence
-import Mathlib.CategoryTheory.EssentialImage
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.Tactic.CrossRefAttribute
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionComparison
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtensionModel
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AlgebraicallyClosedConstantExtension
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Equivalence
+public import Mathlib.CategoryTheory.EssentialImage
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.Tactic.CrossRefAttribute
 
 /-!
 # Finite étale invariance for proper schemes over algebraically closed fields
@@ -30,6 +32,8 @@ The forward functor is the native finite étale pullback along the original
 constant-extension projection. This proves Stacks Project, Lemma 58.9.3,
 https://stacks.math.columbia.edu/tag/0A49, including transcendental extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

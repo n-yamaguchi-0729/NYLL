@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.TameLaurentNormalization
-import Mathlib.RingTheory.PowerSeries.Expand
-import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.TameLaurentNormalization
+public import Mathlib.RingTheory.PowerSeries.Expand
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+public import Mathlib.Data.Fintype.EquivFin
 
 /-! # Root-of-unity automorphisms of the Laurent field
 
@@ -16,13 +18,16 @@ through its actual fraction field. Roots of unity fix every series in the
 corresponding power of the parameter, and all fractions of those series.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace PowerSeries
 
 variable {K : Type*} [Field K]
 
-private def unitRescaleAlgHom (a : K) : PowerSeries K →ₐ[K] PowerSeries K where
+/-- Rescaling the formal parameter defines an algebra endomorphism of power series. -/
+def unitRescaleAlgHom (a : K) : PowerSeries K →ₐ[K] PowerSeries K where
   __ := rescale a
   commutes' b := by
     change rescale a (C b) = C b

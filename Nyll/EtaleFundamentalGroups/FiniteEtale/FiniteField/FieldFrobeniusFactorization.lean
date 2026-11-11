@@ -3,8 +3,10 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Field Frobenius Factorization
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 A single Frobenius power sends every element of a finite purely inseparable
 extension into the original field.
 -/
+
+@[expose] public section
 
 noncomputable section
 open scoped BigOperators

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Basic
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Index
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.All
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Basic
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Index
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.All
 
 /-!
 # Abhyankar lemma: TameRamification

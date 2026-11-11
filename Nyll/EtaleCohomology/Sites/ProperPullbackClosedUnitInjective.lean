@@ -5,18 +5,20 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackClosedFiberStalks
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
-import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
-import Nyll.SchemeTheory.Morphisms.ProperHenselianClosedRestriction
-import Nyll.SchemeTheory.Topology.SpecializationCofinalSections
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackClosedFiberStalks
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
+public import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
+public import Nyll.SchemeTheory.Morphisms.ProperHenselianClosedRestriction
+public import Nyll.SchemeTheory.Topology.SpecializationCofinalSections
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Global injectivity of the pulled-back original closed-fiber unit
@@ -27,6 +29,8 @@ stalk maps are injective along that source's closed fiber, and those germs
 detect global sections. This uses the same original unit, without a new
 comparison with a different closed-fiber adjunction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

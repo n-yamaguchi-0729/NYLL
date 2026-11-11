@@ -159,12 +159,6 @@ private noncomputable def trDegZeroEquiv (e : k ≃+* K)
   ((trDivisorEquiv e he).addSubgroupMap (Divisor.degZero (K := k) (F := F))).trans
     (AddEquiv.addSubgroupCongr (trDivisorEquiv_map_degZero e he))
 
-private theorem trDegZeroEquiv_coe (e : k ≃+* K)
-    (he : algebraMap k F = (algebraMap K F).comp e.toRingHom)
-    (D : Divisor.degZero (K := k) (F := F)) :
-    ((trDegZeroEquiv e he D : Divisor.degZero (K := K) (F := F)) : Divisor K F) =
-      trDivisorEquiv e he D := rfl
-
 private theorem trDegZeroEquiv_map_principal (e : k ≃+* K)
     (he : algebraMap k F = (algebraMap K F).comp e.toRingHom) :
     ((Divisor.principal (K := k) (F := F)).addSubgroupOf (Divisor.degZero (K := k) (F := F))).map

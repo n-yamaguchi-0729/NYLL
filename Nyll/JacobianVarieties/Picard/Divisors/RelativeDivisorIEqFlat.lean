@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.Topology.LocallyConstant.Basic
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteFlat
-import Mathlib.Util.WithWeakNamespace
+module
+
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteFlat
+public import Mathlib.Util.WithWeakNamespace
 
 /-!
 # Extending a relative effective divisor over a discrete valuation ring
 -/
 
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,11 +10,9 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyConnectedDescendsAlongSurjective
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyConnectedFgSubalgebra
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyConnectedComp
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralIsIntegral
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataBaseChange
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataHomProjPreimageBasicOpenEq
 import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataIsAffineOpenLePreimage
@@ -55,7 +53,6 @@ import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyConnectedProperFlatBije
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyConnectedProperFlatGeometricallyReduced
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralBijectiveAlgebraMapSections
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralAlgClosedIsIntegralPullback
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralAlgClosed
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
 import Nyll.AlgebraicCurves.Geometry.Curves.IsDomainTensorSections
 import Nyll.AlgebraicCurves.Geometry.Curves.IsIntegralSmooth
@@ -70,3 +67,9 @@ import Nyll.AlgebraicCurves.Geometry.Curves.IsIsoOfBijectivePointsCharZero
 
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
 import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
+
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProductIntegral
+import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperComponents
+import Nyll.AlgebraicCurves.Geometry.Curves.FrobeniusComponentPointCount
+import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusClosureComparison
+import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusIso

@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
 
 /-!
 # Abelian Scheme Property Bundle bijective spec Iso inv comp app Top of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

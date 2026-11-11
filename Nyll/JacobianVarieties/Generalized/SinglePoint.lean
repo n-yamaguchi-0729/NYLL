@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorClasses
-import Nyll.AlgebraicCurves.Places.Evaluation.Value
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorClasses
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
 
 /-!
 # A reduced rational point as modulus
@@ -17,6 +19,8 @@ nonzero residue makes it congruent to one without changing its divisor. Thus
 the abstract degree-zero divisor class group with this modulus is the existing
 `Pic0`. This is an isomorphism of abstract groups, not of representing schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

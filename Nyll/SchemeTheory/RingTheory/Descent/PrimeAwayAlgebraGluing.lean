@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayPairGluing
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayPairGluing
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Extending algebra maps across a pair of principal opens
@@ -15,6 +17,8 @@ Flat Hartogs extension preserves the multiplicative structure: the algebra
 identities can be checked after the two principal localizations. These are
 the maps used to extend the actual completion-overlap isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

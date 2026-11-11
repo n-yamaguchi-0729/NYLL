@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.FppfGmRepresentable
-import Nyll.EtaleCohomology.Sites.Subcanonical
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.Algebra.Group.Units.Equiv
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.FppfGmRepresentable
+public import Nyll.EtaleCohomology.Sites.Subcanonical
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.Algebra.Group.Units.Equiv
 
 /-!
 # The actual multiplicative group on the small étale site
@@ -22,13 +24,16 @@ The power morphism below will be used in the étale Kummer sequence.
 This file does not assert its epimorphy or any higher cohomology vanishing.
 -/
 
+@[expose] public section
+
 noncomputable section
 universe u
 open AlgebraicGeometry CategoryTheory Limits Opposite
 
 namespace EtaleCohomology
 
-private def restrictBigEtaleAbelianSheaf (X : Scheme.{u}) :
+/-- Restriction of an abelian sheaf from the big to the small étale site. -/
+def restrictBigEtaleAbelianSheaf (X : Scheme.{u}) :
     Sheaf Scheme.etaleTopology AddCommGrpCat.{u} ⥤
       Sheaf X.smallEtaleTopology AddCommGrpCat.{u} := by
   have : (Scheme.Etale.forget X).LocallyCoverDense (Scheme.etaleTopology.over X) :=

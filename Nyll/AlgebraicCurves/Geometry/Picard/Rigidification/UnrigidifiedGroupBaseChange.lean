@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
 
 /-! # Scalar extension of the actual unrigidified Picard-zero group presheaf -/
+
+@[expose] public section
 
 noncomputable section
 

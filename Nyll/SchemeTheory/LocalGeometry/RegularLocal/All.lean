@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.DimensionOneRegularRing
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.DimensionOneRegularRing
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 
 /-! Canonical aggregate for SchemeTheory.LocalGeometry.RegularLocal. -/

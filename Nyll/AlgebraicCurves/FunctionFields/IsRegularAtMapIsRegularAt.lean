@@ -17,6 +17,7 @@ import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapNeTop
 import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
 import Nyll.AlgebraicCurves.Places.Differentials.IsRegularAtDAlgebraMap
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.SeparatingTranscendental
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Is Regular At map of forall is Regular At of constant Field Extension of is Alg Closed
@@ -57,18 +58,8 @@ open _root_.AlgebraicCurve
 section Ord
 variable {L E : Type*} [Field L] [Field E] [Algebra L E] (v : Place L E)
 
-theorem ord_nonneg_of_mem {f : E} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f := by
-  rcases eq_or_ne f 0 with rfl | hf0
-  · rw [v.ord_zero]
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨n, u, hu⟩ :=
-    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
-  have hf' : f = ((u : v.toValuationSubring) : E) * ((π : E) ^ (n : ℤ)) := by
-    have := congrArg (fun z : v.toValuationSubring => (z : E)) hu
-    simpa [zpow_natCast] using this
-  rw [hf', v.ord_unit_smul_zpow u hπ]
-  exact Int.natCast_nonneg n
+theorem ord_nonneg_of_mem {f : E} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f :=
+  _root_.AlgebraicCurve.Place.ord_nonneg_of_mem v hf
 
 theorem mem_of_ord_nonneg {f : E} (hf : f ≠ 0) (h : 0 ≤ v.ord f) : f ∈ v.toValuationSubring := by
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring

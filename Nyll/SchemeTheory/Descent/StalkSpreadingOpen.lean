@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.StalkSpreading
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Nyll.SchemeTheory.Descent.StalkSpreading
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Spreading a stalk morphism on an arbitrary scheme
@@ -16,6 +18,8 @@ produces a morphism on an actual open of the original scheme, with the
 original stalk factorization retained. No finiteness assumption on the
 ambient scheme is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

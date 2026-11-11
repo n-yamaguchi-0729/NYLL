@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.Etale.HenselianLocalGeometricSection
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-!
 # Canonical maps from the actual geometric stalk to étale neighborhoods
@@ -22,6 +24,8 @@ affine case agrees with the literal germ homomorphism.
 These maps define the comparison cocone needed in degree-zero continuity
 (Stacks Project, Theorem 59.53.1). No sheaf-continuity assertion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

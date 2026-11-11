@@ -10,11 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
 /-!
 # Scheme Modules Is Frame On exists Unique ihom Eval eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

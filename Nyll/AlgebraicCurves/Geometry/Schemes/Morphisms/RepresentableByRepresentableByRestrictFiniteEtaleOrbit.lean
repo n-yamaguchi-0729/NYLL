@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.RingHom.Flat
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectiveFiniteEtaleOrbit
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.RingHom.Flat
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectiveFiniteEtaleOrbit
 
 /-!
 # exists representable By of representable By restrict finite Etale of forall orbit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

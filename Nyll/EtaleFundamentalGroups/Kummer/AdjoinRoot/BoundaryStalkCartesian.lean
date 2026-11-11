@@ -4,33 +4,35 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryCodimensionOneTame
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkFieldFactors
-import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneBoundary
-import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
-import Nyll.SchemeTheory.Divisors.ConnectedComplement
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.Algebra.Ring.NonZeroDivisors
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.FieldTheory.Separable
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Closure
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryCodimensionOneTame
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkFieldFactors
+public import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneBoundary
+public import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
+public import Nyll.SchemeTheory.Divisors.ConnectedComplement
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Algebra.Ring.NonZeroDivisors
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Closure
 
 /-!
 # The actual Cartier-boundary stalk square for the standard root cover
@@ -49,6 +51,8 @@ Section 58.31 (tag `0BSE`), rather than only a commuting square.
 https://stacks.math.columbia.edu/tag/0BSE
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,19 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.Integral
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.Separable
-import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.DVRAlgebraMapMemFinite
+module
+
+public import Mathlib.RingTheory.Valuation.Integral
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.Separable
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.DVRAlgebraMapMemFinite
 
 /-!
 # Valuation Subring exists layer is Discrete Valuation Ring of finite of is Algebraic of
 irreducible
 -/
 
+@[expose] public section
+
 section ProofImplementation
+
+universe u v
 
 namespace AlgebraicCurves.Valuations.Proofs.DiscreteValuationLayer
 
@@ -30,8 +36,8 @@ open IsLocalRing
 
 namespace BDescL1
 
-theorem mem_of_isIntegral {L : Type} [Field L] (A : ValuationSubring L) {x : L} (hx : IsIntegral ↥A
-  x) : x ∈ A := by
+theorem mem_of_isIntegral {L : Type u} [Field L] (A : ValuationSubring L) {x : L}
+    (hx : IsIntegral ↥A x) : x ∈ A := by
   have hAint : A.valuation.Integers ↥A :=
     { hom_inj := Subtype.coe_injective
       map_le_one := fun a => (A.valuation_le_one_iff (a : L)).mpr a.2
@@ -39,24 +45,24 @@ theorem mem_of_isIntegral {L : Type} [Field L] (A : ValuationSubring L) {x : L} 
   have := hAint.mem_of_integral hx
   exact (A.valuation_le_one_iff x).mp ((Valuation.mem_integer_iff _ _).mp this)
 
-theorem mem_maximalIdeal_iff_inv_not_mem {L : Type} [Field L] (A : ValuationSubring L) (x : L) (hx
+theorem mem_maximalIdeal_iff_inv_not_mem {L : Type u} [Field L] (A : ValuationSubring L) (x : L) (hx
   : x ∈ A) (hx0 : x ≠ 0) :
     (⟨x, hx⟩ : ↥A) ∈ maximalIdeal ↥A ↔ x⁻¹ ∉ A := by
   rw [ValuationSubring.valuation_lt_one_iff, ← A.valuation_le_one_iff, map_inv₀, not_le]
   change A.valuation x < 1 ↔ 1 < (A.valuation x)⁻¹
   rw [one_lt_inv₀ (((map_ne_zero A.valuation).mpr hx0).bot_lt)]
 
-theorem residue_eq_zero_iff_inv_not_mem {L : Type} [Field L] (A : ValuationSubring L) (x : L) (hx :
-  x ∈ A) (hx0 : x ≠ 0) :
+theorem residue_eq_zero_iff_inv_not_mem {L : Type u} [Field L] (A : ValuationSubring L) (x : L)
+    (hx : x ∈ A) (hx0 : x ≠ 0) :
     IsLocalRing.residue ↥A ⟨x, hx⟩ = 0 ↔ x⁻¹ ∉ A := by
   rw [IsLocalRing.residue_eq_zero_iff, mem_maximalIdeal_iff_inv_not_mem A x hx hx0]
 
-theorem isUnit_of_inv_mem {L : Type} [Field L] (B : Subring L) (x : L) (hx : x ∈ B) (hxi : x⁻¹ ∈ B)
-  (hx0 : x ≠ 0) :
+theorem isUnit_of_inv_mem {L : Type u} [Field L] (B : Subring L) (x : L)
+    (hx : x ∈ B) (hxi : x⁻¹ ∈ B) (hx0 : x ≠ 0) :
     IsUnit (⟨x, hx⟩ : ↥B) :=
   ⟨⟨⟨x, hx⟩, ⟨x⁻¹, hxi⟩, Subtype.ext (mul_inv_cancel₀ hx0), Subtype.ext (inv_mul_cancel₀ hx0)⟩, rfl⟩
 
-theorem inv_mem_of_isUnit {L : Type} [Field L] (B : Subring L) (x : ↥B) (hx : IsUnit x) : ((x :
+theorem inv_mem_of_isUnit {L : Type u} [Field L] (B : Subring L) (x : ↥B) (hx : IsUnit x) : ((x :
   L))⁻¹ ∈ B := by
   obtain ⟨u, rfl⟩ := hx
   have h : ((u : ↥B) : L) * (((u⁻¹ : (↥B)ˣ) : ↥B) : L) = 1 := by
@@ -71,8 +77,8 @@ namespace GenLoc
 open IsLocalRing
 
 theorem exists_frac_unit_of_mem_valuationSubring
-    {B : Type} [CommRing B] [IsDedekindDomain B]
-    {E : Type} [Field E] [Algebra B E] [IsFractionRing B E]
+    {B : Type u} [CommRing B] [IsDedekindDomain B]
+    {E : Type v} [Field E] [Algebra B E] [IsFractionRing B E]
     (V : ValuationSubring E) (hBV : ∀ b : B, algebraMap B E b ∈ V) (hV : V ≠ ⊤)
     (c : E) (hc : c ∈ V) :
     ∃ b s : B, s ≠ 0 ∧ algebraMap B E s ∉ V.nonunits ∧ c * algebraMap B E s = algebraMap B E b := by
@@ -153,7 +159,7 @@ open _root_.IsLocalRing
 
 open _root_.AlgebraicCurves.Valuations.Proofs.DiscreteValuationLayer.BDescL1 in
 theorem exists_layer_isDiscreteValuationRing_of_finite_of_isAlgebraic_of_irreducible
-    {L : Type} [Field L] [CharZero L] (A : ValuationSubring L)
+    {L : Type u} [Field L] [CharZero L] (A : ValuationSubring L)
     (C' : Subring L) (hC'A : ∀ c : L, c ∈ C' → c ∈ A) [IsDiscreteValuationRing ↥C'] (ϖ' : ↥C')
       (hϖ'irr : Irreducible ϖ')
     (hϖ' : ∀ d : ↥C', IsLocalRing.residue ↥A ⟨(d : L), hC'A d d.2⟩ = 0 ↔ ∃ d' : ↥C', d = ϖ' * d')
@@ -359,9 +365,9 @@ theorem exists_layer_isDiscreteValuationRing_of_finite_of_isAlgebraic_of_irreduc
   have hRC'' : R ≤ C'' := by
     rintro r ⟨x, hx, rfl⟩
     exact (hmemC'' _).mpr ⟨hBA x hx, x.2⟩
-  have hRfin : (letI : Algebra ↥C' ↥R := (Subring.inclusion hC'R).toAlgebra; Module.Finite ↥C' ↥R)
+  have hRfin : (let : Algebra ↥C' ↥R := (Subring.inclusion hC'R).toAlgebra; Module.Finite ↥C' ↥R)
     := by
-    let algCR : Algebra ↥C' ↥R := (Subring.inclusion hC'R).toAlgebra
+    intro algCR
     let g : ↥B →ₐ[↥C'] ↥R :=
       { toFun := fun x => ⟨((x : ↥E) : L), ⟨(x : ↥E), x.2, rfl⟩⟩
         map_one' := Subtype.ext rfl

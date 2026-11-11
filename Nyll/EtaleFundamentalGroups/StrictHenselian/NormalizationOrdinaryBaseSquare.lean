@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationOrdinaryGenericGalois
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedSubfield
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendedFiberGaloisAction
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGaloisPoint
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationOrdinaryGenericGalois
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedSubfield
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendedFiberGaloisAction
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGaloisPoint
 
 /-!
 # The actual ordinary-henselization map to the original base
@@ -18,6 +20,8 @@ ordinary generic point with the canonical original fraction point. The
 induced fundamental-group map sends every original decomposition element
 to the same original ambient Galois image, as checked on geometric points.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,13 +41,13 @@ private theorem transportedFundamentalGroupHom_eq_fieldSource
     (hpoint : s ≫ f = ξ F Ω ≫ j) (a : π₁ᵉᵗ(s)) (σ : Gal(Ω/F))
     (ρ : Ω →+* Ω) (hσ : σ.toRingHom = ρ)
     (ha : ∀ (X : FiniteEtale S) (x : (fiber s).obj X),
-      (fiberObjEquivHom s X (a.hom.app X x)).left =
+      (fiberObjEquivHom s X (a.asIso.hom.app X x)).left =
         Spec.map (CommRingCat.ofHom ρ) ≫ (fiberObjEquivHom s X x).left) :
     continuousConjAut (eqToIso (congrArg fiber hpoint)) (fundamentalGroupHom f s a) =
       fieldSourceAbsoluteGaloisHom F Ω j σ := by
   have hsource (Y : FiniteEtale (Spec (.of F))) (y : (fib F Ω).obj Y) :
       (fiberObjEquivHom (ξ F Ω) Y
-        ((suppliedGaloisEquivFundamentalGroup F Ω σ).hom.app Y y)).left =
+        ((suppliedGaloisEquivFundamentalGroup F Ω σ).asIso.hom.app Y y)).left =
         Spec.map (CommRingCat.ofHom ρ) ≫ (fiberObjEquivHom (ξ F Ω) Y y).left :=
     (suppliedGaloisEquivFundamentalGroup_point F Ω σ Y y).trans
       (congrArg (fun r : Ω →+* Ω => Spec.map (CommRingCat.ofHom r) ≫

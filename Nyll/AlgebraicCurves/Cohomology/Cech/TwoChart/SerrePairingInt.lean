@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.CupProduct
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
+module
+
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.CupProduct
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
 
 /-!
 The integral Serre pairing for Čech cochains on a two-chart cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

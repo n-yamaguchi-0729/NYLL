@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FreeAbelianCechRelations
-import Mathlib.Algebra.Category.Grp.Adjunctions
-import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Abelian
+module
+
+public import Nyll.EtaleCohomology.Classical.FreeAbelianCechRelations
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Sites.Abelian
 
 /-!
 # Exact free abelian Cech relations as sheaves
@@ -18,6 +20,8 @@ complex of presheaves. Exact sheafification preserves this complex.
 Consequently Cech cocycles with values in an injective abelian sheaf
 have primitives, with no assumption about Galois-cohomology comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantEtaleNeighborhood
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Operations
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantEtaleNeighborhood
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Operations
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Invariant.Galois
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Integral
 
 
 /-!
@@ -27,6 +29,8 @@ This supplies the finite-Galois principal-neighborhood prerequisite of 0BSU.
 The arbitrary infinite inertia restriction and localized filtered-colimit
 comparisons are separate statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

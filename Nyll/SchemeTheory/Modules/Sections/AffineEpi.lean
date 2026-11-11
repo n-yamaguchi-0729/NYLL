@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.EpiMono
-import Mathlib.CategoryTheory.Functor.EpiMono
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.EpiMono
+public import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # Surjectivity of actual affine sections of quasicoherent epimorphisms
@@ -23,6 +25,8 @@ Restriction to the spectrum of any affine open then gives surjectivity
 of the original section map on that open. The argument retains the
 original sheaf morphism and the canonical restriction comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

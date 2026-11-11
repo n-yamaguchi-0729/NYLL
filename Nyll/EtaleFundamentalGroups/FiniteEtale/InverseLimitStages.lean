@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFractions
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFractions
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 
 /-!
 # The stage categories inside the localization of models
@@ -16,6 +18,8 @@ cartesian refinement.  These identify the stagewise meaning of the
 localization universal property; the localization is not merely assigned a
 colimit name.
 -/
+
+@[expose] public section
 
 noncomputable section
 

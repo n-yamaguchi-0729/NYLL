@@ -5,16 +5,20 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 
 /-! # Equivariant comparisons along a monoidal functor tower
 
 Successive group and action comparisons give the actual composite group
 comparison and its equivariance. The namespace is retained for existing users.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v

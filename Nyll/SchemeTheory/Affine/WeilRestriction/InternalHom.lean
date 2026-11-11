@@ -10,6 +10,8 @@ public import Nyll.SchemeTheory.Affine.WeilRestriction.FiniteEtale
 public import Nyll.SchemeTheory.Pi1.Affine.Property
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Nyll.SchemeTheory.Affine.WeilRestriction.Basic
+public import Nyll.SchemeTheory.Pi1.Affine.Over
 
 /-!
 # Affine internal Homs over an affine base

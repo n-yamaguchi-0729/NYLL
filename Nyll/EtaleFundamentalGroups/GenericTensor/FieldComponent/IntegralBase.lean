@@ -45,26 +45,16 @@ integral root base is the original normalization over the smaller base. -/
 noncomputable def fieldTowerTensorComponentIntegralBaseAlgEquiv :
     let m := fieldTowerTensorComponentIdeal
       (K := K) (K' := K') (L := L)
-    letI : m.IsMaximal :=
+    let : m.IsMaximal :=
       fieldTowerTensorComponentIdeal_isMaximal
         (K := K) (K' := K') (L := L)
     let M := GenericTensorFieldComponent m
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     integralClosure B M ≃ₐ[B] integralClosure A L := by
-  dsimp only
-  let m := fieldTowerTensorComponentIdeal
-    (K := K) (K' := K') (L := L)
-  letI : m.IsMaximal :=
-    fieldTowerTensorComponentIdeal_isMaximal
-      (K := K) (K' := K') (L := L)
-  let M := GenericTensorFieldComponent m
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-  letI : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro m sharedOwner1 M sharedOwner2 sharedOwner3
   exact
     (fieldTowerTensorComponentIntegralClosureAlgEquiv
       (B := B) (K := K) (K' := K') (L := L)).trans

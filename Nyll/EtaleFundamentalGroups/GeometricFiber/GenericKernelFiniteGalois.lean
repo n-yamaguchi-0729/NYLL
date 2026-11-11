@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ClosedNormalFiniteGalois
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedSubfield
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ClosedNormalFiniteGalois
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedSubfield
 
 /-!
 # The generic-point kernel as an intersection of unramified finite kernels
@@ -17,6 +19,8 @@ finite-etale generic-fiber equivalence, and no local criterion is assumed.
 
 Reference: https://stacks.math.columbia.edu/tag/0BTD
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry AlgebraicGeometry.FiniteEtale
 

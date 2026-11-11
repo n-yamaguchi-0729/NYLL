@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
-import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
+public import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Actual morphisms and finite generation of direct-image algebras
@@ -23,6 +25,8 @@ For a finite morphism, the section algebra on every affine open is finite.
 Consequently its genuine underlying sheaf is quasicoherent and of finite
 type. For a closed transition, all its affine components are surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

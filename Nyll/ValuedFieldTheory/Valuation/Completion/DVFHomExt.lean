@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
-import Mathlib.LinearAlgebra.TensorProduct.Defs
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
 
 /-!
 # Homomorphisms out of finite extension completions
@@ -14,6 +16,8 @@ The actual tensor map onto an extension completion makes a homomorphism
 over the base completion determined by its values on the original field.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

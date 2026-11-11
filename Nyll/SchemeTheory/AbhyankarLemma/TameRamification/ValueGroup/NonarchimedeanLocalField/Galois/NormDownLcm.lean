@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.NormDown
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.NormDown
 
 /-!
 # Galois norm-down lcm value-step inclusions
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Nonarchimede
 This file keeps the Galois residue-degree lcm subgroup comparisons for the
 norm-down ramification image separate from the construction of that image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits
-import Mathlib.Algebra.Category.ModuleCat.Kernels
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Kernels
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Actual kernel subsheaves of modules
@@ -18,6 +20,8 @@ sections killed by the actual component morphism. Membership is local by
 separatedness of the target sheaf. Evaluation identifies its kernel fork
 with the ordinary linear-map kernel, giving the actual categorical comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

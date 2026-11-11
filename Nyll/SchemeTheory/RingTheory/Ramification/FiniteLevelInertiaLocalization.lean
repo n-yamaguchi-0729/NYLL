@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaDiagram
-import Mathlib.Algebra.Category.AlgCat.FilteredColimits
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.Data.Finset.Insert
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.OreLocalization.Ring
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaDiagram
+public import Mathlib.Algebra.Category.AlgCat.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.OreLocalization.Ring
 
 
 /-!
@@ -27,6 +29,8 @@ Finite representatives of numerator and denominator give surjectivity, and
 the existing localization map-injectivity theorem detects equality.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits
@@ -37,7 +41,7 @@ universe u v w
 
 /-- Expose the one native localization ring dictionary at the categorical
 object boundary. Its Ring projection is the native Ore localization Ring. -/
-private def primeLocalizationAlgCat
+def primeLocalizationAlgCat
     (B : Type u) (R : Type w) [CommRing B] [CommRing R] [Algebra B R]
     (p : Ideal R) [p.IsPrime] : AlgCat.{w} B := by
   letI : CommRing (Localization.AtPrime p) :=
@@ -159,7 +163,7 @@ theorem finiteLevelInertiaSubalgebraInclusion_injective (E : FiniteGaloisInterme
   apply Subtype.ext
   exact congrArg (fun b : CI => ((b : C) : L)) h
 
-private theorem finiteLevelInertiaLocalizationInclusion_injective
+theorem finiteLevelInertiaLocalizationInclusion_injective
     (E : FiniteGaloisIntermediateField K L) :
     Function.Injective
       ((finiteLevelInertiaLocalizationInclusion A K L Q E).toRingHom :

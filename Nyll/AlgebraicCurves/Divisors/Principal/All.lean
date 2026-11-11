@@ -21,3 +21,4 @@ import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalDegreeEqZeroMemSupportAd
 import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
 import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalGenusEqZero
 import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalHom
+import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalPullback

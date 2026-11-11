@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBase
 
 /-! # The whole divisor subscheme under change of the curve's base -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Degree.FormalDiagonalPoleBound
-import Nyll.AlgebraicCurves.Places.Orders.PowerSeriesRescaleIntegral
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinates
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Degree.FormalDiagonalPoleBound
+public import Nyll.AlgebraicCurves.Places.Orders.PowerSeriesRescaleIntegral
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinates
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
 
 /-! # Uniform poles for actual group-valued formal differences
 
@@ -18,6 +21,8 @@ functions have one effective divisor bounding every coefficient of any finite
 family. The chart factorization and coefficient bounds are constructed, not
 hypotheses on the given group point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

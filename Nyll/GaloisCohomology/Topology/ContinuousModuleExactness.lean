@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousEquivariantTupleLifting
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Homology.HomologySequence
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousEquivariantTupleLifting
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Homology.HomologySequence
 
 /-!
 # Exact sequences of actual continuous cochains
@@ -16,6 +18,8 @@ For discrete coefficients with jointly continuous actions, pointwise short
 exact coefficient sequences induce actual short exact sequences of the
 module-valued continuous cochain complexes.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

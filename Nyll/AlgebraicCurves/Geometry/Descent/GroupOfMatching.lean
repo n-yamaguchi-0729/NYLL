@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.RepresentableMatching
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Subgroup.Basic
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.RepresentableMatching
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Subgroup.Basic
 
 /-!
 # Commutative group laws on effective descents
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Group.Subgroup.Basic
 Matching local elements form a subgroup. The actual matching equivalence transports
 its operations to relative points of the descended scheme.
 -/
+
+@[expose] public section
 
 universe u
 

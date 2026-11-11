@@ -4,15 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PointedEmptyAffineNeighborhood
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
-import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
-import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
-import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.PointedEmptyAffineNeighborhood
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
+public import Nyll.AlgebraicCurves.Geometry.Descent.FiniteFaithfullyFlat
+public import Nyll.AlgebraicCurves.Geometry.Descent.FppfCoverRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ConnectedSmoothDimensionDescent
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenusBaseChange
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The degree-zero modulus over a curve without a rational point
@@ -21,6 +24,8 @@ The actual empty-modulus Picard-zero sheaf descends from its pointed ordinary
 Picard representation over a finite residue extension. This proves its global
 representation and properness without assuming that the curve has a basepoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

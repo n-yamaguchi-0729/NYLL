@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Tensor.AffineTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Tensor.AffineTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # The actual affine projection formula for quasicoherent modules
@@ -33,6 +35,8 @@ the affine tensor comparison, and the target by the actual pullback
 tensor comparison over the same target section ring. The affine basis
 then gives an isomorphism of the native module sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

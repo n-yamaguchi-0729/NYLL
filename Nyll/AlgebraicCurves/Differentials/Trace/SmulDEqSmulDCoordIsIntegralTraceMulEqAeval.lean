@@ -10,26 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Regular.Regular
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialUniqueSmulD
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
-import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormSubEqOrdEval
-import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaSeparable
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqOneIsRational
-import Nyll.AlgebraicCurves.Places.Orders.IsIntegralAdjoinEqTopOrdSubAlgebraMapEqOne
-import Mathlib.RingTheory.DedekindDomain.Different
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialUniqueSmulD
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
+public import Nyll.AlgebraicCurves.Places.NormTrace.OrdNormSubEqOrdEval
+public import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaSeparable
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqOneIsRational
+public import Nyll.AlgebraicCurves.Places.Orders.IsIntegralAdjoinEqTopOrdSubAlgebraMapEqOne
+public import Mathlib.RingTheory.DedekindDomain.Different
 
 /-!
 # Exists smul D eq smul d Coord of forall is Integral trace mul eq aeval
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -64,7 +68,7 @@ variable {K F : Type*} [Field K] [Field F] [Algebra K F]
 theorem ord_nonneg_of_mem (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubring) :
     0 ≤ v.ord f := by
   by_cases hf0 : f = 0
-  · simp [hf0]
+  · simpa only [hf0, Place.ord_zero] using (le_rfl : (0 : ℤ) ≤ 0)
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
   obtain ⟨n, u, hu⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
     (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
@@ -97,7 +101,7 @@ theorem inv_mem_of_ord_eq_zero (v : Place K F) {f : F} (hf : v.ord f = 0) :
 
 theorem ord_algebraMap (v : Place K F) (c : K) : v.ord (algebraMap K F c) = 0 := by
   by_cases hc : c = 0
-  · simp [hc]
+  · simpa only [hc, map_zero] using v.ord_zero
   exact ord_eq_zero_of_mem_of_inv_mem v (v.algebraMap_mem' c)
     (by rw [← map_inv₀]; exact v.algebraMap_mem' c⁻¹)
 
@@ -166,14 +170,17 @@ theorem ord_aeval_eq_zero (w : Place K F) {c₀ : K} (h1 : 1 ≤ w.ord (t - alge
     {p : K[X]} (hp : p.eval c₀ ≠ 0) : aeval t p ≠ 0 ∧ w.ord (aeval t p) = 0 := by
   obtain ⟨q, hq⟩ := (X_sub_C_dvd_sub_C_eval : X - C c₀ ∣ p - C (p.eval c₀))
   have hp' : p = C (p.eval c₀) + (X - C c₀) * q := by rw [← hq]; ring
-  have ht0 : t - algebraMap K F c₀ ≠ 0 := by rintro h; simp [h] at h1
+  have ht0 : t - algebraMap K F c₀ ≠ 0 := by
+    intro h
+    rw [h, Place.ord_zero] at h1
+    exact (not_le_of_gt (zero_lt_one : (0 : ℤ) < 1)) h1
   have htmem : t ∈ w.toValuationSubring := by
     have : t = (t - algebraMap K F c₀) + algebraMap K F c₀ := by ring
     rw [this]
     exact add_mem (mem_of_ord_nonneg w (by omega)) (w.algebraMap_mem' c₀)
   have heval : aeval t p = algebraMap K F (p.eval c₀) + (t - algebraMap K F c₀) * aeval t q := by
     conv_lhs => rw [hp']
-    simp [map_add, map_mul, map_sub, aeval_X, aeval_C]
+    simp only [map_add, map_mul, map_sub, aeval_X, aeval_C]
   have hc : algebraMap K F (p.eval c₀) ≠ 0 := by
     rwa [map_ne_zero_iff _ (algebraMap K F).injective]
   have h2 : (t - algebraMap K F c₀) * aeval t q = 0 ∨
@@ -262,7 +269,7 @@ theorem exists_mul_aeval_eq (w : Place K F) {c₀ : K} (h1 : 1 ≤ w.ord (t - al
   obtain ⟨k, rfl⟩ := Int.eq_ofNat_of_zero_le hn
   refine ⟨(X - C c₀) ^ k * r₁, s₁, hs₁, ?_⟩
   rw [h, zpow_natCast]
-  simp [map_mul, map_pow, map_sub, aeval_X, aeval_C]
+  simp only [map_mul, map_pow, map_sub, aeval_X, aeval_C]
 
 end RationalBase
 
@@ -378,7 +385,7 @@ theorem trace_mul_mem (x : F)
   have hP₁monic : P₁.Monic := (monic_scaleRoots_iff Q).mpr hP₀monic
   have hP₁eval : aeval (Q * y) P₁ = 0 := by
     have := scaleRoots_aeval_eq_zero (r := Q) hP₀eval
-    simpa using this
+    simpa only [Algebra.algebraMap_self_apply] using this
   have hdeg : P₀.natDegree = d := hmonic.natDegree_map _
   have hcoeffmem : ∀ n, P₁.coeff n ∈ Algebra.adjoin K ({t} : Set F) := by
     intro n

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
-import Mathlib.RingTheory.TensorProduct.Nontrivial
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
+public import Mathlib.RingTheory.TensorProduct.Nontrivial
 
 /-!
 # Locality after base change of an integral local extension
@@ -23,6 +25,8 @@ This is the local tensor product step of Stacks Project, Tag 092Y, used in
 the forward implication of Tag 06DM. It neither assumes nor encodes the
 irreducibility of a strict henselization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,16 +11,21 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Mathlib.AlgebraicGeometry.PullbackCarrier
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Separatedness and quasi-compactness under flat or surjective descent
 
 These generic proofs are extracted from the attributed finite-étale base-change
 supplier, so they can be used by scheme-theoretic foundations without curve imports.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -29,6 +34,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+/-- Quasi-compactness is local on the target; reuse the canonical Mathlib proof. -/
+theorem QuasiCompact.isZariskiLocalAtTarget :
+    IsZariskiLocalAtTarget (@QuasiCompact : MorphismProperty Scheme.{u}) :=
+  (HasAffineProperty.iff.mp
+    instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat).1
 
 attribute [local instance] universallyClosed_respectsIso
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 
 /-!
 # The actual strict-local base change as an inverse limit of schemes
@@ -25,6 +27,8 @@ Scheme finite-data descent is applied to them before refining the final
 neighborhood to an affine étale one.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory Limits Opposite
@@ -37,7 +41,8 @@ universe u
 variable {R Ω : Type u} [CommRing R] [Field Ω] [IsSepClosed Ω]
   (φ : R →+* Ω)
 
-private def geometricStalkCoefficientSpec :
+/-- Taking spectra sends algebras over the coefficient ring to schemes over its spectrum. -/
+def geometricStalkCoefficientSpec :
     (Under (CommRingCat.of R))ᵒᵖ ⥤ Over (Spec (CommRingCat.of R)) :=
   (Over.opEquivOpUnder (CommRingCat.of R)).inverse ⋙ Over.post Scheme.Spec
 
@@ -60,11 +65,13 @@ def geometricStalkSpecConeIsLimit : IsLimit (geometricStalkSpecCone φ) := by
     (geometricStalkSmallAlgebraCoconeIsColimit φ).op
 
 /-- The native pullbacks of the coefficient stages to an arbitrary scheme over the base. -/
-abbrev geometricStalkSchemeDiagram {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of R)) :=
+abbrev geometricStalkSchemeDiagram {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of R)) :
+    (GeometricStalkAlgebraIndex φ)ᵒᵖ ⥤ Scheme.{u} :=
   AffineTransitionHom.diagram (geometricStalkSpecDiagram φ) f
 
 /-- The native strict-local pullback, with its maps to the coefficient stages. -/
-abbrev geometricStalkSchemeCone {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of R)) :=
+abbrev geometricStalkSchemeCone {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of R)) :
+    Cone (geometricStalkSchemeDiagram φ f) :=
   AffineTransitionHom.cone (geometricStalkSpecDiagram φ) (geometricStalkSpecCone φ) f
 
 /-- Strict-local base change is the actual inverse limit of its coefficient stages. -/

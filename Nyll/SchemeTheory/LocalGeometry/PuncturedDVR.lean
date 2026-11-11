@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
-import Mathlib.Algebra.GroupWithZero.Associated
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
+public import Mathlib.Algebra.GroupWithZero.Associated
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # The punctured spectrum of a discrete valuation ring
@@ -25,6 +27,8 @@ point. The resulting scheme isomorphism retains the canonical map to the
 full spectrum, so covers of the puncture and of the fraction field can be
 compared without replacing their structure maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

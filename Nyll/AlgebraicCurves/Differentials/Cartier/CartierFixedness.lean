@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
-import Nyll.AlgebraicCurves.Differentials.Logarithmic.Logarithmic
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.Logarithmic
 
 /-!
 # Cartier Fixedness
 -/
+
+@[expose] public section
 
 open Polynomial AlgebraicCurve.PthPower AlgebraicCurve.Cartier
 

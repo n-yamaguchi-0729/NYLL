@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 /-!
 # Actual sections of a kernel sheaf
@@ -20,6 +22,8 @@ open with the kernel of the original section map. The inclusion is the
 original categorical kernel inclusion, and its naturality gives the
 original restriction of every kernel section.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusUnitBoundary
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMapSheaf
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionUnits
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitBoundary
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMapSheaf
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionUnits
 
 /-! # Modulus restriction commutes with the actual unit boundary -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -17,6 +21,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-!
 # Scheme exists is Closed Immersion represents of forall exists ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -26,13 +30,13 @@ namespace Scheme_exists_isClosedImmersion_represents_of_forall_exists_ideal
 
 open CategoryTheory AlgebraicGeometry Opposite
 
-namespace ClosedRep
+universe u v
 
-universe u
+namespace ClosedRep
 
 section Generalities
 
-theorem section_eq_zero_of_cover {Y : Scheme.{0}} {V : Y.Opens} (s : Γ(Y, V)) {ι : Type} (U : ι →
+theorem section_eq_zero_of_cover {Y : Scheme.{u}} {V : Y.Opens} (s : Γ(Y, V)) {ι : Type v} (U : ι →
   Y.Opens)
     (hU : ∀ i, U i ≤ V) (hcov : V ≤ ⨆ i, U i)
     (h : ∀ i, (Y.presheaf.map (homOfLE (hU i)).op).hom s = 0) : s = 0 := by
@@ -40,9 +44,9 @@ theorem section_eq_zero_of_cover {Y : Scheme.{0}} {V : Y.Opens} (s : Γ(Y, V)) {
   rw [map_zero]
   exact h i
 
-variable {R : Type} [CommRing R]
+variable {R : Type u} [CommRing R]
 
-theorem algebraMap_comm_of_Spec {A B : Type} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+theorem algebraMap_comm_of_Spec {A B : Type u} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (ψ : A →+* B)
     (h : Spec.map (CommRingCat.ofHom ψ) ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) =
       Spec.map (CommRingCat.ofHom (algebraMap R B))) (r : R) :
@@ -56,45 +60,46 @@ theorem algebraMap_comm_of_Spec {A B : Type} [CommRing A] [CommRing B] [Algebra 
 The algebra homomorphism associated with a ring homomorphism whose spectrum map is over the
 base.
 -/
-def algHomOfSpec {A B : Type} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (ψ : A →+* B)
+def algHomOfSpec {A B : Type u} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (ψ : A →+* B)
     (h : Spec.map (CommRingCat.ofHom ψ) ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) =
       Spec.map (CommRingCat.ofHom (algebraMap R B))) : A →ₐ[R] B :=
   { ψ with commutes' := fun r => algebraMap_comm_of_Spec ψ h r }
 
-@[scoped simp] theorem algHomOfSpec_toRingHom {A B : Type} [CommRing A] [CommRing B] [Algebra R A]
+@[scoped simp] theorem algHomOfSpec_toRingHom {A B : Type u} [CommRing A] [CommRing B] [Algebra R A]
   [Algebra R B]
     (ψ : A →+* B) (h) : (algHomOfSpec (R := R) ψ h).toRingHom = ψ := rfl
 
-theorem algHomOfSpec_apply {A B : Type} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+theorem algHomOfSpec_apply {A B : Type u} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (ψ : A →+* B) (h) (x : A) : algHomOfSpec (R := R) ψ h x = ψ x := rfl
 
 end Generalities
 
 section Setting
 
-variable {R : Type} [CommRing R]
-  (F : ∀ (A : Type) [CommRing A] [Algebra R A], Type)
-  (Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B], (A →ₐ[R] B) → F A →
+variable {R : Type u} [CommRing R]
+  (F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type v)
+  (Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B], (A →ₐ[R] B)
+      → F A →
     F B)
-  {X : Scheme.{0}} (p : X ⟶ Spec (CommRingCat.of R))
-  (pt : ∀ (A : Type) [CommRing A] [Algebra R A],
+  {X : Scheme.{u}} (p : X ⟶ Spec (CommRingCat.of R))
+  (pt : ∀ (A : Type u) [CommRing A] [Algebra R A],
     F A ≃ {g : Spec (CommRingCat.of A) ⟶ X // g ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
       A))})
-  (W : ∀ (A : Type) [CommRing A] [Algebra R A], F A → Prop)
+  (W : ∀ (A : Type u) [CommRing A] [Algebra R A], F A → Prop)
 
 /-- The chosen points commute with extension of the coefficient algebra. -/
 def PtNatural : Prop :=
-  ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s : F A),
+  ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s : F A),
     (pt B (Fmap A B φ s)).1 = Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ (pt A s).1
 
 /-- The subfunctor condition is locally cut out by the vanishing of an ideal. -/
 def Closed : Prop :=
-  ∀ (A : Type) [CommRing A] [Algebra R A] (s : F A), ∃ 𝔞 : Ideal A,
-    ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), W B (Fmap A B φ s) ↔ ∀ a ∈ 𝔞, φ a = 0
+  ∀ (A : Type u) [CommRing A] [Algebra R A] (s : F A), ∃ 𝔞 : Ideal A,
+    ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), W B (Fmap A B φ s) ↔ ∀ a ∈ 𝔞, φ a = 0
 
 variable {F Fmap p pt W}
 
-theorem Fmap_id (hn : PtNatural F Fmap p pt) (A : Type) [CommRing A] [Algebra R A] (s : F A) :
+theorem Fmap_id (hn : PtNatural F Fmap p pt) (A : Type u) [CommRing A] [Algebra R A] (s : F A) :
     Fmap A A (AlgHom.id R A) s = s := by
   apply (pt A).injective
   apply Subtype.ext
@@ -104,7 +109,8 @@ theorem Fmap_id (hn : PtNatural F Fmap p pt) (A : Type) [CommRing A] [Algebra R 
   erw [Spec.map_id]
   exact Category.id_comp _
 
-theorem Fmap_comp (hn : PtNatural F Fmap p pt) (A B C : Type) [CommRing A] [CommRing B] [CommRing C]
+theorem Fmap_comp (hn : PtNatural F Fmap p pt) (A B C : Type u) [CommRing A] [CommRing B]
+    [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra R C] (φ : A →ₐ[R] B) (ψ : B →ₐ[R] C) (s : F A) :
     Fmap B C ψ (Fmap A B φ s) = Fmap A C (ψ.comp φ) s := by
   apply (pt C).injective
@@ -112,28 +118,30 @@ theorem Fmap_comp (hn : PtNatural F Fmap p pt) (A B C : Type) [CommRing A] [Comm
   rw [hn, hn, hn, ← Category.assoc, ← Spec.map_comp]
   rfl
 
-theorem eq_of_pt_eq (A : Type) [CommRing A] [Algebra R A] (s t : F A) (h : (pt A s).1 = (pt A t).1)
+theorem eq_of_pt_eq (A : Type u) [CommRing A] [Algebra R A] (s t : F A) (h : (pt A s).1 = (pt
+    A t).1)
   : s = t :=
   (pt A).injective (Subtype.ext h)
 
 /-- The chosen ideal cutting out the subfunctor condition at an algebra-valued point. -/
-noncomputable def cl (hc : Closed F Fmap W) (A : Type) [CommRing A] [Algebra R A] (s : F A) : Ideal
+noncomputable def cl (hc : Closed F Fmap W) (A : Type u) [CommRing A] [Algebra R A] (s : F A)
+    : Ideal
   A :=
   (hc A s).choose
 
-theorem cl_spec (hc : Closed F Fmap W) (A : Type) [CommRing A] [Algebra R A] (s : F A)
-    (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B) :
+theorem cl_spec (hc : Closed F Fmap W) (A : Type u) [CommRing A] [Algebra R A] (s : F A)
+    (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B) :
     W B (Fmap A B φ s) ↔ ∀ a ∈ cl hc A s, φ a = 0 :=
   (hc A s).choose_spec B φ
 
-theorem ideal_unique (A : Type) [CommRing A] [Algebra R A] (𝔞 𝔟 : Ideal A)
-    (P : ∀ (B : Type) [CommRing B] [Algebra R B], (A →ₐ[R] B) → Prop)
-    (h𝔞 : ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔞, φ a = 0)
-    (h𝔟 : ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔟, φ a = 0) :
+theorem ideal_unique (A : Type u) [CommRing A] [Algebra R A] (𝔞 𝔟 : Ideal A)
+    (P : ∀ (B : Type u) [CommRing B] [Algebra R B], (A →ₐ[R] B) → Prop)
+    (h𝔞 : ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔞, φ a = 0)
+    (h𝔟 : ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔟, φ a = 0) :
     𝔞 = 𝔟 := by
   have key : ∀ (𝔞 𝔟 : Ideal A),
-      (∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔞, φ a = 0) →
-      (∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔟, φ a = 0) → 𝔞 ≤ 𝔟
+      (∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔞, φ a = 0) →
+      (∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B), P B φ ↔ ∀ a ∈ 𝔟, φ a = 0) → 𝔞 ≤ 𝔟
         := by
     intro 𝔞 𝔟 h𝔞 h𝔟 a ha
     have h1 : ∀ b ∈ 𝔟, Ideal.Quotient.mkₐ R 𝔟 b = 0 := fun b hb =>
@@ -143,14 +151,15 @@ theorem ideal_unique (A : Type) [CommRing A] [Algebra R A] (𝔞 𝔟 : Ideal A)
     exact Ideal.Quotient.eq_zero_iff_mem.mp h2
   exact le_antisymm (key 𝔞 𝔟 h𝔞 h𝔟) (key 𝔟 𝔞 h𝔟 h𝔞)
 
-theorem W_iff_cl_eq_bot (hn : PtNatural F Fmap p pt) (hc : Closed F Fmap W) (A : Type) [CommRing A]
+theorem W_iff_cl_eq_bot (hn : PtNatural F Fmap p pt) (hc : Closed F Fmap W) (A : Type u)
+    [CommRing A]
     [Algebra R A] (s : F A) : W A s ↔ cl hc A s = ⊥ := by
   have h := cl_spec hc A s A (AlgHom.id R A)
   rw [Fmap_id hn] at h
   rw [h, Submodule.eq_bot_iff]
   rfl
 
-theorem cl_map (hn : PtNatural F Fmap p pt) (hc : Closed F Fmap W) (A B : Type) [CommRing A]
+theorem cl_map (hn : PtNatural F Fmap p pt) (hc : Closed F Fmap W) (A B : Type u) [CommRing A]
   [CommRing B]
     [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s : F A) :
     cl hc B (Fmap A B φ s) = (cl hc A s).map φ.toRingHom := by
@@ -172,7 +181,7 @@ end Setting
 
 section Charts
 
-variable {R : Type} [CommRing R] {X : Scheme.{0}} (p : X ⟶ Spec (CommRingCat.of R))
+variable {R : Type u} [CommRing R] {X : Scheme.{u}} (p : X ⟶ Spec (CommRingCat.of R))
 
 /-- The structure homomorphism from the base ring to sections on an affine open. -/
 noncomputable def ρ (U : X.affineOpens) : CommRingCat.of R ⟶ Γ(X, U) :=
@@ -188,35 +197,36 @@ theorem fromSpec_over (U : X.affineOpens) :
   rw [ρ, Spec.map_preimage]
 
 /-- The basic open in an affine spectrum defined by the given ring element. -/
-noncomputable abbrev Da (A : Type) [CommRing A] (a : A) : (Spec (CommRingCat.of A)).Opens :=
+noncomputable abbrev Da (A : Type u) [CommRing A] (a : A) : (Spec (CommRingCat.of A)).Opens :=
   (Spec (CommRingCat.of A)).basicOpen ((Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom a)
 
-theorem isAffineOpen_Da (A : Type) [CommRing A] (a : A) : IsAffineOpen (Da A a) :=
+theorem isAffineOpen_Da (A : Type u) [CommRing A] (a : A) : IsAffineOpen (Da A a) :=
   (isAffineOpen_top (Spec (CommRingCat.of A))).basicOpen _
 
 /-- The homomorphism from the affine ring to sections on its basic open. -/
-noncomputable def θ' (A : Type) [CommRing A] (a : A) : CommRingCat.of A ⟶ Γ(Spec (CommRingCat.of
+noncomputable def θ' (A : Type u) [CommRing A] (a : A) : CommRingCat.of A ⟶ Γ(Spec (CommRingCat.of
   A), Da A a) :=
   (Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ (Spec (CommRingCat.of A)).presheaf.map (homOfLE
     le_top).op
 
-theorem θ'_apply (A : Type) [CommRing A] (a : A) (x : A) :
+theorem θ'_apply (A : Type u) [CommRing A] (a : A) (x : A) :
     (θ' A a).hom x = ((Spec (CommRingCat.of A)).presheaf.map (homOfLE le_top).op).hom
       ((Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom x) := rfl
 
 /-- The base-ring algebra structure on sections of the basic open. -/
-@[reducible] noncomputable def algL (A : Type) [CommRing A] [Algebra R A] (a : A) :
+@[reducible] noncomputable def algL (A : Type u) [CommRing A] [Algebra R A] (a : A) :
     Algebra R Γ(Spec (CommRingCat.of A), Da A a) :=
   ((θ' A a).hom.comp (algebraMap R A)).toAlgebra
 
 /-- The restriction to a basic open viewed as a homomorphism of algebras over the base. -/
-noncomputable def θ (A : Type) [CommRing A] [Algebra R A] (a : A) :
+noncomputable def θ (A : Type u) [CommRing A] [Algebra R A] (a : A) :
     letI := algL (R := R) A a
     A →ₐ[R] Γ(Spec (CommRingCat.of A), Da A a) :=
   letI := algL (R := R) A a
   { (θ' A a).hom with commutes' := fun _ => rfl }
 
-theorem fromSpec_Da (A : Type) [CommRing A] (a : A) : (isAffineOpen_Da A a).fromSpec = Spec.map (θ'
+theorem fromSpec_Da (A : Type u) [CommRing A] (a : A) : (isAffineOpen_Da A a).fromSpec =
+    Spec.map (θ'
   A a) := by
   rw [← IsAffineOpen.map_fromSpec (isAffineOpen_top _) (isAffineOpen_Da A a) (homOfLE le_top).op,
     IsAffineOpen.fromSpec_top, Scheme.isoSpec_Spec_inv, ← Spec.map_comp]
@@ -226,15 +236,16 @@ end Charts
 
 section Sheaf
 
-variable {R : Type} [CommRing R]
-  {F : ∀ (A : Type) [CommRing A] [Algebra R A], Type}
-  {Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B], (A →ₐ[R] B) → F A →
+variable {R : Type u} [CommRing R]
+  {F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type v}
+  {Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B], (A →ₐ[R] B)
+      → F A →
     F B}
-  {X : Scheme.{0}} {p : X ⟶ Spec (CommRingCat.of R)}
-  {pt : ∀ (A : Type) [CommRing A] [Algebra R A],
+  {X : Scheme.{u}} {p : X ⟶ Spec (CommRingCat.of R)}
+  {pt : ∀ (A : Type u) [CommRing A] [Algebra R A],
     F A ≃ {g : Spec (CommRingCat.of A) ⟶ X // g ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
       A))}}
-  {W : ∀ (A : Type) [CommRing A] [Algebra R A], F A → Prop}
+  {W : ∀ (A : Type u) [CommRing A] [Algebra R A], F A → Prop}
   (hn : PtNatural F Fmap p pt) (hc : Closed F Fmap W)
 
 variable (pt) in
@@ -278,7 +289,7 @@ noncomputable def J : X.IdealSheafData where
 
 section Key
 
-variable (A : Type) [CommRing A] [Algebra R A] (s : F A)
+variable (A : Type u) [CommRing A] [Algebra R A] (s : F A)
 
 include hn in
 theorem local_iff (U : X.affineOpens) (a : A) (ha : Da A a ≤ (pt A s).1 ⁻¹ᵁ U.1) :
@@ -366,28 +377,28 @@ end Key
 
 end Sheaf
 
-theorem main (R : Type) [CommRing R]
-    (F : ∀ (A : Type) [CommRing A] [Algebra R A], Type)
-    (Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
+theorem main (R : Type u) [CommRing R]
+    (F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type v)
+    (Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
       (A →ₐ[R] B) → F A → F B)
-    (X : Scheme.{0}) (p : X ⟶ Spec (CommRingCat.of R))
-    (pt : ∀ (A : Type) [CommRing A] [Algebra R A],
+    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of R))
+    (pt : ∀ (A : Type u) [CommRing A] [Algebra R A],
       F A ≃ {g : Spec (CommRingCat.of A) ⟶ X // g ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
         A))})
-    (pt_natural : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+    (pt_natural : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
       (φ : A →ₐ[R] B) (s : F A),
       (pt B (Fmap A B φ s)).1 = Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ (pt A s).1)
-    (W : ∀ (A : Type) [CommRing A] [Algebra R A], F A → Prop)
-    (closed : ∀ (A : Type) [CommRing A] [Algebra R A] (s : F A), ∃ 𝔞 : Ideal A,
-      ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
+    (W : ∀ (A : Type u) [CommRing A] [Algebra R A], F A → Prop)
+    (closed : ∀ (A : Type u) [CommRing A] [Algebra R A] (s : F A), ∃ 𝔞 : Ideal A,
+      ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
         W B (Fmap A B φ s) ↔ ∀ a ∈ 𝔞, φ a = 0) :
-    ∃ (Z : Scheme.{0}) (ι : Z ⟶ X)
-      (ptZ : ∀ (A : Type) [CommRing A] [Algebra R A],
+    ∃ (Z : Scheme.{u}) (ι : Z ⟶ X)
+      (ptZ : ∀ (A : Type u) [CommRing A] [Algebra R A],
         {s : F A // W A s} ≃
           {g : Spec (CommRingCat.of A) ⟶ Z //
             g ≫ ι ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R A))}),
       IsClosedImmersion ι ∧
-      ∀ (A : Type) [CommRing A] [Algebra R A] (s : {s : F A // W A s}),
+      ∀ (A : Type u) [CommRing A] [Algebra R A] (s : {s : F A // W A s}),
         (ptZ A s).1 ≫ ι = (pt A s.1).1 := by
   have hn : PtNatural F Fmap p pt := pt_natural
   have hc : Closed F Fmap W := closed
@@ -395,23 +406,24 @@ theorem main (R : Type) [CommRing R]
   let Z := 𝒥.subscheme
   let ι := 𝒥.subschemeι
   have hker : ι.ker = 𝒥 := 𝒥.ker_subschemeι
-  have key : ∀ (A : Type) [CommRing A] [Algebra R A] (s : F A), ι.ker ≤ (pt A s).1.ker ↔ W A s := by
+  have key : ∀ (A : Type u) [CommRing A] [Algebra R A] (s : F A), ι.ker ≤ (pt A s).1.ker ↔ W
+      A s := by
     intro A _ _ s
     rw [hker]
     exact J_le_ker_iff hn hc A s
-  let fwd : ∀ (A : Type) [CommRing A] [Algebra R A], {s : F A // W A s} →
+  let fwd : ∀ (A : Type u) [CommRing A] [Algebra R A], {s : F A // W A s} →
       {g : Spec (CommRingCat.of A) ⟶ Z // g ≫ ι ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
         A))} :=
     fun A _ _ s => ⟨IsClosedImmersion.lift ι (pt A s.1).1 ((key A s.1).mpr s.2), by
       rw [← Category.assoc, IsClosedImmersion.lift_fac]; exact (pt A s.1).2⟩
-  have bwdW : ∀ (A : Type) [CommRing A] [Algebra R A]
+  have bwdW : ∀ (A : Type u) [CommRing A] [Algebra R A]
       (g : {g : Spec (CommRingCat.of A) ⟶ Z // g ≫ ι ≫ p = Spec.map (CommRingCat.ofHom (algebraMap
         R A))}),
       W A ((pt A).symm ⟨g.1 ≫ ι, by rw [Category.assoc]; exact g.2⟩) := by
     intro A _ _ g
     rw [← key, Equiv.apply_symm_apply]
     exact Scheme.Hom.le_ker_comp _ _
-  let bwd : ∀ (A : Type) [CommRing A] [Algebra R A],
+  let bwd : ∀ (A : Type u) [CommRing A] [Algebra R A],
       {g : Spec (CommRingCat.of A) ⟶ Z // g ≫ ι ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
         A))} →
       {s : F A // W A s} :=
@@ -437,28 +449,28 @@ attribute [local simp] ClosedRep.algHomOfSpec_toRingHom
 
 
 theorem _root_.AlgebraicGeometry.Scheme.exists_isClosedImmersion_represents_of_forall_exists_ideal
-    (R : Type) [CommRing R]
-    (F : ∀ (A : Type) [CommRing A] [Algebra R A], Type)
-    (Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
+    (R : Type u) [CommRing R]
+    (F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type v)
+    (Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
       (A →ₐ[R] B) → F A → F B)
-    (X : Scheme.{0}) (p : X ⟶ Spec (CommRingCat.of R))
-    (pt : ∀ (A : Type) [CommRing A] [Algebra R A],
+    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of R))
+    (pt : ∀ (A : Type u) [CommRing A] [Algebra R A],
       F A ≃ {g : Spec (CommRingCat.of A) ⟶ X // g ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
         A))})
-    (pt_natural : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+    (pt_natural : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
       (φ : A →ₐ[R] B) (s : F A),
       (pt B (Fmap A B φ s)).1 = Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ (pt A s).1)
-    (W : ∀ (A : Type) [CommRing A] [Algebra R A], F A → Prop)
-    (closed : ∀ (A : Type) [CommRing A] [Algebra R A] (s : F A), ∃ 𝔞 : Ideal A,
-      ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
+    (W : ∀ (A : Type u) [CommRing A] [Algebra R A], F A → Prop)
+    (closed : ∀ (A : Type u) [CommRing A] [Algebra R A] (s : F A), ∃ 𝔞 : Ideal A,
+      ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
         W B (Fmap A B φ s) ↔ ∀ a ∈ 𝔞, φ a = 0) :
-    ∃ (Z : Scheme.{0}) (ι : Z ⟶ X)
-      (ptZ : ∀ (A : Type) [CommRing A] [Algebra R A],
+    ∃ (Z : Scheme.{u}) (ι : Z ⟶ X)
+      (ptZ : ∀ (A : Type u) [CommRing A] [Algebra R A],
         {s : F A // W A s} ≃
           {g : Spec (CommRingCat.of A) ⟶ Z //
             g ≫ ι ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R A))}),
       IsClosedImmersion ι ∧
-      ∀ (A : Type) [CommRing A] [Algebra R A] (s : {s : F A // W A s}),
+      ∀ (A : Type u) [CommRing A] [Algebra R A] (s : {s : F A // W A s}),
         (ptZ A s).1 ≫ ι = (pt A s.1).1 :=
   ClosedRep.main R F Fmap X p pt pt_natural W closed
 end Scheme_exists_isClosedImmersion_represents_of_forall_exists_ideal

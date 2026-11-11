@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf
-import Mathlib.GroupTheory.MonoidLocalization.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf
+public import Mathlib.GroupTheory.MonoidLocalization.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual coordinate transition functions for the twisting sheaf
@@ -22,6 +24,8 @@ map. Its multiplicative identity on intersections is proved in the
 localization at each projective point. These functions therefore give
 an actual unit cocycle, with no transition identity assumed as data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

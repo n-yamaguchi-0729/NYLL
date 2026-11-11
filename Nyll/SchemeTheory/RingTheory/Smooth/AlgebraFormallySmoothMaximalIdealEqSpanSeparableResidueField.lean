@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Smooth.Fiber
-import Mathlib.RingTheory.Unramified.LocalRing
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.LocalRing.ResidueField.Instances
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.FieldTheory.Minpoly.Field
+module
+
+public import Mathlib.RingTheory.Smooth.Fiber
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.LocalRing.ResidueField.Instances
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.FieldTheory.Minpoly.Field
 
 /-!
 # Algebra Formally Smooth of maximal Ideal eq span of is Separable residue Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

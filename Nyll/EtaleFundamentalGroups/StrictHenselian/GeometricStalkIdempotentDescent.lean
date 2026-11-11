@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.IdempotentDescent
-import Nyll.EtaleFundamentalGroups.Inertia.EquivariantIdempotentDescent
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.CategoryTheory.Filtered.FinallySmall
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.IdempotentDescent
+public import Nyll.EtaleFundamentalGroups.Inertia.EquivariantIdempotentDescent
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.Filtered.FinallySmall
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -32,6 +34,8 @@ This supplies the finite idempotent descent in external Stacks tag 0BSR,
 needed for [Stacks, Tag 0BST](https://stacks.math.columbia.edu/tag/0BST). Prime-fiber finiteness and
 residue-extension comparisons are separate prerequisites.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
-import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
+public import Nyll.SchemeTheory.Modules.Sections.FiniteFreeSections
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientFreeSequence
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Original affine sections of closed-level free modules
@@ -20,6 +22,8 @@ identifies the actual closed-level sections with the literal quotient
 coefficient vectors. This fixes the native source needed to compare
 categorical syzygies with their affine presentation kernels.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -135,7 +139,8 @@ private theorem constructedLevelFreeSectionsEquiv_coefficients (c : J →₀ Γ(
   exact LinearMap.quotKerEquivOfSurjective_apply_mk l
     (levelFreeSectionsCoefficients_surjective f I J U n) c
 
-private theorem exists_levelFreeSectionsEquiv :
+/-- The quotient coefficient module admits an equivalence retaining the original unit formula. -/
+theorem exists_levelFreeSectionsEquiv :
     ∃ e : (J →₀ Γ(X, U) ⧸ (sectionsIdeal f I U) ^ (n + 1)) ≃ₗ[Γ(X, U)]
         Γ(levelPullbackModule f I (show X.Modules from SheafOfModules.free J) n, U),
       ∀ c : J →₀ Γ(X, U),
@@ -169,7 +174,8 @@ private theorem compatible_of_surjective_coefficients
   exact (congrArg e₀ (hv a)).trans
     ((he₀ a).trans ((hl a).trans (congrArg τ (he₁ a).symm)))
 
-private theorem app_comp_eq_of_eq {Y : Scheme.{u}} {P Q T : Y.Modules}
+/-- A native module-morphism composition equality evaluated on an original section. -/
+theorem app_comp_eq_of_eq {Y : Scheme.{u}} {P Q T : Y.Modules}
     (α : P ⟶ Q) (β : Q ⟶ T) (γ : P ⟶ T) (h : α ≫ β = γ)
     (W : Y.Opens) (x : Γ(P, W)) : β.app W (α.app W x) = γ.app W x := by
   have h' : α.app W ≫ β.app W = γ.app W :=
@@ -177,7 +183,8 @@ private theorem app_comp_eq_of_eq {Y : Scheme.{u}} {P Q T : Y.Modules}
       (congrArg (fun k => k.app W) h)
   exact congrArg (fun k : Γ(P, W) ⟶ Γ(T, W) => k x) h'
 
-private theorem levelUnit_app_transition
+/-- Evaluation of the original level units commutes with the original transition. -/
+theorem levelUnit_app_transition
     (M : X.Modules) (x : Γ(M, U)) :
     (levelPullbackUnit f I M n).app U x =
       (levelPullbackTransition f I M n).app U

@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.GoingUp
-import Nyll.SchemeTheory.RingTheory.Henselian.IsIdempotentElemMapEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.FiniteAppTopProper
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.IsPreconnectedPreimageClosedPoint
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Nyll.SchemeTheory.RingTheory.Henselian.IsIdempotentElemMapEq
+public import Nyll.SchemeTheory.Morphisms.ProperGlobalSectionsFinite
+public import Nyll.SchemeTheory.Fibers.ClosedPointConnected
 
 /-!
 # Lifting clopen subsets of proper fibres over a Henselian local ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -181,7 +185,7 @@ theorem isLocalRing_of_forall_isIdempotentElem (A : Type u) [CommRing A] [Hensel
         M₁.map (Ideal.Quotient.mk ((maximalIdeal A).map (algebraMap A B))) :=
       fun heq => hne (by rw [← hc₁, ← hc₂, heq])
     have := hp₁.isPrime
-    obtain ⟨r, hr₁, hr, hr'⟩ := IsArtinianRing.exists_not_mem_forall_mem_of_ne
+    obtain ⟨r, hr₁, hr, hr'⟩ := IsArtinianRing.exists_notMem_forall_mem_of_ne
       (M₁.map (Ideal.Quotient.mk ((maximalIdeal A).map (algebraMap A B))))
     have hr₂ : r ∈ M₂.map (Ideal.Quotient.mk ((maximalIdeal A).map (algebraMap A B))) :=
       hr' _ hp₂.isPrime hp

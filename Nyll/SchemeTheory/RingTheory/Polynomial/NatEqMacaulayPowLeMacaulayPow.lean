@@ -10,34 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Nat.Defs
-import Mathlib.Algebra.Group.Semigroup
-import Mathlib.Data.DFinsupp.WellFounded
-import Mathlib.Data.Fintype.Basic
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.Data.Nat.Init
-import Mathlib.Data.Set.Operations
-import Mathlib.Order.Basic
-import Mathlib.Order.Defs.LinearOrder
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.Order.Fin.Basic
-import Mathlib.Order.Monotone.Basic
-import Mathlib.Order.Monotone.Defs
-import Mathlib.Order.PiLex
-import Mathlib.Order.RelClasses
-import Mathlib.Order.WellFounded
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Algebra.Group.Semigroup
+public import Mathlib.Data.DFinsupp.WellFounded
+public import Mathlib.Data.Fintype.Basic
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Data.Nat.Basic
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Data.Nat.Init
+public import Mathlib.Data.Set.Operations
+public import Mathlib.Order.Basic
+public import Mathlib.Order.Defs.LinearOrder
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.Order.Fin.Basic
+public import Mathlib.Order.Monotone.Basic
+public import Mathlib.Order.Monotone.Defs
+public import Mathlib.Order.PiLex
+public import Mathlib.Order.RelClasses
+public import Mathlib.Order.WellFounded
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # Nat exists forall eq macaulay Pow of forall le macaulay Pow
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

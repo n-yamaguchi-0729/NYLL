@@ -9,6 +9,8 @@ import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
 import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.PrimeLocalizationEquiv
 import Nyll.EtaleFundamentalGroups.Purity.ConnectedCoverGenericNormalizationFinite
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Height-one primes on affine charts of a boundary normalization

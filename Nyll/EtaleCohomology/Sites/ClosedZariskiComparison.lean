@@ -5,20 +5,22 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ZariskiGeometricStalks
-import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
-import Nyll.EtaleCohomology.Sites.ClosedAdjunction
-import Nyll.SchemeTheory.Topology.SheafPullbackStalks
-import Nyll.SchemeTheory.Topology.SheafPullbackGerms
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.EtaleCohomology.Sites.ZariskiGeometricStalks
+public import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
+public import Nyll.EtaleCohomology.Sites.ClosedAdjunction
+public import Nyll.SchemeTheory.Topology.SheafPullbackStalks
+public import Nyll.SchemeTheory.Topology.SheafPullbackGerms
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # The closed-immersion Zariski comparison is a monomorphism
@@ -29,6 +31,8 @@ geometric germs makes its underlying Zariski stalk map injective there.
 The actual mixed unit square and the topological inverse-image stalk
 formula then prove that the constructed comparison is a monomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

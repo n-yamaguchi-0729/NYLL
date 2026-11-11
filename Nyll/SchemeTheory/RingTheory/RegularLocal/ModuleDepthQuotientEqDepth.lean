@@ -15,11 +15,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 
 /-!
 Module depth is unchanged when the scalar action factors through a quotient.
 -/
+
+@[expose] public section
 
 open AlgebraicCurves.Foundations.Algebra.Proofs.Module_depth_quotSMulTop_succ_eq
 

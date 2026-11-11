@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.AdicCompletion.Exactness
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemOverCompletion
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.AdicCompletion.Exactness
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Completion of an actual reduction system
@@ -28,6 +30,8 @@ The proof derives the transition kernels and stage annihilation from the
 original maps. Completeness supplies surjectivity, while the original kernel
 equalities detect every coordinate of the source completion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

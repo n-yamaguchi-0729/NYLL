@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
-import Mathlib.Order.KrullDimension
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+public import Mathlib.Order.KrullDimension
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # A one-dimensional prime quotient over a nonmaximal radical
@@ -18,6 +20,8 @@ spectrum of a Noetherian local ring has finite dimension, so a prime of
 coheight one lies above that prime.  The quotient-spectrum order
 isomorphism identifies its coheight with the dimension of its quotient.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

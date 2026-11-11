@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteDivisorialFiniteQuotientNaturality
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCyclotomicConjugacy
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteDivisorialFiniteQuotientNaturality
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCyclotomicConjugacy
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteDivisorialFiniteQuotientCompatibility
 
 /-!
 # Absolute divisorial inertia in every finite pointed quotient
@@ -17,6 +20,8 @@ Galois quotient, using contraction of that same absolute prime along the
 function-field embedding selected by the pointed fiber.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory
@@ -26,16 +31,6 @@ open CategoryTheory.PreGaloisCategory
 namespace EtaleFundamentalGroups.Inertia
 
 universe u
-
-private theorem fieldGeometricPoint_comp_genericExtensionMorphism
-    (U : Scheme.{u}) [IsIntegral U]
-    (Omega : Type u) [Field Omega] [Algebra U.functionField Omega] :
-    ξ U.functionField Omega ≫
-        U.genericExtensionMorphism U.functionField =
-      U.genericExtensionMorphism Omega := by
-  simp only [Scheme.genericExtensionMorphism]
-  rw [← Spec.map_comp_assoc]
-  congr 1
 
 /-- Membership in one absolute normalization-prime inertia source implies
 the finite-quotient normalization-prime inertia condition at its base prime.

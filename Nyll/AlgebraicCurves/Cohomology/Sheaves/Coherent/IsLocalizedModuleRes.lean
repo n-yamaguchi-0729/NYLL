@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafSectionsLinearRes
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafSectionsLinearRes
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # OModule Presheaf is Localized Module res of is Quasicoherent
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -29,9 +33,9 @@ open CategoryTheory AlgebraicGeometry
 theorem _root_.AlgebraicGeometry.OModulePresheaf.isLocalizedModule_res_of_isQuasicoherent
     {R : Type u} [CommRing R] {V : Scheme.{u}} {π : V ⟶ Spec (.of R)} (F : OModulePresheaf π)
     (hq : F.IsQuasicoherent) (U : V.affineOpens) (f : Γ(V, U.1)) :
-    letI := F.moduleRestrict (V.basicOpen_le f)
+    let := F.moduleRestrict (V.basicOpen_le f)
     IsLocalizedModule (Submonoid.powers f) (F.resₗ (V.basicOpen_le f)) := by
-  let := F.moduleRestrict (V.basicOpen_le f)
+  intro sharedOwner1
   obtain ⟨hsurj, hker⟩ := hq U f
   have := U.2.isLocalization_basicOpen f
   refine ⟨?_, ?_, ?_⟩

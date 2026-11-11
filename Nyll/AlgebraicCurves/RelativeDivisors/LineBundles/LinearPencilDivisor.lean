@@ -11,26 +11,28 @@ https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.FlatSectionsBaseChange
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UniqueSectionPullbackSectionClosedCover
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleInvertibleZeroSchemeIdealFlat
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdealNeZero
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.FlatSectionsBaseChange
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UniqueSectionPullbackSectionClosedCover
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleInvertibleZeroSchemeIdealFlat
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdealNeZero
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!+# Effective divisors in a linear pencil
 
@@ -40,6 +42,8 @@ The actual zero scheme is finite and flat over the affine line, and its rank
 is constant. This constructs an effective relative Cartier divisor and
 computes its zero ideal on every rational parameter fibre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

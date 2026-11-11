@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.FiniteFractionFieldModel
-import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalModelNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.RingTheory.Smooth.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.FiniteFractionFieldModel
+public import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalModelNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.RingTheory.Smooth.IntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
 
 /-!
 # Non-Noetherian spreading for finite field normalizations
@@ -19,6 +22,8 @@ A finite subalgebra with the correct fraction field becomes the actual
 normalization on each neighborhood where it is étale. Local finiteness and
 étaleness at a base prime therefore spread without any Noetherian hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

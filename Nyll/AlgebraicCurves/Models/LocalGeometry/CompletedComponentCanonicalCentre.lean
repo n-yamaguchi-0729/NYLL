@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.AlgebraicCurves.Places.ValuationRings.UniqueCentrePlaceProper
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.Places.ValuationRings.UniqueCentrePlaceProper
 
 /-! # Canonical centres of the completed Cartier components
 
@@ -14,6 +16,8 @@ actual integral Cartier family is the point specified by the curve model's
 place equivalence. This connects Henselian block selection to the original
 finite set of boundary places, without an additional matching hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

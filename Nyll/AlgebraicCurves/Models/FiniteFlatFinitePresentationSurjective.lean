@@ -10,21 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Geometry.IsClosedSingletonNeGenericPoint
-import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FlatFinrankEqFinite
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+module
+
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Geometry.IsClosedSingletonNeGenericPoint
+public import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FlatFinrankEqFinite
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 
 /-!
 # Curve Model is Finite and flat and locally Of Finite Presentation and surjective of point
 Equiv Place comp eq restrict Along
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

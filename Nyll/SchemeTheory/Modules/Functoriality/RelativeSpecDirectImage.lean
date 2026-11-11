@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.AffineSourceColimit
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraMap
-import Nyll.SchemeTheory.Modules.Functoriality.RelativeSpecMap
-import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Nyll.SchemeTheory.Modules.AffineSourceColimit
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraMap
+public import Nyll.SchemeTheory.Modules.Functoriality.RelativeSpecMap
+public import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # Recovering an affine morphism from its actual direct-image algebra
@@ -19,6 +21,8 @@ The uniqueness isomorphism recovers the original source, its structure
 morphism, and every morphism over the base. All chart comparisons use the
 original `fromSpec` and `appLE` maps of the given schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

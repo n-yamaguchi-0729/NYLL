@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Essential scalar kernels in power-torsion modules
@@ -18,6 +20,8 @@ from the kernel, induction on the annihilating exponent forces every
 element to be zero.  Local cohomology supplies the required power torsion
 for each scalar in its support ideal.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

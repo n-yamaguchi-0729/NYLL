@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.FieldDivision
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Algebra.Polynomial.FieldDivision
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Tactic.Ext
 
 /-!
 # bijective algebra Map app Top of is Proper of is Integral
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -56,8 +60,7 @@ theorem _root_.AlgebraicGeometry.bijective_algebraMap_appTop_of_isProper_of_isIn
   let π : Spec (CommRingCat.of k[X]) ⟶ Spec (CommRingCat.of k) :=
     Spec.map (CommRingCat.ofHom (algebraMap k k[X]))
   have hψC : ψ.comp (algebraMap k k[X]) = φ := by
-    ext x
-    simp [ψ, Polynomial.algebraMap_eq]
+    exact Polynomial.eval₂RingHom_comp_C φ a
   have hfX : fX = X.toSpecΓ ≫ Spec.map (CommRingCat.ofHom φ) := by
     have h1 := Scheme.toSpecΓ_naturality fX
     rw [← SpecMap_ΓSpecIso_hom] at h1
@@ -127,7 +130,9 @@ theorem _root_.AlgebraicGeometry.bijective_algebraMap_appTop_of_isProper_of_isIn
       have h2 : Polynomial.X - Polynomial.C c ∈ (g.base x).asIdeal := hmem hXc
       have h3 : (g.base x).asIdeal = Ideal.comap ψ (X.toSpecΓ.base x).asIdeal := rfl
       rw [h3, Ideal.mem_comap] at h2
-      have h4 : ψ (Polynomial.X - Polynomial.C c) = a - φ c := by simp [ψ]
+      have h4 : ψ (Polynomial.X - Polynomial.C c) = a - φ c := by
+        change (Polynomial.X - Polynomial.C c).eval₂ φ a = a - φ c
+        rw [Polynomial.eval₂_sub, Polynomial.eval₂_X, Polynomial.eval₂_C]
       rw [h4] at h2
       have h5 : x ∈ X.toSpecΓ ⁻¹ᵁ (PrimeSpectrum.basicOpen (a - φ c)) := by
         rw [Scheme.toSpecΓ_preimage_basicOpen]; exact hx

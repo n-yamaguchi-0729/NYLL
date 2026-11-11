@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Degree.FormalRootPoleBound
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
-import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Degree.FormalRootPoleBound
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
+public import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
 
 /-! # Effective divisor bounds for actual simple algebraic formal roots
 
@@ -15,6 +17,8 @@ has linearly bounded coefficient poles. The weighted equation is derived
 from the polynomial by removing its nonzero linear term and writing the
 root as `X * W`; it is not an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

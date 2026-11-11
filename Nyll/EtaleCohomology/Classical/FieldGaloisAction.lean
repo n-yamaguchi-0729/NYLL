@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GaloisSections
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
+module
+
+public import Nyll.EtaleCohomology.Sites.GaloisSections
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
 
 /-!
 # The actual Galois action on sheaf sections over a field
@@ -17,6 +19,8 @@ this action with the usual Galois action on units for the actual Gm sheaf.
 This supplies the coefficient action required to apply Hilbert 90 to
 descent of extensions of etale sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w
@@ -29,14 +33,17 @@ namespace EtaleCohomology
 def finiteEtaleSheafDeckAction {D : Type v} [Category.{w} D]
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology D) (Y : FiniteEtale X) :
     (Aut Y)ᵐᵒᵖ →* Aut (F.obj.obj (op ((finiteEtaleInclusion X).obj Y))) where
-  toFun σ := ((finiteEtaleInclusion X).op ⋙ F.obj).mapIso (MulOpposite.unop σ).op
+  toFun σ := Aut.of (((finiteEtaleInclusion X).op ⋙ F.obj).mapIso
+    (MulOpposite.unop σ).asIso.op)
   map_one' := by
+    apply Aut.ext
     apply Iso.ext
     exact ((finiteEtaleInclusion X).op ⋙ F.obj).map_id (op Y)
   map_mul' σ τ := by
+    apply Aut.ext
     apply Iso.ext
     exact ((finiteEtaleInclusion X).op ⋙ F.obj).map_comp
-      (MulOpposite.unop τ).hom.op (MulOpposite.unop σ).hom.op
+      (MulOpposite.unop τ).asIso.hom.op (MulOpposite.unop σ).asIso.hom.op
 
 /-- The action on sections of a finite Galois field extension uses the
 already constructed comparison with its actual finite-etale deck group. -/
@@ -57,7 +64,8 @@ theorem fieldGaloisSheafAction_units
     (s : (etaleMultiplicativeGroupSheaf (Spec (.of K))).obj.obj
       (op ((finiteEtaleInclusion (Spec (.of K))).obj (FiniteEtale.mk (ξ K L))))) :
     etaleMultiplicativeGroupSpecSectionsEquiv (Spec (.of K)) (.of L) (ξ K L)
-      ((fieldGaloisSheafAction K L (etaleMultiplicativeGroupSheaf (Spec (.of K))) σ).hom s) =
+      ((fieldGaloisSheafAction K L
+        (etaleMultiplicativeGroupSheaf (Spec (.of K))) σ).asIso.hom s) =
         Additive.ofMul (Units.map σ.toMonoidHom
           (etaleMultiplicativeGroupSpecSectionsEquiv
             (Spec (.of K)) (.of L) (ξ K L) s).toMul) := by
@@ -75,14 +83,14 @@ theorem fieldGaloisSheafAction_naturality {D : Type v} [Category.{w} D]
     [FiniteDimensional K L] [IsGalois K L]
     {F G : Sheaf (Spec (.of K)).smallEtaleTopology D} (η : F ⟶ G)
     (σ : Gal(L/K)) :
-    (fieldGaloisSheafAction K L F σ).hom ≫
+    (fieldGaloisSheafAction K L F σ).asIso.hom ≫
         η.hom.app (op ((finiteEtaleInclusion (Spec (.of K))).obj
           (FiniteEtale.mk (ξ K L)))) =
       η.hom.app (op ((finiteEtaleInclusion (Spec (.of K))).obj
-        (FiniteEtale.mk (ξ K L)))) ≫ (fieldGaloisSheafAction K L G σ).hom :=
+        (FiniteEtale.mk (ξ K L)))) ≫ (fieldGaloisSheafAction K L G σ).asIso.hom :=
   η.hom.naturality
     ((finiteEtaleInclusion (Spec (.of K))).map
       (MulOpposite.unop
-        (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K L σ)).hom).op
+        (EtaleFundamentalGroups.fieldGaloisToFiniteEtaleAutOpMulEquiv K L σ)).asIso.hom).op
 
 end EtaleCohomology

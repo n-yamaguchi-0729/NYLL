@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Etale.Descent
 public import Mathlib.RingTheory.Etale.Finite
 public import Mathlib.RingTheory.Finiteness.Descent
 public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.TensorProduct.Pi
 public import Mathlib.RingTheory.TotallySplit
 
 /-!
@@ -372,7 +373,7 @@ private lemma cancelBaseChange_symm_map {C D : CommAlgCat S}
   | tmul c a =>
       simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
         Algebra.TensorProduct.cancelBaseChange_symm_tmul, AlgHom.restrictScalars_apply]
-  | add x y hx hy => simp [hx, hy]
+  | add x y hx hy => simp only [map_add, hx, hy]
 
 omit [Module.Free R A] [Module.Finite R A] [Algebra.FinitePresentation R B] in
 private lemma targetBaseChangeHomEquiv_comp {C D : CommAlgCat S}
@@ -412,11 +413,6 @@ private lemma targetBaseChangeHomEquiv_comp {C D : CommAlgCat S}
 private def sourceS :
     tensorRightS (R := R) (S := S) (A := A).PartialLeftAdjointSource :=
   ⟨of S (BS (R := R) (S := S) (B := B)), tensorRight_leftAdjointObjIsDefined⟩
-
-private abbrev HS :=
-  affineWeilRestriction
-    (R := S) (A := AS (R := R) (S := S) (A := A))
-    (B := BS (R := R) (S := S) (B := B))
 
 private def baseChangeCorepresentableBy :
     ((tensorRightS (R := R) (S := S) (A := A)) ⋙

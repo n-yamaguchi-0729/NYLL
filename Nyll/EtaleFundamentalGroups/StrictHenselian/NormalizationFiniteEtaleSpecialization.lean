@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryHenselization
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.SchemeTheory.RingTheory.Ramification.StabilizerLocalizationAction
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PointSpecialization
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryHenselization
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeField
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.SchemeTheory.RingTheory.Ramification.StabilizerLocalizationAction
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.RingTheory.Localization.Integral
 
 /-!
 # Actual decomposition-equivariant specialization for the ordinary henselization
@@ -22,6 +24,8 @@ are linear over that henselization by its proved universal rigidity. The
 ring-only point equivalence then identifies generic and residue points of
 every finite étale algebra, naturally and for these same original actions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

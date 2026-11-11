@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
-import Nyll.AlgebraicCurves.Geometry.IsClosedSingletonNeGenericPoint
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
+public import Nyll.AlgebraicCurves.Geometry.IsClosedSingletonNeGenericPoint
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Full modulus congruence is restriction to one
@@ -17,6 +19,8 @@ Cartier modulus, the function-field congruence is equivalent to restriction to
 one on the original closed subscheme. Stalk detection retains every nilpotent
 order; it needs no reduced-support replacement or decomposition assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

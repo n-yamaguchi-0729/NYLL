@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
-import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
-import Nyll.SchemeTheory.Etale.OverField.Decomposition
-import Mathlib.Algebra.Homology.ShortComplex.Ab
+module
+
+public import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
+public import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
+public import Nyll.SchemeTheory.Etale.OverField.Decomposition
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Cohomology on disjoint unions
@@ -15,6 +18,8 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 Exactness and cohomology vanishing on an étale disjoint union follow by
 gluing componentwise boundary lifts for the actual injective resolution.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
 
 /-!
 # Scheme Modules Is Invertible nonempty iso tensor Unit of is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

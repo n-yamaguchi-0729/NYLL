@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Topology.MetricSpace.Pseudo.Pi
-import Mathlib.Topology.MetricSpace.Pseudo.Constructions
-import Mathlib.Topology.Algebra.Monoid
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.SumAppLEMulAppLENeZeroEqZero
+module
+
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Topology.MetricSpace.Pseudo.Pi
+public import Mathlib.Topology.MetricSpace.Pseudo.Constructions
+public import Mathlib.Topology.Algebra.Monoid
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.SumAppLEMulAppLENeZeroEqZero
 
 /-!
 # exists finset forall norm app LE sub lt imp false of ne of is Separated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

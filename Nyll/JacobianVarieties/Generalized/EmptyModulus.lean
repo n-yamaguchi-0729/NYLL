@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardForgetful
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
-import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.Logic.Relation
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardForgetful
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
+public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Logic.Relation
 
 /-!
 # Empty modulus and ordinary relative line bundles
@@ -20,6 +22,8 @@ every actual underlying line bundle has a unique chosen rigidification on an emp
 modulus, and every underlying isomorphism is compatible. A base twist is then shown
 to disappear after any actual trivialization of its base line bundle.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -73,7 +77,8 @@ def compatibleIso {X E : Scheme.{u}} [IsEmpty E] {i : E ⟶ X}
 variable {R : Type u} [CommRing R] {X D : Scheme.{u}}
   (c : X ⟶ Spec (CommRingCat.of R)) (i : D ⟶ X) [IsEmpty D]
 
-private instance empty_baseChange {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) :
+/-- Every coefficient base change of the empty modulus is empty. -/
+local instance empty_baseChange {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) :
     IsEmpty (pullback (i ≫ c) t : Scheme.{u}) :=
   Function.isEmpty (fun x : (pullback (i ≫ c) t : Scheme.{u}) =>
     (pullback.fst (i ≫ c) t) x)

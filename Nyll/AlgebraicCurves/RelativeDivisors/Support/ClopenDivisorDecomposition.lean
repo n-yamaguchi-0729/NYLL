@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.HenselianRegularDivisorBlock
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.HenselianRegularDivisorBlock
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Complementary finite-flat divisor blocks
@@ -16,6 +18,8 @@ divisors over the original local base. Their full ideals are coprime and
 multiply to the original ideal. The existing construction of products of
 relative divisors then proves additivity of their actual finite-flat ranks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

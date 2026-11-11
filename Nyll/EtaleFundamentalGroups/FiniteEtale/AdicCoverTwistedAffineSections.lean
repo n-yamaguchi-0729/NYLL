@@ -4,28 +4,30 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineCompletion
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineProjective
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorNilpotentSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorWithFrame
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineCompletion
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineProjective
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorNilpotentSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorWithFrame
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Actual twisted affine sections of the finite étale adic tower
@@ -41,6 +43,8 @@ projective over that quotient by the actual finite étale coefficient
 map. These are the target modules of the quotient-free presentations;
 no flatness or kernel identification is supplied as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

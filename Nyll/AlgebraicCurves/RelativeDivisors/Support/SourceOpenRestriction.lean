@@ -11,8 +11,10 @@ Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b3
 Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 
 /-!
 # Restricting supported relative divisors without changing the base
@@ -21,6 +23,8 @@ An actual divisor family supported in an open curve restricts to that open
 over the same test scheme and base. Its finite flat projection and full ideal
 are preserved. Restriction commutes with arbitrary changes of test scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

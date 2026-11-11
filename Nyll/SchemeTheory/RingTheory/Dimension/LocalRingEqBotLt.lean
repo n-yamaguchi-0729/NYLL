@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.Ideal.GoingDown
-import Mathlib.Tactic.FinCases
+module
+
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.Ideal.GoingDown
+public import Mathlib.Tactic.FinCases
 
 /-!
 # Is Local Ring eq bot of lt of ne maximal Ideal of ring Krull Dim le two
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

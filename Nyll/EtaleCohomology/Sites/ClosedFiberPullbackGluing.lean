@@ -5,30 +5,32 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ClosedFiberFinitePullbackLifts
-import Nyll.EtaleCohomology.Sites.PullbackClosedFiberStalks
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
-import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
-import Nyll.EtaleCohomology.Sites.ZariskiRestriction
-import Nyll.SchemeTheory.Morphisms.ProperHenselianSheafRestriction
-import Nyll.SchemeTheory.Topology.SheafPullbackStalks
-import Nyll.SchemeTheory.Topology.SpecializationCofinalRestriction
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.EtaleCohomology.Sites.ClosedFiberFinitePullbackLifts
+public import Nyll.EtaleCohomology.Sites.PullbackClosedFiberStalks
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
+public import Nyll.EtaleCohomology.Sites.ZariskiModuleBaseChange
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Nyll.SchemeTheory.Morphisms.ProperHenselianSheafRestriction
+public import Nyll.SchemeTheory.Topology.SheafPullbackStalks
+public import Nyll.SchemeTheory.Topology.SpecializationCofinalRestriction
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Gluing the actual closed-fiber unit after finite refinement
@@ -39,6 +41,8 @@ the relevant Zariski stalks. Proper henselian restriction then lifts this
 closed-fiber section to the whole refinement. The section equations use
 the original unit throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

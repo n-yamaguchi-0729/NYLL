@@ -16,3 +16,4 @@ import Nyll.AlgebraicCurves.FunctionFields.Extensions.IsIntegralAdjoinIntermedia
 import Nyll.AlgebraicCurves.FunctionFields.Extensions.IsIntegralAdjoinIsScalarTower
 import Nyll.AlgebraicCurves.FunctionFields.Extensions.IsIntegralAdjoinMapAlgHom
 import Nyll.AlgebraicCurves.FunctionFields.Extensions.SeparableAlongCharZero
+import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveFiniteExtension

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Tactic.Ring
-import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.PowValuationEqValuationAlgebraMap
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.Tactic.Ring
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.PowValuationEqValuationAlgebraMap
 
 /-!
 # Valuation Subring exists pow eq unit mul zpow of is Algebraic of is Noetherian Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

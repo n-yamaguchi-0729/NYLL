@@ -10,32 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.IntegralClosure.GoingDown
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.RingTheory.Polynomial.IsIntegral
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Algebraic.Basic
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Algebra.Polynomial.Lifts
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.Data.Int.CharZero
-import Mathlib.Data.Nat.Prime.Int
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.Separable
+module
+
+public import Mathlib.RingTheory.Adjoin.Polynomial.Transcendental
+public import Mathlib.RingTheory.IntegralClosure.GoingDown
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.RingTheory.Polynomial.IsIntegral
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.Data.Int.CharZero
+public import Mathlib.Data.Nat.Prime.Int
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Place exists of is Prime over valuation Subring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -123,10 +128,6 @@ open _root_.Subring
 open _root_.Subring
 
 variable {F : Type*} [Field F]
-
-private theorem isIntegral_iff_exists_monic_eval₂ (S : Subring F) (b : F) :
-    IsIntegral S b ↔ ∃ p : Polynomial S, p.Monic ∧ Polynomial.eval₂ S.subtype b p = 0 :=
-  Iff.rfl
 
 private theorem exists_ideal_le_comap_eq_of_isIntegral {S B : Subring F} (hSB : S ≤ B)
     [IsIntegrallyClosed S] (hint : ∀ b : B, IsIntegral S (b : F))
@@ -227,9 +228,6 @@ private def _root_.AlgebraicCurve.Place.HasValueAt (f : F) (a : K) : Prop :=
   f - algebraMap K F a ∈ w.toValuationSubring.nonunits
 
 open _root_.AlgebraicCurve.Place
-private theorem hasValueAt_iff (f : F) (a : K) :
-    w.HasValueAt f a ↔ f - algebraMap K F a ∈ w.toValuationSubring.nonunits := Iff.rfl
-
 private theorem _root_.AlgebraicCurve.Place.hasValueAt_iff_ord_pos {f : F} {a : K} (h : f ≠
   algebraMap K F a) :
     w.HasValueAt f a ↔ 0 < w.ord (f - algebraMap K F a) :=
@@ -317,16 +315,6 @@ private theorem _root_.AlgebraicCurve.Place.HasValueAt.mul {f g : F} {a b : K} (
 end HasValueAt
 open _root_.AlgebraicCurve.Place
 namespace HasValueAt
-variable {w} in
-private theorem _root_.AlgebraicCurve.Place.HasValueAt.pow {f : F} {a : K} (hf : w.HasValueAt f a)
-  (n : ℕ) :
-    w.HasValueAt (f ^ n) (a ^ n) := by
-  induction n with
-  | zero => simpa using w.hasValueAt_algebraMap 1
-  | succ n ih =>
-    rw [pow_succ, pow_succ]
-    exact ih.mul hf
-
 end HasValueAt
 open _root_.AlgebraicCurve.Place
 namespace HasValueAt
@@ -357,13 +345,6 @@ private theorem _root_.AlgebraicCurve.Place.HasValueAt.inv {f : F} {a : K} (hf :
 end HasValueAt
 open _root_.AlgebraicCurve.Place
 namespace HasValueAt
-variable {w} in
-private theorem _root_.AlgebraicCurve.Place.HasValueAt.div {f g : F} {a b : K} (hf : w.HasValueAt f
-  a) (hg : w.HasValueAt g b)
-    (hb : b ≠ 0) : w.HasValueAt (f / g) (a / b) := by
-  rw [div_eq_mul_inv, div_eq_mul_inv]
-  exact hf.mul (hg.inv hb)
-
 end HasValueAt
 open _root_.AlgebraicCurve.Place
 
@@ -394,11 +375,6 @@ private theorem _root_.AlgebraicCurve.Place.surjective_algebraMap_residueField_o
 
 open _root_.AlgebraicCurve.Place
 
-private theorem surjective_algebraMap_residueField_of_deg_eq_one [IsAlgClosed K] (h : w.deg = 1) :
-    Function.Surjective (algebraMap K w.ResidueField) :=
-  haveI : Module.Finite K w.ResidueField := Module.finite_of_finrank_eq_succ (n := 0) h
-  w.surjective_algebraMap_residueField_of_isAlgClosed
-
 variable (A : ValuationSubring K)
 
 private def _root_.AlgebraicCurve.Place.compSubring : Subring F where
@@ -416,10 +392,6 @@ private def _root_.AlgebraicCurve.Place.compSubring : Subring F where
     exact ⟨-a, by simpa using ha.neg⟩
 
 open _root_.AlgebraicCurve.Place
-variable {A} in
-private theorem mem_compSubring_iff {f : F} : f ∈ w.compSubring A ↔ ∃ a : A, w.HasValueAt f a :=
-  Iff.rfl
-
 variable {A} in
 private theorem _root_.AlgebraicCurve.Place.mem_compSubring_of_hasValueAt {f : F} {a : K} (ha : a ∈
   A) (h : w.HasValueAt f a) :
@@ -482,17 +454,6 @@ private theorem _root_.AlgebraicCurve.Place.value_eq_of_hasValueAt {f : w.compSu
   Subtype.ext ((w.hasValueAt_value A f).unique h)
 
 open _root_.AlgebraicCurve.Place
-variable {A} in
-private theorem ord_sub_value_pos {f : w.compSubring A} (hf : (f : F) ≠ algebraMap K F (w.value A
-  f)) :
-    0 < w.ord ((f : F) - algebraMap K F (w.value A f)) :=
-  (w.hasValueAt_iff_ord_pos hf).mp (w.hasValueAt_value A f)
-
-variable {A} in
-private theorem value_eq_of_ord_pos {f : w.compSubring A} {a : A}
-    (h : 0 < w.ord ((f : F) - algebraMap K F a)) : w.value A f = a :=
-  w.value_eq_of_hasValueAt (w.hasValueAt_of_ord_pos h)
-
 private theorem _root_.AlgebraicCurve.Place.value_algebraMap (a : A) :
     w.value A ⟨algebraMap K F a, (w.algebraMap_mem_compSubring_iff A a).mpr a.2⟩ = a :=
   w.value_eq_of_hasValueAt (w.hasValueAt_algebraMap (a : K))
@@ -532,22 +493,12 @@ private theorem _root_.AlgebraicCurve.Place.mem_centre_iff_of_hasValueAt {f : w.
 
 open _root_.AlgebraicCurve.Place
 variable {A} in
-private theorem mem_centre_iff_of_ord_pos {f : w.compSubring A} {a : A}
-    (h : 0 < w.ord ((f : F) - algebraMap K F a)) : f ∈ w.centre A ↔ a ∈ maximalIdeal A :=
-  w.mem_centre_iff_of_hasValueAt (w.hasValueAt_of_ord_pos h)
-
-variable {A} in
 private theorem _root_.AlgebraicCurve.Place.mem_centre_of_mem_nonunits {f : w.compSubring A}
     (hf : (f : F) ∈ w.toValuationSubring.nonunits) : f ∈ w.centre A := by
   rw [mem_centre_iff, w.value_eq_zero_of_mem_nonunits hf]
   exact Ideal.zero_mem _
 
 open _root_.AlgebraicCurve.Place
-variable {A} in
-private theorem mem_centre_of_ord_pos {f : w.compSubring A} (hf : 0 < w.ord (f : F)) : f ∈ w.centre
-  A :=
-  w.mem_centre_of_mem_nonunits ((w.mem_nonunits_iff_ord_pos (by rintro h; simp [h] at hf)).mpr hf)
-
 private theorem _root_.AlgebraicCurve.Place.algebraMap_mem_centre_iff (a : A) :
     (⟨algebraMap K F a, (w.algebraMap_mem_compSubring_iff A a).mpr a.2⟩ : w.compSubring A)
         ∈ w.centre A ↔ a ∈ maximalIdeal A := by
@@ -603,25 +554,6 @@ private theorem compValuationSubring_toSubring (hw : Function.Surjective (algebr
   w.ResidueField)) :
     (w.compValuationSubring A hw).toSubring = w.compSubring A := rfl
 
-private theorem mem_compValuationSubring_iff (hw : Function.Surjective (algebraMap K
-  w.ResidueField))
-    (f : F) : f ∈ w.compValuationSubring A hw ↔ f ∈ w.compSubring A := Iff.rfl
-
-private theorem mem_compSubring_of_isIntegral (hw : Function.Surjective (algebraMap K
-  w.ResidueField))
-    {S : Subring F} (hS : S ≤ w.compSubring A) {f : F} (hf : IsIntegral S f) :
-    f ∈ w.compSubring A := by
-  obtain ⟨p, hp, hpf⟩ := hf
-  let V := w.compValuationSubring A hw
-  let i : S →+* V := Subring.inclusion hS
-  have hint : IsIntegral V f := by
-    refine ⟨p.map i, hp.map i, ?_⟩
-    rw [Polynomial.eval₂_map]
-    exact hpf
-  obtain ⟨y, hy⟩ := IsIntegrallyClosed.isIntegral_iff.mp hint
-  rw [← hy]
-  exact y.2
-
 private theorem _root_.AlgebraicCurve.Place.mem_compSubring_of_isIntegral' [IsAlgClosed K] {S :
   Subring F} (hS : S ≤ w.compSubring A)
     {f : F} (hf : IsIntegral S f) : f ∈ w.compSubring A := by
@@ -667,32 +599,6 @@ private theorem _root_.AlgebraicCurve.Place.mem_compSubring_of_isIntegral' [IsAl
 
 open _root_.AlgebraicCurve.Place
 
-private theorem exists_unique_valueHom [IsAlgClosed K] (g : F) (B₀ : Subring F)
-    (hint : ∀ b : B₀,
-      ∃ p : Polynomial (Subring.closure (algebraMap K F '' (A : Set K) ∪ {g})),
-        p.Monic ∧
-          Polynomial.eval₂ (Subring.closure (algebraMap K F '' (A : Set K) ∪ {g})).subtype
-            (b : F) p = 0)
-    (hw : ∃ a : A, g - algebraMap K F (a : K) ∈ w.toValuationSubring.nonunits) :
-    ∃! φ : B₀ →+* A, ∀ b : B₀,
-      (b : F) - algebraMap K F ((φ b : A) : K) ∈ w.toValuationSubring.nonunits := by
-  obtain ⟨a₀, ha₀⟩ := hw
-  have hg : g ∈ w.compSubring A := w.mem_compSubring_of_hasValueAt a₀.2 ha₀
-  have hS : Subring.closure (algebraMap K F '' (A : Set K) ∪ {g}) ≤ w.compSubring A := by
-    rw [Subring.closure_le]
-    rintro y (⟨c, hc, rfl⟩ | rfl)
-    · exact (w.algebraMap_mem_compSubring_iff A c).mpr hc
-    · exact hg
-  have hB₀ : B₀ ≤ w.compSubring A := fun b hb => w.mem_compSubring_of_isIntegral' A hS (hint ⟨b,
-    hb⟩)
-  refine ⟨(w.value A).comp (Subring.inclusion hB₀), fun b => w.hasValueAt_value A ⟨b, hB₀ b.2⟩, ?_⟩
-  intro ψ hψ
-  refine RingHom.ext fun b => ?_
-  have h1 : w.HasValueAt (b : F) ((ψ b : A) : K) := hψ b
-  have h2 : ψ b = w.value A ⟨b, hB₀ b.2⟩ := Subtype.ext (h1.unique (w.hasValueAt_value A ⟨b, hB₀
-    b.2⟩))
-  exact h2
-
 variable {A} in
 private theorem _root_.AlgebraicCurve.Place.residue_comp_value_surjective {B : Subring F} (hB : B ≤
   w.compSubring A)
@@ -716,27 +622,6 @@ private theorem _root_.AlgebraicCurve.Place.ker_residue_comp_value {B : Subring 
     IsLocalRing.residue_eq_zero_iff]
 
 open _root_.AlgebraicCurve.Place
-variable {A} in
-private theorem centre_comap_isMaximal {B : Subring F} (hB : B ≤ w.compSubring A)
-    (hconst : ∀ a : A, algebraMap K F a ∈ B) :
-    ((w.centre A).comap (Subring.inclusion hB)).IsMaximal := by
-  rw [← w.ker_residue_comp_value hB]
-  exact RingHom.ker_isMaximal_of_surjective _ (w.residue_comp_value_surjective hB hconst)
-
-variable {A} in
-private theorem sub_value_mem_centre_comap {B : Subring F} (hB : B ≤ w.compSubring A)
-    (hconst : ∀ a : A, algebraMap K F a ∈ B) (b : B) :
-    b - ⟨algebraMap K F (w.value A ⟨b, hB b.2⟩ : K), hconst _⟩ ∈
-      (w.centre A).comap (Subring.inclusion hB) := by
-  rw [Ideal.mem_comap, mem_centre_iff]
-  simp only [map_sub]
-  have h1 : w.value A (Subring.inclusion hB ⟨algebraMap K F (w.value A ⟨b, hB b.2⟩ : K), hconst _⟩)
-      = w.value A ⟨b, hB b.2⟩ :=
-    w.value_eq_of_hasValueAt (w.hasValueAt_algebraMap _)
-  have h2 : w.value A (Subring.inclusion hB b) = w.value A ⟨b, hB b.2⟩ := rfl
-  rw [h1, h2, sub_self]
-  exact Ideal.zero_mem _
-
 variable {A} in
 private theorem _root_.AlgebraicCurve.Place.algebraMap_mem_centre_comap_iff {B : Subring F} (hB : B
   ≤ w.compSubring A)
@@ -886,16 +771,6 @@ private theorem exists_sub_constants_mem [IsAlgClosed K] {x : F} {B : Subring F}
   rw [halg, Ideal.Quotient.eq] at ha
   have := 𝔭.neg_mem ha
   rwa [neg_sub] at this
-
-private theorem constants_unique_mod {B : Subring F} (hconst : ∀ a : A, A.constants a ∈ B)
-    (𝔭 : Ideal B) (hbot : ∀ a : A, (⟨A.constants a, hconst a⟩ : B) ∈ 𝔭 → a = 0)
-    {a c : A} (h : (⟨A.constants a, hconst a⟩ : B) - ⟨A.constants c, hconst c⟩ ∈ 𝔭) : a = c := by
-  have : (⟨A.constants (a - c), hconst (a - c)⟩ : B) ∈ 𝔭 := by
-    convert h using 1
-    apply Subtype.ext
-    push_cast
-    rw [map_sub]
-  exact sub_eq_zero.mp (hbot _ this)
 
 end Quotient
 
@@ -1068,12 +943,6 @@ private def ofValuationSubringOver (O : ValuationSubring F) (hO : ∀ r : R, alg
 private theorem ofValuationSubringOver_toValuationSubring (O : ValuationSubring F)
     (hO : ∀ r : R, algebraMap R F r ∈ O) (hne : O ≠ ⊤) (hK : ∀ c : K, algebraMap K F c ∈ O) :
     (ofValuationSubringOver O hO hne hK).toValuationSubring = O := rfl
-
-private theorem mem_nonunits_ofValuationSubringOver_iff (O : ValuationSubring F)
-    (hO : ∀ r : R, algebraMap R F r ∈ O) (hne : O ≠ ⊤) (hK : ∀ c : K, algebraMap K F c ∈ O)
-    {B : Subring F} {𝔭 : Ideal B} (hdom : ∀ b : B, (b : F) ∈ O.nonunits ↔ b ∈ 𝔭) (b : B) :
-    (b : F) ∈ (ofValuationSubringOver O hO hne hK).toValuationSubring.nonunits ↔ b ∈ 𝔭 :=
-  hdom b
 
 end Place
 
@@ -1270,23 +1139,6 @@ private theorem _root_.ValuationSubring.ker_eq_maximalIdeal_of_isAlgebraic [Alge
 
 open _root_.ValuationSubring
 
-private theorem exists_mul_eq_one_of_map_ne_zero [Algebra ℚ K] [Algebra.IsAlgebraic ℚ K]
-    (ℓ : ℕ) [Fact ℓ.Prime] [CharP k ℓ] (red : A →+* k) {a : A} (ha : red a ≠ 0) :
-    ∃ b : A, red a * red b = 1 := by
-  have hunit : IsUnit a := by
-    by_contra h
-    have : a ∈ RingHom.ker red := by
-      rw [A.ker_eq_maximalIdeal_of_isAlgebraic ℓ red]
-      exact (IsLocalRing.mem_maximalIdeal _).mpr h
-    exact ha this
-  obtain ⟨u, rfl⟩ := hunit
-  exact ⟨((u⁻¹ : Aˣ) : A), by rw [← map_mul, Units.mul_inv, map_one]⟩
-
-private theorem ker_eq_maximalIdeal_apply [Algebra ℚ K] [Algebra.IsAlgebraic ℚ K]
-    (ℓ : ℕ) [Fact ℓ.Prime] [CharP k ℓ] (red : A →+* k) (a : A) :
-    red a = 0 ↔ a ∈ maximalIdeal A := by
-  rw [← RingHom.mem_ker, A.ker_eq_maximalIdeal_of_isAlgebraic ℓ red]
-
 end ValuationSubring
 
 noncomputable section
@@ -1341,32 +1193,6 @@ private theorem integralClosure_adjoin_le_valuationSubring (O : ValuationSubring
   rw [← hy]
   exact y.2
 
-private theorem algebraMap_mem_integralClosure_adjoin (c : K) :
-    algebraMap K F c ∈ integralClosure (Algebra.adjoin K ({j} : Set F)) F := by
-  rw [mem_integralClosure_iff, IsScalarTower.algebraMap_apply K (Algebra.adjoin K ({j} : Set F)) F]
-  exact isIntegral_algebraMap
-
-private theorem self_mem_integralClosure_adjoin :
-    j ∈ integralClosure (Algebra.adjoin K ({j} : Set F)) F := by
-  rw [mem_integralClosure_iff]
-  have : j = algebraMap (Algebra.adjoin K ({j} : Set F)) F ⟨j, Algebra.self_mem_adjoin_singleton K
-    j⟩ :=
-    rfl
-  rw [this]
-  exact isIntegral_algebraMap
-
-private theorem le_integralClosure_adjoin_of_isIntegral {S B : Subring F}
-    (hS : S ≤ (Algebra.adjoin K ({j} : Set F)).toSubring)
-    (hint : ∀ b : B, IsIntegral S (b : F)) (b : B) :
-    (b : F) ∈ integralClosure (Algebra.adjoin K ({j} : Set F)) F := by
-  rw [mem_integralClosure_iff]
-  obtain ⟨p, hp, hpb⟩ := hint b
-  let φ : S →+* Algebra.adjoin K ({j} : Set F) :=
-    S.subtype.codRestrict (Algebra.adjoin K ({j} : Set F)).toSubring (fun y => hS y.2)
-  refine ⟨p.map φ, hp.map φ, ?_⟩
-  rw [eval₂_map]
-  exact hpb
-
 end AlgebraicCurve
 
 open Polynomial
@@ -1376,24 +1202,6 @@ open _root_.ValuationSubring
 open _root_.ValuationSubring
 
 variable {K : Type*} [Field K] (A : ValuationSubring K) {k : Type*} [Field k]
-
-private theorem isAlgClosed_of_surjective [IsAlgClosed K] (red : A →+* k)
-    (hred : Function.Surjective red) : IsAlgClosed k := by
-  refine IsAlgClosed.of_exists_root k fun p hp hirr => ?_
-  have hlifts : p ∈ Polynomial.lifts red := (lifts_iff_coeff_lifts p).mpr fun n => hred _
-  obtain ⟨P, hPp, hPdeg, hP⟩ := lifts_and_degree_eq_and_monic hlifts hp
-  have hdegK : (P.map (algebraMap A K)).degree ≠ 0 := by
-    rw [hP.degree_map, hPdeg]
-    exact (degree_pos_of_irreducible hirr).ne'
-  obtain ⟨x, hx⟩ := IsAlgClosed.exists_root (P.map (algebraMap A K)) hdegK
-  have hint : IsIntegral A x := ⟨P, hP, by rwa [IsRoot.def, eval_map] at hx⟩
-  obtain ⟨y, rfl⟩ := IsIntegrallyClosed.isIntegral_iff.mp hint
-  have hy : P.eval y = 0 := by
-    apply IsFractionRing.injective A K
-    rw [map_zero, ← Polynomial.eval₂_at_apply, ← eval_map]
-    exact hx
-  refine ⟨red y, ?_⟩
-  rw [← hPp, eval_map, Polynomial.eval₂_at_apply, hy, map_zero]
 
 end ValuationSubring
 
@@ -1413,52 +1221,12 @@ private theorem rangeRestrict_mem_imagePrime_iff {𝔮 : Ideal B} (hker : ker π
     ← RingHom.ker, ker_rangeRestrict, sup_eq_left.mpr hker]
 
 variable {π} in
-private theorem mk_mem_imagePrime_iff {𝔮 : Ideal B} (hker : ker π ≤ 𝔮) (b : B)
-    (hb : π b ∈ π.range := π.mem_range_self b) :
-    (⟨π b, hb⟩ : π.range) ∈ π.imagePrime 𝔮 ↔ b ∈ 𝔮 :=
-  rangeRestrict_mem_imagePrime_iff hker b
-
-variable {π} in
-private theorem mem_imagePrime_iff {𝔮 : Ideal B} (y : π.range) :
-    y ∈ π.imagePrime 𝔮 ↔ ∃ b ∈ 𝔮, π.rangeRestrict b = y := by
-  rw [imagePrime, Ideal.mem_map_iff_of_surjective _ π.rangeRestrict_surjective]
-
-variable {π} in
 private theorem imagePrime_ne_top {𝔮 : Ideal B} (hker : ker π ≤ 𝔮) (h𝔮 : 𝔮 ≠ ⊤) :
     π.imagePrime 𝔮 ≠ ⊤ := by
   intro htop
   apply h𝔮
   rw [Ideal.eq_top_iff_one, ← rangeRestrict_mem_imagePrime_iff hker, map_one, htop]
   exact Submodule.mem_top
-
-variable {π} in
-private theorem imagePrime_isPrime {𝔮 : Ideal B} [𝔮.IsPrime] (hker : ker π ≤ 𝔮) :
-    (π.imagePrime 𝔮).IsPrime :=
-  Ideal.map_isPrime_of_surjective π.rangeRestrict_surjective (by rwa [ker_rangeRestrict])
-
-variable {π} in
-private theorem imagePrime_isMaximal {𝔮 : Ideal B} [h : 𝔮.IsMaximal] (hker : ker π ≤ 𝔮) :
-    (π.imagePrime 𝔮).IsMaximal :=
-  (Ideal.map_eq_top_or_isMaximal_of_surjective _ π.rangeRestrict_surjective h).resolve_left
-    (imagePrime_ne_top hker h.ne_top)
-
-variable {π} in
-private theorem eq_zero_of_const_mem_imagePrime {A k : Type*} [CommRing A] [CommRing k]
-    (σ : A →+* B) (red : A →+* k) (ι : k →+* C) (hcompat : ∀ a : A, π (σ a) = ι (red a))
-    (hred : Function.Surjective red) {𝔮 : Ideal B} (hker : ker π ≤ 𝔮)
-    (h𝔮 : ∀ a : A, σ a ∈ 𝔮 → red a = 0) (c : k) (hc : ι c ∈ π.range)
-    (hmem : (⟨ι c, hc⟩ : π.range) ∈ π.imagePrime 𝔮) : c = 0 := by
-  obtain ⟨a, rfl⟩ := hred c
-  refine h𝔮 a ((rangeRestrict_mem_imagePrime_iff hker (σ a)).mp ?_)
-  convert hmem using 1
-  exact Subtype.ext (hcompat a)
-
-variable {π} in
-private theorem const_mem_range {A k : Type*} [CommRing A] [CommRing k]
-    (σ : A →+* B) (red : A →+* k) (ι : k →+* C) (hcompat : ∀ a : A, π (σ a) = ι (red a))
-    (hred : Function.Surjective red) (c : k) : ι c ∈ π.range := by
-  obtain ⟨a, rfl⟩ := hred c
-  exact ⟨σ a, hcompat a⟩
 
 end RingHom
 
@@ -1716,10 +1484,6 @@ private theorem finite_residueField_of_adjoin_simple_eq_top {x : E} (hx : Transc
       rw [IntermediateField.adjoin_simple_inv_eq x, htop]
     exact finite_residueField_of_adjoin_simple_eq_top_of_mem hx' htop' v hxinv
 
-private theorem finiteResidue_of_adjoin_simple_eq_top {x : E} (hx : Transcendental K x)
-    (htop : IntermediateField.adjoin K ({x} : Set E) = ⊤) (v : Place K E) : v.FiniteResidue :=
-  ⟨finite_residueField_of_adjoin_simple_eq_top hx htop v⟩
-
 end Place
 
 end AlgebraicCurve
@@ -1767,19 +1531,6 @@ private theorem _root_.AlgebraicCurve.Place.eq_of_forall_mem_nonunits_iff (R : T
 
 open _root_.AlgebraicCurve.Place
 
-private theorem eq_of_forall_mem_nonunits_iff_of_surjective (R : Type*) [CommRing R]
-  [IsDedekindDomain R]
-    [Algebra R F] [IsFractionRing R F] {v₁ v₂ : Place K F}
-    (h₁ : ∀ r : R, algebraMap R F r ∈ v₁.toValuationSubring)
-    (h₂ : ∀ r : R, algebraMap R F r ∈ v₂.toValuationSubring)
-    {ι : Type*} (f : ι → F) (hsurj : ∀ r : R, ∃ i, f i = algebraMap R F r)
-    (h : ∀ i, f i ∈ v₁.toValuationSubring.nonunits ↔ f i ∈ v₂.toValuationSubring.nonunits) :
-    v₁ = v₂ :=
-  eq_of_forall_mem_nonunits_iff R h₁ h₂ fun r => by
-    obtain ⟨i, hi⟩ := hsurj r
-    rw [← hi]
-    exact h i
-
 variable (K) in
 private theorem integralClosure_adjoin_le_of_forall_isIntegral_mem {j : F} {S : Subring F}
     (hK : ∀ c : K, algebraMap K F c ∈ S) (hj : j ∈ S)
@@ -1794,14 +1545,6 @@ private theorem integralClosure_adjoin_le_of_forall_isIntegral_mem {j : F} {S : 
   refine hS r ⟨p.map φ, hp.map φ, ?_⟩
   rw [Polynomial.eval₂_map]
   exact hpr
-
-private theorem exists_eq_of_integralClosure_adjoin {j : F} {B : Type*} (π : B → F) {S : Subring F}
-    (hrange : ∀ x, x ∈ S ↔ ∃ b, π b = x)
-    (hK : ∀ c : K, algebraMap K F c ∈ S) (hj : j ∈ S)
-    (hS : ∀ x : F, (∃ p : Polynomial S, p.Monic ∧ Polynomial.eval₂ S.subtype x p = 0) → x ∈ S)
-    (r : integralClosure (Algebra.adjoin K ({j} : Set F)) F) :
-    ∃ b, π b = algebraMap (integralClosure (Algebra.adjoin K ({j} : Set F)) F) F r :=
-  (hrange r).mp (integralClosure_adjoin_le_of_forall_isIntegral_mem K hK hj hS r)
 
 end Place
 

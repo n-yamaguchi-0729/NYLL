@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.FGSubalgebra
-import Nyll.SchemeTheory.Descent.SubalgebraStages
-import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Order.Hom.Basic
-import Mathlib.RingTheory.Adjoin.FG
+module
+
+public import Nyll.SchemeTheory.Descent.FGSubalgebra
+public import Nyll.SchemeTheory.Descent.SubalgebraStages
+public import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Order.Hom.Basic
+public import Mathlib.RingTheory.Adjoin.FG
 
 /-!
 # Finite coefficient models over an arbitrary commutative ring
@@ -33,6 +35,8 @@ Stacks Project, Lemma 58.9.1, https://stacks.math.columbia.edu/tag/0A48.
 It starts from an actual cover over `B`; it does not construct a cover over
 a completion or a homomorphism from the coefficient algebra back to `A`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

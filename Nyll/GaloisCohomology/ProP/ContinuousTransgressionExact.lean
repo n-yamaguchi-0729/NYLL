@@ -4,15 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousTransgression
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
-import Mathlib.Algebra.Field.ZMod
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
-import Mathlib.RepresentationTheory.Continuous.Basic
-import Mathlib.RepresentationTheory.Continuous.TopRep
-import Mathlib.Topology.ContinuousMap.Algebra
-import Mathlib.Topology.ContinuousMap.Basic
-import Mathlib.Topology.ContinuousMap.Defs
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgression
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
+public import Mathlib.RepresentationTheory.Continuous.Basic
+public import Mathlib.RepresentationTheory.Continuous.TopRep
+public import Mathlib.Topology.ContinuousMap.Algebra
+public import Mathlib.Topology.ContinuousMap.Basic
+public import Mathlib.Topology.ContinuousMap.Defs
+public import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
 
 /-!
 # Exactness of continuous transgression
@@ -21,6 +24,8 @@ For an open normal subgroup, restriction of an ambient continuous mod-`p` charac
 the conjugation-invariant continuous characters.  Its range is exactly the kernel of the
 continuous factor-set transgression.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

@@ -5,3 +5,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.FundamentalGroup
+import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.TrivialMonodromy
+import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.TrivialMonodromyFiber
+import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.TrivialMonodromyQuotient

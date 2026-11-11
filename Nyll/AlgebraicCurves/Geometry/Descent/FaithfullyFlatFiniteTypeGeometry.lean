@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothSeparatedQuasiCompactGeometricallyConnected
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.FaithfullyFlatProperties
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothSeparatedQuasiCompactGeometricallyConnected
 
 /-!
 # Finite-type geometry under faithfully flat scalar extension
@@ -14,6 +16,8 @@ The existing fpqc descent results apply without a separability assumption and
 without requiring the descended scheme to be proper. This is the form needed
 for positive-modulus generalized Jacobians.
 -/
+
+@[expose] public section
 
 universe u
 

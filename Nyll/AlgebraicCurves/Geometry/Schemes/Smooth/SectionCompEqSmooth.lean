@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.EtaleNhdSectionSmooth
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.EtaleNhdSectionSmooth
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
 
 /-!
 # exists section comp eq of smooth of henselian Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Classification
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+module
+
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OrdEqNegLogValuationSubringEq
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
 
 /-!
 # Rational Function Field map Domain eq ord div map of primitive
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -85,7 +90,8 @@ theorem exists_multiset_map_monic_eq_prod {L : Type*} [Field L] [IsAlgClosed L]
   rw [hprodmap, Multiset.map_map,
     show (Polynomial.map (algebraMap A L) ∘ fun t : A => Polynomial.X - Polynomial.C t)
       = ((fun u : L => Polynomial.X - Polynomial.C u) ∘ (algebraMap A L)) from
-      funext fun t => by simp [Polynomial.map_sub],
+      funext fun t => by
+        simp only [Function.comp_apply, Polynomial.map_sub, Polynomial.map_X, Polynomial.map_C],
     ← Multiset.map_map, hsmap]
   exact hfact.symm
 
@@ -220,13 +226,11 @@ open WithZero IsDedekindDomain
 section General
 variable {K F : Type*} [Field K] [Field F] [Algebra K F] (v : Place K F)
 
-theorem le_exp_neg_one_of_lt_one {x : ℤᵐ⁰} (hx : x < 1) : x ≤ exp (-1 : ℤ) := by
-  rcases eq_or_ne x 0 with rfl | hx0
-  · exact zero_le
-  · rw [← exp_log hx0] at hx ⊢
-    rw [show (1 : ℤᵐ⁰) = exp 0 from rfl, exp_lt_exp] at hx
-    rw [exp_le_exp]
-    omega
+theorem le_exp_neg_one_of_lt_one {x : ℤᵐ⁰} (hx : x < 1) : x ≤ exp (-1 : ℤ) :=
+  open AlgebraicCurves.Places.Proofs in
+  open Place_ord_eq_neg_log_of_valuationSubring_eq.AlgebraicCurve.WFa renaming
+    le_exp_neg_one_of_lt_one → leExpNegOne in
+  leExpNegOne hx
 
 theorem ord_algebraMap (c : K) : v.ord (algebraMap K F c) = 0 := by
   rcases eq_or_ne c 0 with rfl | hc
@@ -239,30 +243,8 @@ theorem ord_algebraMap (c : K) : v.ord (algebraMap K F c) = 0 := by
 
 theorem ord_eq_neg_log_of_valuationSubring_eq (w : Valuation F ℤᵐ⁰)
     (hw : w.valuationSubring = v.toValuationSubring) {π : F} (hπ : w π = exp (-1 : ℤ))
-    {f : F} (hf : f ≠ 0) : v.ord f = -log (w f) := by
-  have hequiv : w.IsEquiv v.adicValuation :=
-    v.isEquiv_adicValuation_of_valuationSubring_eq hw
-  have hexp_lt : (exp (-1 : ℤ) : ℤᵐ⁰) < 1 := by
-    rw [show (1 : ℤᵐ⁰) = exp 0 from rfl]
-    exact exp_lt_exp.mpr (by omega)
-  obtain ⟨π₀, hπ₀⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  have hadic_π₀ : v.adicValuation (π₀ : F) = exp (-1 : ℤ) := v.adicValuation_coe_irreducible hπ₀
-  have hwπ₀ : w (π₀ : F) = exp (-1 : ℤ) := by
-    refine le_antisymm (le_exp_neg_one_of_lt_one (hequiv.lt_one_iff_lt_one.mpr ?_)) ?_
-    · rw [hadic_π₀]
-      exact hexp_lt
-    · rw [← hπ]
-      refine (hequiv π π₀).mpr ?_
-      rw [hadic_π₀]
-      refine le_exp_neg_one_of_lt_one (hequiv.lt_one_iff_lt_one.mp ?_)
-      rw [hπ]
-      exact hexp_lt
-  obtain ⟨u, hu⟩ := v.exists_unit_mul_zpow hf hπ₀
-  have hwu : w ((u : v.toValuationSubring) : F) = 1 :=
-    hequiv.eq_one_iff_eq_one.mpr ((v.adicValuation_coe_eq_one_iff _).mpr u.isUnit)
-  set n := v.ord f with hn
-  rw [hu, map_mul, map_zpow₀, hwu, hwπ₀, one_mul, log_zpow, log_exp, smul_eq_mul]
-  ring
+    {f : F} (hf : f ≠ 0) : v.ord f = -log (w f) :=
+  _root_.AlgebraicCurve.Place.ord_eq_neg_log_of_valuationSubring_eq v w hw hπ hf
 
 end General
 
@@ -435,11 +417,13 @@ theorem primitive_push_and_reduce
       = ((t.map (algebraMap A L)).map fun a => X - C a).prod := by
     rw [htfac, Polynomial.map_multiset_prod, Multiset.map_map, Multiset.map_map]
     congr 1
-    exact Multiset.map_congr rfl fun a _ => by simp [Polynomial.map_sub]
+    exact Multiset.map_congr rfl fun a _ => by
+      simp only [Function.comp_apply, Polynomial.map_sub, Polynomial.map_X, Polynomial.map_C]
   have hPintk : Pint.map red = ((t.map red).map fun a => X - C a).prod := by
     rw [htfac, Polynomial.map_multiset_prod, Multiset.map_map, Multiset.map_map]
     congr 1
-    exact Multiset.map_congr rfl fun a _ => by simp [Polynomial.map_sub]
+    exact Multiset.map_congr rfl fun a _ => by
+      simp only [Function.comp_apply, Polynomial.map_sub, Polynomial.map_X, Polynomial.map_C]
   have hPoutL0 : Pout.map (algebraMap A L) ≠ 0 := (Polynomial.map_ne_zero_iff hinj).mpr hPout0
   have hPintL0 : Pint.map (algebraMap A L) ≠ 0 :=
     (Polynomial.map_ne_zero_iff hinj).mpr hmonic.ne_zero

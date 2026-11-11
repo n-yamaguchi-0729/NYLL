@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaRestriction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianInertiaRestriction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.AlgebraicRamificationDetection
-import Nyll.ValuedFieldTheory.Ramification.ClosedSubgroups
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharP
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaRestriction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianInertiaRestriction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.AlgebraicRamificationDetection
+public import Nyll.ValuedFieldTheory.Ramification.ClosedSubgroups
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharP
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
 
 /-!
 # Surjectivity of absolute wild inertia restriction
@@ -21,6 +24,8 @@ compatible finite ramification lifts. Compactness then supplies an absolute
 inertia element whose restrictions at every finite layer are ramified.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

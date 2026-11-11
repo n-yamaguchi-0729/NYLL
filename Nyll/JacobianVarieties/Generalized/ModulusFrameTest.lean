@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.IsPullbackBaseChangeSnd
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.IsPullbackBaseChangeSnd
 
 /-!
 # Actual modulus frames on a parameter test scheme
@@ -15,6 +17,8 @@ The pullback square compares the intrinsic frame functor with frames of the
 restricted, pulled-back line bundle on the actual curve family. All comparison
 maps are geometric pullbacks, including the module pullback comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

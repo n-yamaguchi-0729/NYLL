@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Nyll.EtaleFundamentalGroups.Purity.HeightOne.UFDIntersection
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Nyll.EtaleFundamentalGroups.Purity.HeightOne.UFDIntersection
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Descent of finite-free morphisms from height-one localizations
@@ -19,6 +21,8 @@ uniqueness of a descended morphism between finite free modules.
 This is a coordinate codimension-one full-faithfulness input.  It does not
 assert extension of finite étale covers across a punctured spectrum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

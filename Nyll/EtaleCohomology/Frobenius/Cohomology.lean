@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.Etale
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Nyll.EtaleCohomology.Classical.PullbackCohomology
-import Nyll.EtaleCohomology.Sites.ConstantPullback
-import Nyll.SchemeTheory.Morphisms.FrobeniusBaseChange
+module
+
+public import Nyll.EtaleCohomology.Classical.Etale
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Nyll.EtaleCohomology.Classical.PullbackCohomology
+public import Nyll.EtaleCohomology.Sites.ConstantPullback
+public import Nyll.SchemeTheory.Morphisms.FrobeniusBaseChange
 
 /-!
 # Scheme Frobenius on classical étale cohomology
@@ -23,6 +25,8 @@ of the original scheme. Identifying its cohomological action with inverse
 arithmetic Galois Frobenius requires the separate étale Frobenius comparison.
 No such comparison is assumed in these definitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

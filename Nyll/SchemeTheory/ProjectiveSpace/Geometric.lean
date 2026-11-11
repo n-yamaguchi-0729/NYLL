@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.GenericPoint
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.GenericPoint
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 
 /-! Projective space is geometrically irreducible over every coefficient ring. -/
+
+@[expose] public section
 
 noncomputable section
 

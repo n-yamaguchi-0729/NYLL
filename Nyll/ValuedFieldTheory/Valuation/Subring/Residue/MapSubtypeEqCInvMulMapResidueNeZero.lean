@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Polynomial.Subring
-import Mathlib.Data.Finset.Max
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Polynomial.Subring
+public import Mathlib.Data.Finset.Max
 
 /-!
 # Valuation Subring exists map subtype eq C inv mul and map residue ne zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

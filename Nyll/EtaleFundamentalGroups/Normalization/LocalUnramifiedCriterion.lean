@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalizationLocalCriterion
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalizationLocalCriterion
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # The original local unramified criterion for normalization algebras
@@ -19,6 +21,8 @@ extension, unramifiedness after localization at every base prime implies
 finite étaleness globally. Domain and faithfulness of each localization are
 derived from the actual integral-closure inclusion and flat localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

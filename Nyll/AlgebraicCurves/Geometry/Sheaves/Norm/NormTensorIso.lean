@@ -10,35 +10,39 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageIsoTensorUnit
-import Nyll.SchemeTheory.Modules.ExteriorPower.Det
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
-import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnSheafificationAdjunctionUnitIotaMulti
-import Nyll.SchemeTheory.Modules.Norm.NormFrames
-import Nyll.SchemeTheory.Modules.ExteriorPower.SheafificationAdjunctionUnitIotaMultiEqDetSmul
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageIsoTensorUnit
+public import Nyll.SchemeTheory.Modules.ExteriorPower.Det
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
+public import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnSheafificationAdjunctionUnitIotaMulti
+public import Nyll.SchemeTheory.Modules.Norm.NormFrames
+public import Nyll.SchemeTheory.Modules.ExteriorPower.SheafificationAdjunctionUnitIotaMultiEqDetSmul
 
 /-!
 # Tensor compatibility of the norm module
 
 Local determinant frames construct the tensor comparison and glue it to an isomorphism.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -349,7 +353,8 @@ def BasisClause (W : Y.Opens) (e : Fin d → Γ(OX π, W)) : Prop :=
   ∀ (W' : Y.Opens) (h : W' ≤ W), ∃ b : Module.Basis (Fin d) Γ(Y, W') Γ(OX π, W'),
     ∀ i, b i = (OX π).presheaf.map (homOfLE h).op (e i)
 
-private def _root_.N2Adapter.good (W : Y.Opens) : Prop := ∃ e : Fin d → Γ(OX π, W), BasisClause π d
+/-- An open admits a basis of the pushforward structure module compatible with every restriction. -/
+def _root_.N2Adapter.good (W : Y.Opens) : Prop := ∃ e : Fin d → Γ(OX π, W), BasisClause π d
   W e
 
 open _root_.N2Adapter
@@ -469,7 +474,8 @@ theorem Lu_one (W : Y.Opens) : Lu π W 1 = LinearMap.id := by
 theorem Lu_mul (W : Y.Opens) (u v : Γ(X, π ⁻¹ᵁ W)) : Lu π W (u * v) = Lu π W u ∘ₗ Lu π W v := by
   ext x; change (u * v) * _ = u * (v * _); rw [mul_assoc]
 
-private noncomputable def _root_.N2Adapter.Nm (W : Y.Opens) : Γ(X, π ⁻¹ᵁ W) →* Γ(Y, W) where
+/-- The scalar norm is the determinant of multiplication on the pushforward structure module. -/
+noncomputable def _root_.N2Adapter.Nm (W : Y.Opens) : Γ(X, π ⁻¹ᵁ W) →* Γ(Y, W) where
   toFun u := LinearMap.det (Lu π W u)
   map_one' := by rw [Lu_one, LinearMap.det_id]
   map_mul' u v := by rw [Lu_mul, LinearMap.det_comp]
@@ -586,7 +592,7 @@ theorem δ_smul (M : X.Modules) {W : Y.Opens} (hW : good π d W) (v : Γ(X, π �
 
 theorem map_δ (M : X.Modules) {W W' : Y.Opens} (hW : good π d W) (h : W' ≤ W) (s : Γ(M, π ⁻¹ᵁ W)) :
     (normModule π d M).presheaf.map (homOfLE h).op (δ M hW s) =
-      δ M (good_of_le π d hW h) (M.presheaf.map (homOfLE (π.preimage_mono h)).op s) := by
+      δ M (by exact good_of_le π d hW h) (M.presheaf.map (homOfLE (π.preimage_mono h)).op s) := by
   set hW' := good_of_le π d hW h
   set e := eOf hW
   set e' := eOf hW'

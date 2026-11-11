@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
-import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedJacobian
+public import Nyll.AlgebraicCurves.Geometry.Descent.GlobalRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
 
 /-!
 # Comparison of the unpointed Jacobian with a pointed Picard representative
@@ -16,6 +18,8 @@ When an actual rational point and a pointed representation are provided, the sam
 chosen unpointed Jacobian represents the unrigidified presheaf. Descending the local
 universal element fixes its comparison with the pointed representative.
 -/
+
+@[expose] public section
 
 universe u
 

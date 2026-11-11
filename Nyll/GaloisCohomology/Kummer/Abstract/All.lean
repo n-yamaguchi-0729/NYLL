@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Abstract.KummerAbelianAssembly
-import Nyll.GaloisCohomology.Kummer.Abstract.KummerAbelianCyclicFactors
-import Nyll.GaloisCohomology.Kummer.Abstract.KummerCyclicOperator
-import Nyll.GaloisCohomology.Kummer.Abstract.KummerDelta
-import Nyll.GaloisCohomology.Kummer.Abstract.KummerFixedField
-import Nyll.GaloisCohomology.Kummer.Abstract.KummerGlobalOperator
-import Nyll.GaloisCohomology.Kummer.Abstract.MultiplicativeFixedPoints
+module
+
+public import Nyll.GaloisCohomology.Kummer.Abstract.KummerAbelianAssembly
+public import Nyll.GaloisCohomology.Kummer.Abstract.KummerAbelianCyclicFactors
+public import Nyll.GaloisCohomology.Kummer.Abstract.KummerCyclicOperator
+public import Nyll.GaloisCohomology.Kummer.Abstract.KummerDelta
+public import Nyll.GaloisCohomology.Kummer.Abstract.KummerFixedField
+public import Nyll.GaloisCohomology.Kummer.Abstract.KummerGlobalOperator
+public import Nyll.GaloisCohomology.Kummer.Abstract.MultiplicativeFixedPoints
 
 /-!
 # Abstract Kummer theory

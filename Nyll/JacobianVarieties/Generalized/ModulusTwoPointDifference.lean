@@ -5,9 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
 
 /-! # Algebraic triviality of two arbitrary points on the same test scheme -/
+
+@[expose] public section
 
 noncomputable section
 

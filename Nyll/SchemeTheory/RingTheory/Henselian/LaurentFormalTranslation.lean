@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Mathlib.RingTheory.PowerSeries.Substitution
-import Mathlib.RingTheory.LaurentSeries
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Equiv
+public import Mathlib.RingTheory.PowerSeries.Substitution
+public import Mathlib.RingTheory.LaurentSeries
 
 /-! # Actual formal translation on the Laurent field
 
@@ -17,6 +19,8 @@ extends translation to the entire Laurent field, with residue the identity.
 The construction uses all coefficients and is valid in positive characteristic.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped nonZeroDivisors
@@ -25,7 +29,8 @@ namespace PowerSeries
 
 variable {K : Type*} [Field K]
 
-private def oneVariableEquiv : MvPowerSeries (Fin 1) K ≃ₐ[K] PowerSeries K :=
+/-- Identify power series indexed by Fin 1 with ordinary power series. -/
+def oneVariableEquiv : MvPowerSeries (Fin 1) K ≃ₐ[K] PowerSeries K :=
   MvPowerSeries.renameEquiv K (Equiv.ofUnique (Fin 1) Unit)
 
 private theorem coeff_oneVariableEquiv (f : MvPowerSeries (Fin 1) K) (n : ℕ) :
@@ -45,7 +50,8 @@ private theorem oneVariableEquiv_X :
   rw [MvPowerSeries.rename_X]
   rfl
 
-private theorem hasSubst_twoVariables : HasSubst
+/-- The sum of the two formal variables admits power-series substitution. -/
+theorem hasSubst_twoVariables : HasSubst
     (MvPowerSeries.X (0 : Fin 2) + MvPowerSeries.X 1 : MvPowerSeries (Fin 2) K) :=
   HasSubst.of_constantCoeff_zero (by
     rw [map_add, MvPowerSeries.constantCoeff_X, MvPowerSeries.constantCoeff_X, add_zero])
@@ -103,7 +109,8 @@ namespace LaurentSeries
 
 variable {K : Type*} [Field K]
 
-private def coefficientInclusion : PowerSeries K →ₐ[K] LaurentSeries K where
+/-- The coefficient algebra map from power series into the Laurent series field. -/
+def coefficientInclusion : PowerSeries K →ₐ[K] LaurentSeries K where
   toRingHom := HahnSeries.ofPowerSeries ℤ K
   commutes' _ := rfl
 
@@ -123,7 +130,8 @@ theorem constantCoeff_powerSeriesTranslation (f : PowerSeries K) :
     PowerSeries.constantCoeff_formalTranslation]
   rfl
 
-private theorem powerSeriesTranslation_isUnit
+/-- The formal translation of a nonzero power series is a unit over the Laurent field. -/
+theorem powerSeriesTranslation_isUnit
     (f : PowerSeries K) (hf : f ≠ 0) : IsUnit (powerSeriesTranslation f) := by
   apply PowerSeries.isUnit_iff_constantCoeff.mpr
   rw [constantCoeff_powerSeriesTranslation]

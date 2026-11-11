@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialFinite
-import Mathlib.RingTheory.IsGaloisGroup.Defs
-import Mathlib.FieldTheory.Galois.IsGaloisGroup
-import Mathlib.LinearAlgebra.Dimension.Localization
-import Mathlib.Algebra.GroupWithZero.Units.Fintype
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialFinite
+public import Mathlib.RingTheory.IsGaloisGroup.Defs
+public import Mathlib.FieldTheory.Galois.IsGaloisGroup
+public import Mathlib.LinearAlgebra.Dimension.Localization
+public import Mathlib.Algebra.GroupWithZero.Units.Fintype
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-! # Degree two of the actual simultaneous sign quotient
 
@@ -18,6 +20,8 @@ finite-group invariant-field theorem then gives ring rank two, and the
 canonical fraction-field extension has the same degree. No algebraic closure
 or characteristic-zero hypothesis is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Rank comparisons on actual generic and scheme-theoretic fibers
@@ -18,6 +20,8 @@ finite presentation makes this rank equal to the rank on any specified
 actual generic-stalk pullback square. These comparisons are proved at the
 scheme level, before introducing a field extension or its scalar structures.
 -/
+
+@[expose] public section
 
 noncomputable section
 

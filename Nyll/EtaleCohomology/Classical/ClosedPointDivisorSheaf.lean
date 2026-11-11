@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.ConstantEtaleSections
-import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
-import Nyll.SchemeTheory.CategoryTheory.PresheafDirectSum
-import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.ConstantEtaleSections
+public import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
+public import Nyll.SchemeTheory.CategoryTheory.PresheafDirectSum
+public import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # The closed-point divisor sheaf
@@ -27,6 +29,8 @@ Fundamental Exact Sequence, Stacks Project, Theorem 59.68.1 (Tag 03RI):
 This file defines the target object only; it does not assert the comparison
 with the quotient of generic-point units.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -476,7 +480,7 @@ theorem etalePresheafCoproductSheafification_locally_finite_sum
                   (fun j => (((Discrete.functor F).obj j).obj (op V) : Type u)) i
                   ((Presheaf.discreteCoproductObjIsoDirectSum F (op V)).hom.hom
                     (Presheaf.localPreimage f s g hg) i)) := by
-  let f := toSheafify X.smallEtaleTopology (colimit (Discrete.functor F))
+  intro f
   have hloc := etaleAbelianToSheafify_locallySurjective X
     (colimit (Discrete.functor F))
   constructor

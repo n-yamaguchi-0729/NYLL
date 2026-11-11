@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.SeparablyClosedFieldStalks
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.SeparablyClosedFieldStalks
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Geometric stalks as sections of the actual inverse image
@@ -19,6 +21,8 @@ actual module of global sections. Their composite gives the canonical
 isomorphism, and its value on each represented germ is the literal
 pullback-section map through that neighborhood's geometric point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

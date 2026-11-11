@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.SingleScalarExtensionComparisons
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparisonExistence
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.SingleScalarExtensionComparisons
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparisonExistence
 
 /-! # Simultaneous scalar-extension comparisons for the actual modulus
 
 The group, Picard-one scheme and complement comparisons preserve the action,
 the intrinsic Abel map and the original regular map.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Nat.GCD.Basic
-import Mathlib.Data.Nat.Prime.Int
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Mathlib.Data.Nat.GCD.Basic
+public import Mathlib.Data.Nat.Prime.Int
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # Rational Localization
 -/
+
+@[expose] public section
 
 namespace Rat
 

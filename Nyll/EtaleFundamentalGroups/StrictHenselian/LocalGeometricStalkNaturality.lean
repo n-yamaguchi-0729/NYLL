@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFunctoriality
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationSchemeComposition
-import Nyll.SchemeTheory.LocalGeometry.PointedStalkMap
-import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Stalk
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFunctoriality
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkSpecializationLift
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationSchemeComposition
+public import Nyll.SchemeTheory.LocalGeometry.PointedStalkMap
+public import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Stalk
 
 /-!
 # Naturality of the actual strict local models
@@ -31,6 +33,8 @@ https://stacks.math.columbia.edu/tag/0BUP. The resulting fundamental-group
 square also requires the proper closed-fiber comparison.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory IsLocalRing
@@ -44,7 +48,8 @@ variable {X Y : Scheme.{u}} {Ωx Ωy : Type u} [Field Ωx] [Field Ωy]
   (ι : Ωy →+* Ωx)
   (h : x ≫ f = Spec.map (CommRingCat.ofHom ι) ≫ y)
 
-private theorem localGeometricStalkMap_square :
+/-- The pointed stalk map gives the affine square required for geometric-stalk functoriality. -/
+theorem localGeometricStalkMap_square :
     Spec.map (CommRingCat.ofHom (Scheme.stalkClosedPointTo x).hom) ≫
         Spec.map (CommRingCat.ofHom (Scheme.pointedStalkMap f x y ι h).hom) =
       Spec.map (CommRingCat.ofHom ι) ≫

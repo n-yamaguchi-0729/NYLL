@@ -34,17 +34,21 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.Algebra.Module.NatInt
-import Mathlib.LinearAlgebra.Alternating.Basic
-import Mathlib.LinearAlgebra.Determinant
-import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.RingTheory.Norm.Defs
+module
+
+public import Mathlib.Algebra.Module.NatInt
+public import Mathlib.LinearAlgebra.Alternating.Basic
+public import Mathlib.LinearAlgebra.Determinant
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.RingTheory.Norm.Defs
 
 /-!
 # exterior Power iota Multi comp eq det smul
 -/
+
+@[expose] public section
 
 section exteriorPower_iotaMulti_comp_eq_det_smul
 
@@ -62,7 +66,8 @@ lemma alternatingMap_apply_matrix_smul {A : Type*} [CommRing A] {M N : Type*} [A
   let L : (Fin n → A) →ₗ[A] M := Fintype.linearCombination A f
   let b : Module.Basis (Fin n) A (Fin n → A) := Pi.basisFun A (Fin n)
   have hL : ∀ i, L (b i) = f i := fun i => by
-    simp [L, b, Fintype.linearCombination_apply_single]
+    change Fintype.linearCombination A f (Pi.basisFun A (Fin n) i) = f i
+    rw [Pi.basisFun_apply, Fintype.linearCombination_apply_single, one_smul]
   have key : g.compLinearMap L = b.det.smulRight (g f) := by
     refine Module.Basis.ext_alternating b fun v hv => ?_
     let σ : Equiv.Perm (Fin n) := Equiv.ofBijective v (Finite.injective_iff_bijective.1 hv)
@@ -71,10 +76,10 @@ lemma alternatingMap_apply_matrix_smul {A : Type*} [CommRing A] {M N : Type*} [A
     rw [AlternatingMap.compLinearMap_apply, h1, AlternatingMap.map_perm,
       AlternatingMap.smulRight_apply,
       h2, AlternatingMap.map_perm, Module.Basis.det_self]
-    simp [Units.smul_def, Int.cast_smul_eq_zsmul]
+    simp only [Units.smul_def, Int.smul_one_eq_cast, Int.cast_smul_eq_zsmul]
   have h3 : (fun j => ∑ i, a i j • f i) = fun j => L (a.transpose j) := by
     funext j
-    simp [L, Fintype.linearCombination_apply, Matrix.transpose_apply]
+    rfl
   have h4 := congrArg (fun G : (Fin n → A) [⋀^Fin n]→ₗ[A] N => G (fun j => a.transpose j)) key
   simp only [AlternatingMap.compLinearMap_apply, AlternatingMap.smulRight_apply] at h4
   calc

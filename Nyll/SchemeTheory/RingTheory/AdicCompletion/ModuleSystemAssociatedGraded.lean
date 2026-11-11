@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # The associated graded module of an actual adic system
@@ -22,6 +24,8 @@ original finite stages. In positive degree these layers are exactly the
 original transition kernels. Both the comparisons and their coefficient
 formulas are derived from the original projections of the system.
 -/
+
+@[expose] public section
 
 noncomputable section
 

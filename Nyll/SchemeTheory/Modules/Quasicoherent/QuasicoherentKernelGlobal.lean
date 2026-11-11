@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernel
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.CategoryTheory.Adjunction.Limits
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernel
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Quasicoherence of kernels on schemes
@@ -23,6 +25,8 @@ Restriction preserves the actual categorical kernel. Affine kernel
 quasicoherence supplies the hypotheses of the shared affine-presentation
 criterion, which constructs the global quasicoherent data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

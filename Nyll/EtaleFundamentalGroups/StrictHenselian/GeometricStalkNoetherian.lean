@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ChangeBase
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FreeModuleFlat
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.NoetherianOfQuotient
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Finiteness.Descent
-import Mathlib.RingTheory.Finiteness.Ideal
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Unramified.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ChangeBase
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FreeModuleFlat
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.NoetherianOfQuotient
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Finiteness.Descent
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Unramified.Finite
 
 /-!
 # Noetherianity of the actual geometric stalk of a local ring
@@ -40,6 +42,8 @@ ideals descends. No Noetherianity or closedness of stalk ideals is assumed.
 This proves the Noetherian ascent in Stacks, Lemma 15.46.3, for the actual
 pointed-neighborhood colimit used by the specialization constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
-import Nyll.SchemeTheory.Descent.FGSubalgebra
-import Nyll.SchemeTheory.Descent.SubalgebraStages
-import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.RingTheory.Adjoin.FG
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarNaturality
+public import Nyll.SchemeTheory.Descent.FGSubalgebra
+public import Nyll.SchemeTheory.Descent.SubalgebraStages
+public import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.RingTheory.Adjoin.FG
 
 /-!
 # Finite coefficient models for constant extension
@@ -25,6 +27,8 @@ This is the finite-presentation descent step in Stacks Project, Lemma 58.9.3,
 https://stacks.math.columbia.edu/tag/0A49. The comparison with a rational fibre
 is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

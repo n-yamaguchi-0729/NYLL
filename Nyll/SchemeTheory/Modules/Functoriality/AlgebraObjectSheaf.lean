@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.AlgebraObjectSections
-import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.Sheaves.Forget
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.AlgebraObjectSections
+public import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sheaves.Forget
 
 /-!
 # The actual algebra sheaf of a commutative module-algebra object
@@ -26,6 +28,8 @@ linearity is the proved compatibility between structural coefficients and
 the original scalar action. Quasicoherence and finite type consequently
 give the actual finite relative spectrum without a separate sheaf model.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,7 +60,8 @@ def ringPresheaf : TopCat.Presheaf CommRingCat.{u} X where
     exact congrArg (fun k : F.presheaf.obj U ⟶ F.presheaf.obj W => k x)
       (F.presheaf.map_comp i j)
 
-private theorem ringPresheaf_isSheaf : (ringPresheaf F).IsSheaf := by
+/-- The section-ring presheaf inherits the sheaf condition from the original module. -/
+theorem ringPresheaf_isSheaf : (ringPresheaf F).IsSheaf := by
   apply (TopCat.Presheaf.isSheaf_iff_isSheaf_comp
     (CategoryTheory.forget CommRingCat.{u}) (ringPresheaf F)).mpr
   exact (TopCat.Presheaf.isSheaf_iff_isSheaf_comp
@@ -77,7 +82,8 @@ def structureMap : X.sheaf ⟶ sheaf F where
         intro r
         exact (restriction_coefficientMap F i.unop r).symm }
 
-private def underlyingSectionIso (U : X.Opensᵒᵖ) :
+/-- On every open, the original scalar action identifies the recovered section module. -/
+def underlyingSectionIso (U : X.Opensᵒᵖ) :
     (RelativeSpec.underlyingModule (structureMap F)).val.obj U ≅ F.val.obj U := by
   refine ModuleCat.isoMk (Iso.refl _) ?_
   intro r

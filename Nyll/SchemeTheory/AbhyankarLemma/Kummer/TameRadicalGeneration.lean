@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalRepresentatives
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalRepresentatives
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Tame ramification implies radical generation
@@ -13,6 +17,8 @@ The corrected representatives of all value-group cosets generate an
 intermediate field with the same value group and residue field as the target.
 The immediate prime-to-`p` lemma then identifies that field with the target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

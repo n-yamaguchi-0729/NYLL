@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelTwists
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.EpiMono
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverLevelTwists
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.EpiMono
 
 /-!
 # Presentations on the original closed levels
@@ -27,6 +29,8 @@ original level transitions. In particular, free source maps constructed
 from compatible global generators give presentations by the free modules
 on the thickenings themselves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

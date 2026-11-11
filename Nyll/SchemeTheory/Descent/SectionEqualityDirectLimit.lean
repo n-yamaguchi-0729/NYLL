@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
-import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
+module
+
+public import Lean.Elab.Command
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
+public import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
 /-!
 # Scheme exists app eq app of is Compact of is Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -35,54 +39,11 @@ noncomputable section
 
 namespace LimitIsoFil
 
-private def _root_.AlgebraicGeometry.Scheme.Hom.appInf {X Y : Scheme.{u}} (π : Y ⟶ X) (V W :
-  X.Opens) :
-    Γ(X, V ⊓ W) ⟶ Γ(Y, π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W) :=
-  π.app (V ⊓ W)
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.appInf".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-      modifyEnv fun env => addAlias env
-        ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-          "Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.AlgebraicGeometry." ++
-          "Scheme.Hom.appInf").toName target
-  | none => pure ()
-
-
 open _root_.AlgebraicGeometry.Scheme.Modules
-
-
-private theorem _root_.AlgebraicGeometry.Scheme.Hom.preimage_mono_inf {X Y : Scheme.{u}} (π : Y ⟶
-  X) {W' V W : X.Opens}
-    (h : W' ≤ V ⊓ W) : π ⁻¹ᵁ W' ≤ π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W := π.preimage_mono h
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.preimage_mono_inf".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-      modifyEnv fun env => addAlias env
-        ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-          "Scheme_exists_app_eq_app_of_isCompact_of_isDirectLimit.AlgebraicGeometry." ++
-          "Scheme.Hom.preimage_mono_inf").toName target
-  | none => pure ()
 
 lemma appInf_res {X Y : Scheme.{u}} (π : Y ⟶ X) (V W W' : X.Opens) (h : W' ≤ V ⊓ W) (t : Γ(X, V ⊓
   W)) :
-    Y.presheaf.map (homOfLE (π.preimage_mono_inf h)).op (π.appInf V W t) =
+    Y.presheaf.map (homOfLE (π.preimage_mono h)).op (π.app (V ⊓ W) t) =
       π.app W' (X.presheaf.map (homOfLE h).op t) := by
   have e := congrArg (fun k => (ConcreteCategory.hom k) t) (π.naturality (homOfLE h).op)
   simp only [CategoryTheory.comp_apply] at e
@@ -96,15 +57,15 @@ lemma res_res {X : Scheme.{u}} {U V W : X.Opens} (h₁ : V ≤ U) (h₂ : W ≤ 
 lemma cocycle_res {X Y : Scheme.{u}} (π : Y ⟶ X) {V W W' : X.Opens} (h : W' ≤ V ⊓ W) (t₁ t₂ : Γ(X,
   V ⊓ W))
     (uV : Γ(Y, π ⁻¹ᵁ V)) (uW : Γ(Y, π ⁻¹ᵁ W))
-    (hc : π.appInf V W t₁ * Y.presheaf.map (homOfLE (inf_le_left : π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W ≤ π ⁻¹ᵁ V)).op
+    (hc : π.app (V ⊓ W) t₁ * Y.presheaf.map (homOfLE (π.preimage_mono (inf_le_left : V ⊓ W ≤ V))).op
       uV =
-      Y.presheaf.map (homOfLE (inf_le_right : π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W ≤ π ⁻¹ᵁ W)).op uW * π.appInf V W
+      Y.presheaf.map (homOfLE (π.preimage_mono (inf_le_right : V ⊓ W ≤ W))).op uW * π.app (V ⊓ W)
         t₂) :
     π.app W' (X.presheaf.map (homOfLE h).op t₁) *
         Y.presheaf.map (homOfLE (π.preimage_mono (h.trans inf_le_left))).op uV =
       Y.presheaf.map (homOfLE (π.preimage_mono (h.trans inf_le_right))).op uW *
         π.app W' (X.presheaf.map (homOfLE h).op t₂) := by
-  have e := congrArg (Y.presheaf.map (homOfLE (π.preimage_mono_inf h)).op) hc
+  have e := congrArg (Y.presheaf.map (homOfLE (π.preimage_mono h)).op) hc
   rw [map_mul, map_mul, appInf_res, appInf_res, res_res, res_res] at e
   exact e
 

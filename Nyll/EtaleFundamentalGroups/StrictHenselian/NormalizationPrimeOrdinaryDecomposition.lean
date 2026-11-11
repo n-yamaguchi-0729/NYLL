@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFraction
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralClosureUnits
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.GroupTheory.GroupAction.FixingSubgroup
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFraction
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralClosureUnits
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.GroupTheory.GroupAction.FixingSubgroup
+public import Mathlib.RingTheory.Localization.Integral
 
 /-!
 # The original decomposition group fixes exactly the ordinary fraction image
@@ -22,6 +24,8 @@ over the Henselian base. Hence it preserves the original prime itself.
 Together with ordinary uniqueness this identifies the original decomposition
 group as the fixing group of the actual embedded ordinary fraction field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

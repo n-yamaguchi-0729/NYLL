@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 
 /-!
 # Polarisation Rosati
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.SchemeTheory.Normalization.FiniteNormalSource
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.SchemeTheory.Normalization.FiniteNormalSource
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # The labelled formal generic fibre of a finite normal morphism
 
@@ -16,6 +18,8 @@ Consequently its generic-fibre square is cartesian. Base change through a
 power-series deformation then produces the coproduct of the formal lifts
 of the residue field embeddings, with both projections computed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

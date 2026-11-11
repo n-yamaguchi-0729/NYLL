@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientSequence
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.QuotientSequence
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Actual fixed-degree polynomials from compatible adic coefficients
@@ -31,6 +33,8 @@ hypothesis, bounded support assumption beyond fixed degree, or given
 algebraization of the polynomial system is needed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u v w
@@ -39,7 +43,8 @@ namespace MvPolynomial
 
 variable {R : Type u} [CommRing R] (I : Ideal R)
 
-private def idealPowerModuleQuotientEquiv (k : ℕ) :
+/-- Identify the quotient by an ideal power with the corresponding adic module quotient. -/
+def idealPowerModuleQuotientEquiv (k : ℕ) :
     (R ⧸ I ^ (k + 1)) ≃ₗ[R] AdicModuleSystem.quotientSequenceModule I R k :=
   Submodule.quotEquivOfEq (I ^ (k + 1))
     (I ^ (k + 1) • (⊤ : Submodule R R))
@@ -49,7 +54,8 @@ private theorem idealPowerModuleQuotientEquiv_mk (k : ℕ) (r : R) :
     idealPowerModuleQuotientEquiv I k (Ideal.Quotient.mk (I ^ (k + 1)) r) =
       Submodule.Quotient.mk r := rfl
 
-private theorem idealPowerModuleQuotientEquiv_transition (k : ℕ)
+/-- The ideal-power quotient identification commutes with the adic transition maps. -/
+theorem idealPowerModuleQuotientEquiv_transition (k : ℕ)
     (x : R ⧸ I ^ ((k + 1) + 1)) :
     AdicModuleSystem.quotientSequenceTransition I R k
         (idealPowerModuleQuotientEquiv I (k + 1) x) =
@@ -57,7 +63,8 @@ private theorem idealPowerModuleQuotientEquiv_transition (k : ℕ)
         (Ideal.Quotient.factorPow I (Nat.le_succ (k + 1)) x) := by
   exact Quotient.inductionOn' x (fun _ : R => rfl)
 
-private def scalarQuotientSequence
+/-- A compatible sequence of ideal quotients defines a section of the adic module system. -/
+def scalarQuotientSequence
     (x : (k : ℕ) → R ⧸ I ^ (k + 1))
     (hx : ∀ k : ℕ, Ideal.Quotient.factorPow I (Nat.le_succ (k + 1)) (x (k + 1)) = x k) :
     AdicModuleSystem.sections (fun k => AdicModuleSystem.quotientSequenceModule I R k)
@@ -70,7 +77,8 @@ section CompleteScalars
 
 variable [IsAdicComplete I R]
 
-private def scalarQuotientLift
+/-- Lift a compatible sequence of ideal quotients to its unique element of the complete ring. -/
+def scalarQuotientLift
     (x : (k : ℕ) → R ⧸ I ^ (k + 1))
     (hx : ∀ k : ℕ, Ideal.Quotient.factorPow I (Nat.le_succ (k + 1)) (x (k + 1)) = x k) : R :=
   (AdicModuleSystem.quotientSequenceEquiv I R).symm (scalarQuotientSequence I x hx)
@@ -88,10 +96,12 @@ end CompleteScalars
 
 variable {σ : Type v} [Finite σ]
 
-private def homogeneousExponents (d : ℕ) : Finset (σ →₀ ℕ) :=
+/-- The finite set of monomial exponents of the given total degree. -/
+def homogeneousExponents (d : ℕ) : Finset (σ →₀ ℕ) :=
   (Finsupp.finite_of_nat_weight_eq (1 : σ → ℕ) (fun _ => one_ne_zero) d).toFinset
 
-private theorem mem_homogeneousExponents (d : ℕ) (e : σ →₀ ℕ) :
+/-- The homogeneous exponent set consists exactly of exponents of the prescribed degree. -/
+theorem mem_homogeneousExponents (d : ℕ) (e : σ →₀ ℕ) :
     e ∈ homogeneousExponents (σ := σ) d ↔ e.degree = d := by
   simp only [homogeneousExponents, Set.Finite.mem_toFinset, Set.mem_ofPred_eq,
     Finsupp.degree_eq_weight_one]
@@ -105,7 +115,8 @@ variable (d : ℕ)
 include hp
 
 omit [Finite σ] in
-private theorem coefficient_compatible (e : σ →₀ ℕ) (k : ℕ) :
+/-- Each coefficient of a compatible homogeneous polynomial system is compatible. -/
+theorem coefficient_compatible (e : σ →₀ ℕ) (k : ℕ) :
     Ideal.Quotient.factorPow I (Nat.le_succ (k + 1)) ((p (k + 1)).val.coeff e) =
       (p k).val.coeff e := by
   have h := congrArg (fun q : MvPolynomial σ (R ⧸ I ^ (k + 1)) => q.coeff e) (hp k)

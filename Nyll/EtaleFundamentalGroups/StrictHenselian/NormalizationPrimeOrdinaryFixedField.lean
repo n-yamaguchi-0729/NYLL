@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryDecomposition
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.Algebra.Field.Subfield.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryDecomposition
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.Algebra.Field.Subfield.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The actual ordinary fraction image is the original decomposition fixed field
@@ -21,6 +23,8 @@ field of the original extension. Its proved fixing subgroup is the original
 decomposition subgroup, so the native infinite Galois correspondence identifies
 that same image with the decomposition fixed field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

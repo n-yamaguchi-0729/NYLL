@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionEquality
-import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionEquality
+public import Nyll.SchemeTheory.Etale.FiniteNeighborhoodSection
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Injectivity of the proper strict-local section comparison
@@ -26,6 +28,8 @@ No rational-point description of the fiber is used. The coefficient sheaf
 is arbitrary, and universal closedness suffices for this injective half of
 the proper degree-zero comparison in Stacks Project, Lemma 59.91.4.
 -/
+
+@[expose] public section
 
 noncomputable section
 

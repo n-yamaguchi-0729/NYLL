@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Polynomial.Eval.Coeff
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Data.Finset.Empty
-import Mathlib.Data.Finset.Insert
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Polynomial.Eval.Coeff
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Data.Finset.Empty
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
 
 
 /-!
@@ -27,6 +29,8 @@ This is a ring-local precursor to the finite-presentation refinement in
 Stacks Project, Tag 09Z0. A filtered diagram, its colimit comparison, and a
 global relative-Spec approximation are separate constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

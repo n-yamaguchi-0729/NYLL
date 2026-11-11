@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.Flat.Equalizer
-import Mathlib.RingTheory.Finiteness.Ideal
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.Flat.Equalizer
+public import Mathlib.RingTheory.Finiteness.Ideal
 
 /-!
 # Reflecting power-torsion through adic completion
@@ -18,6 +20,8 @@ annihilated by `I ^ n` already comes from an `I ^ n`-annihilated element of
 `M`.  This is the torsion-reflection calculation used in the mixed
 completion/localization equalizer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

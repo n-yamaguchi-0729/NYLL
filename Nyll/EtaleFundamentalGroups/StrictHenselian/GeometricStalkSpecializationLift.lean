@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.SchemeTheory.LocalGeometry.SpecializationStalkMap
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Lifting a geometric specialization to the actual strict local model
@@ -30,6 +32,8 @@ the compatibility of the maps are proved, not included as input data.
 This is the local-diagram construction used in Stacks Project, Section
 58.16, https://stacks.math.columbia.edu/tag/0BUP.
 -/
+
+@[expose] public section
 
 noncomputable section
 

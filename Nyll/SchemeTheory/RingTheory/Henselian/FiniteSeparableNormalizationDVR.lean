@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralDomainLocal
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The actual normalization of a strictly Henselian DVR
@@ -29,6 +31,8 @@ integral extension cannot turn the base DVR into a field. These facts
 prove discreteness of the normalization. Finally, its finite residue
 extension is separably closed because the original residue field is.
 -/
+
+@[expose] public section
 
 noncomputable section
 

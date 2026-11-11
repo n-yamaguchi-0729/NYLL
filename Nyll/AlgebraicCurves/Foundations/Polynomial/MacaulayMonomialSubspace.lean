@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Ideal
-import Mathlib.Tactic.Push
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomials
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Ideal
+public import Mathlib.Tactic.Push
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomials
 
 /-!
 # Mv Polynomial exists span monomial finrank piece eq and finrank piece succ eq macaulay Pow
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
 
 /-!
 # A final tensor component above a fixed intermediate component
@@ -17,6 +19,8 @@ component above it.  This file packages one canonical choice and records that
 the contraction used by `GenericTensorFieldComponentTower` is exactly the
 original component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

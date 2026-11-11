@@ -6,6 +6,5 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Determinants.DetSuccIsoDetTensor
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Determinants.EpiWhiskerRightWedgeVec
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Determinants.InvertibleDetLocallyFree
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Determinants.PullbackDetIsoDetPullback
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Determinants.PullbackSectionDualDetEqZeroIffNotIso

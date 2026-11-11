@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusMultiplicativeJets
-import Mathlib.Algebra.BigOperators.Finprod
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusMultiplicativeJets
+public import Mathlib.Algebra.BigOperators.Finprod
 
 /-!
 # Uniqueness of local symbols from multiplicative approximation
@@ -20,6 +22,8 @@ symbol uniquely. The finite support used in the reciprocity argument follows
 from the existing principal-divisor theorem. This file does not assert that
 local symbols exist for arbitrary algebraic-group-valued maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

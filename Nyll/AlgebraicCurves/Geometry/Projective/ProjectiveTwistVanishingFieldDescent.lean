@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.ProjSpaceLinearEquivBaseChangeCochainTwist
+module
+
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.ProjSpaceLinearEquivBaseChangeCochainTwist
 
 /-!
 # Proj Space subsingleton HSucc twist of subsingleton HSucc twist base Change field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

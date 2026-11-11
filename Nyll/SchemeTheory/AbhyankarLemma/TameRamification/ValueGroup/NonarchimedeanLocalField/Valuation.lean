@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Image
-import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.SeparableNormValuation
-import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.FiniteExtensionCompleteDVF
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Valuation
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Image
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.SeparableNormValuation
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.FiniteExtensionCompleteDVF
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Basic
 
 /-!
 # Neu1999 local-field valuations
@@ -16,6 +20,8 @@ This file packages the normalized integer valuation from
 the tame Abhyankar value-group layer, and rewrites the Neu1999 norm formula
 for the field-norm API.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,12 +39,8 @@ namespace NAField
 def multiplicativeIntegerValuation
     (K : Type u) [Field K] [ValuativeRel K] [TopologicalSpace K]
     [IsNonarchimedeanLocalField K] :
-    MultiplicativeIntegerValuation Kˣ where
-  val x := LocalFieldTheory.IsNonarchimedeanLocalField.v K (Additive.ofMul x)
-  map_one := by
-    exact LocalFieldTheory.IsNonarchimedeanLocalField.v_one K
-  map_mul x y := by
-    exact LocalFieldTheory.IsNonarchimedeanLocalField.v_mul K x y
+    MultiplicativeIntegerValuation Kˣ :=
+  LocalFieldTheory.IsNonarchimedeanLocalField.multiplicativeIntegerValuation K
 
 @[simp] theorem multiplicativeIntegerValuation_val
     (K : Type u) [Field K] [ValuativeRel K] [TopologicalSpace K]
@@ -51,11 +53,9 @@ def multiplicativeIntegerValuation
 theorem multiplicativeIntegerValuation_surjective
     (K : Type u) [Field K] [ValuativeRel K] [TopologicalSpace K]
     [IsNonarchimedeanLocalField K] :
-    Function.Surjective (multiplicativeIntegerValuation K).val := by
-  intro n
-  rcases LocalFieldTheory.IsNonarchimedeanLocalField.v_surjective K n with ⟨x, hx⟩
-  refine ⟨Additive.toMul x, ?_⟩
-  simpa [multiplicativeIntegerValuation] using hx
+    Function.Surjective (multiplicativeIntegerValuation K).val :=
+  open LocalFieldTheory in
+  IsNonarchimedeanLocalField.multiplicativeIntegerValuation_surjective K
 
 /-- A Neu1999 local field has a multiplicative element of normalized
 valuation one for the value-group API. -/
@@ -63,8 +63,8 @@ theorem multiplicativeIntegerValuation_exists_uniformizer
     (K : Type u) [Field K] [ValuativeRel K] [TopologicalSpace K]
     [IsNonarchimedeanLocalField K] :
     ∃ ϖ : Kˣ, (multiplicativeIntegerValuation K).IsUniformizer ϖ :=
-  (multiplicativeIntegerValuation K).exists_uniformizer_of_surjective
-    (multiplicativeIntegerValuation_surjective K)
+  open LocalFieldTheory in
+  IsNonarchimedeanLocalField.multiplicativeIntegerValuation_exists_uniformizer K
 
 /-- The Neu1999 norm-valuation formula, rewritten for the
 `LocalFieldTheory.normUnits` API used by the value-group layer. -/

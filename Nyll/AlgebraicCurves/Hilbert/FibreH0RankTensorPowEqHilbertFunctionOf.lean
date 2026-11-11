@@ -10,38 +10,45 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.FibreH0RankIdEqFinrankSections
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.SectionsTopEquivH0Modules
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPowMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjectiveTwistSectionsMap
-import Nyll.SchemeTheory.HomologicalAlgebra.FiniteDimensionalExactSequences
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceH0TwistHomogeneousValEq
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Projective.HomogeneousSectionsH0
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.FibreH0RankIdEqFinrankSections
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.SectionsTopEquivH0Modules
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPowMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjectiveTwistSectionsMap
+public import Nyll.SchemeTheory.HomologicalAlgebra.FiniteDimensionalExactSequences
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceH0TwistHomogeneousValEq
 
 /-!
 # exists forall geom Fibre H0 Finrank tensor Pow eq hilbert Function Of of point
 -/
+
+@[expose] public section
+
+universe uH
 
 section ProofImplementation
 
@@ -182,28 +189,20 @@ variable {n : ℕ} {k : Type u} [Field k] {Zk : Scheme.{u}}
 noncomputable def chartVal (F : MvPolynomial (Fin (n + 1)) k) (hF : F.IsHomogeneous d) (i : Fin (n
   + 1)) :
     Γ(Zk, ProjSpace.pullbackChart ιk i) :=
-  (ιk.app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.X i)))
-    (Proj.awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.X i)
-      (HomogeneousLocalization.mk
-        { deg := d
-          num := ⟨F, (MvPolynomial.mem_homogeneousSubmodule d F).mpr hF⟩
-          den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-            (MvPolynomial.isHomogeneous_X_pow i d)⟩
-          den_mem := ⟨d, rfl⟩ }))
+  ProjSpace.HomogeneousSectionsH0.chartVal ιk d F hF i
 
 theorem isHomogeneous_of_mem (F : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d)) :
     (F : MvPolynomial (Fin (n + 1)) k).IsHomogeneous d :=
-  (MvPolynomial.mem_homogeneousSubmodule d _).mp F.2
+  ProjSpace.HomogeneousSectionsH0.isHomogeneous_of_mem d F
 
 /-- The degree-zero Cech index corresponding to the selected standard projective chart. -/
 def vertex (i : Fin (n + 1)) : (ProjSpace.stdCoverPullback ιk).Idx 0 :=
-  ⟨fun _ => ULift.up i, fun a b hab => absurd (Fin.lt_def.mp hab)
-    (by have := a.isLt; have := b.isLt; omega)⟩
+  ProjSpace.HomogeneousSectionsH0.vertex ιk i
 
 theorem chart_le_inter_vertex (i : Fin (n + 1)) :
     ProjSpace.pullbackChart ιk i ≤ (ProjSpace.stdCoverPullback ιk).inter (vertex ιk i) ⊓
       ProjSpace.pullbackChart ιk i :=
-  le_inf (le_iInf fun _ => le_rfl) le_rfl
+  ProjSpace.HomogeneousSectionsH0.chart_le_inter_vertex ιk i
 
 theorem exists_theta :
     ∃ Θ : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d) →ₗ[k]
@@ -217,41 +216,7 @@ theorem exists_theta :
               ≤ ProjSpace.pullbackChart ιk i)
             (chartVal ιk d F (isHomogeneous_of_mem d F) i) := by
   obtain ⟨θ, hθ, -⟩ := ProjSpace.exists_linearMap_homogeneousSubmodule_twistObj_top_val_eq ιk d
-  let T := ProjSpace.twist (ιk ≫ ProjSpace.π k n) ιk d
-  let K := ProjSpace.stdCoverPullback ιk
-  let Θ₀ : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d) →ₗ[k] T.cochain K 0 :=
-    LinearMap.pi fun s => (T.res (le_top : K.inter s ≤ ⊤)).comp θ
-  have hΘ₀ : ∀ F s, Θ₀ F s = T.res (le_top : K.inter s ≤ ⊤) (θ F) := fun F s => rfl
-  have hcoc : ∀ F, Θ₀ F ∈ T.H0 K := by
-    intro F
-    rw [LinearMap.mem_ker]
-    funext s
-    change T.d K 0 (Θ₀ F) s = (0 : T.obj (K.inter s))
-    rw [OModulePresheaf.d_apply, Fin.sum_univ_two]
-    simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_smul, neg_smul, hΘ₀]
-    have h0 : T.res (K.inter_le_inter_face s 0)
-        (T.res (le_top : K.inter (K.face s 0) ≤ ⊤) (θ F)) =
-        T.res (le_top : K.inter s ≤ ⊤) (θ F) := T.res_res _ _ (θ F)
-    have h1 : T.res (K.inter_le_inter_face s 1)
-        (T.res (le_top : K.inter (K.face s 1) ≤ ⊤) (θ F)) =
-        T.res (le_top : K.inter s ≤ ⊤) (θ F) := T.res_res _ _ (θ F)
-    exact (congrArg₂ (fun a b : T.obj (K.inter s) => a + -b) h0 h1).trans
-      (add_neg_cancel (T.res (le_top : K.inter s ≤ ⊤) (θ F)))
-  refine ⟨LinearMap.codRestrict (T.H0 K) Θ₀ hcoc, fun F s i => ?_⟩
-  rw [LinearMap.codRestrict_apply, hΘ₀]
-  change (ProjSpace.twistRes (ιk ≫ ProjSpace.π k n) ιk d (le_top : K.inter s ≤ ⊤) (θ F)).val i = _
-  rw [ProjSpace.twistRes_val]
-  have hF := hθ F.1 (isHomogeneous_of_mem d F) i
-  rw [show (⟨F.1, (MvPolynomial.mem_homogeneousSubmodule d F.1).mpr (isHomogeneous_of_mem d F)⟩ :
-      ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d)) = F from Subtype.ext rfl] at hF
-  have hF' : (θ F).val i =
-      ProjSpace.restrictFun
-        (inf_le_right : (⊤ : Zk.Opens) ⊓ ProjSpace.pullbackChart ιk i ≤ ProjSpace.pullbackChart ιk
-          i)
-        (chartVal ιk d F (isHomogeneous_of_mem d F) i) := hF
-  exact (congrArg (ProjSpace.restrictFun
-      (inf_le_inf_right (ProjSpace.pullbackChart ιk i) (le_top : K.inter s ≤ ⊤))) hF').trans
-    (ProjSpace.restrictFun_restrictFun _ _ (chartVal ιk d F (isHomogeneous_of_mem d F) i))
+  exact ProjSpace.HomogeneousSectionsH0.exists_theta_of_section_map ιk d θ hθ
 
 variable {ιk d}
 
@@ -267,32 +232,8 @@ theorem theta_eq_zero_iff
               ≤ ProjSpace.pullbackChart ιk i)
             (chartVal ιk d F (isHomogeneous_of_mem d F) i))
     (F : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d)) :
-    Θ F = 0 ↔ ∀ i : Fin (n + 1), chartVal ιk d F (isHomogeneous_of_mem d F) i = 0 := by
-  constructor
-  · intro h i
-    have h1 := hΘ F (vertex ιk i) i
-    rw [h] at h1
-    have h2 : ProjSpace.restrictFun (chart_le_inter_vertex ιk i)
-        (ProjSpace.restrictFun
-          (inf_le_right : (ProjSpace.stdCoverPullback ιk).inter (vertex ιk i) ⊓
-            ProjSpace.pullbackChart ιk i ≤
-            ProjSpace.pullbackChart ιk i)
-          (chartVal ιk d F (isHomogeneous_of_mem d F) i)) = chartVal ιk d F (isHomogeneous_of_mem d
-            F) i := by
-      rw [ProjSpace.restrictFun_restrictFun]; exact ProjSpace.restrictFun_refl _
-    rw [← h2, ← h1]
-    have hz : (((0 : ↥((ProjSpace.twist (ιk ≫ ProjSpace.π k n) ιk d).H0 (ProjSpace.stdCoverPullback
-      ιk))) :
-        (ProjSpace.twist (ιk ≫ ProjSpace.π k n) ιk d).cochain (ProjSpace.stdCoverPullback ιk) 0)
-          (vertex ιk i)).val i
-        = 0 := rfl
-    rw [hz, map_zero]
-  · intro h
-    apply Subtype.ext
-    funext s
-    refine ProjSpace.twistObj.ext (funext fun i => ?_)
-    rw [hΘ, h i, map_zero]
-    rfl
+    Θ F = 0 ↔ ∀ i : Fin (n + 1), chartVal ιk d F (isHomogeneous_of_mem d F) i = 0 :=
+  ProjSpace.HomogeneousSectionsH0.theta_eq_zero_iff Θ hΘ F
 
 end Theta
 
@@ -300,9 +241,9 @@ end H0AB
 
 open _root_.AlgebraicGeometry.ProjSpace in
 theorem H0AB.exists_forall_geomFibreH0Finrank_eq_finrank_piece
-    (n : ℕ) (P : Polynomial ℚ) (m : ℕ) (k : Type) [Field k] [IsAlgClosed k]
+    (n : ℕ) (P : Polynomial ℚ) (m : ℕ) (k : Type uH) [Field k] [IsAlgClosed k]
     (q : Point k n (hilbertFunctionOf n P m))
-    (Z : Scheme.{0}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
+    (Z : Scheme.{uH}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
     (hι : IsClosedImmersion ι)
     (hZ : ∀ d : ℕ, m ≤ d → ∀ (F : MvPolynomial (Fin (n + 1)) k) (hF : F.IsHomogeneous d),
       (F ∈ q.I ↔ ∀ i : Fin (n + 1),
@@ -392,7 +333,7 @@ theorem H0AB.exists_forall_geomFibreH0Finrank_eq_finrank_piece
 
 namespace H0SOL
 
-theorem finrank_piece_eq_of_point {k : Type} [Field k] {n : ℕ} {h : ℕ → ℕ} (q : Point k n h) (d :
+theorem finrank_piece_eq_of_point {k : Type uH} [Field k] {n : ℕ} {h : ℕ → ℕ} (q : Point k n h) (d :
   ℕ) :
     Module.finrank k (piece q.I d) = h d := by
   have : Module.Finite k (piece q.I d) := q.finite_piece d
@@ -413,9 +354,9 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 open _root_.AlgebraicCurves.Hilbert.Proofs.HilbertFibreRankFunction in
 theorem exists_forall_geomFibreH0Finrank_tensorPow_eq_hilbertFunctionOf_of_point
-    (n : ℕ) (P : Polynomial ℚ) (m : ℕ) (k : Type) [Field k] [IsAlgClosed k]
+    (n : ℕ) (P : Polynomial ℚ) (m : ℕ) (k : Type uH) [Field k] [IsAlgClosed k]
     (q : Point k n (hilbertFunctionOf n P m))
-    (Z : Scheme.{0}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
+    (Z : Scheme.{uH}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
     (hι : IsClosedImmersion ι)
     (hZ : ∀ d : ℕ, m ≤ d → ∀ (F : MvPolynomial (Fin (n + 1)) k) (hF : F.IsHomogeneous d),
       (F ∈ q.I ↔ ∀ i : Fin (n + 1),

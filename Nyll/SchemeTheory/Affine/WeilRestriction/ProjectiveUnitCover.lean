@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitCharts
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitCharts
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # Local sections of the projective-class map
@@ -15,6 +17,8 @@ the entire norm open. On each corresponding principal localization, the
 normalized unit constructs a section of the map from the affine unit open.
 Consequently that map is surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

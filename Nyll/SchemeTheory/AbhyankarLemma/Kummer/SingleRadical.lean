@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.HenselLemma
 
 /-!
 # A single radical in a tame extension
@@ -12,6 +16,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
 This file proves the root-of-unity descent used in the converse and degree
 calculation for a single prime-to-residue-characteristic radical.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,18 +11,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Noetherian.Defs
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionIff
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionChartIffAffineOpens
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionIff
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionChartIffAffineOpens
 
 /-!
 # Noetherian closed charts for trivial rigidified line bundles
@@ -30,6 +32,8 @@ import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmers
 The affine charts glue to the closed locus where every pullback of the rigidified bundle
 is isomorphic to the unit bundle.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

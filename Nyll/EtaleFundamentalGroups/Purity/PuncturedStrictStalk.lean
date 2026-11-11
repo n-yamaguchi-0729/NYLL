@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncturedSections
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrumFlat
-import Nyll.SchemeTheory.WeilRestriction.Affine
-import Nyll.SchemeTheory.WeilRestriction.Sheaf
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.CategoryTheory.Yoneda
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncturedSections
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrumFlat
+public import Nyll.SchemeTheory.WeilRestriction.Affine
+public import Nyll.SchemeTheory.WeilRestriction.Sheaf
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.CategoryTheory.Yoneda
 
 /-!
 # Full faithfulness from connected punctured strict henselization
@@ -29,6 +31,8 @@ This is the original arbitrary-local-ring statement of Stacks Project 0BLQ.
 The puncture need not be quasi-compact. No domain, reducedness, normality,
 Noetherianity, or dimension hypothesis is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

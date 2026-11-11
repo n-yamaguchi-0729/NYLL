@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticCondition
-import Nyll.SchemeTheory.Divisors.IrreducibleComponentMap
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisDomination
-import Mathlib.AlgebraicGeometry.PullbackCarrier
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticCondition
+public import Nyll.SchemeTheory.Divisors.IrreducibleComponentMap
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisDomination
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Geometric generic boundary components in finite-etale towers
@@ -18,6 +20,8 @@ proof dominates a composite cover by a Galois cover of the original base
 and descends geometric integrality along a finite surjective morphism of
 reduced irreducible components.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -136,7 +140,8 @@ lemma geometricallyIntegralGenericComponents_after_galois_tower
   have hAll' := hcomap ▸ hAll
   exact hAll' F hF
 
-private theorem connectedSpaceLeftOfIsGalois [ConnectedSpace X]
+/-- A Galois finite étale cover of a connected scheme has connected source. -/
+theorem connectedSpaceLeftOfIsGalois [ConnectedSpace X]
     (Y : FiniteEtale X) (hY : IsGalois Y) : ConnectedSpace Y.left := by
   let : IsGalois Y := hY
   exact FiniteEtale.connectedSpace_left_of_isConnected Y

@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
-import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedPullback
+public import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorObjIsoHomAppPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
 /-!
 # Tensor coherence of rigidified pullback
@@ -20,6 +22,8 @@ import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 The pullback composition comparison preserves the actual tensor comparison: this is
 proved on locally pulled-back pure tensor sections using the canonical adjunctions.
 -/
+
+@[expose] public section
 
 universe u
 

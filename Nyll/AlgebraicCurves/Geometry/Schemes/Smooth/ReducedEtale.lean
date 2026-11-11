@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.LocalProperties.Reduced
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraSmoothReducedReduced
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.LocalProperties.Reduced
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraSmoothReducedReduced
 
 /-!
 # is Reduced of etale
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

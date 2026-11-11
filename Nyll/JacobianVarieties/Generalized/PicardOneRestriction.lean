@@ -5,12 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneFamily
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMapSheaf
-import Nyll.JacobianVarieties.Generalized.PicardOneTorsor
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneFamily
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMapSheaf
+public import Nyll.JacobianVarieties.Generalized.PicardOneTorsor
 
 /-! # Restriction of actual intrinsic Picard-one classes and the Abel square -/
+
+@[expose] public section
 
 noncomputable section
 

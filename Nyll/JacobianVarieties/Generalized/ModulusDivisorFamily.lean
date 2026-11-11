@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusCanonicalPointBundle
-import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
-import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusCanonicalPointBundle
+public import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
+public import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
 
 /-! # The actual full-modulus class of a supported divisor family -/
+
+@[expose] public section
 
 noncomputable section
 

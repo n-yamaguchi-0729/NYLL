@@ -5,8 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
-import Nyll.JacobianVarieties.Generalized.Construction
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The pointed Abel morphism into the constructed generalized Jacobian
@@ -17,12 +20,16 @@ constructed without a rational point, for every effective modulus degree.
 The selected point of the open complement maps to the group identity.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

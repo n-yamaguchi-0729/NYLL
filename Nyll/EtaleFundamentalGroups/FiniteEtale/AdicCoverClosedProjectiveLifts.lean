@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverKernelCech
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTwistedSectionLifts
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesClosedProjectiveSerre
-import Nyll.SchemeTheory.Modules.Tensor.InvertibleCoherence
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverKernelCech
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTwistedSectionLifts
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesClosedProjectiveSerre
+public import Nyll.SchemeTheory.Modules.Tensor.InvertibleCoherence
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!
 # Uniform lifts on a closed projective family
@@ -21,6 +23,8 @@ Each sufficiently twisted section of the original closed cover therefore
 lifts compatibly through all infinitesimal levels. No flatness of the
 projective family, or vanishing premise, is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

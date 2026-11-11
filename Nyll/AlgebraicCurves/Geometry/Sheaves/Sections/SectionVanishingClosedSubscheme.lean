@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionDifferenceIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertibleEqPullbackSectionEq
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionDifferenceIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertibleEqPullbackSectionEq
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Full closed-subscheme vanishing detected by coefficient ideals -/
+
+@[expose] public section
 
 noncomputable section
 

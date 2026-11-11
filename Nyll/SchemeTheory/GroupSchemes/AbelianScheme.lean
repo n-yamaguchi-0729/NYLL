@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 
 /-! # Abelian schemes on actual commutative group schemes
 
@@ -16,6 +18,8 @@ The property belongs to the given group object and its actual structure morphism
 Over a field this is the usual smooth, proper, geometrically connected definition
 of an abelian variety. Products and base changes retain their actual scheme carriers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

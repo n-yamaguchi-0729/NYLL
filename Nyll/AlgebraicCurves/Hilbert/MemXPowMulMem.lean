@@ -10,16 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
 
 /-!
 # mem of forall exists X pow mul mem of forall mem iff app away To Section eq zero
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -30,8 +36,8 @@ open _root_.MvPolynomial _root_.CategoryTheory _root_.CategoryTheory.Limits _roo
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 theorem mem_of_forall_exists_X_pow_mul_mem_of_forall_mem_iff_app_awayToSection_eq_zero
-    (n : ℕ) (k : Type) [Field k]
-    (Zk : Scheme.{0}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
+    (n : ℕ) (k : Type u) [Field k]
+    (Zk : Scheme.{u}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
     (I : Ideal (MvPolynomial (Fin (n + 1)) k))
     (hZ : ∀ (d : ℕ) (F : MvPolynomial (Fin (n + 1)) k) (hF : F.IsHomogeneous d),
           (F ∈ I ↔ ∀ i : Fin (n + 1),

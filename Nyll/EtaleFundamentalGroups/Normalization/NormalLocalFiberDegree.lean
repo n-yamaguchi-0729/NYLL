@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationFiberDegreeCriterion
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationFiberDegreeCriterion
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The closed-fiber criterion with the original fraction field
@@ -15,6 +17,8 @@ Transport only the scalar action along the canonical fraction-field
 isomorphism. The ambient algebra and its integral closure remain unchanged,
 and the native dimension comparison preserves the original generic degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

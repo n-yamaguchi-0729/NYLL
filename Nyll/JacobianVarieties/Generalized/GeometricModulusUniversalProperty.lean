@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusTorsorDescent
-import Nyll.JacobianVarieties.Generalized.GeometricModulusEmptyRegularMap
-import Nyll.JacobianVarieties.Generalized.ModulusComplementFiniteExtension
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusTorsorDescent
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusEmptyRegularMap
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementFiniteExtension
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
 
 /-! # The full unpointed geometric-modulus universal property
 
@@ -16,6 +18,8 @@ first complement point; a further such extension supplies a point outside
 its degree-one divisor. Each actual equivariant factor descends with its
 Abel identity, so no ground-field rational point or splitting is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

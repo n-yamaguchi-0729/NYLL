@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Tower
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Canonical
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.Field
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Index
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Tower
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Canonical
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.Field
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Index
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.RamificationInvariants
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
 
 /-!
 # Common-top branch calculus
@@ -17,6 +21,8 @@ statements, and lower-branch lcm product used by the Abhyankar step.  All
 invariants belong directly to the chosen valued fields; there are no
 extension records or canonicalization constructors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

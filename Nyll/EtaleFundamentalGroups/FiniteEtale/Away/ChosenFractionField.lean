@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # The function field of an away cover over a chosen fraction field
@@ -26,6 +28,8 @@ normalization calculation at a prime of the special fibre. No change
 of the cover's function field or of its original normalization is
 required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

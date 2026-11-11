@@ -10,19 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMemMulMemFinrankPieceSupEqMacaulayPow
-import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialMemSpanLinearMulMem
-import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialRelationMemSpanLinear
-import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialRelationMemSpanHomogeneousMemSpan
+module
+
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialEvalNeZeroMemMulMemFinrankPieceSupEqMacaulayPow
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialMemSpanLinearMulMem
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialRelationMemSpanLinear
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPolynomialRelationMemSpanHomogeneousMemSpan
 
 /-!
 # Mv Polynomial exists forall eval ne zero mem of mul mem of finrank piece succ eq macaulay
 Pow
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -40,7 +46,7 @@ open MvPolynomial AlgebraicGeometry.HilbertFunctor
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-variable {L : Type} [Field L] {n : ℕ}
+variable {L : Type u} [Field L] {n : ℕ}
 
 /-- The homogeneous polynomials of the specified degree belonging to the ideal. -/
 noncomputable def Ik (I : Ideal (MvPolynomial (Fin (n + 1)) L)) (d : ℕ) :
@@ -111,70 +117,20 @@ theorem span_homogeneous (s : Set (MvPolynomial (Fin (n + 1)) L))
 theorem exists_eq_sum_X_mul (k : ℕ) (g : MvPolynomial (Fin (n + 1)) L) (hg : g.IsHomogeneous (k +
   1)) :
     ∃ q : Fin (n + 1) → MvPolynomial (Fin (n + 1)) L, (∀ i, (q i).IsHomogeneous k) ∧ g = ∑ i, X i *
-      q i := by
-  classical
-  have hg' : g ∈ (Submodule.span L ((fun μ : Fin (n + 1) →₀ ℕ => monomial μ (1 : L)) ''
-      {μ : Fin (n + 1) →₀ ℕ | μ.degree = k + 1}) : Submodule L (MvPolynomial (Fin (n + 1)) L)) := by
-    have : g ∈ homogeneousSubmodule (Fin (n + 1)) L (k + 1) := hg
-    rw [homogeneousSubmodule_eq_finsupp_supported, AddMonoidAlgebra.supported_eq_span_single]
-      at this
-    exact this
-  clear hg
-  induction hg' using Submodule.span_induction with
-  | mem x hx =>
-      obtain ⟨μ, hμ, rfl⟩ := hx
-      have hμ' : μ.degree = k + 1 := hμ
-      have hne : μ ≠ 0 := by rintro rfl; rw [map_zero] at hμ'; omega
-      obtain ⟨i, hi⟩ : ∃ i, μ i ≠ 0 := by
-        by_contra h; push Not at h; exact hne (Finsupp.ext h)
-      have hle : Finsupp.single i 1 ≤ μ := Finsupp.single_le_iff.mpr (Nat.one_le_iff_ne_zero.mpr hi)
-      have hdeg : (μ - Finsupp.single i 1).degree = k := by
-        have h1 : μ - Finsupp.single i 1 + Finsupp.single i 1 = μ := tsub_add_cancel_of_le hle
-        have h2 := congrArg Finsupp.degree h1
-        rw [map_add, Finsupp.degree_single, hμ'] at h2
-        omega
-      refine ⟨Pi.single i (monomial (μ - Finsupp.single i 1) 1), fun j => ?_, ?_⟩
-      · by_cases hj : j = i
-        · subst hj; rw [Pi.single_eq_same]; exact isHomogeneous_monomial _ hdeg
-        · rw [Pi.single_eq_of_ne hj]; exact isHomogeneous_zero _ _ _
-      · rw [Finset.sum_eq_single i (fun j _ hj => by rw [Pi.single_eq_of_ne hj, mul_zero])
-          (fun h => (h (Finset.mem_univ i)).elim), Pi.single_eq_same]
-        change (monomial μ (1 : L)) = monomial (Finsupp.single i 1) 1 * monomial (μ -
-          Finsupp.single i 1) 1
-        rw [monomial_mul_monomial, one_mul, add_tsub_cancel_of_le hle]
-  | zero => exact ⟨0, fun _ => isHomogeneous_zero _ _ _, by
-      simp only [Pi.zero_apply, mul_zero, Finset.sum_const_zero]⟩
-  | add x y _ _ hx hy =>
-      obtain ⟨q₁, hq₁, rfl⟩ := hx
-      obtain ⟨q₂, hq₂, rfl⟩ := hy
-      exact ⟨q₁ + q₂, fun i => (hq₁ i).add (hq₂ i), by
-        rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl fun i _ =>
-          by rw [Pi.add_apply, mul_add]⟩
-  | smul c x _ hx =>
-      obtain ⟨q, hq, rfl⟩ := hx
-      refine ⟨fun i => C c * q i, fun i => (hq i).C_mul c, ?_⟩
-      rw [smul_eq_C_mul, Finset.mul_sum]
-      exact Finset.sum_congr rfl fun i _ => by rw [mul_left_comm]
+      q i :=
+  open MvPolynomial_relation_mem_span_of_forall_isHomogeneous_mem_span.GotzRegD
+    renaming exists_eq_sum_X_mul → homogeneousExpansion in
+  homogeneousExpansion k g hg
 
 theorem exists_eq_sum_mul_of_span {N q : ℕ} (u : Fin N → MvPolynomial (Fin (n + 1)) L)
     (hspan : ∀ w : MvPolynomial (Fin (n + 1)) L, w.IsHomogeneous q → w ∈ Submodule.span L
       (Set.range u)) :
     ∀ (p : ℕ) (w : MvPolynomial (Fin (n + 1)) L), w.IsHomogeneous (q + p) →
       ∃ d : Fin N → MvPolynomial (Fin (n + 1)) L, (∀ j, (d j).IsHomogeneous p) ∧ w = ∑ j, d j * u j
-  | 0, w, hw => by
-      obtain ⟨κ, hκ⟩ := (Submodule.mem_span_range_iff_exists_fun L).mp (hspan w hw)
-      refine ⟨fun j => C (κ j), fun j => isHomogeneous_C _ _, ?_⟩
-      rw [← hκ]; exact Finset.sum_congr rfl fun j _ => by rw [smul_eq_C_mul]
-  | p + 1, w, hw => by
-      obtain ⟨r, hr, rfl⟩ := exists_eq_sum_X_mul (q + p) w hw
-      have ih := fun i => exists_eq_sum_mul_of_span u hspan p (r i) (hr i)
-      choose d hd hrd using ih
-      refine ⟨fun j => ∑ i, X i * d i j, fun j => IsHomogeneous.sum _ _ _ fun i _ => ?_, ?_⟩
-      · have := (isHomogeneous_X L i).mul (hd i j); rwa [Nat.add_comm 1 p] at this
-      · calc ∑ i, X i * r i = ∑ i, ∑ j, X i * d i j * u j := Finset.sum_congr rfl fun i _ => by
-              rw [hrd i, Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by rw [mul_assoc]
-          _ = ∑ j, (∑ i, X i * d i j) * u j := by
-              rw [Finset.sum_comm]; exact Finset.sum_congr rfl fun j _ => by rw [Finset.sum_mul]
+    :=
+  open MvPolynomial_relation_mem_span_of_forall_isHomogeneous_mem_span.GotzRegD
+    renaming exists_eq_sum_mul_of_span → homogeneousSpanExpansion in
+  homogeneousSpanExpansion u hspan
 
 theorem span_of_basis {q : ℕ} {ι : Type} (b : Module.Basis ι L ↥(homogeneousSubmodule (Fin (n + 1))
   L q))
@@ -270,12 +226,12 @@ variable (m' : ℕ) {g : ℕ} (F : Fin g → MvPolynomial (Fin (n + 1)) L) (hF :
   (ℓ : MvPolynomial (Fin (n + 1)) L) (hℓ : ℓ.IsHomogeneous 1)
 
 /-- The dimension of the homogeneous polynomial component of degree m'. -/
-noncomputable def NU (L : Type) [Field L] (n m' : ℕ) : ℕ :=
+noncomputable def NU (L : Type u) [Field L] (n m' : ℕ) : ℕ :=
   Module.finrank L ↥(homogeneousSubmodule (Fin (n + 1)) L m')
 
 /-- The chosen basis of the homogeneous component, regarded as polynomials. -/
-noncomputable def uB (L : Type) [Field L] (n m' : ℕ) : Fin (NU L n m') → MvPolynomial (Fin (n + 1))
-  L :=
+noncomputable def uB (L : Type u) [Field L] (n m' : ℕ) :
+    Fin (NU L n m') → MvPolynomial (Fin (n + 1)) L :=
   fun j => (Module.finBasis L ↥(homogeneousSubmodule (Fin (n + 1)) L m') j : MvPolynomial (Fin (n +
     1)) L)
 
@@ -407,7 +363,7 @@ theorem rel_mod_of_lp
 
 end SectionFamily
 
-theorem lp_of_maximal_growth (n m' : ℕ) (K : Type) [Field K] [Infinite K] :
+theorem lp_of_maximal_growth (n m' : ℕ) (K : Type u) [Field K] [Infinite K] :
     ∀ (N g : ℕ) (F : Fin g → MvPolynomial (Fin (n + 1)) K), (∀ i, (F i).IsHomogeneous (m' + 1)) →
       Module.finrank K (piece (Ideal.span (Set.range F)) (m' + 1)) ≤ N →
       Module.finrank K (piece (Ideal.span (Set.range F)) (m' + 1 + 1)) =
@@ -455,7 +411,8 @@ theorem lp_of_maximal_growth (n m' : ℕ) (K : Type) [Field K] [Infinite K] :
         g K F hF ℓ hℓ
         hcolm hrel
 
-theorem main (n m : ℕ) (K : Type) [Field K] [Infinite K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+theorem main (n m : ℕ) (K : Type u) [Field K] [Infinite K]
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∃ s : Set (MvPolynomial (Fin (n + 1)) K), (∀ p ∈ s, p.IsHomogeneous m) ∧ J = Ideal.span s)
     (hmax : Module.finrank K (piece J (m + 1)) = Nat.macaulayPow m (Module.finrank K (piece J m))) :
     ∃ G : MvPolynomial (Fin (n + 1)) K, G ≠ 0 ∧ ∀ a : Fin (n + 1) → K, MvPolynomial.eval a G ≠ 0 →
@@ -508,7 +465,7 @@ attribute [local instance] GotzRegW2.finite_Jk
 open MvPolynomial AlgebraicGeometry.HilbertFunctor in
 theorem
   _root_.MvPolynomial.exists_forall_eval_ne_zero_mem_of_mul_mem_of_finrank_piece_succ_eq_macaulayPow
-    (n m : ℕ) (K : Type) [Field K] [Infinite K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (n m : ℕ) (K : Type u) [Field K] [Infinite K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∃ s : Set (MvPolynomial (Fin (n + 1)) K), (∀ p ∈ s, p.IsHomogeneous m) ∧ J = Ideal.span s)
     (hmax : Module.finrank K (piece J (m + 1)) = Nat.macaulayPow m (Module.finrank K (piece J m))) :
     ∃ G : MvPolynomial (Fin (n + 1)) K, G ≠ 0 ∧ ∀ a : Fin (n + 1) → K, MvPolynomial.eval a G ≠ 0 →

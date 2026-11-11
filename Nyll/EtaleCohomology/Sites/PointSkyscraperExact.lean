@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+module
+
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-!
 # Exact point skyscrapers and their actual small products
@@ -25,6 +27,8 @@ of the actual sheaf product is compared with the product of evaluations.
 Only products in the coefficient category are assumed exact. No exactness of
 arbitrary products of sheaves is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -91,7 +95,8 @@ def familySkyscraperSheafFunctor : (Discrete ι ⥤ A) ⥤ Sheaf J A :=
   Functor.pi' (fun i => (evaluation (Discrete ι) A).obj (Discrete.mk i) ⋙
     (Φ i).skyscraperSheafFunctor) ⋙ Limits.Pi.functor ι
 
-private def familySkyscraperHomEquiv (F : Sheaf J A) (M : Discrete ι ⥤ A) :
+/-- The product of skyscraper adjunctions on the original family of fibers. -/
+def familySkyscraperHomEquiv (F : Sheaf J A) (M : Discrete ι ⥤ A) :
     (Discrete.functor (fun i => (Φ i).sheafFiber.obj F) ⟶ M) ≃
       (F ⟶ ∏ᶜ (fun i => (Φ i).skyscraperSheafFunctor.obj (M.obj (Discrete.mk i)))) where
   toFun f := Limits.Pi.lift (fun i =>

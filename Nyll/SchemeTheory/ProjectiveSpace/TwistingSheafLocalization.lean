@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!
 # Localization at projective coordinate sections
@@ -22,6 +24,8 @@ then supplies numerator lifting and a power bound on the kernel for
 the actual section restriction to that intersection. The two clauses
 are retained together because gluing local numerators needs both.
 -/
+
+@[expose] public section
 
 noncomputable section
 

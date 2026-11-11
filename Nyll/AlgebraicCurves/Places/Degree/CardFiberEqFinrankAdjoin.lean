@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexEqFinrank
-import Nyll.AlgebraicCurves.Places.Evaluation.EvalAtAlgebraMapEqEvalAtRestrict
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Analysis.Complex.Polynomial.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexEqFinrank
+public import Nyll.AlgebraicCurves.Places.Evaluation.EvalAtAlgebraMapEqEvalAtRestrict
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Analysis.Complex.Polynomial.Basic
 
 /-!
 # Place card fiber eq finrank adjoin of ord eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

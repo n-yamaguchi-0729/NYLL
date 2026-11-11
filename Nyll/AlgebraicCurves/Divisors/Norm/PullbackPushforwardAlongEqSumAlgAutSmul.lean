@@ -126,8 +126,15 @@ theorem pullbackAlong_pushforwardAlong_eq_sum_ofAlgAut_smul_of_forall_comp_eq
         push Not at h
         exact hne (AlgEquiv.ext h)
       refine ⟨σ i b ⊗ₜ[K] 1 - 1 ⊗ₜ[K] b, ?_, ?_⟩
-      · simp [Algebra.TensorProduct.productMap_apply_tmul]
-      · simp [Algebra.TensorProduct.productMap_apply_tmul, sub_eq_zero, hb])
+      · rw [map_sub, Algebra.TensorProduct.productMap_apply_tmul,
+          Algebra.TensorProduct.productMap_apply_tmul]
+        change σ i b * σ i 1 - 1 * σ i b = 0
+        rw [map_one, mul_one, one_mul, sub_self]
+      · rw [map_sub, Algebra.TensorProduct.productMap_apply_tmul,
+          Algebra.TensorProduct.productMap_apply_tmul]
+        change σ i b * σ j 1 - 1 * σ j b ≠ 0
+        rw [map_one, mul_one, one_mul, sub_ne_zero]
+        exact hb)
     D
   rw [key]
   refine Finset.sum_congr rfl fun i _ => ?_

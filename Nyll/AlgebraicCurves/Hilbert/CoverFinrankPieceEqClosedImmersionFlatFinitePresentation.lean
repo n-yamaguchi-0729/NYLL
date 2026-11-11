@@ -10,14 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Hilbert.CoverFinrankPieceEqClosedImmersionFlatNoetherian
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceFgSubalgebraClosedImmersionFlatPullbackCompMap
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.CoverFinrankPieceEqClosedImmersionFlatNoetherian
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceFgSubalgebraClosedImmersionFlatPullbackCompMap
 
 /-!
 # Local Hilbert functions for flat finitely presented closed immersions
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -241,8 +247,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 theorem
   exists_cover_forall_finrank_piece_eq_of_isClosedImmersion_of_flat_of_locallyOfFinitePresentation
-    (n : ℕ) (A : Type) [CommRing A]
-    (Z : Scheme.{0}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A))
+    (n : ℕ) (A : Type u) [CommRing A]
+    (Z : Scheme.{u}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A))
     (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫ ProjSpace.π A n))
     (hfp : LocallyOfFinitePresentation (ι ≫ ProjSpace.π A n)) :
     ∃ (J : Type) (_ : Fintype J) (r : J → A), Ideal.span (Set.range r) = ⊤ ∧
@@ -250,9 +256,9 @@ theorem
         (_ : ∃ (K : Type) (_ : Field K) (I : Ideal (MvPolynomial (Fin (n + 1)) K)),
           (∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) ∧
           ∃ d₁ : ℕ, ∀ d : ℕ, d₁ ≤ d → (Module.finrank K (piece I d) : ℚ) = P.eval (d : ℚ))
-        (D₀ : ℕ), ∀ (k : Type) [Field k] [IsAlgClosed k] [Algebra A k], IsUnit (algebraMap A k (r
+        (D₀ : ℕ), ∀ (k : Type u) [Field k] [IsAlgClosed k] [Algebra A k], IsUnit (algebraMap A k (r
           j)) →
-          ∀ (Zk : Scheme.{0}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
+          ∀ (Zk : Scheme.{u}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
             (e : Zk ⟶ Z),
             IsClosedImmersion ιk →
             IsPullback e (ιk ≫ ProjSpace.π k n) (ι ≫ ProjSpace.π A n) (Spec.map (CommRingCat.ofHom
@@ -280,7 +286,7 @@ theorem
   have : Algebra.FiniteType ℤ ↥A₀ := (Subalgebra.fg_iff_finiteType A₀).mp hFG
   have : IsNoetherianRing ↥A₀ := Algebra.FiniteType.isNoetherianRing ℤ ↥A₀
   obtain ⟨J, hJ, r₀, hspan₀, hj₀⟩ :=
-    exists_cover_forall_finrank_piece_eq_of_isClosedImmersion_of_flat_of_isNoetherianRing
+    exists_cover_forall_finrank_piece_eq_of_isClosedImmersion_of_flat_of_isNoetherianRing.{u}
       n ↥A₀ Z₀ ι₀ hι₀ hfl₀
   refine ⟨J, hJ, fun j => algebraMap ↥A₀ A (r₀ j), ?_, fun j => ?_⟩
   · have h := congrArg (Ideal.map (algebraMap ↥A₀ A)) hspan₀

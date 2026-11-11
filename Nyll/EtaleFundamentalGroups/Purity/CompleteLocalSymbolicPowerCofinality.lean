@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
-import Nyll.EtaleFundamentalGroups.Purity.SymbolicPowerErrorModule
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.Artinian.Module
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
+public import Nyll.EtaleFundamentalGroups.Purity.SymbolicPowerErrorModule
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.Artinian.Module
 
 /-!
 # Cofinality of symbolic and ordinary prime powers
@@ -19,6 +21,8 @@ images lie in an Artinian module and hence stabilize.  Chevalley's lemma
 places the stable image in every maximal-ideal power, so Hausdorffness of
 the finite quotient forces it to vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

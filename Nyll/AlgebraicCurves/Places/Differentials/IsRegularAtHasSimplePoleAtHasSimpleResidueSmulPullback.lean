@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Regular.Polar
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.Differentials.Maps.Maps
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.Places.Differentials.OrdNonnegDEqSmulD
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Regular.Polar
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.Differentials.Maps.Maps
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveTranscendentalPerfectField
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdNonnegDEqSmulD
 
 /-!
 # Place is Regular At and has Simple Pole At and has Simple Residue smul pullback Along of
 alg Equiv
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -66,7 +70,7 @@ theorem ord_nonneg_of_mem (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubri
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
   obtain ⟨n, u, hu⟩ :=
     IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
+      (x := (⟨f, hf⟩ : v.toValuationSubring)) (fun h => hf0 (congrArg Subtype.val h)) hπ
   have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
     have h := congrArg (Subtype.val) hu
     push_cast at h
@@ -112,7 +116,12 @@ theorem mem_maximalIdeal_of_ord_pos (v : Place K F) {f : F} (h : 0 < v.ord f) (h
 theorem ord_algebraMap (v : Place K F) {c : K} (hc : c ≠ 0) : v.ord (algebraMap K F c) = 0 := by
   let u : v.toValuationSubringˣ :=
     ⟨⟨algebraMap K F c, v.algebraMap_mem' c⟩, ⟨algebraMap K F c⁻¹, v.algebraMap_mem' c⁻¹⟩,
-      Subtype.ext (by simp [hc]), Subtype.ext (by simp [hc])⟩
+      Subtype.ext (by
+        change algebraMap K F c * algebraMap K F c⁻¹ = 1
+        rw [← map_mul, mul_inv_cancel₀ hc, map_one]),
+      Subtype.ext (by
+        change algebraMap K F c⁻¹ * algebraMap K F c = 1
+        rw [← map_mul, inv_mul_cancel₀ hc, map_one])⟩
   exact v.ord_coe_unit u
 
 theorem coeff_unique {t : F} (hDt : D K F t ≠ 0) {g g' : F} (h : g • D K F t = g' • D K F t) : g =
@@ -202,7 +211,7 @@ theorem ord_iterate_deriv_nonneg [IsCurveOver K F] [PerfectField K] (x : F)
     (v : Place K F) {t : F} (ht : v.ord t = 1) (hDt : D K F t ≠ 0) (k : ℕ) {h : F}
     (hh : 0 ≤ v.ord h) : 0 ≤ v.ord ((deriv hDt)^[k] h) := by
   induction k with
-  | zero => simpa using hh
+  | zero => exact hh
   | succ k ih =>
     rw [Function.iterate_succ_apply']
     exact AlgebraicCurve.Place.ord_nonneg_of_D_eq_smul_D_of_ord_eq_one x v ht ih (D_eq_deriv_smul
@@ -293,7 +302,7 @@ theorem isRegularAt_and_hasSimplePoleAt_and_hasSimpleResidue_smul_pullbackAlong_
   have hgt0 : g • t ≠ 0 := by
     intro h0; apply ht0
     have := congrArg (fun y => g⁻¹ • y) h0
-    simpa using this
+    simpa only [inv_smul_smul, smul_zero] using this
   have hσt_ord : w.ord (g • t) = 1 := by rw [hwdef, AlgebraicCurve.SemilinearAut.ord_smul]; exact ht
   set u : F := (g • t) * t'⁻¹ with hudef
   have hu0 : u ≠ 0 := mul_ne_zero hgt0 (inv_ne_zero ht'0)
@@ -323,7 +332,6 @@ theorem isRegularAt_and_hasSimplePoleAt_and_hasSimpleResidue_smul_pullbackAlong_
     have e : t' * ((g • f) * c) = u⁻¹ * (g • (t * f)) * c := by
       rw [smul_mul', hgt]
       field_simp
-      try ring
     rw [e]
     exact mul_mem (mul_mem huinv_mem (DiaTransportPen12.smul_mem_smul g v htf)) hc_mem
   · rintro r ⟨f, rfl, hval⟩
@@ -335,7 +343,6 @@ theorem isRegularAt_and_hasSimplePoleAt_and_hasSimpleResidue_smul_pullbackAlong_
     have e : t' * ((g • f) * c) = (g • (t * f)) * (1 + t' * u' * u⁻¹) := by
       rw [smul_mul', hgt, hcdef]
       field_simp
-      try ring
     rw [e]
     obtain ⟨hm1, hr1⟩ := hv'
     have hm2 : (1 + t' * u' * u⁻¹ : F) ∈ w.toValuationSubring :=
@@ -347,7 +354,9 @@ theorem isRegularAt_and_hasSimplePoleAt_and_hasSimpleResidue_smul_pullbackAlong_
       by_cases h0 : u' = 0
       · have : (⟨t' * u' * u⁻¹, mul_mem (mul_mem ht'mem hu'_mem) huinv_mem⟩ : w.toValuationSubring)
           = 0 :=
-          Subtype.ext (by simp [h0])
+          Subtype.ext (by
+            change t' * u' * u⁻¹ = 0
+            rw [h0, mul_zero, zero_mul])
         rw [this]; exact Ideal.zero_mem _
       · refine CartierLocalPen12.mem_maximalIdeal_of_ord_pos w ?_ _
         rw [w.ord_mul (mul_ne_zero ht'0 h0) (inv_ne_zero hu0), w.ord_mul ht'0 h0, ht', w.ord_inv,

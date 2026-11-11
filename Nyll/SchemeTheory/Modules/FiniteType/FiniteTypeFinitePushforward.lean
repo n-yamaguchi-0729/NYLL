@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite type of the actual direct image under a finite morphism
@@ -20,6 +22,8 @@ the actual finite module of sections therefore produces finite direct
 image sections. Their actual affine local generators give native finite
 type of the quasicoherent direct image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

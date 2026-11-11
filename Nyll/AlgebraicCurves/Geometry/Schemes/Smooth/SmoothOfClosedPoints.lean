@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Smooth Of Closed Points
 -/
+
+@[expose] public section
 
 universe u
 
@@ -354,4 +358,3 @@ theorem SmoothOfRelativeDimension.of_forall_isClosed
   exact RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ (hT x)
 
 end AlgebraicGeometry
-

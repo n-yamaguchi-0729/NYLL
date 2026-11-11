@@ -13,6 +13,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.Places.Restriction.RestrictEq
 import Nyll.AlgebraicCurves.Places.Rational.Basic
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists restrict Along eq of finite Dimensional field Range

@@ -28,11 +28,11 @@ open IsCurveOver_of_isIntegral_of_smoothOfRelativeDimension_one
 namespace AlgebraicCurve
 
 /-- The actual function field of an integral smooth curve over an
-algebraically closed characteristic-zero field has zero absolute
+algebraically closed field in arbitrary characteristic has zero absolute
 continuous mod-p H². No rational parameter or finite-extension
 presentation is assumed in the statement. -/
 theorem functionField_absoluteGalois_continuousH2_eq_zero
-    (K : Type) [Field K] [IsAlgClosed K] [CharZero K]
+    (K : Type) [Field K] [IsAlgClosed K]
     {C : Scheme.{0}} [IsIntegral C] (c : C ⟶ Spec (.of K))
     [SmoothOfRelativeDimension 1 c]
     (p : ℕ+) [Fact (p : ℕ).Prime]

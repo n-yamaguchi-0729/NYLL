@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicTorsor
-import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
-import Nyll.JacobianVarieties.Generalized.Construction
-import Mathlib.CategoryTheory.Limits.Yoneda
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicTorsor
+public import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Mathlib.CategoryTheory.Limits.Yoneda
 
 /-!
 # The intrinsic Picard-one scheme torsor identity over an arbitrary field
@@ -19,6 +21,8 @@ Their isomorphism represents the point-independent raw tensor action and
 rigidified difference after fppf sheafification.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u v w
@@ -27,7 +31,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 
-private def representProduct {B : Type u} [Category.{v} B] [HasBinaryProducts B]
+/-- The product of representing objects represents the product of their presheaves. -/
+def representProduct {B : Type u} [Category.{v} B] [HasBinaryProducts B]
     {F G : Bᵒᵖ ⥤ Type (max w v)} {X Y : B}
     (eF : F.RepresentableBy X) (eG : G.RepresentableBy Y) :
     (F ⨯ G).RepresentableBy (X ⨯ Y) :=

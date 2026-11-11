@@ -10,33 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Trace.Defs
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.NormTrace
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.SimpleRing.Basic
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
-import Nyll.AlgebraicCurves.Models.FunctionFields.GermToFunctionFieldAppEq
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Trace.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.NormTrace
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.SimpleRing.Basic
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
+public import Nyll.AlgebraicCurves.Models.FunctionFields.GermToFunctionFieldAppEq
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # germ To Function Field trace eq trace Fun Along germ To Function Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

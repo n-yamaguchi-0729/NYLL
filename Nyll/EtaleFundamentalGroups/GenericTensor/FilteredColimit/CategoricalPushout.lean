@@ -9,17 +9,21 @@ Mathlib/CategoryTheory/Comma/Over/Pullback.lean is Copyright (c) 2021
 Bhavik Mehta; authors Bhavik Mehta and Andrew Yang; Apache 2.0.
 -/
 
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.HomCongr
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.HomCongr
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Pushout extension and transpose laws
 
 The actual pushout adjunction transports maps as coefficients change.
 -/
+
+@[expose] public section
 
 universe v u
 

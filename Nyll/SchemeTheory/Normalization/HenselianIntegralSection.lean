@@ -17,6 +17,7 @@ public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
 public import Nyll.SchemeTheory.RingTheory.Idempotents.LocalizationIdempotentFactor
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import Nyll.SchemeTheory.RingTheory.QuotientBaseChange
 
 /-!
 # Étale sections after integral extension of a Henselian pair

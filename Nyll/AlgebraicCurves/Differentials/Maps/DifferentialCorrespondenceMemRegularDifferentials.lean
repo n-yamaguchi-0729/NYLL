@@ -10,15 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Maps.Maps
-import Nyll.AlgebraicCurves.Differentials.Regular.Regular
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Mathlib.RingTheory.DedekindDomain.Different
+module
+
+public import Nyll.AlgebraicCurves.Places.Ramification.RamificationIndexEqRamificationIdxFiberCenter
+public import Nyll.AlgebraicCurves.Places.Ramification.NegLogValuationFiberCenterEqOrd
+public import Nyll.AlgebraicCurves.Places.Ramification.LeOrdIffMemPowFiberCenter
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Differentials.Maps.Maps
+public import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Mathlib.RingTheory.DedekindDomain.Different
 
 /-!
 # Differential correspondence mem regular Differentials
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -43,20 +51,8 @@ section SinglePlace
 
 variable {K F : Type*} [Field K] [Field F] [Algebra K F] (v : Place K F)
 
-theorem ord_nonneg_of_mem' {f : F} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f := by
-  rcases eq_or_ne f 0 with rfl | hf0
-  · rw [v.ord_zero]
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  obtain ⟨n, u, hu⟩ :=
-    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
-      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
-  have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
-    have h := congrArg (Subtype.val) hu
-    push_cast at h
-    rw [zpow_natCast]
-    exact h
-  rw [hcoe, v.ord_unit_smul_zpow u hπ (n : ℤ)]
-  exact Int.natCast_nonneg n
+theorem ord_nonneg_of_mem' {f : F} (hf : f ∈ v.toValuationSubring) : 0 ≤ v.ord f :=
+  _root_.AlgebraicCurve.Place.ord_nonneg_of_mem v hf
 
 theorem mem_of_ord_nonneg' {f : F} (hf : f ≠ 0) (h : 0 ≤ v.ord f) :
     f ∈ v.toValuationSubring := by
@@ -152,92 +148,20 @@ section ValuationDictionary
 variable {v : Place K F} {w : Place K F'}
 
 theorem neg_log_valuation_fiberCenter_eq_ord (hw : w.restrict F = v) {x : F'} (hx : x ≠ 0) :
-    -log ((fiberCenter F' v hw).valuation F' x) = w.ord x := by
-  refine eq_ord_of_addHom_of_nonneg_iff w
-    (fun y => -log ((fiberCenter F' v hw).valuation F' y)) ?_ ?_ ?_ hx
-  · intro a b ha hb
-    show -log ((fiberCenter F' v hw).valuation F' (a * b)) =
-      -log ((fiberCenter F' v hw).valuation F' a) +
-        -log ((fiberCenter F' v hw).valuation F' b)
-    rw [map_mul, log_mul ((Valuation.ne_zero_iff _).mpr ha) ((Valuation.ne_zero_iff _).mpr hb)]
-    ring
-  · obtain ⟨t, ht⟩ := (fiberCenter F' v hw).valuation_exists_uniformizer F'
-    refine ⟨t, ?_, ?_⟩
-    · intro h
-      rw [h, map_zero] at ht
-      exact exp_ne_zero ht.symm
-    · show -log ((fiberCenter F' v hw).valuation F' t) = 1
-      rw [ht, log_exp]
-      ring
-  · intro y hy
-    have hy0 : (fiberCenter F' v hw).valuation F' y ≠ 0 := (Valuation.ne_zero_iff _).mpr hy
-    change 0 ≤ -log ((fiberCenter F' v hw).valuation F' y) ↔ y ∈ w.toValuationSubring
-    have hmem : y ∈ w.toValuationSubring ↔ (fiberCenter F' v hw).valuation F' y ≤ 1 := by
-      rw [toValuationSubring_eq_of_restrict_eq hw,
-        HeightOneSpectrum.valuationSubringAtPrime_eq_valuationSubring]
-      exact Iff.rfl
-    rw [hmem]
-    constructor
-    · intro h
-      calc (fiberCenter F' v hw).valuation F' y
-          = exp (log ((fiberCenter F' v hw).valuation F' y)) := (exp_log hy0).symm
-        _ ≤ exp 0 := by rw [exp_le_exp]; omega
-        _ = 1 := exp_zero
-    · intro h
-      have h1 : exp (log ((fiberCenter F' v hw).valuation F' y)) ≤ exp 0 := by
-        rw [exp_log hy0, exp_zero]
-        exact h
-      rw [exp_le_exp] at h1
-      omega
+    -log ((fiberCenter F' v hw).valuation F' x) = w.ord x :=
+  _root_.AlgebraicCurve.Place.neg_log_valuation_fiberCenter_eq_ord hw hx
 
 theorem le_ord_iff_mem_pow_fiberCenter (hw : w.restrict F = v)
     {c : integralClosureAt F' v} (hc : c ≠ 0) (n : ℕ) :
     (n : ℤ) ≤ w.ord (algebraMap (integralClosureAt F' v) F' c) ↔
-      c ∈ (fiberCenter F' v hw).asIdeal ^ n := by
-  have hcF : algebraMap (integralClosureAt F' v) F' c ≠ 0 := by
-    simpa using (IsFractionRing.injective (integralClosureAt F' v) F').ne_iff.mpr hc
-  rw [← neg_log_valuation_fiberCenter_eq_ord hw hcF,
-    HeightOneSpectrum.valuation_of_algebraMap,
-    ← HeightOneSpectrum.intValuation_le_pow_iff_mem]
-  have h0 : (fiberCenter F' v hw).intValuation c ≠ 0 :=
-    HeightOneSpectrum.intValuation_ne_zero _ c hc
-  constructor
-  · intro h
-    calc (fiberCenter F' v hw).intValuation c
-        = exp (log ((fiberCenter F' v hw).intValuation c)) := (exp_log h0).symm
-      _ ≤ exp (-(n : ℤ)) := by rw [exp_le_exp]; omega
-  · intro h
-    have h1 : exp (log ((fiberCenter F' v hw).intValuation c)) ≤ exp (-(n : ℤ)) := by
-      rw [exp_log h0]
-      exact h
-    rw [exp_le_exp] at h1
-    omega
+      c ∈ (fiberCenter F' v hw).asIdeal ^ n :=
+  _root_.AlgebraicCurve.Place.le_ord_iff_mem_pow_fiberCenter hw hc n
 
 theorem ramificationIndex_eq_ramificationIdx_fiberCenter (hw : w.restrict F = v) :
     w.ramificationIndex F =
       (IsLocalRing.maximalIdeal v.toValuationSubring).ramificationIdx'
-        (fiberCenter F' v hw).asIdeal := by
-  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
-  have hπ0 : π ≠ 0 := hπ.ne_zero
-  have hπC : algebraMap v.toValuationSubring (integralClosureAt F' v) π ≠ 0 :=
-    algebraMap_integralClosureAt_ne_zero hπ0
-  have hmap : (IsLocalRing.maximalIdeal v.toValuationSubring).map
-      (algebraMap v.toValuationSubring (integralClosureAt F' v))
-        = Ideal.span {algebraMap v.toValuationSubring (integralClosureAt F' v) π} := by
-    rw [hπ.maximalIdeal_eq, Ideal.map_span, Set.image_singleton]
-  have hord : w.ord (algebraMap (integralClosureAt F' v) F'
-      (algebraMap v.toValuationSubring (integralClosureAt F' v) π))
-        = w.ramificationIndex F := by
-    rw [ord_algebraMap_integralClosureAt hw, ValuationSubring.algebraMap_apply,
-      v.ord_coe_irreducible hπ, mul_one]
-  refine (Ideal.ramificationIdx'_spec ?_ ?_).symm
-  · rw [hmap, Ideal.span_singleton_le_iff_mem,
-      ← le_ord_iff_mem_pow_fiberCenter hw hπC, hord]
-  · rw [hmap, Ideal.span_singleton_le_iff_mem,
-      ← le_ord_iff_mem_pow_fiberCenter hw hπC, hord]
-    have : 0 < w.ramificationIndex F := w.ramificationIndex_pos
-    push_cast
-    omega
+        (fiberCenter F' v hw).asIdeal :=
+  _root_.AlgebraicCurve.Place.ramificationIndex_eq_ramificationIdx_fiberCenter v hw
 
 end ValuationDictionary
 

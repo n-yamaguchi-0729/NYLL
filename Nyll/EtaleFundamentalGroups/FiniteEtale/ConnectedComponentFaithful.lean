@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # Faithfulness after meeting every connected component
@@ -24,6 +26,8 @@ This proves Stacks Project, Lemma 58.17.5 (tag `0EJX`), and allows any
 morphism meeting every connected component, without a closed-immersion
 hypothesis. The base need not be Noetherian or have finitely many components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

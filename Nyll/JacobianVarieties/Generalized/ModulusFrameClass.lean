@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameTest
-import Nyll.JacobianVarieties.Generalized.ParameterFrameClasses
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameTest
+public import Nyll.JacobianVarieties.Generalized.ParameterFrameClasses
 
 /-!
 # Intrinsic frame classes as actual modulus-rigidified bundles
@@ -15,6 +17,8 @@ compatible-isomorphism classes on the actual curve family. Its image is exactly
 the classes with underlying line bundle isomorphic to the pulled family.
 Naturality across test schemes and sheaf-level Picard classification are separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraphAlgClosed
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
-import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
+module
+
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraphAlgClosed
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+public import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Regular traces along finite flat curve morphisms
 
@@ -20,6 +23,8 @@ group-valued trace on the open locus where the whole fibre lies in the
 domain of the original map. The evaluation formulas use equality of
 Cartier ideals, including repeated points and nonreduced test schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

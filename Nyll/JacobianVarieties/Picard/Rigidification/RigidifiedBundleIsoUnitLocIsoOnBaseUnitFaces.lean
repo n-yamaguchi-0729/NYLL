@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Monoidal.Category
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleIsoUnitLocIsoOnBaseUnitFacesNoetherian
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianModelLocIsoOnBaseUnitFaces
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleIsoUnitLocIsoOnBaseUnitFacesNoetherian
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianModelLocIsoOnBaseUnitFaces
 
 /-!
 # The unit-face criterion over an arbitrary base
 
 Descend to a noetherian model and pull the resulting trivialization back to the original bundle.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

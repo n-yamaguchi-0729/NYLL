@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.FinitePresentation.FinitePresentationCoequalizer
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.CommAlgCat.FiniteType
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.InducedCategory
-import Mathlib.CategoryTheory.Limits.Cones
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.FiniteStability
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.SchemeTheory.RingTheory.FinitePresentation.FinitePresentationCoequalizer
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.CommAlgCat.FiniteType
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.InducedCategory
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -28,9 +30,10 @@ Morphisms and the diagram are inherited from the native over category.
 
 Common stages use the existing tensor-product universal maps. Parallel
 arrows are coequalized by the actual finite relation quotient. Thus the
-index is filtered without assuming any colimit comparison. For an integral
-target, proving that the displayed cocone is a colimit is the next step.
+index is filtered.
 -/
+
+@[expose] public section
 
 noncomputable section
 

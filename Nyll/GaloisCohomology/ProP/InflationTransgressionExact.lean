@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousTransgressionPrimitive
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgressionPrimitive
 
 /-!
 # Continuous inflation--transgression exactness in degree two
@@ -13,6 +15,8 @@ For an open normal subgroup, continuous transgression has range exactly the kern
 degree-two inflation.  The reverse inclusion is proved at cochain level by restricting a
 continuous primitive of the inflated cocycle.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

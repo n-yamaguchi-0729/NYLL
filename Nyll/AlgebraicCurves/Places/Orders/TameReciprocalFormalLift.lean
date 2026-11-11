@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.TameReciprocalModulusReduction
-import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
-import Nyll.SchemeTheory.RingTheory.Henselian.SeparatingFormalTranslationComparison
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.TameReciprocalModulusReduction
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.RingTheory.Henselian.SeparatingFormalTranslationComparison
 
 /-! # The normalized tame deformation is the actual reciprocal formal lift
 
@@ -16,6 +18,8 @@ Laurent deformation to the source field, finite-separable uniqueness
 identifies it with every actual formal lift having that reciprocal shift
 and the prescribed residue embedding. Its coefficient bounds are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

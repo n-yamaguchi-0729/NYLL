@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Descent.LocalStageResidueComparison
-import Nyll.SchemeTheory.Descent.NoetherianImageResidueLimit
-import Nyll.SchemeTheory.Descent.AffineTransitionIdempotents
-import Nyll.SchemeTheory.Morphisms.NoetherianProperFiberSections
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Nyll.SchemeTheory.Descent.LocalStageResidueComparison
+public import Nyll.SchemeTheory.Descent.NoetherianImageResidueLimit
+public import Nyll.SchemeTheory.Descent.AffineTransitionIdempotents
+public import Nyll.SchemeTheory.Morphisms.NoetherianProperFiberSections
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Lifting closed-fiber idempotents from actual Noetherian image stages
@@ -19,6 +21,8 @@ stage. Localizing that stage at the contracted closed point permits the
 Noetherian proper-section theorem to lift it. Pullback of that section gives
 an actual global section on the original closed subscheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

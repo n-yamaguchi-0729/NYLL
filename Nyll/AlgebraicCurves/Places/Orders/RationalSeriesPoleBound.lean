@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.RingTheory.PowerSeries.Inverse
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
-import Mathlib.Algebra.Polynomial.Eval.Coeff
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
+public import Mathlib.Algebra.Polynomial.Eval.Coeff
 
 /-! # Linear pole bounds from finite rational-coordinate data
 
@@ -21,6 +23,8 @@ reciprocity or extension theorem. On an arbitrary curve, a formal diagonal
 or finite étale lifting must still connect its actual coordinates to such
 formal expansions; functions need not be rational in a local parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

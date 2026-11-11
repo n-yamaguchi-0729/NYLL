@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.Unramified.LocalRing
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Ring Hom exists Unique eq smul kaehler Differential D of formally Smooth of maximal Ideal
 eq map sup span
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -32,10 +36,9 @@ theorem existsUnique_eq_smul_kaehlerDifferential_D_of_formallySmooth_of_maximalI
     (hres : Function.Surjective ((IsLocalRing.residue S).comp i))
     (t : S) (hm : maximalIdeal S = (maximalIdeal A).map i ⊔ Ideal.span {t})
     (ht : t ∉ (maximalIdeal A).map i) :
-    letI : Algebra A S := i.toAlgebra
+    let : Algebra A S := i.toAlgebra
     ∀ ω : KaehlerDifferential A S, ∃! s : S, ω = s • KaehlerDifferential.D A S t := by
-  let instAS : Algebra A S := i.toAlgebra
-  change ∀ ω : KaehlerDifferential A S, ∃! s : S, ω = s • KaehlerDifferential.D A S t
+  intro instAS
   classical
   have : Algebra.FormallySmooth A S := hi
   have : Algebra.EssFiniteType A S := hif

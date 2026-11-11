@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Module.ULift
-import Mathlib.Data.ZMod.Basic
-import Nyll.EtaleCohomology.Classical.SequentialLimit
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Module.ULift
+public import Mathlib.Data.ZMod.Basic
+public import Nyll.EtaleCohomology.Classical.SequentialLimit
 
 /-!
 # Classical ℓ-adic cohomology on the ordinary étale site
@@ -25,6 +27,8 @@ of cohomology groups with the cohomology of a derived inverse limit; any such
 comparison needs its own hypotheses and proof.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory
@@ -33,11 +37,12 @@ universe u
 
 namespace EtaleCohomology.Classical
 
-/-- The finite cyclic coefficient group, lifted to the scheme universe. -/
+/-- The cyclic coefficient group, lifted to the scheme universe. It is finite when `ℓ ≠ 0`;
+for `ℓ = 0` it is the lifted additive group of integers. -/
 abbrev ellPowerCoefficients (ℓ n : ℕ) : AddCommGrpCat.{u} :=
   AddCommGrpCat.of (ULift.{u} (ZMod (ℓ ^ (n + 1))))
 
-/-- Reduction between consecutive finite coefficient groups. -/
+/-- Reduction between consecutive cyclic coefficient groups, which are finite when `ℓ ≠ 0`. -/
 def ellPowerReduction (ℓ n : ℕ) :
     ellPowerCoefficients.{u} ℓ (n + 1) →+ ellPowerCoefficients.{u} ℓ n where
   toFun a := ULift.up
@@ -45,8 +50,9 @@ def ellPowerReduction (ℓ n : ℕ) :
   map_zero' := congrArg ULift.up (map_zero _)
   map_add' a b := congrArg ULift.up (map_add _ a.down b.down)
 
-/-- Ordinary étale cohomology with finite cyclic constant coefficients, bundled
-with its original additive-group structure once at each level. -/
+/-- Ordinary étale cohomology with cyclic constant coefficients, finite when `ℓ ≠ 0`,
+bundled with its original additive-group structure once at each level.
+The coefficient group at `ℓ = 0` is the lifted additive group of integers. -/
 def finiteLevelCohomology (X : Scheme.{u}) (ℓ n i : ℕ) : AddCommGrpCat.{u} :=
   AddCommGrpCat.of (Sheaf.H.{u} ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u}).obj
     (ellPowerCoefficients ℓ n)) i)

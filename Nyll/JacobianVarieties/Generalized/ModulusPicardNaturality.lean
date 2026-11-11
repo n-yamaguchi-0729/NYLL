@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
-import Nyll.JacobianVarieties.Generalized.ModulusFrameNaturality
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameNaturality
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 
 /-! A natural comparison from actual scalar frames to the existing modulus Picard presheaf. -/
+
+@[expose] public section
 
 noncomputable section
 

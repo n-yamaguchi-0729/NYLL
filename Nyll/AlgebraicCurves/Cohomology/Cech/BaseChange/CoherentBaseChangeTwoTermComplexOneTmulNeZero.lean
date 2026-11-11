@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
+module
+
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
 
 /-!
 # Coherent Base Change Two Term Complex one tmul ne zero of forall nonempty H0 linear Equiv
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

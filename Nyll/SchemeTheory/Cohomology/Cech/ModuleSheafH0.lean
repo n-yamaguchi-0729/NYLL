@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.Order.Fin.Tuple
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.Order.Fin.Tuple
 
 /-!
 # Actual global sections and zeroth ordered Čech cohomology
@@ -24,6 +26,8 @@ It applies to arbitrary native module sheaves, without quasicoherence or
 affineness of intersections. For a separated structural morphism it is
 natural for the existing Čech maps defined on affine intersections.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -118,7 +122,7 @@ theorem cechAugmentationCochain_apply (M : X.Modules) (K : X.OrderedAffineCover)
     cechAugmentationCochain f M K x s =
       (toOModulePresheaf f M).res (show K.inter s ≤ ⊤ from le_top) x := rfl
 
-private theorem cechAugmentationCochain_mem_ker (M : X.Modules)
+theorem cechAugmentationCochain_mem_ker (M : X.Modules)
     (K : X.OrderedAffineCover) (x : sectionModuleOverBase f M ⊤) :
     cechAugmentationCochain f M K x ∈ ((toOModulePresheaf f M).d K 0).ker := by
   apply LinearMap.mem_ker.mpr

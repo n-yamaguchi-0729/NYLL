@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.InjectiveDeckCohomology
-import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
+module
+
+public import Nyll.EtaleCohomology.Classical.InjectiveDeckCohomology
+public import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FieldCoverQuotient
 
 /-!
 # Homogeneous-function primitives from actual etale descent
@@ -13,6 +16,8 @@ import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
 The already proved geometric Cech primitives give equivariant
 homogeneous-function primitives in every positive degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -36,7 +41,7 @@ theorem homogeneousDeckSection_d
       ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) •
         homogeneousDeckSection X F Y n z (fun j => a (i.succAbove j)) := by
   change F.obj.map ((finiteEtaleInclusion X).map
-    (Pi.lift fun j => (MulOpposite.unop (a j)).hom)).op _ = _
+    (Pi.lift fun j => (MulOpposite.unop (a j)).asIso.hom)).op _ = _
   rw [map_sum]
   apply Finset.sum_congr rfl
   intro i _
@@ -70,7 +75,7 @@ theorem exists_injective_homogeneousDeck_primitive
     rw [homogeneousDeckSection_d, hz]
     exact (hc a).trans
       ((I.obj.map ((finiteEtaleInclusion X).map
-        (Pi.lift fun j => (MulOpposite.unop (a j)).hom)).op).hom.map_zero).symm
+        (Pi.lift fun j => (MulOpposite.unop (a j)).asIso.hom)).op).hom.map_zero).symm
   obtain ⟨b, hb⟩ := exists_injective_mappedGeometricCech_primitive
     (finiteEtaleInclusion X) X.smallEtaleTopology Y I n z hdz
   refine ⟨homogeneousDeckSection X I Y n b,
@@ -91,14 +96,14 @@ theorem exists_injective_homogeneousFieldGalois_primitive
       I.obj.obj (op ((finiteEtaleInclusion (Spec (.of K))).obj
         (FiniteEtale.mk (ξ K L)))))
     (heq : ∀ (σ : Gal(L/K)) (a : Fin (n + 2) → Gal(L/K)),
-      f (fun i => σ * a i) = (fieldGaloisSheafAction K L I σ).hom (f a))
+      f (fun i => σ * a i) = (fieldGaloisSheafAction K L I σ).asIso.hom (f a))
     (hc : ∀ a : Fin (n + 3) → Gal(L/K),
       ∑ i : Fin (n + 3), (-1 : ℤ) ^ (i : ℕ) • f (fun j => a (i.succAbove j)) = 0) :
     ∃ g : (Fin (n + 1) → Gal(L/K)) →
         I.obj.obj (op ((finiteEtaleInclusion (Spec (.of K))).obj
           (FiniteEtale.mk (ξ K L)))),
       (∀ (σ : Gal(L/K)) (a : Fin (n + 1) → Gal(L/K)),
-        g (fun i => σ * a i) = (fieldGaloisSheafAction K L I σ).hom (g a)) ∧
+        g (fun i => σ * a i) = (fieldGaloisSheafAction K L I σ).asIso.hom (g a)) ∧
       ∀ a : Fin (n + 2) → Gal(L/K),
         ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • g (fun j => a (i.succAbove j)) = f a := by
   let X := Spec (.of K)
@@ -110,10 +115,10 @@ theorem exists_injective_homogeneousFieldGalois_primitive
       fD (fun i => σ * a i) = (finiteEtaleDeckSectionsRep X I Y).ρ σ (fD a) := by
     have ht : (fun i => e.symm (σ * a i)) =
         (fun i => e.symm σ * e.symm (a i)) := funext (fun i => e.symm.map_mul σ (a i))
-    have ha : (fieldGaloisSheafAction K L I (e.symm σ)).hom (fD a) =
+    have ha : (fieldGaloisSheafAction K L I (e.symm σ)).asIso.hom (fD a) =
         (finiteEtaleDeckSectionsRep X I Y).ρ σ (fD a) := by
-      change (finiteEtaleSheafDeckAction X I Y (e (e.symm σ))).hom (fD a) =
-        (finiteEtaleSheafDeckAction X I Y σ).hom (fD a)
+      change (finiteEtaleSheafDeckAction X I Y (e (e.symm σ))).asIso.hom (fD a) =
+        (finiteEtaleSheafDeckAction X I Y σ).asIso.hom (fD a)
       rw [e.apply_symm_apply]
     exact (congrArg f ht).trans ((heq (e.symm σ) (fun i => e.symm (a i))).trans ha)
   have hcD (a : Fin (n + 3) → (Aut Y)ᵐᵒᵖ) :

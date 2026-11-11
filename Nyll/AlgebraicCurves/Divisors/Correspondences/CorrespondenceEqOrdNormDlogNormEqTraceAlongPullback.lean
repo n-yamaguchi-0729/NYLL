@@ -16,6 +16,7 @@ import Nyll.AlgebraicCurves.Differentials.Basic
 import Nyll.AlgebraicCurves.Differentials.Trace.Trace
 import Nyll.AlgebraicCurves.Differentials.Trace.TraceDiffInvSmulDEqInvNormSmulDNorm
 import Nyll.AlgebraicCurves.Differentials.Trace.TraceDiffApply
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Divisor correspondence eq ord norm and dlog norm eq trace Along pullback Along

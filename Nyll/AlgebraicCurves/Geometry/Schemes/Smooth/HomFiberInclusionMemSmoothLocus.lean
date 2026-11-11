@@ -10,46 +10,49 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Smooth.Locus
-import Mathlib.Topology.Sets.Opens
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Smooth.Fiber
-import Mathlib.RingTheory.Etale.Descent
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Unramified.Basic
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsSmoothAtIsSmoothAtFiber
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Smooth.Locus
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Smooth.Fiber
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Unramified.Basic
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsSmoothAtIsSmoothAtFiber
 
 /-!
 # Scheme Hom fiber Inclusion mem smooth Locus of mem smooth Locus fiber To Spec Residue
 Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -108,21 +111,21 @@ variable (A : Type u) [CommRing A] [Algebra R A]
 /-- The base change of the scheme along the spectrum of the chosen algebra. -/
 abbrev XA : Scheme.{u} := Limits.pullback c (specMap R A)
 
-private abbrev _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange.fst : XA c A ⟶ X
+/-- The first projection from the actual base change. -/
+abbrev fst : XA c A ⟶ X
   := Limits.pullback.fst c (specMap R A)
-export _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange (fst)
 
 
-private abbrev _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange.snd : XA c A ⟶
+/-- The structural projection of the actual base change. -/
+abbrev snd : XA c A ⟶
   Spec (.of A) := Limits.pullback.snd c (specMap R A)
-export _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange (snd)
 
 variable (U : X.Opens) (hU : IsAffineOpen U)
 
 theorem specMap_algebraMap_eq :
-    letI := algebraOfHom c U
+    let := algebraOfHom c U
     Spec.map (CommRingCat.ofHom (algebraMap R Γ(X, U))) = hU.fromSpec ≫ c := by
-  let := algebraOfHom c U
+  intro sharedOwner1
   have halg : (algebraMap R Γ(X, U)) = ((Scheme.ΓSpecIso (.of R)).inv ≫ c.appLE ⊤ U le_top).hom :=
     rfl
   rw [halg, CommRingCat.ofHom_hom, Spec.map_comp, ← Scheme.isoSpec_Spec_inv, ←
@@ -166,24 +169,24 @@ theorem sigma_apply (x : letI := algebraOfHom c U; Γ(X, U) ⊗[R] A) :
   rfl
 
 theorem iso_hom_comp_sndLeg :
-    letI := algebraOfHom c U
+    let := algebraOfHom c U
     ((fst c A) ⁻¹ᵁ U).ι ≫ snd c A
       = (pullbackAffineOpenIsoSpecTensor c A U hU).hom
         ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[R] Γ(X, U) ⊗[R]
           A)) := by
-  let := algebraOfHom c U
+  intro sharedOwner1
   rw [pullbackAffineOpenIsoSpecTensor, ← pullbackSpecIso_inv_snd R Γ(X, U) A]
   simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc, Iso.hom_inv_id_assoc,
     pullback.lift_snd, Category.comp_id, pullbackRightPullbackFstIso_hom_snd,
     pullbackSymmetry_hom_comp_snd_assoc, pullbackRestrictIsoRestrict_inv_fst_assoc]
 
 theorem iso_hom_comp_fstLeg :
-    letI := algebraOfHom c U
+    let := algebraOfHom c U
     (pullbackAffineOpenIsoSpecTensor c A U hU).hom
         ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : Γ(X, U) →+* Γ(X,
           U) ⊗[R] A))
       = ((fst c A) ∣_ U) ≫ hU.isoSpec.hom := by
-  let := algebraOfHom c U
+  intro sharedOwner1
   rw [pullbackAffineOpenIsoSpecTensor, ← pullbackSpecIso_inv_fst R Γ(X, U) A]
   simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc, Iso.hom_inv_id_assoc,
     pullback.lift_fst, pullbackRightPullbackFstIso_hom_fst_assoc,
@@ -206,9 +209,9 @@ theorem topIso_morphismRestrict_appTop_topIso {Y Z : Scheme.{u}} (g : Y ⟶ Z) (
 
 
 theorem sigma_tmul_one (s : Γ(X, U)) :
-    letI := algebraOfHom c U
+    let := algebraOfHom c U
     sigma c A U hU (s ⊗ₜ[R] (1 : A)) = ((fst c A).app U).hom s := by
-  let := algebraOfHom c U
+  intro sharedOwner1
   rw [sigma_apply]
   have hiL : s ⊗ₜ[R] (1 : A)
       = (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : Γ(X, U) →+* Γ(X, U) ⊗[R]
@@ -223,11 +226,11 @@ theorem sigma_tmul_one (s : Γ(X, U)) :
   rw [hΓ, Category.id_comp, Category.assoc, topIso_morphismRestrict_appTop_topIso]
 
 theorem sigma_one_tmul (a : A) :
-    letI := algebraOfHom c U
+    let := algebraOfHom c U
     sigma c A U hU ((1 : Γ(X, U)) ⊗ₜ[R] a)
       = ((XA c A).presheaf.map (homOfLE (le_top : (fst c A) ⁻¹ᵁ U ≤ ⊤)).op).hom
           (((Scheme.ΓSpecIso (.of A)).inv ≫ (snd c A).appTop).hom a) := by
-  let := algebraOfHom c U
+  intro sharedOwner1
   rw [sigma_apply]
   have hiR : (1 : Γ(X, U)) ⊗ₜ[R] a
       = (CommRingCat.ofHom (R := A) (S := Γ(X, U) ⊗[R] A)
@@ -313,9 +316,9 @@ theorem isAffineOpen_preimage_fst (U : X.Opens) (hU : IsAffineOpen U) : IsAffine
   hU.preimage (fst c k)
 
 theorem smooth_tensor_of_smooth_snd (U : X.Opens) (hU : IsAffineOpen U) (hsm : Smooth (snd c k)) :
-    letI := algebraOfHom c U
+    let := algebraOfHom c U
     Algebra.Smooth k (k ⊗[R] Γ(X, U)) := by
-  let := algebraOfHom c U
+  intro sharedOwner1
   let := algebraOfHom (snd c k) ((fst c k) ⁻¹ᵁ U)
   have h1 : (Scheme.Hom.appLE (snd c k) ⊤ ((fst c k) ⁻¹ᵁ U) le_top).hom.Smooth :=
     Smooth.smooth_appLE (snd c k) (isAffineOpen_top _) (isAffineOpen_preimage_fst c k U hU) le_top
@@ -329,42 +332,7 @@ theorem smooth_tensor_of_smooth_snd (U : X.Opens) (hU : IsAffineOpen U) (hsm : S
 
 end AlgebraicGeometry.SmoothFibre
 
-open Lean Elab Command in
-run_cmd
-  let namespacePrefix := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-    "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField"
-  for word in ([
-      namespacePrefix ++ ".AlgebraicGeometry",
-      namespacePrefix ++ ".AlgebraicGeometry.SmoothFibre"
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  let namespacePrefix := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-    "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField"
-  for word in ([
-      namespacePrefix ++ ".AlgebraicGeometry"
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry.SmoothFibre
 
 namespace Algebra
 export _root_.Algebra (FormallySmooth ofId map_top FormallyUnramified.of_surjective
@@ -490,47 +458,6 @@ private theorem _root_.Algebra.IsSmoothAt.comap_algEquiv {K A B : Type*} [CommRi
         IsScalarTower.algebraMap_apply K B (Localization.AtPrime Q)]
       exact congrArg (algebraMap B (Localization.AtPrime Q)) (e.commutes x))
   exact Algebra.FormallySmooth.of_equiv E.symm
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "Algebra.IsSmoothAt.comap_algEquiv".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-      "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField" ++
-      ".Algebra.IsSmoothAt.comap_algEquiv"
-    modifyEnv fun env => addAlias env aliasName.toName target
-  | none => pure ()
-
-
-private theorem _root_.Algebra.IsSmoothAt.of_algEquiv_of_comap_eq {K A B : Type*} [CommRing K]
-  [CommRing A] [CommRing B]
-    [Algebra K A] [Algebra K B] (e : A ≃ₐ[K] B) (P : Ideal A) (Q : Ideal B) [P.IsPrime] [Q.IsPrime]
-    (h : Q.comap e.toRingHom = P) [Algebra.IsSmoothAt K Q] : Algebra.IsSmoothAt K P := by
-  subst h
-  exact Algebra.IsSmoothAt.comap_algEquiv e Q
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "Algebra.IsSmoothAt.of_algEquiv_of_comap_eq".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-      "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField" ++
-      ".Algebra.IsSmoothAt.of_algEquiv_of_comap_eq"
-    modifyEnv fun env => addAlias env aliasName.toName target
-  | none => pure ()
-
 
 theorem mem_smoothLocus_of_mem_smoothLocus_snd_residueField (p : Ideal R) [p.IsPrime]
     (z : ↥(XA c p.ResidueField)) (hz : z ∈ (snd c p.ResidueField).smoothLocus) :
@@ -675,64 +602,11 @@ theorem fiberInclusion_mem_smoothLocus_of_affine
 
 end AlgebraicGeometry.SmoothFibre
 
-open Lean Elab Command in
-run_cmd
-  let namespacePrefix := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-    "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField"
-  for word in ([
-      namespacePrefix ++ ".AlgebraicGeometry",
-      namespacePrefix ++ ".AlgebraicGeometry.SmoothFibre"
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  let namespacePrefix := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-    "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField"
-  for word in ([
-      namespacePrefix ++ ".AlgebraicGeometry",
-      namespacePrefix ++ ".AlgebraicGeometry.SmoothFibre"
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry.SmoothFibre
 
 end
 
-open Lean Elab Command in
-run_cmd
-  let namespacePrefix := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-    "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField"
-  for word in ([
-      namespacePrefix ++ ".AlgebraicGeometry",
-      namespacePrefix ++ ".AlgebraicGeometry.SmoothFibre"
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry.SmoothFibre
 
 universe u
 
@@ -858,24 +732,7 @@ private theorem _root_.FiberSmoothnessCriterion.fiberInclusion_mem_smoothLocus_g
 
 end AlgebraicGeometry
 
-open Lean Elab Command in
-run_cmd
-  let namespacePrefix := "AlgebraicCurves.Geometry.Schemes.Proofs." ++
-    "Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField"
-  for word in ([
-      namespacePrefix ++ ".AlgebraicGeometry",
-      namespacePrefix ++ ".AlgebraicGeometry.SmoothFibre"
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry.SmoothFibre
 
 end Scheme_Hom_fiberInclusion_mem_smoothLocus_of_mem_smoothLocus_fiberToSpecResidueField
 end AlgebraicCurves.Geometry.Schemes.Proofs

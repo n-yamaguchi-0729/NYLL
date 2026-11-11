@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.DedekindDomain.PID
-import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.Tactic.Set
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.DedekindDomain.PID
+public import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.Tactic.Set
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
 
 /-!
 # Is Discrete Valuation Ring exists finite locally Principal Overring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

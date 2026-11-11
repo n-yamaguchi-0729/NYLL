@@ -11,7 +11,6 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataFlatSubschem
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataInvModuleProdPowIsoTensorUnit
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataMonoWhiskerLeftModuleIota
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataPullbackModuleComparisonLocallySurjective
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafDataRangeModuleIotaAppInjective
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModuleMaps
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InterIInterSupportZeroSchemeIdealEqEmpty

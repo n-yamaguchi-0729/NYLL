@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.HenselianLocalSection
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Connected.Clopen
-import Mathlib.Topology.Inseparable
+module
+
+public import Nyll.SchemeTheory.Etale.HenselianLocalSection
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Connected.Clopen
+public import Mathlib.Topology.Inseparable
 
 /-!
 # Extending finite étale sections over a strictly local spectrum
@@ -31,6 +33,8 @@ section has clopen image; connectedness puts the whole source in that image.
 No assumption on the dimension, normality, or Noetherianity of the ring is
 used, and the source need not be quasi-compact or an open subscheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

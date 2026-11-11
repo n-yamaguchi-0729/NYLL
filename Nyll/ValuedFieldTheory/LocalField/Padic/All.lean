@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Padic.ClosedAddSubgroup
-import Nyll.ValuedFieldTheory.LocalField.Padic.CompactDenominator
-import Nyll.ValuedFieldTheory.LocalField.Padic.Cyclotomic.All
-import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerCharacter
-import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerRestriction
-import Nyll.ValuedFieldTheory.LocalField.Padic.NonarchimedeanLocalField
-import Nyll.ValuedFieldTheory.LocalField.Padic.PrincipalUnits
-import Nyll.ValuedFieldTheory.LocalField.Padic.PrimePowerTorsionReduction
-import Nyll.ValuedFieldTheory.LocalField.Padic.ReductionCompatibility
-import Nyll.ValuedFieldTheory.LocalField.Padic.ResidueInverseLimit
-import Nyll.ValuedFieldTheory.LocalField.Padic.Teichmuller
-import Nyll.ValuedFieldTheory.LocalField.Padic.TeichmullerReduction
-import Nyll.ValuedFieldTheory.LocalField.Padic.UnitDecomposition
-import Nyll.ValuedFieldTheory.LocalField.Padic.PrimitiveRootTeichmullerCharacter
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Padic.ClosedAddSubgroup
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CompactDenominator
+public import Nyll.ValuedFieldTheory.LocalField.Padic.Cyclotomic.All
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerCharacter
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerRestriction
+public import Nyll.ValuedFieldTheory.LocalField.Padic.NonarchimedeanLocalField
+public import Nyll.ValuedFieldTheory.LocalField.Padic.PrincipalUnits
+public import Nyll.ValuedFieldTheory.LocalField.Padic.PrimePowerTorsionReduction
+public import Nyll.ValuedFieldTheory.LocalField.Padic.ReductionCompatibility
+public import Nyll.ValuedFieldTheory.LocalField.Padic.ResidueInverseLimit
+public import Nyll.ValuedFieldTheory.LocalField.Padic.Teichmuller
+public import Nyll.ValuedFieldTheory.LocalField.Padic.TeichmullerReduction
+public import Nyll.ValuedFieldTheory.LocalField.Padic.UnitDecomposition
+public import Nyll.ValuedFieldTheory.LocalField.Padic.PrimitiveRootTeichmullerCharacter
 
 /-!
 # Padic local fields and their units

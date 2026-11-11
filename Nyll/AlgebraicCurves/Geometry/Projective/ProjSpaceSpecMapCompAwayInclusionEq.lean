@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
+module
+
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
 
 /-!
 # Proj Space spec Map comp away Inclusion eq of forall apply ratio mul eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

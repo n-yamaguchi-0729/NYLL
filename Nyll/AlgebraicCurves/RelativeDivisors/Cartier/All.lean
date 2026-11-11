@@ -11,3 +11,5 @@ import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdealNeZero
 import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
 import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
 import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDivRestrict
+import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.EffectiveCartierIdeal
+import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.EffectiveCartierInvertibility

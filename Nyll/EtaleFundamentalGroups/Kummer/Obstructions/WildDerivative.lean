@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.Unit
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.Unit
 
 /-!
 # The wild-exponent obstruction for an explicit Kummer equation
@@ -15,6 +17,8 @@ the derivative at the adjoined root cannot be a unit when the residue
 characteristic divides `n`.  The proof combines the explicit derivative
 calculation with unit descent from the boundary complement.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

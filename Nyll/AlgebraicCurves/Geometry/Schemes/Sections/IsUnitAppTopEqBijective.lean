@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # exists is Unit app Top eq of bijective of surjective of ker le maximal Ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationFiniteH
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationKerIsFG
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedPresentationShift
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedSerreVanishing
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedGlobalSections
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedFreeGlobalSections
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationFiniteH
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModulePresentationKerIsFG
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedPresentationShift
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedSerreVanishing
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedGlobalSections
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedFreeGlobalSections
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Lifting global Čech sections to homogeneous numerators
@@ -30,6 +32,8 @@ the remaining lift through the free source is a polynomial numerator.
 Both the section and its numerator are constructed from the original
 presentation. No uniform regularity or eventual surjectivity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

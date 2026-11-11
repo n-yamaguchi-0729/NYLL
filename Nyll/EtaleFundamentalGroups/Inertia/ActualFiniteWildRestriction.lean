@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildImage
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.SubgroupRestrictionOfImage
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildImage
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.SubgroupRestrictionOfImage
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Category.Grp.Basic
 
 /-!
 # Surjective actual finite wild restrictions
@@ -18,6 +20,8 @@ The induced map uses the literal actual inertia restriction. Its image
 equality was proved from the original data, so preservation and surjectivity
 are conclusions, with no comparison premise supplied by a caller.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,23 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
-import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
-import Mathlib.RingTheory.Unramified.Basic
-import Mathlib.RingTheory.Unramified.LocalRing
-import Mathlib.RingTheory.Kaehler.Polynomial
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.FieldTheory.RatFunc.AsPolynomial
-import Mathlib.FieldTheory.Perfect
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.AlgebraicCurves.Places.Ramification.FiberCenterResidueComparison
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
+public import Nyll.AlgebraicCurves.Places.Taylor.DerivationCoefficients
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+public import Mathlib.RingTheory.Unramified.Basic
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import Mathlib.RingTheory.Kaehler.Polynomial
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Place ord diff Coeff D nonneg
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -127,84 +132,27 @@ variable {v : Place K F} {w : Place K F'}
 
 private def toValuationSubringOfRestrictEq (hw : w.restrict F = v) :
     integralClosureAt F' v →+* w.toValuationSubring :=
-  (algebraMap (integralClosureAt F' v) F').codRestrict
-    w.toValuationSubring.toSubring (forall_mem_of_restrict_eq hw)
+  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.toValuationSubringOfRestrictEq hw
 omit [FiniteDimensional F F'] in
 @[scoped simp]
 private theorem coe_toValuationSubringOfRestrictEq (hw : w.restrict F = v)
     (c : integralClosureAt F' v) :
     (toValuationSubringOfRestrictEq hw c : F')
-      = algebraMap (integralClosureAt F' v) F' c := rfl
+      = algebraMap (integralClosureAt F' v) F' c :=
+  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.coe_toValuationSubringOfRestrictEq hw c
 
 private def residueOfCenter (hw : w.restrict F = v) :
     integralClosureAt F' v →+* w.ResidueField :=
-  (IsLocalRing.residue w.toValuationSubring).comp (toValuationSubringOfRestrictEq hw)
+  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter hw
 omit [FiniteDimensional F F'] in
 private theorem residueOfCenter_apply (hw : w.restrict F = v) (c : integralClosureAt F' v) :
     residueOfCenter hw c = IsLocalRing.residue w.toValuationSubring
-      (toValuationSubringOfRestrictEq hw c) := rfl
+      (toValuationSubringOfRestrictEq hw c) :=
+  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter_apply hw c
 
 private theorem surjective_residueOfCenter (hw : w.restrict F = v) :
-    Function.Surjective (residueOfCenter hw) := by
-  classical
-  intro y
-  obtain ⟨x, rfl⟩ := IsLocalRing.residue_surjective y
-  have hx : (x : F') ∈ HeightOneSpectrum.valuationSubringAtPrime F' (fiberCenter F' v hw) := by
-    rw [← toValuationSubring_eq_of_restrict_eq hw]
-    exact x.2
-  obtain ⟨a, s, hs, hxas⟩ := hx
-  have hsP : s ∉ (fiberCenter F' v hw).asIdeal := hs
-  have hs0 : s ≠ 0 := fun h => hsP (h ▸ (fiberCenter F' v hw).asIdeal.zero_mem)
-  have hsF : algebraMap (integralClosureAt F' v) F' s ≠ 0 := by
-    simpa using (IsFractionRing.injective (integralClosureAt F' v) F').ne_iff.mpr hs0
-  have hsord : w.ord (algebraMap (integralClosureAt F' v) F' s) = 0 := by
-    have h1 : ¬ 0 < w.ord (algebraMap (integralClosureAt F' v) F' s) := by
-      rw [← mem_fiberCenter_iff_ord_pos hw hs0]
-      exact hsP
-    have h2 : 0 ≤ w.ord (algebraMap (integralClosureAt F' v) F' s) :=
-      w.ord_nonneg_of_mem (forall_mem_of_restrict_eq hw s)
-    omega
-  have hmax : (fiberCenter F' v hw).asIdeal.IsMaximal :=
-    (fiberCenter F' v hw).isPrime.isMaximal (fiberCenter F' v hw).ne_bot
-  obtain ⟨t, i, hi, hti⟩ := hmax.exists_inv hsP
-  have hst : s * t - 1 ∈ (fiberCenter F' v hw).asIdeal := by
-    have h1 : s * t - 1 = -i := by linear_combination hti
-    rw [h1]
-    exact neg_mem hi
-  refine ⟨a * t, ?_⟩
-  rw [residueOfCenter_apply, ← sub_eq_zero, ← map_sub, IsLocalRing.residue_eq_zero_iff]
-  have hcoe : ((toValuationSubringOfRestrictEq hw (a * t) - x : w.toValuationSubring) : F')
-      = algebraMap (integralClosureAt F' v) F' (a * t) - (x : F') := rfl
-  rcases eq_or_ne (toValuationSubringOfRestrictEq hw (a * t) - x) 0 with hzero | hne
-  · rw [hzero]
-    exact (IsLocalRing.maximalIdeal w.toValuationSubring).zero_mem
-  have hcoene : algebraMap (integralClosureAt F' v) F' (a * t) - (x : F') ≠ 0 := by
-    intro h
-    exact hne (by rwa [← hcoe, ZeroMemClass.coe_eq_zero] at h)
-  have hfactor : algebraMap (integralClosureAt F' v) F' (a * t) - (x : F')
-      = algebraMap (integralClosureAt F' v) F' (a * t * s - a)
-          * (algebraMap (integralClosureAt F' v) F' s)⁻¹ := by
-    rw [hxas, map_sub, map_mul (algebraMap (integralClosureAt F' v) F') (a * t) s,
-      sub_mul, mul_assoc, mul_inv_cancel₀ hsF, mul_one]
-  have hdiffC : a * t * s - a ≠ 0 := by
-    intro h
-    apply hcoene
-    rw [hfactor, h, map_zero, zero_mul]
-  have hdiffP : a * t * s - a ∈ (fiberCenter F' v hw).asIdeal := by
-    have h1 : a * t * s - a = a * (s * t - 1) := by ring
-    rw [h1]
-    exact Ideal.mul_mem_left _ _ hst
-  have hmem' : algebraMap (integralClosureAt F' v) F' (a * t) - (x : F')
-      ∈ w.toValuationSubring := by
-    rw [← hcoe]
-    exact Subtype.coe_prop _
-  rw [show (toValuationSubringOfRestrictEq hw (a * t) - x)
-      = (⟨_, hmem'⟩ : w.toValuationSubring) from Subtype.ext hcoe,
-    w.mem_maximalIdeal_iff_ord_pos hcoene hmem']
-  rw [hfactor, w.ord_mul (by
-      simpa using (IsFractionRing.injective (integralClosureAt F' v) F').ne_iff.mpr hdiffC)
-    (inv_ne_zero hsF), w.ord_inv, hsord, neg_zero, add_zero]
-  exact (mem_fiberCenter_iff_ord_pos hw hdiffC).mp hdiffP
+    Function.Surjective (residueOfCenter hw) :=
+  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.surjective_residueOfCenter hw
 
 end Dict
 

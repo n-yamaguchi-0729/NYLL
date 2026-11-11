@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberFullyFaithful
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberFullyFaithful
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
 
 /-!
 # Full faithfulness under algebraically closed constant extension
@@ -24,6 +26,8 @@ fullness, without a connectedness assumption or a chosen geometric point.
 This supplies full faithfulness in Stacks 0A49. Essential surjectivity for
 proper schemes is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

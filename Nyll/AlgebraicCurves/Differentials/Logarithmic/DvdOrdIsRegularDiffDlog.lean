@@ -91,7 +91,7 @@ theorem main
   obtain ⟨w, hw⟩ := v.exists_unit_mul_zpow hg hπ
   set n : ℤ := v.ord g with hn
   set uF : F := ((w : v.toValuationSubring) : F) with huF
-  have huF0 : uF ≠ 0 := by simp [huF, ne_eq, ZeroMemClass.coe_eq_zero]
+  have huF0 : uF ≠ 0 := fun h0 => w.ne_zero (Subtype.ext h0)
   have horduF : v.ord uF = 0 := by rw [huF]; exact v.ord_coe_unit w
   by_contra hndvd
   have hnF : ((n : ℤ) : F) ≠ 0 := by

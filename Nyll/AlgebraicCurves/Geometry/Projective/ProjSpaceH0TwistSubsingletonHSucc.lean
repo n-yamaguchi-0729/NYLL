@@ -10,28 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.NormNum
-import Lean.Elab.Tactic.Omega
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpacePolynomialNatDegreeLeFinrankH0TwistEq
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceH0TwistHomogeneousValEq
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceSubsingletonHSuccTwistH0
-import Nyll.SchemeTheory.RingTheory.Polynomial.NatPolynomialEvalEqEqMacaulayPow
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccEqMacaulayPow
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Projective.HomogeneousSectionsH0
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.NormNum
+public import Lean.Elab.Tactic.Omega
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpacePolynomialNatDegreeLeFinrankH0TwistEq
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceH0TwistHomogeneousValEq
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceSubsingletonHSuccTwistH0
+public import Nyll.SchemeTheory.RingTheory.Polynomial.NatPolynomialEvalEqEqMacaulayPow
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccEqMacaulayPow
 
 /-!
 # Proj Space forall H0 twist exists of forall subsingleton HSucc of maximal growth
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -212,28 +217,20 @@ variable {n : ℕ} {k : Type} [Field k] {Zk : Scheme.{0}}
 noncomputable def chartVal (F : MvPolynomial (Fin (n + 1)) k) (hF : F.IsHomogeneous d) (i : Fin (n
   + 1)) :
     Γ(Zk, ProjSpace.pullbackChart ιk i) :=
-  (ιk.app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.X i)))
-    (Proj.awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.X i)
-      (HomogeneousLocalization.mk
-        { deg := d
-          num := ⟨F, (MvPolynomial.mem_homogeneousSubmodule d F).mpr hF⟩
-          den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-            (MvPolynomial.isHomogeneous_X_pow i d)⟩
-          den_mem := ⟨d, rfl⟩ }))
+  ProjSpace.HomogeneousSectionsH0.chartVal ιk d F hF i
 
 theorem isHomogeneous_of_mem (F : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d)) :
     (F : MvPolynomial (Fin (n + 1)) k).IsHomogeneous d :=
-  (MvPolynomial.mem_homogeneousSubmodule d _).mp F.2
+  ProjSpace.HomogeneousSectionsH0.isHomogeneous_of_mem d F
 
 /-- The degree-zero Cech index corresponding to the selected standard projective chart. -/
 def vertex (i : Fin (n + 1)) : (ProjSpace.stdCoverPullback ιk).Idx 0 :=
-  ⟨fun _ => ULift.up i, fun a b hab => absurd (Fin.lt_def.mp hab)
-    (by have := a.isLt; have := b.isLt; omega)⟩
+  ProjSpace.HomogeneousSectionsH0.vertex ιk i
 
 theorem chart_le_inter_vertex (i : Fin (n + 1)) :
     ProjSpace.pullbackChart ιk i ≤ (ProjSpace.stdCoverPullback ιk).inter (vertex ιk i) ⊓
       ProjSpace.pullbackChart ιk i :=
-  le_inf (le_iInf fun _ => le_rfl) le_rfl
+  ProjSpace.HomogeneousSectionsH0.chart_le_inter_vertex ιk i
 
 theorem exists_theta :
     ∃ Θ : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d) →ₗ[k]
@@ -247,36 +244,7 @@ theorem exists_theta :
               ≤ ProjSpace.pullbackChart ιk i)
             (chartVal ιk d F (isHomogeneous_of_mem d F) i) := by
   obtain ⟨θ, hθ, -⟩ := ProjSpace.exists_linearMap_homogeneousSubmodule_twistObj_top_val_eq ιk d
-  let T := ProjSpace.twist (ιk ≫ ProjSpace.π k n) ιk d
-  let K := ProjSpace.stdCoverPullback ιk
-  let Θ₀ : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d) →ₗ[k] T.cochain K 0 :=
-    LinearMap.pi fun s => (T.res (le_top : K.inter s ≤ ⊤)).comp θ
-  have hΘ₀ : ∀ F s, Θ₀ F s = T.res (le_top : K.inter s ≤ ⊤) (θ F) := fun F s => rfl
-  have hcoc : ∀ F, Θ₀ F ∈ T.H0 K := by
-    intro F
-    rw [LinearMap.mem_ker]
-    funext s
-    rw [OModulePresheaf.d_apply, Fin.sum_univ_two]
-    simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_smul, neg_smul, hΘ₀]
-    change T.res (K.inter_le_inter_face s 0) (T.res le_top (θ F)) +
-      -T.res (K.inter_le_inter_face s 1) (T.res le_top (θ F)) = (0 : T.obj (K.inter s))
-    exact (congrArg₂ (fun x y : T.obj (K.inter s) => x + -y)
-      (T.res_res (K.inter_le_inter_face s 0) le_top (θ F))
-      (T.res_res (K.inter_le_inter_face s 1) le_top (θ F))).trans
-      (add_neg_cancel (T.res (le_top : K.inter s ≤ ⊤) (θ F)))
-  refine ⟨LinearMap.codRestrict (T.H0 K) Θ₀ hcoc, fun F s i => ?_⟩
-  rw [LinearMap.codRestrict_apply, hΘ₀]
-  change (ProjSpace.twistRes (ιk ≫ ProjSpace.π k n) ιk d (le_top : K.inter s ≤ ⊤) (θ F)).val i = _
-  rw [ProjSpace.twistRes_val]
-  have hF : (θ F).val i =
-      ProjSpace.restrictFun (inf_le_right : (⊤ : Zk.Opens) ⊓ ProjSpace.pullbackChart ιk i ≤
-        ProjSpace.pullbackChart ιk i) (chartVal ιk d F (isHomogeneous_of_mem d F) i) :=
-    hθ F.1 (isHomogeneous_of_mem d F) i
-  exact (congrArg (ProjSpace.restrictFun
-      (inf_le_inf_right (ProjSpace.pullbackChart ιk i) (le_top : K.inter s ≤ ⊤))) hF).trans
-    (ProjSpace.restrictFun_restrictFun
-      (inf_le_inf_right (ProjSpace.pullbackChart ιk i) (le_top : K.inter s ≤ ⊤))
-      inf_le_right (chartVal ιk d F (isHomogeneous_of_mem d F) i))
+  exact ProjSpace.HomogeneousSectionsH0.exists_theta_of_section_map ιk d θ hθ
 
 variable {ιk d}
 
@@ -292,32 +260,8 @@ theorem theta_eq_zero_iff
               ≤ ProjSpace.pullbackChart ιk i)
             (chartVal ιk d F (isHomogeneous_of_mem d F) i))
     (F : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d)) :
-    Θ F = 0 ↔ ∀ i : Fin (n + 1), chartVal ιk d F (isHomogeneous_of_mem d F) i = 0 := by
-  constructor
-  · intro h i
-    have h1 := hΘ F (vertex ιk i) i
-    rw [h] at h1
-    have h2 : ProjSpace.restrictFun (chart_le_inter_vertex ιk i)
-        (ProjSpace.restrictFun
-          (inf_le_right : (ProjSpace.stdCoverPullback ιk).inter (vertex ιk i) ⊓
-            ProjSpace.pullbackChart ιk i ≤
-            ProjSpace.pullbackChart ιk i)
-          (chartVal ιk d F (isHomogeneous_of_mem d F) i)) = chartVal ιk d F (isHomogeneous_of_mem d
-            F) i := by
-      rw [ProjSpace.restrictFun_restrictFun]; exact ProjSpace.restrictFun_refl _
-    rw [← h2, ← h1]
-    have hz : (((0 : ↥((ProjSpace.twist (ιk ≫ ProjSpace.π k n) ιk d).H0 (ProjSpace.stdCoverPullback
-      ιk))) :
-        (ProjSpace.twist (ιk ≫ ProjSpace.π k n) ιk d).cochain (ProjSpace.stdCoverPullback ιk) 0)
-          (vertex ιk i)).val i
-        = 0 := rfl
-    rw [hz, map_zero]
-  · intro h
-    apply Subtype.ext
-    funext s
-    refine ProjSpace.twistObj.ext (funext fun i => ?_)
-    rw [hΘ, h i, map_zero]
-    rfl
+    Θ F = 0 ↔ ∀ i : Fin (n + 1), chartVal ιk d F (isHomogeneous_of_mem d F) i = 0 :=
+  ProjSpace.HomogeneousSectionsH0.theta_eq_zero_iff Θ hΘ F
 
 end Theta
 

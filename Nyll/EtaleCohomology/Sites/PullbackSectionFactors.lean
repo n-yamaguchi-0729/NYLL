@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackSections
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackSections
 
 /-!
 # Restriction through actual inverse-image section factors
@@ -14,6 +16,8 @@ agrees with pulling it through the composite factor. The proof retains the
 chosen inverse-image unit and the literal maps into native scheme pullbacks.
 This supplies compatibility for section cocones over pointed neighborhoods.
 -/
+
+@[expose] public section
 
 noncomputable section
 

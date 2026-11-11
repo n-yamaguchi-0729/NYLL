@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleHEquivFD
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleHEquivPi
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedGlobalSections
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistGlobalSections
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistFiniteCohomology
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Lean.Elab.Tactic.Omega
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleHEquivFD
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleHEquivPi
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedGlobalSections
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistGlobalSections
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistFiniteCohomology
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Polynomial numerators for global sections of shifted free modules
@@ -26,6 +28,8 @@ assembles numerators for finite products of graded modules.
 These are statements about the explicit graded Čech complex. No
 identification with sections of an arbitrary module presheaf is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

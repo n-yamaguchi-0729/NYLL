@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareGroupProjection
-import Nyll.JacobianVarieties.Generalized.PoincareZeroFibre
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareGroupProjection
+public import Nyll.JacobianVarieties.Generalized.PoincareZeroFibre
 
 /-!
 # The scheme fibre at the identity of the modulus-forgetting group morphism
@@ -14,6 +16,8 @@ Both the projection and the ordinary identity are identified with their
 geometric constructions. The scheme-theoretic fibre at that identity is
 therefore the scalar-unit quotient of the full modulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

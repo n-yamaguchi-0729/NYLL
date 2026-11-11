@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.GroupTheory.CyclicProjection
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealTower
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.GroupTheory.CyclicProjection
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealTower
 
 /-!
 # Ideal inertia on a compositum
@@ -14,6 +16,8 @@ This file combines the ideal-theoretic restriction map with the cyclic group
 calculation in Abhyankar's lemma.  The field-specific construction of the two
 restriction homomorphisms is deliberately kept separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

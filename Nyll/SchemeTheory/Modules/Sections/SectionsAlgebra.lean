@@ -10,9 +10,13 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! The structure-presheaf map and section algebra induced by a morphism to an affine scheme. -/
+
+@[expose] public section
 
 universe u
 

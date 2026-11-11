@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.Frames.FrameLinearCombination
-import Nyll.SchemeTheory.Modules.Frames.FrameDescent
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.Frames.FrameLinearCombination
+public import Nyll.SchemeTheory.Modules.Frames.FrameDescent
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
 
 /-! SpanningFrameDescent for scheme modules. -/
+
+@[expose] public section
 
 universe u
 

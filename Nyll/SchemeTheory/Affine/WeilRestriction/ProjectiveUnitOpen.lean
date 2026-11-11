@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormPolynomial
-import Nyll.SchemeTheory.ProjectiveSpace.Smooth
-import Nyll.SchemeTheory.Modules.Frames.ProjectivePresentationFromFrames
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormPolynomial
+public import Nyll.SchemeTheory.ProjectiveSpace.Smooth
+public import Nyll.SchemeTheory.Modules.Frames.ProjectivePresentationFromFrames
 
 /-!
 # The projective norm open of a finite free algebra
@@ -20,6 +22,8 @@ These constructions supply the carrier and the invariant map for the
 scalar quotient. The fppf quotient universal property, including points
 with a nontrivial scalar line bundle, is a separate assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

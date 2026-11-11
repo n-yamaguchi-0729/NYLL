@@ -5,11 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneDivisorScalarExtension
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
-import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicAction
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneDivisorScalarExtension
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
+public import Nyll.JacobianVarieties.Generalized.PicardOneIntrinsicAction
 
 /-! # Actual tensor action and scalar extension of the full relative divisor -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -17,6 +22,8 @@ universe u v w
 
 open CategoryTheory Opposite MonoidalCategory
 open AlgebraicGeometry.SmoothProperCurve
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

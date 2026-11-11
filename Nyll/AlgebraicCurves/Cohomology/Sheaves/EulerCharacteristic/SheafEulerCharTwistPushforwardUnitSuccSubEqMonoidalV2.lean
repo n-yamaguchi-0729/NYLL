@@ -10,41 +10,46 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Associator
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Topology.Sets.Closeds
-import Lean.Elab.Tactic.Omega
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafTensor
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.SheafEulerCharEqAdd
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.AffSESTensor
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentQuasicoherentSupportedInPushforwardUnit
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.AffHomH0EquivHSuccEquiv
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleFunctionFieldPresentation
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealSheafDataTensorLinearEquiv
-import Nyll.SchemeTheory.Modules.Functoriality.AffineSectionsBaseChange
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleBijectiveLiftTensorSectionsBilinMonoidalV2
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentCoherentSupportedInTensor
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
-import Nyll.AlgebraicCurves.Geometry.Projective.ModulesProjectiveSections
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentKer
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentKer
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Associator
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Topology.Sets.Closeds
+public import Lean.Elab.Tactic.Omega
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafTensor
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafConstructions
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.SheafEulerCharEqAdd
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.AffSESTensor
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentQuasicoherentSupportedInPushforwardUnit
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.AffHomH0EquivHSuccEquiv
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleFunctionFieldPresentation
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealSheafDataTensorLinearEquiv
+public import Nyll.SchemeTheory.Modules.Functoriality.AffineSectionsBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleBijectiveLiftTensorSectionsBilinMonoidalV2
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentCoherentSupportedInTensor
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
+public import Nyll.AlgebraicCurves.Geometry.Projective.ModulesProjectiveSections
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentKer
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentKer
 
 /-!
 # OModule Presheaf exists euler Char twist pushforward Unit succ sub eq monoidal V2
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -146,11 +151,9 @@ variable {k : Type u} [Field k] {V : Scheme.{u}} (π : V ⟶ Spec (.of k)) (K : 
 include hL in
 theorem locTriv_tensorPow (n : ℕ) : ∀ x : V, ∃ (U : V.Opens), x ∈ U ∧
     Nonempty ((Scheme.Modules.pullback U.ι).obj (L.tensorPow n) ≅ SheafOfModules.unit
-      U.toScheme.ringCatSheaf) := by
-  suffices h : Scheme.Modules.IsInvertible (L.tensorPow n) from h.1
-  induction n with
-  | zero => exact Scheme.Modules.isInvertible_unit V
-  | succ n ih => exact ih.tensor_monoidalV2 ⟨hL⟩
+      U.toScheme.ringCatSheaf) :=
+  (_root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorPow
+    (L := L) ⟨hL⟩ n).1
 include hL in
 theorem coh_twist (G : OModulePresheaf π) (hc : G.IsCoherent) (hq : G.IsQuasicoherent) (n : ℕ) :
     (G.twist (L.tensorPow n)).IsCoherent ∧ (G.twist (L.tensorPow n)).IsQuasicoherent :=
@@ -203,7 +206,8 @@ variable {k : Type u} [Field k] {V : Scheme.{u}} (π : V ⟶ Spec (.of k)) (Z₀
 /-- The closed subscheme defined by the vanishing ideal of the chosen closed set. -/
 noncomputable abbrev ZZ : Scheme.{u} := (Scheme.IdealSheafData.vanishingIdeal Z₀).subscheme
 
-private noncomputable abbrev _root_.P2mTwistStep.ι : ZZ Z₀ ⟶ V :=
+/-- The closed immersion defined by the vanishing ideal of the chosen closed subset. -/
+noncomputable abbrev _root_.P2mTwistStep.ι : ZZ Z₀ ⟶ V :=
   (Scheme.IdealSheafData.vanishingIdeal Z₀).subschemeι
 export _root_.P2mTwistStep (ι)
 

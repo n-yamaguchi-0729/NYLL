@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Degree-zero maximal-support cohomology of symbolic-power quotients
@@ -21,6 +23,8 @@ symbolic-power quotient. For a nonmaximal prime in a local ring, choose
 such an element in the maximal ideal. Its powers detect the vanishing of
 maximal-ideal-power torsion, hence of degree-zero local cohomology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNeighborhoodLift
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNeighborhoodLift
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Maps of strict local rings induced by a chosen specialization
@@ -23,6 +25,8 @@ the composite ring map. It supplies the map of strict local rings used
 in Stacks Project, Lemma 58.16.2:
 https://stacks.math.columbia.edu/tag/0BUP.
 -/
+
+@[expose] public section
 
 noncomputable section
 

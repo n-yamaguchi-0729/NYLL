@@ -4,38 +4,42 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Complete
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.AdicLimits
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Assembly
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Basic
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.CoefficientMinimum
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Complete
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DegreeBounds
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DivisionBounds
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.ErrorPowers
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.FiniteApproximation
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.InfiniteApproximation
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Iteration
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.PrincipalLimits
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Step
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Truncation
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.WeakLimits
-import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialBounds
-import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialLifting
-import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicReduction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveFactorization
-import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveReduction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueAlgebraicExtensions
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Canonical
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.IndexAbsorption
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.BaseChange
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Complete
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.AdicLimits
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Assembly
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Basic
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.CoefficientMinimum
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Complete
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DegreeBounds
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.DivisionBounds
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.ErrorPowers
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.FiniteApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.InfiniteApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Iteration
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.PrincipalLimits
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Step
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.Truncation
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Factorization.WeakLimits
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialBounds
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.IrreduciblePolynomialLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicReduction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrimitiveReduction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueAlgebraicExtensions
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Canonical
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.IndexAbsorption
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.BaseChange
+public import Nyll.ValuedFieldTheory.Ramification.RamificationIndexComparison
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Finite tame base change on the actual compositum
@@ -47,6 +51,8 @@ compositum `L ⊔ K'`, uses finite-separable uniqueness to identify the two
 upper valuation rings, applies Neu1999 Corollary 7.8, and returns tame
 ramification in the canonical CompleteDVF API.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -222,17 +228,17 @@ theorem exists_actualCommonTop_isTamelyRamified_of_bookFiniteTame
     let Top := (L ⊔ K' : IntermediateField K Ω)
     ∃ commonTarget : CompleteDVF.{u, 0} Top,
       ∃ hRight : rightBase.valuation.HasExtension commonTarget.valuation,
-        letI : rightBase.valuation.HasExtension commonTarget.valuation := hRight
-        letI : FiniteDimensional K' Top :=
+        let : rightBase.valuation.HasExtension commonTarget.valuation := hRight
+        let : FiniteDimensional K' Top :=
           finiteDimensional_sup_over_right L K'
-        letI : Algebra.IsSeparable K' Top :=
+        let : Algebra.IsSeparable K' Top :=
           isSeparable_sup_over_right_of_left L K'
-        letI : IsScalarTower rightBase.valuationSubring
+        let : IsScalarTower rightBase.valuationSubring
             commonTarget.valuationSubring Top :=
           Valuation.valuationSubring_isScalarTower_of_hasExtension
             rightBase.valuation commonTarget.valuation
         IsTamelyRamified rightBase.toDVF commonTarget.toDVF := by
-  let Top := (L ⊔ K' : IntermediateField K Ω)
+  intro Top
   let wRight := exponentialValuationRestrict wΩ K'
   let wTop := exponentialValuationRestrict wΩ Top
   let hRightTop : ∀ a : K',
@@ -247,18 +253,14 @@ theorem exists_actualCommonTop_isTamelyRamified_of_bookFiniteTame
     exists_actualCommonTop_bookFiniteTame_and_compatible
       (baseK := baseK) (rightBase := rightBase)
       L K' vK wΩ hKΩ hhens hTame hBaseBook
-  let : rightBase.valuation.HasExtension commonTarget.valuation := hRight
-  let : IsScalarTower rightBase.valuationSubring
-      commonTarget.valuationSubring Top :=
-    Valuation.valuationSubring_isScalarTower_of_hasExtension
-      rightBase.valuation commonTarget.valuation
+  refine ⟨commonTarget, hRight, ?_⟩
+  intro extension finiteDimension separable scalarTower
   have hBaseRight :=
     exponentialValuationRestrict_extends vK wΩ hKΩ K'
   have hhensRight : ValuationTheory.DiscreteValuationField.HenselianValuationByFactorization
       (LubinTate.Valuations.exponentialValuationSubringAsValuationSubring wRight).valuation :=
     henselianValuation_of_algebraic_extension
       vK wRight hBaseRight hhens
-  refine ⟨commonTarget, hRight, ?_⟩
   exact isTamelyRamified_of_bookFiniteTame
     (base := rightBase) (target := commonTarget)
     wRight wTop hRightTop hhensRight hTopTame hRightBook hTopBook
@@ -296,12 +298,12 @@ theorem exists_actualCommonTop_ramificationIndex_dvd_div_gcd_of_bookFiniteTame
     let Top := (L ⊔ K' : IntermediateField K Omega)
     exists commonTarget : CompleteDVF.{u, 0} Top,
       exists hRight : rightBase.valuation.HasExtension commonTarget.valuation,
-        letI : rightBase.valuation.HasExtension commonTarget.valuation := hRight
-        letI : FiniteDimensional K' Top :=
+        let : rightBase.valuation.HasExtension commonTarget.valuation := hRight
+        let : FiniteDimensional K' Top :=
           finiteDimensional_sup_over_right L K'
-        letI : Algebra.IsSeparable K' Top :=
+        let : Algebra.IsSeparable K' Top :=
           isSeparable_sup_over_right_of_left L K'
-        letI : IsScalarTower rightBase.valuationSubring
+        let : IsScalarTower rightBase.valuationSubring
             commonTarget.valuationSubring Top :=
           Valuation.valuationSubring_isScalarTower_of_hasExtension
             rightBase.valuation commonTarget.valuation
@@ -309,7 +311,7 @@ theorem exists_actualCommonTop_ramificationIndex_dvd_div_gcd_of_bookFiniteTame
           ramificationIndex baseK.toDVF leftTarget.toDVF /
             Nat.gcd (ramificationIndex baseK.toDVF leftTarget.toDVF)
               (ramificationIndex baseK.toDVF rightBase.toDVF) := by
-  let Top := (L ⊔ K' : IntermediateField K Omega)
+  intro Top
   let wLeft := exponentialValuationRestrict wOmega L
   let wRight := exponentialValuationRestrict wOmega K'
   let wTop := exponentialValuationRestrict wOmega Top
@@ -329,11 +331,8 @@ theorem exists_actualCommonTop_ramificationIndex_dvd_div_gcd_of_bookFiniteTame
     exists_actualCommonTop_bookFiniteTame_and_compatible
       (baseK := baseK) (rightBase := rightBase)
       L K' vK wOmega hKOmega hhens hTame hBaseBook
-  let : rightBase.valuation.HasExtension commonTarget.valuation := hRight
-  let : IsScalarTower rightBase.valuationSubring
-      commonTarget.valuationSubring Top :=
-    Valuation.valuationSubring_isScalarTower_of_hasExtension
-      rightBase.valuation commonTarget.valuation
+  refine ⟨commonTarget, hRight, ?_⟩
+  intro extension finiteDimension separable scalarTower
   have hBookLeftExt : baseK.valuation.HasExtension
       (LubinTate.Valuations.exponentialValuationSubringAsValuationSubring wLeft).valuation :=
     completeDVF_hasExtension_bookValuationSubring_of_eq
@@ -376,7 +375,6 @@ theorem exists_actualCommonTop_ramificationIndex_dvd_div_gcd_of_bookFiniteTame
         Nat.gcd (exponentialRamificationIndex vK wLeft)
           (exponentialRamificationIndex vK wRight) at hbook
   rw [hramRight, hramLeft, hramBase] at hbook
-  refine ⟨commonTarget, hRight, ?_⟩
   exact hbook
 
 /-- Classical Abhyankar's lemma on the actual compositum: if the finite
@@ -410,17 +408,17 @@ theorem exists_actualCommonTop_isUnramified_of_bookFiniteTame_of_dvd
     let Top := (L ⊔ K' : IntermediateField K Omega)
     exists commonTarget : CompleteDVF.{u, 0} Top,
       exists hRight : rightBase.valuation.HasExtension commonTarget.valuation,
-        letI : rightBase.valuation.HasExtension commonTarget.valuation := hRight
-        letI : FiniteDimensional K' Top :=
+        let : rightBase.valuation.HasExtension commonTarget.valuation := hRight
+        let : FiniteDimensional K' Top :=
           finiteDimensional_sup_over_right L K'
-        letI : Algebra.IsSeparable K' Top :=
+        let : Algebra.IsSeparable K' Top :=
           isSeparable_sup_over_right_of_left L K'
-        letI : IsScalarTower rightBase.valuationSubring
+        let : IsScalarTower rightBase.valuationSubring
             commonTarget.valuationSubring Top :=
           Valuation.valuationSubring_isScalarTower_of_hasExtension
             rightBase.valuation commonTarget.valuation
         IsUnramified rightBase.toDVF commonTarget.toDVF := by
-  let Top := (L ⊔ K' : IntermediateField K Omega)
+  intro Top
   let wLeft := exponentialValuationRestrict wOmega L
   let hLeft :=
     exponentialValuationRestrict_extends vK wOmega hKOmega L
@@ -433,11 +431,8 @@ theorem exists_actualCommonTop_isUnramified_of_bookFiniteTame_of_dvd
       (baseK := baseK) (rightBase := rightBase)
       (leftTarget := leftTarget)
       L K' vK wOmega hKOmega hhens hTame hBaseBook
-  let : rightBase.valuation.HasExtension commonTarget.valuation := hRight
-  let : IsScalarTower rightBase.valuationSubring
-      commonTarget.valuationSubring Top :=
-    Valuation.valuationSubring_isScalarTower_of_hasExtension
-      rightBase.valuation commonTarget.valuation
+  refine ⟨commonTarget, hRight, ?_⟩
+  intro extension finiteDimension separable scalarTower
   have hBookLeftExt : baseK.valuation.HasExtension
       (LubinTate.Valuations.exponentialValuationSubringAsValuationSubring wLeft).valuation :=
     completeDVF_hasExtension_bookValuationSubring_of_eq
@@ -459,7 +454,6 @@ theorem exists_actualCommonTop_isUnramified_of_bookFiniteTame_of_dvd
       0 < ramificationIndex baseK.toDVF leftTarget.toDVF := by
     rw [← hramLeft]
     exact bookRamificationIndex_pos vK wLeft hLeft
-  refine ⟨commonTarget, hRight, ?_⟩
   change ramificationIndex rightBase.toDVF commonTarget.toDVF = 1
   exact eq_one_of_abhyankarIndexBound_of_dvd
     hleftPos hbound hdiv

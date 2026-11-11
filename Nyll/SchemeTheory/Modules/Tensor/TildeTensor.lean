@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.ModuleColimitGenerator
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionRightUnitor
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.LinearAlgebra.BilinearMap
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.ModuleColimitGenerator
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionNaturality
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionRightUnitor
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.LinearAlgebra.BilinearMap
 
 /-!
 # Tensor products of actual affine tilde modules
@@ -28,6 +30,8 @@ arbitrary module proves that the comparison is an isomorphism.
 No flatness, finite presentation, or tensor-comparison hypothesis is used.
 The formula on the original global pure tensors is retained explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

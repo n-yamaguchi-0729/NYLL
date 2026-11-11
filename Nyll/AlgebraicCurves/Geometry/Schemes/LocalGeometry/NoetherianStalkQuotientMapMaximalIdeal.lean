@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Scheme is Noetherian Ring stalk quotient map maximal Ideal of locally Of Finite Type
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Nyll.JacobianVarieties.Generalized.ModulusUnitFunctor
-import Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitFunctor
+public import Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # A degree-one modulus is an actual rational reduced point -/
+
+@[expose] public section
 
 noncomputable section
 

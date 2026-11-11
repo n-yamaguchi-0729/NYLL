@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusLocalUnits
-import Mathlib.Algebra.CharP.Lemmas
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.GroupWithZero.Divisibility
-import Mathlib.GroupTheory.OrderOfElement
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusLocalUnits
+public import Mathlib.Algebra.CharP.Lemmas
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.GroupWithZero.Divisibility
+public import Mathlib.GroupTheory.OrderOfElement
 
 /-!
 # Positive-characteristic units retain the full modulus
@@ -19,6 +21,8 @@ has order `p²`. This rules out replacing the whole principal-unit group by
 an additive group killed by `p`. It is an assertion about actual truncated
 local rings, without any assumption of scheme representability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

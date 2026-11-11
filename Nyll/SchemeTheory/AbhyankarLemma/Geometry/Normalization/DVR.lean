@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 
 /-!
 # Normalizations over an arbitrary discrete valuation ring
@@ -15,6 +17,8 @@ the unique maximal ideal of the base.  Consequently, all residue fields in a
 normalization tower have the same exponential characteristic as the fixed
 residue field of the DVR.
 -/
+
+@[expose] public section
 
 noncomputable section
 

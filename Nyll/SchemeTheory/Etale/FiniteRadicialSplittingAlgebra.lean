@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.RingTheory.TotallySplit
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSplitting
 
 /-!
 # Actual local splitting algebras over a finite radicial surjection

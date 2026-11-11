@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoDescent
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoDescent
 
 /-!
 # Isomorphisms between finite-etale models at a later stage
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsoDescent
 Combine actual Hom descent, eventual invertibility, and pullback-composition
 coherence. The resulting isomorphism recovers the originally supplied map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

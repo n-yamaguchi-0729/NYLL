@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Constructible.Restriction
-import Nyll.EtaleCohomology.Constructible.Stratification
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.Topology.Constructible
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Constructible.Restriction
+public import Nyll.EtaleCohomology.Constructible.Stratification
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.Topology.Constructible
 
 /-!
 # Pulling back finite constructible stratifications
@@ -31,6 +33,8 @@ particular constructible sheaves on an affine target pull back to constructible
 sheaves on arbitrary schemes, without restrictions on the morphism or the
 coefficient ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

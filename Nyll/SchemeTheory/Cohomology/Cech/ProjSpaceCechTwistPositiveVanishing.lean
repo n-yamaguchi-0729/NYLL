@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistFiniteCohomology
-import Mathlib.Algebra.Group.Finsupp
-import Mathlib.Algebra.Notation.Pi.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistFiniteCohomology
+public import Mathlib.Algebra.Group.Finsupp
+public import Mathlib.Algebra.Notation.Pi.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Vanishing of positive Čech cohomology for nonnegative twists
@@ -26,6 +28,8 @@ The proof uses the actual monomial Čech complex and its existing
 contractions. This is the free-module step of Serre vanishing, which is
 needed when algebraizing coherent formal systems on projective schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

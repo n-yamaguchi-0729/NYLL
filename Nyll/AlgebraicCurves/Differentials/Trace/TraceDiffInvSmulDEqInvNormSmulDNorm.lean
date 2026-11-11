@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Norm.Basic
-import Mathlib.RingTheory.Norm.Transitivity
-import Mathlib.RingTheory.Trace.Basic
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.Derivation.MapCoeffs
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Etale.Kaehler
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.LinearAlgebra.Dual.Lemmas
-import Nyll.AlgebraicCurves.Differentials.Trace.Trace
-import Nyll.AlgebraicCurves.Differentials.Trace.TraceDiffApply
-import Nyll.AlgebraicCurves.Differentials.Kaehler.AlgebraTraceInvMulDerivationEqInvNormMulDerivationNorm
+module
+
+public import Mathlib.RingTheory.Norm.Basic
+public import Mathlib.RingTheory.Norm.Transitivity
+public import Mathlib.RingTheory.Trace.Basic
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.Derivation.MapCoeffs
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Nyll.AlgebraicCurves.Differentials.Trace.Trace
+public import Nyll.AlgebraicCurves.Differentials.Trace.TraceDiffApply
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.AlgebraTraceInvMulDerivationEqInvNormMulDerivationNorm
 
 /-!
 # Trace Diff inv smul D eq inv norm smul D norm
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
-import Nyll.SchemeTheory.Affine.UnramifiedGenericFiber
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.SchemeTheory.Affine.UnramifiedGenericFiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Generic-fibre quotients of affine étale unit groups
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 The actual fraction-field square identifies the restricted generic-unit
 quotient with the fraction-field unit quotient of an affine étale domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -23,7 +27,8 @@ namespace EtaleCohomology
 
 universe u
 
-private instance etale_specMap_of_algebraEtale
+/-- An étale algebra induces an étale morphism of affine schemes. -/
+instance etale_specMap_of_algebraEtale
     (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.Etale R S] :
     Etale (Spec.map (CommRingCat.ofHom (algebraMap R S))) := by
@@ -70,6 +75,87 @@ def etaleRestrictionFractionFieldUnitPushforwardIso
   exact @etaleRestrictionMultiplicativeGroupPushforwardIsoOfIsPullback
     _ _ _ _ i inferInstance f p g hg H
 
+/-- On an actual cartesian square between arbitrary base schemes, the unit
+pushforward comparison sends a rational unit to the unit induced by the
+specified homomorphism of source rings. -/
+theorem etaleRestrictionUnitPushforwardIsoOfIsPullback_rationalUnit
+    (K E : Type u) [CommRing K] [CommRing E]
+    {X U : Scheme.{u}} (i : U ⟶ X) [Etale i]
+    (f : Spec (CommRingCat.of K) ⟶ X)
+    (p : Spec (CommRingCat.of E) ⟶ U) (φ : K →+* E)
+    [Etale (Spec.map (CommRingCat.ofHom φ))]
+    (H : IsPullback p (Spec.map (CommRingCat.ofHom φ)) i f)
+    (V : U.Etale) (a : Additive Kˣ) :
+    let W := (etalePostcompose i).obj V
+    let eP := (sheafToPresheaf U.smallEtaleTopology
+      AddCommGrpCat.{u}).mapIso
+        (etaleRestrictionMultiplicativeGroupPushforwardIsoOfIsPullback
+          i f p (Spec.map (CommRingCat.ofHom φ)) H)
+    ConcreteCategory.hom (eP.hom.app (op V))
+      (Additive.ofMul (Units.map
+        (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
+          (pullback.snd W.hom f).appTop).hom.toMonoidHom) a.toMul)) =
+    Additive.ofMul (Units.map
+      (((Scheme.ΓSpecIso (CommRingCat.of E)).inv ≫
+        (pullback.snd V.hom p).appTop).hom.toMonoidHom)
+      ((Units.map φ.toMonoidHom).toAdditive a).toMul) := by
+  intro W eP
+  let g := Spec.map (CommRingCat.ofHom φ)
+  let cV := ((IsPullback.of_hasPullback V.hom p).paste_vert H).isoPullback
+  change ConcreteCategory.hom
+    (FppfRepresentableGroupSchemeSheaf.GmAbelianSheaf.obj.map cV.hom.op)
+    (Additive.ofMul (Units.map
+      (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
+        (pullback.snd W.hom f).appTop).hom.toMonoidHom) a.toMul)) = _
+  have hcV : cV.hom ≫ pullback.snd W.hom f = pullback.snd V.hom p ≫ g :=
+    ((IsPullback.of_hasPullback V.hom p).paste_vert H).isoPullback_hom_snd
+  have hcomp : (pullback.snd W.hom f).appTop ≫ cV.hom.appTop =
+      g.appTop ≫ (pullback.snd V.hom p).appTop := by
+    calc
+      (pullback.snd W.hom f).appTop ≫ cV.hom.appTop =
+          (cV.hom ≫ pullback.snd W.hom f).appTop :=
+            Scheme.Hom.comp_appTop cV.hom (pullback.snd W.hom f)
+      _ = (pullback.snd V.hom p ≫ g).appTop := congrArg Scheme.Hom.appTop hcV
+      _ = g.appTop ≫ (pullback.snd V.hom p).appTop :=
+            Scheme.Hom.comp_appTop (pullback.snd V.hom p) g
+  have hGamma : CommRingCat.ofHom φ ≫
+      (Scheme.ΓSpecIso (CommRingCat.of E)).inv =
+      (Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ g.appTop :=
+    Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom φ)
+  have hrings :
+      ((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
+        (pullback.snd W.hom f).appTop) ≫ cV.hom.appTop =
+      CommRingCat.ofHom φ ≫
+        ((Scheme.ΓSpecIso (CommRingCat.of E)).inv ≫
+          (pullback.snd V.hom p).appTop) := by
+    calc
+      _ = (Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
+          ((pullback.snd W.hom f).appTop ≫ cV.hom.appTop) := by
+            exact Category.assoc _ _ _
+      _ = (Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
+          (g.appTop ≫ (pullback.snd V.hom p).appTop) :=
+            congrArg _ hcomp
+      _ = ((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ g.appTop) ≫
+          (pullback.snd V.hom p).appTop := by
+            exact (Category.assoc (Scheme.ΓSpecIso (CommRingCat.of K)).inv
+              g.appTop (pullback.snd V.hom p).appTop).symm
+      _ = _ := by
+        calc
+          _ = (CommRingCat.ofHom φ ≫
+              (Scheme.ΓSpecIso (CommRingCat.of E)).inv) ≫
+              (pullback.snd V.hom p).appTop :=
+                congrArg (fun q => q ≫ (pullback.snd V.hom p).appTop) hGamma.symm
+          _ = _ := Category.assoc _ _ _
+  apply Additive.toMul.injective
+  change Units.map cV.hom.appTop.hom.toMonoidHom
+      (Units.map (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
+        (pullback.snd W.hom f).appTop).hom.toMonoidHom) a.toMul) =
+    Units.map (((Scheme.ΓSpecIso (CommRingCat.of E)).inv ≫
+      (pullback.snd V.hom p).appTop).hom.toMonoidHom)
+      (Units.map φ.toMonoidHom a.toMul)
+  apply Units.ext
+  exact ConcreteCategory.congr_hom hrings a.toMul.val
+
 /-- The fraction-field pushforward comparison sends a rational unit section
 to the section defined by its image in the extension fraction field. -/
 theorem etaleRestrictionFractionFieldUnitPushforwardIso_rationalUnit
@@ -96,75 +182,13 @@ theorem etaleRestrictionFractionFieldUnitPushforwardIso_rationalUnit
       (((Scheme.ΓSpecIso (CommRingCat.of E)).inv ≫
         (pullback.snd V.hom p).appTop).hom.toMonoidHom)
       ((Units.map (algebraMap K E).toMonoidHom).toAdditive a).toMul) := by
-  let i := Spec.map (CommRingCat.ofHom (algebraMap R S))
-  let f := Spec.map (CommRingCat.ofHom (algebraMap R K))
-  let p := Spec.map (CommRingCat.ofHom (algebraMap S E))
+  intro i f p W eP
   let g := Spec.map (CommRingCat.ofHom (algebraMap K E))
   let H := EtaleFundamentalGroups.isPullback_spec_unramified_generic R S K E
   have hg : Etale g := MorphismProperty.of_isPullback (P := @Etale) H
     (show Etale i from inferInstance)
-  let W := (etalePostcompose i).obj V
-  let cV := ((IsPullback.of_hasPullback V.hom p).paste_vert H).isoPullback
-  change ConcreteCategory.hom
-      ((((sheafToPresheaf (Spec (CommRingCat.of S)).smallEtaleTopology AddCommGrpCat).mapIso
-        (etaleRestrictionMultiplicativeGroupPushforwardIsoOfIsPullback
-          i f p g H)).hom.app (op V)))
-      (Additive.ofMul (Units.map
-        (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
-          (pullback.snd W.hom f).appTop).hom.toMonoidHom) a.toMul)) = _
-  change ConcreteCategory.hom
-    (FppfRepresentableGroupSchemeSheaf.GmAbelianSheaf.obj.map cV.hom.op)
-    (Additive.ofMul (Units.map
-      (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
-        (pullback.snd W.hom f).appTop).hom.toMonoidHom) a.toMul)) = _
-  have hcV : cV.hom ≫ pullback.snd W.hom f = pullback.snd V.hom p ≫ g :=
-    ((IsPullback.of_hasPullback V.hom p).paste_vert H).isoPullback_hom_snd
-  have hcomp : (pullback.snd W.hom f).appTop ≫ cV.hom.appTop =
-      g.appTop ≫ (pullback.snd V.hom p).appTop := by
-    calc
-      (pullback.snd W.hom f).appTop ≫ cV.hom.appTop =
-          (cV.hom ≫ pullback.snd W.hom f).appTop :=
-            Scheme.Hom.comp_appTop cV.hom (pullback.snd W.hom f)
-      _ = (pullback.snd V.hom p ≫ g).appTop := congrArg Scheme.Hom.appTop hcV
-      _ = g.appTop ≫ (pullback.snd V.hom p).appTop :=
-            Scheme.Hom.comp_appTop (pullback.snd V.hom p) g
-  have hGamma : CommRingCat.ofHom (algebraMap K E) ≫
-      (Scheme.ΓSpecIso (CommRingCat.of E)).inv =
-      (Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ g.appTop :=
-    Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom (algebraMap K E))
-  have hrings :
-      ((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
-        (pullback.snd W.hom f).appTop) ≫ cV.hom.appTop =
-      CommRingCat.ofHom (algebraMap K E) ≫
-        ((Scheme.ΓSpecIso (CommRingCat.of E)).inv ≫
-          (pullback.snd V.hom p).appTop) := by
-    calc
-      _ = (Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
-          ((pullback.snd W.hom f).appTop ≫ cV.hom.appTop) := by
-            exact Category.assoc _ _ _
-      _ = (Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
-          (g.appTop ≫ (pullback.snd V.hom p).appTop) :=
-            congrArg _ hcomp
-      _ = ((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ g.appTop) ≫
-          (pullback.snd V.hom p).appTop := by
-            exact (Category.assoc (Scheme.ΓSpecIso (CommRingCat.of K)).inv
-              g.appTop (pullback.snd V.hom p).appTop).symm
-      _ = _ := by
-        calc
-          _ = (CommRingCat.ofHom (algebraMap K E) ≫
-              (Scheme.ΓSpecIso (CommRingCat.of E)).inv) ≫
-              (pullback.snd V.hom p).appTop :=
-                congrArg (fun q => q ≫ (pullback.snd V.hom p).appTop) hGamma.symm
-          _ = _ := Category.assoc _ _ _
-  apply Additive.toMul.injective
-  change Units.map cV.hom.appTop.hom.toMonoidHom
-      (Units.map (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫
-        (pullback.snd W.hom f).appTop).hom.toMonoidHom) a.toMul) =
-    Units.map (((Scheme.ΓSpecIso (CommRingCat.of E)).inv ≫
-      (pullback.snd V.hom p).appTop).hom.toMonoidHom)
-      (Units.map (algebraMap K E).toMonoidHom a.toMul)
-  apply Units.ext
-  exact ConcreteCategory.congr_hom hrings a.toMul.val
+  exact etaleRestrictionUnitPushforwardIsoOfIsPullback_rationalUnit
+    K E i f p (algebraMap K E) H V a
 
 /-- Restricting the actual generic-unit quotient to an affine étale domain
 gives that domain's own fraction-field unit quotient. The comparison uses

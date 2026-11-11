@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.PrimeFractionRing
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.RingExtension
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.PrimeFractionRing
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.RingExtension
 
 /-! Canonical aggregate for SchemeTheory.RingTheory.Localization.Fraction. -/

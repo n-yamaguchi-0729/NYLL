@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldHilbert90
-import Nyll.EtaleCohomology.Classical.EtaleRestriction
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldHilbert90
+public import Nyll.EtaleCohomology.Classical.EtaleRestriction
 
 /-!
 # Exact unit-kernel sequences on actual field neighborhoods
@@ -14,6 +16,8 @@ Hilbert 90 applies on every actual etale field neighborhood, not just at
 the terminal object of the original field site. Exact geometric restriction
 and its proved unit-sheaf comparison supply the transport.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -24,7 +28,7 @@ namespace EtaleCohomology
 /-- On the restriction to an actual etale field, a quotient section of a
 short exact sequence with unit-sheaf kernel lifts to a section. -/
 theorem exists_restriction_section_lift_of_units_kernel_at_field
-    (X : Scheme.{u}) (L : Type u) [Field L] [CharZero L]
+    (X : Scheme.{u}) (L : Type u) [Field L]
     (f : Spec (.of L) ⟶ X) [Etale f]
     {B Q : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}}
     (i : etaleMultiplicativeGroupSheaf X ⟶ B) (p : B ⟶ Q)
@@ -57,7 +61,7 @@ theorem exists_restriction_section_lift_of_units_kernel_at_field
 /-- Actual sections on any etale field neighborhood lift through a
 short exact sequence whose kernel is the actual unit sheaf. -/
 theorem exists_section_lift_of_units_kernel_at_field
-    (X : Scheme.{u}) (L : Type u) [Field L] [CharZero L]
+    (X : Scheme.{u}) (L : Type u) [Field L]
     (f : Spec (.of L) ⟶ X) [Etale f]
     {B Q : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}}
     (i : etaleMultiplicativeGroupSheaf X ⟶ B) (p : B ⟶ Q)

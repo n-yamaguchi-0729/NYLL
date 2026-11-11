@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkUnibranchIrreducible
-import Nyll.SchemeTheory.RingTheory.Reduced.GeometricallyUnibranch
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkUnibranchIrreducible
+public import Nyll.SchemeTheory.RingTheory.Reduced.GeometricallyUnibranch
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Geometric unibranchness implies irreducibility of the actual strict stalk
@@ -16,6 +18,8 @@ Its canonical normalization map supplies the integral normal extension used
 in the proved étale-neighborhood and geometric-stalk irreducibility results.
 In particular the base ring need not be reduced or Noetherian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

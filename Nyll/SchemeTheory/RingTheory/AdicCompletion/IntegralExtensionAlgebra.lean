@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.CoprimeProduct
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.CoprimeProduct
 
 /-!
 # Algebra compatibility of the integral-extension completion decomposition
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.RingTheory.AdicCompletion.CoprimeProduct
 The Chinese-remainder decomposition of a completed finite integral extension
 is compatible with the canonical maps from the extension ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

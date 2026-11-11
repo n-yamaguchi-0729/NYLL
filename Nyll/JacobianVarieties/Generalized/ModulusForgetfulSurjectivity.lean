@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameCover
-import Nyll.JacobianVarieties.Generalized.ModulusFramesZero
-import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
-import Mathlib.CategoryTheory.Sites.LocallyBijective
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.JacobianVarieties.Generalized.FrameCover
+public import Nyll.JacobianVarieties.Generalized.ModulusFramesZero
+public import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # Local surjectivity of modulus forgetting without a rational basepoint
 
@@ -16,6 +19,8 @@ an open cover of its parameter scheme. Those frames give actual modulus classes
 lifting the ordinary relative class. No global rigidification is required.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -23,6 +28,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite NeronModelInfra
 open AlgebraicGeometry.RelPicard
 open AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

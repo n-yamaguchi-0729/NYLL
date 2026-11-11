@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackOfPoint
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.PullbackOfPoint
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
 
 /-! # The corrected denominator is the actual constant basepoint frame -/
+
+@[expose] public section
 
 noncomputable section
 

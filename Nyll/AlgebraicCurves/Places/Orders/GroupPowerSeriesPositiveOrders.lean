@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.SchemeTheory.GroupSchemes.IntegralGroupPowerSeries
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.SchemeTheory.GroupSchemes.IntegralGroupPowerSeries
 
 /-! # Integral group-valued series from positive place orders
 
@@ -15,6 +17,8 @@ lie in its maximal ideal, so coefficientwise residue is the unit augmentation.
 The generic affine-coordinate construction then gives an actual integral
 group-valued point reducing to the unit; no integral lift is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

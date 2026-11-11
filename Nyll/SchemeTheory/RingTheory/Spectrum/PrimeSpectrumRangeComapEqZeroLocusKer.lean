@@ -10,11 +10,15 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Prime Spectrum range comap eq zero Locus ker of is Integral
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -3,12 +3,21 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.Cohomology.DVRGenericUnitQuotient
-import Nyll.EtaleCohomology.Sites.ZariskiGeometricStalks
-import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
-import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
-import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
-import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.DVRGenericUnitQuotient
+public import Nyll.EtaleCohomology.Sites.ZariskiGeometricStalks
+public import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
+public import Nyll.EtaleCohomology.Sites.ZariskiGlobalSections
+public import Nyll.SchemeTheory.RingTheory.Etale.UnramifiedDedekind
+public import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Nyll.SchemeTheory.Divisors.DVRUnitQuotient
+public import Nyll.SchemeTheory.Sheaves.UnitStalks
 
 /-! # Rational divisor classes on actual open subschemes
 
@@ -16,6 +25,8 @@ This file supplies affine divisor and geometric-stalk comparison components
 related to [Stacks Project, Theorem 59.68.1 (Tag 03RI)](https://stacks.math.columbia.edu/tag/03RI);
 it does not prove the completed global sheaf exact sequence.
 -/
+@[expose] public section
+
 noncomputable section
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite IsDedekindDomain
 namespace EtaleFundamentalGroups.StrictHenselian
@@ -288,11 +299,8 @@ theorem exists_genericUnitQuotientSection_of_divisor
     let Q := cokernel (EtaleCohomology.etaleMultiplicativeGroupToPushforward j)
     let Z := EtaleCohomology.zariskiToEtale X
     ∃ q : Q.obj.obj (op (Z.obj ⊤)), IsGenericUnitDivisorSection R D q := by
+  intro X j Q Z
   classical
-  let X := Spec (CommRingCat.of R)
-  let j := Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))
-  let Q := cokernel (EtaleCohomology.etaleMultiplicativeGroupToPushforward j)
-  let Z := EtaleCohomology.zariskiToEtale X
   have hlocal := FractionalIdeal.exists_principalDivisor_eq_on_basicOpen_at_prime
     R (FractionRing R) D
   choose s a hmem hdiv using hlocal
@@ -955,10 +963,7 @@ theorem genericUnitQuotientSection_germ_of_local_rational
     (Scheme.pointSmallEtale s).toPresheafFiber (Z.obj ⊤) t Q.obj q =
       divisorGenericUnitQuotientGeometricGerm R φ ξ
         (FractionalIdeal.principalDivisorAddHom R (FractionRing R) a) := by
-  let s := Spec.map (CommRingCat.ofHom φ)
-  let j := Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))
-  let Q := cokernel (EtaleCohomology.etaleMultiplicativeGroupToPushforward j)
-  let Z := EtaleCohomology.zariskiToEtale (Spec (CommRingCat.of R))
+  intro s j Q Z
   let Φ := Scheme.pointSmallEtale s
   let tU := EtaleCohomology.zariskiGeometricLift s ξ U hU
   let tTop := EtaleCohomology.zariskiGeometricLift s ξ ⊤ (by trivial)
@@ -1095,7 +1100,7 @@ theorem genericUnitQuotientSectionCoefficient_eq_geometric_germ
     (divisorGenericUnitQuotientGeometricStalkEquiv R φ ξ v hv).symm
       ((Scheme.pointSmallEtale s).toPresheafFiber (Z.obj ⊤) t Q.obj q) =
         genericUnitQuotientSectionCoefficient R v q := by
-  let s := Spec.map (CommRingCat.ofHom φ)
+  intro s
   obtain ⟨U, hUle, hU, a, hq⟩ :=
     genericUnitQuotientSection_exists_local_rational R ⊤ q (s ξ) (by trivial)
   have hp : s ξ = (⟨v.asIdeal, inferInstance⟩ : PrimeSpectrum R) := by

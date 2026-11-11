@@ -4,27 +4,30 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.AlbaneseFactorization
-import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
-import Nyll.JacobianVarieties.Albanese.AbelJacobiFiniteSums
-import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeSchemeHomOverCompMulEqMul
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Nyll.SchemeTheory.Morphisms.ReducedSmooth
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Nyll.JacobianVarieties.Generalized.GeometricModulusPointedUniversalProperty
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
-import Nyll.JacobianVarieties.Generalized.DivisorClasses
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+module
+
+public import Nyll.JacobianVarieties.Albanese.AlbaneseFactorization
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiFiniteSums
+public import Nyll.JacobianVarieties.Picard.GroupLaw.RelativeGroupLawAbelJacobi
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeSchemeHomOverCompMulEqMul
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Nyll.SchemeTheory.Morphisms.ReducedSmooth
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusPointedUniversalProperty
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.ModulusClassAbel
+public import Nyll.JacobianVarieties.Generalized.DivisorClasses
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # The empty modulus for a regular map to an abelian variety
 
@@ -34,6 +37,8 @@ zero. Restriction and scalar extension give the full geometric modulus
 condition, and the constructed generalized Jacobian supplies the unique
 group factor. The map is required to extend over the whole curve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

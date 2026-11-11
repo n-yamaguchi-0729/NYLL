@@ -4,20 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Translation of regular maps preserves the full modulus
 
 The principal divisor has degree zero, so translating every value subtracts
 zero from its evaluation. Values on the modulus support are irrelevant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,13 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Kaehler.Basic
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.LaurentChart
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverKaehler
 
 /-!
 Compatibility of Laurent-chart residues with restriction from the first chart.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

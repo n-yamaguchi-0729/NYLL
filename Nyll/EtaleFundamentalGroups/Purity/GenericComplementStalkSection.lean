@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncturedSections
-import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncturedSections
+public import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!+# Extending an open section to a generic complement stalk
 
@@ -17,6 +19,8 @@ actual strict-stalk puncture therefore extends a finite etale section to
 the full stalk. The resulting section agrees on the native pullback of
 the original open, as required for compatible neighborhood spreading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

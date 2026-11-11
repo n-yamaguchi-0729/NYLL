@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.BigOperators.Group.List.Basic
-import Mathlib.Algebra.Order.Monoid.Unbundled.Pow
-import Mathlib.LinearAlgebra.Matrix.Block
-import Mathlib.RingTheory.Valuation.Basic
+module
+
+public import Mathlib.Algebra.BigOperators.Group.List.Basic
+public import Mathlib.Algebra.Order.Monoid.Unbundled.Pow
+public import Mathlib.LinearAlgebra.Matrix.Block
+public import Mathlib.RingTheory.Valuation.Basic
 
 /-! # A uniform pole bound for products of unitriangular matrices
 
@@ -20,6 +22,8 @@ This proves the local matrix estimate in Serre, *Algebraic Groups and Class Fiel
 Chapter III, §2, Lemma 8 (pp. 44–45). It does not assume or assert an embedding of
 an arbitrary algebraic group into a unitriangular group.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

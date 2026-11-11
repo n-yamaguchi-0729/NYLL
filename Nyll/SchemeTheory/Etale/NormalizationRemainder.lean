@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.CategoryTheory.EpiMono
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Nyll.SchemeTheory.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.CategoryTheory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 
 /-!
@@ -36,6 +38,8 @@ Uniform bounds on geometric fibers, their decrease under specialization,
 and finite-stage descent are separate inputs. No finite refinement theorem
 or bound is assumed or asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -64,7 +68,8 @@ lemma normalizationEtaleGraph_snd :
 
 variable [Etale f]
 
-private theorem isClopen_range_normalizationEtaleGraph :
+/-- The normalization graph of a separated étale morphism has open and closed image. -/
+theorem isClopen_range_normalizationEtaleGraph :
     IsClopen (Set.range (normalizationEtaleGraph f)) := by
   have : LocallyQuasiFinite f :=
     LocallyQuasiFinite.of_formallyUnramified_of_locallyOfFiniteType f

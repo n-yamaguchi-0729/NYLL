@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusMapTranslation
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusMapTranslation
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Scalar extension of regular maps with full modulus
 
@@ -19,6 +21,8 @@ extended divisor. The constructed all-degree Abel factor and actual basepoint tr
 prove the principal-divisor modulus condition after an algebraically closed
 extension, and the constructed universal group morphism commutes with it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

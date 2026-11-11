@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
 
 /-! # The actual trivial group is an abelian scheme -/
+
+@[expose] public section
 
 noncomputable section
 

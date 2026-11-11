@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
-import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
-import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
+public import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
 
 /-! # Scalar extension preserves the actual normalized Abel class -/
+
+@[expose] public section
 
 noncomputable section
 

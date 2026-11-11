@@ -13,13 +13,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.SectionRing
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowerSectionProduct
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Mathlib.Algebra.DirectSum.Ring
-import Mathlib.Algebra.Polynomial.Coeff
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.SectionRing
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerFrames
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowerSectionProduct
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Mathlib.Algebra.DirectSum.Ring
+public import Mathlib.Algebra.Polynomial.Coeff
 
 /-!
 # Constructing the graded section ring
@@ -28,6 +30,8 @@ The direct sum of tensor-power global sections is embedded into products of poly
 using local frames. The injective coefficient map supplies the ring laws, and the natural summand
 ranges supply the grading. No section-ring witness is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,23 +53,23 @@ private theorem app_map {M N : X.Modules} (φ : M ⟶ N) {U V : X.Opens} (i : V 
   have h := φ.mapPresheaf.naturality i.op
   exact (congrFun (congrArg (fun k => (ConcreteCategory.hom k : Γ(M, U) → Γ(N, V))) h) s).symm
 
-private def baseHom : S →+* Γ(X, ⊤) :=
+/-- The structural morphism supplies the scalar map on global functions. -/
+def baseHom : S →+* Γ(X, ⊤) :=
   f.appTop.hom.comp (Scheme.ΓSpecIso (CommRingCat.of S)).inv.hom
 
 /-- Global tensor-power sections with the base action pulled back through `f`. -/
-private def Sec (f : X ⟶ Spec (CommRingCat.of S)) (L : X.Modules) (n : ℕ) : ModuleCat S :=
+def Sec (f : X ⟶ Spec (CommRingCat.of S)) (L : X.Modules) (n : ℕ) : ModuleCat S :=
   let : Module S Γ(L.tensorPow n, ⊤) := Module.compHom Γ(L.tensorPow n, ⊤) (baseHom f)
   ModuleCat.of S Γ(L.tensorPow n, ⊤)
 
 scoped instance (n : ℕ) : Module Γ(X, ⊤) (Sec f L n) :=
   inferInstanceAs (Module Γ(X, ⊤) Γ(L.tensorPow n, ⊤))
 
-private theorem baseHom_apply (s : S) : baseHom f s = GradedOAlgebra.baseScalar f s := rfl
-
 private theorem smul_def (n : ℕ) (s : S) (a : Sec f L n) :
     s • a = (GradedOAlgebra.baseScalar f s • (a : Γ(L.tensorPow n, ⊤)) : Γ(L.tensorPow n, ⊤)) := rfl
 
-private def mulSec {m n : ℕ} (a : Sec f L m) (b : Sec f L n) : Sec f L (m + n) :=
+/-- Multiply homogeneous sections using the original tensor-power comparison. -/
+def mulSec {m n : ℕ} (a : Sec f L m) (b : Sec f L n) : Sec f L (m + n) :=
   ((tensorPowAdd L m n).hom.app ⊤ (tensorSections (L := L.tensorPow m) (M := L.tensorPow n) a b) :
     Γ(L.tensorPow (m + n), ⊤))
 
@@ -258,16 +262,20 @@ end Frames
 
 variable [Fact (Scheme.Modules.IsInvertible L)]
 
-private theorem one_mul' (a : ⨁ n, Sec f L n) : 1 * a = a :=
+/-- The section-ring unit acts on the left as the identity. -/
+theorem one_mul' (a : ⨁ n, Sec f L n) : 1 * a = a :=
   F_injective f L (by rw [F_mul, F_one, one_mul])
 
-private theorem mul_one' (a : ⨁ n, Sec f L n) : a * 1 = a :=
+/-- The section-ring unit acts on the right as the identity. -/
+theorem mul_one' (a : ⨁ n, Sec f L n) : a * 1 = a :=
   F_injective f L (by rw [F_mul, F_one, mul_one])
 
-private theorem mul_assoc' (a b c : ⨁ n, Sec f L n) : a * b * c = a * (b * c) :=
+/-- Multiplication of global tensor-power sections is associative. -/
+theorem mul_assoc' (a b c : ⨁ n, Sec f L n) : a * b * c = a * (b * c) :=
   F_injective f L (by rw [F_mul, F_mul, F_mul, F_mul, mul_assoc])
 
-private theorem mul_comm' (a b : ⨁ n, Sec f L n) : a * b = b * a :=
+/-- Multiplication of global tensor-power sections is commutative. -/
+theorem mul_comm' (a b : ⨁ n, Sec f L n) : a * b = b * a :=
   F_injective f L (by rw [F_mul, F_mul, mul_comm])
 
 scoped instance instCommRing : CommRing (⨁ n, Sec f L n) :=
@@ -292,16 +300,19 @@ private theorem F_smul (s : S) (r : ⨁ n, Sec f L n) : F f L (s • r) = cS f L
     rw [Pi.mul_apply, coefHom_apply, coefHom_apply, cS, Polynomial.C_mul_monomial, smul_def]
     erw [coef_smul]
 
-private theorem smul_mul' (s : S) (a b : ⨁ n, Sec f L n) : s • a * b = s • (a * b) :=
+/-- Base scalars commute with multiplication in the left factor. -/
+theorem smul_mul' (s : S) (a b : ⨁ n, Sec f L n) : s • a * b = s • (a * b) :=
   F_injective f L (by rw [F_mul, F_smul, F_smul, F_mul, mul_assoc])
 
-private theorem mul_smul' (s : S) (a b : ⨁ n, Sec f L n) : a * s • b = s • (a * b) :=
+/-- Base scalars commute with multiplication in the right factor. -/
+theorem mul_smul' (s : S) (a b : ⨁ n, Sec f L n) : a * s • b = s • (a * b) :=
   F_injective f L (by rw [F_mul, F_smul, F_smul, F_mul, mul_left_comm])
 
 scoped instance instAlgebra : Algebra S (⨁ n, Sec f L n) :=
   Algebra.ofModule (smul_mul' f L) (mul_smul' f L)
 
-private def 𝓡 (n : ℕ) : Submodule S (⨁ n, Sec f L n) where
+/-- The homogeneous piece is the original direct-sum summand range. -/
+def 𝓡 (n : ℕ) : Submodule S (⨁ n, Sec f L n) where
   carrier := Set.range (DirectSum.of (fun n => (Sec f L n : Type u)) n)
   zero_mem' := ⟨0, map_zero _⟩
   add_mem' := by
@@ -311,10 +322,6 @@ private def 𝓡 (n : ℕ) : Submodule S (⨁ n, Sec f L n) where
     rintro s _ ⟨a, rfl⟩
     exact ⟨s • a, DirectSum.of_smul _ _ _ _⟩
 
-omit [Fact (Scheme.Modules.IsInvertible L)] in
-private theorem mem_𝓡_iff {n : ℕ} (r : ⨁ n, Sec f L n) :
-    r ∈ 𝓡 f L n ↔ ∃ a, DirectSum.of (fun n => (Sec f L n : Type u)) n a = r := Iff.rfl
-
 scoped instance : SetLike.GradedMonoid (𝓡 f L) where
   one_mem := ⟨GradedMonoid.GOne.one (A := fun n => (Sec f L n : Type u)), rfl⟩
   mul_mem := by
@@ -322,12 +329,14 @@ scoped instance : SetLike.GradedMonoid (𝓡 f L) where
     exact ⟨GradedMonoid.GMul.mul (A := fun n => (Sec f L n : Type u)) a b,
       (DirectSum.of_mul_of (A := fun n => (Sec f L n : Type u)) a b).symm⟩
 
-private def toPiece (n : ℕ) : Sec f L n →+ 𝓡 f L n where
+/-- Embed a homogeneous section in its original summand range. -/
+def toPiece (n : ℕ) : Sec f L n →+ 𝓡 f L n where
   toFun a := ⟨DirectSum.of (fun n => (Sec f L n : Type u)) n a, a, rfl⟩
   map_zero' := Subtype.ext (map_zero _)
   map_add' a b := Subtype.ext (map_add _ a b)
 
-private def decomposeHom : (⨁ n, Sec f L n) →+ ⨁ n, 𝓡 f L n :=
+/-- Decompose a section-ring element into its original homogeneous pieces. -/
+def decomposeHom : (⨁ n, Sec f L n) →+ ⨁ n, 𝓡 f L n :=
   DirectSum.toAddMonoid fun n => (DirectSum.of (fun n => 𝓡 f L n) n).comp (toPiece f L n)
 
 private theorem decomposeHom_of (n : ℕ) (a : Sec f L n) :

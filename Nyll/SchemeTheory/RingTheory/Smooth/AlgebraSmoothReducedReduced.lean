@@ -11,18 +11,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.Smooth.Basic
-import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.Smooth.Basic
+public import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
 
 /-!
 # Algebra Smooth is Reduced of is Reduced of is Noetherian Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

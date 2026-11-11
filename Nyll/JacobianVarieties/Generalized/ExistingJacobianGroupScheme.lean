@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ExistingJacobianGroupCompatibility
+module
+
+public import Nyll.JacobianVarieties.Generalized.ExistingJacobianGroupCompatibility
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The saved ordinary Jacobian as a commutative group scheme
@@ -13,6 +16,8 @@ The group object uses the original `Unpointed.groupLaw`. The identity on its
 carrier identifies it with the group object classified by the actual ordinary
 Picard-zero sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

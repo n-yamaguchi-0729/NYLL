@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.CategoryTheory.Adjunction.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # The canonical direct-image base-change morphism
@@ -18,6 +20,8 @@ images, for use in geometric-stalk calculations. No invertibility of
 base change is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -26,7 +30,8 @@ open AlgebraicGeometry CategoryTheory
 
 namespace EtaleCohomology
 
-private def transposeTransformation
+/-- Transpose a natural transformation componentwise along an adjunction. -/
+def transposeTransformation
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     {L : D ⥤ E} {R : E ⥤ D} (adj : L ⊣ R)
     {G : C ⥤ D} {H : C ⥤ E} (α : G ⟶ H ⋙ R) : G ⋙ L ⟶ H where
@@ -46,7 +51,8 @@ private theorem transposeTransformation_unit
       R.map ((transposeTransformation adj α).app X) :=
   ((adj.homEquiv (G.obj X) (H.obj X)).apply_symm_apply (α.app X)).symm
 
-private def directImageUnitTransformation
+/-- Insert the inverse-image unit into a direct-image comparison. -/
+def directImageUnitTransformation
     {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
     {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
     {G : C ⥤ E} {H : D ⥤ F} {S : F ⥤ E}

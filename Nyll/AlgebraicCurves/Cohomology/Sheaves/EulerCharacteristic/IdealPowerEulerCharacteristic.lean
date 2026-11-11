@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.InverseIdealPowerEulerCharacteristic
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.InverseIdealPowerEulerCharacteristic
 
 /-!
 # Scheme Ideal Sheaf Data Is Invertible euler Char sections Of pullback pow module tensor eq
 sub mul
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

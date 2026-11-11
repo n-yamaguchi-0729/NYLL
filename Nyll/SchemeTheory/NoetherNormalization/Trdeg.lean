@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.GeneratorReduction
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.NoetherNormalization
+module
+
+public import Nyll.SchemeTheory.NoetherNormalization.GeneratorReduction
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.NoetherNormalization
 
 /-!
 # Field Arithmetic, Proposition 6.2.1: Noether normalization
@@ -18,6 +20,8 @@ This file connects mathlib's Noether normalization theorem with the
 transcendence degree of the quotient field.  This is the first source-producing
 step toward the full generator-sensitive statement in Fried--Jarden.
 -/
+
+@[expose] public section
 
 noncomputable section
 

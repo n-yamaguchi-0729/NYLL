@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.CoordinateRing
 
 /-!
 # Rational points from coordinate-ring morphisms
@@ -13,6 +15,8 @@ Every `K`-algebra map from an affine plane-curve coordinate ring to `K`
 comes from a unique rational point.  Consequently, coordinate-ring
 equivalences transport rational points and their maximal ideals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

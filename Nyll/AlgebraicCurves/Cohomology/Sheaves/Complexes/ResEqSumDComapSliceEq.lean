@@ -10,32 +10,36 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Field.Defs
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Combinatorics.Quiver.Basic
-import Mathlib.Logic.Function.Defs
-import Mathlib.Order.Lattice
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.BoxZigzag
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.ResEqSumBoxZigzag
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.StripResSubEqSum
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.AppStripEqSum
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.StripEqSum
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Combinatorics.Quiver.Basic
+public import Mathlib.Logic.Function.Defs
+public import Mathlib.Order.Lattice
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.BoxZigzag
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.ResEqSumBoxZigzag
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.StripResSubEqSum
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.AppStripEqSum
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.StripEqSum
 
 /-!
 # OModule Presheaf exists res eq sum of d comap slice eq of is Affine Open
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

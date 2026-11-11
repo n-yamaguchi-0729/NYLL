@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperFinitePresentationTwoFibers
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperFinitePresentationAmbient
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperClosedFinitePresentationThickening
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.FinitePresentationChowOpenCompactification
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionCompEqIffIdealEqBot
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFactorsIff
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFinitePresentationFactorsIff
@@ -36,10 +40,8 @@ import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.LocallyQuasiFiniteLocally
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensFinitePreimageSingletonToSpecPolynomial
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensFlatMorphismRestrictFinrankEqMem
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensProperToSpecPolynomial
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperSurjectiveOpenImmersionCompEqIsIntegral
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperSurjectiveOpenImmersionCompEqSeparated
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.RepresentableByRepresentableByRestrictFiniteEtale
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.RepresentableByRepresentableByRestrictFiniteEtaleOrbit
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeHomOverClosedImmersion
 import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ValuativeCriterion
+import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ProperFinitePresentationTwoFibersFiniteEtale

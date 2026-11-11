@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
-import Mathlib.RingTheory.KrullDimension.Zero
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
+public import Mathlib.RingTheory.KrullDimension.Zero
 
 /-!
 # Degree-zero nonvanishing for derived local cohomology
@@ -16,6 +18,8 @@ the ideal-powers Ext diagram.  For the zero ideal, every positive power is
 again zero, and the identity class of `R ⧸ (0)` survives every later
 transition.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,8 +39,8 @@ private theorem ringModIdeals_bot_transition_eq_quotEquiv
         (homOfLE hnm).op =
       (Submodule.quotEquivOfEq
         ((⊥ : Ideal R) ^ m) ((⊥ : Ideal R) ^ n)
-        (by simp [Ideal.bot_pow (Nat.ne_of_gt hn),
-          Ideal.bot_pow (Nat.ne_of_gt hm)])).toModuleIso.hom := by
+        (by rw [Ideal.bot_pow (Nat.ne_of_gt hm),
+          Ideal.bot_pow (Nat.ne_of_gt hn)])).toModuleIso.hom := by
   ext x
   induction x using Submodule.Quotient.induction_on with
   | _ x =>

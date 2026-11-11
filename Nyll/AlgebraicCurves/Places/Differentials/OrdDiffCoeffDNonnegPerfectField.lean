@@ -10,13 +10,17 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegSeparable
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegSeparable
 
 /-!
 # Place ord diff Coeff D nonneg of perfect Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
-import Nyll.AlgebraicCurves.Models.LocalGeometry.ClosedPointRangeStalkEq
-import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
+module
+
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.ValuationRings.RangeStalkEq
+public import Nyll.AlgebraicCurves.Models.LocalGeometry.ClosedPointRangeStalkEq
+public import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
 
 /-!
 # Preimage restrict Along places Of subset places Of preimage
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -108,15 +112,13 @@ theorem eq_restrictAlong_of_range_stalk_eq
       Y.fromSpecStalk (genericPoint Y) ≫ π =
         Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ X.fromSpecStalk (genericPoint X))
     (y : Y) :
-    letI := (baseToFunctionField cX).toAlgebra
-    letI := (baseToFunctionField cY).toAlgebra
+    let := (baseToFunctionField cX).toAlgebra
+    let := (baseToFunctionField cY).toAlgebra
     ∀ (w : Place K Y.functionField) (v : Place K X.functionField),
       (algebraMap (Y.presheaf.stalk y) Y.functionField).range = w.toValuationSubring.toSubring →
       (algebraMap (X.presheaf.stalk (π y)) X.functionField).range = v.toValuationSubring.toSubring →
       v = Place.restrictAlong φ hφ w := by
-  let := (baseToFunctionField cX).toAlgebra
-  let := (baseToFunctionField cY).toAlgebra
-  intro w v hyw hv
+  intro sharedOwner1 sharedOwner2 w v hyw hv
   have hc := comp_algebraMap_stalk_eq π φ.toRingHom hφπ y
   apply place_eq_of_le
   intro f hf
@@ -146,11 +148,10 @@ theorem _root_.AlgebraicCurve.preimage_restrictAlong_placesOf_subset_placesOf_pr
       Y.fromSpecStalk (genericPoint Y) ≫ π =
         Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ X.fromSpecStalk (genericPoint X))
     (U : X.Opens) :
-    letI := (baseToFunctionField cX).toAlgebra
-    letI := (baseToFunctionField cY).toAlgebra
+    let := (baseToFunctionField cX).toAlgebra
+    let := (baseToFunctionField cY).toAlgebra
     (Place.restrictAlong φ hφ) ⁻¹' placesOf cX U ⊆ placesOf cY (π ⁻¹ᵁ U) := by
-  let := (baseToFunctionField cX).toAlgebra
-  let := (baseToFunctionField cY).toAlgebra
+  intro sharedOwner1 sharedOwner2
   rintro w ⟨x, hxU, hxc, hxw⟩
   obtain ⟨y, hyc, hyw⟩ := exists_closedPoint_range_stalk_eq cY w
   have hπyc : IsClosed ({π y} : Set X) := by

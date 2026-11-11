@@ -4,8 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.FiniteQuotientComponentInertiaCoprimality
-import Nyll.SchemeTheory.Divisors.SurjectiveArithmeticBoundary
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.FiniteQuotientComponentInertiaCoprimality
+public import Nyll.SchemeTheory.Divisors.SurjectiveArithmeticBoundary
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
 
 /-!
 # Component inertia over every arithmetic residue characteristic
@@ -16,6 +21,8 @@ point in every rational-prime residue characteristic.  Applying the local
 component theorem at those points gives prime-to-`p` normalization inertia
 for one fixed connected finite-etale Galois cover of the complement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

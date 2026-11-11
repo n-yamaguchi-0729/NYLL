@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.JacobianVarieties.Generalized.WholeCurveGeometricModulus
+import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Whole-curve maps to torsors over separated commutative groups
 

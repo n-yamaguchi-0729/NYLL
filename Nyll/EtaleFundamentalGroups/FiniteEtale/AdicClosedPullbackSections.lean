@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
-import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnitKernel
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicLevelPullbackModules
+public import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnit
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionUnitKernel
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Original affine sections of the actual closed-level pullbacks
@@ -26,6 +28,8 @@ therefore surjective on affine sections, with that same ideal power
 times the original section module as its kernel. Both statements refer
 to the original adjunction unit, without changing the section action.
 -/
+
+@[expose] public section
 
 noncomputable section
 

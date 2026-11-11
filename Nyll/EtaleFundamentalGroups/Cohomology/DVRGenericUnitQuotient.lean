@@ -4,16 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.GenericSectionsComparison
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVR
-import Nyll.SchemeTheory.Divisors.DVRUnitQuotient
-import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Mathlib.Algebra.Group.Units.Equiv
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.RingTheory.DedekindDomain.Dvr
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.GenericSectionsComparison
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVR
+public import Nyll.SchemeTheory.Divisors.DVRUnitQuotient
+public import Nyll.SchemeTheory.Divisors.DedekindPrincipalDivisor
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.SchemeTheory.Sheaves.UnitStalks
 
 /-!
 # The actual generic-unit quotient stalk over a DVR
@@ -23,6 +29,8 @@ generic multiplicative group by the local multiplicative group is infinite
 cyclic. The comparison uses the actual ring-stalk map and its proved
 compatibility with the fraction-field inclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -92,10 +100,7 @@ theorem geometricGenericUnitQuotientStalkIso_π :
           (Y := AddCommGrpCat.of (Additive (FractionRing (geometricStalk s))ˣ))).hom ≫
           cokernel.π (IsDiscreteValuationRing.fractionUnitInclusion
             (geometricStalk s) (FractionRing (geometricStalk s))) := by
-  let s := Spec.map (CommRingCat.ofHom φ)
-  let j := Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))
-  let F := (Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u})
-  let g := EtaleCohomology.etaleMultiplicativeGroupToPushforward j
+  intro s j F g
   let A := geometricStalk s
   let U := ((Scheme.pointEtaleNeighborhoods s).presheafFiber
     (A := CommRingCat.{u})).obj (etaleSections (Spec (CommRingCat.of R)))
@@ -299,7 +304,8 @@ variable (R : Type u) [CommRing R] [IsDedekindDomain R]
   {Ω : Type u} [Field Ω] (φ : R →+* Ω)
   (v : HeightOneSpectrum R) (hv : v.asIdeal = RingHom.ker φ)
 
-private def geometricStalkValuationSubringEquiv :
+/-- Identify the base localization with the valuation subring at the specified height-one point. -/
+def geometricStalkValuationSubringEquiv :
     Localization.AtPrime (geometricBasePrime φ).asIdeal ≃ₐ[R]
       HeightOneSpectrum.valuationSubringAtPrime (FractionRing R) v := by
   have hM : v.asIdeal.primeCompl = (geometricBasePrime φ).asIdeal.primeCompl := by
@@ -508,15 +514,7 @@ theorem geometricGenericUnitQuotient_rational_germ_image [IsSepClosed Ω]
         (geometricStalk s) (FractionRing (geometricStalk s)))
         (Additive.ofMul (Units.map (geometricStalkFractionFieldMap φ).toMonoidHom
           a.toMul)) := by
-  let s := Spec.map (CommRingCat.ofHom φ)
-  let j := Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))
-  let Φ := Scheme.pointSmallEtale s
-  let P := etaleBaseChangedSections j
-  let z :
-      (CategoryTheory.GrothendieckTopology.Point.additiveUnitsPresheaf P).obj (Opposite.op W) :=
-    Additive.ofMul (Units.map
-      (((Scheme.ΓSpecIso (CommRingCat.of (FractionRing R))).inv ≫
-        (pullback.snd W.hom j).appTop).hom.toMonoidHom) a.toMul)
+  intro s j Φ P z
   let b := Φ.toPresheafFiber W t
     (CategoryTheory.GrothendieckTopology.Point.additiveUnitsPresheaf P) z
   change (Φ.sheafFiber (A := AddCommGrpCat.{u})).obj
@@ -559,15 +557,7 @@ theorem geometricGenericUnitQuotient_rational_germ_eq_zero [IsSepClosed Ω]
       (cokernel.π (EtaleCohomology.etaleMultiplicativeGroupToPushforward j))
       (Φ.toPresheafFiber W t
         (CategoryTheory.GrothendieckTopology.Point.additiveUnitsPresheaf P) z) = 0 := by
-  let s := Spec.map (CommRingCat.ofHom φ)
-  let j := Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))
-  let Φ := Scheme.pointSmallEtale s
-  let P := etaleBaseChangedSections j
-  let z :
-      (CategoryTheory.GrothendieckTopology.Point.additiveUnitsPresheaf P).obj (Opposite.op W) :=
-    Additive.ofMul (Units.map
-      (((Scheme.ΓSpecIso (CommRingCat.of (FractionRing R))).inv ≫
-        (pullback.snd W.hom j).appTop).hom.toMonoidHom) a.toMul)
+  intro s j Φ P z
   let e := (geometricGenericUnitQuotientStalkIso R φ).addCommGroupIsoToAddEquiv
   apply e.injective
   rw [map_zero]

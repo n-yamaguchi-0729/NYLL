@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupDiagram
+module
+
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupDiagram
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # The actual morphism underlying the group scalar-extension comparison -/
+
+@[expose] public section
 
 noncomputable section
 universe u

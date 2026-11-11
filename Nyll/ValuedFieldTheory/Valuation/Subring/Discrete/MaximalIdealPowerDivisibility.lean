@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Order.GroupWithZero.Basic
-import Mathlib.Data.Finset.Max
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.RingTheory.Coprime.Lemmas
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.WLOG
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.Coprime.Lemmas
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.WLOG
 
 /-!
 # Valuation Subring exists dvd pow of mem maximal Ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -220,14 +224,14 @@ theorem exists_pow_eq_mul_of_mem_maximalIdeal_algebraicClosure
     (A : ValuationSubring (AlgebraicClosure ℚ)) (hqA : (q : AlgebraicClosure ℚ) ∈ A.nonunits)
     (c : A) (hc0 : c ≠ 0) (c' : A) (hc' : c' ∈ IsLocalRing.maximalIdeal A) (hc'0 : c' ≠ 0) :
     ∃ M : ℕ, ∃ a : A, (c' : AlgebraicClosure ℚ) ^ M = c * a :=
-  haveI : Algebra.IsAlgebraic ℚ (AlgebraicClosure ℚ) := AlgebraicClosure.isAlgebraic ℚ
+  have : Algebra.IsAlgebraic ℚ (AlgebraicClosure ℚ) := AlgebraicClosure.isAlgebraic ℚ
   exists_pow_eq_mul_of_mem_maximalIdeal A hqA c hc0 c' hc' hc'0
 
 theorem map_eq_zero_of_mem_maximalIdeal_algebraicClosure
     (A : ValuationSubring (AlgebraicClosure ℚ)) (hqA : (q : AlgebraicClosure ℚ) ∈ A.nonunits)
     {k : Type*} [Field k] [CharP k q] (red : A →+* k)
     (a : A) (ha : a ∈ IsLocalRing.maximalIdeal A) : red a = 0 :=
-  haveI : Algebra.IsAlgebraic ℚ (AlgebraicClosure ℚ) := AlgebraicClosure.isAlgebraic ℚ
+  have : Algebra.IsAlgebraic ℚ (AlgebraicClosure ℚ) := AlgebraicClosure.isAlgebraic ℚ
   map_eq_zero_of_mem_maximalIdeal A hqA red a ha
 
 end Archimedean

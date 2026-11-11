@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Differentials.Cartier.PthPowerKernel
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Divisor exists eq pow and eq ord of inv smul D eq zero

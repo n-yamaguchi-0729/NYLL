@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyNormalizedSection
-import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyTwistDegree
-import Nyll.JacobianVarieties.Generalized.RelativeIdealNormalizedDivisor
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyDisjointSupport
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyNormalizedSection
+public import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyTwistDegree
+public import Nyll.JacobianVarieties.Generalized.RelativeIdealNormalizedDivisor
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyDisjointSupport
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
 
 /-! # Concrete divisor representatives of actual affine Picard-zero families -/
+
+@[expose] public section
 
 noncomputable section
 

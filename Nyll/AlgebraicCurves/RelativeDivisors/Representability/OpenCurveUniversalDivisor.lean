@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Charts.IsAffineOpenMemFinsetField
-import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.IsAffineOpenOpensLePreimageMem
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.SupportedInUniversal
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.AlgebraicCurves.Models.Charts.IsAffineOpenMemFinsetField
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Affine.IsAffineOpenOpensLePreimageMem
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.SupportedInUniversal
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-! # Actual universal effective divisors on an open smooth proper curve -/
+
+@[expose] public section
 
 noncomputable section
 

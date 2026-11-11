@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.Algebra.Group.Submonoid.Membership
-import Mathlib.RingTheory.Extension.Presentation.Basic
-import Mathlib.RingTheory.Extension.Presentation.Core
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.RingTheory.Localization.Away.AdjoinRoot
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Integer
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.Algebra.Group.Submonoid.Membership
+public import Mathlib.RingTheory.Extension.Presentation.Basic
+public import Mathlib.RingTheory.Extension.Presentation.Core
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.RingTheory.Localization.Away.AdjoinRoot
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Integer
 
 
 /-!
@@ -30,6 +32,8 @@ presentation of the entire fraction field over the original ring is assumed.
 
 This is the finite-model prerequisite for [Stacks, Tag 0BSM](https://stacks.math.columbia.edu/tag/0BSM). Descent of the strict splitting isomorphism remains a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

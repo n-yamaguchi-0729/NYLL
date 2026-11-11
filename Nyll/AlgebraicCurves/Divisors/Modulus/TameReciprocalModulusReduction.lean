@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.TameTestFactorization
-import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdNeZeroCastNatAbsNeZero
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveFiniteDimensionalAdjoinSimple
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.TameTestFactorization
+public import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdNeZeroCastNatAbsNeZero
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveFiniteDimensionalAdjoinSimple
 
 /-! # Reducing modulus tests to finite-separable reciprocal parameters
 
@@ -19,6 +21,8 @@ The vanishing of principal evaluation for the finite-separable tame tests
 remains an explicit hypothesis. This is a reduction criterion, not a proof
 of general group-valued reciprocity or general modulus existence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

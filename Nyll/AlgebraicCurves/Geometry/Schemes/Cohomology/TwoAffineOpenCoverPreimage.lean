@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
 
 /-!
 # Two Affine Open Cover Preimage
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -77,7 +81,6 @@ def HomOver.pullback {𝒱 : X.TwoAffineOpenCover} {c : X ⟶ Spec (.of R)} {�
   comm := by
     rw [Limits.pullback.lift_snd, CommRingCat.ofHom_id]
     erw [Spec.map_id]
-    try rw [Category.comp_id, Category.comp_id]
   U0_le := by
     change Limits.pullback.fst c' (specMap R A) ⁻¹ᵁ 𝒲.U0 ≤
       Limits.pullback.map c' (specMap R A) c (specMap R A) f.hom (𝟙 _) (𝟙 _) _ _ ⁻¹ᵁ

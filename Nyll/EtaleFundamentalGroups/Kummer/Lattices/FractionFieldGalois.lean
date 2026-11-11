@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MonoidAlgebra.NoZeroDivisors
-import Mathlib.FieldTheory.Galois.IsGaloisGroup
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Lattices.GaloisGroup
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.NoZeroDivisors
+public import Mathlib.FieldTheory.Galois.IsGaloisGroup
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Lattices.GaloisGroup
 
 /-!
 # Fraction-field Galois extension of a finite lattice cover
@@ -17,6 +19,8 @@ fraction field.  The ring-level `IsGaloisGroup` producer and mathlib's
 fraction-ring transport then identify the same finite character group as a
 Galois group of the fraction-field extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -55,33 +59,20 @@ theorem latticeCharacter_isGaloisGroup_fractionRing
     let A := AddMonoidAlgebra k H
     let B := AddMonoidAlgebra k L
     let G := Multiplicative (L ⧸ H) →* kˣ
-    letI : UniqueSums L := latticeUniqueSums_of_freeIntModule L
-    letI : UniqueSums H := latticeSubgroupUniqueSums H
-    letI : IsDomain A := inferInstance
-    letI : IsDomain B := inferInstance
-    letI : Algebra A B := latticeMapDomainAlgebra H
-    letI : FaithfulSMul A B := latticeMapDomainFaithfulSMul H
+    let : UniqueSums L := latticeUniqueSums_of_freeIntModule L
+    let : UniqueSums H := latticeSubgroupUniqueSums H
+    let : IsDomain A := inferInstance
+    let : IsDomain B := inferInstance
+    let : Algebra A B := latticeMapDomainAlgebra H
+    let : FaithfulSMul A B := latticeMapDomainFaithfulSMul H
     let K := FractionRing A
     let E := FractionRing B
-    letI : Algebra K E := FractionRing.liftAlgebra A E
-    letI : MulSemiringAction G B := latticeCharacterMulSemiringAction H
-    letI : MulSemiringAction G E := IsFractionRing.mulSemiringAction G B E
+    let : Algebra K E := FractionRing.liftAlgebra A E
+    let : MulSemiringAction G B := latticeCharacterMulSemiringAction H
+    let : MulSemiringAction G E := IsFractionRing.mulSemiringAction G B E
     IsGaloisGroup G K E := by
-  dsimp only
-  let A := AddMonoidAlgebra k H
-  let B := AddMonoidAlgebra k L
-  let G := Multiplicative (L ⧸ H) →* kˣ
-  let K := FractionRing A
-  let E := FractionRing B
-  let : UniqueSums L := latticeUniqueSums_of_freeIntModule L
-  let : UniqueSums H := latticeSubgroupUniqueSums H
-  let : IsDomain A := inferInstance
-  let : IsDomain B := inferInstance
-  let : Algebra A B := latticeMapDomainAlgebra H
-  let : FaithfulSMul A B := latticeMapDomainFaithfulSMul H
-  let : Algebra K E := FractionRing.liftAlgebra A E
-  let : MulSemiringAction G B := latticeCharacterMulSemiringAction H
-  let : MulSemiringAction G E := IsFractionRing.mulSemiringAction G B E
+  intro A B G sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6 K E
+    sharedOwner9 sharedOwner10 sharedOwner11
   let : Finite G := latticeCharacterGroupFinite H
   have : IsGaloisGroup G A B := latticeCharacter_isGaloisGroup H
   infer_instance

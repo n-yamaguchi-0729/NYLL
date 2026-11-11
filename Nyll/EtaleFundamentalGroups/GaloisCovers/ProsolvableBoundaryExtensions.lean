@@ -5,6 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.GaloisCovers.ProsolvableBoundary
+import Nyll.ProCGroups.FiniteGroups.StandardClasses
+import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
 
 /-!
 # Prosolvable comparison from actual boundary-cover extensions

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationTowerAction
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationTower
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationCoefficientSquare
-import Mathlib.Algebra.Ring.Hom.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationTowerAction
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationTower
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteNormalizationCoefficientSquare
+public import Mathlib.Algebra.Ring.Hom.Defs
 
 /-!
 # Faithfulness of finite normalization restriction
@@ -16,6 +18,8 @@ An ambient automorphism fixing a larger finite normalization fixes every
 smaller finite normalization. The actual coefficient square and the literal
 injective normalization inclusion supply the implication.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

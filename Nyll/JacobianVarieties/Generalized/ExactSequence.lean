@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.ModulusForgetfulSurjectivity
+module
+
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.ModulusForgetfulSurjectivity
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
 
 /-! # The generalized-Jacobian exact sequence over the original field
 
@@ -13,6 +16,8 @@ The scalar boundary identifies the concrete norm-open group with the actual
 scheme-theoretic kernel. Forgetting rigidification is locally surjective for
 the fppf topology, without a rational point on the curve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

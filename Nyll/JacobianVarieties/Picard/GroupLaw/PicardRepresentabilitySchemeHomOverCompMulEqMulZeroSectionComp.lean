@@ -17,8 +17,8 @@ import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGro
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
 import Nyll.SchemeTheory.Modules.Invertible.Rigidify
 import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal

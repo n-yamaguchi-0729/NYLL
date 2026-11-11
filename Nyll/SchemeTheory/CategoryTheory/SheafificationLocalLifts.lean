@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+module
+
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.CoverLifting
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-!
 # Transporting actual local representatives of a sheafification
@@ -17,6 +19,8 @@ An isomorphism of raw presheaves retains local representatives. Restriction
 of the big fppf site to a new base also retains Zariski representatives,
 using the actual unit-compatible sheafification comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

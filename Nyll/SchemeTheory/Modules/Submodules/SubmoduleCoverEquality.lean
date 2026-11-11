@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Mathlib.CategoryTheory.Sites.Spaces
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Mathlib.CategoryTheory.Sites.Spaces
 
 /-!
 # Equality of actual submodules from an open cover
@@ -16,6 +18,8 @@ intersections of each test open with the cover. This turns the finite
 principal-open equalities of affine extraction into equality on their
 quasi-compact union.
 -/
+
+@[expose] public section
 
 noncomputable section
 

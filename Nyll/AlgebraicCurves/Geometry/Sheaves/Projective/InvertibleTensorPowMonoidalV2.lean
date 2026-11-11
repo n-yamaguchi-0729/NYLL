@@ -10,14 +10,19 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
 
 /-!
 # Scheme Modules Is Invertible tensor Pow monoidal V2
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -53,12 +58,7 @@ open _root_.AlgebraicGeometry
 
 theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorPow_monoidalV2 {X : Scheme.{u}}
   {L : X.Modules}
-    (hL : Scheme.Modules.IsInvertible L) (n : ℕ) : Scheme.Modules.IsInvertible (L.tensorPow n) := by
-  induction n with
-  | zero =>
-    simpa only [Scheme.Modules.tensorPow_zero, Scheme.Modules.tensorUnit_eq] using
-      Scheme.Modules.isInvertible_unit X
-  | succ n ih =>
-    simpa only [Scheme.Modules.tensorPow_succ] using ih.tensor_monoidalV2 hL
+    (hL : Scheme.Modules.IsInvertible L) (n : ℕ) : Scheme.Modules.IsInvertible (L.tensorPow n) :=
+  _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorPow hL n
 end AlgebraicCurves.Geometry.Sheaves.Proofs.Scheme_Modules_IsInvertible_tensorPow_monoidalV2
 end ProofImplementation

@@ -10,62 +10,67 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.Ext
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Noetherian.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.SmallExtensionIsPicDeformationCocycle
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsoUnitIsPicDeformationCocycle
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocyclePullbackEqUnitPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionSubMemRangeD
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleIso
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverRefinementPreimagePreimage
-import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.ModulesOrderedAffineCoverCechTrivialisationComap
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeDEqUnitPullbackInvAddUnitPullbackId
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseIffIso
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDualMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeMemRangeDZero
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverLePreimage
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleAppTopEqUnitAutSection
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsUnitAppTopEqBijective
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveSpecIsoInvCompAppTop
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleUnitPullbackUnitIsoZero
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.Ext
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.SmallExtensionIsPicDeformationCocycle
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsoUnitIsPicDeformationCocycle
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocyclePullbackEqUnitPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionSubMemRangeD
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleIso
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverRefinementPreimagePreimage
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Trivializations.ModulesOrderedAffineCoverCechTrivialisationComap
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeDEqUnitPullbackInvAddUnitPullbackId
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseIffIso
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDualMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeMemRangeDZero
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverLePreimage
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleAppTopEqUnitAutSection
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsUnitAppTopEqBijective
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveSpecIsoInvCompAppTop
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleUnitPullbackUnitIsoZero
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Isomorphisms of line bundles over square-zero thickenings
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

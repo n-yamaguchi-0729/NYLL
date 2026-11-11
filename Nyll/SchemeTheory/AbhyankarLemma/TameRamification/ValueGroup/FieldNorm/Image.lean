@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Common
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Common
 
 /-!
 # Field-norm value images
@@ -12,6 +14,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.Co
 This file turns the common-top field-norm lcm divisibility from elementwise
 form into the subgroup-image form needed by the ramification-image comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

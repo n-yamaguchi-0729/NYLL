@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.AffineBlowupCharts
-import Nyll.SchemeTheory.RingTheory.ReesChartRegular
-import Nyll.SchemeTheory.Divisors.CartierOpenDescent
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.Algebra.Ring.NonZeroDivisors
+module
+
+public import Nyll.SchemeTheory.Morphisms.AffineBlowupCharts
+public import Nyll.SchemeTheory.RingTheory.ReesChartRegular
+public import Nyll.SchemeTheory.Divisors.CartierOpenDescent
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.Algebra.Ring.NonZeroDivisors
+public import Nyll.SchemeTheory.RingTheory.ReesChart
 
 /-!
 # The actual exceptional ideal of an affine blowup
@@ -19,6 +22,8 @@ degree-one chart. The native affine cover and open descent therefore show
 that its actual pullback ideal sheaf is an effective Cartier divisor.
 This is the local exceptional-divisor assertion of Stacks Project 31.33.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,7 +35,8 @@ namespace AlgebraicGeometry
 
 variable {R : Type u} [CommRing R]
 
-private def specIdealSheaf (I : Ideal R) : (Spec (.of R)).IdealSheafData :=
+/-- The ideal sheaf on an affine spectrum associated to an ideal of its ring. -/
+def specIdealSheaf (I : Ideal R) : (Spec (.of R)).IdealSheafData :=
   Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (.of R)).inv.hom)
 
 private theorem specIdealSheaf_comap {S : Type u} [CommRing S]

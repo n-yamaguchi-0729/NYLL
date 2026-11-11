@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionOverHomFamily
-import Nyll.SchemeTheory.FiniteEtale.RawOverlapFiniteness
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitRecoveredModel
-import Nyll.SchemeTheory.Gluing.RecoveredPullbackOverlaps
-import Nyll.SchemeTheory.Gluing.RecoveredOverlapTransport
-import Nyll.SchemeTheory.Gluing.RelativeChartBaseChange
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverHomFamily
+public import Nyll.SchemeTheory.FiniteEtale.RawOverlapFiniteness
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitRecoveredModel
+public import Nyll.SchemeTheory.Gluing.RecoveredPullbackOverlaps
+public import Nyll.SchemeTheory.Gluing.RecoveredOverlapTransport
+public import Nyll.SchemeTheory.Gluing.RelativeChartBaseChange
 
 /-!
 # An actual stage model from standard recovered affine charts
@@ -19,6 +21,8 @@ qcqs scheme Hom theorem. The descended local models retain their literal
 cartesian overlaps and their covering maps into the original object.
 Eventual equality and gluing then supply a finite-etale stage model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

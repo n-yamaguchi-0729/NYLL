@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Nilpotent.Lemmas
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.RingTheory.Nilpotent.Lemmas
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Is Local Ring exists sub algebra Map mem map maximal Ideal of mul self sub mem of smul eq
 add
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

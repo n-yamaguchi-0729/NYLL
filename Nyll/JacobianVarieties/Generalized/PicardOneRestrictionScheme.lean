@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusAbelOneMap
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelOneMap
 
 /-! # Actual degree-one scheme transitions and the intrinsic Abel square -/
+
+@[expose] public section
 
 noncomputable section
 

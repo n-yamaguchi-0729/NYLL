@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.AffineTransitionModel
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.AffineTransitionModel
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Finite-etale chart models at a common inverse-system stage
@@ -18,6 +20,8 @@ global-sections colimit, then use a finite cofiltered wide cospan to put all
 models over the same stage. Native pullback composition preserves every
 recovery isomorphism and the pulled-back opens still cover that stage.
 -/
+
+@[expose] public section
 
 noncomputable section
 

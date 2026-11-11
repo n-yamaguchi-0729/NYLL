@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Algebra.Algebra.Subalgebra.Prod
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.Tactic.ByContra
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
+module
+
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Algebra.Subalgebra.Prod
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.Tactic.ByContra
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
 
 /-!
 # Two Chart Cech finrank H0 glued Lines Sections zero zero le one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

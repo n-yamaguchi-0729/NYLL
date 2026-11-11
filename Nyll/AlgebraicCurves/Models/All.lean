@@ -27,3 +27,9 @@ import Nyll.AlgebraicCurves.Models.Ramification.All
 import Nyll.AlgebraicCurves.Models.Rational.All
 import Nyll.AlgebraicCurves.Models.Sections.All
 import Nyll.AlgebraicCurves.Models.SumMulEqZeroSumMulEqZero
+import Nyll.AlgebraicCurves.Models.Kummer.All
+import Nyll.AlgebraicCurves.Models.ConstantFrobeniusEmbedding
+import Nyll.AlgebraicCurves.Models.ConstantPointPlace
+import Nyll.AlgebraicCurves.Models.EtaleClosedPoints
+import Nyll.AlgebraicCurves.Models.EtaleOfRamification
+import Nyll.AlgebraicCurves.Models.SemilinearFunctionFieldIso

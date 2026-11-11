@@ -81,22 +81,22 @@ theorem
     let K := FractionRing R
     let pointed : R ≃ₐ[R] Cₚ :=
       henselianPointedEtaleLocalizationAlgEquiv P hres
-    letI : IsDomain Cₚ := pointed.symm.toMulEquiv.isDomain R
-    letI : Algebra Cₚ K :=
+    let : IsDomain Cₚ := pointed.symm.toMulEquiv.isDomain R
+    let : Algebra Cₚ K :=
       pointedBaseReverseFractionRingAlgebra pointed
     let cFullAlgebra : Algebra Cₚ F' :=
       ((algebraMap K F').comp (algebraMap Cₚ K)).toAlgebra
-    letI : Algebra Cₚ F' := cFullAlgebra
+    let : Algebra Cₚ F' := cFullAlgebra
     let cTargetAlgebra : Algebra Cₚ L :=
       ((algebraMap K L).comp (algebraMap Cₚ K)).toAlgebra
-    letI : Algebra Cₚ L := cTargetAlgebra
+    let : Algebra Cₚ L := cTargetAlgebra
     let m := fieldTowerTensorComponentIdeal
       (K := K) (K' := F') (L := L)
-    letI : m.IsMaximal :=
+    let : m.IsMaximal :=
       fieldTowerTensorComponentIdeal_isMaximal
         (K := K) (K' := F') (L := L)
     let M := GenericTensorFieldComponent m
-    letI : Algebra Cₚ M :=
+    let : Algebra Cₚ M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := Cₚ) m
     ∃ (p : PrimeSpectrum (integralClosure Cₚ M)),
       let Dfinal := Localization.AtPrime p.asIdeal
@@ -109,31 +109,19 @@ theorem
         (OreLocalization.instCommRing (R := Cₚ))
         (OreLocalization.instCommRing (R := Dfinal))
         (Localization.awayMap (algebraMap Cₚ Dfinal) fCₚ).toAlgebra := by
-  dsimp only
+  intro Cₚ K pointed sharedOwner1 cKAlgebra cFullAlgebra sharedOwner2 cTargetAlgebra sharedOwner3 m
+    sharedOwner5 M sharedOwner7
   let Q := etaleChosenAwayPrime e P'
   let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
   let : Q.LiesOver P' :=
     etaleChosenAwayPrime_liesOver e P' heP'
   let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
   let Dₚ := Localization.AtPrime Q
   let : Algebra Cₚ Dₚ :=
     Localization.AtPrime.algebraOfLiesOver P Q
-  let K := FractionRing R
-  let pointed : R ≃ₐ[R] Cₚ :=
-    henselianPointedEtaleLocalizationAlgEquiv P hres
-  let : IsDomain Cₚ := pointed.symm.toMulEquiv.isDomain R
-  let cKAlgebra : Algebra Cₚ K :=
-    pointedBaseReverseFractionRingAlgebra pointed
   let : Algebra Cₚ K := cKAlgebra
   let : SMul Cₚ K := cKAlgebra.toSMul
-  let cFullAlgebra : Algebra Cₚ F' :=
-    ((algebraMap K F').comp (algebraMap Cₚ K)).toAlgebra
-  let : Algebra Cₚ F' := cFullAlgebra
   let : SMul Cₚ F' := cFullAlgebra.toSMul
-  let cTargetAlgebra : Algebra Cₚ L :=
-    ((algebraMap K L).comp (algebraMap Cₚ K)).toAlgebra
-  let : Algebra Cₚ L := cTargetAlgebra
   let : SMul Cₚ L := cTargetAlgebra.toSMul
   let : IsScalarTower Cₚ K F' :=
     IsScalarTower.of_algebraMap_eq' rfl
@@ -231,14 +219,10 @@ theorem
       Localization.AtPrime pTarget :=
     Localization.localAlgEquiv
       pBase.asIdeal pTarget eBaseIC hpBaseComap
-  let m := fieldTowerTensorComponentIdeal
-    (K := K) (K' := F') (L := L)
   let : m.IsMaximal :=
-    fieldTowerTensorComponentIdeal_isMaximal
-      (K := K) (K' := F') (L := L)
-  let M := GenericTensorFieldComponent m
+    sharedOwner5
   let : Algebra Cₚ M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := Cₚ) m
+    sharedOwner7
   let pFinal := fieldTowerTensorComponentIntegralClosurePrime
     (B := Cₚ) (K := K) (K' := F') (L := L) pTarget
   let : pFinal.IsPrime :=

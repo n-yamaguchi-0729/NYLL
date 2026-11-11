@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGalois
-import Nyll.EtaleFundamentalGroups.Normalization.FieldSourceNormalization
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGalois
+public import Nyll.EtaleFundamentalGroups.Normalization.FieldSourceNormalization
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.FieldTheory.Galois.Infinite
 
 /-!
 # The original maximal unramified subextension over a normal domain
@@ -21,6 +23,8 @@ ambient field whose literal integral closures over A are unramified. The
 geometric criterion then proves that this is the field fixed by the actual
 fundamental-group kernel, and that its elements form the literal union.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,11 +45,6 @@ def maximalUnramifiedSubfield
   ⨆ (E : IntermediateField K Ω) (_ : FiniteDimensional K E)
     (_ : Algebra.FormallyUnramified A (integralClosure A E) ∧
       Algebra.FiniteType A (integralClosure A E)), E
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 private local instance fractionSourcePreimmersion
     (A F : Type u) [CommRing A] [IsDomain A] [Field F]

@@ -4,21 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
-import Nyll.GaloisCohomology.ArtinSchreier.FiniteRestrictionKernel
-import Nyll.GaloisCohomology.ArtinSchreier.PrimeDegreeAction
-import Nyll.GaloisCohomology.ArtinSchreier.CharacterClasses
-import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
-import Nyll.GaloisCohomology.ArtinSchreier.CohomologyVanishing
-import Nyll.GaloisCohomology.ArtinSchreier.OpenCohomologyVanishing
-import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
-import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
+module
 
-import Nyll.GaloisCohomology.ArtinSchreier.AutomorphismDetection
-import Nyll.GaloisCohomology.ArtinSchreier.RestrictionKernelCharacterEquiv
-import Nyll.GaloisCohomology.ArtinSchreier.FiniteExtension
+public import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
+public import Nyll.GaloisCohomology.ArtinSchreier.FiniteRestrictionKernel
+public import Nyll.GaloisCohomology.ArtinSchreier.PrimeDegreeAction
+public import Nyll.GaloisCohomology.ArtinSchreier.CharacterClasses
+public import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
+public import Nyll.GaloisCohomology.ArtinSchreier.CohomologyVanishing
+public import Nyll.GaloisCohomology.ArtinSchreier.OpenCohomologyVanishing
+public import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
+public import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
 
-import Nyll.GaloisCohomology.ArtinSchreier.RestrictionDegree
+public import Nyll.GaloisCohomology.ArtinSchreier.AutomorphismDetection
+public import Nyll.GaloisCohomology.ArtinSchreier.RestrictionKernelCharacterEquiv
+public import Nyll.GaloisCohomology.ArtinSchreier.FiniteExtension
+
+public import Nyll.GaloisCohomology.ArtinSchreier.RestrictionDegree
+
+
+public import Nyll.GaloisCohomology.ArtinSchreier.WittAdditiveHilbert90
+public import Nyll.GaloisCohomology.ArtinSchreier.WittCharacterNaturality
+public import Nyll.GaloisCohomology.ArtinSchreier.WittCharacterSurjectivity
+public import Nyll.GaloisCohomology.ArtinSchreier.WittCharacters
 
 /-!
 # Artin–Schreier characters and cohomology

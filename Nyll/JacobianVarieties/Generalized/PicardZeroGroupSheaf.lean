@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
-import Nyll.JacobianVarieties.Generalized.PicardGroupSheaf
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+public import Nyll.JacobianVarieties.Generalized.PicardGroupSheaf
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-!
 # The group sheaf underlying modulus Picard-zero
@@ -15,11 +18,15 @@ law. Compatibility of sheafification with the forgetful functor identifies
 its underlying sheaf with the previously defined modulus Picard-zero sheaf.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
 
 open CategoryTheory
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

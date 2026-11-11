@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroChartCompatibility
-import Nyll.JacobianVarieties.Generalized.ModulusBasepointDivisorClass
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorDifferenceClass
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroChartCompatibility
+public import Nyll.JacobianVarieties.Generalized.ModulusBasepointDivisorClass
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorDifferenceClass
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # The actual chart class is its corrected divisor class -/
+
+@[expose] public section
 
 noncomputable section
 

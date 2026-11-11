@@ -10,35 +10,40 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
-import Mathlib.Algebra.Order.Antidiag.Prod
-import Mathlib.Algebra.Order.GroupWithZero.Basic
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Degree.Defs
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.GCongr.Core
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SplitIfs
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Data.Finset.Max
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.RingTheory.Adjoin.Polynomial.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MultisetLinearFactorNormalization
+public import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
+public import Mathlib.Algebra.Order.Antidiag.Prod
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.Degree.Defs
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.GCongr.Core
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SplitIfs
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Data.Finset.Max
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.RingTheory.Adjoin.Polynomial.Basic
 
 /-!
 # Valuation Subring exists eq aeval div of forall valuation Subring mem of eq sum mul
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -164,16 +169,8 @@ theorem IsGood.multiset_prod_one_sub (rs : Multiset L) (hrs : ∀ r ∈ rs, A.va
 theorem prod_X_sub_C_eq_C_mul_prod_one_sub (s : Multiset L) (hs : ∀ ρ ∈ s, ρ ≠ 0) :
     (s.map fun ρ => (X - C ρ : L[X])).prod =
       C (s.map fun ρ => -ρ).prod *
-        ((s.map fun ρ => ρ⁻¹).map fun r => (1 - C r * X : L[X])).prod := by
-  rw [map_multiset_prod C, Multiset.map_map, Multiset.map_map, ← Multiset.prod_map_mul]
-  refine congr_arg _ (Multiset.map_congr rfl fun ρ hρ => ?_)
-  simp only [Function.comp_apply]
-  have hρ0 : ρ ≠ 0 := hs ρ hρ
-  have : C (-ρ) * (1 - C ρ⁻¹ * X) = X - C ρ := by
-    have h1 : C ρ * C ρ⁻¹ = (1 : L[X]) := by rw [← C_mul, mul_inv_cancel₀ hρ0, C_1]
-    rw [C_neg]
-    linear_combination X * h1
-  exact this.symm
+        ((s.map fun ρ => ρ⁻¹).map fun r => (1 - C r * X : L[X])).prod :=
+  Polynomial.prod_X_sub_C_eq_C_mul_prod_one_sub s hs
 
 /-- A polynomial with integral coefficients and at least one coefficient of valuation one. -/
 def IsPrim (p : L[X]) : Prop :=

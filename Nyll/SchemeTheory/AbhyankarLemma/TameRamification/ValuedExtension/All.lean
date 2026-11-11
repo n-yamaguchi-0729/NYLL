@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Canonical
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.ResidueCharacteristic
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Tower
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Canonical
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.ResidueCharacteristic
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValuedExtension.Tower
 
 /-!
 # Valued extensions in tame ramification

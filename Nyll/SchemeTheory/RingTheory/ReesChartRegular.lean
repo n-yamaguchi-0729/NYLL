@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.ReesChart
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.SchemeTheory.RingTheory.ReesChart
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.Tactic.Ring
 
 /-!
 # Regularity of the exceptional generator on a Rees chart
@@ -16,6 +18,8 @@ homogeneous chart at `aT` is a non-zero-divisor. Together with the explicit
 principal-ideal calculation, this is the local effective Cartier calculation
 for a blowup (Stacks Project, Section 31.33).
 -/
+
+@[expose] public section
 
 noncomputable section
 

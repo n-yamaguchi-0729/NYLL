@@ -14,9 +14,11 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleDatum
+module
+
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleDatum
 
 /-!
 # Effective faithfully flat descent for an algebra datum
@@ -25,6 +27,8 @@ The equalizer subalgebra of a compatible algebra descent datum recovers the upst
 algebra after base change. The proof obtains its underlying module isomorphism from
 `Module.FaithfullyFlat.isBaseChange_eqLocus_of_descentDatum`.
 -/
+
+@[expose] public section
 
 universe u
 

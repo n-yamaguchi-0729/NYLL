@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Module.LocalizedModule.Submodule
-import Mathlib.RingTheory.Localization.Module
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
+public import Mathlib.RingTheory.Localization.Module
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finiteness of the canonical localization from actual affine sections
@@ -20,6 +22,8 @@ canonical localization ring is identified with its actual section ring.
 These proved localization equivalences transport finite generation without
 requiring global finite type of the original sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

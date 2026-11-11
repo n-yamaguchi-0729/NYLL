@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
 import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackFundamentalGroup
+import Nyll.ProCGroups.Profinite.OpenSubgroups
 
 /-!
 # Open normal subgroups and pointed pullbacks

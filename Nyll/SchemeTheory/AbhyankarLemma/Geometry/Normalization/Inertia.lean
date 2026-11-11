@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealTower
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.RingTheory.Ideal.GoingUp
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealTower
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.RingTheory.Ideal.GoingUp
 
 /-!
 # Inertia in a tower of normalization rings
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.GoingUp
 This file instantiates the ideal-theoretic inertia tower for the integral
 closures of a Dedekind domain in a finite Galois tower of fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

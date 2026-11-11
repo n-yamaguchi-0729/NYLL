@@ -4,18 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Albanese.CorrectedDivisorSums
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
-import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBasePointSums
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Albanese.CorrectedDivisorSums
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
+public import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.ChangeBasePointSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Geometric values of corrected divisor sums under scalar extension
 
@@ -25,6 +28,8 @@ represents the original family. The two constructed regular sums therefore
 agree under the native group-point adjunction, including the degree correction.
 No modulus condition on the target map is needed for this comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

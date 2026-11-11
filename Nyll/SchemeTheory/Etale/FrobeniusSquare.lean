@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.Frobenius
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.SchemeTheory.Etale.Frobenius
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # The cartesian Frobenius square of an étale morphism
@@ -14,6 +16,8 @@ The actual relative Frobenius isomorphism identifies the Frobenius
 naturality square with the pullback square. This retains the original
 schemes and maps for subsequent base-change constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

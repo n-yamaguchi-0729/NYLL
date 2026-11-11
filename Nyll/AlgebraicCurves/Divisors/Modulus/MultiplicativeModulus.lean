@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
-import Nyll.AlgebraicCurves.Geometry.WeilReciprocityAlgClosed
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
+public import Nyll.AlgebraicCurves.Geometry.WeilReciprocityAlgClosed
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
 
 /-!
 # A reduced modulus for a multiplicative rational function
@@ -18,6 +20,8 @@ support of its divisor is a modulus: a congruence-one test function has disjoint
 divisor, and the existing proved Weil reciprocity theorem evaluates it to one.
 The preceding local-symbol construction therefore supplies the unique symbols.
 -/
+
+@[expose] public section
 
 noncomputable section
 

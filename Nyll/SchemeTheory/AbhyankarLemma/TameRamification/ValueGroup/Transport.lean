@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Integer
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Integer
 
 /-!
 # Transport for subgroup value images
@@ -13,6 +15,8 @@ The common-top value-group comparison needs one transport step: the actual
 ramification image is a subgroup of a larger common image, while the two lower
 value-step inclusions are naturally proved for that larger common image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

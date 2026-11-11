@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraMap
-import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraMap
+public import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # The genuine adic algebra sheaves of the lifted finite étale covers
@@ -28,6 +30,8 @@ step in Stacks Project 0A48/0GS2.
 https://stacks.math.columbia.edu/tag/0A48
 https://stacks.math.columbia.edu/tag/0GS2
 -/
+
+@[expose] public section
 
 noncomputable section
 

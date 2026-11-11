@@ -10,23 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DedekindDomain.Different
+module
 
-import Nyll.AlgebraicCurves.Differentials.Regular.Regular
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.Places.ValuationRings.IntegralClosureAtOrdFiberNonneg
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
-import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
+public import Mathlib.RingTheory.DedekindDomain.Different
+
+public import Nyll.AlgebraicCurves.Differentials.Regular.Regular
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.Places.ValuationRings.IntegralClosureAtOrdFiberNonneg
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.Places.Differentials.OrdDiffCoeffDNonnegPerfectField
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+public import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
 
 /-!
 # Exists trace mul eq aeval of forall exists smul D eq smul d Coord
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -314,8 +318,8 @@ theorem exists_derivation_of_span_eq_top {ω₀ : Ω[F⁄K]} (hne : ω₀ ≠ 0)
       ((LinearEquiv.ofTop _ htop).symm : Ω[F⁄K] →ₗ[F] Submodule.span F ({ω₀} : Set Ω[F⁄K]))
   have hℓ : ∀ ω : Ω[F⁄K], ℓ ω • ω₀ = ω := by
     intro ω
-    have h := LinearEquiv.coord_apply_smul F Ω[F⁄K] ω₀ hne ((LinearEquiv.ofTop _ htop).symm ω)
-    simp [ℓ] at h ⊢
+    exact LinearEquiv.coord_apply_smul F Ω[F⁄K] ω₀ hne
+      ((LinearEquiv.ofTop _ htop).symm ω)
   refine ⟨ℓ.compDer (D K F), fun z => ?_⟩
   exact (hℓ (D K F z)).symm
 
@@ -628,7 +632,8 @@ theorem exists_ord_coe_eq_one {w : Place K F} (hw : w.restrict E = v) :
   have hs0 : (s : Place.integralClosureAt F v) ≠ 0 := by
     intro h; exact hs (by rw [h]; exact zero_mem _)
   have hsF0 : ((s : Place.integralClosureAt F v) : F) ≠ 0 := by
-    simpa using (IsFractionRing.injective (Place.integralClosureAt F v) F).ne_iff.mpr hs0
+    intro hzero
+    exact hs0 (Subtype.ext hzero)
   have hords : w.ord ((s : Place.integralClosureAt F v) : F) = 0 := by
     have h1 : 0 ≤ w.ord ((s : Place.integralClosureAt F v) : F) :=
       ord_nonneg_of_mem w (Place.forall_mem_of_restrict_eq hw _)
@@ -651,7 +656,8 @@ theorem le_ord_of_mem_pow_fiberCenter {w : Place K F} (hw : w.restrict E = v)
     by_cases hd0 : d = 0
     · rw [hd0, map_zero]; exact zero_mem _
     have hdF0 : (d : F) ≠ 0 := by
-      simpa using (IsFractionRing.injective (Place.integralClosureAt F v) F).ne_iff.mpr hd0
+      intro hzero
+      exact hd0 (Subtype.ext hzero)
     have hpos := (Place.mem_fiberCenter_iff_ord_pos hw hd0).mp hd
     exact (Place.mem_maximalIdeal_iff_ord_pos w hdF0
       (Place.forall_mem_of_restrict_eq hw d)).mpr hpos

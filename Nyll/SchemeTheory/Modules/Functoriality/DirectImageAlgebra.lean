@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.FiniteRelativeSpec
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # The actual direct-image algebra of a scheme morphism
@@ -19,6 +21,8 @@ structure morphism is the original morphism's sheaf map. Its underlying
 module is identified with the native direct image of the unit module,
 using identity maps on the actual section modules and their restrictions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

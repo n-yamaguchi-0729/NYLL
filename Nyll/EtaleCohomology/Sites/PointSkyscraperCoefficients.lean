@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+module
+
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-!
 # Point skyscrapers and coefficient functors
@@ -16,6 +18,8 @@ actual native point skyscraper. If its functor on sheaves also preserves
 products, it commutes with actual small families of skyscrapers. Both
 comparisons are constructed from the canonical product comparison maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

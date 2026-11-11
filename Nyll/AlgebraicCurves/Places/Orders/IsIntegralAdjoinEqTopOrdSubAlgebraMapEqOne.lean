@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.Ramification.LeOrdIffMemPowFiberCenter
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+module
+
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Ramification.LeOrdIffMemPowFiberCenter
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
 
 /-!
 # Place exists is Integral adjoin eq top ord sub algebra Map eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

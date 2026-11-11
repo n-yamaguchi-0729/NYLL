@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.LinearAlgebra.Reflection
-import Mathlib.RingTheory.Extension.Cotangent.BaseChange
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Kaehler.TensorProduct
-import Mathlib.RingTheory.Smooth.Locus
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.LinearAlgebra.Reflection
+public import Mathlib.RingTheory.Extension.Cotangent.BaseChange
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Kaehler.TensorProduct
+public import Mathlib.RingTheory.Smooth.Locus
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.Tactic.Ext
 
 /-!
 # Scheme Hom smooth Locus le preimage of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -143,9 +147,9 @@ open Algebra.TensorProduct in
 theorem flat_right_baseChange {A B A' : Type u} [CommRing A] [CommRing B] [CommRing A'] [Algebra A
   B] [Algebra A A']
     [Module.Flat A A'] :
-    letI : Algebra B (A' ⊗[A] B) := Algebra.TensorProduct.rightAlgebra
+    let : Algebra B (A' ⊗[A] B) := Algebra.TensorProduct.rightAlgebra
     Module.Flat B (A' ⊗[A] B) := by
-  let : Algebra B (A' ⊗[A] B) := Algebra.TensorProduct.rightAlgebra
+  intro sharedOwner1
   let e₀ := (Algebra.TensorProduct.comm A A' B).toLinearEquiv.toAddEquiv
   have hsmul : ∀ (b : B) (z : A' ⊗[A] B), e₀ (b • z) = b • e₀ z := by
     intro b z
@@ -188,7 +192,11 @@ theorem isSmoothAt_comap_of_isSmoothAt_baseChange
         { toFun := fun t =>
             (TensorProduct.mk B (A' ⊗[A] B) (Algebra.H1Cotangent A B)
               (t ⊗ₜ[A] (1 : B))).restrictScalars A
-          map_add' := fun t t' => by ext x; simp [TensorProduct.add_tmul]
+          map_add' := fun t t' => by
+            ext x
+            exact (congrArg (fun y : A' ⊗[A] B => y ⊗ₜ[B] x)
+              (TensorProduct.add_tmul t t' (1 : B))).trans
+                (TensorProduct.add_tmul _ _ x)
           map_smul' := fun a t => by
             ext x
             simp only [LinearMap.coe_restrictScalars, TensorProduct.mk_apply, RingHom.id_apply,

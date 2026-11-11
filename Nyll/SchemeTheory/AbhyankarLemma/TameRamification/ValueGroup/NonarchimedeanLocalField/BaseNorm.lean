@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Invariants
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Invariants
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Norm
 
 /-!
 # Norms of base units in Neu1999 local fields
@@ -12,6 +15,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Nonarchimede
 This file supplies concrete elements of field-norm subgroups coming from base
 units.  It is an element-level source for later ramification-image comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

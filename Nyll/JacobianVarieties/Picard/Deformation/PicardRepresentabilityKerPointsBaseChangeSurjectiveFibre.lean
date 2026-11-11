@@ -10,52 +10,56 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.Algebra.TrivSqZeroExt.Basic
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Spec
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.Algebra.Module.NatInt
-import Mathlib.Tactic.Abel
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerBijective
-import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerMul
-import Nyll.JacobianVarieties.Picard.GroupLaw.PicardRepresentabilityKerPointsMulMemCompMem
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClass
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassInjective
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassMapMul
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassNatural
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassSurjective
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverH1baseChangeMapSurjectiveEqIff
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.Algebra.TrivSqZeroExt.Basic
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Spec
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.Algebra.Module.NatInt
+public import Mathlib.Tactic.Abel
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerBijective
+public import Nyll.JacobianVarieties.Picard.Deformation.PicardRepresentabilityKerPointsToRigKerMul
+public import Nyll.JacobianVarieties.Picard.GroupLaw.PicardRepresentabilityKerPointsMulMemCompMem
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClass
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassInjective
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassMapMul
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassNatural
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassSurjective
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverH1baseChangeMapSurjectiveEqIff
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
 
 /-!
 Base change on infinitesimal Picard points is surjective, with fibres given by multiples.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -283,12 +287,6 @@ theorem Δ_nsmulK (n : ℕ) (x : K hD A) : Δ hD (δ := δ) (nsmulK hD A n x) = 
   | zero => rw [zero_smul, nsmulK_zero]; exact Δ_oneK hD hδ
   | succ n ih => rw [nsmulK_succ, Δ_mulK hD hδ, ih, succ_nsmul]
 
-theorem kerPointsToRigKer_eq_mk (x : K hD A) :
-    ∃ M : RigKerDualNumber.Carrier c ε A,
-      hD.kerPointsToRigKer A x = Quotient.mk _ M ∧ M.1 = hD.poincare.pullbackAlong x.1 := by
-  unfold RepresentsRelSubPic.kerPointsToRigKer
-  exact ⟨_, rfl, rfl⟩
-
 end K
 
 section Restrict
@@ -320,8 +318,8 @@ variable {𝒱 : X.TwoAffineOpenCover}
 include hδR hδA in
 theorem Δ_sigmaK (x : K hD R) :
     Δ hD (δ := δA) (sigmaK hD A x) = 𝒱.H1stageMap c (Algebra.ofId R A) (Δ hD (δ := δR) x) := by
-  obtain ⟨M, hM, hM1⟩ := kerPointsToRigKer_eq_mk hD x
-  obtain ⟨N, hN, hN1⟩ := kerPointsToRigKer_eq_mk hD (sigmaK hD A x)
+  obtain ⟨M, hM, hM1⟩ := hD.kerPointsToRigKer_eq_mk R x
+  obtain ⟨N, hN, hN1⟩ := hD.kerPointsToRigKer_eq_mk A (sigmaK hD A x)
   unfold Δ
   rw [hM, hN]
   refine IsDeformationClassMap.natural hδR hδA (Algebra.ofId R A) M N ?_

@@ -10,20 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.SchemeTheory.Modules.KaehlerDifferentials
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.UniqueSectionAlgebraMapGermEq
-import Nyll.AlgebraicCurves.Models.FunctionFields.FunctionFieldGermRestrictionResidue
-import Nyll.AlgebraicCurves.Models.Points.SurjectiveEqGenericPointOrIsClosedSingleton
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenEqAppLEEqAppLEEq
+module
+
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.SchemeTheory.Modules.KaehlerDifferentials
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.UniqueSectionAlgebraMapGermEq
+public import Nyll.AlgebraicCurves.Models.FunctionFields.FunctionFieldGermRestrictionResidue
+public import Nyll.AlgebraicCurves.Models.Points.SurjectiveEqGenericPointOrIsClosedSingleton
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenEqAppLEEqAppLEEq
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 
 /-!
 # Curve Model exists opens hom comp eq of exists Unique eval At eq app LE
 -/
+
+@[expose] public section
+
+universe u vF
 
 section ProofImplementation
 
@@ -37,7 +44,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicCurve Oppos
 namespace K6aS3
 
 section Eval
-variable {F : Type} [Field F] [Algebra ℂ F]
+variable {F : Type vF} [Field F] [Algebra ℂ F]
 
 theorem isRational [IsCurveOver ℂ F] (v : Place ℂ F) : v.IsRational := by
   have : Module.Finite ℂ v.ResidueField := IsCurveOver.finite_residueField v
@@ -73,8 +80,9 @@ end Eval
 section Points
 variable {K : Type} [Field K] {X : Scheme.{0}}
 
-theorem appLE_congr_hom {X Y : Scheme.{0}} {p q : X ⟶ Y} (hpq : p = q) (U : Y.Opens) (V : X.Opens)
-    (h : V ≤ p ⁻¹ᵁ U) (h' : V ≤ q ⁻¹ᵁ U) : p.appLE U V h = q.appLE U V h' := by subst hpq; rfl
+theorem appLE_congr_hom {X Y : Scheme.{u}} {p q : X ⟶ Y} (hpq : p = q) (U : Y.Opens) (V : X.Opens)
+    (h : V ≤ p ⁻¹ᵁ U) (h' : V ≤ q ⁻¹ᵁ U) : p.appLE U V h = q.appLE U V h' :=
+  _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom hpq U V h h'
 
 theorem top_le_preimage_iff (q : Spec (CommRingCat.of ℂ) ⟶ X) (U : X.Opens) :
     ⊤ ≤ q ⁻¹ᵁ U ↔ q.base (IsLocalRing.closedPoint ℂ) ∈ U := by
@@ -109,7 +117,7 @@ theorem evalAlgHom_apply (f : X ⟶ Spec (CommRingCat.of K)) (U : X.Opens) (P : 
 end Points
 
 section Theta
-variable {F : Type} [Field F] [Algebra ℂ F] [IsCurveOver ℂ F]
+variable {F : Type vF} [Field F] [Algebra ℂ F] [IsCurveOver ℂ F]
   {Y : Scheme.{0}} (pY : Y ⟶ Spec (CommRingCat.of ℂ))
   (w : Place ℂ F → {P : Spec (CommRingCat.of ℂ) ⟶ Y // P ≫ pY = 𝟙 _})
   (U : Y.Opens)
@@ -118,15 +126,15 @@ theorem exists_ringHom_forall_mem_and_evalAt_eq
     (hB : ∀ φ : Γ(Y, U), ∃! ξ : F, ∀ (v : Place ℂ F) (h : ⊤ ≤ (w v).1 ⁻¹ᵁ U),
       ξ ∈ v.toValuationSubring ∧
         Place.evalAt v ξ = (Scheme.ΓSpecIso (CommRingCat.of ℂ)).hom (((w v).1.appLE U ⊤ h) φ)) :
-    letI := pY.sectionsAlgebra U
+    let := pY.sectionsAlgebra U
     ∃ θ : Γ(Y, U) →+* F,
       (∀ (φ : Γ(Y, U)) (v : Place ℂ F) (h : ⊤ ≤ (w v).1 ⁻¹ᵁ U),
         θ φ ∈ v.toValuationSubring ∧
           Place.evalAt v (θ φ) = (Scheme.ΓSpecIso (CommRingCat.of ℂ)).hom (((w v).1.appLE U ⊤ h)
             φ)) ∧
       ∀ c : ℂ, θ (algebraMap ℂ Γ(Y, U) c) = algebraMap ℂ F c := by
+  intro sharedOwner1
   classical
-  let := pY.sectionsAlgebra U
   choose ξ hξ hξu using hB
   have hv : ∀ v : Place ℂ F, v.IsRational := isRational
   have hmul : ∀ φ ψ : Γ(Y, U), ξ (φ * ψ) = ξ φ * ξ ψ := fun φ ψ =>
@@ -149,7 +157,7 @@ theorem exists_ringHom_forall_mem_and_evalAt_eq
 end Theta
 
 section Sections
-variable {F : Type} [Field F] [Algebra ℂ F] (M : CurveModel ℂ F)
+variable {F : Type vF} [Field F] [Algebra ℂ F] (M : CurveModel ℂ F)
 
 /-- The open subset whose closed points correspond to the prescribed cofinite set of places. -/
 def goodOpen (S : Set (Place ℂ F)) (hS : Sᶜ.Finite) : M.C.Opens :=
@@ -285,7 +293,7 @@ theorem point_toSpecΓ_comp {X : Scheme.{0}} {R A : CommRingCat.{0}}
 end PieceHelpers
 
 section Morphism
-variable {F : Type} [Field F] [Algebra ℂ F] (M : CurveModel ℂ F)
+variable {F : Type vF} [Field F] [Algebra ℂ F] (M : CurveModel ℂ F)
   {Y : Scheme.{0}} (pY : Y ⟶ Spec (CommRingCat.of ℂ))
   (w : Place ℂ F → {P : Spec (CommRingCat.of ℂ) ⟶ Y // P ≫ pY = 𝟙 _})
 
@@ -451,7 +459,7 @@ open K6aS3
 open scoped Topology
 
 theorem _root_.AlgebraicCurve.CurveModel.exists_opens_hom_comp_eq_of_existsUnique_evalAt_eq_appLE
-    (F : Type) [Field F] [Algebra ℂ F] [IsCurveOver ℂ F]
+    (F : Type vF) [Field F] [Algebra ℂ F] [IsCurveOver ℂ F]
     (M : CurveModel ℂ F)
     {Y : Scheme.{0}} (pY : Y ⟶ Spec (CommRingCat.of ℂ))
     (w : Place ℂ F → {P : Spec (CommRingCat.of ℂ) ⟶ Y // P ≫ pY = 𝟙 _})

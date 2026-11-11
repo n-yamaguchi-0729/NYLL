@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Native finite-etale morphisms descend along inverse limits
@@ -15,6 +17,8 @@ Translate the actual scheme Hom descent through pullback symmetry and retain
 the canonical pullback-composition comparison. The output is a morphism in
 the native finite-etale category with its categorical recovery equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

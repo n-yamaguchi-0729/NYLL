@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Trace.Defs
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Trace.Defs
 
 /-!
 # Trace
 -/
+
+@[expose] public section
 
 noncomputable section
 

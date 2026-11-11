@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianUnderlying
-import Nyll.EtaleCohomology.Sites.ConnectedConstants
-import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.EtaleCohomology.Sites.ModuleRestriction
-import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
-import Nyll.SchemeTheory.Etale.OverField.Decomposition
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianUnderlying
+public import Nyll.EtaleCohomology.Sites.ConnectedConstants
+public import Nyll.EtaleCohomology.Sites.EtaleRestriction
+public import Nyll.EtaleCohomology.Sites.ModuleRestriction
+public import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
+public import Nyll.SchemeTheory.Etale.OverField.Decomposition
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Constant sheaf sections on étale objects over a field
@@ -20,6 +23,8 @@ sections on an étale object over a field are then computed by the existing
 decomposition into spectra of fields and the existing section gluing for
 `etaleSigma`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,7 +71,8 @@ def etaleSigmaAbelianSectionsAddEquiv {X : Scheme.{u}} {ι : Type u}
   exact AddEquiv.ofBijective h
     (etaleSigmaSectionsEquiv U ((etaleAbelianUnderlying X).obj F)).bijective
 
-private def fieldEtaleRestrictionConstantHom {U X : Scheme.{u}}
+/-- The sheafification unit induces restriction of the actual constant sheaf. -/
+def fieldEtaleRestrictionConstantHom {U X : Scheme.{u}}
     (f : U ⟶ X) [Etale f] (A : Type u) :
     (constantSheaf U.smallEtaleTopology (Type u)).obj A ⟶
       (etaleRestriction f (Type u)).obj
@@ -85,7 +91,8 @@ private theorem fieldEtaleRestrictionConstantHom_fac {U X : Scheme.{u}}
       (toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj A)) :=
   toSheafify_sheafifyLift U.smallEtaleTopology _ _
 
-private instance fieldEtaleRestrictionConstantHom_isIso {U X : Scheme.{u}}
+/-- Étale restriction preserves the actual constant sheaf. -/
+instance fieldEtaleRestrictionConstantHom_isIso {U X : Scheme.{u}}
     (f : U ⟶ X) [Etale f] (A : Type u) :
     IsIso (fieldEtaleRestrictionConstantHom f A) := by
   let η := toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj A)
@@ -106,7 +113,8 @@ private instance fieldEtaleRestrictionConstantHom_isIso {U X : Scheme.{u}}
   rw [fieldEtaleRestrictionConstantHom_fac]
   exact U.smallEtaleTopology.W_of_isLocallyBijective (whiskerLeft (etalePostcompose f).op η)
 
-private def fieldEtaleRestrictionConstantIso {U X : Scheme.{u}}
+/-- The constant sheaf is unchanged by restriction to an étale source. -/
+def fieldEtaleRestrictionConstantIso {U X : Scheme.{u}}
     (f : U ⟶ X) [Etale f] (A : Type u) :
     (constantSheaf U.smallEtaleTopology (Type u)).obj A ≅
       (etaleRestriction f (Type u)).obj
@@ -290,26 +298,36 @@ theorem fieldEtaleConstantAbelianSectionsAddEquiv_naturality
     _ = Ef (Ef.symm (Eg s)) := by rw [hnat]
     _ = Eg s := Ef.apply_symm_apply _
 
-private structure FieldEtaleSigmaData (K : Type u) [Field K]
+/-- A field-spectrum decomposition indexed by the actual points of the étale scheme. -/
+structure FieldEtaleSigmaData (K : Type u) [Field K]
     (V : (Spec (.of K)).Etale) where
+  /-- The field attached to each point of the étale scheme. -/
   L : V.left → CommRingCat
+  /-- The base-field homomorphism for each component. -/
   a : ∀ x, CommRingCat.of K ⟶ L x
+  /-- The decomposition into the spectra of the component fields. -/
   e : (∐ fun x => Spec (L x)) ≅ V.left
+  /-- Each component ring is a field. -/
   hfield : ∀ x, IsField (L x)
+  /-- Each component is a finite separable extension of the base field. -/
   hsep : ∀ x, letI := (a x).hom.toAlgebra
     Module.Finite K (L x) ∧ Algebra.IsSeparable K (L x)
+  /-- The decomposition respects the original morphism to the base spectrum. -/
   he : e.hom ≫ V.hom = Sigma.desc (fun x => Spec.map (a x))
+  /-- Each component maps its point to the original point indexing that component. -/
   hpoint : ∀ x, ∃ z : Spec (L x),
     e.hom (Sigma.ι (fun x => Spec (L x)) x z) = x
 
-private noncomputable def fieldEtaleSigmaDataOf (K : Type u) [Field K]
+/-- Choose the proved field-spectrum decomposition with its original point labels. -/
+noncomputable def fieldEtaleSigmaDataOf (K : Type u) [Field K]
     (V : (Spec (.of K)).Etale) : FieldEtaleSigmaData K V :=
   Classical.choice (show Nonempty _ from by
     obtain ⟨L, a, e, hfield, hsep, he, hpoint⟩ :=
       Scheme.Etale.exists_iso_sigmaSpec_with_point_labels K V
     exact ⟨⟨L, a, e, hfield, hsep, he, hpoint⟩⟩)
 
-private theorem fieldEtaleSigmaComponent_isFiniteEtale
+/-- Each field-spectrum component is finite étale over the original base field. -/
+theorem fieldEtaleSigmaComponent_isFiniteEtale
     {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
     (D : FieldEtaleSigmaData K V) (x : V.left) :
     IsFiniteEtale (Spec.map (D.a x)) := by
@@ -326,19 +344,22 @@ private theorem fieldEtaleSigmaComponent_isFiniteEtale
   rw [RingHom.finiteEtale_algebraMap_iff, Algebra.finiteEtale_iff]
   exact ⟨hetale, hmod⟩
 
-private def fieldEtaleSigmaComponent {K : Type u} [Field K]
+/-- A field-spectrum component as an object of the original étale site. -/
+def fieldEtaleSigmaComponent {K : Type u} [Field K]
     {V : (Spec (.of K)).Etale} (D : FieldEtaleSigmaData K V) (x : V.left) :
     (Spec (.of K)).Etale :=
   MorphismProperty.Over.mk ⊤ (Spec.map (D.a x)) (by
     have hfinite := fieldEtaleSigmaComponent_isFiniteEtale D x
     infer_instance)
 
-private def fieldEtaleSigmaObjects {K : Type u} [Field K]
+/-- The family of actual field-spectrum components. -/
+def fieldEtaleSigmaObjects {K : Type u} [Field K]
     {V : (Spec (.of K)).Etale} (D : FieldEtaleSigmaData K V) :
     V.left → (Spec (.of K)).Etale :=
   fun x => fieldEtaleSigmaComponent D x
 
-private def fieldEtaleSigmaIso {K : Type u} [Field K]
+/-- The component coproduct recovers the original étale object. -/
+def fieldEtaleSigmaIso {K : Type u} [Field K]
     {V : (Spec (.of K)).Etale} (D : FieldEtaleSigmaData K V) :
     etaleSigma (fieldEtaleSigmaObjects D) ≅ V := by
   exact MorphismProperty.Over.isoMk D.e D.he
@@ -357,30 +378,6 @@ private theorem fieldEtaleSigmaComponentInclusion_hits_label
   obtain ⟨z, hz⟩ := D.hpoint x
   refine ⟨z, ?_⟩
   exact hz
-
-/-- The actual residue-field point factors through the selected component.
-The lift is supplied by the open-immersion universal property, using the
-point-label witness rather than an assumed component structure field. -/
-private theorem fieldEtaleSigmaComponent_factorResiduePoint
-    {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
-    (D : FieldEtaleSigmaData K V) (x : V.left) :
-    ∃ q : Spec (V.left.residueField x) ⟶ Spec (D.L x),
-      q ≫ (fieldEtaleSigmaComponentInclusion D x).left =
-        V.left.fromSpecResidueField x := by
-  let j := (fieldEtaleSigmaComponentInclusion D x).left
-  let ρ := V.left.fromSpecResidueField x
-  have hj : IsOpenImmersion j := by
-    change IsOpenImmersion
-      (Sigma.ι (fun y : V.left => Spec (D.L y)) x ≫ D.e.hom)
-    have hι : IsOpenImmersion (Sigma.ι (fun y : V.left => Spec (D.L y)) x) :=
-      (sigmaOpenCover (fun y : V.left => Spec (D.L y))).map_prop x
-    infer_instance
-  have hrange : Set.range ρ ⊆ Set.range j := by
-    rintro _ ⟨t, rfl⟩
-    obtain ⟨z, hz⟩ := fieldEtaleSigmaComponentInclusion_hits_label D x
-    exact ⟨z, hz.trans (Scheme.fromSpecResidueField_apply x t).symm⟩
-  exact ⟨@IsOpenImmersion.lift _ _ _ j ρ hj hrange,
-    @IsOpenImmersion.lift_fac _ _ _ j ρ hj hrange⟩
 
 private theorem fieldEtaleSigmaComponent_residuePointIso
     {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
@@ -460,7 +457,8 @@ private theorem fieldEtaleSigmaComponent_residuePointIso
   have hqIso : IsIso q' := by infer_instance
   exact ⟨q', hqIso, hq⟩
 
-private theorem fieldEtaleSigma_residuePoint_etale
+/-- Each actual residue-field point is étale over the original base field. -/
+theorem fieldEtaleSigma_residuePoint_etale
     {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
     (D : FieldEtaleSigmaData K V) (x : V.left) :
     Etale (V.left.fromSpecResidueField x ≫ V.hom) := by
@@ -480,7 +478,15 @@ private theorem fieldEtaleSigma_residuePoint_etale
   rw [← hcomp]
   exact hqf
 
-private def fieldEtaleSigmaResiduePointObject
+/-- The original residue-field point of an étale object over a field is
+étale over that base field. -/
+theorem fieldEtaleResiduePoint_etale (K : Type u) [Field K]
+    (V : (Spec (.of K)).Etale) (x : V.left) :
+    Etale (V.left.fromSpecResidueField x ≫ V.hom) :=
+  fieldEtaleSigma_residuePoint_etale (fieldEtaleSigmaDataOf K V) x
+
+/-- The actual residue-field point as an étale object over the base field. -/
+def fieldEtaleSigmaResiduePointObject
     {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
     (D : FieldEtaleSigmaData K V) (x : V.left) : (Spec (.of K)).Etale :=
   let f := V.left.fromSpecResidueField x ≫ V.hom
@@ -513,7 +519,8 @@ noncomputable def fieldEtaleConstantSectionsEquiv_of_exists_iso_sigmaSpec
     exact fieldEtaleConstantSectionsEquiv f A
   exact eVsec.trans (eSigma.trans (Equiv.piCongrRight eComp))
 
-private noncomputable def fieldEtaleConstantAbelianComponentAddEquiv
+/-- Constant abelian sections on a field component recover the coefficient group. -/
+noncomputable def fieldEtaleConstantAbelianComponentAddEquiv
     {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
     (D : FieldEtaleSigmaData K V) (x : V.left) (A : AddCommGrpCat.{u}) :
     (((constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}).obj A).obj.obj
@@ -525,7 +532,8 @@ private noncomputable def fieldEtaleConstantAbelianComponentAddEquiv
   have : Etale f := by infer_instance
   exact fieldEtaleConstantAbelianSectionsAddEquiv f A
 
-private noncomputable def fieldEtaleConstantAbelianSigmaAddEquiv
+/-- Component restriction identifies constant abelian sections with functions on the points. -/
+noncomputable def fieldEtaleConstantAbelianSigmaAddEquiv
     {K : Type u} [Field K] {V : (Spec (.of K)).Etale}
     (D : FieldEtaleSigmaData K V) (A : AddCommGrpCat.{u}) :
     (((constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}).obj A).obj.obj
@@ -563,16 +571,15 @@ theorem fieldEtaleConstantAbelianSectionsAddEquiv_residuePoint
       rfl)
     (fieldEtaleConstantAbelianSectionsAddEquiv_of_exists_iso_sigmaSpec K V A s) x =
       @fieldEtaleConstantAbelianSectionsAddEquiv K (V.left.residueField x)
-        inferInstance inferInstance f (fieldEtaleSigma_residuePoint_etale D x) A
+        inferInstance inferInstance f (fieldEtaleResiduePoint_etale K V x) A
         ((((constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}).obj A).obj.map
           r.op).hom s) := by
-  let D := fieldEtaleSigmaDataOf K V
+  intro D ρ g R r
   let : Field (D.L x) := (D.hfield x).toField
   let cA := (constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}).obj A
   let U := fieldEtaleSigmaComponent D x
   let inc := fieldEtaleSigmaComponentInclusion D x
   let j := inc.left
-  let ρ := V.left.fromSpecResidueField x
   let f : Spec (D.L x) ⟶ Spec (.of K) := Spec.map (D.a x)
   have hf : Etale f := by
     have hfinite := fieldEtaleSigmaComponent_isFiniteEtale D x
@@ -581,18 +588,13 @@ theorem fieldEtaleConstantAbelianSectionsAddEquiv_residuePoint
       (etaleBaseObject (Spec (D.L x))) := rfl
   obtain ⟨q, hqIso, hq⟩ := fieldEtaleSigmaComponent_residuePointIso D x
   have hji : j ≫ V.hom = f := inc.w
-  let g : Spec (V.left.residueField x) ⟶ Spec (.of K) := ρ ≫ V.hom
   have hg : Etale g := fieldEtaleSigma_residuePoint_etale D x
-  let R : (Spec (.of K)).Etale := fieldEtaleSigmaResiduePointObject D x
   let m : R ⟶ U := MorphismProperty.Over.homMk (A := R) (B := U) q (by
     change q ≫ f = g
     dsimp [g]
     calc
       q ≫ f = q ≫ (j ≫ V.hom) := by rw [← hji]; rfl
       _ = ρ ≫ V.hom := congrArg (fun t => t ≫ V.hom) hq)
-  let r : R ⟶ V := MorphismProperty.Over.homMk (A := R) (B := V) ρ (by
-    change ρ ≫ V.hom = g
-    rfl)
   have hmcomp : m ≫ inc = r := by
     apply MorphismProperty.Over.Hom.ext
     change q ≫ j = ρ

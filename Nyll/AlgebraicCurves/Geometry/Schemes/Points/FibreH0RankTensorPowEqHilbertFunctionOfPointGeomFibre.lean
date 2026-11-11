@@ -10,27 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
-import Nyll.AlgebraicCurves.Hilbert.FibreH0RankTensorPowEqHilbertFunctionOf
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.FibreH0RankEqPullback
-import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceRestrictFunAppAppAwayToSectionEqAppAwayToSectionMap
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
+public import Nyll.AlgebraicCurves.Hilbert.FibreH0RankTensorPowEqHilbertFunctionOf
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.FibreH0RankEqPullback
+public import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceRestrictFunAppAppAwayToSectionEqAppAwayToSectionMap
 
 /-!
 # exists forall geom Fibre H0 Finrank tensor Pow eq hilbert Function Of of point geom Fibre
 -/
+
+@[expose] public section
+
+universe uH
 
 section ProofImplementation
 
@@ -192,18 +198,18 @@ open _root_.AlgebraicCurves.Geometry.Schemes.Proofs in
 open exists_forall_geomFibreH0Finrank_tensorPow_eq_hilbertFunctionOf_of_point_geomFibre in
 open F3Sol in
 theorem exists_forall_geomFibreH0Finrank_tensorPow_eq_hilbertFunctionOf_of_point_geomFibre
-    (S : Type) [CommRing S] {X : Scheme.{0}} (f : X ⟶ Spec (CommRingCat.of S))
+    (S : Type uH) [CommRing S] {X : Scheme.{uH}} (f : X ⟶ Spec (CommRingCat.of S))
     (𝓛X : X.Modules) (hX₁ : Scheme.Modules.IsInvertible 𝓛X)
     {n : ℕ} (𝔓 : Scheme.Modules.ProjPresentation 𝓛X f n)
-    (S' : Type) [CommRing S'] (ψ : S →+* S')
-    (Z : Scheme.{0}) (ι : Z ⟶ pullback f (Spec.map (CommRingCat.ofHom ψ)))
+    (S' : Type uH) [CommRing S'] (ψ : S →+* S')
+    (Z : Scheme.{uH}) (ι : Z ⟶ pullback f (Spec.map (CommRingCat.ofHom ψ)))
     (j : pullback f (Spec.map (CommRingCat.ofHom ψ)) ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin
       (n + 1)) S'))
     (hj₂ : (letI : Algebra S S' := ψ.toAlgebra; j ≫ ProjSpace.map S S' n) =
       pullback.fst f (Spec.map (CommRingCat.ofHom ψ)) ≫ 𝔓.toProj)
-    (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k)
+    (k : Type uH) [Field k] [IsAlgClosed k] (sk : S' →+* k)
     (P' : Polynomial ℚ) (m' : ℕ) (q : Point k n (hilbertFunctionOf n P' m'))
-    (Zk : Scheme.{0}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)) (hιk :
+    (Zk : Scheme.{uH}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)) (hιk :
       IsClosedImmersion ιk)
     (e : Zk ⟶ Z)
     (he₁ : IsPullback e (ιk ≫ ProjSpace.π k n) (ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom ψ)))

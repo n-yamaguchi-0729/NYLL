@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtension
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtension
+public import Mathlib.CategoryTheory.Sites.CoverLifting
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-! # Scalar extension of the intrinsic degree-one fppf sheaf -/
+
+@[expose] public section
 
 noncomputable section
 

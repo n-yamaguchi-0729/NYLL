@@ -4,29 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.AffineChartFiniteSubmoduleExtension
-import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleExtension
-import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleOnOpen
-import Nyll.SchemeTheory.Modules.Submodules.AffineSubmoduleLocalization
-import Nyll.SchemeTheory.Modules.Submodules.FiniteAffineSectionSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.FiniteOpenSectionSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSectionSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleExtension
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleUnionExtension
-import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.ImageSubmoduleRestriction
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleRestriction
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
-import Nyll.SchemeTheory.Modules.Submodules.QuasicoherentSubmoduleOverExtension
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleCoverEquality
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluing
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingFiniteType
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingUnion
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictedSections
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleTopRestriction
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteModuleExtension
+public import Nyll.SchemeTheory.Modules.Submodules.AffineChartFiniteSubmoduleExtension
+public import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleExtension
+public import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleOnOpen
+public import Nyll.SchemeTheory.Modules.Submodules.AffineSubmoduleLocalization
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteAffineSectionSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteOpenSectionSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSectionSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleExtension
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleUnionExtension
+public import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.ImageSubmoduleRestriction
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleRestriction
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleScheme
+public import Nyll.SchemeTheory.Modules.Submodules.QuasicoherentSubmoduleOverExtension
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleCoverEquality
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluing
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingFiniteType
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingUnion
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictedSections
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleTopRestriction

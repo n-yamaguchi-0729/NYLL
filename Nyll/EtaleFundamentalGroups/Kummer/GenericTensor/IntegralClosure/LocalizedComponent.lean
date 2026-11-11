@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.ComponentExtraction
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.Finiteness
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.ComponentExtraction
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.Finiteness
 
 /-!
 # From a local product normalization to a global component localization
@@ -21,6 +23,8 @@ each of its literal field components. The coefficient maps agree by the
 universal property of the actual prime localization. This comparison is
 proved here, rather than required as additional scalar data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

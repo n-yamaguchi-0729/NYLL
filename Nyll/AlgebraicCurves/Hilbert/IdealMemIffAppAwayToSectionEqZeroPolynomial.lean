@@ -10,67 +10,73 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.Field.Rat
-import Mathlib.Algebra.GradedMonoid
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.Algebra.Group.Finsupp
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Nat.Defs
-import Mathlib.Algebra.Group.Submonoid.Defs
-import Mathlib.Algebra.Group.Submonoid.Membership
-import Mathlib.Algebra.GroupWithZero.Defs
-import Mathlib.Algebra.Module.Defs
-import Mathlib.Algebra.Module.LinearMap.Defs
-import Mathlib.Algebra.Module.Submodule.Defs
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.Algebra.MonoidAlgebra.Defs
-import Mathlib.Algebra.MonoidAlgebra.Module
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Basic
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.Data.Finset.Defs
-import Mathlib.Data.Finset.Insert
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Opposite
-import Mathlib.Data.Rat.Init
-import Mathlib.Geometry.RingedSpace.PresheafedSpace
-import Mathlib.GroupTheory.MonoidLocalization.Basic
-import Mathlib.GroupTheory.MonoidLocalization.MonoidWithZero
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.Order.Defs.LinearOrder
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
-import Nyll.SchemeTheory.RingTheory.Polynomial.NatEqMacaulayPowLeMacaulayPow
-import Nyll.SchemeTheory.RingTheory.Polynomial.NatPolynomialEvalEqEqMacaulayPow
+module
+
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Field.Rat
+public import Mathlib.Algebra.GradedMonoid
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.Finsupp
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Algebra.Group.Submonoid.Defs
+public import Mathlib.Algebra.Group.Submonoid.Membership
+public import Mathlib.Algebra.GroupWithZero.Defs
+public import Mathlib.Algebra.Module.Defs
+public import Mathlib.Algebra.Module.LinearMap.Defs
+public import Mathlib.Algebra.Module.Submodule.Defs
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.Algebra.MonoidAlgebra.Defs
+public import Mathlib.Algebra.MonoidAlgebra.Module
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Basic
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.Data.Finset.Defs
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.Data.Nat.Basic
+public import Mathlib.Basic.Opposite
+public import Mathlib.Data.Rat.Init
+public import Mathlib.Geometry.RingedSpace.PresheafedSpace
+public import Mathlib.GroupTheory.MonoidLocalization.Basic
+public import Mathlib.GroupTheory.MonoidLocalization.MonoidWithZero
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.Order.Defs.LinearOrder
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
+public import Nyll.SchemeTheory.RingTheory.Polynomial.NatEqMacaulayPowLeMacaulayPow
+public import Nyll.SchemeTheory.RingTheory.Polynomial.NatPolynomialEvalEqEqMacaulayPow
 
 /-!
 # exists ideal forall mem iff app away To Section eq zero and polynomial
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -86,8 +92,8 @@ namespace E2SOL
 
 section Sat
 
-variable {n : ℕ} {k : Type} [Field k]
-    {Zk : Scheme.{0}} (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
+variable {n : ℕ} {k : Type u} [Field k]
+    {Zk : Scheme.{u}} (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
 
 local notation "𝒜" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k
 
@@ -128,7 +134,7 @@ theorem frac_mul (i : Fin (n + 1)) (e d : ℕ) (G : ↥(homogeneousSubmodule (Fi
   rw [Localization.mk_mul]
   congr 1
   ext
-  simp [xpow, pow_add]
+  simp only [xpow, pow_add, Submonoid.mk_mul_mk]
 
 /-- The homomorphism from a projective affine chart to sections on its inverse image. -/
 noncomputable def chartHom (i : Fin (n + 1)) :
@@ -157,11 +163,12 @@ theorem Van_mul_left (e : ℕ) {d : ℕ} (G : ↥(homogeneousSubmodule (Fin (n +
 def comp (d : ℕ) (p : MvPolynomial (Fin (n + 1)) k) : ↥(homogeneousSubmodule (Fin (n + 1)) k d) :=
   ⟨homogeneousComponent d p, homogeneousComponent_mem d p⟩
 omit ιk in
-theorem comp_zero (d : ℕ) : comp (k := k) (n := n) d 0 = 0 := Subtype.ext (by simp [comp])
+theorem comp_zero (d : ℕ) : comp (k := k) (n := n) d 0 = 0 :=
+  Subtype.ext (map_zero (homogeneousComponent d))
 omit ιk in
 theorem comp_add (d : ℕ) (p q : MvPolynomial (Fin (n + 1)) k) : comp d (p + q) = comp d p + comp d
   q :=
-  Subtype.ext (by simp [comp])
+  Subtype.ext (map_add (homogeneousComponent d) p q)
 omit ιk in
 theorem coe_decompose (φ : MvPolynomial (Fin (n + 1)) k) (i : ℕ) :
     ((DirectSum.decompose 𝒜 φ) i : MvPolynomial (Fin (n + 1)) k) = homogeneousComponent i φ :=
@@ -263,8 +270,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 open E2SOL in
 theorem exists_ideal_forall_mem_iff_app_awayToSection_eq_zero_and_polynomial
-    (n : ℕ) (k : Type) [Field k]
-    (Zk : Scheme.{0}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
+    (n : ℕ) (k : Type u) [Field k]
+    (Zk : Scheme.{u}) (ιk : Zk ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k))
     (_hιk : IsClosedImmersion ιk) :
     ∃ (I : Ideal (MvPolynomial (Fin (n + 1)) k)),
       (∀ p ∈ I, ∀ d : ℕ, homogeneousComponent d p ∈ I) ∧

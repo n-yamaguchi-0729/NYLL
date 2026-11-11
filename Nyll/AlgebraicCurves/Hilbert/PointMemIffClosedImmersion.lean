@@ -24,6 +24,8 @@ import Nyll.AlgebraicCurves.Hilbert.FinrankPieceEqEvalClosedImmersion
 # exists point forall mem iff of is Closed Immersion of forall geom Fibre H0 Finrank eq eval
 -/
 
+universe u
+
 section ProofImplementation
 
 namespace AlgebraicCurves.Hilbert.Proofs.HilbertPointFromFibreRanks
@@ -164,8 +166,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 theorem exists_point_forall_mem_iff_of_isClosedImmersion_of_forall_geomFibreH0Finrank_eq_eval
     (n : ℕ) (P : Polynomial ℚ) :
-    ∃ D₀ : ℕ, ∀ m : ℕ, D₀ ≤ m → ∀ (k : Type) [Field k] [IsAlgClosed k]
-      (Z : Scheme.{0}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)),
+    ∃ D₀ : ℕ, ∀ m : ℕ, D₀ ≤ m → ∀ (k : Type u) [Field k] [IsAlgClosed k]
+      (Z : Scheme.{u}) (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k)),
         IsClosedImmersion ι →
       ∀ (𝓛 : Z.Modules) (_h𝓛 : Scheme.Modules.IsInvertible 𝓛)
         (𝔓 : Scheme.Modules.ProjPresentation 𝓛 (ι ≫ ProjSpace.π k n) n) (_h𝔓 : 𝔓.toProj = ι),

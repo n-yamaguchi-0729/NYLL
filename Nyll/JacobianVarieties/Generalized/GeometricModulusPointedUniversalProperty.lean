@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
-import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
+public import Nyll.JacobianVarieties.Generalized.PicardOneEquivariantMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Pointed universality in every modulus degree
 
@@ -15,6 +17,8 @@ The intrinsic torsor theorem yields the translated group factorization.
 The empty modulus, arbitrary ground fields and nonproper separated group
 targets are all included in the same statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

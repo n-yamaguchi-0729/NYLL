@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitScheme
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitScheme
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 
 /-! # The affine nilpotent-unit group is the actual restriction kernel -/
+
+@[expose] public section
 
 noncomputable section
 

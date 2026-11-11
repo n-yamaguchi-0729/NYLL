@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Basic
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Basic
 
 /-!
 # Residue characteristic lemmas for tame ramification
@@ -15,6 +17,8 @@ that the residue characteristic is unchanged along a valued-field extension,
 so "prime to the residue characteristic" can be transported through the
 residue-field algebra induced by the extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

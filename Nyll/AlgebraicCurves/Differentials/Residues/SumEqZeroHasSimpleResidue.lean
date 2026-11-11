@@ -25,6 +25,7 @@ import Nyll.AlgebraicCurves.Differentials.Residues.ResidueTheoremKAlgClosed
 import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
 import Nyll.AlgebraicCurves.FunctionFields.Rational.CurveRatFunc
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Sum eq zero of forall has Simple Residue of mem polar Differentials
@@ -192,8 +193,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField

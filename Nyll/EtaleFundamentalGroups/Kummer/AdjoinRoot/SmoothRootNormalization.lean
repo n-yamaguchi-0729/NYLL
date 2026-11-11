@@ -4,27 +4,29 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.NormalDomainRoot
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootDivisorNormalization
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.LocalizedComponent
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.FixedComponentEtale
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.RegularBoundaryPurity
-import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.PrimeFractionRing
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularRingIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.NormalDomainRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.RootDivisorNormalization
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.LocalizedComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.FixedComponentEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.RegularBoundaryPurity
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.PrimeFractionRing
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularRingIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Extending a generic cover on a smooth affine chart
@@ -49,6 +51,8 @@ Proposition 58.30.2: https://stacks.math.columbia.edu/tag/0C0Q.
 Passing from these charts to an arbitrary smooth proper scheme and its
 geometric generic covers is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

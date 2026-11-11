@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.Cones
-import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
-import Nyll.SchemeTheory.Topology.FiniteModelSheafTransitions
+module
+
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
+public import Nyll.SchemeTheory.Topology.FiniteModelSheafTransitions
 
 /-!
 # The actual diagram of finite-model sheaf approximations
@@ -21,6 +23,8 @@ This is the finite-model diagram used in the proof of Stacks Project,
 tag 09ZG: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean constructions and proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

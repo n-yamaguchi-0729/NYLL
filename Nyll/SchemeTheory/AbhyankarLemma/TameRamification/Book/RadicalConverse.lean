@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Tower
-import Nyll.ValuedFieldTheory.LocalField.Unramified.ResidueLifting
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.FiniteTameDegree
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Tower
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.ResidueLifting
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.FiniteTameDegree
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Converse radical criterion for finite tame extensions
@@ -15,6 +19,8 @@ The declarations here complete the production radical API: a finite family
 of prime-to-residue-characteristic radicals over the maximal unramified
 subextension gives a finite tame extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -413,7 +419,7 @@ theorem radicalFamily_totalRamified_surjective_coprime_of_separableResidue
       · rw [← Module.finrank_mul_finrank K E F]
         exact hcopE.mul_left hcopEF
   have hPS : P (IntermediateField.adjoin K (↑S : Set L)) :=
-    IntermediateField.induction_on_adjoin_finset S P hbase hstep
+    IntermediateField.induction_on_adjoin_finset S (motive := P) hbase hstep
   rw [hS, hgen] at hPS
   let Top : IntermediateField K L := ⊤
   let wTop := exponentialValuationRestrict w Top

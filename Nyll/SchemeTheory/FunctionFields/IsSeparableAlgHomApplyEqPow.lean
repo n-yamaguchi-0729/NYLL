@@ -10,12 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.RatFunc.Basic
+module
+
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.RatFunc.Basic
 
 /-!
 # Is Separable of alg Hom apply eq pow of transcendental
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

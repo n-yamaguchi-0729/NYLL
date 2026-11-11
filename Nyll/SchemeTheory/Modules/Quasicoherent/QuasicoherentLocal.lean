@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.CategoryTheory.Adjunction.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Quasicoherence from actual affine restrictions
@@ -20,6 +22,8 @@ The affine tilde presentation is transported to the open subscheme and then
 through the native equivalence with the slice site. These genuine local
 presentations form quasicoherent data on the canonical affine open cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.Module
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.Localization.Module
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Extensionality for homomorphisms between base-changed modules
@@ -16,6 +18,8 @@ These are the two componentwise extensionality lemmas used by mixed formal
 gluing.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

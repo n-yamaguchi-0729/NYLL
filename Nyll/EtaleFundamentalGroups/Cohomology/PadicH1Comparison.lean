@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.AdicH1Comparison
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ValuedFieldTheory.LocalField.Padic.ResidueInverseLimit
-import Mathlib.Topology.Constructions
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.AdicH1Comparison
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ValuedFieldTheory.LocalField.Padic.ResidueInverseLimit
+public import Mathlib.Topology.Constructions
 
 /-!
 # Classical integral ℓ-adic H¹ and p-adic continuous characters
@@ -19,6 +21,8 @@ identifies classical integral ℓ-adic H¹ with continuous p-adic characters of
 the actual étale fundamental group. Connectedness and a geometric point are
 the only geometric assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,7 +49,8 @@ local instance residueDiscrete (n : ℕ) : DiscreteTopology (ZMod (ℓ ^ n)) := 
 abbrev padicCharacters : Type (u + 1) :=
   Additive (Aut (FiniteEtale.fiber ξ) →ₜ* Multiplicative ℤ_[ℓ])
 
-private def characterResidues (χ : compatibleFiniteCharacters ξ ℓ)
+/-- The compatible residue sequence of a character at a group element. -/
+def characterResidues (χ : compatibleFiniteCharacters ξ ℓ)
     (g : Aut (FiniteEtale.fiber ξ)) : compatibleResidues ℓ := by
   let a : ∀ n : ℕ, ZMod (ℓ ^ n)
     | 0 => 0
@@ -60,7 +65,8 @@ private def characterResidues (χ : compatibleFiniteCharacters ξ ℓ)
     exact congrArg (fun ψ : finiteLevelCharacters ξ ℓ n => (ψ.toMul g).toAdd.down)
       (χ.property n)
 
-private def characterLimit (χ : compatibleFiniteCharacters ξ ℓ)
+/-- The p-adic value recovered from the character's compatible residues. -/
+def characterLimit (χ : compatibleFiniteCharacters ξ ℓ)
     (g : Aut (FiniteEtale.fiber ξ)) : ℤ_[ℓ] :=
   residueLimit ℓ (characterResidues ξ ℓ χ g)
 
@@ -80,7 +86,7 @@ private theorem padic_ext_positive {a b : ℤ_[ℓ]}
     exact Subsingleton.elim _ _
   | succ n => exact h n
 
-private theorem characterLimit_mul (χ : compatibleFiniteCharacters ξ ℓ)
+theorem characterLimit_mul (χ : compatibleFiniteCharacters ξ ℓ)
     (g h : Aut (FiniteEtale.fiber ξ)) :
     characterLimit ξ ℓ χ (g * h) = characterLimit ξ ℓ χ g + characterLimit ξ ℓ χ h := by
   apply padic_ext_positive ℓ
@@ -89,7 +95,7 @@ private theorem characterLimit_mul (χ : compatibleFiniteCharacters ξ ℓ)
   exact congrArg (fun z : Multiplicative (ellPowerCoefficients ℓ n) => z.toAdd.down)
     ((χ.val n).toMul.map_mul g h)
 
-private theorem characterLimit_one (χ : compatibleFiniteCharacters ξ ℓ) :
+theorem characterLimit_one (χ : compatibleFiniteCharacters ξ ℓ) :
     characterLimit ξ ℓ χ 1 = 0 := by
   apply padic_ext_positive ℓ
   intro n
@@ -97,7 +103,7 @@ private theorem characterLimit_one (χ : compatibleFiniteCharacters ξ ℓ) :
   exact congrArg (fun z : Multiplicative (ellPowerCoefficients ℓ n) => z.toAdd.down)
     (χ.val n).toMul.map_one
 
-private theorem continuous_characterLimit (χ : compatibleFiniteCharacters ξ ℓ) :
+theorem continuous_characterLimit (χ : compatibleFiniteCharacters ξ ℓ) :
     Continuous (characterLimit ξ ℓ χ) := by
   apply (continuous_iff_residues ℓ _).mpr
   intro n
@@ -172,7 +178,7 @@ def padicCharacterResidues : padicCharacters ξ ℓ →+ compatibleFiniteCharact
     exact congrArg (fun z => Multiplicative.ofAdd (ULift.up.{u} z))
       ((PadicInt.toZModPow (n + 1)).map_add (χ.toMul g).toAdd (ψ.toMul g).toAdd)
 
-private theorem padicCharacterResidues_injective :
+theorem padicCharacterResidues_injective :
     Function.Injective (padicCharacterResidues ξ ℓ) := by
   intro χ ψ h
   apply ContinuousMonoidHom.ext
@@ -183,7 +189,7 @@ private theorem padicCharacterResidues_injective :
   exact congrArg (fun a : compatibleFiniteCharacters ξ ℓ =>
     ((a.val n).toMul g).toAdd.down) h
 
-private theorem padicCharacterResidues_limit (χ : compatibleFiniteCharacters ξ ℓ) :
+theorem padicCharacterResidues_limit (χ : compatibleFiniteCharacters ξ ℓ) :
     padicCharacterResidues ξ ℓ (compatibleCharacterLimit ξ ℓ χ) = χ := by
   apply Subtype.ext
   funext n

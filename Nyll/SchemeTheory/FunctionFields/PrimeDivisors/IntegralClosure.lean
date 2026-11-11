@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Extending finiteness to an integral-closure model
@@ -17,6 +19,8 @@ closure of `A` in the ambient field.  This is the bridge from an affine
 coordinate model to the Dedekind normalization used in the prime counts of
 Fried--Jarden, Lemma 6.2.2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

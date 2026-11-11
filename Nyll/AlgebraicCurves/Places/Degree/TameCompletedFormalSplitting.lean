@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.AlgebraicCurves.Places.Degree.TameRationalCompletedTensorSplitting
 import Nyll.SchemeTheory.Normalization.FormalFieldFiberSplitting
+import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # The formal fibre of an actual tame completed boundary factor
 

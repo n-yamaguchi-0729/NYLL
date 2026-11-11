@@ -14,32 +14,34 @@ Upstream per-file ATTRIBUTION:
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.JacobianVarieties.Albanese.DivisorPicardSums
-import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.JacobianVarieties.Picard.Representability.AlgEquivZeroCutAlgClosed
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSubsingletonH1Fibre
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.HasChartSectionsGeometricFibreRiemannRochImpEq
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.EulerCharFibreSectionTwistTensorIdealModuleEqOne
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
-import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
-import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.TwistModulePullbackIsoPullback
-import Nyll.AlgebraicCurves.Models.Charts.IsAffineOpenMemFinsetField
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+module
+
+public import Nyll.JacobianVarieties.Albanese.DivisorPicardSums
+public import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AbelianVarieties.LineBundles.Cube.CurvePicard
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.ChartSubsingletonH1Fibre
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.HasChartSectionsGeometricFibreRiemannRochImpEq
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.EulerCharFibreSectionTwistTensorIdealModuleEqOne
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
+public import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraph
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+public import Nyll.AlgebraicCurves.RelativeDivisors.BaseChange.TwistModulePullbackIsoPullback
+public import Nyll.AlgebraicCurves.Models.Charts.IsAffineOpenMemFinsetField
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 
 /-! # Gluing the actual divisor sums on Picard charts
 
@@ -48,6 +50,8 @@ effective divisors of a common degree. Their sum morphisms agree on the actual
 overlaps, since their twists are restrictions of the same Poincare bundle.
 The resulting morphism has a calculation rule on every reduced family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

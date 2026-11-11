@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorKernelReverse
-import Nyll.JacobianVarieties.Generalized.DivisorRigidificationSurjective
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorKernelReverse
+public import Nyll.JacobianVarieties.Generalized.DivisorRigidificationSurjective
 
 /-! # Full divisor classes identify with actual rigidified line-bundle classes -/
+
+@[expose] public section
 
 noncomputable section
 

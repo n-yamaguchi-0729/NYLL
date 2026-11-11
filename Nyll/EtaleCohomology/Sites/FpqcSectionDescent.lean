@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.CechEqualityOpen
-import Nyll.EtaleCohomology.Sites.PullbackLocalRepresentatives
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Nyll.EtaleCohomology.Sites.SectionImageGluing
-import Nyll.EtaleCohomology.Sites.SurjectivePullbackUnit
-import Nyll.SchemeTheory.Topology.FpqcOpenDescent
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.FieldTheory.SeparableClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.CechEqualityOpen
+public import Nyll.EtaleCohomology.Sites.PullbackLocalRepresentatives
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Nyll.EtaleCohomology.Sites.SectionImageGluing
+public import Nyll.EtaleCohomology.Sites.SurjectivePullbackUnit
+public import Nyll.SchemeTheory.Topology.FpqcOpenDescent
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.FieldTheory.SeparableClosure
 
 /-!
 # Fpqc descent of sections of actual étale inverse image
@@ -34,6 +36,8 @@ preimage. The coefficient sheaf is arbitrary.
 This is the single-morphism section-descent assertion of Stacks Project,
 Tag 09XN, with the original pullback map and its canonical Čech comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

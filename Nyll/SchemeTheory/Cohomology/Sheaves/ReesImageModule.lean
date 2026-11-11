@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraImage
-import Nyll.SchemeTheory.Modules.LocalMorphisms
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebraImage
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # A native coherent sheaf for the actual Rees image
@@ -26,6 +28,8 @@ isomorphism theorem therefore compares the actual native sections
 with the existing Rees image presheaf. The comparison retains the
 original inclusion and every affine restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

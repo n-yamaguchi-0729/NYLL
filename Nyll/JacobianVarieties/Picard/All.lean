@@ -70,7 +70,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Functor.IsSheafForPicardZeroPresheaf
 import Nyll.AlgebraicCurves.Geometry.Picard.Functor.IsSheafForPicardZeroPresheafFiniteFaithfullyFlat
 import Nyll.AlgebraicCurves.Geometry.Picard.Functor.IsSheafPicardZeroPresheafZariskiBijectiveSections
 import Nyll.AlgebraicCurves.Geometry.Picard.Functor.IsSheafPicardZeroPresheafZariskiFiniteMapData
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
 import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
 import Nyll.AlgebraicCurves.Geometry.Picard.IsClosedSetOfFibreModuleIsoUnit
 import Nyll.AlgebraicCurves.Geometry.Picard.IsFiniteToBaseGeometricFibreGenusEqZero
@@ -132,7 +132,6 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundleTensorPointsSubBase
 import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundleTensorPullbackTensorIso
 import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaSectionNeZeroStabilizerTrivial
 import Nyll.AlgebraicCurves.Geometry.Picard.Theta.TranslateThetaBundleTensorIso
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Nyll.JacobianVarieties.Picard.AbelJacobi.All
 import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.All
 import Nyll.JacobianVarieties.Picard.BaseChange.All

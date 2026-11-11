@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleRestrictionComparison
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
 
 /-!
 # Whole submodules and restrictions on which they generate
@@ -19,6 +21,8 @@ actual native submodule equals the whole module on a slice, the geometric
 restriction of its inclusion is an isomorphism: each actual section map
 is the bijective inclusion of the full section submodule.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,7 +49,8 @@ theorem top_obj (M : SheafOfModules.{v} R) (U : Cᵒᵖ) :
   rw [← hQ]
   rfl
 
-private def topSectionEquiv (M : SheafOfModules.{v} R) (U : Cᵒᵖ) :
+/-- Sections of the top submodule identify linearly with the ambient sections. -/
+def topSectionEquiv (M : SheafOfModules.{v} R) (U : Cᵒᵖ) :
     (⊤ : M.Submodule).toSubmodule.obj U ≃ₗ[R.obj.obj U] M.val.obj U where
   toFun := Subtype.val
   invFun s := ⟨s, by rw [top_obj]; exact _root_.Submodule.mem_top⟩

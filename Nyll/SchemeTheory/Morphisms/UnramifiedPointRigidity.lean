@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
-import Mathlib.AlgebraicGeometry.Morphisms.IsIso
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
+public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # Unramified maps determined at one nonempty test scheme
@@ -18,6 +20,8 @@ The relative equalizer of maps to a separated unramified scheme is both
 open and closed. Agreement after a map from a nonempty scheme makes this
 equalizer nonempty. A preconnected source therefore forces the maps equal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.IsAdjoinRoot
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Artinian.Ring
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.IsAdjoinRoot
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Artinian.Ring
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.Tactic.Ext
 
 /-!
 # Module free and finrank tensor Product quot span tmul pow sub eq mul
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

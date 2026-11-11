@@ -10,26 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.Category.TopCat.EpiMono
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.CompEqOpenImmersion
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.EqSndCompCompEqConst
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.GeometricallyConnectedIdentityComponent
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBaseChange
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
-import Nyll.AlgebraicCurves.Geometry.Curves.MemSeparated
+module
+
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.Category.TopCat.EpiMono
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.CompEqOpenImmersion
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.EqSndCompCompEqConst
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.GeometricallyConnectedIdentityComponent
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Nyll.AlgebraicCurves.Geometry.Curves.MemSeparated
 
 /-!
 # Pointed morphisms to abelian schemes preserve the group law
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

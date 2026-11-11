@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelDifference
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelDifference
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtension
 
 /-! # Canonical test-point graph bundles with their actual modulus frames -/
+
+@[expose] public section
 
 noncomputable section
 

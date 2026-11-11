@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Mathlib.CategoryTheory.Abelian.Exact
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # The actual unit quotient of a discrete valuation ring
@@ -19,6 +21,8 @@ For a DVR R with fraction field K, the cokernel of R units into K units
 is infinite cyclic. A chosen uniformizer gives the generator. No
 Henselianity, completeness, or residue-field finiteness is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,29 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Module.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Combinatorics.Quiver.Basic
-import Mathlib.Order.Lattice
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Topology.Category.TopCat.Opens
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+module
+
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Module.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Combinatorics.Quiver.Basic
+public import Mathlib.Order.Lattice
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Topology.Category.TopCat.Opens
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
 
 /-!
 # OModule Presheaf exists app strip eq sum of box zigzag of d comap slice eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

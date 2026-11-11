@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFieldSource
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFunctoriality
-import Nyll.EtaleFundamentalGroups.Inertia.FieldPointedQuotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFieldSource
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFunctoriality
+public import Nyll.EtaleFundamentalGroups.Inertia.FieldPointedQuotient
 
 /-!
 # Divisorial inertia as a finite quotient of a field fundamental group
@@ -15,6 +17,8 @@ The inertia fixed field constructed from a normalization prime has an actual
 absolute Galois group.  Via the geometric fiber functor of its spectrum, its
 canonical finite quotient has image exactly the selected ideal inertia.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,7 +41,7 @@ variable [FiniteDimensional K L] [_root_.IsGalois K L]
 algebra map to the closure is the actual composite.  The tower witness is
 passed explicitly so an intermediate-field action cannot compete with the
 action stored in the chosen composite algebra. -/
-private theorem composite_isSepClosure
+theorem composite_isSepClosure
     (F E Omega : Type u)
     [Field F] [Field E] [Field Omega]
     [Algebra F E] [Algebra E Omega] [hFOmega : Algebra F Omega]

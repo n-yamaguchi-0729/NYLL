@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZero
-import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Mathlib.Algebra.Group.Subgroup.Defs
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZero
+public import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Mathlib.Algebra.Group.Subgroup.Defs
 
 /-!
 # The commutative group presheaf of modulus Picard-zero classes
@@ -16,6 +18,8 @@ The geometric-fibre zero condition is closed under the actual rigidified tensor
 product and inverse. The subgroup retains the chosen trivialization on the full
 modulus. Pullback gives group homomorphisms on these actual subgroups.
 -/
+
+@[expose] public section
 
 noncomputable section
 

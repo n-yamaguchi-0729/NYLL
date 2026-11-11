@@ -10,32 +10,37 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Birational.RationalMap
-import Mathlib.Algebra.Module.SpanRank
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.Order.KrullDimension
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawIsGreatestOpensDifferenceExtension
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.IsOpenIrreducibleComponent
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalSpanFinrankKerAddKrullDimensionEq
-import Nyll.SchemeTheory.RingTheory.RegularLocal.LocalRingIsCohenMacaulayOfDimKrullDimensionQuotientAddHeight
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepth
-import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.RationalMapSpecializesKrullDimensionLeOne
+module
+
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Birational.RationalMap
+public import Mathlib.Algebra.Module.SpanRank
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.Order.KrullDimension
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawIsGreatestOpensDifferenceExtension
+public import Nyll.SchemeTheory.LocalGeometry.OpenIrreducibleComponents
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalSpanFinrankKerAddKrullDimensionEq
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.LocalRingIsCohenMacaulayOfDimKrullDimensionQuotientAddHeight
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepth
+public import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.RationalMapSpecializesKrullDimensionLeOne
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 
 /-!
 # Relative Group Law exists opens diagonal difference extension of forall ring Krull Dim le
 one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

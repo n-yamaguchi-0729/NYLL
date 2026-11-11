@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Injectivity of inverse image along an arbitrary surjection
@@ -27,6 +29,8 @@ the actual inverse-image unit followed by its direct-image stalk component
 is an isomorphism. Hence the unit is a monomorphism, and the actual map on
 global sections is injective. No finiteness or flatness assumption is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.GroupTheory.Coset.Card
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.GroupTheory.Coset.Card
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Coprimality from a finite Kummer character lattice
@@ -16,6 +18,8 @@ makes the lattice order divide the product of the Kummer exponents.  Thus,
 if every exponent is a unit in the coefficient ring, the lattice order is a
 unit there as well.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

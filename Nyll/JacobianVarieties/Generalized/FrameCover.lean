@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameCoordinates
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageIsoTensorUnit
-import Mathlib.AlgebraicGeometry.Cover.Directed
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameCoordinates
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageIsoTensorUnit
+public import Mathlib.AlgebraicGeometry.Cover.Directed
 
 /-!
 # A genuine directed open cover carrying modulus frames
@@ -17,6 +19,8 @@ transfer the supplied trivializations to the actual categorical pullbacks
 used in the frame functor. All opens with such a frame form a small basis;
 the resulting locally directed cover is suitable for scheme gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

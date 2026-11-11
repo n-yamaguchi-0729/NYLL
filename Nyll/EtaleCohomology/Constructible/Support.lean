@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Sites.ClosedImmersionStalks
-import Nyll.EtaleCohomology.Sites.ExtensionByZeroStalks
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-import Mathlib.CategoryTheory.Sites.Point.Conservative
-import Nyll.EtaleCohomology.Sites.ExtensionByZero
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Sites.ClosedImmersionStalks
+public import Nyll.EtaleCohomology.Sites.ExtensionByZeroStalks
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Nyll.EtaleCohomology.Sites.ExtensionByZero
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
 # Vanishing away from the support
@@ -24,6 +26,8 @@ An inverse image disjoint from the image of an open or closed immersion
 annihilates extension by zero or closed direct image, respectively. These
 are statements about the actual sheaves, detected by geometric stalks.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

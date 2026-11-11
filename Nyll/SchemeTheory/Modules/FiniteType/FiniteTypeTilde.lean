@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite type of the sheaf associated to a finite module
@@ -17,6 +19,8 @@ presentation with exactly this generating set. Its relation module is
 allowed to be infinite. Restricting the finite family of generators to
 the slice sites gives the native finite-type condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

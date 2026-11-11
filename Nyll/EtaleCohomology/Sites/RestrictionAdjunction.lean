@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.RestrictionStalks
-import Mathlib.CategoryTheory.Sites.Point.Comap
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Functor.Category
-import Mathlib.CategoryTheory.Limits.Final
-import Mathlib.CategoryTheory.Limits.FinallySmall
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Nyll.EtaleCohomology.Sites.RestrictionStalks
+public import Mathlib.CategoryTheory.Sites.Point.Comap
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Functor.Category
+public import Mathlib.CategoryTheory.Limits.Final
+public import Mathlib.CategoryTheory.Limits.FinallySmall
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Canonical counits and initial neighborhood functors
@@ -32,6 +34,8 @@ counit induces an isomorphism on the specified stalk.
 The coefficient category only needs products and colimits of the size of the
 point. No additive, abelian, or scheme hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

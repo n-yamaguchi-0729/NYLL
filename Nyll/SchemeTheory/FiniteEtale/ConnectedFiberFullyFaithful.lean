@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberSections
-import Nyll.SchemeTheory.FiniteEtale.FullOfSectionDescent
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Mathlib.CategoryTheory.Functor.FullyFaithful
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.ConnectedFiberSections
+public import Nyll.SchemeTheory.FiniteEtale.FullOfSectionDescent
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-!
 # Full faithfulness for universally open maps with connected geometric fibres
@@ -16,6 +18,8 @@ The actual descent of finite etale sections supplies fullness through the
 finite etale internal Hom. Surjectivity of a geometrically connected map
 supplies faithfulness. Neither source nor target is assumed connected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

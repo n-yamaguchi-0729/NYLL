@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeScalarQuotient
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeScalarQuotient
 
 /-! Naturality of actual finite-scheme scalar classes in the affine test algebra. -/
+
+@[expose] public section
 
 noncomputable section
 

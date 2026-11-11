@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Valuation
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Valuation
 
 /-!
 # Neu1999 field-norm value images
@@ -13,6 +15,8 @@ This file specializes the generic field-norm image lemmas to Neu1999 local
 fields.  It keeps the arbitrary subgroup and generator forms close to the
 frontier where the actual ramification-image subgroup will be constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

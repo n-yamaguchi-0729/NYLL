@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebraBaseChange
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientBaseChange
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebraBaseChange
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientBaseChange
 
 /-!
 # Scalar classes on an actual finite scheme after affine base change
@@ -15,6 +17,8 @@ product modulo units restricted from the parameter spectrum. The scalar
 subgroup is proved to be the same via the Gamma--Spec isomorphism; it is
 not replaced by an assumed group of constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

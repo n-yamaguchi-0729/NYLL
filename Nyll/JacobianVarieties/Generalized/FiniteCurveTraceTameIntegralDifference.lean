@@ -4,16 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GenericTracePoint
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTracePowerSeriesBlocks
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceBlockAdditivity
-import Nyll.JacobianVarieties.Generalized.RegularCartierBlockIntegralDifference
-import Nyll.JacobianVarieties.Generalized.FormalBoundaryBlockEvaluation
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceDomain
-import Nyll.AlgebraicCurves.Places.Degree.CompletedRegularCoefficientMap
-import Nyll.AlgebraicCurves.Places.Degree.TameBoundaryCompletedEmbeddings
-import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalInfinity
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+module
+
+public import Nyll.JacobianVarieties.Generalized.GenericTracePoint
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTracePowerSeriesBlocks
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceBlockAdditivity
+public import Nyll.JacobianVarieties.Generalized.RegularCartierBlockIntegralDifference
+public import Nyll.JacobianVarieties.Generalized.FormalBoundaryBlockEvaluation
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceDomain
+public import Nyll.AlgebraicCurves.Places.Degree.CompletedRegularCoefficientMap
+public import Nyll.AlgebraicCurves.Places.Degree.TameBoundaryCompletedEmbeddings
+public import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalInfinity
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Completion
+public import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionIntegersDegEqOne
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
+public import Nyll.SchemeTheory.RingTheory.Henselian.RegularReciprocalLaurentDeformation
 
 /-! # The integral difference of the original finite curve trace
 
@@ -24,6 +36,8 @@ difference. Both block constructions use the same completed-base map and
 the same Laurent valuation ring. The pole bound is chosen before the
 finite map and exact-contact test function.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -296,7 +310,8 @@ private theorem integral_trace_difference_of_completed_blocks
           (hpullB ▸ hA₀)))⁻¹)
     htraceA htraceB hquotient hpR hpB' hpRred hpBred
 
-private def uniformTameIntegralTraceDifference
+/-- The quantified uniform tame trace-difference construction on the original curve. -/
+def uniformTameIntegralTraceDifference
     {K : Type u} [Field K] [IsAlgClosed K]
     {C : Scheme.{u}} [IsIntegral C] [IsNormalIntegral C]
     (c : C ⟶ Spec (.of K)) [IsProper c] [SmoothOfRelativeDimension 1 c]
@@ -385,8 +400,8 @@ theorem exists_finiteCurveTrace_uniform_tame_integral_difference
     (hunit : Set.range (1 : Over.mk (𝟙 (Spec (.of K))) ⟶ G.X).left ⊆ V) :
     uniformTameIntegralTraceDifference c U hU ε G q V hV hunit := by
   classical
-  let algC : Algebra K C.functionField := (AlgebraicCurve.baseToFunctionField c).toAlgebra
-  intro essC curveC
+  unfold uniformTameIntegralTraceDifference
+  intro algC essC curveC
   let genericMap := genericOpenPoint c U hU
   obtain ⟨t, ht, Dpole, hboundary⟩ :=
     exists_completedBoundaryBlock_uniform_integral_difference c U hU genericMap

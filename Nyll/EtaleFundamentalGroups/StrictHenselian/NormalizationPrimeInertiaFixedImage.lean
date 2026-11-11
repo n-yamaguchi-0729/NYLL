@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeInertia
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianRigidity
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.Henselian
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeInertia
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianRigidity
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Original normalization inertia fixes the actual stalk image
@@ -24,6 +26,8 @@ theorem fixes the constructed map. No fixed-image or comparison premise is
 introduced; the reverse image and ambient fraction-field identifications
 remain separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
-import Nyll.SchemeTheory.Affine.FiniteSchemeUnitRestriction
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusRestrictionMap
+public import Nyll.SchemeTheory.Affine.FiniteSchemeUnitRestriction
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Restriction of actual whole-modulus units on field-valued tests -/
+
+@[expose] public section
 
 noncomputable section
 

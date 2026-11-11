@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaSeparation
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Category.Grp.FiniteGrp
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaSeparation
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Category.Grp.FiniteGrp
 
 /-!
 # Native group owners for original and finite wild inertia
@@ -19,6 +21,8 @@ The maps are the restrictions of the already constructed original inertia
 maps to the independently defined subgroups. Their joint faithfulness is
 inherited from actual finite inertia separation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

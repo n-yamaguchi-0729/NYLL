@@ -64,39 +64,11 @@ private theorem e3_ffMap_germ_apply (U : Y.Opens) (hU : genericPoint Y ∈ U) (s
           by rwa [genericPoint_eq_of_isOpenImmersion θ]) (θ.app U s) := by
   rw [← CommRingCat.comp_apply, e3_germ_ffMap]; rfl
 
-private theorem e3_ffMap_germ_of_eq {Z : Scheme.{u}} (g₂ : Y ⟶ Z) (g₁ : X ⟶ Z) (e : g₁ = θ ≫ g₂)
-    (U : Z.Opens) (h₂ : genericPoint Y ∈ g₂ ⁻¹ᵁ U) (h₁ : genericPoint X ∈ g₁ ⁻¹ᵁ U) (s : Γ(Z, U)) :
-    e3_ffMap θ (Y.presheaf.germ (g₂ ⁻¹ᵁ U) (genericPoint Y) h₂ (g₂.app U s)) =
-      X.presheaf.germ (g₁ ⁻¹ᵁ U) (genericPoint X) h₁ (g₁.app U s) := by
-  subst e
-  rw [e3_ffMap_germ_apply]
-  rfl
-
 end FFMap
 
 section ChartValue
 
 variable {R : CommRingCat.{u}} [IsLocalRing R] {X Y : Scheme.{u}}
-
-private theorem e3_stalkClosedPointTo_germ_appIso_inv (ι : Y ⟶ X) [IsOpenImmersion ι] (l : Spec R ⟶
-  Y)
-    (w : Γ(Y, ⊤)) (h : (l ≫ ι).base (IsLocalRing.closedPoint R) ∈ ι ''ᵁ ⊤) :
-    Scheme.stalkClosedPointTo (l ≫ ι) (X.presheaf.germ (ι ''ᵁ ⊤) _ h ((ι.appIso ⊤).inv w)) =
-      Scheme.stalkClosedPointTo l (Y.presheaf.germ ⊤ _ (TopologicalSpace.Opens.mem_top _) w) := by
-  rw [Scheme.stalkClosedPointTo_comp]
-  have hg (y : Y) (hy : ι.base y ∈ ι ''ᵁ ⊤) :
-      ι.stalkMap y (X.presheaf.germ (ι ''ᵁ ⊤) (ι.base y) hy ((ι.appIso ⊤).inv w)) =
-        Y.presheaf.germ ⊤ y (TopologicalSpace.Opens.mem_top _) w := by
-    rw [Scheme.Hom.germ_stalkMap_apply, Scheme.Hom.appIso_inv_app_apply]
-    exact Y.presheaf.germ_res_apply _ y hy w
-  exact congrArg (Scheme.stalkClosedPointTo l) (hg _ h)
-
-private theorem e3_stalkClosedPointTo_SpecMap_germ {A : CommRingCat.{u}} (φ : A ⟶ R) (b : A) :
-    Scheme.stalkClosedPointTo (Spec.map φ) ((Spec A).presheaf.germ ⊤ _
-      (TopologicalSpace.Opens.mem_top _) ((Scheme.ΓSpecIso A).inv b)) =
-      φ b := by
-  rw [← CommRingCat.comp_apply, Scheme.germ_stalkClosedPointTo_Spec, CommRingCat.comp_apply,
-    Iso.inv_hom_id_apply]
 
 end ChartValue
 
@@ -131,7 +103,8 @@ open _root_.AlgebraicCurve.CurveModel
 private theorem e3_isLocalHom_of_field {F : Type*} [Field F] {S : Type*} [CommRing S] [Nontrivial
   S] (f : F →+* S) :
     IsLocalHom f :=
-  ⟨fun a ha => isUnit_iff_ne_zero.mpr fun h0 => by simp [h0] at ha⟩
+  ⟨fun _ ha => isUnit_iff_ne_zero.mpr fun h0 =>
+    ha.ne_zero ((congrArg f h0).trans (map_zero f))⟩
 
 private theorem _root_.AlgebraicCurve.CurveModel.e3_ffMap_eq_of_fromSpecStalk_comp_eq (φ : L₁ ≃+*
   L₂)

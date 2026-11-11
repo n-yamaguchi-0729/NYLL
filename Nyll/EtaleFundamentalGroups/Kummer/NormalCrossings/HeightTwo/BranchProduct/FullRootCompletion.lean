@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenRoot.TensorComponentEtale
 import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.PrimeParameterLocalization
 import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.BranchProductFullRootCover
+import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 
 /-!
 # Completed chosen components along a height-two branch-product root cover
@@ -128,36 +129,36 @@ theorem
     let N := heightTwoSelectedBranchRamificationProduct
       (K := K) (L := L) t hNC i
     let p := Ideal.span ({t i} : Set A)
-    letI : p.IsPrime :=
+    let : p.IsPrime :=
       Ideal.isPrime_span_singleton_of_prime (hNC.2.2.2.1 i hi)
     let V := Localization.AtPrime p
-    letI : IsDiscreteValuationRing V :=
+    let : IsDiscreteValuationRing V :=
       EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
         A (t i) (hNC.2.2.2.1 i hi)
-    letI : Algebra V K :=
+    let : Algebra V K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) p
-    letI : Algebra V L :=
+    let : Algebra V L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
-    letI : IsScalarTower V K L :=
+    let : IsScalarTower V K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) p
-    letI : IsFractionRing V K :=
+    let : IsFractionRing V K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) p
     let C := integralClosure V L
-    letI : IsFractionRing C L :=
+    let : IsFractionRing C L :=
       IsIntegralClosure.isFractionRing_of_finite_extension V K L C
-    letI : IsDedekindDomain C :=
+    let : IsDedekindDomain C :=
       IsIntegralClosure.isDedekindDomain V K L C
-    letI : Module.IsTorsionFree V L :=
+    let : Module.IsTorsionFree V L :=
       Module.IsTorsionFree.trans_faithfulSMul V K L
-    letI : Module.IsTorsionFree V C :=
+    let : Module.IsTorsionFree V C :=
       IsIntegralClosure.isTorsionFree V L
-    letI : Module.Finite V C := IsIntegralClosure.finite V K L C
+    let : Module.Finite V C := IsIntegralClosure.finite V K L C
     let q := localizedNormalizationPrime (K := K) (L := L) p Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       localizedNormalizationPrime_isMaximal (K := K) (L := L) p Q
-    letI : q.IsPrime := inferInstance
-    letI : q.LiesOver (IsLocalRing.maximalIdeal V) :=
+    let : q.IsPrime := inferInstance
+    let : q.LiesOver (IsLocalRing.maximalIdeal V) :=
       localizedNormalizationPrime_liesOver (K := K) (L := L) p Q
     let qOver : (IsLocalRing.maximalIdeal V).primesOver C :=
       ⟨q, inferInstance, inferInstance⟩
@@ -172,55 +173,14 @@ theorem
       CompletedChosenRootTensorComponentEtaleAt
         (V := V) (C := C) (K := K) (L := L)
         qOver piV hpiV N hN := by
-  dsimp only
   classical
-  let p := Ideal.span ({t i} : Set A)
-  let : p.IsPrime :=
-    Ideal.isPrime_span_singleton_of_prime (hNC.2.2.2.1 i hi)
-  let V := Localization.AtPrime p
-  let : IsDiscreteValuationRing V :=
-    EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
-      A (t i) (hNC.2.2.2.1 i hi)
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) p
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
-  let : IsScalarTower V K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) p
-  let : IsFractionRing V K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) p
-  let C := integralClosure V L
-  let : IsFractionRing C L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension V K L C
-  let : IsDedekindDomain C :=
-    IsIntegralClosure.isDedekindDomain V K L C
-  let : Module.IsTorsionFree V L :=
-    Module.IsTorsionFree.trans_faithfulSMul V K L
-  let : Module.IsTorsionFree V C :=
-    IsIntegralClosure.isTorsionFree V L
-  let : Module.Finite V C := IsIntegralClosure.finite V K L C
-  let q := localizedNormalizationPrime (K := K) (L := L) p Q
-  let : q.IsMaximal :=
-    localizedNormalizationPrime_isMaximal (K := K) (L := L) p Q
-  let : q.IsPrime := inferInstance
-  let : q.LiesOver (IsLocalRing.maximalIdeal V) :=
-    localizedNormalizationPrime_liesOver (K := K) (L := L) p Q
-  let qOver : (IsLocalRing.maximalIdeal V).primesOver C :=
-    ⟨q, inferInstance, inferInstance⟩
-  let piV : V := algebraMap A V (t i)
-  let N := heightTwoSelectedBranchRamificationProduct
-    (K := K) (L := L) t hNC i
+  intro N p suppliedPrime V suppliedDVR suppliedAlgebraVK suppliedAlgebraVL suppliedTowerVKL
+    suppliedFractionVK C suppliedFractionCL suppliedDedekindC suppliedTorsionVL suppliedTorsionVC
+    suppliedFiniteVC q suppliedMaximalQ suppliedPrimeQ suppliedLiesOver qOver piV hpiV hN
   have hram : q.ramificationIdx V = Q.ramificationIdx A :=
     localizedNormalizationPrime_ramificationIdx
       (K := K) (L := L) p Q
   refine ⟨hram, ?_⟩
-  have hpiV : IsLocalRing.maximalIdeal V =
-      Ideal.span ({piV} : Set V) :=
-    localizationAtPrime_maximalIdeal_eq_span_of_eq_span p (t i) rfl
-  have hN : 0 < N :=
-    heightTwoSelectedBranchRamificationProduct_pos
-      (K := K) (L := L) t hNC i
   have hdivGlobal : Q.ramificationIdx A ∣ N :=
     normalizationPrime_ramificationIdx_dvd_splitStrictNormalCrossingsProduct
       (K := K) (L := L) t hNC i hi Q

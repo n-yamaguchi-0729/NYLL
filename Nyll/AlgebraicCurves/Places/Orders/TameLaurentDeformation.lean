@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslationOrder
-import Nyll.AlgebraicCurves.Places.Orders.TameParameterOrder
-import Nyll.AlgebraicCurves.Places.Orders.TameSeriesCompositionOrder
-import Nyll.AlgebraicCurves.Places.ValuationRings.OrdEqNegLogValuationSubringEq
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.LaurentFormalTranslationOrder
+public import Nyll.AlgebraicCurves.Places.Orders.TameParameterOrder
+public import Nyll.AlgebraicCurves.Places.Orders.TameSeriesCompositionOrder
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OrdEqNegLogValuationSubringEq
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-! # Actual tame deformation of the completed local field
 
@@ -16,6 +19,8 @@ Laurent translation. Its coefficient growth is `e*n + order(f)` for every
 Laurent function, including one with a pole. Restriction along an actual
 field embedding retains the given residue embedding and the same bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

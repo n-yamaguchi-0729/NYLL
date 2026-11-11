@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ProperHenselianH0
-import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
-import Nyll.EtaleCohomology.Sites.SeparablyClosedFieldExtensionSections
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.ProperHenselianH0
+public import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
+public import Nyll.EtaleCohomology.Sites.SeparablyClosedFieldExtensionSections
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Proper sections over an arbitrary closed field point of a strictly local base
@@ -22,6 +24,8 @@ section bijections. The canonical inverse-image composition isomorphism
 then proves bijectivity of the original section map.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -29,6 +33,45 @@ universe u
 open AlgebraicGeometry CategoryTheory Limits Opposite
 
 namespace EtaleCohomology
+
+/-- A Cartesian closed field point factors through the actual residue
+fibre. The second square is Cartesian over the original residue embedding.
+This geometric factorization is independent of sheaf coefficients. -/
+theorem exists_residueFieldFactor_of_isPullback
+    (H : Type u) [CommRing H] [IsLocalRing H]
+    {Ω : Type u} [Field Ω] (ε : H →+* Ω) [IsLocalHom ε]
+    {X Z : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of H))
+    (q : Z ⟶ X) (p : Z ⟶ Spec (CommRingCat.of Ω))
+    (h : IsPullback q p f (Spec.map (CommRingCat.ofHom ε))) :
+    ∃ l : Z ⟶ pullback f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue H))),
+      l ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue H))) = q ∧
+      IsPullback l p
+        (pullback.snd f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue H))))
+        (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.lift ε))) := by
+  let κ := IsLocalRing.ResidueField H
+  let r : Spec (CommRingCat.of κ) ⟶ Spec (CommRingCat.of H) :=
+    Spec.map (CommRingCat.ofHom (IsLocalRing.residue H))
+  let j : Spec (CommRingCat.of Ω) ⟶ Spec (CommRingCat.of κ) :=
+    Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.lift ε))
+  have hjr : j ≫ r = Spec.map (CommRingCat.ofHom ε) := by
+    change Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.lift ε)) ≫
+      Spec.map (CommRingCat.ofHom (IsLocalRing.residue H)) = _
+    rw [← Spec.map_comp]
+    apply congrArg Spec.map
+    apply CommRingCat.hom_ext
+    exact IsLocalRing.ResidueField.lift_comp_residue ε
+  let Y : Scheme.{u} := pullback f r
+  let i : Y ⟶ X := pullback.fst f r
+  let g : Y ⟶ Spec (CommRingCat.of κ) := pullback.snd f r
+  let l : Z ⟶ Y := pullback.lift q (p ≫ j) (by
+    rw [Category.assoc, hjr]
+    exact h.w)
+  have hli : l ≫ i = q := pullback.lift_fst _ _ _
+  have hlg : l ≫ g = p ≫ j := pullback.lift_snd _ _ _
+  have houter : IsPullback (l ≫ i) p f (j ≫ r) := by
+    rw [hli, hjr]
+    exact h
+  exact ⟨l, hli, houter.of_right hlg (IsPullback.of_hasPullback f r)⟩
 
 private theorem globalSectionsMap_bijective_comp
     {X Y Z : Scheme.{u}} (p : Z ⟶ Y) (q : Y ⟶ X)
@@ -68,26 +111,10 @@ theorem etaleClosedField_globalSections_bijective_of_isPullback
     Spec.map (CommRingCat.ofHom (IsLocalRing.residue H))
   let j : Spec (CommRingCat.of Ω) ⟶ Spec (CommRingCat.of κ) :=
     Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.lift ε))
-  have hjr : j ≫ r = Spec.map (CommRingCat.ofHom ε) := by
-    change Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.lift ε)) ≫
-      Spec.map (CommRingCat.ofHom (IsLocalRing.residue H)) = _
-    rw [← Spec.map_comp]
-    apply congrArg Spec.map
-    apply CommRingCat.hom_ext
-    exact IsLocalRing.ResidueField.lift_comp_residue ε
   let Y : Scheme.{u} := pullback f r
   let i : Y ⟶ X := pullback.fst f r
   let g : Y ⟶ Spec (CommRingCat.of κ) := pullback.snd f r
-  let l : Z ⟶ Y := pullback.lift q (p ≫ j) (by
-    rw [Category.assoc, hjr]
-    exact h.w)
-  have hli : l ≫ i = q := pullback.lift_fst _ _ _
-  have hlg : l ≫ g = p ≫ j := pullback.lift_snd _ _ _
-  have houter : IsPullback (l ≫ i) p f (j ≫ r) := by
-    rw [hli, hjr]
-    exact h
-  have hlpb : IsPullback l p g j :=
-    houter.of_right hlg (IsPullback.of_hasPullback f r)
+  obtain ⟨l, hli, hlpb⟩ := exists_residueFieldFactor_of_isPullback H ε f q p h
   have hi : Function.Bijective (etalePullbackGlobalSectionsMap i Λ F) :=
     etaleClosedFiber_globalSections_bijective H f Λ F
   have hl : Function.Bijective

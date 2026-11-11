@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Galois.GaloisObjects
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Topology.Connected.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # Detecting Galois descent by the actual deck-transformation map
@@ -37,6 +39,8 @@ automorphisms of a geometric Galois cover. It does not assume that those
 automorphisms have descended or assert a finite-field model without
 constructing one.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -69,8 +73,9 @@ theorem isGalois_iff_surjective_mapAut_of_surjective_baseChange
   have hInjective : Function.Injective (F.mapAut Y) := by
     intro σ τ hστ
     apply Aut.ext
+    apply Iso.ext
     apply F.map_injective
-    exact congrArg Iso.hom hστ
+    exact congrArg (fun a => a.asIso.hom) hστ
   let t : T := Classical.choice (inferInstance : Nonempty T)
   let Ω := AlgebraicClosure (T.residueField t)
   let ξ : Spec (.of Ω) ⟶ T :=

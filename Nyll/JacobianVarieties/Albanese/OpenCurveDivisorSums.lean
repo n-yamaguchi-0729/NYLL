@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.OpenCurveUniversalDivisor
-import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
-import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.OpenCurveUniversalDivisor
+public import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
 
 /-!
 # Regular sums on the actual divisor space of an open curve
@@ -16,6 +18,8 @@ the open curve to any separated commutative group then has an actual regular
 sum morphism on this scheme. The finite flat tuple cover and its full
 scheme-valued divisor relation are retained for use in family descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -51,7 +55,7 @@ theorem exists_openCurveDivisorSum
           (hv : v ≫ finFibrePow.toBase (U.ι ≫ c) n = t)
           (hw : w ≫ finFibrePow.toBase (U.ι ≫ c) n = t),
           v ≫ σ = w ≫ σ ↔
-            SameDivisor (U.ι ≫ c)
+            SameDivisor (g := t) (U.ι ≫ c)
               (fun i => v ≫ finFibrePow.proj (U.ι ≫ c) n i)
               (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hv])
               (fun i => w ≫ finFibrePow.proj (U.ι ≫ c) n i)

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.AffineFppfComparison
-import Mathlib.CategoryTheory.Adjunction.Unique
+module
+
+public import Nyll.SchemeTheory.Affine.AffineFppfComparison
+public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # The dense affine comparison retains the original sections
@@ -15,6 +17,8 @@ raw section to the sheafification of its original affine comparison. This
 compatibility allows concrete local representatives to be transported across
 the comparison, rather than only identifying the abstract sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

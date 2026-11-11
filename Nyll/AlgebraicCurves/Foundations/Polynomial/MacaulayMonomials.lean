@@ -11,19 +11,21 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Group.Embedding
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finset.Card
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.Tactic.SplitIfs
-import Lean.Elab.Tactic.Omega
+module
+
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Group.Embedding
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finset.Card
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.Tactic.SplitIfs
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Monomial exponent sets and dimensions of homogeneous quotients
@@ -31,6 +33,10 @@ import Lean.Elab.Tactic.Omega
 The degree and support bounds use one family of finite exponent sets.
 Coefficient maps identify homogeneous quotient pieces with coordinate spaces.
 -/
+
+@[expose] public section
+
+universe u
 
 namespace MvPolynomial.Macaulay
 
@@ -198,13 +204,13 @@ theorem card_Mon (e : ℕ) : (Mon n e).card = (n + e).choose n := by
   rw [← MonW_of_le n le_rfl, card_MonW n (n + 1) e le_rfl, show n + 1 + e - 1 = n + e by omega,
     Nat.choose_symm_add]
 
-theorem degree_eq_of_mem_support (K : Type) [Field K] {e : ℕ} {p : MvPolynomial (Fin (n + 1)) K}
+theorem degree_eq_of_mem_support (K : Type u) [Field K] {e : ℕ} {p : MvPolynomial (Fin (n + 1)) K}
     (hp : p.IsHomogeneous e) {m : Fin (n + 1) →₀ ℕ} (hm : m ∈ p.support) : m.degree = e := by
   have h : p ∈ homogeneousSubmodule (Fin (n + 1)) K e := hp
   rw [homogeneousSubmodule_eq_finsupp_supported] at h
   exact h hm
 
-theorem finrank_piece_eq_card (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e :
+theorem finrank_piece_eq_card (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e :
   ℕ)
     (D : Finset (Fin (n + 1) →₀ ℕ)) (hD : ∀ m ∈ D, m.degree = e)
     (hJ : ∀ p : MvPolynomial (Fin (n + 1)) K, p.IsHomogeneous e →

@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UnitAutSectionPullbackUnitIsoConjOpensIEqAppOne
+module
+
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UnitAutSectionPullbackUnitIsoConjOpensIEqAppOne
 
 /-!
 # Small Extension is Pic Deformation Cocycle of app Top eq unit Aut Section
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

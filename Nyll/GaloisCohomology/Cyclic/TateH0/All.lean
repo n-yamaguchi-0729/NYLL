@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.TateH0.Invariants
-import Nyll.GaloisCohomology.Cyclic.TateH0.Main
-import Nyll.GaloisCohomology.Cyclic.TateH0.NormImage
+module
+
+public import Nyll.GaloisCohomology.Cyclic.TateH0.Invariants
+public import Nyll.GaloisCohomology.Cyclic.TateH0.Main
+public import Nyll.GaloisCohomology.Cyclic.TateH0.NormImage
 
 /-!
 # Degree-zero Tate cohomology

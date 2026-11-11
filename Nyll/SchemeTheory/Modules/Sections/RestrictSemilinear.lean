@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Module.Equiv.Defs
-import Mathlib.Algebra.Ring.CompTypeclasses
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Module.Equiv.Defs
+public import Mathlib.Algebra.Ring.CompTypeclasses
 
 /-!
 # Actual coefficient and section comparisons for an affine chart
@@ -25,6 +27,8 @@ The underlying additive comparison is the original `restrictAppIso`.
 This retains the original section morphisms while supplying the exact
 coefficient change needed for tensor products of sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.AwayPairIntersection
-import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
-import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.All
-import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
-import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.All
-import Nyll.SchemeTheory.Normalization.IntegralClosure.TwoIntegralBasesEquiv
-import Nyll.SchemeTheory.Normalization.IntegralClosure.Nested
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.AwayPairIntersection
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.All
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.All
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.TwoIntegralBasesEquiv
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.Nested
 
 /-!
 # Integral-closure constructions and comparisons

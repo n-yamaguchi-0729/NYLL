@@ -4,16 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.MonicProjection
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Counting
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.IntegralClosure
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.MonicProjection
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Counting
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.IntegralClosure
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # Prime divisors centered at a rational point
 
 This file supplies the monic-projection form of Fried--Jarden, Lemma 6.2.2(b).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -151,17 +155,16 @@ for the normalization, not an assumed comparison or counting statement.
 theorem card_centeredPrimeDivisor_le_totalDegree
     {f : BivariatePolynomial K} (hirr : Irreducible f)
     (hmonic : (yPolynomial f).Monic) (p : RationalPoint f) :
-    letI : IsDomain (CoordinateRing f) :=
+    let : IsDomain (CoordinateRing f) :=
       coordinateRing_isDomain hirr
-    letI : Algebra (ProjectionFunctionField K)
+    let : Algebra (ProjectionFunctionField K)
         (FractionRing (CoordinateRing f)) :=
       functionFieldAlgebra f hirr hmonic
     Algebra.IsSeparable (ProjectionFunctionField K)
         (FractionRing (CoordinateRing f)) →
       Nat.card (CenteredPrimeDivisor (K := K) p) ≤
         MvPolynomial.totalDegree f := by
-  let : IsDomain (CoordinateRing f) :=
-    coordinateRing_isDomain hirr
+  intro coordinateDomain
   let : Algebra (ProjectionBase K) (CoordinateRing f) :=
     projectionAlgebra f
   let : Algebra (ProjectionBase K)
@@ -189,9 +192,7 @@ theorem card_centeredPrimeDivisor_le_totalDegree
         IsScalarTower.algebraMap_apply (ProjectionBase K)
           (CoordinateRing f) (FractionRing (CoordinateRing f)),
         projectionAlgebra_algebraMap_apply f x]
-  let : Algebra (ProjectionFunctionField K)
-      (FractionRing (CoordinateRing f)) :=
-    functionFieldAlgebra f hirr hmonic
+  intro projectionFunctionAlgebra
   let : IsScalarTower (ProjectionBase K) (ProjectionFunctionField K)
       (FractionRing (CoordinateRing f)) :=
     IsScalarTower.of_algebraMap_eq fun x ↦

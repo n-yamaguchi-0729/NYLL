@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.RingTheory.UniqueFactorizationDomain.Basic
-import Mathlib.RingTheory.Ideal.Span
+module
+
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.RingTheory.UniqueFactorizationDomain.Basic
+public import Mathlib.RingTheory.Ideal.Span
 
 /-!
 # Intersecting the height-one localizations of a UFD
@@ -20,6 +22,8 @@ This is the codimension-one intersection input needed in the two-dimensional
 local-purity argument.  It does not assume normality, reflexivity, or a purity
 statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

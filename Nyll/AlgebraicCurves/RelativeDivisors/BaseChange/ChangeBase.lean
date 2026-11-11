@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPullbackInvModuleIso
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPullbackInvModuleIso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 
 /-!
 # Relative divisors after changing the base of the curve
@@ -22,6 +24,8 @@ their finite flat projections, and their degrees. This is a change of the base
 of the curve, in addition to pullback of a divisor along a test scheme.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -30,7 +34,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.RelEffCartierDiv
 
-private def transport
+/-- Transport a relative divisor through an isomorphism of ambient schemes over its test base. -/
+def transport
     {C S C' S' T : Scheme.{u}} {f : C ⟶ S} {g : T ⟶ S}
     {f' : C' ⟶ S'} {g' : T ⟶ S'} {r : ℕ}
     (D : RelEffCartierDiv f r g) (e : pullback f' g' ≅ pullback f g)

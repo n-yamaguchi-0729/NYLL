@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.GroupTheory.MonoidLocalization.Basic
-import Mathlib.Tactic.SplitIfs
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.GroupTheory.MonoidLocalization.Basic
+public import Mathlib.Tactic.SplitIfs
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # Proj Space away To Section mk mem span iff exists X pow mul mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -85,17 +89,18 @@ theorem frac_mul (i : Fin (n + 1)) (e d : ℕ) (G : ↥(homogeneousSubmodule (Fi
   rw [Localization.mk_mul]
   congr 1
   ext
-  simp [xpow, pow_add]
+  simp only [xpow, pow_add, Submonoid.mk_mul_mk]
 
 /-- The homogeneous component of a polynomial, bundled with its degree membership. -/
 def comp (d : ℕ) (p : MvPolynomial (Fin (n + 1)) A) : ↥(homogeneousSubmodule (Fin (n + 1)) A d) :=
   ⟨homogeneousComponent d p, homogeneousComponent_mem d p⟩
 
-theorem comp_zero (d : ℕ) : comp (A := A) (n := n) d 0 = 0 := Subtype.ext (by simp [comp])
+theorem comp_zero (d : ℕ) : comp (A := A) (n := n) d 0 = 0 :=
+  Subtype.ext (map_zero (homogeneousComponent d))
 
 theorem comp_add (d : ℕ) (p q : MvPolynomial (Fin (n + 1)) A) : comp d (p + q) = comp d p + comp d
   q :=
-  Subtype.ext (by simp [comp])
+  Subtype.ext (map_add (homogeneousComponent d) p q)
 
 theorem coe_decompose (φ : MvPolynomial (Fin (n + 1)) A) (i : ℕ) :
     ((DirectSum.decompose 𝒜 φ) i : MvPolynomial (Fin (n + 1)) A) = homogeneousComponent i φ :=
@@ -289,7 +294,8 @@ def satAway (I : Ideal (MvPolynomial (Fin (n + 1)) A)) (i : Fin (n + 1)) :
     rintro c x ⟨D, P, hP, hPI, rfl⟩
     obtain ⟨m, H, hH, rfl⟩ := HomogeneousLocalization.Away.mk_surjective 𝒜 (ProjSpace.X_mem_one A n
       i) c
-    have hH' : H ∈ 𝒜 m := by simpa using hH
+    have hH' : H ∈ 𝒜 m := by
+      simpa only [nsmul_eq_mul, mul_one, Nat.cast_id] using hH
     have hHh : H.IsHomogeneous m := (MvPolynomial.mem_homogeneousSubmodule m H).mp hH'
     refine ⟨m + D, H * P, hHh.mul hP, I.mul_mem_left _ hPI, ?_⟩
     rw [smul_eq_mul, awayMk_eq_frac i m H hH hH', ← frac_mul]

@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.RingTheory.Ideal.Maps
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.RingTheory.Ideal.Maps
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
 
 /-!
 # Scheme Ideal Sheaf Data Is Invertible of forall comap open Cover
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

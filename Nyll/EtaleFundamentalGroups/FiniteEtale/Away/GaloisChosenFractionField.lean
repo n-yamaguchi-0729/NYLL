@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # The Galois degree of an actual away cover
@@ -26,6 +28,8 @@ same condition for the fraction-field extension used in the root
 normalization calculation. The field, its scalar action, and the
 automorphism group are those of the original cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

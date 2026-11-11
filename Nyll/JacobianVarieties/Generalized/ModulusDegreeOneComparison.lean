@@ -4,12 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDegreeOneSheaf
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.EmptyOrdinaryComparison
-import Nyll.JacobianVarieties.Generalized.ModulusTransitionTorsor
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDegreeOneSheaf
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.EmptyOrdinaryComparison
+public import Nyll.JacobianVarieties.Generalized.ModulusTransitionTorsor
+public import Nyll.JacobianVarieties.Generalized.ExistingJacobianGroupScheme
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
 
 /-! # A single rational reduced modulus gives the ordinary Jacobian -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusMultiplicativeJets
-import Nyll.AlgebraicCurves.Differentials.Logarithmic.Logarithmic
-import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
-import Nyll.AlgebraicCurves.Differentials.Residues.Basic
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusMultiplicativeJets
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.Logarithmic
+public import Nyll.AlgebraicCurves.Differentials.Local.LocalGeometry
+public import Nyll.AlgebraicCurves.Differentials.Residues.Basic
 
 /-!
 # Differential estimates for principal units
@@ -17,6 +19,8 @@ positive maximal-ideal power by at most one. Consequently the residue of
 `f dlog(g)` vanishes when `g` is one modulo a power strictly greater than the
 pole order of `f`. The local congruence is the actual ideal-power condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

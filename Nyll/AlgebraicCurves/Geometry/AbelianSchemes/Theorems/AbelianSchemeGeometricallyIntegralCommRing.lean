@@ -11,14 +11,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Geometrically.Basic
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Geometrically.Basic
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeBaseChange
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
 
 /-!
 # Abelian Scheme Property Bundle geometrically Integral of comm Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

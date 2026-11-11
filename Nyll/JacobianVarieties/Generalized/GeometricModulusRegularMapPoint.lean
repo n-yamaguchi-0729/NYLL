@@ -4,22 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
-import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
-import Nyll.JacobianVarieties.Generalized.GeometricModulusAtlasGluing
-import Nyll.JacobianVarieties.Generalized.ModulusPointClassification
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyPointEvaluation
-import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
-import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
-import Nyll.JacobianVarieties.Generalized.ModulusFamilySumScalarExtension
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusMapScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
+public import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusAtlasGluing
+public import Nyll.JacobianVarieties.Generalized.ModulusPointClassification
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyPointEvaluation
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelGroupScalarExtension
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelCanonicalPoint
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilySumScalarExtension
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # Geometric point values of the regular map over the ground field
 
@@ -29,6 +33,8 @@ Their existing point classification identifies the result with the additive
 full-modulus evaluation over the closed extension field.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -36,6 +42,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.SmoothProperCurve NeronModelInfra GoodReductionJacobian
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantRepresentable
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.CategoryTheory.Limits.MorphismProperty
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Logic.Function.Basic
-import Mathlib.Topology.Connected.TotallyDisconnected
-import Mathlib.Topology.Constructions
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantRepresentable
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.CategoryTheory.Limits.MorphismProperty
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.Topology.Connected.TotallyDisconnected
+public import Mathlib.Topology.Constructions
 
 /-!
 # Constant étale sheaves on connected schemes
@@ -28,6 +30,8 @@ representation by that disjoint union, the constant set-sheaf functor is
 fully faithful. The set can be infinite, and the scheme need not be locally
 noetherian or lie over a field.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

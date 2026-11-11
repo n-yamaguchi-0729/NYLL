@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.TameUniformizerRoot
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IntegralClosure
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.TameUniformizerRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IntegralClosure
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Complete normalization at an exponent divisible by a prime-to-p degree
@@ -33,6 +35,8 @@ positive multiple of that degree works for the normalization calculation.
 This is the complete local tame calculation used in Stacks Project 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

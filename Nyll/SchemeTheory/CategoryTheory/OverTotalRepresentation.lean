@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
 
 /-! A represented presheaf on a slice has its total presheaf represented by the same carrier. -/
+
+@[expose] public section
 
 noncomputable section
 

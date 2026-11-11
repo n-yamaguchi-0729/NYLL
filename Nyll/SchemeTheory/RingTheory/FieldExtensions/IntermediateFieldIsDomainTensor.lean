@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.LinearDisjoint
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.IntermediateFieldFinrankAdjoinRangeLeFinrank
-import Mathlib.LinearAlgebra.Dimension.OrzechProperty
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SimpRw
+module
+
+public import Mathlib.FieldTheory.LinearDisjoint
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.IntermediateFieldFinrankAdjoinRangeLeFinrank
+public import Mathlib.LinearAlgebra.Dimension.OrzechProperty
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SimpRw
 
 /-!
 # Intermediate Field is Domain tensor Product of finrank le finrank adjoin range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

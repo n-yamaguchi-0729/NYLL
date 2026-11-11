@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
-import Mathlib.CategoryTheory.Limits.Types.Limits
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.QuasiSeparated
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Topology.Spectral.Prespectral
+module
+
+public import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+public import Mathlib.CategoryTheory.Limits.Types.Limits
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Topology.Spectral.Prespectral
 
 /-!
 # Filtered colimits and sections over compact open subsets
@@ -33,6 +35,8 @@ References: https://stacks.math.columbia.edu/tag/009F and
 https://stacks.math.columbia.edu/tag/0CAI.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

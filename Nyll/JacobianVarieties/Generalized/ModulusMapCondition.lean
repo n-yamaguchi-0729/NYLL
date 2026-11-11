@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
-import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusEvaluation
+module
+
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelFamily
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusEvaluation
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
 
 /-! # The full modulus condition for an actual regular group-valued map
 
@@ -18,6 +21,8 @@ This condition is the principal-divisor definition applied to the actual
 morphism's constructed values. Its scope here is an algebraically closed
 base field. It does not assert existence of a modulus for a general map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionEquality
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.OpenImmersion
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionEquality
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 # Equality of sheaf sections at an affine-transition limit
@@ -21,6 +23,8 @@ The coefficient sheaf is arbitrary, and the stage maps need not be étale.
 This is the equality step needed when gluing finite local representatives
 in degree-zero continuity for étale sheaves (Stacks Project, Theorem 59.53.1).
 -/
+
+@[expose] public section
 
 noncomputable section
 

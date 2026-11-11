@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
-import Nyll.SchemeTheory.LocalGeometry.SmoothRegularStalks
-import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
+public import Nyll.SchemeTheory.LocalGeometry.SmoothRegularStalks
+public import Nyll.SchemeTheory.Normalization.Normal
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # The actual normal integral generic open of a smooth connected family
@@ -35,6 +37,8 @@ affine charts. Integrality and normality of that generic scheme are
 conclusions, not extra inputs to the specialization argument.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits
@@ -42,6 +46,19 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 universe u
+
+/-- An integral scheme smooth over a regular affine base is normal. The
+normality is proved on its actual stalks, without changing the scheme or
+its chosen function field. -/
+theorem Smooth.isNormalIntegral_of_isIntegral
+    {R : Type u} [CommRing R] [IsRegularRing R]
+    {X : Scheme.{u}} [IsIntegral X]
+    (f : X ⟶ Spec (.of R)) [Smooth f] : IsNormalIntegral X := by
+  apply IsNormalIntegral.of_stalks
+  intro x
+  let : IsRegularLocalRing (X.presheaf.stalk x) :=
+    Smooth.isRegularLocalRing_stalk_over_spec f x
+  exact SchemeTheory.isIntegrallyClosed_of_isRegularLocalRing _
 
 /-- The actual principal-open base change of a smooth geometrically
 connected family over a regular domain is integral. -/

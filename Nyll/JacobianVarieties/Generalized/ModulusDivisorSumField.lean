@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.Models.Divisors.CartierRelativePointSums
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusEvaluation
-import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
+module
+
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierRelativePointSums
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusEvaluation
+public import Nyll.JacobianVarieties.Albanese.DivisorSumEvaluation
 
 /-! # Regular divisor sums and actual function-field evaluation
 
@@ -16,6 +18,8 @@ These formulas identify the regular sum with the evaluation of the full Cartier
 divisor, including repetitions. The tuple hypotheses concern actual ideals and
 are discharged by geometric splitting of supported divisors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

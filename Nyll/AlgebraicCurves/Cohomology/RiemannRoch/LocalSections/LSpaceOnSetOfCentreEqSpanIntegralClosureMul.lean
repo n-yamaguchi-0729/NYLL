@@ -18,6 +18,7 @@ import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
 import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 import Nyll.AlgebraicCurves.Places.ValuationRings.MemIntegralClosureIffPlace
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # LSpace On set Of centre eq span integral Closure mul
@@ -94,7 +95,7 @@ theorem isIso_stalkSpecializes_of_eq {X : TopCat.{u}} (P : TopCat.Presheaf CommR
 theorem centred_fromSpec {k : Type u} [Field k] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of k))
   [IsIntegral C]
     {U : C.Opens} (hUaff : IsAffineOpen U) (hη : genericPoint C ∈ U) :
-    letI := (baseToFunctionField c).toAlgebra
+    let := (baseToFunctionField c).toAlgebra
     ∀ (v : Place k C.functionField)
       (_hAv : ∀ s : Γ(C, U), (C.presheaf.germ U (genericPoint C) hη).hom s ∈ v.toValuationSubring)
       (y : PrimeSpectrum Γ(C, U))
@@ -105,8 +106,8 @@ theorem centred_fromSpec {k : Type u} [Field k] {C : Scheme.{u}} (c : C ⟶ Spec
       (t ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk (hUaff.fromSpec y)) →
         v.adicValuation (algebraMap (C.presheaf.stalk (hUaff.fromSpec y)) C.functionField t) < 1)
           := by
+  intro sharedOwner1
   classical
-  let := (baseToFunctionField c).toAlgebra
   intro v hAv y hy
   set A := (C.presheaf.germ U (genericPoint C) hη).hom with hAdef
   set z : C := hUaff.fromSpec y with hzdef
@@ -148,7 +149,7 @@ theorem _root_.AlgebraicCurve.lSpaceOn_setOf_centre_eq_span_integralClosure_mul
     (hpts : ∀ z : C, z = genericPoint C ∨ IsClosed ({z} : Set C))
     (U : C.Opens) [Nonempty U] (hUaff : IsAffineOpen U)
     (z : C) (hzU : z ∈ U) (hz : IsClosed ({z} : Set C)) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     lSpaceOn {v : Place k C.functionField | (∀ s : C.presheaf.stalk z,
           v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) ≤ 1 ∧
           (s ∈ IsLocalRing.maximalIdeal (C.presheaf.stalk z) →
@@ -156,8 +157,8 @@ theorem _root_.AlgebraicCurve.lSpaceOn_setOf_centre_eq_span_integralClosure_mul
               Divisor k C.functionField) =
       Submodule.span k ((integralClosure Γ(C, U) C.functionField : Set C.functionField) *
         Set.range (algebraMap (C.presheaf.stalk z) C.functionField)) := by
+  intro sharedOwner1
   classical
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
   have : IsCurveOver k C.functionField := hK
   have : PerfectField k := inferInstance
   have := AlgebraicCurve.essFiniteType_functionField c

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticAllBranchCharacteristicZero
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentBranchResidue
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticCanonicalFundamentalGroup
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCoverAbelian
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalCyclotomicInertia
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticAllBranchCharacteristicZero
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentBranchResidue
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticCanonicalFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCoverAbelian
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalCyclotomicInertia
 
 /-!
 # Arithmetic cyclotomic vanishing on normal-crossings charts
@@ -20,6 +22,8 @@ the same height-one prime and the same normalization prime.  Hence the
 canonical divisorial inertia image vanishes in every abelian Galois quotient
 of the boundary complement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

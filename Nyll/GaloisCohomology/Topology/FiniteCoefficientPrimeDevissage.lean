@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.InvariantCoefficientSubrepresentation
-import Nyll.GaloisCohomology.Topology.InvariantCoefficientExactness
-import Nyll.GaloisCohomology.Topology.ContinuousH2FiniteIndexTrace
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
-import Mathlib.GroupTheory.OrderOfElement
+module
+
+public import Nyll.GaloisCohomology.Topology.InvariantCoefficientSubrepresentation
+public import Nyll.GaloisCohomology.Topology.InvariantCoefficientExactness
+public import Nyll.GaloisCohomology.Topology.ContinuousH2FiniteIndexTrace
+public import Mathlib.Algebra.Homology.HomologySequenceLemmas
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # Prime-coefficient dévissage for continuous degree-two cohomology
@@ -18,28 +21,32 @@ module's annihilator. Thus vanishing for all finite modules killed by a
 prime implies vanishing for every finite discrete coefficient module.
 -/
 
+@[expose] public section
+
 noncomputable section
 open CategoryTheory Limits ContRepresentation
 
 namespace TopRep
 
-variable (G : Type) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+universe u v
+
+variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [LocallyCompactSpace G]
 
 /-- Vanishing for every prime-annihilated finite coefficient module implies
 vanishing for arbitrary actual finite discrete coefficients. -/
 theorem continuousModuleH2_isZero_of_prime_coefficients
-    (hprime : ∀ (p : ℕ) [Fact p.Prime] (A : TopRep.{0} ℤ G)
+    (hprime : ∀ (p : ℕ) [Fact p.Prime] (A : TopRep.{u} ℤ G)
       [Finite A] [DiscreteTopology A],
       Continuous (fun ga : G × A => A.ρ ga.1 ga.2) →
       (∀ a : A, p • a = 0) →
       IsZero (((continuousModuleComplexFunctor G).obj A).homology 2))
-    (X : TopRep.{0} ℤ G) [Finite X] [DiscreteTopology X]
+    (X : TopRep.{u} ℤ G) [Finite X] [DiscreteTopology X]
     (hX : Continuous (fun gx : G × X => X.ρ gx.1 gx.2)) :
     IsZero (((continuousModuleComplexFunctor G).obj X).homology 2) := by
   classical
   suffices step : ∀ n : ℕ, 0 < n →
-      ∀ (Y : TopRep.{0} ℤ G) [Finite Y] [DiscreteTopology Y],
+      ∀ (Y : TopRep.{u} ℤ G) [Finite Y] [DiscreteTopology Y],
       Continuous (fun gy : G × Y => Y.ρ gy.1 gy.2) →
       (∀ y : Y, n • y = 0) →
       IsZero (((continuousModuleComplexFunctor G).obj Y).homology 2) by
@@ -101,5 +108,25 @@ theorem continuousModuleH2_isZero_of_prime_coefficients
       have hS := coefficientRangeContinuousModule_shortExact G A Y φ
         (invariantSubmoduleInclusion_injective ℤ G Y W hW) hAcont hY
       exact (hS.homology_exact₂ 2).isZero_X₂ (hA.eq_of_src _ _) (hQ.eq_of_tgt _ _)
+
+/-- Prime dévissage for an independently sized original coefficient module.
+The prime test uses the same working group as its actual lifted homogeneous complex. -/
+theorem universeLiftContinuousModuleH2_isZero_of_prime_coefficients
+    (hprime : ∀ (p : ℕ) [Fact p.Prime]
+      (A : TopRep.{max u v} ℤ (ULift.{v} G)) [Finite A] [DiscreteTopology A],
+      Continuous (fun ga : ULift.{v} G × A => A.ρ ga.1 ga.2) →
+      (∀ a : A, p • a = 0) →
+      IsZero (((continuousModuleComplexFunctor (ULift.{v} G)).obj A).homology 2))
+    (X : TopRep.{v} ℤ G) [Finite X] [DiscreteTopology X]
+    (hX : Continuous (fun gx : G × X => X.ρ gx.1 gx.2)) :
+    IsZero (((continuousModuleComplexFunctor (ULift.{v} G)).obj
+      (universeLift X)).homology 2) := by
+  let : LocallyCompactSpace (ULift.{v} G) :=
+    (Homeomorph.ulift : ULift.{v} G ≃ₜ G).isClosedEmbedding.locallyCompactSpace
+  have : Finite (universeLift X) := inferInstanceAs (Finite (ULift.{u} X))
+  have : DiscreteTopology (universeLift X) :=
+    inferInstanceAs (DiscreteTopology (ULift.{u} X))
+  exact continuousModuleH2_isZero_of_prime_coefficients (ULift.{v} G) hprime
+    (universeLift X) (universeLift_action_continuous X hX)
 
 end TopRep

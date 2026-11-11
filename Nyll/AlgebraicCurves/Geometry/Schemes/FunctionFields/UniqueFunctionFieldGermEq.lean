@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Algebra.Category.Ring.Constructions
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Algebra.Category.Ring.Constructions
 
 /-!
 # Scheme exists Unique germ To Function Field eq of i Sup eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

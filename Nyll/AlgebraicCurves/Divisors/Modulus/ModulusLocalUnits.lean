@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.Core
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.Modulus
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.Core
 
 /-!
 # Truncated local units of a modulus
@@ -19,6 +21,8 @@ This is the local algebra in Serre, *Algebraic Groups and Class Fields*,
 Chapter V, §3, no. 13–14. The unit reduction and first-isomorphism APIs come
 from `Valuation.AbsoluteValue.Theory.Core`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

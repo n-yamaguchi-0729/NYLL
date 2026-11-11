@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedDescent
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
-import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedDescent
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
+public import Nyll.AlgebraicCurves.Geometry.Descent.GroupOfMatching
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # The group law on an unpointed Picard descent
@@ -16,6 +18,8 @@ The group law comes from the actual tensor-product group of unrigidified classes
 using the proved equivalence between descended scheme points and matching local
 classes. No group law or comparison is assumed on the descended carrier.
 -/
+
+@[expose] public section
 
 universe u
 

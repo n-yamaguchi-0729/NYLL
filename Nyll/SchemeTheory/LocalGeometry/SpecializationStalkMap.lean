@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # The actual local-ring map of a geometric specialization
@@ -20,6 +22,8 @@ When the underlying point of `t` differs from `x`, its kernel is not the
 maximal ideal of `𝒪_{S,x}`. This supplies the nonclosed-point hypothesis in
 the DVR realization of a geometric specialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

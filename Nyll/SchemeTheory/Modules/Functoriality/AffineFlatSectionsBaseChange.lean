@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.Functoriality.AffineSectionsBaseChange
-import Nyll.SchemeTheory.Affine.PullbackSectionsPushout
-import Mathlib.RingTheory.IsTensorProduct
+module
+
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.Functoriality.AffineSectionsBaseChange
+public import Nyll.SchemeTheory.Affine.PullbackSectionsPushout
+public import Mathlib.RingTheory.IsTensorProduct
 
 /-! Tensor base change for sections over affine opens. -/
+
+@[expose] public section
 
 universe u
 
@@ -74,7 +78,7 @@ theorem exists_tensorProduct_linearEquiv_sections_pullback_preimage_of_isAffineO
   have key : c.appLE U (c ⁻¹ᵁ U) le_rfl = c.app U := Scheme.Hom.appLE_eq_app c
   have tSAB' : (let : Algebra Γ(X, U) Γ(X', c ⁻¹ᵁ U) := (c.appLE U (c ⁻¹ᵁ U) le_rfl).hom.toAlgebra
       IsScalarTower S Γ(X, U) Γ(X', c ⁻¹ᵁ U)) := by
-    let : Algebra Γ(X, U) Γ(X', c ⁻¹ᵁ U) := (c.appLE U (c ⁻¹ᵁ U) le_rfl).hom.toAlgebra
+    intro appLEAlgebra
     exact IsScalarTower.of_algebraMap_eq fun s => by
       change _ = (c.appLE U (c ⁻¹ᵁ U) le_rfl).hom (algebraMap S Γ(X, U) s)
       rw [key]; rfl

@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
-import Nyll.JacobianVarieties.Generalized.ModulusClassUniversality
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorEvaluationInvariance
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusClassUniversality
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorEvaluationInvariance
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
 
 /-! # Actual generalized Jacobian points and corrected divisor evaluation -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,22 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Data.Fintype.Pigeonhole
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Tactic.GCongr.Core
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith.Frontend
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+public import Mathlib.Data.Fintype.Pigeonhole
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Tactic.GCongr.Core
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith.Frontend
 
 /-!
 # Valuation Subring exists forall mem and sub mem nonunits
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

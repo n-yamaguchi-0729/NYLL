@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Presentable.Finite
-import Nyll.SchemeTheory.Topology.CompactOpenGenerators
-import Nyll.SchemeTheory.Topology.CompactOpenSections
+module
+
+public import Mathlib.CategoryTheory.Presentable.Finite
+public import Nyll.SchemeTheory.Topology.CompactOpenGenerators
+public import Nyll.SchemeTheory.Topology.CompactOpenSections
 
 /-!
 # Finite presentability of compact-open generators
@@ -21,6 +23,8 @@ sheafification. This is an input to the finite-presentation argument in
 Stacks Project, tag 0CAI: https://stacks.math.columbia.edu/tag/0CAI.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

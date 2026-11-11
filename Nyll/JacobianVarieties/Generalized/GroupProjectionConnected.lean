@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GroupProjectionGeometry
-import Nyll.SchemeTheory.Morphisms.GeometricallyConnectedDescent
+module
+
+public import Nyll.JacobianVarieties.Generalized.GroupProjectionGeometry
+public import Nyll.SchemeTheory.Morphisms.GeometricallyConnectedDescent
 
 /-! # Geometrically connected fibres of the arbitrary-field forgetting projection -/
+
+@[expose] public section
 
 noncomputable section
 universe u

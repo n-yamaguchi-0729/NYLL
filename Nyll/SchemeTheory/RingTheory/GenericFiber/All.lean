@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.ChosenComponentFractionRing
-import Nyll.SchemeTheory.RingTheory.GenericFiber.DVRProductComponent
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
-import Nyll.SchemeTheory.RingTheory.GenericFiber.LiesOverFractionRingExtension
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.ChosenComponentFractionRing
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.DVRProductComponent
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.LiesOverFractionRingExtension
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
 
 /-!
 # Generic fibres and fraction rings

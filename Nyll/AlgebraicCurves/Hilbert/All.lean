@@ -21,6 +21,7 @@ import Nyll.AlgebraicCurves.Hilbert.IdealMemIffAppAwayToSectionEqZeroPolynomial
 import Nyll.AlgebraicCurves.Hilbert.IdealProjectivePieceSuccIff
 import Nyll.AlgebraicCurves.Hilbert.ClosedImmersionFinitePresentationFactorsIffMem
 import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
+import Nyll.AlgebraicCurves.Hilbert.SmallFieldModel
 import Nyll.AlgebraicCurves.Hilbert.PointIEqMap
 import Nyll.AlgebraicCurves.Hilbert.PointIEqSpanSurjective
 import Nyll.AlgebraicCurves.Hilbert.PointMemIffClosedImmersion

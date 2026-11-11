@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
 
 /-!
 # Boundary-away transport through a finite integral base
@@ -15,6 +17,8 @@ are canonically equivalent.  Localizing that equivalence at a primitive
 element transports etaleness of the literal away map to the normalization
 over the enlarged base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

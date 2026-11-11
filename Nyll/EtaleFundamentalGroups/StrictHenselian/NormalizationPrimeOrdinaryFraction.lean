@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryHenselization
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryHenselization
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The ordinary henselization fraction field in the original ambient field
@@ -16,6 +18,8 @@ The native fraction-ring lift extends the actual injective ordinary-stalk
 map. Localization extensionality extends the proved decomposition-group
 fixedness to this actual fraction-field embedding.
 -/
+
+@[expose] public section
 
 noncomputable section
 

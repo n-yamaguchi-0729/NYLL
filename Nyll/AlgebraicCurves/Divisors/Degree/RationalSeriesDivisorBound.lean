@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
-import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
-import Mathlib.Data.Int.Lemmas
+module
+
+public import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
+public import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
+public import Mathlib.Data.Int.Lemmas
 
 /-! # One effective divisor for finite rational formal expansions
 
@@ -19,6 +21,8 @@ This concerns formal quotients of finite polynomial data. Realizing arbitrary
 curve coordinates along the formal diagonal, and the subsequent global
 reciprocity argument, are separate steps not asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
 
 /-!
 # Descending an actual geometric-stalk tensor equivalence
@@ -17,6 +19,8 @@ neighborhood. Both inverse equations descend through the small filtered
 algebra presentation. An affine refinement is then obtained geometrically,
 and the descended equivalence is extended to its ring of sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,7 +38,7 @@ theorem geometricStalk_exists_affine_tensorProduct_algEquiv
     [CommRing B] [CommRing D] [Algebra R B] [Algebra R D]
     [Algebra.FinitePresentation R B] [Algebra.FinitePresentation R D]
     (φ : R →+* Ω) :
-    letI : Algebra R (geometricStalk (Spec.map (CommRingCat.ofHom φ))) :=
+    let : Algebra R (geometricStalk (Spec.map (CommRingCat.ofHom φ))) :=
       (geometricStalkStructureMap φ).toAlgebra
     Nonempty ((geometricStalk (Spec.map (CommRingCat.ofHom φ)) ⊗[R] B) ≃ₐ[
       geometricStalk (Spec.map (CommRingCat.ofHom φ))]
@@ -45,8 +49,7 @@ theorem geometricStalk_exists_affine_tensorProduct_algEquiv
       letI : Algebra R Γ(V.left, ⊤) :=
         (((Scheme.ΓSpecIso (CommRingCat.of R)).inv ≫ V.hom.appTop).hom).toAlgebra
       Nonempty ((Γ(V.left, ⊤) ⊗[R] B) ≃ₐ[Γ(V.left, ⊤)] (Γ(V.left, ⊤) ⊗[R] D)) := by
-  let : Algebra R (geometricStalk (Spec.map (CommRingCat.ofHom φ))) :=
-    (geometricStalkStructureMap φ).toAlgebra
+  intro sharedOwner1
   rintro ⟨e⟩
   obtain ⟨k, ek, _, _⟩ := exists_tensorProduct_algEquiv_stage_of_filteredColimit
     (geometricStalkSmallAlgebraDiagram φ) (geometricStalkSmallAlgebraCocone φ)

@@ -10,23 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Analysis.Real.Sqrt
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusRiemannIndexCurve
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
-import Nyll.AlgebraicCurves.Cohomology.IndexOfSpecialtyEqFinrankH1
-import Nyll.AlgebraicCurves.Places.Degree.FiniteSetOfDegEq
-import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroIsAlgebraic
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantExtensionFinite
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqConstantExtensionFiniteDimensional
-import Nyll.AlgebraicCurves.Divisors.Degree.CardPlacesDegOneEqSumDivisors
+module
+
+public import Mathlib.Analysis.Real.Sqrt
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.GenusRiemannIndexCurve
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.AdelicGenus
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Spaces.SectionBounds
+public import Nyll.AlgebraicCurves.Cohomology.IndexOfSpecialtyEqFinrankH1
+public import Nyll.AlgebraicCurves.Places.Degree.FiniteSetOfDegEq
+public import Nyll.AlgebraicCurves.Places.Orders.OrdEqZeroIsAlgebraic
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantExtensionFinite
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Genus.GenusFFEqConstantExtensionFiniteDimensional
+public import Nyll.AlgebraicCurves.Divisors.Degree.CardPlacesDegOneEqSumDivisors
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Sum divisors mul card places lt of even
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -332,7 +337,7 @@ theorem ellQ_jump_add (hC : ConstantsAreBase K F) (Q : Place K F) (hQ : Q.deg = 
     apply ellQ_lt_of_exists hC Q (u * w)
     · have := mul_mem_lSpace_add' hu hw
       rw [← Finsupp.single_add] at this
-      (convert this using 3; try first | with_reducible_and_instances rfl | rfl)
+      convert this using 3
       push_cast; ring
     · exact mul_ne_zero hu0 hw0
     · rw [Place.ord_mul _ hu0 hw0, hou, how]

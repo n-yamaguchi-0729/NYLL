@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.JacobianVarieties.Generalized.PointedConstruction
 import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # Independence of the section used in the positive-modulus construction -/
 

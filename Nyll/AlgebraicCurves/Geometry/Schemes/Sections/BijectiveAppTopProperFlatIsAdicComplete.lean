@@ -10,35 +10,40 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.Algebra.Ring.Subring.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.LinearAlgebra.SModEq.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Tactic.Algebraize
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.LinearAlgebra.SModEq.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Tactic.Algebraize
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 
 /-!
 # bijective app Top of is Proper of flat of is Adic Complete
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -163,7 +168,8 @@ abbrev ι (I : Ideal A) : XI p I ⟶ X := pullback.fst _ _
 /-- The structure morphism from the closed base change to the quotient spectrum. -/
 abbrev pI (I : Ideal A) : XI p I ⟶ Spec (.of (A ⧸ I)) := pullback.snd _ _
 
-private noncomputable def _root_.SolH0T2.alg (U : X.Opens) : A →+* Γ(X, U) :=
+/-- The coefficient ring homomorphism on sections induced by the structure morphism. -/
+noncomputable def _root_.SolH0T2.alg (U : X.Opens) : A →+* Γ(X, U) :=
   (p.appLE ⊤ U le_top).hom.comp (Scheme.ΓSpecIso A).inv.hom
 export _root_.SolH0T2 (alg)
 
@@ -184,8 +190,8 @@ lemma appLE_top_top {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
   f.appLE_eq_app
 
 lemma appLE_congr_hom {Y Z : Scheme.{u}} {f g : Y ⟶ Z} (h : f = g) (U : Z.Opens) (V : Y.Opens)
-    (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ g ⁻¹ᵁ U) : f.appLE U V e = g.appLE U V e' := by
-  subst h; rfl
+    (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ g ⁻¹ᵁ U) : f.appLE U V e = g.appLE U V e' :=
+  _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom h U V e e'
 
 lemma ker_ι_app (I : Ideal A) {U : X.Opens} (hU : IsAffineOpen U) :
     RingHom.ker ((ι p I).app U).hom = I.map (alg p U) ∧ Function.Surjective ((ι p I).app U) := by

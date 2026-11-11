@@ -35,8 +35,6 @@ private def unifLDR : F :=
 private theorem unifLDR_mem : v.unifLDR ∈ v.toValuationSubring :=
   SetLike.coe_mem (IsDiscreteValuationRing.exists_irreducible v.toValuationSubring).choose
 
-private theorem dCoord_eq_D_unifLDR : v.dCoord = D K F v.unifLDR := rfl
-
 /-- The differential coefficient becomes integral after multiplication by a uniformizer power. -/
 def HasPoleOrderLE (n : ℕ) (ω : Ω[F⁄K]) : Prop :=
   ∃ f : F, v.unifLDR ^ n * f ∈ v.toValuationSubring ∧ ω = f • v.dCoord

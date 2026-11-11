@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroZariski
-import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyDivisorClasses
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroZariski
+public import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyDivisorClasses
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Actual supported divisors on affine charts of the modulus Picard-zero sheaf
@@ -15,6 +18,8 @@ The Zariski representatives and the normalized family construction provide
 actual divisors on each affine open. Both the original sheaf section and
 the equality preserving the full modulus frame are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

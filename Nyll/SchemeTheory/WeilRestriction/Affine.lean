@@ -12,6 +12,9 @@ public import Mathlib.RingTheory.Etale.Finite
 public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Nyll.SchemeTheory.Affine.WeilRestriction.Glued
+public import Nyll.SchemeTheory.Affine.WeilRestriction.InternalHom
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Basic
 
 /-!
 # Finite étale internal Hom over an affine scheme

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Topology.Algebra.Valued.NormedValued
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completion
+module
+
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Topology.Algebra.Valued.NormedValued
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completion
 
 /-!
 # Absolute-value and valued-field completions of a DVR fraction field
@@ -21,6 +23,8 @@ The map is obtained by extending the identity on `K`.  Its surjectivity is
 proved from density of `K` in the valued-field completion and closedness of
 the image of an isometry; it is not supplied as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -100,7 +104,7 @@ theorem standardDVRAbsoluteCompletionBaseMap_apply
   rfl
 
 /-- The completed valuation is still discrete rank one. -/
-private theorem standardDVFCompletionIsRankOneDiscrete
+theorem standardDVFCompletionIsRankOneDiscrete
     (V : Type uV) (K : Type uK)
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
@@ -113,7 +117,7 @@ private theorem standardDVFCompletionIsRankOneDiscrete
 /-- The rank-one structure on the completed valuation, normalized with the
 same scale as `standardDVRAbsoluteValue`. -/
 @[reducible]
-private noncomputable def standardDVRAbsoluteCompletionRankOne
+noncomputable def standardDVRAbsoluteCompletionRankOne
     (V : Type uV) (K : Type uK)
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
@@ -131,7 +135,7 @@ private theorem standardDVRAbsoluteCompletionRankOne_hom'_eq
     (V : Type uV) (K : Type uK)
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
-    letI : (Valued.v : Valuation (standardDVFCompletionField V K)
+    let : (Valued.v : Valuation (standardDVFCompletionField V K)
         (WithZero (Multiplicative ℤ))).IsRankOneDiscrete :=
       standardDVFCompletionIsRankOneDiscrete V K
     (standardDVRAbsoluteCompletionRankOne V K).hom' =
@@ -140,9 +144,7 @@ private theorem standardDVRAbsoluteCompletionRankOne_hom'_eq
           (Valuation.IsRankOneDiscrete.valueGroup₀_equiv_withZeroMulInt
             (Valued.v : Valuation (standardDVFCompletionField V K)
               (WithZero (Multiplicative ℤ)))).toMonoidWithZeroHom := by
-  let : (Valued.v : Valuation (standardDVFCompletionField V K)
-      (WithZero (Multiplicative ℤ))).IsRankOneDiscrete :=
-    standardDVFCompletionIsRankOneDiscrete V K
+  intro sharedOwner1
   rfl
 
 /-- The completed standard valuation is onto its normalized value group. -/
@@ -214,13 +216,11 @@ theorem standardDVRAbsoluteCompletionBaseMap_isometry
     (V : Type uV) (K : Type uK)
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
-    letI : (Valued.v : Valuation (standardDVFCompletionField V K)
+    let : (Valued.v : Valuation (standardDVFCompletionField V K)
         (WithZero (Multiplicative ℤ))).RankOne :=
       standardDVRAbsoluteCompletionRankOne V K
     Isometry (standardDVRAbsoluteCompletionBaseMap V K) := by
-  let : (Valued.v : Valuation (standardDVFCompletionField V K)
-      (WithZero (Multiplicative ℤ))).RankOne :=
-    standardDVRAbsoluteCompletionRankOne V K
+  intro sharedOwner1
   exact AddMonoidHomClass.isometry_of_norm _
     (standardDVRAbsoluteCompletionBaseMap_norm V K)
 
@@ -259,13 +259,11 @@ theorem standardDVRAbsoluteCompletionRingHom_isometry
     (V : Type uV) (K : Type uK)
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
-    letI : (Valued.v : Valuation (standardDVFCompletionField V K)
+    let : (Valued.v : Valuation (standardDVFCompletionField V K)
         (WithZero (Multiplicative ℤ))).RankOne :=
       standardDVRAbsoluteCompletionRankOne V K
     Isometry (standardDVRAbsoluteCompletionRingHom V K) := by
-  let : (Valued.v : Valuation (standardDVFCompletionField V K)
-      (WithZero (Multiplicative ℤ))).RankOne :=
-    standardDVRAbsoluteCompletionRankOne V K
+  intro sharedOwner1
   exact (standardDVRAbsoluteCompletionBaseMap_isometry V K).completion_extension
 
 /-- The canonical copy of `K` is dense in the valued-field completion. -/
@@ -351,12 +349,11 @@ noncomputable def standardDVRAbsoluteCompletionAlgEquiv
     (V : Type uV) (K : Type uK)
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
-    letI : Algebra K (standardDVFCompletionField V K) :=
+    let : Algebra K (standardDVFCompletionField V K) :=
       standardDVFCompletionAlgebra V K
     (standardDVRAbsoluteValue V K).Completion ≃ₐ[K]
       standardDVFCompletionField V K := by
-  letI : Algebra K (standardDVFCompletionField V K) :=
-    standardDVFCompletionAlgebra V K
+  intro sharedDefinitionOwner1
   exact
     { __ := standardDVRAbsoluteCompletionRingEquiv V K
       commutes' := standardDVRAbsoluteCompletionRingEquiv_algebraMap V K }

@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalSubextension
-import Nyll.ValuedFieldTheory.LocalField.Unramified.BasicInvariants
-import Mathlib.FieldTheory.SeparableClosure
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalSubextension
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.BasicInvariants
+public import Mathlib.FieldTheory.SeparableClosure
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Finite-subextension sources for residue embeddings
@@ -20,6 +23,8 @@ Passing these statements through the whole supremum requires closure under
 finite composita (stability under finite composita); that missing step is not inserted here as an
 extra hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -82,39 +87,21 @@ def restrictedResidueAlgHomToAmbient
       (exponentialValuationRestrict_extends v w hExt E)
     let j := restrictedValuationRingMapToAmbient w E
     let b := unramifiedValuationRingValuationRingMap v w hExt
-    letI : IsLocalHom i :=
+    let : IsLocalHom i :=
       unramifiedValuationRingValuationRingMap_isLocalHom v vE
         (exponentialValuationRestrict_extends v w hExt E)
-    letI : IsLocalHom j :=
+    let : IsLocalHom j :=
       restrictedValuationRingMapToAmbient_isLocalHom w E
-    letI : IsLocalHom b :=
+    let : IsLocalHom b :=
       unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
     let k := IsLocalRing.ResidueField V
     let kE := IsLocalRing.ResidueField VE
     let ell := IsLocalRing.ResidueField W
-    letI : Algebra k kE := (IsLocalRing.ResidueField.map i).toAlgebra
-    letI : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
+    let : Algebra k kE := (IsLocalRing.ResidueField.map i).toAlgebra
+    let : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
     kE →ₐ[k] ell := by
-  let vE := exponentialValuationRestrict w E
-  let V := LubinTate.Valuations.exponentialValuationSubring v
-  let VE := LubinTate.Valuations.exponentialValuationSubring vE
-  let W := LubinTate.Valuations.exponentialValuationSubring w
-  let i := unramifiedValuationRingValuationRingMap v vE
-    (exponentialValuationRestrict_extends v w hExt E)
-  let j := restrictedValuationRingMapToAmbient w E
-  let b := unramifiedValuationRingValuationRingMap v w hExt
-  letI : IsLocalHom i :=
-    unramifiedValuationRingValuationRingMap_isLocalHom v vE
-      (exponentialValuationRestrict_extends v w hExt E)
-  letI : IsLocalHom j :=
-    restrictedValuationRingMapToAmbient_isLocalHom w E
-  letI : IsLocalHom b :=
-    unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
-  let k := IsLocalRing.ResidueField V
-  let kE := IsLocalRing.ResidueField VE
-  let ell := IsLocalRing.ResidueField W
-  letI : Algebra k kE := (IsLocalRing.ResidueField.map i).toAlgebra
-  letI : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
+  intro vE V VE W i j b sharedOwner1 sharedOwner2 sharedOwner3 k kE ell
+    sharedOwner4 sharedOwner5
   refine
     { IsLocalRing.ResidueField.map j with
       commutes' := ?_ }
@@ -159,35 +146,28 @@ theorem finiteUnramifiedSubextension_residue_image_mem_separableClosure
     let V := LubinTate.Valuations.exponentialValuationSubring v
     let W := LubinTate.Valuations.exponentialValuationSubring w
     let b := unramifiedValuationRingValuationRingMap v w hExt
-    letI : IsLocalHom b :=
+    let : IsLocalHom b :=
       unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
     let k := IsLocalRing.ResidueField V
     let ell := IsLocalRing.ResidueField W
-    letI : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
+    let : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
     restrictedResidueAlgHomToAmbient v w hExt E x ∈
       separableClosure k ell := by
+  intro V W b localHom k ell residueAlgebra
   rcases hE with ⟨hfin, hUnramified⟩
   let : FiniteDimensional K E := hfin
   let vE := exponentialValuationRestrict w E
-  let V := LubinTate.Valuations.exponentialValuationSubring v
   let VE := LubinTate.Valuations.exponentialValuationSubring vE
-  let W := LubinTate.Valuations.exponentialValuationSubring w
   let i := unramifiedValuationRingValuationRingMap v vE
     (exponentialValuationRestrict_extends v w hExt E)
   let j := restrictedValuationRingMapToAmbient w E
-  let b := unramifiedValuationRingValuationRingMap v w hExt
   let : IsLocalHom i :=
     unramifiedValuationRingValuationRingMap_isLocalHom v vE
       (exponentialValuationRestrict_extends v w hExt E)
   let : IsLocalHom j :=
     restrictedValuationRingMapToAmbient_isLocalHom w E
-  let : IsLocalHom b :=
-    unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
-  let k := IsLocalRing.ResidueField V
   let kE := IsLocalRing.ResidueField VE
-  let ell := IsLocalRing.ResidueField W
   let : Algebra k kE := (IsLocalRing.ResidueField.map i).toAlgebra
-  let : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
   have hsep : Algebra.IsSeparable k kE := hUnramified.1
   let : Algebra.IsSeparable k kE := hsep
   let f : kE →ₐ[k] ell :=

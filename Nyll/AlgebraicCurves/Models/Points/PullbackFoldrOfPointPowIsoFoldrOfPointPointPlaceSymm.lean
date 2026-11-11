@@ -34,7 +34,7 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealPullbackInv
 import Nyll.AlgebraicCurves.Models.Construction.Basic
 import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
 import Nyll.AlgebraicCurves.Models.Ramification.PullbackOfPointModuleIsoFoldrPowRamificationIndex
 

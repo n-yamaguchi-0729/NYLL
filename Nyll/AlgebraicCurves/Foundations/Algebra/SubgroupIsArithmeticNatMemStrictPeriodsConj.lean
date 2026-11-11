@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.NumberTheory.ModularForms.Cusps
+module
+
+public import Mathlib.NumberTheory.ModularForms.Cusps
 
 /-!
 # Subgroup Is Arithmetic exists nat mem strict Periods conj
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

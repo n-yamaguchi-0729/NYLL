@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FinitePresentation
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Etale.Kaehler
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Flat.Tensor
-import Mathlib.RingTheory.Smooth.Fiber
-import Mathlib.RingTheory.Smooth.Flat
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.FinitePresentation
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.Flat.Tensor
+public import Mathlib.RingTheory.Smooth.Fiber
+public import Mathlib.RingTheory.Smooth.Flat
 
 
 /-!
@@ -26,6 +28,8 @@ reflects formal unramifiedness to R → A. Source-side finite-presentation
 descent supplies the remaining finite-presentation condition, so R → A is
 genuinely étale.
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Nyll.SchemeTheory.Modules.Tensor.AffineTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Functoriality.QuasicoherentPullbackSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPullback
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Nyll.SchemeTheory.Modules.Tensor.AffineTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Tensor sections with a pulled back coefficient module
@@ -24,6 +26,8 @@ ring. Its construction cancels the intervening scalar extension. On
 affine opens, quasicoherence makes each of the actual comparison maps
 invertible, so the resulting original section map is bijective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

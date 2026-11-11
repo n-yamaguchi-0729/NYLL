@@ -10,31 +10,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.RingTheory.LocalProperties.Exactness
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Algebra.Module.LocalizedModule.AtPrime
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatFinitePresentation
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPushoutAppTopPullbackFstAppTopPullbackSnd
-import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppTopUniversallyClosed
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.LocalProperties.Exactness
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopProperFlatFinitePresentation
+public import Nyll.SchemeTheory.BaseChange.AffineGlobalSections
+public import Nyll.AlgebraicCurves.Geometry.Curves.BijectiveAppTopUniversallyClosed
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePullback
 
 /-!
 # Abelian Scheme Property Bundle bijective algebra Map sections pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

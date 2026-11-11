@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameClass
-import Nyll.JacobianVarieties.Generalized.RigidifiedCongr
-import Nyll.JacobianVarieties.Generalized.PicardFunctor
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameClass
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCongr
+public import Nyll.JacobianVarieties.Generalized.PicardFunctor
 
 /-!
 # Frame classes in the existing modulus Picard presheaf
@@ -17,6 +19,8 @@ to the modulus convention used by the Picard presheaf. The intrinsic frame class
 therefore inject into its values on every test scheme. Naturality and the
 sheaf-level classification remain separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.All
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactorUniverse
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ResidueTrivialFiniteEtale
-import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.All
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactorUniverse
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ResidueTrivialFiniteEtale
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
 
 /-! Canonical aggregate for SchemeTheory.FiniteEtale.Henselian. -/

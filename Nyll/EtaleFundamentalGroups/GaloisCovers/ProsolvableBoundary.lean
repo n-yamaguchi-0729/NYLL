@@ -6,6 +6,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
 import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+import Nyll.ProCGroups.FiniteGroups.StandardClasses
+import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
 
 /-!
 # Prosolvable comparison across divisor complements

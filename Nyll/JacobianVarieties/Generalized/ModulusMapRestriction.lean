@@ -4,22 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
-import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.ModulusTransition
-import Nyll.JacobianVarieties.Generalized.ModulusAbelTransition
-import Nyll.JacobianVarieties.Generalized.ModulusRegularMap
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
+public import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.ModulusTransition
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelTransition
+public import Nyll.JacobianVarieties.Generalized.ModulusRegularMap
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Restricting a regular map while enlarging its full modulus
 
@@ -28,6 +31,8 @@ inequality of all multiplicities. Values at the newly removed points do not
 affect the modulus condition because every admissible principal divisor has
 order zero there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

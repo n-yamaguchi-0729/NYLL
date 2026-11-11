@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Nyll.SchemeTheory.CategoryTheory.FunctorCategoryExactness
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+module
+
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Nyll.SchemeTheory.CategoryTheory.FunctorCategoryExactness
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 
 /-!
 # The actual cohomology-presheaf boundary of a short exact sequence
@@ -19,6 +21,8 @@ to the actual degree-one cohomology presheaf. Its kernel is the image
 of the middle sheaf's sections. For an injective middle sheaf it presents
 the entire cohomology presheaf as a cokernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Transport of recovered charts through an actual natural isomorphism
@@ -15,6 +17,8 @@ Changing the base-change functor along a specified natural isomorphism
 preserves the recovered open cover, its cartesian structure squares, and
 the actual pairwise recovery equations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

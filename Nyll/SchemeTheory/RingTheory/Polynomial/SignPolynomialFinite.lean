@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialInvariants
-import Mathlib.RingTheory.Invariant.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.Algebra.GroupWithZero.Units.Fintype
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialInvariants
+public import Mathlib.RingTheory.Invariant.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.Algebra.GroupWithZero.Units.Fintype
 
 /-! # Finiteness of the simultaneous sign quotient
 
@@ -16,6 +18,8 @@ The polynomial ring is finite over its concrete quadratic subalgebra. The
 invariant-ring input is the proved calculation for simultaneous sign change,
 with the action explicitly selected. These statements allow zero variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

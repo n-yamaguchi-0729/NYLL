@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Mathlib.CategoryTheory.Preadditive.Biproducts
-import Mathlib.LinearAlgebra.Finsupp.Defs
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Nyll.SchemeTheory.Modules.Sections.FreeHomSections
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
+public import Mathlib.LinearAlgebra.Finsupp.Defs
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-!
 # Original sections and generators of a finite free module sheaf
@@ -36,6 +38,8 @@ morphism is epimorphic and its target is quasicoherent, this original
 linear combination is surjective on each affine open.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -48,7 +52,8 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 
 variable {X : Scheme.{u}} (J : Type u) [Finite J] (U : X.Opens)
 
-private def freeSectionsIsColimit : IsColimit
+/-- Evaluating the finite free sheaf gives the coproduct of its coefficient modules. -/
+def freeSectionsIsColimit : IsColimit
     (Cofan.mk ((moduleSectionsFunctor U).obj (show X.Modules from SheafOfModules.free J))
       (fun j : J => (SheafOfModules.ιFree (R := X.ringCatSheaf) j).val.app (op U)) :
         Cofan (fun _ : J => ModuleCat.of Γ(X, U) Γ(X, U))) := by

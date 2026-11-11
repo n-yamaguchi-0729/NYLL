@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ClosedAdjunction
-import Nyll.EtaleCohomology.Sites.ClosedImmersionStalks
-import Nyll.EtaleCohomology.Sites.ExtensionByZero
-import Nyll.EtaleCohomology.Sites.ExtensionByZeroStalks
-import Nyll.EtaleCohomology.Sites.OpenAdjunction
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.EtaleCohomology.Sites.Stalks
-import Nyll.SchemeTheory.Morphisms.ClosedImmersionLift
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Homology.ShortComplex.Basic
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
-import Mathlib.CategoryTheory.Sites.Point.Conservative
+module
+
+public import Nyll.EtaleCohomology.Sites.ClosedAdjunction
+public import Nyll.EtaleCohomology.Sites.ClosedImmersionStalks
+public import Nyll.EtaleCohomology.Sites.ExtensionByZero
+public import Nyll.EtaleCohomology.Sites.ExtensionByZeroStalks
+public import Nyll.EtaleCohomology.Sites.OpenAdjunction
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Nyll.EtaleCohomology.Sites.Stalks
+public import Nyll.SchemeTheory.Morphisms.ClosedImmersionLift
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Homology.ShortComplex.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
 
 /-!
 # Open-closed localization for étale coefficient sheaves
@@ -34,6 +36,8 @@ adjunction counit and unit give the short exact sequence
 The composite is zero and exactness is checked on all geometric stalks.
 No base field, noetherian, finite-type, or constructibility hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

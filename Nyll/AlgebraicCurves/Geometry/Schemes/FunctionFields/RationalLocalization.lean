@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ResidueField
-import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Nyll.SchemeTheory.RingTheory.Localization.RationalLocalization
 
 /-!
 # Rational Localization
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory
 

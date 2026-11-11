@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameOrder
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameQuotientCardinality
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealWildPrimary
-import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameOrder
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameQuotientCardinality
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealWildPrimary
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeFiniteNormalizationTameProperties
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
 
 /-!
 # Wild and tame cardinalities of the original finite normalization
@@ -21,6 +23,8 @@ The finite Galois field tower supplies the actual wild prime-power order.
 Its independent principal-unit subgroup realizes that cardinality, and the
 same tame degree is the literal normalization-inertia quotient cardinality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

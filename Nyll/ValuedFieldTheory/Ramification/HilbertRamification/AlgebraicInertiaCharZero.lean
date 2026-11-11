@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
-import Mathlib.FieldTheory.Galois.GaloisClosure
-import Mathlib.Algebra.Group.Subgroup.Finite
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
+public import Mathlib.FieldTheory.Galois.GaloisClosure
+public import Mathlib.Algebra.Group.Subgroup.Finite
 
 /-!
 # Inertia in residue characteristic zero over an algebraic Galois extension
@@ -20,6 +22,8 @@ restriction formula gives commutativity on each element of the original field.
 No Henselianity, discreteness, or finite-residue hypothesis is used.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

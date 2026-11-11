@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
-import Mathlib.RingTheory.Trace.Defs
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
+public import Mathlib.RingTheory.Trace.Defs
+public import Mathlib.Tactic.Ext
 
 /-!
 # Algebra is Integral trace of finite Dimensional
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -75,7 +79,7 @@ theorem _root_.Algebra.isIntegral_trace_of_finiteDimensional
     rfl
   rw [htr, ← (isIntegral_algebraMap_iff (R := R) (A := K) (B := Kb) (x := M.trace))]
   have htrmap : algebraMap K Kb M.trace = Mb.trace := by
-    simp [Matrix.trace, hMbdef, map_sum]
+    exact AddMonoidHom.map_trace (algebraMap K Kb) M
   rw [htrmap, Matrix.trace_eq_sum_roots_charpoly]
   refine IsIntegral.multiset_sum fun μ hμ => ?_
   have hroot : Mb.charpoly.IsRoot μ := (mem_roots (Matrix.charpoly_monic Mb).ne_zero).mp hμ
@@ -86,7 +90,7 @@ theorem _root_.Algebra.isIntegral_trace_of_finiteDimensional
     rw [Matrix.sub_mulVec, sub_eq_zero] at hv
     rw [← hv]
     ext i
-    simp [Matrix.scalar_apply, Matrix.mulVec_diagonal]
+    exact Matrix.mulVec_diagonal (fun _ => μ) v i
   have heval : (p.map (algebraMap R Kb)).eval μ = 0 := by
     have h1 := aeval_mulVec_of_mulVec_eq_smul Mb μ v hev (p.map (algebraMap R Kb))
     rw [hMb, Matrix.zero_mulVec] at h1

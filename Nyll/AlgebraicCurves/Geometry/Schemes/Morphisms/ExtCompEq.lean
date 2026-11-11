@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.RingTheory.Jacobson.Ring
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # ext of forall comp eq of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

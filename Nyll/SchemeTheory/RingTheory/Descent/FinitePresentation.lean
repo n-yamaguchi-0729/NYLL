@@ -13,19 +13,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Finiteness.Ideal
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatOnOpenImage
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteType
-import Nyll.SchemeTheory.RingTheory.Flat.FiniteSubalgebra
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatOnOpenImage
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteType
+public import Nyll.SchemeTheory.RingTheory.Flat.FiniteSubalgebra
 
 /-!
 # Faithfully flat descent of finite presentation
@@ -34,6 +36,8 @@ Finite generation of the kernel of a polynomial presentation descends through fa
 flat base change. Combined with finite-type descent, this proves descent of finite
 presentation.
 -/
+
+@[expose] public section
 
 universe u v w
 

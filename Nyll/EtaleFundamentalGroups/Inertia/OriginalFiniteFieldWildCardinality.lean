@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationWildCardinality
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameOrder
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.Group.Subgroup.Finite
-import Mathlib.GroupTheory.Index
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteFieldCanonicalTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationTameExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalFiniteNormalizationWildCardinality
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameOrder
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Group.Subgroup.Finite
+public import Mathlib.GroupTheory.Index
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # Cardinality of the original finite-field wild subgroup
@@ -23,6 +25,8 @@ The genuine normalization restriction equivalence preserves the cardinality
 of the already-defined wild comap and its inertia quotient. This yields the
 literal original-field wild-order and tame-order statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

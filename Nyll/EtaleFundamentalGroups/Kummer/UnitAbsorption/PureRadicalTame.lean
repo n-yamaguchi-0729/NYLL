@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerRamification
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.ResidueSeparableTower
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Separable
-import Mathlib.RingTheory.Polynomial.GaussLemma
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.Smooth.Flat
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerRamification
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.ResidueSeparableTower
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Separable
+public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.Smooth.Flat
 
 /-!
 # Unit absorption with a separable residue extension
@@ -37,6 +39,8 @@ gives étaleness.
 This is the local tame unit-absorption step needed for Stacks Project,
 Proposition 58.30.3: https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

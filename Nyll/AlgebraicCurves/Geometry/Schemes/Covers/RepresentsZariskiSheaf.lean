@@ -10,26 +10,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.Sites.BigZariski
-import Mathlib.AlgebraicGeometry.Sites.Representability
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.MorphismProperty.Representable
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.PresheafOverEquivIsSheafOverTotal
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OpenImmersionPresheafOverTotal
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Sites.BigZariski
+public import Mathlib.AlgebraicGeometry.Sites.Representability
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.MorphismProperty.Representable
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.PresheafOverEquivIsSheafOverTotal
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OpenImmersionPresheafOverTotal
 
 /-!
 # Scheme exists represents of zariski Sheaf of open Affine Cover
+
+The sheaf extension, affine charts, chart index and representing scheme share one arbitrary
+universe. The construction uses the same slice sections, gluing datum and evaluation equivalence.
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -45,14 +54,14 @@ open _root_.CategoryTheory.Limits
 
 namespace GrassBridgeS1
 
-variable {R : Type} [CommRing R]
+variable {R : Type u} [CommRing R]
 
 /-- The spectrum morphism associated with the given algebra structure. -/
-noncomputable abbrev strMap (A : Type) [CommRing A] [Algebra R A] :
+noncomputable abbrev strMap (A : Type u) [CommRing A] [Algebra R A] :
     Spec (CommRingCat.of A) ⟶ Spec (CommRingCat.of R) :=
   Spec.map (CommRingCat.ofHom (algebraMap R A))
 
-lemma spec_comp_strMap {A B : Type} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+lemma spec_comp_strMap {A B : Type u} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (φ : A →ₐ[R] B) : Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ strMap (R := R) A = strMap B := by
   rw [strMap, strMap, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
   congr 2
@@ -60,17 +69,17 @@ lemma spec_comp_strMap {A B : Type} [CommRing A] [CommRing B] [Algebra R A] [Alg
 
 section pts
 
-variable (G : (Over (Spec (CommRingCat.of R)))ᵒᵖ ⥤ Type) {X : Scheme.{0}}
+variable (G : (Over (Spec (CommRingCat.of R)))ᵒᵖ ⥤ Type u) {X : Scheme.{u}}
   (e : G.overTotal.RepresentableBy X)
-  (F : ∀ (A : Type) [CommRing A] [Algebra R A], Type)
-  (ev : ∀ (A : Type) [CommRing A] [Algebra R A],
+  (F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type u)
+  (ev : ∀ (A : Type u) [CommRing A] [Algebra R A],
     F A ≃ G.obj (op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R A))))))
 
 /-- The points of the representing scheme over the specified algebra structure. -/
-abbrev Pts (A : Type) [CommRing A] [Algebra R A] : Type :=
+abbrev Pts (A : Type u) [CommRing A] [Algebra R A] : Type u :=
   {g : Spec (CommRingCat.of A) ⟶ X // g ≫ e.overTotalBase = strMap A}
 
-variable (A : Type) [CommRing A] [Algebra R A]
+variable (A : Type u) [CommRing A] [Algebra R A]
 
 /-- The point of the representing scheme associated with an element of the functor. -/
 noncomputable def toPts (s : F A) : Pts G e A :=
@@ -109,9 +118,9 @@ noncomputable def ptEquiv : F A ≃ Pts G e A :=
 variable {A}
 
 lemma ptEquiv_natural
-    (Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
+    (Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
       (A →ₐ[R] B) → F A → F B)
-    (hev : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s
+    (hev : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s
       : F A)
       (h : Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ Spec.map (CommRingCat.ofHom (algebraMap R A))
         =
@@ -120,7 +129,7 @@ lemma ptEquiv_natural
         G.map (Over.homMk (Spec.map (CommRingCat.ofHom φ.toRingHom)) h :
           Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R B))) ⟶
             Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R A)))).op (ev A s))
-    (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B) (s : F A) :
+    (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B) (s : F A) :
     (ptEquiv G e F ev B (Fmap A B φ s)).1 =
       Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ (ptEquiv G e F ev A s).1 := by
   have h := spec_comp_strMap (R := R) φ
@@ -146,16 +155,16 @@ lemma ptEquiv_natural
 end pts
 
 lemma P_map
-    (F : ∀ (A : Type) [CommRing A] [Algebra R A], Type)
-    (Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
+    (F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type u)
+    (Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
       (A →ₐ[R] B) → F A → F B)
-    (Fmap_id : ∀ (A : Type) [CommRing A] [Algebra R A] (s : F A), Fmap A A (AlgHom.id R A) s = s)
-    {ι : Type} (P : ι → ∀ (A : Type) [CommRing A] [Algebra R A], F A → Prop)
-    (isOpen : ∀ (i : ι) (A : Type) [CommRing A] [Algebra R A] (s : F A),
+    (Fmap_id : ∀ (A : Type u) [CommRing A] [Algebra R A] (s : F A), Fmap A A (AlgHom.id R A) s = s)
+    {ι : Type u} (P : ι → ∀ (A : Type u) [CommRing A] [Algebra R A], F A → Prop)
+    (isOpen : ∀ (i : ι) (A : Type u) [CommRing A] [Algebra R A] (s : F A),
       ∃ U : Set (PrimeSpectrum A), IsOpen U ∧
-        ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
+        ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
           P i B (Fmap A B φ s) ↔ Set.range (PrimeSpectrum.comap φ.toRingHom) ⊆ U)
-    (i : ι) {A B : Type} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B)
+    (i : ι) {A B : Type u} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B)
     (u : {s : F A // P i A s}) : P i B (Fmap A B φ u.1) := by
   obtain ⟨U, -, hU⟩ := isOpen i A u.1
   have huniv : Set.univ ⊆ U := by
@@ -169,45 +178,47 @@ end GrassBridgeS1
 
 open GrassBridgeS1 in
 theorem _root_.AlgebraicGeometry.Scheme.exists_represents_of_zariskiSheaf_of_openAffineCover
-    (R : Type) [CommRing R]
-    (F : ∀ (A : Type) [CommRing A] [Algebra R A], Type)
-    (Fmap : ∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
+    (R : Type u) [CommRing R]
+    (F : ∀ (A : Type u) [CommRing A] [Algebra R A], Type u)
+    (Fmap : ∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B],
       (A →ₐ[R] B) → F A → F B)
-    (Fmap_id : ∀ (A : Type) [CommRing A] [Algebra R A] (s : F A), Fmap A A (AlgHom.id R A) s = s)
-    (Fmap_comp : ∀ (A B C : Type) [CommRing A] [CommRing B] [CommRing C] [Algebra R A] [Algebra R B]
+    (Fmap_id : ∀ (A : Type u) [CommRing A] [Algebra R A] (s : F A), Fmap A A (AlgHom.id R A) s = s)
+    (Fmap_comp : ∀ (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]
+      [Algebra R A] [Algebra R B]
       [Algebra R C] (φ : A →ₐ[R] B) (ψ : B →ₐ[R] C) (s : F A),
       Fmap A C (ψ.comp φ) s = Fmap B C ψ (Fmap A B φ s))
-    (sheaf : ∀ (A : Type) [CommRing A] [Algebra R A] (n : ℕ) (f : Fin n → A),
+    (sheaf : ∀ (A : Type u) [CommRing A] [Algebra R A] (n : ℕ) (f : Fin n → A),
       Ideal.span (Set.range f) = ⊤ →
-      ∀ (B : Fin n → Type) [∀ i, CommRing (B i)] [∀ i, Algebra A (B i)] [∀ i, Algebra R (B i)]
+      ∀ (B : Fin n → Type u) [∀ i, CommRing (B i)] [∀ i, Algebra A (B i)] [∀ i, Algebra R (B i)]
         [∀ i, IsScalarTower R A (B i)] [∀ i, IsLocalization.Away (f i) (B i)] (s : ∀ i, F (B i)),
-      (∀ (i j : Fin n) (C : Type) [CommRing C] [Algebra A C] [Algebra R C] [IsScalarTower R A C]
+      (∀ (i j : Fin n) (C : Type u) [CommRing C] [Algebra A C] [Algebra R C] [IsScalarTower R A C]
           [IsLocalization.Away (f i * f j) C] (ρ₁ : B i →ₐ[A] C) (ρ₂ : B j →ₐ[A] C),
           Fmap _ _ (ρ₁.restrictScalars R) (s i) = Fmap _ _ (ρ₂.restrictScalars R) (s j)) →
       ∃! s₀ : F A, ∀ i, Fmap _ _ (IsScalarTower.toAlgHom R A (B i)) s₀ = s i)
-    (ι : Type) (P : ι → ∀ (A : Type) [CommRing A] [Algebra R A], F A → Prop)
-    (isOpen : ∀ (i : ι) (A : Type) [CommRing A] [Algebra R A] (s : F A),
+    (ι : Type u) (P : ι → ∀ (A : Type u) [CommRing A] [Algebra R A], F A → Prop)
+    (isOpen : ∀ (i : ι) (A : Type u) [CommRing A] [Algebra R A] (s : F A),
       ∃ U : Set (PrimeSpectrum A), IsOpen U ∧
-        ∀ (B : Type) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
+        ∀ (B : Type u) [CommRing B] [Algebra R B] (φ : A →ₐ[R] B),
           P i B (Fmap A B φ s) ↔ Set.range (PrimeSpectrum.comap φ.toRingHom) ⊆ U)
-    (S : ι → Type) [∀ i, CommRing (S i)] [∀ i, Algebra R (S i)]
-    (chart : ∀ (i : ι) (A : Type) [CommRing A] [Algebra R A], {s : F A // P i A s} ≃ (S i →ₐ[R] A))
-    (chart_natural : ∀ (i : ι) (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
+    (S : ι → Type u) [∀ i, CommRing (S i)] [∀ i, Algebra R (S i)]
+    (chart : ∀ (i : ι) (A : Type u) [CommRing A] [Algebra R A],
+      {s : F A // P i A s} ≃ (S i →ₐ[R] A))
+    (chart_natural : ∀ (i : ι) (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
       (φ : A →ₐ[R] B) (s : {s : F A // P i A s}) (h : P i B (Fmap A B φ s.1)),
       chart i B ⟨Fmap A B φ s.1, h⟩ = φ.comp (chart i A s))
-    (cover : ∀ (K : Type) [Field K] [Algebra R K] (s : F K), ∃ i, P i K s) :
-    ∃ (X : Scheme.{0}) (p : X ⟶ Spec (CommRingCat.of R))
-      (pt : ∀ (A : Type) [CommRing A] [Algebra R A],
+    (cover : ∀ (K : Type u) [Field K] [Algebra R K] (s : F K), ∃ i, P i K s) :
+    ∃ (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of R))
+      (pt : ∀ (A : Type u) [CommRing A] [Algebra R A],
         F A ≃ {g : Spec (CommRingCat.of A) ⟶ X // g ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R
           A))})
       (j : ∀ i, Spec (CommRingCat.of (S i)) ⟶ X),
-      (∀ (A B : Type) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s : F
+      (∀ (A B : Type u) [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (φ : A →ₐ[R] B) (s : F
         A),
           (pt B (Fmap A B φ s)).1 = Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ (pt A s).1) ∧
       (∀ i, IsOpenImmersion (j i)) ∧
       (∀ i, j i ≫ p = Spec.map (CommRingCat.ofHom (algebraMap R (S i)))) ∧
       (∀ y : X, ∃ i, y ∈ Set.range (j i).base) ∧
-      (∀ (i : ι) (A : Type) [CommRing A] [Algebra R A] (s : {s : F A // P i A s}),
+      (∀ (i : ι) (A : Type u) [CommRing A] [Algebra R A] (s : {s : F A // P i A s}),
           (pt A s.1).1 = Spec.map (CommRingCat.ofHom (chart i A s).toRingHom) ≫ j i) := by
   obtain ⟨G, ev, hG, hev⟩ :=
     AlgebraicGeometry.Scheme.exists_presheaf_over_equiv_isSheaf_overTotal_of_isLocalization_away R
@@ -217,7 +228,7 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_represents_of_zariskiSheaf_of_ope
     AlgebraicGeometry.Scheme.exists_isOpenImmersion_presheaf_overTotal_of_isOpen_of_chart R F Fmap
       Fmap_id
       Fmap_comp G ev hG hev ι P isOpen S chart chart_natural cover
-  let Gs : Sheaf Scheme.zariskiTopology (Type) := ⟨G.overTotal, hG⟩
+  let Gs : Sheaf Scheme.zariskiTopology (Type u) := ⟨G.overTotal, hG⟩
   have hf' : ∀ i, IsOpenImmersion.presheaf
       (show yoneda.obj (Spec (CommRingCat.of (S i))) ⟶ Gs.1 from f i) := hf
   have : Presheaf.IsLocallySurjective Scheme.zariskiTopology

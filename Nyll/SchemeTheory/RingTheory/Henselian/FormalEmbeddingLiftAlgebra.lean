@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # Ground-field structure of actual finite separable formal factors
 
@@ -15,6 +17,8 @@ native ground-field algebra homomorphism, with its residue and base-parameter
 values proved from the original lift equations. No additional scalar tower
 through the coefficient-field inclusion into power series is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

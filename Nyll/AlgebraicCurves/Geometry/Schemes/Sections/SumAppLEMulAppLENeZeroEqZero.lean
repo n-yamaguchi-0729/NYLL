@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Basic.Complex.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.SchemeTheory.Affine.SeparatedIntersections
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenEqAppLEEqAppLEEq
+module
+
+public import Mathlib.Basic.Complex.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.Affine.SeparatedIntersections
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenEqAppLEEqAppLEEq
 
 /-!
 # exists sum app LE mul app LE ne zero and forall eq zero of ne of is Separated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

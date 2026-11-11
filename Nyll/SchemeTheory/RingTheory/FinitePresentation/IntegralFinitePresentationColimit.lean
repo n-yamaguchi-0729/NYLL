@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.FinitePresentation.FinitePresentationCoequalizer
-import Nyll.SchemeTheory.RingTheory.FinitePresentation.IntegralFinitePresentationDiagram
-import Nyll.SchemeTheory.RingTheory.FinitePresentation.IntegralFinitePresentationModel
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.InducedCategory
-import Mathlib.CategoryTheory.Limits.Preserves.Basic
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.Data.Finset.Insert
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.FinitePresentation.FinitePresentationCoequalizer
+public import Nyll.SchemeTheory.RingTheory.FinitePresentation.IntegralFinitePresentationDiagram
+public import Nyll.SchemeTheory.RingTheory.FinitePresentation.IntegralFinitePresentationModel
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.InducedCategory
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
 
 
 /-!
@@ -34,6 +36,8 @@ underlying commutative-ring cocone is colimiting.
 All stages and the index remain in the base universe. This is the actual
 ring-local approximation; global relative-Spec approximation is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

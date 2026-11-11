@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.Algebra.Ring.Idempotent
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.Algebra.Ring.Idempotent
 
 /-!
 # Descending idempotent sections through affine-transition limits
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Ring.Idempotent
 A global section descends to a stage, and its idempotency equation holds at
 a further stage. Both the section and the equation are actually constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

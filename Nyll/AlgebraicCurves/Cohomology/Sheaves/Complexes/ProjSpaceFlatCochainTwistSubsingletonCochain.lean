@@ -10,28 +10,32 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.GradedMonoid
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.Tactic.FinCases
-import Lean.Elab.Tactic.Omega
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivTwistObj
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceQuasicoherentTwist
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceCoherentTwistFlat
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.GradedMonoid
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.Tactic.FinCases
+public import Lean.Elab.Tactic.Omega
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivTwistObj
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceQuasicoherentTwist
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceCoherentTwistFlat
 
 /-!
 # Proj Space flat cochain twist and subsingleton cochain of flat
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

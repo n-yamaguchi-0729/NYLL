@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSubopen
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingFiniteType
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSubopen
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingFiniteType
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Finite-type quasicoherent gluing on a union of opens
@@ -16,6 +18,8 @@ the actual glued submodule restricts to a finite-type quasicoherent
 module on that union whenever the prescribed local submodules have those
 properties and their embedded section submodules agree on the overlap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

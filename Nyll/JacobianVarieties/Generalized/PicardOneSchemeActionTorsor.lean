@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneSchemeAction
-import Nyll.JacobianVarieties.Generalized.PicardOneSchemeTorsor
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneSchemeAction
+public import Nyll.JacobianVarieties.Generalized.PicardOneSchemeTorsor
 
 /-! # The actual canonical Picard-one action satisfies the scheme torsor identity -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -18,7 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory CartesianMon
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 
-private def tensorBinaryProductIso {B : Type u} [Category.{v} B]
+/-- The canonical comparison between the tensor and binary Cartesian products. -/
+def tensorBinaryProductIso {B : Type u} [Category.{v} B]
     [CartesianMonoidalCategory B] (X Y : B) : X ⊗ Y ≅ X ⨯ Y where
   hom := Limits.prod.lift (fst X Y) (snd X Y)
   inv := lift Limits.prod.fst Limits.prod.snd

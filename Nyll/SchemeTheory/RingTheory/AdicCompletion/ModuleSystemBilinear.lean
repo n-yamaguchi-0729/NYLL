@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Mathlib.LinearAlgebra.BilinearMap
-import Mathlib.LinearAlgebra.Quotient.Bilinear
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Mathlib.LinearAlgebra.BilinearMap
+public import Mathlib.LinearAlgebra.Quotient.Bilinear
 
 /-!
 # Bilinear maps of effective adic systems
@@ -21,6 +23,8 @@ The source modules are constructed by finite adic effectivity; quotient
 identifications, maps on quotients, and their compatibility are all proved.
 The target system only needs the specified annihilating ideal powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -90,7 +94,8 @@ theorem eval_sectionsBilinearMap (f : compatibleBilinearMaps M tM N tN P tP)
 variable (I : Ideal R)
   (hpowP : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule R (P n)) = ⊥)
 
-private def quotientStageBilinear
+/-- Descend an evaluated bilinear map to the ideal-power quotients in both variables. -/
+def quotientStageBilinear
     (F : sections M tM →ₗ[R] sections N tN →ₗ[R] sections P tP) (n : ℕ) :
     (sections M tM ⧸ (I ^ (n + 1) • (⊤ : Submodule R (sections M tM)))) →ₗ[R]
       (sections N tN ⧸ (I ^ (n + 1) • (⊤ : Submodule R (sections N tN)))) →ₗ[R] P n :=

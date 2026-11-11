@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerFiniteEtaleExtension
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerFiniteEtaleExtension
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Normalization at the actual root divisor
@@ -40,6 +42,8 @@ There is no restriction on the dimension of `R`. This is the boundary
 localization step used before purity in Stacks Project, Proposition
 58.30.2: https://stacks.math.columbia.edu/tag/0C0Q.
 -/
+
+@[expose] public section
 
 noncomputable section
 

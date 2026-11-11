@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCyclotomicInertia
 import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
 import Nyll.EtaleFundamentalGroups.Kummer.Normalization.HeightOneCyclotomicInertia
+import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealResidueComparison
 
 /-!
 # Cyclotomic vanishing in pointed finite Galois quotients
@@ -42,15 +43,15 @@ theorem
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)]
     (y : (FiniteEtale.fiber xi).obj Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} {B : Type uB}
       [CommRing A] [CommRing B]
@@ -63,9 +64,9 @@ theorem
       (P : Ideal B) [P.IsMaximal] (_hP : P ≠ ⊥)
       [Algebra k
         (A ⧸ TameAbhyankar.SGA1.normalizationIdealBasePrime (A := A) P)],
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       GeometricallyIntegral
           (Spec.map (CommRingCat.ofHom
@@ -84,24 +85,10 @@ theorem
               (Subgroup.comap
                 (finiteEtaleGaloisCoverQuotientMonoidHom xi Y hY y)
                 (P.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ)) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A B instCommA instCommB instAlgAK instFracAK instAlgBL instFracBL
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    A B instCommA instCommB instAlgAK instFracAK instAlgBL instFracBL
     instAlgAB instAlgAL instTowerAKL instTowerABL instIntegralClosure
-    instDedekind instClosed P instPMax hP instAlgk hgeo hCoprime
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+    instDedekind instClosed P instPMax hP instAlgk fieldAction coverAction hgeo hCoprime
   have hcard :=
     natCard_finiteEtaleGaloisCoverIdealInertia_image_eq
       xi Y hY y A B P
@@ -130,15 +117,15 @@ finiteEtaleGaloisCover_quotientHeightOneNormalizationInertia_eq_bot_of_geometric
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)]
     (y : (FiniteEtale.fiber xi).obj Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [IsIntegrallyClosed A]
@@ -148,11 +135,11 @@ finiteEtaleGaloisCover_quotientHeightOneNormalizationInertia_eq_bot_of_geometric
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
       [Algebra k P.ResidueField],
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       GeometricallyIntegral
           (Spec.map (CommRingCat.ofHom
@@ -169,29 +156,12 @@ finiteEtaleGaloisCover_quotientHeightOneNormalizationInertia_eq_bot_of_geometric
               (Subgroup.comap
                 (finiteEtaleGaloisCoverQuotientMonoidHom xi Y hY y)
                 (Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ)) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instClosedA instAlgAK
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    A instCommA instDomainA instRegularA instClosedA instAlgAK
     instFracAK instAlgAL instTowerAKL P instPPrime hP Q instQPrime
-    instQLiesOver instAlgk hgeo hCoprime
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
+    instQLiesOver instAlgk B fractionBL
   let genericAction : MulSemiringAction Gal(L/K) B := inferInstance
-  let integralClosureAction : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction Gal(L/K) B := integralClosureAction
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+  intro integralClosureAction coverAction hgeo hCoprime
   have hcard :=
     natCard_finiteEtaleGaloisCoverIdealInertia_image_eq
       xi Y hY y A B Q

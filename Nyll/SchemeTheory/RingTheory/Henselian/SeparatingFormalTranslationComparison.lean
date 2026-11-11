@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
-import Mathlib.FieldTheory.RatFunc.AsPolynomial
-import Mathlib.RingTheory.PowerSeries.Substitution
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLiftEmbedding
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.RingTheory.PowerSeries.Substitution
 
 /-! # Comparing actual formal translations by a separating parameter
 
@@ -15,6 +17,8 @@ a formal field homomorphism. Consequently every actual formal deformation
 is obtained from a fixed translation by substituting the actual displacement
 of that parameter. No compatibility of the two deformations is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -57,7 +61,7 @@ theorem formalLift_ext_of_separating_parameter
     rw [← RingHom.comp_assoc, hρ0]
   obtain ⟨φ, _hφ, hUnique⟩ :=
     existsUnique_formalLift_finiteSeparable_embedding (R := R) i.toRingHom τ hτ
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   exact (hUnique θ.toRingHom ⟨hbase, hθ0⟩).trans
     (hUnique ρ.toRingHom ⟨rfl, hρ0⟩).symm
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitOrbits
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitGroupScheme
-import Mathlib.GroupTheory.QuotientGroup.Defs
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitOrbits
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitGroupScheme
+public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-!
 # The scalar quotient presheaf and its projective norm-open map
@@ -16,6 +18,8 @@ Its map to the norm open is defined by scalar invariance. The normalized
 chart results prove local surjectivity and local injectivity of this map.
 The passage from this presheaf to its fppf sheaf remains a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -131,7 +135,7 @@ def quotientPoint : ScalarQuotient (R := R) (A := A) (S := S) →
       change c = scalarHom r * a
       rw [hr]
       exact (mul_inv_cancel_left a c).symm.trans (mul_comm _ _)
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     change ProjectiveUnitOpen.projectivePoint b a = ProjectiveUnitOpen.projectivePoint b c
     rw [he, ProjectiveUnitOpen.projectivePoint_scalarMul])
 
@@ -144,7 +148,7 @@ theorem quotientPoint_surjective_on_chart
     (j : Fin (n + 1)) (hj : IsUnit (f (ProjectiveUnitCharts.chartElement b j))) :
     ∃ q, quotientPoint b q = f := by
   refine ⟨QuotientGroup.mk (ProjectiveUnitCharts.normalizedUnit b f j hj), ?_⟩
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   exact ProjectiveUnitCharts.projectivePoint_normalizedUnit b f j hj
 
 /-- Two scalar-quotient sections over the same normalized chart are equal

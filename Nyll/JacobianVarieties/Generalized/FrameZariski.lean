@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameRepresentability
-import Nyll.JacobianVarieties.Generalized.ModulusUnitZariski
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameRepresentability
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitZariski
 
 /-!
 # Actual scalar frames on Zariski covers
@@ -16,6 +18,8 @@ section of the fppf frame sheaf. The resulting cover of the entire frame
 representer consists of opens and therefore preserves smoothness and
 reducedness when constructing regular maps by geometric-point comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,17 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceTameIntegralDifference
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceNativeData
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceFinitePoints
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineConstancy
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineFormalDifference
-import Nyll.JacobianVarieties.Generalized.WholeCurveGroupModulus
-import Nyll.JacobianVarieties.Generalized.VectorGroupRegularMapModulus
-import Nyll.AlgebraicCurves.Divisors.Modulus.TameReciprocalModulusReduction
-import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalInfinity
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceTameIntegralDifference
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceNativeData
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceFinitePoints
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineConstancy
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTraceAffineFormalDifference
+public import Nyll.JacobianVarieties.Generalized.WholeCurveGroupModulus
+public import Nyll.JacobianVarieties.Generalized.VectorGroupRegularMapModulus
+public import Nyll.AlgebraicCurves.Divisors.Modulus.TameReciprocalModulusReduction
+public import Nyll.AlgebraicCurves.Places.Orders.TameReciprocalInfinity
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
 
 /-! # A full modulus for an actual map to a commutative group
 
@@ -30,6 +33,8 @@ The base point and the formal coordinate bounds are chosen before the test
 function. The curve, its function field, the finite map, and its full
 Cartier fibres are retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

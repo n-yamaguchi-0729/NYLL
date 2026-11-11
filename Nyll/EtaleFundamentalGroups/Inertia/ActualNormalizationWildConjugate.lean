@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildCharacter
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinateEquivariance
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildCharacter
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinateEquivariance
 
 /-!
 # Original decomposition conjugation preserves the independent wild subgroup
@@ -13,6 +15,8 @@ import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinateEquivarianc
 The independently defined principal-unit subgroup is detected by the SAME
 finite canonical coordinates. Their proved equivariance preserves identity.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

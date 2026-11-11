@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.DirectImageBaseChange
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.PullbackSectionFactors
-import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Nyll.EtaleCohomology.Sites.DirectImageBaseChange
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.PullbackSectionFactors
+public import Nyll.EtaleCohomology.Sites.PushforwardGlobalSections
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # The actual base-change mate on pulled sections
@@ -21,6 +23,8 @@ identity of the base-change mate therefore gives a formula on every
 pulled section. No properness, field-point detection or invertibility
 of the base-change mate enters this identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

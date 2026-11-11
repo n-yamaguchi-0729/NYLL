@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeRestriction
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeRestriction
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
 
 /-!
 # Finite type of the actual gluing of submodules
@@ -15,6 +17,8 @@ Actual finite-type submodules on the two covering slice sites glue to a
 finite-type submodule. The finite-type proof uses only their generating
 families; it imposes no finite-presentation or Noetherian hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

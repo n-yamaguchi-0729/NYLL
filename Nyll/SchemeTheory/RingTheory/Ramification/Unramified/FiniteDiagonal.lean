@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Unramified.Finite
+module
+
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Unramified.Finite
 
 /-!
 # The diagonal factor of a finite formally unramified algebra
@@ -21,6 +23,8 @@ property of `Localization.Away` and proves bijectivity by exhibiting `S`, with
 the multiplication algebra structure, as a second localization away from the
 same element.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,10 +46,11 @@ lemma mul_formallyUnramifiedElem_eq_lmul_tmul_one_mul
         Algebra.FormallyUnramified.elem R S := by
   induction x using TensorProduct.inductionOn with
   | tmul x y =>
+      rw [Algebra.TensorProduct.lmul'_apply_tmul]
       rw [show x ⊗ₜ[R] y = (x ⊗ₜ[R] (1 : S)) * ((1 : S) ⊗ₜ[R] y) by
         rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]]
       rw [mul_assoc, Algebra.FormallyUnramified.one_tmul_mul_elem (R := R) y]
-      simp [← mul_assoc]
+      rw [← mul_assoc, Algebra.TensorProduct.tmul_mul_tmul, one_mul]
   | add x y hx hy =>
       simp only [add_mul, map_add, TensorProduct.add_tmul, hx, hy]
 
@@ -83,8 +88,14 @@ lemma finiteUnramifiedDiagonalAwayMul_algebraMap (x : S ⊗[R] S) :
         (algebraMap (S ⊗[R] S)
           (Localization.Away (Algebra.FormallyUnramified.elem R S)) x) =
       Algebra.TensorProduct.lmul' R x := by
-  simp [finiteUnramifiedDiagonalAwayMul]
-  rfl
+  exact IsLocalization.Away.lift_eq
+    (Algebra.FormallyUnramified.elem R S)
+    (g := (Algebra.TensorProduct.lmul'' R).toRingHom)
+    (by
+      change IsUnit
+        (Algebra.TensorProduct.lmul' R (Algebra.FormallyUnramified.elem R S))
+      rw [Algebra.FormallyUnramified.lmul_elem]
+      exact isUnit_one) x
 
 /-- The multiplication map from the diagonal Away factor is bijective. -/
 lemma finiteUnramifiedDiagonalAwayMul_bijective :

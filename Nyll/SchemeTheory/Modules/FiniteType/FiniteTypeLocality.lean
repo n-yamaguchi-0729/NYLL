@@ -5,8 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joël Riou; Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.CategoryTheory.Sites.CoversTop.Over
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.CategoryTheory.Sites.CoversTop.Over
 
 /-!
 # Locality of finite type for sheaves of modules
@@ -21,6 +23,8 @@ quasicoherent-data construction at Mathlib revision
 065356127b1dc0016f66b7283ce0ce2c4055aa55:
 https://github.com/leanprover-community/mathlib4/blob/065356127b1dc0016f66b7283ce0ce2c4055aa55/Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean
 -/
+
+@[expose] public section
 
 noncomputable section
 

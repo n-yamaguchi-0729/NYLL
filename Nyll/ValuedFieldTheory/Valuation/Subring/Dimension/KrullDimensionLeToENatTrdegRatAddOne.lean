@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Nyll.ValuedFieldTheory.Valuation.Subring.Dimension.KrullDimensionLeKrullDimensionComapAddTrdeg
+module
+
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Dimension.KrullDimensionLeKrullDimensionComapAddTrdeg
 
 /-!
 # Valuation Subring ring Krull Dim le to ENat trdeg rat add one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -58,9 +62,11 @@ lemma isUnit_den (B : ValuationSubring ℚ) (x : B) : IsUnit (algebraMap ℤ B (
     exact B.add_mem _ _ (B.mul_mem _ _ (intCast_mem B u) x.2) (intCast_mem B v)
   refine ⟨⟨algebraMap ℤ B (r.den : ℤ), ⟨_, hmem⟩, ?_, ?_⟩, rfl⟩
   · apply Subtype.ext
-    simp [hden0]
+    simp only [algebraMap_int_eq, map_natCast, MulMemClass.coe_mul, SubringClass.coe_natCast, ne_eq,
+      hden0, not_false_eq_true, mul_inv_cancel₀, OneMemClass.coe_one]
   · apply Subtype.ext
-    simp [hden0]
+    simp only [algebraMap_int_eq, map_natCast, MulMemClass.coe_mul, SubringClass.coe_natCast, ne_eq,
+      hden0, not_false_eq_true, inv_mul_cancel₀, OneMemClass.coe_one]
 
 scoped instance isLocalization (B : ValuationSubring ℚ) : IsLocalization (unitInts B) B := by
   rw [isLocalization_iff]
@@ -71,7 +77,8 @@ scoped instance isLocalization (B : ValuationSubring ℚ) : IsLocalization (unit
     exact_mod_cast congrArg (fun t => 1 * t) (show a = b by exact_mod_cast this)⟩⟩
   refine ⟨⟨(z : ℚ).num, ⟨((z : ℚ).den : ℤ), isUnit_den B z⟩⟩, ?_⟩
   apply Subtype.ext
-  simp [Rat.mul_den_eq_num]
+  simp only [algebraMap_int_eq, map_natCast, MulMemClass.coe_mul, SubringClass.coe_natCast,
+    Rat.mul_den_eq_num, eq_intCast, SubringClass.coe_intCast]
 
 theorem ringKrullDim_le_one (B : ValuationSubring ℚ) : ringKrullDim B ≤ 1 := by
   have h : Ring.DimensionLEOne B :=

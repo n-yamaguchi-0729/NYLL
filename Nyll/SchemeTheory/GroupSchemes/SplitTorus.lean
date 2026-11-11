@@ -4,15 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Group.Affine
-import Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra
+module
+
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra
+public import Nyll.SchemeTheory.GroupSchemes.HopfAlgebra.MonoidAlgebraConnected
 
 /-! # Actual split tori and their character morphisms
 
 The torus is the spectrum of the group algebra of its integral character lattice,
-with the Hopf-algebra group operation. Over a domain, every group-scheme homomorphism
-between these split tori comes uniquely from a homomorphism of character lattices.
+with the Hopf-algebra group operation. Over a nontrivial ring with connected prime
+spectrum, every group-scheme homomorphism between these split tori comes uniquely
+from a homomorphism of character lattices.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -76,19 +82,19 @@ theorem splitTorusMap_comp {r s t : ℕ}
     (CommHopfAlgCat.ofHom (AddMonoidAlgebra.mapDomainBialgHom R f)).op
 
 /-- Bundling an actual bialgebra homomorphism as a morphism of commutative Hopf algebras. -/
-private def hopfHomEquiv (A B : CommHopfAlgCat.{u} R) :
+def hopfHomEquiv (A B : CommHopfAlgCat.{u} R) :
     (A →ₐc[R] B) ≃ (A ⟶ B) where
   toFun := CommHopfAlgCat.ofHom
   invFun f := f.hom
   left_inv _ := rfl
   right_inv _ := rfl
 
-variable [IsDomain R]
+variable [Nontrivial R] [ConnectedSpace (PrimeSpectrum R)]
 
 /-- Every actual homomorphism of split tori uniquely comes from its integral character map. -/
 def splitTorusHomEquiv (r s : ℕ) :
     ((Fin r → ℤ) →+ (Fin s → ℤ)) ≃ (splitTorus R s ⟶ splitTorus R r) :=
-  (AddMonoidAlgebra.mapDomainBialgHomEquiv (R := R)).trans
+  (AddMonoidAlgebra.mapDomainBialgHomEquivOfConnected (R := R)).trans
     ((hopfHomEquiv R (CommHopfAlgCat.of R (splitTorusAlgebra R r))
       (CommHopfAlgCat.of R (splitTorusAlgebra R s))).trans
       (Quiver.Hom.opEquiv.trans

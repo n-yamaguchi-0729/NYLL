@@ -5,17 +5,19 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Ulift
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Abelian.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Ulift
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Abelian.Basic
 
 /-!
 # Tensor exactness and covering diagrams
@@ -27,6 +29,8 @@ larger module universe and a proved natural comparison with universe lifting.
 The categorical covering diagrams construct their kernel lifts and cokernel descents.
 They can be used without reopening the concrete module instances of every diagram object.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -180,7 +184,7 @@ private noncomputable def tensorHomAdjunction {R : Type u} [CommRing R]
       homEquiv_naturality_right := tensorCurryHom_naturality_right M }
 
 /-- The actual comparison on one universe-lifted source object. -/
-private noncomputable def tensorUliftComponent {R : Type u} [CommRing R]
+noncomputable def tensorUliftComponent {R : Type u} [CommRing R]
     (M : Type v) [AddCommGroup M] [Module R M] (X : ModuleCat.{u} R) :
     (tensorFunctor M).obj ((ModuleCat.uliftFunctor.{v, u} R).obj X) ≅
       (tensorFunctor M).obj X :=
@@ -224,7 +228,7 @@ theorem tensorFunctor_preservesFiniteColimits {R : Type u} [CommRing R]
   exact preservesFiniteColimits_of_natIso (tensorUliftIso M)
 
 /-- Zero-map preservation is supplied by the constructed preservation of initial objects. -/
-private instance tensorFunctor_preservesZeroMorphisms {R : Type u} [CommRing R]
+instance tensorFunctor_preservesZeroMorphisms {R : Type u} [CommRing R]
     (M : Type v) [AddCommGroup M] [Module R M] :
     (tensorFunctor M : ModuleCat.{u} R ⥤ ModuleCat.{max u v} R).PreservesZeroMorphisms := by
   have : PreservesFiniteColimits

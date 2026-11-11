@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Lifting a prescribed splitting modulo an ideal
@@ -23,6 +25,8 @@ Applied over successive ideal-power quotient rings, this supplies compatible
 splittings for a system of finite projective modules. No splitting over the
 original ring is an input to the construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

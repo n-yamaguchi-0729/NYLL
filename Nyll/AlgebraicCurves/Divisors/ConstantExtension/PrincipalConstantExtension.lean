@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.FunctionFields.Constants.MemSpanRangeAlgebraMapConstantExtension
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.MemSpanRangeAlgebraMapConstantExtension
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ComapAlgebraMapEqConstantExtension
 
 /-!
 # Divisor is Principal of constant Field Extension
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -197,7 +201,7 @@ theorem ord_sum_le [IsAlgClosed K] [IsCurveOver K F]
     by_cases hr0 : r j = 0
     · have : (⟨algebraMap F F' (r j), hφmem _ (r j).2⟩ : P'.toValuationSubring) = 0 := by
         apply Subtype.ext
-        simp [hr0]
+        simp only [hr0, ZeroMemClass.coe_zero, map_zero]
       rw [this]
       exact Ideal.zero_mem _
     apply mem_maximalIdeal_of_ord_pos P'
@@ -219,7 +223,8 @@ theorem ord_sum_le [IsAlgClosed K] [IsCurveOver K F]
   have hunit := isUnit_add_of_mem_maximalIdeal P' hDunit hTmem
   have hcoe : ((Dd + Tt : P'.toValuationSubring) : F') =
       algebraMap K' F' d + ∑ j ∈ s, algebraMap K' F' (β j) * algebraMap F F' (r j) := by
-    simp [hDd, hTt]
+    simp only [hDd, hTt, MulMemClass.mk_mul_mk, AddMemClass.coe_add,
+      AddSubmonoidClass.coe_finsetSum]
   have hne' : algebraMap K' F' d + ∑ j ∈ s, algebraMap K' F' (β j) * algebraMap F F' (r j) ≠ 0 := by
     rw [← hcoe]
     exact_mod_cast hunit.ne_zero
@@ -283,7 +288,8 @@ theorem exists_linearIndependent_repr {z : F'}
 variable {K F} in
 theorem degree_eq_sum [IsAlgClosed K] [IsCurveOver K F] (E : Divisor K F) :
     E.degree = E.sum fun _ n => n := by
-  simp [Divisor.degree, Finsupp.liftAddHom_apply, IsCurveOver.deg_eq_one_of_isAlgClosed]
+  simp only [Divisor.degree, IsCurveOver.deg_eq_one_of_isAlgClosed, Nat.cast_one,
+    Finsupp.liftAddHom_apply, AddMonoidHom.coe_mulRight, mul_one]
 
 theorem isPrincipal_of_constantFieldExtension [IsAlgClosed K] [CharZero K] [IsAlgClosed K']
     (hfg : ∃ x : F, Transcendental K x ∧ FiniteDimensional (IntermediateField.adjoin K ({x} : Set
@@ -324,7 +330,7 @@ theorem isPrincipal_of_constantFieldExtension [IsAlgClosed K] [CharZero K] [IsAl
     push Not at h
     apply hz0
     rw [hzu]
-    simp [h]
+    simp only [h, map_zero, mul_zero, Finset.sum_const_zero]
   have hle : ∀ P : Place K F, D P ≤ P.ord (u k₀) := by
     intro P
     have h := ord_sum_le P (lift P) (hlift_comap P) (hlift_ord P) Finset.univ β hβ u

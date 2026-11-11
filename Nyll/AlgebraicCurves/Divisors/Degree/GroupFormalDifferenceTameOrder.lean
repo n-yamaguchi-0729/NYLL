@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferencePoleBound
-import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Degree.GroupFormalDifferencePoleBound
+public import Nyll.AlgebraicCurves.Places.Orders.TameLaurentDeformation
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
 
 /-! # Positive local order of actual tame group differences
 
@@ -17,6 +20,8 @@ deformation has positive order on every nonzero centered coordinate
 coefficient once its ramification exceeds an explicit bound. The original
 Laurent-parameter equation is retained for subsequent trace comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

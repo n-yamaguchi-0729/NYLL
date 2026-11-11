@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Morphisms of effective adic module systems
@@ -22,6 +24,8 @@ Only the source system needs the finite effectivity hypotheses for this
 comparison. The target stages need to be annihilated by the prescribed ideal
 powers. No quotient comparison or descended map is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

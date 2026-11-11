@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.EventuallyNormalizedSection
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgebraicEquivalenceEulerCharSectionsOfTensorEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealModuleTensorInvModuleIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.EventuallyNormalizedSection
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgebraicEquivalenceEulerCharSectionsOfTensorEq
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealModuleTensorInvModuleIso
 
 /-!
 # A uniform modulus bound for every algebraically trivial line bundle
@@ -16,6 +18,8 @@ after tensoring a fixed bundle. The full Cartier modulus contributes its
 scheme length, and the point-power twist contributes its exponent. Thus the
 vanishing bound is independent of the particular Picard-zero class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

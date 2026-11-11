@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPushoutAppTopPullbackFstAppTopPullbackSnd
+module
+
+public import Nyll.SchemeTheory.BaseChange.AffineGlobalSections
 
 /-!
 # bijective app Top pullback snd of bijective app Top
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

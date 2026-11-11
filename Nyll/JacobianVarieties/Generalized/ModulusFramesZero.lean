@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameSheaf
-import Nyll.JacobianVarieties.Generalized.PicardZero
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameSheaf
+public import Nyll.JacobianVarieties.Generalized.PicardZero
 
 /-!
 # Algebraic triviality of the actual modulus frame classes
@@ -14,6 +16,8 @@ A family algebraically trivial on geometric fibres supplies classes in the
 existing modulus Picard-zero functor. The condition is verified on the actual
 underlying pulled bundle and survives the modulus convention change.
 -/
+
+@[expose] public section
 
 noncomputable section
 

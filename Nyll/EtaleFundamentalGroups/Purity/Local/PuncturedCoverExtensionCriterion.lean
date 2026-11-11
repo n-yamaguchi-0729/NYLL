@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.DepthTwoSections
-import Nyll.SchemeTheory.FiniteEtale.AffinizationExtension
-import Mathlib.AlgebraicGeometry.QuasiAffine
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.DepthTwoSections
+public import Nyll.SchemeTheory.FiniteEtale.AffinizationExtension
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite étale extension detected by global sections
@@ -17,6 +20,8 @@ algebra is finite étale over the base ring.
 
 This proves Stacks Project, Lemma 58.20.2 (tag `0BLK`).
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.EpiMono
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # Finite type passes to actual epimorphic quotients
@@ -16,6 +18,8 @@ The original local generating covers are retained. Restriction to a slice
 is a left adjoint, so the actual restricted morphisms are epimorphisms;
 their images of the original finite generators generate the quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

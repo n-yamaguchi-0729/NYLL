@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.RepresentableMatching
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.SubcanonicalOver
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.RepresentableMatching
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # A compatible global representation after effective descent
@@ -15,6 +17,8 @@ The descended universal element is retained explicitly. Consequently its classif
 equivalence agrees with the fixed local representation, a fact needed to compare
 group laws rather than merely isomorphism classes of representing objects.
 -/
+
+@[expose] public section
 
 universe u
 

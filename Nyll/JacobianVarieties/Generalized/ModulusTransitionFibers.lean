@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusTransitionGeometry
-import Nyll.JacobianVarieties.Generalized.GroupProjectionConnected
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusTransitionGeometry
+public import Nyll.JacobianVarieties.Generalized.GroupProjectionConnected
 
 /-! # Uniform transition geometry, including the empty modulus -/
+
+@[expose] public section
 
 noncomputable section
 

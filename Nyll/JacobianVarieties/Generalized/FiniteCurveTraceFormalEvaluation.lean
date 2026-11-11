@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceDomain
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.TupleOfSplitDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
-import Nyll.SchemeTheory.Normalization.FiniteNormalFormalSplitting
-import Nyll.SchemeTheory.FunctionFields.IntegralGenericPointReflection
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTraceDomain
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.TupleOfSplitDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
+public import Nyll.SchemeTheory.Normalization.FiniteNormalFormalSplitting
+public import Nyll.SchemeTheory.FunctionFields.IntegralGenericPointReflection
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # The regular finite-curve trace on the actual formal generic fibre
 
@@ -17,6 +21,8 @@ Its formal splitting constructs the Cartier tuple. The coordinates of this
 tuple are precisely the lifted field embeddings, and evaluate the previously
 constructed regular trace over the entire power-series spectrum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
-import Nyll.SchemeTheory.Normalization.GenericFiber.FiniteEtaleNormalization
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+public import Nyll.SchemeTheory.Normalization.GenericFiber.FiniteEtaleNormalization
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Recovering the whole base-changed cover from its generic normalization
@@ -27,6 +29,8 @@ recovers every component of the original base change. Its calculation
 on pure tensors preserves the two original structural maps, as required
 for the overlap comparisons of normalized cover extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

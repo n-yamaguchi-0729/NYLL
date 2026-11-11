@@ -4,30 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryCodimensionOneTame
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkCartesian
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkFieldFactors
-import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
-import Nyll.EtaleFundamentalGroups.Purity.TameCodimensionOne
-import Nyll.SchemeTheory.Divisors.ConnectedComplement
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
-import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.Algebra.Ring.NonZeroDivisors
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Topology.Closure
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryCodimensionOneTame
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkCartesian
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.BoundaryStalkFieldFactors
+public import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneGenericFiber
+public import Nyll.EtaleFundamentalGroups.Purity.TameCodimensionOne
+public import Nyll.SchemeTheory.Divisors.ConnectedComplement
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Ramification.TameDVR
+public import Nyll.SchemeTheory.RingTheory.Reduced.ReducedCartierDivisor
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Algebra.Ring.NonZeroDivisors
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Topology.Closure
 
 /-!
 # Standard Kummer covers are tame along their Cartier boundary
@@ -44,6 +46,8 @@ comparisons transport the already proved tame extensions. No field-factor,
 ramification or generic-fiber comparison is added as an assumption.
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 noncomputable section
 

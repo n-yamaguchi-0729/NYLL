@@ -8,3 +8,4 @@ import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiCompEqMulAbelJacobi
 import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiDivisionDisplacement
 import Nyll.JacobianVarieties.Picard.AbelJacobi.AbelJacobiPointClassBaseChange
 import Nyll.JacobianVarieties.Picard.AbelJacobi.UnpointedAbelJacobi
+import Nyll.JacobianVarieties.Picard.AbelJacobi.PositiveGenusPointSeparation

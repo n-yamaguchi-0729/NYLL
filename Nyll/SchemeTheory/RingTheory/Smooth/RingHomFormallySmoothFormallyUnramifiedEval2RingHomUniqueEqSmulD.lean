@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.Unramified
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallyEtaleFormallySmooth
+module
+
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.Unramified
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraFormallyEtaleFormallySmooth
 
 /-!
 # Ring Hom formally Smooth and formally Unramified eval2 Ring Hom of exists Unique eq smul D
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

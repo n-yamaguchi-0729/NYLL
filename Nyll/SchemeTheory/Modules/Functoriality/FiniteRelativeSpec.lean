@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.AffineAnd
-import Mathlib.RingTheory.RingHom.Finite
-import Mathlib.RingTheory.Localization.Away.Basic
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.AffineAnd
+public import Mathlib.RingTheory.RingHom.Finite
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
 
 /-!
 # Relative spectra of quasicoherent sheaves of commutative algebras
@@ -24,6 +26,8 @@ the localization of the actual section rings. The existing affine Zariski
 relative gluing construction then gives the scheme and its finite structure
 morphism whenever the affine section algebras are finite.
 -/
+
+@[expose] public section
 
 noncomputable section
 

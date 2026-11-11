@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.RingTheory.PowerSeries.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.RingTheory.PowerSeries.Basic
 
 /-! # Integral group-valued series from actual affine coordinates
 
@@ -22,6 +24,8 @@ The integrality hypotheses are explicit statements about the actual generator
 series. For a valuation ring, use its coefficient inclusion and residue map;
 membership in the residue kernel is membership in its maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -98,11 +102,13 @@ theorem exists_coordinate_lift_reducing_to_unit
   rw [hψa, PowerSeries.algebraMap_apply]
   exact hzero
 
-private abbrev scalarSpec (B : Type u) [CommRing B] [Algebra K B] :
+/-- The spectrum of a coefficient algebra as a scheme over the coefficient ring. -/
+abbrev scalarSpec (B : Type u) [CommRing B] [Algebra K B] :
     Over (Spec (.of K)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K B)))
 
-private def scalarSpecMap {B C : Type u} [CommRing B] [CommRing C]
+/-- The morphism of spectra over the base induced by an algebra homomorphism. -/
+def scalarSpecMap {B C : Type u} [CommRing B] [CommRing C]
     [Algebra K B] [Algebra K C] (f : B →ₐ[K] C) :
     scalarSpec (K := K) C ⟶ scalarSpec (K := K) B :=
   Over.homMk (Spec.map (CommRingCat.ofHom f.toRingHom)) (by

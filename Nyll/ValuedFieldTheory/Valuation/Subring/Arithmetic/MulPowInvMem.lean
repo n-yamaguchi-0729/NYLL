@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.RingTheory.Adjoin.Polynomial.Basic
-import Mathlib.RingTheory.Polynomial.ScaleRoots
-import Mathlib.RingTheory.Polynomial.Subring
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.RingTheory.Adjoin.Polynomial.Basic
+public import Mathlib.RingTheory.Polynomial.ScaleRoots
+public import Mathlib.RingTheory.Polynomial.Subring
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring
 
 /-!
 # Valuation Subring exists mul pow inv mem of finite Dimensional adjoin
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

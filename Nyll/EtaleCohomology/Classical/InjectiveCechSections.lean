@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FreeAbelianCechSheaves
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Mathlib.CategoryTheory.Adjunction.Additive
-import Mathlib.CategoryTheory.Limits.Constructions.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+module
+
+public import Nyll.EtaleCohomology.Classical.FreeAbelianCechSheaves
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Limits.Constructions.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-!
 # Actual Cech primitives with injective sheaf coefficients
@@ -17,6 +19,8 @@ A section on a self-pullback defines a cochain on the free abelian
 representable Cech complex. The triangle identity and injectivity then
 produce an actual section primitive. No Galois comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe v u

@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameCoordinates
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameCoordinates
 
 /-! Frames of a pulled-back module agree naturally with restriction of its frame functor. -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -9,6 +9,8 @@ import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.Ex
 import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ExistsChosenLocalizationNoAway
 import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
 import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Exact.BoundaryAway
+import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
+import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
 
 /-!
 # A boundary-away local factor at the exact ramification root

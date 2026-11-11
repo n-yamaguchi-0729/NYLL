@@ -6,6 +6,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.BoundaryHeightOneNormalizationEtale
 import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 
 /-!
 # Prime-local form of height-one boundary normalization etaleness

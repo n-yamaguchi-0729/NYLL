@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.FractionField
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.FractionField
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # The entire generic fibre of a finite étale domain
@@ -20,6 +22,8 @@ comparison uses the original product of the two structural maps. In
 particular, it retains the actual field extension supplied by a connected
 finite étale cover when further generic base changes are performed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

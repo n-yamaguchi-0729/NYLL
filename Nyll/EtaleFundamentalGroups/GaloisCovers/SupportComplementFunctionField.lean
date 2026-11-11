@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.OpenImmersion
-import Nyll.SchemeTheory.Divisors.LocalComplement
+module
+
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
+public import Nyll.SchemeTheory.Divisors.LocalComplement
 
 /-!
 # Function fields of divisor complements
@@ -15,6 +17,8 @@ function field.  The algebra structure below remembers the canonical map
 from a chosen ambient stalk, which is needed for normalization at a boundary
 prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,14 +45,12 @@ equivalence over the chosen ambient stalk. -/
 noncomputable def supportComplementFunctionFieldAlgEquiv
     (I : X.IdealSheafData) [Nonempty I.supportComplement]
     (x : X) :
-    letI : Algebra (X.presheaf.stalk x)
+    let : Algebra (X.presheaf.stalk x)
         (I.supportComplement : Scheme).functionField :=
       I.supportComplementFunctionFieldAlgebra x
     X.functionField ≃ₐ[X.presheaf.stalk x]
       (I.supportComplement : Scheme).functionField := by
-  letI : Algebra (X.presheaf.stalk x)
-      (I.supportComplement : Scheme).functionField :=
-    I.supportComplementFunctionFieldAlgebra x
+  intro sharedDefinitionOwner1
   exact AlgEquiv.ofRingEquiv
     (f := I.supportComplement.ι.functionFieldRingEquivOfIsOpenImmersion) (by
       intro a
@@ -64,14 +66,12 @@ stalk, through the canonical open-immersion map. -/
 theorem supportComplementFunctionField_isFractionRing
     (I : X.IdealSheafData) [Nonempty I.supportComplement]
     (x : X) :
-    letI : Algebra (X.presheaf.stalk x)
+    let : Algebra (X.presheaf.stalk x)
         (I.supportComplement : Scheme).functionField :=
       I.supportComplementFunctionFieldAlgebra x
     IsFractionRing (X.presheaf.stalk x)
       (I.supportComplement : Scheme).functionField := by
-  let : Algebra (X.presheaf.stalk x)
-      (I.supportComplement : Scheme).functionField :=
-    I.supportComplementFunctionFieldAlgebra x
+  intro sharedOwner1
   exact IsFractionRing.of_algEquiv
     (I.supportComplementFunctionFieldAlgEquiv x)
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
-import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.SchemeTheory.Normalization.GenericFiber.FiniteEtaleNormalization
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
+public import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.SchemeTheory.Normalization.GenericFiber.FiniteEtaleNormalization
 
 /-! Canonical aggregate for SchemeTheory.Normalization.GenericFiber. -/

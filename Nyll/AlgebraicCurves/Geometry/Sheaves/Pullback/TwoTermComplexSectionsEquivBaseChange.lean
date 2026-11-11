@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
-import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.TwoTermComplexKerMapBaseChangeBijectiveModules
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.CochainBaseChangeEquiv
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroModulesEqZeroIffUnique
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
+public import Nyll.SchemeTheory.Cohomology.Sheaves.CoherentBaseChange
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.TwoTermComplexKerMapBaseChangeBijectiveModules
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.CochainBaseChangeEquiv
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroModulesEqZeroIffUnique
 
 /-!
 # Scheme Modules exists two Term Complex sections Equiv forall base Change
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

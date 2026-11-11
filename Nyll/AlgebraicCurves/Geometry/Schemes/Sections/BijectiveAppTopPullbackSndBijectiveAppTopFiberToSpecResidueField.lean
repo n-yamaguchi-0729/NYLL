@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTop
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopPullbackSndBijectiveAppTop
 
 /-!
 # bijective app Top pullback snd of bijective app Top fiber To Spec Residue Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

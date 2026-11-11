@@ -5,11 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Mathlib.CategoryTheory.Action.Concrete
-import Mathlib.CategoryTheory.Action.Continuous
-import Mathlib.CategoryTheory.Galois.IsFundamentalgroup
-import Mathlib.Topology.Category.FinTopCat
-import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
+module
+
+public import Mathlib.CategoryTheory.Action.Concrete
+public import Mathlib.CategoryTheory.Action.Continuous
+public import Mathlib.CategoryTheory.Galois.IsFundamentalgroup
+public import Mathlib.Topology.Category.FinTopCat
+public import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
+public import Nyll.ClassFieldTheory.Definitions.LocalClassFieldTheory.TopologicalProfiniteCompletion
 
 /-!
 # The profinite completion of a topological group
@@ -18,6 +21,8 @@ This file proves Stacks Project, Tag `0BMU`: the automorphism group of the
 forgetful functor on finite continuous actions of a topological group is its
 profinite completion.
 -/
+
+@[expose] public section
 
 universe u v
 
@@ -32,7 +37,8 @@ namespace FiniteContinuousAction
 
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 
-private instance carrierMulAction
+/-- Use the original action on the carrier of a finite continuous action. -/
+local instance carrierMulAction
     (X : ContAction FintypeCat.{u} G) :
     MulAction G
       ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) :=
@@ -46,14 +52,15 @@ private instance carrierContinuousSMul
     ((forget₂ (Action FintypeCat.{u} G) TopCat).obj X.obj)
   exact X.property
 
-private instance naturalSMul :
+/-- Morphisms of finite continuous actions commute with the carrier actions. -/
+local instance naturalSMul :
     PreGaloisCategory.IsNaturalSMul
       (forget₂ (ContAction FintypeCat.{u} G) FintypeCat) G where
   naturality g {X Y} f x := by
     change
       ConcreteCategory.hom (InducedCategory.Hom.hom f).hom
-          (ConcreteCategory.hom (X.obj.ρ g) x) =
-        ConcreteCategory.hom (Y.obj.ρ g)
+          (ConcreteCategory.hom (X.obj.ρ g).asHom x) =
+        ConcreteCategory.hom (Y.obj.ρ g).asHom
           (ConcreteCategory.hom (InducedCategory.Hom.hom f).hom x)
     simpa only [FintypeCat.comp_apply] using
       ConcreteCategory.congr_hom ((InducedCategory.Hom.hom f).comm g) x
@@ -71,7 +78,8 @@ private theorem continuous_of_isOpen_ker
   have h1 : (1 : H) ∈ A := mem_of_mem_nhds hA
   simpa only [Set.mem_preimage, MonoidHom.mem_ker.mp hg] using h1
 
-private theorem canonicalHom_continuous :
+/-- The canonical action homomorphism is continuous in the automorphism topology. -/
+theorem canonicalHom_continuous :
     Continuous
       (PreGaloisCategory.toAut
         (forget₂ (ContAction FintypeCat.{u} G) FintypeCat) G) := by
@@ -94,8 +102,8 @@ private theorem canonicalHom_continuous :
     · intro hg x
       change ev g = 1 at hg
       change g • x = x
-      have happ := congrArg (fun a : Aut (F.obj X) ↦ a.hom x) hg
-      change (ρ g).hom.app X x = x at happ
+      have happ := congrArg (fun a : Aut (F.obj X) ↦ a.asIso.hom x) hg
+      change (ρ g).asIso.hom.app X x = x at happ
       simpa only [ρ, PreGaloisCategory.toAut_hom_app_apply] using happ
     · intro hg
       change ev g = 1
@@ -103,7 +111,7 @@ private theorem canonicalHom_continuous :
       ext x
       have hx := hg x
       change g • x = x at hx
-      change (ρ g).hom.app X x = x
+      change (ρ g).asIso.hom.app X x = x
       simpa only [ρ, PreGaloisCategory.toAut_hom_app_apply] using hx
   have hopen : IsOpen (ev.ker : Set G) := by
     rw [hker]
@@ -176,9 +184,9 @@ private theorem exists_canonicalHom_eq_on_finite
       (forget₂ (ContAction FintypeCat.{u} G) FintypeCat)) :
     ∃ g : G, ∀ i,
       (PreGaloisCategory.toAut
-          (forget₂ (ContAction FintypeCat.{u} G) FintypeCat) G g).hom.app
+          (forget₂ (ContAction FintypeCat.{u} G) FintypeCat) G g).asIso.hom.app
           (X i) =
-        σ.hom.app (X i) := by
+        σ.asIso.hom.app (X i) := by
   let F := forget₂ (ContAction FintypeCat.{u} G) FintypeCat
   let ρ := PreGaloisCategory.toAut F G
   let K : Subgroup G :=
@@ -209,7 +217,7 @@ private theorem exists_canonicalHom_eq_on_finite
       exact quotient_continuousSMul G K hKopen⟩
   obtain ⟨g, hg⟩ :=
     QuotientGroup.mk'_surjective K
-      (σ.hom.app Q (1 : G ⧸ K))
+      (σ.asIso.hom.app Q (1 : G ⧸ K))
   refine ⟨g, fun i ↦ ?_⟩
   ext x
   have hKle : K ≤ MulAction.stabilizer G x := by
@@ -240,39 +248,39 @@ private theorem exists_canonicalHom_eq_on_finite
         exact φfun_smul a q }
   let φ : Q ⟶ X i := ObjectProperty.homMk φAction
   have hnat :=
-    ConcreteCategory.congr_hom (σ.hom.naturality φ)
+    ConcreteCategory.congr_hom (σ.asIso.hom.naturality φ)
       (1 : G ⧸ K)
   have hφ_apply (q : G ⧸ K) :
       ConcreteCategory.hom (F.map φ) q = φfun q := rfl
   have hnat' :
-      σ.hom.app (X i) (φfun (1 : G ⧸ K)) =
-        φfun (σ.hom.app Q (1 : G ⧸ K)) := by
+      σ.asIso.hom.app (X i) (φfun (1 : G ⧸ K)) =
+        φfun (σ.asIso.hom.app Q (1 : G ⧸ K)) := by
     have hnat0 :
-        σ.hom.app (X i)
+        σ.asIso.hom.app (X i)
             (ConcreteCategory.hom (F.map φ) (1 : G ⧸ K)) =
           ConcreteCategory.hom (F.map φ)
-            (σ.hom.app Q (1 : G ⧸ K)) := by
+            (σ.asIso.hom.app Q (1 : G ⧸ K)) := by
       calc
-        _ = ConcreteCategory.hom (F.map φ ≫ σ.hom.app (X i))
+        _ = ConcreteCategory.hom (F.map φ ≫ σ.asIso.hom.app (X i))
             (1 : G ⧸ K) :=
-          (FintypeCat.comp_apply (F.map φ) (σ.hom.app (X i))
+          (FintypeCat.comp_apply (F.map φ) (σ.asIso.hom.app (X i))
             (1 : G ⧸ K)).symm
-        _ = ConcreteCategory.hom (σ.hom.app Q ≫ F.map φ)
+        _ = ConcreteCategory.hom (σ.asIso.hom.app Q ≫ F.map φ)
             (1 : G ⧸ K) := hnat
-        _ = _ := FintypeCat.comp_apply (σ.hom.app Q) (F.map φ)
+        _ = _ := FintypeCat.comp_apply (σ.asIso.hom.app Q) (F.map φ)
           (1 : G ⧸ K)
     simp only [hφ_apply] at hnat0
     exact hnat0
   have hφone : φfun (1 : G ⧸ K) = x := by
     change (1 : G) • x = x
     exact one_smul G x
-  change g • x = σ.hom.app (X i) x
+  change g • x = σ.asIso.hom.app (X i) x
   calc
     g • x = φfun (QuotientGroup.mk g) := rfl
-    _ = φfun (σ.hom.app Q (1 : G ⧸ K)) := congrArg φfun hg
-    _ = σ.hom.app (X i) (φfun (1 : G ⧸ K)) := hnat'.symm
-    _ = σ.hom.app (X i) x :=
-      congrArg (fun y ↦ σ.hom.app (X i) y) hφone
+    _ = φfun (σ.asIso.hom.app Q (1 : G ⧸ K)) := congrArg φfun hg
+    _ = σ.asIso.hom.app (X i) (φfun (1 : G ⧸ K)) := hnat'.symm
+    _ = σ.asIso.hom.app (X i) x :=
+      congrArg (fun y ↦ σ.asIso.hom.app (X i) y) hφone
 
 private theorem canonicalHom_denseRange :
     DenseRange
@@ -293,11 +301,13 @@ private theorem canonicalHom_denseRange :
   have heq :
       PreGaloisCategory.autEmbedding F (ρ g) X =
         PreGaloisCategory.autEmbedding F σ X := by
+    apply Aut.ext
     apply Iso.ext
     exact hg ⟨X, hX⟩
   exact Set.mem_of_eq_of_mem heq (hJmem X hX).2
 
-private def canonicalContinuousHom :
+/-- The continuous homomorphism induced by the original finite actions. -/
+def canonicalContinuousHom :
     G →ₜ*
       Aut (forget₂ (ContAction FintypeCat.{u} G) FintypeCat) where
   toMonoidHom :=
@@ -305,7 +315,8 @@ private def canonicalContinuousHom :
       (forget₂ (ContAction FintypeCat.{u} G) FintypeCat) G
   continuous_toFun := canonicalHom_continuous G
 
-private noncomputable def automorphismProfiniteGroup : ProfiniteGrp.{u + 1} :=
+/-- The profinite automorphism group of the finite-action forgetful functor. -/
+noncomputable def automorphismProfiniteGroup : ProfiniteGrp.{u + 1} :=
   ProfiniteGrp.of
     (Aut (forget₂ (ContAction FintypeCat.{u} G) FintypeCat))
 
@@ -348,7 +359,7 @@ private theorem canonicalHom_preimage_cofinal
   change canonicalContinuousHom G g ∈ N at hg
   change ev (canonicalContinuousHom G g) = 1 at hg
   have hpoint :=
-    congrArg (fun a : Aut (F.obj Q) ↦ a.hom (1 : G ⧸ K)) hg
+    congrArg (fun a : Aut (F.obj Q) ↦ a.asIso.hom (1 : G ⧸ K)) hg
   change g • (1 : G ⧸ K) = (1 : G ⧸ K) at hpoint
   change g ∈ H.toOpenNormalSubgroup.toSubgroup
   apply (QuotientGroup.eq_one_iff g).mp
@@ -356,7 +367,8 @@ private theorem canonicalHom_preimage_cofinal
   change (QuotientGroup.mk g : G ⧸ K) * 1 = 1 at hpoint
   simpa only [mul_one] using hpoint
 
-private theorem canonicalLift_injective :
+/-- Finite quotient actions detect elements of the canonical completion lift. -/
+theorem canonicalLift_injective :
     Function.Injective
       (LocalClassFieldTheory.topologicalProfiniteCompletionLift
         (automorphismProfiniteGroup G) (canonicalContinuousHom G)) := by
@@ -430,7 +442,8 @@ private theorem canonicalLift_injective :
         (map_one ((LocalClassFieldTheory.openFiniteQuotientDiagram G).map i).hom))
   · exact bot_le
 
-private theorem canonicalLift_surjective :
+/-- Density and compactness make the canonical completion lift surjective. -/
+theorem canonicalLift_surjective :
     Function.Surjective
       (LocalClassFieldTheory.topologicalProfiniteCompletionLift
         (automorphismProfiniteGroup G) (canonicalContinuousHom G)) := by

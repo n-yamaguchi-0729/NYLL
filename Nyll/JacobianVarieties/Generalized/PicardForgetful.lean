@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardSheaf
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardSheaf
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
 
 /-!
 # Forgetting the modulus and the ordinary relative Picard sheaf
@@ -19,6 +21,8 @@ Forgetting a chosen modulus trivialization gives an actual natural transformatio
 and an induced morphism of fppf sheaves. No surjectivity on rational points or
 identification of the kernel is asserted here.
 -/
+
+@[expose] public section
 
 universe u
 

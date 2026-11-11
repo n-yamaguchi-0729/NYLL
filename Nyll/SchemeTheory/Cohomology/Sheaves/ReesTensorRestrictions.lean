@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorNaturality
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.Algebra.Polynomial.Eval.Coeff
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.ReesAlgebra
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorNaturality
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.Algebra.Polynomial.Eval.Coeff
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 # Restrictions of the actual Rees tensors of a module sheaf
@@ -31,6 +33,8 @@ homogeneous insertions commute with them. No flatness or noetherian
 hypothesis is imposed on the module or the scheme.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -40,7 +44,8 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules.ReesTensor
 
-private def idealPowerMapTo {R S : Type u} [CommRing R] [CommRing S]
+/-- The semilinear map on ideal powers induced by a ring map carrying one ideal to another. -/
+def idealPowerMapTo {R S : Type u} [CommRing R] [CommRing S]
     (ρ : R →+* S) (I : Ideal R) (J : Ideal S) (hIJ : I.map ρ = J) (n : ℕ) :
     ↥(I ^ n) →ₛₗ[ρ] ↥(J ^ n) where
   toFun a := ⟨ρ a.val, by
@@ -49,7 +54,8 @@ private def idealPowerMapTo {R S : Type u} [CommRing R] [CommRing S]
   map_add' a b := Subtype.ext (ρ.map_add a.val b.val)
   map_smul' a b := Subtype.ext (ρ.map_mul a b.val)
 
-private def reesMapTo {R S : Type u} [CommRing R] [CommRing S]
+/-- The semilinear map on Rees algebras induced by the coefficient ring map. -/
+def reesMapTo {R S : Type u} [CommRing R] [CommRing S]
     (ρ : R →+* S) (I : Ideal R) (J : Ideal S) (hIJ : I.map ρ = J) :
     ↥(reesAlgebra I) →ₛₗ[ρ] ↥(reesAlgebra J) where
   toFun p := ⟨Polynomial.map ρ p.val, fun n => by

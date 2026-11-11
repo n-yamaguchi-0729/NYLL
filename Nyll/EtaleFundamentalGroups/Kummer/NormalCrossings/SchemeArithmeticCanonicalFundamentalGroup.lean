@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalFundamentalGroup
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
 
 /-!
 # Arithmetic normal-crossings charts and canonical field quotients
@@ -18,6 +21,8 @@ local complement then supplies, through the usual fundamental-group map of
 spectra, a corrected canonical finite quotient whose image is precisely
 ideal inertia and whose image order is prime to the residue characteristic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

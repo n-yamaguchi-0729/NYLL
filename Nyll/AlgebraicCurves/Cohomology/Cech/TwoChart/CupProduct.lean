@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.BilinearMap
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+module
+
+public import Mathlib.LinearAlgebra.BilinearMap
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Two Chart Cech Cup Product
 -/
+
+@[expose] public section
 
 noncomputable section
 

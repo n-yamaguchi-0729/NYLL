@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.PowerChange
-import Nyll.SchemeTheory.NoetherNormalization.Trdeg
+module
+
+public import Nyll.SchemeTheory.NoetherNormalization.PowerChange
+public import Nyll.SchemeTheory.NoetherNormalization.Trdeg
 
 /-!
 # Generator-sensitive Noether normalization over an arbitrary field
@@ -15,6 +17,8 @@ field.  In a dependent step, the power-triangular coordinates from
 `PowerNormalization` replace `n + 1` generators by `n` generators.  The
 induction remembers exactly which original generators must be retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

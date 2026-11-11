@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RelativeNormalizedDivisor
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+module
+
+public import Nyll.JacobianVarieties.Generalized.RelativeNormalizedDivisor
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 
 /-! # The divisor cut out by a family normalized along a positive relative modulus -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeneralGroupLocalSymbolExistence
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeneralGroupLocalSymbolExistence
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 
 /-! # The conductor of an actual product-valued map
 
@@ -18,6 +20,8 @@ The actual maps supply their least full conductors. The conductor of their
 product is the coefficientwise supremum, so a pole in one coordinate cannot
 be cancelled by the other coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

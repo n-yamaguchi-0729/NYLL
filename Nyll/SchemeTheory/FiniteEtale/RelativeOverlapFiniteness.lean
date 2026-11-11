@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Gluing.RelativeOverlap
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Nyll.SchemeTheory.Gluing.RelativeOverlap
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Finiteness properties of actual gluing overlaps
@@ -16,6 +18,8 @@ triple overlap objects. Their maps to the ambient quasi-separated base
 are quasi-compact and locally of finite type; they are not asserted to be
 finite over that whole base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

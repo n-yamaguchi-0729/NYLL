@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
-import Nyll.SchemeTheory.Etale.FiniteStrictLocalGeometricSection
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
+public import Nyll.SchemeTheory.Etale.FiniteStrictLocalGeometricSection
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Marked sections over arbitrary finite schemes of a strictly local base
@@ -19,6 +21,8 @@ section of the original scheme. The conclusion retains equality of the
 field-valued morphisms and does not require the source of the étale morphism
 to be affine.
 -/
+
+@[expose] public section
 
 noncomputable section
 

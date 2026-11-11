@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Mathlib.FieldTheory.Perfect
-import Mathlib.LinearAlgebra.LinearIndependent.Basic
-import Mathlib.Algebra.Polynomial.Roots
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.LinearAlgebra.LinearIndependent.Basic
+public import Mathlib.Algebra.Polynomial.Roots
 
 /-!
 # Cartier B linear Independent of cartier fixed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

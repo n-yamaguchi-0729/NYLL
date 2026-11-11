@@ -4,15 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTrace
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorSumFieldActual
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Models.Ramification.Ramification
-import Nyll.AlgebraicCurves.Models.Divisors.CartierPointSums
-import Nyll.AlgebraicCurves.Places.Rational.RatFuncOrdXSubC
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalIsAffine
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTrace
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorSumFieldActual
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.AlgebraicCurves.Models.Ramification.Ramification
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierPointSums
+public import Nyll.AlgebraicCurves.Places.Rational.RatFuncOrdXSubC
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalIsAffine
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Full principal-divisor evaluation through the rational-function trace
 
@@ -20,6 +25,8 @@ The graph family has exactly the inverse-image ideal of each target point.
 Its regular trace therefore evaluates the full Cartier fibre, including all
 ramification multiplicities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.WholeNormalizationRestriction
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.SchemeTheory.Normalization.Affine
-import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
-import Nyll.SchemeTheory.Normalization.IntegralClosure.Nested
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
-import Nyll.SchemeTheory.Normalization.SourceIso
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.WholeNormalizationRestriction
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.SchemeTheory.Normalization.Affine
+public import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.Nested
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayPullback
+public import Nyll.SchemeTheory.Normalization.SourceIso
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The relative normalization of the original base-changed away cover
@@ -44,6 +46,8 @@ calculation is the relative normalization of the original cover. This
 is the model comparison used to transfer local results to the global
 relative normalization, whose affine pieces are already glued.
 -/
+
+@[expose] public section
 
 noncomputable section
 

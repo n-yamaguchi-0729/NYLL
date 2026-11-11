@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeneralGroupRegularMapModulus
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeneralGroupRegularMapModulus
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
 
 /-! # Local symbols and the least conductor of an actual group map
 
@@ -13,6 +15,8 @@ The original map supplies a full modulus. The existing place-theoretic
 construction then supplies its unique reciprocal local symbol and its
 coefficientwise least conductor, without a modulus assumption from the caller.
 -/
+
+@[expose] public section
 
 noncomputable section
 

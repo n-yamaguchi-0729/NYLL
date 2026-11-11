@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Semiabelian
-import Nyll.SchemeTheory.GroupSchemes.TorusProduct
-import Mathlib.CategoryTheory.MorphismProperty.Limits
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Semiabelian
+public import Nyll.SchemeTheory.GroupSchemes.TorusProduct
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
 
 /-! # Products of actual semiabelian extensions -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,19 +53,20 @@ namespace AlgebraicGeometry.SemiabelianExtension
 
 variable {K : Type u} [Field K] {G H : CommGrp (Over (Spec (CommRingCat.of K)))}
 
-private theorem comp_tensorHom_fst
+theorem comp_tensorHom_fst
     {X Y X' Y' T : Over (Spec (CommRingCat.of K))}
     (m : T ⟶ X ⊗ Y) (f : X ⟶ X') (g : Y ⟶ Y') :
     (m ≫ fst X Y) ≫ f = (m ≫ (f ⊗ₘ g)) ≫ fst X' Y' := by
   simp only [Category.assoc, tensorHom_fst]
 
-private theorem comp_tensorHom_snd
+theorem comp_tensorHom_snd
     {X Y X' Y' T : Over (Spec (CommRingCat.of K))}
     (m : T ⟶ X ⊗ Y) (f : X ⟶ X') (g : Y ⟶ Y') :
     (m ≫ snd X Y) ≫ g = (m ≫ (f ⊗ₘ g)) ≫ snd X' Y' := by
   simp only [Category.assoc, tensorHom_snd]
 
-private theorem product_condition (E : SemiabelianExtension G) (F : SemiabelianExtension H) :
+/-- The product inclusion followed by the product projection is the group unit. -/
+theorem product_condition (E : SemiabelianExtension G) (F : SemiabelianExtension H) :
     (GroupSchemes.productMap E.inclusion F.inclusion).hom.hom.hom ≫
       (GroupSchemes.productMap E.projection F.projection).hom.hom.hom = 1 := by
   change (E.inclusion.hom.hom.hom ⊗ₘ F.inclusion.hom.hom.hom) ≫
@@ -72,7 +77,8 @@ private theorem product_condition (E : SemiabelianExtension G) (F : SemiabelianE
   · simp only [Category.assoc, tensorHom_snd, tensorHom_snd_assoc,
       F.condition, MonObj.comp_one, MonObj.one_comp]
 
-private def product_kernel (E : SemiabelianExtension G) (F : SemiabelianExtension H) :
+/-- The product torus inclusion is the kernel of the product projection. -/
+def product_kernel (E : SemiabelianExtension G) (F : SemiabelianExtension H) :
     IsLimit (Fork.ofι
       (GroupSchemes.productMap E.inclusion F.inclusion).hom.hom.hom
       ((product_condition E F).trans

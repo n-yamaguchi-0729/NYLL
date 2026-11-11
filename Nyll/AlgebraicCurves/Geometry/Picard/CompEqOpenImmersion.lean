@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Birational.RationalMap
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawOpensDiagonalDifferenceExtension
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawExtension
-import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.PartialMapMemDomainToRationalMap
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+module
+
+public import Mathlib.AlgebraicGeometry.Birational.RationalMap
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawOpensDiagonalDifferenceExtension
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawExtension
+public import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.PartialMapMemDomainToRationalMap
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 
 /-!
 # exists comp eq of is Open Immersion of abelian Scheme Property Bundle
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

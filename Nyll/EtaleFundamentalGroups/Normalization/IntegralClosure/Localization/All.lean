@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.NormalityFiniteExtension
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.NormalityFiniteExtension
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Normalization.IntegralClosure.Localization. -/

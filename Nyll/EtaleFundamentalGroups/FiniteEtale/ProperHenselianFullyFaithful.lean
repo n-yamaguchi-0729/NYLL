@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.ProperHenselianSections
-import Nyll.SchemeTheory.FiniteEtale.ProperClosedFiberFaithful
-import Nyll.SchemeTheory.FiniteEtale.FullOfSectionDescent
-import Mathlib.CategoryTheory.Functor.FullyFaithful
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.ProperHenselianSections
+public import Nyll.SchemeTheory.FiniteEtale.ProperClosedFiberFaithful
+public import Nyll.SchemeTheory.FiniteEtale.FullOfSectionDescent
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-!
 # Full faithfulness over an arbitrary henselian local base
@@ -20,6 +22,8 @@ Fullness uses the existing finite étale internal Hom and henselian section
 lift. Faithfulness is supplied by the arbitrary-local proper closed-fibre
 comparison. The proper morphism is not assumed flat.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-!
 # Restriction of finite-type sheaves of modules
@@ -14,6 +16,8 @@ The covering of a restriction consists of objects mapping both to the
 chosen slice object and to a member of the original generating cover.
 Each finite family is transported along the actual restriction functor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

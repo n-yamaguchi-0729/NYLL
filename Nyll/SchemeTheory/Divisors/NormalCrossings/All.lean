@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
-import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.All
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Transport
+module
+
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.All
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Transport
 
 /-!
 # Strict normal crossings

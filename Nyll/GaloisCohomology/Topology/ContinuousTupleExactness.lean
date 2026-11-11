@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
-import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
+public import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
 
 /-!
 # Passing explicit tuple primitives to actual continuous cohomology
@@ -13,6 +15,8 @@ import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
 These lemmas share the tuple-to-homology step between geometric-section
 primitives and explicit coinduced contractions.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.TensorIdealQuotient
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AssociatedGradedModule
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.TensorIdealQuotient
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # The actual associated graded layers of a flat module
@@ -27,6 +29,8 @@ For a finite locally free formal module this expresses all successive
 layers in terms of its first reduction and the Rees module of the base.
 It is the affine tensor calculation for the uniform Serre argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

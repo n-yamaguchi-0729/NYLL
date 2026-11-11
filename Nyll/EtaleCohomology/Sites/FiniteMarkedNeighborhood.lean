@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FiniteStrictLocalMarkedDescent
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import Nyll.EtaleCohomology.Sites.FiniteStrictLocalMarkedDescent
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Simultaneous marked neighborhoods for finite morphisms
@@ -23,6 +25,8 @@ uniqueness preserves all prescribed field-valued lifts.
 This supplies the geometric neighborhood construction for the product
 description of finite direct-image stalks in Stacks Project 59.55.2(1).
 -/
+
+@[expose] public section
 
 noncomputable section
 

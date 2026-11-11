@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonRigidity
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonRigidity
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Rigidity at a prime of an unramified domain
@@ -17,6 +19,8 @@ are determined by congruence modulo its maximal ideal. Localizing a domain
 at a prime applies that criterion to endomorphisms agreeing modulo the prime. Injectivity
 of the actual localization map then proves equality in the original domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

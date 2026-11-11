@@ -70,8 +70,8 @@ theorem higherRadicalUnitFactorData_closedPrime_map_higherGenericFiber_eq_top
     let Cq := AdjoinRoot factor.q
     let higherRootMap : Rₑ →ₐ[base.valuationSubring] Rₙ :=
       adjoinRootPowerMapOfDvd hdiv varpi
-    letI : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     let Tₙ := Rₙ ⊗[Rₑ] Cq
     let G := Froot ⊗[Rₙ] Tₙ
@@ -79,22 +79,8 @@ theorem higherRadicalUnitFactorData_closedPrime_map_higherGenericFiber_eq_top
       (Algebra.TensorProduct.includeRight : Tₙ →ₐ[Rₙ] G).toRingHom.comp
         (Algebra.TensorProduct.includeRight : Cq →ₐ[Rₑ] Tₙ).toRingHom
     q.1.map cToG = ⊤ := by
-  dsimp only
+  intro e Rₑ Rₙ Cq higherRootMap sharedOwner1 sharedOwner2 Tₙ G cToG
   let V := base.valuationSubring
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let higherRootMap : Rₑ →ₐ[V] Rₙ :=
-    adjoinRootPowerMapOfDvd hdiv varpi
-  let : Algebra Rₑ Rₙ := higherRootMap.toRingHom.toAlgebra
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
-  let Tₙ := Rₙ ⊗[Rₑ] Cq
-  let G := Froot ⊗[Rₙ] Tₙ
-  let cToG : Cq →+* G :=
-    (Algebra.TensorProduct.includeRight : Tₙ →ₐ[Rₙ] G).toRingHom.comp
-      (Algebra.TensorProduct.includeRight : Cq →ₐ[Rₑ] Tₙ).toRingHom
   let rootₑ : Rₑ := AdjoinRoot.root (X ^ e - C varpi)
   let rootₙ : Rₙ := AdjoinRoot.root (X ^ N - C varpi)
   have he : 0 < e := ramificationIndex_pos_of_moduleFinite base target

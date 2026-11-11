@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.Length
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.Length
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # The degree of a local modulus quotient
@@ -16,6 +18,8 @@ of its maximal ideal has dimension `n` times the residue-field degree. The
 finite-dimensionality of the quotient follows from its length and the finite
 residue degree; it is not an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

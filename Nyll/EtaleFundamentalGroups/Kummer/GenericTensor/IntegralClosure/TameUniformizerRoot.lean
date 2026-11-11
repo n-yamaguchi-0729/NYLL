@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.PrimeToUniformizerRadical
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.GenericTensorComponent
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalTame
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
-import Mathlib.Algebra.CharP.Invertible
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.PrimeToUniformizerRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.GenericTensorComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalTame
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
+public import Mathlib.Algebra.CharP.Invertible
 
 /-!
 # Literal tensor components after a tame uniformizer root
@@ -32,6 +34,8 @@ used as the root exponent. This is the tensor-component form of the
 local tame calculation in Stacks Project 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

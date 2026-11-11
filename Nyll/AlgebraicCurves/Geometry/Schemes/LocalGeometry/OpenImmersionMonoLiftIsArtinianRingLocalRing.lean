@@ -10,29 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.Ring.Epi
-import Mathlib.Algebra.Algebra.Epi
-import Mathlib.RingTheory.HopkinsLevitzki
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.Quotient
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatMaximalIdealRTensorInjective
+module
+
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.Ring.Epi
+public import Mathlib.Algebra.Algebra.Epi
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatMaximalIdealRTensorInjective
 
 /-!
 # is Open Immersion of mono of forall exists lift of is Artinian Ring of is Local Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

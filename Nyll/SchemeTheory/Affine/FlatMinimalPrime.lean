@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.Affine.GeometricIrreducibility
+module
+
+public import Nyll.SchemeTheory.Pi1.Affine.GeometricIrreducibility
 
 /-!
 # Minimal primes under flat affine maps
@@ -14,6 +16,8 @@ base.  Over a domain the base has only the zero minimal prime, so every
 irreducible component of the affine source dominates the base.
 -/
 
+
+@[expose] public section
 
 namespace Ideal
 

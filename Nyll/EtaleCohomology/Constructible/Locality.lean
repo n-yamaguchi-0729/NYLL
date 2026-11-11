@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.FiniteGluing
-import Nyll.EtaleCohomology.Constructible.Pullback
-import Nyll.EtaleCohomology.Constructible.Restriction
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.FiniteGluing
+public import Nyll.EtaleCohomology.Constructible.Pullback
+public import Nyll.EtaleCohomology.Constructible.Restriction
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Zariski locality and arbitrary pullback of constructible étale sheaves
@@ -25,6 +27,8 @@ scheme morphism preserves constructibility: affine neighborhoods of source
 points map into affine opens of the target, and their finite stratifications
 glue by the preceding geometric refinement theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

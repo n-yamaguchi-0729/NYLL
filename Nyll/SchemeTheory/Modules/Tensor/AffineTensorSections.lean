@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.RestrictSemilinear
-import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.RestrictTensorImageSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.RestrictSemilinear
+public import Nyll.SchemeTheory.Modules.Tensor.QuasicoherentTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.RestrictTensorImageSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSectionMaps
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Actual tensor sections over every affine open
@@ -28,6 +30,8 @@ The resulting equivalence has the original structure sheaf section ring
 as coefficient ring. Its compatibility with sheaf morphisms and open
 restrictions follows from the actual tensor-section operations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

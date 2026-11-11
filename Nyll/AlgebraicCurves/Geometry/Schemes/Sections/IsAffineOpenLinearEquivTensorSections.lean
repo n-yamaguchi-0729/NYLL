@@ -10,14 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.AffinePullbackIntersectionSections
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.AffinePullbackIntersectionSections
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 
 /-!
 # Scheme is Affine Open and exists linear Equiv tensor sections of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -31,8 +36,8 @@ universe u
 namespace E163G5A
 
 theorem appLE_congr_hom {X Y : Scheme.{u}} {f g : X ⟶ Y} (hfg : f = g) (U : Y.Opens) (V : X.Opens)
-    (h : V ≤ f ⁻¹ᵁ U) (h' : V ≤ g ⁻¹ᵁ U) : f.appLE U V h = g.appLE U V h' := by
-  subst hfg; rfl
+    (h : V ≤ f ⁻¹ᵁ U) (h' : V ≤ g ⁻¹ᵁ U) : f.appLE U V h = g.appLE U V h' :=
+  _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom hfg U V h h'
 
 theorem appLE_self_of_eq_id {X : Scheme.{u}} {k : X ⟶ X} (hk : k = 𝟙 X) (W : X.Opens)
     (h : W ≤ k ⁻¹ᵁ W) : k.appLE W W h = 𝟙 _ := by
@@ -81,17 +86,15 @@ theorem
     (fX : X ⟶ Spec (CommRingCat.of R)) (fY : Y ⟶ Spec (CommRingCat.of R))
     (p₁ : P ⟶ X) (p₂ : P ⟶ Y) (hP : IsPullback p₁ p₂ fX fY)
     (U : X.Opens) (hU : IsAffineOpen U) (V : Y.Opens) (hV : IsAffineOpen V) :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom fX U
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom fY V
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom (p₁ ≫ fX) (p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V)
+    let := Scheme.TwoAffineOpenCover.algebraOfHom fX U
+    let := Scheme.TwoAffineOpenCover.algebraOfHom fY V
+    let := Scheme.TwoAffineOpenCover.algebraOfHom (p₁ ≫ fX) (p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V)
     IsAffineOpen (p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V) ∧
     ∃ Φ : Γ(X, U) ⊗[R] Γ(Y, V) ≃ₗ[R] Γ(P, p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V),
       ∀ (a : Γ(X, U)) (b : Γ(Y, V)), Φ (a ⊗ₜ[R] b) =
         (p₁.appLE U (p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V) inf_le_left).hom a *
           (p₂.appLE V (p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V) inf_le_right).hom b := by
-  let iU := Scheme.TwoAffineOpenCover.algebraOfHom fX U
-  let iV := Scheme.TwoAffineOpenCover.algebraOfHom fY V
-  let iW := Scheme.TwoAffineOpenCover.algebraOfHom (p₁ ≫ fX) (p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ V)
+  intro iU iV iW
   let iW' := Scheme.TwoAffineOpenCover.algebraOfHom (pullback.fst fX fY ≫ fX) (pullback.fst fX fY
     ⁻¹ᵁ U ⊓ pullback.snd fX fY ⁻¹ᵁ V)
   have h60 := isAffineOpen_and_exists_algEquiv_tensor_sections_fst_preimage_inf_snd_preimage

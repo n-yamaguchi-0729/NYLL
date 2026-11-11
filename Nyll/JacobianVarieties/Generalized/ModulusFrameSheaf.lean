@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusPicardNaturality
-import Nyll.JacobianVarieties.Generalized.PicardSheaf
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusPicardNaturality
+public import Nyll.JacobianVarieties.Generalized.PicardSheaf
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 
 /-!
 # The actual frame family embeds in the modulus Picard sheaf
@@ -15,6 +17,8 @@ Sheafification of the natural, pointwise injective classification gives an
 embedding over the parameter scheme. The target uses the existing full modulus
 Picard sheaf. Identifying the total family with its degree-zero part is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

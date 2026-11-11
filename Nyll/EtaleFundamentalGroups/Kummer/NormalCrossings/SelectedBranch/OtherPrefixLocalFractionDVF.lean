@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.RingExtension
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.OtherPrefixLocalDVR
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.RingExtension
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.OtherPrefixLocalDVR
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Fraction fields of the selected-prefix local DVRs
@@ -27,6 +29,8 @@ same reason, finite dimensionality of the literal fraction-field extension
 and the corresponding `DVF.ramificationIndex` equality belong to the later
 generic-component bridge, not to this raw local-DVR leaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -59,7 +63,7 @@ theorem
     (q : Ideal C) [q.IsPrime] [q.LiesOver (IsLocalRing.maximalIdeal V)]
     (N : ℕ) (hqRam : q.ramificationIdx V = N) :
     let T := E ⊗[V] C
-    letI : Algebra E T := Algebra.TensorProduct.leftAlgebra
+    let : Algebra E T := Algebra.TensorProduct.leftAlgebra
     ∃ Q : Ideal T, ∃ hQPrime : Q.IsPrime,
       letI : Q.IsPrime := hQPrime
       let P := Q.under E
@@ -102,8 +106,7 @@ theorem
                   let base := EtaleFundamentalGroups.standardDVFOfDVR EP KP
                   let target := EtaleFundamentalGroups.standardDVFOfDVR TQ KQ
                   base.valuation.HasExtension target.valuation := by
-  let T := E ⊗[V] C
-  let : Algebra E T := Algebra.TensorProduct.leftAlgebra
+  intro T sharedOwner2
   obtain ⟨Q, hQPrime, hQRight, hQRam,
       hPDomain, hPDVR, hQDomain, hQDVR⟩ :=
     exists_tensorProduct_prime_over_right_with_localDVRs_ramificationIdx_eq_of_etale

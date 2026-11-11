@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Recovering finite étale algebras from their generic fibres
@@ -26,6 +28,8 @@ isomorphism of the original finite étale algebras. The extension preserves
 the specified generic isomorphism. This supplies the affine overlap
 comparison used when finite étale extensions of a generic cover are glued.
 -/
+
+@[expose] public section
 
 noncomputable section
 

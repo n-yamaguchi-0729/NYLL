@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.ExtensionPresentation
-import Nyll.EtaleCohomology.Constructible.LocallyConstantKernels
-import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
-import Nyll.EtaleCohomology.Sites.FiniteFreeLift
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.RingTheory.Finiteness.Finsupp
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.ExtensionPresentation
+public import Nyll.EtaleCohomology.Constructible.LocallyConstantKernels
+public import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
+public import Nyll.EtaleCohomology.Sites.FiniteFreeLift
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.RingTheory.Finiteness.Finsupp
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
 # Extensions of constructible module sheaves
@@ -27,6 +29,8 @@ on an actual étale cover. The middle term then has the cokernel presentation
 constructed in `ExtensionPresentation`. Common stratifications give the
 corresponding closure theorem for constructible sheaves on arbitrary schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

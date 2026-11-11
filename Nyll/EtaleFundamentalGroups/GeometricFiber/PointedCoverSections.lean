@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Mathlib.CategoryTheory.Galois.Full
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Mathlib.CategoryTheory.Galois.Full
 
 /-!
 # Pointed sections of actual finite étale covers
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Galois.Full
 A monodromy-fixed geometric point of a finite étale cover gives an actual
 section with that value. Connectedness makes this section unique.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.Topology.Sheaves.Stalks
-import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
+module
+
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.Topology.Sheaves.Stalks
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
 
 /-!
 # The stalk outside a closed discrete-function support
@@ -16,6 +18,8 @@ section, even for an empty value type. Every germ at a point outside the
 support restricts to this section, so the actual stalk is terminal.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

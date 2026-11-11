@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteResidueFields
-import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableResidueGroup
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidueClosure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeAbsoluteResidueFields
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableResidueGroup
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidueClosure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # The original strict-stalk residue is the actual separable normalization residue
@@ -21,6 +23,8 @@ makes this an isomorphism over the original local residue field. Transporting
 the proved actual stalk-residue image through this concrete isomorphism gives
 the same separable field used in the original decomposition/inertia sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

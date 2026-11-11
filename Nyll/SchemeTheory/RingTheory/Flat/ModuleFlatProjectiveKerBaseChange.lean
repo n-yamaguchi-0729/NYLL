@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.Algebra.Module.Projective
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatFlatKerBijectiveKerBaseChangeHom
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatFlatKerBijectiveKerBaseChangeHom
 
 /-!
 # Module Flat projective ker base Change of is Localization Away of ker base Change le range
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -77,7 +81,7 @@ theorem cancelBaseChange_baseChange_baseChange (f : M →ₗ[R] N) (x : B ⊗[S]
   | tmul b y =>
     induction y using TensorProduct.inductionOn with
     | tmul s m =>
-      simp [LinearMap.baseChange_tmul, AlgebraTensorModule.cancelBaseChange_tmul]
+      simp only [LinearMap.baseChange_tmul, AlgebraTensorModule.cancelBaseChange_tmul]
     | add y₁ y₂ h₁ h₂ => simp only [tmul_add, map_add, h₁, h₂]
   | add x₁ x₂ h₁ h₂ => simp only [map_add, h₁, h₂]
 
@@ -119,7 +123,7 @@ noncomputable def kerEquiv (f : M →ₗ[R] N) :
 
 @[scoped simp] theorem kerEquiv_apply_coe (f : M →ₗ[R] N) (x : T ⊗[R] LinearMap.ker f) :
     (kerEquiv T f x : T ⊗[R] M) = (LinearMap.ker f).subtype.baseChange T x := by
-  simp [kerEquiv, TwoChartCech.kerBaseChangeHom_apply_coe]
+  exact TwoChartCech.kerBaseChangeHom_apply_coe f T x
 
 end FlatKer
 
@@ -139,8 +143,9 @@ theorem key (f : M →ₗ[R] N) (w : B ⊗[S] (S ⊗[R] LinearMap.ker f)) :
   | tmul b t =>
     induction t using TensorProduct.inductionOn with
     | tmul s k =>
-      simp [LinearEquiv.baseChange_tmul, TwoChartCech.kerBaseChangeHom_apply_coe,
-        LinearMap.baseChange_tmul, AlgebraTensorModule.cancelBaseChange_tmul]
+      simp only [LinearEquiv.baseChange_tmul, TwoChartCech.kerBaseChangeHom_apply_coe,
+        Submodule.coe_subtype, kerEquiv_apply_coe, LinearMap.baseChange_tmul,
+        AlgebraTensorModule.cancelBaseChange_tmul]
     | add t₁ t₂ h₁ h₂ => simp only [tmul_add, map_add, Submodule.coe_add, h₁, h₂]
   | add w₁ w₂ h₁ h₂ => simp only [map_add, Submodule.coe_add, h₁, h₂]
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.All
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.All
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.All
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.All
 
 /-!
 # Abhyankar lemma

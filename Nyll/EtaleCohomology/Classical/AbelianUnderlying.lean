@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleCohomology.Sites.SetSheafFunctors
-import Mathlib.CategoryTheory.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Nyll.EtaleCohomology.Sites.SetSheafFunctors
+public import Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Underlying sets of actual abelian inverse images
@@ -18,6 +20,8 @@ integer-module equivalence defining abelian inverse image. The comparison
 retains the original abelian sheaves and the existing set inverse image.
 This allows their extension fibers to be compared as sheaves of sets.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -71,12 +75,14 @@ theorem constantPresheafAdj_unit_app_eq_id {C : Type u} [Category.{v} C]
   change (Functor.constCompEvaluationObj D (Opposite.op T)).hom.app A = 𝟙 A
   rfl
 
-private def integerSheafEquivalenceUnderlyingIso (X : Scheme.{u}) :
+/-- The integer-module equivalence preserves the original underlying sheaf of sets. -/
+def integerSheafEquivalenceUnderlyingIso (X : Scheme.{u}) :
     (Classical.integerSheafEquivalence X.smallEtaleTopology).functor ⋙
       etaleAbelianUnderlying X ≅ etaleModuleUnderlying X (ULift.{u} ℤ) :=
   Iso.refl _
 
-private def integerSheafInverseUnderlyingIso (X : Scheme.{u}) :
+/-- The inverse integer-module equivalence preserves the original underlying sheaf of sets. -/
+def integerSheafInverseUnderlyingIso (X : Scheme.{u}) :
     (Classical.integerSheafEquivalence X.smallEtaleTopology).inverse ⋙
       etaleModuleUnderlying X (ULift.{u} ℤ) ≅ etaleAbelianUnderlying X :=
   Functor.isoWhiskerLeft (Classical.integerSheafEquivalence X.smallEtaleTopology).inverse

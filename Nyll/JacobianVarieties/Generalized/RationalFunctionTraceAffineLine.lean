@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTrace
-import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineRatFuncModel
-import Nyll.SchemeTheory.FunctionFields.OpenImmersionSections
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTrace
+public import Nyll.AlgebraicCurves.Models.Rational.ProjectiveLineRatFuncModel
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersionSections
 
 /-! # The actual affine-line domain of a rational-function trace
 
@@ -18,6 +20,8 @@ has negative order. The entire affine chart lies in the trace domain,
 giving an actual group-valued affine-line morphism and retaining both its
 finite-trace definition and the specified generic function-field map.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -114,7 +118,8 @@ private theorem polynomialChart_preimage_traceLocus_eq_top
     j ⁻¹ᵁ finiteMapTraceLocus M.toBase P.toBase π hπ n hn U = ⊤ := by
   intro P j
   have hη : genericPoint M.C ∈ U :=
-    ((genericPoint_spec M.C).mem_open_set_iff U.isOpen).mpr (by simpa using hU)
+    ((genericPoint_spec M.C).mem_open_set_iff U.isOpen).mpr
+      (by simpa only [Set.univ_inter] using hU)
   apply top_unique
   intro y _
   apply (mem_finiteMapTraceLocus_iff M.toBase P.toBase π hπ n hn U (j y)).mpr

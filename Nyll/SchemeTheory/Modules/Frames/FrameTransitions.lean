@@ -34,19 +34,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Algebra.Group.Units.Equiv
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.Frames.FrameLocality
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
-import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
+public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
 
 /-!
 # Scheme Modules Is Frame On exists is Unit map eq mul of iso tensor Unit
 -/
+
+@[expose] public section
 
 open CategoryTheory MonoidalCategory
 
@@ -122,7 +126,9 @@ theorem isFrameOn_unit_smul {M : X.Modules} {V : X.Opens} {s : Γ(M, V)} (hs : I
     funext f; simp only [Function.comp_apply, mul_smul]
   rw [this]
   obtain ⟨c, hc⟩ := hu
-  have hf : (fun f : Γ(X, W) => f * rO hWV g) = Units.mulRight c := by funext f; simp [hc]
+  have hf : (fun f : Γ(X, W) => f * rO hWV g) = Units.mulRight c := by
+    funext f
+    exact congrArg (f * ·) hc.symm
   rw [hf]
   exact hb.comp (Units.mulRight c).bijective
 
@@ -148,7 +154,9 @@ def U2 (U V : X.Opens) : Bool → X.Opens := fun b => cond b V U
 
 theorem iSup_U2 (U V : X.Opens) : iSup (U2 U V) = U ⊔ V := by
   apply le_antisymm
-  · exact iSup_le fun b => by cases b <;> simp [U2]
+  · exact iSup_le fun b => by cases b with
+      | false => exact le_sup_left
+      | true => exact le_sup_right
   · exact sup_le (le_iSup (U2 U V) false) (le_iSup (U2 U V) true)
 
 theorem res_tensorSections_eq_mul_smul {L L' : X.Modules} {U V : X.Opens}

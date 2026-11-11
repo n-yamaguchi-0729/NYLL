@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Relative point laws of actual commutative group schemes
 
@@ -14,6 +17,8 @@ The operations are transported from the existing group object. The additive
 point evaluator identifies the relative-law coordinates with the same actual
 point group, so regular divisor sums can target any commutative group scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

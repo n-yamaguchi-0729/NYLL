@@ -10,34 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.ExteriorPower.Det
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.InvertibleNorm
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoEvAppTensorUnit
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Determinants.InvertibleDetLocallyFree
-import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageIsoTensorUnit
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
-import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleCoeffIdealLeIdealZeroSchemeIdealEq
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AlgebraStandardSmoothDVRLocalizationAtPrime
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IdealSpanAlgebraNormEq
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealEqSpan
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.IsFrameOnNormAppEqNormSmul
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.SectionZeroScheme
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.ExteriorPower.Det
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.InvertibleNorm
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoEvAppTensorUnit
+public import Nyll.SchemeTheory.Modules.Invertible.Determinant
+public import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackPreimageIsoTensorUnit
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIsoInvModuleZeroSchemeIdeal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealInvModuleSection
+public import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleCoeffIdealLeIdealZeroSchemeIdealEq
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AlgebraStandardSmoothDVRLocalizationAtPrime
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IdealSpanAlgebraNormEq
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealEqSpan
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.IsFrameOnNormAppEqNormSmul
 
 /-!
 # Scheme Modules nonempty norm Module inv Module ker iso
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -108,9 +112,9 @@ theorem ideal_zeroSchemeIdeal_detSection_eq_span_norm
         ∀ i, b i = ((pushforward π).obj (𝟙_ X'.Modules)).presheaf.map (homOfLE hW).op (e i))
     (s : Γ(P, π ⁻¹ᵁ U.1)) (hs : IsFrameOn s (π ⁻¹ᵁ U.1))
     (g : Γ(X', π ⁻¹ᵁ U.1)) (hg : ι'.app (π ⁻¹ᵁ U.1) (toUnitSection _ 1) = g • s) :
-    letI : Algebra Γ(X, U.1) Γ(X', π ⁻¹ᵁ U.1) := (π.app U.1).hom.toAlgebra
+    let : Algebra Γ(X, U.1) Γ(X', π ⁻¹ᵁ U.1) := (π.app U.1).hom.toAlgebra
     (zeroSchemeIdeal (detSection π d ι')).ideal U = Ideal.span {Algebra.norm Γ(X, U.1) g} := by
-  let : Algebra Γ(X, U.1) Γ(X', π ⁻¹ᵁ U.1) := (π.app U.1).hom.toAlgebra
+  intro sharedOwner1
   obtain ⟨Ω, hΩ, hσ⟩ := exists_isFrameOn_normModule_and_app_eq_norm_smul π d ι' U.1 e he s hs g hg
   have := hN.ideal_zeroSchemeIdeal_eq_span_of_app_eq_smul Ω hΩ (detSection π d ι') (Algebra.norm
     Γ(X, U.1) g)

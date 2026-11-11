@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMonodromy
-import Nyll.ProCGroups.Abelian.RestrictedTateModule
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
-import Mathlib.CategoryTheory.Galois.Topology
+module
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTorsionFiber
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMonodromy
+public import Nyll.ProCGroups.Abelian.RestrictedTateModule
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+public import Mathlib.CategoryTheory.Galois.Topology
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTorsionFiber
+public import Nyll.ProCGroups.Abelian.FullTateModule
 
 /-!
 # Actual compatible torsion families at invertible indices
@@ -19,7 +22,11 @@ realized by compactness: any finite set of its coordinates is realized at the
 product of their indices, which remains invertible in the ground field.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open CategoryTheory CategoryTheory.PreGaloisCategory AlgebraicGeometry
 open AlgebraicGeometry.FiniteEtale
@@ -27,8 +34,8 @@ open scoped FintypeCatDiscrete BigOperators
 
 namespace GoodReductionJacobian.RelativeGroupLaw.UnitMultiplication
 
-variable {K : Type} [Field K] [IsSepClosed K]
-  {A : Scheme} {f : A ⟶ Spec (.of K)} [IsProper f] [Smooth f]
+variable {K : Type u} [Field K] [IsSepClosed K]
+  {A : Scheme.{u}} {f : A ⟶ Spec (.of K)} [IsProper f] [Smooth f]
   (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
 
 /-- The actual multiplication transition preserves the distinguished unit fibre point. -/

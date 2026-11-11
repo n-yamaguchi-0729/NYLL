@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Normal.Defs
-import Mathlib.GroupTheory.Coset.Card
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Normal.Defs
+public import Mathlib.GroupTheory.Coset.Card
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Divisibility of Galois tensor-component degrees
@@ -24,6 +26,8 @@ In particular a prime-to-p Galois degree remains prime to p on every
 component after completion. Unlike a numerical upper bound, this permits
 the original degree itself to be a common tame root exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

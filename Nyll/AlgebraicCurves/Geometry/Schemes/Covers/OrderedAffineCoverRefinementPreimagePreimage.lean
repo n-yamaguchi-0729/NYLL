@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Order.CompleteBooleanAlgebra
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Order.CompleteBooleanAlgebra
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
 
 /-!
 # Scheme Ordered Affine Cover exists refinement preimage preimage of is Separated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

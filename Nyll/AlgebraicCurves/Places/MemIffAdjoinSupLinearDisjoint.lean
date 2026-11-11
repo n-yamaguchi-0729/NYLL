@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Place exists forall mem iff adjoin sup of linear Disjoint
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

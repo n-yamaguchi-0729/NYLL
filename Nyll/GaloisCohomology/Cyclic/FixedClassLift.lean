@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.LangNormKernel
-import Mathlib.Tactic.Abel
+module
+
+public import Nyll.GaloisCohomology.Cyclic.LangNormKernel
+public import Mathlib.Tactic.Abel
 
 /-!
 # Fixed representatives of cyclic quotient classes
@@ -14,6 +16,8 @@ An equivariant quotient class fixed by a cyclic action has a fixed representativ
 when norm-one elements have Hilbert 90 primitives and invariant kernel elements
 are norms of kernel elements. The proof explicitly removes the norm obstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

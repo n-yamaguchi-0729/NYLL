@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
-import Mathlib.AlgebraicGeometry.AffineSpace
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Sites.SubcanonicalOver
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
-import Mathlib.Algebra.Category.Grp.Adjunctions
-import Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+public import Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 
 /-!
 # Fppf Gm Representable
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -357,10 +361,6 @@ variable (n : ℕ)
 local instance : TopologicalSpace (ZMod n) := ⊥
 
 local instance : DiscreteTopology (ZMod n) := ⟨rfl⟩
-
-local instance : IsTopologicalAddGroup (ZMod n) where
-  continuous_add := continuous_of_discreteTopology
-  continuous_neg := continuous_of_discreteTopology
 
 /-- The presheaf of locally constant functions with values in the additive group `ZMod n`. -/
 def constantZMod : Scheme.{u}ᵒᵖ ⥤ AddCommGrpCat.{u} :=

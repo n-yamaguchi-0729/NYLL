@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
-import Nyll.EtaleCohomology.Classical.FieldUnitSections
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldSectionRepresentations
+public import Nyll.EtaleCohomology.Classical.FieldUnitSections
 
 /-!
 # Exactness of actual unit-kernel Galois representations
@@ -13,6 +15,8 @@ import Nyll.EtaleCohomology.Classical.FieldUnitSections
 Left exactness comes from actual sheaf evaluation. Surjectivity is the
 geometric Hilbert 90 section-lifting theorem on the field neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -36,7 +40,7 @@ private theorem representation_exact_iff_underlying
 /-- Actual finite-Galois field sections preserve short exact sequences
 whose kernel is the actual multiplicative-group sheaf. -/
 theorem fieldGaloisSheafSections_unitsKernel_shortExact
-    (K L : Type u) [Field K] [Field L] [CharZero L] [Algebra K L]
+    (K L : Type u) [Field K] [Field L] [Algebra K L]
     [FiniteDimensional K L] [IsGalois K L]
     {B Q : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (i : etaleMultiplicativeGroupSheaf (Spec (.of K)) ⟶ B) (p : B ⟶ Q)

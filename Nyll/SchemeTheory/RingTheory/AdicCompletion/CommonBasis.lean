@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Flat.LocalAdicBasis
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.Finsupp.VectorSpace
-import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Flat.LocalAdicBasis
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.Finsupp.VectorSpace
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Completion using one common family of basis representatives
@@ -28,6 +30,8 @@ it can transfer flatness of completed free modules to the completion of an
 arbitrary flat module. This supplies the common-basis completion argument
 used in Stacks, Tag 07QM, part (4).
 -/
+
+@[expose] public section
 
 noncomputable section
 

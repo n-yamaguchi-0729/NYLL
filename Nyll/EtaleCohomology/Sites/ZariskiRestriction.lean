@@ -5,16 +5,18 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Actual Zariski restriction of a small étale sheaf
@@ -24,6 +26,8 @@ the open image of an étale morphism is left adjoint to this inclusion.
 The inclusion preserves covering sieves, hence is continuous, and ordinary
 presheaf restriction gives the actual sheaf on the underlying space.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -54,7 +58,8 @@ private lemma hom_to_zariskiToEtale_eq {U : X.Opens} {T : X.Etale}
   apply (cancel_mono U.ι).mp
   exact a.w.trans b.w.symm
 
-private def openImageHomEquiv (T : X.Etale) (U : X.Opens) :
+/-- An étale object maps to an open exactly when its image lies in that open. -/
+def openImageHomEquiv (T : X.Etale) (U : X.Opens) :
     ((etaleOpenImage X).obj T ⟶ U) ≃ (T ⟶ (zariskiToEtale X).obj U) where
   toFun h := by
     have hRange : Set.range (T.hom : T.left ⟶ X) ⊆ Set.range (U.ι : U.toScheme ⟶ X) := by
@@ -73,7 +78,7 @@ private def openImageHomEquiv (T : X.Etale) (U : X.Opens) :
     rw [← hk]
     exact (k.left t).property)
   left_inv _ := Subsingleton.elim _ _
-  right_inv k := hom_to_zariskiToEtale_eq X _ k
+  right_inv k := by exact hom_to_zariskiToEtale_eq X _ k
 
 /-- An étale object maps into an open subscheme exactly when its open image
 is contained in that open. -/
@@ -81,7 +86,7 @@ def etaleOpenImageAdjunction : etaleOpenImage X ⊣ zariskiToEtale X :=
   Adjunction.mkOfHomEquiv
     { homEquiv := openImageHomEquiv X
       homEquiv_naturality_left_symm := fun _ _ => Subsingleton.elim _ _
-      homEquiv_naturality_right := fun _ _ => hom_to_zariskiToEtale_eq X _ _ }
+      homEquiv_naturality_right := fun _ _ => by exact hom_to_zariskiToEtale_eq X _ _ }
 
 instance zariskiToEtale_isRightAdjoint : (zariskiToEtale X).IsRightAdjoint where
   exists_leftAdjoint := ⟨etaleOpenImage X, ⟨etaleOpenImageAdjunction X⟩⟩

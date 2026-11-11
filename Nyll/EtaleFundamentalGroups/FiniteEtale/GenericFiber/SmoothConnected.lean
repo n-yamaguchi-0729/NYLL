@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # Connected generic fibres of smooth algebras over normal domains
@@ -22,6 +24,8 @@ scheme, since its composite structure morphism is smooth. The result concerns
 the ordinary generic fibre; geometric connectedness requires the additional
 arithmetic argument about the field of constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.CategoryTheory.Limits.Cones
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Limits.Cones
 
 /-!
 # Native limits and the actual compatible-sequence module
@@ -20,6 +22,8 @@ comparison with the native limit preserves every original projection.
 This comparison applies after evaluating a diagram of module sheaves on
 an open, without assuming finiteness or surjectivity of its transitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

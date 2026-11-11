@@ -4,14 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.SupportedDivisorSums
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraphAlgClosed
+module
+
+public import Nyll.JacobianVarieties.Albanese.SupportedDivisorSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.IEqProdKerGraphAlgClosed
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Evaluating the regular sum of an actual divisor family
 
 The tuple-cover formula determines the sum on every divisor which is a sum of
 sections. It holds over arbitrary test schemes, including nonreduced schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

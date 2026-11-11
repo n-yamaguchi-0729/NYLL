@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Iso
-import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
-import Mathlib.Topology.Sheaves.Stalks
-import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
-import Nyll.SchemeTheory.Topology.ClosedDiscreteRestriction
-import Nyll.SchemeTheory.Topology.ClosedDiscreteStalkOutside
-import Nyll.SchemeTheory.Topology.SheafPullbackStalks
+module
+
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
+public import Mathlib.Topology.Sheaves.Stalks
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteRestriction
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteStalkOutside
+public import Nyll.SchemeTheory.Topology.SheafPullbackStalks
 
 /-!
 # The supported-function pullback comparison is a monomorphism
@@ -22,6 +24,8 @@ comparison is a monomorphism. This is enough to transfer the concrete
 function-extension result to the actual inverse-image unit.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

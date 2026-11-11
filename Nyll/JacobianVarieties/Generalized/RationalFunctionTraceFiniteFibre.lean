@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RationalFunctionTracePrincipalDivisor
+module
+
+public import Nyll.JacobianVarieties.Generalized.RationalFunctionTracePrincipalDivisor
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Principal evaluation from two finite trace fibres
 
@@ -13,6 +16,8 @@ For the trace coordinate `z`, the difference of the full fibres over `a` and
 `g = (z+1)/z` uses the fibres over `-1` and `0`; it does not require a trace
 value at infinity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

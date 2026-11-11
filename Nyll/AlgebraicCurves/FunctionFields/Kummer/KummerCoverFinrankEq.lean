@@ -10,11 +10,15 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.FieldTheory.KummerExtension
+module
+
+public import Mathlib.FieldTheory.KummerExtension
 
 /-!
 # Kummer Cover finrank eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

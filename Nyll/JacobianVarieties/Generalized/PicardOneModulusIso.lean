@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusIsoComparison
-import Nyll.JacobianVarieties.Generalized.PicardOneRestriction
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusIsoComparison
+public import Nyll.JacobianVarieties.Generalized.PicardOneRestriction
 
 /-! # Intrinsic Picard-one for isomorphic whole moduli -/
+
+@[expose] public section
 
 noncomputable section
 

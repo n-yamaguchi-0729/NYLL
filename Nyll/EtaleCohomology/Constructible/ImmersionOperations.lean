@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.OpenClosed
-import Nyll.EtaleCohomology.Constructible.Support
-import Nyll.EtaleCohomology.Sites.OpenAdjunction
-import Nyll.EtaleCohomology.Sites.ClosedAdjunction
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Topology.Constructible
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.OpenClosed
+public import Nyll.EtaleCohomology.Constructible.Support
+public import Nyll.EtaleCohomology.Sites.OpenAdjunction
+public import Nyll.EtaleCohomology.Sites.ClosedAdjunction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.Topology.Constructible
 
 /-!
 # Constructibility of extension by zero and closed direct image
@@ -22,6 +24,8 @@ image is retrocompact. Their composite treats locally closed immersions
 presented by their open-closed factorization. All coefficient rings are
 allowed and no noetherian hypothesis on the base scheme is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

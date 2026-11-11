@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.LocalRing
+module
+
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
 
 /-!
 # The first quotient of an adic completion
@@ -13,6 +15,8 @@ For a finitely generated ideal `I`, reduction of the `I`-adic completion
 modulo the extended ideal is canonically the original quotient `R ⧸ I`.
 This is the closed-fibre comparison used by formal gluing along completion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

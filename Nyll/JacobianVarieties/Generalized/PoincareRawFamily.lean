@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareModulusZero
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareModulusZero
 
 /-!
 # The total Poincaré frame presheaf before relative sheafification
@@ -13,6 +15,8 @@ Elements retain an actual parameter map and a scalar class of an actual frame.
 They map to the represented frame family and to actual modulus Picard-zero
 classes. Local classification of these maps is kept separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

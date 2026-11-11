@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.ChowDatum
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.SchemeTheory.Morphisms.ChowDatum
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Compactifications and their common refinements
@@ -25,6 +27,8 @@ refinement, constructed as the image in their fiber product. These are
 geometric inputs to compactly supported étale cohomology. Existence for
 arbitrary separated finite-type schemes is not assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

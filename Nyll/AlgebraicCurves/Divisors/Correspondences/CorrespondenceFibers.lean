@@ -20,13 +20,17 @@ Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b3
 Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDegAlong
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPosFiniteDimensional
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDegAlong
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPosFiniteDimensional
 
 /-!
 # Correspondence Fibers
 -/
+
+@[expose] public section
 
 section
 

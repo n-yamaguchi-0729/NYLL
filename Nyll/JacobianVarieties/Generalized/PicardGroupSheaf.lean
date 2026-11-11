@@ -5,11 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
-import Nyll.JacobianVarieties.Generalized.PicardSheaf
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardGroupFunctor
+public import Nyll.JacobianVarieties.Generalized.PicardSheaf
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-!
 # The commutative group sheaf of modulus-rigidified classes
@@ -21,18 +24,15 @@ constructed fppf sheaf of chosen-rigidified line-bundle classes, with compatible
 units from actual bundles.
 -/
 
+@[expose] public section
+
 universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
 noncomputable section
 
-private instance filteredCommGrpHasColimitsOfShape
-    {K : Type v} [SmallCategory K] [IsFiltered K] :
-    HasColimitsOfShape K CommGrpCat.{v} where
-  has_colimit F := HasColimit.mk
-    { cocone := CommGrpCat.FilteredColimits.colimitCocone F
-      isColimit := CommGrpCat.FilteredColimits.colimitCoconeIsColimit F }
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

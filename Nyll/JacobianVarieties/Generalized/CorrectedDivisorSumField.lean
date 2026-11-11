@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorSumFieldActual
-import Nyll.JacobianVarieties.Albanese.CorrectedDivisorSums
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorSumFieldActual
+public import Nyll.JacobianVarieties.Albanese.CorrectedDivisorSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Full-divisor evaluation of corrected regular sums -/
+
+@[expose] public section
 
 noncomputable section
 

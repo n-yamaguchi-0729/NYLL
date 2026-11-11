@@ -3,9 +3,12 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableAffineDescent
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldCover
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableAffineDescent
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldCover
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Pure Inseparable Cover Recovery
@@ -13,6 +16,8 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldCover
 Recovery on a literal coefficient chart gives recovery on the standard
 pullback chart, with both structure maps fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits AlgebraicGeometry

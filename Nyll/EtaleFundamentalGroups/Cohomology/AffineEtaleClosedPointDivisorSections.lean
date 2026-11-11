@@ -3,7 +3,9 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineClosedPointDivisorComparison
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineClosedPointDivisorComparison
 
 /-!
 # Closed-point divisor sections on affine étale objects
@@ -12,6 +14,8 @@ For an affine étale domain over a Dedekind base, sections of the actual
 closed-point divisor sheaf are described by finitely supported coefficients
 on the height-one points of the affine source.
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 open IsDedekindDomain

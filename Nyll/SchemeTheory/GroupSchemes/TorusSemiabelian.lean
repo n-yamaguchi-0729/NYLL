@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Semiabelian
-import Nyll.SchemeTheory.GroupSchemes.TorusGeometry
-import Nyll.SchemeTheory.GroupSchemes.Trivial
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Semiabelian
+public import Nyll.SchemeTheory.GroupSchemes.TorusGeometry
+public import Nyll.SchemeTheory.GroupSchemes.Trivial
 
 /-! # Tori as actual semiabelian extensions -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareGroupProjection
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareGroupProjection
 
 /-!
 # Geometry of the actual modulus-forgetting group morphism
@@ -12,6 +14,8 @@ import Nyll.JacobianVarieties.Generalized.PoincareGroupProjection
 The proved equality with the frame projection supplies affineness, relative
 smooth dimension and geometric connectedness of its fibres.
 -/
+
+@[expose] public section
 
 noncomputable section
 

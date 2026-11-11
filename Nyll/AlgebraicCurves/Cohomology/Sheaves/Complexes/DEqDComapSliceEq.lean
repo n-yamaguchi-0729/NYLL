@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DEqDComapSectionEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomBijectiveAppPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.ResEqSumDComapSliceEq
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DEqDComapSectionEq
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.HomBijectiveAppPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.ResEqSumDComapSliceEq
 
 /-!
 # OModule Presheaf exists d eq of d comap slice eq of bijective algebra Map
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

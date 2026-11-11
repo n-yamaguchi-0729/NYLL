@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitKernelSquare
-import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentIdealBasis
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionFibers
-import Nyll.SchemeTheory.Morphisms.SmoothGeometricallyIntegral
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentUnitKernelSquare
+public import Nyll.SchemeTheory.Affine.WeilRestriction.NilpotentIdealBasis
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionFibers
+public import Nyll.SchemeTheory.Morphisms.SmoothGeometricallyIntegral
 
 /-! # The actual smooth connected affine group of a nilpotent ideal -/
+
+@[expose] public section
 
 noncomputable section
 

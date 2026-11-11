@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafLocalization
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
-import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafLocalization
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafCocycle
+public import Nyll.SchemeTheory.Modules.Descent.GlueOfCocycle
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring
 
 /-!
 # Actual compatible numerators for a projective local section
@@ -30,6 +32,8 @@ Taking one common power for all overlaps gives compatible numerators.
 Every numerator is an actual section of the original module sheaf.
 The compatibility and the exponents are conclusions of the construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

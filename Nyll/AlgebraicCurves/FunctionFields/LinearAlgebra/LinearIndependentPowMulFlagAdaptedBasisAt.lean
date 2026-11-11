@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Dimension.OrzechProperty
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Bases.MulMemLSpaceNsmulSuccReflects
+module
+
+public import Mathlib.LinearAlgebra.Dimension.OrzechProperty
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Bases.MulMemLSpaceNsmulSuccReflects
 
 /-!
 # Linear Independent pow mul of flag Adapted Basis At of ell eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -38,7 +42,7 @@ theorem _root_.AlgebraicCurve.linearIndependent_pow_mul_of_flagAdaptedBasisAt_of
       (fun p : {p : Fin d' × ℕ // p.2 + e p.1 ≤ M} => x ^ p.val.2 * y p.val.1)) :
     LinearIndependent K (fun p : Fin d' × ℕ => x ^ p.2 * y p.1) := by
   classical
-  have hD0 : 0 ≤ D := fun v => by simp [hD v]
+  have hD0 : 0 ≤ D := fun v => (le_max_left 0 (-v.ord x)).trans_eq (hD v).symm
   have hmono : ∀ {a b : ℕ}, a ≤ b → (LSpace (a • D) : Submodule K F) ≤ LSpace (b • D) := by
     intro a b hab; refine lSpace_mono ?_
     intro v; simpa using nsmul_le_nsmul_left (hD0 v) hab
@@ -78,7 +82,7 @@ theorem _root_.AlgebraicCurve.linearIndependent_pow_mul_of_flagAdaptedBasisAt_of
         change (q.2 : ℕ) + e q.1 ≤ N; have h := q.2.isLt; omega⟩
       left_inv := fun p => rfl
       right_inv := fun q => rfl }
-    simp [Fintype.card_congr eqv, Fintype.card_sigma]
+    simp only [Fintype.card_congr eqv, Fintype.card_sigma, Fintype.card_fin]
   have hceq_at : ∀ N ≤ M₀ + 1,
       Fintype.card {p : Fin d' × ℕ // p.2 + e p.1 ≤ N}
         = Module.finrank K ↥(LSpace (N • D) : Submodule K F) := by

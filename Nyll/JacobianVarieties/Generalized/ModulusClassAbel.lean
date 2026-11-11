@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.LocalSymbolBoundary
-import Mathlib.Data.Finsupp.Ext
+module
+
+public import Nyll.JacobianVarieties.Generalized.LocalSymbolBoundary
+public import Mathlib.Data.Finsupp.Ext
 
 /-!
 # The Abel map into the actual modulus divisor class group
@@ -16,6 +18,8 @@ full modulus, its induced evaluation on degree-zero classes is the identity,
 and its local symbol is the negative of the isolated local-unit boundary.
 Over an algebraically closed field this is the usual point-minus-basepoint map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

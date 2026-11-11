@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Trace.Trace
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Etale.Kaehler
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Trace.Trace
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Etale.Kaehler
 
 /-!
 # Is Trace Diff trace Diff
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -39,8 +43,11 @@ private theorem AlgebraicCurve.exists_isTraceDiff (K F F' : Type*) [Field K] [Fi
   refine ⟨g.comp (e.symm.toLinearMap.restrictScalars F), fun y ω => ?_⟩
   have he : e.symm (y • KaehlerDifferential.map K K F F' ω) = y ⊗ₜ[F] ω := by
     rw [LinearEquiv.symm_apply_eq]
-    simp [e]
-  simp [he, g]
+    rw [KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply,
+      KaehlerDifferential.mapBaseChange_tmul]
+  change g (e.symm (y • KaehlerDifferential.map K K F F' ω)) = _
+  rw [he]
+  exact TensorProduct.lift.tmul y ω
 
 open scoped AlgebraicCurve in
 private theorem AlgebraicCurve.isTraceDiff_traceDiff_aux (K F F' : Type*) [Field K] [Field F]
@@ -49,13 +56,6 @@ private theorem AlgebraicCurve.isTraceDiff_traceDiff_aux (K F F' : Type*) [Field
   unfold traceDiff
   rw [dite_eq_left (exists_isTraceDiff K F F')]
   exact (exists_isTraceDiff K F F').choose_spec
-
-open scoped AlgebraicCurve in
-private theorem AlgebraicCurve.traceDiff_apply (K F F' : Type*) [Field K] [Field F] [Field F']
-  [Algebra K F] [Algebra K F'] [Algebra F F'] [IsScalarTower K F F'] [Algebra.IsSeparable F F'] (y
-  : F') (ω : Ω[F⁄K]) : traceDiff K F F' (y • KaehlerDifferential.map K K F F' ω) = Algebra.trace F
-  F' y • ω :=
-  isTraceDiff_traceDiff_aux K F F' y ω
 
 open scoped AlgebraicCurve in
 private theorem AlgebraicCurve.isTraceDiff_unique (K F F' : Type*) [Field K] [Field F] [Field F']
@@ -71,13 +71,6 @@ private theorem AlgebraicCurve.isTraceDiff_unique (K F F' : Type*) [Field K] [Fi
     rw [KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply,
       KaehlerDifferential.mapBaseChange_tmul, h₁, h₂]
   | add z₁ z₂ hz₁ hz₂ => rw [map_add, map_add, map_add, hz₁, hz₂]
-
-open scoped AlgebraicCurve in
-private theorem AlgebraicCurve.eq_traceDiff_of_isTraceDiff (K F F' : Type*) [Field K] [Field F]
-  [Field F'] [Algebra K F] [Algebra K F'] [Algebra F F'] [IsScalarTower K F F']
-  [Algebra.IsSeparable F F'] {t : Ω[F'⁄K] →ₗ[F] Ω[F⁄K]} (ht : IsTraceDiff K F F' t) : t = traceDiff
-  K F F' :=
-  isTraceDiff_unique K F F' ht (isTraceDiff_traceDiff_aux K F F')
 
 theorem _root_.AlgebraicCurve.isTraceDiff_traceDiff (K F F' : Type*) [Field K] [Field F] [Field F']
   [Algebra K F] [Algebra K F'] [Algebra F F'] [IsScalarTower K F F'] [Algebra.IsSeparable F F'] :

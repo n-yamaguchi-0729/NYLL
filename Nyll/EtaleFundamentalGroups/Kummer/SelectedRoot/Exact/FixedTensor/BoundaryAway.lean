@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.BoundaryAway
 import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Exact.FixedTensorComponentBijective
+import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
 
 /-!
 # Boundary Away in a fixed exact-root tensor component
@@ -76,10 +77,10 @@ theorem
           (X ^ ramificationIndex base target - C varpi)))]
     (m : Ideal (Froot ⊗[K] Omega)) [m.IsMaximal] :
     let P := GenericTensorFieldComponent m
-    letI : Algebra Omega P := genericTensorFieldComponentRightAlgebra m
+    let : Algebra Omega P := genericTensorFieldComponentRightAlgebra m
     let omegaPAlgebra : Algebra A P :=
       ((algebraMap Omega P).comp (algebraMap A Omega)).toAlgebra
-    letI : Algebra A P := omegaPAlgebra
+    let : Algebra A P := omegaPAlgebra
     ∀ (j : D →ₐ[A] P),
       (letI : Algebra base.valuationSubring P :=
          pureRadicalFractionFieldGenericTensorComponentBaseAlgebra
@@ -103,12 +104,7 @@ theorem
           IsScalarTower.of_algebraMap_eq fun x ↦ (j.commutes x).symm
         (Localization.awayMap
           (algebraMap A (integralClosure D P)) f).Etale := by
-  dsimp only
-  let P := GenericTensorFieldComponent m
-  let : Algebra Omega P := genericTensorFieldComponentRightAlgebra m
-  let omegaPAlgebra : Algebra A P :=
-    ((algebraMap Omega P).comp (algebraMap A Omega)).toAlgebra
-  let : Algebra A P := omegaPAlgebra
+  intro P sharedOwner1 omegaPAlgebra sharedOwner2
   let : IsScalarTower A Omega P :=
     IsScalarTower.of_algebraMap_eq' rfl
   intro j hEtale f hAway

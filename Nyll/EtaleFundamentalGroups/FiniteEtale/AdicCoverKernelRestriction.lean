@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.SchemeTheory.Modules.LocalMorphisms
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTransitionKernels
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Original affine restrictions of the actual transition-kernel tensors
@@ -25,6 +27,8 @@ that the constructed tensor/kernel comparison commutes with the original
 sheaf restrictions. This supplies the restriction compatibility required
 for the Čech differential; it is not an additional comparison hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

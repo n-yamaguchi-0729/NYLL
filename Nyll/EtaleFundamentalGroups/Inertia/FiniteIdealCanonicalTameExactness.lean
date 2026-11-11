@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.DedekindPrime
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealCanonicalTameCharacter
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameExactness
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.DedekindPrime
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealCanonicalTameCharacter
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteIdealTameExactness
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Kernel and surjectivity of normalized finite characters
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Group.Subgroup.Ker
 Proves that normalization preserves the finite principal-unit kernel and that the canonical
 character surjects onto its full root group.
 -/
+
+@[expose] public section
 
 open scoped Pointwise
 

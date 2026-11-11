@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalTensorSplittingOfEmbeddings
-import Mathlib.RingTheory.TensorProduct.Pi
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalTensorSplittingOfEmbeddings
+public import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.AlgebraicGeometry.Limits
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # Simultaneous formal splitting of the boundary field factors
 
@@ -17,6 +20,8 @@ Both spectrum projections are retained, so a previously constructed Cartier
 block can be transported through this isomorphism without assuming its tuple
 ideal or its divisor-sum formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

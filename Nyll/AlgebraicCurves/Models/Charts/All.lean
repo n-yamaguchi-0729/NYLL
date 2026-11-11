@@ -20,3 +20,4 @@ import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
 import Nyll.AlgebraicCurves.Models.Charts.OpensHomCompEqUniqueEvalAtEqAppLE
 import Nyll.AlgebraicCurves.Models.Charts.ProperSmoothPlacesAffineCoverGlued
 import Nyll.AlgebraicCurves.Models.Charts.RangeSectionsEqMapEval2PolyPartInvPolyPart
+import Nyll.AlgebraicCurves.Models.Charts.ProperOpenAffine

@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
-import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechOrdered
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OdOext
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OresOext
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OresOunitPullbackOext
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
+public import Nyll.AlgebraicCurves.Cohomology.Cech.OrderedAffineCoverCechOrdered
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OdOext
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OresOext
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OresOunitPullbackOext
 
 /-!
 # A cochain homotopy between the identity and the refinement augmentation
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

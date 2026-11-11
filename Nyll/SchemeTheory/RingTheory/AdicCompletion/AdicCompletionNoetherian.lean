@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Mathlib.RingTheory.MvPolynomial.Ideal
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.RingTheory.Polynomial.MvPowerSeriesNoetherian
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.MvPowerSeries.Equiv
+public import Mathlib.RingTheory.MvPolynomial.Ideal
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.RingTheory.Polynomial.MvPowerSeriesNoetherian
 
 /-!
 # Adic Completion is Noetherian Ring of is Noetherian Ring
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -42,15 +46,14 @@ noncomputable abbrev XI : Ideal (MvPolynomial (Fin n) R) := MvPolynomial.idealOf
 /-- Evaluation at the chosen generators of the ideal. -/
 noncomputable abbrev ev : MvPolynomial (Fin n) R →+* R := (MvPolynomial.aeval f).toRingHom
 
-lemma ev_C (r : R) : ev f (C r) = r := by simp [ev]
+lemma ev_C (r : R) : ev f (C r) = r := by exact MvPolynomial.aeval_C f r
 
 lemma ev_surjective : Function.Surjective (ev f) := fun r => ⟨C r, ev_C f r⟩
 
 lemma map_XI_eq : Ideal.map (ev f) (XI) = Ideal.span (Set.range f) := by
   rw [Ideal.map_span, ← Set.range_comp]
-  congr 1
-  ext i
-  simp [ev]
+  exact congrArg (fun g : Fin n → R => Ideal.span (Set.range g))
+    (funext fun i => MvPolynomial.aeval_X f i)
 
 variable (hf : Ideal.span (Set.range f) = I)
 include hf
@@ -73,7 +76,8 @@ noncomputable def phi (k : ℕ) : MvPowerSeries (Fin n) R →+* R ⧸ I ^ k :=
 
 lemma phi_apply (k : ℕ) (p : MvPowerSeries (Fin n) R) :
     phi I f hf k p = Ideal.Quotient.mk (I ^ k) (ev f (truncTotal k p)) := by
-  simp [phi, Ideal.quotientMap_mk]
+  exact Ideal.quotientMap_mk (J := (XI : Ideal (MvPolynomial (Fin n) R)) ^ k)
+    (I := I ^ k) (f := ev f) (H := XI_pow_le_comap I f hf k) (x := truncTotal k p)
 
 lemma phi_eq_of_sub_mem (k : ℕ) (p : MvPowerSeries (Fin n) R) (P : MvPolynomial (Fin n) R)
     (h : truncTotal k p - P ∈ (XI : Ideal (MvPolynomial (Fin n) R)) ^ k) :

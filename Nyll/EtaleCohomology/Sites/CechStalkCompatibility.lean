@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.CechSections
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
+module
+
+public import Nyll.EtaleCohomology.Sites.CechSections
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-!
 # Čech compatibility at arbitrary geometric lifts
@@ -17,6 +19,8 @@ closed field. The comparison is computed using the actual inverse-image
 units and the canonical Čech pullback isomorphism. No finiteness or flatness
 is needed. This is the generic calculation used in `FiniteCechStalkLift`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

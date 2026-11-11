@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRawInjectivity
-import Nyll.JacobianVarieties.Generalized.PoincareRawLocalBijection
-import Nyll.JacobianVarieties.Generalized.PoincareSheafSurjectivity
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRawInjectivity
+public import Nyll.JacobianVarieties.Generalized.PoincareRawLocalBijection
+public import Nyll.JacobianVarieties.Generalized.PoincareSheafSurjectivity
 
 /-!
 # The constructed Poincaré frame scheme represents modulus Picard-zero
@@ -16,6 +18,8 @@ and the modulus zero sheaf. Thus the existing comparison is an isomorphism.
 For positive modulus degree, the scheme already glued from frame quotients
 represents the zero sheaf. No new representability assumption is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

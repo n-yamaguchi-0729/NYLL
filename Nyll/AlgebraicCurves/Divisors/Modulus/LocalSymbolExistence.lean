@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
-import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
+public import Nyll.AlgebraicCurves.Divisors.Principal.PrincipalEvaluation
 
 /-!
 # Construction of local symbols from a modulus
@@ -16,6 +18,8 @@ divisor evaluation off the modulus defines the symbol. The modulus condition
 proves independence of the approximation, and therefore additivity. The product
 of the finitely many approximants proves reciprocity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

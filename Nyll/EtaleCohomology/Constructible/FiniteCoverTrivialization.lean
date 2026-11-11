@@ -4,33 +4,35 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Galois.Decomposition
-import Mathlib.CategoryTheory.Galois.GaloisObjects
-import Mathlib.CategoryTheory.Galois.Basic
-import Mathlib.CategoryTheory.Limits.FintypeCat
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Types.Coproducts
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Nyll.EtaleCohomology.Constructible.Representability
-import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
-import Nyll.EtaleCohomology.Constructible.FiniteEtaleSheaf
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.ConstantRepresentable
-import Nyll.EtaleCohomology.Sites.SetSheafFunctors
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
+module
+
+public import Mathlib.CategoryTheory.Galois.Decomposition
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
+public import Mathlib.CategoryTheory.Galois.Basic
+public import Mathlib.CategoryTheory.Limits.FintypeCat
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Types.Coproducts
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Nyll.EtaleCohomology.Constructible.Representability
+public import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
+public import Nyll.EtaleCohomology.Constructible.FiniteEtaleSheaf
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.ConstantRepresentable
+public import Nyll.EtaleCohomology.Sites.SetSheafFunctors
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Finite étale covers that trivialize finite étale schemes
@@ -45,6 +47,8 @@ scheme being trivialized.
 Finite étale representability then gives a connected finite étale
 trivializing cover for every finite locally constant set sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v w
@@ -62,7 +66,7 @@ private lemma evaluation_surjective_at (b : F.obj A) :
   obtain ⟨σ, hσ⟩ := evaluation_aut_surjective_of_isGalois F A b a
   intro z
   obtain ⟨f, hf⟩ := ha.surjective z
-  refine ⟨σ.hom ≫ f, ?_⟩
+  refine ⟨σ.asIso.hom ≫ f, ?_⟩
   simp only [Functor.map_comp, FintypeCat.comp_apply, hσ, hf]
 
 /-- Evaluation on a Galois representative identifies its copies indexed by

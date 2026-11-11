@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.FreeAbelianGroup
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.GroupTheory.FreeAbelianGroup
+public import Mathlib.Tactic.Abel
 
 /-!
 # Relations in the free abelian Cech complex
@@ -15,6 +17,8 @@ is exact. The contraction chooses one point in each nonempty fiber; it
 does not require a section over points outside the image. This is the
 pointwise algebraic input for the free abelian sheaf Cech resolution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

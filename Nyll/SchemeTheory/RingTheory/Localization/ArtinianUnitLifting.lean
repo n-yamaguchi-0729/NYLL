@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Ideal.Nonunits
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Ideal.Nonunits
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.Tactic.Ring
 
 /-! # Lifting units through quotients of commutative Artinian rings -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

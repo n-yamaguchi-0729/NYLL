@@ -13,6 +13,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 import Nyll.AlgebraicCurves.Differentials.Maps.Maps
 import Nyll.AlgebraicCurves.Differentials.Trace.Trace
 import Nyll.AlgebraicCurves.Differentials.Trace.TraceDiffApply
+import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 
 /-!
 # Differential trace Along eq trace Diff

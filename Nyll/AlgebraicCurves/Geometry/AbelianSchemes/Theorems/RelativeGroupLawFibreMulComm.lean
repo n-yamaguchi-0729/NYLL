@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Fibre
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Fibre
+public import Nyll.SchemeTheory.Fibers.SchemeFibreEndo
 
 /-!
 # Relative Group Law fibre mul comm
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

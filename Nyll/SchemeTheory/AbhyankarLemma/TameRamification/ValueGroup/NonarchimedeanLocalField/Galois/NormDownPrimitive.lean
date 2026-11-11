@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.NormDown
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.NormDown
 
 /-!
 # Primitive divisors from Galois norm-down lcm sources
@@ -14,6 +16,8 @@ This file contains the arithmetic cancellation layer on top of
 divisor, these lemmas extract the primitive residue-degree factor by cancelling
 the visible lower residue degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
 
 /-!
 # Relative Group Law locally Quasi Finite scheme Nsmul of finite torsion Subset
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -161,7 +165,7 @@ theorem quasiFiniteAt_of_isClosed [LocallyOfFiniteType f] (L : RelativeGroupLaw 
   have : JacobsonSpace G := LocallyOfFiniteType.jacobsonSpace f
   set y : G := h.base x with hy
   have hyc : IsClosed ({y} : Set G) := by
-    have := Scheme.Hom.closePoints_subset_preimage_closedPoints h (mem_closedPoints_iff.mpr hx)
+    have := Scheme.Hom.closedPoints_subset_preimage_closedPoints h (mem_closedPoints_iff.mpr hx)
     exact mem_closedPoints_iff.mp this
   have : LocallyOfFiniteType (G.fromSpecResidueField y) :=
     isClosed_singleton_iff_locallyOfFiniteType.mp hyc

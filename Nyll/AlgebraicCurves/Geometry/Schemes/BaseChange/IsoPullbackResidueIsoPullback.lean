@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # exists iso pullback residue of iso pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

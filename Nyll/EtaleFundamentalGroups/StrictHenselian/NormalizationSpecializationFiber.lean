@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecialization
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationFiniteEtaleSpecialization
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecialization
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationFiniteEtaleSpecialization
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
 
 /-!
 # The actual normalization specialization of ordinary-henselization fibers
@@ -15,6 +18,8 @@ all hypotheses of the canonical specialization comparison. This retains the
 existing ordinary henselization maps and constructs the actual fiber isomorphism
 and the resulting fundamental-group comparison without a chosen base-point path.
 -/
+
+@[expose] public section
 
 noncomputable section
 

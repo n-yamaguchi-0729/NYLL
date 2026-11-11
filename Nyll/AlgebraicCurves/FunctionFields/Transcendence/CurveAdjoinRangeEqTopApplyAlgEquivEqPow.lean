@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.Finite.GaloisField
-import Mathlib.Logic.Equiv.Set
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerRankOneTranscendental
-import Nyll.AlgebraicCurves.Differentials.Kaehler.TranscendentalSeparable
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveIffTranscendentalFiniteDimensional
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
-import Nyll.SchemeTheory.FunctionFields.IsSeparableAlgHomApplyEqPow
+module
+
+public import Mathlib.FieldTheory.Finite.GaloisField
+public import Mathlib.Logic.Equiv.Set
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerRankOneTranscendental
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.TranscendentalSeparable
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.CurveIffTranscendentalFiniteDimensional
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+public import Nyll.SchemeTheory.FunctionFields.IsSeparableAlgHomApplyEqPow
 
 /-!
 # Exists is Curve Over adjoin range eq top apply alg Equiv eq pow of pow eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -263,7 +267,8 @@ theorem exists_eq_algebraMap_of_mem_S (hr : 0 < r) {n : ℕ} (hn : 0 < n) {c : F
   rw [mem_S] at hc
   have halg : IsAlgebraic K c :=
     ⟨Polynomial.X ^ ((p ^ r) ^ n) - Polynomial.X,
-      FiniteField.X_pow_card_sub_X_ne_zero K (one_lt_Qn p r hr hn), by simp [hc]⟩
+      FiniteField.X_pow_card_sub_X_ne_zero K (one_lt_Qn p r hr hn), by
+        rw [map_sub, Polynomial.aeval_X_pow, Polynomial.aeval_X, hc, sub_self]⟩
   exact halg.isIntegral.mem_range_algebraMap_of_minpoly_splits
     (by simpa using IsAlgClosed.splits (minpoly K c))
 omit [CharP K p] in
@@ -600,25 +605,21 @@ theorem alpha_pow_e : αα ^ e = 1 := by
     have := congrArg₂ (· + ·) ihy ihz
     have h__ := this
     try simp only [← map_add] at h__
-    try simp only [← map_add]
     exact h__
   | neg y hy ihy =>
     have := congrArg (fun w => -w) ihy
     have h__ := this
     try simp only [← map_neg] at h__
-    try simp only [← map_neg]
     exact h__
   | inv y hy ihy =>
     have := congrArg (fun w => w⁻¹) ihy
     have h__ := this
     try simp only [← map_inv₀] at h__
-    try simp only [← map_inv₀]
     exact h__
   | mul y z hy hz ihy ihz =>
     have := congrArg₂ (· * ·) ihy ihz
     have h__ := this
     try simp only [← map_mul] at h__
-    try simp only [← map_mul]
     exact h__
 
 /-- The product of the comparison automorphism and the restricted original automorphism. -/
@@ -909,8 +910,6 @@ variable (φ : F →ₐ[K] F) (hφ : ∀ x : F₀, φ (algebraMap F₀ F x) = al
   [hcard : Fact (Nat.card k = p ^ r)]
 
 local notation "L" => Lsub F p r σ e s
-local notation "ββ" => beta p r φ hφ σ e he hσe hcomm hr s
-local notation "GG" => G p r φ hφ σ e he hσe hcomm hr s
 local notation "FF₁" => F1 p r φ hφ σ e he hσe hcomm hr s
 local notation "FI" => F1I (k := k) p r φ hφ σ e he hσe hcomm hr s
 

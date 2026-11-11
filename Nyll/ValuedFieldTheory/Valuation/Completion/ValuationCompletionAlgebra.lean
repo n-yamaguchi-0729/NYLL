@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Mathlib.Topology.Algebra.UniformRing
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Mathlib.Topology.Algebra.UniformRing
 
 /-!
 # Valuation Completion Algebra
 -/
+
+@[expose] public section
 
 noncomputable section
 

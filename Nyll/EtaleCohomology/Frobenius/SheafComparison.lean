@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.Frobenius
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Sites.BaseChange
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Nyll.SchemeTheory.Etale.Frobenius
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Sites.BaseChange
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Frobenius invariance of étale sheaves
@@ -19,6 +21,8 @@ a natural comparison from actual direct image to the identity functor.
 Uniqueness of left adjoints then identifies actual inverse image with the
 identity functor. This applies to arbitrary module or abelian sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

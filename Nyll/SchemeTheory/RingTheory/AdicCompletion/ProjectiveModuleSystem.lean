@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicProjectiveSplittings
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Finiteness.Cardinality
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicProjectiveSplittings
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
 # Effectivity of finite projective adic module systems
@@ -33,6 +35,8 @@ constructed in `FiniteModuleSystem`: a finite projective adic system is
 effective as a finite projective module, and the already constructed
 quotient equivalences recover its supplied stages.
 -/
+
+@[expose] public section
 
 noncomputable section
 

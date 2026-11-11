@@ -14,14 +14,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 
 /-!
 # The irrelevant ideal under a graded map
 
 Positive-degree spanning suffices for the irrelevant-ideal containment needed by Proj.
 -/
+
+@[expose] public section
 
 universe u
 

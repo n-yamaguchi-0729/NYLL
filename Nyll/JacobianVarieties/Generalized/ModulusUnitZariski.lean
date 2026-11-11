@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRepresentation
-import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
-import Nyll.SchemeTheory.Affine.AffineFppfComparisonUnit
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientZariski
-import Nyll.SchemeTheory.CategoryTheory.SheafificationLocalLifts
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRepresentation
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
+public import Nyll.SchemeTheory.Affine.AffineFppfComparisonUnit
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientZariski
+public import Nyll.SchemeTheory.CategoryTheory.SheafificationLocalLifts
 
 /-!
 # Zariski local representatives of the actual modulus-unit sheaf
@@ -18,6 +20,8 @@ comparison preserves raw sections, so the intrinsic fppf sheaf has actual
 unit classes Zariski locally. This statement survives every base change
 and applies to actual scalar frames whenever a reference frame is given.
 -/
+
+@[expose] public section
 
 noncomputable section
 

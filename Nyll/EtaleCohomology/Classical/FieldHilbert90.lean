@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldGaloisDescent
-import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldGaloisDescent
+public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
 
 /-!
 # Hilbert 90 for actual etale sheaf extensions over a field
@@ -15,6 +17,8 @@ section can be corrected to an invariant lift when the kernel is the actual
 unit sheaf. The correction is obtained from its actual difference cocycle,
 the proved equivariance of unit sections, and Noether's Hilbert 90.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -31,10 +35,11 @@ theorem exists_fieldGalois_units_cocycle_primitive
     (c : Gal(L/K) → (etaleMultiplicativeGroupSheaf (Spec (.of K))).obj.obj
       (op ((finiteEtaleInclusion (Spec (.of K))).obj (FiniteEtale.mk (ξ K L)))))
     (hcoc : ∀ σ τ, c (σ * τ) =
-      (fieldGaloisSheafAction K L (etaleMultiplicativeGroupSheaf (Spec (.of K))) σ).hom
+      (fieldGaloisSheafAction K L (etaleMultiplicativeGroupSheaf (Spec (.of K))) σ).asIso.hom
         (c τ) + c σ) :
     ∃ a, ∀ σ : Gal(L/K),
-      (fieldGaloisSheafAction K L (etaleMultiplicativeGroupSheaf (Spec (.of K))) σ).hom a - a =
+      (fieldGaloisSheafAction K L
+        (etaleMultiplicativeGroupSheaf (Spec (.of K))) σ).asIso.hom a - a =
         c σ := by
   let X := Spec (.of K)
   let V := (finiteEtaleInclusion X).obj (FiniteEtale.mk (ξ K L))
@@ -50,18 +55,18 @@ theorem exists_fieldGalois_units_cocycle_primitive
     intro σ τ
     change (U (c (σ * τ))).toMul = σ • (U (c τ)).toMul * (U (c σ)).toMul
     rw [hcoc, U.map_add]
-    change (U ((ρA σ).hom (c τ))).toMul * (U (c σ)).toMul = _
+    change (U ((ρA σ).asIso.hom (c τ))).toMul * (U (c σ)).toMul = _
     have hn := congrArg Additive.toMul (fieldGaloisSheafAction_units K L σ (c τ))
-    change (U ((ρA σ).hom (c τ))).toMul = Units.map σ.toMonoidHom (U (c τ)).toMul at hn
+    change (U ((ρA σ).asIso.hom (c τ))).toMul = Units.map σ.toMonoidHom (U (c τ)).toMul at hn
     rw [hn, hunits]
   obtain ⟨β, hβ⟩ :=
     groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units b hb
   let a : A.obj.obj (op V) := U.symm (Additive.ofMul β)
-  have ha (σ : Gal(L/K)) : (ρA σ).hom a = c σ + a := by
+  have ha (σ : Gal(L/K)) : (ρA σ).asIso.hom a = c σ + a := by
     apply U.injective
     rw [U.map_add]
     have hn := fieldGaloisSheafAction_units K L σ a
-    change U ((ρA σ).hom a) = Additive.ofMul (Units.map σ.toMonoidHom (U a).toMul) at hn
+    change U ((ρA σ).asIso.hom a) = Additive.ofMul (Units.map σ.toMonoidHom (U a).toMul) at hn
     rw [hn]
     have hua : U a = Additive.ofMul β := U.apply_symm_apply _
     rw [hua]
@@ -83,7 +88,7 @@ theorem exists_fieldGalois_invariant_lift
     (e : B.obj.obj (op ((finiteEtaleInclusion (Spec (.of K))).obj
       (FiniteEtale.mk (ξ K L)))))
     (he : ∀ σ : Gal(L/K),
-      (fieldGaloisSheafAction K L Q σ).hom
+      (fieldGaloisSheafAction K L Q σ).asIso.hom
         (p.hom.app (op ((finiteEtaleInclusion (Spec (.of K))).obj
           (FiniteEtale.mk (ξ K L)))) e) =
         p.hom.app (op ((finiteEtaleInclusion (Spec (.of K))).obj
@@ -94,15 +99,15 @@ theorem exists_fieldGalois_invariant_lift
         (FiniteEtale.mk (ξ K L)))) e' =
           p.hom.app (op ((finiteEtaleInclusion (Spec (.of K))).obj
             (FiniteEtale.mk (ξ K L)))) e ∧
-      ∀ σ : Gal(L/K), (fieldGaloisSheafAction K L B σ).hom e' = e' := by
+      ∀ σ : Gal(L/K), (fieldGaloisSheafAction K L B σ).asIso.hom e' = e' := by
   exact exists_fieldGalois_invariant_lift_of_cocycle_primitives K L i p hz hS
     (exists_fieldGalois_units_cocycle_primitive K L) e he
 
-/-- Over a characteristic-zero field, global sections of an actual short
+/-- Over any field, global sections of an actual short
 exact sequence with unit-sheaf kernel surject onto quotient sections.
 A finite Galois local lift is corrected by Hilbert 90 and then descended. -/
 theorem exists_section_lift_of_units_kernel_of_field
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     {B Q : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (i : etaleMultiplicativeGroupSheaf (Spec (.of K)) ⟶ B) (p : B ⟶ Q)
     (hz : i ≫ p = 0) (hS : (ShortComplex.mk i p hz).ShortExact)
@@ -112,11 +117,11 @@ theorem exists_section_lift_of_units_kernel_of_field
   exact exists_section_lift_of_fieldGalois_cocycle_primitives K i p hz hS
     (fun L _ _ _ _ => exists_fieldGalois_units_cocycle_primitive K L) q
 
-/-- The actual derived etale H1 of Gm over a characteristic-zero field
+/-- The actual derived etale H1 of Gm over any field
 vanishes. Its extension representative is split using the proved geometric
 Galois descent and Hilbert 90, not an assumed comparison with Galois H1. -/
 theorem etaleMultiplicativeGroup_H1_eq_zero_of_field
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     (a : Sheaf.H.{u} (etaleMultiplicativeGroupSheaf (Spec (.of K))) 1) : a = 0 := by
   exact etaleH1_eq_zero_of_fieldGalois_cocycle_primitives K
     (etaleMultiplicativeGroupSheaf (Spec (.of K)))

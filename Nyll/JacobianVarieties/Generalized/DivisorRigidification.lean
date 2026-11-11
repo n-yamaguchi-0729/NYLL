@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
-import Nyll.AlgebraicCurves.Models.Divisors.PointIdealSupport
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
-import Nyll.JacobianVarieties.Generalized.DivisorClasses
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorTensor
-import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
-import Mathlib.Algebra.BigOperators.Finsupp.Basic
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulus
+public import Nyll.AlgebraicCurves.Models.Divisors.PointIdealSupport
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
+public import Nyll.JacobianVarieties.Generalized.DivisorClasses
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisorTensor
+public import Nyll.JacobianVarieties.Generalized.RigidifiedCommutativity
+public import Mathlib.Algebra.BigOperators.Finsupp.Basic
 
 /-!
 # Actual rigidified bundles of divisors away from a Cartier modulus
@@ -19,6 +21,8 @@ Each place outside the modulus gives the inverse ideal of its actual rational
 point with its canonical section normalized on the entire modulus. Integer
 linear extension constructs the divisor-to-rigidified-class homomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

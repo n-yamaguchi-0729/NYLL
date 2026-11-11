@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.CommAlgRingMap
-import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
-import Nyll.SchemeTheory.RingTheory.Localization.AwayToPrime
-import Nyll.SchemeTheory.RingTheory.Localization.CommAlgPrincipal
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.RingHom.Unramified
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.CommAlgRingMap
+public import Nyll.SchemeTheory.RingTheory.Localization.AwayAlgebra
+public import Nyll.SchemeTheory.RingTheory.Localization.AwayToPrime
+public import Nyll.SchemeTheory.RingTheory.Localization.CommAlgPrincipal
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.RingHom.Unramified
 
 /-!
 # Etaleness of the actual principal-product transition
@@ -26,6 +28,8 @@ Its etaleness is proved through the actual second principal localization
 of R_f. The product-localization equivalence and its coefficient equation
 are established before introducing another coefficient base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

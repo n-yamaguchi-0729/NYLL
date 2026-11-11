@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
 
 /-!
 # Finite type from the actual affine spectrum restrictions
@@ -19,6 +22,8 @@ affine open cover combines those local generating families into finite
 type of the original module sheaf. No quasicoherence or Noetherian
 hypothesis is needed for this local criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

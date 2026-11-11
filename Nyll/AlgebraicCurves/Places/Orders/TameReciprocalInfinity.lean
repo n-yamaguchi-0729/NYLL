@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Evaluation.PlaceValueRestrictAlong
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Nyll.AlgebraicCurves.Places.Rational.RatFuncOrdXSubC
+module
+
+public import Nyll.AlgebraicCurves.Places.Evaluation.PlaceValueRestrictAlong
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.AlgebraicCurves.Places.Rational.RatFuncOrdXSubC
 
 /-! # Exact reciprocal contact and the original infinity valuation
 
@@ -15,6 +17,8 @@ of the actual reciprocal coordinate with infinity, computes its ramification
 index, and determines the order of every rational function under that same
 field map. This retains the map used by the original finite curve morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

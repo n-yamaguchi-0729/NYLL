@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
 
 /-!
 # Literal equality from embedded submodule comparisons
@@ -15,6 +17,8 @@ gives equality of the original native submodules. In particular, the
 embedded restriction comparison in the quasicoherent extension theorem
 can be used by submodule gluing without an assumed section comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

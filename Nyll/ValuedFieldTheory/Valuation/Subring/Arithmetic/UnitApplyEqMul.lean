@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Data.Int.LeastGreatest
-import Mathlib.Algebra.Order.GroupWithZero.Basic
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Order.Int.LeastGreatest
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
 
 /-!
 # Valuation Subring exists unit apply eq mul of mem iff apply mem of rank One
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

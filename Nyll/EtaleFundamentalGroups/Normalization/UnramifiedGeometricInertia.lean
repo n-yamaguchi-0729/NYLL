@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationPointRigidity
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.FieldTheory.Finiteness
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationPointRigidity
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.SchemeTheory.Morphisms.ResiduePointFixedness
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.FieldTheory.Finiteness
 
 /-!
 # Global geometric-point rigidity for an unramified normalization
@@ -31,6 +33,8 @@ in Stacks Project, Tag 0BTF, for the original field automorphism itself.
 Galoisness is unnecessary for this forward implication.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -38,11 +42,6 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 private theorem fieldAlgEquiv_eq_one_of_specMap_eq_id
     {K L : Type u} [Field K] [Field L] [Algebra K L]

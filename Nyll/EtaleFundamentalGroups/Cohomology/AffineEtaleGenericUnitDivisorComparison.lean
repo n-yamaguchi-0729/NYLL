@@ -3,20 +3,24 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.Algebra.Category.Grp.Basic
-import Nyll.EtaleCohomology.Classical.ClosedPointDivisorSheaf
-import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
-import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineGenericPointStalkComparison
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorData
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorTransport
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorCompatibility
+module
+
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Nyll.EtaleCohomology.Classical.ClosedPointDivisorSheaf
+public import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
+public import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineGenericPointStalkComparison
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorData
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorTransport
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleGenericUnitDivisorCompatibility
 
 /-!
 # Naturality of the affine divisor comparison
 
 Combine the independently proved source transport and divisor compatibility.
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 open IsDedekindDomain

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedEqualizer
 import Nyll.SchemeTheory.RingTheory.Descent.ModuleBaseChangeHomExt
+import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
 
 /-!
 # Hom descent for mixed completion/localization data

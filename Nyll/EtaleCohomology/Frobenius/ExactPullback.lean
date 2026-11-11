@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.Etale
-import Nyll.EtaleCohomology.Classical.PullbackCohomology
-import Nyll.EtaleCohomology.Classical.PullbackCoefficients
-import Nyll.EtaleCohomology.Frobenius.SheafComparison
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.Etale
+public import Nyll.EtaleCohomology.Classical.PullbackCohomology
+public import Nyll.EtaleCohomology.Classical.PullbackCoefficients
+public import Nyll.EtaleCohomology.Frobenius.SheafComparison
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import Mathlib.Algebra.Category.Grp.Basic
 
 /-!
 # Frobenius pullback preserves classical cohomology
@@ -19,6 +21,8 @@ sheaf categories. Its map on Ext groups is bijective in every degree, so the
 constructed classical cohomology pullback is an additive equivalence and,
 with module coefficients, a linear equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

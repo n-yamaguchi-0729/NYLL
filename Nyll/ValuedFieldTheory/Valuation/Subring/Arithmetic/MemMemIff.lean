@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Field.Subfield.Basic
-import Mathlib.RingTheory.LocalRing.LocalSubring
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Tactic.ByContra
+module
+
+public import Mathlib.Algebra.Field.Subfield.Basic
+public import Mathlib.RingTheory.LocalRing.LocalSubring
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Tactic.ByContra
 
 /-!
 # Valuation Subring mem of forall mem iff of subset
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

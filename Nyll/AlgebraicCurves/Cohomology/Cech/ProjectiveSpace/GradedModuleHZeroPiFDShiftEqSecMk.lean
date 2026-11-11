@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
 
 /-!
 Representing degree-zero Čech classes of free graded modules by shifted sections.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -36,10 +40,11 @@ variable {R : Type u} [CommRing R] {n : ℕ}
 def toF (v : Fin (n + 1) → ℕ) : Fin (n + 1) →₀ ℕ := ∑ j, Finsupp.single j (v j)
 
 @[scoped simp] theorem toF_apply (v : Fin (n + 1) → ℕ) (i : Fin (n + 1)) : toF v i = v i := by
-  simp [toF, Finsupp.finsetSum_apply, Finsupp.single_apply]
+  simp only [toF, Finsupp.finsetSum_apply, Finsupp.single_apply, Finset.sum_ite_eq',
+    Finset.mem_univ, ↓reduceIte]
 
 theorem toF_add (v w : Fin (n + 1) → ℕ) : toF (v + w) = toF v + toF w := by
-  ext i; simp [Pi.add_apply]
+  ext i; simp only [toF_apply, Pi.add_apply, Finsupp.coe_add]
 
 theorem toF_zero : toF (0 : Fin (n + 1) → ℕ) = 0 := by
   ext i
@@ -161,15 +166,21 @@ theorem Idx_zero_ext {s s' : Idx n 0} (h : s.1 0 = s'.1 0) : s = s' :=
 /-- The increasing two-element index tuple associated to `i < j`. -/
 def pairIdx (i j : Fin (n + 1)) (hij : i < j) : Idx n 1 :=
   ⟨![i, j], fun a b hab => by
-    fin_cases a <;> fin_cases b <;> simp_all⟩
+    fin_cases a <;> fin_cases b
+    · exact (Nat.lt_irrefl 0 hab).elim
+    · exact hij
+    · exact (Nat.not_lt_zero 1 hab).elim
+    · exact (Nat.lt_irrefl 1 hab).elim⟩
 
 theorem face_pairIdx_zero (i j : Fin (n + 1)) (hij : i < j) : (Idx.face n (pairIdx i j hij) 0).1
   0 = j := by
-  simp [Idx.face, pairIdx, Fin.succAbove_zero]
+  simp only [Nat.reduceAdd, Idx.face, pairIdx, Fin.isValue, Fin.succAbove_zero, Function.comp_apply,
+    Fin.succ_zero_eq_one, Matrix.cons_val_one, Matrix.cons_val_fin_one]
 
 theorem face_pairIdx_one (i j : Fin (n + 1)) (hij : i < j) : (Idx.face n (pairIdx i j hij) 1).1
   0 = i := by
-  simp [Idx.face, pairIdx]
+  simp only [Nat.reduceAdd, Idx.face, pairIdx, Fin.isValue, Function.comp_apply, ne_eq, one_ne_zero,
+    not_false_eq_true, Fin.succAbove_ne_zero_zero, Matrix.cons_val_zero]
 
 end H0FreeBody
 

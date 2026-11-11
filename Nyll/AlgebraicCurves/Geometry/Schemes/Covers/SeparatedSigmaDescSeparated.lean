@@ -11,30 +11,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Diagonal
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Mono
-import Mathlib.CategoryTheory.MorphismProperty.Basic
-import Mathlib.Tactic.Convert
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Diagonal
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Mono
+public import Mathlib.CategoryTheory.MorphismProperty.Basic
+public import Mathlib.Tactic.Convert
 
 /-!
 # is Separated sigma Desc of forall is Separated
 -/
 
+@[expose] public section
+
 section ProofImplementation
 
 namespace AlgebraicCurves.Geometry.Schemes.Proofs.isSeparated_sigmaDesc_of_forall_isSeparated
 
-universe u
+universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 theorem _root_.AlgebraicGeometry.isSeparated_sigmaDesc_of_forall_isSeparated
-    {σ : Type u} (X : σ → Scheme.{u}) {Y : Scheme.{u}} (f : ∀ i, X i ⟶ Y)
+    {σ : Type v} [Small.{u} σ] (X : σ → Scheme.{u}) {Y : Scheme.{u}}
+    (f : ∀ i, X i ⟶ Y)
     (hf : ∀ i, IsSeparated (f i)) : IsSeparated (Sigma.desc f) := by
   constructor
   refine IsZariskiLocalAtTarget.of_openCover

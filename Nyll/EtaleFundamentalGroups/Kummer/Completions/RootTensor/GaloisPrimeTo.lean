@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.GaloisDegree
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.PrimeToDegree
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.ComponentExtraction
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.GenericTensorComponent
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.GaloisDegree
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.PrimeToDegree
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.ComponentExtraction
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.GenericTensorComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-!
 # A common prime-to-p exponent through a completed tensor tower
@@ -33,6 +35,8 @@ canonically identified with the normalization of the original quotient.
 This is the completed tensor-tower step used in Stacks Project 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

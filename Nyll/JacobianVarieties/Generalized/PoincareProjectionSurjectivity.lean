@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareProjectionGeometry
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareProjectionGeometry
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Fppf local surjectivity of the modulus-forgetting group morphism
@@ -15,6 +17,8 @@ ordinary classifying point gives an fppf cover and a modulus lift on that
 cover. Thus the group sheaf projection is an epimorphism without any claim
 of surjectivity on rational points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

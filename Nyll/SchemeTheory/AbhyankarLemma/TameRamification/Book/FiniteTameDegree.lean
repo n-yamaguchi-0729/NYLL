@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Tower
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
-import Nyll.ValuedFieldTheory.LocalField.Unramified.FiniteSupport
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Tower
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.FiniteSupport
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
 
 /-!
 # Degree identities for finite tame exponential-valued extensions
@@ -16,6 +20,8 @@ to compare the exponential-valuation presentation with the canonical DVF
 presentation.  It is stated entirely in the production
 `AlgebraicNumberTheory.Valuations` API.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,9 +47,7 @@ theorem maximalUnramifiedSubextension_finiteUnramified
     let hKT := exponentialValuationRestrict_extends v w hExt T
     FiniteUnramifiedExtension v wT hKT := by
   classical
-  let T := maximalUnramifiedSubextension v w hExt
-  let wT := exponentialValuationRestrict w T
-  let hKT := exponentialValuationRestrict_extends v w hExt T
+  intro T wT hKT
   have hfg : (⊤ : IntermediateField K T).FG :=
     IntermediateField.fg_top K T
   obtain ⟨s, hs⟩ := hfg

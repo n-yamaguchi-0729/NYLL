@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
-import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
-import Mathlib.Data.Fin.Tuple.Basic
-import Mathlib.Data.List.OfFn
+module
+
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
+public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
+public import Mathlib.Data.Fin.Tuple.Basic
+public import Mathlib.Data.List.OfFn
 
 /-!
 # Stabilization of pointed finite sums
@@ -23,6 +25,8 @@ before and after this insertion. This works over any field and needs no commutat
 This is degree stabilization, not invariance under principal divisors. It asserts neither
 an arbitrary-target Albanese factorization nor the existence of a symmetric-power quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

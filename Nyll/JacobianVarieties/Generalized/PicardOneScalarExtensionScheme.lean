@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneDivisorScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
-import Nyll.SchemeTheory.WeilRestriction.Restriction
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneDivisorScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneUnpointedConstruction
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
 
 /-! # Scalar extension of the actual intrinsic Picard-one scheme -/
+
+@[expose] public section
 
 noncomputable section
 

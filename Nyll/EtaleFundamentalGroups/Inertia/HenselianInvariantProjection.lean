@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiber
-import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiberAction
-import Mathlib.Algebra.Algebra.Subalgebra.Operations
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.BigOperators.GroupWithZero.Action
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Ring.Idempotent
-import Mathlib.GroupTheory.GroupAction.Basic
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Pointwise
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Invariant.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiber
+public import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiberAction
+public import Mathlib.Algebra.Algebra.Subalgebra.Operations
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.BigOperators.GroupWithZero.Action
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Ring.Idempotent
+public import Mathlib.GroupTheory.GroupAction.Basic
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Pointwise
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Invariant.Basic
 
 
 /-!
@@ -41,6 +43,8 @@ The kernel calculation uses that the orbit of an element outside the chosen
 closed-fiber prime generates the unit ideal. It preserves the actual kernel
 of the original base map and does not assume that map is injective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

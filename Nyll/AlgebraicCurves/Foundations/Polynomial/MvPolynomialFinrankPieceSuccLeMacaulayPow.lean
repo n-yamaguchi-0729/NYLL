@@ -10,79 +10,85 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Batteries.Tactic.Init
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.Algebra.Group.Equiv.Defs
-import Mathlib.Algebra.Group.Finsupp
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.Group.Monoid
-import Mathlib.Algebra.Group.Nat.Defs
-import Mathlib.Algebra.Group.Semigroup
-import Mathlib.Algebra.GroupWithZero.Action.Defs
-import Mathlib.Algebra.GroupWithZero.Basic
-import Mathlib.Algebra.Module.LinearMap.Defs
-import Mathlib.Algebra.Module.Submodule.Defs
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.Algebra.MonoidAlgebra.Defs
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Notation.Pi.Defs
-import Mathlib.Basic.Finite.Defs
-import Mathlib.Data.Finset.Card
-import Mathlib.Data.Finset.Defs
-import Mathlib.Data.Finset.Filter
-import Mathlib.Data.Finset.Max
-import Mathlib.Data.Finset.SDiff
-import Mathlib.Data.Finsupp.Defs
-import Mathlib.Data.Finsupp.MonomialOrder
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Single
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Fintype.Basic
-import Mathlib.Data.Fintype.Card
-import Mathlib.Data.Fintype.Defs
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Data.Fintype.Sets
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.Data.Set.Card
-import Mathlib.Data.Set.Finite.Basic
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.Order.Basic
-import Mathlib.Order.Defs.LinearOrder
-import Mathlib.Order.Defs.PartialOrder
-import Mathlib.Order.Fin.Basic
-import Mathlib.Order.RelClasses
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.MvPolynomial.MonomialOrder
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomials
-import Nyll.SchemeTheory.RingTheory.Polynomial.FinsuppCardLeMacaulayPowCard
+module
+
+public import Batteries.Tactic.Init
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.Equiv.Defs
+public import Mathlib.Algebra.Group.Finsupp
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.Group.Monoid
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Algebra.Group.Semigroup
+public import Mathlib.Algebra.GroupWithZero.Action.Defs
+public import Mathlib.Algebra.GroupWithZero.Basic
+public import Mathlib.Algebra.Module.LinearMap.Defs
+public import Mathlib.Algebra.Module.Submodule.Defs
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.Algebra.MonoidAlgebra.Defs
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Notation.Pi.Defs
+public import Mathlib.Basic.Finite.Defs
+public import Mathlib.Data.Finset.Card
+public import Mathlib.Data.Finset.Defs
+public import Mathlib.Data.Finset.Filter
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Finset.SDiff
+public import Mathlib.Data.Finsupp.Defs
+public import Mathlib.Data.Finsupp.MonomialOrder
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Single
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Fintype.Basic
+public import Mathlib.Data.Fintype.Card
+public import Mathlib.Data.Fintype.Defs
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Data.Fintype.Sets
+public import Mathlib.Data.Nat.Basic
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Data.Set.Card
+public import Mathlib.Data.Set.Finite.Basic
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.Order.Basic
+public import Mathlib.Order.Defs.LinearOrder
+public import Mathlib.Order.Defs.PartialOrder
+public import Mathlib.Order.Fin.Basic
+public import Mathlib.Order.RelClasses
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomials
+public import Nyll.SchemeTheory.RingTheory.Polynomial.FinsuppCardLeMacaulayPowCard
 
 /-!
 # Mv Polynomial finrank piece succ le macaulay Pow
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -98,10 +104,11 @@ open scoped MonomialOrder
 
 variable (n : ℕ)
 
-private noncomputable def _root_.MacaulayRed.lex : MonomialOrder (Fin (n + 1)) := MonomialOrder.lex
+/-- The lexicographic monomial order on the finite set of variables. -/
+noncomputable def _root_.MacaulayRed.lex : MonomialOrder (Fin (n + 1)) := MonomialOrder.lex
 export _root_.MacaulayRed (lex)
 
-variable (K : Type) [Field K]
+variable (K : Type u) [Field K]
 
 /-- The leading exponent vectors of nonzero homogeneous elements of the ideal. -/
 noncomputable def LM (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : ℕ) : Finset (Fin (n + 1) →₀ ℕ)
@@ -114,7 +121,7 @@ theorem mem_LM (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : ℕ) (a : Fin (n 
     a ∈ LM n K J e ↔ a.degree = e ∧ ∃ f : MvPolynomial (Fin (n + 1)) K,
       f ∈ J ∧ f.IsHomogeneous e ∧ f ≠ 0 ∧ (lex n).degree f = a := by
   classical
-  simp [LM]
+  simp only [LM, ne_eq, Finset.mem_filter, mem_Mon]
 
 theorem LM_subset (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : ℕ) : LM n K J e ⊆ Mon n e := by
   classical
@@ -194,7 +201,8 @@ theorem linearIndependent_of_degree_eq (s : Finset (Fin (n + 1) →₀ ℕ))
   set t : Finset ↥s := Finset.univ.filter fun a => c a ≠ 0 with ht
   have htne : t.Nonempty := by
     obtain ⟨a, ha⟩ := hne
-    exact ⟨a, by simp [ht, ha]⟩
+    exact ⟨a, by simp only [ht, ne_eq, Finset.univ_eq_attach, Finset.mem_filter,
+      Finset.mem_attach, ha, not_false_eq_true, and_self]⟩
   obtain ⟨a₀, ha₀, hmax⟩ := t.exists_max_image (fun a => (lex n).toSyn a.1) htne
   have hca₀ : c a₀ ≠ 0 := by simpa [ht] using ha₀
   have hcoeff : (∑ a, c a • g a).coeff a₀.1 = c a₀ * (lex n).leadingCoeff (g a₀) := by
@@ -202,8 +210,10 @@ theorem linearIndependent_of_degree_eq (s : Finset (Fin (n + 1) →₀ ℕ))
     · rw [coeff_smul, smul_eq_mul, MonomialOrder.leadingCoeff, hg a₀]
     · intro a _ haa
       by_cases hca : c a = 0
-      · simp [hca]
-      · have hle : (lex n).toSyn a.1 ≤ (lex n).toSyn a₀.1 := hmax a (by simp [ht, hca])
+      · simp only [hca, zero_smul, AddMonoidAlgebra.coeff_zero, Finsupp.coe_zero, Pi.zero_apply]
+      · have hle : (lex n).toSyn a.1 ≤ (lex n).toSyn a₀.1 := hmax a (by simp only [ht, ne_eq,
+        Finset.univ_eq_attach, Finset.mem_filter, Finset.mem_attach, hca, not_false_eq_true,
+        and_self])
         have hlt : (lex n).toSyn a.1 < (lex n).toSyn a₀.1 := by
           refine lt_of_le_of_ne hle fun h => haa ?_
           exact Subtype.ext ((lex n).toSyn.injective h)
@@ -245,7 +255,7 @@ open _root_.AlgebraicCurves.Foundations.Polynomial.Proofs in
 open MvPolynomial_finrank_piece_succ_le_macaulayPow.MacaulayRed in
 open MvPolynomial AlgebraicGeometry.HilbertFunctor in
 theorem _root_.MvPolynomial.finrank_piece_succ_le_macaulayPow
-    (n d : ℕ) (hd : 1 ≤ d) (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (n d : ℕ) (hd : 1 ≤ d) (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (_hJ : ∀ p ∈ J, ∀ i : ℕ, homogeneousComponent i p ∈ J) :
     Module.finrank K (piece J (d + 1)) ≤ Nat.macaulayPow d (Module.finrank K (piece J d)) := by
   classical

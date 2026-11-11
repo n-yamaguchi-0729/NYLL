@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ZariskiBaseChange
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Nyll.EtaleCohomology.Sites.ZariskiBaseChange
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Underlying Zariski sets of module-valued étale inverse image
@@ -21,6 +23,8 @@ Direct image commutes with these operations. Taking mates compares its
 topological inverse image with the underlying Zariski sheaf of module-valued
 étale inverse image, including the actual chosen adjunction units.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -62,7 +66,7 @@ def etaleModuleZariskiPullbackComparison :
       etalePullback f Λ ⋙ etaleModuleZariskiRestriction X Λ :=
   ((mateEquiv (etalePullbackPushforwardAdjunction f Λ)
     (TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) f.base)).symm
-      (etaleModuleZariskiPushforwardIso f Λ).hom).natTrans
+      (etaleModuleZariskiPushforwardIso f Λ).hom)
 
 /-- The mixed comparison carries the actual topological unit to the
 underlying actual module-valued étale unit. -/

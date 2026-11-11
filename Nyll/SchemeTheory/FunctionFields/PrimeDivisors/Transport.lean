@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
+module
+
+public import Nyll.SchemeTheory.FunctionFields.PrimeDivisors.Basic
 
 /-!
 # Transport of prime divisors across function-field equivalences
@@ -14,6 +16,8 @@ discrete `K`-valuations, residue fields, and hence Fried--Jarden prime
 divisors.  This is the model-independent bridge needed to replace a plane
 equation by an isomorphic monic representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

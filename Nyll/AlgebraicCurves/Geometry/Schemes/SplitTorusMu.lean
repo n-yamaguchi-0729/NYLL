@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.Data.ZMod.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.Data.ZMod.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Split Torus Mu
 -/
+
+@[expose] public section
 
 universe u
 

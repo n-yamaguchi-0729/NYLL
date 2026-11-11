@@ -10,8 +10,10 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
-import Mathlib.CategoryTheory.EffectiveEpi.Basic
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
+public import Mathlib.CategoryTheory.EffectiveEpi.Basic
 
 /-!
 # Points of an effective descent as matching local points
@@ -19,6 +21,8 @@ import Mathlib.CategoryTheory.EffectiveEpi.Basic
 This identifies points of a descended scheme with the compatible elements of the
 presheaf represented after base change. The presheaf is not assumed to be a sheaf.
 -/
+
+@[expose] public section
 
 universe u
 

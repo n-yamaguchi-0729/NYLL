@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
-import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Mathlib.Algebra.Group.Pi.Lemmas
-import Mathlib.Algebra.Module.BigOperators
-import Mathlib.Data.Finset.Lattice.Fold
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolConductor
+public import Nyll.AlgebraicCurves.Divisors.Degree.DegreeArithmetic
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Mathlib.Algebra.Group.Pi.Lemmas
+public import Mathlib.Algebra.Module.BigOperators
+public import Mathlib.Data.Finset.Lattice.Fold
 
 /-!
 # Moduli under homomorphisms and finite products
@@ -18,6 +20,8 @@ The proofs commute homomorphisms with the genuinely finite support of each
 principal-divisor sum. In particular a finite family of rational maps with
 proved moduli has a common modulus for its product map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

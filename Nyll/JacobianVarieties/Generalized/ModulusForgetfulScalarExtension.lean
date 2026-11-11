@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupBaseChange
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
-import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupBaseChange
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionSheaf
+public import Nyll.JacobianVarieties.Generalized.PicardZeroForgetfulGroup
 
 /-! # The actual forgetful square under scalar extension -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -16,6 +21,8 @@ universe u
 
 open CategoryTheory Opposite
 open AlgebraicGeometry.SmoothProperCurve AlgebraicGeometry.RelPicard
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

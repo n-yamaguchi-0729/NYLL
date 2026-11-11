@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.Algebra.Polynomial.Taylor
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveFormalTranslation
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.Algebra.Polynomial.Taylor
 
 /-! # A finite simple-root equation for an actual formal translation
 
@@ -18,6 +20,8 @@ Its formal root is the translated function minus its constant term. At the
 origin its linear coefficient is a nonzero scalar times the derivative of
 the original separable minimal polynomial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

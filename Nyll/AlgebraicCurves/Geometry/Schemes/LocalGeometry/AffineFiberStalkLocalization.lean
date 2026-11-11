@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.StructureSheaf
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.StructureSheaf
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Kmf2 Fiber Spec Tensor Stalk Leg1 Affine Datum
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -107,7 +111,7 @@ theorem affineFiberStalk_equiv_localizationAtPrime
     Nonempty
       (((Spec.map (CommRingCat.ofHom (algebraMap R S))).fiber p).presheaf.stalk w ≃+*
         Localization.AtPrime q.asIdeal) := by
-  let q : PrimeSpectrum (p.asIdeal.Fiber S) := (affineFiberSpecTensorIso R S p).hom w
+  intro q
   exact ⟨(asIso ((affineFiberSpecTensorIso R S p).hom.stalkMap
     w)).commRingCatIsoToRingEquiv.symm.trans
     ((StructureSheaf.stalkIso (p.asIdeal.Fiber S) q).symm.toRingEquiv)⟩

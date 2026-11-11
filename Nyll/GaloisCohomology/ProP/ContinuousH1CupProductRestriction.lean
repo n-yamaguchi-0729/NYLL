@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousH1CupProduct
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousH1CupProduct
 
 /-!
 # Restriction naturality of the continuous H¹ cup product
@@ -13,6 +15,8 @@ The canonical character representatives commute with pullback along a
 continuous group homomorphism.  Consequently their degree-two cup cocycle
 and cohomology class commute with continuous-cohomology restriction.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep
 open ClassFieldTower.ProP

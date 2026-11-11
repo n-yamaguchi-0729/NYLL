@@ -4,31 +4,33 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
-import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiberDecomposition
-import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiberAction
-import Nyll.EtaleFundamentalGroups.Inertia.EquivariantIdempotentDescent
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
-import Nyll.EtaleFundamentalGroups.Inertia.HenselianInvariantProjection
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantFlatBaseChange
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantEtaleFactorNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleOpenImage
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkIdempotentDescent
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalPrimeLift
-import Mathlib.Algebra.Algebra.Subalgebra.Operations
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.RingTheory.Invariant.Basic
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+public import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiberDecomposition
+public import Nyll.EtaleFundamentalGroups.Inertia.HenselianIntegralFiberAction
+public import Nyll.EtaleFundamentalGroups.Inertia.EquivariantIdempotentDescent
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantBaseChange
+public import Nyll.EtaleFundamentalGroups.Inertia.HenselianInvariantProjection
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantFlatBaseChange
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantEtaleFactorNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleOpenImage
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkIdempotentDescent
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalPrimeLift
+public import Mathlib.Algebra.Algebra.Subalgebra.Operations
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.RingTheory.Invariant.Basic
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.Smooth.Flat
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 
 /-!
 # Principal étale neighborhoods in inertia-fixed algebras
@@ -38,6 +40,8 @@ Descending this family and its action to an étale neighborhood constructs a
 principal étale neighborhood in the original inertia-fixed algebra, avoiding
 the contracted prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

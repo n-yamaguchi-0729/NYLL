@@ -7,6 +7,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.JacobianVarieties.Generalized.KernelScalarExtensionSheaf
 import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupSchemeMap
 import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupBaseChange
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupDiagram
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+import Nyll.SchemeTheory.WeilRestriction.Restriction
 
 /-! # Scalar extension of the genuine kernel group scheme and its actual inclusion -/
 

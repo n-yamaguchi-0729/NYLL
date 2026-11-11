@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.AffineChartFiniteSubmoduleExtension
-import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleUnionExtension
-import Nyll.SchemeTheory.Modules.Submodules.QuasicoherentSubmoduleOverExtension
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTop
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.AffineChartFiniteSubmoduleExtension
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteSubmoduleUnionExtension
+public import Nyll.SchemeTheory.Modules.Submodules.QuasicoherentSubmoduleOverExtension
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleOverEquality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeTop
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Finite quasicoherent submodule extension on qcqs schemes
@@ -27,6 +29,8 @@ At the top open, cover-locality gives global finite type. Applying this to
 the actual quasicoherent extension of any prescribed native submodule
 proves the original extension statement of Stacks Tag 01PF.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.RingTheory.Localization.NormTrace
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Nyll.SchemeTheory.RingTheory.NormIdentities
-import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.UniqueFunctionFieldGermEq
+module
+
+public import Mathlib.Tactic.Choose
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.RingTheory.Localization.NormTrace
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Nyll.SchemeTheory.RingTheory.NormIdentities
+public import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.UniqueFunctionFieldGermEq
 
 /-!
 # Scheme exists norm Sections mul map eq norm of is Finite of is Integrally Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

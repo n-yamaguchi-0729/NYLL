@@ -72,7 +72,7 @@ theorem exists_filtered_colimit_stage_model
       (R := Z) (F := F) (α := α) (f := f) (c := c) (hc := hc) hf g
       (fun _ ↦ hZ.hom_ext _ _)
   refine ⟨i, ?_⟩
-  let : Algebra (F.obj i) c.pt := (c.ι.app i).hom.toAlgebra
+  intro stageAlgebra
   let : Algebra T (F.obj i) := gᵢ.hom.toAlgebra
   have : IsScalarTower T (F.obj i) c.pt :=
     IsScalarTower.of_algebraMap_eq' (congrArg CommRingCat.Hom.hom hfactor)

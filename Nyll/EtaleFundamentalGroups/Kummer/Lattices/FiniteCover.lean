@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
-import Nyll.EtaleFundamentalGroups.Kummer.Laurent.DiagonalRadical
+module
+
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
+public import Nyll.EtaleFundamentalGroups.Kummer.Laurent.DiagonalRadical
 
 /-!
 # Finiteness of finite-index lattice covers
@@ -17,6 +19,8 @@ induced monoid-algebra map is finite.  Coefficient extension for monoid
 algebras is handled by its canonical pushout square, so no persistent custom
 algebra or scalar-tower instances are introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,9 +45,8 @@ private theorem mapRingHom_isFinite
     IsScalarTower.of_algebraMap_eq' rfl
   let : IsScalarTower A (AddMonoidAlgebra A M)
       (AddMonoidAlgebra B M) :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext a
-      simp [g, RingHom.algebraMap_toAlgebra])
+    IsScalarTower.of_algebraMap_eq'
+      (AddMonoidAlgebra.mapRingHom_comp_algebraMap (M := M) f).symm
   let : Algebra.IsPushout A (AddMonoidAlgebra A M) B
       (AddMonoidAlgebra B M) :=
     AddMonoidAlgebra.instIsPushout'

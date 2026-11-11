@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Restriction of the actual completed Cartier coproduct to a clopen block
 
@@ -14,6 +16,8 @@ The selected component spectra are restricted along the actual open-and-closed
 immersion. The resulting isomorphism is then transported through the full
 Cartier kernel ideal and its pullback, so both ambient projections are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

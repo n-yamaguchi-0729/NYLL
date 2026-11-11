@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.RestrictTensorSections
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.RestrictTensorSections
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
 
 /-!
 # Tensor sections on the image of an open immersion
@@ -19,6 +21,8 @@ open and the inverse image of its image recovers the original
 `restrictAppIso` inverse. The native tensor restriction isomorphism
 therefore preserves pure tensors under these exact section isomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

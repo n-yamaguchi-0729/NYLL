@@ -10,29 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringIsIntegralAdjoin
-import Nyll.AlgebraicCurves.Places.Degree.DegNeZeroFiniteDimensionalAdjoin
-import Nyll.AlgebraicCurves.Places.ValuationRings.OrdEqNegLogValuationSubringEq
-import Nyll.AlgebraicCurves.Places.GramDenominatorMulTable
-import Nyll.AlgebraicCurves.Places.Differentials.UniformizingSeparatingForm
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.Adjoin.Polynomial.Basic
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.Algebra.Polynomial.BigOperators
-import Mathlib.Algebra.Polynomial.Lifts
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.ValuationRings.MemToValuationSubringIsIntegralAdjoin
+public import Nyll.AlgebraicCurves.Places.Degree.DegNeZeroFiniteDimensionalAdjoin
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OrdEqNegLogValuationSubringEq
+public import Nyll.AlgebraicCurves.Places.GramDenominatorMulTable
+public import Nyll.AlgebraicCurves.Places.Differentials.UniformizingSeparatingForm
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Adjoin.Polynomial.Basic
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 
 /-!
 # Divisor exists symm Value rows kernel iff
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -205,19 +209,6 @@ private theorem mwALGM_pin_pow (v : Place k F) {x : F} {c : k}
     have hstep := mwALGM_pin_mul v (pow_mem hx t) ih hc
     rw [← pow_succ, ← pow_succ] at hstep
     exact hstep
-
-private theorem mwALGM_pin_sum {ι : Type*} (v : Place k F) (s : Finset ι)
-    (f : ι → F) (g : ι → k)
-    (h : ∀ i ∈ s, f i = algebraMap k F (g i) ∨ 0 < v.ord (f i - algebraMap k F (g i))) :
-    (∑ i ∈ s, f i) = algebraMap k F (∑ i ∈ s, g i)
-      ∨ 0 < v.ord ((∑ i ∈ s, f i) - algebraMap k F (∑ i ∈ s, g i)) := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => left; rw [Finset.sum_empty, Finset.sum_empty, map_zero]
-  | @insert a s' ha ih =>
-    rw [Finset.sum_insert ha, Finset.sum_insert ha]
-    exact mwALGM_pin_add v (h a (Finset.mem_insert_self a s'))
-      (ih fun i hi => h i (Finset.mem_insert_of_mem hi))
 
 private theorem mwALGM_aeval_mem (v : Place k F) {x : F} (hx : x ∈ v.toValuationSubring)
     (p : Polynomial k) : Polynomial.aeval x p ∈ v.toValuationSubring := by

@@ -10,30 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Birational.RationalMap
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.Algebra.Ring.Equiv
-import Mathlib.Topology.Maps.Basic
-import Mathlib.Topology.Constructions
-import Mathlib.Topology.Neighborhoods
-import Mathlib.Tactic.Set
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+module
+
+public import Mathlib.AlgebraicGeometry.Birational.RationalMap
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.Algebra.Ring.Equiv
+public import Mathlib.Topology.Maps.Basic
+public import Mathlib.Topology.Constructions
+public import Mathlib.Topology.Neighborhoods
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 
 /-!
 # Relative Group Law exists is Greatest opens difference extension of dense
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

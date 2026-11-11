@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.LinearAlgebra.Vandermonde
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Linarith.Frontend
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Vandermonde
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Multiset filter ne zero eq of forall prod one sub pow eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -161,7 +165,7 @@ theorem single_mul_apply (w : ℝ) (p : AddMonoidAlgebra ℂ ℝ) (v : ℝ) :
   · intro h; linarith
 
 theorem F_zero : F 0 = 1 := by
-  simp [F]
+  simp only [F, Multiset.map_zero, Multiset.prod_zero]
 
 theorem F_cons (w : ℝ) (u : Multiset ℝ) :
     F (w ::ₘ u) = F u - AddMonoidAlgebra.single w 1 * F u := by

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Mathlib.Algebra.Algebra.Bilinear
-import Mathlib.Algebra.BigOperators.Pi
-import Mathlib.Algebra.MonoidAlgebra.Basic
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Mathlib.Algebra.Algebra.Bilinear
+public import Mathlib.Algebra.BigOperators.Pi
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Maps from shifted free graded modules
@@ -27,6 +29,8 @@ These constructions allow homogeneous generators at the first stage of
 an adic system to be lifted before finite generation of its limit is known.
 No module structure over the polynomial ring is added to the target type.
 -/
+
+@[expose] public section
 
 noncomputable section
 

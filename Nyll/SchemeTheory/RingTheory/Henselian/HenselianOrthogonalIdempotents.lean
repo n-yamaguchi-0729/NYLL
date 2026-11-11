@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
-import Mathlib.RingTheory.Idempotents
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
+public import Mathlib.RingTheory.Idempotents
 
 /-!
 # Lifting complete orthogonal families over a Henselian pair
@@ -15,6 +17,8 @@ each member of a finite family. Uniqueness lifts orthogonality and the
 equation that their sum is one. The algebra need not be finite or finite
 type over the base.
 -/
+
+@[expose] public section
 
 namespace Algebra
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitFiniteCover
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitFiniteCover
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Actual raw chart models of an inverse-limit cover
@@ -16,6 +18,8 @@ are transported through their proved cartesian chart squares to the literal
 `Over.pullback` charts. This supplies exactly the recovery data consumed by
 the generic raw-chart and overlap constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

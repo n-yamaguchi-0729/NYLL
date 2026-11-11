@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueDVR
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaDecomposition
-import Nyll.EtaleFundamentalGroups.Inertia.NativeIdealInertiaInclusion
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueDVR
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationInertiaDecomposition
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeIdealInertiaInclusion
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Exactness at the original decomposition group
@@ -16,6 +18,8 @@ The actual inclusion is injective. Mapping into the original Galois group
 identifies its range with the original inertia subgroup; the already
 proved residue-kernel image then gives literal equality of subgroups of D.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

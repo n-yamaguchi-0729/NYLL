@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkEvaluationCompatibility
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionSurjectivity
-import Nyll.EtaleCohomology.Sites.ProperGeometricStalkSections
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkEvaluationCompatibility
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionSurjectivity
+public import Nyll.EtaleCohomology.Sites.ProperGeometricStalkSections
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-!
 # Proper geometric-fibre sections over an affine base
@@ -20,6 +22,8 @@ inverse-image section map through the native geometric pullback.
 
 Reference: Stacks Project, Lemma 59.91.4 (degree zero).
 -/
+
+@[expose] public section
 
 noncomputable section
 

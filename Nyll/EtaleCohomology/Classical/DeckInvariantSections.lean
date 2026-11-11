@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.DeckSectionRepresentations
-import Mathlib.RepresentationTheory.Invariants
-import Mathlib.Algebra.Homology.Additive
+module
+
+public import Nyll.EtaleCohomology.Classical.DeckSectionRepresentations
+public import Mathlib.RepresentationTheory.Invariants
+public import Mathlib.Algebra.Homology.Additive
 
 /-!
 # Actual global sections as deck invariants
@@ -15,6 +17,8 @@ This is the degree-zero geometric identification required for descent.
 The map is actual restriction to the cover, and surjectivity is actual
 sheaf descent, not an assumed comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.SemiabelianGeometry
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.SemiabelianGeometry
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Noetherianity of the actual semiabelian scheme
 
 The source is locally of finite type over its ground field by smoothness, and
 quasi-compact by descent from its torus-by-abelian extension.
 -/
+
+@[expose] public section
 
 universe u
 

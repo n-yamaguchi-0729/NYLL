@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 
 import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Existence of the restriction of a place

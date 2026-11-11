@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.RingHom.Etale
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.FormallyUnramifiedDescent
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.MultiAwayUnitDescent
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.RingHom.Etale
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.FormallyUnramifiedDescent
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.MultiAwayUnitDescent
 
 /-!
 # Exponent units from an etale factor of an iterated radical
@@ -26,6 +28,8 @@ on the complement, and prime-boundary descent brings the units back to `A`.
 
 No finiteness hypothesis on `D / B` is needed for this terminal consumer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

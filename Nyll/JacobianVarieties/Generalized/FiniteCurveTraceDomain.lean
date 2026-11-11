@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
-import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
-import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
-import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
+public import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
+public import Nyll.AlgebraicCurves.Models.Points.InfinitePlace
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # The actual domain of a finite curve trace
 
@@ -16,6 +20,8 @@ The trace is defined precisely away from the image of the excluded source
 points. For a nonempty open in a proper curve this image is finite; on a
 geometric smooth proper target curve its complement is nonempty and dense.
 -/
+
+@[expose] public section
 
 noncomputable section
 

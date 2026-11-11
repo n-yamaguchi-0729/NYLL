@@ -4,17 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Localization after restricting scalars
 
 Preserves the actual localized-module property under the prescribed coefficient ring map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,21 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FibreH0RankTensorPowEqHilbertFunctionOfPointGeomFibreHom
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationBaseChange
-import Nyll.AlgebraicCurves.Hilbert.UniformCoverGeomFibreIdealEqPoint
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisedAbelianScheme
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FibreH0RankTensorPowEqHilbertFunctionOfPointGeomFibreHom
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationBaseChange
+public import Nyll.AlgebraicCurves.Hilbert.UniformCoverGeomFibreIdealEqPoint
 
 /-!
 # Hilbert polynomials of tensor powers on geometric fibres
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -251,17 +257,17 @@ theorem AlgebraicGeometry.HilbertFunctor.cast_hilbertFunctionOf_eq_eval (n : ℕ
 open _root_.AlgebraicGeometry
   (exists_forall_geomFibreH0Finrank_tensorPow_eq_hilbertFunctionOf_of_point_geomFibre_of_hom) in
 theorem _root_.AlgebraicGeometry.exists_cover_geomFibreH0Finrank_tensorPow_eq_eval
-    (S : Type) [CommRing S] {X : Scheme.{0}} (f : X ⟶ Spec (CommRingCat.of S))
+    (S : Type u) [CommRing S] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of S))
     (𝓛X : X.Modules) (hX₁ : Scheme.Modules.IsInvertible 𝓛X) (hX₂ :
       Scheme.Modules.ClosedImmersionBySections 𝓛X f)
-    (S' : Type) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
+    (S' : Type u) [CommRing S'] (s : Spec (CommRingCat.of S') ⟶ Spec (CommRingCat.of S))
     (ψ : S →+* S') (hs : s = Spec.map (CommRingCat.ofHom ψ))
-    (Z : Scheme.{0}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
+    (Z : Scheme.{u}) (ι : Z ⟶ pullback f s) (hι : IsClosedImmersion ι) (hfl : Flat (ι ≫
       pullback.snd f s))
     (hfp : LocallyOfFinitePresentation (ι ≫ pullback.snd f s)) :
     ∃ (J : Type) (_ : Fintype J) (r : J → S') (_ : Ideal.span (Set.range r) = ⊤) (Pj : J →
       Polynomial ℚ),
-      ∀ (j : J) (k : Type) [Field k] [IsAlgClosed k] (sk : S' →+* k), IsUnit (sk (r j)) →
+      ∀ (j : J) (k : Type u) [Field k] [IsAlgClosed k] (sk : S' →+* k), IsUnit (sk (r j)) →
         ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d →
           ((Scheme.Modules.geomFibreH0Finrank (ι ≫ pullback.snd f s)
             (Nat.rec (motive := fun _ => Z.Modules) (𝟙_ Z.Modules)
@@ -285,7 +291,7 @@ theorem _root_.AlgebraicGeometry.exists_cover_geomFibreH0Finrank_tensorPow_eq_ev
   have hfp' : LocallyOfFinitePresentation ((ι ≫ 𝔓'.toProj) ≫ ProjSpace.π S' n) :=
     by rw [Category.assoc, hj₁]; exact hfp
   obtain ⟨D₀, hD⟩ :=
-    AlgebraicGeometry.HilbertFunctor.exists_uniform_cover_geomFibre_ideal_eq_point n
+    AlgebraicGeometry.HilbertFunctor.exists_uniform_cover_geomFibre_ideal_eq_point.{u} n
   obtain ⟨J, hJ, r, hspan, hcov⟩ := hD S' Z (ι ≫ 𝔓'.toProj) hc hfl' hfp'
   choose Pj hw hrest using hcov
   refine ⟨J, hJ, r, hspan, Pj, fun j k _ _ sk hu => ?_⟩

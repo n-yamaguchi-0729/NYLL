@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.DualNumber
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+module
 
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
 
 /-!
 # Cech classes of dual-number deformations
 
 The overlap unit and compatibility condition specify the Cech class of a rigidified deformation.
 -/
+
+@[expose] public section
 
 universe u
 

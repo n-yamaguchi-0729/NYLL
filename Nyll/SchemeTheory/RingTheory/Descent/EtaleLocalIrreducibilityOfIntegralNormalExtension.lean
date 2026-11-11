@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Reduced.IntegralPurelyInseparableLocalTensor
-import Nyll.SchemeTheory.RingTheory.Reduced.FlatTensorNilpotentKernel
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalDomainOfIntegralNormalExtension
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.SchemeTheory.RingTheory.Reduced.IntegralPurelyInseparableLocalTensor
+public import Nyll.SchemeTheory.RingTheory.Reduced.FlatTensorNilpotentKernel
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalDomainOfIntegralNormalExtension
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Irreducibility of local étale neighborhoods from normalization data
@@ -19,6 +21,8 @@ nonreduced local rings. Flatness carries a nilpotent kernel to a nilpotent
 kernel; embedding modulo that kernel into the constructed normal domain
 proves that the nilradical of the original local étale neighborhood is prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

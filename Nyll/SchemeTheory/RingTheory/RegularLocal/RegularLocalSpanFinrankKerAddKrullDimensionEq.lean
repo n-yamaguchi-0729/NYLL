@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.Algebra.Module.SpanRank
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring.RingNF
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+module
+
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.Algebra.Module.SpanRank
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 
 /-!
 # Is Regular Local Ring span Finrank ker add ring Krull Dim eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

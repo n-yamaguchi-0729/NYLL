@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedExtLegacyComparison
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedExtLegacyComparison
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-!
 # Comparing derived and legacy local cohomology
@@ -17,6 +19,8 @@ derived-category Ext and the legacy left-derived Ext used by
 the common cocycle quotient; its naturality in the first variable is the
 input needed to compare the ideal-powers diagrams and their colimits.
 -/
+
+@[expose] public section
 
 noncomputable section
 

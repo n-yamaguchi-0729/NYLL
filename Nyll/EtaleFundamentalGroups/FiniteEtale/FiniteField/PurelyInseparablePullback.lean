@@ -3,12 +3,16 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
-import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
+public import Nyll.SchemeTheory.Morphisms.PurelyInseparableFieldExtension
 
 /-!
 # Fully faithful pullback across purely inseparable extensions
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

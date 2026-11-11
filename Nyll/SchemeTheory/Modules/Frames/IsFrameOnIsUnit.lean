@@ -10,15 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 /-!
 # Scheme Modules exists is Frame On of is Unit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -378,22 +381,7 @@ theorem exists_isFrameOn'_of_isUnit (ht : IsUnit t) :
 
 end TwoChartGlue
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Sheaves.Proofs." ++
-        "Scheme_Modules_exists_isFrameOn_of_isUnit.TwoChartGlue")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped TwoChartGlue
 
 open AlgebraicGeometry in
 theorem _root_.AlgebraicGeometry.Scheme.Modules.exists_isFrameOn_of_isUnit

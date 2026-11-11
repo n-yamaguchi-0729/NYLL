@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
-import Mathlib.LinearAlgebra.Isomorphisms
+module
+
+public import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
+public import Mathlib.LinearAlgebra.Isomorphisms
 
 /-!
 # Quotient presentation of a degree-two inflation range
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Isomorphisms
 The inflation--transgression kernel calculation identifies finite-stage degree-two cohomology
 modulo continuous transgression with the corresponding range in ambient degree-two cohomology.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

@@ -29,14 +29,16 @@ Place_derivation_apply_eq_diffCoeff_D_mul
 Place_kaehlerD_ne_zero_of_ord_eq_one
 -/
 
-import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
-import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.IsAlgebraicAdjoinTranscendental
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.FieldTheory.Perfect
+module
+
+public import Nyll.AlgebraicCurves.Places.Orders.SeparableAdjoinOrdEqOne
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialDNeZero
+public import Nyll.AlgebraicCurves.Places.Orders.TranscendentalOrdNeZero
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerDifferentialSpanDEqTop
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.IsAlgebraicAdjoinTranscendental
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.FieldTheory.Perfect
 
 /-!
 # Local differential coefficients
@@ -45,6 +47,8 @@ Nonvanishing and generation of differentials come from the same separable simple
 The characteristic-zero statements share that construction; order-one statements use the
 existing separability theorem over a perfect base field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

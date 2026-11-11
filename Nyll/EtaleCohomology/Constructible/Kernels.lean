@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.Basic
-import Nyll.EtaleCohomology.Constructible.LocallyConstantKernels
-import Nyll.EtaleCohomology.Sites.PullbackStalks
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleCohomology.Constructible.Basic
+public import Nyll.EtaleCohomology.Constructible.LocallyConstantKernels
+public import Nyll.EtaleCohomology.Sites.PullbackStalks
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Kernels and cokernels of constructible sheaves
@@ -17,6 +19,8 @@ A common finite adapted stratification reduces both operations to their
 finite type locally constant counterparts. The argument applies on every
 affine open without any noetherian hypothesis on the scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

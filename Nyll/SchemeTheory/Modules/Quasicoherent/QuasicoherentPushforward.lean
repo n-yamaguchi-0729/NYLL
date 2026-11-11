@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Localization.PushforwardLocalization
-import Nyll.SchemeTheory.Modules.Functoriality.PushforwardRestrict
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
+module
+
+public import Nyll.SchemeTheory.Modules.Localization.PushforwardLocalization
+public import Nyll.SchemeTheory.Modules.Functoriality.PushforwardRestrict
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 
 /-!
 # Quasicoherent direct images for open and affine morphisms
@@ -24,6 +26,8 @@ The affine-target theorem is transported from the actual `Spec` theorem through
 `isoSpec`. The arbitrary-target theorem uses the actual open-restriction comparison
 on each affine target open, then the native affine-cover criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

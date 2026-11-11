@@ -3,11 +3,14 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.Algebra.Category.Grp.Basic
-import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleClosedPointDivisorSections
-import Nyll.EtaleFundamentalGroups.Cohomology.GenericUnitDivisorSections
-import Nyll.EtaleFundamentalGroups.Cohomology.AffineGenericPointStalkComparison
+module
+
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineEtaleClosedPointDivisorSections
+public import Nyll.EtaleFundamentalGroups.Cohomology.GenericUnitDivisorSections
+public import Nyll.EtaleFundamentalGroups.Cohomology.AffineGenericPointStalkComparison
+public import Nyll.SchemeTheory.Affine.UnramifiedGenericFiber
 
 /-!
 # Affine étale generic-unit quotient sections
@@ -16,6 +19,8 @@ Compare the restriction of the base generic-unit quotient to an affine étale
 object with the generic-unit quotient over the affine source, and combine this
 with the closed-point divisor section equivalence.
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 open IsDedekindDomain

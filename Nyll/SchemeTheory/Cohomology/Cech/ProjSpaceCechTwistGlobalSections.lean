@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistFiniteCohomology
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistPositiveVanishing
-import Mathlib.Data.Finsupp.Basic
-import Mathlib.Data.Fintype.Defs
-import Mathlib.LinearAlgebra.Finsupp.Defs
-import Mathlib.Tactic.SplitIfs
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistFiniteCohomology
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwistPositiveVanishing
+public import Mathlib.Data.Finsupp.Basic
+public import Mathlib.Data.Fintype.Defs
+public import Mathlib.LinearAlgebra.Finsupp.Defs
+public import Mathlib.Tactic.SplitIfs
 
 /-!
 # Global sections of nonnegative projective twists
@@ -27,6 +29,8 @@ The resulting equivalence retains the explicit map to chart sections.
 It supplies the polynomial-numerator calculation needed to lift global
 sections through finite graded presentations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

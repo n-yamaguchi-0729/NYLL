@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Nilpotent.Lemmas
-import Mathlib.RingTheory.RingHom.PurelyInseparable
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Nilpotent.Lemmas
+public import Mathlib.RingTheory.RingHom.PurelyInseparable
 
 /-!
 # Geometrically unibranch local rings
@@ -19,6 +21,8 @@ local, and the resulting residue field extension to be purely inseparable.
 This is Stacks Project, Definition 15.108.1, not a criterion formulated in
 terms of strict henselization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

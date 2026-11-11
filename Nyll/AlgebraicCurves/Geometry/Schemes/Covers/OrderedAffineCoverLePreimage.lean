@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Order.Basic
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Order.Basic
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
 
 /-!
 # Scheme Ordered Affine Cover exists forall le preimage of compact Space
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

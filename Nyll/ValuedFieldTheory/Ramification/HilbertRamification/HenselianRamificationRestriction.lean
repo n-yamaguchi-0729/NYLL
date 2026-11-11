@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianInertiaRestriction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharP
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianInertiaRestriction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharP
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
 
 /-!
 # Surjectivity of finite wild inertia restriction
@@ -18,6 +21,8 @@ subgroup onto a Sylow subgroup, so actual ramification restriction is also
 surjective.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

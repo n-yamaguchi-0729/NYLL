@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MonoidAlgebra.Grading
-import Mathlib.GroupTheory.QuotientGroup.Defs
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.Grading
+public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-!
 # The lattice-algebra cover and its quotient grading
@@ -14,6 +16,8 @@ For an additive subgroup `H` of a lattice `L`, the induced map of additive
 monoid algebras identifies `R[H]` with the degree-zero subalgebra of `R[L]`
 for the quotient grading by `L ⧸ H`.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

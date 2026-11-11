@@ -4,15 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleOnOpen
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleTopRestriction
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleRestriction
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentExtension
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleOnOpen
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSchemeRestriction
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleTopRestriction
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmoduleRestriction
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentExtension
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
 
 /-!
 # Extending a finite quasicoherent submodule across one affine chart
@@ -23,6 +26,8 @@ affine isomorphism and extended by the kernel of the quotient direct image.
 The resulting global subsheaf is finite type on the chart and agrees with
 the original subsheaf on the entire overlap, as a native submodule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

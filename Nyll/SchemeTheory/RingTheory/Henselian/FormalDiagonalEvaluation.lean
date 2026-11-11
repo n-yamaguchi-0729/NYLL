@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! # Actual evaluation on the generic formal diagonal
 
@@ -15,6 +17,8 @@ The tensor evaluation `a ⊗ b ↦ σ(a) C(b)` has constant coefficient equal
 to multiplication. Denominators outside the diagonal prime therefore map
 to units, constructing an actual map from its local ring into power series.
 -/
+
+@[expose] public section
 
 noncomputable section
 

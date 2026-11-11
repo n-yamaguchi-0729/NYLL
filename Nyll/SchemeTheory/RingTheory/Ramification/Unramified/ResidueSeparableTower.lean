@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.SeparableDegree
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Instances
-import Mathlib.RingTheory.LocalRing.ResidueField.Separable
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Mathlib.FieldTheory.SeparableDegree
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Instances
+public import Mathlib.RingTheory.LocalRing.ResidueField.Separable
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # Separable residue fields in an étale tower
@@ -25,6 +27,8 @@ These results use the actual residue extensions, so they apply when the
 base residue field is imperfect. They provide the residue-field step in
 the tame ramification-index argument after adjoining a uniformizer root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

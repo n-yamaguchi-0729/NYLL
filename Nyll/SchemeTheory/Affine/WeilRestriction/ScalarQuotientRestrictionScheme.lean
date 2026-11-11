@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormSchemeRepresentation
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitNormSchemeRepresentation
 
 /-! # The actual Cartesian restriction square of unit and scalar quotient schemes -/
+
+@[expose] public section
 
 noncomputable section
 

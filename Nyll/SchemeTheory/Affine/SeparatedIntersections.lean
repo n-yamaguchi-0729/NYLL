@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.LinearAlgebra.TensorProduct.Finiteness
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Is Separated is Affine Open inf and exists eq sum mul of is Affine Open
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -89,7 +93,8 @@ theorem main {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [IsAffine Y]
     (isPullback_opens_inf U V).of_iso (Iso.refl _) hU.isoSpec hV.isoSpec (Iso.refl _)
       (by simp only [Iso.refl_hom, Category.id_comp])
       (by simp only [Iso.refl_hom, Category.id_comp])
-      (by simp [IsAffineOpen.isoSpec_hom]) (by simp [IsAffineOpen.isoSpec_hom])
+      (by rw [Iso.refl_hom, Category.comp_id, IsAffineOpen.isoSpec_hom_fromSpec])
+      (by rw [Iso.refl_hom, Category.comp_id, IsAffineOpen.isoSpec_hom_fromSpec])
   set ψ := pullback.mapDesc hU.fromSpec hV.fromSpec f' with hψ
   have : IsClosedImmersion ψ := inferInstance
   set F : ↑(U ⊓ V) ⟶ Spec (.of (A ⊗[R] B)) :=

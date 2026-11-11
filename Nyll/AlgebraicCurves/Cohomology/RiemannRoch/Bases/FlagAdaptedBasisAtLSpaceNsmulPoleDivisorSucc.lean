@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Dimension.OrzechProperty
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Bases.MulMemLSpaceNsmulSuccReflects
+module
+
+public import Mathlib.LinearAlgebra.Dimension.OrzechProperty
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Bases.MulMemLSpaceNsmulSuccReflects
 
 /-!
 # Exists flag Adapted Basis At l Space nsmul pole Divisor succ
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -98,7 +102,7 @@ theorem _root_.AlgebraicCurve.exists_flagAdaptedBasisAt_lSpace_nsmul_poleDivisor
       invFun := fun q => ⟨(q.1, (q.2 : ℕ)), by
         change (q.2 : ℕ) + e q.1 ≤ N; have h := q.2.isLt; omega⟩
       left_inv := fun p => rfl, right_inv := fun q => rfl }
-    simp [Fintype.card_congr eqv, Fintype.card_sigma]
+    simp only [Fintype.card_congr eqv, Fintype.card_sigma, Fintype.card_fin]
   have hstep : ∀ N, (∀ σ, e σ ≤ N) →
       Fintype.card {p : Fin d' × ℕ // p.2 + e p.1 ≤ N + 1}
         = Fintype.card {p : Fin d' × ℕ // p.2 + e p.1 ≤ N} + d' := by
@@ -154,7 +158,9 @@ theorem _root_.AlgebraicCurve.exists_flagAdaptedBasisAt_lSpace_nsmul_poleDivisor
           rcases mul_eq_zero.mp this with h1 | h1
           · exact sub_eq_zero.mp h1
           · exact absurd h1 hvne
-        have ha0 : a ≠ 0 := fun h => by simp [h] at hax
+        have ha0 : a ≠ 0 := fun h => by
+          rw [h, map_zero, zero_mul] at hax
+          exact zero_ne_one hax
         refine hx ⟨Polynomial.C a * Polynomial.X - 1, ?_, ?_⟩
         · intro h; apply ha0
           have := congrArg (·.coeff 1) h; simpa [Polynomial.coeff_one] using this
@@ -295,7 +301,7 @@ theorem _root_.AlgebraicCurve.exists_flagAdaptedBasisAt_lSpace_nsmul_poleDivisor
       invFun := fun q => ⟨(q.1,(q.2:ℕ)), by
         change (q.2:ℕ)+e' q.1≤M; have h:=q.2.isLt; omega⟩
       left_inv := fun p => rfl, right_inv := fun q => rfl }
-    simp [Fintype.card_congr eqv, Fintype.card_sigma]
+    simp only [Fintype.card_congr eqv, Fintype.card_sigma, Fintype.card_fin]
   have hnewCardV : Fintype.card {p : Fin (d'+k) × ℕ // p.2 + e' p.1 ≤ M₁+1} = Module.finrank K ↥V
     := by
     rw [hnewcard (M₁+1), Fin.sum_univ_add]

@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Differentials.Basic
-import Mathlib.FieldTheory.Perfect
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsTranscendental
-import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Differentials.Basic
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Nyll.AlgebraicCurves.Places.Taylor.UniquePDigitsTranscendental
+public import Nyll.AlgebraicCurves.FunctionFields.Extensions.FiniteSimpleExtensions
 
 /-!
 # PDigits exists Unique
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

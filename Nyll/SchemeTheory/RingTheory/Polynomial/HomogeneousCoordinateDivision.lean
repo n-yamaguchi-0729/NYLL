@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Division
-import Mathlib.Algebra.MonoidAlgebra.Defs
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Single
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Division
+public import Mathlib.Algebra.MonoidAlgebra.Defs
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Single
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Dividing a homogeneous polynomial by a coordinate power
@@ -21,6 +23,8 @@ is a coefficient calculation, so no domain assumption is needed. The
 actual monomial quotient is homogeneous of the expected degree. The
 one-variable version supplies the same division for projective zero-space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

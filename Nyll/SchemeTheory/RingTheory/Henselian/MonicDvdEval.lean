@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.QuasiFinite.Basic
-import Mathlib.RingTheory.QuasiFinite.Weakly
-import Mathlib.RingTheory.ZariskisMainTheorem
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
-import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubSumMemSpanPair
+module
+
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.QuasiFinite.Basic
+public import Mathlib.RingTheory.QuasiFinite.Weakly
+public import Mathlib.RingTheory.ZariskisMainTheorem
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFiniteLocalizationAtPrimeQuasiFiniteAt
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalRingSubSumMemSpanPair
 
 /-!
 # Henselian Local Ring forall exists monic dvd eval of prime of not associated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

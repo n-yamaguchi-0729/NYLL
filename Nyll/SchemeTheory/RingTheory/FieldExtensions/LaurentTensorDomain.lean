@@ -22,13 +22,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
-import Mathlib.RingTheory.LinearDisjoint
-import Mathlib.RingTheory.Flat.Localization
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
+public import Mathlib.RingTheory.LinearDisjoint
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Intermediate Field is Domain tensor Product of le laurent Series
 -/
+
+@[expose] public section
 
 section IntermediateField_isDomain_tensorProduct_of_le_laurentSeries
 

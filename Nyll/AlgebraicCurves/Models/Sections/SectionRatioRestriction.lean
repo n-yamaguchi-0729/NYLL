@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Sections.SectionRatioCongruence
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SectionVanishingClosedSubscheme
-import Nyll.SchemeTheory.Divisors.StalkIdealExt
+module
+
+public import Nyll.AlgebraicCurves.Models.Sections.SectionRatioCongruence
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SectionVanishingClosedSubscheme
+public import Nyll.SchemeTheory.Divisors.StalkIdealExt
 
 /-! # Full place congruence forces equality on the original modulus -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.ResidueEmbedding
-import Nyll.ValuedFieldTheory.LocalField.Unramified.FiniteSupport
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.ResidueEmbedding
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.FiniteSupport
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # The maximal unramified subextension from residue-field data
@@ -13,6 +16,8 @@ import Nyll.ValuedFieldTheory.LocalField.Unramified.FiniteSupport
 Finite support in the compositum reduces the value-group equality and the
 forward residue-field inclusion to the corresponding finite statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

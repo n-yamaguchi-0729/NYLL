@@ -10,11 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Is Regular Local Ring is Domain and is Integrally Closed of ring Krull Dim le one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

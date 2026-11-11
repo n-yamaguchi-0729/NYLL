@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedGlobalSections
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedFreeHom
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedAdicSystem
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedNumeratorLifting
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedGlobalSections
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedFreeHom
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedAdicSystem
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedNumeratorLifting
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModules
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Finite homogeneous generators of an actual adic limit
@@ -29,6 +31,8 @@ presentation of the limit from the stage-zero presentation; finite generation
 of the limit and a lifted presentation are not hypotheses.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ProjSpaceCech.GradedModule
@@ -43,7 +47,8 @@ variable {R : Type u} [CommRing R] {dim : ℕ}
   (hker : ∀ (d : ℤ) (k : ℕ), ((t k).gradeMap d).ker =
     I ^ (k + 1) • (⊤ : Submodule R ((D (k + 1)).grade d)))
 
-private def presentationGenerator (σ : Presentation (D 0)) (j : σ.J) :
+/-- The homogeneous image of a basis generator under the given presentation. -/
+def presentationGenerator (σ : Presentation (D 0)) (j : σ.J) :
     (D 0).grade (-σ.d₀ j) := by
   classical
   have h1 : (1 : MvPolynomial (Fin (dim + 1)) R) ∈
@@ -56,7 +61,8 @@ private def presentationGenerator (σ : Presentation (D 0)) (j : σ.J) :
     ((freeSummandInclusion (R := R) (n := dim) σ.d₀ j).mem_grade
       (-σ.d₀ j) (1 : MvPolynomial (Fin (dim + 1)) R) h1)
 
-private def adicGenerator (σ : Presentation (D 0)) (j : σ.J) :
+/-- An actual homogeneous lift of the original stage-zero generator. -/
+def adicGenerator (σ : Presentation (D 0)) (j : σ.J) :
     (adicLimit D t).grade (-σ.d₀ j) :=
   (adicEval_gradeMap_surjective D t I ht hker (-σ.d₀ j) 0
     (presentationGenerator D σ j)).choose

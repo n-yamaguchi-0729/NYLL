@@ -10,16 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.Tactic.Set
+module
+
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.Tactic.Set
 
 /-!
 # finite set Of pullback fst eq of is Closed singleton
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

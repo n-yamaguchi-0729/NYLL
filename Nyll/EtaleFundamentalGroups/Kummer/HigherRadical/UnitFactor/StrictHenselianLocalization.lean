@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.Ideal.GoingUp
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.UnitFactorFiniteEtale
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.UnitFactorFiniteEtale
 
 /-!
 # The strict-Henselian localization of the retained unit factor
@@ -23,6 +25,8 @@ literal lower factor retained by `HigherRadicalUnitFactorData`.  It does not
 assume that this factor has a unique closed prime, and it does not compare
 its generic field with a later full-root component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -141,19 +145,14 @@ theorem higherRadicalUnitFactorData_exists_strictHenselian_localizationAlgEquiv
     let e := ramificationIndex base target
     let Rₑ := AdjoinRoot (X ^ e - C varpi)
     let Cq := AdjoinRoot factor.q
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     ∃ q : (IsLocalRing.maximalIdeal Rₑ).primesOver Cq,
       Nonempty (Rₑ ≃ₐ[Rₑ] Localization.AtPrime q.1) := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Cq := AdjoinRoot factor.q
+  intro e Rₑ Cq sharedOwner1
   let : IsDomain Cq :=
     higherRadicalUnitFactorData_isDomain
       base target varpi pi N beta factor
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
   let : Module.Finite Rₑ Cq :=
     higherRadicalUnitFactorData_radical_finite
       base target varpi pi N beta factor

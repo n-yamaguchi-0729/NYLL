@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.TrivialZModP
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Algebra.Group.ULift
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Algebra.Module.NatInt
+module
+
+public import Nyll.GaloisCohomology.ProP.TrivialZModP
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Algebra.Group.ULift
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Algebra.Module.NatInt
 
 /-!
 # Actual trivial integral coefficient lines
@@ -17,6 +19,8 @@ An invariant element killed by p gives a continuous equivariant integral
 map from the existing lifted mod-p coefficient object. If p is prime and
 the element is nonzero, this map is injective.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -11,12 +11,6 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Action
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPoints
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.BaseChange
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.EndDegree
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Fibre
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.KernelPair
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.MultiplicationMorphisms
@@ -27,7 +21,8 @@ import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.FiniteFieldLangPoin
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.FiniteFieldLangNorm
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.LangIterate
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.FiniteFieldLangPowers
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPointsBaseChange
 
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.CanonicalModelFactorization
 import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.AlgebraicPointsPullback
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.KernelPoints
+import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.ProperTorsionPoints

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSquareEquivalence
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSquareEquivalence
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedBaseChange
 
 /-! # Actual modulus classes under scalar extension -/
+
+@[expose] public section
 
 noncomputable section
 

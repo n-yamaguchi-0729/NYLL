@@ -10,29 +10,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.GroupWithZero.Range
-import Mathlib.Algebra.GroupWithZero.Units.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Algebra.Order.Monoid.Unbundled.Pow
-import Mathlib.Algebra.Ring.Int.Units
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Data.Matrix.Mul
-import Mathlib.LinearAlgebra.Matrix.Adjugate
-import Mathlib.LinearAlgebra.Matrix.Defs
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import Mathlib.LinearAlgebra.Matrix.RowCol
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.UniformSpace.Cauchy
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SplitIfs
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.GroupWithZero.Range
+public import Mathlib.Algebra.GroupWithZero.Units.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Monoid.Unbundled.Pow
+public import Mathlib.Algebra.Ring.Int.Units
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Data.Matrix.Mul
+public import Mathlib.LinearAlgebra.Matrix.Adjugate
+public import Mathlib.LinearAlgebra.Matrix.Defs
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.LinearAlgebra.Matrix.RowCol
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.UniformSpace.Cauchy
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SplitIfs
 
 /-!
 # Valued exists mul Vec add eq of v det eq one
 -/
+
+@[expose] public section
+
+universe uK uΓ
 
 section ProofImplementation
 
@@ -42,7 +48,7 @@ namespace NewtonNA
 
 open Matrix
 
-variable {K : Type} [Field K] {Γ₀ : Type} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
+variable {K : Type uK} [Field K] {Γ₀ : Type uΓ} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
 
 theorem v_sum_le {ι : Type} (s : Finset ι) (f : ι → K) (g : Γ₀) (h : ∀ i ∈ s, Valued.v (f i) ≤ g) :
     Valued.v (∑ i ∈ s, f i) ≤ g :=
@@ -90,7 +96,7 @@ end NewtonNA
 
 namespace NewtonNA
 
-variable {K : Type} [Field K] {Γ₀ : Type} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
+variable {K : Type uK} [Field K] {Γ₀ : Type uΓ} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
 
 theorem exists_eq_restrict (γ : (MonoidWithZeroHom.ValueGroup₀ (MonoidWithZeroHom.ofClass (Valued.v
   : Valuation K Γ₀)))ˣ) :
@@ -152,7 +158,7 @@ end NewtonNA
 
 open Matrix NewtonNA in
 theorem _root_.Valued.exists_mulVec_add_eq_of_v_det_eq_one
-    {K : Type} [Field K] {Γ₀ : Type} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
+    {K : Type uK} [Field K] {Γ₀ : Type uΓ} [LinearOrderedCommGroupWithZero Γ₀] [Valued K Γ₀]
       [CompleteSpace K]
     (hrk : ∀ x y : K, Valued.v x < 1 → y ≠ 0 → ∃ m : ℕ, Valued.v x ^ m ≤ Valued.v y)
     {n : ℕ} (A : Matrix (Fin n) (Fin n) K) (hA : ∀ i j : Fin n, Valued.v (A i j) ≤ 1)

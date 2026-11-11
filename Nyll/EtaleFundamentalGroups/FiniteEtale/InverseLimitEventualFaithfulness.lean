@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions.Fractions
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions.Fractions
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Eventual equality and the faithful comparison of finite etale models
@@ -21,6 +23,8 @@ This separates the categorical argument from the geometric equality
 supplier, allowing both scheme inverse limits and germs along a subscheme
 to use the same concrete model localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

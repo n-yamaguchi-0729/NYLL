@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
-import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleDSq
-import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModuleHomSecMapInjective
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechTwist
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModule
+public import Nyll.SchemeTheory.Cohomology.Cech.ProjSpaceCechGradedModuleDSq
+public import Nyll.AlgebraicCurves.Cohomology.Cech.ProjectiveSpace.GradedModuleHomSecMapInjective
 
 /-!
 # Proj Space Cech Graded Module Presentation forall H zero shift eq sec mk of subsingleton H
 one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

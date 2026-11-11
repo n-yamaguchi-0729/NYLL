@@ -63,7 +63,8 @@ theorem
       set D' : Divisor K F := D + (D V₀) • p with hD'
       have hD'V₀ : D' V₀ = 0 := by
         have h1 : D' V₀ = D V₀ + (D V₀) * (p V₀) := by
-          simp [hD', Finsupp.add_apply, Finsupp.smul_apply]
+          change D V₀ + (D V₀) • p V₀ = D V₀ + (D V₀) * p V₀
+          rw [smul_eq_mul]
         rw [h1, hpV₀]
         ring
       have hD'eq : ∀ V, V ≠ V₀ → ¬ good V → D' V = D V := by
@@ -71,7 +72,8 @@ theorem
         have hpV : p V = 0 := by
           by_contra hpne
           exact hbad (hpgood V (Finsupp.mem_support_iff.mpr hpne) hne)
-        simp [hD', Finsupp.add_apply, Finsupp.smul_apply, hpV]
+        change D V + (D V₀) • p V = D V
+        rw [hpV, smul_zero, add_zero]
       have hsub : D'.support.filter (fun V => ¬ good V)
           ⊆ (D.support.filter (fun V => ¬ good V)).erase V₀ := by
         intro V hV

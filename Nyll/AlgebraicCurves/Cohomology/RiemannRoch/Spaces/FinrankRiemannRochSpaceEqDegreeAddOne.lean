@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.RingTheory.Polynomial.DegreeLT
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Evaluation.Value
-import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Nyll.AlgebraicCurves.Places.Rational.Classification
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.RingTheory.Polynomial.DegreeLT
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
+public import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
 
 /-!
 # Finrank riemann Roch Space eq degree add one of ring Equiv rat Func
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -554,7 +558,11 @@ variable {k : Type*} [Field k] {ι : Type*}
 by the chosen weights. -/
 def wEvalAt (a w : ι → k) (n : ℕ) : degreeLT k n →ₗ[k] (ι → k) where
   toFun P := fun i => w i * (P : k[X]).eval (a i)
-  map_add' P Q := by ext i; simp [mul_add]
+  map_add' P Q := by
+    funext i
+    exact (congrArg (w i * ·)
+      (Polynomial.eval_add (p := (P : k[X])) (q := (Q : k[X])) (x := a i))).trans
+        (mul_add _ _ _)
   map_smul' c P := by
     ext i
     change w i * (c • (P : k[X])).eval (a i) = c • (w i * (P : k[X]).eval (a i))

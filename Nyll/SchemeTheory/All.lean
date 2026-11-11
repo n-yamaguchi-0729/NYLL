@@ -4,31 +4,34 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.All
-import Nyll.SchemeTheory.Modules.All
-import Nyll.SchemeTheory.Affine.All
-import Nyll.SchemeTheory.CategoryTheory.All
-import Nyll.SchemeTheory.Descent.All
-import Nyll.SchemeTheory.Divisors.All
-import Nyll.SchemeTheory.Etale.All
-import Nyll.SchemeTheory.Fibers.All
-import Nyll.SchemeTheory.FiniteEtale.All
-import Nyll.SchemeTheory.FunctionFields.All
-import Nyll.SchemeTheory.LocalGeometry.All
-import Nyll.SchemeTheory.Morphisms.All
-import Nyll.SchemeTheory.NoetherNormalization.All
-import Nyll.SchemeTheory.Normalization.All
-import Nyll.SchemeTheory.PlaneCurves.All
-import Nyll.SchemeTheory.RingTheory.All
-import Nyll.SchemeTheory.Topology.All
-import Nyll.SchemeTheory.WeilRestriction.All
-import Nyll.SchemeTheory.AbhyankarLemma.All
+module
 
-import Nyll.SchemeTheory.Sheaves.All
-import Nyll.SchemeTheory.Gluing.All
-import Nyll.SchemeTheory.Cohomology.All
-import Nyll.SchemeTheory.HomologicalAlgebra.All
-import Nyll.SchemeTheory.Pi1.All
+public import Nyll.SchemeTheory.ProjectiveSpace.All
+public import Nyll.SchemeTheory.Modules.All
+public import Nyll.SchemeTheory.Affine.All
+public import Nyll.SchemeTheory.CategoryTheory.All
+public import Nyll.SchemeTheory.Compat.All
+public import Nyll.SchemeTheory.Descent.All
+public import Nyll.SchemeTheory.Divisors.All
+public import Nyll.SchemeTheory.Etale.All
+public import Nyll.SchemeTheory.Fibers.All
+public import Nyll.SchemeTheory.FiniteEtale.All
+public import Nyll.SchemeTheory.FunctionFields.All
+public import Nyll.SchemeTheory.LocalGeometry.All
+public import Nyll.SchemeTheory.Morphisms.All
+public import Nyll.SchemeTheory.NoetherNormalization.All
+public import Nyll.SchemeTheory.Normalization.All
+public import Nyll.SchemeTheory.PlaneCurves.All
+public import Nyll.SchemeTheory.RingTheory.All
+public import Nyll.SchemeTheory.Topology.All
+public import Nyll.SchemeTheory.WeilRestriction.All
+public import Nyll.SchemeTheory.AbhyankarLemma.All
+
+public import Nyll.SchemeTheory.Sheaves.All
+public import Nyll.SchemeTheory.Gluing.All
+public import Nyll.SchemeTheory.Cohomology.All
+public import Nyll.SchemeTheory.HomologicalAlgebra.All
+public import Nyll.SchemeTheory.Pi1.All
 
 /-
 # Scheme theory
@@ -36,8 +39,12 @@ import Nyll.SchemeTheory.Pi1.All
 Reader-facing entry point for the scheme-theoretic and commutative-algebra
 modules in this workspace.
 -/
-import Nyll.SchemeTheory.GroupSchemes.All
-import Nyll.SchemeTheory.BaseChange.BaseChangedIdentifiedModelIso
+public import Nyll.SchemeTheory.GroupSchemes.All
+public import Nyll.SchemeTheory.BaseChange.BaseChangedIdentifiedModelIso
+public import Nyll.SchemeTheory.BaseChange.All
+
+
+public import Nyll.SchemeTheory.AlgebraicPoints.All
 
 /-!
 # Scheme theory

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkCoverDescent
-import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
-import Nyll.EtaleCohomology.Sites.GeometricStalkSchemeLimit
-import Nyll.SchemeTheory.Descent.AffineTransitionMatchedCover
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkCoverDescent
+public import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSchemeLimit
+public import Nyll.SchemeTheory.Descent.AffineTransitionMatchedCover
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # A pointed étale covering stage retaining its full overlap condition
@@ -22,6 +24,8 @@ to a cover over a pointed affine étale neighborhood. Its map to the original
 cover and overlap descent is purely geometric; no sheaf continuity is used.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -31,7 +35,8 @@ open EtaleFundamentalGroups.StrictHenselian
 
 namespace EtaleCohomology
 
-private theorem baseChangeFactor_w {X Y : Scheme.{u}} (q : Y ⟶ X)
+/-- The structural square of a morphism into an étale base change commutes. -/
+theorem baseChangeFactor_w {X Y : Scheme.{u}} (q : Y ⟶ X)
     (U : X.Etale) (V : Y.Etale) (d : V ⟶ (etaleBaseChange q).obj U) :
     (d.left ≫ pullback.fst U.hom q) ≫ U.hom = V.hom ≫ q :=
   (Category.assoc d.left (pullback.fst U.hom q) U.hom).trans

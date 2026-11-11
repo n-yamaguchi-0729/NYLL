@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Unramified
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Actual generic-fiber squares of affine integral schemes
@@ -14,6 +16,8 @@ The generic-fiber square is a pullback when the source and base have
 compatible fraction fields and the algebra map is essentially finite type
 and formally unramified.
 -/
+
+@[expose] public section
 
 noncomputable section
 

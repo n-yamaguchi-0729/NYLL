@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleCohomology.Sites.GeometricStalkSchemeLimit
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Limits.Opposites
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSchemeLimit
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Opposites
 
 /-!
 # Spreading scheme sections from the actual geometric stalk
@@ -27,6 +30,8 @@ may be proper without being finitely presented over the base. Applying
 in the geometric finite-data step of Stacks Project, Theorem 59.53.1.
 This file does not assume a continuity theorem for arbitrary étale sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -69,6 +74,8 @@ theorem geometricStalk_exists_affine_section_stage
   have hc : IsLimit c := isLimitOfPreserves (Over.pullback f) hc₀
   let D' := D ⋙ Over.forget X
   let c' : Cone D' := (Over.forget X).mapCone c
+  have : IsConnected (GeometricStalkAlgebraIndex φ)ᵒᵖ :=
+    IsCofiltered.isConnected (GeometricStalkAlgebraIndex φ)ᵒᵖ
   have hc' : IsLimit c' := isLimitOfPreserves (Over.forget X) hc
   let p : D' ⟶ (Functor.const _).obj X := ((Over.forgetCocone X).whisker D).ι
   have hcompat : c'.π ≫ p = (Functor.const _).map (s ≫ g) := by

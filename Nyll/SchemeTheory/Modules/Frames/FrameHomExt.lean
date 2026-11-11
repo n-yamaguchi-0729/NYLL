@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Frames.Frames
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.Sets.Opens
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.Frames
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sets.Opens
 
 /-!
 # Morphisms determined by original frames on a cover
@@ -20,6 +22,8 @@ open the frame expresses every source section as a scalar multiple of
 the restricted global section. The actual restriction naturality and
 sheaf separatedness then identify the original morphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

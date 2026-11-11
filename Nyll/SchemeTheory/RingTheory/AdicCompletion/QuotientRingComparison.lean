@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionLocalRing
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # The actual coefficient quotients of an adic completion
@@ -19,6 +21,8 @@ algebra equivalence over the original ring and retains literal evaluation.
 In particular, every completed quotient coefficient has an original-ring
 representative. No local-ring hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

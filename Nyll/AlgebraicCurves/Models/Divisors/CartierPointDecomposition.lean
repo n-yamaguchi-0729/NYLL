@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.PointIdealSupport
-import Nyll.AlgebraicCurves.Models.Divisors.CartierModulusRestriction
-import Nyll.SchemeTheory.Divisors.PointIdealStalk
-import Nyll.SchemeTheory.Divisors.StalkIdealExt
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.PointIdealSupport
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierModulusRestriction
+public import Nyll.SchemeTheory.Divisors.PointIdealStalk
+public import Nyll.SchemeTheory.Divisors.StalkIdealExt
 
 /-!
 # The actual Cartier ideal is the product of its point ideals
@@ -17,6 +19,8 @@ point and unit stalk elsewhere. The product with the constructed Cartier
 multiplicities therefore agrees with the original ideal at every stalk.
 This identifies full ideals, including nonreduced multiplicities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

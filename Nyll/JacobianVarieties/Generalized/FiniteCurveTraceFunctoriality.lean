@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
-import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Mathlib.Algebra.BigOperators.Group.List.Basic
+module
+
+public import Nyll.JacobianVarieties.Generalized.FiniteCurveTrace
+public import Nyll.SchemeTheory.GroupSchemes.GeometricPointHom
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Mathlib.Algebra.BigOperators.Group.List.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Group operations and target functoriality of the regular trace
 
@@ -16,6 +19,8 @@ actual regular trace maps. Their fibre formulas use the same full Cartier
 tuple, so the trace preserves group operations, commutes with group
 homomorphisms, and is independent of the point used in its construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

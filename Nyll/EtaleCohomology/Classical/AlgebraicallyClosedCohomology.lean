@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.ClosedPushforward
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Nyll.EtaleCohomology.Classical.HenselianLocal
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleCohomology.Classical.ClosedPushforward
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Nyll.EtaleCohomology.Classical.HenselianLocal
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Étale cohomology over separably closed fields
@@ -24,6 +26,8 @@ for sheaves supported at an algebraically closed point.
 The strictly henselian vanishing theorem is Stacks Project, Lemma 59.55.1:
 https://stacks.math.columbia.edu/tag/03QO.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

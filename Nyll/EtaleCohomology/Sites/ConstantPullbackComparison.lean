@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.ConstantPullback
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Nyll.EtaleCohomology.Sites.ConstantPullback
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Coherence of constant sheaves under a site isomorphism
@@ -16,6 +18,8 @@ If a site endofunctor is naturally isomorphic to the identity, the induced
 identity comparison on inverse image agrees on constant sheaves with the
 comparison from the constant-sheaf adjunction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

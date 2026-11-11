@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneBoundary
-import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
-import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Topology.Closure
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CodimensionOneBoundary
+public import Nyll.SchemeTheory.LocalGeometry.GenericComplementPuncture
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedDVR
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Topology.Closure
 
 /-!
 # Canonical generic maps at a codimension-one boundary point
@@ -29,6 +31,8 @@ retains the same stalk, fraction field, and structural ring map; it is the
 input for transporting an original cover's generic fibre to an extension
 over the larger open in Stacks Project, Lemma 58.31.2 (tag 0H2W).
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Algebra.PrimeRigidity
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.PrimeRigidity
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.Tactic.Ring
 
 /-!
 # Trivial intrinsic inertia on an unramified domain
@@ -18,6 +20,8 @@ The literal coefficient automorphisms in ideal inertia agree modulo the
 prime. Prime rigidity proves equality on the original domain itself, so
 the intrinsic inertia group has at most one element.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Mathlib.RingTheory.RamificationInertia.Inertia
-import Mathlib.NumberTheory.RamificationInertia.Ramification
-import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.EqValuationSubringAtPrime
+module
+
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Mathlib.RingTheory.RamificationInertia.Inertia
+public import Mathlib.NumberTheory.RamificationInertia.Ramification
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.EqValuationSubringAtPrime
 
 /-!
 # Is Discrete Valuation Ring forall valuation Subring eq and forall exists sub mem nonunits
 of primes Over integral Closure eq singleton
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.CoefficientSheaves
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
-import Mathlib.Algebra.Homology.ShortComplex.Ab
+module
+
+public import Nyll.EtaleCohomology.Classical.CoefficientSheaves
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-!
 # Coefficient-linear long exact sequences
@@ -18,6 +20,8 @@ Exactness is inherited from the existing classical cohomology long exact sequenc
 using the proved exactness of the coefficient-forgetting functor.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 
@@ -77,22 +81,24 @@ lemma connecting_naturality
         (connecting.{u, v, w, t, h} h₁ n x) := by
   simp only [connecting_apply, cohomologyMap_apply]
   -- Explicit components keep comparison with the boundary map local.
-  let g : S₁.map (forgetCoefficients.{u, v, max t w, t} (J := J)) ⟶
-      S₂.map (forgetCoefficients.{u, v, max t w, t} (J := J)) :=
-    { τ₁ := (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₁
-      τ₂ := (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₂
-      τ₃ := (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₃
+  let coefficients : Sheaf J (ModuleCat.{max t w} R) ⥤ Sheaf J AddCommGrpCat.{max t w} :=
+    (forgetCoefficients.{u, v, max t w, t} (J := J) (R := R))
+  let g : S₁.map coefficients ⟶
+      S₂.map coefficients :=
+    { τ₁ := coefficients.map f.τ₁
+      τ₂ := coefficients.map f.τ₂
+      τ₃ := coefficients.map f.τ₃
       comm₁₂ := by
-        change (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₁ ≫
-            (forgetCoefficients.{u, v, max t w, t} (J := J)).map S₂.f =
-          (forgetCoefficients.{u, v, max t w, t} (J := J)).map S₁.f ≫
-            (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₂
+        change coefficients.map f.τ₁ ≫
+            coefficients.map S₂.f =
+          coefficients.map S₁.f ≫
+            coefficients.map f.τ₂
         rw [← Functor.map_comp, ← Functor.map_comp, f.comm₁₂]
       comm₂₃ := by
-        change (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₂ ≫
-            (forgetCoefficients.{u, v, max t w, t} (J := J)).map S₂.g =
-          (forgetCoefficients.{u, v, max t w, t} (J := J)).map S₁.g ≫
-            (forgetCoefficients.{u, v, max t w, t} (J := J)).map f.τ₃
+        change coefficients.map f.τ₂ ≫
+            coefficients.map S₂.g =
+          coefficients.map S₁.g ≫
+            coefficients.map f.τ₃
         rw [← Functor.map_comp, ← Functor.map_comp, f.comm₂₃] }
   exact Sheaf.H.δ_naturality.{h, max t w, v, u} n (n + 1) rfl
     (forgetCoefficients_shortExact R J h₁) (forgetCoefficients_shortExact R J h₂)

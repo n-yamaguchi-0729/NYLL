@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # From the literal residue action to a fixed residue-field point
@@ -16,6 +18,8 @@ Conversely, injectivity of residue-field maps proves the point and residue
 condition at every point in any fixed test morphism's image. No geometric-point
 comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

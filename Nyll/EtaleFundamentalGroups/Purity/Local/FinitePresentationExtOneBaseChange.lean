@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.FinitePresentationHomBaseChange
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Descent
-import Mathlib.Algebra.Category.ModuleCat.Ext.DimensionShifting
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.TensorProduct.IsBaseChangeRightExact
-import Mathlib.RingTheory.TensorProduct.Free
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.FinitePresentationHomBaseChange
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Descent
+public import Mathlib.Algebra.Category.ModuleCat.Ext.DimensionShifting
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.TensorProduct.IsBaseChangeRightExact
+public import Mathlib.RingTheory.TensorProduct.Free
 
 /-!
 # Flat base change for `Ext¹` from a finitely presented module
@@ -21,6 +23,8 @@ again finitely presented.  The contravariant long exact `Ext` sequence of a
 finite-free presentation therefore expresses `Ext¹` as a cokernel of two
 `Hom` modules to which finite-presentation base change applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,23 +36,6 @@ namespace EtaleFundamentalGroups
 universe u
 
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
-
-private theorem extendScalarsTensorAlgebra_eq :
-    ((algebraMap S S).comp (algebraMap R S)).toAlgebra =
-      (inferInstance : Algebra R S) := by
-  apply Algebra.algebra_ext
-  intro r
-  simp [RingHom.algebraMap_toAlgebra]
-
-private theorem extendScalarsTensorModule_eq :
-    ((ModuleCat.restrictScalars (algebraMap R S)).obj
-        (ModuleCat.of S S)).isModule =
-      (@Algebra.toModule R S _ _ (inferInstance : Algebra R S)) := by
-  apply Module.ext'
-  intro r s
-  change algebraMap R S r • (show S from s) =
-    r • (show S from s)
-  exact IsScalarTower.algebraMap_smul S r (show S from s)
 
 private noncomputable def extendScalarsTensorEquiv (Q : ModuleCat.{u} R) :
     (ModuleCat.extendScalars (algebraMap R S)).obj Q ≃ₗ[S] S ⊗[R] Q := by

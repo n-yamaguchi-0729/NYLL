@@ -13,13 +13,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.Chevalley
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
+module
+
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 
 /-!
 # Faithfully flat base change on an open spectral image
@@ -28,6 +30,8 @@ The spectral image of a flat finitely presented algebra is represented by an ide
 base change on which this ideal becomes the unit ideal makes the tensor-product algebra
 faithfully flat.
 -/
+
+@[expose] public section
 
 open TensorProduct PrimeSpectrum
 

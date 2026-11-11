@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SourceOpenRestriction
-import Nyll.JacobianVarieties.Albanese.OpenCurveDivisorSums
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SourceOpenRestriction
+public import Nyll.JacobianVarieties.Albanese.OpenCurveDivisorSums
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Evaluating regular divisor sums on supported families
@@ -15,6 +18,8 @@ supported family on the original proper curve. This gives an actual morphism
 over the base, compatible with arbitrary changes of test scheme. The target
 may be any separated commutative algebraic group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

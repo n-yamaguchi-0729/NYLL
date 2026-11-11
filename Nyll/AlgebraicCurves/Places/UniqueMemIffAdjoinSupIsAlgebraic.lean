@@ -10,14 +10,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
-import Nyll.ValuedFieldTheory.Valuation.Subring.Ramification.FinsumRamificationIdxMulInertiaDegEqFinrank
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPosFiniteDimensional
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+module
+
+public import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
+public import
+  Nyll.ValuedFieldTheory.Valuation.Subring.Ramification.FinsumRamificationIdxMulInertiaDegEqFinrank
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPosFiniteDimensional
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ForgetConstantsRestrictEq
+public import Nyll.AlgebraicCurves.Places.ValuationRings.EqComapToValuationSubringEq
+public import Nyll.AlgebraicCurves.Places.Residue.ResidueFieldEqCompositum
 
 /-!
 # Place exists Unique forall mem iff adjoin sup of is Algebraic of forall exists sub mem
 -/
+
+@[expose] public section
+
+universe u₀ uL uF
 
 section ProofImplementation
 
@@ -1134,8 +1155,10 @@ theorem layerSpec_of
 
 end KFRatExt
 
+open _root_.AlgebraicCurves.Places.Proofs.PlaceResidueFieldCompositum.AlgebraicCurve.Place in
+open ResidueCompositumAux in
 theorem KFRatExt.ratext_subfield
-    {k F : Type} [Field k] [CharZero k] [Field F] [Algebra k F]
+    {k : Type u₀} {F : Type uF} [Field k] [CharZero k] [Field F] [Algebra k F]
     (K₁ L F₀ : IntermediateField k F) (hK₁L : K₁ ≤ L) (hgen : L ⊔ F₀ = ⊤)
     (halg : ∀ x : ↥L, IsAlgebraic ↥K₁ (x : F))
     (V₁ : ValuationSubring ↥(K₁ ⊔ F₀))
@@ -1147,25 +1170,120 @@ theorem KFRatExt.ratext_subfield
     (∀ P : Place ↥L F, (∀ f : ↥(K₁ ⊔ F₀), (f : F) ∈ P.toValuationSubring ↔ f ∈ V₁) → P.IsRational)
       := by
   classical
-  obtain ⟨ϖ, hϖirr⟩ := IsDiscreteValuationRing.exists_irreducible ↥V₁
-  have hϖ : maximalIdeal ↥V₁ = Ideal.span {ϖ} :=
-    (IsDiscreteValuationRing.irreducible_iff_uniformizer ϖ).mp hϖirr
-  refine KFRatExt.main_of_layers K₁ L F₀ hK₁L hgen halg V₁ ϖ hϖ (fun x => ?_)
-  refine KFRatExt.layerSpec_of K₁ L F₀ hK₁L halg V₁ hK₁V hrat ϖ x ?_
-  intro n b hbW hind hn
-  have : CharZero ↥(K₁ ⊔ F₀) := charZero_of_injective_algebraMap (algebraMap k ↥(K₁ ⊔ F₀)).injective
-  let algK₁F₁ : Algebra ↥K₁ ↥(K₁ ⊔ F₀) :=
+  let : Algebra ↥K₁ ↥(K₁ ⊔ F₀) :=
     (IntermediateField.inclusion (le_sup_left : K₁ ≤ K₁ ⊔ F₀)).toRingHom.toAlgebra
-  let algK₁E : Algebra ↥K₁ ↥(KFRatExt.Lay K₁ F₀ (x : F)) :=
-    ((algebraMap ↥(K₁ ⊔ F₀) ↥(KFRatExt.Lay K₁ F₀ (x : F))).comp (algebraMap ↥K₁ ↥(K₁ ⊔
-      F₀))).toAlgebra
-  have : IsScalarTower ↥K₁ ↥(K₁ ⊔ F₀) ↥(KFRatExt.Lay K₁ F₀ (x : F)) :=
-    IsScalarTower.of_algebraMap_eq fun _ => rfl
+  let : Algebra ↥K₁ ↥L := (IntermediateField.inclusion hK₁L).toRingHom.toAlgebra
   have : IsScalarTower ↥K₁ ↥(K₁ ⊔ F₀) F := IsScalarTower.of_algebraMap_eq fun _ => rfl
-  have hxF₁ : IsIntegral ↥(K₁ ⊔ F₀) (x : F) := ((halg x).isIntegral).tower_top
-  have : FiniteDimensional ↥(K₁ ⊔ F₀) ↥(KFRatExt.Lay K₁ F₀ (x : F)) :=
-    IntermediateField.adjoin.finiteDimensional hxF₁
-  exact BDescRatExt.layer (k₀ := ↥K₁) V₁ (fun a => hK₁V a) ϖ hϖ b hbW hind hn
+  have : IsScalarTower ↥K₁ ↥L F := IsScalarTower.of_algebraMap_eq fun _ => rfl
+  have : CharZero ↥K₁ := charZero_of_injective_algebraMap (algebraMap k ↥K₁).injective
+  have : Algebra.IsAlgebraic ↥K₁ ↥L := ⟨fun x =>
+    ((isIntegral_algHom_iff (IsScalarTower.toAlgHom ↥K₁ ↥L F)
+      (algebraMap ↥L F).injective).mp (halg x).isIntegral).isAlgebraic⟩
+  have : Algebra.IsSeparable ↥K₁ ↥L := inferInstance
+  have hVne : V₁ ≠ ⊤ := by
+    intro htop
+    obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible ↥V₁
+    have hπ0 : (π : ↥(K₁ ⊔ F₀)) ≠ 0 := fun h => hπ.ne_zero (Subtype.ext h)
+    have hinv : (π : ↥(K₁ ⊔ F₀))⁻¹ ∈ V₁ :=
+      htop.ge (ValuationSubring.mem_top _)
+    exact hπ.not_isUnit ((KFRatLayer.isUnit_iff_inv_mem V₁ π hπ0).mpr hinv)
+  let v : Place ↥K₁ ↥(K₁ ⊔ F₀) :=
+    ⟨V₁, hK₁V, hVne, inferInstance⟩
+  have hv : v.IsRational := by
+    intro r
+    obtain ⟨a, rfl⟩ := IsLocalRing.residue_surjective (R := ↥V₁) r
+    obtain ⟨c, hc⟩ := hrat a
+    refine ⟨c, ?_⟩
+    change IsLocalRing.residue ↥V₁
+        ⟨⟨(c : F), (le_sup_left : K₁ ≤ K₁ ⊔ F₀) c.2⟩, hK₁V c⟩ =
+      IsLocalRing.residue ↥V₁ a
+    have h := (IsLocalRing.residue_eq_zero_iff _).mpr hc
+    rw [map_sub, sub_eq_zero] at h
+    exact h.symm
+  have hconst : ∀ y : ↥(K₁ ⊔ F₀), IsAlgebraic ↥K₁ y →
+      y ∈ (algebraMap ↥K₁ ↥(K₁ ⊔ F₀)).range := by
+    intro y hy
+    have hyV : y ∈ v.toValuationSubring := mem_of_isIntegral v hy.isIntegral
+    obtain ⟨c, hc⟩ := hrat ⟨y, hyV⟩
+    have hzero : y - algebraMap ↥K₁ ↥(K₁ ⊔ F₀) c = 0 := by
+      by_contra hne
+      have hint : IsIntegral ↥K₁ (y - algebraMap ↥K₁ ↥(K₁ ⊔ F₀) c) :=
+        hy.isIntegral.sub (isIntegral_algebraMap)
+      exact ((IsLocalRing.mem_maximalIdeal _).mp hc)
+        (isUnit_of_isIntegral v hint hne)
+    exact ⟨c, (sub_eq_zero.mp hzero).symm⟩
+  have hrange (E : IntermediateField k F) :
+      Set.range (algebraMap ↥E F) = (E : Set F) := by
+    ext x
+    exact ⟨fun ⟨y, hy⟩ => hy ▸ y.2, fun hx => ⟨⟨x, hx⟩, rfl⟩⟩
+  have hsup : L ⊔ (K₁ ⊔ F₀) = ⊤ := by
+    rw [← sup_assoc, sup_eq_left.mpr hK₁L, hgen]
+  have hfield : IntermediateField.adjoin ↥(K₁ ⊔ F₀)
+      (Set.range (algebraMap ↥L F)) = ⊤ := by
+    apply IntermediateField.restrictScalars_injective k
+    rw [IntermediateField.restrictScalars_adjoin_eq_sup, hrange,
+      IntermediateField.adjoin_self]
+    change (K₁ ⊔ F₀) ⊔ L = ⊤
+    exact (sup_comm _ _).trans hsup
+  have hreverse : IntermediateField.adjoin ↥L
+      (Set.range (algebraMap ↥(K₁ ⊔ F₀) F)) = ⊤ := by
+    apply IntermediateField.restrictScalars_injective k
+    rw [IntermediateField.restrictScalars_adjoin_eq_sup, hrange,
+      IntermediateField.adjoin_self]
+    exact hsup
+  have hgensInt : ∀ x ∈ Set.range (algebraMap ↥L F), IsIntegral ↥(K₁ ⊔ F₀) x := by
+    rintro _ ⟨x, rfl⟩
+    exact (halg x).isIntegral.tower_top
+  have hring : Algebra.adjoin ↥(K₁ ⊔ F₀) (Set.range (algebraMap ↥L F)) = ⊤ :=
+    (IntermediateField.adjoin_eq_top_iff_of_isAlgebraic
+      (fun x hx => (hgensInt x hx).isAlgebraic)).mp hfield
+  have : Algebra.IsIntegral ↥(K₁ ⊔ F₀) F := by
+    have hi := (Subalgebra.isIntegral_iff _).mp (Algebra.IsIntegral.adjoin hgensInt)
+    refine ⟨fun x => hi x ?_⟩
+    rw [hring]
+    trivial
+  obtain ⟨W, hW⟩ :=
+    Place.exists_forgetConstants_restrict_eq_of_isConstantFieldExtension
+      (K := ↥K₁) (K' := ↥L) (F := ↥(K₁ ⊔ F₀)) (F' := F) (M := ↥(K₁ ⊔ F₀))
+      hring hconst v
+  have hWcomap : W.toValuationSubring.comap (algebraMap ↥(K₁ ⊔ F₀) F) = V₁ :=
+    congrArg Place.toValuationSubring hW
+  have hcomap (P : Place ↥L F)
+      (hP : ∀ f : ↥(K₁ ⊔ F₀), (f : F) ∈ P.toValuationSubring ↔ f ∈ V₁) :
+      P.toValuationSubring.comap (algebraMap ↥(K₁ ⊔ F₀) F) = V₁ :=
+    SetLike.ext hP
+  refine ⟨⟨W, fun f => (SetLike.ext_iff.mp hWcomap) f, fun P hP => ?_⟩, ?_⟩
+  · exact Place.eq_of_comap_toValuationSubring_eq_of_isRational
+      hreverse v hv P W (hcomap P hP) hWcomap
+  intro P hP
+  let Q : Place ↥K₁ F := P.forgetConstants
+  have hQv : Q.restrict ↥(K₁ ⊔ F₀) = v := Place.ext (hcomap P hP)
+  have hQrat : (Q.restrict ↥(K₁ ⊔ F₀)).IsRational := by
+    rw [hQv]
+    exact hv
+  have hgenres : IntermediateField.adjoin ↥L (E := P.ResidueField)
+      (Set.range (Q.restrictResidueMap (F := ↥(K₁ ⊔ F₀)))) = ⊤ :=
+    Place.residueField_eq_compositum_of_isConstantFieldExtension
+      (K := ↥K₁) (K' := ↥L) (F := ↥(K₁ ⊔ F₀)) (F' := F) hring P
+  have hspan : IntermediateField.adjoin ↥L (E := P.ResidueField)
+      (Set.range (Q.restrictResidueMap (F := ↥(K₁ ⊔ F₀)))) ≤ ⊥ := by
+    apply IntermediateField.adjoin_le_iff.mpr
+    rintro _ ⟨r, rfl⟩
+    obtain ⟨c, rfl⟩ := hQrat r
+    apply IntermediateField.mem_bot.mpr
+    refine ⟨algebraMap ↥K₁ ↥L c, ?_⟩
+    change IsLocalRing.residue Q.toValuationSubring
+        (algebraMap ↥K₁ Q.toValuationSubring c) =
+      Q.restrictResidueMap (F := ↥(K₁ ⊔ F₀))
+        (IsLocalRing.residue (Q.restrict ↥(K₁ ⊔ F₀)).toValuationSubring
+          (algebraMap ↥K₁ (Q.restrict ↥(K₁ ⊔ F₀)).toValuationSubring c))
+    exact (Place.restrictResidueMap_residue (F := ↥(K₁ ⊔ F₀)) Q
+      (algebraMap ↥K₁ (Q.restrict ↥(K₁ ⊔ F₀)).toValuationSubring c)).symm
+  intro r
+  apply IntermediateField.mem_bot.mp
+  apply hspan
+  rw [hgenres]
+  exact IntermediateField.mem_top
 
 end Place_existsUnique_forall_mem_iff_adjoin_sup_of_isAlgebraic_of_forall_exists_sub_mem
 end AlgebraicCurves.Places.Proofs
@@ -1178,7 +1296,8 @@ open _root_.AlgebraicCurves.Places.Proofs in
 open Place_existsUnique_forall_mem_iff_adjoin_sup_of_isAlgebraic_of_forall_exists_sub_mem in
 open IsLocalRing AlgebraicCurve in
 theorem existsUnique_forall_mem_iff_adjoin_sup_of_isAlgebraic_of_forall_exists_sub_mem
-    {k₀ L F : Type} [Field k₀] [Field L] [CharZero L] [Field F] [Algebra k₀ L] [Algebra k₀ F]
+    {k₀ : Type u₀} {L : Type uL} {F : Type uF}
+    [Field k₀] [Field L] [CharZero L] [Field F] [Algebra k₀ L] [Algebra k₀ F]
       [Algebra L F]
     [IsScalarTower k₀ L F]
     (F₀ : IntermediateField k₀ F) (K₁ : IntermediateField k₀ L)

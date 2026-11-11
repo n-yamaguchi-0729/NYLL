@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
-import Nyll.SchemeTheory.Modules.Sections.AffineEpi
-import Nyll.SchemeTheory.Modules.Sections.ImageSections
-import Nyll.SchemeTheory.Modules.Sections.InverseLimit
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
+public import Nyll.SchemeTheory.Modules.Sections.AffineEpi
+public import Nyll.SchemeTheory.Modules.Sections.ImageSections
+public import Nyll.SchemeTheory.Modules.Sections.InverseLimit
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # The actual image sheaf of a direct-image structure map
@@ -27,6 +29,8 @@ map on regular functions.
 This construction supplies the native finite-type sheaf associated
 with the Rees image in the formal algebraization argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Mathlib.RingTheory.LaurentSeries
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.PowerSeries.Derivative
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Mathlib.RingTheory.LaurentSeries
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.PowerSeries.Derivative
 
 /-!
 # Two Chart Cech Laurent Chart
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -190,20 +194,20 @@ def expandKaehler :
   Λ.expandDerivation.liftKaehlerDifferential
 
 theorem expandKaehler_smul_D (f g : 𝒰.A01) :
-    letI := Λ.expandModule
+    let := Λ.expandModule
     Λ.expandKaehler (f • KaehlerDifferential.D R 𝒰.A01 g) = Λ.expand f *
       LaurentSeries.derivative R (Λ.expand g) := by
-  let := Λ.expandModule
+  intro sharedOwner1
   have := Λ.isScalarTower_expandModule
   change Λ.expandDerivation.liftKaehlerDifferential (f • KaehlerDifferential.D R 𝒰.A01 g) = _
   rw [LinearMap.map_smul, Derivation.liftKaehlerDifferential_comp_D]
   rfl
 
 theorem expandKaehler_D (g : 𝒰.A01) :
-    letI := Λ.expandModule
+    let := Λ.expandModule
     Λ.expandKaehler (KaehlerDifferential.D R 𝒰.A01 g) = LaurentSeries.derivative R (Λ.expand g)
       := by
-  let := Λ.expandModule
+  intro sharedOwner1
   have := Λ.isScalarTower_expandModule
   exact Λ.expandDerivation.liftKaehlerDifferential_comp_D g
 

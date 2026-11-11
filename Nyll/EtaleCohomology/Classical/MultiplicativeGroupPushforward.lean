@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
-import Nyll.EtaleCohomology.Classical.KummerSequence
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.EtaleRestriction
-import Nyll.SchemeTheory.CategoryTheory.CokernelNsmulQuotient
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Nyll.EtaleCohomology.Sites.EtaleRestrictionSections
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Classical.KummerSequence
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.EtaleRestriction
+public import Nyll.SchemeTheory.CategoryTheory.CokernelNsmulQuotient
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # The actual unit map to direct image
@@ -26,6 +28,8 @@ of Gm on the source. This is the map used at the generic point in the
 divisor sequence. Its construction uses the existing sheaf of units.
 -/
 
+@[expose] public section
+
 noncomputable section
 universe u
 open AlgebraicGeometry CategoryTheory Limits Opposite
@@ -34,7 +38,8 @@ namespace EtaleCohomology
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-private theorem unitProjection_naturality
+/-- Restriction along base-change projections is natural on the original étale site. -/
+theorem unitProjection_naturality
     (P : Scheme.{u}ᵒᵖ ⥤ AddCommGrpCat.{u})
     {V W : Y.Etale} (g : V ⟶ W) :
     P.map g.left.op ≫ P.map (pullback.fst V.hom f).op =

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitFunctor
-import Nyll.GaloisCohomology.Topology.ContinuousEquivariantTupleLifting
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitFunctor
+public import Nyll.GaloisCohomology.Topology.ContinuousEquivariantTupleLifting
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-!
 # Continuous geometric-section functors
@@ -14,6 +17,8 @@ The actual geometric-section coefficient functor takes values in discrete
 topological representations. Its homogeneous continuous cochains are functorial
 in the actual etale sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -85,14 +90,14 @@ def finiteGaloisSectionContinuousCohomologyFunctor (n : ℕ) :
     HomologicalComplex.homologyFunctor (TopModuleCat.{u} ℤ) (ComplexShape.up ℕ) n
 
 /-- The continuous cochain functor of geometric sections is additive. -/
-instance finiteGaloisSectionContinuousCochainsFunctor_additive [CharZero K] :
+instance finiteGaloisSectionContinuousCochainsFunctor_additive :
     (finiteGaloisSectionContinuousCochainsFunctor K).Additive := by
   dsimp only [finiteGaloisSectionContinuousCochainsFunctor]
   infer_instance
 
 /-- Actual sheaf epimorphisms give surjective maps in every degree of the
 homogeneous continuous geometric-section complex. -/
-theorem finiteGaloisSectionContinuousCochains_map_surjective [CharZero K]
+theorem finiteGaloisSectionContinuousCochains_map_surjective
     {F G : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (η : F ⟶ G) [Epi η] (n : ℕ) :
     Function.Surjective

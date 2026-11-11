@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 # Composition of actual direct-image stalk components
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 The concrete maps on representing neighborhoods commute with the chosen
 pullback-pasting isomorphism. Passing to stalks retains this equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

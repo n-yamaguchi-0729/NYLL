@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidueSeparable
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.Separable
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.Algebra.Polynomial.Lifts
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidueSeparable
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.Algebra.Polynomial.Lifts
 
 /-!
 # Identifying the geometric stalk's residue field with the chosen closure
@@ -25,6 +27,8 @@ to the chosen separable closure. For residue characteristic zero this applies
 to the algebraic closure used by the manuscript. No residue-field comparison
 is supplied as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

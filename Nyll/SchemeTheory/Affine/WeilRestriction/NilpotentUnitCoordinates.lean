@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentUnitKernel
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionGeometry
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionSheaf
+module
+
+public import Nyll.SchemeTheory.RingTheory.Reduced.NilpotentUnitKernel
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionGeometry
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientRestrictionSheaf
 
 /-! # Affine coordinates for the actual nilpotent unit kernel -/
+
+@[expose] public section
 
 noncomputable section
 

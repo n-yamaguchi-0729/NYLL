@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Kummer.OpenKummerGenericRootFiber
+module
+
+public import Nyll.JacobianVarieties.Kummer.OpenKummerGenericRootFiber
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
 
 /-! # The same generic root coordinate with its literal normalization lift
 
@@ -13,6 +16,8 @@ It identifies each root with its actual AdjoinRoot point followed by the origina
 toNormalization map. This is the exact bridge to a model chart carrying that
 same quotient root to its rational coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 open AlgebraicGeometry CategoryTheory CategoryTheory.PreGaloisCategory
@@ -96,7 +101,7 @@ theorem exists_arithmeticKummerFiber_genericRootEquiv_with_lift
     let ξ := η ≫ X.fromSpecStalk (genericPoint X)
     let W := M.openKummerCover S n hn w j hj hi
     let g := j.functionFieldMap hj (M.ffEquiv (w.val : F))
-    letI := kummerGeometricRootAction M S n w j hj hi hn ξ
+    let := kummerGeometricRootAction M S n w j hj hi hn ξ
     ∃ e : (FiniteEtale.fiber ξ).obj W ≃
         {β : Ω // β ^ (n : ℕ) = algebraMap X.functionField Ω g},
       (∀ (ζ : rootsOfUnity (n : ℕ) K) x,
@@ -114,8 +119,7 @@ theorem exists_arithmeticKummerFiber_genericRootEquiv_with_lift
                   Polynomial.eval₂_X, Polynomial.eval₂_C]
                 exact sub_eq_zero.mpr β.property)).toRingHom) ≫
             (M.openKummerGenericMap S n w j hj).toNormalization := by
-  intro η ξ W g
-  let := kummerGeometricRootAction M S n w j hj hi hn ξ
+  intro η ξ W g rootAction
   let A := AdjoinRoot (Polynomial.X ^ (n : ℕ) - Polynomial.C g)
   let f := M.openKummerGenericMap S n w j hj
   let π := f.fromNormalization
@@ -222,7 +226,7 @@ theorem exists_arithmeticKummerFiber_genericRootEquiv_with_lift
           ⟨(l x).1 ≫ d.hom,
             (Category.assoc _ _ _).trans ((congrArg ((l x).1 ≫ ·) hd).trans (l x).2)⟩ := by
         apply Subtype.ext
-        exact fiberLiftEquiv_naturality ξ (kummerCoverRootScale M S n w j hj hi hn ζ).hom x
+        exact fiberLiftEquiv_naturality ξ (kummerCoverRootScale M S n w j hj hi hn ζ).asIso.hom x
       change (Scheme.ΓSpecIso (.of Ω)).hom (c (l (ζ • x))) = _
       rw [hl]
       change (Scheme.ΓSpecIso (.of Ω)).hom (rootLiftCoordinate π V ξ hξ T _) = _

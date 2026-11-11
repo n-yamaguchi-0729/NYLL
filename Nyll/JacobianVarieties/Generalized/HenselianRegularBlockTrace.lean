@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
-import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
-import Mathlib.RingTheory.AdicCompletion.Completeness
+module
+
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.ClopenDivisorDecomposition
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.JacobianVarieties.Albanese.OpenCurveSumChoice
+public import Nyll.SchemeTheory.GroupSchemes.RegularBlockFormalDeformation
+public import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # Integral trace differences of the actual regular Henselian block
 
@@ -21,6 +23,8 @@ is a point over `K[[s]][[T]]` reducing to the identity modulo `s`.
 The construction retains full ideals, multiplicities, and the original
 group target; no splitting, separability, or tameness is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

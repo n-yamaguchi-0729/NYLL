@@ -20,6 +20,7 @@ import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Places.Residue.ModuleFiniteResidueFieldRestrict
 import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDegAlong
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Map Fibers

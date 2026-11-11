@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineIntegralLimit
-import Nyll.SchemeTheory.Etale.IntegralRefinement
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.Topology.Sets.OpenCover
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Tactic.Choose
+module
+
+public import Nyll.SchemeTheory.Descent.AffineIntegralLimit
+public import Nyll.SchemeTheory.Etale.IntegralRefinement
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.Topology.Sets.OpenCover
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Tactic.Choose
 
 
 /-!
@@ -29,6 +31,8 @@ integral-refinement theorem. Applying that theorem to a general integral
 source still requires its canonical affine iso connection; this file does
 not assert the completed finite-FP refinement theorem or a globalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # The actual tensor comparison for open restriction
@@ -16,6 +18,8 @@ an open immersion. Its original comparison with pullback, together with
 the constructed pullback tensor isomorphism, identifies restriction of
 the actual tensor with the tensor of the actual restrictions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

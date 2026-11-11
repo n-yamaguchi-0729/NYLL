@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.Tactic.Ext
 
 /-!
 # Module Projective exists ideal fg forall tmul eq zero iff map eq bot
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

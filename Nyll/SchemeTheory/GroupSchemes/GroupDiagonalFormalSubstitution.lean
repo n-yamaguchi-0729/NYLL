@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.SeparatingFormalTranslationComparison
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinates
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.SeparatingFormalTranslationComparison
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalCoordinates
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
 
 /-! # Change of formal translation for actual group diagonal coordinates
 
@@ -17,6 +20,8 @@ substitutes the actual affine-chart coordinates of the group difference.
 The resulting coordinate homomorphism represents the pulled-back original
 group difference, by the already constructed diagonal-chart factorization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,7 +55,7 @@ theorem constantCoeff_diagonalTensorMapAlong
     rw [map_mul, constantCoeff_C, ha, map_mul]
   | add a b ha hb => rw [map_add, map_add, map_add, map_add, ha, hb]
 
-private theorem isUnit_diagonalTensorMapAlong
+theorem isUnit_diagonalTensorMapAlong
     (i : F →ₐ[K] L) (ρ : F →ₐ[K] PowerSeries L)
     (hρ0 : constantCoeff.comp ρ.toRingHom = i.toRingHom)
     (s : (diagonalPrime (K := K) (F := F)).asIdeal.primeCompl) :

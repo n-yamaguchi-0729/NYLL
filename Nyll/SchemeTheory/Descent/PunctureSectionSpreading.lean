@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Spreading a morphism from a retrocompact part of a local spectrum
@@ -17,6 +19,8 @@ stages are quasi-compact and quasi-separated. Finite-presentation Hom
 descent then spreads the given morphism to the overlap with an actual
 neighborhood, retaining the original morphism on the local spectrum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedTensor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.AbelJacobiPicardRepresentability
 
 /-!
 # Algebraic triviality of actual rigidified point differences
@@ -15,6 +17,8 @@ The line-bundle comparison in the ordinary Abel construction supplies algebraic
 triviality on a field-valued fibre. Tensor cancellation then applies this result
 to actual modulus-rigidified point line bundles, retaining their chosen frames.
 -/
+
+@[expose] public section
 
 noncomputable section
 

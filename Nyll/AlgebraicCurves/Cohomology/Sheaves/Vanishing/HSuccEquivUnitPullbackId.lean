@@ -10,26 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
-import Nyll.AlgebraicCurves.Cohomology.Cech.BiCech
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.BoundedCochainTensor
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
-import Nyll.SchemeTheory.HomologicalAlgebra.DoubleComplexHTotEquivMkEqMkSingle
-import Nyll.SchemeTheory.HomologicalAlgebra.DoubleComplexHTotTransposeEquivMkEqMkSwap
-import Nyll.SchemeTheory.HomologicalAlgebra.DoubleComplexHTotEquiv
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayRowsExact
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayDVCompBiAug
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.LerayDTotEqSingleBiAugUnitPullbackSubSingleId
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.LerayLevelwiseEquivTransposeId
+module
+
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.SchemeTheory.Cohomology.Sheaves.DoubleComplex
+public import Nyll.AlgebraicCurves.Cohomology.Cech.BiCech
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.BoundedCochainTensor
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OrderedAffineCoverCochainPullback
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
+public import Nyll.SchemeTheory.HomologicalAlgebra.DoubleComplexHTotEquivMkEqMkSingle
+public import Nyll.SchemeTheory.HomologicalAlgebra.DoubleComplexHTotTransposeEquivMkEqMkSwap
+public import Nyll.SchemeTheory.HomologicalAlgebra.DoubleComplexHTotEquiv
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayRowsExact
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafLerayDVCompBiAug
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DUnitPullback
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.LerayDTotEqSingleBiAugUnitPullbackSubSingleId
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.LerayLevelwiseEquivTransposeId
 
 /-!
 # OModule Presheaf exists HSucc equiv unit Pullback id of is Separated
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

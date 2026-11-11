@@ -68,33 +68,20 @@ theorem higherRadicalActualFactor_algebraMap_comp_eq_rootMap
     let K' := higherRadicalFieldOverLower (K := K) e N beta
     let M := higherRadicalActualCompositumField
       (K := K) (L := L) e N beta
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-    letI : Algebra Rₙ K' :=
+    let : Algebra Rₙ K' :=
       higherRadicalFieldOverLowerRootAlgebra
         (e := e) base hN varpi hvarpiPrime beta hbetaPow
-    letI : Algebra K' M :=
+    let : Algebra K' M :=
       higherRadicalActualFactorHigherFieldAlgebra base target beta
     (algebraMap K' M).comp (algebraMap Rₙ K') = actual.rootMap := by
-  dsimp only
+  intro e Rₙ F K' M sharedOwner5 sharedOwner6 sharedOwner7
   let V := base.valuationSubring
-  let e := ramificationIndex base target
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let F := lowerRadicalField (K := K) e N beta
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
-  let M := higherRadicalActualCompositumField
-    (K := K) (L := L) e N beta
   let : IsFractionRing V K := base.valuationSubring_isFractionRing
-  let : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
   let eRₙ : (K ⊗[V] Rₙ) ≃ₐ[K] K' :=
     higherRadicalFieldOverLowerGenericFiberAlgEquiv
       (e := e) base hN varpi hvarpiPrime beta hbetaPow
-  let : Algebra Rₙ K' :=
-    higherRadicalFieldOverLowerRootAlgebra
-      (e := e) base hN varpi hvarpiPrime beta hbetaPow
-  let : Algebra K' M :=
-    higherRadicalActualFactorHigherFieldAlgebra base target beta
   have hRₙRoot :
       (((genericFiberRightAlgHom eRₙ)
           (AdjoinRoot.root (X ^ N - C varpi)) : K') :
@@ -137,30 +124,16 @@ theorem higherRadicalActualFactor_isScalarTower
     let K' := higherRadicalFieldOverLower (K := K) e N beta
     let M := higherRadicalActualCompositumField
       (K := K) (L := L) e N beta
-    letI : Algebra K K' :=
+    let : Algebra K K' :=
       ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-    letI : Algebra Rₙ K' :=
+    let : Algebra Rₙ K' :=
       higherRadicalFieldOverLowerRootAlgebra
         (e := e) base hN varpi hvarpiPrime beta hbetaPow
-    letI : Algebra K' M :=
+    let : Algebra K' M :=
       higherRadicalActualFactorHigherFieldAlgebra base target beta
-    letI : Algebra Rₙ M := actual.rootMap.toAlgebra
+    let : Algebra Rₙ M := actual.rootMap.toAlgebra
     IsScalarTower Rₙ K' M := by
-  dsimp only
-  let e := ramificationIndex base target
-  let Rₙ := AdjoinRoot (X ^ N - C varpi)
-  let F := lowerRadicalField (K := K) e N beta
-  let K' := higherRadicalFieldOverLower (K := K) e N beta
-  let M := higherRadicalActualCompositumField
-    (K := K) (L := L) e N beta
-  let : Algebra K K' :=
-    ((algebraMap F K').comp (algebraMap K F)).toAlgebra
-  let : Algebra Rₙ K' :=
-    higherRadicalFieldOverLowerRootAlgebra
-      (e := e) base hN varpi hvarpiPrime beta hbetaPow
-  let : Algebra K' M :=
-    higherRadicalActualFactorHigherFieldAlgebra base target beta
-  let : Algebra Rₙ M := actual.rootMap.toAlgebra
+  intro e Rₙ F K' M sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4
   apply IsScalarTower.of_algebraMap_eq
   intro x
   exact DFunLike.congr_fun

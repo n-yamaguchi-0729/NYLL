@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 
 /-! # Multiplicative point equivalences supplied by an adjunction -/
+
+@[expose] public section
 
 noncomputable section
 

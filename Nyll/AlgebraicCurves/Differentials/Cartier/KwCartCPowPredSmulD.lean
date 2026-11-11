@@ -10,12 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierFixedness
-import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Cartier.CartierFixedness
+public import Nyll.AlgebraicCurves.Differentials.Cartier.CartierCoordinates
+public import Nyll.AlgebraicCurves.Differentials.Logarithmic.Logarithmic
 
 /-!
 # Kw cart C pow pred smul D
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -52,7 +57,8 @@ private theorem repr_pow_basis {k : ℕ} (hk : k < ℓ) :
   rw [Finset.sum_eq_single (⟨k, hk⟩ : Fin ℓ)]
   · simp only [ite_true, OneMemClass.coe_one, one_mul]
   · intro j _ hj
-    simp [hj]
+    rw [ite_eq_right hj]
+    exact zero_mul _
   · intro hmem
     exact absurd (Finset.mem_univ _) hmem
 
@@ -68,7 +74,7 @@ private theorem repr_pow_top_eq_zero {k : ℕ} (hk : k + 1 < ℓ) :
   exact ite_eq_right hne
 
 private theorem root_zero : pthRoot (0 : pthPowers F ℓ) = 0 :=
-  pthRoot_unique (by simp [zero_pow hℓ.out.ne_zero])
+  pthRoot_unique (zero_pow hℓ.out.ne_zero)
 
 private theorem C_pow_smul_Dt {k : ℕ} (hk : k + 1 < ℓ) :
     cartier (K := K) t hdt hspan hsep hdeg
@@ -83,7 +89,7 @@ private theorem C_D_eq_zero (f : F) :
   rw [D_eq_derivativeEval_smul t hsep hdeg f, derivativeEval, Finset.sum_smul, ← CC_apply, map_sum]
   refine Finset.sum_eq_zero fun i _ => ?_
   rcases Nat.eq_zero_or_pos (i : ℕ) with h0 | hpos
-  · simp [h0]
+  · simp only [h0, Nat.cast_zero, zero_mul, zero_smul, map_zero]
   · obtain ⟨w, hw⟩ := (mem_pthPowers_iff F ℓ).mp
       (powerCoefficients t hsep hdeg f i).2
     have hcast : (((i : ℕ) : F)) ^ ℓ = ((i : ℕ) : F) := natCast_pow_char (i : ℕ)
@@ -111,14 +117,6 @@ private theorem C_pow_pred_smul_D (g : F) :
     rw [AlgebraicCurve.dlog] at hfix
     rw [hkey, cartier_pow_smul, hfix, smul_smul, mul_inv_cancel₀ hg, one_smul]
 
-private theorem C_dlog_fixed_all (g : F) :
-    cartier (K := K) t hdt hspan hsep hdeg
-      (g⁻¹ • KaehlerDifferential.D K F g) = g⁻¹ • KaehlerDifferential.D K F g := by
-  rcases eq_or_ne g 0 with rfl | hg
-  · rw [map_zero, smul_zero, ← CC_apply, map_zero]
-  · have h := cartier_dlog (K := K) t hdt hspan hsep hdeg hg
-    simpa only [AlgebraicCurve.dlog] using h
-
 private theorem C_pow_smul_D_eq_zero (g : F) {i : ℕ} (hi : i + 1 < ℓ) :
     cartier (K := K) t hdt hspan hsep hdeg
       (g ^ i • KaehlerDifferential.D K F g) = 0 := by
@@ -136,25 +134,6 @@ private theorem C_pow_smul_D_eq_zero (g : F) {i : ℕ} (hi : i + 1 < ℓ) :
       = (((i + 1 : ℕ) : F)⁻¹) ^ ℓ • KaehlerDifferential.D K F (g ^ (i + 1)) := by
     rw [hcp, hleib, smul_smul, inv_mul_cancel₀ hne, one_smul]
   rw [hrew, cartier_pow_smul, C_D_eq_zero t hdt hspan hsep hdeg, smul_zero]
-
-private theorem C_digits (g : F) (a : Fin ℓ → F) :
-    cartier (K := K) t hdt hspan hsep hdeg
-      ((∑ i : Fin ℓ, a i ^ ℓ * g ^ (i : ℕ)) • KaehlerDifferential.D K F g) =
-      a ⟨ℓ - 1, Nat.sub_lt (Fact.out : ℓ.Prime).pos Nat.one_pos⟩ •
-        KaehlerDifferential.D K F g := by
-  have hp : ℓ.Prime := Fact.out
-  rw [Finset.sum_smul, ← CC_apply, map_sum,
-    Finset.sum_eq_single (⟨ℓ - 1, Nat.sub_lt hp.pos Nat.one_pos⟩ : Fin ℓ)]
-  · rw [mul_smul, CC_semilinear, CC_apply, C_pow_pred_smul_D t hdt hspan hsep hdeg g]
-  · intro i _ hi
-    have hi' : (i : ℕ) ≠ ℓ - 1 := fun h => hi (Fin.ext h)
-    have hlt : (i : ℕ) + 1 < ℓ := by
-      have := i.isLt
-      omega
-    rw [mul_smul, CC_semilinear, CC_apply,
-      C_pow_smul_D_eq_zero t hdt hspan hsep hdeg g hlt, smul_zero]
-  · intro h
-    exact absurd (Finset.mem_univ _) h
 
 end CartMintSol
 

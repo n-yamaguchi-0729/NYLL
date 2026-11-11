@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaBaseLocalization
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Stalk
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaBaseLocalization
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Stalk
 
 /-!
 # Original inertia on an affine chart and the actual scheme stalk
@@ -17,6 +19,8 @@ map and the existing stalk-to-function-field map. The normalization prime
 is extended by the literal inclusion in the same Galois field, and becomes
 maximal. Its original inertia subgroup is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

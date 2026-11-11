@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Kernel
-import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatIsLocalHom
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.IsFiniteKrullDimensionStalkQuotientEqZero
-import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.KrullDimensionStalkEqFiniteEndomorphism
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsIntegral
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Kernel
+public import Nyll.SchemeTheory.RingTheory.Flat.ModuleFlatIsLocalHom
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.IsFiniteKrullDimensionStalkQuotientEqZero
+public import Nyll.AlgebraicCurves.Geometry.Schemes.LocalGeometry.KrullDimensionStalkEqFiniteEndomorphism
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsIntegral
 
 /-!
 # Relative Group Law flat scheme Nsmul of is Finite of field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

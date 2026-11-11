@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FiniteCoproductSections
-import Nyll.EtaleCohomology.Classical.InjectiveCechSections
-import Nyll.EtaleFundamentalGroups.GaloisCovers.TripleProduct
-import Mathlib.Tactic.Abel
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.Algebra.Category.Grp.AB
+module
+
+public import Nyll.EtaleCohomology.Sites.FiniteCoproductSections
+public import Nyll.EtaleCohomology.Classical.InjectiveCechSections
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.TripleProduct
+public import Mathlib.Tactic.Abel
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # Actual Galois Cech cocycles
@@ -17,6 +19,8 @@ import Mathlib.Algebra.Category.Grp.AB
 The deck-coordinate equivalence is additive. Triple deck graphs test the
 actual geometric Cech identity, with the contravariant deck action.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -40,11 +44,11 @@ def galoisSelfProductSectionsAddEquiv
     have he (x : F.obj.obj (op ((finiteEtaleInclusion X).obj (Y ⨯ Y)))) :
         (galoisSelfProductSectionsEquiv X U Y x σ :
           F.obj.obj (op ((finiteEtaleInclusion X).obj Y))) =
-        F.obj.map ((finiteEtaleInclusion X).map (prod.lift (𝟙 Y) σ.hom)).op x :=
+        F.obj.map ((finiteEtaleInclusion X).map (prod.lift (𝟙 Y) σ.asIso.hom)).op x :=
       galoisSelfProductSectionsEquiv_apply X U Y x σ
     exact (he (s + t)).trans
       (((F.obj.map ((finiteEtaleInclusion X).map
-        (prod.lift (𝟙 Y) σ.hom)).op).hom.map_add s t).trans
+        (prod.lift (𝟙 Y) σ.asIso.hom)).op).hom.map_add s t).trans
         (congrArg₂ (fun a b : F.obj.obj (op ((finiteEtaleInclusion X).obj Y)) => a + b)
           (he s).symm (he t).symm))
 
@@ -55,7 +59,7 @@ theorem galoisSelfProductSectionsAddEquiv_apply
     (Y : FiniteEtale X) [IsGalois Y]
     (s : F.obj.obj (op ((finiteEtaleInclusion X).obj (Y ⨯ Y)))) (σ : Aut Y) :
     galoisSelfProductSectionsAddEquiv X F Y s σ =
-      F.obj.map ((finiteEtaleInclusion X).map (prod.lift (𝟙 Y) σ.hom)).op s :=
+      F.obj.map ((finiteEtaleInclusion X).map (prod.lift (𝟙 Y) σ.asIso.hom)).op s :=
   galoisSelfProductSectionsEquiv_apply X
     ((sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})).obj F) Y s σ
 
@@ -83,46 +87,45 @@ theorem galoisTripleProduct_sections_ext
     galoisTripleProductIso_ι]
   exact h p.1 p.2
 
-/-- An actual contravariant deck cocycle gives an actual Cech cocycle
-on the triple product, not merely a formal group-cohomology class. -/
-theorem galoisCechSection_triangle
+/-- The actual differential of an arbitrary deck cochain has its
+original three-term value on every actual triple deck graph. This
+retains a specified cobounding cochain before passing to cohomology. -/
+theorem galoisCechSection_triangle_coordinate
     (X : Scheme.{u}) [ConnectedSpace X]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
     (Y : FiniteEtale X) [IsGalois Y]
     (c : Aut Y → F.obj.obj (op ((finiteEtaleInclusion X).obj Y)))
-    (hc : ∀ σ τ : Aut Y, c (τ * σ) =
-      F.obj.map ((finiteEtaleInclusion X).map σ.hom).op (c τ) + c σ) :
+    (σ τ : Aut Y) :
     let z := (galoisSelfProductSectionsAddEquiv X F Y).symm c
-    F.obj.map ((finiteEtaleInclusion X).map
+    F.obj.map ((finiteEtaleInclusion X).map (galoisTripleGraph Y σ τ)).op
+      (F.obj.map ((finiteEtaleInclusion X).map
         (prod.snd : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z -
       F.obj.map ((finiteEtaleInclusion X).map
         (prod.lift prod.fst (prod.snd ≫ prod.snd) : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z +
       F.obj.map ((finiteEtaleInclusion X).map
-        (prod.lift prod.fst (prod.snd ≫ prod.fst) : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z = 0 := by
+        (prod.lift prod.fst (prod.snd ≫ prod.fst) : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z) =
+      F.obj.map ((finiteEtaleInclusion X).map σ.asIso.hom).op (c τ) - c (τ * σ) + c σ := by
   let I := finiteEtaleInclusion X
   let z := (galoisSelfProductSectionsAddEquiv X F Y).symm c
   have hcoord (σ : Aut Y) :
-      F.obj.map (I.map (prod.lift (𝟙 Y) σ.hom)).op z = c σ := by
+      F.obj.map (I.map (prod.lift (𝟙 Y) σ.asIso.hom)).op z = c σ := by
     rw [← galoisSelfProductSectionsAddEquiv_apply]
     exact congrFun ((galoisSelfProductSectionsAddEquiv X F Y).apply_symm_apply c) σ
-  apply galoisTripleProduct_sections_ext X
-    ((sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})).obj F) Y
-  intro σ τ
   have h₂₃ : galoisTripleGraph Y σ τ ≫ prod.snd =
-      σ.hom ≫ prod.lift (𝟙 Y) τ.hom := by
+      σ.asIso.hom ≫ prod.lift (𝟙 Y) τ.asIso.hom := by
     apply prod.hom_ext
     · simp only [galoisTripleGraph, prod.lift_snd, prod.lift_fst, Category.assoc,
         Category.comp_id]
     · simp only [galoisTripleGraph, prod.lift_snd, Category.assoc]
   have h₁₃ : galoisTripleGraph Y σ τ ≫
-      prod.lift prod.fst (prod.snd ≫ prod.snd) = prod.lift (𝟙 Y) (τ * σ).hom := by
+      prod.lift prod.fst (prod.snd ≫ prod.snd) = prod.lift (𝟙 Y) (τ * σ).asIso.hom := by
     apply prod.hom_ext
     · simp only [Category.assoc, prod.lift_fst, galoisTripleGraph]
     · simp only [Category.assoc, prod.lift_snd, galoisTripleGraph]
       rw [← Category.assoc, prod.lift_snd, prod.lift_snd]
       rfl
   have h₁₂ : galoisTripleGraph Y σ τ ≫
-      prod.lift prod.fst (prod.snd ≫ prod.fst) = prod.lift (𝟙 Y) σ.hom := by
+      prod.lift prod.fst (prod.snd ≫ prod.fst) = prod.lift (𝟙 Y) σ.asIso.hom := by
     apply prod.hom_ext
     · simp only [Category.assoc, prod.lift_fst, galoisTripleGraph]
     · simp only [Category.assoc, prod.lift_snd, galoisTripleGraph]
@@ -131,15 +134,39 @@ theorem galoisCechSection_triangle
     (F.obj.map (I.map prod.snd).op z -
       F.obj.map (I.map (prod.lift prod.fst (prod.snd ≫ prod.snd))).op z +
       F.obj.map (I.map (prod.lift prod.fst (prod.snd ≫ prod.fst))).op z) =
-    F.obj.map (I.map (galoisTripleGraph Y σ τ)).op 0
-  simp only [map_add, map_sub, map_zero, ← ConcreteCategory.comp_apply,
+    F.obj.map (I.map σ.asIso.hom).op (c τ) - c (τ * σ) + c σ
+  simp only [map_add, map_sub, ← ConcreteCategory.comp_apply,
     ← Functor.map_comp, ← op_comp, h₂₃, h₁₃, h₁₂]
   rw [I.map_comp, op_comp, F.obj.map_comp]
-  change F.obj.map (I.map σ.hom).op
-    (F.obj.map (I.map (prod.lift (𝟙 Y) τ.hom)).op z) -
-      F.obj.map (I.map (prod.lift (𝟙 Y) (τ * σ).hom)).op z +
-      F.obj.map (I.map (prod.lift (𝟙 Y) σ.hom)).op z = 0
-  rw [hcoord, hcoord, hcoord, hc]
+  change F.obj.map (I.map σ.asIso.hom).op
+    (F.obj.map (I.map (prod.lift (𝟙 Y) τ.asIso.hom)).op z) -
+      F.obj.map (I.map (prod.lift (𝟙 Y) (τ * σ).asIso.hom)).op z +
+      F.obj.map (I.map (prod.lift (𝟙 Y) σ.asIso.hom)).op z =
+    F.obj.map (I.map σ.asIso.hom).op (c τ) - c (τ * σ) + c σ
+  rw [hcoord, hcoord, hcoord]
+
+/-- An actual contravariant deck cocycle gives an actual Cech cocycle
+on the triple product, not merely a formal group-cohomology class. -/
+theorem galoisCechSection_triangle
+    (X : Scheme.{u}) [ConnectedSpace X]
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})
+    (Y : FiniteEtale X) [IsGalois Y]
+    (c : Aut Y → F.obj.obj (op ((finiteEtaleInclusion X).obj Y)))
+    (hc : ∀ σ τ : Aut Y, c (τ * σ) =
+      F.obj.map ((finiteEtaleInclusion X).map σ.asIso.hom).op (c τ) + c σ) :
+    let z := (galoisSelfProductSectionsAddEquiv X F Y).symm c
+    F.obj.map ((finiteEtaleInclusion X).map
+        (prod.snd : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z -
+      F.obj.map ((finiteEtaleInclusion X).map
+        (prod.lift prod.fst (prod.snd ≫ prod.snd) : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z +
+      F.obj.map ((finiteEtaleInclusion X).map
+        (prod.lift prod.fst (prod.snd ≫ prod.fst) : Y ⨯ (Y ⨯ Y) ⟶ Y ⨯ Y)).op z = 0 := by
+  apply galoisTripleProduct_sections_ext X
+    ((sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u})).obj F) Y
+  intro σ τ
+  change F.obj.map ((finiteEtaleInclusion X).map (galoisTripleGraph Y σ τ)).op _ =
+    F.obj.map ((finiteEtaleInclusion X).map (galoisTripleGraph Y σ τ)).op 0
+  rw [galoisCechSection_triangle_coordinate X F Y c σ τ, map_zero, hc]
   abel
 
 /-- Every actual deck cocycle with injective sheaf coefficients has an
@@ -150,21 +177,21 @@ theorem exists_injective_galois_cocycle_primitive
     (Y : FiniteEtale X) [IsGalois Y]
     (c : Aut Y → F.obj.obj (op ((finiteEtaleInclusion X).obj Y)))
     (hc : ∀ σ τ : Aut Y, c (τ * σ) =
-      F.obj.map ((finiteEtaleInclusion X).map σ.hom).op (c τ) + c σ) :
+      F.obj.map ((finiteEtaleInclusion X).map σ.asIso.hom).op (c τ) + c σ) :
     ∃ s : F.obj.obj (op ((finiteEtaleInclusion X).obj Y)),
       ∀ σ : Aut Y,
-        F.obj.map ((finiteEtaleInclusion X).map σ.hom).op s - s = c σ := by
+        F.obj.map ((finiteEtaleInclusion X).map σ.asIso.hom).op s - s = c σ := by
   let I := finiteEtaleInclusion X
   let z := (galoisSelfProductSectionsAddEquiv X F Y).symm c
   obtain ⟨s, hs⟩ := exists_injective_mappedProductSection_primitive
     X.smallEtaleTopology I Y F z (galoisCechSection_triangle X F Y c hc)
   refine ⟨s, ?_⟩
   intro σ
-  have h := congrArg (F.obj.map (I.map (prod.lift (𝟙 Y) σ.hom)).op) hs
+  have h := congrArg (F.obj.map (I.map (prod.lift (𝟙 Y) σ.asIso.hom)).op) hs
   simp only [map_sub, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
     ← op_comp, prod.lift_fst, prod.lift_snd] at h
   rw [I.map_id, op_id, F.obj.map_id] at h
-  have hcoord : F.obj.map (I.map (prod.lift (𝟙 Y) σ.hom)).op z = c σ := by
+  have hcoord : F.obj.map (I.map (prod.lift (𝟙 Y) σ.asIso.hom)).op z = c σ := by
     rw [← galoisSelfProductSectionsAddEquiv_apply]
     exact congrFun ((galoisSelfProductSectionsAddEquiv X F Y).apply_symm_apply c) σ
   exact h.trans hcoord

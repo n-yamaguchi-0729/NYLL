@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1Comparison
-import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelNormalGeneration
-import Mathlib.Topology.Algebra.Group.Subgroup
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1Comparison
+public import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelNormalGeneration
+public import Mathlib.Topology.Algebra.Group.Subgroup
 
 /-!
 # Actual geometric H¹ and unramified generic characters
@@ -15,6 +17,8 @@ The generic absolute Galois map identifies the characters of a normal integral
 scheme with the characters that kill its actual normalization inertia groups.
 The inertia groups are those of the literal integral closures on affine charts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

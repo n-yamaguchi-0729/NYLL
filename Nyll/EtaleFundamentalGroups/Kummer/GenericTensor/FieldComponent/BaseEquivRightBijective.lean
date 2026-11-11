@@ -33,12 +33,11 @@ by hypothesis: its equality with the collapse kernel is produced internally. -/
 theorem genericTensorFieldComponentRight_bijective_of_base_bijective
     (hbase : Function.Bijective (algebraMap K₀ K₁))
     (m : Ideal (K₁ ⊗[K₀] L)) [m.IsMaximal] :
-    letI : Algebra L (GenericTensorFieldComponent m) :=
+    let : Algebra L (GenericTensorFieldComponent m) :=
       genericTensorFieldComponentRightAlgebra m
     Function.Bijective
       (algebraMap L (GenericTensorFieldComponent m)) := by
-  let : Algebra L (GenericTensorFieldComponent m) :=
-    genericTensorFieldComponentRightAlgebra m
+  intro sharedOwner1
   let eForward : K₀ ≃ₐ[K₀] K₁ :=
     AlgEquiv.ofBijective (Algebra.ofId K₀ K₁) hbase
   let e : K₁ ≃ₐ[K₀] K₀ := eForward.symm

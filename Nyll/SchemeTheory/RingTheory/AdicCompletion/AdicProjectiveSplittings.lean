@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
-import Mathlib.Algebra.Algebra.Operations
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveQuotientLifting
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveSplittingLift
+public import Mathlib.Algebra.Algebra.Operations
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Compatible splittings of successive module reductions
@@ -23,6 +25,8 @@ actual quotient maps and is natural in linear maps. A prescribed splitting
 modulo `I` is then extended to a splitting modulo `J`, using projectivity
 over `R/J`, with compatibility along the original quotient maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticAllBranchCharacteristicZero
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCover
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticQuotientInertia
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticAllBranchCharacteristicZero
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCover
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticQuotientInertia
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
 
 /-!
 # Divisorial inertia along horizontal normal-crossings boundaries
@@ -21,6 +23,8 @@ finite quotient has inertia of order prime to the residue characteristic.
 Only local Noetherianity is used; there is no finite-type or Nagata
 hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

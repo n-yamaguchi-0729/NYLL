@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Localization.NormTrace
-import Mathlib.RingTheory.Discriminant
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
 
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.AlgebraIsIntegralTrace
+public import Mathlib.RingTheory.Localization.NormTrace
+public import Mathlib.RingTheory.Discriminant
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.AlgebraIsIntegralTrace
 
 /-!
 # Algebra integral Closure le of is Unit discr of span eq top
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

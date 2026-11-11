@@ -11,7 +11,9 @@ Pinned source:
 https://github.com/leanprover-community/mathlib4/blob/065356127b1dc0016f66b7283ce0ce2c4055aa55/Mathlib/CategoryTheory/Comma/Over/Pullback.lean
 -/
 
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Pullback in over categories using left projections
@@ -20,6 +22,8 @@ The left-projection pullback functor on over categories is defined together with
 object and morphism formulas. A natural isomorphism compares it with the usual
 over-category pullback functor.
 -/
+
+@[expose] public section
 
 universe v u
 

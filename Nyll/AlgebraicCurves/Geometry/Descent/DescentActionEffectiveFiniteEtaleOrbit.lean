@@ -10,26 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.RingHom.Finite
-import Mathlib.RingTheory.RingHom.FinitePresentation
-import Mathlib.Tactic.CategoryTheory.Reassoc
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
-import Nyll.AlgebraicCurves.Geometry.Schemes.Quotients.QuotientFiniteLocallyFreeEquivalenceRelation
-import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectivePullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.RingHom.Finite
+public import Mathlib.RingTheory.RingHom.FinitePresentation
+public import Mathlib.Tactic.CategoryTheory.Reassoc
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentAction
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Quotients.QuotientFiniteLocallyFreeEquivalenceRelation
+public import Nyll.AlgebraicCurves.Geometry.Descent.DescentActionEffectivePullback
 
 /-!
 # Descent Action effective of finite Etale of forall orbit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.QuotientRestriction
+module
+
+public import Nyll.GaloisCohomology.ProP.QuotientRestriction
 
 /-!
 # Trivial restriction maps in degree-one continuous cohomology
@@ -14,6 +16,8 @@ continuous cohomology with trivial `ZMod p` coefficients. Consequently,
 inflation followed by restriction to the kernel vanishes in degree one.
 The same statements are proved for universe-lifted coefficients.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 

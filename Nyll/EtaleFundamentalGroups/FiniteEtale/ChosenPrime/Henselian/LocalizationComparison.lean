@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
 
 /-!
 # Recovering the input prime from the Tag 00UJ chosen factor
@@ -17,6 +19,8 @@ prime-local ring of the *input* algebra at the *input* prime.  The comparison
 is constructed from the contraction equality returned by 00UJ; no separately
 chosen prime or ideal equality is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -69,9 +73,8 @@ noncomputable def etaleChosenLocalFactor_henselian_inputPrimeAlgEquiv
   letI : IsScalarTower C T TS :=
     IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
   letI : IsScalarTower R T TS :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext r
-      simp [RingHom.algebraMap_toAlgebra, φ])
+    IsScalarTower.of_algebraMap_eq'
+      (φ.restrictScalars R).comp_algebraMap.symm
   letI : IsLocalization
       (Algebra.algebraMapSubmonoid T P.primeCompl) TS := by
     exact IsLocalization.tensorProduct_tensorProduct
@@ -185,25 +188,17 @@ noncomputable def
     (hP'q :
       P'.comap Algebra.TensorProduct.includeRight.toRingHom = q) :
     let Q := etaleChosenAwayPrime e P'
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
     let Cₚ := Localization.AtPrime P
     let Dₚ := Localization.AtPrime Q
-    letI : Algebra Cₚ Dₚ :=
+    let : Algebra Cₚ Dₚ :=
       Localization.AtPrime.algebraOfLiesOver P Q
-    letI : Algebra R Dₚ :=
+    let : Algebra R Dₚ :=
       ((algebraMap Cₚ Dₚ).comp (algebraMap R Cₚ)).toAlgebra
     Dₚ ≃ₐ[R] Localization.AtPrime q := by
-  dsimp only
-  let Q := etaleChosenAwayPrime e P'
-  letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
-  let Dₚ := Localization.AtPrime Q
-  letI : Algebra Cₚ Dₚ :=
-    Localization.AtPrime.algebraOfLiesOver P Q
+  intro Q sharedOwner1 sharedOwner2 sharedOwner3 Cₚ Dₚ sharedOwner4
   let defaultRDAlgebra : Algebra R Dₚ := inferInstance
   let Edefault :
       @AlgEquiv R Dₚ (Localization.AtPrime q)
@@ -215,8 +210,7 @@ noncomputable def
       ERing (@algebraMap R Dₚ _ _ defaultRDAlgebra r) =
         algebraMap R (Localization.AtPrime q) r :=
     Edefault.commutes r
-  let rDAlgebra : Algebra R Dₚ :=
-    ((algebraMap Cₚ Dₚ).comp (algebraMap R Cₚ)).toAlgebra
+  intro rDAlgebra
   letI : SMul R Dₚ := defaultRDAlgebra.toSMul
   letI : Algebra R Dₚ := defaultRDAlgebra
   letI : IsScalarTower R C Cₚ :=

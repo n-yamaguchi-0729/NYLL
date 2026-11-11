@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.NormNum
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.NormNum
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # Proj Space exists forall away To Section mk X pow mul mem ideal of mem ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 
 /-!
 Tensor powers of an algebraically trivial invertible module remain algebraically trivial.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

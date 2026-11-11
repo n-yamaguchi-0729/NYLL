@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusTransitionFibers
-import Nyll.JacobianVarieties.Generalized.AbelianSchemeExamples
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusTransitionFibers
+public import Nyll.JacobianVarieties.Generalized.AbelianSchemeExamples
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Affineness of the actual changing-modulus identity kernel -/
+
+@[expose] public section
 
 noncomputable section
 

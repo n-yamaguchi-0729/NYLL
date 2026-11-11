@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Mathlib.Algebra.Category.ModuleCat.Basic
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-!
 # The coefficient-preserving section equivalence of an actual unit isomorphism
@@ -14,6 +16,8 @@ Evaluation of the sheaf isomorphism gives the native section-module
 equivalence. Restriction of scalars uses the existing base-ring action
 and its existing scalar tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

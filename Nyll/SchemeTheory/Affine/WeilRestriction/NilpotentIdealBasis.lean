@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionSplitting
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.UnitRestrictionSplitting
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Coordinates adapted to the actual ideal of a finite algebra -/
+
+@[expose] public section
 
 noncomputable section
 

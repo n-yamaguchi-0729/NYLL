@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PrescribedRootTame
-import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PrescribedRootTame
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Tame normalization after a prescribed higher uniformizer root
@@ -28,6 +30,8 @@ characteristic-zero hypothesis. This supplies the tame counterpart of
 the local actual-factor calculation for Stacks Project 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

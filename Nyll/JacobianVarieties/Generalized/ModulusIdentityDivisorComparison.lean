@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedEulerZeroComparison
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
-import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedEulerZeroComparison
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorFamily
+public import Nyll.JacobianVarieties.Generalized.RigidifiedIdealPullbackComparison
 
 /-! # The full Cartier ideal and its actual identity-test divisor class -/
+
+@[expose] public section
 
 noncomputable section
 

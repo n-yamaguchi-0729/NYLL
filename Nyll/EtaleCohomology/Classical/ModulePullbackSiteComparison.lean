@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
+module
+
+public import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
 
 /-!
 # Coefficient-linear pullback under a site isomorphism
@@ -13,6 +15,8 @@ The actual module and abelian inverse-image comparisons are compatible with
 forgetting coefficients. Their compatibility follows from the defining
 adjunction units and gives equality of the existing cohomological pullbacks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

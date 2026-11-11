@@ -3,18 +3,22 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.SchemeTheory.Gluing.RecoveredPullback
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RawStageGlue
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredOverlap
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoefficientCover
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CommonCoverRecovery
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoverRecovery
-import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Nyll.SchemeTheory.Gluing.RecoveredPullback
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RawStageGlue
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredOverlap
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoefficientCover
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CommonCoverRecovery
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoverRecovery
+public import Nyll.SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # Gluing finite étale models across purely inseparable extensions
 -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits AlgebraicGeometry
@@ -105,7 +109,7 @@ local instance recoveredPullbackChartMap_mono (i : 𝒰.I₀) :
   infer_instance
 
 /-- Recovery is injective on maps into each actual separated étale overlap. -/
-private theorem gluingRecoveryFunctor_overlap_injective (T : Over X) (i j : 𝒰.I₀) :
+theorem gluingRecoveryFunctor_overlap_injective (T : Over X) (i j : 𝒰.I₀) :
     Function.Injective ((gluingRecoveryFunctor ψ).map
       (X := T) (Y := gluingOverlapOver 𝒰 M (i, j))) := by
   have : IsSeparated (gluingOverlapOver 𝒰 M (i, j)).hom := by

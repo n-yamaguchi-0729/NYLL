@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalLocalExactSequence
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFundamentalGroup
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGaloisTopology
-import Nyll.ProCGroups.Presentations.Profinite
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalLocalExactSequence
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGaloisTopology
+public import Nyll.ProCGroups.Presentations.Profinite
 
 /-!
 # The original inertia presentation of the normal-local fundamental group
@@ -18,6 +20,8 @@ proved comparison with the original ambient Galois group. This gives the
 literal fraction-pullback quotient map, with its kernel generated as a
 closed normal subgroup by the original normalization inertia.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Order.Directed
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Order.Directed
 
 /-!
 # Right fractions for actual finite étale models
@@ -16,6 +18,8 @@ Directedness supplies a common stage, and the cartesian square supplies the
 unique lifted numerator.  Thus the native model localization has genuine
 right-fraction representatives, independently of geometric descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

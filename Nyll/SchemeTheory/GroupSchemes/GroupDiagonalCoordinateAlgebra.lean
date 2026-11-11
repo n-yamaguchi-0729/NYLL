@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalResidue
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalResidue
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
 
 /-! # The actual algebra of an affine group identity chart
 
@@ -15,6 +18,8 @@ coordinates are then morphisms over that same base. Local finite type of
 the original group supplies finite algebra generators of this actual chart.
 No alternative group or independently chosen scalar action is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,7 +41,7 @@ variable {K : Type u} [Field K] {G : Over (Spec (.of K))}
 def coordinateInclusion (V : G.left.Opens) (hV : IsAffineOpen V) :
     let := coordinateAlgebra V hV
     Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K Γ(G.left, V)))) ⟶ G := by
-  let := coordinateAlgebra V hV
+  intro sharedAlgebra
   exact Over.homMk hV.fromSpec (Spec.map_preimage (hV.fromSpec ≫ G.hom)).symm
 
 /-- A locally finite-type group has finitely many algebra generators on
@@ -45,14 +50,15 @@ theorem coordinateAlgebra_finiteType [LocallyOfFiniteType G.hom]
     (V : G.left.Opens) (hV : IsAffineOpen V) :
     let := coordinateAlgebra V hV
     Algebra.FiniteType K Γ(G.left, V) := by
-  let := coordinateAlgebra V hV
+  intro sharedAlgebra
   apply RingHom.finiteType_algebraMap.mp
   change (Spec.preimage (hV.fromSpec ≫ G.hom)).hom.FiniteType
   apply (HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)).mp
   rw [Spec.map_preimage]
   infer_instance
 
-private theorem coordinateMap_comp_algebraMap
+/-- A chart map over the base respects the scalar algebra of the original chart. -/
+theorem coordinateMap_comp_algebraMap
     (V : G.left.Opens) (hV : IsAffineOpen V)
     {B : Type u} [CommRing B] [Algebra K B]
     (φ : Γ(G.left, V) →+* B)
@@ -60,7 +66,7 @@ private theorem coordinateMap_comp_algebraMap
       Spec.map (CommRingCat.ofHom (algebraMap K B))) :
     let := coordinateAlgebra V hV
     φ.comp (algebraMap K Γ(G.left, V)) = algebraMap K B := by
-  let := coordinateAlgebra V hV
+  intro sharedAlgebra
   have h : CommRingCat.ofHom (φ.comp (algebraMap K Γ(G.left, V))) =
       CommRingCat.ofHom (algebraMap K B) := by
     apply Spec.map_injective
@@ -78,7 +84,7 @@ def identityCoordinatesAlgHom (V : G.left.Opens) (hV : IsAffineOpen V)
     (hunit : Set.range (1 : Over.mk (𝟙 (Spec (.of K))) ⟶ G).left ⊆ V) :
     let := coordinateAlgebra V hV
     Γ(G.left, V) →ₐ[K] K := by
-  let := coordinateAlgebra V hV
+  intro sharedAlgebra
   refine { toRingHom := AffineLineGroupFormalDifference.identityCoordinates V hV hunit
            commutes' := ?_ }
   intro a
@@ -100,7 +106,7 @@ theorem identityCoordinatesAlgHom_spec (V : G.left.Opens) (hV : IsAffineOpen V)
     Spec.map (CommRingCat.ofHom (identityCoordinatesAlgHom V hV hunit).toRingHom) ≫
       (coordinateInclusion V hV).left =
         (1 : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K))) ⟶ G).left := by
-  let := coordinateAlgebra V hV
+  intro sharedAlgebra
   change Spec.map (CommRingCat.ofHom
     (AffineLineGroupFormalDifference.identityCoordinates V hV hunit)) ≫ hV.fromSpec = _
   calc
@@ -131,7 +137,7 @@ def formalCoordinatesAlongAlgHom
     (hρ0 : PowerSeries.constantCoeff.comp ρ.toRingHom = i.toRingHom) :
     let := coordinateAlgebra V hV
     Γ(G.left, V) →ₐ[K] PowerSeries L := by
-  let := coordinateAlgebra V hV
+  intro sharedAlgebra
   refine { toRingHom := formalCoordinatesAlong x V hV hunit i ρ hρ0
            commutes' := ?_ }
   intro a

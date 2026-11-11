@@ -39,22 +39,6 @@ private noncomputable def quotientRingEquivOfRingEquiv
     (Ideal.map_comap_of_surjective E.toRingHom E.surjective I).symm
   exact (Ideal.quotientEquiv J I E hIJ).trans h
 
-/-- Transporting a root into the pulled-back quotient and then through the
-quotient comparison returns its original image.  This calculation justifies
-using the computed image in `lowerUnitFactorHigherBaseChangeFixedComponentRoot`. -/
-private theorem quotientComponentRoot_eq
-    {G : Type uG} {H : Type uH} {P : Type uP}
-    [CommRing G] [CommRing H] [CommRing P]
-    (E : G ≃+* H) (I : Ideal H) (h : (H ⧸ I) ≃+* P) (c : H) :
-    let J := I.comap E.toRingHom
-    let hIJ : I = J.map E.toRingHom :=
-      (Ideal.map_comap_of_surjective E.toRingHom E.surjective I).symm
-    let qE : (G ⧸ J) ≃+* (H ⧸ I) := Ideal.quotientEquiv J I E hIJ
-    (qE.trans h) (qE.symm (Ideal.Quotient.mk I c)) =
-      h (Ideal.Quotient.mk I c) := by
-  intro J hIJ qE
-  exact congrArg h (qE.apply_symm_apply (Ideal.Quotient.mk I c))
-
 /-- The component ideal of the literal higher base change of the same lower
 unit factor `Cq`, selected by the fixed higher tensor component `m`. -/
 noncomputable def lowerUnitFactorHigherBaseChangeFixedComponentIdeal

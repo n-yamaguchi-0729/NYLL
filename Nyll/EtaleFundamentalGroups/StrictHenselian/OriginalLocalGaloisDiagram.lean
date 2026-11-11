@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationStrictResidueAction
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedInertiaKernel
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationStrictResidueAction
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalUnramifiedInertiaKernel
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Nyll.ProCGroups.Presentations.Profinite
 
 /-!
 # The original local Galois diagram
@@ -17,6 +20,8 @@ of the actual strict stalk give the lower vertices. The literal restriction
 from the original Galois group descends through the proved decomposition
 residue quotient. Both vertical maps retain their original kernels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

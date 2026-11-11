@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusComplementBaseChange
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementBaseChange
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.RelEffCartierDivSupportedIn
 
 /-! # Normalized divisors are supported in the actual modulus complement -/
+
+@[expose] public section
 
 noncomputable section
 

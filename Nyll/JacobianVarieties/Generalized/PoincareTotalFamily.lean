@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
-import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
-import Mathlib.CategoryTheory.Sites.SubcanonicalOver
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPresheaf
+public import Nyll.SchemeTheory.WeilRestriction.RelativeTotal
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # The total Poincaré frame family over the original field
@@ -17,6 +19,8 @@ carrier gives a represented fppf sheaf over the original field. Its projection
 to the ordinary Picard functor is the actual structure map of the same frame
 scheme. Comparison with the modulus Picard-zero sheaf remains separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

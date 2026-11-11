@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+module
+
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 
 /-!
 # Scheme Hom nat Card le finrank of is Finite
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

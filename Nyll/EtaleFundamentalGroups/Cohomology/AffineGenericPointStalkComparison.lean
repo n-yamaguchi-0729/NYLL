@@ -3,9 +3,11 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
-import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.EtaleCohomology.Classical.AffineGenericUnitQuotient
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # The generic point stalk as the affine fraction field
@@ -15,6 +17,8 @@ field and is a fraction ring of the coordinate ring. The actual generic-point
 unit quotient is therefore the quotient presented by the corresponding
 fraction-field spectrum map.
 -/
+
+@[expose] public section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 universe u

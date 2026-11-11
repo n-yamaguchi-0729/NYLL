@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ScalarFramePullback
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackCompPullbackCongrPasteSquaresApp
+module
+
+public import Nyll.JacobianVarieties.Generalized.ScalarFramePullback
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackCompPullbackCongrPasteSquaresApp
 
 /-! The presheaf of actual frames of the pullback of a fixed module. -/
+
+@[expose] public section
 
 noncomputable section
 

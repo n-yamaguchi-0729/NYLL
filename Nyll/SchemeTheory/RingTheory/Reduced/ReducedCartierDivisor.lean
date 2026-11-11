@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.GroupWithZero.Action.Regular
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientLift
+module
+
+public import Mathlib.Algebra.GroupWithZero.Action.Regular
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientLift
 
 /-!
 # The generic local rings of a reduced Cartier divisor
@@ -29,6 +31,8 @@ This supplies the local-ring assertion preceding the Kummer construction
 in Stacks Project, Example 58.31.4 (tag `0EYF`):
 https://stacks.math.columbia.edu/tag/0EYF
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

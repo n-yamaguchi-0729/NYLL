@@ -3,10 +3,12 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldTower
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldTower
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # Algebraic Closure Tower
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 The actual projection from the constant extension to its maximal
 separable intermediate extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits

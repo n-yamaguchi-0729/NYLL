@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.NonunitLocalization
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.RegularParameters
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.ResidueCharacteristic
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.NonunitLocalization
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.RegularParameters
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.ResidueCharacteristic
 
 /-!
 # Height-two local geometry

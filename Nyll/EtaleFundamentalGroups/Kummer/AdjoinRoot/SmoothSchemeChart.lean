@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothBaseChange
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.AdjoinRoot
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothBaseChange
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.AdjoinRoot
 
 /-!
 # The actual root chart on a base-changed smooth scheme
@@ -24,6 +26,8 @@ with the pullback of the original open chart, proving it is an open
 immersion. This places the local root-normalization calculation on the
 actual global base-changed scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.LocalUnitQuotient
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseIsRational
-import Mathlib.Algebra.Group.Equiv.Basic
+module
+
+public import Nyll.JacobianVarieties.Generalized.LocalUnitQuotient
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.ConstantsAreBaseIsRational
+public import Mathlib.Algebra.Group.Equiv.Basic
 
 /-!
 # The multiplicative kernel at two reduced rational places
@@ -18,6 +20,8 @@ ratio of the two residue units identifies the local-unit quotient by diagonal
 scalars with `Kˣ`. The forgetful kernel therefore is `Kˣ`, as an abstract group.
 The required constant-field equality is proved from either rational place.
 -/
+
+@[expose] public section
 
 noncomputable section
 

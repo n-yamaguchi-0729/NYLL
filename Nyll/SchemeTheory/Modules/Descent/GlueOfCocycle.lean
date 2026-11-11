@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 /-!
 # Modules Glue Of Cocycle
 -/
+
+@[expose] public section
 
 universe u
 

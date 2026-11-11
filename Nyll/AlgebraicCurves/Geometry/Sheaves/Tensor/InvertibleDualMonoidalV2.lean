@@ -10,25 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Sites.Pretopology
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
-import Mathlib.CategoryTheory.Sites.SheafHom
-import Mathlib.CategoryTheory.Sites.Subsheaf
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
-import Mathlib.Tactic.Ext
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+module
+
+public import Nyll.SchemeTheory.Modules.Frames.FrameBridge
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Sites.Pretopology
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.CategoryTheory.Sites.SheafHom
+public import Mathlib.CategoryTheory.Sites.Subsheaf
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import Mathlib.Tactic.Ext
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
 
 /-!
 # Duals and evaluation for invertible modules
@@ -36,6 +39,8 @@ import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 Local trivializations identify generators and their duals, and restriction compatibility
 transports the resulting maps to sheaves of modules.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -116,10 +121,6 @@ private noncomputable def ofPresheafHom (X : Cᵒᵖ) (s : (linearSub F N).obj X
       appAt s.1 (Opposite.op (Over.mk (g.unop ≫ f.unop))) (F.map g x)
     have := s.1.naturality (Over.homMk g.unop rfl : Over.mk (g.unop ≫ f.unop) ⟶ Over.mk f.unop).op
     exact (ConcreteCategory.congr_hom this x).symm⟩
-
-private lemma ofPresheafHom_app (X : Cᵒᵖ) (s : (linearSub F N).obj X) {Y : Cᵒᵖ} (f : X ⟶ Y)
-    (x : F.obj Y) :
-    (ofPresheafHom F N X s).1 f x = appAt s.1 (Opposite.op (Over.mk f.unop)) x := rfl
 
 private noncomputable def equivLinearSub (X : Cᵒᵖ) : naturalFamilies F N X ≃ (linearSub F N).obj X
   where
@@ -237,39 +238,49 @@ export _root_.PresheafOfModules.InvertibleDual (dual)
 
 private noncomputable abbrev ev : F ⊗ dual F ⟶ 𝟙_ _ := uncurry' F (𝟙 (dual F))
 
-private structure TrivializationBelow (X₀ : Cᵒᵖ) where
-  gen : ∀ {Y : Cᵒᵖ} (_ : X₀ ⟶ Y), F.obj Y
-  compat : ∀ {Y Z : Cᵒᵖ} (f : X₀ ⟶ Y) (g : Y ⟶ Z), F.map g (gen f) = gen (f ≫ g)
-  bij : ∀ {Y : Cᵒᵖ} (f : X₀ ⟶ Y), Function.Bijective (fun a : R.obj Y => a • gen f)
+/-- Compatible rank-one generators on all objects below the chosen object. -/
+abbrev TrivializationBelow (X₀ : Cᵒᵖ) :=
+  _root_.PresheafOfModules.FrameBridge.TrivializationBelow F X₀
+
+namespace TrivializationBelow
+
+export _root_.PresheafOfModules.FrameBridge.TrivializationBelow (mk gen compat bij)
+
+end TrivializationBelow
 
 variable {F} {X₀ : Cᵒᵖ} (D : TrivializationBelow F X₀)
 
 namespace TrivializationBelow
 
 private noncomputable def restrictTo {Y : Cᵒᵖ} (f : X₀ ⟶ Y) : TrivializationBelow F Y where
-  gen g := D.gen (f ≫ g)
-  compat g g' := by rw [D.compat, Category.assoc]
-  bij g := D.bij (f ≫ g)
+  gen g := TrivializationBelow.gen D (f ≫ g)
+  compat g g' := by rw [TrivializationBelow.compat D, Category.assoc]
+  bij g := TrivializationBelow.bij D (f ≫ g)
 
 private noncomputable def triv {Y : Cᵒᵖ} (f : X₀ ⟶ Y) : R.obj Y ≃ₗ[R.obj Y] F.obj Y :=
-  LinearEquiv.ofBijective (LinearMap.toSpanSingleton (R.obj Y) (F.obj Y) (D.gen f)) (D.bij f)
+  LinearEquiv.ofBijective
+    (LinearMap.toSpanSingleton (R.obj Y) (F.obj Y) (TrivializationBelow.gen D f))
+    (TrivializationBelow.bij D f)
 
 private noncomputable def coord {Y : Cᵒᵖ} (f : X₀ ⟶ Y) : F.obj Y →ₗ[R.obj Y] R.obj Y := (D.triv
   f).symm
 
-private lemma coord_smul_gen {Y : Cᵒᵖ} (f : X₀ ⟶ Y) (x : F.obj Y) : D.coord f x • D.gen f = x :=
+private lemma coord_smul_gen {Y : Cᵒᵖ} (f : X₀ ⟶ Y) (x : F.obj Y) :
+    D.coord f x • TrivializationBelow.gen D f = x :=
   (D.triv f).apply_symm_apply x
 
-private lemma coord_gen_smul {Y : Cᵒᵖ} (f : X₀ ⟶ Y) (a : R.obj Y) : D.coord f (a • D.gen f) = a :=
+private lemma coord_gen_smul {Y : Cᵒᵖ} (f : X₀ ⟶ Y) (a : R.obj Y) :
+    D.coord f (a • TrivializationBelow.gen D f) = a :=
   (D.triv f).symm_apply_apply a
 
-@[local simp] private lemma coord_gen {Y : Cᵒᵖ} (f : X₀ ⟶ Y) : D.coord f (D.gen f) = 1 := by
+@[local simp] private lemma coord_gen {Y : Cᵒᵖ} (f : X₀ ⟶ Y) :
+    D.coord f (TrivializationBelow.gen D f) = 1 := by
   simpa using D.coord_gen_smul f 1
 
 private lemma coord_map {Y Z : Cᵒᵖ} (f : X₀ ⟶ Y) (g : Y ⟶ Z) (x : F.obj Y) :
     D.coord (f ≫ g) (F.map g x) = R.map g (D.coord f x) := by
   conv_lhs => rw [← D.coord_smul_gen f x]
-  rw [PresheafOfModules.map_smul, D.compat]
+  rw [PresheafOfModules.map_smul, TrivializationBelow.compat D]
   exact D.coord_gen_smul (f ≫ g) _
 
 private noncomputable def dualGen : (dual F).obj X₀ :=
@@ -282,20 +293,20 @@ private noncomputable def dualGen : (dual F).obj X₀ :=
 
 private lemma eq_smul_dualGen (φ : (dual F).obj X₀) : φ = SMul.smul (M := R.obj X₀) (α := (dual
   F).obj X₀)
-      (φ.1 (𝟙 X₀) (D.gen (𝟙 X₀))) D.dualGen := by
+      (φ.1 (𝟙 X₀) (TrivializationBelow.gen D (𝟙 X₀))) D.dualGen := by
   apply naturalFamilies_ext
   intro Y f x
   erw [InternalHom.smul_app, dualGen_app]
   conv_lhs => rw [← D.coord_smul_gen f x, LinearMap.map_smul]
-  have h := InternalHom.naturality φ (𝟙 X₀) f (D.gen (𝟙 X₀))
-  rw [D.compat, Category.id_comp] at h
+  have h := InternalHom.naturality φ (𝟙 X₀) f (TrivializationBelow.gen D (𝟙 X₀))
+  rw [TrivializationBelow.compat D, Category.id_comp] at h
   rw [← h]
-  change D.coord f x * R.map f (φ.1 (𝟙 X₀) (D.gen (𝟙 X₀))) =
-    R.map f (φ.1 (𝟙 X₀) (D.gen (𝟙 X₀))) * D.coord f x
+  change D.coord f x * R.map f (φ.1 (𝟙 X₀) (TrivializationBelow.gen D (𝟙 X₀))) =
+    R.map f (φ.1 (𝟙 X₀) (TrivializationBelow.gen D (𝟙 X₀))) * D.coord f x
   exact mul_comm _ _
 
 private noncomputable def evInv : R.obj X₀ →ₗ[R.obj X₀] (F.obj X₀ ⊗[R.obj X₀] (dual F).obj X₀) :=
-  LinearMap.toSpanSingleton _ _ (D.gen (𝟙 X₀) ⊗ₜ D.dualGen)
+  LinearMap.toSpanSingleton _ _ (TrivializationBelow.gen D (𝟙 X₀) ⊗ₜ D.dualGen)
 
 private noncomputable def evLinear
     (F : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)) (X₀ : Cᵒᵖ) :
@@ -309,7 +320,7 @@ private lemma ev_app_tmul (x : F.obj X₀) (φ : (dual F).obj X₀) :
 
 private lemma ev_evInv (a : R.obj X₀) :
     (evLinear F X₀) (D.evInv a) = a := by
-  change (evLinear F X₀) (a • (D.gen (𝟙 X₀) ⊗ₜ[R.obj X₀] D.dualGen)) = a
+  change (evLinear F X₀) (a • (TrivializationBelow.gen D (𝟙 X₀) ⊗ₜ[R.obj X₀] D.dualGen)) = a
   rw [LinearMap.map_smul]
   erw [ev_app_tmul]
   rw [dualGen_app, coord_gen, smul_eq_mul, mul_one]
@@ -320,8 +331,8 @@ private lemma evInv_ev (z : (F.obj X₀ ⊗[R.obj X₀] (dual F).obj X₀)) :
   | add z₁ z₂ h₁ h₂ => rw [map_add, map_add, h₁, h₂]
   | tmul x φ =>
     erw [ev_app_tmul]
-    set d : R.obj X₀ := φ.1 (𝟙 X₀) (D.gen (𝟙 X₀)) with hd
-    have hx : x = D.coord (𝟙 X₀) x • D.gen (𝟙 X₀) := (D.coord_smul_gen _ x).symm
+    set d : R.obj X₀ := φ.1 (𝟙 X₀) (TrivializationBelow.gen D (𝟙 X₀)) with hd
+    have hx : x = D.coord (𝟙 X₀) x • TrivializationBelow.gen D (𝟙 X₀) := (D.coord_smul_gen _ x).symm
     have hφ : φ = d • D.dualGen := D.eq_smul_dualGen φ
     have h1 : φ.1 (𝟙 X₀) x = D.coord (𝟙 X₀) x * d := by
       conv_lhs => rw [hx]
@@ -419,88 +430,56 @@ private noncomputable def dualSheaf (L : X.Modules) : X.Modules where
 
 variable (U : X.Opens)
 
-private noncomputable def restrictRingCatSheafHom : (U : Scheme.{u}).ringCatSheaf ⟶
+/-- The structural ring-sheaf morphism for restriction to an open subscheme. -/
+noncomputable def restrictRingCatSheafHom : (U : Scheme.{u}).ringCatSheaf ⟶
     (U.ι.opensFunctor.sheafPushforwardContinuous RingCat.{u}
       (Opens.grothendieckTopology (U : Scheme.{u})) (Opens.grothendieckTopology X)).obj
         X.ringCatSheaf :=
-  ⟨𝟙 _⟩
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.restrictRingCatSheafHom U
 
-private noncomputable def restrictFunctor' : X.Modules ⥤ (U : Scheme.{u}).Modules :=
-  SheafOfModules.pushforward (restrictRingCatSheafHom U)
+/-- Restriction of module sheaves through the structural ring-sheaf morphism. -/
+noncomputable def restrictFunctor' : X.Modules ⥤ (U : Scheme.{u}).Modules :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.restrictFunctor' U
 
-private lemma restrictFunctor'_eq : restrictFunctor' U = Modules.restrictFunctor U.ι := by
-  dsimp only [restrictFunctor', Modules.restrictFunctor, restrictRingCatSheafHom]
-  congr 2
-  ext V : 2
-  change 𝟙 _ = (forget₂ CommRingCat RingCat).map (U.ι.appIso V.unop).inv
-  rw [Scheme.Opens.ι_appIso]
-  rfl
+private lemma restrictFunctor'_eq : restrictFunctor' U = Modules.restrictFunctor U.ι :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.restrictFunctor'_eq U
 
 private noncomputable def restrictFunctor'IsoPullback : restrictFunctor' U ≅ Modules.pullback U.ι :=
-  eqToIso (restrictFunctor'_eq U) ≪≫ restrictFunctorIsoPullback U.ι
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.restrictFunctor'IsoPullback U
 
 variable {U} (L : X.Modules)
 
-private lemma image_preimage_of_le {V : X.Opens} (h : V ≤ U) : U.ι ''ᵁ (U.ι ⁻¹ᵁ V) = V := by
-  rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
-  exact inf_eq_right.mpr h
+private lemma image_preimage_of_le {V : X.Opens} (h : V ≤ U) : U.ι ''ᵁ (U.ι ⁻¹ᵁ V) = V :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.image_preimage_of_le (U := U) h
 
 section
 
 variable (e : (restrictFunctor' U).obj L ≅ SheafOfModules.unit (U : Scheme.{u}).ringCatSheaf)
 
 private noncomputable def gen₀ (W : (U : Scheme.{u}).Opens) : Γ(L, U.ι ''ᵁ W) :=
-  (e.inv.val.app (op W)).hom (1 : Γ(U, W))
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.gen₀ L e W
 
 private lemma gen₀_spec (W : (U : Scheme.{u}).Opens) (b : Γ(X, U.ι ''ᵁ W)) :
-    (e.inv.val.app (op W)).hom b = b • gen₀ L e W := by
-  exact (congrArg
-    ((e.inv.val.app (op W)).hom : Γ(U, W) → Γ(L, U.ι ''ᵁ W))
-    (mul_one (b : Γ(U, W)))).symm.trans
-      ((e.inv.val.app (op W)).hom.map_smul b (1 : Γ(U, W)))
+    (e.inv.val.app (op W)).hom b = b • gen₀ L e W :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.gen₀_spec L e W b
 
 private lemma gen₀_bijective (W : (U : Scheme.{u}).Opens) :
-    Function.Bijective (fun b : Γ(X, U.ι ''ᵁ W) => b • gen₀ L e W) := by
-  have h : Function.Bijective ((e.inv.val.app (op W)).hom) := by
-    refine Function.bijective_iff_has_inverse.2 ⟨(e.hom.val.app (op W)).hom, fun b => ?_, fun m =>
-      ?_⟩
-    · exact congr($(e.inv_hom_id).val.app (op W) |>.hom b)
-    · exact congr($(e.hom_inv_id).val.app (op W) |>.hom m)
-  exact (funext (gen₀_spec L e W) ▸ h :)
+    Function.Bijective (fun b : Γ(X, U.ι ''ᵁ W) => b • gen₀ L e W) :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.gen₀_bijective L e W
 
 private lemma gen₀_map {W W' : (U : Scheme.{u}).Opens} (i : W' ⟶ W) :
-    L.val.map (U.ι.opensFunctor.map i).op (gen₀ L e W) = gen₀ L e W' := by
-  have := PresheafOfModules.naturality_apply e.inv.val i.op (1 : Γ(U, W))
-  rw [show ((SheafOfModules.unit (U : Scheme.{u}).ringCatSheaf).val.map i.op) (1 : Γ(U, W)) =
-    (1 : Γ(U, W')) from ((U : Scheme.{u}).presheaf.map i.op).hom.map_one] at this
-  exact this.symm
+    L.val.map (U.ι.opensFunctor.map i).op (gen₀ L e W) = gen₀ L e W' :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.gen₀_map L e i
 
 omit e in
 private lemma bijective_smul_map_eqToHom {A B : X.Opens} (q : A = B) (t : Γ(L, A))
     (h : Function.Bijective (fun b : Γ(X, A) => b • t)) :
     Function.Bijective (fun a : Γ(X, B) => SMul.smul (M := Γ(X, B)) (α := Γ(L, B))
-      a (L.val.map (eqToHom q.symm : B ⟶ A).op t)) := by
-  subst q
-  have e1 : L.val.map (eqToHom (rfl : A = A) : A ⟶ A).op t = t := by
-    rw [eqToHom_refl, op_id]
-    exact PresheafOfModules.InternalHom.map_id_apply (R := X.sheaf.obj) L.val _ _
-  simp only [e1]
-  exact h
+      a (L.val.map (eqToHom q.symm : B ⟶ A).op t)) :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.bijective_smul_map_eqToHom L q t h
 
-private noncomputable def trivializationBelow : TrivializationBelow L.val (op U) where
-  gen {Y} f := L.val.map (eqToHom (image_preimage_of_le (U := U) f.unop.le).symm :
-      Y.unop ⟶ U.ι ''ᵁ (U.ι ⁻¹ᵁ Y.unop)).op (gen₀ L e (U.ι ⁻¹ᵁ Y.unop))
-  compat {Y Z} f g := by
-    have hle : U.ι ⁻¹ᵁ Z.unop ≤ U.ι ⁻¹ᵁ Y.unop := fun x hx => g.unop.le hx
-    dsimp only
-    rw [← gen₀_map L e (homOfLE hle)]
-    erw [← PresheafOfModules.map_comp_apply, ← PresheafOfModules.map_comp_apply]
-    exact congrFun (congrArg
-      (fun φ : (op (U.ι ''ᵁ (U.ι ⁻¹ᵁ Y.unop)) ⟶ Z) =>
-        ((L.val.map φ).hom : L.val.obj (op (U.ι ''ᵁ (U.ι ⁻¹ᵁ Y.unop))) → L.val.obj Z))
-      (Subsingleton.elim _ _)) _
-  bij {Y} f := bijective_smul_map_eqToHom L (image_preimage_of_le (U := U) f.unop.le) _
-    (gen₀_bijective L e _)
+private noncomputable def trivializationBelow : TrivializationBelow L.val (op U) :=
+  _root_.AlgebraicGeometry.Scheme.Modules.FrameBridge.trivializationBelow L e
 
 end
 
@@ -548,16 +527,6 @@ private noncomputable def tensorDualSheafIso (L : X.Modules) [Fact (Scheme.Modul
   (Scheme.Modules.tensorIsoSheafify L (dualSheaf L)).symm ≪≫
     e ≪≫
     SheafOfModules.sheafifyUnitIso X.sheaf.obj X.ringCatSheaf.property
-
-private theorem isInvertible_dualSheaf (L : X.Modules) [Fact (Scheme.Modules.IsInvertible L)] :
-    Scheme.Modules.IsInvertible (dualSheaf L) := by
-  refine ⟨fun x => ?_⟩
-  obtain ⟨U, hxU, ⟨eU⟩⟩ := (Fact.out : Scheme.Modules.IsInvertible L).1 x
-  refine ⟨U, hxU, ⟨?_⟩⟩
-  exact (λ_ _).symm ≪≫ (eU.symm ⊗ᵢ Iso.refl _) ≪≫
-    Functor.Monoidal.μIso (Modules.pullback U.ι) L (dualSheaf L) ≪≫
-    (Modules.pullback U.ι).mapIso (tensorDualSheafIso L) ≪≫
-    pullbackTensorUnitObjIso U.ι
 
 end AlgebraicGeometry.Scheme.Modules
 
@@ -664,9 +633,9 @@ variable {X : _root_.AlgebraicGeometry.Scheme.{u}}
 private noncomputable def toPMod
     {L : X.Modules} {X₀ : (X.Opens)ᵒᵖ} (D : TrivializationBelow (R := X.sheaf.obj) L.val X₀) :
     TrivializationBelow (R := X.sheaf.obj) ((toPMod X).obj L) X₀ where
-  gen f := D.gen f
-  compat f g := D.compat f g
-  bij f := D.bij f
+  gen f := TrivializationBelow.gen D f
+  compat f g := TrivializationBelow.compat D f g
+  bij f := TrivializationBelow.bij D f
 
 end PresheafOfModules.InvertibleDual.TrivializationBelow
 
@@ -764,18 +733,9 @@ private theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.dual {X :
 
 end AlgebraicGeometry.Scheme.Modules.IsInvertible
 
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let cur ← getCurrNamespace
-  let mut aliases : Array (Name × Name) := #[]
-  for word in (["AlgebraicGeometry.Scheme.Modules.IsInvertible.dual"] : List String) do
-    let full := word.toName
-    if env.contains full then aliases := aliases.push (cur ++ full, full)
-    else
-      let prv := mkPrivateName env full
-      if env.contains prv then aliases := aliases.push (cur ++ full, prv)
-  modifyEnv fun env => aliases.foldl (fun env p => addAlias env p.1 p.2) env
+namespace AlgebraicGeometry.Scheme.Modules.IsInvertible
+export _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible (dual)
+end AlgebraicGeometry.Scheme.Modules.IsInvertible
 
 end LinkageInlined_bbe2083f
 

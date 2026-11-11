@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.SeparableClosure.GeometricallyIntegralRestriction
-import Nyll.SchemeTheory.FunctionFields.SeparableClosure.SeparableClosureRestriction
+module
+
+public import Nyll.SchemeTheory.FunctionFields.SeparableClosure.GeometricallyIntegralRestriction
+public import Nyll.SchemeTheory.FunctionFields.SeparableClosure.SeparableClosureRestriction
 
 /-! Canonical aggregate for field-theoretic constructions. -/

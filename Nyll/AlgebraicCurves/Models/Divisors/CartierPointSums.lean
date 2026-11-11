@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
+module
+
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
 
 /-! # Cartier multiplicities of actual point sums -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,7 +60,8 @@ theorem cartierModulus_point
   exact (congrArg M.cartierIdealEquiv hp').symm.trans h
 
 omit [IsAlgClosed K] in
-private theorem invertible_product {ι : Type*} (s : Finset ι)
+/-- A finite product of invertible ideal sheaves is invertible. -/
+theorem invertible_product {ι : Type*} (s : Finset ι)
     (I : ι → M.C.IdealSheafData) (hI : ∀ i, (I i).IsInvertible) :
     (∏ i ∈ s, I i).IsInvertible := by
   classical

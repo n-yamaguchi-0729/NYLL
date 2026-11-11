@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierAdjoinRoot
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.EisensteinResidue
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierAdjoinRoot
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.EisensteinResidue
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # A cyclic Artin--Schreier extension with unchanged residue field
@@ -24,6 +26,8 @@ The valuation, its extension property, the power basis, and the Eisenstein
 condition are all outputs of the construction, never extra assumptions.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

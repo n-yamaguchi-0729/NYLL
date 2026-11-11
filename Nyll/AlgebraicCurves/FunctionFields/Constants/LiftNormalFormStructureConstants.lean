@@ -10,16 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.LocalCoboundarySmallExtension
-import Nyll.AlgebraicCurves.Geometry.CoboundaryAtInfinitySmallExtension
-import Nyll.AlgebraicCurves.FunctionFields.AevalSubMemSmulIsMaximal
-import Nyll.AlgebraicCurves.FunctionFields.NormTrace.DiscrNeZeroNormalFormSplit
-import Nyll.AlgebraicCurves.Geometry.MulEqHochschildCoboundary
-import Nyll.AlgebraicCurves.Geometry.BoundedTwoCochainLocalCoboundaries
+module
+
+public import Nyll.AlgebraicCurves.Geometry.LocalCoboundarySmallExtension
+public import Nyll.AlgebraicCurves.Geometry.CoboundaryAtInfinitySmallExtension
+public import Nyll.AlgebraicCurves.FunctionFields.AevalSubMemSmulIsMaximal
+public import Nyll.AlgebraicCurves.FunctionFields.NormTrace.DiscrNeZeroNormalFormSplit
+public import Nyll.AlgebraicCurves.Geometry.MulEqHochschildCoboundary
+public import Nyll.AlgebraicCurves.Geometry.BoundedTwoCochainLocalCoboundaries
 
 /-!
 # Exists lift normal Form structure Constants of small Extension
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -91,7 +95,7 @@ def divε (ε c : S) : S :=
   if c = 0 then 0 else if h : ε ∣ c then Classical.choose h else 0
 
 open Classical in
-theorem divε_zero (ε : S) : divε ε 0 = 0 := by simp [divε]
+theorem divε_zero (ε : S) : divε ε 0 = 0 := ite_eq_left rfl
 
 open Classical in
 theorem mul_divε (ε c : S) (h : ε ∣ c) : ε * divε ε c = c := by

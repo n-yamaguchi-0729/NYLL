@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.CechSections
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
+module
+
+public import Nyll.EtaleCohomology.Sites.CechSections
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.SchemeTheory.Etale.FiniteGeometricPoints
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-!
 # A Čech-compatible section determines a germ downstairs
@@ -17,6 +19,8 @@ the same field. Invert the actual pullback stalk map at one lift. The Čech
 equation on the pair of any two lifts shows that this germ works at every
 lift, without assuming descent or a stalk-product surjectivity theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

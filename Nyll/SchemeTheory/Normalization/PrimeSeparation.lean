@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.ConductorQuotient
-import Nyll.SchemeTheory.PlaneCurves.Dimension
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Nyll.SchemeTheory.Normalization.ConductorQuotient
+public import Nyll.SchemeTheory.PlaneCurves.Dimension
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Prime separation in a localized normalization
@@ -24,6 +26,8 @@ bound is first expressed through a linearly independent family (and hence
 through `Module.rank`); the finite-dimensional `finrank` formulation follows
 once Lemma 6.3.2(a), whose proof uses Lemma 6.3.1, is available.
 -/
+
+@[expose] public section
 
 noncomputable section
 

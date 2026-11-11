@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkSchemeLimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.SchemeTheory.Descent.AffineTransitionCover
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSchemeLimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.SchemeTheory.Descent.AffineTransitionCover
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
 # Spreading an affine étale covering from the actual strict-local base
@@ -21,6 +23,8 @@ Only quasi-compactness of the original source over the affine base is
 needed. No continuity assertion about arbitrary coefficient sheaves is
 assumed in this geometric covering step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

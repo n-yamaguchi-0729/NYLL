@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Algebra.Module.Projective
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.SplitIfs
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleFreeQuotientRange
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleFreeQuotientRange
 
 /-!
 # free piece of is Local Ring of forall relation mem span
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -63,12 +67,12 @@ theorem decompose_eq (q : MvPolynomial (Fin (n + 1)) A) (d : ℕ) :
       homogeneousComponent d q :=
   MvPolynomial.decomposition.decompose'_apply q d
 
-private noncomputable def _root_.GotzLocalLift.proj (A : Type) [CommRing A] (d : ℕ) :
+/-- Projection of a polynomial onto its homogeneous component of degree `d`. -/
+noncomputable def proj (A : Type) [CommRing A] (d : ℕ) :
     MvPolynomial (Fin (n + 1)) A →ₗ[A] ↥(homogeneousSubmodule (Fin (n + 1)) A d) :=
   LinearMap.codRestrict (homogeneousSubmodule (Fin (n + 1)) A d)
     ((homogeneousComponent d : MvPolynomial (Fin (n + 1)) A →ₗ[A] MvPolynomial (Fin (n + 1)) A))
     (fun p => homogeneousComponent_mem d p)
-export _root_.GotzLocalLift (proj)
 
 @[scoped simp] theorem proj_apply_coe (d : ℕ) (p : MvPolynomial (Fin (n + 1)) A) :
     (proj A d p : MvPolynomial (Fin (n + 1)) A) = homogeneousComponent d p := rfl

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PushforwardGlobalSections
-import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+module
+
+public import Nyll.EtaleCohomology.Classical.PushforwardGlobalSections
+public import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-!
 # Degree-one vanishing for direct images
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 Vanishing of the degree-one cohomology presheaf after direct image follows
 from the actual injective presentation and the comparison of its cokernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

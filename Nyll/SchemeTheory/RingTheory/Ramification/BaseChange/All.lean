@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.BaseChange.Flat
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.BaseChange.Flat
 
 /-!
 # Flat base change of ramification

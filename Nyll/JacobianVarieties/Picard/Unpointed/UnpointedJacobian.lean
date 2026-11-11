@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedExistence
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedGroup
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedDimension
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedExistence
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedGroup
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedDimension
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
 
 /-!
 # A Jacobian over an arbitrary field without a rational basepoint
@@ -19,6 +21,8 @@ Its carrier and structure map are retained by all public constructions. The rela
 group law is constructed from tensor product, and its dimension is the geometric
 genus of the original curve.
 -/
+
+@[expose] public section
 
 universe u
 

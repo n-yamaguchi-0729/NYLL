@@ -4,22 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.LinearAlgebra.Dual.Lemmas
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
-import Nyll.SchemeTheory.CategoryTheory.MorphismPropertyWidePullbackBase
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.IsIntegralSmooth
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionLeTopologicalKrullDim
-import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalGeometricallyConnected
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.UniversalSumKernel
-import Nyll.JacobianVarieties.Albanese.FiniteSums
+module
+
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
+public import Nyll.SchemeTheory.CategoryTheory.MorphismPropertyWidePullbackBase
+public import Nyll.SchemeTheory.LocalGeometry.IntegralSmooth
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.SmoothOfRelativeDimensionLeTopologicalKrullDim
+public import Nyll.AlgebraicCurves.Hilbert.SymmetricPowerData
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalGeometricallyConnected
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.UniversalSumKernel
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Finite sums on universal effective divisors
@@ -35,6 +38,8 @@ entire kernel pair and effective-epimorphism descent gives the required map.
 The resulting equality for `SameDivisor` holds on arbitrary test schemes.
 No permutation description of tuples over a nonreduced test scheme is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -275,7 +280,7 @@ theorem exists_finiteSumMap_desc_of_commutative
         (hv : v ≫ finFibrePow.toBase c r = g)
         (hw : w ≫ finFibrePow.toBase c r = g),
         v ≫ σ = w ≫ σ ↔
-          SameDivisor c (fun i => v ≫ finFibrePow.proj c r i)
+          SameDivisor (g := g) c (fun i => v ≫ finFibrePow.proj c r i)
             (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hv])
             (fun i => w ≫ finFibrePow.proj c r i)
             (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hw]) := by
@@ -397,7 +402,7 @@ theorem exists_finiteSumMap_desc
         (hv : v ≫ finFibrePow.toBase c r = g)
         (hw : w ≫ finFibrePow.toBase c r = g),
         v ≫ σ = w ≫ σ ↔
-          SameDivisor c (fun i => v ≫ finFibrePow.proj c r i)
+          SameDivisor (g := g) c (fun i => v ≫ finFibrePow.proj c r i)
             (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hv])
             (fun i => w ≫ finFibrePow.proj c r i)
             (fun i => by rw [Category.assoc, finFibrePow.proj_comp, hw]) :=

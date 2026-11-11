@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+module
+
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
 
 /-!
 # Proj Space is Quasicoherent twist
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

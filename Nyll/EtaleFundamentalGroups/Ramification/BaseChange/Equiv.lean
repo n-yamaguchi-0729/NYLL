@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
 
 /-!
 # Ramification indices under equivalent integral models
@@ -13,6 +15,8 @@ Equivalent base and target rings do not change ramification indices.  These
 lemmas package the change of local model needed when one divisorial valuation
 is represented in different scheme stalks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

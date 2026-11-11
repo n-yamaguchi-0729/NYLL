@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.SubschemeStalk
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Nyll.SchemeTheory.Divisors.SubschemeStalk
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-! # The full stalk ideal of a rational closed point -/
+
+@[expose] public section
 
 universe u
 

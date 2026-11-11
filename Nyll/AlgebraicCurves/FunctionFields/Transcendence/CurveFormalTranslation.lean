@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.RationalFunctionFormalTranslation
-import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLift
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.RationalFunctionFormalTranslation
+public import Nyll.SchemeTheory.RingTheory.Henselian.FiniteSeparableFormalLift
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveSeparatingTranscendental
 
 /-! # Formal translation along a separating curve parameter
 
@@ -16,6 +18,8 @@ translation on the rational subfield lifts through the actual finite separable
 extension, giving a unique algebra homomorphism with identity constant term
 and the prescribed translation of the parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -77,7 +81,7 @@ theorem existsUnique_formalTranslation_of_finiteSeparable
       RatFunc.formalTranslation t ht (e.symm x) at h
     rw [e.apply_symm_apply] at h
     exact h
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   exact hUnique ρ.toRingHom ⟨congrArg AlgHom.toRingHom hρbase, hρ.2⟩
 
 /-- A curve function field of essential finite type over a perfect field has

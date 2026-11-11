@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.CategoryTheory.Localization.Predicate
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # The actual category of finite étale models over an inverse diagram
@@ -16,6 +18,8 @@ along a cone defines a functor on this category, and it inverts the
 cartesian arrows used in the colimit construction.  No
 descent statement is assumed in these constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,7 +70,8 @@ def baseChangeObj (A : InverseLimitModel F) : FiniteEtale s.pt :=
       (P := (@IsFiniteEtale : MorphismProperty Scheme.{u}))
       (IsPullback.of_hasPullback A.hom (s.π.app A.right)) A.prop⟩
 
-private def conePullbackMap
+/-- A compatible pair of arrows induces a map of pullbacks over a cone vertex. -/
+def conePullbackMap
     {A B X Y Z : Scheme.{u}} (f : A ⟶ Y) (g : B ⟶ Z)
     (p : X ⟶ Y) (q : X ⟶ Z) (a : A ⟶ B) (b : Y ⟶ Z)
     (ha : a ≫ g = f ≫ b) (hp : p ≫ b = q) :

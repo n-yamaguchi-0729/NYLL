@@ -5,18 +5,22 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Picard.AbelJacobi.UnpointedAbelJacobi
-import Nyll.JacobianVarieties.Albanese.AlbaneseFactorizationField
-import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+module
+
+public import Nyll.JacobianVarieties.Picard.AbelJacobi.UnpointedAbelJacobi
+public import Nyll.JacobianVarieties.Albanese.AlbaneseFactorizationField
+public import Nyll.JacobianVarieties.Albanese.AbelJacobiPointClassUnique
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLawGrpObj
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralSmooth
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
 
 /-! The actual Albanese factorization for the fixed, unpointed Jacobian. -/
+
+@[expose] public section
 
 noncomputable section
 

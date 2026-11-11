@@ -5,9 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardForgetful
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
-import Mathlib.CategoryTheory.Subfunctor.Basic
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardForgetful
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+public import Mathlib.CategoryTheory.Subfunctor.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Geometric-fibre algebraic triviality for the modulus Picard functor
@@ -18,6 +21,8 @@ and pullback is supplied by the existing unrigidified Picard construction.
 The resulting subpresheaf is sheafified in the fppf topology. No representing
 scheme or identification with a scheme's identity component is assumed.
 -/
+
+@[expose] public section
 
 universe u
 

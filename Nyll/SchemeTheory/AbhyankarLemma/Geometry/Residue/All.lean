@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
 
 /-! Canonical aggregate for EtaleFundamentalGroups.TameRamification.Abhyankar.Residue. -/

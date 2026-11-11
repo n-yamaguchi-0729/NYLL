@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldContinuousH0Comparison
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldContinuousH0Comparison
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences
 
 /-!
 # Actual field cohomology in degree zero and dimension shifting
@@ -15,6 +17,8 @@ The base object is terminal in the actual small etale site.
 The classical connecting map gives dimension shifting through an actual
 injective coefficient sheaf, using the existing derived cohomology sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -152,7 +156,7 @@ def fieldEtaleH1CokernelIso
 
 /-- Actual continuous first field cohomology is the same cokernel of actual
 base sections of an injective coefficient presentation. -/
-def fieldContinuousH1CokernelIso [CharZero K]
+def fieldContinuousH1CokernelIso
     (S : ShortComplex (Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}))
     (hS : S.ShortExact) [Injective S.X₂] :
     cokernel (S.g.hom.app (op (Scheme.Etale.mk (𝟙 (Spec (.of K)))))) ≅
@@ -181,7 +185,7 @@ def fieldContinuousH1CokernelIso [CharZero K]
 
 /-- Actual classical first field cohomology and actual continuous cohomology
 of geometric sections agree, by an actual injective presentation. -/
-def fieldEtaleContinuousModuleH1Equiv [CharZero K]
+def fieldEtaleContinuousModuleH1Equiv
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}) :
     Sheaf.H.{u} F 1 ≃+
       (((finiteGaloisSectionContinuousModuleComplexFunctor K).obj F).homology 1) := by
@@ -195,7 +199,7 @@ def fieldEtaleContinuousModuleH1Equiv [CharZero K]
 homology of the actual continuous geometric-section complex in every degree.
 It is constructed from the natural degree-zero comparison and the proved
 injective acyclicity on both sides; no higher comparison premise is assumed. -/
-def fieldEtaleContinuousModuleEquiv [CharZero K] :
+def fieldEtaleContinuousModuleEquiv :
     (n : ℕ) →
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}) →
     Sheaf.H.{u} F n ≃+
@@ -214,10 +218,10 @@ def fieldEtaleContinuousModuleEquiv [CharZero K] :
         ((fieldEtaleContinuousModuleEquiv (n + 1) S.X₃).trans
           e.addCommGroupIsoToAddEquiv)
 
-/-- Actual derived etale cohomology of a characteristic-zero field agrees
+/-- Actual derived etale cohomology of an arbitrary field agrees
 objectwise, in every degree, with actual continuous absolute Galois cohomology
 of its geometric sections. No naturality in higher degrees is asserted here. -/
-def fieldEtaleContinuousCohomologyEquiv [CharZero K]
+def fieldEtaleContinuousCohomologyEquiv
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}) (n : ℕ) :
     Sheaf.H.{u} F n ≃+
       continuousCohomology n (finiteGaloisSectionColimitTopRep K F) :=

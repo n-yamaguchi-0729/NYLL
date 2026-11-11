@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Kaehler.JacobiZariski
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Kaehler.JacobiZariski
 
 /-!
 # Algebra Formally Etale of formally Smooth of bijective map Base Change
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -10,26 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivTwistObj
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenLinearEquivTensorSections
-import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Projective.ChartSectionsBaseChange
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearEquivTwistObj
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.IsAffineOpenLinearEquivTensorSections
+public import Nyll.SchemeTheory.ProjectiveSpace.StandardChartsBaseChange
 
 /-!
 # Proj Space exists linear Equiv base Change cochain twist of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -59,93 +64,43 @@ local notation "𝒜B" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) B
 
 omit [IsAffineHom ι] [IsAffineHom ι'] in
 theorem preimage_pullbackChart (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (j : Fin (n + 1)) :
-    e ⁻¹ᵁ ProjSpace.pullbackChart ι j = ProjSpace.pullbackChart ι' j := by
-  rw [ProjSpace.pullbackChart_eq, ProjSpace.pullbackChart_eq, ← Scheme.Hom.comp_preimage, hcomp,
-    Scheme.Hom.comp_preimage, ProjSpace.map_preimage_basicOpen_X]
+    e ⁻¹ᵁ ProjSpace.pullbackChart ι j = ProjSpace.pullbackChart ι' j :=
+  ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι B ι' e hcomp j
 
 theorem preimage_inter (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) {i : ℕ} (s :
   (ProjSpace.stdCoverPullback ι).Idx i) :
-    e ⁻¹ᵁ (ProjSpace.stdCoverPullback ι).inter s = (ProjSpace.stdCoverPullback ι').inter s := by
-  change {t : Fin (i + 1) → ULift.{u} (Fin (n + 1)) // StrictMono t} at s
-  change e ⁻¹ᵁ (⨅ j, (ProjSpace.stdCoverPullback ι).U (s.1 j)) = ⨅ j, (ProjSpace.stdCoverPullback
-    ι').U (s.1 j)
-  rw [Scheme.OrderedAffineCover.preimage_iInf_fin]
-  congr 1
-  funext j
-  rw [ProjSpace.stdCoverPullback_U, ProjSpace.stdCoverPullback_U, ProjSpace.stdCover_U,
-    ProjSpace.stdCover_U,
-    ← Scheme.Hom.comp_preimage, hcomp, Scheme.Hom.comp_preimage, ProjSpace.map_preimage_basicOpen_X]
+    e ⁻¹ᵁ (ProjSpace.stdCoverPullback ι).inter s = (ProjSpace.stdCoverPullback ι').inter s :=
+  ProjSpace.ChartSectionsBaseChange.preimage_inter ι B ι' e hcomp s
 
 theorem inter_le_pullbackChart {W : Scheme.{u}} {R : Type u} [CommRing R]
     (φ : W ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)) [IsAffineHom φ]
     {i : ℕ} (s : (ProjSpace.stdCoverPullback φ).Idx i) (t : Fin (i + 1)) :
-    (ProjSpace.stdCoverPullback φ).inter s ≤ ProjSpace.pullbackChart φ ((s.1 t).down) := by
-  change {t : Fin (i + 1) → ULift.{u} (Fin (n + 1)) // StrictMono t} at s
-  refine (Scheme.OrderedAffineCover.inter_le (ProjSpace.stdCoverPullback φ) s t).trans ?_
-  rw [ProjSpace.stdCoverPullback_U, ProjSpace.stdCover_U, ProjSpace.pullbackChart_eq]
+    (ProjSpace.stdCoverPullback φ).inter s ≤ ProjSpace.pullbackChart φ ((s.1 t).down) :=
+  ProjSpace.ChartSectionsBaseChange.inter_le_pullbackChart φ s t
 
 theorem isAffineOpen_inter {W : Scheme.{u}} {R : Type u} [CommRing R]
     (φ : W ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)) [IsAffineHom φ]
     {i : ℕ} (s : (ProjSpace.stdCoverPullback φ).Idx i) :
-    IsAffineOpen ((ProjSpace.stdCoverPullback φ).inter s) := by
-  change {t : Fin (i + 1) → ULift.{u} (Fin (n + 1)) // StrictMono t} at s
-  have : (ProjSpace.stdCoverPullback φ).inter s = φ ⁻¹ᵁ (⨅ j, (ProjSpace.stdCover R n).U (s.1 j))
-    := by
-    change (⨅ j, (ProjSpace.stdCoverPullback φ).U (s.1 j)) = _
-    rw [Scheme.OrderedAffineCover.preimage_iInf_fin]
-    rfl
-  rw [this]
-  refine IsAffineOpen.preimage ?_ φ
-  have key : ∀ (m : ℕ) (g : Fin (m + 1) → MvPolynomial (Fin (n + 1)) R),
-      (⨅ j, Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R) (g j))
-        = Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R) (∏ j, g j) := by
-    intro m
-    induction m with
-    | zero =>
-      intro g
-      rw [Fin.prod_univ_one]
-      exact le_antisymm (iInf_le _ 0) (le_iInf fun j => by fin_cases j; exact le_rfl)
-    | succ m ih =>
-      intro g
-      rw [Fin.prod_univ_succ, Proj.basicOpen_mul, ← ih (fun j => g j.succ)]
-      exact le_antisymm (le_inf (iInf_le _ 0) (le_iInf fun j => iInf_le _ j.succ))
-        (le_iInf fun j => Fin.cases inf_le_left (fun k => inf_le_right.trans (iInf_le _ k)) j)
-  have hdeg : ∀ (m : ℕ) (t : Fin (m + 1) → Fin (n + 1)),
-      (∏ j, MvPolynomial.X (t j) : MvPolynomial (Fin (n + 1)) R) ∈
-        MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R (m + 1) := by
-    intro m t
-    have := SetLike.prod_mem_graded (A := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)
-      (F := (Finset.univ : Finset (Fin (m + 1)))) (i := fun _ => (1 : ℕ)) (g := fun j =>
-        MvPolynomial.X (t j))
-      (fun j _ => ProjSpace.X_mem_one R n (t j))
-    simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul, mul_one]
-      using this
-  simp only [ProjSpace.stdCover_U]
-  rw [key]
-  exact Proj.isAffineOpen_basicOpen _ _ (hdeg i (fun j => (s.1 j).down)) (Nat.succ_pos _)
+    IsAffineOpen ((ProjSpace.stdCoverPullback φ).inter s) :=
+  ProjSpace.ChartSectionsBaseChange.isAffineOpen_inter φ s
 
 theorem X_eq_mvMapGraded_mul_one (i : Fin (n + 1)) :
     (MvPolynomial.X i : MvPolynomial (Fin (n + 1)) B) = (ProjSpace.mvMapGraded A B n)
-      (MvPolynomial.X i) * 1 := by
-  rw [ProjSpace.mvMapGraded_X, mul_one]
+      (MvPolynomial.X i) * 1 :=
+  ProjSpace.ChartSectionsBaseChange.X_eq_mvMapGraded_mul_one (A := A) B i
 
 theorem one_mem_zero : (1 : MvPolynomial (Fin (n + 1)) B) ∈ (MvPolynomial.homogeneousSubmodule (Fin
   (n + 1)) B) 0 :=
-  SetLike.one_mem_graded _
+  ProjSpace.ChartSectionsBaseChange.one_mem_zero (n := n) B
 
 /-- The coordinate localization map induced by the coefficient base change. -/
 noncomputable def toB (i : Fin (n + 1)) : Away 𝒜A (MvPolynomial.X i) →+* Away 𝒜B (MvPolynomial.X i)
   :=
-  (awayMap 𝒜B (one_mem_zero (n := n) B) (X_eq_mvMapGraded_mul_one (A := A) B i)).comp
-    (Away.map (ProjSpace.mvMapGraded A B n) (MvPolynomial.X i))
+  ProjSpace.ChartSectionsBaseChange.toB (A := A) B i
 
 theorem toB_ratio (i j : Fin (n + 1)) : toB (A := A) B i (ProjSpace.ratio A n i j) =
-  ProjSpace.ratio B n i j := by
-  apply HomogeneousLocalization.val_injective
-  rw [toB, RingHom.comp_apply, ProjSpace.ratio, Away.map_mk]
-  rw [Away.mk, val_awayMap_mk, ProjSpace.ratio, Away.val_mk, Localization.mk_eq_mk_iff,
-    Localization.r_iff_exists]
-  exact ⟨1, by simp only [ProjSpace.mvMapGraded_X, one_pow, mul_one]⟩
+  ProjSpace.ratio B n i j :=
+  ProjSpace.ChartSectionsBaseChange.toB_ratio (A := A) B i j
 
 omit [IsAffineHom ι] [IsAffineHom ι'] in
 theorem restrictFun_app_pullAway (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i : Fin (n + 1))
@@ -155,81 +110,23 @@ theorem restrictFun_app_pullAway (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n
         ((ι.app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A (MvPolynomial.X
           i)).hom a)))
       = ProjSpace.restrictFun h₂ ((ι'.app (Proj.basicOpen 𝒜B (MvPolynomial.X i))).hom
-          ((Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a))) := by
-  have s1 : (e.app (ProjSpace.pullbackChart ι i)).hom
-      ((ι.app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A (MvPolynomial.X
-        i)).hom a))
-      = ((e ≫ ι).app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A
-        (MvPolynomial.X i)).hom a) := by
-    rfl
-  rw [s1]
-  have s2 := Scheme.Hom.congr_app hcomp (Proj.basicOpen 𝒜A (MvPolynomial.X i))
-  rw [s2]
-  change ProjSpace.restrictFun h₁ ((Z'.presheaf.map _).hom
-      ((ι'.app ((ProjSpace.map A B n) ⁻¹ᵁ Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom
-        (((ProjSpace.map A B n).app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom
-          ((Proj.awayToSection 𝒜A (MvPolynomial.X i)).hom a)))) = _
-  have s3 : ((ProjSpace.map A B n).app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom
-      ((Proj.awayToSection 𝒜A (MvPolynomial.X i)).hom a)
-      = (Proj.awayToSection 𝒜B ((ProjSpace.mvMapGraded A B n) (MvPolynomial.X i))).hom
-          (Away.map (ProjSpace.mvMapGraded A B n) (MvPolynomial.X i) a) := by
-    have := Proj.awayToSection_comp_appLE (ProjSpace.mvMapGraded A B n)
-      (ProjSpace.irrelevant_le_map_mvMapGraded A B n)
-      (ProjSpace.X_mem_one A n i)
-    have h := congrArg (fun ψ => ψ.hom a) this
-    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at h
-    have h' : ((ProjSpace.map A B n).appLE (Proj.basicOpen 𝒜A (MvPolynomial.X i))
-        ((ProjSpace.map A B n) ⁻¹ᵁ Proj.basicOpen 𝒜A (MvPolynomial.X i)) le_rfl).hom
-        ((Proj.awayToSection 𝒜A (MvPolynomial.X i)).hom a)
-        = (Proj.awayToSection 𝒜B ((ProjSpace.mvMapGraded A B n) (MvPolynomial.X i))).hom
-          (Away.map (ProjSpace.mvMapGraded A B n) (MvPolynomial.X i) a) := h
-    rw [Scheme.Hom.appLE_eq_app] at h'
-    exact h'
-  rw [s3]
-  have s4 := congrArg (fun ψ => ψ.hom (Away.map (ProjSpace.mvMapGraded A B n) (MvPolynomial.X i) a))
-    (Proj.awayMap_awayToSection 𝒜B (one_mem_zero (n := n) B) (X_eq_mvMapGraded_mul_one (A := A) B
-      i))
-  simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at s4
-  have s5 : (Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a)
-      = ((Proj 𝒜B).presheaf.map (homOfLE (Proj.basicOpen_mono 𝒜B _ _
-          ⟨_, X_eq_mvMapGraded_mul_one (A := A) B i⟩)).op).hom
-        ((Proj.awayToSection 𝒜B ((ProjSpace.mvMapGraded A B n) (MvPolynomial.X i))).hom
-          (Away.map (ProjSpace.mvMapGraded A B n) (MvPolynomial.X i) a)) := by
-    rw [toB, RingHom.comp_apply]
-    exact s4
-  rw [s5]
-  have s6 := congrArg (fun ψ => ψ.hom ((Proj.awayToSection 𝒜B ((ProjSpace.mvMapGraded A B n)
-    (MvPolynomial.X i))).hom
-          (Away.map (ProjSpace.mvMapGraded A B n) (MvPolynomial.X i) a)))
-    (ι'.naturality (homOfLE (Proj.basicOpen_mono 𝒜B _ _ ⟨_, X_eq_mvMapGraded_mul_one (A := A) B
-      i⟩)).op)
-  simp only [CommRingCat.hom_comp, RingHom.comp_apply] at s6
-  rw [s6]
-  change (Z'.presheaf.map _ ≫ Z'.presheaf.map _).hom _ = (Z'.presheaf.map _ ≫ Z'.presheaf.map
-    _).hom _
-  erw [← Functor.map_comp, ← Functor.map_comp]
-  rfl
+          ((Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a))) :=
+  ProjSpace.ChartSectionsBaseChange.restrictFun_app_pullAway ι B ι' e hcomp i a h₁ h₂
 
 omit [IsAffineHom ι] [IsAffineHom ι'] in
 theorem restrictFun_app_frameUnit (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i j : Fin (n + 1))
   {W' : Z'.Opens}
     (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
     ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom (ProjSpace.frameUnit ι i j))
-      = ProjSpace.restrictFun h₂ (ProjSpace.frameUnit ι' i j) := by
-  rw [ProjSpace.frameUnit, ProjSpace.frameUnit, restrictFun_app_pullAway ι B ι' e hcomp i _ h₁ h₂,
-    toB_ratio]
+      = ProjSpace.restrictFun h₂ (ProjSpace.frameUnit ι' i j) :=
+  ProjSpace.ChartSectionsBaseChange.restrictFun_app_frameUnit ι B ι' e hcomp i j h₁ h₂
 
 theorem restrictFun_app_eq {U V : Z.Opens} (hVU : V ≤ U) {W' : Z'.Opens} (h₁ : W' ≤ e ⁻¹ᵁ V) (h₂ :
   W' ≤ e ⁻¹ᵁ U)
     (x : Γ(Z, U)) :
     ProjSpace.restrictFun h₁ ((e.app V).hom (ProjSpace.restrictFun hVU x)) = ProjSpace.restrictFun
-      h₂ ((e.app U).hom x) := by
-  have := congrArg (fun ψ => ψ.hom x) (e.naturality (homOfLE hVU).op)
-  simp only [CommRingCat.hom_comp, RingHom.comp_apply] at this
-  erw [this]
-  change (Z'.presheaf.map _ ≫ Z'.presheaf.map _).hom _ = (Z'.presheaf.map _).hom _
-  rw [← Functor.map_comp]
-  rfl
+      h₂ ((e.app U).hom x) :=
+  ProjSpace.ChartSectionsBaseChange.restrictFun_app_eq e hVU h₁ h₂ x
 
 theorem appLE_top_top {X Y : Scheme.{u}} (g : X ⟶ Y) (h : (⊤ : X.Opens) ≤ g ⁻¹ᵁ ⊤) : g.appLE ⊤ ⊤ h
   = g.appTop := by

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
-import Nyll.SchemeTheory.FiniteEtale.Away.AtUnit
-import Nyll.SchemeTheory.FiniteEtale.Away.EtaleExtension
-import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+public import Nyll.SchemeTheory.FiniteEtale.Away.AtUnit
+public import Nyll.SchemeTheory.FiniteEtale.Away.EtaleExtension
+public import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
 
 /-! Canonical aggregate for SchemeTheory.FiniteEtale.Away. -/

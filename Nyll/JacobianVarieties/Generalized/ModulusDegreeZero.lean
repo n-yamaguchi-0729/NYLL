@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareFrameQuotient
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # A full modulus of degree zero is empty -/
+
+@[expose] public section
 
 noncomputable section
 

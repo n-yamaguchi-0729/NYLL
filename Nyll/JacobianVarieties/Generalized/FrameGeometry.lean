@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameRepresentability
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitDimension
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitGeometric
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameRepresentability
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitDimension
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitGeometric
 
 /-! Geometry of the actual glued scalar-frame scheme over its parameter scheme. -/
+
+@[expose] public section
 
 noncomputable section
 

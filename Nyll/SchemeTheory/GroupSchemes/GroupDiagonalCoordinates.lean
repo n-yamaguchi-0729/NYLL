@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalDiagonalEvaluation
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 
 /-! # Actual group coordinates at the generic diagonal
 
@@ -18,6 +20,8 @@ therefore factors through every open identity neighbourhood. For an affine
 neighbourhood this constructs its coordinate ring map into that local ring.
 No formal parameter or bound on coefficients is part of this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,11 +34,13 @@ namespace AlgebraicGeometry.GroupDiagonal
 
 variable {K : Type u} [Field K]
 
-private abbrev scalarSpec (A : Type u) [CommRing A] [Algebra K A] :
+/-- The spectrum of a coefficient algebra as a scheme over the coefficient field. -/
+abbrev scalarSpec (A : Type u) [CommRing A] [Algebra K A] :
     Over (Spec (.of K)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K A)))
 
-private def scalarSpecMap {A B : Type u} [CommRing A] [CommRing B]
+/-- The morphism of spectra over the coefficient field induced by an algebra map. -/
+def scalarSpecMap {A B : Type u} [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B] (f : A →ₐ[K] B) :
     scalarSpec (K := K) B ⟶ scalarSpec (K := K) A :=
   Over.homMk (Spec.map (CommRingCat.ofHom f.toRingHom)) (by

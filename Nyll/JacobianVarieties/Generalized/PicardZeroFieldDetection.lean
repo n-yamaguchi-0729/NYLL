@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
-import Nyll.AlgebraicCurves.Geometry.Picard.AbelJacobi.AbelJacobiFamily
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+public import Nyll.AlgebraicCurves.Geometry.Picard.AbelJacobi.AbelJacobiFamily
 
 /-! # Detecting the modulus zero condition after geometric-point restriction -/
+
+@[expose] public section
 
 noncomputable section
 

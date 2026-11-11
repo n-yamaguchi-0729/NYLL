@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverProjectiveTwistedLifts
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTwistedGeneratingSections
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Order.Lattice
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverProjectiveTwistedLifts
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTwistedGeneratingSections
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Order.Lattice
 
 /-!
 # Constructed compatible finite generators for the projective cover tower
@@ -30,6 +32,8 @@ The conclusion supplies the original section families, their common
 finite index type, the actual epimorphic free-sheaf maps, and compatibility
 with the original transitions. None of these are hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

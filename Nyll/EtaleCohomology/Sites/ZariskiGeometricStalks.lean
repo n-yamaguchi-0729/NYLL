@@ -5,15 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ZariskiSectionEquality
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.EtaleCohomology.Sites.ZariskiSectionEquality
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Zariski germs inside geometric étale stalks
@@ -23,6 +25,8 @@ map from the Zariski stalk to the geometric étale stalk. Equality in the
 latter occurs on an étale neighborhood. Descent to its open image proves
 that this map is injective for a sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -121,7 +125,8 @@ theorem exists_zariski_neighborhood_abelianSections_eq_of_geometric_germs_eq
   have hb := ConcreteCategory.congr_hom he b
   exact ha.trans (hab.trans hb.symm)
 
-private def zariskiGeometricNeighborhoods :
+/-- Open neighborhoods lift to geometric étale neighborhoods by their actual point lifts. -/
+def zariskiGeometricNeighborhoods :
     OpenNhds (s ξ) ⥤ (Scheme.pointSmallEtale s).fiber.Elements where
   obj U := (Scheme.pointSmallEtale s).fiber.elementsMk ((zariskiToEtale X).obj U.1)
     (zariskiGeometricLift s ξ U.1 U.2)

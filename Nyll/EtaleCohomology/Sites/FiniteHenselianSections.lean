@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.EmptySections
-import Nyll.EtaleCohomology.Sites.FiniteAffineSectionLifts
-import Nyll.SchemeTheory.Etale.FiniteStrictLocalSection
-import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.IsSheafFor
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Sites.EmptySections
+public import Nyll.EtaleCohomology.Sites.FiniteAffineSectionLifts
+public import Nyll.SchemeTheory.Etale.FiniteStrictLocalSection
+public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Exact global sections on finite schemes over a strictly local base
@@ -32,6 +34,8 @@ the geometric section of that cover pulls this preimage back to the base.
 This supplies the strictly local exactness step in Stacks Project 59.55.2.
 It does not identify a direct-image stalk with a geometric-fiber product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

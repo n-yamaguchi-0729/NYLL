@@ -16,13 +16,14 @@ import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
 import Nyll.SchemeTheory.Modules.Invertible.Rigidify
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackRigidifyIso
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
+import Nyll.SchemeTheory.Modules.Invertible.Field
 
 /-! Transport of Picard morphisms through commuting curve isomorphisms. -/
 
@@ -48,23 +49,8 @@ namespace RTNAux
 
 /-- An invertible module over the spectrum of a field is trivial. -/
 theorem nonempty_iso_unit_of_field {k : Type u} [Field k] (Q : (Spec (CommRingCat.of k)).Modules)
-    (hQ : Scheme.Modules.IsInvertible Q) : Nonempty (Q ≅ 𝟙_ (Spec (CommRingCat.of k)).Modules) := by
-  obtain ⟨U, hx, ⟨eU⟩⟩ := hQ.1 default
-  have hU : U = ⊤ := by
-    ext y
-    simp only [TopologicalSpace.Opens.coe_top, Set.mem_univ, iff_true]
-    rw [Subsingleton.elim y default]
-    exact hx
-  subst hU
-  let X := Spec (CommRingCat.of k)
-  let i : (⊤ : X.Opens).toScheme ≅ X := X.topIso
-  have hi : i.inv ≫ (⊤ : X.Opens).ι = 𝟙 X := by
-    rw [← Scheme.topIso_hom]; exact i.inv_hom_id
-  exact ⟨((Scheme.Modules.pullbackId _).app Q).symm ≪≫
-    (Scheme.Modules.pullbackCongr hi.symm).app Q ≪≫
-    ((Scheme.Modules.pullbackComp _ _).app Q).symm ≪≫
-    (Scheme.Modules.pullback i.inv).mapIso eU ≪≫
-    Scheme.Modules.pullbackUnitIso i.inv⟩
+    (hQ : Scheme.Modules.IsInvertible Q) : Nonempty (Q ≅ 𝟙_ (Spec (CommRingCat.of k)).Modules) :=
+  _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_tensorUnit_of_field k Q hQ
 
 variable {R : Type u} [CommRing R] {C C' : Scheme.{u}}
   {c : C ⟶ Spec (CommRingCat.of R)} {c' : C' ⟶ Spec (CommRingCat.of R)}

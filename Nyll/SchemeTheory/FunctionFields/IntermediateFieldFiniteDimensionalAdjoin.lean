@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.Tactic.Choose
 
 /-!
 # Intermediate Field finite Dimensional adjoin of linear Disjoint of transcendental
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

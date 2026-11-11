@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousTransgressionExact
-import Nyll.ProCGroups.Topologies.QuotientMaps
-import Mathlib.Algebra.Field.ZMod
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgressionExact
+public import Nyll.ProCGroups.Topologies.QuotientMaps
+public import Mathlib.Algebra.Field.ZMod
 
 /-!
 # Exactness of continuous degree-one inflation and restriction
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Field.ZMod
 For an open normal subgroup `U`, continuous mod-`p` characters of `G / U` inflate to
 continuous characters of `G`.  Their range is exactly the kernel of restriction to `U`.
 -/
+
+@[expose] public section
 
 open scoped Topology
 

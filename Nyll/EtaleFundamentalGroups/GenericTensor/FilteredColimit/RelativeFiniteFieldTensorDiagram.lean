@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Filtered.Connected
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Limits.Final
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Filtered.Connected
+public import Mathlib.CategoryTheory.Filtered.Final
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Final
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Relative finite constant-extension tensor diagrams
@@ -22,6 +24,8 @@ through the tensor map of the actual field inclusion. Finality of the upper
 interval preserves the existing tensor colimit; no coefficient lifting or
 injectivity argument is repeated.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,11 +39,13 @@ namespace EtaleFundamentalGroups
 variable (k L R : Type u) [Field k] [Field L] [CommRing R]
 variable [Algebra k L] [Algebra k R]
 
-private def finiteIntermediateFieldTensorRingDiagram :
+/-- The finite constant-extension tensor diagram with its base algebra forgotten. -/
+def finiteIntermediateFieldTensorRingDiagram :
     FiniteIntermediateFieldIndex k L ⥤ CommRingCat.{u} :=
   finiteIntermediateFieldTensorDiagram k L R ⋙ Under.forget (CommRingCat.of R)
 
-private def finiteIntermediateFieldTensorRingCocone :
+/-- The tensor inclusion cocone in commutative rings. -/
+def finiteIntermediateFieldTensorRingCocone :
     Cocone (finiteIntermediateFieldTensorRingDiagram k L R) :=
   (Under.forget (CommRingCat.of R)).mapCocone
     (finiteIntermediateFieldTensorCocone k L R)
@@ -61,7 +67,7 @@ existing finite-field tensor colimit to the final upper interval. -/
 def relativeFiniteIntermediateFieldTensorCoconeIsColimit [Algebra.IsAlgebraic k L]
     (F₀ : FiniteIntermediateFieldIndex k L) :
     IsColimit (relativeFiniteIntermediateFieldTensorCocone k L R F₀) := by
-  letI : IsConnected (FiniteIntermediateFieldIndex k L) := IsFiltered.isConnected _
+  let : IsConnected (FiniteIntermediateFieldIndex k L) := IsFiltered.isConnected _
   have hc : IsColimit (finiteIntermediateFieldTensorRingCocone k L R) :=
     isColimitOfPreserves (Under.forget (CommRingCat.of R))
       (finiteIntermediateFieldTensorCoconeIsColimit k L R)

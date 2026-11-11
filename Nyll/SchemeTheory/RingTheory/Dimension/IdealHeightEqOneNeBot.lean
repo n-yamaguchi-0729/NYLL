@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Ideal height eq one of ne bot of not is Maximal of ring Krull Dim le two
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,24 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineCompletion
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
-import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveOverCompletion
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.Algebra.Module.Projective
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverAffineCompletion
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+public import Nyll.SchemeTheory.Affine.ClosedBaseChangeSections
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ProjectiveOverCompletion
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Projectivity of the actual completed finite étale cover sections
@@ -37,6 +39,8 @@ over the original coefficient quotients. The completed compatible-section
 module is consequently projective, hence flat, over the completed affine
 coefficient ring. No flatness of this constructed module is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

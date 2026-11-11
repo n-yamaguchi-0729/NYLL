@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
 import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
 import Nyll.SchemeTheory.Divisors.RegularCartier
+import Nyll.SchemeTheory.Divisors.LocalComplement
 
 /-!
 # The Cartier complement over the actual strict henselization

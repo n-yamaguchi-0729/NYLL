@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Topology.NoetherianSpace
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.IsIntegralSmooth
+module
+
+public import Mathlib.Topology.NoetherianSpace
+public import Nyll.SchemeTheory.LocalGeometry.IntegralSmooth
 
 /-!
 # Smooth exists is Open is Irreducible nhd
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

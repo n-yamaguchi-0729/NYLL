@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFrameFunctor
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFrameFunctor
+public import Mathlib.Algebra.Category.Grp.Basic
 
 /-!
 # Units of the actual base-changed modulus modulo parameter scalars
@@ -14,6 +16,8 @@ The values are global units on the actual scheme fibre product, rather than
 on an assumed tensor-algebra model. The scalar subgroup is the image of the
 actual projection to the test scheme. Its quotient is functorial on all tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

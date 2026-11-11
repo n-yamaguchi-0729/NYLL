@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
-import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.NormalLocalizationDVR
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
+public import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.NormalLocalizationDVR
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
 
 /-!
 # Inertia cardinality over a normal Noetherian base
@@ -15,6 +18,8 @@ At a height-one prime, normality and Noetherianity already make the local
 base a discrete valuation ring.  Thus the inertia-cardinality formula does
 not require regularity of the ambient ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

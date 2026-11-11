@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Smith.LatticeCover
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Lattices.Smith.LatticeCover
 
 /-!
 # Positive Smith coordinates for a finite-index lattice cover
@@ -14,6 +16,8 @@ Changing the sign of each negative target coordinate replaces them by their
 positive natural absolute values.  Functoriality of additive monoid algebras
 preserves the resulting coordinate square.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -59,13 +63,13 @@ theorem exists_smithNatDiagonal_monoidAlgebra
     intro x i
     rw [show d' x i = sign i (d x i) by rfl, hd]
     by_cases h : 0 ≤ a i
-    · rw [show sign i = AddEquiv.refl ℤ by simp [sign, h]]
+    · rw [show sign i = AddEquiv.refl ℤ by exact ite_eq_left h]
       have hnat : (n i : ℤ) = a i := by
         simpa [n] using Int.natAbs_of_nonneg h
       rw [hnat]
       rfl
     · have hai : a i ≤ 0 := le_of_lt (lt_of_not_ge h)
-      rw [show sign i = AddEquiv.neg ℤ by simp [sign, h]]
+      rw [show sign i = AddEquiv.neg ℤ by exact ite_eq_right h]
       have hnat : (n i : ℤ) = -a i := by
         simp only [n]
         rw [Int.natCast_natAbs, abs_of_nonpos hai]

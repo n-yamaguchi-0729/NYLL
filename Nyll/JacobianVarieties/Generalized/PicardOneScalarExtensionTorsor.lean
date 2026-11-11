@@ -5,21 +5,25 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionAction
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionScheme
-import Nyll.JacobianVarieties.Generalized.PicardOneSchemeAction
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupSchemeMap
-import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
-import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionAction
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionScheme
+public import Nyll.JacobianVarieties.Generalized.PicardOneSchemeAction
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupScheme
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupSchemeMap
+public import Nyll.JacobianVarieties.Generalized.PicardOneModuleObject
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
+public import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 
 /-! # Scalar extension of the actual degree-one scheme action -/
+
+@[expose] public section
 
 noncomputable section
 

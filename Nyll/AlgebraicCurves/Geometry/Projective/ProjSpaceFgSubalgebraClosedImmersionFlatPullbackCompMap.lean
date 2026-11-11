@@ -10,27 +10,31 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Algebra.Ring.ULift
-import Mathlib.Tactic.Ext
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraProperFlatPullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.FgSubalgebraHomPullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFiniteSubalgebra
-import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.Algebra.Ring.ULift
+public import Mathlib.Tactic.Ext
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.Descent.FgSubalgebraProperFlatPullback
+public import Nyll.SchemeTheory.Descent.FgSubalgebraHomPullback
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ClosedImmersionFiniteSubalgebra
+public import Nyll.SchemeTheory.ProjectiveSpace.BaseChange
 
 /-!
 # Proj Space exists fg subalgebra is Closed Immersion flat is Pullback comp map of is Closed
 Immersion of flat of locally Of Finite Presentation
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

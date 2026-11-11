@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.BaseNorm
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.BaseNorm
+public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Norm
 
 /-!
 # Basic Galois ramification-image subgroups
@@ -13,6 +16,8 @@ This file contains the subgroup constructions used by the Neu1999 Galois
 ramification source: embedded base units, their tower transport, their
 `[M : L]`-powered lower image, and the norm-down image in the base field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

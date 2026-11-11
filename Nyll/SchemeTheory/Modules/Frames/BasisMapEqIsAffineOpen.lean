@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 /-!
 # Scheme Modules forall exists basis map eq of forall is Affine Open
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

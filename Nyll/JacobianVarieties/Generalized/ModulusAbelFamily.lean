@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedDivisor
-import Nyll.JacobianVarieties.Generalized.PicardSheaf
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedDivisor
+public import Nyll.JacobianVarieties.Generalized.PicardSheaf
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedInOfPoint
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
 
 /-!
 # The actual modulus-rigidified Abel family
@@ -22,6 +24,8 @@ The resulting family defines an actual natural transformation from the open
 curve's functor of points to the fppf modulus Picard sheaf. Its factorization
 through a represented degree-one torsor is a separate construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

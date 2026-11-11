@@ -10,12 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.Algebra.MvPolynomial.PDeriv
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Derivative
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Place exists Unique sub algebra Map mem nonunits of eval pderiv ne zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -69,7 +78,9 @@ theorem eval_subY (a b : K) (G : MvPolynomial (Fin 2) K) :
 theorem derivative_subY (a : K) (G : MvPolynomial (Fin 2) K) :
     Polynomial.derivative (subY a G) = subY a (pderiv 1 G) := by
   induction G using MvPolynomial.induction_on with
-  | C c => simp [subY]
+  | C c =>
+      rw [subY, MvPolynomial.aeval_C, pderiv_C, map_zero]
+      exact Polynomial.derivative_C
   | add G H hG hH => simp only [map_add, hG, hH]
   | mul_X G i hG =>
     rw [map_mul, Polynomial.derivative_mul, hG, (pderiv 1).leibniz, map_add, smul_eq_mul,
@@ -86,7 +97,10 @@ theorem sub_ιY_subY_mem_span (a : K) (G : MvPolynomial (Fin 2) K) :
     G - ιY (subY a G) ∈ Ideal.span ({X 0 - C a} : Set (MvPolynomial (Fin 2) K)) := by
   induction G using MvPolynomial.induction_on with
   | C c =>
-    have : ιY (subY a (C c)) = (C c : MvPolynomial (Fin 2) K) := by simp [ιY, subY]
+    have : ιY (subY a (C c)) = (C c : MvPolynomial (Fin 2) K) := by
+      rw [subY, MvPolynomial.aeval_C]
+      exact Polynomial.aeval_C (R := K)
+        (X (1 : Fin 2) : MvPolynomial (Fin 2) K) c
     rw [this, sub_self]; exact Ideal.zero_mem _
   | add G H hG hH =>
     have : G + H - ιY (subY a (G + H)) = (G - ιY (subY a G)) + (H - ιY (subY a H)) := by
@@ -100,10 +114,16 @@ theorem sub_ιY_subY_mem_span (a : K) (G : MvPolynomial (Fin 2) K) :
     refine Ideal.add_mem _ (Ideal.mul_mem_right _ _ hG) (Ideal.mul_mem_left _ _ ?_)
     fin_cases i
     · change X 0 - ιY (subY a (X 0)) ∈ _
-      have : ιY (subY a (X (0 : Fin 2))) = (C a : MvPolynomial (Fin 2) K) := by simp [ιY, subY]
+      have : ιY (subY a (X (0 : Fin 2))) = (C a : MvPolynomial (Fin 2) K) := by
+        rw [subY, MvPolynomial.aeval_X]
+        exact Polynomial.aeval_C (R := K)
+          (X (1 : Fin 2) : MvPolynomial (Fin 2) K) a
       rw [this]; exact Ideal.subset_span rfl
     · change X 1 - ιY (subY a (X 1)) ∈ _
-      have : ιY (subY a (X (1 : Fin 2))) = (X 1 : MvPolynomial (Fin 2) K) := by simp [ιY, subY]
+      have : ιY (subY a (X (1 : Fin 2))) = (X 1 : MvPolynomial (Fin 2) K) := by
+        rw [subY, MvPolynomial.aeval_X]
+        exact Polynomial.aeval_X (R := K)
+          (X (1 : Fin 2) : MvPolynomial (Fin 2) K)
       rw [this, sub_self]; exact Ideal.zero_mem _
 
 end Poly
@@ -380,10 +400,14 @@ theorem sO_mem_span_tO : sO hker hab hF ∈ Ideal.span {tO hker hab hF} := by
     · intro c
       rw [RingHom.comp_apply]
       change Φ (ιY (Polynomial.C c)) = φ (Polynomial.C c)
-      rw [show ιY (Polynomial.C c) = (C c : MvPolynomial (Fin 2) K) by simp [ιY], hφC]
+      rw [show ιY (Polynomial.C c) = (C c : MvPolynomial (Fin 2) K) from
+        Polynomial.aeval_C (R := K)
+          (X (1 : Fin 2) : MvPolynomial (Fin 2) K) c, hφC]
     · rw [RingHom.comp_apply]
       change Φ (ιY Polynomial.X) = φ Polynomial.X
-      rw [show ιY (Polynomial.X : Polynomial K) = (X 1 : MvPolynomial (Fin 2) K) by simp [ιY], hφX]
+      rw [show ιY (Polynomial.X : Polynomial K) = (X 1 : MvPolynomial (Fin 2) K) from
+        Polynomial.aeval_X (R := K)
+          (X (1 : Fin 2) : MvPolynomial (Fin 2) K), hφX]
   have hcomp : ∀ p : Polynomial K, Φ (ιY p) = φ p := fun p => by rw [← hfac]; rfl
   have htO : Φ (X 0 - C a) = tO hker hab hF := by rw [hΦapply]; rfl
   have hsO : Φ (X 1 - C b) = sO hker hab hF := by rw [hΦapply]; rfl
@@ -401,7 +425,8 @@ theorem sO_mem_span_tO : sO hker hab hF ∈ Ideal.span {tO hker hab hF} := by
         Polynomial.eval_C,
       sub_self, zero_mul, add_zero] at this
     exact this
-  have hh2root : (h - Polynomial.C (h.eval b)).IsRoot b := by simp [Polynomial.IsRoot]
+  have hh2root : (h - Polynomial.C (h.eval b)).IsRoot b := by
+    rw [Polynomial.IsRoot, Polynomial.eval_sub, Polynomial.eval_C, sub_self]
   set h₂ : Polynomial K := (h - Polynomial.C (h.eval b)) /ₘ (Polynomial.X - Polynomial.C b) with hh₂
   have hhh₂ : (Polynomial.X - Polynomial.C b) * h₂ = h - Polynomial.C (h.eval b) :=
     Polynomial.mul_divByMonic_eq_iff_isRoot.mpr hh2root

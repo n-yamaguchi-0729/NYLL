@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSquareEquivalence
-import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
-import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceBaseChange
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSquareEquivalence
+public import Nyll.JacobianVarieties.Generalized.PicardZeroGroupFunctor
+public import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.AlgebraicEquivalenceBaseChange
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
 
 /-! # The actual rigidified classes at the identity test scheme -/
+
+@[expose] public section
 
 noncomputable section
 

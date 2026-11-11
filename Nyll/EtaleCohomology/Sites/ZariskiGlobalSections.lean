@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.ZariskiRestriction
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Opposites
+module
+
+public import Nyll.EtaleCohomology.Sites.ZariskiRestriction
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Opposites
 
 /-!
 # Global sections of the actual Zariski restriction
@@ -17,6 +19,8 @@ The top open subscheme is identified with the identity object of the small
 étale site. The induced identification of sections commutes with restriction
 to every open subscheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

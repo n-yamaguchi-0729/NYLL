@@ -4,15 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitGroupRepresentation
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitGroupRepresentation
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
 
 /-! # Restricting actual modulus units modulo parameter scalars -/
+
+@[expose] public section
 
 noncomputable section
 
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian.ScalarFrames
 

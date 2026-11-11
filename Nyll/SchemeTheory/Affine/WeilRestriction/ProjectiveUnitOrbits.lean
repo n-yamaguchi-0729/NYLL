@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitCover
-import Mathlib.Algebra.Group.Commute.Units
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ProjectiveUnitCover
+public import Mathlib.Algebra.Group.Commute.Units
 
 /-!
 # Scalar orbits on the normalized projective unit charts
@@ -14,6 +16,8 @@ An actual unit over a point of a standard chart is a unique scalar
 multiple of the constructed normalized unit. The scalar is its
 distinguished coordinate, whose invertibility follows from the norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,7 +36,8 @@ variable {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
 local notation "𝒜" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R
 local notation "N" => UnitNormPolynomial.normPolynomial b
 
-private theorem mixed_mem (j i : Fin (n + 1)) :
+/-- The mixed coordinate has the same homogeneous degree as the norm polynomial. -/
+theorem mixed_mem (j i : Fin (n + 1)) :
     MvPolynomial.X i * MvPolynomial.X j ^ n ∈ 𝒜 (1 • (n + 1)) := by
   apply (MvPolynomial.mem_homogeneousSubmodule _ _).mpr
   simpa only [one_smul, one_mul, Nat.add_comm] using

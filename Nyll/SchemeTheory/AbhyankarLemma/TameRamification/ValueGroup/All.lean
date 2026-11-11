@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Integer
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Norm.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Transport
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.FieldNorm.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Integer
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Norm.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Transport
 
 /-!
 # Value groups in tame ramification

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldHilbert90
-import Nyll.EtaleCohomology.Classical.EtaleRestriction
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
-import Nyll.EtaleCohomology.Sites.FieldFiniteEtaleBasis
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldHilbert90
+public import Nyll.EtaleCohomology.Classical.EtaleRestriction
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
+public import Nyll.EtaleCohomology.Sites.FieldFiniteEtaleBasis
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Hilbert 90 at field-valued étale objects
@@ -18,6 +20,8 @@ The actual restriction comparison transports the existing geometric Hilbert 90
 to a field-valued object of any small étale site. Vanishing of degree-one
 cohomology also supplies actual lifts of sections in a short exact sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -28,7 +32,7 @@ namespace EtaleCohomology
 
 /-- Actual unit-sheaf H1 vanishes at an étale object which is a field spectrum. -/
 theorem etaleMultiplicativeGroup_H1_eq_zero_at_field
-    {X : Scheme.{u}} (L : Type u) [Field L] [CharZero L]
+    {X : Scheme.{u}} (L : Type u) [Field L]
     (f : Spec (.of L) ⟶ X) [Etale f]
     (a : Sheaf.H'.{u} (etaleMultiplicativeGroupSheaf X) 1 (Scheme.Etale.mk f)) :
     a = 0 := by
@@ -62,9 +66,9 @@ theorem exists_section_lift_of_H1_eq_zero
   rw [← freeAbelianSheafYonedaHomEquiv_postcomp, he, Equiv.apply_symm_apply]
 
 /-- Sections of a short exact sequence with actual unit-sheaf kernel lift
-on every étale object over a characteristic-zero field. -/
+on every étale object over any field. -/
 theorem exists_section_lift_of_units_kernel_at_etale_object_of_field
-    (K : Type u) [Field K] [CharZero K]
+    (K : Type u) [Field K]
     {B Q : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (i : etaleMultiplicativeGroupSheaf (Spec (.of K)) ⟶ B) (p : B ⟶ Q)
     (hz : i ≫ p = 0) (hS : (ShortComplex.mk i p hz).ShortExact)
@@ -95,7 +99,6 @@ theorem exists_section_lift_of_units_kernel_at_etale_object_of_field
       (ShortComplex.mk i p hz) hS (U x) _ s
     intro b
     let : Field (L x) := (hfield x).toField
-    have : CharZero (L x) := charZero_of_injective_ringHom (a x).hom.injective
     have : Etale (Spec.map (a x)) := by
       have := hfinite x
       infer_instance
@@ -114,9 +117,9 @@ theorem exists_section_lift_of_units_kernel_at_etale_object_of_field
       rfl
 
 /-- Geometric Hilbert 90 holds at every object of the small étale site
-of a characteristic-zero field, including infinite disjoint unions. -/
+of any field, including infinite disjoint unions. -/
 theorem etaleMultiplicativeGroup_H1_eq_zero_at_etale_object_of_field
-    (K : Type u) [Field K] [CharZero K] (V : (Spec (.of K)).Etale)
+    (K : Type u) [Field K] (V : (Spec (.of K)).Etale)
     (a : Sheaf.H'.{u} (etaleMultiplicativeGroupSheaf (Spec (.of K))) 1 V) :
     a = 0 := by
   let A := etaleMultiplicativeGroupSheaf (Spec (.of K))

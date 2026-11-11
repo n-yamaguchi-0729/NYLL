@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.SheafPullbackGerms
-import Nyll.SchemeTheory.Topology.SpecializationCofinalSections
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Nyll.SchemeTheory.Topology.SheafPullbackGerms
+public import Nyll.SchemeTheory.Topology.SpecializationCofinalSections
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Restriction to a specialization-cofinal image
@@ -27,6 +29,8 @@ subsheaf reduction of Stacks Project, tag 09ZG.
 Reference: https://stacks.math.columbia.edu/tag/09ZG.
 The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

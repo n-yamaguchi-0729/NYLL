@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.Tactic.Ext
 
 /-!
 # Is Local Ring exists is Local Ring adic Completion is Adic Complete map maximal Ideal eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

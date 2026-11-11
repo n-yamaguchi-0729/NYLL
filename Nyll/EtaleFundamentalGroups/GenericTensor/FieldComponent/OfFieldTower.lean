@@ -92,22 +92,14 @@ noncomputable def fieldTowerTensorComponentIntegralClosureAlgEquiv
     [Algebra B K'] [Algebra B L] [IsScalarTower B K' L] :
     let m := fieldTowerTensorComponentIdeal
       (K := K) (K' := K') (L := L)
-    letI : m.IsMaximal :=
+    let : m.IsMaximal :=
       fieldTowerTensorComponentIdeal_isMaximal
         (K := K) (K' := K') (L := L)
     let M := GenericTensorFieldComponent m
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
     integralClosure B M ≃ₐ[B] integralClosure B L := by
-  dsimp only
-  let m := fieldTowerTensorComponentIdeal
-    (K := K) (K' := K') (L := L)
-  letI : m.IsMaximal :=
-    fieldTowerTensorComponentIdeal_isMaximal
-      (K := K) (K' := K') (L := L)
-  let M := GenericTensorFieldComponent m
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
+  intro m sharedOwner1 M sharedOwner2
   let eK' : M ≃ₐ[K'] L :=
     fieldTowerTensorComponentAlgEquiv
       (K := K) (K' := K') (L := L)

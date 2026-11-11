@@ -5,19 +5,21 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.CechSections
-import Nyll.EtaleCohomology.Sites.ClosedFiberPullbackGluing
-import Nyll.EtaleCohomology.Sites.ProperPullbackClosedUnitInjective
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleCohomology.Sites.CechSections
+public import Nyll.EtaleCohomology.Sites.ClosedFiberPullbackGluing
+public import Nyll.EtaleCohomology.Sites.ProperPullbackClosedUnitInjective
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # The finite-refinement lift satisfies the actual Čech equation
@@ -27,6 +29,8 @@ injective on global sections. Naturality and the actual Čech equation for
 the pulled-back target section therefore force compatibility of the
 constructed lift. All maps use the original chosen inverse images.
 -/
+
+@[expose] public section
 
 noncomputable section
 

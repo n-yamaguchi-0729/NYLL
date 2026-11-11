@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Quasicoherence of native image subsheaves
@@ -17,6 +19,8 @@ The identity-action equivalence transports the actual kernel and cokernel
 theorems for scheme modules to native sheaves. The native image is then
 the actual kernel of the actual cokernel projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

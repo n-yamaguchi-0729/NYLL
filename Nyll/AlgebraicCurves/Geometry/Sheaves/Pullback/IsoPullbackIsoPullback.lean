@@ -10,22 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Modules.IsoAppEqISupEqTop
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
-import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
-import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
+module
+
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Modules.IsoAppEqISupEqTop
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Functoriality.AffinePullbackSections
+public import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
 
 /-!
 # Scheme Modules exists nonempty iso pullback of nonempty iso pullback of is Direct Limit
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -124,94 +127,11 @@ lemma Hom.app_map_homOfLE {M N : X.Modules} (φ : M ⟶ N) {U W : X.Opens} (h : 
   have := (Hom.mapPresheaf φ).naturality (homOfLE h).op
   exact (congrFun (congrArg (fun f => (ConcreteCategory.hom f : Γ(M, U) → Γ(N, W))) this) s)
 
-private def _root_.AlgebraicGeometry.Scheme.Hom.appInf {Y : Scheme.{u}} (π : Y ⟶ X) (V W : X.Opens)
+/-- The section map on an intersection, with the inverse-image intersection as target. -/
+def _root_.AlgebraicGeometry.Scheme.Hom.appInf {Y : Scheme.{u}} (π : Y ⟶ X) (V W : X.Opens)
   :
     Γ(X, V ⊓ W) ⟶ Γ(Y, π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W) :=
   π.app (V ⊓ W)
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.appInf".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := ("AlgebraicCurves.Geometry.Sheaves.Proofs.DirectLimitModuleIsomorphism." ++
-      "AlgebraicGeometry.Scheme.Hom.appInf").toName
-    modifyEnv fun env => addAlias env aliasName target
-  | none => pure ()
-
-private lemma _root_.AlgebraicGeometry.Scheme.Hom.appInf_apply {Y : Scheme.{u}} (π : Y ⟶ X) (V W :
-  X.Opens) (t : Γ(X, V ⊓ W)) :
-    π.appInf V W t = π.app (V ⊓ W) t := rfl
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.appInf_apply".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := ("AlgebraicCurves.Geometry.Sheaves.Proofs.DirectLimitModuleIsomorphism." ++
-      "AlgebraicGeometry.Scheme.Hom.appInf_apply").toName
-    modifyEnv fun env => addAlias env aliasName target
-  | none => pure ()
-
-
-private lemma _root_.AlgebraicGeometry.Scheme.Hom.appInf_map_left {Y : Scheme.{u}} (π : Y ⟶ X) (V W
-  : X.Opens) (y : Γ(X, V)) :
-    π.appInf V W (X.presheaf.map (homOfLE inf_le_left).op y) =
-      Y.presheaf.map (homOfLE (inf_le_left : π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W ≤ π ⁻¹ᵁ V)).op (π.app V y) := by
-  have h := congrArg (fun k => (ConcreteCategory.hom k) y) (π.naturality (homOfLE (inf_le_left : V
-    ⊓ W ≤ V)).op)
-  simp only [CategoryTheory.comp_apply] at h
-  exact h
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.appInf_map_left".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := ("AlgebraicCurves.Geometry.Sheaves.Proofs.DirectLimitModuleIsomorphism." ++
-      "AlgebraicGeometry.Scheme.Hom.appInf_map_left").toName
-    modifyEnv fun env => addAlias env aliasName target
-  | none => pure ()
-
-
-private lemma _root_.AlgebraicGeometry.Scheme.Hom.appInf_map_right {Y : Scheme.{u}} (π : Y ⟶ X) (V
-  W : X.Opens) (y : Γ(X, W)) :
-    π.appInf V W (X.presheaf.map (homOfLE inf_le_right).op y) =
-      Y.presheaf.map (homOfLE (inf_le_right : π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W ≤ π ⁻¹ᵁ W)).op (π.app W y) := by
-  have h := congrArg (fun k => (ConcreteCategory.hom k) y) (π.naturality (homOfLE (inf_le_right : V
-    ⊓ W ≤ W)).op)
-  simp only [CategoryTheory.comp_apply] at h
-  exact h
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.appInf_map_right".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := ("AlgebraicCurves.Geometry.Sheaves.Proofs.DirectLimitModuleIsomorphism." ++
-      "AlgebraicGeometry.Scheme.Hom.appInf_map_right").toName
-    modifyEnv fun env => addAlias env aliasName target
-  | none => pure ()
 
 namespace IsFrameOn
 export _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn (mono map existsUnique
@@ -287,7 +207,8 @@ variable {L : X.Modules} {ι : Type*} {U : ι → X.Opens} {s : ∀ k, Γ(L, U k
 namespace IsFrameOn
 
 open scoped _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn in
-private def _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn.trans (hs : ∀ k, IsFrameOn (s k) (U
+/-- The transition coefficient between two rank-one frames on their intersection. -/
+def _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn.trans (hs : ∀ k, IsFrameOn (s k) (U
   k)) (i j : ι) : Γ(X, U i ⊓ U j) :=
   ((hs i).existsUnique (inf_le_left : U i ⊓ U j ≤ U i) inf_le_left
     (L.presheaf.map (homOfLE (inf_le_right : U i ⊓ U j ≤ U j)).op (s j))).exists.choose
@@ -436,24 +357,10 @@ open DirectLimitModuleIsomorphism
 open AlgebraicGeometry.Scheme.Modules
 
 
-private theorem _root_.AlgebraicGeometry.Scheme.Hom.preimage_mono_inf {X Y : Scheme.{u}} (π : Y ⟶
+/-- Inverse image preserves containment in an intersection of opens. -/
+theorem _root_.AlgebraicGeometry.Scheme.Hom.preimage_mono_inf {X Y : Scheme.{u}} (π : Y ⟶
   X) {W' V W : X.Opens}
     (h : W' ≤ V ⊓ W) : π ⁻¹ᵁ W' ≤ π ⁻¹ᵁ V ⊓ π ⁻¹ᵁ W := π.preimage_mono h
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Hom.preimage_mono_inf".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    let aliasName := ("AlgebraicCurves.Geometry.Sheaves.Proofs.DirectLimitModuleIsomorphism." ++
-      "AlgebraicGeometry.Scheme.Hom.preimage_mono_inf").toName
-    modifyEnv fun env => addAlias env aliasName target
-  | none => pure ()
 
 lemma appInf_res {X Y : Scheme.{u}} (π : Y ⟶ X) (V W W' : X.Opens) (h : W' ≤ V ⊓ W) (t : Γ(X, V ⊓
   W)) :

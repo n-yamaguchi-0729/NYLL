@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.VectorGroup
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
-import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
-import Nyll.AlgebraicCurves.Models.Points.FieldEquivSymmMemEvalAtPointPlaceEqStalkClosedPointTo
-import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
-import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
-import Nyll.AlgebraicCurves.Divisors.Modulus.SplitAffineModulus
-import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqProper
-import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
-import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
-import Mathlib.Algebra.Group.Equiv.TypeTags
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.VectorGroup
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientSchemePresheaf
+public import Nyll.AlgebraicCurves.Models.Charts.OpenPointValues
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
+public import Nyll.AlgebraicCurves.Models.Points.FieldEquivSymmMemEvalAtPointPlaceEqStalkClosedPointTo
+public import Nyll.AlgebraicCurves.Models.Divisors.CartierIdealEquiv
+public import Nyll.AlgebraicCurves.Models.FunctionFields.CurveRingEquivFunctionField
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeFunctionField
+public import Nyll.AlgebraicCurves.Divisors.Modulus.SplitAffineModulus
+public import Nyll.AlgebraicCurves.Divisors.Modulus.ModulusFunctoriality
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqProper
+public import Nyll.JacobianVarieties.Generalized.ModulusCurveIdeal
+public import Nyll.JacobianVarieties.Generalized.ModulusMapCondition
+public import Mathlib.Algebra.Group.Equiv.TypeTags
 
 /-! # Effective moduli for actual maps to vector groups
 
@@ -29,6 +31,8 @@ boundary, therefore controls the actual vector-group-valued map. The
 resulting effective Cartier ideal is the product of the corresponding
 closed-point ideals, with its full multiplicities retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

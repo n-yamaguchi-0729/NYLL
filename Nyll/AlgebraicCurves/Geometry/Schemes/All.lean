@@ -22,7 +22,6 @@ import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.All
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.All
 import Nyll.AlgebraicCurves.Geometry.Schemes.Quotients.All
 import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
 import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.All
 import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.All
 import Nyll.AlgebraicCurves.Geometry.Schemes.SplitTorusMu

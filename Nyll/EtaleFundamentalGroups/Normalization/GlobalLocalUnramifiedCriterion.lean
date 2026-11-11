@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.LocalUnramifiedCriterion
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.SchemeTheory.Affine.ChartStalkLocalization
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.LocalUnramifiedCriterion
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.SchemeTheory.Affine.ChartStalkLocalization
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # The global local-ring criterion for unramified normalization
@@ -26,6 +28,8 @@ This proves the original implication `(5) ⇒ (4)` in Stacks Project Tag 0BTF
 for an arbitrary finite function-field extension.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -35,11 +39,6 @@ namespace EtaleFundamentalGroups
 open scoped TensorProduct
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 private theorem localized_normalizationChart_unramified_of_stalk
     (X : Scheme.{u}) [IsIntegral X]

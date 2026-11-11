@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
+module
+
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
 
 /-!
 # Open range containment descends below a coefficient stage
@@ -16,6 +18,8 @@ chosen coefficient stage using `Over.conePost`; no new limit or change
 of strict henselization is assumed. Affine coefficient transitions and
 quasi-compactness suffice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

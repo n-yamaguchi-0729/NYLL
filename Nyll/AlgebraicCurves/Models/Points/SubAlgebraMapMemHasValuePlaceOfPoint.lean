@@ -10,12 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Places.Evaluation.Value
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
+public import Nyll.AlgebraicCurves.Models.Points.HasValuePlaceOfPointSubAlgebraMapMem
 
 /-!
 # Curve Model sub algebra Map mem of has Value place Of Point
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -94,60 +99,9 @@ theorem hasValue_placeOfPoint_of_sub_algebraMap_mem (M : CurveModel K L)
     (f : B) (a : K) (hfa : f - algebraMap K B a ∈ z.asIdeal) :
     (M.placeOfPoint ⟨G.base z, hz⟩).HasValue
       (M.ffEquiv.symm (M.C.germToFunctionField (G ''ᵁ ⊤)
-        ((G.appIso ⊤).inv ((Scheme.ΓSpecIso (CommRingCat.of B)).inv f)))) a := by
-  classical
-  set v := M.placeOfPoint ⟨G.base z, hz⟩ with hv
-  let φ : M.C.presheaf.stalk (G.base z) →+* L :=
-    (M.ffEquiv.symm : M.C.functionField ≃+* L).toRingHom.comp (algebraMap (M.C.presheaf.stalk
-      (G.base z)) M.C.functionField)
-  have hφrange : φ.range = v.toValuationSubring.toSubring := M.range_stalk_eq ⟨G.base z, hz⟩
-  have hφinj : Function.Injective φ := M.ffEquiv.symm.injective.comp (algebraMap_stalk_injective
-    (G.base z))
-  have hzW : G.base z ∈ (G ''ᵁ ⊤ : M.C.Opens) := ⟨z, trivial, rfl⟩
-  let sec : B → Γ(M.C, G ''ᵁ ⊤) := fun b => (G.appIso ⊤).inv ((Scheme.ΓSpecIso (CommRingCat.of
-    B)).inv b)
-  have hsec : ∀ b, M.C.germToFunctionField (G ''ᵁ ⊤) (sec b) =
-      algebraMap (M.C.presheaf.stalk (G.base z)) M.C.functionField (M.C.presheaf.germ (G ''ᵁ ⊤)
-        (G.base z) hzW (sec b)) := by
-    intro b
-    rw [RingHom.algebraMap_toAlgebra]
-    exact (TopCat.Presheaf.germ_stalkSpecializes_apply _ _ _ _).symm
-  have hread : ∀ b, M.ffEquiv.symm (M.C.germToFunctionField (G ''ᵁ ⊤) (sec b)) =
-      φ (M.C.presheaf.germ (G ''ᵁ ⊤) (G.base z) hzW (sec b)) := by
-    intro b
-    rw [hsec]
-    rfl
-  have hconst : M.ffEquiv.symm (M.C.germToFunctionField (G ''ᵁ ⊤) (sec (algebraMap K B a))) =
-    algebraMap K L a := by
-    apply M.ffEquiv.injective
-    rw [RingEquiv.apply_symm_apply, M.ffEquiv_algebraMap]
-    exact germToFunctionField_appIso_inv_base G M.toBase (CommRingCat.ofHom (algebraMap K B)) hG a
-  have hmem : ∀ b, M.ffEquiv.symm (M.C.germToFunctionField (G ''ᵁ ⊤) (sec b)) ∈
-    v.toValuationSubring := by
-    intro b
-    rw [hread, ← ValuationSubring.mem_toSubring, ← hφrange]
-    exact ⟨_, rfl⟩
-  refine ⟨hmem f, ?_⟩
-  rw [← Place.residue_algebraMap]
-  change Ideal.Quotient.mk _ _ = Ideal.Quotient.mk _ _
-  rw [Ideal.Quotient.mk_eq_mk_iff_sub_mem, IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
-  intro hu
-  obtain ⟨e, he⟩ := hu.exists_right_inv
-  obtain ⟨t, ht⟩ : ∃ t, φ t = (e : L) := by
-    have : (e : L) ∈ φ.range := by rw [hφrange]; exact e.2
-    exact this
-  have hsecsub : sec (f - algebraMap K B a) = sec f - sec (algebraMap K B a) := by
-    change (G.appIso ⊤).inv ((Scheme.ΓSpecIso (CommRingCat.of B)).inv (f - algebraMap K B a)) = _
-    rw [map_sub, map_sub]
-  have hd : (((⟨_, hmem f⟩ : v.toValuationSubring) - algebraMap K v.toValuationSubring a :
-    v.toValuationSubring) : L) =
-      φ (M.C.presheaf.germ (G ''ᵁ ⊤) (G.base z) hzW (sec (f - algebraMap K B a))) := by
-    rw [AddSubgroupClass.coe_sub, Place.coe_algebraMap, ← hconst, ← hread, hsecsub, map_sub,
-      map_sub]
-  have h2 := congrArg Subtype.val he
-  rw [Subring.coe_mul, hd, ← ht, ← map_mul, OneMemClass.coe_one, ← map_one φ] at h2
-  have h3 := hφinj h2
-  exact not_isUnit_germ_appIso_inv_of_mem G z (f - algebraMap K B a) hfa (IsUnit.of_mul_eq_one _ h3)
+        ((G.appIso ⊤).inv ((Scheme.ΓSpecIso (CommRingCat.of B)).inv f)))) a :=
+  _root_.AlgebraicCurve.CurveModel.hasValue_placeOfPoint_of_sub_algebraMap_mem
+    M G hG z hz f a hfa
 
 theorem sub_algebraMap_mem_of_hasValue_placeOfPoint (M : CurveModel K L)
     {B : Type u} [CommRing B] [Algebra K B] (G : Spec (CommRingCat.of B) ⟶ M.C) [IsOpenImmersion G]

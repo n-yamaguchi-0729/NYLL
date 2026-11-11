@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealGroups
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.HeightOneCyclotomicInertia
-import Nyll.ProCGroups.Boundary.CyclotomicInversion
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealGroups
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.HeightOneCyclotomicInertia
+public import Nyll.ProCGroups.Boundary.CyclotomicInversion
 
 /-!
 # Cyclotomic conjugacy in categorical finite Galois quotients
@@ -16,6 +18,8 @@ cover is transported from the function-field Galois group to the actual deck
 group of the cover.  Cyclotomic inversion therefore holds in that deck group,
 not merely in an auxiliary field automorphism group.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,31 +42,31 @@ theorem
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ (x : X) (_hregular : X.IsRegularAt x)
       (_hx : Order.coheight x = 1) [Algebra k (X.residueField x)],
       let A := X.presheaf.stalk x
-      letI : Algebra A L :=
+      let : Algebra A L :=
         ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-      letI : IsScalarTower A K L :=
+      let : IsScalarTower A K L :=
         IsScalarTower.of_algebraMap_eq' rfl
-      letI : IsIntegrallyClosed A :=
+      let : IsIntegrallyClosed A :=
         IsNormalIntegral.stalk_isIntegrallyClosed x
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       ∀ (Q : Ideal B) [Q.IsPrime]
         [Q.LiesOver (IsLocalRing.maximalIdeal A)],
@@ -73,33 +77,9 @@ theorem
             IsConj (sigma : (Aut Y)ᵐᵒᵖ)
               ((sigma⁻¹ : Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ) :
                 (Aut Y)ᵐᵒᵖ) := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro x hregular hx instAlgk
-  let A := X.presheaf.stalk x
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let : IsIntegrallyClosed A :=
-    IsNormalIntegral.stalk_isIntegrallyClosed x
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
-  intro Q instQPrime instQLiesOver hgeo sigma
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7 x hregular hx instAlgk
+    A algebraAL towerAKL normalA B fractionBL fieldAction coverAction
+    Q instQPrime instQLiesOver hgeo sigma
   let eI := finiteEtaleGaloisCoverIdealInertiaMulEquiv Y hY A B Q
   have hsource :
       IsConj ((eI sigma : Q.toAddSubgroup.inertia Gal(L/K)) : Gal(L/K))
@@ -132,15 +112,15 @@ theorem
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [IsIntegrallyClosed A]
@@ -150,11 +130,11 @@ theorem
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
       [Algebra k P.ResidueField],
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       GeometricallyIntegral
           (Spec.map (CommRingCat.ofHom
@@ -163,29 +143,12 @@ theorem
           IsConj (sigma : (Aut Y)ᵐᵒᵖ)
             ((sigma⁻¹ : Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ) :
               (Aut Y)ᵐᵒᵖ) := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instClosedA instAlgAK
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    A instCommA instDomainA instRegularA instClosedA instAlgAK
     instFracAK instAlgAL instTowerAKL P instPPrime hP Q instQPrime
-    instQLiesOver instAlgk hgeo
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
+    instQLiesOver instAlgk B fractionBL
   let genericAction : MulSemiringAction Gal(L/K) B := inferInstance
-  let integralClosureAction : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction Gal(L/K) B := integralClosureAction
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+  intro integralClosureAction coverAction hgeo
   have hsmul : ∀ (tau : Gal(L/K)) (b : B),
       (letI := genericAction; tau • b) =
         (letI := integralClosureAction; tau • b) := by
@@ -255,15 +218,15 @@ theorem
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [IsIntegrallyClosed A]
@@ -273,11 +236,11 @@ theorem
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
       [Algebra k (A ⧸ P)],
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       GeometricallyIntegral
           (Spec.map (CommRingCat.ofHom (algebraMap k (A ⧸ P)))) →
@@ -285,20 +248,10 @@ theorem
           IsConj (sigma : (Aut Y)ᵐᵒᵖ)
             ((sigma⁻¹ : Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ) :
               (Aut Y)ᵐᵒᵖ) := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instClosedA instAlgAK
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    A instCommA instDomainA instRegularA instClosedA instAlgAK
     instFracAK instAlgAL instTowerAKL P instPPrime hP Q instQPrime
-    instQLiesOver instAlgk hgeo
+    instQLiesOver instAlgk B fractionBL fieldAction coverAction hgeo
   let Z := Spec (CommRingCat.of (A ⧸ P))
   let f : Z ⟶ Spec (CommRingCat.of k) :=
     Spec.map (CommRingCat.ofHom (algebraMap k (A ⧸ P)))
@@ -324,15 +277,15 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y)
     [IsMulCommutative (Aut Y)] :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K : Type u := X.functionField
     let L : Type u := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-    letI : FiniteDimensional K L :=
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected Y
-    letI : _root_.IsGalois K L :=
+    let : _root_.IsGalois K L :=
       isGalois_functionField_of_isGalois_finiteEtale Y hY
     ∀ {A : Type u} [CommRing A] [IsDomain A] [IsRegularRing A]
       [IsIntegrallyClosed A]
@@ -342,38 +295,21 @@ theorem
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
       [Algebra k (A ⧸ P)],
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       GeometricallyIntegral
           (Spec.map (CommRingCat.ofHom (algebraMap k (A ⧸ P)))) →
         Nat.Coprime
             (Nat.card (Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ)) 2 →
           Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := X.functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  dsimp only
-  intro A instCommA instDomainA instRegularA instClosedA instAlgAK
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 sharedOwner6 sharedOwner7
+    A instCommA instDomainA instRegularA instClosedA instAlgAK
     instFracAK instAlgAL instTowerAKL P instPPrime hP Q instQPrime
-    instQLiesOver instAlgk hgeo hCoprime
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+    instQLiesOver instAlgk B fractionBL fieldAction coverAction hgeo hCoprime
   let I := Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ
   let : Finite (Aut Y) := inferInstance
   let : Finite ((Aut Y)ᵐᵒᵖ) :=

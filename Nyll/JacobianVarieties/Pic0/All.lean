@@ -26,7 +26,6 @@ import Nyll.JacobianVarieties.Pic0.InjectiveAddMonoidHomTorsionApplyEqInvSmulD
 import Nyll.JacobianVarieties.Pic0.InjectiveAddMonoidHomTorsionDlog
 import Nyll.JacobianVarieties.Pic0.InjectiveConormConstantExtension
 import Nyll.JacobianVarieties.Pic0.JacobianPackAlgClosed
-import Nyll.JacobianVarieties.Pic0.MkEqDvdOrdMemTorsion
 import Nyll.JacobianVarieties.Pic0.MkEqNotMemSupport
 import Nyll.JacobianVarieties.Pic0.NsmulEqJacobianPack
 import Nyll.JacobianVarieties.Pic0.OrdEqMulPowNeNeZero
@@ -37,7 +36,6 @@ import Nyll.JacobianVarieties.Pic0.ZsmulEqFiniteDimensionalRatFunc
 import Nyll.JacobianVarieties.Pic0.PrincipalRingEquiv
 import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingle
 import Nyll.JacobianVarieties.Pic0.MemClosureMkSingleSubSingleNotMem
-import Nyll.JacobianVarieties.Pic0.MkEqZeroIffPow
 import Nyll.JacobianVarieties.Pic0.NatCardTorsionEqConstantExtension
 import Nyll.JacobianVarieties.Pic0.DivisorialWeilPairingData
 import Nyll.JacobianVarieties.Pic0.DivisorialWeilPairingDataAlgClosed

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Nyll.SchemeTheory.Modules.Functoriality.DirectImageAlgebra
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentPushforward
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Quasicoherence of the actual affine direct-image algebra
@@ -16,6 +18,8 @@ The unit sheaf is the one-generator free sheaf. Affine pushforward preserves
 its quasicoherence, and the actual direct-image algebra/module comparison
 identifies the resulting module with the algebra's underlying module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

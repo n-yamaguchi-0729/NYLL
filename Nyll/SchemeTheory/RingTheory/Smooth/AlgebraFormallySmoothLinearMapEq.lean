@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Module
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Module
 
 /-!
 # Algebra Formally Smooth exists linear Map eq of symmetric hochschild two cocycle
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

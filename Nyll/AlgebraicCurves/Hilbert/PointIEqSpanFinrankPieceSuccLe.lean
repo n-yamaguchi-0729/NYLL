@@ -10,34 +10,38 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Projective
-import Nyll.AlgebraicCurves.Hilbert.PointHilbertFunctionOfMemIff
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleIdealProjectiveRankAtStalkEqIff
-import Mathlib.Data.Finsupp.Multiset
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Sym.Card
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Prod
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Finiteness.Nakayama
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.Tactic.Abel
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
+module
+
+public import Mathlib.Algebra.Module.Projective
+public import Nyll.AlgebraicCurves.Hilbert.PointHilbertFunctionOfMemIff
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleIdealProjectiveRankAtStalkEqIff
+public import Mathlib.Data.Finsupp.Multiset
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Sym.Card
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Prod
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Finiteness.Nakayama
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.Tactic.Abel
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.AlgebraicCurves.Hilbert.LinearEquivBaseChangePieceMap
 
 /-!
 # Point I eq span of forall finrank piece succ le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

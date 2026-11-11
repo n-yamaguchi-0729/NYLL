@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.CompEqOpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.CompEqOpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Constancy of morphisms from the affine line to an abelian variety
@@ -19,6 +21,8 @@ Extend the map `(x,y) ↦ q(x/y)` from `D(y)` to the affine plane. Pulling
 this extension back by `(x,y) ↦ (xy,y)` agrees with `q(x)` on `D(y)`, hence
 everywhere by separatedness. Restriction to `y = 0` proves constancy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

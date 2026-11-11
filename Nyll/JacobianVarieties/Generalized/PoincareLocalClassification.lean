@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedLocalRigidification
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedLocalRigidification
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 
 /-!
 # Local Poincaré classification of an actual unrigidified family
@@ -14,6 +16,8 @@ An algebraically trivial family is locally isomorphic to the actual Poincaré
 pullback on its section-restriction trivializing cover. The cover is constructed
 from the given line bundle, without assuming a global pointed rigidification.
 -/
+
+@[expose] public section
 
 noncomputable section
 

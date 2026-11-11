@@ -4,38 +4,40 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GaloisChosenFractionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.WholeRelativeNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.NormalDomainRoot
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothRootNormalization
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
-import Nyll.SchemeTheory.Normalization.IntegralOpen
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.PrimeFractionRing
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularRingIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Galois.GaloisObjects
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.ChosenFractionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GaloisChosenFractionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.WholeRelativeNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.NormalDomainRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.SmoothRootNormalization
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+public import Nyll.SchemeTheory.Normalization.IntegralOpen
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.PrimeFractionRing
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularRingIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # The original Galois cover on a characteristic-zero smooth chart
@@ -56,6 +58,8 @@ This is the affine extension step of Stacks Project 58.30.2,
 https://stacks.math.columbia.edu/tag/0C0Q. Passing to a whole smooth scheme
 and then descending arbitrary geometric generic covers are further steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

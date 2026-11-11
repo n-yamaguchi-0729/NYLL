@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 
 /-!
 # Fpqc-local coequalizers of schemes
@@ -15,6 +18,8 @@ the asserted coequalizer property holds both over every member of the cover and
 over every pairwise overlap.  This is
 [Stacks Project, Tag 0BMN](https://stacks.math.columbia.edu/tag/0BMN).
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.NoetherNormalization.Nonvanishing
+module
+
+public import Nyll.SchemeTheory.NoetherNormalization.Nonvanishing
 
 /-!
 # Linear changes of variables for Noether normalization
@@ -13,6 +15,8 @@ This file formalizes the triangular linear substitution used in
 Fried--Jarden, Lemma 22.5.1.  It fixes the first variable and sends each
 remaining variable `Xᵢ` to `Xᵢ + cᵢ X₀`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,12 +38,12 @@ def linearChangeFirst {n : ℕ} (c : Fin n → K) :
 @[simp]
 theorem linearChangeFirst_X_zero {n : ℕ} (c : Fin n → K) :
     linearChangeFirst c (X 0) = X 0 := by
-  simp [linearChangeFirst]
+  simp only [linearChangeFirst, aeval_X, Fin.cases_zero]
 
 @[simp]
 theorem linearChangeFirst_X_succ {n : ℕ} (c : Fin n → K) (i : Fin n) :
     linearChangeFirst c (X i.succ) = X i.succ + C (c i) * X 0 := by
-  simp [linearChangeFirst]
+  simp only [linearChangeFirst, aeval_X, Fin.cases_succ]
 
 theorem linearChangeFirst_comp_neg {n : ℕ} (c : Fin n → K) :
     (linearChangeFirst c).comp (linearChangeFirst (-c)) =
@@ -111,7 +115,15 @@ theorem aeval_finCons_eq_eval₂_finSuccEquiv
   congr 1
   apply MvPolynomial.algHom_ext
   rw [Fin.forall_iff_succ]
-  simp [φ, finSuccEquiv_X_zero, finSuccEquiv_X_succ]
+  constructor
+  · rw [aeval_X]
+    change x₀ = Polynomial.eval₂ (aeval x).toRingHom x₀ (finSuccEquiv K n (X 0))
+    rw [finSuccEquiv_X_zero, Polynomial.eval₂_X]
+  · intro i
+    rw [aeval_X]
+    change x i = Polynomial.eval₂ (aeval x).toRingHom x₀ (finSuccEquiv K n (X i.succ))
+    rw [finSuccEquiv_X_succ, Polynomial.eval₂_C]
+    exact (MvPolynomial.aeval_X x i).symm
 
 /-- The `n` tail coordinates after the inverse triangular change. -/
 def linearTailCoordinatesFirst

@@ -36,19 +36,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RepresentationTheory.Rep.Basic
-import Mathlib.RepresentationTheory.Basic
-import Mathlib.LinearAlgebra.Finsupp.Defs
-import Mathlib.LinearAlgebra.Finsupp.LSum
-import Mathlib.Algebra.Group.End
-import Mathlib.Algebra.GroupWithZero.Action.Basic
-import Mathlib.Algebra.Ring.AddAut
-import Mathlib.Algebra.Ring.Action.Submonoid
-import Mathlib.NumberTheory.RamificationInertia.Galois
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import Mathlib.RepresentationTheory.Basic
+public import Mathlib.LinearAlgebra.Finsupp.Defs
+public import Mathlib.LinearAlgebra.Finsupp.LSum
+public import Mathlib.Algebra.Group.End
+public import Mathlib.Algebra.GroupWithZero.Action.Basic
+public import Mathlib.Algebra.Ring.AddAut
+public import Mathlib.Algebra.Ring.Action.Submonoid
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+public import Mathlib.RingTheory.Invariant.Galois
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
 
 /-
 The vendored blocks below are adapted from Mathlib (Apache-2.0; see Mathlib's LICENSE),
@@ -60,6 +62,8 @@ The source notices above cover these adaptations.
 
 /-! ## Block A — Mathlib v4.30.0 Mathlib/RepresentationTheory/Basic.lean:391-419 (section
 MulAction), names suffixed `Finsupp` -/
+
+@[expose] public section
 
 namespace Representation
 

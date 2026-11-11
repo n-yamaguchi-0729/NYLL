@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.NilpotentModule
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.NilpotentModule
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.AdicCompletionNoetherian
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.AdicCompletion.Completeness
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Adic module systems over an affine coefficient completion
@@ -30,6 +32,8 @@ original compatible sequences. No completeness of the original ring, new
 scalar action on the original stages, or effective module is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace AdicModuleSystem
@@ -41,7 +45,8 @@ variable {R : Type u} [CommRing R]
   (t : ∀ k : ℕ, M (k + 1) →ₗ[R] M k) (I : Ideal R)
   (hpow : ∀ k : ℕ, I ^ (k + 1) • (⊤ : Submodule R (M k)) = ⊥)
 
-private def stageCompletionEquiv (k : ℕ) : M k ≃ₗ[R] AdicCompletion I (M k) := by
+/-- A stage annihilated by an ideal power is canonically isomorphic to its adic completion. -/
+def stageCompletionEquiv (k : ℕ) : M k ≃ₗ[R] AdicCompletion I (M k) := by
   have : IsAdicComplete I (M k) :=
     IsAdicComplete.of_pow_smul_top_eq_bot I (M k) (k + 1) (hpow k)
   exact AdicCompletion.ofLinearEquiv I (M k)

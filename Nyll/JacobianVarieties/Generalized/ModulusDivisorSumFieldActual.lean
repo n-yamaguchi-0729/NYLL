@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorSumField
-import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorSumField
+public import Nyll.AlgebraicCurves.RelativeDivisors.Support.SupportedDivisorGeometricTuples
 
 /-! # Full Cartier evaluation of an arbitrary supported divisor sum -/
+
+@[expose] public section
 
 noncomputable section
 

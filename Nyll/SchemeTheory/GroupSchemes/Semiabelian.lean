@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Torus
-import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Torus
+public import Nyll.SchemeTheory.Morphisms.OverPullbackDescent
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 
 /-! # Actual semiabelian extensions
 
@@ -14,6 +16,8 @@ An extension consists of actual group-scheme homomorphisms, a torus identified b
 the universal property of the identity kernel, and a smooth surjective projection
 to an abelian variety. The resulting exactness holds on every parameter scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

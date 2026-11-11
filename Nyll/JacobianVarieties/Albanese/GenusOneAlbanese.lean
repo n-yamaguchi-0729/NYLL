@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.GenusOneAbelJacobiIsomorphism
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Cohomology.FiniteH0H1StructureSheafAlgClosed
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoFunctionFieldGermEq
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
+module
+
+public import Nyll.JacobianVarieties.Albanese.GenusOneAbelJacobiIsomorphism
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Cohomology.FiniteH0H1StructureSheafAlgClosed
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoFunctionFieldGermEq
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.RelativeGroupLawCompMulEqMulComp
 
 /-!
 # The Albanese variety of a genus-one curve
@@ -23,6 +25,8 @@ model. Its actual Abel--Jacobi isomorphism supplies a proper smooth connected
 commutative group. Inverting this same isomorphism constructs every pointed
 Albanese factorization; the proved rigidity theorem gives its group law.
 -/
+
+@[expose] public section
 
 noncomputable section
 

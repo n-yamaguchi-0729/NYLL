@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionQuotient
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionQuotient
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Base change of modules annihilated by the adic ideal
@@ -16,6 +18,8 @@ from a ring to its adic completion does not change a module annihilated by the
 adic ideal.  The proof uses the closed-fibre comparison and is valid without
 assuming that the original ring is complete.
 -/
+
+@[expose] public section
 
 noncomputable section
 

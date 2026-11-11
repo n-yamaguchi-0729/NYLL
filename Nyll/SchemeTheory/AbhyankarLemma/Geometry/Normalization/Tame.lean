@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.GroupTheory.CoprimeProjection
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldCompositum
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.GroupTheory.CoprimeProjection
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldCompositum
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
 
 /-!
 # Tameness at a prime of a normalization compositum
@@ -15,6 +17,8 @@ The inertia group at a prime of a compositum embeds in the product of the
 two factor inertia groups.  Consequently, prime-to-residue-characteristic
 tameness of both factors propagates to the compositum, prime by prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,10 +44,6 @@ noncomputable local instance normalizationTameTopAction :
 noncomputable local instance normalizationTameLeftAction :
     MulSemiringAction Gal(M/K) (integralClosure V M) :=
   IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
-
-noncomputable local instance normalizationTameRightAction :
-    MulSemiringAction Gal(N/K) (integralClosure V N) :=
-  IsIntegralClosure.MulSemiringAction V K N (integralClosure V N)
 
 omit [IsDedekindDomain V] in
 /-- At every prime of the top normalization, the top inertia order is prime

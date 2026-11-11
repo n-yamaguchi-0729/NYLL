@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Underlying sets of the actual abelian inverse image
@@ -17,6 +19,8 @@ It reuses the geometric-stalk proof for modules and its actual inverse-image
 functor. This is the comparison needed to pull back the sheaf of lifts of
 an extension representing a derived H¹ class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

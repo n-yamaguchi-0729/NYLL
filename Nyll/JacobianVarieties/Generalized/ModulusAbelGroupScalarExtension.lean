@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionAction
-import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
-import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelTorsorDifference
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupSchemeMap
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionAction
+public import Nyll.JacobianVarieties.Generalized.ModulusClosedFieldPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtensionClasses
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelTorsorDifference
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupSchemeMap
 
 /-! # Actual pointed Abel maps on scalar-extended group points -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -21,6 +25,8 @@ universe u
 open CategoryTheory Opposite
 open AlgebraicGeometry.SmoothProperCurve
 open scoped CategoryTheory.MonObj
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace AlgebraicGeometry.GeneralizedJacobian
 

@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalResidue
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalResidue
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
 
 /-!
 # Lifting separable residue elements to unramified extensions
@@ -13,6 +18,8 @@ The reverse residue-field inclusion in the maximal-residue theorem is the Hensel
 from the residue-lifting argument: lift the minimal polynomial of a separable ambient residue
 element, then lift its simple linear factor over the ambient valuation ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,11 +44,11 @@ theorem exists_integral_root_lifting_separable_residue_element
     let V := LubinTate.Valuations.exponentialValuationSubring v
     let W := LubinTate.Valuations.exponentialValuationSubring w
     let i := unramifiedValuationRingValuationRingMap v w hExt
-    letI : IsLocalHom i :=
+    let : IsLocalHom i :=
       unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
     let k := IsLocalRing.ResidueField V
     let ell := IsLocalRing.ResidueField W
-    letI : Algebra k ell := (IsLocalRing.ResidueField.map i).toAlgebra
+    let : Algebra k ell := (IsLocalRing.ResidueField.map i).toAlgebra
     ∀ alpha : ell, IsSeparable k alpha →
     ∃ F : Polynomial V,
       ∃ beta : W,
@@ -50,17 +57,9 @@ theorem exists_integral_root_lifting_separable_residue_element
           (F.map ((algebraMap K L).comp
             V.subtype)).eval (beta : L) = 0 ∧
           IsLocalRing.residue W beta = alpha := by
+  intro V W i localHom k ell residueAlgebra
   classical
-  simp only
   intro alpha halpha
-  let V := LubinTate.Valuations.exponentialValuationSubring v
-  let W := LubinTate.Valuations.exponentialValuationSubring w
-  let i := unramifiedValuationRingValuationRingMap v w hExt
-  let : IsLocalHom i :=
-    unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
-  let k := IsLocalRing.ResidueField V
-  let ell := IsLocalRing.ResidueField W
-  let : Algebra k ell := (IsLocalRing.ResidueField.map i).toAlgebra
   let fbar : Polynomial k := minpoly k alpha
   have hfbarMonic : fbar.Monic := minpoly.monic halpha.isIntegral
   have hfbarSep : fbar.Separable := halpha
@@ -194,11 +193,11 @@ theorem exists_finiteUnramifiedSubextension_residue_image_eq
     let V := LubinTate.Valuations.exponentialValuationSubring v
     let W := LubinTate.Valuations.exponentialValuationSubring w
     let i := unramifiedValuationRingValuationRingMap v w hExt
-    letI : IsLocalHom i :=
+    let : IsLocalHom i :=
       unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
     let k := IsLocalRing.ResidueField V
     let ell := IsLocalRing.ResidueField W
-    letI : Algebra k ell := (IsLocalRing.ResidueField.map i).toAlgebra
+    let : Algebra k ell := (IsLocalRing.ResidueField.map i).toAlgebra
     ∀ alpha : ell, IsSeparable k alpha →
       ∃ E : IntermediateField K L,
         ∃ z : IsLocalRing.ResidueField
@@ -206,17 +205,9 @@ theorem exists_finiteUnramifiedSubextension_residue_image_eq
             (exponentialValuationRestrict w E)),
           FiniteUnramifiedSubextension v w hExt E ∧
             restrictedResidueAlgHomToAmbient v w hExt E z = alpha := by
+  intro V W i localHom k ell residueAlgebra
   classical
-  simp only
   intro alpha halpha
-  let V := LubinTate.Valuations.exponentialValuationSubring v
-  let W := LubinTate.Valuations.exponentialValuationSubring w
-  let i := unramifiedValuationRingValuationRingMap v w hExt
-  let : IsLocalHom i :=
-    unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
-  let k := IsLocalRing.ResidueField V
-  let ell := IsLocalRing.ResidueField W
-  let : Algebra k ell := (IsLocalRing.ResidueField.map i).toAlgebra
   obtain ⟨F, beta, hFmonic, hFmap, hFroot, hbetaResidue⟩ :=
     exists_integral_root_lifting_separable_residue_element
       v w hExt hhens alpha halpha
@@ -309,32 +300,21 @@ theorem separableClosure_le_maximalUnramifiedSubextension_residue_fieldRange
     let i := unramifiedValuationRingValuationRingMap v wT
       (exponentialValuationRestrict_extends v w hExt T)
     let b := unramifiedValuationRingValuationRingMap v w hExt
-    letI : IsLocalHom i :=
+    let : IsLocalHom i :=
       unramifiedValuationRingValuationRingMap_isLocalHom v wT
         (exponentialValuationRestrict_extends v w hExt T)
-    letI : IsLocalHom b :=
+    let : IsLocalHom b :=
       unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
     let k := IsLocalRing.ResidueField V
     let kT := IsLocalRing.ResidueField VT
     let ell := IsLocalRing.ResidueField W
-    letI : Algebra k kT := (IsLocalRing.ResidueField.map i).toAlgebra
-    letI : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
+    let : Algebra k kT := (IsLocalRing.ResidueField.map i).toAlgebra
+    let : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
     separableClosure k ell ≤
       (restrictedResidueAlgHomToAmbient v w hExt T).fieldRange := by
+  intro T wT V VT W i b localHomI localHomB k kT ell residueAlgebraKT residueAlgebraKL
   classical
-  simp only
   intro alpha halpha
-  let T := maximalUnramifiedSubextension v w hExt
-  let wT := exponentialValuationRestrict w T
-  let V := LubinTate.Valuations.exponentialValuationSubring v
-  let VT := LubinTate.Valuations.exponentialValuationSubring wT
-  let W := LubinTate.Valuations.exponentialValuationSubring w
-  let b := unramifiedValuationRingValuationRingMap v w hExt
-  let : IsLocalHom b :=
-    unramifiedValuationRingValuationRingMap_isLocalHom v w hExt
-  let k := IsLocalRing.ResidueField V
-  let ell := IsLocalRing.ResidueField W
-  let : Algebra k ell := (IsLocalRing.ResidueField.map b).toAlgebra
   have hsep : IsSeparable k alpha :=
     mem_separableClosure_iff.mp halpha
   obtain ⟨E, z, hEunramified, hz⟩ :=

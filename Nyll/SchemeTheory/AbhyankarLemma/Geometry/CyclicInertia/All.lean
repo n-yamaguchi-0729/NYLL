@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Conjugation
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Core
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicInversion
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicRestriction
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.DVRCyclotomicInversion
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Field
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.FiniteLevelCyclotomicInversion
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicBaseResidue
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicInversion
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.RamificationGroup
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Conjugation
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Core
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicRestriction
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.DVRCyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Field
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.FiniteLevelCyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicBaseResidue
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.RamificationGroup
 
 /-! Canonical aggregate for EtaleFundamentalGroups.TameRamification.Abhyankar.CyclicInertia. -/

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
-import Mathlib.GroupTheory.Coset.Card
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
+public import Mathlib.GroupTheory.Coset.Card
 
 /-!
 # Coprimality transfer for divisorial finite images
@@ -15,6 +17,8 @@ quotient is a finite subgroup of the deck group.  Its order therefore divides
 the deck-group order, and more sharply divides the order of every subgroup
 which contains that image.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,14 +37,14 @@ theorem finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage_natCard_dvd_aut
     (j : T ⟶ U) (xi : Spec (.of Omega) ⟶ T)
     (Y : FiniteEtale U) (hY : IsGalois Y)
     (y : (FiniteEtale.fiber (xi ≫ j)).obj Y) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     Nat.card
         (Subgroup.map
           (finiteEtaleGaloisCoverQuotientMonoidHom
             (xi ≫ j) Y hY y)
           (fundamentalGroupImageOfMorphism j xi)) ∣
       Nat.card (Aut Y) := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   rw [finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage]
   calc
     Nat.card
@@ -66,14 +70,14 @@ theorem finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage_natCard_dvd_of_
           (finiteEtaleGaloisCoverQuotientMonoidHom
             (xi ≫ j) Y hY y)
           (fundamentalGroupImageOfMorphism j xi) ≤ H) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     Nat.card
         (Subgroup.map
           (finiteEtaleGaloisCoverQuotientMonoidHom
             (xi ≫ j) Y hY y)
           (fundamentalGroupImageOfMorphism j xi)) ∣
       Nat.card H := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   exact Subgroup.card_dvd_of_le himage
 
 /-- Coprimality of a containing finite subgroup descends to the geometric
@@ -91,14 +95,14 @@ theorem finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage_coprime_of_le
             (xi ≫ j) Y hY y)
           (fundamentalGroupImageOfMorphism j xi) ≤ H)
     (p : ℕ) (hcoprime : Nat.Coprime (Nat.card H) p) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     Nat.Coprime
       (Nat.card
         (Subgroup.map
           (finiteEtaleGaloisCoverQuotientMonoidHom
             (xi ≫ j) Y hY y)
           (fundamentalGroupImageOfMorphism j xi))) p := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   exact hcoprime.of_dvd_left
     (finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage_natCard_dvd_of_le
       j xi Y hY y H himage)
@@ -112,14 +116,14 @@ theorem finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage_coprime_of_aut
     (Y : FiniteEtale U) (hY : IsGalois Y)
     (y : (FiniteEtale.fiber (xi ≫ j)).obj Y)
     (p : ℕ) (hcoprime : Nat.Coprime (Nat.card (Aut Y)) p) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     Nat.Coprime
       (Nat.card
         (Subgroup.map
           (finiteEtaleGaloisCoverQuotientMonoidHom
             (xi ≫ j) Y hY y)
           (fundamentalGroupImageOfMorphism j xi))) p := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   exact hcoprime.of_dvd_left
     (finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage_natCard_dvd_aut
       j xi Y hY y)

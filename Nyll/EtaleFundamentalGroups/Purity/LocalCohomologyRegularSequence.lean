@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Depth.Rees
-import Nyll.EtaleFundamentalGroups.Purity.DerivedExtLegacyComparison
-import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyExtVanishing
+module
+
+public import Mathlib.RingTheory.Depth.Rees
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedExtLegacyComparison
+public import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyExtVanishing
 
 /-!
 # Local-cohomology vanishing from regular sequences
@@ -15,6 +17,8 @@ A regular sequence in an ideal annihilates the low positive-degree Ext groups by
 the Rees theorem.  Combining that result with the comparison between the two Ext
 implementations gives the corresponding local-cohomology vanishing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

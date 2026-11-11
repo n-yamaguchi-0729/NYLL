@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Ring-stalk comparisons from pointed refinements
@@ -17,6 +19,8 @@ A map of ring presheaves induces a bijection on a stalk when every
 pointed neighborhood has a further pointed refinement on which the
 section map is bijective. No comparison of stalks is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

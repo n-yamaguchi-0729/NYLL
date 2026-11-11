@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.DVR
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Compositum
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Residue
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Tame
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.DVR
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Compositum
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Residue
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Tame
 
 /-!
 # Abhyankar's lemma over an arbitrary discrete valuation ring
@@ -19,6 +21,8 @@ the normalization in the compositum are quantified, and the conclusion
 records both inertia restriction exact sequences as well as unramifiedness
 over the right-hand normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,33 +51,17 @@ local instance abhyankarDVRDedekind : IsDedekindDomain V :=
 local instance abhyankarLeftSeparable : Algebra.IsSeparable K M :=
   Algebra.isSeparable_tower_bot_of_isSeparable (F := K) M E
 
-local instance abhyankarRightSeparable : Algebra.IsSeparable K N :=
-  Algebra.isSeparable_tower_bot_of_isSeparable (F := K) N E
-
 local instance abhyankarLeftGalois : IsGalois K M :=
-  isGalois_iff.mpr ⟨inferInstance, inferInstance⟩
-
-local instance abhyankarRightGalois : IsGalois K N :=
   isGalois_iff.mpr ⟨inferInstance, inferInstance⟩
 
 local instance abhyankarLeftNormalizationAlgebra :
     Algebra (integralClosure V M) (integralClosure V E) :=
   normalizationAlgebra (V := V) (K := K) (E := E) M
 
-local instance abhyankarRightNormalizationAlgebra :
-    Algebra (integralClosure V N) (integralClosure V E) :=
-  normalizationAlgebra (V := V) (K := K) (E := E) N
-
 local instance abhyankarLeftPrimeLiesOver
     (Q : Ideal (integralClosure V E)) :
     Q.LiesOver
       (normalizationLowerPrime (V := V) (K := K) (E := E) M Q) where
-  over := rfl
-
-local instance abhyankarRightPrimeLiesOver
-    (Q : Ideal (integralClosure V E)) :
-    Q.LiesOver
-      (normalizationLowerPrime (V := V) (K := K) (E := E) N Q) where
   over := rfl
 
 local instance abhyankarLeftBasePrimeLiesOver
@@ -82,31 +70,15 @@ local instance abhyankarLeftBasePrimeLiesOver
       (normalizationBasePrime (V := V) (K := K) (E := E) M Q) where
   over := rfl
 
-local instance abhyankarRightBasePrimeLiesOver
-    (Q : Ideal (integralClosure V E)) :
-    (normalizationLowerPrime (V := V) (K := K) (E := E) N Q).LiesOver
-      (normalizationBasePrime (V := V) (K := K) (E := E) N Q) where
-  over := rfl
-
 local instance abhyankarLeftPrimeIsMaximal
     (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
     (normalizationLowerPrime (V := V) (K := K) (E := E) M Q).IsMaximal :=
   normalizationLowerPrime_isMaximal (V := V) M Q
 
-local instance abhyankarRightPrimeIsMaximal
-    (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
-    (normalizationLowerPrime (V := V) (K := K) (E := E) N Q).IsMaximal :=
-  normalizationLowerPrime_isMaximal (V := V) N Q
-
 local instance abhyankarLeftBasePrimeIsMaximal
     (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
     (normalizationBasePrime (V := V) (K := K) (E := E) M Q).IsMaximal :=
   normalizationBasePrime_isMaximal (V := V) M Q
-
-local instance abhyankarRightBasePrimeIsMaximal
-    (Q : Ideal (integralClosure V E)) [Q.IsMaximal] :
-    (normalizationBasePrime (V := V) (K := K) (E := E) N Q).IsMaximal :=
-  normalizationBasePrime_isMaximal (V := V) N Q
 
 noncomputable local instance abhyankarTopNormalizationAction :
     MulSemiringAction Gal(E/K) (integralClosure V E) :=
@@ -115,10 +87,6 @@ noncomputable local instance abhyankarTopNormalizationAction :
 noncomputable local instance abhyankarLeftNormalizationAction :
     MulSemiringAction Gal(M/K) (integralClosure V M) :=
   IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
-
-noncomputable local instance abhyankarRightNormalizationAction :
-    MulSemiringAction Gal(N/K) (integralClosure V N) :=
-  IsIntegralClosure.MulSemiringAction V K N (integralClosure V N)
 
 /-- Prime-to-residue-characteristic tameness of the inertia group obtained by
 contracting a top normalization prime to an intermediate normalization. -/

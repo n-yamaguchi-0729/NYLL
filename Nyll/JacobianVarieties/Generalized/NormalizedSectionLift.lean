@@ -4,13 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SurjectiveAppSup
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealEpiUnitAppTensorInvModulePowShortExact
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.LocallyFreeOneIffInvertible
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveLeSectionInvModuleDisjoint
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.ModulesInvertibleSubsingletonH1SectionsOf
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SurjectiveAppSup
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealEpiUnitAppTensorInvModulePowShortExact
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
+public import Nyll.SchemeTheory.Modules.Invertible.RankOne
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveLeSectionInvModuleDisjoint
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.ModulesInvertibleSubsingletonH1SectionsOf
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Lifting an actual modulus frame
@@ -20,6 +23,8 @@ The exact sequence for restriction to the entire Cartier modulus has kernel
 prescribed restriction. The numerical criterion below supplies this vanishing
 from Riemann--Roch, retaining all nilpotents of the modulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

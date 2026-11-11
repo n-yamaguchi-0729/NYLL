@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodDiagram
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodExistence
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
-import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualFaithfulness
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.CategoryTheory.NatIso
-import Mathlib.Order.OrderDual
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodDiagram
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedHypersurfaceNeighborhoodExistence
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualFaithfulness
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.Order.OrderDual
 
 /-!
 # Faithfulness on germs along a punctured hypersurface
@@ -34,6 +36,8 @@ The geometric faithful neighbourhood is constructed from the original
 ring hypotheses; no eventual-equality or faithfulness hypothesis remains
 in the final theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

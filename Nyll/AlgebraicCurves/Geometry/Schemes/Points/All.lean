@@ -11,9 +11,9 @@ import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteExtensionPoint
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteIntermediateFieldSection
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FinsetPointEquivEqCoeMemBall
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.HomIsClosedIrreducibleSubsetFiber
-import Nyll.AlgebraicCurves.Geometry.Schemes.Points.IsPreconnectedPreimageClosedPoint
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.MemIsClosedSingletonNe
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.OverHomBaseClosedPointEq
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.RationalPointEnumeration
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.SchemeHomOverExtAlgebraicClosurePoint
 import Nyll.AlgebraicCurves.Geometry.Schemes.Points.UniversallyInjectiveAlgClosedPointsEq
+import Nyll.AlgebraicCurves.Geometry.Schemes.Points.FiniteConstantSchemeRigidity

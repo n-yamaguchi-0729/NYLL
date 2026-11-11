@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.Padics.PadicIntegers
-import Mathlib.Topology.Order.Compact
+module
+
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # A common denominator for a compact family of p-adic numbers
@@ -13,6 +15,8 @@ import Mathlib.Topology.Order.Compact
 A continuous family on a compact space can be multiplied by one power of p
 so that every value lies in the actual p-adic integer ring.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory
 

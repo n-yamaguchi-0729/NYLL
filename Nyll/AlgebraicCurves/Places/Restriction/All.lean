@@ -34,3 +34,4 @@ import Nyll.AlgebraicCurves.Places.Restriction.RestrictEqMem
 import Nyll.AlgebraicCurves.Places.Restriction.RestrictionComposition
 import Nyll.AlgebraicCurves.Places.Restriction.SmulEqComapEq
 import Nyll.AlgebraicCurves.Places.Restriction.SurjectiveAlgebraMapInjectiveRestrictPlace
+import Nyll.AlgebraicCurves.Places.Restriction.OrderRigidity

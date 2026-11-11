@@ -14,25 +14,27 @@ Upstream per-file ATTRIBUTION:
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
-import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
-import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalProper
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.OpenChartPicardZeroPresheaf
+public import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.OpensRangeSubsetIffSubsingletonH1Fibre
+public import Nyll.AlgebraicCurves.Geometry.Picard.Divisors.RelativeDivisorTwistModuleIso
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.ThetaBundle
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapData
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.RelEffCartierDivTwist2
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IdealProductDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversalProper
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 
 /-!+# The concrete divisor chart as an open subscheme of the Picard scheme
 
@@ -40,6 +42,8 @@ The chart map classifies the actual twist of the universal divisor plus an
 auxiliary divisor. Its inverse onto an open subset of the representing Picard
 scheme is obtained from the divisor chart's proven universal property.
 -/
+
+@[expose] public section
 
 noncomputable section
 

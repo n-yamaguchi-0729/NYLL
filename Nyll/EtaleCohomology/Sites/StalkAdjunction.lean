@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Functor.Category
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Functor.Category
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Stalks of a left adjoint to restriction
@@ -32,6 +34,8 @@ The geometric comparisons and the adjunction are supplied by concrete
 constructions when this result is applied to extension by zero.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,7 +57,7 @@ def restrictionSkyscraperIso :
       Ψ.skyscraperSheafFunctor :=
   ((fullyFaithfulSheafToPresheaf J A).whiskeringRight A).preimageIso
     ((flipFunctor Cᵒᵖ A A).mapIso
-      (CategoryTheory.Functor.isoWhiskerRight (NatIso.op e).symm piFunctor.flip))
+      (CategoryTheory.Functor.isoWhiskerRight (NatIso.op e).symm piConst.flip))
 
 variable [HasColimitsOfSize.{w, w} A]
   (L : Sheaf J A ⥤ Sheaf K A) (adj : L ⊣ G.sheafPushforwardContinuous A J K)

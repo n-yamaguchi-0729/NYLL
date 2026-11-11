@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildProperties
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameGroups
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteWildImage
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.Group.Subgroup.Map
-import Mathlib.GroupTheory.Index
-import Mathlib.GroupTheory.PGroup
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildProperties
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameGroups
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteWildImage
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Group.Subgroup.Map
+public import Mathlib.GroupTheory.Index
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Actual finite wild subgroup images
@@ -25,6 +27,8 @@ subgroups have proved primary cardinalities, prime-to-characteristic indices
 and target normality. The original field environment is closed before the
 finite-group Sylow image theorem is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRawSurjectivity
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Sites.LocallyBijective
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRawSurjectivity
+public import Mathlib.CategoryTheory.Sites.CoverLifting
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-!
 # Local surjectivity of the total Poincaré frame comparison
@@ -16,6 +18,8 @@ modulus classes to their fppf sheaves. Its local surjectivity follows from actua
 local Poincaré classification, rather than an extra representability or lifting
 assumption. This does not yet identify the comparison as an isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

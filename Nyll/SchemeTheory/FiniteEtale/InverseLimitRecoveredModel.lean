@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitGluingRelations
-import Nyll.SchemeTheory.FiniteEtale.RelativeOverlapFiniteness
-import Nyll.SchemeTheory.FiniteEtale.RelativePullbackGluing
-import Nyll.SchemeTheory.Gluing.RelativePullbackRecovery
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitGluingRelations
+public import Nyll.SchemeTheory.FiniteEtale.RelativeOverlapFiniteness
+public import Nyll.SchemeTheory.FiniteEtale.RelativePullbackGluing
+public import Nyll.SchemeTheory.Gluing.RelativePullbackRecovery
 
 /-!
 # An actual inverse-limit model from recovered local charts
@@ -17,6 +19,8 @@ local models and their actual recovered chart overlaps. The resulting
 scheme is finite etale over an original later stage, and its literal native
 pullback recovers the originally given finite-etale object.
 -/
+
+@[expose] public section
 
 noncomputable section
 

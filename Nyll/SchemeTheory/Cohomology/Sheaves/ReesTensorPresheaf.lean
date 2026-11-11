@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorRestrictions
-import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.ReesAlgebra
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorRestrictions
+public import Nyll.SchemeTheory.Modules.Sections.SectionsAlgebra
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ReesTensorCoefficients
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 # The actual Rees tensor presheaf and its homogeneous retracts
@@ -30,6 +32,8 @@ actual presheaves. Their composite in each degree is the identity.
 The construction applies to every module sheaf, with no flatness or
 noetherian assumption and no comparison with a sheaf taken as input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,7 +57,8 @@ def idealTensorSectionsOverBase (n : ℕ) (U : X.Opens) : ModuleCat.{u} A :=
   (ModuleCat.restrictScalars (f.constToPresheaf.app (op U)).hom).obj
     (ModuleCat.of Γ(X, U) (↥((sectionsIdeal f I U) ^ n) ⊗[Γ(X, U)] Γ(M, U)))
 
-private def restrictionOverBase {U W : X.Opens} (h : W ≤ U)
+/-- The original semilinear restriction viewed over the fixed base ring. -/
+def restrictionOverBase {U W : X.Opens} (h : W ≤ U)
     (P : ModuleCat.{u} Γ(X, U)) (Q : ModuleCat.{u} Γ(X, W))
     (φ : P →ₛₗ[(X.presheaf.map (homOfLE h).op).hom] Q) :
     (ModuleCat.restrictScalars (f.constToPresheaf.app (op U)).hom).obj P →ₗ[A]

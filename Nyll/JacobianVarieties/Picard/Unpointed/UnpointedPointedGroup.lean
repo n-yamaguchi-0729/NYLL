@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedPointedComparison
-import Nyll.AlgebraicCurves.Geometry.Descent.GroupGlobalRepresentation
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupComparison
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+module
+
+public import Nyll.JacobianVarieties.Picard.Unpointed.UnpointedPointedComparison
+public import Nyll.AlgebraicCurves.Geometry.Descent.GroupGlobalRepresentation
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupComparison
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
 
 /-!
 # Group compatibility of the pointed comparison
@@ -15,6 +17,8 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPic
 The comparison uses the descended universal element. Its effect on the identity
 and tensor products is determined by the actual classifying equivalences.
 -/
+
+@[expose] public section
 
 universe u
 

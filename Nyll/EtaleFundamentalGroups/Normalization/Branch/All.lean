@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamification.All
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamificationIndex
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.RamificationProduct
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamification.All
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamificationIndex
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.RamificationProduct
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Normalization.Branch. -/

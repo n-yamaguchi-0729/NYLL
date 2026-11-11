@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselizationUniversal
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OrdinaryHenselizationUniversal
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # The actual ordinary-to-pointed-stalk comparison
@@ -18,6 +20,8 @@ stalk. Uniqueness proves the literal triangle with its existing Henselian
 target map. This also applies to the original strict stalk inside a
 normalization-prime localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

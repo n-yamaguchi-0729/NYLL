@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionLinear
-import Nyll.GaloisCohomology.ProP.FreeProPH2Cocycle
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ProCGroup
-import Mathlib.Algebra.Field.ZMod
+module
+
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionLinear
+public import Nyll.GaloisCohomology.ProP.FreeProPH2Cocycle
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ProCGroup
+public import Mathlib.Algebra.Field.ZMod
 
 /-!
 # Continuous transgression from an open normal subgroup
@@ -18,6 +20,8 @@ The algebraic factor-set construction in `FiniteTransgression` uses a bottom top
 finite quotient.  Here the same construction is made directly for the canonical quotient
 topology of an open normal subgroup, so that it composes with the maintained inflation map.
 -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology

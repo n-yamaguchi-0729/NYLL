@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialBaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialMatrix
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialBaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialMatrix
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Pullback of original free-to-twist morphisms along a ring homomorphism
@@ -26,6 +28,8 @@ The polynomial matrix of this native morphism is obtained by applying
 the original ring homomorphism to every coefficient. This description
 also proves identity and composition for the actual transported maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

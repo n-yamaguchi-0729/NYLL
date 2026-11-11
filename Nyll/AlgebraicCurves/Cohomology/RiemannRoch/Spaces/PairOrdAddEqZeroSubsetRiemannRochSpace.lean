@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Submodule.Union
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Linarith.Frontend
-import Mathlib.Tactic.SplitIfs
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+module
+
+public import Mathlib.Algebra.Module.Submodule.Union
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Exists pair forall ord add eq zero of subset riemann Roch Space
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

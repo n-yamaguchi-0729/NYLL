@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFundamentalGroupConjugacy
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFieldTower
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkGaloisRestriction
-import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGalois
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFundamentalGroupConjugacy
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFieldTower
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkGaloisRestriction
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.OriginalFractionFieldGalois
 
 /-!
 # The actual strict-generic fundamental group has image original inertia
@@ -19,6 +21,8 @@ fiber functors accounts for the inner conjugation in the generic scheme
 map. The canonical fraction field permits this comparison in the scheme
 universe while the original displayed fraction field remains independent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

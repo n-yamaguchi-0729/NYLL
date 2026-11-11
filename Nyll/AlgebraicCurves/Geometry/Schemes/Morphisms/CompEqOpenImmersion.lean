@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
-import Mathlib.AlgebraicGeometry.SpreadingOut
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.AlgebraicGeometry.SpreadingOut
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.Tactic.Choose
 
 /-!
 # exists comp eq of is Open Immersion of is Proper of is Discrete Valuation Ring stalk
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

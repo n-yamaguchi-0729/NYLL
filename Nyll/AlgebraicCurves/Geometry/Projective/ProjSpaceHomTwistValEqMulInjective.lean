@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Topology.Sheaves.CommRingCat
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Tactic.Ring
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+module
+
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Topology.Sheaves.CommRingCat
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Tactic.Ring
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
 
 /-!
 # Proj Space exists hom twist val eq mul and injective of cocycle
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

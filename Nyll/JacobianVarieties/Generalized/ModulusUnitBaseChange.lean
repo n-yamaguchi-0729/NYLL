@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.FrameCoordinates
-import Nyll.SchemeTheory.WeilRestriction.BaseChange
-import Mathlib.CategoryTheory.Sites.CoverLifting
+module
+
+public import Nyll.JacobianVarieties.Generalized.FrameCoordinates
+public import Nyll.SchemeTheory.WeilRestriction.BaseChange
+public import Mathlib.CategoryTheory.Sites.CoverLifting
 
 /-!
 # Base change of the intrinsic modulus-unit sheaf
@@ -16,6 +18,8 @@ on every parameter scheme. It preserves the exact scalar subgroup, giving
 an isomorphism of group presheaves. Restriction to a slice commutes with
 fppf sheafification, so this comparison descends to the intrinsic sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

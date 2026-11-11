@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjPresentationFiniteBySectionsPullback
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationBaseChange
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationFaithfullyFlatDescent
-import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationIso
+module
+
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjPresentationFiniteBySectionsPullback
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentation
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationBaseChange
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationCharts
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationFaithfullyFlatDescent
+public import Nyll.SchemeTheory.Modules.ProjectivePresentation.ProjectivePresentationIso

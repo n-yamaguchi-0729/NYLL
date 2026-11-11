@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerFiniteEtaleExtension
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
-import Nyll.SchemeTheory.Normalization.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Data.Nat.Factorial.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerFiniteEtaleExtension
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+public import Nyll.SchemeTheory.Normalization.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Data.Nat.Factorial.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Defs
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # The normalized generic cover after a uniformizer root
@@ -40,6 +42,8 @@ Applying this calculation at the special-fibre generic points of a smooth
 scheme, and applying purity on that scheme, are subsequent steps.
 https://stacks.math.columbia.edu/tag/0C0Q
 -/
+
+@[expose] public section
 
 noncomputable section
 

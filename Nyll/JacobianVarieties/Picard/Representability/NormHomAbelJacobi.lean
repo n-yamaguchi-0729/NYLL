@@ -10,44 +10,48 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
-import Nyll.JacobianVarieties.Picard.Representability.UniqueHom
-import Nyll.JacobianVarieties.Picard.GroupLaw.PicardRepresentabilityCompMulEqMulCompTransform
-import Nyll.AlgebraicCurves.Geometry.Picard.Poincare.PicardRepresentabilityPoincarePullbackMulIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.InvertibleNorm
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.PullbackNormIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormUnitIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormTensorIso
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormInvModuleKerIso
-import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.FibrewiseAlgebraicEquivalenceOfInvertibleNormCurveChange
-import Nyll.JacobianVarieties.Picard.BaseChange.IsPullbackBaseChangeSndCurveChange
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomFinrankPullbackMapCompEq
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.IdealSheafModule
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOfPoint
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
+public import Nyll.JacobianVarieties.Picard.Representability.UniqueHom
+public import Nyll.JacobianVarieties.Picard.GroupLaw.PicardRepresentabilityCompMulEqMulCompTransform
+public import Nyll.AlgebraicCurves.Geometry.Picard.Poincare.PicardRepresentabilityPoincarePullbackMulIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.InvertibleNorm
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.PullbackNormIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormUnitIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormTensorIso
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Norm.NormInvModuleKerIso
+public import Nyll.JacobianVarieties.Picard.AlgebraicEquivalence.FibrewiseAlgebraicEquivalenceOfInvertibleNormCurveChange
+public import Nyll.JacobianVarieties.Picard.BaseChange.IsPullbackBaseChangeSndCurveChange
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomFinrankPullbackMapCompEq
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealInvertibleInvModule
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
 /-!
 # Norm morphisms and Abel-Jacobi points
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

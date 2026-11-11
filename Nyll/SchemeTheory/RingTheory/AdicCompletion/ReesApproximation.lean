@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.Algebra.Polynomial.Monomial
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.ReesAlgebra
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.Algebra.Polynomial.Monomial
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.ReesAlgebra
+public import Mathlib.Tactic.Choose
 
 /-!
 # Finite approximation from the residual Rees algebra
@@ -31,6 +33,8 @@ bound on the orders of coefficients needed to improve an approximation by
 one degree. No Noetherianity of `R` or closedness of `J` is assumed. This is
 the algebraic part of the proof of Stacks, Tag 05GH.
 -/
+
+@[expose] public section
 
 noncomputable section
 

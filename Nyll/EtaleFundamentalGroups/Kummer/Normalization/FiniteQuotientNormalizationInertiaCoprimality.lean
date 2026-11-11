@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteQuotientRealization
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteQuotientRealization
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
 
 /-!
 # Normalization inertia in explicit finite quotients
@@ -15,6 +17,8 @@ a pointed connected finite-etale Galois cover.  This file transports
 coprimality of normalization-prime inertia in the cover's function-field
 Galois group to the corresponding subgroup image in the prescribed quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

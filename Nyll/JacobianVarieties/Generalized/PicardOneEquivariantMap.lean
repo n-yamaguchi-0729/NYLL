@@ -5,11 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
-import Nyll.JacobianVarieties.Generalized.ModulusAbelTorsorDifference
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelTorsorDifference
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
 
 /-! # Actual equivariant morphisms from the intrinsic Picard-one torsor -/
+
+@[expose] public section
 
 noncomputable section
 

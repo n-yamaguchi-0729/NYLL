@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelChangeBasepoint
-import Nyll.JacobianVarieties.Generalized.ModulusAbelTransition
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
-import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
-import Nyll.JacobianVarieties.Generalized.ModulusDegreeOneComparison
-import Nyll.JacobianVarieties.Generalized.ModulusMapRestriction
-import Nyll.JacobianVarieties.Generalized.ModulusRegularMap
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelChangeBasepoint
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelTransition
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniquenessGeometric
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementNonempty
+public import Nyll.JacobianVarieties.Generalized.ModulusDegreeOneComparison
+public import Nyll.JacobianVarieties.Generalized.ModulusMapRestriction
+public import Nyll.JacobianVarieties.Generalized.ModulusRegularMap
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
 
 /-! # Universal group factorization for degree-zero modulus
 
@@ -22,6 +24,8 @@ a group morphism on the degree-zero Jacobian, and density of the open complement
 extends its Abel identity to the original curve. Basepoint change supplies the
 identity at the prescribed basepoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

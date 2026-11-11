@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalFiniteEtaleSections
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianConnectedFibers
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Morphisms.ProperNormalization
-import Nyll.SchemeTheory.Morphisms.EtalePostcomposition
-import Mathlib.RingTheory.RingHom.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalFiniteEtaleSections
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianConnectedFibers
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Morphisms.ProperNormalization
+public import Nyll.SchemeTheory.Morphisms.EtalePostcomposition
+public import Mathlib.RingTheory.RingHom.Finite
 
 /-!
 # The Stein factor over an arbitrary local base
@@ -19,6 +21,8 @@ the second map of relative normalization as finite étale. Its first map has
 geometrically connected fibres by the unrestricted scalar-section comparison.
 The original local base is not assumed Noetherian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

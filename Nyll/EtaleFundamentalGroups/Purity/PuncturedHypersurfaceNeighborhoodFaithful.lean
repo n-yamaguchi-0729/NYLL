@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedComponentFaithful
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Nyll.SchemeTheory.RingTheory.Dimension.PuncturedHypersurfacePrime
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Inseparable
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedComponentFaithful
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.RingTheory.Dimension.PuncturedHypersurfacePrime
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Inseparable
 
 /-!
 # Faithful restriction from a neighbourhood of a punctured hypersurface
@@ -28,6 +30,8 @@ This is the neighbourhood faithfulness implication of
 The existence of a suitable neighbourhood and the statement about the
 colimit of neighbourhood categories are separate assertions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

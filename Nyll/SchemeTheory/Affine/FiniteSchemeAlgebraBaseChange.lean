@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
-import Nyll.SchemeTheory.Affine.SpecFlatBaseChangeSections
+module
+
+public import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
+public import Nyll.SchemeTheory.Affine.SpecFlatBaseChangeSections
 
 /-! The actual finite-scheme coordinate algebra commutes with extension of field coefficients. -/
+
+@[expose] public section
 
 noncomputable section
 

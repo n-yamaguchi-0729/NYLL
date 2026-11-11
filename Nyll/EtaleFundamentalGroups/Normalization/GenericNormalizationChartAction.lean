@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedGeometricInertia
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedGeometricInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # The actual normalization action on a generic integral-closure chart
@@ -28,6 +30,8 @@ this equivariance statement, so it applies to the algebraic closures used
 by the original global inertia-kernel theorem as well.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
@@ -35,11 +39,6 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 /-- The literal restricted field automorphism on an integral-closure chart
 intertwines with the actual normalization endomorphism over X. -/

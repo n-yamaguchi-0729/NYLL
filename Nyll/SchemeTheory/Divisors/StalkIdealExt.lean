@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+module
+
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 
 /-!
 # Ideal sheaves are determined by their actual stalk ideals
@@ -13,6 +15,8 @@ Containment and equality of ideal sheaves can be checked at every stalk.
 This follows from affine ideal detection and the proved affine-neighborhood
 description of the actual stalk ideal, without a coherence hypothesis.
 -/
+
+@[expose] public section
 
 universe u
 

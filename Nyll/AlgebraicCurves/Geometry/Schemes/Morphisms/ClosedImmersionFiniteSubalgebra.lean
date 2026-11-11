@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Schemes.Limits.IsClosedImmersionFgSubalgebraClosedImmersionPullbackMap
+module
+
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.Descent.IsClosedImmersionFgSubalgebraClosedImmersionPullbackMap
 
 /-!
 # Is Closed Immersion exists fg subalgebra of is Closed Immersion pullback map of quasi
 Compact
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

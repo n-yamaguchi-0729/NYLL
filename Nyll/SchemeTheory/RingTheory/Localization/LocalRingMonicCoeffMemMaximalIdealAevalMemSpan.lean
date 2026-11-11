@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.Matrix.Charpoly.LinearMap
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.Tactic.SplitIfs
+module
+
+public import Mathlib.LinearAlgebra.Matrix.Charpoly.LinearMap
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.Tactic.SplitIfs
 
 /-!
 # Is Local Ring exists monic coeff mem maximal Ideal aeval mem span of pow mem
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

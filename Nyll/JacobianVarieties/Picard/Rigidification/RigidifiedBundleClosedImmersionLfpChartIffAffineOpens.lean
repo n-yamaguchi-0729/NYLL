@@ -10,26 +10,30 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianDescentAffineOpens
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionLfpChartIff
-import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionPullbackIsoUnitIff
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleNoetherianDescentAffineOpens
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionLfpChartIff
+public import Nyll.JacobianVarieties.Picard.Rigidification.RigidifiedBundleClosedImmersionPullbackIsoUnitIff
 
 /-!
 # Affine charts for the finite-presentation triviality locus
 
 Descend to a noetherian base and transport its closed triviality locus to each affine chart.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

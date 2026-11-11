@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.Embedding.Extend
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Mathlib.Algebra.Homology.FullSubcategory
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Mathlib.CategoryTheory.MorphismProperty.Basic
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+public import Mathlib.Algebra.Homology.FullSubcategory
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import Mathlib.CategoryTheory.MorphismProperty.Basic
 
 /-!
 # Actual injective resolutions compute the bounded below derived functor
@@ -21,6 +23,8 @@ nonnegative to integer degrees. The resulting quasi-isomorphism, followed by
 the native right-derived unit on the complex of injectives, constructs the
 comparison in the derived category. No comparison is supplied as a premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

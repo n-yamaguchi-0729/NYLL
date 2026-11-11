@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Basic
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Data.Nat.Prime.Basic
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Basic
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.Prime.Basic
 
 /-!
 # Index calculus for the tame Abhyankar frontier
@@ -16,6 +18,8 @@ ramification index after base change by `e / gcd e e'`.  This file proves the
 arithmetic consequences of that bound.  It deliberately does not assert the
 geometric bound itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

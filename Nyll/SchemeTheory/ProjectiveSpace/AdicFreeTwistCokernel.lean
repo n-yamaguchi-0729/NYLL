@@ -4,31 +4,34 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.AdicFreeTwistHom
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialBaseChange
-import Nyll.SchemeTheory.ProjectiveSpace.PolynomialHomPullback
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.CategoryTheory.Sites.Spaces
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPresentation
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocality
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeQuotient
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCokernel
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.AdicFreeTwistHom
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.FreeTwistPolynomialBaseChange
+public import Nyll.SchemeTheory.ProjectiveSpace.PolynomialHomPullback
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafFiniteType
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Algebraization of cokernels of compatible native presenting morphisms
@@ -45,6 +48,8 @@ comparison is supplied as extra data. Constructing a uniformly sized
 compatible presentation of an arbitrary formal coherent sheaf remains
 a separate geometric step.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -67,6 +72,19 @@ private theorem cokernelComparison_comp_eq
   change p ≫ (e.hom ≫ (cokernelIsoOfEq h).hom) = _
   rw [← Category.assoc, hp, Category.assoc, π_comp_cokernelIsoOfEq_hom]
 
+private theorem cokernelMapIso_comp_eq
+    {C : Type*} [Category C] [HasZeroMorphisms C]
+    {P M N M' N' : C} (f : M ⟶ N) (g : M' ⟶ N')
+    [HasCokernel f] [HasCokernel g]
+    (p : M ≅ M') (q : N ≅ N') (h : f ≫ q.hom = p.hom ≫ g)
+    (e : P ≅ cokernel f) (projection : N ⟶ P)
+    (hprojection : projection ≫ e.hom = cokernel.π f) :
+    projection ≫ (e ≪≫ cokernel.mapIso f g p q h).hom =
+      q.hom ≫ cokernel.π g := by
+  change projection ≫ (e.hom ≫ (cokernel.mapIso f g p q h).hom) = _
+  rw [← Category.assoc, hprojection]
+  exact cokernel.π_desc _ _ _
+
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 variable (R A : Type u) [CommRing R] [CommRing A] [Algebra R A]
@@ -75,7 +93,7 @@ variable (R A : Type u) [CommRing R] [CommRing A] [Algebra R A]
 local notation "𝒜R" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R
 local notation "𝒜A" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A
 
-private theorem freeTwistHomPullback_square (φ : FreeTwistHom R n I J d) :
+theorem freeTwistHomPullback_square (φ : FreeTwistHom R n I J d) :
     (Scheme.Modules.pullback (map R A n)).map φ ≫
         (freeTwistBaseChangeIso R A n J d).hom =
       (pullbackFreeIso (map R A n) I).hom ≫
@@ -113,14 +131,29 @@ theorem freeTwistHomCokernelBaseChangeIso_projection (φ : FreeTwistHom R n I J 
         (freeTwistHomCokernelBaseChangeIso R A n I J d φ).hom =
       (freeTwistBaseChangeIso R A n J d).hom ≫
         cokernel.π (freeTwistHomPullback R A (algebraMap R A) n I J d φ) := by
-  change (Scheme.Modules.pullback (map R A n)).map (cokernel.π φ) ≫
-    ((PreservesCokernel.iso (Scheme.Modules.pullback (map R A n)) φ).hom ≫
-      (cokernel.mapIso ((Scheme.Modules.pullback (map R A n)).map φ)
-        (freeTwistHomPullback R A (algebraMap R A) n I J d φ)
-        (pullbackFreeIso (map R A n) I) (freeTwistBaseChangeIso R A n J d)
-        (freeTwistHomPullback_square R A n I J d φ)).hom) = _
-  rw [← Category.assoc, PreservesCokernel.π_iso_hom]
-  exact cokernel.π_desc _ _ _
+  exact cokernelMapIso_comp_eq
+    ((Scheme.Modules.pullback (map R A n)).map φ)
+    (freeTwistHomPullback R A (algebraMap R A) n I J d φ)
+    (pullbackFreeIso (map R A n) I) (freeTwistBaseChangeIso R A n J d)
+    (freeTwistHomPullback_square R A n I J d φ)
+    (PreservesCokernel.iso (Scheme.Modules.pullback (map R A n)) φ)
+    ((Scheme.Modules.pullback (map R A n)).map (cokernel.π φ))
+    (PreservesCokernel.π_iso_hom (Scheme.Modules.pullback (map R A n)) φ)
+
+/-- The actual base-change comparison preserves the cokernel projection after
+identifying the transported presenting morphism with another native morphism. -/
+theorem freeTwistHomCokernelBaseChangeIso_projection_of_eq
+    (φ : FreeTwistHom R n I J d) (g : FreeTwistHom A n I J d)
+    (h : freeTwistHomPullback R A (algebraMap R A) n I J d φ = g) :
+    (Scheme.Modules.pullback (map R A n)).map (cokernel.π φ) ≫
+        (freeTwistHomCokernelBaseChangeIso R A n I J d φ ≪≫ cokernelIsoOfEq h).hom =
+      (freeTwistBaseChangeIso R A n J d).hom ≫ cokernel.π g :=
+  cokernelComparison_comp_eq
+    (freeTwistHomPullback R A (algebraMap R A) n I J d φ) g h
+    ((Scheme.Modules.pullback (map R A n)).map (cokernel.π φ))
+    (freeTwistHomCokernelBaseChangeIso R A n I J d φ)
+    (freeTwistBaseChangeIso R A n J d).hom
+    (freeTwistHomCokernelBaseChangeIso_projection R A n I J d φ)
 
 omit A [CommRing A] [Algebra R A] [Finite J] in
 private theorem freeTwistCokernel_quasicoherent (φ : FreeTwistHom R n I J d) :
@@ -134,17 +167,8 @@ private theorem freeTwistCokernel_quasicoherent (φ : FreeTwistHom R n I J d) :
     isQuasicoherent_tensor_twistingSheaf R n Q d
   exact isQuasicoherent_cokernel (M := P) (N := T) φ
 
-private theorem finiteType_free {X : Scheme.{u}} (K : Type u) [Finite K] :
-    (SheafOfModules.free (R := X.ringCatSheaf) K).IsFiniteType := by
-  let g := SheafOfModules.free.generatingSections (R := X.ringCatSheaf) K
-  let q := g.localGeneratorsData
-  have hq : q.IsFiniteType := by
-    constructor
-    intro U
-    exact ⟨inferInstanceAs (Finite K)⟩
-  exact q.isFiniteType hq
-
-private theorem finiteType_cokernel {X : Scheme.{u}} {M N : X.Modules}
+/-- A cokernel of a morphism into a finite-type sheaf has finite type. -/
+theorem finiteType_cokernel {X : Scheme.{u}} {M N : X.Modules}
     [SheafOfModules.IsFiniteType (R := X.ringCatSheaf) N] (φ : M ⟶ N) :
     SheafOfModules.IsFiniteType (R := X.ringCatSheaf) (cokernel φ) := by
   let E : X.Modules ≌ SheafOfModules.{u} X.ringCatSheaf := sheafOfModulesEquivalence X
@@ -192,26 +216,22 @@ theorem adicFreeTwistCokernel_isFiniteType :
 /-- Original stage cokernels are recovered under actual coefficient
 pullback, using the proved reduction of the native presenting morphism. -/
 def adicFreeTwistCokernelReductionIso (k : ℕ) :
-    (Scheme.Modules.pullback (map R (R ⧸ a ^ (k + 1)) n)).obj
+    (Scheme.Modules.pullback (map R (R ⧸ adicFreeTwistHomStageIdeal R a k) n)).obj
         (adicFreeTwistCokernel R n I J d a φ) ≅ cokernel (φ.val k) :=
-  freeTwistHomCokernelBaseChangeIso R (R ⧸ a ^ (k + 1)) n I J d
+  freeTwistHomCokernelBaseChangeIso R (R ⧸ adicFreeTwistHomStageIdeal R a k) n I J d
       (adicFreeTwistHomLift R a n I J d φ) ≪≫
     cokernelIsoOfEq (adicFreeTwistHomLift_reduction R a n I J d φ k)
 
 /-- Recovery preserves the original quotient map at every stage. -/
 theorem adicFreeTwistCokernelReductionIso_projection (k : ℕ) :
-    (Scheme.Modules.pullback (map R (R ⧸ a ^ (k + 1)) n)).map
+    (Scheme.Modules.pullback (map R (R ⧸ adicFreeTwistHomStageIdeal R a k) n)).map
         (cokernel.π (adicFreeTwistHomLift R a n I J d φ)) ≫
       (adicFreeTwistCokernelReductionIso R n I J d a φ k).hom =
-        (freeTwistBaseChangeIso R (R ⧸ a ^ (k + 1)) n J d).hom ≫ cokernel.π (φ.val k) := by
-  let ψ : FreeTwistHom R n I J d := adicFreeTwistHomLift R a n I J d φ
-  let ψk : FreeTwistHom (R ⧸ a ^ (k + 1)) n I J d :=
-    freeTwistHomPullback R (R ⧸ a ^ (k + 1))
-      (algebraMap R (R ⧸ a ^ (k + 1))) n I J d ψ
-  have hk : ψk = φ.val k := adicFreeTwistHomLift_reduction R a n I J d φ k
-  have hbase := freeTwistHomCokernelBaseChangeIso_projection
-    R (R ⧸ a ^ (k + 1)) n I J d ψ
-  exact cokernelComparison_comp_eq ψk (φ.val k) hk _
-    (freeTwistHomCokernelBaseChangeIso R (R ⧸ a ^ (k + 1)) n I J d ψ) _ hbase
+        (freeTwistBaseChangeIso R (R ⧸ adicFreeTwistHomStageIdeal R a k) n J d).hom ≫
+          cokernel.π (φ.val k) :=
+  freeTwistHomCokernelBaseChangeIso_projection_of_eq
+    R (R ⧸ adicFreeTwistHomStageIdeal R a k) n I J d
+    (adicFreeTwistHomLift R a n I J d φ) (φ.val k)
+    (adicFreeTwistHomLift_reduction R a n I J d φ k)
 
 end AlgebraicGeometry.ProjSpace

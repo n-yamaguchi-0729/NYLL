@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.MvPolynomial.CommRing
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Ring.Action.Basic
-import Mathlib.Algebra.Ring.Int.Units
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.MvPolynomial.CommRing
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Ring.Action.Basic
+public import Mathlib.Algebra.Ring.Int.Units
 
 /-! # Simultaneous sign change on the polynomial ring
 
@@ -18,6 +20,8 @@ The sign group is the concrete group `ℤˣ = {1, -1}`.  Its action is kept as
 explicit data, so no competing action on the polynomial ring is registered.
 This is the action occurring in Stacks Project, Tag 0BTE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

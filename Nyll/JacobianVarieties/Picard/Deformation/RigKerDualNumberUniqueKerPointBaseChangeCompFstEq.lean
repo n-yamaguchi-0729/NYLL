@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Util.WithWeakNamespace
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
-import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.JacobianVarieties.Picard.GroupLaw.BaseChangeRelativeGroupLawMulCompat
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.RelativePic0DesignationBaseChange
+public import Mathlib.Util.WithWeakNamespace
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
+public import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.JacobianVarieties.Picard.GroupLaw.BaseChangeRelativeGroupLawMulCompat
 
 /-!
 # Base change of points in the dual-number kernel
@@ -22,6 +26,8 @@ import Nyll.JacobianVarieties.Picard.GroupLaw.BaseChangeRelativeGroupLawMulCompa
 Transport points along the pullback defining the base-changed Picard carrier. Compatibility
 with multiplication and the identity gives the unique lift in the dual-number kernel.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -77,16 +83,17 @@ open _root_.AlgebraicGeometry
 /-- Transport a point over an equality of structure morphisms. -/
 def castBase {B Y X : Scheme.{u}} {s s' : Y ⟶ B} {f : X ⟶ B} (e : s = s') (a : SchemeHomOver s f) :
     SchemeHomOver s' f :=
-  ⟨a.1, a.2.trans e⟩
+  _root_.NeronModelInfra.SchemeHomOver.castBase e a
 
 @[scoped simp] theorem castBase_coe {B Y X : Scheme.{u}} {s s' : Y ⟶ B} {f : X ⟶ B} (e : s = s')
-    (a : SchemeHomOver s f) : (castBase e a).1 = a.1 := rfl
+    (a : SchemeHomOver s f) : (castBase e a).1 = a.1 :=
+  _root_.NeronModelInfra.SchemeHomOver.castBase_coe e a
 
 theorem mul_castBase {R : Type u} [CommRing R] {A T : Scheme.{u}} {f : A ⟶ Spec (CommRingCat.of R)}
     (G : RelativeGroupLaw R f) {s s' : T ⟶ Spec (CommRingCat.of R)} (e : s = s')
     (a b : SchemeHomOver s f) :
-    G.mul s' (castBase e a) (castBase e b) = castBase e (G.mul s a b) := by
-  subst e; rfl
+    G.mul s' (castBase e a) (castBase e b) = castBase e (G.mul s a b) :=
+  _root_.GoodReductionJacobian.RelativeGroupLaw.mul_castBase G e a b
 
 /-- Lift a point to the pullback defining the base-changed Picard carrier. -/
 def liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingCat.of R)}
@@ -94,7 +101,7 @@ def liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingC
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R'))
     (a : SchemeHomOver (t ≫ specMap R R') D.toBase) :
     SchemeHomOver t (D.baseChange R').toBase :=
-  ⟨pullback.lift a.1 t a.2, pullback.lift_snd _ _ _⟩
+  _root_.GoodReductionJacobian.RelativePic0Designation.baseChangeLift D R' t a
 
 @[scoped simp] theorem liftPt_fst {R : Type u} [CommRing R] {C : Scheme.{u}}
     {c : C ⟶ Spec (CommRingCat.of R)}
@@ -102,18 +109,15 @@ def liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingC
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R'))
     (a : SchemeHomOver (t ≫ specMap R R') D.toBase) :
     (liftPt D R' t a).1 ≫ pullback.fst D.toBase (specMap R R') = a.1 :=
-  pullback.lift_fst _ _ _
+  _root_.GoodReductionJacobian.RelativePic0Designation.baseChangeLift_fst D R' t a
 
 theorem eq_liftPt {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingCat.of R)}
     (D : RelativePic0Designation R c) (R' : Type u) [CommRing R'] [Algebra R R']
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R'))
     (z : SchemeHomOver t (D.baseChange R').toBase)
     (a : SchemeHomOver (t ≫ specMap R R') D.toBase)
-    (hz : z.1 ≫ pullback.fst D.toBase (specMap R R') = a.1) : z = liftPt D R' t a := by
-  apply Subtype.ext
-  apply pullback.hom_ext
-  · exact hz.trans (liftPt_fst D R' t a).symm
-  · exact z.2.trans (pullback.lift_snd _ _ _).symm
+    (hz : z.1 ≫ pullback.fst D.toBase (specMap R R') = a.1) : z = liftPt D R' t a :=
+  _root_.GoodReductionJacobian.RelativePic0Designation.eq_baseChangeLift D R' t z a hz
 
 theorem liftPt_mul {R : Type u} [CommRing R] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of R))
     (ε : SchemeHomOver (𝟙 (Spec (CommRingCat.of R))) c) (D : RelativePic0Designation R c)
@@ -138,8 +142,8 @@ theorem liftPt_mul {R : Type u} [CommRing R] {C : Scheme.{u}} (c : C ⟶ Spec (C
 
 theorem one_castBase {R : Type u} [CommRing R] {A T : Scheme.{u}} {f : A ⟶ Spec (CommRingCat.of R)}
     (G : RelativeGroupLaw R f) {s s' : T ⟶ Spec (CommRingCat.of R)} (e : s = s') :
-    castBase e (G.one s) = G.one s' := by
-  subst e; rfl
+    castBase e (G.one s) = G.one s' :=
+  _root_.GoodReductionJacobian.RelativeGroupLaw.one_castBase G e
 
 private theorem eq_one_of_mul_self {R : Type u} [CommRing R]
     {A T : Scheme.{u}} {f : A ⟶ Spec (CommRingCat.of R)} (G : RelativeGroupLaw R f)

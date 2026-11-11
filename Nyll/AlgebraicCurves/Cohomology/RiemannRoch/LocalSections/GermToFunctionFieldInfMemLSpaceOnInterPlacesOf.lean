@@ -10,14 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Models.LocalGeometry.EqRangeStalkEq
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Germ To Function Field inf mem l Space On inter places Of
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -39,11 +45,11 @@ theorem germToFunctionField_mem_lSpaceOn_placesOf_aux
     {K : Type u} [Field K] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of K))
     [IsIntegral C]
     (U : C.Opens) [Nonempty (U : C.Opens)] (s : Γ(C, U)) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     (C.germToFunctionField U).hom s ∈
       AlgebraicCurve.lSpaceOn (AlgebraicCurve.placesOf c U) (0 : AlgebraicCurve.Divisor K
         C.functionField) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   rintro v ⟨x, hxU, -, hvx⟩
   simp only [Finsupp.coe_zero, Pi.zero_apply, WithZero.exp_zero]
   rw [← Place.mem_iff_adicValuation_le_one]
@@ -58,11 +64,11 @@ theorem _root_.AlgebraicCurve.germToFunctionField_inf_mem_lSpaceOn_inter_placesO
     {K : Type u} [Field K] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of K))
     [IsIntegral C] [IsSeparated c] [SmoothOfRelativeDimension 1 c]
     (U V : C.Opens) [Nonempty (U ⊓ V : C.Opens)] (s : Γ(C, U ⊓ V)) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     (C.germToFunctionField (U ⊓ V)).hom s ∈
       AlgebraicCurve.lSpaceOn (AlgebraicCurve.placesOf c U ∩ AlgebraicCurve.placesOf c V)
         (0 : AlgebraicCurve.Divisor K C.functionField) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   have h := germToFunctionField_mem_lSpaceOn_placesOf_aux c (U ⊓ V) s
   intro v hv
   refine h v ?_

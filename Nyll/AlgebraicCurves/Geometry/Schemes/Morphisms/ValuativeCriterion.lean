@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+module
+
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-!
 # Valuative Criterion
 -/
+
+@[expose] public section
 
 noncomputable section
 

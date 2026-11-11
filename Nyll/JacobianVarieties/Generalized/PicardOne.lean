@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
-import Nyll.JacobianVarieties.Generalized.PicardZeroFieldDetection
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
+public import Nyll.JacobianVarieties.Generalized.PicardZeroFieldDetection
 
 /-!
 # A basepoint-independent geometric degree-one condition
@@ -17,6 +19,8 @@ condition uses no chosen ground-field point. An actual ground-field point
 identifies it with its tensor translate of Picard-zero; the comparison is
 proved from geometric-field detection and the actual Abel difference theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

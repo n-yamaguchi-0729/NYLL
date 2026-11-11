@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutEquiv
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutEquiv
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-!
 # Fixing subgroups across Henselian completion
@@ -17,6 +19,8 @@ the actual constructed automorphism correspondence, and holds without
 requiring the intermediate field to be finite or normal.
 -/
 
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

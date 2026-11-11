@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialFinite
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialFinite
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.Polynomial.UniqueFactorization
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
 
 /-! # Normality and the integral closure for the sign quotient
 
@@ -18,6 +20,8 @@ Normality descends because a polynomial quotient of two invariant polynomials
 is itself invariant. The polynomial ring is the integral closure of the
 quadratic subalgebra in its own fraction field, using its original inclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

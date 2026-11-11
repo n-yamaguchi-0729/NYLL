@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.EffectiveDivisorRigidification
-import Nyll.JacobianVarieties.Generalized.EventuallyNormalizedSection
-import Nyll.JacobianVarieties.Generalized.NormalizedSectionNonzero
-import Nyll.JacobianVarieties.Generalized.NonzeroPointTwistSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.NonzeroSectionCartier
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SectionVanishingClosedSubscheme
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
-import Nyll.SchemeTheory.Divisors.StalkIdealExt
-import Mathlib.Topology.JacobsonSpace
+module
+
+public import Nyll.JacobianVarieties.Generalized.EffectiveDivisorRigidification
+public import Nyll.JacobianVarieties.Generalized.EventuallyNormalizedSection
+public import Nyll.JacobianVarieties.Generalized.NormalizedSectionNonzero
+public import Nyll.JacobianVarieties.Generalized.NonzeroPointTwistSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.NonzeroSectionCartier
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.SectionVanishingClosedSubscheme
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+public import Nyll.SchemeTheory.Divisors.StalkIdealExt
+public import Mathlib.Topology.JacobsonSpace
 
 /-!
 # Surjectivity of the concrete divisor map for every Cartier modulus
@@ -22,6 +24,8 @@ are supplied by the curve geometry. A normalized section of a sufficiently
 large point twist gives a Cartier numerator. The full point-ideal decomposition
 then supplies an actual function-field divisor representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

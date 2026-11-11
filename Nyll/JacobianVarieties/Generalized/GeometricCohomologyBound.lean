@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RelativeNormalizedSection
-import Nyll.JacobianVarieties.Generalized.ModulusUniformVanishing
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Nyll.JacobianVarieties.Generalized.RelativeNormalizedSection
+public import Nyll.JacobianVarieties.Generalized.ModulusUniformVanishing
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # A uniform bound for actual geometric first cohomology -/
+
+@[expose] public section
 
 noncomputable section
 

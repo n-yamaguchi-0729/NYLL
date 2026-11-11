@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.Ideal.Quotient.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # Scheme exists is Alg Closed factor residue Field of range subset singleton
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

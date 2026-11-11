@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.FrobeniusBaseChange
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.FieldTheory.Finite.Basic
+module
+
+public import Nyll.SchemeTheory.Morphisms.FrobeniusBaseChange
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.FieldTheory.Finite.Basic
 
 /-!
 # Constant-field automorphisms and finite-field Frobenius
@@ -17,6 +19,8 @@ as base change of the original scheme Frobenius followed by the constant
 automorphism induced by arithmetic Frobenius. This distinguishes the two
 geometric morphisms before passing to cohomology.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -85,7 +89,8 @@ theorem constantFieldTwist_mul (σ τ : Ω ≃ₐ[k] Ω) :
       rfl
     rw [h]
 
-private theorem constantFieldTwist_comp_symm (σ : Ω ≃ₐ[k] Ω) :
+/-- The constant-field twist and its inverse cancel on the original pullback. -/
+theorem constantFieldTwist_comp_symm (σ : Ω ≃ₐ[k] Ω) :
     constantFieldTwist k Ω X σ ≫ constantFieldTwist k Ω X σ.symm = 𝟙 Y := by
   apply pullback.hom_ext
   · rw [Category.assoc, constantFieldTwist_fst, constantFieldTwist_fst, Category.id_comp]
@@ -111,8 +116,7 @@ section FiniteField
 
 variable [Fintype k] [Algebra.IsAlgebraic k Ω]
 
-private local instance constantPullbackOver : (Y).Over (Spec (.of k)) :=
-  ⟨pullback.fst f b ≫ f⟩
+attribute [local instance] constantPullbackOver
 
 private local instance constantSpecOver : (Spec (.of Ω)).Over (Spec (.of k)) := ⟨b⟩
 

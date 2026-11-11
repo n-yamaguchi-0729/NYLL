@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientLocalBijection
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
+module
+
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientLocalBijection
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 
 /-!
 # The scalar quotient as a smooth affine group scheme
@@ -21,18 +23,23 @@ projective-class map. The commutative group structure is transported from
 this represented group sheaf to the same concrete affine scheme.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite Module
 
 universe u v
 
-private instance filteredCommGrpHasColimitsOfShape
+/-- Filtered commutative-group colimits supply the original sheafification construction. -/
+theorem filteredCommGrpHasColimitsOfShape
     {K : Type v} [SmallCategory K] [IsFiltered K] :
     HasColimitsOfShape K CommGrpCat.{v} where
   has_colimit F := HasColimit.mk
     { cocone := CommGrpCat.FilteredColimits.colimitCocone F
       isColimit := CommGrpCat.FilteredColimits.colimitCoconeIsColimit F }
+
+attribute [local instance] filteredCommGrpHasColimitsOfShape
 
 namespace SchemeTheory.Affine.ScalarQuotientSchemePresheaf
 

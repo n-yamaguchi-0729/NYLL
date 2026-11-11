@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleColimit
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleDiagram
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleNeighborhoods
-import Nyll.EtaleFundamentalGroups.Inertia.InvariantPrimeLocalizationMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianEtaleRange
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleColimit
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleDiagram
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteLevelEtaleNeighborhoods
+public import Nyll.EtaleFundamentalGroups.Inertia.InvariantPrimeLocalizationMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselianEtaleRange
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaLocalization
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-!
 # The inertia-invariant localization lies in the actual stalk-map range
@@ -25,6 +27,8 @@ actual map into the normalization prime localization has the original base
 square, so the proved geometric-stalk etale factorization supplies a
 preimage. This concerns the invariant-localization image only.
 -/
+
+@[expose] public section
 
 noncomputable section
 

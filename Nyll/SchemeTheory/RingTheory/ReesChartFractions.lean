@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.ReesChartRegular
+module
+
+public import Nyll.SchemeTheory.RingTheory.ReesChartRegular
 
 /-!
 # Fractions in the actual Rees charts
@@ -13,6 +15,8 @@ Every chart element is a homogeneous fraction with numerator in an actual
 power of the ideal. Multiplication by the coefficient denominator clears
 that fraction. These calculations include zero divisors in the base ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

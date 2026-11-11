@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFieldTower
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkInertia
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Group.Subgroup.Map
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeEmbedding
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFieldTower
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkFraction
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeStalkInertia
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Group.Subgroup.Map
 
 /-!
 # Actual strict-generic Galois restriction has image original inertia
@@ -19,6 +21,8 @@ proved scalar tower. Restricting scalars along that actual tower embeds the
 relative Galois group into the original one. The proved fixing criterion for
 the actual stalk-fraction map gives its exact image, the original inertia.
 -/
+
+@[expose] public section
 
 noncomputable section
 

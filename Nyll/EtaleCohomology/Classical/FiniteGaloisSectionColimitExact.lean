@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisCanonicalRefinement
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisCanonicalRefinement
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-!
 # Exactness of the actual finite Galois section colimit
@@ -18,6 +20,8 @@ into surjectivity on the section colimit. Left exactness comes from
 actual sheaf evaluation and filtered colimits of abelian groups.
 Together these prove exactness; it is not a supplied comparison axiom.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u
@@ -62,7 +66,6 @@ theorem finiteGaloisSectionColimitFunctor_map_ι
 /-- A section at a finite Galois stage lifts through an actual sheaf
 epimorphism after a canonical finite Galois inclusion. -/
 theorem exists_canonical_finiteGalois_lift_section
-    [CharZero K]
     {F G : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}}
     (η : F ⟶ G) [Epi η]
     (E : FiniteGaloisIntermediateField K (AlgebraicClosure K))
@@ -79,7 +82,7 @@ theorem exists_canonical_finiteGalois_lift_section
 
 /-- The actual section-colimit functor preserves epimorphisms, by local
 lifting and canonical finite Galois refinement. -/
-instance finiteGaloisSectionColimitFunctor_preservesEpimorphisms [CharZero K] :
+instance finiteGaloisSectionColimitFunctor_preservesEpimorphisms :
     (finiteGaloisSectionColimitFunctor K).PreservesEpimorphisms where
   preserves {F G} η _ := by
     apply (AddCommGrpCat.epi_iff_surjective _).mpr
@@ -96,20 +99,20 @@ instance finiteGaloisSectionColimitFunctor_preservesEpimorphisms [CharZero K] :
       (ConcreteCategory.congr_hom (finiteGaloisSectionColimitι_transition K G h) s))
 
 /-- Exactness of the actual finite Galois section colimit. -/
-instance finiteGaloisSectionColimitFunctor_preservesHomology [CharZero K] :
+instance finiteGaloisSectionColimitFunctor_preservesHomology :
     (finiteGaloisSectionColimitFunctor K).PreservesHomology :=
   Functor.preservesHomology_of_preservesEpis_and_kernels
     (finiteGaloisSectionColimitFunctor K)
 
 /-- Finite colimits are preserved by the actual section-colimit functor. -/
-instance finiteGaloisSectionColimitFunctor_preservesFiniteColimits [CharZero K] :
+instance finiteGaloisSectionColimitFunctor_preservesFiniteColimits :
     PreservesFiniteColimits (finiteGaloisSectionColimitFunctor K) :=
   Functor.preservesFiniteColimits_of_preservesHomology
     (finiteGaloisSectionColimitFunctor K)
 
 /-- Every actual short exact coefficient sequence stays short exact
 after passage to the finite Galois section colimit. -/
-theorem finiteGaloisSectionColimit_shortExact [CharZero K]
+theorem finiteGaloisSectionColimit_shortExact
     (S : ShortComplex
       (Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}))
     (hS : S.ShortExact) :

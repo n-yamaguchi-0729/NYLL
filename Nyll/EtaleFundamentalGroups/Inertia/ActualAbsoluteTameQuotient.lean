@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualAbsoluteTameCharacter
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientEquiv
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsSeparableEquiv
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsSeparableMap
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualAbsoluteTameCharacter
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientEquiv
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsSeparableEquiv
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsSeparableMap
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # The SAME tame quotient is the full separable roots limit
@@ -17,6 +19,8 @@ Compose the existing continuous quotient equivalence with the actual
 separable-roots equivalence. The representative law retains the original
 quotient projection and the literal postcomposed character.
 -/
+
+@[expose] public section
 
 noncomputable section
 

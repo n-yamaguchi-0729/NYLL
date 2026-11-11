@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LocalizedModule.Submodule
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
 
 /-!
 # Full localized submodules in the actual localization module
@@ -14,6 +16,8 @@ becomes the whole of any actual localization. The proof transfers actual
 fraction representatives along the localized identity map. This is the
 comparison needed to use finite-generator extraction for sheaf sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Polynomial.UniqueFactorization
+public import Mathlib.Tactic.Ring
 
 /-!
 # Affine plane curves and their rational points
@@ -18,6 +20,8 @@ Fried--Jarden, Section 6.2.  A bivariate equation `f` defines the quotient of
 evaluation map from this quotient to `K`; its kernel is the corresponding
 maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -91,14 +95,14 @@ def polynomialEval {f : BivariatePolynomial K} (p : RationalPoint f) :
 theorem polynomialEval_X
     {f : BivariatePolynomial K} (p : RationalPoint f) (i : Fin 2) :
     polynomialEval p (MvPolynomial.X i) = p.coords i := by
-  simp [polynomialEval]
+  simp only [polynomialEval, aeval_X]
 
 theorem polynomialEval_surjective
     {f : BivariatePolynomial K} (p : RationalPoint f) :
     Function.Surjective (polynomialEval p) := by
   intro a
   refine ⟨MvPolynomial.C a, ?_⟩
-  simp [polynomialEval]
+  simp only [polynomialEval, algHom_C, Algebra.algebraMap_self, RingHom.id_apply]
 
 theorem polynomialEval_ker_isMaximal
     {f : BivariatePolynomial K} (p : RationalPoint f) :
@@ -129,7 +133,8 @@ theorem polynomialEval_ker_eq_span_coordinate_sub
       clear hg
       induction g using MvPolynomial.induction_on with
       | C a =>
-          simp [polynomialEval]
+          simp only [polynomialEval, algHom_C, Algebra.algebraMap_self, RingHom.id_apply, sub_self,
+            zero_mem]
       | add g h hg hh =>
           have hadd := I.add_mem hg hh
           convert hadd using 1
@@ -159,7 +164,8 @@ theorem polynomialEval_ker_eq_span_coordinate_sub
       MvPolynomial.X i - MvPolynomial.C (p.coords i) ∈
         RingHom.ker (polynomialEval p).toRingHom
     rw [RingHom.mem_ker]
-    simp [polynomialEval]
+    simp only [polynomialEval, AlgHom.toRingHom_eq_coe, coe_aeval_eq_eval, map_sub, eval_X, eval_C,
+      sub_self]
 
 /--
 The curve equation ideal lies in the kernel of evaluation at a rational
@@ -184,19 +190,20 @@ theorem pointEval_mk
     (g : BivariatePolynomial K) :
     pointEval p (Ideal.Quotient.mk (equationIdeal f) g) =
       MvPolynomial.aeval p.coords g := by
-  simp [pointEval, polynomialEval]
+  simp only [pointEval, polynomialEval, Ideal.Quotient.liftₐ_apply, coe_aeval_eq_eval,
+    Ideal.Quotient.lift_mk, aeval_eq_eval]
 
 @[simp]
 theorem pointEval_coordinateX
     {f : BivariatePolynomial K} (p : RationalPoint f) :
     pointEval p (coordinateX f) = p.coords 0 := by
-  simp [coordinateX, coordinate]
+  simp only [coordinateX, coordinate, Fin.isValue, pointEval_mk, aeval_X]
 
 @[simp]
 theorem pointEval_coordinateY
     {f : BivariatePolynomial K} (p : RationalPoint f) :
     pointEval p (coordinateY f) = p.coords 1 := by
-  simp [coordinateY, coordinate]
+  simp only [coordinateY, coordinate, Fin.isValue, pointEval_mk, aeval_X]
 
 theorem pointEval_surjective
     {f : BivariatePolynomial K} (p : RationalPoint f) :
@@ -257,12 +264,12 @@ theorem pointIdeal_eq_span_coordinate_sub
   ext z
   constructor
   · rintro ⟨_, ⟨i, rfl⟩, rfl⟩
-    exact ⟨i, by simp [coordinate]⟩
+    exact ⟨i, by simp only [coordinate, map_sub, quotient_mk_C]⟩
   · rintro ⟨i, rfl⟩
     refine
       ⟨MvPolynomial.X i - MvPolynomial.C (p.coords i),
         ⟨i, rfl⟩, ?_⟩
-    simp [coordinate]
+    simp only [map_sub, quotient_mk_C, coordinate]
 
 theorem pointIdeal_isMaximal
     {f : BivariatePolynomial K} (p : RationalPoint f) :

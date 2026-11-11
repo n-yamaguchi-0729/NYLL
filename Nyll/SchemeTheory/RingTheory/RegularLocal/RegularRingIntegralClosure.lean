@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
-import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Integral closedness of regular domains
@@ -15,6 +17,8 @@ Regularity at the actual prime localizations supplies their integral
 closedness. The local criterion then proves integral closedness of the
 original domain, as needed for normalization of smooth affine charts.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

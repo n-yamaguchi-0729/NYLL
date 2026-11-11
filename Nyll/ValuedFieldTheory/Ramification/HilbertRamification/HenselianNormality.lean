@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationGroup
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationGroup
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
 
 /-!
 # Ambient normality of inertia and ramification over a Henselian base
@@ -16,6 +18,8 @@ decomposition is the full automorphism group, so both actual inertia and
 actual ramification are normal subgroups of that group.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

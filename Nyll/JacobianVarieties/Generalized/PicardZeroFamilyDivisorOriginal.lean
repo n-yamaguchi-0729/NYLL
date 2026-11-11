@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyDivisor
-import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdealClasses
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardZeroFamilyDivisor
+public import Nyll.JacobianVarieties.Generalized.ModulusFamilyIdealClasses
 
 /-! # Actual divisor representatives with the original modulus frame -/
+
+@[expose] public section
 
 noncomputable section
 

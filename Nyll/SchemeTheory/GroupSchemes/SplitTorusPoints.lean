@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.SplitTorus
-import Mathlib.Algebra.Group.Units.Hom
-import Mathlib.LinearAlgebra.StdBasis
-import Mathlib.Algebra.Module.Equiv.Basic
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorus
+public import Mathlib.Algebra.Group.Units.Hom
+public import Mathlib.LinearAlgebra.StdBasis
+public import Mathlib.Algebra.Module.Equiv.Basic
 
 /-! # Actual split-torus points and their unit coordinates
 
@@ -15,6 +17,8 @@ The canonical Hopf group law identifies points on affine test schemes with tuple
 of units. The comparison uses the fully faithful monoidal algebra-spectrum functor,
 so multiplication is the actual group-scheme multiplication.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,7 +47,8 @@ theorem latticeCharactersEquiv_apply (M : Type u) [CommGroup M] (r : ℕ)
   change χ (Multiplicative.ofAdd ((Pi.basisFun ℤ (Fin r)) j)) = _
   rw [Pi.basisFun_apply]
 
-private def oppositeAlgHomEquiv (R : Type u) [CommRing R] (A B : CommAlgCat.{u} R) :
+/-- Opposite algebra morphisms identify with algebra homomorphisms in the reverse direction. -/
+def oppositeAlgHomEquiv (R : Type u) [CommRing R] (A B : CommAlgCat.{u} R) :
     (op A ⟶ op B) ≃ (B →ₐ[R] A) where
   toFun f := f.unop.hom
   invFun f := (CommAlgCat.ofHom f).op

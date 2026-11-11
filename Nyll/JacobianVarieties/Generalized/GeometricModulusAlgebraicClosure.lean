@@ -4,13 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
-import Nyll.JacobianVarieties.Generalized.GeometricModulusScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
-import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
-import Nyll.JacobianVarieties.Generalized.ScalarExtensionTowerComparisons
-import Nyll.SchemeTheory.GroupSchemes.BaseChangeTowerComparison
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusUniversalProperty
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionTorsor
+public import Nyll.JacobianVarieties.Generalized.ModulusDivisorScalarPoints
+public import Nyll.JacobianVarieties.Generalized.ScalarExtensionTowerComparisons
+public import Nyll.SchemeTheory.GroupSchemes.BaseChangeTowerComparison
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-! # One algebraic closure tests a fixed geometric modulus
 
@@ -20,6 +25,8 @@ complement isomorphisms. Thus a fixed ground divisor which has the full
 condition over an algebraic closure has that condition after every closed
 extension. Neither the divisor nor its regular map is replaced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

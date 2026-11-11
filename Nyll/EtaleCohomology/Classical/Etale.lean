@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.CoefficientSheaves
-import Nyll.EtaleCohomology.Classical.ModuleCohomology
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.Algebra.Module.ULift
+module
+
+public import Nyll.EtaleCohomology.Classical.CoefficientSheaves
+public import Nyll.EtaleCohomology.Classical.ModuleCohomology
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.Algebra.Module.ULift
 
 /-!
 # Classical étale cohomology with module coefficients
@@ -21,6 +23,8 @@ and Grothendieck abelian category instances. The underlying groups are Sheaf.H
 on the small étale site.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

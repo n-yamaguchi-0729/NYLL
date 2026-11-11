@@ -12,6 +12,8 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Exists divisor forall eq weight Floor

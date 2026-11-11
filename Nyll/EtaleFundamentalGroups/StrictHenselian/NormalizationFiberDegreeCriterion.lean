@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkGenericTensor
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
-import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiberDegree
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkGenericTensor
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
+public import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiberDegree
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # The full-degree closed-fiber criterion over a normal local domain
@@ -23,6 +25,8 @@ tensor. Lifting the split fiber's idempotents forces that generic tensor
 to split. Existing descent of actual strict generic splitting then proves
 étaleness of the original integral closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

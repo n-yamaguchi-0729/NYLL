@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Nyll.SchemeTheory.Pi1.Affine.Over
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Nyll.SchemeTheory.Pi1.Affine.Over
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Lifting overlap comparisons over a proper henselian family
@@ -36,6 +38,8 @@ It does not construct `W` or assert effectivity of a proper descent datum.
 The full comparison is Stacks Project, Lemma 58.9.1:
 https://stacks.math.columbia.edu/tag/0A48.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -106,7 +110,8 @@ section CategoricalComparison
 variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   (F : C ⥤ D) (FF : F.FullyFaithful)
 
-private def comparisonPreimageIso (U V : C) (T : D)
+/-- Lift a comparison through a fully faithful functor. -/
+def comparisonPreimageIso (U V : C) (T : D)
     (a : F.obj U ≅ T) (b : F.obj V ≅ T) : U ≅ V :=
   FF.preimageIso (a ≪≫ b.symm)
 

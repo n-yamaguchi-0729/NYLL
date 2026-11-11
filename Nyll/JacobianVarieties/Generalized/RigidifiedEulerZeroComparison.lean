@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedIdentityBaseChange
-import Nyll.JacobianVarieties.Generalized.RigidifiedEulerDegree
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedIdentityBaseChange
+public import Nyll.JacobianVarieties.Generalized.RigidifiedEulerDegree
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # The actual Euler-degree kernel and the original modulus Picard-zero group -/
+
+@[expose] public section
 
 noncomputable section
 

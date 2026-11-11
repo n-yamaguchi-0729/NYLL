@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCategoricalImage
 import Nyll.ProCGroups.Boundary.CyclotomicInversion
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Triviality of finite divisorial inertia
@@ -46,28 +47,28 @@ theorem
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K := X.functionField
     let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) [CommRing A] [IsDomain A]
       [Algebra A K] [IsFractionRing A K]
       [Algebra A L] [IsScalarTower A K L]
       [IsIntegrallyClosed A]
       (P : Ideal A) [P.IsPrime]
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P],
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : _root_.IsGalois K L :=
+      let : _root_.IsGalois K L :=
         isGalois_functionField_of_isGalois_finiteEtale Y hY
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
           Y hY A B
       (∀ p : ℕ, p.Prime →
@@ -76,28 +77,9 @@ theorem
             (finiteEtaleGaloisCoverIdealInertiaFieldQuotientHom
               Y hY A P Q).range) p) →
       Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A instCommRing instDomain instAK instFracAK instAL instTower instNormal P
-    instPprime Q instQprime instQover
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
-      Y hY A B
-  intro hCoprime
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 A instCommRing instDomain instAK instFracAK
+    instAL instTower instNormal P instPprime Q instQprime instQover finiteDimensional fieldGalois B
+    fractionRing integralClosureAction coverAction hCoprime
   have hrange :=
     finiteEtaleGaloisCoverIdealInertiaFieldQuotientHom_range
       Y hY A P Q

@@ -4,87 +4,91 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.MultiplicativeBinaryProductH2Evaluation
-import Nyll.GaloisCohomology.ProP.H2InflationRangeCardinality
-import Nyll.GaloisCohomology.ProP.MultiplicativeProductH2Evaluation
-import Nyll.GaloisCohomology.ProP.FiniteCyclicH2CoefficientNorm
-import Nyll.GaloisCohomology.ProP.FiniteCyclicH2PullbackNorm
-import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryRestriction
-import Nyll.GaloisCohomology.ProP.DiscreteH2Representatives
-import Nyll.GaloisCohomology.ProP.CentralExtensionFrattiniKernel
-import Nyll.GaloisCohomology.ProP.ContinuousH1Bridge
-import Nyll.GaloisCohomology.ProP.ContinuousH1CupCochain
-import Nyll.GaloisCohomology.ProP.ContinuousH1CupFiniteStage
-import Nyll.GaloisCohomology.ProP.ContinuousH1CupProduct
-import Nyll.GaloisCohomology.ProP.ContinuousH1CupProductRestriction
-import Nyll.GaloisCohomology.ProP.ContinuousH1InflationExact
-import Nyll.GaloisCohomology.ProP.ContinuousLowDegreeFiveTermExact
-import Nyll.GaloisCohomology.ProP.ContinuousTransgression
-import Nyll.GaloisCohomology.ProP.ContinuousTransgressionExact
-import Nyll.GaloisCohomology.ProP.ContinuousTransgressionPrimitive
-import Nyll.GaloisCohomology.ProP.DiscreteH2CochainComparison
-import Nyll.GaloisCohomology.ProP.DiscreteH2Comparison
-import Nyll.GaloisCohomology.ProP.DiscreteH2ShortComplexComparison
-import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicCarryIdentity
-import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicChainComparison
-import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicH2Comparison
-import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryCocycle
-import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryCoefficientNorm
-import Nyll.GaloisCohomology.ProP.FiniteCyclicH2TateH0
-import Nyll.GaloisCohomology.ProP.FiniteIndexTransfer
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgression
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionExact
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionKernel
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionLinear
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionPrimitive
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionQuotient
-import Nyll.GaloisCohomology.ProP.FiniteTransgression
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionKernel
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionLinear
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionQuotient
-import Nyll.GaloisCohomology.ProP.FreeProPH2
-import Nyll.GaloisCohomology.ProP.FreeProPH2Cocycle
-import Nyll.GaloisCohomology.ProP.H1NormalSubgroupDescent
-import Nyll.GaloisCohomology.ProP.H2CentralExtensionClass
-import Nyll.GaloisCohomology.ProP.H2CocycleExtension
-import Nyll.GaloisCohomology.ProP.H2CocycleExtensionKernelCharacter
-import Nyll.GaloisCohomology.ProP.H2CocycleExtensionLiftDifference
-import Nyll.GaloisCohomology.ProP.H2CocycleExtensionLinearLiftDifference
-import Nyll.GaloisCohomology.ProP.H2CocycleExtensionLinearLifts
-import Nyll.GaloisCohomology.ProP.H2CocycleExtensionPullback
-import Nyll.GaloisCohomology.ProP.H2CocycleExtensionSplitting
-import Nyll.GaloisCohomology.ProP.H2FiniteEmbeddingProblem
-import Nyll.GaloisCohomology.ProP.H2FiniteStage
-import Nyll.GaloisCohomology.ProP.H2FiniteStageCochain
-import Nyll.GaloisCohomology.ProP.H2FiniteStageFamily
-import Nyll.GaloisCohomology.ProP.H2InflationRangeBound
-import Nyll.GaloisCohomology.ProP.H2PrimeToIndexRestriction
-import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
-import Nyll.GaloisCohomology.ProP.InflationTransgressionQuotient
-import Nyll.GaloisCohomology.ProP.InflationTransgressionRange
-import Nyll.GaloisCohomology.ProP.InvariantKernelH1
-import Nyll.GaloisCohomology.ProP.MultiplicativeInducedShapiro
-import Nyll.GaloisCohomology.ProP.MultiplicativeProductH2
-import Nyll.GaloisCohomology.ProP.PresentationH2KernelCharacter
-import Nyll.GaloisCohomology.ProP.PresentationH2LowerBound
-import Nyll.GaloisCohomology.ProP.PresentationH2Primitive
-import Nyll.GaloisCohomology.ProP.PresentationH2UpperBound
-import Nyll.GaloisCohomology.ProP.PresentationQuotientEquiv
-import Nyll.GaloisCohomology.ProP.QuotientRestriction
-import Nyll.GaloisCohomology.ProP.RelationRankH1
-import Nyll.GaloisCohomology.ProP.RelationRankH2
-import Nyll.GaloisCohomology.ProP.SmallLiftedComparison
-import Nyll.GaloisCohomology.ProP.TrivialMapH1
-import Nyll.GaloisCohomology.ProP.TrivialZModP
-import Nyll.GaloisCohomology.ProP.ClosedKernelH2FiniteFamily
-import Nyll.GaloisCohomology.ProP.ClosedKernelFiniteGeneration
-import Nyll.GaloisCohomology.ProP.FinitePresentationExistence
-import Nyll.GaloisCohomology.ProP.FiniteGolodShafarevichH2
-import Nyll.GaloisCohomology.ProP.TransferRestriction
-import Nyll.GaloisCohomology.ProP.PrimeToIndexCharacterExtension
-import Nyll.GaloisCohomology.ProP.ResidualCharacterDetection
-import Nyll.GaloisCohomology.ProP.FiniteCoefficientTransfer
+module
+
+public import Nyll.GaloisCohomology.ProP.MultiplicativeBinaryProductH2Evaluation
+public import Nyll.GaloisCohomology.ProP.H2InflationRangeCardinality
+public import Nyll.GaloisCohomology.ProP.MultiplicativeProductH2Evaluation
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicH2CoefficientNorm
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicH2PullbackNorm
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryRestriction
+public import Nyll.GaloisCohomology.ProP.DiscreteH2Representatives
+public import Nyll.GaloisCohomology.ProP.CentralExtensionFrattiniKernel
+public import Nyll.GaloisCohomology.ProP.ContinuousH1Bridge
+public import Nyll.GaloisCohomology.ProP.ContinuousH1CupCochain
+public import Nyll.GaloisCohomology.ProP.ContinuousH1CupFiniteStage
+public import Nyll.GaloisCohomology.ProP.ContinuousH1CupProduct
+public import Nyll.GaloisCohomology.ProP.ContinuousH1CupProductRestriction
+public import Nyll.GaloisCohomology.ProP.ContinuousH1InflationExact
+public import Nyll.GaloisCohomology.ProP.ContinuousLowDegreeFiveTermExact
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgression
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgressionExact
+public import Nyll.GaloisCohomology.ProP.ContinuousTransgressionPrimitive
+public import Nyll.GaloisCohomology.ProP.DiscreteH2CochainComparison
+public import Nyll.GaloisCohomology.ProP.DiscreteH2Comparison
+public import Nyll.GaloisCohomology.ProP.DiscreteH2ShortComplexComparison
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicCarryIdentity
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicChainComparison
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicH2Comparison
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryCocycle
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryCoefficientNorm
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicH2TateH0
+public import Nyll.GaloisCohomology.ProP.FiniteIndexTransfer
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgression
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionExact
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionKernel
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionLinear
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionPrimitive
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionQuotient
+public import Nyll.GaloisCohomology.ProP.FiniteTransgression
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionKernel
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionLinear
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionQuotient
+public import Nyll.GaloisCohomology.ProP.FreeProPH2
+public import Nyll.GaloisCohomology.ProP.FreeProPH2Cocycle
+public import Nyll.GaloisCohomology.ProP.H1NormalSubgroupDescent
+public import Nyll.GaloisCohomology.ProP.H2CentralExtensionClass
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtension
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtensionKernelCharacter
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtensionLiftDifference
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtensionLinearLiftDifference
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtensionLinearLifts
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtensionPullback
+public import Nyll.GaloisCohomology.ProP.H2CocycleExtensionSplitting
+public import Nyll.GaloisCohomology.ProP.H2FiniteEmbeddingProblem
+public import Nyll.GaloisCohomology.ProP.H2FiniteStage
+public import Nyll.GaloisCohomology.ProP.H2FiniteStageCochain
+public import Nyll.GaloisCohomology.ProP.H2FiniteStageFamily
+public import Nyll.GaloisCohomology.ProP.H2InflationRangeBound
+public import Nyll.GaloisCohomology.ProP.H2PrimeToIndexRestriction
+public import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
+public import Nyll.GaloisCohomology.ProP.InflationTransgressionQuotient
+public import Nyll.GaloisCohomology.ProP.InflationTransgressionRange
+public import Nyll.GaloisCohomology.ProP.InvariantKernelH1
+public import Nyll.GaloisCohomology.ProP.MultiplicativeInducedShapiro
+public import Nyll.GaloisCohomology.ProP.MultiplicativeProductH2
+public import Nyll.GaloisCohomology.ProP.PresentationH2KernelCharacter
+public import Nyll.GaloisCohomology.ProP.PresentationH2LowerBound
+public import Nyll.GaloisCohomology.ProP.PresentationH2Primitive
+public import Nyll.GaloisCohomology.ProP.PresentationH2UpperBound
+public import Nyll.GaloisCohomology.ProP.PresentationQuotientEquiv
+public import Nyll.GaloisCohomology.ProP.QuotientRestriction
+public import Nyll.GaloisCohomology.ProP.RelationRankH1
+public import Nyll.GaloisCohomology.ProP.RelationRankH2
+public import Nyll.GaloisCohomology.ProP.SmallLiftedComparison
+public import Nyll.GaloisCohomology.ProP.TrivialMapH1
+public import Nyll.GaloisCohomology.ProP.TrivialZModP
+public import Nyll.GaloisCohomology.ProP.ClosedKernelH2FiniteFamily
+public import Nyll.GaloisCohomology.ProP.ClosedKernelFiniteGeneration
+public import Nyll.GaloisCohomology.ProP.FinitePresentationExistence
+public import Nyll.GaloisCohomology.ProP.FiniteGolodShafarevichH2
+public import Nyll.GaloisCohomology.ProP.TransferRestriction
+public import Nyll.GaloisCohomology.ProP.PrimeToIndexCharacterExtension
+public import Nyll.GaloisCohomology.ProP.ResidualCharacterDetection
+public import Nyll.GaloisCohomology.ProP.FiniteCoefficientTransfer
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryPrimitive
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicCharacterCoordinates
 
 /-!
 # Pro-p cohomology

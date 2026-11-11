@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPowerSeries.Inverse
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.MvPowerSeries.Trunc
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Inverse
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.MvPowerSeries.Trunc
 
 /-!
 # Mv Power Series is Adic Complete maximal Ideal
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

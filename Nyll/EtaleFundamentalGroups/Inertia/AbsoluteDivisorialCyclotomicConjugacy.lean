@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteNormalizationPrime
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCyclotomicConjugacy
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFunctoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteNormalizationPrime
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialCyclotomicConjugacy
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldFunctoriality
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteDivisorialFiniteQuotientCompatibility
 
 /-!
 # Absolute divisorial inertia sources
@@ -16,6 +19,8 @@ absolute inertia subgroup.  This file maps elements of that single source
 into the etale fundamental group and compares all of their finite Galois
 cover images with contraction of the fixed normalization prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -28,16 +33,6 @@ open RamificationTheory.HilbertRamification
 namespace EtaleFundamentalGroups.Inertia
 
 universe uA u
-
-private theorem fieldGeometricPoint_comp_genericExtensionMorphism
-    (U : Scheme.{u}) [IsIntegral U]
-    (Omega : Type u) [Field Omega] [Algebra U.functionField Omega] :
-    ξ U.functionField Omega ≫
-        U.genericExtensionMorphism U.functionField =
-      U.genericExtensionMorphism Omega := by
-  simp only [Scheme.genericExtensionMorphism]
-  rw [← Spec.map_comp_assoc]
-  congr 1
 
 /-- Membership in the image of one absolute normalization-prime inertia
 subgroup.  The source element is mapped to the etale fundamental group by

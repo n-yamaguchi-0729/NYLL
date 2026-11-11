@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.EndDegree
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFinrankCompFinrankEqConst
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.EndDegree
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomFinrankCompFinrankEqConst
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Relative Group Law end Degree scheme Hom Over Comp of is Finite of flat
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

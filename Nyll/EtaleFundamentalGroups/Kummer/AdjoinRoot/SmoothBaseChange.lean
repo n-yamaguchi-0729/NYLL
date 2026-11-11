@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.SchemeTheory.RingTheory.Smooth.RegularBase
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Smooth base change of a uniformizer root
@@ -28,6 +30,8 @@ base change or a comparison with the polynomial root chart.
 https://stacks.math.columbia.edu/tag/0C0Q
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Polynomial
@@ -37,7 +41,8 @@ namespace EtaleFundamentalGroups.Kummer
 
 universe u
 
-private def rootBaseChangeAlgEquiv
+/-- Adjoining a radical root commutes with extension of the base ring. -/
+def rootBaseChangeAlgEquiv
     (V A : Type u) [CommRing V] [CommRing A] [Algebra V A]
     (n : ℕ) (a : V) :
     A ⊗[V] AdjoinRoot (X ^ n - C a) ≃ₐ[A]

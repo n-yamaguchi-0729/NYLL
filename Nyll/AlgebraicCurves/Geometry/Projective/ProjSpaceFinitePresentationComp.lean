@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.GradedAlgebra.Basic
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.RingHom.FinitePresentation
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceAlgHomAwayApplyRatioEq
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.GradedAlgebra.Basic
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.RingHom.FinitePresentation
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.AwayRatio
 
 /-!
 # Proj Space locally Of Finite Presentation comp of fg of ideal basic Open eq span
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -64,13 +68,13 @@ variable elsewhere.
 def bvec : Fin (n + 1) → MvPolynomial {k : Fin (n + 1) // k ≠ i} A :=
   fun k => if h : k = i then 1 else MvPolynomial.X ⟨k, h⟩
 
-theorem bvec_self : bvec A n i i = 1 := by simp [bvec]
+theorem bvec_self : bvec A n i i = 1 := by simp only [ne_eq, bvec, ↓reduceDIte]
 
 theorem toAway_bvec (k : Fin (n + 1)) : toAway A n i (bvec A n i k) = ProjSpace.ratio A n i k := by
   unfold bvec
   split_ifs with h
   · subst h; rw [map_one, ProjSpace.ratio_self]
-  · simp [toAway]
+  · simp only [ne_eq, toAway, aeval_X]
 
 theorem range_toAway : Function.Surjective (toAway A n i) := by
   rw [← AlgHom.range_eq_top, eq_top_iff, ← ProjSpace.adjoin_range_ratio A n i,
@@ -148,18 +152,20 @@ theorem frac_mul (i : Fin (n + 1)) (e d : ℕ) (G : ↥(homogeneousSubmodule (Fi
   rw [Localization.mk_mul]
   congr 1
   ext
-  simp [xpow, pow_add]
+  simp only [xpow, pow_add, Submonoid.mk_mul_mk]
 
-private def _root_.K1BSOL.comp (d : ℕ) (p : MvPolynomial (Fin (n + 1)) A) : ↥(homogeneousSubmodule
+/-- The homogeneous component of the specified degree. -/
+def _root_.K1BSOL.comp (d : ℕ) (p : MvPolynomial (Fin (n + 1)) A) : ↥(homogeneousSubmodule
   (Fin (n + 1)) A d) :=
   ⟨homogeneousComponent d p, homogeneousComponent_mem d p⟩
 export _root_.K1BSOL (comp)
 
-theorem comp_zero (d : ℕ) : comp (A := A) (n := n) d 0 = 0 := Subtype.ext (by simp [comp])
+theorem comp_zero (d : ℕ) : comp (A := A) (n := n) d 0 = 0 := Subtype.ext (by simp only [comp,
+  map_zero, ZeroMemClass.coe_zero])
 
 theorem comp_add (d : ℕ) (p q : MvPolynomial (Fin (n + 1)) A) : comp d (p + q) = comp d p + comp d
   q :=
-  Subtype.ext (by simp [comp])
+  Subtype.ext (by simp only [comp, map_add, AddMemClass.mk_add_mk])
 
 theorem coe_decompose (φ : MvPolynomial (Fin (n + 1)) A) (i : ℕ) :
     ((DirectSum.decompose 𝒜 φ) i : MvPolynomial (Fin (n + 1)) A) = homogeneousComponent i φ :=

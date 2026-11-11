@@ -14,6 +14,7 @@ import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.Differentials.Logarithmic.Logarithmic
 import Nyll.AlgebraicCurves.Places.Orders.MemRangeAlgebraMapOrdEqZeroAlgClosed
 import Nyll.AlgebraicCurves.Differentials.Cartier.PthPowerKernel
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Logarithmic differentials of torsion divisor classes

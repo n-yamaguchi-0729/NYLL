@@ -5,10 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneSchemeActionTorsor
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneSchemeActionTorsor
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Mod
 
 /-! # The actual Picard-one torsor as a categorical module object -/
+
+@[expose] public section
 
 noncomputable section
 

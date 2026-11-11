@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.Modules.Invertible.Invertible
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
-import Nyll.SchemeTheory.Modules.Functoriality.AffineFlatSectionsBaseChange
-import Nyll.SchemeTheory.Affine.SeparatedIntersections
-import Mathlib.LinearAlgebra.TensorProduct.Pi
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Choose
+module
+
+public import Nyll.SchemeTheory.Modules.Invertible.Invertible
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
+public import Nyll.SchemeTheory.Modules.Functoriality.AffineFlatSectionsBaseChange
+public import Nyll.SchemeTheory.Affine.SeparatedIntersections
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Choose
 
 /-! Flat base change for sections via finite affine covers and their overlaps. -/
+
+@[expose] public section
 
 universe u
 

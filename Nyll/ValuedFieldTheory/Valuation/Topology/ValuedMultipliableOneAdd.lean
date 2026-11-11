@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.Algebra.InfiniteSum.Defs
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SplitIfs
-import Mathlib.Tactic.GCongr.Core
+module
+
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.Algebra.InfiniteSum.Defs
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SplitIfs
+public import Mathlib.Tactic.GCongr.Core
 
 /-!
 # Valued multipliable one add of tendsto cofinite zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

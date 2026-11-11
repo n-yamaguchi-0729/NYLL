@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.KernelStabilization
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemHom
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FiniteModuleSystem
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.KernelStabilization
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.ModuleSystemHom
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Kernels of actual effective adic module systems
@@ -31,6 +33,8 @@ stable images, and quotient comparisons are all constructed.
 These are the affine kernel stabilization statements used in
 https://stacks.math.columbia.edu/tag/087X.
 -/
+
+@[expose] public section
 
 noncomputable section
 

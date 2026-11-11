@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosedTensor
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosedTensor
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 
 /-!
 # Completing the same finite intermediate field
@@ -18,6 +20,8 @@ an algebraic intermediate field. For a finite separable intermediate field
 of a Henselian DVF, this identifies its own valuation completion with that
 field, preserving every element of the prescribed intermediate field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

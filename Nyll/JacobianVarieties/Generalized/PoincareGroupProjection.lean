@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareGroupScheme
-import Nyll.JacobianVarieties.Generalized.OrdinaryZeroRepresentation
-import Nyll.JacobianVarieties.Generalized.PoincareForgetfulComparison
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareGroupScheme
+public import Nyll.JacobianVarieties.Generalized.OrdinaryZeroRepresentation
+public import Nyll.JacobianVarieties.Generalized.PoincareForgetfulComparison
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The modulus-forgetting morphism of represented group schemes
@@ -15,6 +18,8 @@ The actual natural homomorphism of Picard-zero group sheaves determines a
 group scheme morphism between the constructed frame scheme and the ordinary
 Picard carrier.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.IntegralRefinement
-import Nyll.SchemeTheory.Etale.AffineChartFiniteSubalgebra
-import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
-import Nyll.SchemeTheory.Modules.GeneratedAlgebraSource
-import Nyll.SchemeTheory.Modules.GeneratedAlgebraLocalFactors
-import Nyll.SchemeTheory.Modules.GeneratedFiniteAlgebra
-import Nyll.SchemeTheory.Modules.Submodules.FiniteAffineSectionSubmodule
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
-import Mathlib.Topology.Sets.OpenCover
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.SchemeTheory.Etale.IntegralRefinement
+public import Nyll.SchemeTheory.Etale.AffineChartFiniteSubalgebra
+public import Nyll.SchemeTheory.Modules.Quasicoherent.DirectImageAlgebraQuasicoherent
+public import Nyll.SchemeTheory.Modules.GeneratedAlgebraSource
+public import Nyll.SchemeTheory.Modules.GeneratedAlgebraLocalFactors
+public import Nyll.SchemeTheory.Modules.GeneratedFiniteAlgebra
+public import Nyll.SchemeTheory.Modules.Submodules.FiniteAffineSectionSubmodule
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import Mathlib.Topology.Sets.OpenCover
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite surjective refinements over a qcqs base
@@ -35,6 +37,8 @@ The literal chart subalgebra inclusions transfer the local factorizations
 to the model's native open cover. No finite-presentation conclusion is
 asserted or required for this finite refinement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusUnitRepresentation
-import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
-import Nyll.SchemeTheory.WeilRestriction.Restriction
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitRepresentation
+public import Nyll.JacobianVarieties.Generalized.ModulusUnitBaseChange
+public import Nyll.SchemeTheory.WeilRestriction.Restriction
 
 /-!
 # Relative representations of the modulus unit and local frame sheaves
@@ -17,6 +19,8 @@ sheaf is represented by the corresponding pullback of the concrete norm
 open. A genuine trivialization of a module on that base-changed modulus
 then supplies its local scalar-frame representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

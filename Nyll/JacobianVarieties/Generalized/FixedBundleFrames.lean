@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.InvertibleScalars
-import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
+module
+
+public import Nyll.JacobianVarieties.Generalized.InvertibleScalars
+public import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
 
 /-!
 # Scalar frames classify chosen rigidifications of a fixed line bundle
@@ -15,6 +17,8 @@ The proof uses the automorphisms of the given invertible module, including
 nontrivial modules, and keeps the compatibility of the chosen trivializations.
 Replacing ambient units by parameter units requires a separate comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,9 +52,10 @@ theorem withFrame_iso_iff (e f : (Scheme.Modules.pullback i).obj M ≅ 𝟙_ D.M
       CategoryTheory.Iso.ext v.compatible
     have hs : smulIso (Units.map i.appTop.hom.toMonoidHom a)
         ((Scheme.Modules.pullback i).obj M) ≪≫ f = e :=
-      (congrArg (fun α : Aut ((Scheme.Modules.pullback i).obj M) => α ≪≫ f)
+      (congrArg (fun α : (Scheme.Modules.pullback i).obj M ≅
+          (Scheme.Modules.pullback i).obj M => α ≪≫ f)
         (pullback_mapIso_smulIso i a M).symm).trans
-          ((congrArg (fun α : Aut M => (Scheme.Modules.pullback i).mapIso α ≪≫ f) ha).trans hv)
+          ((congrArg (fun α : M ≅ M => (Scheme.Modules.pullback i).mapIso α ≪≫ f) ha).trans hv)
     apply (scalarFrameSetoid i ((Scheme.Modules.pullback i).obj M)).symm
     exact ⟨a, (Scalars.frameRatio_scalar f (Units.map i.appTop.hom.toMonoidHom a)).symm.trans
       (congrArg (fun z : (Scheme.Modules.pullback i).obj M ≅ 𝟙_ D.Modules => frameRatio f z) hs)⟩
@@ -62,7 +67,8 @@ theorem withFrame_iso_iff (e f : (Scheme.Modules.pullback i).obj M ≅ 𝟙_ D.M
         ((Scalars.frameRatio_scalar f (Units.map i.appTop.hom.toMonoidHom a)).trans ha)
     refine ⟨⟨smulIso a M, ?_⟩⟩
     exact congrArg CategoryTheory.Iso.hom
-      ((congrArg (fun α : Aut ((Scheme.Modules.pullback i).obj M) => α ≪≫ f)
+      ((congrArg (fun α : (Scheme.Modules.pullback i).obj M ≅
+          (Scheme.Modules.pullback i).obj M => α ≪≫ f)
         (pullback_mapIso_smulIso i a M)).trans hs)
 
 /-- An actual scalar-frame class determines a compatible-isomorphism class. -/

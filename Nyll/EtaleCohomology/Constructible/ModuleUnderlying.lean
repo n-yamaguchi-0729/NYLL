@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Mathlib.RingTheory.Finiteness.Cardinality
+module
+
+public import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Mathlib.RingTheory.Finiteness.Cardinality
 
 /-!
 # Underlying finite locally constant sheaves
@@ -18,6 +20,8 @@ trivializing étale cover works: inverse image commutes with forgetting the
 module structure, and each finitely generated module over a finite ring is
 a finite set. The base scheme is arbitrary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

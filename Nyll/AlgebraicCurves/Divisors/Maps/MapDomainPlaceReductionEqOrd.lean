@@ -10,31 +10,35 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.RatFunc.IntermediateField
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Nyll.AlgebraicCurves.Divisors.Maps.Maps
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqOneIsRational
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
-import Nyll.AlgebraicCurves.Places.Rational.Classification
-import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaFiniteDimensional
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
-import Nyll.AlgebraicCurves.FunctionFields.LinearAlgebra.LinearIndependentPowTranscendental
-import Nyll.AlgebraicCurves.Places.Rational.RatFuncOrdPlaceInftyEqOrdPlaceInftyAddSumOrdPlaceOfPoint
-import Nyll.AlgebraicCurves.Differentials.Residues.ResidueNormEqNormResidue
+module
+
+public import Mathlib.FieldTheory.RatFunc.IntermediateField
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Nyll.AlgebraicCurves.Divisors.Maps.Maps
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Nyll.AlgebraicCurves.Places.Orders.PrescribedOrders
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.AlgebraicCurves.Places.Degree.IsRationalAlgClosed
+public import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqOneIsRational
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.EssFiniteTypeTranscendental
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
+public import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaFiniteDimensional
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
+public import Nyll.AlgebraicCurves.FunctionFields.LinearAlgebra.LinearIndependentPowTranscendental
+public import Nyll.AlgebraicCurves.Places.Rational.RatFuncOrdPlaceInftyEqOrdPlaceInftyAddSumOrdPlaceOfPoint
+public import Nyll.AlgebraicCurves.Differentials.Residues.ResidueNormEqNormResidue
 
 /-!
 # Divisor map Domain place Reduction eq ord of retraction
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -59,9 +63,9 @@ variable {K F : Type*} [Field K] [Field F] [Algebra K F]
   (Polynomial.aeval x).toRingHom.toAlgebra
 
 theorem faithful_polyAlg {x : F} (hx : Transcendental K x) :
-    letI := polyAlg (K := K) x
+    let := polyAlg (K := K) x
     FaithfulSMul K[X] F := by
-  let := polyAlg (K := K) x
+  intro sharedOwner1
   exact (faithfulSMul_iff_algebraMap_injective K[X] F).mpr (transcendental_iff_injective.mp hx)
 
 open scoped RatFunc in
@@ -72,21 +76,21 @@ open scoped RatFunc in
   inferInstance
 
 theorem ratAlg_tower {x : F} (hx : Transcendental K x) :
-    letI := ratAlg (K := K) hx
+    let : Algebra (RatFunc K) F := ratAlg (K := K) hx
     IsScalarTower K (RatFunc K) F := by
   let := polyAlg (K := K) x
   have := faithful_polyAlg (K := K) hx
-  let := ratAlg (K := K) hx
+  intro sharedRatAlgebra
   have : IsScalarTower K K[X] F := IsScalarTower.of_algebraMap_eq fun k => by
     exact (Polynomial.aeval x).commutes k |>.symm
   infer_instance
 
 theorem ratAlg_X {x : F} (hx : Transcendental K x) :
-    letI := ratAlg (K := K) hx
+    let : Algebra (RatFunc K) F := ratAlg (K := K) hx
     algebraMap (RatFunc K) F RatFunc.X = x := by
   let := polyAlg (K := K) x
   have := faithful_polyAlg (K := K) hx
-  let := ratAlg (K := K) hx
+  intro sharedRatAlgebra
   have h1 : algebraMap (RatFunc K) F (algebraMap K[X] (RatFunc K) Polynomial.X) =
       algebraMap K[X] F Polynomial.X :=
     (IsScalarTower.algebraMap_apply K[X] (RatFunc K) F _).symm
@@ -97,9 +101,9 @@ theorem ratAlg_X {x : F} (hx : Transcendental K x) :
 open IntermediateField in
 theorem ratAlg_finite {x : F} (hx : Transcendental K x)
     (hfin : FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F) :
-    letI := ratAlg (K := K) hx
+    let := ratAlg (K := K) hx
     FiniteDimensional (RatFunc K) F := by
-  let := ratAlg (K := K) hx
+  intro sharedOwner1
   have := ratAlg_tower (K := K) hx
   set ψ : RatFunc K →ₐ[K] F := IsScalarTower.toAlgHom K (RatFunc K) F with hψ
   have hψX : ψ RatFunc.X = x := ratAlg_X hx
@@ -537,7 +541,9 @@ theorem core
     rw [h1, ← RingHom.mem_ker, hker, IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
     rcases eq_or_ne (z : RatFunc E) 0 with hz | hz
     · have hz' : z = 0 := Subtype.ext hz
-      have h0 : (⟨algebraMap (RatFunc E) FE z, hzO⟩ : O) = 0 := Subtype.ext (by simp [hz])
+      have h0 : (⟨algebraMap (RatFunc E) FE z, hzO⟩ : O) = 0 := Subtype.ext (by
+        change algebraMap (RatFunc E) FE (z : RatFunc E) = (0 : FE)
+        rw [hz, map_zero])
       rw [h0, hz']
       exact iff_of_true (not_isUnit_zero) (not_isUnit_zero)
     · have hz1 : (algebraMap (RatFunc E) FE z) ≠ 0 := (map_ne_zero _).mpr hz

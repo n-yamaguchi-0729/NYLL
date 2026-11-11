@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.EqSndCompCompEqConst
-import Nyll.SchemeTheory.ProjectiveSpace.ProjectiveSpaceIntegral
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
-import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
-import Mathlib.Tactic.FinCases
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.EqSndCompCompEqConst
+public import Nyll.SchemeTheory.ProjectiveSpace.ProjectiveSpaceIntegral
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
+public import Mathlib.Tactic.FinCases
 
 /-! # Morphisms from the projective line to a separated group scheme
 
@@ -19,6 +21,8 @@ the quotient of the translated map by the original map makes this quotient
 constant on each projective-line fibre. The fixed point `[0:1]` makes it the
 identity. The orbit of `[1:1]` is dense, proving constancy of the original map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

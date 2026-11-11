@@ -10,33 +10,34 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.Algebra.Group.Units.Basic
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Sites.Pretopology
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.Topology.Irreducible
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.LocalMorphisms
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.Algebra.Group.Units.Basic
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Sites.Pretopology
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.Topology.Irreducible
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
 
 /-!
 # Triviality from nonzero sections of a line bundle and its dual
@@ -44,6 +45,8 @@ import Nyll.SchemeTheory.Modules.LocalMorphisms
 Local trivializations identify generators and their duals, and restriction compatibility
 transports the resulting maps to sheaves of modules.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -307,23 +310,6 @@ private lemma _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn.bijective_self {
     change (P.presheaf.map (𝟙 _)) f = f
     rw [P.presheaf.map_id]; rfl
   simpa only [e] using h
-
-
-open Lean Elab Command in
-run_cmd
-  let env ← getEnv
-  let full := "AlgebraicGeometry.Scheme.Modules.IsFrameOn.bijective_self".toName
-  let target := if env.contains full then some full else
-    let prv := mkPrivateName env full
-    if env.contains prv then some prv else none
-  match target with
-  | some target =>
-    modifyEnv fun env => addAlias env
-      "AlgebraicCurves.Geometry.Sheaves.Proofs.Scheme_Modules_IsInvertible_nonempty_i\
-      so_tensorUnit_of_section_ne_zero_of_dual_section_ne_zero.AlgebraicGeometry.Sch\
-      eme.Modules.IsFrameOn.bijective_self".toName target
-  | none => pure ()
-
 
 lemma subsingleton_of_eq_bot {W : Y.Opens} (h : W = ⊥) : Subsingleton Γ(Y, W) :=
   CommRingCat.subsingleton_of_isTerminal (Y.sheaf.isTerminalOfEqEmpty h)

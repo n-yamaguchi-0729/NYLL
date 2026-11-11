@@ -11,6 +11,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Transport of principal degree-zero divisors
@@ -218,12 +219,6 @@ private theorem forall_isPrincipal_of_ringEquiv
         (Place.ord_congrRingEquiv e he (c.symm v') f).symm
     _ = v'.ord (e f) := by rw [show Place.congrRingEquiv e he (c.symm v') = v' from
         c.apply_symm_apply v']
-
-private theorem subsingleton_of_ringEquiv (h : Subsingleton (Pic0 K F)) :
-    Subsingleton (Pic0 K F') :=
-  Pic0.subsingleton_of_forall_isPrincipal K F'
-    (forall_isPrincipal_of_ringEquiv e he fun _ hD =>
-      Divisor.mem_principal.mp ((Pic0.subsingleton_iff K F).mp h hD))
 
 end Pic0
 

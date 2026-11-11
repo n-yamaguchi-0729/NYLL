@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Geometric
-import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Geometric
+public import Nyll.SchemeTheory.Affine.WeilRestriction.ScalarQuotientGroupScheme
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
 # Geometric irreducibility of the scalar quotient
@@ -15,6 +17,8 @@ The class of one supplies a section of the actual projective norm open.
 It therefore meets every fibre of projective space. Its geometric fibres
 are nonempty open subsets of irreducible projective spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

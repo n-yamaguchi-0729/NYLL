@@ -9,3 +9,7 @@ import Nyll.AlgebraicCurves.Divisors.ClassGroup.Pic0Congr
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardAction
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardDegree
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardZero
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.KummerClasses
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.MkEqDvdOrdMemTorsion
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.MkEqZeroIffPow
+import Nyll.AlgebraicCurves.Divisors.ClassGroup.PicardTorsion

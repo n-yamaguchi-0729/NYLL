@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.CategoryTheory.Abelian.RightDerived
+module
+
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Sheafification and derived homology
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 Sheafification compares the homology presheaf of a complex of sheaves with
 homology in the abelian category of sheaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

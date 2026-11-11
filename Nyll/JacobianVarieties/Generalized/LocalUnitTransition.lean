@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.LocalUnitQuotient
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Nyll.JacobianVarieties.Generalized.LocalUnitQuotient
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Reduction between moduli and finite local-unit jets
@@ -16,6 +18,8 @@ maps are surjective and commute with the principal boundary and the transition
 on degree-zero divisor classes. Lifting an ordinary Picard class and then its
 local-unit correction proves that the class-group transition is surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

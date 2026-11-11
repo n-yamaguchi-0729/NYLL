@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.ConstantExtension.ConstantFieldExtension
-import Mathlib.Data.Finset.Option
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
-import Nyll.AlgebraicCurves.FunctionFields.LinearAlgebra.LinearIndependentAlgebraMap
-import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapRingHomSeparable
-import Nyll.AlgebraicCurves.FunctionFields.Constants.FiniteDimensionalSeparableAdjoinConstantExtensionPerfectField
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.ConstantExtension.ConstantFieldExtension
+public import Mathlib.Data.Finset.Option
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Index
+public import Nyll.AlgebraicCurves.FunctionFields.LinearAlgebra.LinearIndependentAlgebraMap
+public import Nyll.AlgebraicCurves.Places.ValuationRings.ToValuationSubringEqComapRingHomSeparable
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.FiniteDimensionalSeparableAdjoinConstantExtensionPerfectField
 
 /-!
 # Place exists comap algebra Map eq of constant Field Extension of deg eq one of is
 Algebraic
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

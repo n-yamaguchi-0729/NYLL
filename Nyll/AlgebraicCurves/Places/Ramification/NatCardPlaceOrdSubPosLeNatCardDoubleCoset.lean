@@ -10,16 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.GroupTheory.DoubleCoset
-import Mathlib.GroupTheory.Index
+module
 
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.Places.Restriction.OrdRestrictAlongEqNatCardAlgHom
+public import Mathlib.GroupTheory.DoubleCoset
+public import Mathlib.GroupTheory.Index
+
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.Places.Restriction.OrdRestrictAlongEqNatCardAlgHom
+public import Nyll.AlgebraicCurves.Places.Basic
 
 /-!
 # Nat Card place ord sub pos le nat Card double Coset
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

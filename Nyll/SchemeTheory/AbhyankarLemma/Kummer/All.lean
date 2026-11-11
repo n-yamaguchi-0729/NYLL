@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Definitions
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.ImmediateExtensions
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.NormValue
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalGeneration
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalRepresentatives
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.SingleRadical
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
-import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Tower
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Definitions
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.ImmediateExtensions
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.NormValue
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalGeneration
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.RadicalRepresentatives
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.SingleRadical
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.TameRadicalGeneration
+public import Nyll.SchemeTheory.AbhyankarLemma.Kummer.Tower
 
 /-!
 # Abhyankar lemma: Kummer

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
-import Nyll.EtaleCohomology.Sites.FiniteMarkedNeighborhood
-import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
+public import Nyll.EtaleCohomology.Sites.FiniteMarkedNeighborhood
+public import Nyll.EtaleCohomology.Sites.FinitePushforwardStalks
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # The finite direct-image geometric stalk formula
@@ -26,6 +28,8 @@ Together with the existing injectivity theorem this proves that the actual
 canonical comparison is an isomorphism, Stacks Project 59.55.2(1). The proof
 applies to sets, abelian groups and modules via their usual forgetful functors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

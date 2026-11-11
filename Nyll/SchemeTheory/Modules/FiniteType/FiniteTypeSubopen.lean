@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeIteratedSlice
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeRestriction
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeIteratedSlice
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeRestriction
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Finite type on subopens
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Modules.Sheaf
 Restriction to a smaller open is obtained within the larger slice site,
 then transported by the actual equivalence of iterated slice sites.
 -/
+
+@[expose] public section
 
 noncomputable section
 

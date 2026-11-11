@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
-import Nyll.SchemeTheory.HomologicalAlgebra.RightDerivedFunctorPlusResolution
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Sites.Sheaf
+module
+
+public import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
+public import Nyll.SchemeTheory.HomologicalAlgebra.RightDerivedFunctorPlusResolution
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Native derived global sections on the small étale site
@@ -26,6 +28,8 @@ of modules. Comparison with classical cohomology of the underlying abelian
 sheaf additionally needs its global-section acyclicity; it is not assumed or
 asserted here. No cohomological finiteness or perfection is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

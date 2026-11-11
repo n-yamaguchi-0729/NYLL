@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.NormalLocalFiberDegree
-import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalizationLocalCriterion
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Smooth.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.NormalLocalFiberDegree
+public import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalizationLocalCriterion
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Smooth.IntegralClosure
 
 /-!
 # Fiberwise degree detects finite étale normalization
@@ -19,6 +21,8 @@ residue-field tensor identify the original fiber with the closed fiber of
 the local normalization. The normal-local criterion supplies étaleness,
 which the non-Noetherian normalization spreading theorem glues globally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

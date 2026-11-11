@@ -11,13 +11,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Trace.Trace
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Etale.Kaehler
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Trace.Trace
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Etale.Kaehler
 
 /-!
 # Trace Diff apply
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -40,8 +44,11 @@ private theorem AlgebraicCurve.exists_isTraceDiff (K F F' : Type*) [Field K] [Fi
   refine ⟨g.comp (e.symm.toLinearMap.restrictScalars F), fun y ω => ?_⟩
   have he : e.symm (y • KaehlerDifferential.map K K F F' ω) = y ⊗ₜ[F] ω := by
     rw [LinearEquiv.symm_apply_eq]
-    simp [e]
-  simp [he, g]
+    rw [KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply,
+      KaehlerDifferential.mapBaseChange_tmul]
+  change g (e.symm (y • KaehlerDifferential.map K K F F' ω)) = _
+  rw [he]
+  exact TensorProduct.lift.tmul y ω
 
 open scoped AlgebraicCurve in
 private theorem AlgebraicCurve.isTraceDiff_traceDiff (K F F' : Type*) [Field K] [Field F] [Field

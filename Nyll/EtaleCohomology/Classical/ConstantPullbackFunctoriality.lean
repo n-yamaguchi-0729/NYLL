@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.ConstantCoefficientsComparison
-import Nyll.EtaleCohomology.Classical.EndomorphismPullbackComposition
-import Nyll.EtaleCohomology.Classical.PullbackIdentity
+module
+
+public import Nyll.EtaleCohomology.Classical.ConstantCoefficientsComparison
+public import Nyll.EtaleCohomology.Classical.EndomorphismPullbackComposition
+public import Nyll.EtaleCohomology.Classical.PullbackIdentity
 
 /-!
 # Functoriality of native constant-module cohomology
@@ -15,6 +17,8 @@ The actual constant-coefficient comparison transfers identity and composition
 from abelian pullback to the original coefficient-linear maps. It also identifies
 powers of an endomorphism's pullback with pullback along its actual scheme powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -81,7 +85,7 @@ theorem etaleConstantCohomologyPullbackMap_pow (f : X ⟶ X)
       change 1 = etaleConstantCohomologyPullbackMap (𝟙 X) R M n
       exact (etaleConstantCohomologyPullbackMap_id R M n).symm
   | succ m ih =>
-      rw [pow_succ', pow_succ, CategoryTheory.End.mul_def,
+      rw [pow_succ', pow_succ, CategoryTheory.End.mul_asHom,
         etaleConstantCohomologyPullbackMap_comp_end, ih]
 
 end EtaleCohomology

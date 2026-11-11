@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorLocal
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
-import Nyll.SchemeTheory.RingTheory.Localization.LocalMapLocalizationSurjective
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Ring.Subring.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkTensorLocal
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalMapLocalizationSurjective
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Local rings on triple overlaps of the actual geometric stalk
@@ -30,6 +32,8 @@ This supplies the triple-overlap local comparison used in Stacks Project,
 Lemma 58.10.6 (https://stacks.math.columbia.edu/tag/0BSB). It does not yet
 supply the punctured-cover descent or the lemma's fundamental-group sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

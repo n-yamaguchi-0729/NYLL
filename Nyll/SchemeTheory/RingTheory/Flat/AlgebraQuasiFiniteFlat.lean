@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.QuasiFinite.Basic
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Nyll.SchemeTheory.RingTheory.IdealEqLe
+module
+
+public import Mathlib.RingTheory.QuasiFinite.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Nyll.SchemeTheory.RingTheory.IdealEqLe
 
 /-!
 # Algebra Quasi Finite of flat of quasi Finite generic Fiber
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

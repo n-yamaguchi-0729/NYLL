@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FilteredColimitModel
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Opposites
-import Mathlib.RingTheory.Etale.Finite
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FilteredColimitModel
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Opposites
+public import Mathlib.RingTheory.Etale.Finite
 
 /-!
 # Finite-etale covers of spectra of filtered ring colimits
@@ -17,6 +19,8 @@ The actual finite-etale algebra model over a stage is transferred across the
 existing affine equivalence. Its native base-change comparison yields recovery
 along the literal `Spec` map of the given cocone component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

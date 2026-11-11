@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Actual finite-type subsheaves containing finitely many global sections
@@ -17,6 +19,8 @@ image in a quasicoherent ambient module has both properties. This supplies
 the local input to finite-type submodule extension without an additional
 affine comparison assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

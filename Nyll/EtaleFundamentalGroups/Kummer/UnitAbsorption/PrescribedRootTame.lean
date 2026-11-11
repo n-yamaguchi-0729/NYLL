@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.Compositum
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PureRadicalTame
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.Compositum
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PureRadicalTame
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # A finite étale model for a prescribed tame uniformizer root
@@ -26,6 +28,8 @@ Both root coordinates are retained. These are the tame local models used
 in Stacks Project, Proposition 58.30.3:
 https://stacks.math.columbia.edu/tag/0C0R.
 -/
+
+@[expose] public section
 
 noncomputable section
 

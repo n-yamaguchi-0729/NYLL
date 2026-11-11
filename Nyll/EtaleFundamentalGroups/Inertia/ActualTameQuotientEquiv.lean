@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterKernel
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
-import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.Topology.Algebra.Group.Quotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameQuotientGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterKernel
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameCharacterSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualTameRootsGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildSubgroup
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaAction
+public import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.Topology.Algebra.Group.Quotient
 
 /-!
 # The SAME canonical tame character identifies I/P with the actual root limit
@@ -21,6 +23,8 @@ Surjectivity and the proved independent wild kernel give the first
 isomorphism theorem. The actual quotient projection descends continuity,
 and compactness upgrades this SAME map to a continuous group equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

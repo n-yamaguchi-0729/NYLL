@@ -4,19 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Morphisms.EtaleRadicial
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.CharP.Reduced
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FieldFrobeniusFactorization
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Morphisms.EtaleRadicial
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.CharP.Reduced
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FieldFrobeniusFactorization
 
 /-!
 # Pure Inseparable Affine
 
 The Frobenius power on every algebra, including the zero algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 open CategoryTheory Limits AlgebraicGeometry
@@ -82,7 +86,8 @@ private theorem specAlgebraFrobeniusPower_universallyInjective
   exact (iterateFrobenius_inj K p n) (by
     simpa only [iterateFrobenius_def, map_pow] using heq)
 
-private abbrev affineCoordinateAlgebra (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) :
+/-- The algebra structure on global sections induced by the specified map to the field spectrum. -/
+abbrev affineCoordinateAlgebra (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) :
     Algebra k Γ(X, ⊤) :=
   (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueExactness
-import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableResidueGroup
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationAbsoluteResidueGroup
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueNormal
-import Nyll.EtaleFundamentalGroups.Inertia.SeparableClosureAutomorphisms
-import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationResidueExactness
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeSeparableResidueGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationAbsoluteResidueGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationResidueNormal
+public import Nyll.EtaleFundamentalGroups.Inertia.SeparableClosureAutomorphisms
+public import Nyll.SchemeTheory.RingTheory.Ramification.NormalizationResidueSequence
 
 /-!
 # Original decomposition and inertia over the separable residue field
@@ -21,6 +23,8 @@ and its literal kernel, the original inertia included in decomposition.
 No discrete valuation or algebraically closed residue hypothesis is used.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Inertia
@@ -31,7 +35,8 @@ universe u v w
 
 attribute [local instance] normalizationCommAlgGaloisAction
 
-private def separableResidueIsoOfNormal (k : Type u) [Field k] (E : Bundled Field.{w})
+/-- Restriction to the separable part identifies automorphisms of a normal residue field. -/
+def separableResidueIsoOfNormal (k : Type u) [Field k] (E : Bundled Field.{w})
     (a : Algebra k E.α) (h : let := a; Normal k E.α) :
     nativeFieldAutomorphisms k E a ≅ nativeSeparableResidueGroup k E a := by
   let := a

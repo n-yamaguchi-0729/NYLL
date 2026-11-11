@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.Support
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+module
+
+public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.Support
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 # Module exists forall is Unit surjective base Change of surjective base Change residue
 Field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -79,7 +83,7 @@ theorem
     have hzero : (LinearMap.range f).mkQ.lTensor 𝔭.asIdeal.ResidueField = 0 := by
       rw [← LinearMap.ker_eq_top, ex.linearMap_ker_eq, LinearMap.range_eq_top]
       have : ⇑(f.baseChange 𝔭.asIdeal.ResidueField) = ⇑(f.lTensor 𝔭.asIdeal.ResidueField) :=
-        LinearMap.baseChange_eq_ltensor f
+        LinearMap.baseChange_eq_lTensor f
       rw [← this]; exact hf
     refine ⟨fun x y => ?_⟩
     obtain ⟨x', rfl⟩ := hsurj x; obtain ⟨y', rfl⟩ := hsurj y
@@ -94,7 +98,7 @@ theorem
   have hsubA := subsingleton_tensor_of_smul_eq_zero Q g (fun q => Module.mem_annihilator.mp hgann
     q) A hu
   have := lTensor_surjective_of_subsingleton f A hsubA
-  have hfun : ⇑(f.baseChange A) = ⇑(f.lTensor A) := LinearMap.baseChange_eq_ltensor f
+  have hfun : ⇑(f.baseChange A) = ⇑(f.lTensor A) := LinearMap.baseChange_eq_lTensor f
   rw [hfun]; exact this
 end Module_exists_forall_isUnit_surjective_baseChange_of_surjective_baseChange_residueField
 end AlgebraicCurves.Foundations.Algebra.Proofs

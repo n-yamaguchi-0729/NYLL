@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
-import Nyll.EtaleCohomology.Classical.CoefficientSheaves
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.Sites.Whiskering
+module
+
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.CoefficientSheaves
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Forgetting coefficients under actual étale inverse image
@@ -21,6 +23,8 @@ The pointwise coefficient adjunction also proves compatibility with the
 actual inverse-image/direct-image units.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 universe u
@@ -29,16 +33,19 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Functor
 
 namespace EtaleCohomology
 
-private abbrev coefficientRightAdjoint (R : Type u) [CommRing R] :
+/-- The right adjoint to forgetting a module coefficient action. -/
+abbrev coefficientRightAdjoint (R : Type u) [CommRing R] :
     AddCommGrpCat.{u} ⥤ ModuleCat.{u} R :=
   (forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}).rightAdjoint
 
-private def coefficientSheafRightAdjoint (X : Scheme.{u}) (R : Type u) [CommRing R] :
+/-- The coefficient right adjoint applied pointwise to étale sheaves. -/
+def coefficientSheafRightAdjoint (X : Scheme.{u}) (R : Type u) [CommRing R] :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u} ⥤
       Sheaf X.smallEtaleTopology (ModuleCat.{u} R) :=
   sheafCompose X.smallEtaleTopology (coefficientRightAdjoint R)
 
-private def coefficientSheafAdjunction (X : Scheme.{u}) (R : Type u) [CommRing R] :
+/-- Forgetting coefficients is left adjoint to the pointwise coefficient right adjoint. -/
+def coefficientSheafAdjunction (X : Scheme.{u}) (R : Type u) [CommRing R] :
     Classical.forgetCoefficients.{u + 1, u, u, u}
       (J := X.smallEtaleTopology) (R := R) ⊣
       coefficientSheafRightAdjoint X R := by

@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Restrict
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
 
 /-!
 # Polarisation Loc Iso On Base equivalence
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

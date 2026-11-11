@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Basic
-import Mathlib.RingTheory.PowerSeries.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Mathlib.RingTheory.PowerSeries.Basic
+public import Mathlib.Tactic.Linarith
 
 /-! # Integral rescaling of a series with a linear pole bound
 
@@ -14,6 +16,8 @@ For a series with zero constant coefficient, a parameter of order at least
 `2b` clears every coefficient pole bounded by `b(n+1)`. The resulting series
 over the actual valuation ring is constructed coefficient by coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

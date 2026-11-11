@@ -43,6 +43,7 @@ import Nyll.EtaleCohomology.Constructible.Locality
 import Nyll.EtaleCohomology.Constructible.LocallyConstantKernels
 import Nyll.EtaleCohomology.Constructible.OpenClosed
 import Nyll.EtaleCohomology.Constructible.Support
+import Nyll.EtaleCohomology.Constructible.ModuleStalkFinite
 
 /-!
 # All

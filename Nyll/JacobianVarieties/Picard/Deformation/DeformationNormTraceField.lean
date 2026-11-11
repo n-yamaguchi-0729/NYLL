@@ -10,91 +10,96 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DualNumber
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.RingTheory.Trace.Defs
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.Topology.Sets.Opens
-import Mathlib.RingTheory.Trace.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Topology.Irreducible
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.Tactic.Abel
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.SchemeTheory.Modules.Norm.NormModule
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
-import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
-import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
-import Nyll.AlgebraicCurves.Models.Points.Places
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
-import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
-import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverPreimage
-import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverHomOverIsFrameOnPullback
-import Nyll.JacobianVarieties.Picard.Deformation.Map01OneAddEpsMul
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomFinrankPullbackMapCompEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverBasicOpenRefinementBasisPushforward
-import Nyll.JacobianVarieties.Picard.Deformation.BasisPushforwardDualNumberThickening
-import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnNormMapEqOneAddEpsMulTraceSmul
-import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnMapEqOneAddEpsMulSmul
-import Nyll.SchemeTheory.Modules.Invertible.Rigidify
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitField
-import Nyll.JacobianVarieties.Picard.LineBundles.ModulesInvertibleIsoUnit
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClass
-import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassCechH1ToH1GermEq
-import Nyll.JacobianVarieties.Picard.LineBundles.CrossSectionsIsFrameOn
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldInfMemLSpaceOnInterPlacesOf
-import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldMemLSpaceOnPlacesOf
-import Nyll.AlgebraicCurves.Models.FunctionFields.GermToFunctionFieldAppEq
-import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.FunctionFieldGermTraceEqTraceFunAlongFunctionFieldGerm
-import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageEqPreimageRestrictAlongPlacesOf
-import Nyll.AlgebraicCurves.Cohomology.CechH1ToH1MkEqCechH1ToH1Mk
+module
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
-import Nyll.SchemeTheory.Modules.Sections.IhomSections
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Nyll.SchemeTheory.Modules.Quasicoherent.TildePullback
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.RingTheory.Trace.Defs
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.RingTheory.Trace.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.Irreducible
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.Tactic.Abel
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
+public import Nyll.SchemeTheory.Modules.Norm.NormModule
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.StageHom
+public import Nyll.JacobianVarieties.Picard.Deformation.PicDualNumberDeformationClassSpec
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverH1BaseChange
+public import Nyll.AlgebraicCurves.Models.Points.Places
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Maps
+public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumberBaseTransport
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineOpenCoverPreimage
+public import Nyll.JacobianVarieties.Picard.Deformation.RigKerDualNumberIsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverHomOverIsFrameOnPullback
+public import Nyll.JacobianVarieties.Picard.Deformation.Map01OneAddEpsMul
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomFinrankPullbackMapCompEq
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverBasicOpenRefinementBasisPushforward
+public import Nyll.JacobianVarieties.Picard.Deformation.BasisPushforwardDualNumberThickening
+public import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnNormMapEqOneAddEpsMulTraceSmul
+public import Nyll.JacobianVarieties.Picard.Deformation.IsFrameOnMapEqOneAddEpsMulSmul
+public import Nyll.SchemeTheory.Modules.Invertible.Rigidify
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitField
+public import Nyll.JacobianVarieties.Picard.LineBundles.ModulesInvertibleIsoUnit
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClass
+public import Nyll.JacobianVarieties.Picard.Deformation.DeformationClassCechH1ToH1GermEq
+public import Nyll.JacobianVarieties.Picard.LineBundles.CrossSectionsIsFrameOn
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldInfMemLSpaceOnInterPlacesOf
+public import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.GermToFunctionFieldMemLSpaceOnPlacesOf
+public import Nyll.AlgebraicCurves.Models.FunctionFields.GermToFunctionFieldAppEq
+public import Nyll.AlgebraicCurves.Geometry.Schemes.FunctionFields.FunctionFieldGermTraceEqTraceFunAlongFunctionFieldGerm
+public import Nyll.AlgebraicCurves.Places.Restriction.PlacesOfPreimageEqPreimageRestrictAlongPlacesOf
+public import Nyll.AlgebraicCurves.Cohomology.CechH1ToH1MkEqCechH1ToH1Mk
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.SubPicCondition
+public import Nyll.SchemeTheory.Modules.Sections.IhomSections
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Nyll.SchemeTheory.Modules.Quasicoherent.TildePullback
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Designation
+public import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 /-!
 # Trace on deformation classes over a field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -1037,10 +1042,8 @@ theorem exists_cechH1ToH1_germ_eq_traceAlong_of_classifies_normModule_pullback_o
     rw [← hM]; exact hδ M e₀ e₁ f he₀ he₁ hef
   have hfs : (Submodule.Quotient.mk f : H1StructureSheaf c K 𝒲) = Submodule.Quotient.mk s :=
     hδx.symm.trans hs
-  have hMx : Nonempty (M.1.L ≅ (h.poincare.pullbackAlong x.1).L) := by
-    have hM' := hM
-    unfold RepresentsRelSubPic.kerPointsToRigKer at hM'
-    exact Quotient.exact hM'
+  have hMx : Nonempty (M.1.L ≅ (h.poincare.pullbackAlong x.1).L) :=
+    h.nonempty_iso_of_mk_eq_kerPointsToRigKer K x M hM
   let M₀ : RigidifiedLineBundle c ε (specMap K (DualNumber K)) := M.1
   have hM₀ : (algEquivZeroCut c ε).P _ M₀ :=
     (algEquivZeroCut c ε).congr _ _ _ ⟨hMx.some.symm⟩ ((algEquivZeroCut c ε).pullback_mem _ _ x.1 _
@@ -1063,9 +1066,8 @@ theorem exists_cechH1ToH1_germ_eq_traceAlong_of_classifies_normModule_pullback_o
   let Mr : RigKerDualNumber.Carrier c ε K := Quotient.out (h.kerPointsToRigKer K xr)
   have hMr : (Quotient.mk _ Mr : RigKerDualNumber c ε K) = h.kerPointsToRigKer K xr :=
     Quotient.out_eq _
-  have hMr' : Nonempty (Mr.1.L ≅ (h.poincare.pullbackAlong xr.1).L) := by
-    unfold RepresentsRelSubPic.kerPointsToRigKer at hMr
-    exact Quotient.exact hMr
+  have hMr' : Nonempty (Mr.1.L ≅ (h.poincare.pullbackAlong xr.1).L) :=
+    h.nonempty_iso_of_mk_eq_kerPointsToRigKer K xr Mr hMr
   let fβ := NormDefTriv.homOver c y πβ Hβ K 𝒲
   let fβε := NormDefTriv.homOver c y πβ Hβ (DualNumber K) 𝒲
   have hcommβ : fβε.hom ≫ (dualNumberThickening K 𝒲 c).hom =

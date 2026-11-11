@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Mathlib.CategoryTheory.Functor.Flat
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Surjective global restriction and finite products
@@ -26,6 +28,8 @@ property; unit naturality identifies their restriction with the target.
 
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

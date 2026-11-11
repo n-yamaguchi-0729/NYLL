@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.SchemeTheory.RingTheory.Flat.LocalAdicBasis
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.SchemeTheory.RingTheory.Flat.LocalAdicBasis
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # A common basis in the actual adic quotients of a geometric stalk
@@ -23,6 +25,8 @@ bases of the geometric stalk's actual infinitesimal quotients. Every basis
 uses the same family of elements of the stalk. This constructs the data in
 Stacks, Tag 07QM, part (4), with the original structure homomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

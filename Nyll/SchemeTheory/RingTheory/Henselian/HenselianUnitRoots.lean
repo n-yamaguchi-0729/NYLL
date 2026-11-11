@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # Prime-to-residue-characteristic unit roots in strictly local rings
@@ -15,6 +17,8 @@ A residue root of a unit lifts by Hensel's lemma because the derivative of
 the power polynomial is a unit. No completeness or finite residue field
 hypothesis is needed.
 -/
+
+@[expose] public section
 
 namespace HenselianLocalRing
 

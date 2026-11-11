@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.GenericTensor.ChosenLocalizationFractionRing
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.RamificationIndexExact
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.GenericTensor.ChosenLocalizationFractionRing
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.RamificationIndexExact
 
 /-!
 # The exact completed tensor coordinate at a chosen normalization prime
@@ -26,6 +28,8 @@ Thus later selected-Away transport can use one `Q/m/q`, rather than compare
 independently chosen components or primes.  No component equality,
 right-coordinate surjectivity, or degree equality is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

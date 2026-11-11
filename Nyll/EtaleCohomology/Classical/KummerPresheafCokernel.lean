@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FieldHilbert90EtaleObjects
-import Nyll.EtaleCohomology.Classical.KummerSequence
-import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Nyll.SchemeTheory.CategoryTheory.FunctorCategoryExactness
+module
+
+public import Nyll.EtaleCohomology.Classical.FieldHilbert90EtaleObjects
+public import Nyll.EtaleCohomology.Classical.KummerSequence
+public import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Nyll.SchemeTheory.CategoryTheory.FunctorCategoryExactness
 
 /-!
 # The natural Kummer cokernel on a field's small étale site
@@ -20,6 +22,8 @@ boundary surjective. Its existing naturality and exact kernel identify the
 full cohomology presheaf with the cokernel presheaf, not merely its values at
 field spectra.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

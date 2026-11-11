@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.EpiMono
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # Faithful finite étale pullback to a proper closed fibre
@@ -19,6 +21,8 @@ by their restriction to the closed fibre. The proof uses the actual relative
 equalizer, which is open and closed, and the existing proper closed-fibre
 isomorphism detector. Neither Noetherianity nor henselianity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

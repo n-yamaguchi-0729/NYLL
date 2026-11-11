@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensFlatMorphismRestrictFinrankEqMem
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.OpensFlatMorphismRestrictFinrankEqMem
 
 /-!
 # flat and finrank eq of is Finite of surjective of ring Krull Dim le one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.NatIso
+module
+
+public import Mathlib.CategoryTheory.NatIso
 
 /-! # Comparing successive transports with a direct transport
 
 One comparison is formed from the actual object isomorphisms and the
 isomorphism between the direct and composite functors.
 -/
+
+@[expose] public section
 
 namespace CategoryTheory
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildGroup
-import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildTopology
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildProperties
-import Nyll.ProCGroups.ProC.ProPOfFiniteEmbedding
-import Nyll.ProCGroups.ProC.InverseLimits.Predicates
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildTopology
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteWildProperties
+public import Nyll.ProCGroups.ProC.ProPOfFiniteEmbedding
+public import Nyll.ProCGroups.ProC.InverseLimits.Predicates
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # The independently defined original wild group is pro-p
@@ -19,6 +21,8 @@ Its actual finite wild coordinates are p-groups, locally constant and
 jointly faithful. Closed-product permanence for pro-p groups therefore
 applies to the SAME original wild subgroup in its inherited topology.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

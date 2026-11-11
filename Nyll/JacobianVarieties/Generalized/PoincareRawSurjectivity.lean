@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PoincareRawFamily
-import Nyll.JacobianVarieties.Generalized.PoincareLocalClassification
-import Nyll.JacobianVarieties.Generalized.ModulusFramePicardImage
-import Mathlib.CategoryTheory.Sites.LocallySurjective
+module
+
+public import Nyll.JacobianVarieties.Generalized.PoincareRawFamily
+public import Nyll.JacobianVarieties.Generalized.PoincareLocalClassification
+public import Nyll.JacobianVarieties.Generalized.ModulusFramePicardImage
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
 # Local surjectivity onto actual modulus Picard-zero classes
@@ -17,6 +19,8 @@ section. On that actual open cover, ordinary Poincaré classification and the
 image theorem for modulus frames supply a raw frame representing the given
 modulus-rigidified class. The chosen modulus trivialization is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

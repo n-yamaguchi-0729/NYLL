@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.PicardOneTorsor
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+module
+
+public import Nyll.JacobianVarieties.Generalized.PicardOneTorsor
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-!
 # The intrinsic Picard-one torsor isomorphism
@@ -15,6 +17,8 @@ The actual tensor action and difference give an isomorphism of presheaf
 products. Left exact fppf sheafification carries this isomorphism to the
 intrinsic sheaves. The construction and both inverse identities use no point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

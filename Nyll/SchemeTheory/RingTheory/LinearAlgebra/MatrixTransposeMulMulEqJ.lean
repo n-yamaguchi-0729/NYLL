@@ -10,22 +10,26 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.LinearAlgebra.Basis.Prod
-import Mathlib.LinearAlgebra.Matrix.BilinearForm
-import Mathlib.LinearAlgebra.Matrix.Basis
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import Mathlib.LinearAlgebra.SymplecticGroup
-import Mathlib.Logic.Equiv.Sum
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Ring.RingNF
+module
+
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.Basis.Prod
+public import Mathlib.LinearAlgebra.Matrix.BilinearForm
+public import Mathlib.LinearAlgebra.Matrix.Basis
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.LinearAlgebra.SymplecticGroup
+public import Mathlib.Logic.Equiv.Sum
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # Matrix exists transpose mul mul eq J
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -171,13 +175,21 @@ theorem exists_basis (k : ℕ) :
     simp only [bH, Module.Basis.prod_apply, Sum.elim_inr, Function.comp_apply,
       LinearMap.inr_apply, Module.Basis.singleton_apply]
   have hs1 : ∀ a : Unit, Equiv.sumSumSumComm Unit ι' Unit ι' (Sum.inl (Sum.inl a)) =
-      Sum.inl (Sum.inl a) := fun a => by simp [Equiv.sumSumSumComm_apply]
+      Sum.inl (Sum.inl a) := fun a => by simp only [Equiv.sumSumSumComm_apply, Equiv.sumComm_apply,
+        Function.comp_apply, Equiv.sumAssoc_symm_apply_inl, Sum.map_inl,
+        Equiv.sumAssoc_apply_inl_inl, id_eq]
   have hs2 : ∀ i : ι', Equiv.sumSumSumComm Unit ι' Unit ι' (Sum.inl (Sum.inr i)) =
-      Sum.inr (Sum.inl i) := fun i => by simp [Equiv.sumSumSumComm_apply]
+      Sum.inr (Sum.inl i) := fun i => by simp only [Equiv.sumSumSumComm_apply, Equiv.sumComm_apply,
+        Function.comp_apply, Equiv.sumAssoc_symm_apply_inl, Sum.map_inl,
+        Equiv.sumAssoc_apply_inl_inr, Sum.map_inr, Sum.swap_inl, Equiv.sumAssoc_symm_apply_inr_inr]
   have hs3 : ∀ a : Unit, Equiv.sumSumSumComm Unit ι' Unit ι' (Sum.inr (Sum.inl a)) =
-      Sum.inl (Sum.inr a) := fun a => by simp [Equiv.sumSumSumComm_apply]
+      Sum.inl (Sum.inr a) := fun a => by simp only [Equiv.sumSumSumComm_apply, Equiv.sumComm_apply,
+        Function.comp_apply, Equiv.sumAssoc_symm_apply_inr_inl, Sum.map_inl,
+        Equiv.sumAssoc_apply_inr, Sum.map_inr, Sum.swap_inr, Equiv.sumAssoc_apply_inl_inl]
   have hs4 : ∀ i : ι', Equiv.sumSumSumComm Unit ι' Unit ι' (Sum.inr (Sum.inr i)) =
-      Sum.inr (Sum.inr i) := fun i => by simp [Equiv.sumSumSumComm_apply]
+      Sum.inr (Sum.inr i) := fun i => by simp only [Equiv.sumSumSumComm_apply, Equiv.sumComm_apply,
+        Function.comp_apply, Equiv.sumAssoc_symm_apply_inr_inr, Sum.map_inr, id_eq,
+        Equiv.sumAssoc_apply_inr]
   have he1 : ∀ a : Unit, e (Sum.inl (Sum.inl a)) = u := fun a => by
     obtain ⟨⟩ := a
     rw [hval, hs1, Module.Basis.prod_apply]
@@ -266,7 +278,11 @@ theorem _root_.Matrix.exists_transpose_mul_mul_eq_J {n : ℕ} (Q : Matrix (Fin n
       simp only [dotProduct, c]
       refine Finset.sum_congr rfl fun k _ => ?_
       have hk : (Pi.single k (y k) : V) = y k • (Pi.single k 1 : V) := by
-        ext l; by_cases h : l = k <;> simp [h]
+        ext l
+        by_cases h : l = k
+        · simp only [h, Pi.single_eq_same, Pi.smul_apply, Int.zsmul_eq_mul, mul_one]
+        · simp only [ne_eq, h, not_false_eq_true, Pi.single_eq_of_ne,
+            Pi.smul_apply, Int.zsmul_eq_mul, mul_zero]
       rw [hk, map_smul, smul_eq_mul, mul_comm]
     refine ⟨c ᵥ* Q⁻¹, fun y => ?_⟩
     rw [hB', Matrix.vecMul_vecMul, hinv2, Matrix.vecMul_one, hφ]
@@ -285,7 +301,7 @@ theorem _root_.Matrix.exists_transpose_mul_mul_eq_J {n : ℕ} (Q : Matrix (Fin n
   have hPcol : ∀ j, (fun k => P k j) = e₁ j := fun j => rfl
   have hP : P = (Pi.basisFun ℤ (Fin n ⊕ Fin n)).toMatrix e₁ := by
     ext k j
-    simp [P, Module.Basis.toMatrix_apply, Pi.basisFun_repr]
+    simp only [of_apply, Module.Basis.toMatrix_apply, Pi.basisFun_repr, P]
   refine ⟨P, ?_, ?_⟩
   · rw [hP]
     let := (Pi.basisFun ℤ (Fin n ⊕ Fin n)).invertibleToMatrix e₁

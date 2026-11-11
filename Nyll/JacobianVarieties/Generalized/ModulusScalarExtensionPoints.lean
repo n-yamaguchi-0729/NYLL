@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusComplementBaseChange
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusComplementBaseChange
 
 /-! # Actual open-curve points on a scalar-extended parameter scheme -/
+
+@[expose] public section
 
 noncomputable section
 

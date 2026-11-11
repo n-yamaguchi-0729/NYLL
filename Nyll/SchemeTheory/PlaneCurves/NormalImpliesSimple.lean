@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.PlaneCurves.NormalPoint
-import Nyll.SchemeTheory.PlaneCurves.PartialDerivatives
+module
+
+public import Nyll.SchemeTheory.PlaneCurves.NormalPoint
+public import Nyll.SchemeTheory.PlaneCurves.PartialDerivatives
 
 /-!
 # Normal points on affine plane curves are simple
@@ -20,6 +22,8 @@ divisibility.  After clearing the localization denominator, differentiating
 the resulting polynomial identity at the point contradicts the fact that the
 denominator lies outside the point ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
-import Nyll.EtaleFundamentalGroups.GenericTensor.ActualCompositumComponent
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+public import Nyll.EtaleFundamentalGroups.GenericTensor.ActualCompositumComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
 
 /-!
 # The lower unit factor inside the higher actual component
@@ -19,6 +21,8 @@ maximal generic component of `K' ⊗[Rₑ] Cq` whose quotient is the actual
 higher compositum.  The construction consumes the sourced
 `HigherRadicalUnitFactorData`; it does not choose a second unit factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,7 +36,8 @@ open ValuationTheory.DiscreteValuationField.ValuedExtension
 
 universe u v w x
 
-private theorem finiteDimensional_targetField
+/-- Finiteness of the valuation-subring extension gives finite dimension of the fields. -/
+theorem finiteDimensional_targetField
     {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L]
     (base : DVF.{u, w} K) (target : DVF.{v, x} L)
     [base.valuation.HasExtension target.valuation]
@@ -47,7 +52,8 @@ private theorem finiteDimensional_targetField
     Module.Finite.base_change V K W
   exact Module.Finite.equiv eGeneric.toLinearEquiv
 
-private theorem finiteDimensional_lowerCompositum
+/-- The target compositum is finite-dimensional over the lower radical field. -/
+theorem finiteDimensional_lowerCompositum
     {K : Type u} {L Omega : Type v}
     [Field K] [Field L] [Field Omega]
     [Algebra K L] [Algebra L Omega] [Algebra K Omega]
@@ -57,7 +63,7 @@ private theorem finiteDimensional_lowerCompositum
     let E := targetCompositumOverLowerRadical
       (K := K) (L := L) e N beta
     FiniteDimensional F E := by
-  let F := lowerRadicalField (K := K) e N beta
+  intro F
   let Limage : IntermediateField K Omega :=
     (IsScalarTower.toAlgHom K L Omega).fieldRange
   let E := targetCompositumOverLowerRadical
@@ -105,49 +111,27 @@ noncomputable def lowerUnitFactorHigherGenericComponentIdeal
       IntermediateField.adjoin K ({alpha} : Set (AlgebraicClosure L))
     let K' : IntermediateField F (AlgebraicClosure L) :=
       higherRadicalFieldOverLower (K := K) e N beta
-    letI : IsFractionRing V K := base.valuationSubring_isFractionRing
-    letI : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
-    letI : Algebra V F :=
+    let : IsFractionRing V K := base.valuationSubring_isFractionRing
+    let : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
+    let : Algebra V F :=
       ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-    letI : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
     let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
       pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha halphaPow
-    letI : Algebra Rₑ F :=
+    let : Algebra Rₑ F :=
       (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
-    letI : Algebra Rₑ K' :=
+    let : Algebra Rₑ K' :=
       ((algebraMap F K').comp (algebraMap Rₑ F)).toAlgebra
-    letI : IsScalarTower Rₑ F K' :=
+    let : IsScalarTower Rₑ F K' :=
       IsScalarTower.of_algebraMap_eq' rfl
     Ideal (K' ⊗[Rₑ] Cq) := by
-  dsimp only
-  let V := base.valuationSubring
-  let e := ramificationIndex base target
-  let alpha : AlgebraicClosure L := beta ^ (N / e)
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let F : IntermediateField K (AlgebraicClosure L) :=
-    IntermediateField.adjoin K ({alpha} : Set (AlgebraicClosure L))
+  intro V e alpha Rₑ Cq F
   let E : IntermediateField F (AlgebraicClosure L) :=
     targetCompositumOverLowerRadical (K := K) (L := L) e N beta
-  let K' : IntermediateField F (AlgebraicClosure L) :=
-    higherRadicalFieldOverLower (K := K) e N beta
-  letI : IsFractionRing V K := base.valuationSubring_isFractionRing
-  letI : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
-  letI : Algebra V F :=
-    ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-  letI : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
-  let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
-    pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha halphaPow
-  letI : Algebra Rₑ F :=
-    (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-  letI : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
-  letI : Algebra Rₑ K' :=
-    ((algebraMap F K').comp (algebraMap Rₑ F)).toAlgebra
-  letI : IsScalarTower Rₑ F K' :=
-    IsScalarTower.of_algebraMap_eq' rfl
+  intro K' sharedOwner15 sharedOwner16 sharedOwner17 sharedOwner18 eRₑ sharedOwner19 sharedOwner20
+    sharedOwner21 sharedOwner22
   let eGeneric : (F ⊗[Rₑ] Cq) ≃ₐ[F] E :=
     lowerUnitFactorGenericFiberAlgEquiv
       base target varpi pi N beta he hvarpiPrime halphaPow factor
@@ -155,7 +139,7 @@ noncomputable def lowerUnitFactorHigherGenericComponentIdeal
 
 /-- The selected component ideal is the kernel of the native actual-compositum
 map built from the same prescribed lower factor and its generic coordinate. -/
-private theorem lowerUnitFactorHigherGenericComponentIdeal_eq_actualCompositum
+theorem lowerUnitFactorHigherGenericComponentIdeal_eq_actualCompositum
     {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L]
     (base : DVF.{u, w} K) (target : DVF.{v, x} L)
     [base.valuation.HasExtension target.valuation]
@@ -231,50 +215,27 @@ theorem lowerUnitFactorHigherGenericComponentIdeal_isMaximal
       IntermediateField.adjoin K ({alpha} : Set (AlgebraicClosure L))
     let K' : IntermediateField F (AlgebraicClosure L) :=
       higherRadicalFieldOverLower (K := K) e N beta
-    letI : IsFractionRing V K := base.valuationSubring_isFractionRing
-    letI : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
-    letI : Algebra V F :=
+    let : IsFractionRing V K := base.valuationSubring_isFractionRing
+    let : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
+    let : Algebra V F :=
       ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-    letI : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
     let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
       pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha halphaPow
-    letI : Algebra Rₑ F :=
+    let : Algebra Rₑ F :=
       (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
-    letI : Algebra Rₑ K' :=
+    let : Algebra Rₑ K' :=
       ((algebraMap F K').comp (algebraMap Rₑ F)).toAlgebra
-    letI : IsScalarTower Rₑ F K' :=
+    let : IsScalarTower Rₑ F K' :=
       IsScalarTower.of_algebraMap_eq' rfl
     (lowerUnitFactorHigherGenericComponentIdeal
       base target varpi pi N beta he hvarpiPrime halphaPow factor).IsMaximal := by
-  dsimp only
-  let V := base.valuationSubring
-  let e := ramificationIndex base target
-  let alpha : AlgebraicClosure L := beta ^ (N / e)
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let F : IntermediateField K (AlgebraicClosure L) :=
-    IntermediateField.adjoin K ({alpha} : Set (AlgebraicClosure L))
+  intro V e alpha Rₑ Cq F K' sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 eRₑ sharedOwner5
+    sharedOwner6 sharedOwner7 sharedOwner8
   let E : IntermediateField F (AlgebraicClosure L) :=
     targetCompositumOverLowerRadical (K := K) (L := L) e N beta
-  let K' : IntermediateField F (AlgebraicClosure L) :=
-    higherRadicalFieldOverLower (K := K) e N beta
-  let : IsFractionRing V K := base.valuationSubring_isFractionRing
-  let : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
-  let : Algebra V F :=
-    ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-  let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
-  let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
-    pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha halphaPow
-  let : Algebra Rₑ F :=
-    (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-  let : Algebra Rₑ Cq :=
-    factor.radicalToUnitFactor.toRingHom.toAlgebra
-  let : Algebra Rₑ K' :=
-    ((algebraMap F K').comp (algebraMap Rₑ F)).toAlgebra
-  let : IsScalarTower Rₑ F K' :=
-    IsScalarTower.of_algebraMap_eq' rfl
   let : FiniteDimensional K L := finiteDimensional_targetField base target
   let : FiniteDimensional F E := finiteDimensional_lowerCompositum e N beta
   let eGeneric : (F ⊗[Rₑ] Cq) ≃ₐ[F] E :=
@@ -368,35 +329,27 @@ theorem lowerUnitFactorGenericFiberAlgEquiv_root_coe
       IntermediateField.adjoin K ({alpha} : Set (AlgebraicClosure L))
     let E : IntermediateField F (AlgebraicClosure L) :=
       targetCompositumOverLowerRadical (K := K) (L := L) e N beta
-    letI : IsFractionRing V K := base.valuationSubring_isFractionRing
-    letI : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
-    letI : Algebra V F :=
+    let : IsFractionRing V K := base.valuationSubring_isFractionRing
+    let : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
+    let : Algebra V F :=
       ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-    letI : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
+    let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
     let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
       pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha halphaPow
-    letI : Algebra Rₑ F :=
+    let : Algebra Rₑ F :=
       (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
-    letI : Algebra Rₑ Cq :=
+    let : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     (((lowerUnitFactorGenericFiberAlgEquiv
         base target varpi pi N beta he hvarpiPrime halphaPow factor)
       (1 ⊗ₜ[Rₑ] AdjoinRoot.root factor.q) : E) :
         AlgebraicClosure L) = factor.delta := by
-  dsimp only
-  let V := base.valuationSubring
+  intro V e alpha Rₑ Cq F E sharedOwner9 sharedOwner10 sharedOwner11 sharedOwner12 eRₑ sharedOwner13
+    sharedOwner14
   let W := target.valuationSubring
-  let e := ramificationIndex base target
-  let alpha : AlgebraicClosure L := beta ^ (N / e)
-  let Rₑ := AdjoinRoot (X ^ e - C varpi)
-  let Cq := AdjoinRoot factor.q
-  let F : IntermediateField K (AlgebraicClosure L) :=
-    IntermediateField.adjoin K ({alpha} : Set (AlgebraicClosure L))
   let E₀ : IntermediateField L (AlgebraicClosure L) :=
     IntermediateField.adjoin L
       ({factor.delta} : Set (AlgebraicClosure L))
-  let E : IntermediateField F (AlgebraicClosure L) :=
-    targetCompositumOverLowerRadical (K := K) (L := L) e N beta
   let Limage : IntermediateField K (AlgebraicClosure L) :=
     (IsScalarTower.toAlgHom K L (AlgebraicClosure L)).fieldRange
   let lToE : L →ₐ[K] E :=
@@ -447,21 +400,12 @@ theorem lowerUnitFactorGenericFiberAlgEquiv_root_coe
     (genericFiberRightAlgHom eCq).toRingHom.toAlgebra
   let : IsFractionRing Cq E :=
     isFractionRing_of_genericFiberAlgEquiv eCq
-  let : IsFractionRing V K := base.valuationSubring_isFractionRing
-  let : IsIntegrallyClosed V := base.valuationSubring_isIntegrallyClosed
-  let : Algebra V F :=
-    ((algebraMap K F).comp (algebraMap V K)).toAlgebra
-  let : IsScalarTower V K F := IsScalarTower.of_algebraMap_eq' rfl
-  let eRₑ : (K ⊗[V] Rₑ) ≃ₐ[K] F :=
-    pureRadicalGenericFiberAlgEquiv he varpi hvarpiPrime alpha halphaPow
   let : IsDomain Rₑ :=
     isDomain_adjoinRoot_X_pow_sub_C_of_prime he varpi hvarpiPrime
-  let : Algebra Rₑ F :=
-    (genericFiberRightAlgHom eRₑ).toRingHom.toAlgebra
   let : IsFractionRing Rₑ F :=
     isFractionRing_of_genericFiberAlgEquiv eRₑ
   let radicalMap : Rₑ →ₐ[V] Cq := factor.radicalToUnitFactor
-  let : Algebra Rₑ Cq := radicalMap.toRingHom.toAlgebra
+  let : Algebra Rₑ Cq := sharedOwner14
   let : Algebra Rₑ E :=
     ((algebraMap F E).comp (algebraMap Rₑ F)).toAlgebra
   let : IsScalarTower Rₑ F E := IsScalarTower.of_algebraMap_eq' rfl

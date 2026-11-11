@@ -71,7 +71,7 @@ class PresentationTests(unittest.TestCase):
                 '## Main results\n\nKeep geometric assumptions.\n\n## Public API\n\nImports.\n')
         result = presentation(text, ['AnabelianGeometry'])
         self.assertEqual(result.count('## Main results\n'), 1)
-        self.assertIn('### Grothendieck’s conjecture for genus-zero curves over number fields', result)
+        self.assertIn('### Grothendieck’s conjecture for genus-zero curves over finitely generated fields', result)
         self.assertIn('### Geometric fundamental groups', result)
         self.assertIn('Keep number-field assumptions.', result)
         self.assertIn('Keep geometric assumptions.', result)

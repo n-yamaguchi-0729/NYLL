@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.RamificationInertia.Galois
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Smooth.IntegralClosure
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.NormalCardinality
-import Nyll.SchemeTheory.RingTheory.Ramification.Etale.SquareRamification
+module
+
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Smooth.IntegralClosure
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.NormalCardinality
+public import Nyll.SchemeTheory.RingTheory.Ramification.Etale.SquareRamification
 
 /-!
 # Inertia cardinality after an arbitrary etale base change
@@ -21,6 +23,8 @@ normalization; a prime above the prescribed base prime can therefore be
 compared by an etale ramification square.  Galois conjugacy removes the
 dependence on which normalization prime occurs as its contraction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

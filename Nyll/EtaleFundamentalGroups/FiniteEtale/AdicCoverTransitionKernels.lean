@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalLayers
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
-import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
-import Nyll.SchemeTheory.Modules.LocalMorphisms
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
-import Nyll.SchemeTheory.Modules.Sections.KernelSections
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalLayers
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverFormalModule
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverSheaves
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeOfFiniteSections
+public import Nyll.SchemeTheory.Modules.LocalMorphisms
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentKernelGlobal
+public import Nyll.SchemeTheory.Modules.Sections.KernelSections
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # The actual coherent transition kernels of the finite étale tower
@@ -34,6 +36,8 @@ native formal sections, and its inclusion is the original scalar
 multiplication of projected formal sections. No kernel comparison or
 effective cover is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Descent of lifts by correcting a cocycle
@@ -14,6 +16,8 @@ A lift along an augmented complex descends through the augmentation once
 its difference cocycle in the kernel has a primitive. This is the algebraic
 correction step in the passage from Cech acyclicity to derived acyclicity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

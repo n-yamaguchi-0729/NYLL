@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-! # The actual group comparison for iterated scheme base change
 
 The canonical monoidal pullback comparison gives a group-scheme isomorphism
 whose underlying arrow is the inverse component of the supplied pullback comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

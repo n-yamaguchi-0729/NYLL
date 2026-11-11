@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Descent.NaturalRepresentationDescent
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.CategoryTheory.Sites.SubcanonicalOver
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Descent.NaturalRepresentationDescent
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.CoverLifting
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # Sheafification on a cover with an actual local representation
@@ -16,6 +18,8 @@ The unit of fppf sheafification restricts to an isomorphism wherever the actual
 presheaf is represented. Its local representation therefore has exactly the
 same canonical descent action, even if the original presheaf is not a sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

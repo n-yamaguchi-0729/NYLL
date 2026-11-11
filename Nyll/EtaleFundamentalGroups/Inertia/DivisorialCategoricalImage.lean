@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFundamentalGroup
-import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
-import Mathlib.RingTheory.Ideal.Pointwise
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialQuotientFundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
+public import Mathlib.RingTheory.Ideal.Pointwise
 
 /-!
 # Categorical finite images of divisorial inertia sources
@@ -18,6 +20,8 @@ transported from the function-field Galois group to the automorphism group of
 an actual finite-etale Galois cover.  Its range is the categorical
 normalization-prime inertia subgroup.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,14 +70,12 @@ private theorem normalization_inertia_actions_eq
     [IsScalarTower A K L] [IsIntegrallyClosed A] [FiniteDimensional K L]
     (Q : Ideal (integralClosure A L)) :
     let B := integralClosure A L
-    letI : IsFractionRing B L :=
+    let : IsFractionRing B L :=
       IsIntegralClosure.isFractionRing_of_finite_extension A K L B
     Q.toAddSubgroup.inertia Gal(L/K) =
       (letI : MulSemiringAction Gal(L/K) B := IsIntegralClosure.MulSemiringAction A K L B
        Q.toAddSubgroup.inertia Gal(L/K)) := by
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
+  intro B sharedOwner2
   let genericAction : MulSemiringAction Gal(L/K) B := inferInstance
   let integralClosureAction : MulSemiringAction Gal(L/K) B :=
     IsIntegralClosure.MulSemiringAction A K L B
@@ -106,49 +108,40 @@ noncomputable def finiteEtaleGaloisCoverIdealInertiaFieldQuotientHom
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K := X.functionField
     let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) [CommRing A] [IsDomain A]
       [Algebra A K] [IsFractionRing A K]
       [Algebra A L] [IsScalarTower A K L]
       [IsIntegrallyClosed A]
       (P : Ideal A) [P.IsPrime]
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P],
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : _root_.IsGalois K L :=
+      let : _root_.IsGalois K L :=
         isGalois_functionField_of_isGalois_finiteEtale Y hY
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
           Y hY A B
       let F := localizedNormalizationInertiaField
         (K := K) (L := L) P Q
       let Omega := SeparableClosure L
-      letI : Algebra F Omega :=
+      let : Algebra F Omega :=
         ((algebraMap L Omega).comp (algebraMap F L)).toAlgebra
       Aut (fib F Omega) →* (Aut Y)ᵐᵒᵖ := by
-  letI : IsGalois Y := hY
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A instCommRing instDomain instAK instFracAK instAL instTower instNormal P
-    instPprime Q instQprime instQover
-  letI : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  letI : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2 K L sharedDefinitionOwner5 A instCommRing
+    instDomain instAK instFracAK instAL instTower instNormal P instPprime Q instQprime instQover
+    finiteDimensional fieldGalois B fractionRing integralClosureAction coverAction F Omega
+    closureAlgebra
   exact (finiteEtaleAutOpFunctionFieldMulEquiv Y hY).symm.toMonoidHom.comp
     (localizedNormalizationInertiaFieldFundamentalGroupHom (K := K) (L := L) P Q)
 
@@ -158,55 +151,37 @@ theorem finiteEtaleGaloisCoverIdealInertiaFieldQuotientHom_range
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     let K := X.functionField
     let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) [CommRing A] [IsDomain A]
       [Algebra A K] [IsFractionRing A K]
       [Algebra A L] [IsScalarTower A K L]
       [IsIntegrallyClosed A]
       (P : Ideal A) [P.IsPrime]
       (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P],
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : _root_.IsGalois K L :=
+      let : _root_.IsGalois K L :=
         isGalois_functionField_of_isGalois_finiteEtale Y hY
       let B := integralClosure A L
-      letI : IsFractionRing B L :=
+      let : IsFractionRing B L :=
         IsIntegralClosure.isFractionRing_of_finite_extension A K L B
-      letI : MulSemiringAction Gal(L/K) B :=
+      let : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
           Y hY A B
       (finiteEtaleGaloisCoverIdealInertiaFieldQuotientHom Y hY A P Q).range =
         Q.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A instCommRing instDomain instAK instFracAK instAL instTower instNormal P
-    instPprime Q instQprime instQover
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  let B := integralClosure A L
-  let : IsFractionRing B L :=
-    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
+  intro sharedOwner1 sharedOwner2 K L sharedOwner5 A instCommRing instDomain instAK instFracAK
+    instAL instTower instNormal P instPprime Q instQprime instQover finiteDimensional fieldGalois B
+    fractionRing
   let genericAction : MulSemiringAction Gal(L/K) B := inferInstance
-  let integralClosureAction : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction Gal(L/K) B := integralClosureAction
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
-      Y hY A B
+  intro integralClosureAction coverAction
   let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
   let Omega := SeparableClosure L
   let : Algebra F Omega :=

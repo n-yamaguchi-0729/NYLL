@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.Morphisms.Finite
-import Nyll.SchemeTheory.Pi1.Morphisms.Flat
-import Nyll.SchemeTheory.Pi1.Morphisms.Smooth
-import Nyll.SchemeTheory.Pi1.Morphisms.SmoothLocus
+module
+
+public import Nyll.SchemeTheory.Pi1.Morphisms.Finite
+public import Nyll.SchemeTheory.Pi1.Morphisms.Flat
+public import Nyll.SchemeTheory.Pi1.Morphisms.Smooth
+public import Nyll.SchemeTheory.Pi1.Morphisms.SmoothLocus

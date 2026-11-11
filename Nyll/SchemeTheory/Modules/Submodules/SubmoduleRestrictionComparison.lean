@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleEmbeddedIso
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Comparing native submodule restrictions with open-subscheme modules
@@ -17,6 +19,8 @@ submodule and the canonical slice-to-open equivalence. Its inclusion
 identity lets geometric restriction isomorphisms give literal equality
 of the native restricted submodules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

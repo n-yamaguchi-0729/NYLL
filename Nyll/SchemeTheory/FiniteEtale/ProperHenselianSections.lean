@@ -11,9 +11,11 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
 
-import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
-import Nyll.SchemeTheory.Morphisms.ProperHenselianClopenLift
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+public import Nyll.SchemeTheory.FiniteEtale.IsoIsoPullbackClosedFibre
+public import Nyll.SchemeTheory.Morphisms.ProperHenselianClopenLift
 
 /-!
 # Finite etale sections over an arbitrary proper Henselian family
@@ -24,6 +26,8 @@ isomorphism on the closed fibre. The original FLT section construction is
 adapted here to the unrestricted Henselian clopen-lifting theorem, removing
 the Noetherian hypothesis on the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

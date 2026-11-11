@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.SplitTorusPoints
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.SplitTorusPoints
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
 
 /-! # Split-torus points on arbitrary test schemes
 
 The relative Gamma--Spec adjunction identifies the actual split-torus group of
 points with tuples of global units, including for nonaffine test schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.MvPolynomial.Nilpotent
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Field Arithmetic, Chapter 6: plane curves
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 This file starts the source-producing infrastructure for Section 6.1: scalar
 extension to an algebraic closure and the zero sets of multivariate polynomials.
 -/
+
+@[expose] public section
 
 namespace FieldArithmetic
 namespace Chapter06

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.DirectSumExactness
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.FinitePiCoefficients
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.CommonBasis
-import Mathlib.RingTheory.AdicCompletion.Exactness
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.Tactic.CrossRefAttribute
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.DirectSumExactness
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.FinitePiCoefficients
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.CommonBasis
+public import Mathlib.RingTheory.AdicCompletion.Exactness
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.Tactic.CrossRefAttribute
 
 /-!
 # Flatness of the completion of an arbitrary free module
@@ -32,6 +34,8 @@ then proves flatness of the maximal-ideal completion of any flat module.
 
 Stacks Project, Lemma 15.28.2, Tag 06LE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

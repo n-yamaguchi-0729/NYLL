@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.EndomorphismPullbackComposition
-import Nyll.EtaleCohomology.Classical.PullbackIdentity
-import Nyll.EtaleCohomology.Frobenius.ArithmeticComparison
-import Mathlib.Algebra.Group.Hom.End
+module
+
+public import Nyll.EtaleCohomology.Classical.EndomorphismPullbackComposition
+public import Nyll.EtaleCohomology.Classical.PullbackIdentity
+public import Nyll.EtaleCohomology.Frobenius.ArithmeticComparison
+public import Mathlib.Algebra.Group.Hom.End
 
 /-!
 # The actual constant-field action on abelian étale cohomology
@@ -16,6 +18,8 @@ Automorphisms of the extended constants act through the actual constant-field
 scheme automorphisms and canonical constant-coefficient pullback. The group
 law follows from the proved identity and composition laws in every degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

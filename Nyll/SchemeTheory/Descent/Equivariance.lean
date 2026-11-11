@@ -46,11 +46,10 @@ theorem coaction_invariantsBaseChange_tmul
       letI : Algebra R C := Algebra.compHom C f
       C →ₐ[B] B ⊗[R] C)
     (b : B) (z : invariants f C ρ) :
-    letI : Algebra R B := f.toAlgebra
-    letI : Algebra R C := Algebra.compHom C f
+    let : Algebra R B := f.toAlgebra
+    let : Algebra R C := Algebra.compHom C f
     ρ (invariantsBaseChange f C ρ (b ⊗ₜ[R] z)) = b ⊗ₜ[R] (z : C) := by
-  let : Algebra R B := f.toAlgebra
-  let : Algebra R C := Algebra.compHom C f
+  intro baseAlgebra compositeAlgebra
   have hz : ρ (z : C) = (1 : B) ⊗ₜ[R] (z : C) := z.property
   rw [invariantsBaseChange_tmul, map_mul, ρ.commutes, hz,
     Algebra.TensorProduct.algebraMap_apply, Algebra.TensorProduct.tmul_mul_tmul,
@@ -62,18 +61,16 @@ theorem invariantsBaseChange_coaction
       letI : Algebra R B := f.toAlgebra
       letI : Algebra R C := Algebra.compHom C f
       C →ₐ[B] B ⊗[R] C) :
-    letI : Algebra R B := f.toAlgebra
-    letI : Algebra R C := Algebra.compHom C f
-    letI : IsScalarTower R B C := IsScalarTower.of_compHom R B C
+    let : Algebra R B := f.toAlgebra
+    let : Algebra R C := Algebra.compHom C f
+    let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
     ρ.comp (invariantsBaseChange f C ρ) =
       (Algebra.TensorProduct.map (.id B B)
         ((invariantsBaseChange f C ρ).restrictScalars R)).comp
           (Algebra.TensorProduct.map (.id B B)
             (Algebra.TensorProduct.includeRight : invariants f C ρ →ₐ[R]
               B ⊗[R] invariants f C ρ)) := by
-  let : Algebra R B := f.toAlgebra
-  let : Algebra R C := Algebra.compHom C f
-  let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
+  intro baseAlgebra compositeAlgebra scalarTower
   apply AlgHom.ext
   intro x
   induction x using TensorProduct.inductionOn with
@@ -131,9 +128,9 @@ variable (f : R →+* B) (C : Type u) [CommRing C] [Algebra B C]
 /-- The original overlap comparison has the canonical formula on an invariant tensor,
 provided it preserves both coordinates of the overlap base. -/
 theorem invariantsBaseChange_overlap_tmul :
-    letI : Algebra R B := f.toAlgebra
-    letI : Algebra R C := Algebra.compHom C f
-    letI : IsScalarTower R B C := IsScalarTower.of_compHom R B C
+    let : Algebra R B := f.toAlgebra
+    let : Algebra R C := Algebra.compHom C f
+    let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
     ∀ (θ : C ⊗[R] B ≃ₐ[B] B ⊗[R] C),
       θ.toAlgHom.comp (affineOverlapSourceBase R B C) = affineOverlapTargetBase R B C →
       ∀ (b b' : B) (z : FaithfullyFlatDescent.invariants f C (tensorCoaction R B C θ)),
@@ -141,10 +138,7 @@ theorem invariantsBaseChange_overlap_tmul :
             (b ⊗ₜ[R] z) ⊗ₜ[R] b') =
           b ⊗ₜ[R] FaithfullyFlatDescent.invariantsBaseChange f C (tensorCoaction R B C θ)
             (b' ⊗ₜ[R] z) := by
-  let : Algebra R B := f.toAlgebra
-  let : Algebra R C := Algebra.compHom C f
-  let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
-  intro θ hbase b b' z
+  intro baseAlgebra compositeAlgebra scalarTower θ hbase b b' z
   have hright : θ ((1 : C) ⊗ₜ[R] b') = (1 : B) ⊗ₜ[R] algebraMap B C b' := by
     have h := AlgHom.congr_fun hbase ((1 : B) ⊗ₜ[R] b')
     simpa only [AlgHom.comp_apply, affineOverlapSourceBase, affineOverlapTargetBase,
@@ -169,9 +163,9 @@ theorem invariantsBaseChange_overlap_tmul :
 
 /-- The full overlap square commutes for the canonical map out of the invariant algebra. -/
 theorem invariantsBaseChange_overlap :
-    letI : Algebra R B := f.toAlgebra
-    letI : Algebra R C := Algebra.compHom C f
-    letI : IsScalarTower R B C := IsScalarTower.of_compHom R B C
+    let : Algebra R B := f.toAlgebra
+    let : Algebra R C := Algebra.compHom C f
+    let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
     ∀ (θ : C ⊗[R] B ≃ₐ[B] B ⊗[R] C),
       θ.toAlgHom.comp (affineOverlapSourceBase R B C) = affineOverlapTargetBase R B C →
       let D := FaithfullyFlatDescent.invariants f C (tensorCoaction R B C θ)
@@ -179,10 +173,7 @@ theorem invariantsBaseChange_overlap :
       θ.toAlgHom.comp (Algebra.TensorProduct.map e (.id R B)) =
         (Algebra.TensorProduct.map (.id B B) (e.restrictScalars R)).comp
           (standardTensorOverlap R B D).toAlgHom := by
-  let : Algebra R B := f.toAlgebra
-  let : Algebra R C := Algebra.compHom C f
-  let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
-  intro θ hbase
+  intro baseAlgebra compositeAlgebra scalarTower θ hbase
   apply AlgHom.ext
   intro x
   induction x using TensorProduct.inductionOn with
@@ -195,9 +186,9 @@ theorem invariantsBaseChange_overlap :
 
 /-- The actual effective descent equivalence intertwines the entire tensor overlap datum. -/
 theorem tensorDescentEquiv_overlap (hf : f.FaithfullyFlat) :
-    letI : Algebra R B := f.toAlgebra
-    letI : Algebra R C := Algebra.compHom C f
-    letI : IsScalarTower R B C := IsScalarTower.of_compHom R B C
+    let : Algebra R B := f.toAlgebra
+    let : Algebra R C := Algebra.compHom C f
+    let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
     ∀ (θ : C ⊗[R] B ≃ₐ[B] B ⊗[R] C)
       (hdiag : (tensorTargetDiagonal R B C).comp θ.toAlgHom = tensorSourceDiagonal R B C)
       (hcocycle : tensorCocycleLeft R B C θ = tensorCocycleRight R B C θ),
@@ -207,10 +198,7 @@ theorem tensorDescentEquiv_overlap (hf : f.FaithfullyFlat) :
       θ.toAlgHom.comp (Algebra.TensorProduct.map e.toAlgHom (.id R B)) =
         (Algebra.TensorProduct.map (.id B B) (e.restrictScalars R).toAlgHom).comp
           (standardTensorOverlap R B D).toAlgHom := by
-  let : Algebra R B := f.toAlgebra
-  let : Algebra R C := Algebra.compHom C f
-  let : IsScalarTower R B C := IsScalarTower.of_compHom R B C
-  intro θ hdiag hcocycle hbase
+  intro baseAlgebra compositeAlgebra scalarTower θ hdiag hcocycle hbase
   exact invariantsBaseChange_overlap f C θ hbase
 
 end Algebra.Descent

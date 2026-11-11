@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelNormalGeneration
-import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelPointNormalGeneration
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationStalkInertia
-import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaContraction
-import Nyll.EtaleFundamentalGroups.Inertia.StalkNormalizationInertiaGenerators
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelNormalGeneration
+public import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelPointNormalGeneration
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationStalkInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.OriginalNormalizationInertiaContraction
+public import Nyll.EtaleFundamentalGroups.Inertia.StalkNormalizationInertiaGenerators
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # The generic-point kernel and actual strict-local fraction fields
@@ -24,6 +26,8 @@ generic-point kernel.
 
 Reference: https://stacks.math.columbia.edu/tag/0BTD
 -/
+
+@[expose] public section
 
 noncomputable section
 

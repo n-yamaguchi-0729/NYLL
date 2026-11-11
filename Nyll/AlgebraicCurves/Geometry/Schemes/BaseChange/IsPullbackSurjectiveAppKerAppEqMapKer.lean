@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Tactic.Set
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackIsoSpecQuotientCompMorphismRestrictEq
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Tactic.Set
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.IsPullbackIsoSpecQuotientCompMorphismRestrictEq
 
 /-!
 # Is Pullback surjective app and ker app eq map ker of is Affine Open
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -33,10 +37,10 @@ theorem _root_.AlgebraicGeometry.IsPullback.surjective_app_and_ker_app_eq_map_ke
     {P P₀ : Scheme.{u}} (p : P ⟶ Spec (CommRingCat.of T')) (p₀ : P₀ ⟶ Spec (CommRingCat.of T))
     (G : P₀ ⟶ P) (hG : IsPullback G p₀ p (Spec.map (CommRingCat.ofHom π)))
     (D : P.Opens) (hD : IsAffineOpen D) :
-    letI := Scheme.TwoAffineOpenCover.algebraOfHom p D
+    let := Scheme.TwoAffineOpenCover.algebraOfHom p D
     Function.Surjective (G.app D).hom ∧
       RingHom.ker (G.app D).hom = (RingHom.ker π).map (algebraMap T' Γ(P, D)) := by
-  let inst := Scheme.TwoAffineOpenCover.algebraOfHom p D
+  intro inst
   obtain ⟨-, ε, hε⟩ :=
     AlgebraicGeometry.IsPullback.exists_iso_Spec_quotient_comp_morphismRestrict_eq π hπ hker p p₀
       G hG D hD

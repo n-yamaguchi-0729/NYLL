@@ -4,21 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.RingHom.Unramified
-import Mathlib.RingTheory.Etale.Descent
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.CategoryTheory.MorphismProperty.Descent
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+module
 
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.RingHom.Unramified
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.CategoryTheory.MorphismProperty.Descent
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Unramified normalizations are finite étale
@@ -30,6 +31,8 @@ assumption is needed.
 
 Reference: https://stacks.math.columbia.edu/tag/0BQK
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -74,11 +77,6 @@ theorem etale_of_dominant_unramified
   let : Algebra.FormallyUnramified Γ(X, U) Γ(Y, V) :=
     f.formallyUnramified_appLE hU hV e
   exact etale_of_unramified_of_domain_of_faithful
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 /-- The generic extension morphism has dense image because its image
 contains the generic point. -/

@@ -4,25 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.CyclotomicTorsionQuotient
-import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteInteger
-import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteIntegerCore
-import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteIntegerPrimeProduct
-import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteIntegerUnits
-import Nyll.GaloisCohomology.ProfiniteIntegers.TopologicalGeneration
+module
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Nyll.GaloisCohomology.ProfiniteIntegers.CyclotomicTorsionQuotient
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteInteger
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteIntegerCore
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteIntegerPrimeProduct
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ProfiniteIntegerUnits
+public import Nyll.GaloisCohomology.ProfiniteIntegers.TopologicalGeneration
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPowerExact
-import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPrimeKernel
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrimaryQuotient
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicUnitInfiniteImage
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPowerExact
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPrimeKernel
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.ZModCircle
-import Nyll.GaloisCohomology.ProfiniteIntegers.CyclicCharacterLifting
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrincipalUnitPowers
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicCharacterSurjectivity
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrimaryQuotient
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicUnitInfiniteImage
+
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ZModCircle
+public import Nyll.GaloisCohomology.ProfiniteIntegers.CyclicCharacterLifting
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrincipalUnitPowers
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicCharacterSurjectivity
 
 /-!
 # Profinite integer foundations

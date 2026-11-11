@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.PoincareProjectionGeometry
+module
+
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.PoincareProjectionGeometry
 
 /-! # Geometry of the actual projection after choosing a curve section -/
+
+@[expose] public section
 
 noncomputable section
 universe u

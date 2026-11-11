@@ -5,17 +5,19 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
-import Nyll.AlgebraicCurves.Geometry.Deformation.SmoothOfRelativeDimension
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
-import Nyll.JacobianVarieties.Picard.Deformation.CurveModelFinrankCotangentSpaceZeroSectionEqGenusFF
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
+public import Nyll.AlgebraicCurves.Geometry.Deformation.SmoothOfRelativeDimension
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveTwoAffineCover
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+public import Nyll.JacobianVarieties.Picard.Deformation.CurveModelFinrankCotangentSpaceZeroSectionEqGenusFF
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Existence
 
 /-!
 # Relative dimension of a pointed Picard scheme over a field
@@ -27,6 +29,8 @@ relative dimension as the first-cohomology dimension on a two-affine cover.
 This constructs a dimension witness for pointed curves over arbitrary fields. It does
 not assert unpointed existence or identify this dimension with a separate genus API.
 -/
+
+@[expose] public section
 
 noncomputable section
 

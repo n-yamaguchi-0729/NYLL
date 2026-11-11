@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.HenselianLocalSection
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.SchemeTheory.Etale.HenselianLocalSection
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Étale sections through arbitrary closed field points
@@ -24,6 +26,8 @@ The open-section argument is adapted from
 Here the closed-point hypothesis removes the need for the étale morphism
 to be finite, and no change of field or algebraization is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

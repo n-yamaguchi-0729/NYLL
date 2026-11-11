@@ -7,6 +7,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentInertia
 import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkFunctionFieldNormalization
 import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.SchemeStalkDVR
+import Nyll.EtaleFundamentalGroups.Normalization.Primes.SchemePoint
 
 /-!
 # Inertia cardinality at arithmetic boundary components
@@ -71,66 +76,39 @@ theorem
     (hY : CategoryTheory.PreGaloisCategory.IsGalois Y)
     (Z : Set (D.1.comap Y.hom).subscheme)
     (hZ : Z ∈ irreducibleComponents (D.1.comap Y.hom).subscheme) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsNormalIntegral Y.left :=
+    let : IsNormalIntegral Y.left :=
       EtaleFundamentalGroups.isNormalIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
     ∀ (W : FiniteEtale Y.left)
       (hW : CategoryTheory.PreGaloisCategory.IsGalois W),
-      letI : CategoryTheory.PreGaloisCategory.IsGalois W := hW
-      letI : IsIntegral W.left :=
+      let : CategoryTheory.PreGaloisCategory.IsGalois W := hW
+      let : IsIntegral W.left :=
         EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
       let K : Type u := Y.left.functionField
       let L : Type u := W.left.functionField
-      letI : Algebra K L :=
+      let : Algebra K L :=
         EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-      letI : _root_.IsGalois K L :=
+      let : _root_.IsGalois K L :=
         EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
       let I : Y.left.IdealSheafData := D.1.comap Y.hom
       let x := I.componentGenericPoint Z hZ
       let A := Y.left.presheaf.stalk x
-      letI : Algebra A L :=
+      let : Algebra A L :=
         ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-      letI : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
+      let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
       let B := integralClosure A L
       let Q : Ideal B :=
         EtaleFundamentalGroups.schemePointNormalizationPrime (L := L) x
       Nat.card (Q.toAddSubgroup.inertia Gal(L/K)) = 1 ∧
         Nat.Coprime (Nat.card (Q.toAddSubgroup.inertia Gal(L/K))) 2 := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsNormalIntegral Y.left :=
-    EtaleFundamentalGroups.isNormalIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
-  dsimp only
-  intro W hW
-  let : CategoryTheory.PreGaloisCategory.IsGalois W := hW
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let K : Type u := Y.left.functionField
-  let L : Type u := W.left.functionField
-  let : Algebra K L :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : FiniteDimensional K L :=
-    EtaleFundamentalGroups.finiteDimensional_functionField_of_finiteEtale_isConnected W
-  let : _root_.IsGalois K L :=
-    EtaleFundamentalGroups.isGalois_functionField_of_isGalois_finiteEtale W hW
-  let I : Y.left.IdealSheafData := D.1.comap Y.hom
-  let x := I.componentGenericPoint Z hZ
-  let A := Y.left.presheaf.stalk x
-  let : Algebra A L :=
-    ((algebraMap K L).comp (algebraMap A K)).toAlgebra
-  let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
-  let B := integralClosure A L
-  let Q : Ideal B :=
-    EtaleFundamentalGroups.schemePointNormalizationPrime (L := L) x
+  intro sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 W hW
+    galoisW integralW K L algebraKL finiteKL galoisKL I x A algebraAL towerAKL B Q
   have hdata :=
     D.galoisPullback_componentGenericPoint_localResidueData
       p hD Y hY Z hZ

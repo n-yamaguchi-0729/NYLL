@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ConnectedComplement
-import Nyll.SchemeTheory.LocalGeometry.SmoothRegularStalks
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Topology.Irreducible
-import Mathlib.Topology.Maps.Basic
+module
+
+public import Nyll.SchemeTheory.Divisors.ConnectedComplement
+public import Nyll.SchemeTheory.LocalGeometry.SmoothRegularStalks
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Topology.Irreducible
+public import Mathlib.Topology.Maps.Basic
 
 /-!
 # Integral affine charts with integral closed fibre
@@ -36,6 +38,8 @@ This is the geometric chart reduction needed before the prime-special-
 fibre normalization calculation in Stacks Project 58.30.2 and 58.30.3.
 It assumes neither an integral source nor an integral closed fibre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

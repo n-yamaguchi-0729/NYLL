@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
-import Nyll.EtaleFundamentalGroups.GaloisCategories.EquivalenceFunctoriality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.EquivalenceFunctoriality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Changing a geometric fiber over the original base scheme
@@ -24,6 +26,8 @@ This retains the original geometric points, rather than replacing either
 fiber product by an unspecified isomorphic scheme. It is used in the closed
 fiber comparison for the strict local specialization diagram of Stacks 58.16.
 -/
+
+@[expose] public section
 
 noncomputable section
 

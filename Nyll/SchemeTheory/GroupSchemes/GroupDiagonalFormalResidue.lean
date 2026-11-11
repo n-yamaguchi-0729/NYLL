@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
-import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.GroupDiagonalFormalSubstitution
+public import Nyll.SchemeTheory.GroupSchemes.AffineLineGroupFormalDifference
 
 /-! # The actual unit residue of formal diagonal coordinates
 
@@ -13,6 +15,8 @@ The constant coefficient is evaluation at the original group unit, followed
 by the given coefficient-field inclusion. Thus centering the actual formal
 coordinates is the same as subtracting the scalar unit coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

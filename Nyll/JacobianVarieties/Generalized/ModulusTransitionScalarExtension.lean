@@ -9,6 +9,8 @@ import Nyll.JacobianVarieties.Generalized.ModulusTransitionScalarExtensionSheaf
 import Nyll.JacobianVarieties.Generalized.ScalarExtensionGroupSchemeMap
 import Nyll.JacobianVarieties.Generalized.ModulusTransition
 import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupBaseChange
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupDiagram
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-! # Scalar extension of the actual generalized-Jacobian group transitions -/
 

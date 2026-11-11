@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FieldFiniteCover
-import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
-import Mathlib.Algebra.Category.Grp.Kernels
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Nyll.EtaleCohomology.Sites.FieldFiniteCover
+public import Nyll.EtaleCohomology.Classical.NatInjectiveResolution
+public import Mathlib.Algebra.Category.Grp.Kernels
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Finite étale local primitives for field cohomology
@@ -19,6 +21,8 @@ this to an injective resolution supplies finite-cover local primitives
 in every positive degree. These are the actual resolutions computing
 classical sheaf cohomology, not an assumed field/Galois comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

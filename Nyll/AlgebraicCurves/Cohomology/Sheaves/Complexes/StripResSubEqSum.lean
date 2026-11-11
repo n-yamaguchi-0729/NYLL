@@ -10,46 +10,50 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Field.Defs
-import Mathlib.Algebra.Group.Defs
-import Mathlib.Algebra.Group.Hom.Defs
-import Mathlib.Algebra.GroupWithZero.Action.Defs
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Notation.Pi.Defs
-import Mathlib.Algebra.Ring.Hom.Defs
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Combinatorics.Quiver.Basic
-import Mathlib.Order.CompleteLattice.Basic
-import Mathlib.Order.Lattice
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Set
-import Mathlib.Topology.Category.TopCat.Opens
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOf
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayBicomplex
-import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfKerDSuccLeRangeD
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfKerDZeroEqRangeAug
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfAugInjective
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Group.Defs
+public import Mathlib.Algebra.Group.Hom.Defs
+public import Mathlib.Algebra.GroupWithZero.Action.Defs
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Notation.Pi.Defs
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Functor.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Combinatorics.Quiver.Basic
+public import Mathlib.Order.CompleteLattice.Basic
+public import Mathlib.Order.Lattice
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Set
+public import Mathlib.Topology.Category.TopCat.Opens
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafHom
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayBicomplex
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafLerayDoubleComplex
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfKerDSuccLeRangeD
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfKerDZeroEqRangeAug
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverOfAugInjective
 
 /-!
 # OModule Presheaf exists strip res sub eq sum of box zigzag of le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Trace.Perfect
-import Mathlib.Algebra.Homology.HomotopyCategory.Shift
+module
+
+public import Nyll.EtaleCohomology.Trace.Perfect
+public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.FiniteProjectiveTrace
 
 /-!
 # Shifts of actual perfect complexes and their traces
@@ -15,6 +18,8 @@ produce a genuine bounded finite-projective model of a shifted perfect
 object. Reindexing the finite alternating sum gives its sign, and actual
 chain representatives extend this computation to every derived endomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

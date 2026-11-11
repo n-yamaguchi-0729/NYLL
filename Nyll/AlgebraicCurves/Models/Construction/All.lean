@@ -10,7 +10,12 @@ import Nyll.AlgebraicCurves.Models.Construction.Construction
 import Nyll.AlgebraicCurves.Models.Construction.CurveIsIntegral
 import Nyll.AlgebraicCurves.Models.Construction.FiniteHomProjProper
 import Nyll.AlgebraicCurves.Models.Construction.GeometricallyIntegralOfConstants
+import Nyll.AlgebraicCurves.Models.Construction.FullConstantStructure
 import Nyll.AlgebraicCurves.Models.Construction.LiteralArithmeticCurveModel
 import Nyll.AlgebraicCurves.Models.Construction.OfSmoothProperCurve
 import Nyll.AlgebraicCurves.Models.Construction.Smoothness
 import Nyll.AlgebraicCurves.Models.Construction.Transport
+import Nyll.AlgebraicCurves.Models.Construction.ConstantModelGenericSource
+import Nyll.AlgebraicCurves.Models.Construction.GenericSourceCurveModel
+import Nyll.AlgebraicCurves.Models.Construction.GenericSourceFieldPresentation
+import Nyll.AlgebraicCurves.Models.Construction.SmoothOpenCompactification

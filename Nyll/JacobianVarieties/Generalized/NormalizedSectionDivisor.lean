@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealEqSpan
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdealNeZero
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealZeroSchemeIdealEqSpan
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.IEqZeroSchemeIdealNeZero
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.InvertibleI
 
 /-!
 # Actual divisors of normalized sections
@@ -18,6 +20,8 @@ disjoint from the full modulus. On a proper smooth geometric curve, a nonzero
 such section cuts out an actual relative effective Cartier divisor, and its
 canonical rigidification recovers the given line bundle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

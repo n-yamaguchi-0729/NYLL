@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
-import Mathlib.RingTheory.KrullDimension.LocalRing
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalPowerQuotient
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+public import Mathlib.RingTheory.KrullDimension.LocalRing
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalPowerQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
 
 /-!
 # Degree-one nonvanishing for derived local cohomology
@@ -17,6 +19,8 @@ For a nonzero nonunit `x` in a local domain, the extension class of
 `0 → R → R → R/(x^n) → 0` supplies a class in degree one which
 survives every transition in the principal ideal-powers diagram.
 -/
+
+@[expose] public section
 
 noncomputable section
 

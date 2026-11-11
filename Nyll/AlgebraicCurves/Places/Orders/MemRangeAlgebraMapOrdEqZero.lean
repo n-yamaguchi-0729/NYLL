@@ -10,17 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Nyll.AlgebraicCurves.Places.Orders.OrdNegTranscendental
+module
+
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Nyll.AlgebraicCurves.Places.Orders.OrdNegTranscendental
 
 /-!
 # Place mem range algebra Map of forall ord eq zero
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,25 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
-import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
-import Nyll.EtaleFundamentalGroups.GaloisCovers.SurjectiveBaseChangeDescent
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Equivalence
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.CategoryTheory.MorphismProperty.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Topology.Connected.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.IsomorphismTransport
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SurjectiveBaseChangeDescent
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Equivalence
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # A proper geometric Galois cover over the relative separable closure
@@ -40,6 +42,8 @@ has exactly the original automorphism order. Thus the reduction preserves
 the prime-to-characteristic condition without assuming the specified
 geometric field is a separable extension of the original field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

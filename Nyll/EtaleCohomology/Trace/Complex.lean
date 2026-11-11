@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.FiniteProjectiveTrace
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.BigOperators.Finprod
-import Mathlib.Algebra.FiniteSupport.Basic
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.Homotopy
-import Mathlib.Algebra.Ring.NegOnePow
-import Mathlib.Data.Int.Interval
+module
+
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.FiniteProjectiveTrace
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.BigOperators.Finprod
+public import Mathlib.Algebra.FiniteSupport.Basic
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Homotopy
+public import Mathlib.Algebra.Ring.NegOnePow
+public import Mathlib.Data.Int.Interval
 
 /-!
 # Alternating trace on bounded complexes of finite projective modules
@@ -27,6 +29,8 @@ Proposition 64.10.2 (https://stacks.math.columbia.edu/tag/03TI). Passing from
 these complexes to arbitrary perfect objects in the derived category, and
 the noncommutative coefficient case, are separate constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

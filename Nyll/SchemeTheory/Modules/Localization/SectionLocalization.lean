@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Localization.AbelianSectionLocalization
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Functor.Category
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Topology.QuasiSeparated
-import Mathlib.Algebra.Category.ModuleCat.Presheaf
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Away
-import Mathlib.Algebra.Group.Action.Basic
-import Mathlib.Geometry.RingedSpace.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Localization.AbelianSectionLocalization
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentAffineLocalization
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Functor.Category
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Away
+public import Mathlib.Algebra.Group.Action.Basic
+public import Mathlib.Geometry.RingedSpace.Basic
 
 
 /-!
@@ -24,6 +26,8 @@ import Mathlib.Geometry.RingedSpace.Basic
 
 Uses abelian-presheaf gluing to prove localization for the actual module restrictions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,41 +40,43 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Multiplication by an actual global section, as a natural endomorphism
 of the existing abelian presheaf. -/
 def sectionEnd {X : Scheme.{u}} (M : X.Modules) (f : Γ(X, ⊤)) : End M.presheaf where
-  app V := M.smul (X.presheaf.map V.unop.leTop.op f)
-  naturality {V W} i := by
-    symm
-    have hsmul : M.smul (X.presheaf.map V.unop.leTop.op f) ≫ M.presheaf.map i =
-        M.presheaf.map i ≫ M.smul
-          (X.presheaf.map i (X.presheaf.map V.unop.leTop.op f)) := by
-      simpa only [Quiver.Hom.op_unop] using
-        M.map_comp_smul i.unop (X.presheaf.map V.unop.leTop.op f)
-    rw [hsmul]
-    have h : X.presheaf.map i (X.presheaf.map V.unop.leTop.op f) =
-        X.presheaf.map W.unop.leTop.op f := by
-      change (X.presheaf.map V.unop.leTop.op ≫ X.presheaf.map i) f = _
-      rw [← Functor.map_comp]
-      rfl
-    rw [h]
+  asHom :=
+    { app V := (M.smul (X.presheaf.map V.unop.leTop.op f)).asHom
+      naturality {V W} i := by
+        symm
+        have hsmul : (M.smul (X.presheaf.map V.unop.leTop.op f)).asHom ≫ M.presheaf.map i =
+            M.presheaf.map i ≫ (M.smul
+              (X.presheaf.map i (X.presheaf.map V.unop.leTop.op f))).asHom := by
+          simpa only [Quiver.Hom.op_unop] using
+            M.map_comp_smul i.unop (X.presheaf.map V.unop.leTop.op f)
+        rw [hsmul]
+        have h : X.presheaf.map i (X.presheaf.map V.unop.leTop.op f) =
+            X.presheaf.map W.unop.leTop.op f := by
+          change (X.presheaf.map V.unop.leTop.op ≫ X.presheaf.map i) f = _
+          rw [← Functor.map_comp]
+          rfl
+        rw [h] }
 
 lemma sectionEnd_pow_app {X : Scheme.{u}} (M : X.Modules) (f : Γ(X, ⊤))
     (n : ℕ) (V : X.Opens) :
-    ((sectionEnd M f) ^ n).app (op V) =
-      M.smul (X.presheaf.map V.leTop.op (f ^ n)) := by
-  have h := (Functor.mapEnd M.presheaf
-    ((evaluation X.Opensᵒᵖ Ab).obj (op V))).map_pow (sectionEnd M f) n
-  change ((sectionEnd M f) ^ n).app (op V) =
-    (M.smul (X.presheaf.map V.leTop.op f)) ^ n at h
+    ((sectionEnd M f) ^ n).asHom.app (op V) =
+      (M.smul (X.presheaf.map V.leTop.op (f ^ n))).asHom := by
+  have h := congrArg End.asHom ((Functor.mapEnd M.presheaf
+    ((evaluation X.Opensᵒᵖ Ab).obj (op V))).map_pow (sectionEnd M f) n)
+  change ((sectionEnd M f) ^ n).asHom.app (op V) =
+    ((M.smul (X.presheaf.map V.leTop.op f)) ^ n).asHom at h
   calc
-    ((sectionEnd M f) ^ n).app (op V) =
-        (M.smul (X.presheaf.map V.leTop.op f)) ^ n := h
-    _ = M.smul ((X.presheaf.map V.leTop.op f) ^ n) :=
-      (map_pow (M.smul (U := V)) _ n).symm
-    _ = M.smul (X.presheaf.map V.leTop.op (f ^ n)) :=
-      congrArg (M.smul (U := V)) (map_pow (X.presheaf.map V.leTop.op).hom f n).symm
+    ((sectionEnd M f) ^ n).asHom.app (op V) =
+        ((M.smul (X.presheaf.map V.leTop.op f)) ^ n).asHom := h
+    _ = (M.smul ((X.presheaf.map V.leTop.op f) ^ n)).asHom :=
+      congrArg End.asHom (map_pow (M.smul (U := V)) _ n).symm
+    _ = (M.smul (X.presheaf.map V.leTop.op (f ^ n))).asHom :=
+      congrArg (fun r => (M.smul (U := V) r).asHom)
+        (map_pow (X.presheaf.map V.leTop.op).hom f n).symm
 
 lemma sectionEnd_pow_apply {X : Scheme.{u}} (M : X.Modules) (f : Γ(X, ⊤))
     (n : ℕ) (V : X.Opens) (x : Γ(M, V)) :
-    ((sectionEnd M f) ^ n).app (op V) x =
+    ((sectionEnd M f) ^ n).asHom.app (op V) x =
       X.presheaf.map V.leTop.op (f ^ n) • x := by
   rw [sectionEnd_pow_app]
   rfl

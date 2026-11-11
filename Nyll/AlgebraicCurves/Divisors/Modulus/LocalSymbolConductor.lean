@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
-import Mathlib.Data.Finsupp.WellFounded
+module
+
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolExistence
+public import Mathlib.Data.Finsupp.WellFounded
 
 /-!
 # Independence of modulus and the least conductor
@@ -16,6 +18,8 @@ admitting any modulus has a unique least modulus. Existence of this conductor
 uses the actual well-founded coefficientwise order on finitely supported
 natural-number divisors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

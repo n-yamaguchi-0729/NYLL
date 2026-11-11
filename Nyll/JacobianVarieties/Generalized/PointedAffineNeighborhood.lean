@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.PointedConstruction
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
-import Nyll.AlgebraicCurves.Geometry.Picard.Representability.IsAffineOpenPicardRepresentabilityAlgEquivZeroCut
+module
+
+public import Nyll.JacobianVarieties.Generalized.PointedConstruction
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveFiniteMapDataLeIsUnit
+public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.IsAffineOpenPicardRepresentabilityAlgEquivZeroCut
 
 /-!
 # Affine neighborhoods of finite sets in the actual modulus Picard scheme
@@ -15,6 +17,8 @@ The ordinary Picard scheme has affine neighborhoods of finite sets. The actual
 Poincaré frame projection is affine, so their inverse images give the criterion
 needed for effective finite faithfully flat descent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
-import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionCounit
-import Nyll.SchemeTheory.Modules.Tensor.FiniteFreePullback
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
-import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Functor.EpiMono
+module
+
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeFinitePushforward
+public import Nyll.SchemeTheory.Modules.Functoriality.ClosedImmersionCounit
+public import Nyll.SchemeTheory.Modules.Tensor.FiniteFreePullback
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
+public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafGlobalGeneration
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # Eventual global generation on a closed projective family
@@ -21,6 +23,8 @@ transport the original finite global generating families from projective
 space to every closed projective subscheme. The bound is independent of
 the twist, and no flatness assumption on the family is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

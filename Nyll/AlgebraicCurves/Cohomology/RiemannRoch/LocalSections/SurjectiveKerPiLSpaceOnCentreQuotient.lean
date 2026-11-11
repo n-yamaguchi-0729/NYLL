@@ -19,6 +19,7 @@ import Nyll.AlgebraicCurves.Models.Points.SurjectiveEqGenericPointOrIsClosedSing
 import Nyll.AlgebraicCurves.FunctionFields.SurjectiveKerPiSpanMulQuotient
 import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.LSpaceOnSetOfCentreEqSpanIntegralClosure
 import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.LocalSections.LSpaceOnSetOfCentreEqSpanIntegralClosureMul
+import Nyll.SchemeTheory.FunctionFields.StructureMorphism
 
 /-!
 # Surjective and ker pi l Space On centre quotient of is Affine Open
@@ -107,7 +108,7 @@ theorem _root_.AlgebraicCurve.surjective_and_ker_pi_lSpaceOn_centre_quotient_of_
     {F : Type v} [Field F] [Algebra k F] (M : AlgebraicCurve.CurveModel k F)
     (ν : M.C ⟶ C) (hν : ν ≫ c = M.toBase) (hbir : IsIso (ν.stalkMap (genericPoint M.C)))
     (U : C.Opens) (hUaff : IsAffineOpen U) (hU : genericPoint C ∈ U) :
-    letI := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+    let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
     let Q : C → Type u := fun z =>
       ↥(lSpaceOn {v : Place k C.functionField | (∀ s : C.presheaf.stalk z,
           v.adicValuation (algebraMap (C.presheaf.stalk z) C.functionField s) ≤ 1 ∧
@@ -147,7 +148,7 @@ theorem _root_.AlgebraicCurve.surjective_and_ker_pi_lSpaceOn_centre_quotient_of_
               Divisor k C.functionField)).subtype ∧
       {z : {z : C // z ∈ U ∧ IsClosed ({z} : Set C)} | Nontrivial (Q z.1)}.Finite ∧
       ∀ z : {z : C // z ∈ U ∧ IsClosed ({z} : Set C)}, FiniteDimensional k (Q z.1) := by
-  let := (AlgebraicCurve.baseToFunctionField c).toAlgebra
+  intro sharedOwner1
   have : Nonempty U := ⟨⟨genericPoint C, hU⟩⟩
   have hpts : ∀ z : C, z = genericPoint C ∨ IsClosed ({z} : Set C) :=
     (surjective_and_eq_genericPoint_or_isClosed_singleton_of_isIso_stalkMap k c M ν hν hbir).2

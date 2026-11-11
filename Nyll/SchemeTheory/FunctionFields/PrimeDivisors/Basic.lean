@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Valuation.ValuationSubring
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 /-!
 # Prime divisors of function fields
@@ -30,6 +32,8 @@ on `A` is the contraction of the valuation ring's maximal ideal.  This center
 is prime; no maximality assertion is made without additional finiteness or
 integrality hypotheses on the model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.SplitTorusRegularMapModulus
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapReflection
-import Nyll.JacobianVarieties.Generalized.ModulusOpenComplement
-import Nyll.JacobianVarieties.Generalized.GeometricModulusPointedUniversalProperty
-import Nyll.SchemeTheory.GroupSchemes.Torus
-import Nyll.SchemeTheory.GroupSchemes.TorusSeparatedQuasiCompact
+module
+
+public import Nyll.JacobianVarieties.Generalized.SplitTorusRegularMapModulus
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapReflection
+public import Nyll.JacobianVarieties.Generalized.ModulusOpenComplement
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusPointedUniversalProperty
+public import Nyll.SchemeTheory.GroupSchemes.Torus
+public import Nyll.SchemeTheory.GroupSchemes.TorusSeparatedQuasiCompact
 
 /-! # Full moduli for rational maps to tori over arbitrary fields
 
@@ -18,6 +20,8 @@ modulus. Splitting is used only after the prescribed geometric extension;
 the original torus and divisor remain over the original field. For an
 arbitrary nonempty domain, its actual finite boundary supplies the divisor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

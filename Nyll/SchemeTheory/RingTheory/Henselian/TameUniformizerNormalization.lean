@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.PowerSeries.Substitution
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSimpleRoot
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.PowerSeries.Substitution
 
 /-! # Normalizing a tame power series by an actual change of parameter
 
@@ -14,6 +16,8 @@ A series of positive order prime to the characteristic becomes the pure
 power of the parameter under a constructed algebra automorphism. Both the
 coordinate change and its inverse preserve every series order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

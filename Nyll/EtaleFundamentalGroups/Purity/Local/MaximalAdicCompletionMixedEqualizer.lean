@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionTorsionReflection
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Finiteness.Ideal
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionTorsionReflection
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Finiteness.Ideal
 
 /-!
 # The mixed completion/localization equalizer
@@ -18,6 +20,8 @@ maximal-adic completion and its restrictions to the chosen principal cover
 of the punctured spectrum.  The overlap is computed by localizing the
 completed module at the same generators.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -60,13 +64,22 @@ section MaximalAdic
 variable (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 variable (M : Type v) [AddCommGroup M] [Module R M]
 
-private abbrev Rhat := AdicCompletion (maximalIdeal R) R
+namespace MaximalAdicCompletionMixed
 
-private abbrev GeneratorIndex :=
+/-- The completion of the local base at its maximal ideal. -/
+abbrev Rhat := AdicCompletion (maximalIdeal R) R
+
+/-- Indices for the chosen principal cover of the punctured spectrum. -/
+abbrev GeneratorIndex :=
   AlgebraicGeometry.Scheme.puncturedSpectrumGeneratorIndex R
 
-private abbrev generator (i : GeneratorIndex R) : R :=
+/-- The generator defining the indexed principal open. -/
+abbrev generator (i : GeneratorIndex R) : R :=
   AlgebraicGeometry.Scheme.puncturedSpectrumGenerator R i
+
+end MaximalAdicCompletionMixed
+
+open MaximalAdicCompletionMixed
 
 /-- The completion component together with localized components on the
 chosen principal cover of the punctured spectrum. -/
@@ -125,7 +138,7 @@ theorem maximalAdicCompletionMixedRight_apply
   rfl
 
 /-- The canonical pair consisting of completion and punctured restrictions. -/
-private def maximalAdicCompletionMixedPairMap :
+def maximalAdicCompletionMixedPairMap :
     M →ₗ[R] MaximalAdicCompletionMixedSource R M :=
   (TensorProduct.mk R (Rhat R) M 1).prod <|
     LinearMap.pi fun i ↦

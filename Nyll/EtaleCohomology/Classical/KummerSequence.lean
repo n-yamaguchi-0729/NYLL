@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
-import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
-import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Nyll.EtaleCohomology.Classical.KummerRootCover
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+module
+
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Classical.FreeAbelianYoneda
+public import Nyll.EtaleCohomology.Classical.CohomologyPresheafBoundary
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Nyll.EtaleCohomology.Classical.KummerRootCover
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-!
 # Geometric local surjectivity in the actual étale Kummer sequence
@@ -28,6 +30,8 @@ This proves epimorphy of the actual power morphism on the small étale
 multiplicative-group sheaf. The kernel gives the actual roots-of-unity
 sheaf and an actual short exact Kummer sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

@@ -81,9 +81,6 @@ private abbrev wLinv : XL ⟶ XL := curveChange σ.inv (hσinv hσ) (specMap R (
 private theorem wLinv_base_wL_base (x : ↥XL) : (wLinv hσ f).base ((wL hσ f).base x) = x := by
   rw [← Scheme.Hom.comp_apply, wL_wLinv]; rfl
 
-private theorem wL_base_wLinv_base (x : ↥XL) : (wL hσ f).base ((wLinv hσ f).base x) = x := by
-  rw [← Scheme.Hom.comp_apply, wLinv_wL]; rfl
-
 private theorem wL_base_injective : Function.Injective (wL hσ f).base :=
   Function.LeftInverse.injective (wLinv_base_wL_base hσ f)
 
@@ -228,13 +225,6 @@ private theorem range_comp_wL {Y : Scheme.{0}}
     (g : Y ⟶ pullback (c) (specMap R (Localization.Away f))) :
     Set.range (g ≫ wL hσ f).base = (wL hσ f).base '' Set.range g.base := by
   rw [← Set.range_comp]; rfl
-
-private theorem wLs_fst_base {k : Type} [Field k]
-    (s : Spec (CommRingCat.of k) ⟶ Spec (CommRingCat.of (Localization.Away f)))
-    (y : ↥(pullback (baseChange R (c) (Localization.Away f)) s)) :
-    (pullback.fst (baseChange R (c) (Localization.Away f)) s).base ((wLs hσ f s).base y) =
-      (wL hσ f).base ((pullback.fst (baseChange R (c) (Localization.Away f)) s).base y) := by
-  rw [← Scheme.Hom.comp_apply, wLs_fst, Scheme.Hom.comp_apply]
 
 private theorem wLsInv_fst_base {k : Type} [Field k]
     (s : Spec (CommRingCat.of k) ⟶ Spec (CommRingCat.of (Localization.Away f)))

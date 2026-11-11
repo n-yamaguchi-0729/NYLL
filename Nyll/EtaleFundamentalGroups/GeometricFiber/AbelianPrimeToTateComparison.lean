@@ -4,18 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.BasePoint
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTateFamilies
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMonodromyKernel
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualPowerDetection
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotient
-import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
-import Nyll.ProCGroups.Topologies.QuotientMaps
-import Mathlib.Algebra.CharP.Defs
+module
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMonodromy
-import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTorsionFiber
-import Nyll.ProCGroups.Abelian.RestrictedTateModule
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.BasePoint
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTateFamilies
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMonodromyKernel
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualPowerDetection
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotient
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
+public import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
+public import Nyll.ProCGroups.Topologies.QuotientMaps
+public import Mathlib.Algebra.CharP.Defs
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMonodromy
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitTorsionFiber
+public import Nyll.ProCGroups.Abelian.RestrictedTateModule
 
 /-!
 # The actual prime-to-p fundamental group and Tate module
@@ -27,14 +30,19 @@ actual image of the multiplication-cover fundamental group and powers in
 finite Sigma quotients. No p-primary part is discarded by hypothesis.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.FiniteEtale
 open ProCGroups ProCGroups.ProC
+open scoped BigOperators
 
 namespace GoodReductionJacobian.RelativeGroupLaw.UnitMultiplication
 
-variable {K : Type} [Field K]
+variable {K : Type u} [Field K]
 
 section Indices
 
@@ -66,7 +74,165 @@ private theorem isUnit_of_sigmaNumber (n : ℕ)
 
 end Indices
 
-variable [IsSepClosed K] {A : Scheme} {f : A ⟶ Spec (.of K)}
+section Sigma
+
+variable [IsSepClosed K] {A : Scheme.{u}} {f : A ⟶ Spec (.of K)}
+  [IsProper f] [Smooth f] (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
+  (sigma : Set ℕ) (hI : ∀ n : sigmaTorsionIndices sigma, IsUnit ((n.val : ℕ) : K))
+
+local instance (n : ℕ+) : TopologicalSpace (torsionLevel (G.AlgPoints hc K) n) :=
+  FullTateModule.torsionLevelTopology (G.AlgPoints hc K) n
+
+local instance (n : ℕ+) : DiscreteTopology (torsionLevel (G.AlgPoints hc K) n) := ⟨rfl⟩
+
+/-- Actual multiplication monodromy at exactly the positive Sigma-indices. -/
+def toSigmaTate (g : π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val)) :
+    RestrictedTateModule (G.AlgPoints hc K) (sigmaTorsionIndices sigma) :=
+  ⟨fun n => monodromy G hc ⟨n.val, hI n⟩ g,
+    fun n m => monodromy_compatible G hc ⟨n.val, hI n⟩ ⟨m.val, hI m⟩ g⟩
+
+/-- The actual Sigma-monodromy map retains the inverse-limit topology. -/
+def toSigmaTateHom :
+    π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val) →ₜ*
+      Multiplicative (RestrictedTateModule (G.AlgPoints hc K) (sigmaTorsionIndices sigma)) where
+  toFun g := Multiplicative.ofAdd (toSigmaTate G hc sigma hI g)
+  map_one' := by
+    apply congrArg Multiplicative.ofAdd
+    apply Subtype.ext
+    funext n
+    exact monodromy_one G hc ⟨n.val, hI n⟩
+  map_mul' g h := by
+    apply congrArg Multiplicative.ofAdd
+    apply Subtype.ext
+    funext n
+    exact monodromy_mul G hc ⟨n.val, hI n⟩ g h
+  continuous_toFun :=
+    (continuous_pi (fun n => monodromy_continuous G hc ⟨n.val, hI n⟩)).subtype_mk
+      (fun g n m => monodromy_compatible G hc ⟨n.val, hI n⟩ ⟨m.val, hI m⟩ g)
+
+/-- The kernel is the actual pro-Sigma residual core. Its two inclusions use
+multiplication-cover powers and the finite Sigma torsion groups, respectively. -/
+theorem toSigmaTateHom_ker_eq_residualCore [GeometricallyConnected f] :
+    (toSigmaTateHom G hc sigma hI).toMonoidHom.ker =
+      proCResidualCore (FiniteGroupClass.sigmaGroup sigma)
+        π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val) := by
+  apply le_antisymm
+  · intro g hg
+    apply mem_proCResidualCore_of_forall_sigmaPower sigma g
+    intro n hn hs
+    let index : sigmaTorsionIndices sigma := ⟨⟨n, hn⟩, hs⟩
+    apply (monodromy_eq_zero_iff_exists_pow G hc ⟨index.val, hI index⟩ g).mp
+    exact congrArg (fun x : Multiplicative
+      (RestrictedTateModule (G.AlgPoints hc K) (sigmaTorsionIndices sigma)) =>
+        (Multiplicative.toAdd x).val index) hg
+  · intro g hg
+    change Multiplicative.ofAdd (toSigmaTate G hc sigma hI g) = 1
+    apply congrArg Multiplicative.ofAdd
+    apply Subtype.ext
+    funext n
+    let index : unitIndices K := ⟨n.val, hI n⟩
+    have _ : Finite (torsionLevel (G.AlgPoints hc K) n.val) :=
+      finite_torsionLevel G hc index
+    have hpow (x : Multiplicative (torsionLevel (G.AlgPoints hc K) n.val)) :
+        x ^ (n.val : ℕ) = 1 := by
+      change (n.val : ℕ) • Multiplicative.toAdd x = 0
+      apply Subtype.ext
+      exact (Multiplicative.toAdd x).property
+    have hle := proCResidualCore_le_ker_of_finite_exponent sigma
+      (monodromyHom G hc index) (n.val : ℕ) n.property hpow
+    exact congrArg Multiplicative.toAdd (hle hg)
+
+/-- Every compatible Sigma-torsion family is realized by the original
+multiplication monodromy, using compactness and products of Sigma-indices. -/
+theorem toSigmaTate_surjective [GeometricallyConnected f] :
+    Function.Surjective (toSigmaTate G hc sigma hI) := by
+  classical
+  have : ConnectedSpace A := GeometricallyConnected.connectedSpace f f.isOpenMap
+  intro x
+  let P := π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val)
+  let Z : sigmaTorsionIndices sigma → Set P := fun n =>
+    {g | monodromy G hc ⟨n.val, hI n⟩ g = x.val n}
+  have hclosed : ∀ n, IsClosed (Z n) := fun n =>
+    isClosed_eq (monodromy_continuous G hc ⟨n.val, hI n⟩) continuous_const
+  have hfinite : ∀ s : Finset (sigmaTorsionIndices sigma), (⋂ n ∈ s, Z n).Nonempty := by
+    intro s
+    let N : sigmaTorsionIndices sigma := ∏ n ∈ s, n
+    obtain ⟨g, hg⟩ := monodromy_surjective G hc ⟨N.val, hI N⟩ (x.val N)
+    refine ⟨g, Set.mem_iInter.mpr fun n => Set.mem_iInter.mpr fun hn => ?_⟩
+    obtain ⟨m, hm⟩ := Finset.dvd_prod_of_mem (fun i : sigmaTorsionIndices sigma => i) hn
+    have hN : N = n * m := hm
+    change monodromy G hc ⟨n.val, hI n⟩ g = x.val n
+    calc
+      monodromy G hc ⟨n.val, hI n⟩ g =
+          torsionTransition (G.AlgPoints hc K) n.val m.val
+            (monodromy G hc ⟨(n * m).val, hI (n * m)⟩ g) :=
+        (monodromy_compatible G hc ⟨n.val, hI n⟩ ⟨m.val, hI m⟩ g).symm
+      _ = torsionTransition (G.AlgPoints hc K) n.val m.val (x.val (n * m)) := by
+        have hi : monodromy G hc ⟨(n * m).val, hI (n * m)⟩ g = x.val (n * m) := by
+          rw [← hN]
+          exact hg
+        exact congrArg (torsionTransition (G.AlgPoints hc K) n.val m.val) hi
+      _ = x.val n := x.property n m
+  obtain ⟨g, hg⟩ := CompactSpace.iInter_nonempty hclosed hfinite
+  refine ⟨g, ?_⟩
+  apply Subtype.ext
+  funext n
+  exact Set.mem_iInter.mp hg n
+
+/-- The actual pro-Sigma fundamental group of a proper smooth commutative
+group is its restricted Tate module whenever the Sigma-indices are invertible. -/
+def fundamentalGroupSigmaEquivTate [GeometricallyConnected f] :
+    (π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val) ⧸
+      proCResidualCore (FiniteGroupClass.sigmaGroup sigma)
+        π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val)) ≃ₜ*
+      Multiplicative (RestrictedTateModule (G.AlgPoints hc K) (sigmaTorsionIndices sigma)) := by
+  let P := π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val)
+  let R := proCResidualCore (FiniteGroupClass.sigmaGroup sigma) P
+  let φ := toSigmaTateHom G hc sigma hI
+  have hker : φ.toMonoidHom.ker = R := toSigmaTateHom_ker_eq_residualCore G hc sigma hI
+  let ψ := ProCGroups.QuotientGroup.liftₜ R φ hker.ge
+  have hinj : Function.Injective ψ := by
+    intro x y hxy
+    obtain ⟨a, rfl⟩ := QuotientGroup.mk'_surjective R x
+    obtain ⟨b, rfl⟩ := QuotientGroup.mk'_surjective R y
+    apply (QuotientGroup.eq_iff_div_mem (N := R)).mpr
+    rw [← hker]
+    change φ (a / b) = 1
+    change φ a = φ b at hxy
+    rw [map_div, hxy]
+    exact div_self' (φ b)
+  have hsurj : Function.Surjective ψ := by
+    intro y
+    obtain ⟨g, hg⟩ := toSigmaTate_surjective G hc sigma hI y.toAdd
+    exact ⟨QuotientGroup.mk' R g, congrArg Multiplicative.ofAdd hg⟩
+  exact ProCGroups.ContinuousMulEquiv.ofBijectiveCompactToT2
+    ψ.toMonoidHom ψ.continuous_toFun ⟨hinj, hsurj⟩
+
+/-- The Sigma comparison evaluates the original unit-fibre action at every index. -/
+@[simp] theorem fundamentalGroupSigmaEquivTate_apply_mk [GeometricallyConnected f]
+    (g : π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val)) :
+    fundamentalGroupSigmaEquivTate G hc sigma hI
+      (QuotientGroup.mk' (proCResidualCore (FiniteGroupClass.sigmaGroup sigma)
+        π₁ᵉᵗ((G.one (𝟙 (Spec (.of K)))).val)) g) =
+      toSigmaTateHom G hc sigma hI g := rfl
+
+/-- The actual pro-Sigma Tate comparison at an arbitrary geometric point.
+The only basepoint transport is the original fiber-functor isomorphism. -/
+def fundamentalGroupSigmaEquivTateAt [GeometricallyConnected f]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (xi : Spec (.of Ω) ⟶ A) :
+    (π₁ᵉᵗ(xi) ⧸ proCResidualCore (FiniteGroupClass.sigmaGroup sigma) π₁ᵉᵗ(xi)) ≃ₜ*
+      Multiplicative (RestrictedTateModule (G.AlgPoints hc K) (sigmaTorsionIndices sigma)) := by
+  have : ConnectedSpace A := GeometricallyConnected.connectedSpace f f.isOpenMap
+  let e : Spec (.of K) ⟶ A := (G.one (𝟙 _)).val
+  let t : fiber xi ≅ fiber e := Classical.choice (nonempty_fiber_iso xi e)
+  exact (residualQuotientContinuousMulEquiv
+    (FiniteGroupClass.sigmaGroup_fullFormation sigma).hereditary
+    (fundamentalGroupIsoOfFiberIso xi e t)).trans
+      (fundamentalGroupSigmaEquivTate G hc sigma hI)
+
+end Sigma
+
+variable [IsSepClosed K] {A : Scheme.{u}} {f : A ⟶ Spec (.of K)}
   [IsProper f] [Smooth f] [GeometricallyConnected f]
   (G : RelativeGroupLaw K f) (hc : G.IsCommutative)
   (p : ℕ) [Fact p.Prime] [CharP K p]
@@ -152,7 +318,7 @@ theorem fundamentalGroupPrimeToEquivTate_projection
 Tate module describes the maximal prime-to-p quotient. The basepoint comparison
 is chosen internally from the actual fibre-functor comparison theorem. -/
 def fundamentalGroupPrimeToEquivTateAt
-    {Ω : Type} [Field Ω] [IsSepClosed Ω] (xi : Spec (.of Ω) ⟶ A) :
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (xi : Spec (.of Ω) ⟶ A) :
     (π₁ᵉᵗ(xi) ⧸ proCResidualCore (FiniteGroupClass.sigmaGroup ({p}ᶜ : Set ℕ)) π₁ᵉᵗ(xi)) ≃ₜ*
       Multiplicative (RestrictedTateModule (G.AlgPoints hc K) (unitIndices K)) := by
   have _ : ConnectedSpace A := GeometricallyConnected.connectedSpace f f.isOpenMap

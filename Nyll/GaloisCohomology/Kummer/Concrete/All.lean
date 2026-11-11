@@ -4,111 +4,117 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.QuadraticSquareClasses
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernel
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionResidualAction
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerEvaluation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousCharacters
-import Nyll.GaloisCohomology.Kummer.Concrete.Correspondence
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclicExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.Cyclotomic.All
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicField
-import Nyll.GaloisCohomology.Kummer.Concrete.ExtensionRoundTrip
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteCharacterEquiv
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteDualSeparation
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteGaloisDual
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteGeneration
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteKummerNormalizedGenerator
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteSupport
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisCohomology
-import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteCharacterEquiv
-import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteContinuity
-import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteGeneration
-import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteInverse
-import Nyll.GaloisCohomology.Kummer.Concrete.KummerCorrespondenceFormula
-import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
-import Nyll.GaloisCohomology.Kummer.Concrete.LocalMaximalKummerExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.LocalUnitKummerUnramified
-import Nyll.GaloisCohomology.Kummer.Concrete.MaximalKummerSubgroup
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimePowerRootObstruction
-import Nyll.GaloisCohomology.Kummer.Concrete.RadicalExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.RadicalQuotient
-import Nyll.GaloisCohomology.Kummer.Concrete.RestrictedFinite
-import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
-import Nyll.GaloisCohomology.Kummer.Concrete.SUnitPreparation.All
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtensionNorm
+module
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
+public import Nyll.GaloisCohomology.Kummer.Concrete.QuadraticSquareClasses
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernel
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionResidualAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerEvaluation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousCharacters
+public import Nyll.GaloisCohomology.Kummer.Concrete.Correspondence
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclicExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.Cyclotomic.All
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicField
+public import Nyll.GaloisCohomology.Kummer.Concrete.ExtensionRoundTrip
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteCharacterEquiv
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteDualSeparation
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteGaloisDual
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteGeneration
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteKummerNormalizedGenerator
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteKummerRootRestriction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteKummerStageCharacters
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteSupport
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisCohomology
+public import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteCharacterEquiv
+public import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteContinuity
+public import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteGeneration
+public import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteInverse
+public import Nyll.GaloisCohomology.Kummer.Concrete.KummerCorrespondenceFormula
+public import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
+public import Nyll.GaloisCohomology.Kummer.Concrete.LocalMaximalKummerExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.LocalUnitKummerUnramified
+public import Nyll.GaloisCohomology.Kummer.Concrete.MaximalKummerSubgroup
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimePowerRootObstruction
+public import Nyll.GaloisCohomology.Kummer.Concrete.RadicalExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.RadicalQuotient
+public import Nyll.GaloisCohomology.Kummer.Concrete.RestrictedFinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
+public import Nyll.GaloisCohomology.Kummer.Concrete.SUnitPreparation.All
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtensionNorm
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1TrivialCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearRestriction
-import Nyll.GaloisCohomology.Kummer.Concrete.InvariantKummerPowerWitness
-import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
 
-
-import Nyll.GaloisCohomology.Kummer.Concrete.MovingRootOfUnity
-
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.RootKummerInvariantCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantKummerTrace
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1TrivialCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearRestriction
+public import Nyll.GaloisCohomology.Kummer.Concrete.InvariantKummerPowerWitness
+public import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableKummerH1
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.FieldMapNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
-import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousHilbert90
-import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousRootCocycleLifting
+public import Nyll.GaloisCohomology.Kummer.Concrete.MovingRootOfUnity
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootKummerInvariantCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantKummerTrace
 
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionCharacterExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAverage
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCocycleLifting
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicOpenCocycleLifting
 
-import Nyll.GaloisCohomology.Kummer.Concrete.ProlongationCharacterApproximation
-import Nyll.GaloisCohomology.Kummer.Concrete.InvariantCompletionCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
-import Nyll.GaloisCohomology.Kummer.Concrete.MixedCharacteristicCharacters
-import Nyll.GaloisCohomology.Kummer.Concrete.CompletionAbelianModPower
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableKummerH1
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.FieldMapNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
+public import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousHilbert90
+public import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousRootCocycleLifting
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableGaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupSeparableAbsoluteAction
-import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousKummerScalar
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionCharacterExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAverage
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCocycleLifting
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicOpenCocycleLifting
 
-import Nyll.GaloisCohomology.Kummer.Concrete.RadicalPowerSaturation
+public import Nyll.GaloisCohomology.Kummer.Concrete.ProlongationCharacterApproximation
+public import Nyll.GaloisCohomology.Kummer.Concrete.InvariantCompletionCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
+public import Nyll.GaloisCohomology.Kummer.Concrete.MixedCharacteristicCharacters
+public import Nyll.GaloisCohomology.Kummer.Concrete.CompletionAbelianModPower
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableGaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupSeparableAbsoluteAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousKummerScalar
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.RadicalPowerSaturation
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtensionFieldRange
 
 /-!
 # Concrete Kummer extensions and characters

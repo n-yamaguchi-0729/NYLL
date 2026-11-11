@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 
 /-!
 # Is Integral adjoin map alg Hom
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

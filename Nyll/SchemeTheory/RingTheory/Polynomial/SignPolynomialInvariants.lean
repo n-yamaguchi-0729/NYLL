@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialAction
-import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialMonomials
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Algebra.Field.Basic
-import Mathlib.Algebra.Ring.Commute
-import Mathlib.Algebra.Ring.Parity
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialAction
+public import Nyll.SchemeTheory.RingTheory.Polynomial.SignPolynomialMonomials
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Algebra.Field.Basic
+public import Mathlib.Algebra.Ring.Commute
+public import Mathlib.Algebra.Ring.Parity
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-! # Invariants of simultaneous sign change
 
@@ -23,6 +25,8 @@ There is no restriction on the number of variables in this algebraic statement.
 The normalization cover, its generic degree, and its ramification locus are
 separate assertions of Stacks Project, Tag 0BTE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

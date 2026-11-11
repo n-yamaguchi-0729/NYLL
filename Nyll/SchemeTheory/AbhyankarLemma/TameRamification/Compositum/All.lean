@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.All
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.Field
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.FiniteBaseChange
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.CommonTop.All
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.Field
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Compositum.FiniteBaseChange
 
 /-!
 # Valued composita for the tame Abhyankar frontier

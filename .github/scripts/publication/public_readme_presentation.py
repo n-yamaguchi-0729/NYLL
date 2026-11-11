@@ -45,7 +45,7 @@ INTRODUCTIONS = {
     ('AnabelianGeometry',): ('anabelian-geometry',
         'This Lean component of {nyll} studies the recovery of algebraic curves from\n'
         'their étale fundamental groups, with results on genus-zero reconstruction\n'
-        'over number fields, geometric slimness and explicit fundamental-group calculations.\n'
+        'over finitely generated fields of characteristic zero, geometric slimness and explicit fundamental-group calculations.\n'
         'The {guide} presents the reconstruction theorems and geometric applications\n'
         'with links to their formal proofs.')}
 
@@ -130,7 +130,7 @@ def presentation(text, primary):
                                r'(?=^## |\Z)', text, re.M | re.S)
         if arithmetic:
             text = text[:arithmetic.start()] + text[arithmetic.end():]
-            heading = '### Grothendieck’s conjecture for genus-zero curves over number fields\n'
+            heading = '### Grothendieck’s conjecture for genus-zero curves over finitely generated fields\n'
             text = text.replace('## Main results\n', '## Main results\n\n' + heading +
                                 arithmetic[1] + '### Geometric fundamental groups\n', 1)
         text = text.replace('The proofs realize open subgroups by finite étale covers\n'
@@ -199,8 +199,8 @@ def concise_results(text, primary):
         if not link:
             raise ValueError('Missing source-backed genus-zero theorem')
         rows = [
-            '| [Grothendieck’s conjecture for genus-zero curves over number fields — weak reconstruction](' +
-            link[1] + ') | For opens in smooth proper geometrically integral genus-zero curves over a number field, '
+            '| [Grothendieck’s conjecture for genus-zero curves over finitely generated fields — weak reconstruction](' +
+            link[1] + ') | For opens in smooth proper geometrically integral genus-zero curves over a field finitely generated over the rationals, '
             'each with at least three geometric punctures, an isomorphism of pointed arithmetic fundamental '
             'groups over G_k implies an isomorphism of the curves over k. This does not identify the induced '
             'group map with the supplied isomorphism. |']

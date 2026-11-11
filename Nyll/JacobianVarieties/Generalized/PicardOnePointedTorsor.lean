@@ -7,6 +7,7 @@ https://github.com/n-yamaguchi-0729
 
 import Nyll.JacobianVarieties.Generalized.PicardOnePointedConstruction
 import Nyll.JacobianVarieties.Generalized.PicardOneSheafTorsor
+import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
 
 /-!
 # The represented pointed Picard-one torsor identity

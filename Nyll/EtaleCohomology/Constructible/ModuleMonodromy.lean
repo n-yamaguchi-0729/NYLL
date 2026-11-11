@@ -4,36 +4,38 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantEquivalence
-import Nyll.EtaleCohomology.Constructible.LocallyConstant
-import Nyll.EtaleCohomology.Constructible.Monodromy
-import Nyll.EtaleCohomology.Constructible.ModuleUnderlying
-import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
-import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Action.Basic
-import Mathlib.CategoryTheory.Action.Continuous
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Conj
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Linear.Basic
-import Mathlib.CategoryTheory.Linear.FunctorCategory
-import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.Preadditive.Basic
-import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Whiskering
-import Mathlib.Topology.Category.FinTopCat
-import Mathlib.Topology.Constructions.SumProd
-import Mathlib.Topology.Order
+module
+
+public import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantEquivalence
+public import Nyll.EtaleCohomology.Constructible.LocallyConstant
+public import Nyll.EtaleCohomology.Constructible.Monodromy
+public import Nyll.EtaleCohomology.Constructible.ModuleUnderlying
+public import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
+public import Nyll.EtaleCohomology.Sites.ModuleSetComparison
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Action.Basic
+public import Mathlib.CategoryTheory.Action.Continuous
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Conj
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Linear.Basic
+public import Mathlib.CategoryTheory.Linear.FunctorCategory
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Types.Products
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Preadditive.Basic
+public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.Topology.Category.FinTopCat
+public import Mathlib.Topology.Constructions.SumProd
+public import Mathlib.Topology.Order
 
 /-!
 # Linear monodromy on actual geometric stalks
@@ -49,6 +51,8 @@ their sum, and scalar endomorphisms. Additivity and scalar compatibility of the
 stalk functor itself are checked using the canonical maps into its defining
 filtered colimit. No finite field assumption on the base is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 open AlgebraicGeometry CategoryTheory Limits
@@ -242,16 +246,20 @@ abbrev moduleStalkMonodromy (G : EtaleFiniteTypeLocallyConstantModuleSheaf X R) 
     Action (ModuleCat R) (Aut (FiniteEtale.fiber ξ)) where
   V := (Scheme.pointSmallEtale ξ).sheafFiber.obj G.obj
   ρ :=
-    { toFun := fun γ => ModuleCat.ofHom
-        { toFun := (moduleStalkSetAction ξ G).ρ γ
+    { toFun := fun γ => End.of (ModuleCat.ofHom
+        { toFun := fun x => (moduleStalkSetAction ξ G).ρ γ x
           map_add' := moduleStalkSetAction_map_add ξ G γ
-          map_smul' := moduleStalkSetAction_map_smul ξ G γ }
+          map_smul' := moduleStalkSetAction_map_smul ξ G γ })
       map_one' := by
-        apply (forget (ModuleCat R)).map_injective
-        exact (moduleStalkSetAction ξ G).ρ.map_one
+        apply End.ext
+        ext x
+        exact congrArg (fun f : End (moduleStalkSetAction ξ G).V => f x)
+          (moduleStalkSetAction ξ G).ρ.map_one
       map_mul' := fun γ δ => by
-        apply (forget (ModuleCat R)).map_injective
-        exact (moduleStalkSetAction ξ G).ρ.map_mul γ δ }
+        apply End.ext
+        ext x
+        exact congrArg (fun f : End (moduleStalkSetAction ξ G).V => f x)
+          ((moduleStalkSetAction ξ G).ρ.map_mul γ δ) }
 
 /-- Taking the geometric stalk as a linear representation is functorial. -/
 def finiteLocallyConstantModuleMonodromy :
@@ -273,8 +281,9 @@ def finiteLocallyConstantModuleMonodromyUnderlyingIso :
       (forget FintypeCat).mapAction (Aut (FiniteEtale.fiber ξ)) ≅
     finiteLocallyConstantModuleMonodromy (R := R) ξ ⋙
       (forget (ModuleCat R)).mapAction (Aut (FiniteEtale.fiber ξ)) :=
-  NatIso.ofComponents (moduleStalkSetActionIso ξ) (fun f =>
-    Action.Hom.ext ((finiteLocallyConstantModuleStalkIso ξ).hom.naturality f))
+  NatIso.ofComponents (fun G => moduleStalkSetActionIso (R := R) ξ G) (fun f => by
+    apply Action.Hom.ext
+    exact (finiteLocallyConstantModuleStalkIso (R := R) ξ).hom.naturality f)
 
 /-- The actual geometric stalk of a finite-ring local system is a finite module. -/
 theorem finite_moduleStalk (G : EtaleFiniteTypeLocallyConstantModuleSheaf X R) :
@@ -286,20 +295,19 @@ theorem finite_moduleStalk (G : EtaleFiniteTypeLocallyConstantModuleSheaf X R) :
 /-- The linear action is continuous when the finite geometric stalk is discrete. -/
 theorem moduleStalkMonodromy_continuous
     (G : EtaleFiniteTypeLocallyConstantModuleSheaf X R) :
-    letI : TopologicalSpace ((Scheme.pointSmallEtale ξ).sheafFiber
+    let _ : TopologicalSpace ((Scheme.pointSmallEtale ξ).sheafFiber
       (A := ModuleCat R) |>.obj G.obj) := ⊥
     Continuous (fun p : Aut (FiniteEtale.fiber ξ) ×
         ((Scheme.pointSmallEtale ξ).sheafFiber (A := ModuleCat R) |>.obj G.obj) =>
-      ((moduleStalkMonodromy ξ G).ρ p.1).hom p.2) := by
-  let : TopologicalSpace ((Scheme.pointSmallEtale ξ).sheafFiber
-    (A := ModuleCat R) |>.obj G.obj) := ⊥
+      ((moduleStalkMonodromy ξ G).ρ p.1).asHom.hom p.2) := by
+  intro stalkTopology
   have : DiscreteTopology ((Scheme.pointSmallEtale ξ).sheafFiber
     (A := ModuleCat R) |>.obj G.obj) := ⟨rfl⟩
   let A := (finiteLocallyConstantModuleSetMonodromy ξ).obj G
   let e : ↥A.obj.V ≅ ↥((Scheme.pointSmallEtale ξ).sheafFiber
       (A := ModuleCat R) |>.obj G.obj) := (finiteLocallyConstantModuleStalkIso ξ).app G
   have hA : Continuous (fun p : Aut (FiniteEtale.fiber ξ) × A.obj.V =>
-      ((forget FintypeCat).map (A.obj.ρ p.1)) p.2) := A.property.continuous_smul
+      ((forget FintypeCat).map (A.obj.ρ p.1).asHom) p.2) := A.property.continuous_smul
   have hi : Continuous (fun p : Aut (FiniteEtale.fiber ξ) ×
       ((Scheme.pointSmallEtale ξ).sheafFiber (A := ModuleCat R) |>.obj G.obj) =>
       (p.1, e.inv p.2)) :=

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.EquivariantEquiv
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.Module
-import Nyll.GaloisCohomology.GroupTheory.Quotient
+module
+
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.EquivariantEquiv
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.Module
+public import Nyll.GaloisCohomology.GroupTheory.Quotient
 
 /-!
 # Cohomology of a class quotient represented by supported elements
@@ -21,6 +23,8 @@ isomorphism
 to an equivariant equivalence and transports the two low-degree Tate groups
 used in the Herbrand quotient calculation.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,9 +48,9 @@ theorem supportedPrincipalIntersection_stable
     (hP : ∀ (g : G) (x : A), x ∈ P → g • x ∈ P)
     (g : G) (x : S)
     (hx : x ∈ P.subgroupOf S) :
-    letI := stableSubgroupMulDistribMulAction S hS
+    let := stableSubgroupMulDistribMulAction S hS
     g • x ∈ P.subgroupOf S := by
-  let := stableSubgroupMulDistribMulAction S hS
+  intro sharedOwner1
   change ((g • x : S) : A) ∈ P
   rw [stableSubgroup_smul_coe]
   exact hP g x hx
@@ -60,18 +64,14 @@ theorem subgroupQuotientEquivQuotientOfSupEqTop_smul
     (hP : ∀ (g : G) (x : A), x ∈ P → g • x ∈ P)
     (hSP : S ⊔ P = ⊤)
     (g : G) (q : S ⧸ P.subgroupOf S) :
-    letI := stableSubgroupMulDistribMulAction S hS
-    letI := stableQuotientMulDistribMulAction
+    let := stableSubgroupMulDistribMulAction S hS
+    let := stableQuotientMulDistribMulAction
       (P.subgroupOf S)
       (supportedPrincipalIntersection_stable S P hS hP)
-    letI := stableQuotientMulDistribMulAction P hP
+    let := stableQuotientMulDistribMulAction P hP
     subgroupQuotientEquivQuotientOfSupEqTop S P hSP (g • q) =
       g • subgroupQuotientEquivQuotientOfSupEqTop S P hSP q := by
-  let := stableSubgroupMulDistribMulAction S hS
-  let := stableQuotientMulDistribMulAction
-    (P.subgroupOf S)
-    (supportedPrincipalIntersection_stable S P hS hP)
-  let := stableQuotientMulDistribMulAction P hP
+  intro sharedOwner1 sharedOwner2 sharedOwner3
   refine QuotientGroup.induction_on q ?_
   intro s
   change
@@ -86,18 +86,14 @@ noncomputable def supportedClassHerbrandH0Equiv
     (hS : ∀ (g : G) (x : A), x ∈ S → g • x ∈ S)
     (hP : ∀ (g : G) (x : A), x ∈ P → g • x ∈ P)
     (hSP : S ⊔ P = ⊤) :
-    letI := stableSubgroupMulDistribMulAction S hS
-    letI := stableQuotientMulDistribMulAction
+    let := stableSubgroupMulDistribMulAction S hS
+    let := stableQuotientMulDistribMulAction
       (P.subgroupOf S)
       (supportedPrincipalIntersection_stable S P hS hP)
-    letI := stableQuotientMulDistribMulAction P hP
+    let := stableQuotientMulDistribMulAction P hP
     HerbrandH0 G (S ⧸ P.subgroupOf S) ≃*
       HerbrandH0 G (A ⧸ P) := by
-  letI := stableSubgroupMulDistribMulAction S hS
-  letI := stableQuotientMulDistribMulAction
-    (P.subgroupOf S)
-    (supportedPrincipalIntersection_stable S P hS hP)
-  letI := stableQuotientMulDistribMulAction P hP
+  intro sharedOwner1 sharedOwner2 sharedOwner3
   exact
     herbrandH0EquivariantMulEquiv
       (subgroupQuotientEquivQuotientOfSupEqTop S P hSP)
@@ -112,18 +108,14 @@ noncomputable def supportedClassHerbrandHMinusOneEquiv
     (hP : ∀ (g : G) (x : A), x ∈ P → g • x ∈ P)
     (hSP : S ⊔ P = ⊤)
     (σ : G) :
-    letI := stableSubgroupMulDistribMulAction S hS
-    letI := stableQuotientMulDistribMulAction
+    let := stableSubgroupMulDistribMulAction S hS
+    let := stableQuotientMulDistribMulAction
       (P.subgroupOf S)
       (supportedPrincipalIntersection_stable S P hS hP)
-    letI := stableQuotientMulDistribMulAction P hP
+    let := stableQuotientMulDistribMulAction P hP
     HerbrandHMinusOne G (S ⧸ P.subgroupOf S) σ ≃*
       HerbrandHMinusOne G (A ⧸ P) σ := by
-  letI := stableSubgroupMulDistribMulAction S hS
-  letI := stableQuotientMulDistribMulAction
-    (P.subgroupOf S)
-    (supportedPrincipalIntersection_stable S P hS hP)
-  letI := stableQuotientMulDistribMulAction P hP
+  intro sharedOwner1 sharedOwner2 sharedOwner3
   exact
     herbrandHMinusOneEquivariantMulEquiv
       (subgroupQuotientEquivQuotientOfSupEqTop S P hSP)

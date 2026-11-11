@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.CharP.Invertible
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.UniformizerGenericFiber
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.CharP.Invertible
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # A uniformizer root inside the prescribed geometric generic field
@@ -36,6 +38,8 @@ to the required integral root embedding. In particular, the geometric
 generic field need not be replaced after the ramification-removing root
 base change used in specialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

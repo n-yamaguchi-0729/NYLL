@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Convert
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Convert
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 /-!
 # Scheme Modules exists base Change sections linear Equiv pushforward tensor Unit of affine
 Open le
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -337,11 +341,11 @@ theorem pushforwardUnit_loc (π : Y ⟶ X) (W : X.affineOpens) (hW' : IsAffineOp
 open TensorProduct in
 theorem mainU {X Y : Scheme.{u}} (π : Y ⟶ X) [IsAffineHom π]
     {U V : X.Opens} (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hVU : V ≤ U) :
-    letI : Algebra Γ(X, U) Γ(X, V) := (X.presheaf.map (homOfLE hVU).op).hom.toAlgebra
+    let : Algebra Γ(X, U) Γ(X, V) := (X.presheaf.map (homOfLE hVU).op).hom.toAlgebra
     ∃ e : Γ(X, V) ⊗[Γ(X, U)] Γ(Mu π, U) ≃ₗ[Γ(X, V)] Γ(Mu π, V),
       ∀ m : Γ(Mu π, U), e ((1 : Γ(X, V)) ⊗ₜ[Γ(X, U)] m) = (Mu π).presheaf.map (homOfLE hVU).op m :=
         by
-  let alg : Algebra Γ(X, U) Γ(X, V) := (X.presheaf.map (homOfLE hVU).op).hom.toAlgebra
+  intro alg
   exact exists_baseChange_equiv (alg := alg) (Mu π)
     (fun W f => pushforwardUnit_loc π W (W.2.preimage π) f) hU hV hVU (fun _ => rfl)
 
@@ -360,7 +364,7 @@ open _root_.CategoryTheory _root_.CategoryTheory.MonoidalCategory _root_.Algebra
 theorem exists_baseChange_sections_linearEquiv_pushforward_tensorUnit_of_affineOpen_le
     {X Y : Scheme.{u}} (π : Y ⟶ X) [IsAffineHom π]
     {U V : X.Opens} (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hVU : V ≤ U) :
-    letI : Algebra Γ(X, U) Γ(X, V) := (X.presheaf.map (homOfLE hVU).op).hom.toAlgebra
+    let : Algebra Γ(X, U) Γ(X, V) := (X.presheaf.map (homOfLE hVU).op).hom.toAlgebra
     ∃ e : Γ(X, V) ⊗[Γ(X, U)] Γ((Scheme.Modules.pushforward π).obj (𝟙_ Y.Modules), U) ≃ₗ[Γ(X, V)]
         Γ((Scheme.Modules.pushforward π).obj (𝟙_ Y.Modules), V),
       ∀ m : Γ((Scheme.Modules.pushforward π).obj (𝟙_ Y.Modules), U),

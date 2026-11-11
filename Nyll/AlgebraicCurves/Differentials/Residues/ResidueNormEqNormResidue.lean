@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Ring.Subsemiring.Basic
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
+module
+
+public import Mathlib.Algebra.Ring.Subsemiring.Basic
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtension
 
 /-!
 # Residue norm eq norm residue of retraction
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -356,7 +360,9 @@ theorem rho_constEmb (a : A) :
     rw [e1, rho_algebraMap O ρ hρ]
   have hinf : ρ (constEmb A O hO ⟨_, hmA⟩) = 0 := by
     by_cases hm0 : (a : E) - algebraMap K E k = 0
-    · have : constEmb A O hO ⟨_, hmA⟩ = 0 := Subtype.ext (by simp [hm0])
+    · have : constEmb A O hO ⟨_, hmA⟩ = 0 := Subtype.ext (by
+        change algebraMap E FE ((a : E) - algebraMap K E k) = 0
+        rw [hm0, map_zero])
       rw [this, map_zero]
     apply map_eq_zero_of_not_isUnit O ρ hker
     intro hu

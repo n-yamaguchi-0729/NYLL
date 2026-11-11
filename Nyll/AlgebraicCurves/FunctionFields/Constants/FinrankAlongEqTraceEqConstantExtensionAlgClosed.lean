@@ -10,14 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtensionAlgClosed
-import Mathlib.FieldTheory.LinearDisjoint
-import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
+module
+
+public import Nyll.AlgebraicCurves.FunctionFields.Constants.LinearIndependentConstantExtensionAlgClosed
+public import Mathlib.FieldTheory.LinearDisjoint
+public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
+public import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 
 /-!
 # Finrank Along eq and trace eq of constant Field Extension of is Alg Closed
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -22,19 +22,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Tactic.Choose
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Tactic.Choose
 
 /-!
 # Scheme exists alg Equiv tensor sections pullback fst preimage of is Affine Open
 -/
+
+@[expose] public section
 
 section AffinePullbackSectionTensor
 
@@ -94,13 +98,15 @@ variable (A : Type u) [CommRing A] [Algebra R A]
 /-- The base change of the scheme along the given algebra map. -/
 abbrev XA : Scheme.{u} := Limits.pullback c (specMap R A)
 
-private abbrev _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange.fst : XA c A ⟶ X
+/-- The base-change projection to the original scheme. -/
+abbrev _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange.fst : XA c A ⟶ X
   := Limits.pullback.fst c (specMap R A)
 
 export _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange (fst)
 
 
-private abbrev _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange.snd : XA c A ⟶
+/-- The base-change projection to the spectrum of the new coefficient ring. -/
+abbrev _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange.snd : XA c A ⟶
   Spec (.of A) := Limits.pullback.snd c (specMap R A)
 
 

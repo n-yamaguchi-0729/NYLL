@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
-import Nyll.SchemeTheory.FiniteEtale.Away.EtaleExtension
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.NormalizationPrime.ExactTensorTarget
+module
+
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+public import Nyll.SchemeTheory.FiniteEtale.Away.EtaleExtension
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.NormalizationPrime.ExactTensorTarget
 
 /-!
 # Primitive boundary Away at the exact completed normalization prime
@@ -27,6 +29,8 @@ the specified maximal prime is its maximal ideal and localization there is
 an equivalence.  No component comparison, right-coordinate surjectivity, or
 degree equality is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

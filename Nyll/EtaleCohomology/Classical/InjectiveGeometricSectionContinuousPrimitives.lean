@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionTuples
-import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitTopology
-import Nyll.EtaleCohomology.Classical.InjectiveHomogeneousDeckPrimitives
-import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
-import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
-import Nyll.GaloisCohomology.Topology.ContinuousTupleExactness
+module
+
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionTuples
+public import Nyll.EtaleCohomology.Classical.FiniteGaloisSectionColimitTopology
+public import Nyll.EtaleCohomology.Classical.InjectiveHomogeneousDeckPrimitives
+public import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
+public import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
+public import Nyll.GaloisCohomology.Topology.ContinuousTupleExactness
 
 /-!
 # Continuous primitives for actual injective geometric sections
@@ -19,13 +21,15 @@ The proved actual geometric primitive there inflates to a continuous
 primitive for the absolute Galois group.
 -/
 
+@[expose] public section
+
 noncomputable section
 universe u
 open CategoryTheory Limits Opposite AlgebraicGeometry
 
 namespace EtaleCohomology
 
-variable (K : Type u) [Field K] [CharZero K]
+variable (K : Type u) [Field K]
 variable (I : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u}) [Injective I]
 
 /-- Continuous homogeneous cocycles with actual injective geometric-section
@@ -36,12 +40,12 @@ theorem exists_injective_geometricSection_continuous_primitive
     (n : ℕ)
     (z : C(Fin (n + 2) → Gal(AlgebraicClosure K/K), finiteGaloisSectionColimit K I))
     (heq : ∀ (σ : Gal(AlgebraicClosure K/K)) (a : Fin (n + 2) → Gal(AlgebraicClosure K/K)),
-      z (fun i => σ * a i) = (finiteGaloisSectionColimitAction K I σ).hom (z a))
+      z (fun i => σ * a i) = (finiteGaloisSectionColimitAction K I σ).asIso.hom (z a))
     (hc : ∀ a : Fin (n + 3) → Gal(AlgebraicClosure K/K),
       ∑ i : Fin (n + 3), (-1 : ℤ) ^ (i : ℕ) • z (fun j => a (i.succAbove j)) = 0) :
     ∃ g : C(Fin (n + 1) → Gal(AlgebraicClosure K/K), finiteGaloisSectionColimit K I),
       (∀ (σ : Gal(AlgebraicClosure K/K)) (a : Fin (n + 1) → Gal(AlgebraicClosure K/K)),
-        g (fun i => σ * a i) = (finiteGaloisSectionColimitAction K I σ).hom (g a)) ∧
+        g (fun i => σ * a i) = (finiteGaloisSectionColimitAction K I σ).asIso.hom (g a)) ∧
       ∀ a : Fin (n + 2) → Gal(AlgebraicClosure K/K),
         ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • g (fun j => a (i.succAbove j)) = z a := by
   classical
@@ -113,7 +117,7 @@ theorem exists_injective_geometricSection_cochain_primitive
   exact TopRep.exists_homogeneousCochain_primitive_of_tuple_primitives
     Gal(AlgebraicClosure K/K) A n
     (fun f hf hc =>
-      @exists_injective_geometricSection_continuous_primitive K _ _ I _
+      @exists_injective_geometricSection_continuous_primitive K _ I _
         A.hV3 hD n f hf hc)
     z hz
 

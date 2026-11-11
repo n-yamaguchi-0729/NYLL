@@ -17,5 +17,8 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleIsoLocallySurj
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleIsoUnitInvertibleFree
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleRigidify
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleUniqueAppEqSmul
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.LocallyFreeOneIffInvertible
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.LocallyFreePushforward
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleRationalFrames
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleRationalIsomorphism
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleRationalTensor
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleRationalPullbackFrames

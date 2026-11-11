@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
 
 /-! A natural map on a slice descends to its actual total presheaf. -/
+
+@[expose] public section
 
 universe u v w
 

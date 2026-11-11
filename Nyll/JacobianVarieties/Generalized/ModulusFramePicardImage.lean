@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusFramePicard
 
 /-!
 # The actual image of frames in the modulus Picard presheaf
@@ -13,6 +15,8 @@ A chosen modulus-rigidified bundle is in the image precisely when its underlying
 module is isomorphic to the prescribed pulled family. The proof transports the
 chosen trivialization through the actual modulus-scheme comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

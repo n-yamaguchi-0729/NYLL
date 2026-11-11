@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorClasses
-import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorClasses
+public import Nyll.AlgebraicCurves.Divisors.Modulus.LocalSymbolUniqueness
 
 /-!
 # Evaluation on divisor classes with modulus
@@ -15,6 +17,8 @@ actual divisor class quotients. This is the abstract group-valued part of the
 universal property; it does not claim that the resulting maps are scheme
 morphisms or identify these quotients with the represented Picard sheaf.
 -/
+
+@[expose] public section
 
 noncomputable section
 

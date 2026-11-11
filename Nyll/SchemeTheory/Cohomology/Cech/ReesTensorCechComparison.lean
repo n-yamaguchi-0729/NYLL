@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
-import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorAffineSections
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorModule
-import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
-import Mathlib.Algebra.Group.Equiv.Basic
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.Logic.Equiv.Basic
+module
+
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModuleSheafPresheaf
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorAffineSections
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorModule
+public import Nyll.SchemeTheory.Cohomology.Sheaves.ReesTensorPresheaf
+public import Mathlib.Algebra.Group.Equiv.Basic
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.Logic.Equiv.Basic
 
 /-!
 # The actual Rees sheaf and the original Rees tensor Čech complex
@@ -30,6 +32,8 @@ coboundary from a native sheaf coboundary, using the inverse cochain map.
 In particular, vanishing for the native Rees sheaf implies vanishing for
 the actual Rees tensor complex on the original scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

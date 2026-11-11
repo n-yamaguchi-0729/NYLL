@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Basic
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Basic
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
 
 /-!
 # Action comparison for localized normalization inertia
@@ -14,6 +16,8 @@ The generic action on a localized normalization and the action obtained from
 its integral-closure universal property have the same value on every element.
 Consequently, the two definitions of the inertia subgroup coincide.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,16 +38,16 @@ the action supplied by the integral-closure construction agree pointwise. -/
 theorem localizationAtPrime_integralClosure_smul_eq
     (P : Ideal A) [P.IsPrime] :
     let V := Localization.AtPrime P
-    letI : Algebra V K :=
+    let : Algebra V K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI : Algebra V L :=
+    let : Algebra V L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower V K L :=
+    let : IsScalarTower V K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) P
-    letI : IsFractionRing V K :=
+    let : IsFractionRing V K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) P
-    letI : SMulCommClass Gal(L/K) V L :=
+    let : SMulCommClass Gal(L/K) V L :=
       localizationAtPrime_galois_smulCommClass (K := K) (L := L) P
     let B := integralClosure V L
     let genericAction : MulSemiringAction Gal(L/K) B := inferInstance
@@ -52,26 +56,8 @@ theorem localizationAtPrime_integralClosure_smul_eq
     ∀ (sigma : Gal(L/K)) (x : B),
       (letI := genericAction; sigma • x) =
         (letI := integralClosureAction; sigma • x) := by
-  let V := Localization.AtPrime P
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower V K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) P
-  let : IsFractionRing V K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) P
-  let : SMulCommClass Gal(L/K) V L :=
-    localizationAtPrime_galois_smulCommClass (K := K) (L := L) P
-  let B := integralClosure V L
-  let genericAction : MulSemiringAction Gal(L/K) B := inferInstance
-  let integralClosureAction : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction V K L B
-  change ∀ (sigma : Gal(L/K)) (x : B),
-    (letI := genericAction; sigma • x) =
-      (letI := integralClosureAction; sigma • x)
-  intro sigma x
+  intro V sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6 B genericAction
+    integralClosureAction sigma x
   apply Subtype.ext
   calc
     ((letI := genericAction; (sigma • x : B)) : L) =

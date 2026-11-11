@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Nyll.SchemeTheory.Modules.Quasicoherent.TildePullback
-import Nyll.SchemeTheory.Modules.Quasicoherent.IsoBaseChangeSectionsIsoFromTildeGamma
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basic
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Nyll.SchemeTheory.Modules.Quasicoherent.TildePullback
+public import Nyll.SchemeTheory.Modules.Quasicoherent.IsoBaseChangeSectionsIsoFromTildeGamma
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
 
 /-!
 # Actual affine pullback sections of quasicoherent modules
@@ -23,6 +25,8 @@ Quasicoherence of the actual pullback is supplied by the genuine tilde
 pullback isomorphism and the affine counit. No pullback presentation or
 section-comparison hypothesis is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

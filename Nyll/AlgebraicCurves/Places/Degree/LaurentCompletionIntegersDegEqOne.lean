@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionDegEqOne
-import Mathlib.RingTheory.LaurentSeries
+module
+
+public import Nyll.AlgebraicCurves.Places.Degree.LaurentCompletionDegEqOne
+public import Mathlib.RingTheory.LaurentSeries
 
 /-! # The actual integral completion at a degree-one place
 
@@ -16,6 +18,8 @@ in the completed field is computed explicitly, so pulling a Cartier family
 back along the induced spectrum isomorphism preserves its original scalar
 map and is compatible with the generic Laurent fibre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

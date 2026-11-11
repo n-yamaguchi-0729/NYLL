@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.SchemeFibreEndo
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+module
+
+public import Nyll.SchemeTheory.Fibers.SchemeFibreEndo
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-!
 # locally Quasi Finite of forall locally Quasi Finite scheme Fibre Endo
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

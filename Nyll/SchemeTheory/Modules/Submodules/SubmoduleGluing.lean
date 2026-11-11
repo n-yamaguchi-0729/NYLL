@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
-import Mathlib.CategoryTheory.Sites.Grothendieck
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule
+public import Mathlib.CategoryTheory.Sites.Grothendieck
 
 /-!
 # Gluing actual submodules from local membership conditions
@@ -20,6 +22,8 @@ For an open-cover induction in Stacks Tag 01PF, the input submodules are
 the actual extensions supplied by Tag 01PE. The overlap equality still
 has to be proved using their embedded restriction identifications.
 -/
+
+@[expose] public section
 
 noncomputable section
 

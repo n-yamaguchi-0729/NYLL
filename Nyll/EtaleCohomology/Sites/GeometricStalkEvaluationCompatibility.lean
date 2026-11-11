@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.GeometricStalkEvaluationSections
-import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
-import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.PullbackSectionComposition
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.Sites.Limits
+module
+
+public import Nyll.EtaleCohomology.Sites.GeometricStalkEvaluationSections
+public import Nyll.EtaleCohomology.Sites.GeometricStalkNeighborhoodMaps
+public import Nyll.EtaleCohomology.Sites.GeometricStalkSectionComparison
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.PullbackSectionComposition
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Evaluation of represented strict-local sections
@@ -21,6 +23,8 @@ neighborhood section. The proof uses the actual inverse-image composition
 unit and cancels its canonical composition isomorphism, then transports
 along the literal equality of the source projection maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

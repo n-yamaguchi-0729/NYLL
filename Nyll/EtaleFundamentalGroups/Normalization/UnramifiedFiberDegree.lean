@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
-import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
-import Nyll.SchemeTheory.Morphisms.FiberRank
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+module
+
+public import Nyll.SchemeTheory.Normalization.GenericFiber.GenericExtension
+public import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
+public import Nyll.SchemeTheory.Morphisms.FiberRank
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
 /-!
 # Degrees of the fibers of an unramified normalization
@@ -24,6 +26,8 @@ No separability, Galois, or Noetherian hypothesis is added.
 Reference: https://stacks.math.columbia.edu/tag/0BTF
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
@@ -31,11 +35,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace
 namespace EtaleFundamentalGroups
 
 universe u
-
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
 
 private theorem finiteFieldExtension_spec_finrank
     (K L : Type u) [Field K] [Field L] [Algebra K L]

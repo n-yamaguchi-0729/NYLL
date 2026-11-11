@@ -12,12 +12,14 @@ Authors of the unrigidified comparison: Naganori Yamaguchi (assisted by OpenAI C
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
-import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
-import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
+public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedAlgEquivZero
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 
 /-!
 # Base change of unrigidified Picard classes
@@ -26,6 +28,8 @@ The canonical isomorphism between iterated pullbacks identifies relative classes
 over an extended base with restriction of the original presheaf. The comparison
 preserves the actual geometric-fibre condition and requires no rational point.
 -/
+
+@[expose] public section
 
 universe u
 

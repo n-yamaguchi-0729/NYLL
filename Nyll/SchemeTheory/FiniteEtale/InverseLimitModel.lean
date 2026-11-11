@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitRawCharts
-import Nyll.SchemeTheory.FiniteEtale.InverseLimitRawModel
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitRawCharts
+public import Nyll.SchemeTheory.FiniteEtale.InverseLimitRawModel
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Finite-etale objects descend along general qcqs inverse limits
@@ -16,6 +18,8 @@ limit, construct a finite affine stage cover and recovered local models.
 Actual morphism descent and eventual gluing equations then give a global
 finite-etale model over an original stage, with literal native recovery.
 -/
+
+@[expose] public section
 
 noncomputable section
 

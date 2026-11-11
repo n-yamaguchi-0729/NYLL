@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteCanonicalTameValue
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerRestriction
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaSurjectivity
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinateTower
-import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameStage
-import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
-import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
-import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
-import Mathlib.Algebra.Group.Hom.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteCanonicalTameValue
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaTowerRestriction
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteInertiaSurjectivity
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameCoordinateTower
+public import Nyll.EtaleFundamentalGroups.Inertia.ActualFiniteTameStage
+public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteFiniteNormalization
+public import Nyll.EtaleFundamentalGroups.Inertia.CommAlgIdealTameGroups
+public import Nyll.SchemeTheory.Normalization.SubalgebraPreimage
+public import Mathlib.Algebra.Group.Hom.Defs
 
 /-!
 # Canonical character squares for actual finite inertia restrictions
@@ -22,6 +24,8 @@ original inertia. The proved restriction factor equation and the SAME
 canonical scalar normalization tower then give the n_F/n_E power square. Restriction
 through a common upper stage uses the already proved finite map composition.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

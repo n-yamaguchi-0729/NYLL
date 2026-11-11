@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Flat.Product
-import Mathlib.LinearAlgebra.TensorProduct.Prod
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.SplitIfs
-import Nyll.SchemeTheory.RingTheory.Flat.Kernel
+module
+
+public import Nyll.SchemeTheory.RingTheory.Flat.Product
+public import Mathlib.LinearAlgebra.TensorProduct.Prod
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.SchemeTheory.RingTheory.Flat.Kernel
 
 /-!
 # Module exists projective complex quasi Iso of flat complex
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

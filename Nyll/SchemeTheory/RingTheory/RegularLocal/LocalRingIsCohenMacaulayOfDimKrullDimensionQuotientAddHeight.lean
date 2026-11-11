@@ -10,22 +10,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.ENat.Basic
-import Mathlib.Order.WithBot
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Push
-import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthLeKrullDimensionQuotient
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthQuotientEqDepth
-import Nyll.SchemeTheory.RingTheory.Dimension.IdealHeightMapQuotientMkSpanSingletonAddOne
+module
+
+public import Mathlib.Data.ENat.Basic
+public import Mathlib.Order.WithBot
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Push
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthLeKrullDimensionQuotient
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthQuotientEqDepth
+public import Nyll.SchemeTheory.RingTheory.Dimension.IdealHeightMapQuotientMkSpanSingletonAddOne
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 
 /-!
 # Is Local Ring Is Cohen Macaulay Of Dim ring Krull Dim quotient add height
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

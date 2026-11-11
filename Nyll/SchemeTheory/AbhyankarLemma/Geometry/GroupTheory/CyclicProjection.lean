@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
+module
+
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
 
 /-!
 # The cyclic group argument in Abhyankar's lemma
@@ -15,6 +17,8 @@ groups has order dividing the order of the second factor when the order of
 the first factor already divides it.  Consequently, a surjective projection
 to the second factor is an isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

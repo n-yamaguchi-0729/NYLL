@@ -16,7 +16,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGroupCut
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
+import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
 import Nyll.AlgebraicCurves.Models.Construction.Basic
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Divisors.Maps.Maps
@@ -31,6 +31,7 @@ import Nyll.JacobianVarieties.Picard.Rigidification.PoincareRigidifiedPullbackCo
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 /-!
 # Pullback on Picard points and congruence of function fields
 -/

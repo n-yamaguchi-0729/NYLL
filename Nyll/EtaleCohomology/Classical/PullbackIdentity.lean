@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
-import Nyll.EtaleCohomology.Sites.BaseChangeIdentity
+module
+
+public import Nyll.EtaleCohomology.Classical.PullbackSiteComparison
+public import Nyll.EtaleCohomology.Sites.BaseChangeIdentity
 
 /-! # Identity pullback on actual abelian étale cohomology -/
+
+@[expose] public section
 
 noncomputable section
 

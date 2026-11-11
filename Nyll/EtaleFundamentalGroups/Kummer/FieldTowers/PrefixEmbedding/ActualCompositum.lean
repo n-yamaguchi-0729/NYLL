@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenFactorCompositum
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenFactorCompositum
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # A field prefix embedded in a common ambient compositum
@@ -19,6 +21,8 @@ into `P`, retaining both tensor coordinates.  It is the noetherian-free
 field-level junction used before a completed chosen factor is passed to the
 finite residue-lift compositum construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,7 +51,7 @@ theorem fieldPrefixEmbedding_actualCompositum
     let Fimage : IntermediateField K P := fF.fieldRange
     let hfiniteEimage : FiniteDimensional K Eimage :=
       fPrefix.toLinearMap.finiteDimensional_range
-    letI : FiniteDimensional K Eimage := hfiniteEimage
+    let : FiniteDimensional K Eimage := hfiniteEimage
     let eGeneric : (K ⊗[K] M) ≃ₐ[K] Eimage :=
       (Algebra.TensorProduct.lid K M).trans fPrefix.equivFieldRange
     let mActual := actualCompositumGenericComponentIdeal
@@ -63,7 +67,7 @@ theorem fieldPrefixEmbedding_actualCompositum
     let hmF : mF.IsMaximal :=
       hmActual.comap_bijective eTensorF.toRingEquiv.toRingHom
         eTensorF.bijective
-    letI : mF.IsMaximal := hmF
+    let : mF.IsMaximal := hmF
     let Omega := GenericTensorFieldComponent mF
     ∃ omegaToP : Omega →ₐ[F] P,
       Function.Injective omegaToP ∧
@@ -74,28 +78,8 @@ theorem fieldPrefixEmbedding_actualCompositum
           omegaToP (genericTensorFieldComponentRight mF x) =
             fPrefix x) := by
   classical
-  dsimp only
-  let fF : F →ₐ[K] P := IsScalarTower.toAlgHom K F P
-  let Eimage : IntermediateField K P := fPrefix.fieldRange
-  let Fimage : IntermediateField K P := fF.fieldRange
-  let : FiniteDimensional K Eimage :=
-    fPrefix.toLinearMap.finiteDimensional_range
-  let eGeneric : (K ⊗[K] M) ≃ₐ[K] Eimage :=
-    (Algebra.TensorProduct.lid K M).trans fPrefix.equivFieldRange
-  let mActual := actualCompositumGenericComponentIdeal
-    (A := K) (T := M) (F := K) (Omega := P)
-    Eimage Fimage eGeneric
-  let : mActual.IsMaximal :=
-    actualCompositumGenericComponentIdeal_isMaximal
-      Eimage Fimage eGeneric
-  let eF : F ≃ₐ[K] Fimage := fF.equivFieldRange
-  let eTensorF : (F ⊗[K] M) ≃ₐ[K] (Fimage ⊗[K] M) :=
-    Algebra.TensorProduct.congr eF (AlgEquiv.refl : M ≃ₐ[K] M)
-  let mF := mActual.comap eTensorF.toRingEquiv.toRingHom
-  let : mF.IsMaximal :=
-    (inferInstance : mActual.IsMaximal).comap_bijective
-      eTensorF.toRingEquiv.toRingHom eTensorF.bijective
-  let Omega := GenericTensorFieldComponent mF
+  intro fF Eimage Fimage hfiniteEimage suppliedFiniteEimage eGeneric mActual hmActual eF eTensorF mF
+    hmF suppliedMaximalF Omega
   have hmMap :
       mActual = mF.map eTensorF.toRingEquiv.toRingHom := by
     exact (Ideal.map_comap_of_surjective

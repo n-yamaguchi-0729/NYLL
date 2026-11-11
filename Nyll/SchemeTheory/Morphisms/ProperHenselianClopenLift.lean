@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.ProperHenselianClosedRestriction
-import Nyll.SchemeTheory.Topology.SpectralClosedRestriction
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.SchemeTheory.Morphisms.ProperHenselianClosedRestriction
+public import Nyll.SchemeTheory.Topology.SpectralClosedRestriction
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # Clopen lifting from the closed fibre over an arbitrary Henselian local ring
@@ -16,6 +18,8 @@ The scheme-theoretic closed fibre is identified with its actual closed subset
 in the proper total space. The spectral closed-restriction theorem then lifts
 each clopen subset. No Noetherian hypothesis is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

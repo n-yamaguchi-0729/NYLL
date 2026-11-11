@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.EtaleFundamentalGroups.Purity.Local.BoundaryFiniteDirectImage
+import Nyll.EtaleFundamentalGroups.Purity.Local.BoundaryDualHartogs
+import Nyll.EtaleFundamentalGroups.Purity.Local.BoundaryHomHartogs
+import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedHomHartogs
 import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
 import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionQuotient
 import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionTorsionReflection
@@ -32,5 +36,6 @@ import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalPrimePair
 import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteRegularLocalPurity
 import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedFiniteEtaleSections
 import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
+import Nyll.EtaleFundamentalGroups.Purity.Local.BoundaryExtensionDepth
 
 /-! Canonical aggregate for EtaleFundamentalGroups.Purity.Local. -/

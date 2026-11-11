@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.SupportedDivisorSumAdditivity
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.SchemeTheory.Sheaves.IdealSheafComap
+module
+
+public import Nyll.JacobianVarieties.Albanese.SupportedDivisorSumAdditivity
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.SchemeTheory.Sheaves.IdealSheafComap
 
 /-! # The actual two-block trace difference
 
@@ -16,6 +18,8 @@ The represented divisor-sum additivity then identifies its group quotient
 with the product of the two block quotients, retaining multiplicities and
 working over the possibly nonreduced test scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

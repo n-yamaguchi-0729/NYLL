@@ -18,6 +18,7 @@ import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
 import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.TwoAffineEulerCharacteristicConstancy
 import Nyll.AlgebraicCurves.Geometry.Picard.Cohomology.TwoAffineFibreCechRank
 import Nyll.AlgebraicCurves.Geometry.Schemes.Cohomology.TwoAffineCoverLinearEquivH1SectionsOf
+import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 
 /-!
 The Euler characteristic of fibres is well-defined and has clopen level sets.

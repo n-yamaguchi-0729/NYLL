@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Coset.Card
+module
+
+public import Mathlib.GroupTheory.Coset.Card
 
 /-!
 # Coprimality through a joint group embedding
@@ -13,6 +15,8 @@ The inertia group of a compositum embeds in the product of the inertia
 groups of the two factors.  This file records the elementary consequence
 needed to propagate tameness to the compositum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

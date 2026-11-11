@@ -10,13 +10,18 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
-import Nyll.AlgebraicCurves.Places.Basic
-import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
+module
+
+public import Mathlib.RingTheory.PowerSeries.Trunc
+public import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
+public import Nyll.AlgebraicCurves.Places.Basic
+public import Nyll.ValuedFieldTheory.Valuation.Completion.LaurentBaseChange
 
 /-!
 # Place exists alg Hom laurent Series of deg eq one
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

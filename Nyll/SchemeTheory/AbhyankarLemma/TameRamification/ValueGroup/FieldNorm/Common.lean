@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Norm.Common
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNorm
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Norm.Common
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNorm
 
 /-!
 # Field-norm common images
@@ -13,6 +15,8 @@ import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNorm
 This file supplies the common-image containments used by the value-group
 frontier from the concrete tower transitivity of field norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

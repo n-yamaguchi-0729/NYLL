@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # Cyclic tame inertia for exponential valuations
@@ -15,6 +17,8 @@ A discrete production `ExponentialValuation` supplies a discrete valuation
 ring, so cyclicity follows directly from the valuation-subring theorem in
 `CyclicInertia.Ideal`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

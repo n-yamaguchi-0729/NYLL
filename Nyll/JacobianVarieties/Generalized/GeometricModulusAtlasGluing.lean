@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
-import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
-import Nyll.JacobianVarieties.Generalized.GeometricModulusFamilySumOverlap
-import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
-import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
-import Mathlib.AlgebraicGeometry.Gluing
+module
+
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusMapCondition
+public import Nyll.JacobianVarieties.Generalized.PicardZeroLocalSums
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.CommGroupRelativeLaw
+public import Nyll.JacobianVarieties.Generalized.GeometricModulusFamilySumOverlap
+public import Nyll.JacobianVarieties.Generalized.PicardZeroChartDifference
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Smooth.ReducedSmoothOverField
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
 
 /-! # Gluing the actual divisor atlas over an arbitrary field
 
@@ -19,6 +22,8 @@ The geometric full-modulus condition identifies the corrected family sums on
 the original reduced chart overlaps. The original open cover therefore glues
 them directly, without requiring a reduced tensor product of extension fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Category.Ring.FinitePresentation
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The native categorical tensor owner and its pushout comparison
@@ -17,6 +19,8 @@ The tensor functor is Mathlib's existing `CommRingCat.tensorProd`. Its native
 maps and functor laws are retained. Descent is transported across the proved
 `tensorProdIsoPushout`, without calling the former raw descent theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Continuous.TopRep
-import Mathlib.RepresentationTheory.Rep.Basic
+module
+
+public import Mathlib.RepresentationTheory.Continuous.TopRep
+public import Mathlib.RepresentationTheory.Rep.Basic
 
 /-!
 # Discrete quotients by invariant coefficient submodules
@@ -14,6 +16,8 @@ These constructions use the ordinary representation quotient and its
 discrete topology. Continuity of the action descends along the actual
 surjective coefficient projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v

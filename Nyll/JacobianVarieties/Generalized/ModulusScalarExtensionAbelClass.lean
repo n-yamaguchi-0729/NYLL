@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionPoints
-import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
-import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusScalarExtensionPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelZeroClass
+public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
 
 /-! # Scalar extension of actual Abel point classes modulo Picard-zero -/
+
+@[expose] public section
 
 noncomputable section
 

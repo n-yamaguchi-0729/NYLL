@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.ContinuousH1InflationExact
-import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
+module
+
+public import Nyll.GaloisCohomology.ProP.ContinuousH1InflationExact
+public import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
 
 /-!
 # Continuous low-degree five-term exact sequence
@@ -13,6 +15,8 @@ import Nyll.GaloisCohomology.ProP.InflationTransgressionExact
 The three kernel--range identities for inflation, restriction, and transgression assemble into
 the continuous low-degree five-term sequence with trivial `ZMod p` coefficients.
 -/
+
+@[expose] public section
 
 open scoped Topology
 

@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.Semiabelian
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.Semiabelian
 
 /-! # Transport of actual semiabelian extensions by group-scheme isomorphisms -/
+
+@[expose] public section
 
 noncomputable section
 

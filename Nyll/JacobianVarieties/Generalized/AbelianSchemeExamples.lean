@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
-import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
-import Nyll.JacobianVarieties.Generalized.Construction
-import Nyll.JacobianVarieties.Generalized.KernelGroup
-import Nyll.JacobianVarieties.Generalized.EmptyOrdinaryComparison
-import Nyll.JacobianVarieties.Generalized.ModulusDegreeOneComparison
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Curves.GeometricGenus
+public import Nyll.SchemeTheory.GroupSchemes.AbelianScheme
+public import Nyll.JacobianVarieties.Generalized.Construction
+public import Nyll.JacobianVarieties.Generalized.KernelGroup
+public import Nyll.JacobianVarieties.Generalized.EmptyOrdinaryComparison
+public import Nyll.JacobianVarieties.Generalized.ModulusDegreeOneComparison
+public import Nyll.JacobianVarieties.Generalized.ExistingJacobianGroupScheme
 
 /-! # Abelian varieties supplied by the actual Jacobian constructions
 
@@ -17,6 +20,8 @@ The ordinary Jacobian and the generalized Jacobians with modulus of degree at mo
 one satisfy the reusable abelian-scheme interface on their existing group objects.
 No rational base point on the curve is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

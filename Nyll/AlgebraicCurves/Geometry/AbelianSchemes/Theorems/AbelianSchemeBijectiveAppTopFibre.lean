@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeGeometricallyIntegral
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemePullback
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAlgebraMapAppTop
-import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopBijectiveAppTopPullbackSnd
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemeGeometricallyIntegral
+public import Nyll.AbelianVarieties.Geometry.AbelianSchemePullback
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAlgebraMapAppTop
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Sections.BijectiveAppTopBijectiveAppTopPullbackSnd
 
 /-!
 # Abelian Scheme Property Bundle bijective app Top fibre of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

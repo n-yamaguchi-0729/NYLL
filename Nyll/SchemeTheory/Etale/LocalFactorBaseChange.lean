@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.IntegralRefinement
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Nyll.SchemeTheory.Etale.IntegralRefinement
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Base change of actual Zariski-local factorizations
@@ -17,6 +19,8 @@ native pullback universal property. In particular the original integral
 refinement's local factorizations remain available on every affine chart
 of a nonaffine base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

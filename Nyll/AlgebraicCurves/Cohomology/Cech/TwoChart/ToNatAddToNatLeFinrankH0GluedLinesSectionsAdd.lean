@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Tactic.Omega
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Algebra.Algebra.Subalgebra.Prod
-import Mathlib.RingTheory.Polynomial.DegreeLT
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSections
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.NormNum
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0SubFinrankH1GluedLinesSections
+module
+
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Algebra.Subalgebra.Prod
+public import Mathlib.RingTheory.Polynomial.DegreeLT
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0GluedLinesSections
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.NormNum
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.FinrankH0SubFinrankH1GluedLinesSections
 
 /-!
 # Two Chart Cech to Nat add to Nat le finrank H0 glued Lines Sections add
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

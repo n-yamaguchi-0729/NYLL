@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Etale.HenselianLocalSection
-import Nyll.SchemeTheory.RingTheory.Henselian.CompleteOrthogonalIdempotentsLocalRingQuotient
-import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.SchemeTheory.Etale.HenselianLocalSection
+public import Nyll.SchemeTheory.RingTheory.Henselian.CompleteOrthogonalIdempotentsLocalRingQuotient
+public import Nyll.SchemeTheory.RingTheory.Henselian.ModuleFinite
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Étale sections over finite algebras of strictly local rings
@@ -21,6 +23,8 @@ and the spectrum-of-product isomorphism therefore split every surjective
 étale morphism to its spectrum. This is the strictly local geometric step
 in the finite direct-image theorem, Stacks Project, Section 59.55.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Sections.AffineRestriction
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
-import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+module
+
+public import Nyll.SchemeTheory.Modules.Sections.AffineRestriction
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackSections
+public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Original unit sections on the canonical affine chart
@@ -22,6 +24,8 @@ statement for genuine scheme pullback along the canonical affine chart.
 This supplies the precise unit compatibility needed to transport the
 spectrum pullback section theorem to arbitrary affine opens.
 -/
+
+@[expose] public section
 
 noncomputable section
 

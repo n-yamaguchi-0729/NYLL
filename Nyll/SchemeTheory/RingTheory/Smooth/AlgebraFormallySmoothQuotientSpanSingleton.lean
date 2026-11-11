@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Smooth.RingHomFormallySmoothFormallyUnramifiedEval2RingHomUniqueEqSmulD
+module
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.RingHomFormallySmoothFormallyUnramifiedEval2RingHomUniqueEqSmulD
 
 /-!
 # Algebra Formally Smooth quotient span singleton of exists Unique eq smul D
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

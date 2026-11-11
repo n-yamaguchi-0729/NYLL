@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
-import Nyll.SchemeTheory.RingTheory.Localization.LocalizationTensorTower
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalizationTensorTower
 
 
 /-!
@@ -19,6 +21,8 @@ with scalar extension directly from the original ring to the actual stalk.
 Thus a splitting of the actual strict generic fiber supplies the algebra
 splitting used by étale descent of normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

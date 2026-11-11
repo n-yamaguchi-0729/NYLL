@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.FilteredColimitSectionInjectivity
-import Nyll.EtaleCohomology.Sites.FiniteAffineSectionLifts
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+module
+
+public import Nyll.EtaleCohomology.Sites.FilteredColimitSectionInjectivity
+public import Nyll.EtaleCohomology.Sites.FiniteAffineSectionLifts
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
 
 /-!
 # Gluing finite local lifts in filtered colimits
@@ -18,6 +20,8 @@ presheaf colimit glue along a finite étale covering with quasi-compact
 pairwise intersections. Equality on the intersections is reflected by the
 section-injectivity theorem, and finite descent supplies the global lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

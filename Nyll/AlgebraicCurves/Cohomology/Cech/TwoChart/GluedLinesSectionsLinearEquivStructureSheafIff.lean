@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.Laurent
-import Mathlib.Algebra.Polynomial.Degree.Units
-import Mathlib.Algebra.GroupWithZero.Associated
-import Mathlib.Algebra.Algebra.Subalgebra.Prod
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.ByContra
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Ring
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
+module
+
+public import Mathlib.Algebra.Polynomial.Laurent
+public import Mathlib.Algebra.Polynomial.Degree.Units
+public import Mathlib.Algebra.GroupWithZero.Associated
+public import Mathlib.Algebra.Algebra.Subalgebra.Prod
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.ByContra
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Ring
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.GluedLines
 
 /-!
 # Two Chart Cech glued Lines Sections nonempty linear Equiv structure Sheaf iff
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

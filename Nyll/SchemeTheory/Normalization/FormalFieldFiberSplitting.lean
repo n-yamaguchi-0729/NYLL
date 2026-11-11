@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.FormalTensorSplittingOfEmbeddings
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalTensorSplittingOfEmbeddings
+public import Mathlib.AlgebraicGeometry.Limits
+public import Nyll.SchemeTheory.RingTheory.Henselian.FormalSeparableTensorSplitting
 
 /-! # The actual formal fibre over a finite split residue field
 
@@ -14,6 +17,8 @@ actual field-spectrum pullback. Both projections are computed using the
 same simple-root lifts. The coefficient field need not be algebraically
 closed, so this applies to the common Laurent field of the tame boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

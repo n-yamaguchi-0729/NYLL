@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
-import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearAutBaseAutEqPointPlaceEqSmul
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Nyll.AlgebraicCurves.Divisors.Maps.Semilinear
+public import Nyll.AlgebraicCurves.Models.ConstantExtension.SemilinearAutBaseAutEqPointPlaceEqSmul
 
 /-!
 # Curve Model nat Card stabilizer point Equiv Place mul nat Card ker eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -55,57 +59,61 @@ theorem _root_.AlgebraicCurve.CurveModel.natCard_stabilizer_pointEquivPlace_mul_
     {k : Type u} [Field k] [IsAlgClosed k] {L : Type v} [Field L] [Algebra k L]
     (M : CurveModel k L)
     (F : Type v) [Field F] [Algebra k F] [Algebra F L] [IsScalarTower k F L] [FiniteDimensional F L]
-    (G₀ : Type u) [Group G₀] [Finite G₀] (ρ : G₀ →* Aut M.C) (hρ : ∀ g : G₀, (ρ g).hom ≫ M.toBase =
-      M.toBase)
+    (G₀ : Type u) [Group G₀] [Finite G₀] (ρ : G₀ →* Aut M.C)
+    (hρ : ∀ g : G₀, (ρ g).asIso.hom ≫ M.toBase = M.toBase)
     (θ : G₀ →* (L ≃ₐ[F] L)) (hθsurj : Function.Surjective θ)
     (hθ : ∀ (g : G₀) (U : M.C.Opens) [Nonempty (Scheme.Opens.toScheme U)]
-        [Nonempty (Scheme.Opens.toScheme ((ρ g).inv ⁻¹ᵁ U))] (f : Γ(M.C, U)),
+        [Nonempty (Scheme.Opens.toScheme ((ρ g).asIso.inv ⁻¹ᵁ U))] (f : Γ(M.C, U)),
         θ g (M.ffEquiv.symm (M.C.germToFunctionField U f)) =
-          M.ffEquiv.symm (M.C.germToFunctionField ((ρ g).inv ⁻¹ᵁ U) ((ρ g).inv.app U f)))
+          M.ffEquiv.symm (M.C.germToFunctionField ((ρ g).asIso.inv ⁻¹ᵁ U)
+            ((ρ g).asIso.inv.app U f)))
     (hθker : ∀ g : G₀, θ g = 1 ↔ ρ g = 1)
     (x : {p : Spec (CommRingCat.of k) ⟶ M.C // p ≫ M.toBase = 𝟙 _}) :
     Nat.card {σ : L ≃ₐ[F] L // SemilinearAut.ofAlgAut (σ.restrictScalars k) • M.pointEquivPlace x =
       M.pointEquivPlace x} *
         Nat.card θ.ker =
-      Nat.card {g : G₀ // x.1 ≫ (ρ g).hom = x.1} := by
+      Nat.card {g : G₀ // x.1 ≫ (ρ g).asIso.hom = x.1} := by
   have key : ∀ g : G₀,
       SemilinearAut.ofAlgAut ((θ g).restrictScalars k) • M.pointEquivPlace x = M.pointEquivPlace x ↔
-        x.1 ≫ (ρ g).hom = x.1 := by
+        x.1 ≫ (ρ g).asIso.hom = x.1 := by
     intro g
-    have : IsIso (ρ g).inv := (show M.C ≅ M.C from ρ g).isIso_inv
-    have hh : (ρ g).inv ≫ M.toBase = M.toBase ≫ Spec.map (CommRingCat.ofHom ((1 : k ≃+* k) : k →+*
-      k)) := by
+    have : IsIso (ρ g).asIso.inv := (ρ g).asIso.isIso_inv
+    have hh : (ρ g).asIso.inv ≫ M.toBase =
+        M.toBase ≫ Spec.map (CommRingCat.ofHom ((1 : k ≃+* k) : k →+* k)) := by
       have h1 : Spec.map (CommRingCat.ofHom ((1 : k ≃+* k) : k →+* k)) = 𝟙 _ := by
         change Spec.map (CommRingCat.ofHom (RingHom.id k)) = 𝟙 _
         rw [CommRingCat.ofHom_id]
         exact Spec.map_id _
       rw [h1, Category.comp_id]
-      calc (ρ g).inv ≫ M.toBase = (ρ g).inv ≫ ((ρ g).hom ≫ M.toBase) := by rw [hρ g]
-        _ = M.toBase := by exact (show M.C ≅ M.C from ρ g).inv_hom_id_assoc M.toBase
+      calc
+        (ρ g).asIso.inv ≫ M.toBase = (ρ g).asIso.inv ≫ ((ρ g).asIso.hom ≫ M.toBase) := by
+          rw [hρ g]
+        _ = M.toBase := by exact (ρ g).asIso.inv_hom_id_assoc M.toBase
     obtain ⟨s, hs1, hs2, hs3⟩ :=
       AlgebraicCurve.CurveModel.exists_semilinearAut_baseAut_eq_and_pointEquivPlace_eq_smul M 1 (ρ
-        g).inv hh
+        g).asIso.inv hh
     have hs : s = SemilinearAut.ofAlgAut ((θ g).restrictScalars k) := by
       apply STABAuxFFX.semilinearAut_ext
       · intro z
         obtain ⟨U, hU, f, rfl⟩ := STABAuxFFX.exists_germ M z
-        have : Nonempty (Scheme.Opens.toScheme ((ρ g).inv ⁻¹ᵁ U)) := by
+        have : Nonempty (Scheme.Opens.toScheme ((ρ g).asIso.inv ⁻¹ᵁ U)) := by
           refine ⟨⟨genericPoint M.C, ?_⟩⟩
-          change (ρ g).inv.base (genericPoint M.C) ∈ U
-          rw [genericPoint_eq_of_isOpenImmersion (ρ g).inv]
+          change (ρ g).asIso.inv.base (genericPoint M.C) ∈ U
+          rw [genericPoint_eq_of_isOpenImmersion (ρ g).asIso.inv]
           exact ((genericPoint_spec M.C).mem_open_set_iff U.isOpen).mpr (by simpa using hU)
         rw [hs2 U f, SemilinearAut.ofAlgAut_smul]
         exact (hθ g U f).symm
       · rw [hs1, SemilinearAut.baseAut_ofAlgAut]
     let y : {p : Spec (CommRingCat.of k) ⟶ M.C // p ≫ M.toBase = 𝟙 _} :=
-      ⟨x.1 ≫ (ρ g).hom, by rw [Category.assoc, hρ g]; exact x.2⟩
-    have hy : y.1 ≫ (ρ g).inv = Spec.map (CommRingCat.ofHom ((1 : k ≃+* k) : k →+* k)) ≫ x.1 := by
+      ⟨x.1 ≫ (ρ g).asIso.hom, by rw [Category.assoc, hρ g]; exact x.2⟩
+    have hy : y.1 ≫ (ρ g).asIso.inv =
+        Spec.map (CommRingCat.ofHom ((1 : k ≃+* k) : k →+* k)) ≫ x.1 := by
       have h1 : Spec.map (CommRingCat.ofHom ((1 : k ≃+* k) : k →+* k)) = 𝟙 _ := by
         change Spec.map (CommRingCat.ofHom (RingHom.id k)) = 𝟙 _
         rw [CommRingCat.ofHom_id]
         exact Spec.map_id _
       rw [h1, Category.id_comp]
-      change (x.1 ≫ (ρ g).hom) ≫ (ρ g).inv = x.1
+      change (x.1 ≫ (ρ g).asIso.hom) ≫ (ρ g).asIso.inv = x.1
       erw [Category.assoc, Iso.hom_inv_id, Category.comp_id]
     have hpl : M.pointEquivPlace y = s • M.pointEquivPlace x := hs3 x y hy
     rw [← hs, ← hpl]
@@ -117,21 +125,21 @@ theorem _root_.AlgebraicCurve.CurveModel.natCard_stabilizer_pointEquivPlace_mul_
       have : y = x := Subtype.ext h
       rw [this]
   let S : Subgroup G₀ :=
-    { carrier := {g | x.1 ≫ (ρ g).hom = x.1}
+    { carrier := {g | x.1 ≫ (ρ g).asIso.hom = x.1}
       one_mem' := by
-        change x.1 ≫ (ρ 1).hom = x.1
+        change x.1 ≫ (ρ 1).asIso.hom = x.1
         rw [map_one]; exact Category.comp_id _
       mul_mem' := fun {a b} ha hb => by
-        change x.1 ≫ (ρ (a * b)).hom = x.1
-        erw [map_mul, Aut.Aut_mul_def, Iso.trans_hom, ← Category.assoc]
+        change x.1 ≫ (ρ (a * b)).asIso.hom = x.1
+        erw [map_mul, Aut.mul_asIso, Iso.trans_hom, ← Category.assoc]
         rw [hb, ha]
       inv_mem' := fun {a} ha => by
-        change x.1 ≫ (ρ a⁻¹).hom = x.1
-        rw [map_inv, Aut.Aut_inv_def]
-        change x.1 ≫ (ρ a).inv = x.1
+        change x.1 ≫ (ρ a⁻¹).asIso.hom = x.1
+        rw [map_inv, Aut.inv_asIso]
+        change x.1 ≫ (ρ a).asIso.inv = x.1
         conv_lhs => rw [← ha]
         erw [Category.assoc, Iso.hom_inv_id, Category.comp_id] }
-  have hSmem : ∀ g : G₀, g ∈ S ↔ x.1 ≫ (ρ g).hom = x.1 := fun g => Iff.rfl
+  have hSmem : ∀ g : G₀, g ∈ S ↔ x.1 ≫ (ρ g).asIso.hom = x.1 := fun g => Iff.rfl
   have hkerS : θ.ker ≤ S := by
     intro g hg
     rw [MonoidHom.mem_ker] at hg
@@ -164,7 +172,7 @@ theorem _root_.AlgebraicCurve.CurveModel.natCard_stabilizer_pointEquivPlace_mul_
       exact ⟨⟨g, (hSmem g).mpr ((key g).mp hσ)⟩, rfl⟩
   have hidx : φ.ker.index = Nat.card (Set.range φ) := Subgroup.index_ker φ
   have hmul : Nat.card φ.ker * φ.ker.index = Nat.card S := Subgroup.card_mul_index φ.ker
-  have hS : Nat.card S = Nat.card {g : G₀ // x.1 ≫ (ρ g).hom = x.1} := rfl
+  have hS : Nat.card S = Nat.card {g : G₀ // x.1 ≫ (ρ g).asIso.hom = x.1} := rfl
   rw [← hS, ← hmul, hidx, hkercard, hrangecard, Nat.mul_comm]
 
 end AlgebraicCurves.Models.Proofs.CurveModel_natCard_stabilizer_pointEquivPlace_mul_natCard_ker_eq

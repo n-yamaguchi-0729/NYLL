@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.EpiMono
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.Topology.Sheaves.Skyscraper
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.EpiMono
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.Topology.Sheaves.Skyscraper
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # The actual stalk-skyscraper embedding
@@ -25,6 +27,8 @@ tag 0CAL: https://stacks.math.columbia.edu/tag/0CAL.
 The finite-space reduction and the closed-constant comparison are separate
 requirements; neither is assumed or asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

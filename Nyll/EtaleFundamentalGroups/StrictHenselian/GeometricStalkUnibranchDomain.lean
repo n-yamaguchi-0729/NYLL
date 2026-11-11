@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalDomainOfIntegralNormalExtension
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.Data.Fin.VecNotation
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalDomainOfIntegralNormalExtension
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.Data.Fin.VecNotation
+public import Mathlib.RingTheory.RingHom.Etale
 
 
 /-!
@@ -25,6 +27,8 @@ For a reduced geometrically unibranch local ring, its normalization in its
 fraction field supplies the extension used here. All comparison maps and the
 étale neighborhoods are actual constructions, not assumed conclusions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

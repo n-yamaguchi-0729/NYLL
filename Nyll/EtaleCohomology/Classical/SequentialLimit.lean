@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Group.Subgroup.Defs
-import Mathlib.Algebra.Group.Pi.Basic
+module
+
+public import Mathlib.Algebra.Group.Subgroup.Defs
+public import Mathlib.Algebra.Group.Pi.Basic
 
 /-!
 # Compatible families in a sequence of abelian groups
@@ -14,6 +16,8 @@ The inverse limit is a subgroup of the product. Keeping its group operations
 independent of the concrete Ext groups avoids unfolding cohomology constructions
 when checking the elementary compatibility equations.
 -/
+
+@[expose] public section
 
 namespace EtaleCohomology.Classical
 

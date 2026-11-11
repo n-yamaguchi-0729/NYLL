@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorScalarExtension
-import Nyll.JacobianVarieties.Generalized.PicardOneModulusIso
-import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionSheaf
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorScalarExtension
+public import Nyll.JacobianVarieties.Generalized.PicardOneModulusIso
+public import Nyll.JacobianVarieties.Generalized.PicardOneScalarExtensionSheaf
 
 /-! # Picard-one for the actual scalar-extended relative divisor -/
+
+@[expose] public section
 
 noncomputable section
 

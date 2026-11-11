@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
-import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.PullbackUnitGeometricStalks
+public import Nyll.EtaleCohomology.Sites.PushforwardStalkComparison
 
 /-!
 # Global sections of actual étale direct image
@@ -15,6 +17,8 @@ The base change of the identity object is canonically the identity object.
 Restriction through this isomorphism identifies global sections, and its
 geometric germs are the concrete direct-image stalk components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

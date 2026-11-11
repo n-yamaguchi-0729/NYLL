@@ -48,8 +48,6 @@ attribute [-instance]
   kw_ffgc_isScalarTower_integersCompletionCompletion
   instLiesOverSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegersCompletionIdealAsIdeal
   AlgebraicCurve.instHasCanonicalLocalResidueK
-  instAlgebra_restrictResidueField
-  instIsScalarTower_restrictResidueField
   AlgebraicCurve.instHasLocalResidue
   AlgebraicCurve.HasSeparableResidue.of_perfectField_of_isCurveOver
   AlgebraicCurve.HasSeparableResidue.of_perfectField
@@ -153,8 +151,11 @@ theorem ord_neg_of_not_mem (v : Place K F) {f : F} (hf : f ∉ v.toValuationSubr
     apply hf
     have : ((u⁻¹ : v.toValuationSubringˣ) : v.toValuationSubring).val = f := by
       have h1 : ((u⁻¹ : v.toValuationSubringˣ) : v.toValuationSubring).val * f⁻¹ = 1 := by
-        have := congrArg (fun a : v.toValuationSubring => (a : F)) (u.inv_mul)
-        simpa [hu] using this
+        have hmul := congrArg (fun a : v.toValuationSubring => (a : F)) (u.inv_mul)
+        change ((u⁻¹ : v.toValuationSubringˣ) : v.toValuationSubring).val *
+          (u : v.toValuationSubring).val = 1 at hmul
+        rw [hu] at hmul
+        exact hmul
       have := congrArg (· * f) h1
       simpa [inv_mul_cancel_right₀ hf0, mul_assoc, inv_mul_cancel₀ hf0] using this
     rw [← this]
@@ -174,7 +175,7 @@ theorem mem_of_ord_nonneg (v : Place K F) {f : F} (h : 0 ≤ v.ord f) :
 theorem ord_nonneg_of_mem (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubring) :
     0 ≤ v.ord f := by
   by_cases hf0 : f = 0
-  · simp [hf0]
+  · simpa only [hf0] using v.ord_zero.symm.le
   by_cases hu : IsUnit (⟨f, hf⟩ : v.toValuationSubring)
   · exact (v.ord_coe_unit hu.unit).symm.le
   · exact (ord_pos_of_not_isUnit v (fun h => hf0 (by simpa using congrArg Subtype.val h)) hu).le
@@ -183,8 +184,12 @@ theorem isUnit_algebraMap (v : Place K F) {c : K} (hc : c ≠ 0) :
     IsUnit (⟨algebraMap K F c, v.algebraMap_mem' c⟩ : v.toValuationSubring) := by
   refine ⟨⟨⟨algebraMap K F c, v.algebraMap_mem' c⟩, ⟨algebraMap K F c⁻¹, v.algebraMap_mem' c⁻¹⟩,
     ?_, ?_⟩, rfl⟩
-  · ext; simp [hc]
-  · ext; simp [hc]
+  · apply Subtype.ext
+    change algebraMap K F c * algebraMap K F c⁻¹ = 1
+    rw [← map_mul, mul_inv_cancel₀ hc, map_one]
+  · apply Subtype.ext
+    change algebraMap K F c⁻¹ * algebraMap K F c = 1
+    rw [← map_mul, inv_mul_cancel₀ hc, map_one]
 
 theorem mem_maximalIdeal_of_ord_pos (v : Place K F) {f : F} (hf : f ∈ v.toValuationSubring)
     (h : 0 < v.ord f) :
@@ -332,7 +337,7 @@ theorem ell_canonicalDivisorOf_eq {ω : Ω[F⁄K]} (hω : ω ≠ 0) :
     exact (smul_mem_of_mem_lSpace hω (D := 0) (fun _ => le_rfl) hf' hf0).1
   set T : ↥(LSpace (canonicalDivisorOf hω)) →ₗ[K] ↥(regularDifferentials K F) :=
     { toFun := fun f => ⟨(f : F) • ω, hmem f f.2⟩
-      map_add' := fun f g => by ext; simp [add_smul]
+      map_add' := fun f g => Subtype.ext (add_smul (f : F) (g : F) ω)
       map_smul' := fun c f => by
         ext
         simp only [Submodule.coe_smul, RingHom.id_apply]

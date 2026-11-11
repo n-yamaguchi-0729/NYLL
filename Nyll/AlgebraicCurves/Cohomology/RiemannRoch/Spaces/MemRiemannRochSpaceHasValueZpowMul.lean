@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
-import Mathlib.Algebra.Polynomial.Eval.SMul
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.RingTheory.Polynomial.DegreeLT
-import Nyll.AlgebraicCurves.Places.Rational.Basic
-import Nyll.AlgebraicCurves.Places.Rational.Infinity
-import Nyll.AlgebraicCurves.Places.Evaluation.Value
-import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
-import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
-import Nyll.AlgebraicCurves.Places.Rational.Classification
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Adelic.Repartitions
+public import Mathlib.Algebra.Polynomial.Eval.SMul
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.RingTheory.Polynomial.DegreeLT
+public import Nyll.AlgebraicCurves.Places.Rational.Basic
+public import Nyll.AlgebraicCurves.Places.Rational.Infinity
+public import Nyll.AlgebraicCurves.Places.Evaluation.Value
+public import Nyll.AlgebraicCurves.Places.Rational.FiniteOrder
+public import Nyll.AlgebraicCurves.Places.Rational.InfinityArithmetic
+public import Nyll.AlgebraicCurves.Places.Rational.Classification
 
 /-!
 # Exists mem riemann Roch Space forall has Value zpow mul of ring Equiv rat Func
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

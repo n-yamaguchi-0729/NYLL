@@ -26,3 +26,5 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroup
 import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupBaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedGroupComparison
 import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.UnrigidifiedLocalRigidification
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.ChangeRigidification
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedDescentData

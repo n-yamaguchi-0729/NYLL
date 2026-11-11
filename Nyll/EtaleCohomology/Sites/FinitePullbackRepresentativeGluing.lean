@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
-import Nyll.EtaleCohomology.Sites.FinitePullbackRepresentatives
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.MorphismProperty.Limits
+module
+
+public import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
+public import Nyll.EtaleCohomology.Sites.FinitePullbackRepresentatives
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
 
 /-!
 # One affine representative cover for an inverse-image section
@@ -19,6 +21,8 @@ on their disjoint union. The source of the resulting cover and the original
 the native base change, and the glued section satisfies the original
 inverse-image unit equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

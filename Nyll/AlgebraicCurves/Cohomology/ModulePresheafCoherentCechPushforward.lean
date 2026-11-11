@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.Tactic.FinCases
-import Mathlib.Tactic.Choose
-import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.OModulePresheafCechPushforward
-import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.Tactic.FinCases
+public import Mathlib.Tactic.Choose
+public import Nyll.AlgebraicCurves.Cohomology.Cech.Comparison.OModulePresheafCechPushforward
+public import Nyll.SchemeTheory.Cohomology.Cech.ModulePresheafCechFiniteProper
 
 /-!
 # OModule Presheaf is Coherent cech Pushforward of is Proper
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

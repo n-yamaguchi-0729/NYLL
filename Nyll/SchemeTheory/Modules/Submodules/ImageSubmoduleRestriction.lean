@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.StrongEpi
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.ImageSubmodule
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleGluingQuasicoherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.StrongEpi
 
 /-!
 # The actual image on an open where its source generates
@@ -18,6 +20,8 @@ open, the image of its composite into the ambient sheaf restricts to that
 exact prescribed submodule. The reverse inclusion is constructed by the
 epimorphism--monomorphism lifting property in the actual sheaf category.
 -/
+
+@[expose] public section
 
 noncomputable section
 

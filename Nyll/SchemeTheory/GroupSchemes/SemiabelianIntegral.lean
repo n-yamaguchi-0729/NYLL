@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.GroupSchemes.SemiabelianGeometry
-import Nyll.SchemeTheory.Morphisms.SmoothGeometricallyIntegral
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
+module
+
+public import Nyll.SchemeTheory.GroupSchemes.SemiabelianGeometry
+public import Nyll.SchemeTheory.Morphisms.SmoothGeometricallyIntegral
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-! # Geometric integrality of semiabelian varieties and their quotient fibres
 
@@ -14,6 +16,8 @@ The torus translation description supplies geometric connectedness of the actual
 quotient fibres. Smoothness makes those fibres, and the semiabelian source,
 geometrically integral.
 -/
+
+@[expose] public section
 
 universe u
 

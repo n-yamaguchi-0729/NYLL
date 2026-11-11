@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
-import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.CategoryTheory.Functor.FullyFaithful
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.RingTheory.Etale.Finite
-import Mathlib.RingTheory.Ideal.Quotient.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRFiniteEtaleAlgebra
+public import Nyll.SchemeTheory.RingTheory.Ramification.Unramified.DVRNormalization
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.CategoryTheory.Functor.FullyFaithful
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.RingTheory.Etale.Finite
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # Extending unramified generic covers over a DVR
@@ -33,6 +35,8 @@ This is the DVR-local extension in the proof of
 Spreading this model to an open neighbourhood and applying purity to the
 remaining boundary are separate steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

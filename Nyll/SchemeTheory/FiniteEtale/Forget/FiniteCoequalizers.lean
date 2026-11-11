@@ -22,13 +22,20 @@ adapted arguments. The concrete coequalizer and descent implementation is
 Nyll-local; it is not supplied by the cited pi1 file.
 -/
 
-import Nyll.SchemeTheory.Descent.FpqcLocalCoequalizer
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Splitting
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
-import Mathlib.CategoryTheory.Limits.Types.Coequalizers
+module
+
+public import Nyll.SchemeTheory.Descent.FpqcLocalCoequalizer
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Splitting
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Iso
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
+public import Mathlib.CategoryTheory.Limits.Types.Coequalizers
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Equalizer
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Coequalizers of finite étale schemes
@@ -36,6 +43,8 @@ import Mathlib.CategoryTheory.Limits.Types.Coequalizers
 This file proves the coequalizer-preservation part of Stacks Project, Tag
 `0BNA`, for the canonical forgetful functors from finite étale schemes.
 -/
+
+@[expose] public section
 
 universe u v w u' v'
 
@@ -523,10 +532,10 @@ private noncomputable def finiteEtaleRingEquiv (R : CommRingCat.{u}) :=
 private lemma hom_eq_isoSpec_hom_comp_specMap_algebraMap
     {R : Type u} [CommRing R] {Z : Scheme.{u}} [IsAffine Z]
     (p : Z ⟶ Spec (.of R)) :
-    letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+    let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
     p = Z.isoSpec.hom ≫
       Spec.map (CommRingCat.ofHom (algebraMap R Γ(Z, ⊤))) := by
-  let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+  intro globalAlgebra
   change p = Z.isoSpec.hom ≫
     Spec.map ((Scheme.ΓSpecIso (.of R)).inv ≫ p.appTop)
   have hnat : Z.isoSpec.hom ≫ Spec.map p.appTop =
@@ -564,10 +573,10 @@ private lemma hom_eq_isoSpec_hom_comp_specMap_algebraMap
 private noncomputable def pullbackIsoSpecTensorOfHom
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {Z : Scheme.{u}} [IsAffine Z] (p : Z ⟶ Spec (.of R)) :
-    letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+    let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
     pullback p (Spec.map (CommRingCat.ofHom (algebraMap R S))) ≅
       Spec (.of (TensorProduct R S (Γ(Z, ⊤)))) := by
-  letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+  intro globalAlgebra
   let pS := Spec.map (CommRingCat.ofHom (algebraMap R S))
   let pΓ := Spec.map
     (CommRingCat.ofHom (algebraMap R Γ(Z, ⊤)))
@@ -584,39 +593,40 @@ private noncomputable def pullbackIsoSpecTensorOfHom
 private lemma pullbackIsoSpecTensorOfHom_hom_over
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {Z : Scheme.{u}} [IsAffine Z] (p : Z ⟶ Spec (.of R)) :
-    letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+    let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
     (pullbackIsoSpecTensorOfHom p).hom ≫
         Spec.map (CommRingCat.ofHom
           (algebraMap S (TensorProduct R S (Γ(Z, ⊤))))) =
       pullback.snd p
         (Spec.map (CommRingCat.ofHom (algebraMap R S))) := by
-  let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
-  simp [pullbackIsoSpecTensorOfHom, Category.assoc]
+  intro globalAlgebra
+  dsimp only [pullbackIsoSpecTensorOfHom, Iso.trans_hom, asIso_hom, pullback.map]
+  simp only [Category.assoc]
+  rw [pullbackSpecIso_hom_fst', pullbackSymmetry_hom_comp_fst]
+  exact (pullback.lift_snd _ _ _).trans (Category.comp_id _)
 
 private noncomputable def pullbackSplitIsoOfHom
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {Z : Scheme.{u}} [IsAffine Z] (p : Z ⟶ Spec (.of R)) :
-    letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+    let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
     ∀ {E : Type u} [Finite E]
       (_e : TensorProduct R S (Γ(Z, ⊤)) ≃ₐ[S] (E → S)),
       pullback p (Spec.map (CommRingCat.ofHom (algebraMap R S))) ≅
         ∐ fun _ : E ↦ Spec (.of S) := by
-  letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
-  intro E _ e
+  intro globalAlgebra E _ e
   exact pullbackIsoSpecTensorOfHom p ≪≫ specSplitIso e
 
 private lemma pullbackSplitIsoOfHom_hom_over
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {Z : Scheme.{u}} [IsAffine Z] (p : Z ⟶ Spec (.of R)) :
-    letI : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
+    let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
     ∀ {E : Type u} [Finite E]
       (e : TensorProduct R S (Γ(Z, ⊤)) ≃ₐ[S] (E → S)),
       (pullbackSplitIsoOfHom p e).hom ≫
           Sigma.desc (fun _ : E ↦ 𝟙 (Spec (.of S))) =
         pullback.snd p
           (Spec.map (CommRingCat.ofHom (algebraMap R S))) := by
-  let : Algebra R Γ(Z, ⊤) := gammaAlgebraOfHom p
-  intro E _ e
+  intro globalAlgebra E _ e
   simp only [pullbackSplitIsoOfHom, Iso.trans_hom, Category.assoc]
   rw [specSplitIso_hom_over e,
     pullbackIsoSpecTensorOfHom_hom_over p]
@@ -624,39 +634,27 @@ private lemma pullbackSplitIsoOfHom_hom_over
 private noncomputable def pullbackSplitIso
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     (L : FiniteEtale (Spec (.of R))) [IsAffine L.left] :
-    letI : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
+    let : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
     ∀ {E : Type u} [Finite E]
       (_e : TensorProduct R S (Γ(L.left, ⊤)) ≃ₐ[S] (E → S)),
       ((FiniteEtale.pullback
         (Spec.map (CommRingCat.ofHom (algebraMap R S)))).obj L).left ≅
         ∐ fun _ : E ↦ Spec (.of S) := by
-  let p : L.left ⟶ Spec (.of R) := L.hom
-  change letI : Algebra R Γ(L.left, ⊤) := gammaAlgebraOfHom p
-    ∀ {E : Type u} [Finite E]
-      (_e : TensorProduct R S (Γ(L.left, ⊤)) ≃ₐ[S] (E → S)),
-      pullback p (Spec.map (CommRingCat.ofHom (algebraMap R S))) ≅
-        ∐ fun _ : E ↦ Spec (.of S)
-  exact pullbackSplitIsoOfHom p
+  intro globalAlgebra E finiteE e
+  exact pullbackSplitIsoOfHom (Z := L.left) L.hom e
 
 private lemma pullbackSplitIso_hom_over
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     (L : FiniteEtale (Spec (.of R))) [IsAffine L.left] :
-    letI : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
+    let : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
     ∀ {E : Type u} [Finite E]
       (e : TensorProduct R S (Γ(L.left, ⊤)) ≃ₐ[S] (E → S)),
       (pullbackSplitIso L e).hom ≫
           Sigma.desc (fun _ : E ↦ 𝟙 (Spec (.of S))) =
         ((FiniteEtale.pullback
           (Spec.map (CommRingCat.ofHom (algebraMap R S)))).obj L).hom := by
-  let p : L.left ⟶ Spec (.of R) := L.hom
-  change letI : Algebra R Γ(L.left, ⊤) := gammaAlgebraOfHom p
-    ∀ {E : Type u} [Finite E]
-      (e : TensorProduct R S (Γ(L.left, ⊤)) ≃ₐ[S] (E → S)),
-      (pullbackSplitIsoOfHom p e).hom ≫
-          Sigma.desc (fun _ : E ↦ 𝟙 (Spec (.of S))) =
-        pullback.snd p
-          (Spec.map (CommRingCat.ofHom (algebraMap R S)))
-  exact pullbackSplitIsoOfHom_hom_over p
+  intro globalAlgebra E finiteE e
+  exact pullbackSplitIsoOfHom_hom_over (Z := L.left) L.hom e
 
 private lemma pullbackMap_pullbackSpecIso {R S A B : Type u}
     [CommRing R] [CommRing S] [CommRing A] [CommRing B]
@@ -721,8 +719,8 @@ private lemma baseChangeMap_comp_pullbackIsoSpecTensorOfHom
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (pX : X ⟶ Spec (.of R)) (pY : Y ⟶ Spec (.of R))
     (f : X ⟶ Y) (w : f ≫ pY = pX) :
-    letI : Algebra R Γ(X, ⊤) := gammaAlgebraOfHom pX
-    letI : Algebra R Γ(Y, ⊤) := gammaAlgebraOfHom pY
+    let : Algebra R Γ(X, ⊤) := gammaAlgebraOfHom pX
+    let : Algebra R Γ(Y, ⊤) := gammaAlgebraOfHom pY
     ∀ (fAlg : Γ(Y, ⊤) →ₐ[R] Γ(X, ⊤))
       (_hf : f.appTop.hom = fAlg.toRingHom),
       baseChangeMapOfHom pX pY f w ≫
@@ -730,9 +728,7 @@ private lemma baseChangeMap_comp_pullbackIsoSpecTensorOfHom
         (pullbackIsoSpecTensorOfHom pX).hom ≫
           Spec.map (CommRingCat.ofHom
             (Algebra.TensorProduct.map (AlgHom.id S S) fAlg).toRingHom) := by
-  let : Algebra R Γ(X, ⊤) := gammaAlgebraOfHom pX
-  let : Algebra R Γ(Y, ⊤) := gammaAlgebraOfHom pY
-  intro fAlg hf
+  intro sourceAlgebra targetAlgebra fAlg hf
   let pS := Spec.map (CommRingCat.ofHom (algebraMap R S))
   let pΓX := Spec.map (CommRingCat.ofHom (algebraMap R Γ(X, ⊤)))
   let pΓY := Spec.map (CommRingCat.ofHom (algebraMap R Γ(Y, ⊤)))
@@ -780,22 +776,28 @@ private lemma baseChangeMap_comp_pullbackIsoSpecTensorOfHom
     exact (pullback.lift_snd _ _ _).trans (Category.comp_id _)
   have eX_fst : eX.hom ≫ pullback.fst pΓX pS =
       pullback.fst pX pS ≫ X.isoSpec.hom := by
-    simp [eX, pullback.map]
+    dsimp only [eX, asIso_hom, pullback.map]
+    exact pullback.lift_fst _ _ _
   have eX_snd : eX.hom ≫ pullback.snd pΓX pS =
       pullback.snd pX pS := by
-    simp [eX, pullback.map]
+    dsimp only [eX, asIso_hom, pullback.map]
+    exact (pullback.lift_snd _ _ _).trans (Category.comp_id _)
   have eY_fst : eY.hom ≫ pullback.fst pΓY pS =
       pullback.fst pY pS ≫ Y.isoSpec.hom := by
-    simp [eY, pullback.map]
+    dsimp only [eY, asIso_hom, pullback.map]
+    exact pullback.lift_fst _ _ _
   have eY_snd : eY.hom ≫ pullback.snd pΓY pS =
       pullback.snd pY pS := by
-    simp [eY, pullback.map]
+    dsimp only [eY, asIso_hom, pullback.map]
+    exact (pullback.lift_snd _ _ _).trans (Category.comp_id _)
   have qSpec_fst : qSpec ≫ pullback.fst pS pΓY =
       pullback.fst pS pΓX := by
-    simp [qSpec, pullback.map]
+    dsimp only [qSpec, pullback.map]
+    exact (pullback.lift_fst _ _ _).trans (Category.comp_id _)
   have qSpec_snd : qSpec ≫ pullback.snd pS pΓY =
       pullback.snd pS pΓX ≫ a := by
-    simp [qSpec, pullback.map]
+    dsimp only [qSpec, pullback.map]
+    exact pullback.lift_snd _ _ _
   have hpre : q ≫ eY.hom ≫ (pullbackSymmetry pΓY pS).hom =
       eX.hom ≫ (pullbackSymmetry pΓX pS).hom ≫ qSpec := by
     apply pullback.hom_ext
@@ -821,8 +823,8 @@ private lemma pullbackMap_comp_pullbackSplitIso
     (Lsource Ltarget : FiniteEtale (Spec (.of R)))
     [IsAffine Lsource.left] [IsAffine Ltarget.left]
     (f : Lsource ⟶ Ltarget) :
-    letI : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
-    letI : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
+    let : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
+    let : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
     ∀ (fAlg : Γ(Ltarget.left, ⊤) →ₐ[R] Γ(Lsource.left, ⊤))
       (_hf : f.left.appTop.hom = fAlg.toRingHom)
       {Esource Etarget : Type u} [Finite Esource] [Finite Etarget]
@@ -839,9 +841,8 @@ private lemma pullbackMap_comp_pullbackSplitIso
           Sigma.map' sigma (fun _ ↦ 𝟙 (Spec (.of S))) := by
   let pSource : Lsource.left ⟶ Spec (.of R) := Lsource.hom
   let pTarget : Ltarget.left ⟶ Spec (.of R) := Ltarget.hom
-  change letI : Algebra R Γ(Lsource.left, ⊤) := gammaAlgebraOfHom pSource
-    letI : Algebra R Γ(Ltarget.left, ⊤) := gammaAlgebraOfHom pTarget
-    ∀ (fAlg : Γ(Ltarget.left, ⊤) →ₐ[R] Γ(Lsource.left, ⊤))
+  intro sourceAlgebra targetAlgebra
+  change ∀ (fAlg : Γ(Ltarget.left, ⊤) →ₐ[R] Γ(Lsource.left, ⊤))
       (_hf : f.left.appTop.hom = fAlg.toRingHom)
       {Esource Etarget : Type u} [Finite Esource] [Finite Etarget]
       (eTarget : TensorProduct R S Γ(Ltarget.left, ⊤) ≃ₐ[S] (Etarget → S))
@@ -855,8 +856,6 @@ private lemma pullbackMap_comp_pullbackSplitIso
           (pullbackSplitIsoOfHom pTarget eTarget).hom =
         (pullbackSplitIsoOfHom pSource eSource).hom ≫
           Sigma.map' sigma (fun _ ↦ 𝟙 (Spec (.of S)))
-  let : Algebra R Γ(Lsource.left, ⊤) := gammaAlgebraOfHom pSource
-  let : Algebra R Γ(Ltarget.left, ⊤) := gammaAlgebraOfHom pTarget
   intro fAlg hf Esource Etarget _ _ eTarget eSource sigma h
   have w : f.left ≫ pTarget = pSource := MorphismProperty.Over.w f
   let q := baseChangeMapOfHom (R := R) (S := S)
@@ -969,14 +968,13 @@ private lemma splitCopowerComparison_naturality
 private noncomputable def finiteEtalePullbackSplitIso
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     (L : FiniteEtale (Spec (.of R))) [IsAffine L.left] :
-    letI : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
+    let : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
     ∀ {E : Type u} [Finite E]
       (_e : TensorProduct R S Γ(L.left, ⊤) ≃ₐ[S] (E → S)),
       (FiniteEtale.pullback
         (Spec.map (CommRingCat.ofHom (algebraMap R S)))).obj L ≅
         ∐ fun _ : E ↦ splitBase (.of S) := by
-  letI : Algebra R Γ(L.left, ⊤) := overSpecAlgebra L
-  intro E _ e
+  intro globalAlgebra E _ e
   refine MorphismProperty.Over.isoMk
     ((pullbackSplitIso L e) ≪≫
       (PreservesCoproduct.iso (forgetToScheme (.of S))
@@ -997,8 +995,8 @@ private lemma finiteEtalePullbackSplitIso_naturality
     (Lsource Ltarget : FiniteEtale (Spec (.of R)))
     [IsAffine Lsource.left] [IsAffine Ltarget.left]
     (f : Lsource ⟶ Ltarget) :
-    letI : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
-    letI : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
+    let : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
+    let : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
     ∀ (fAlg : Γ(Ltarget.left, ⊤) →ₐ[R] Γ(Lsource.left, ⊤))
       (_hf : f.left.appTop.hom = fAlg.toRingHom)
       {Esource Etarget : Type u} [Finite Esource] [Finite Etarget]
@@ -1013,9 +1011,7 @@ private lemma finiteEtalePullbackSplitIso_naturality
           (finiteEtalePullbackSplitIso Ltarget eTarget).hom =
         (finiteEtalePullbackSplitIso Lsource eSource).hom ≫
           Sigma.map' sigma (fun _ ↦ 𝟙 (splitBase (.of S))) := by
-  let : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
-  let : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
-  intro fAlg hf Esource Etarget _ _ eTarget eSource sigma h
+  intro sourceAlgebra targetAlgebra fAlg hf Esource Etarget _ _ eTarget eSource sigma h
   apply MorphismProperty.Over.Hom.ext
   change ((FiniteEtale.pullback
       (Spec.map (CommRingCat.ofHom (algebraMap R S)))).map f).left ≫
@@ -1053,8 +1049,8 @@ private lemma preservesColimit_pullback_parallelPair_of_areSplit
     (Lsource Ltarget : FiniteEtale (Spec (.of R)))
     [IsAffine Lsource.left] [IsAffine Ltarget.left]
     (f g : Lsource ⟶ Ltarget) :
-    letI : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
-    letI : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
+    let : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
+    let : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
     ∀ (fAlg gAlg : Γ(Ltarget.left, ⊤) →ₐ[R] Γ(Lsource.left, ⊤))
       (_hf : f.left.appTop.hom = fAlg.toRingHom)
       (_hg : g.left.appTop.hom = gAlg.toRingHom)
@@ -1070,9 +1066,7 @@ private lemma preservesColimit_pullback_parallelPair_of_areSplit
             (Spec.map (CommRingCat.ofHom (algebraMap R S)))).map f)
           ((FiniteEtale.pullback
             (Spec.map (CommRingCat.ofHom (algebraMap R S)))).map g)) G := by
-  let : Algebra R Γ(Lsource.left, ⊤) := overSpecAlgebra Lsource
-  let : Algebra R Γ(Ltarget.left, ⊤) := overSpecAlgebra Ltarget
-  intro fAlg gAlg hf hg hsplit C _ _ G _
+  intro sourceAlgebra targetAlgebra fAlg gAlg hf hg hsplit C _ _ G _
   rcases hsplit with ⟨n, m, eTarget₀, eSource₀, sigma₀, tau₀,
     hsigma₀, htau₀⟩
   let Etarget := ULift.{u, 0} (Fin n)
@@ -1113,11 +1107,6 @@ end AlgebraicGeometry
 namespace AlgebraicGeometry.FiniteEtale
 
 variable {X : Scheme.{u}}
-
-private instance finiteEtaleOverCategoryForLocalCoequalizers (Y : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ Y) :=
-  FiniteEtale.instCategory Y
 
 local instance finiteEtaleHasPullbacksAlongForCoequalizers
     {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
@@ -1630,20 +1619,6 @@ private lemma pullback_congrHom_map_naturality
   rw [pullback.map_comp, pullback.map_comp]
   simp only [Category.id_comp, Category.comp_id]
 
-private lemma pullback_congrHom_map_naturality_inv
-    {W Y T S : Scheme.{u}} {a a' : W ⟶ S} {b b' : Y ⟶ S}
-    (p : T ⟶ S) (i : W ⟶ Y) (ha : a = a') (hb : b = b')
-    (e : a ≫ 𝟙 S = i ≫ b) (e' : a' ≫ 𝟙 S = i ≫ b') :
-    (pullback.congrHom ha rfl).inv ≫
-        pullback.map a p b p i (𝟙 T) (𝟙 S) e
-          (by rw [Category.comp_id, Category.id_comp]) =
-      pullback.map a' p b' p i (𝟙 T) (𝟙 S) e'
-          (by rw [Category.comp_id, Category.id_comp]) ≫
-        (pullback.congrHom hb rfl).inv := by
-  simp only [pullback.congrHom_inv]
-  rw [pullback.map_comp, pullback.map_comp]
-  simp only [Category.id_comp, Category.comp_id]
-
 private lemma pullback_congrHom_map_naturality_right_rfl
     {W Y T S : Scheme.{u}} {a a' : W ⟶ S} {b : Y ⟶ S}
     (p : T ⟶ S) (i : W ⟶ Y) (ha : a = a')
@@ -1801,11 +1776,19 @@ private def zeroBMNRight : pullback p (a ≫ c) ⟶ pullback p c :=
 
 private lemma forwardLeft_eq_zeroBMNLeft :
     forwardLeft (a := a) (c := c) p = zeroBMNLeft (a := a) (c := c) p := by
-  apply pullback.hom_ext <;> simp [forwardLeft, zeroBMNLeft, pullback.map]
+  apply pullback.hom_ext
+  · dsimp only [forwardLeft, zeroBMNLeft, pullback.map]
+    rw [pullback.lift_fst, pullback.lift_fst, Category.comp_id]
+  · dsimp only [forwardLeft, zeroBMNLeft, pullback.map]
+    rw [pullback.lift_snd, pullback.lift_snd]
 
 private lemma forwardRight_eq_zeroBMNRight :
     forwardRight hc p = zeroBMNRight hc p := by
-  apply pullback.hom_ext <;> simp [forwardRight, zeroBMNRight, pullback.map]
+  apply pullback.hom_ext
+  · dsimp only [forwardRight, zeroBMNRight, pullback.map]
+    rw [pullback.lift_fst, pullback.lift_fst, Category.comp_id]
+  · dsimp only [forwardRight, zeroBMNRight, pullback.map]
+    rw [pullback.lift_snd, pullback.lift_snd]
 
 private def zeroBMNCofork : Cofork (zeroBMNLeft p) (zeroBMNRight hc p) :=
   Cofork.ofπ (pullback.fst p c) (by
@@ -1914,34 +1897,6 @@ private lemma nestedMiddleHom_eq
   rw [s.app_one_eq_π]
   exact congrArg (fun k ↦ k.left) (Category.comp_id s.π)
 
-private lemma nested_zero_eq
-    (s : Cofork f g) (p : U ⟶ s.pt.left) :
-    (nestedDiagram s p).obj WalkingParallelPair.zero =
-      ((FiniteEtale.pullback p).obj (pointSource s)).left := by
-  change Limits.pullback (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p =
-    Limits.pullback (f ≫ s.π).left p
-  exact congrArg (fun k ↦ Limits.pullback k p) (nestedSourceHom_eq s)
-
-private lemma nested_one_eq
-    (s : Cofork f g) (p : U ⟶ s.pt.left) :
-    (nestedDiagram s p).obj WalkingParallelPair.one =
-      ((FiniteEtale.pullback p).obj (pointMiddle s)).left := by
-  change Limits.pullback (s.ι.app WalkingParallelPair.one ≫ 𝟙 s.pt).left p =
-    Limits.pullback s.π.left p
-  exact congrArg (fun k ↦ Limits.pullback k p) (nestedMiddleHom_eq s)
-
-private lemma nested_point_eq
-    (s : Cofork f g) (p : U ⟶ s.pt.left) :
-    (normalizedNestedCofork s p).pt =
-      (underlyingPullbackCofork s p).pt := by
-  rfl
-
-private lemma nested_pi_eq
-    (s : Cofork f g) (p : U ⟶ s.pt.left) :
-    (normalizedNestedCofork s p).π =
-      (underlyingPullbackCofork s p).π := by
-  rfl
-
 private noncomputable def nestedSourceIso
     (s : Cofork f g) (p : U ⟶ s.pt.left) :
     (nestedDiagram s p).obj WalkingParallelPair.zero ≅
@@ -2011,63 +1966,6 @@ private lemma pullbackPi_left (s : Cofork f g) (p : U ⟶ s.pt.left) :
             (Limits.pullback.condition :
               Limits.pullback.fst s.π.left p ≫ s.π.left =
                 Limits.pullback.snd s.π.left p ≫ p)) := by
-  rfl
-
-private lemma nestedLeft_left (s : Cofork f g)
-    (p : U ⟶ s.pt.left) :
-    (nestedDiagram s p).map WalkingParallelPairHom.left =
-      Limits.pullback.lift
-        (Limits.pullback.fst
-          (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p ≫ f.left)
-        (Limits.pullback.snd
-          (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p)
-        (by
-          change (Limits.pullback.fst
-              (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p ≫
-                f.left) ≫
-              (s.ι.app WalkingParallelPair.one ≫ 𝟙 s.pt).left =
-            Limits.pullback.snd
-              (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p ≫ p
-          rw [nestedSourceHom_eq, nestedMiddleHom_eq]
-          calc
-            _ = Limits.pullback.fst (f ≫ s.π).left p ≫
-                (f.left ≫ s.π.left) := Category.assoc _ _ _
-            _ = Limits.pullback.fst (f ≫ s.π).left p ≫
-                (f ≫ s.π).left := rfl
-            _ = Limits.pullback.snd (f ≫ s.π).left p ≫ p :=
-              Limits.pullback.condition) := by
-  rfl
-
-private lemma nestedRight_left (s : Cofork f g)
-    (p : U ⟶ s.pt.left) :
-    (nestedDiagram s p).map WalkingParallelPairHom.right =
-      Limits.pullback.lift
-        (Limits.pullback.fst
-          (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p ≫ g.left)
-        (Limits.pullback.snd
-          (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p)
-        (by
-          change (Limits.pullback.fst
-              (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p ≫
-                g.left) ≫
-              (s.ι.app WalkingParallelPair.one ≫ 𝟙 s.pt).left =
-            Limits.pullback.snd
-              (s.ι.app WalkingParallelPair.zero ≫ 𝟙 s.pt).left p ≫ p
-          rw [nestedSourceHom_eq, nestedMiddleHom_eq]
-          have hfg : f.left ≫ s.π.left = g.left ≫ s.π.left :=
-            congrArg (fun k ↦ k.left) s.condition
-          calc
-            _ = Limits.pullback.fst (f ≫ s.π).left p ≫
-                (g.left ≫ s.π.left) := Category.assoc _ _ _
-            _ = Limits.pullback.fst (f ≫ s.π).left p ≫
-                (f.left ≫ s.π.left) :=
-              congrArg
-                (fun k ↦ Limits.pullback.fst (f ≫ s.π).left p ≫ k)
-                hfg.symm
-            _ = Limits.pullback.fst (f ≫ s.π).left p ≫
-                (f ≫ s.π).left := rfl
-            _ = Limits.pullback.snd (f ≫ s.π).left p ≫ p :=
-              Limits.pullback.condition) := by
   rfl
 
 private def normalizedUnderlyingIsColimitEquiv

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.GroupTheory.Transfer.RelativeAugmentation
-import Nyll.GaloisCohomology.GroupTheory.Transfer.Witt
+module
+
+public import Nyll.GaloisCohomology.GroupTheory.Transfer.RelativeAugmentation
+public import Nyll.GaloisCohomology.GroupTheory.Transfer.Witt
 
 /-! # Relative augmentation and group transfer -/

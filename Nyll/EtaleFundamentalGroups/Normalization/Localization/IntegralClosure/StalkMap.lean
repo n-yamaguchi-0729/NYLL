@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Normalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Stalk map of an affine normalization
@@ -17,6 +19,8 @@ the base and then normalizing.  This file records the comparison as an
 isomorphism in the arrow category, so properties of the literal stalk map can
 be transported without replacing either endpoint by an unspecified ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

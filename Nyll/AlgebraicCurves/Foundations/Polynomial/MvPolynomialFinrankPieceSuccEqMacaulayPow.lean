@@ -10,38 +10,46 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.Algebra.MonoidAlgebra.Defs
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Module.Submodule.RestrictScalars
-import Mathlib.Data.Finset.Card
-import Mathlib.Data.Finsupp.Order
-import Mathlib.Data.Finsupp.Weight
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Find
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Push
-import Mathlib.Tactic.Set
-import Mathlib.Tactic.SplitIfs
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
-import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomials
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceEq
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
-import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomialSubspace
+module
+
+public import Mathlib.Algebra.Field.Rat
+
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.Algebra.MonoidAlgebra.Defs
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Module.Submodule.RestrictScalars
+public import Mathlib.Data.Finset.Card
+public import Mathlib.Data.Finsupp.Order
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Data.Nat.Find
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Push
+public import Mathlib.Tactic.Set
+public import Mathlib.Tactic.SplitIfs
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+public import Nyll.SchemeTheory.RingTheory.Polynomial.Macaulay
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomials
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceEq
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MvPolynomialFinrankPieceSuccLeMacaulayPow
+public import Nyll.AlgebraicCurves.Foundations.Polynomial.MacaulayMonomialSubspace
 
 /-!
 # Mv Polynomial forall finrank piece succ eq macaulay Pow of finrank piece succ eq macaulay
 Pow
 -/
+
+@[expose] public section
+
+universe u
 
 section ProofImplementation
 
@@ -69,7 +77,7 @@ theorem macaulayPow_choose (δ : ℕ) :
     show n + (δ + 1) + 1 = n + (δ + 2) by omega]
   exact Nat.choose_symm_add.symm
 
-theorem finrank_piece_le (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : ℕ) :
+theorem finrank_piece_le (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : ℕ) :
     Module.finrank K (piece J e) ≤ (n + e).choose n := by
   classical
   have h0 : Module.finrank K (piece (⊥ : Ideal (MvPolynomial (Fin (n + 1)) K)) e) = (Mon n e).card
@@ -98,7 +106,7 @@ theorem finrank_piece_le (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n +
   exact Submodule.finrank_quotient_le _
 
 attribute [local instance] MvPolynomial.gradedAlgebra in
-theorem homogeneousComponent_mem_of_span (K : Type) [Field K] (d : ℕ)
+theorem homogeneousComponent_mem_of_span (K : Type u) [Field K] (d : ℕ)
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∃ s : Set (MvPolynomial (Fin (n + 1)) K), (∀ p ∈ s, p.IsHomogeneous d) ∧ J = Ideal.span
       s) :
@@ -122,7 +130,7 @@ attribute [local simp] MvPolynomial.Macaulay.shift_empty
 open PERSISTSOL in
 theorem
   _root_.MvPolynomial.forall_finrank_piece_succ_eq_macaulayPow_of_finrank_piece_succ_eq_macaulayPow
-    (n m : ℕ) (hm : 1 ≤ m) (K : Type) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (n m : ℕ) (hm : 1 ≤ m) (K : Type u) [Field K] (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : ∃ s : Set (MvPolynomial (Fin (n + 1)) K), (∀ p ∈ s, p.IsHomogeneous m) ∧ J = Ideal.span s)
     (hmax : Module.finrank K (piece J (m + 1)) = Nat.macaulayPow m (Module.finrank K (piece J m))) :
     ∀ e : ℕ, m ≤ e → Module.finrank K (piece J (e + 1)) = Nat.macaulayPow e (Module.finrank K
@@ -163,8 +171,8 @@ theorem
       obtain ⟨J', hJ', h1, h2⟩ :=
         MvPolynomial.exists_span_monomial_finrank_piece_eq_and_finrank_piece_succ_eq_macaulayPow n
           e (by omega)
-          (h e) (h_le e he) K
-      exact ⟨K, inferInstance, J', hJ', h1, by rw [h2, h_succ e he]⟩)
+          (h e) (h_le e he) ℚ
+      exact ⟨ℚ, inferInstance, J', hJ', h1, by rw [h2, h_succ e he]⟩)
     K J hJ h_m.symm (by rw [h_succ _ le_rfl, h_m]; exact hmax)
   intro e he
   rw [key (e + 1) (by omega), key e he, h_succ e he]

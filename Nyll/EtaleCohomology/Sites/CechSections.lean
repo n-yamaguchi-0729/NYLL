@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.EtaleCohomology.Sites.PullbackComposition
-import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
-import Nyll.EtaleCohomology.Sites.PullbackStalkComposition
-import Nyll.EtaleCohomology.Sites.PullbackSections
-import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Products.Basic
-import Mathlib.CategoryTheory.Sites.Sheaf
+module
+
+public import Nyll.EtaleCohomology.Sites.PullbackComposition
+public import Nyll.EtaleCohomology.Sites.PullbackGlobalSectionsComposition
+public import Nyll.EtaleCohomology.Sites.PullbackStalkComposition
+public import Nyll.EtaleCohomology.Sites.PullbackSections
+public import Nyll.EtaleCohomology.Sites.SheafFunctors
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Products.Basic
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # The actual degree-zero Čech section maps
@@ -21,6 +23,8 @@ The two projections from a scheme's self-fiber product give section maps
 into the same chosen iterated inverse image. Their comparison uses the
 existing composition isomorphisms and the actual pullback square equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,7 +36,8 @@ namespace EtaleCohomology
 
 variable {X Y : Scheme.{u}} (q : Y ⟶ X) (Λ : Type u) [CommRing Λ]
 
-private def pullback_eq_iso {Z : Scheme.{u}} {f g : Z ⟶ X} (h : f = g) :
+/-- Equal scheme morphisms induce the same inverse-image functor on étale module sheaves. -/
+def pullback_eq_iso {Z : Scheme.{u}} {f g : Z ⟶ X} (h : f = g) :
     etalePullback f Λ ≅ etalePullback g Λ := by
   cases h
   exact Iso.refl _

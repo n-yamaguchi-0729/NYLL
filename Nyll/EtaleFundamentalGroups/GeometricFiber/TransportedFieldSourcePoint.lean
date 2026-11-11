@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGaloisPoint
-import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGaloisPoint
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.HenselianSpecializationConjugacy
 
 /-!
 # The complete point calculation for a transported actual field-source map
@@ -15,6 +17,8 @@ geometric points, and the final projection to a geometric point are computed
 at abstract field and scheme structures. A caller supplies its proved actual
 automorphism and coefficient equalities, with no concrete fiber expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,17 +42,17 @@ theorem transportedFieldSourceAbsoluteGaloisHom_point
     (ha : a = continuousConjAut (eqToIso (congrArg fiber hpoint))
       (fieldSourceAbsoluteGaloisHom F Ω j σ))
     (X : FiniteEtale S) (x : (fiber t).obj X) :
-    (fiberObjEquivHom t X (a.hom.app X x)).left =
+    (fiberObjEquivHom t X (a.asIso.hom.app X x)).left =
       Spec.map (CommRingCat.ofHom ρ) ≫ (fiberObjEquivHom t X x).left := by
   have hsource (Y : FiniteEtale (Spec (.of F))) (y : (fib F Ω).obj Y) :
       (fiberObjEquivHom (ξ F Ω) Y
-        ((suppliedGaloisEquivFundamentalGroup F Ω σ).hom.app Y y)).left =
+        ((suppliedGaloisEquivFundamentalGroup F Ω σ).asIso.hom.app Y y)).left =
         Spec.map (CommRingCat.ofHom ρ) ≫ (fiberObjEquivHom (ξ F Ω) Y y).left :=
     (suppliedGaloisEquivFundamentalGroup_point F Ω σ Y y).trans
       (congrArg (fun r : Ω →+* Ω => Spec.map (CommRingCat.ofHom r) ≫
         (fiberObjEquivHom (ξ F Ω) Y y).left) hσ)
   exact (congrArg (fun b : π₁ᵉᵗ(t) =>
-    (fiberObjEquivHom t X (b.hom.app X x)).left) ha).trans
+    (fiberObjEquivHom t X (b.asIso.hom.app X x)).left) ha).trans
       (point_action_of_eqToIso hpoint (fieldSourceAbsoluteGaloisHom F Ω j σ) ρ
         (fundamentalGroupHom_point_of_point_action j (ξ F Ω)
           (suppliedGaloisEquivFundamentalGroup F Ω σ) ρ hsource) X x)

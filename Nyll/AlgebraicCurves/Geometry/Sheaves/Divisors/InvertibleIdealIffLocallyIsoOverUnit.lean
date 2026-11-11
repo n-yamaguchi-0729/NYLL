@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
-import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealLocallyIsoOverUnitIffMapEqBot
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Translation
+public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleIdealLocallyIsoOverUnitIffMapEqBot
 
 /-!
 # Scheme Modules Is Invertible exists ideal forall iff locally Iso Over unit of flat of is
 Proper
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -643,9 +647,9 @@ theorem fromSpec_comp {T' : Scheme.{u}} (ψ : T' ⟶ Spec (.of A)) (W : T'.Opens
 
 theorem falg_of_F {T' : Scheme.{u}} (ψ : T' ⟶ Spec (.of A)) (h : F c N ψ) (W : T'.Opens) (hW :
   IsAffineOpen W) :
-    letI := algebraOfHom ψ W
+    let := algebraOfHom ψ W
     Falg c N Γ(T', W) := by
-  let := algebraOfHom ψ W
+  intro sharedOwner1
   have h1 := F_comp c N ψ hW.fromSpec h
   rw [fromSpec_comp] at h1
   exact h1

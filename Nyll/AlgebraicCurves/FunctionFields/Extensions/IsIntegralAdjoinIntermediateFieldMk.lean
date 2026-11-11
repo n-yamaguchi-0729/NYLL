@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.FieldTheory.IntermediateField.Basic
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.FieldTheory.IntermediateField.Basic
 
 /-!
 # Is Integral adjoin intermediate Field mk
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
-import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
-import Mathlib.Tactic.Linarith
+module
+
+public import Nyll.AlgebraicCurves.Places.Orders.RationalSeriesPoleBound
+public import Nyll.AlgebraicCurves.Divisors.Degree.FiniteTypePoleBound
+public import Mathlib.Tactic.Linarith
 
 /-! # Products and inverses of series with linear pole bounds
 
@@ -16,6 +18,8 @@ The actual inverse recurrence gives the sharper local bound
 Finite support of principal divisors constructs such a `b` globally, so the
 inverse of a unit series has a linear bound with divisor `2D_A + D₀`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

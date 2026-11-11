@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.UnramifiedCriterion
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Kaehler.TensorProduct
-import Mathlib.RingTheory.LocalProperties.Submodule
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Smooth.Fiber
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.UnramifiedCriterion
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Kaehler.TensorProduct
+public import Mathlib.RingTheory.LocalProperties.Submodule
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Smooth.Fiber
 
 /-!
 # Unramified field extensions of a discrete valuation ring
@@ -27,6 +29,8 @@ canonically the original field extension. These are the algebraic inputs
 to the codimension-one step of
 [Tag 0H2W](https://stacks.math.columbia.edu/tag/0H2W).
 -/
+
+@[expose] public section
 
 noncomputable section
 

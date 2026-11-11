@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.CompactOpenSections
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Nyll.SchemeTheory.Topology.CompactOpenSections
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Surjective global restriction and filtered colimits
@@ -21,6 +23,8 @@ where it lifts; naturality of the actual adjunction unit gives the result.
 
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

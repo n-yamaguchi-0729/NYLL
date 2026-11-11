@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
 
 /-!
 # Curve Model ff Equiv symm germ To Function Field mem and sub algebra Map app LE mem
 nonunits point Equiv Place
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

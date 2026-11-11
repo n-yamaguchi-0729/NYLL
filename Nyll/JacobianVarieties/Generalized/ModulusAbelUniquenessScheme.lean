@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
-import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoPullback
-import Nyll.AlgebraicCurves.Models.Construction.Transport
+module
+
+public import Nyll.JacobianVarieties.Generalized.ModulusAbelUniqueness
+public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveCurveModelIsoPullback
+public import Nyll.AlgebraicCurves.Models.Construction.Transport
 
 /-! # Intrinsic uniqueness for the pointed generalized Abel morphism -/
+
+@[expose] public section
 
 noncomputable section
 

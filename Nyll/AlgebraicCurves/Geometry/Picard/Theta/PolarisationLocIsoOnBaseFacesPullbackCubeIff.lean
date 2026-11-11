@@ -10,21 +10,25 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
-import Mathlib.AlgebraicGeometry.Modules.Presheaf
-import Nyll.SchemeTheory.Modules.PresheafInternalHom
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
-import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
-import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
+module
+
+public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.Product
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import Nyll.SchemeTheory.Modules.PresheafInternalHom
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
 
 /-!
 # Polarisation loc Iso On Base faces pullback cube iff of is Pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -319,77 +323,26 @@ theorem _root_.AlgebraicGeometry.Polarisation.locIsoOnBase_faces_pullback_cube_i
         ⟨Q.1 ≫ a, by rw [Category.assoc, ha.w, ← Category.assoc, Q.2]⟩).1)
     (N : (pullback (prodStr f₁ f₁) f₁).Modules) :
     (LocIsoOnBase (prodStr f f)
-        ((Scheme.Modules.pullback (pullback.lift
-          (pullback.lift (L.one (prodStr f f)).1 (pullback.fst f f) (by rw [(L.one _).2]))
-          (pullback.snd f f)
-          (by rw [pullback.lift_fst_assoc, (L.one _).2]; exact pullback.condition))).obj
-          ((Scheme.Modules.pullback (pullback.map (prodStr f f) f (prodStr f₁ f₁) f₁
-          (pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm ha.w.symm)
-          a (Spec.map (CommRingCat.ofHom φ))
-          (by
-            have h1 : pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm
-              ha.w.symm ≫
-                pullback.fst f₁ f₁ = pullback.fst f f ≫ a := pullback.lift_fst _ _ _
-            change (pullback.fst f f ≫ f) ≫ Spec.map (CommRingCat.ofHom φ) =
-              pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm ha.w.symm ≫
-                pullback.fst f₁ f₁ ≫ f₁
-            rw [Category.assoc, ← Category.assoc (pullback.map _ _ _ _ _ _ _ _ _), h1,
-              Category.assoc, ha.w])
-          ha.w.symm)).obj N)) (𝟙_ _) ↔
+        ((Scheme.Modules.pullback (FBC.F1 L)).obj
+          ((Scheme.Modules.pullback (FBC.aaa φ a ha)).obj N)) (𝟙_ _) ↔
       LocIsoOnBase (pullback.snd (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom φ)))
-        ((Scheme.Modules.pullback (pullback.fst (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom
-          φ)))).obj
-          ((Scheme.Modules.pullback (pullback.lift
-          (pullback.lift (L₁.one (prodStr f₁ f₁)).1 (pullback.fst f₁ f₁) (by rw [(L₁.one _).2]))
-          (pullback.snd f₁ f₁)
-          (by rw [pullback.lift_fst_assoc, (L₁.one _).2]; exact pullback.condition))).obj
-          N)) (𝟙_ _)) ∧
+        ((Scheme.Modules.pullback
+          (pullback.fst (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom φ)))).obj
+          ((Scheme.Modules.pullback (FBC.F1 L₁)).obj N)) (𝟙_ _)) ∧
     (LocIsoOnBase (prodStr f f)
-        ((Scheme.Modules.pullback (pullback.lift
-          (pullback.lift (pullback.fst f f) (L.one (prodStr f f)).1 (by rw [(L.one _).2]))
-          (pullback.snd f f)
-          (by rw [pullback.lift_fst_assoc]; exact pullback.condition))).obj
-          ((Scheme.Modules.pullback (pullback.map (prodStr f f) f (prodStr f₁ f₁) f₁
-          (pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm ha.w.symm)
-          a (Spec.map (CommRingCat.ofHom φ))
-          (by
-            have h1 : pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm
-              ha.w.symm ≫
-                pullback.fst f₁ f₁ = pullback.fst f f ≫ a := pullback.lift_fst _ _ _
-            change (pullback.fst f f ≫ f) ≫ Spec.map (CommRingCat.ofHom φ) =
-              pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm ha.w.symm ≫
-                pullback.fst f₁ f₁ ≫ f₁
-            rw [Category.assoc, ← Category.assoc (pullback.map _ _ _ _ _ _ _ _ _), h1,
-              Category.assoc, ha.w])
-          ha.w.symm)).obj N)) (𝟙_ _) ↔
+        ((Scheme.Modules.pullback (FBC.F2 L)).obj
+          ((Scheme.Modules.pullback (FBC.aaa φ a ha)).obj N)) (𝟙_ _) ↔
       LocIsoOnBase (pullback.snd (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom φ)))
-        ((Scheme.Modules.pullback (pullback.fst (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom
-          φ)))).obj
-          ((Scheme.Modules.pullback (pullback.lift
-          (pullback.lift (pullback.fst f₁ f₁) (L₁.one (prodStr f₁ f₁)).1 (by rw [(L₁.one _).2]))
-          (pullback.snd f₁ f₁)
-          (by rw [pullback.lift_fst_assoc]; exact pullback.condition))).obj N)) (𝟙_ _)) ∧
+        ((Scheme.Modules.pullback
+          (pullback.fst (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom φ)))).obj
+          ((Scheme.Modules.pullback (FBC.F2 L₁)).obj N)) (𝟙_ _)) ∧
     (LocIsoOnBase (prodStr f f)
-        ((Scheme.Modules.pullback (pullback.lift (𝟙 _) (L.one (prodStr f f)).1
-          (by rw [Category.id_comp, (L.one _).2]))).obj
-          ((Scheme.Modules.pullback (pullback.map (prodStr f f) f (prodStr f₁ f₁) f₁
-          (pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm ha.w.symm)
-          a (Spec.map (CommRingCat.ofHom φ))
-          (by
-            have h1 : pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm
-              ha.w.symm ≫
-                pullback.fst f₁ f₁ = pullback.fst f f ≫ a := pullback.lift_fst _ _ _
-            change (pullback.fst f f ≫ f) ≫ Spec.map (CommRingCat.ofHom φ) =
-              pullback.map f f f₁ f₁ a a (Spec.map (CommRingCat.ofHom φ)) ha.w.symm ha.w.symm ≫
-                pullback.fst f₁ f₁ ≫ f₁
-            rw [Category.assoc, ← Category.assoc (pullback.map _ _ _ _ _ _ _ _ _), h1,
-              Category.assoc, ha.w])
-          ha.w.symm)).obj N)) (𝟙_ _) ↔
+        ((Scheme.Modules.pullback (FBC.F3 L)).obj
+          ((Scheme.Modules.pullback (FBC.aaa φ a ha)).obj N)) (𝟙_ _) ↔
       LocIsoOnBase (pullback.snd (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom φ)))
-        ((Scheme.Modules.pullback (pullback.fst (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom
-          φ)))).obj
-          ((Scheme.Modules.pullback (pullback.lift (𝟙 _) (L₁.one (prodStr f₁ f₁)).1
-            (by rw [Category.id_comp, (L₁.one _).2]))).obj N)) (𝟙_ _)) := by
+        ((Scheme.Modules.pullback
+          (pullback.fst (prodStr f₁ f₁) (Spec.map (CommRingCat.ofHom φ)))).obj
+          ((Scheme.Modules.pullback (FBC.F3 L₁)).obj N)) (𝟙_ _)) := by
   exact ⟨FBC.face_iff φ a ha (FBC.F1_comp L₁ φ L a ha hLa) N,
     FBC.face_iff φ a ha (FBC.F2_comp L₁ φ L a ha hLa) N,
     FBC.face_iff φ a ha (FBC.F3_comp L₁ φ L a ha hLa) N⟩

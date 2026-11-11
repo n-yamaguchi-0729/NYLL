@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Spectral.Basic
-import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
-import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
-import Nyll.SchemeTheory.Topology.FiniteModelSheafColimit
-import Nyll.SchemeTheory.Topology.FiniteModelSheafDiagram
-import Nyll.SchemeTheory.Topology.FiniteProductRestriction
-import Nyll.SchemeTheory.Topology.FiniteSkyscraperEmbedding
-import Nyll.SchemeTheory.Topology.FilteredColimitRestriction
-import Nyll.SchemeTheory.Topology.PullbackFiniteSkyscraperEmbedding
-import Nyll.SchemeTheory.Topology.PullbackSkyscraperClosedDiscrete
-import Nyll.SchemeTheory.Topology.SpecializationCofinalRestriction
-import Nyll.SchemeTheory.Topology.SpectralClosedDiscreteRestriction
-import Nyll.SchemeTheory.Topology.SpectralClosedSubspaceRestriction
+module
+
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Spectral.Basic
+public import Nyll.SchemeTheory.Topology.ClosedDiscreteSheaf
+public import Nyll.SchemeTheory.Topology.CompactOpenFiniteModels
+public import Nyll.SchemeTheory.Topology.FiniteModelSheafColimit
+public import Nyll.SchemeTheory.Topology.FiniteModelSheafDiagram
+public import Nyll.SchemeTheory.Topology.FiniteProductRestriction
+public import Nyll.SchemeTheory.Topology.FiniteSkyscraperEmbedding
+public import Nyll.SchemeTheory.Topology.FilteredColimitRestriction
+public import Nyll.SchemeTheory.Topology.PullbackFiniteSkyscraperEmbedding
+public import Nyll.SchemeTheory.Topology.PullbackSkyscraperClosedDiscrete
+public import Nyll.SchemeTheory.Topology.SpecializationCofinalRestriction
+public import Nyll.SchemeTheory.Topology.SpectralClosedDiscreteRestriction
+public import Nyll.SchemeTheory.Topology.SpectralClosedSubspaceRestriction
 
 /-!
 # Global sections restrict bijectively along the spectral closed subset
@@ -37,6 +39,8 @@ Reference: Stacks Project, tag 09ZG,
 https://stacks.math.columbia.edu/tag/09ZG.
 The Lean proof is original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

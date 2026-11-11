@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.RegularLocalDimensionTwoDVR
 import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVFResidue
 import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverResidue
+import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
 
 /-!
 # Standard DVF residue characteristic on full-cover boundary primes

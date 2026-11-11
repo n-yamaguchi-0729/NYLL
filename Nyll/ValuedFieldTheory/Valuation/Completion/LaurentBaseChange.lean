@@ -11,12 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LaurentSeries
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+module
+
+public import Mathlib.RingTheory.LaurentSeries
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-!
 # Laurent Base Change
 -/
+
+@[expose] public section
 
 noncomputable section
 

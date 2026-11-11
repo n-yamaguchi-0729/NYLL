@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Topology.FiniteModelPrincipalStalk
-import Nyll.SchemeTheory.Topology.FiniteModelSheafDiagram
-import Nyll.SchemeTheory.Topology.FiniteModelStalkColimit
-import Nyll.SchemeTheory.Topology.SheafApproximationGerms
-import Nyll.SchemeTheory.Topology.SheafPullbackStalks
+module
+
+public import Nyll.SchemeTheory.Topology.FiniteModelPrincipalStalk
+public import Nyll.SchemeTheory.Topology.FiniteModelSheafDiagram
+public import Nyll.SchemeTheory.Topology.FiniteModelStalkColimit
+public import Nyll.SchemeTheory.Topology.SheafApproximationGerms
+public import Nyll.SchemeTheory.Topology.SheafPullbackStalks
 
 /-!
 # Stalks of the actual finite-model approximation diagram
@@ -20,6 +22,8 @@ isomorphism, so its naturality can be checked on those germs.
 
 The Lean constructions and proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

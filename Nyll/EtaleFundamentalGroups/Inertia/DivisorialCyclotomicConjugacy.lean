@@ -4,9 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteQuotientRealization
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverHeightOneConjugacy
-import Nyll.ProCGroups.Boundary.FiniteQuotientConjugacy
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteQuotientRealization
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverHeightOneConjugacy
+public import Nyll.ProCGroups.Boundary.FiniteQuotientConjugacy
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Divisorial cyclotomic conjugacy from finite quotients
@@ -18,6 +23,8 @@ height-one boundary prime.  Cyclotomic inversion in each actual deck group,
 together with finite-quotient detection of conjugacy in a profinite group,
 then gives conjugacy in the etale fundamental group itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

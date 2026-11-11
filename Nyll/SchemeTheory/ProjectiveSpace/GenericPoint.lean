@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
+public import Mathlib.Topology.Sober
 
 /-!
 # The generic point of projective space over a domain
@@ -15,6 +17,8 @@ import Mathlib.Topology.Sober
 The zero homogeneous ideal is prime and relevant. Its inclusion in every
 homogeneous prime proves that its closure is the whole projective space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.Algebra.Group.Units.Equiv
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Frames.PullbackFrame
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.Algebra.Group.Units.Equiv
 
 /-!
 # Automorphisms of the structure sheaf
@@ -18,6 +20,8 @@ module with global functions, and its automorphisms with invertible global
 functions. These are sheaf morphisms on every open, not just arbitrary maps
 on global sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,7 +37,7 @@ variable (X : Scheme.{u})
 
 /-- Apply a unit-module endomorphism using the ring of sections as carrier. -/
 def unitEndApp (f : End (𝟙_ X.Modules)) (U : X.Opens) (s : Γ(X, U)) : Γ(X, U) :=
-  f.app U (show Γ(𝟙_ X.Modules, U) from s)
+  f.asHom.app U (show Γ(𝟙_ X.Modules, U) from s)
 
 /-- Evaluate an endomorphism of the unit module at its global section one. -/
 def unitEndValue (f : End (𝟙_ X.Modules)) : Γ(X, ⊤) :=
@@ -44,12 +48,12 @@ theorem unitEnd_app (f : End (𝟙_ X.Modules)) (U : X.Opens) (s : Γ(X, U)) :
     unitEndApp X f U s =
       s * X.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (unitEndValue X f) := by
   have hn := ConcreteCategory.congr_hom
-    (f.mapPresheaf.naturality (homOfLE (le_top : U ≤ ⊤)).op)
+    (f.asHom.mapPresheaf.naturality (homOfLE (le_top : U ≤ ⊤)).op)
     (show Γ(𝟙_ X.Modules, ⊤) from (1 : Γ(X, ⊤)))
   change unitEndApp X f U (X.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op 1) =
     X.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (unitEndValue X f) at hn
   rw [map_one] at hn
-  have hs := Hom.app_smul f s
+  have hs := Hom.app_smul f.asHom s
     (show Γ(𝟙_ X.Modules, U) from (1 : Γ(X, U)))
   change unitEndApp X f U (s * 1) = s * unitEndApp X f U 1 at hs
   rw [mul_one, hn] at hs
@@ -58,6 +62,7 @@ theorem unitEnd_app (f : End (𝟙_ X.Modules)) (U : X.Opens) (s : Γ(X, U)) :
 /-- An endomorphism of the unit module is determined by the value of one. -/
 theorem unitEndValue_injective : Function.Injective (unitEndValue X) := by
   intro f g h
+  apply End.ext
   apply hom_ext
   intro U
   apply ConcreteCategory.hom_ext
@@ -69,8 +74,8 @@ theorem unitEndValue_injective : Function.Injective (unitEndValue X) := by
 /-- Every global function defines the corresponding multiplication endomorphism. -/
 theorem unitEndValue_surjective : Function.Surjective (unitEndValue X) := by
   intro a
-  refine ⟨FramePullback.smulHom (𝟙_ X.Modules)
-    (show Γ(𝟙_ X.Modules, ⊤) from a), ?_⟩
+  refine ⟨End.of (FramePullback.smulHom (𝟙_ X.Modules)
+    (show Γ(𝟙_ X.Modules, ⊤) from a)), ?_⟩
   change (1 : Γ(X, ⊤)) *
     X.presheaf.map (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)).op a = a
   rw [Subsingleton.elim (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)) (𝟙 _),
@@ -101,17 +106,19 @@ def unitAutEquivUnits : Aut (𝟙_ X.Modules) ≃* Γ(X, ⊤)ˣ :=
 /-- The unit corresponding to an automorphism is its value on the global section one. -/
 @[simp]
 theorem unitAutEquivUnits_val (e : Aut (𝟙_ X.Modules)) :
-    (unitAutEquivUnits X e : Γ(X, ⊤)) = unitEndValue X e.hom := rfl
+    (unitAutEquivUnits X e : Γ(X, ⊤)) = unitEndValue X (End.of e.asIso.hom) := rfl
 
 /-- Composition of scalar automorphisms multiplies their global units. -/
 theorem unitAutEquivUnits_trans (e f : Aut (𝟙_ X.Modules)) :
-    unitAutEquivUnits X (e ≪≫ f) = unitAutEquivUnits X e * unitAutEquivUnits X f := by
+    unitAutEquivUnits X (Aut.of (e.asIso ≪≫ f.asIso)) =
+      unitAutEquivUnits X e * unitAutEquivUnits X f := by
   change unitAutEquivUnits X (f * e) = _
   rw [map_mul, mul_comm]
 
 /-- The composition formula expressed with the literal sheaf-isomorphism type. -/
 theorem unitAutEquivUnits_isoTrans (e f : 𝟙_ X.Modules ≅ 𝟙_ X.Modules) :
-    unitAutEquivUnits X (e ≪≫ f) = unitAutEquivUnits X e * unitAutEquivUnits X f :=
-  unitAutEquivUnits_trans X e f
+    unitAutEquivUnits X (Aut.of (e ≪≫ f)) =
+      unitAutEquivUnits X (Aut.of e) * unitAutEquivUnits X (Aut.of f) :=
+  unitAutEquivUnits_trans X (Aut.of e) (Aut.of f)
 
 end AlgebraicGeometry.Scheme.Modules

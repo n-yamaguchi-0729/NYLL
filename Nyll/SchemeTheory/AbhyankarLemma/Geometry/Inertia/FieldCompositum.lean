@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldTower
-import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.CompositumRestriction
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldTower
+public import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.CompositumRestriction
 
 /-!
 # Inertia on a compositum
@@ -15,6 +17,8 @@ by its restrictions to the two fields.  This gives the injective map from the
 inertia group of a compositum to the product of the two lower inertia groups
 used in SGA 1, Expose X, Lemma 3.6.
 -/
+
+@[expose] public section
 
 noncomputable section
 

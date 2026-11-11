@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Connected.Clopen
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.Topology.Sets.Closeds
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.ConstructibleTopology
+module
+
+public import Mathlib.Topology.Connected.Clopen
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Topology.Sets.Closeds
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
 # Clopen restriction along a closed subset of a spectral space
@@ -25,6 +27,8 @@ intersection hypothesis makes them stable under specialization.
 References: https://stacks.math.columbia.edu/tag/0CAM and
 https://stacks.math.columbia.edu/tag/09ZG. The Lean proofs are original.
 -/
+
+@[expose] public section
 
 noncomputable section
 

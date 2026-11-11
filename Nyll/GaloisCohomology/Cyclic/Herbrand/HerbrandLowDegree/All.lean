@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Basic
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.BinaryProduct
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Cardinality
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Core
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.EquivariantEquiv
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Index
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Product
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.TateComparison
+module
+
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.IntegralTateComparison
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Basic
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.BinaryProduct
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Cardinality
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Core
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.EquivariantEquiv
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Index
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Product
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.TateComparison
 
 /-!
 # Low-degree Herbrand quotients

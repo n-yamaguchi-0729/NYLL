@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Sym.Card
-import Nyll.AlgebraicCurves.Hilbert.PointHilbertFunctionOfMemIff
-import Mathlib.Data.Finsupp.Multiset
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
+module
+
+public import Mathlib.Data.Sym.Card
+public import Nyll.AlgebraicCurves.Hilbert.PointHilbertFunctionOfMemIff
+public import Mathlib.Data.Finsupp.Multiset
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Hilbert.Functor.Basic
 
 /-!
 # exists point I eq span of forall surjective of forall projective
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -161,8 +165,10 @@ theorem exists_point_I_eq_span_of_forall_surjective_of_forall_projective
         := by
         intro G hG
         by_cases hG0 : G = 0
-        · have h0 : (⟨c G * G, hmemd G hG⟩ : ↥(homogeneousSubmodule (Fin (n + 1)) A d)) = 0 :=
-            Subtype.ext (by simp [hG0])
+        · have h0 : (⟨c G * G, hmemd G hG⟩ : ↥(homogeneousSubmodule (Fin (n + 1)) A d)) = 0 := by
+            apply Subtype.ext
+            change c G * G = 0
+            rw [hG0, mul_zero]
           rw [h0, map_zero]
         · obtain ⟨hmeG, hΘG⟩ := hgen G hG hG0
           have h1 := hmul (e G) hmeG G (hprop G hG).2.1 (d - e G) (c G) (hprop G hG).2.2 hΘG

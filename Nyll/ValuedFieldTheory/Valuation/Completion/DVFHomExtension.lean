@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Extending field homomorphisms to actual valuation completions
@@ -14,6 +16,8 @@ Scalar extension of the original homomorphism, transported through the
 actual tensor comparison, gives a homomorphism over the base completion.
 Only the source extension needs to be finite and separable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

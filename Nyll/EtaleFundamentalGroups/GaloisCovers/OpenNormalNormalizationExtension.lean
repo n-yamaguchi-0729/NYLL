@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbelian
-import Nyll.EtaleFundamentalGroups.GaloisCovers.ExtensionAcrossSourceIso
-import Nyll.EtaleFundamentalGroups.Purity.ConnectedNormalizationExtension
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbelian
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.ExtensionAcrossSourceIso
+public import Nyll.EtaleFundamentalGroups.Purity.ConnectedNormalizationExtension
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Canonical normalization extensions on open-normal pullback models
@@ -17,6 +20,8 @@ the pulled boundary.  This file transports a cover across that isomorphism,
 uses the canonical function-field normalization as its extension, and then
 transports the resulting pullback isomorphism back to the original model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

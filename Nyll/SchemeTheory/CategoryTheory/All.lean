@@ -4,44 +4,52 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
-import Nyll.SchemeTheory.CategoryTheory.CokernelNsmulQuotient
-import Nyll.SchemeTheory.CategoryTheory.CommAlgRingMap
-import Nyll.SchemeTheory.CategoryTheory.CommGroupPoints
-import Nyll.SchemeTheory.CategoryTheory.DescentComparison
-import Nyll.SchemeTheory.CategoryTheory.FilteredColimitFiniteDescent
-import Nyll.SchemeTheory.CategoryTheory.FunctorCategoryExactness
-import Nyll.SchemeTheory.CategoryTheory.ModuleCatTensorExtension
-import Nyll.SchemeTheory.CategoryTheory.MonoidalCategoryIsoTensorIsoTensorUnit
-import Nyll.SchemeTheory.CategoryTheory.MonoidalClosedIsoEvAppIsoCurryBraidingEv
-import Nyll.SchemeTheory.CategoryTheory.MorphismPropertyWidePullbackBase
-import Nyll.SchemeTheory.CategoryTheory.OverPullbackLeft
-import Nyll.SchemeTheory.CategoryTheory.OverTotalLocalBijection
-import Nyll.SchemeTheory.CategoryTheory.OverTotalMap
-import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
-import Nyll.SchemeTheory.CategoryTheory.OverTotalRepresentation
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
-import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
-import Nyll.SchemeTheory.CategoryTheory.PresheafDirectSum
-import Nyll.SchemeTheory.CategoryTheory.PresheafModulePushforward
-import Nyll.SchemeTheory.CategoryTheory.PseudofunctorDescentDataIsoToDescentDataObj
-import Nyll.SchemeTheory.CategoryTheory.Pullback
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupBaseChange
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupDiagram
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupPullbackIso
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
-import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
-import Nyll.SchemeTheory.CategoryTheory.SheafificationLocalLifts
-import Nyll.SchemeTheory.CategoryTheory.ModuleColimitGenerator
+module
+
+public import Nyll.SchemeTheory.CategoryTheory.ModuleEndomorphismPowers
+
+public import Nyll.SchemeTheory.CategoryTheory.AdjunctionGroupPoints
+public import Nyll.SchemeTheory.CategoryTheory.CokernelNsmulQuotient
+public import Nyll.SchemeTheory.CategoryTheory.CommAlgRingMap
+public import Nyll.SchemeTheory.CategoryTheory.CommGroupPoints
+public import Nyll.SchemeTheory.CategoryTheory.DescentComparison
+public import Nyll.SchemeTheory.CategoryTheory.FilteredColimitFiniteDescent
+public import Nyll.SchemeTheory.CategoryTheory.FunctorCategoryExactness
+public import Nyll.SchemeTheory.CategoryTheory.ModuleCatTensorExtension
+public import Nyll.SchemeTheory.CategoryTheory.MonoidalCategoryIsoTensorIsoTensorUnit
+public import Nyll.SchemeTheory.CategoryTheory.MonoidalClosedIsoEvAppIsoCurryBraidingEv
+public import Nyll.SchemeTheory.CategoryTheory.MorphismPropertyWidePullbackBase
+public import Nyll.SchemeTheory.CategoryTheory.OverPullbackLeft
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalLocalBijection
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalMap
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalPresheaf
+public import Nyll.SchemeTheory.CategoryTheory.OverTotalRepresentation
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorCoordinates
+public import Nyll.SchemeTheory.CategoryTheory.PointedTorsorMap
+public import Nyll.SchemeTheory.CategoryTheory.PresheafDirectSum
+public import Nyll.SchemeTheory.CategoryTheory.PresheafModulePushforward
+public import Nyll.SchemeTheory.CategoryTheory.PseudofunctorDescentDataIsoToDescentDataObj
+public import Nyll.SchemeTheory.CategoryTheory.Pullback
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupBaseChange
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupDiagram
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIdentity
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupPullbackIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroupTargetIso
+public import Nyll.SchemeTheory.CategoryTheory.RepresentedGroups
+public import Nyll.SchemeTheory.CategoryTheory.SheafificationLocalLifts
+public import Nyll.SchemeTheory.CategoryTheory.ModuleColimitGenerator
 
 /- Canonical aggregate for SchemeTheory.CategoryTheory. -/
 
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
-import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerMapComparison
-import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparisonExistence
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparison
+public import Nyll.SchemeTheory.CategoryTheory.EquivariantScalarTowerComparison
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerMapComparison
+public import Nyll.SchemeTheory.CategoryTheory.ScalarTowerComparisonExistence
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.CategoryTheory.EqualizerPoints
+public import Nyll.SchemeTheory.CategoryTheory.FiniteActionGraphs
+public import Nyll.SchemeTheory.CategoryTheory.TensorInverseIso
 
 /-!
 # Categorical tools for scheme descent

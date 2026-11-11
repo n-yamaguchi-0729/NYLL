@@ -10,18 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.AlgHomLiftEtale
 
 /-!
 # Henselian Local Ring exists alg Hom lift of is Smooth At
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs
 namespace HenselianLocalRing_exists_algHom_lift_of_isSmoothAt
 
-universe u
+universe u v
 
 open IsLocalRing TensorProduct
 
@@ -30,7 +34,7 @@ namespace HenselSmoothLift
 variable {R : Type u} [CommRing R] [HenselianLocalRing R]
 
 theorem exists_lift_of_isStandardEtale_mvPolynomial
-    {n : ℕ} (A : Type u) [CommRing A] [Algebra R A]
+    {n : ℕ} (A : Type v) [CommRing A] [Algebra R A]
     [Algebra (MvPolynomial (Fin n) R) A] [IsScalarTower R (MvPolynomial (Fin n) R) A]
     [Algebra.IsStandardEtale (MvPolynomial (Fin n) R) A]
     (φ : A →ₐ[R] ResidueField R) :
@@ -44,7 +48,10 @@ theorem exists_lift_of_isStandardEtale_mvPolynomial
     have h : (Algebra.ofId R (ResidueField R)).comp θ' = θ := by
       apply MvPolynomial.algHom_ext
       intro i
-      simp [θ', hc]
+      change algebraMap R (ResidueField R) (MvPolynomial.aeval c (MvPolynomial.X i)) =
+        θ (MvPolynomial.X i)
+      rw [MvPolynomial.aeval_X]
+      exact hc i
     simpa using congrArg (fun g => g r) h
   let iR : Algebra (MvPolynomial (Fin n) R) R := θ'.toRingHom.toAlgebra
   let iK : Algebra (MvPolynomial (Fin n) R) (ResidueField R) :=
@@ -86,10 +93,11 @@ theorem exists_lift_of_isStandardEtale_mvPolynomial
   rw [hχ, hψT]
   change Algebra.TensorProduct.lift _ _ _ ((1 : R) ⊗ₜ[MvPolynomial (Fin n) R] a) = φ a
   rw [Algebra.TensorProduct.lift_tmul]
-  simp [φ']
+  change algebraMap R (ResidueField R) 1 * φ a = φ a
+  rw [map_one, one_mul]
 
 theorem exists_lift_of_isSmoothAt
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S]
     (φ : S →ₐ[R] ResidueField R)
     [(RingHom.ker φ).IsPrime] [Algebra.IsSmoothAt R (RingHom.ker φ)] :
     ∃ ψ : S →ₐ[R] R, ∀ s, algebraMap R (ResidueField R) (ψ s) = φ s := by
@@ -103,14 +111,14 @@ theorem exists_lift_of_isSmoothAt
   let φf : Localization.Away f →ₐ[R] ResidueField R :=
     IsLocalization.liftAlgHom (M := Submonoid.powers f) hu
   have hφf : ∀ s, φf (algebraMap S (Localization.Away f) s) = φ s := fun s => by
-    simp [φf, IsLocalization.liftAlgHom_apply]
+    exact IsLocalization.lift_eq hu s
   obtain ⟨ψf, hψf⟩ :=
     @exists_lift_of_isStandardEtale_mvPolynomial R _ _ n (Localization.Away f) _ _ iA iT iE φf
   refine ⟨ψf.comp (IsScalarTower.toAlgHom R S (Localization.Away f)), fun s => ?_⟩
   rw [AlgHom.comp_apply, IsScalarTower.coe_toAlgHom', hψf, hφf]
 
 theorem exists_lift_of_smooth
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.Smooth R S]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.Smooth R S]
     (φ : S →ₐ[R] ResidueField R) :
     ∃ ψ : S →ₐ[R] R, ∀ s, algebraMap R (ResidueField R) (ψ s) = φ s := by
   have := RingHom.ker_isPrime φ
@@ -120,7 +128,7 @@ end HenselSmoothLift
 
 theorem _root_.HenselianLocalRing.exists_algHom_lift_of_isSmoothAt
     {R : Type u} [CommRing R] [HenselianLocalRing R]
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S]
     (φ : S →ₐ[R] IsLocalRing.ResidueField R)
     [(RingHom.ker φ).IsPrime] [Algebra.IsSmoothAt R (RingHom.ker φ)] :
     ∃ ψ : S →ₐ[R] R, ∀ s : S, algebraMap R (IsLocalRing.ResidueField R) (ψ s) = φ s :=

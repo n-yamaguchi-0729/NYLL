@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Modules.Tensor.TensorSections
-import Mathlib.CategoryTheory.Localization.Monoidal.Braided
+module
+
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
+public import Mathlib.CategoryTheory.Localization.Monoidal.Braided
 
 /-!
 # Braiding on the actual tensor sections of module sheaves
@@ -17,6 +19,8 @@ with the tensor of sheaves intertwines the original presheaf braiding
 and sheaf braiding. Evaluating on the sheafification unit of a pure
 tensor proves that braiding exchanges the original two local sections.
 -/
+
+@[expose] public section
 
 universe u
 

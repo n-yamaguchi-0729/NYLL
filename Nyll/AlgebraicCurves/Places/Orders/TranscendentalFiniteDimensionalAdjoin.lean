@@ -10,24 +10,28 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Valuation.Integral
-import Mathlib.Algebra.Order.GroupWithZero.Canonical
-import Mathlib.RingTheory.Algebraic.Defs
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.RingTheory.AlgebraTower
-import Mathlib.Tactic.Positivity.Core
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Linarith.Frontend
+module
+
+public import Mathlib.RingTheory.Valuation.Integral
+public import Mathlib.Algebra.Order.GroupWithZero.Canonical
+public import Mathlib.RingTheory.Algebraic.Defs
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.AlgebraTower
+public import Mathlib.Tactic.Positivity.Core
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Linarith.Frontend
 
 /-!
 # Transcendental and finite Dimensional adjoin of valuations
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -51,7 +55,7 @@ def lSpace (V : Set (Valuation F ℤᵐ⁰))
   smul_mem' c {g} hg := fun v hv => by
     rw [Algebra.smul_def, map_mul]
     by_cases hc : c = 0
-    · simp [hc]
+    · simp only [hc, map_zero, zero_mul, zero_le]
     · rw [hK v hv c hc, one_mul]; exact hg v hv
 
 open Classical in
@@ -162,7 +166,7 @@ theorem lSpace_cons_le (V : Set (Valuation F ℤᵐ⁰))
           refine (Valuation.map_sub v _ _).trans (max_le h1 ?_)
           rw [Algebra.smul_def, map_mul]
           by_cases hc0 : c = 0
-          · simp [hc0]
+          · simp only [hc0, map_zero, zero_mul, zero_le]
           · rw [hK v hv c hc0, one_mul]; exact h2
       have : g = (g - c • g₀) + c • g₀ := by abel
       rw [this]
@@ -239,7 +243,8 @@ theorem exists_mem_lSpace (V : Set (Valuation F ℤᵐ⁰))
     ∃ m : Multiset (Valuation F ℤᵐ⁰), g ∈ lSpace V hK m := by
   classical
   by_cases hg : g = 0
-  · exact ⟨0, fun v hv => by simp [hg]⟩
+  · exact ⟨0, fun v hv => by simp only [hg, map_zero, Multiset.notMem_zero, not_false_eq_true,
+    Multiset.count_eq_zero_of_notMem, CharP.cast_eq_zero, WithZero.exp_zero, zero_le]⟩
   refine ⟨∑ w ∈ (hfin g hg).toFinset, (WithZero.log (w g)).toNat • ({w} : Multiset (Valuation F
     ℤᵐ⁰)),
     fun v hv => ?_⟩
@@ -289,7 +294,7 @@ theorem v_le_one_of_isIntegral (V : Set (Valuation F ℤᵐ⁰))
   have hmem : ∀ c : K, algebraMap K F c ∈ v.integer := fun c => by
     rw [Valuation.mem_integer_iff]
     by_cases hc : c = 0
-    · simp [hc]
+    · simp only [hc, map_zero, zero_le]
     · exact (hK v hv c hc).le
   let φ : K →+* v.integer := (algebraMap K F).codRestrict v.integer.toSubsemiring hmem
   have hint : IsIntegral v.integer f := by

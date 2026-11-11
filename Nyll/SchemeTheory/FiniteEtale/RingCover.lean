@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.RingTheory.Discriminant
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.PowerBasis
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.Discriminant
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.PowerBasis
 
 /-!
 # Field Arithmetic, Definition 7.1.3: ring covers
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.PowerBasis
 The book's condition `S = R[z]` is recorded by the existence of a power basis.
 The Galois condition is stated for the induced extension of fraction fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

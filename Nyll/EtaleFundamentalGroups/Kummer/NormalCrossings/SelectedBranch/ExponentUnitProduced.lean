@@ -69,10 +69,10 @@ noncomputable def chosenFactorFiniteUnramifiedDiagonalAwayEquiv
     [Algebra A B] [Algebra A C] [Algebra B D]
     [Module.Finite A C] [Algebra.FormallyUnramified A C]
     (e : (B ⊗[A] C) ≃ₐ[B] D) :
-    letI : Algebra C D := tensorChosenFactorRightAlgebra e
+    let : Algebra C D := tensorChosenFactorRightAlgebra e
     D ⊗[C]
         Localization.Away (Algebra.FormallyUnramified.elem A C) ≃ₐ[D] D := by
-  letI : Algebra C D := tensorChosenFactorRightAlgebra e
+  intro sharedDefinitionOwner1
   exact finiteUnramifiedDiagonalAwayBaseChangeEquiv
     (A := A) (C := C) (E := D)
 

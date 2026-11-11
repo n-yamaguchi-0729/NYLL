@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIntegralAlgClosed
-import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralFieldDescent
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralAlgClosed
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralFieldDescent
 
 /-!
 # geometrically Integral of forall is Alg Closed is Integral pullback
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

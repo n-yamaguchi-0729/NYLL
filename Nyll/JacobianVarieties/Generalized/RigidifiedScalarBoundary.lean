@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 Repository: https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedScalars
-import Mathlib.GroupTheory.QuotientGroup.Defs
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedScalars
+public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-!
 # The scalar quotient for globally trivial underlying bundles
@@ -16,6 +18,8 @@ restrictions of global units classifies exactly the chosen-rigidified classes
 whose underlying line bundle is globally trivial. No assertion about the
 relative Picard sheaf kernel or the constant field is built into this result.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -61,7 +65,7 @@ def IsGloballyTrivial : Classes i → Prop :=
 
 /-- The actual scalar boundary, retaining the chosen modulus automorphism. -/
 def scalarClass (a : Γ(D, ⊤)ˣ) : Classes i :=
-  classOf (unitWith i ((unitAutEquivUnits D).symm a))
+  classOf (unitWith i ((unitAutEquivUnits D).symm a).asIso)
 
 /-- The relation on scalar classes is exactly the restriction of global units. -/
 theorem scalarClass_eq_iff (a b : Γ(D, ⊤)ˣ) :
@@ -81,11 +85,11 @@ theorem scalarClass_range : Set.range (scalarClass i) =
     induction x using Quotient.ind with
     | _ M =>
       obtain ⟨e⟩ := hx
-      refine ⟨unitAutEquivUnits D (scalarAutOfTrivialization i M e), ?_⟩
-      change classOf (unitWith i ((unitAutEquivUnits D).symm
-        (unitAutEquivUnits D (scalarAutOfTrivialization i M e)))) = classOf M
-      exact (congrArg (fun a : Aut (𝟙_ D.Modules) => classOf (unitWith i a))
-        ((unitAutEquivUnits D).symm_apply_apply (scalarAutOfTrivialization i M e))).trans
+      refine ⟨unitAutEquivUnits D (Aut.of (scalarAutOfTrivialization i M e)), ?_⟩
+      change classOf (unitWith i (((unitAutEquivUnits D).symm
+        (unitAutEquivUnits D (Aut.of (scalarAutOfTrivialization i M e))))).asIso) = classOf M
+      exact (congrArg (fun a : Aut (𝟙_ D.Modules) => classOf (unitWith i a.asIso))
+        ((unitAutEquivUnits D).symm_apply_apply (Aut.of (scalarAutOfTrivialization i M e)))).trans
           (Quotient.sound ⟨(isoUnitWithOfTrivialization i M e).symm⟩)
 
 /-- Scalars that extend to global units of the ambient scheme. -/

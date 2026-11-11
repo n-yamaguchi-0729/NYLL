@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Adjunction.Whiskering
-import Mathlib.Algebra.Category.Grp.Adjunctions
+module
+
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Adjunction.Whiskering
+public import Mathlib.Algebra.Category.Grp.Adjunctions
 
 /-!
 # Free abelian sheaves of local surjections
@@ -15,6 +17,8 @@ A local surjection of presheaves induces an epimorphism after taking
 free abelian groups and sheafifying. The proof uses separatedness and
 the two defining adjunctions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.FieldNormImage
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Invariants
-import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.BaseNorm
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.FieldNormImage
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Invariants
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.BaseNorm
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValueGroup
 
 /-!
 # Neu1999 residue-degree lcm divisibility
@@ -14,6 +17,8 @@ import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Nonarchimede
 This file extracts concrete residue-degree divisibility from the Neu1999
 field-norm value-image comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

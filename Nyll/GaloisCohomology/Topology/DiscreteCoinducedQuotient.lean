@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousCoinducedPrimitives
-import Nyll.GaloisCohomology.Topology.DiscreteCoefficientQuotient
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousCoinducedPrimitives
+public import Nyll.GaloisCohomology.Topology.DiscreteCoefficientQuotient
 
 /-!
 # The actual discrete quotient of coinduction by constants
@@ -14,6 +16,8 @@ The quotient is the ordinary module quotient of continuous functions by
 constant functions, with its induced group action and discrete topology.
 For compact groups it is the cokernel used in continuous dimension shifting.
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u v

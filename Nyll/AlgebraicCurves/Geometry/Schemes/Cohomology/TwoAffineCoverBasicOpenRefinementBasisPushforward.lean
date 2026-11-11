@@ -10,67 +10,70 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Lean.Elab.Command
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Submodule.Basic
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Monoidal.Category
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.CategoryTheory.Opposites
-import Mathlib.Data.Finset.Image
-import Mathlib.Data.Finset.Filter
-import Mathlib.Data.Set.Finite.Basic
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.LinearAlgebra.StdBasis
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.EquationalCriterion
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.TensorProduct.Free
-import Mathlib.Topology.Category.TopCat.Opens
-import Mathlib.Topology.Sets.Opens
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Mathlib.Tactic.Choose
-import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleNotMemLinearIndependentSmulMemSpan
-import Nyll.SchemeTheory.Modules.Tensor.BaseChangeSectionsLinearEquivPushforwardTensorUnit
-import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
-import Nyll.SchemeTheory.Modules.Tensor.Monoidal
-import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
-import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Submodule.Basic
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.CategoryTheory.Opposites
+public import Mathlib.Data.Finset.Image
+public import Mathlib.Data.Finset.Filter
+public import Mathlib.Data.Set.Finite.Basic
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.LinearAlgebra.StdBasis
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.Topology.Category.TopCat.Opens
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+public import Mathlib.Tactic.Choose
+public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.ModuleNotMemLinearIndependentSmulMemSpan
+public import Nyll.SchemeTheory.Modules.Tensor.BaseChangeSectionsLinearEquivPushforwardTensorUnit
+public import Nyll.SchemeTheory.Modules.Frames.BasisMapEqIsAffineOpen
+public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+public import Nyll.SchemeTheory.Modules.LocallyFreeOfRank
 
 /-!
 # Scheme Two Affine Open Cover exists basic Open refinement basis pushforward
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -244,69 +247,9 @@ theorem finrank_baseChange_sections_pushforward_unit [IsFinite π] [Flat π]
 
 end AlgebraicGeometry.EXREF.Dict
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
+open scoped AlgebraicGeometry
+open scoped AlgebraicGeometry.EXREF
+open scoped AlgebraicGeometry.EXREF.Dict
 
 open _root_.CategoryTheory
 open _root_.CategoryTheory.Limits
@@ -456,81 +399,10 @@ theorem basicOpen_nonempty [IsIntegral X] {U : X.Opens} (f : Γ(X, U)) (hf : f �
 
 end AlgebraicGeometry.EXREF.Topo
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
+open scoped AlgebraicGeometry
+open scoped AlgebraicGeometry.EXREF
+open scoped AlgebraicGeometry.EXREF.Dict
+open scoped AlgebraicGeometry.EXREF.Topo
 
 open _root_.CategoryTheory
 open _root_.CategoryTheory.Limits
@@ -680,113 +552,10 @@ private theorem main (W : X.Opens) (hW : W ≤ V) :
 
 end AlgebraicGeometry.Scheme.Modules.RGlue
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry
+open scoped AlgebraicGeometry.EXREF
+open scoped AlgebraicGeometry.EXREF.Dict
+open scoped AlgebraicGeometry.EXREF.Topo
 
 namespace EXREF
 
@@ -856,61 +625,17 @@ theorem exists_basis_baseChange_of_isUnit {d : ℕ} (f : A) (e : Fin d → P)
 
 end BaseChange
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry
+open scoped AlgebraicGeometry.EXREF
+open scoped AlgebraicGeometry.EXREF.Dict
+open scoped AlgebraicGeometry.EXREF.Topo
 
 end EXREF
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry
+open scoped AlgebraicGeometry.EXREF
+open scoped AlgebraicGeometry.EXREF.Dict
+open scoped AlgebraicGeometry.EXREF.Topo
 
 namespace AlgebraicGeometry
 
@@ -1036,86 +761,10 @@ theorem main [IsIntegral X]
 
 end AlgebraicGeometry.EXREF.Assembly
 
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
-
-open Lean Elab Command in
-run_cmd
-  for word in ([
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Dict"),
-      ("AlgebraicCurves.Geometry.Schemes.Proofs." ++
-        "Scheme_TwoAffineOpenCover_exists_basicOpen_refinement_basis_pushforward." ++
-        "AlgebraicGeometry.EXREF.Topo")
-    ] : List String) do
-    let ns := word.toName
-    for ext in (← scopedEnvExtensionsRef.get) do
-      modifyEnv fun env =>
-        let st := ext.ext.getState env
-        match st.stateStack with
-        | top :: stack =>
-          let top := { top with activeScopes := top.activeScopes.erase ns }
-          ext.activateScoped (ext.ext.setState env { st with stateStack := top :: stack }) ns
-        | _ => env
-
+open scoped AlgebraicGeometry
+open scoped AlgebraicGeometry.EXREF
+open scoped AlgebraicGeometry.EXREF.Dict
+open scoped AlgebraicGeometry.EXREF.Topo
 
 theorem
   _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.exists_basicOpen_refinement_basis_pushforward

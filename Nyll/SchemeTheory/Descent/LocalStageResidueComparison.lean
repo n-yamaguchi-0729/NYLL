@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Localizing an actual stage at the contraction of a closed point
@@ -17,6 +19,8 @@ maximal ideal. The residue fiber of a scheme over the stage is unchanged by
 this localization. These actual maps compare sections lifted at the local
 stage with their pullbacks to the original closed fiber.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleExtension
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocalAffineSections
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSubopen
-import Nyll.SchemeTheory.Modules.Submodules.SubmoduleCoverEquality
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.AffineFiniteSubmoduleExtension
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeLocalAffineSections
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeSubopen
+public import Nyll.SchemeTheory.Modules.Submodules.SubmoduleCoverEquality
 
 /-!
 # Finite-type affine submodules preserving a quasi-compact restriction
@@ -22,6 +24,8 @@ submodule, and sheaf membership locality identifies its restriction.
 This is the affine step of Stacks Tag 01PF, applied after the actual
 quasicoherent extension of Tag 01PE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

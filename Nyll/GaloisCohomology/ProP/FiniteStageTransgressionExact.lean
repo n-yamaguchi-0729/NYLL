@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionLinear
-import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Mathlib.Algebra.Field.ZMod
+module
+
+public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionLinear
+public import Nyll.GaloisCohomology.ProP.FiniteTransgressionExact
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Mathlib.Algebra.Field.ZMod
 
 /-!
 # Exactness of finite-stage transgression
@@ -16,6 +18,8 @@ At an open finite quotient stage, every abstract mod-`p` character is continuous
 therefore upgrades finite transgression exactness to the continuous degree-one characters of the
 ambient finite quotient: their restriction range is exactly the kernel of finite transgression.
 -/
+
+@[expose] public section
 
 open scoped Topology
 

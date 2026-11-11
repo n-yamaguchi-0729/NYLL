@@ -4,15 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Cohomology.GenericSectionsComparison
-import Nyll.EtaleFundamentalGroups.Cohomology.DVRGenericUnitQuotient
-import Nyll.EtaleCohomology.Classical.FieldKummerH1Quotient
-import Nyll.EtaleCohomology.Classical.StrictHenselianDVRKummer
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVRAtPrime
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
-import Mathlib.Algebra.CharZero.AddMonoidHom
-import Mathlib.RingTheory.DedekindDomain.Dvr
+module
+
+public import Nyll.EtaleFundamentalGroups.Cohomology.GenericSectionsComparison
+public import Nyll.EtaleFundamentalGroups.Cohomology.DVRGenericUnitQuotient
+public import Nyll.EtaleCohomology.Classical.FieldKummerH1Quotient
+public import Nyll.EtaleCohomology.Classical.StrictHenselianDVRKummer
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVRAtPrime
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import Mathlib.Algebra.CharZero.AddMonoidHom
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Nyll.EtaleCohomology.Classical.AbelianSheafFunctors
+public import Nyll.EtaleCohomology.Classical.KummerSequence
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroup
+public import Nyll.EtaleCohomology.Classical.MultiplicativeGroupPushforward
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianUnitRoots
 
 /-!
 # Generic-unit power cokernels and geometric Kummer residues
@@ -20,6 +27,8 @@ import Mathlib.RingTheory.DedekindDomain.Dvr
 The actual generic-unit quotient modulo powers has geometric stalks given
 by actual field Kummer H¹ for the fraction field of the geometric local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -70,6 +79,27 @@ def geometricGenericPowerCokernelStalkIso (n : ℕ) :
 
 
 /-- The geometric residue sheaf defined using actual generic units has,
+the actual derived Kummer H1 of the fraction field of the geometric
+local ring when the exponent is explicitly invertible in its spectrum sections. -/
+def geometricGenericPowerCokernelStalkH1IsoOfIsUnit
+    {n : ℕ} (hn : 0 < n)
+    (hnK : IsUnit (n : Γ(Spec (CommRingCat.of
+      (FractionRing (geometricStalk (Spec.map (CommRingCat.ofHom φ))))), ⊤))) :
+    ((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom φ))).sheafFiber
+      (A := AddCommGrpCat.{u})).obj
+      (cokernel (n • 𝟙 ((EtaleCohomology.etaleAbelianPushforward
+        (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))).obj
+          (EtaleCohomology.etaleMultiplicativeGroupSheaf
+            (Spec (CommRingCat.of (FractionRing R))))))) ≅
+      AddCommGrpCat.of (Sheaf.H.{u}
+        (EtaleCohomology.etaleRootsOfUnitySheaf
+          (Spec (CommRingCat.of
+            (FractionRing (geometricStalk (Spec.map (CommRingCat.ofHom φ)))))) n) 1) :=
+  geometricGenericPowerCokernelStalkIso R φ n ≪≫
+    EtaleCohomology.fieldKummerUnitCokernelIso
+      (FractionRing (geometricStalk (Spec.map (CommRingCat.ofHom φ)))) hn hnK
+
+/-- The geometric residue sheaf defined using actual generic units has,
 at each geometric point in characteristic zero, the actual derived
 Kummer H1 of the fraction field of that geometric local ring. -/
 def geometricGenericPowerCokernelStalkH1Iso [CharZero R]
@@ -92,16 +122,10 @@ def geometricGenericPowerCokernelStalkH1Iso [CharZero R]
       change (geometricStalkStructureMap φ) 1 = 1
       exact map_one _)
     (geometricStalkStructureMap_injective_of_isDomain φ)
-  have hnK : IsUnit (n : Γ(Spec (CommRingCat.of K), ⊤)) := by
-    have h : IsUnit (n : K) :=
-      isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr (Nat.ne_of_gt hn))
-    let e := (Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv
-    have he : e.symm (n : K) = (n : Γ(Spec (CommRingCat.of K), ⊤)) :=
-      map_natCast e.symm.toRingHom n
-    rw [← he]
-    exact h.map e.symm.toRingHom
-  exact geometricGenericPowerCokernelStalkIso R φ n ≪≫
-    EtaleCohomology.fieldKummerUnitCokernelIso K hn hnK
+  have hnK : IsUnit (n : Γ(Spec (CommRingCat.of K), ⊤)) :=
+    EtaleCohomology.fieldSections_natCast_isUnit_of_algebra K K
+      (isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr (Nat.ne_of_gt hn)))
+  exact geometricGenericPowerCokernelStalkH1IsoOfIsUnit R φ hn hnK
 
 /-- At a geometric point above the generic point, the actual generic-unit
 power cokernel has zero stalk whenever the coefficient integer is invertible. -/
@@ -148,11 +172,11 @@ universe u
 variable (R : Type u) [CommRing R]
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (φ : R →+* Ω)
 
-/-- At a non-generic geometric point of an affine Dedekind scheme in
-characteristic zero, the actual generic-unit power-cokernel stalk is cyclic
+/-- At a non-generic geometric point of an affine Dedekind scheme,
+the actual generic-unit power-cokernel stalk is cyclic
 of order n. Invertibility on the base supplies the required local unit roots. -/
 def geometricDedekindGenericPowerCokernelStalkEquiv
-    [IsDedekindDomain R] [CharZero R]
+    [IsDedekindDomain R]
     (hφ : RingHom.ker φ ≠ ⊥) {n : ℕ} (hn : 0 < n) (hnR : IsUnit (n : R)) :
     ((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom φ))).sheafFiber
       (A := AddCommGrpCat.{u})).obj
@@ -167,12 +191,6 @@ def geometricDedekindGenericPowerCokernelStalkEquiv
     IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain R hP _
   have : IsDiscreteValuationRing A :=
     geometricStalk_isDiscreteValuationRing_of_baseLocalization φ
-  have : CharZero A := CharZero.of_addMonoidHom
-    (geometricStalkStructureMap φ).toAddMonoidHom
-    (by
-      change (geometricStalkStructureMap φ) 1 = 1
-      exact map_one _)
-    (geometricStalkStructureMap_injective_of_isDomain φ)
   have hnA : IsUnit (n : A) := by
     simpa only [map_natCast] using hnR.map (geometricStalkStructureMap φ)
   let π : A := Classical.choose (IsDiscreteValuationRing.exists_irreducible A)
@@ -184,7 +202,9 @@ def geometricDedekindGenericPowerCokernelStalkEquiv
     apply IsFractionRing.injective A K
     exact h.trans (map_zero (algebraMap A K)).symm
   let πK : Kˣ := Units.mk0 (algebraMap A K π) hπK
-  let e := (geometricGenericPowerCokernelStalkH1Iso R φ hn).addCommGroupIsoToAddEquiv
+  have hnK : IsUnit (n : Γ(Spec (CommRingCat.of K), ⊤)) :=
+    EtaleCohomology.fieldSections_natCast_isUnit_of_algebra A K hnA
+  let e := (geometricGenericPowerCokernelStalkH1IsoOfIsUnit R φ hn hnK).addCommGroupIsoToAddEquiv
   exact e.trans
     (EtaleCohomology.fieldKummerUniformizerEquiv A K hn hnA hπ πK rfl).symm
 

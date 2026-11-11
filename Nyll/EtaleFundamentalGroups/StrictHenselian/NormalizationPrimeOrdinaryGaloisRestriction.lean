@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryDecomposition
-import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFieldTower
-import Mathlib.Algebra.Group.Subgroup.Map
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryDecomposition
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.NormalizationPrimeOrdinaryFieldTower
+public import Mathlib.Algebra.Group.Subgroup.Map
 
 /-!
 # Actual ordinary-generic Galois restriction has image original decomposition
@@ -16,6 +18,8 @@ scalar tower. Restricting scalars along this tower has image exactly the
 original stabilizer of the normalization prime, by the proved fixing criterion
 for that same ordinary fraction embedding.
 -/
+
+@[expose] public section
 
 noncomputable section
 

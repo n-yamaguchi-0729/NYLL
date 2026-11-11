@@ -1,0 +1,54 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleCohomology.Descent.SetSheafDescentComparisonStalk
+import Nyll.EtaleCohomology.Descent.RepresentedFiberStalkComponent
+import Nyll.EtaleCohomology.Descent.RepresentableSheafFiberGerms
+import Nyll.EtaleCohomology.Descent.SetSheafDescentRepresentedArrows
+import Nyll.EtaleCohomology.Descent.RepresentedOverlapFiberMatching
+import Nyll.EtaleCohomology.Descent.RepresentedOverlapFiberSource
+import Nyll.EtaleCohomology.Descent.RepresentedFiberBaseEquality
+import Nyll.EtaleCohomology.Descent.SetSheafDescentSecondArrowSections
+import Nyll.EtaleCohomology.Descent.RepresentedFiberCoefficientNaturality
+import Nyll.EtaleCohomology.Descent.SetSheafDescentMatchingStalk
+import Nyll.EtaleCohomology.Descent.SetSheafCocyclePairs
+import Nyll.EtaleCohomology.Descent.SetSheafSplitMatchingSections
+import Nyll.EtaleCohomology.Descent.RepresentedSectionEvaluationNaturality
+import Nyll.EtaleCohomology.Descent.RepresentedSectionPrecomposition
+import Nyll.EtaleCohomology.Descent.ProperSurjectiveFiniteLocallyConstant
+import Nyll.EtaleCohomology.Descent.RepresentedSplitMatchingSections
+import Nyll.EtaleCohomology.Descent.SetSheafDescentRepresenter
+import Nyll.EtaleCohomology.Descent.RepresentedOverlapMatchingSections
+import Nyll.EtaleCohomology.Descent.SetSheafDescentSecondArrow
+import Nyll.EtaleCohomology.Descent.RepresentableGlobalSectionsPullback
+import Nyll.EtaleCohomology.Descent.SetSheafDescentAdjunctionUnit
+import Nyll.EtaleCohomology.Descent.SetSheafSplitDescent
+import Nyll.EtaleCohomology.Descent.SetSheafOverlapCocycle
+import Nyll.EtaleCohomology.Descent.SetSheafOverlapRepresenter
+import Nyll.EtaleCohomology.Descent.SetSheafDescentStalkSourceComposition
+import Nyll.EtaleCohomology.Descent.SetSheafDescentSourceComposition
+import Nyll.EtaleCohomology.Descent.SetSheafDescentNaturality
+import Nyll.EtaleCohomology.Descent.RepresentablePullbackSections
+import Nyll.EtaleCohomology.Descent.GeometricStalkRepresentableSections
+import Nyll.EtaleCohomology.Descent.FiniteLocallyConstantHenselianHom
+import Nyll.EtaleCohomology.Descent.SetSheafDescentEqualizer
+import Nyll.EtaleCohomology.Descent.GeometricStalkRepresentableSectionsBijective
+import Nyll.EtaleCohomology.Descent.GeometricStalkEvaluationSetSections
+import Nyll.EtaleCohomology.Descent.FiniteLocallyConstantStrictLocalSections
+import Nyll.EtaleCohomology.Descent.RepresentedGeometricFiberSections
+import Nyll.EtaleCohomology.Descent.RepresentedGeometricFiberSource
+import Nyll.EtaleCohomology.Descent.RepresentedGeometricFiberComponent
+import Nyll.EtaleCohomology.Descent.RepresentedFiberEtaleRestriction
+import Nyll.EtaleCohomology.Descent.RepresentedGeometricFiberRestriction
+import Nyll.EtaleCohomology.Descent.RepresentedGeometricFiberProper
+import Nyll.EtaleCohomology.Descent.SetSheafDescentRepresentedStalkMatching
+import Nyll.EtaleCohomology.Descent.SetSheafDescentRepresentedMatchingRestriction
+import Nyll.EtaleCohomology.Descent.SetSheafDescentProperComparison
+import Nyll.EtaleCohomology.Descent.ProperFiniteEtaleDescent
+
+import Nyll.EtaleCohomology.Descent.ProperFiniteEtaleNativeDescent
+import Nyll.EtaleCohomology.Descent.ProperFiniteEtaleNativeOverlap
+import Nyll.EtaleCohomology.Descent.ProperFiniteEtaleIsoDescent

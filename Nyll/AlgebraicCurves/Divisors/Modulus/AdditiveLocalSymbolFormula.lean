@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Differentials.Local.Order
-import Nyll.AlgebraicCurves.Divisors.Modulus.AdditiveModulus
+module
+
+public import Nyll.AlgebraicCurves.Differentials.Local.Order
+public import Nyll.AlgebraicCurves.Divisors.Modulus.AdditiveModulus
 
 /-!
 # The explicit additive local symbol
@@ -15,6 +17,8 @@ symbol for the additive rational function `f`. The full modulus and the
 reciprocity law come from the proved additive-modulus construction.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace AlgebraicCurve.Modulus
@@ -22,11 +26,8 @@ namespace AlgebraicCurve.Modulus
 variable {K F : Type*} [Field K] [Field F] [Algebra K F]
   [IsAlgClosed K] [Algebra.EssFiniteType K F] [IsCurveOver K F]
 
-local instance : HasPrincipalDivisors K F := IsCurveOver.hasPrincipalDivisors
-local instance : Nontrivial Ω[F⁄K] := IsCurveOver.instNontrivialKaehler
-local instance : ∀ v : Place K F, v.DCoordGenerates := dCoordGenerates_of_isCurveOver
-local instance : HasCanonicalLocalResidueKStar K F :=
-  _root_.AlgebraicCurve.instHasCanonicalLocalResidueKStar
+attribute [local instance] IsCurveOver.toHasPrincipalDivisors IsCurveOver.instNontrivialKaehler
+  dCoordGenerates_of_isCurveOver _root_.AlgebraicCurve.instHasCanonicalLocalResidueKStar
 
 /-- The additive local symbol is the actual residue of `f dlog(g)`. -/
 def additiveResidueSymbol (f : F) (v : Place K F) : Additive Fˣ →+ K where

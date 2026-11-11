@@ -10,20 +10,24 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Trace.Quotient
-import Mathlib.RingTheory.Artinian.Ring
-import Mathlib.RingTheory.LocalRing.Quotient
-import Mathlib.RingTheory.Jacobson.Ring
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.JacobsonSpace
-import Mathlib.LinearAlgebra.Trace
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Trace.Quotient
+public import Mathlib.RingTheory.Artinian.Ring
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.JacobsonSpace
+public import Mathlib.LinearAlgebra.Trace
 
 /-!
 # trace eq zero of finrank eq char of forall is Closed eq
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -213,7 +217,7 @@ theorem _root_.AlgebraicGeometry.trace_eq_zero_of_finrank_eq_char_of_forall_isCl
   set B : Type u := ↑Γ(X, f ⁻¹ᵁ U) with hB
   rcases subsingleton_or_nontrivial A with hA0 | hA0
   · let _ : Subsingleton B := Module.subsingleton A B
-    ext b; simp [Subsingleton.elim b 0]
+    exact Subsingleton.elim _ _
   let ι₀ : κ →+* Γ(Spec (CommRingCat.of κ), ⊤) := (Scheme.ΓSpecIso (CommRingCat.of κ)).inv.hom
   have hι₀ : Function.Bijective ι₀ := ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso
     (CommRingCat.of κ)).inv

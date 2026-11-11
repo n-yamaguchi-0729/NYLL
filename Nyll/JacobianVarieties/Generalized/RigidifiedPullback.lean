@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 https://github.com/n-yamaguchi-0729
 -/
 
-import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorUnitObjIsoHomAppPullbackLocalSectionUnitSection
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
-import Nyll.SchemeTheory.Modules.Functoriality.PullbackCompPullbackCongrPasteSquaresApp
+module
+
+public import Nyll.JacobianVarieties.Generalized.RigidifiedLineBundle
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Nyll.SchemeTheory.Modules.Tensor.PullbackTensorUnitObjIsoHomAppPullbackLocalSectionUnitSection
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
+public import Nyll.SchemeTheory.Modules.Functoriality.PullbackCompPullbackCongrPasteSquaresApp
 
 /-!
 # Composition of pullbacks of chosen rigidifications
@@ -18,6 +20,8 @@ import Nyll.SchemeTheory.Modules.Functoriality.PullbackCompPullbackCongrPasteSqu
 The comparison preserves the actual trivializations. This is stronger than identifying the
 underlying line bundles, and supplies the composition law for the maps on naive classes.
 -/
+
+@[expose] public section
 
 universe u
 

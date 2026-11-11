@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
-import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Transport
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Transport
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # Selected divisor branches in local scheme charts
@@ -18,6 +21,8 @@ canonical stalk/localization identification, such a prime is exactly one of
 the active parameter ideals.  The final theorem applies this to a prime of a
 normalization and produces the `LiesOver` datum consumed by Kummer inertia.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,15 +10,19 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.Fin.Tuple.Sort
-import Mathlib.GroupTheory.Perm.Sign
-import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
+module
+
+public import Mathlib.Data.Fin.Tuple.Sort
+public import Mathlib.GroupTheory.Perm.Sign
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
 
 
 /-!
 # Ordered Affine Cover Cochain Pullback
 -/
+
+@[expose] public section
 
 noncomputable section
 

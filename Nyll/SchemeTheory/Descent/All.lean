@@ -4,62 +4,111 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Descent.ActionOverlap
-import Nyll.SchemeTheory.Descent.AffineActionCoordinates
-import Nyll.SchemeTheory.Descent.AffineAlgebraCoaction
-import Nyll.SchemeTheory.Descent.AffineChartCompatibleStalkSpreading
-import Nyll.SchemeTheory.Descent.AffineCocycle
-import Nyll.SchemeTheory.Descent.AffineIntegralLimit
-import Nyll.SchemeTheory.Descent.AffineTransitionEquality
-import Nyll.SchemeTheory.Descent.AffineTransitionHom
-import Nyll.SchemeTheory.Descent.AffineTransitionHomFamily
-import Nyll.SchemeTheory.Descent.AffineTransitionIdempotents
-import Nyll.SchemeTheory.Descent.AffineTransitionImageDiagram
-import Nyll.SchemeTheory.Descent.AffineTransitionImageLimit
-import Nyll.SchemeTheory.Descent.AffineTransitionOverComparison
-import Nyll.SchemeTheory.Descent.AffineTransitionOverEquality
-import Nyll.SchemeTheory.Descent.AffineTransitionOverHomFamily
-import Nyll.SchemeTheory.Descent.AlgebraCoaction
-import Nyll.SchemeTheory.Descent.AlgebraCoactionTransport
-import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
-import Nyll.SchemeTheory.Descent.AlgebraDescentCofaces
-import Nyll.SchemeTheory.Descent.AlgebraAlgEquivTensorMapEq
-import Nyll.SchemeTheory.Descent.AlgebraAlgHomTensorMapEq
-import Nyll.SchemeTheory.Descent.AlgebraFinitePresentationTensorAlgEquiv
-import Nyll.SchemeTheory.Descent.AlgebraTensorMapApplyEq
-import Nyll.SchemeTheory.Descent.CanonicalAlgebraEqualizer
-import Nyll.SchemeTheory.Descent.CompatibleStalkSpreading
-import Nyll.SchemeTheory.Descent.EffectiveAffine
-import Nyll.SchemeTheory.Descent.EqualizerScalars
-import Nyll.SchemeTheory.Descent.Equivariance
-import Nyll.SchemeTheory.Descent.FGSubalgebra
-import Nyll.SchemeTheory.Descent.FaithfullyFlatAlgebra
-import Nyll.SchemeTheory.Descent.FpqcLocalCoequalizer
-import Nyll.SchemeTheory.Descent.InvariantScalarExtensionComparison
-import Nyll.SchemeTheory.Descent.LocalStageResidueComparison
-import Nyll.SchemeTheory.Descent.ModuleFaithfullyFlatSubmoduleIsBaseChange
-import Nyll.SchemeTheory.Descent.ModuleIsDirectLimitInvertibleLinearEquivBaseChange
-import Nyll.SchemeTheory.Descent.ModuleIsDirectLimitLinearEquiv
-import Nyll.SchemeTheory.Descent.ModuleIsDirectLimitStageLinearEquiv
-import Nyll.SchemeTheory.Descent.NoetherianImageApproximation
-import Nyll.SchemeTheory.Descent.NoetherianImageIdempotentLift
-import Nyll.SchemeTheory.Descent.NoetherianImageResidueLimit
-import Nyll.SchemeTheory.Descent.OpenCoverDirectLimit
-import Nyll.SchemeTheory.Descent.PunctureIsoSpreading
-import Nyll.SchemeTheory.Descent.PunctureSectionSpreading
-import Nyll.SchemeTheory.Descent.RadicialModelCoaction
-import Nyll.SchemeTheory.Descent.RetrocompactAffineChartStalkSpreading
-import Nyll.SchemeTheory.Descent.RetrocompactStalkSpreading
-import Nyll.SchemeTheory.Descent.SectionDirectLimit
-import Nyll.SchemeTheory.Descent.SectionEqualityDirectLimit
-import Nyll.SchemeTheory.Descent.StalkSpreading
-import Nyll.SchemeTheory.Descent.StalkSpreadingOpen
-import Nyll.SchemeTheory.Descent.SubalgebraStages
-import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
-import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
+module
+
+public import Nyll.SchemeTheory.Descent.FiniteTypeFinitePresentationAmbient
+public import Nyll.SchemeTheory.Descent.TwoOpenGluing
+public import Nyll.SchemeTheory.Descent.FinitePresentationTwoOpenOverlap
+public import Nyll.SchemeTheory.Descent.RelativeOverlapMatchingRestrictionAt
+public import Nyll.SchemeTheory.Descent.FinitePresentationOpenPatch
+public import Nyll.SchemeTheory.Descent.FiniteClosedThickeningOpenProjections
+public import Nyll.SchemeTheory.Descent.RelativeOverlapMatchingSections
+public import Nyll.SchemeTheory.Descent.CompactOpenClosedImmersionExtension
+public import Nyll.SchemeTheory.Descent.RelativeSplitDescentSections
+public import Nyll.SchemeTheory.Descent.FiniteTypeAffineAmbient
+public import Nyll.SchemeTheory.Descent.FiniteClosedThickeningClosedImmersion
+public import Nyll.SchemeTheory.Descent.FiniteClosedThickeningAffineTarget
+public import Nyll.SchemeTheory.Descent.AffineClosedImmersionFiniteThickening
+public import Nyll.SchemeTheory.Descent.OverlapActionSections
+public import Nyll.SchemeTheory.Descent.FiniteIdealOpenExtension
+public import Nyll.SchemeTheory.Descent.FiniteClosedThickeningRecovery
+public import Nyll.SchemeTheory.Descent.SplitDescentSections
+public import Nyll.SchemeTheory.Descent.ClosedImmersionFinitePresentationBaseChange
+public import Nyll.SchemeTheory.Descent.FiniteClosedThickeningInOpen
+public import Nyll.SchemeTheory.Descent.ClosedImmersionFinitePresentationLimit
+public import Nyll.SchemeTheory.Descent.OverlapAction
+public import Nyll.SchemeTheory.Descent.OverlapPairHom
+public import Nyll.SchemeTheory.Descent.SplitDescentQuotient
+public import Nyll.SchemeTheory.Descent.SplitDescentAction
+public import Nyll.SchemeTheory.Descent.FiniteQuotients
+public import Nyll.SchemeTheory.Descent.IntegerSubalgebraModels
+public import Nyll.SchemeTheory.Descent.FgSubalgebraHomPullback
+public import Nyll.SchemeTheory.Descent.FgSubalgebraIsAffinePullback
+public import Nyll.SchemeTheory.Descent.FgSubalgebraIsoPullback
+public import Nyll.SchemeTheory.Descent.FgSubalgebraOpensPreimageEq
+public import Nyll.SchemeTheory.Descent.FgSubalgebraProperFlatPullback
+public import Nyll.SchemeTheory.Descent.FgSubalgebraPullbackFinitePresentation
+public import Nyll.SchemeTheory.Descent.FgSubalgebraPullbackFstCompEq
+public import Nyll.SchemeTheory.Descent.FgSubalgebraPullbackISupEqTop
+public import Nyll.SchemeTheory.Descent.FgSubalgebraPullbackIsAffine
+public import Nyll.SchemeTheory.Descent.FlatFgSubalgebraFlatPullbackSnd
+public import Nyll.SchemeTheory.Descent.IsClosedImmersionFgSubalgebraClosedImmersionPullbackMap
+public import Nyll.SchemeTheory.Descent.IsProperFgSubalgebraProperPullbackSnd
+public import Nyll.SchemeTheory.Descent.IsSeparatedFgSubalgebra
+public import Nyll.SchemeTheory.Descent.SmoothFgSubalgebraSmoothPullbackSnd
+public import Nyll.SchemeTheory.Descent.QuotientOverlapCocycle
+public import Nyll.SchemeTheory.Descent.FlatMorphisms
+public import Nyll.SchemeTheory.Descent.GaloisClosedSubschemes
+public import Nyll.SchemeTheory.Descent.ActionOverlap
+public import Nyll.SchemeTheory.Descent.AffineActionCoordinates
+public import Nyll.SchemeTheory.Descent.AffineAlgebraCoaction
+public import Nyll.SchemeTheory.Descent.AffineChartCompatibleStalkSpreading
+public import Nyll.SchemeTheory.Descent.AffineCocycle
+public import Nyll.SchemeTheory.Descent.AffineIntegralLimit
+public import Nyll.SchemeTheory.Descent.AffineTransitionEquality
+public import Nyll.SchemeTheory.Descent.AffineTransitionHom
+public import Nyll.SchemeTheory.Descent.AffineTransitionHomFamily
+public import Nyll.SchemeTheory.Descent.AffineTransitionIdempotents
+public import Nyll.SchemeTheory.Descent.AffineTransitionImageDiagram
+public import Nyll.SchemeTheory.Descent.AffineTransitionImageLimit
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverComparison
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverEquality
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverHomFamily
+public import Nyll.SchemeTheory.Descent.AlgebraCoaction
+public import Nyll.SchemeTheory.Descent.AlgebraCoactionTransport
+public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
+public import Nyll.SchemeTheory.Descent.AlgebraDescentCofaces
+public import Nyll.SchemeTheory.Descent.AlgebraAlgEquivTensorMapEq
+public import Nyll.SchemeTheory.Descent.AlgebraAlgHomTensorMapEq
+public import Nyll.SchemeTheory.Descent.AlgebraFinitePresentationTensorAlgEquiv
+public import Nyll.SchemeTheory.Descent.AlgebraTensorMapApplyEq
+public import Nyll.SchemeTheory.Descent.CanonicalAlgebraEqualizer
+public import Nyll.SchemeTheory.Descent.CompatibleStalkSpreading
+public import Nyll.SchemeTheory.Descent.EffectiveAffine
+public import Nyll.SchemeTheory.Descent.EqualizerScalars
+public import Nyll.SchemeTheory.Descent.Equivariance
+public import Nyll.SchemeTheory.Descent.FGSubalgebra
+public import Nyll.SchemeTheory.Descent.FaithfullyFlatAlgebra
+public import Nyll.SchemeTheory.Descent.FpqcLocalCoequalizer
+public import Nyll.SchemeTheory.Descent.InvariantScalarExtensionComparison
+public import Nyll.SchemeTheory.Descent.LocalStageResidueComparison
+public import Nyll.SchemeTheory.Descent.ModuleFaithfullyFlatSubmoduleIsBaseChange
+public import Nyll.SchemeTheory.Descent.ModuleIsDirectLimitInvertibleLinearEquivBaseChange
+public import Nyll.SchemeTheory.Descent.ModuleIsDirectLimitLinearEquiv
+public import Nyll.SchemeTheory.Descent.ModuleIsDirectLimitStageLinearEquiv
+public import Nyll.SchemeTheory.Descent.NoetherianImageApproximation
+public import Nyll.SchemeTheory.Descent.NoetherianImageIdempotentLift
+public import Nyll.SchemeTheory.Descent.NoetherianImageResidueLimit
+public import Nyll.SchemeTheory.Descent.OpenCoverDirectLimit
+public import Nyll.SchemeTheory.Descent.PunctureIsoSpreading
+public import Nyll.SchemeTheory.Descent.PunctureSectionSpreading
+public import Nyll.SchemeTheory.Descent.RadicialModelCoaction
+public import Nyll.SchemeTheory.Descent.RetrocompactAffineChartStalkSpreading
+public import Nyll.SchemeTheory.Descent.RetrocompactStalkSpreading
+public import Nyll.SchemeTheory.Descent.SectionDirectLimit
+public import Nyll.SchemeTheory.Descent.SectionEqualityDirectLimit
+public import Nyll.SchemeTheory.Descent.StalkSpreading
+public import Nyll.SchemeTheory.Descent.StalkSpreadingOpen
+public import Nyll.SchemeTheory.Descent.SubalgebraStages
+public import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
+public import Nyll.SchemeTheory.Descent.TensorProductDirectLimit
 
 /- Canonical aggregate for SchemeTheory.Descent. -/
-import Nyll.SchemeTheory.Descent.AffineTransitionCover
-import Nyll.SchemeTheory.Descent.AffineTransitionRange
-import Nyll.SchemeTheory.Descent.AffineTransitionOverlap
-import Nyll.SchemeTheory.Descent.AffineTransitionMatchedCover
+public import Nyll.SchemeTheory.Descent.AffineTransitionCover
+public import Nyll.SchemeTheory.Descent.AffineTransitionRange
+public import Nyll.SchemeTheory.Descent.AffineTransitionOverlap
+public import Nyll.SchemeTheory.Descent.AffineTransitionMatchedCover
+
+public import Nyll.SchemeTheory.Descent.AffineFiniteLocallyFreeQuotient
+
+public import Nyll.SchemeTheory.Descent.FiniteLocallyFreeQuotientBaseChange

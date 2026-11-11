@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleCohomology.Classical.Adic
-import Nyll.EtaleCohomology.Classical.AdditiveCoefficientAction
-import Mathlib.Algebra.Module.RingHom
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.NumberTheory.Padics.RingHoms
+module
+
+public import Nyll.EtaleCohomology.Classical.Adic
+public import Nyll.EtaleCohomology.Classical.AdditiveCoefficientAction
+public import Mathlib.Algebra.Module.RingHom
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.NumberTheory.Padics.RingHoms
 
 /-!
 # Rational classical ℓ-adic cohomology
@@ -24,6 +26,8 @@ cohomology of a discrete constant `ℚ_[ℓ]` sheaf or of a pro-étale site.
 See Stacks Project, Section 64.18, https://stacks.math.columbia.edu/tag/03UL.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory
@@ -32,7 +36,8 @@ universe u
 
 namespace EtaleCohomology.Classical
 
-private def linearSequentialLimit (R : Type*) [Semiring R]
+/-- Compatible sequences form a submodule for the original linear transition maps. -/
+def linearSequentialLimit (R : Type*) [Semiring R]
     (M : ℕ → Type u) [∀ n, AddCommGroup (M n)] [∀ n, Module R (M n)]
     (r : ∀ n, M (n + 1) →ₗ[R] M n) : Submodule R (∀ n, M n) where
   carrier := {a | ∀ n, r n (a (n + 1)) = a n}

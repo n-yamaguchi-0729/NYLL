@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
+module
+
+public import Nyll.AlgebraicCurves.Cohomology.Cech.DivisorSections
 
 /-!
 # Cech H1To H1 mk eq cech H1To H1 mk of cross Sections
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

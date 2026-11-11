@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.Polynomial.Module.Basic
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.ReesAlgebra
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.Polynomial.Module.Basic
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 # Associated graded modules from the actual Rees module
@@ -26,6 +28,8 @@ quotient is finite over the Rees algebra. This is the affine finiteness
 construction used for the successive kernels of a coherent formal system.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped DirectSum
@@ -37,7 +41,8 @@ universe u v
 variable {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M]
   {I : Ideal R} (F : I.Filtration M)
 
-private def coefficientFamily (p : F.submodule) : ⨁ n : ℕ, F.N n := by
+/-- The finitely supported family of filtration coefficients of a Rees module element. -/
+def coefficientFamily (p : F.submodule) : ⨁ n : ℕ, F.N n := by
   classical
   exact DFinsupp.mk p.val.coeff.support (fun n => ⟨p.val.coeff n.val, p.property n.val⟩)
 
@@ -51,7 +56,8 @@ private theorem coefficientFamily_apply (p : F.submodule) (n : ℕ) :
     simp only [coefficientFamily, DFinsupp.mk_apply, dite_eq_right hn,
       ZeroMemClass.coe_zero, hz]
 
-private def ofCoefficientFamily (x : ⨁ n : ℕ, F.N n) : F.submodule := by
+/-- Assemble a finitely supported family of filtration coefficients into a Rees module element. -/
+def ofCoefficientFamily (x : ⨁ n : ℕ, F.N n) : F.submodule := by
   classical
   let p : ℕ →₀ M := Finsupp.onFinset x.support (fun n => (x n).val) (by
     intro n hn

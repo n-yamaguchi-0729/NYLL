@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Algebra.Module.LocalizedModule.Away
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Algebra.Module.LocalizedModule.Away
 
 
 /-!
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Away
 
 Relates the actual basic-open restriction maps to their elementwise localization clauses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
-import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
-import Mathlib.CategoryTheory.Conj
-import Mathlib.CategoryTheory.Endomorphism
-import Mathlib.CategoryTheory.Equivalence
-import Mathlib.CategoryTheory.Galois.Topology
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+public import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
+public import Mathlib.CategoryTheory.Conj
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Equivalence
+public import Mathlib.CategoryTheory.Galois.Topology
 
 /-!
 # Automorphism groups under an equivalence of categories
@@ -20,6 +22,8 @@ bijective. The automorphism group of every finite-set-valued functor is compact
 Hausdorff, so the inverse is continuous as well. No connectedness or Galois
 category assumptions are needed for this argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

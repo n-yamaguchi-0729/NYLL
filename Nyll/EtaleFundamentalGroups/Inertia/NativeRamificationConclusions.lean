@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationDiagram
-import Nyll.ProCGroups.ProC.InverseLimits.Predicates
-import Mathlib.Algebra.Group.Subgroup.Ker
-import Mathlib.Algebra.Group.Subgroup.Lattice
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.Topology.Algebra.Group.Subgroup
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NativeRamificationDiagram
+public import Nyll.ProCGroups.ProC.InverseLimits.Predicates
+public import Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.Algebra.Group.Subgroup.Lattice
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.Topology.Algebra.Group.Subgroup
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # Every conclusion of the DVR ramification theorem
@@ -22,6 +24,8 @@ character, decomposition equivariance and its induced quotient isomorphism
 are stated explicitly. The roots group is definitionally the inverse limit
 with the literal power transitions on the displayed degrees.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Inertia
 

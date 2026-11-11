@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
-import Nyll.JacobianVarieties.Generalized.ModulusClassUniversality
-import Nyll.JacobianVarieties.Generalized.GeometricIntegrality
-import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
+module
+
+public import Nyll.JacobianVarieties.Generalized.DivisorClassPoints
+public import Nyll.JacobianVarieties.Generalized.ModulusClassUniversality
+public import Nyll.JacobianVarieties.Generalized.GeometricIntegrality
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.ExtCompEq
 
 /-!
 # Uniqueness of actual morphisms out of the generalized Jacobian
@@ -16,6 +18,8 @@ The genuine full-modulus divisor comparison proves that actual Abel points
 generate the group of field points. Reducedness then detects equality of
 morphisms of the constructed group scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

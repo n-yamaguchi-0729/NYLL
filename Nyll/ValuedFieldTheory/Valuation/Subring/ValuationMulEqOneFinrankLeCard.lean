@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.MemSubMemNonunits
-import Nyll.ValuedFieldTheory.Valuation.Subring.ValuationMulEqOneSupEqTop
-import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.LeMemIffApplyMem
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.MemSubMemNonunits
+public import Nyll.ValuedFieldTheory.Valuation.Subring.ValuationMulEqOneSupEqTop
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Arithmetic.LeMemIffApplyMem
 
 /-!
 # Valuation Subring exists valuation mul eq one of finrank le card
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -135,73 +139,11 @@ theorem sum_ne_zero (hV : V.comap (algebraMap F F') = O) (hW : W.comap (algebraM
   rw [hHW] at hlowW
   exact lt_irrefl 1 hlowW
 
+open ValuationSubring_exists_valuation_mul_eq_one_of_forall_sup_eq_top.ValuationSubring in
+/-- Compatibility form of valuation-ring incomparability over an algebraic extension. -/
 theorem eq_of_le [Algebra.IsAlgebraic F F'] (hV : V.comap (algebraMap F F') = O)
-    (hW : W.comap (algebraMap F F') = O) (hVW : V ≤ W) : V = W := by
-  classical
-  refine le_antisymm hVW fun x hxW => ?_
-  by_contra hxV
-  have hx0 : x ≠ 0 := by
-    rintro rfl
-    exact hxV (ValuationSubring.zero_mem V)
-  set y : F' := x⁻¹ with hy
-  have hyV : y ∈ V := (V.mem_or_inv_mem x).resolve_left hxV
-  have hyV1 : V.valuation y < 1 := by
-    rw [← ValuationSubring.mem_nonunits_iff, ValuationSubring.mem_nonunits_iff_or]
-    right
-    rw [hy, inv_inv]
-    exact hxV
-  have hyW1 : W.valuation y = 1 := by
-    have h1 : W.valuation x ≤ 1 := (W.valuation_le_one_iff x).mpr hxW
-    have h2 : W.valuation y ≤ 1 := (W.valuation_le_one_iff y).mpr (hVW hyV)
-    rw [hy, map_inv₀] at h2 ⊢
-    have hne : W.valuation x ≠ 0 := (Valuation.ne_zero_iff _).mpr hx0
-    have h3 : 1 ≤ W.valuation x := (inv_le_one₀ (zero_lt_iff.mpr hne)).mp h2
-    rw [le_antisymm h1 h3, inv_one]
-  obtain ⟨p, hp0, hpy⟩ := Algebra.IsAlgebraic.isAlgebraic (R := F) y
-  obtain ⟨k0, hk0, hmax⟩ := Finset.exists_max_image p.support
-    (fun k => O.valuation (p.coeff k)) (Polynomial.support_nonempty.mpr hp0)
-  have hc0 : p.coeff k0 ≠ 0 := Polynomial.mem_support_iff.mp hk0
-  have hv0 : O.valuation (p.coeff k0) ≠ 0 := (Valuation.ne_zero_iff _).mpr hc0
-  set c : ℕ → F := fun k => (p.coeff k0)⁻¹ * p.coeff k with hc
-  have hcO : ∀ k, c k ∈ O := by
-    intro k
-    rw [← O.valuation_le_one_iff]
-    simp only [hc, map_mul, map_inv₀]
-    by_cases hk : k ∈ p.support
-    · calc (O.valuation (p.coeff k0))⁻¹ * O.valuation (p.coeff k)
-          ≤ (O.valuation (p.coeff k0))⁻¹ * O.valuation (p.coeff k0) :=
-            mul_le_mul' le_rfl (hmax k hk)
-        _ = 1 := inv_mul_cancel₀ hv0
-    · rw [Polynomial.notMem_support_iff.mp hk, map_zero, mul_zero]
-      exact zero_le
-  have hck0 : O.valuation (c k0) = 1 := by
-    simp only [hc, map_mul, map_inv₀]
-    exact inv_mul_cancel₀ hv0
-  have hex : ∃ k, O.valuation (c k) = 1 := ⟨k0, hck0⟩
-  set j := Nat.find hex with hjdef
-  have hj : O.valuation (c j) = 1 := Nat.find_spec hex
-  have hlow : ∀ k < j, O.valuation (c k) < 1 := fun k hk =>
-    lt_of_le_of_ne ((O.valuation_le_one_iff _).mpr (hcO k)) (Nat.find_min hex hk)
-  have hcj0 : c j ≠ 0 := by
-    intro h
-    rw [h, map_zero] at hj
-    exact zero_ne_one hj
-  have hpj : p.coeff j ≠ 0 := by
-    intro h
-    apply hcj0
-    simp only [hc, h, mul_zero]
-  have hjN : j < p.natDegree + 1 := Nat.lt_succ_of_le (Polynomial.le_natDegree_of_ne_zero hpj)
-  have hrel : ∑ k ∈ Finset.range (p.natDegree + 1), algebraMap F F' (c k) * y ^ k = 0 := by
-    have h := hpy
-    rw [Polynomial.aeval_eq_sum_range' (Nat.lt_succ_self _) y] at h
-    have hfac : ∑ k ∈ Finset.range (p.natDegree + 1), algebraMap F F' (c k) * y ^ k =
-        algebraMap F F' (p.coeff k0)⁻¹ *
-          ∑ k ∈ Finset.range (p.natDegree + 1), p.coeff k • y ^ k := by
-      rw [Finset.mul_sum]
-      refine Finset.sum_congr rfl fun k _ => ?_
-      simp only [hc, map_mul, Algebra.smul_def, mul_assoc]
-    rw [hfac, h, mul_zero]
-  exact sum_ne_zero hV hW hVW hyV1 hyW1 c hcO hjN hj hlow hrel
+    (hW : W.comap (algebraMap F F') = O) (hVW : V ≤ W) : V = W :=
+  IndepMember.eq_of_le hV hW hVW
 
 end Incomparable
 
@@ -210,95 +152,17 @@ section Loc
 variable {K : Type*} [Field K]
 
 /-- The valuation overring defined by bounds on all powers against the selected test elements. -/
-def locAt (A : ValuationSubring K) (D : Set K) : ValuationSubring K where
-  carrier := {x | ∀ d ∈ D, A.valuation d < 1 → ∀ n : ℕ, A.valuation (d * x ^ n) < 1}
-  mul_mem' := by
-    intro x y hx hy d hdD hd n
-    have key : ∀ x y : K, A.valuation x ≤ A.valuation y →
-        (∀ n : ℕ, A.valuation (d * y ^ n) < 1) → A.valuation (d * (x * y) ^ n) < 1 := by
-      intro x y h hy'
-      calc A.valuation (d * (x * y) ^ n)
-          = A.valuation d * (A.valuation x ^ n * A.valuation y ^ n) := by
-            rw [map_mul, mul_pow, map_mul, map_pow, map_pow]
-        _ ≤ A.valuation d * (A.valuation y ^ n * A.valuation y ^ n) := by
-            gcongr
-        _ = A.valuation (d * y ^ (2 * n)) := by
-            rw [map_mul, map_pow, two_mul, pow_add]
-        _ < 1 := hy' (2 * n)
-    rcases le_total (A.valuation x) (A.valuation y) with h | h
-    · exact key x y h (hy d hdD hd)
-    · rw [mul_comm x y]; exact key y x h (hx d hdD hd)
-  one_mem' := by
-    intro d _ hd n
-    simpa using hd
-  add_mem' := by
-    intro x y hx hy d hdD hd n
-    have key : ∀ x y : K, A.valuation x ≤ A.valuation y →
-        (∀ n : ℕ, A.valuation (d * y ^ n) < 1) → A.valuation (d * (x + y) ^ n) < 1 := by
-      intro x y h hy'
-      have hxy : A.valuation (x + y) ≤ A.valuation y :=
-        (Valuation.map_add _ _ _).trans (max_le h le_rfl)
-      calc A.valuation (d * (x + y) ^ n)
-          = A.valuation d * A.valuation (x + y) ^ n := by rw [map_mul, map_pow]
-        _ ≤ A.valuation d * A.valuation y ^ n := by gcongr
-        _ = A.valuation (d * y ^ n) := by rw [map_mul, map_pow]
-        _ < 1 := hy' n
-    rcases le_total (A.valuation x) (A.valuation y) with h | h
-    · exact key x y h (hy d hdD hd)
-    · rw [add_comm x y]; exact key y x h (hx d hdD hd)
-  zero_mem' := by
-    intro d _ hd n
-    cases n with
-    | zero => simpa using hd
-    | succ n => rw [zero_pow (Nat.succ_ne_zero n), mul_zero, map_zero]; exact zero_lt_one
-  neg_mem' := by
-    intro x hx d hdD hd n
-    have h := hx d hdD hd n
-    have e : A.valuation (d * (-x) ^ n) = A.valuation (d * x ^ n) := by
-      rw [map_mul, map_mul, map_pow, map_pow, Valuation.map_neg]
-    rwa [e]
-  mem_or_inv_mem' := by
-    intro x
-    by_contra h
-    rw [not_or] at h
-    obtain ⟨h1, h2⟩ := h
-    simp only [Set.mem_ofPred_eq, not_forall, not_lt, exists_prop] at h1 h2
-    obtain ⟨d, -, hd, n, hn⟩ := h1
-    obtain ⟨d', -, hd', n', hn'⟩ := h2
-    have one_lt : ∀ (d z : K) (n : ℕ), A.valuation d < 1 → 1 ≤ A.valuation (d * z ^ n) →
-        1 < A.valuation z := by
-      intro d z n hd hn
-      by_contra hz
-      rw [not_lt] at hz
-      have : A.valuation (d * z ^ n) < 1 := by
-        rw [map_mul, map_pow]
-        calc A.valuation d * A.valuation z ^ n ≤ A.valuation d * 1 := by
-              gcongr; exact pow_le_one₀ zero_le hz
-          _ < 1 := by rw [mul_one]; exact hd
-      exact (lt_irrefl _) (lt_of_le_of_lt hn this)
-    have hx1 := one_lt d x n hd hn
-    have hx2 := one_lt d' x⁻¹ n' hd' hn'
-    have hx0 : x ≠ 0 := by
-      rintro rfl
-      rw [map_zero] at hx1
-      exact not_lt_zero hx1
-    rw [map_inv₀] at hx2
-    have : A.valuation x < 1 := by
-      have h := one_lt_inv₀ (zero_lt_iff.mpr ((Valuation.ne_zero_iff _).mpr hx0)) |>.mp hx2
-      exact h
-    exact lt_irrefl _ (hx1.trans this)
+def locAt (A : ValuationSubring K) (D : Set K) : ValuationSubring K :=
+  open ValuationSubring_exists_valuation_mul_eq_one_of_forall_sup_eq_top.ValuationSubring in
+  IndepMember.locAt A D
 
 theorem mem_locAt_iff (A : ValuationSubring K) (D : Set K) (x : K) :
     x ∈ locAt A D ↔ ∀ d ∈ D, A.valuation d < 1 → ∀ n : ℕ, A.valuation (d * x ^ n) < 1 :=
   Iff.rfl
 
-theorem le_locAt (A : ValuationSubring K) (D : Set K) : A ≤ locAt A D := by
-  intro x hx d _ hd n
-  rw [map_mul, map_pow]
-  calc A.valuation d * A.valuation x ^ n ≤ A.valuation d * 1 := by
-        gcongr
-        exact pow_le_one₀ zero_le ((A.valuation_le_one_iff x).mpr hx)
-    _ < 1 := by rw [mul_one]; exact hd
+theorem le_locAt (A : ValuationSubring K) (D : Set K) : A ≤ locAt A D :=
+  open ValuationSubring_exists_valuation_mul_eq_one_of_forall_sup_eq_top.ValuationSubring in
+  IndepMember.le_locAt A D
 
 end Loc
 

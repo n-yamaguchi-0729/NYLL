@@ -4,20 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandFiniteness
-import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.All
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Induced
-import Nyll.GaloisCohomology.Cyclic.Herbrand.LowDegree
-import Nyll.GaloisCohomology.Cyclic.Herbrand.NormalBasisLattice
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.All
-import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.All
-import Nyll.GaloisCohomology.Cyclic.Herbrand.Product
-import Nyll.GaloisCohomology.Cyclic.Herbrand.SupportedQuotient
+module
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.FiniteErrors
-import Nyll.GaloisCohomology.Cyclic.Herbrand.AlmostTrivialProduct
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.UniverseFiniteness
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandFiniteness
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.FieldUnits
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.All
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Induced
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.LowDegree
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.NormalBasisLattice
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Permutation.All
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.All
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.Product
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.SupportedQuotient
 
-import Nyll.GaloisCohomology.Cyclic.Herbrand.TrivialAction
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.FiniteErrors
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.AlmostTrivialProduct
+
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.TrivialAction
 
 /-!
 # Herbrand quotients

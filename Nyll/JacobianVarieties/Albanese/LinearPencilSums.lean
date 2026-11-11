@@ -4,24 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
-import Nyll.JacobianVarieties.Albanese.FiniteSums
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilDivisor
-import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilSections
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
-import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
-import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
-import Nyll.AlgebraicCurves.Models.Charts.IsAffineOpenMemFinsetField
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AbelianSchemePropertyBundle
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UniqueSectionPullbackSectionClosedCover
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleZeroSchemeIdealEq
-import Nyll.AlgebraicCurves.Geometry.Curves.GeometricallyIrreducibleGeometricallyConnected
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
+module
+
+public import Nyll.JacobianVarieties.Albanese.SameDivisorDescent
+public import Nyll.JacobianVarieties.Albanese.FiniteSums
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilDivisor
+public import Nyll.AlgebraicCurves.RelativeDivisors.LineBundles.LinearPencilSections
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.RelEffCartierDivFunctor
+public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.RelEffCartierDiv
+public import Nyll.AlgebraicCurves.RelativeDivisors.Representability.IsUniversal
+public import Nyll.AlgebraicCurves.Models.Charts.IsAffineOpenMemFinsetField
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.AffineLineConstancy
+public import Nyll.AbelianVarieties.Basic
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.UniqueSectionPullbackSectionClosedCover
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleZeroSchemeIdealEq
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
 
 /-!+# Finite sums are constant along an actual linear pencil
 
@@ -32,6 +34,8 @@ and their ideals are identified with the original linear combinations.
 For nonzero dependent sections, the ground-field scalar is a unit and the
 two actual zero-scheme ideals coincide.
 -/
+
+@[expose] public section
 
 noncomputable section
 

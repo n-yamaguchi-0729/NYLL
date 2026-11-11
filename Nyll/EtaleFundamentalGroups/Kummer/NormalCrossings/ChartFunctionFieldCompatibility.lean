@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentFunctionField
-import Nyll.EtaleFundamentalGroups.GaloisCovers.SupportComplementFunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComplementCover
-import Nyll.SchemeTheory.FunctionFields.StalkFactorization
-import Mathlib.RingTheory.Flat.TorsionFree
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentFunctionField
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.SupportComplementFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComplementCover
+public import Nyll.SchemeTheory.FunctionFields.StalkFactorization
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Function-field compatibility for local etale charts
@@ -19,6 +21,8 @@ prime-localized etale chart and its boundary-away function field.  In
 particular, the compatibility needed for finite-etale pullback components
 is produced by the chart itself, rather than supplied as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

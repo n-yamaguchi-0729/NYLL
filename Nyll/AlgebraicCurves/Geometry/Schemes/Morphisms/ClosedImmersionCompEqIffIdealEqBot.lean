@@ -10,25 +10,29 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Tactic.Choose
-import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+module
+
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Tactic.Choose
+public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-!
 # Scheme exists is Closed Immersion forall exists comp eq iff ideal eq bot
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -50,7 +54,7 @@ variable (E : Scheme.{u})
       I R' (Spec.map (CommRingCat.ofHom ψ) ≫ s) = (I R s).map ψ)
 
 /-- The affine-open subtype supplies the hypothesis expected by affine chart maps. -/
-private theorem affineOpenWitness {X : Scheme.{u}} (U : X.affineOpens) :
+theorem affineOpenWitness {X : Scheme.{u}} (U : X.affineOpens) :
     IsAffineOpen U.1 := by
   change IsAffine U.1
   infer_instance

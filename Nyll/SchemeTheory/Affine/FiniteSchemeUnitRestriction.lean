@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.ArtinianUnitLifting
-import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.ArtinianUnitLifting
+public import Nyll.SchemeTheory.Affine.FiniteSchemeAlgebra
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Actual restriction of units to a closed subscheme of a finite field-scheme -/
+
+@[expose] public section
 
 noncomputable section
 

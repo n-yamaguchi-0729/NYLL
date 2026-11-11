@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCoprod
-import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeCoprod
-import Mathlib.Data.Finset.Lattice.Fold
+module
+
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentCoprod
+public import Nyll.SchemeTheory.Modules.FiniteType.FiniteTypeCoprod
+public import Mathlib.Data.Finset.Lattice.Fold
 
 /-!
 # Actual finite joins of finite-type quasicoherent subsheaves
@@ -17,6 +19,8 @@ map from the coproduct. The proof uses the least-submodule property of the
 image and both original inclusions. No pointwise-sum description of the
 sheaf join is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

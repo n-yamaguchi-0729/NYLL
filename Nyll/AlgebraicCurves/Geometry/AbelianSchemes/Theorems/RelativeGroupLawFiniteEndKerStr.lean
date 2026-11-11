@@ -10,28 +10,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Jacobson.Ring
-import Nyll.AlgebraicCurves.Geometry.Picard.GroupLaw.RelativeGroupLaw
-import Nyll.AlgebraicCurves.Geometry.Schemes.SchemeHomOver
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.GroupLaw.EndDegree
-import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsIntegral
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
+public import Nyll.SchemeTheory.CategoryTheory.SchemeHomOver
+public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.EndDegree
+public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeIsIntegral
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 
 /-!
 # Relative Group Law is Finite end Ker Str of surjective
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -186,8 +191,7 @@ theorem trdeg_sections_eq [IsIntegral A] (U : A.Opens) (hU : IsAffineOpen U) [No
     let _ := (algK f U).toAlgebra
     let _ := (algFF f).toAlgebra
     Algebra.trdeg K Γ(A, U) = Algebra.trdeg K A.functionField := by
-  let _ := (algK f U).toAlgebra
-  let _ := (algFF f).toAlgebra
+  intro sharedOwner1 sharedOwner2
   let _ : IsScalarTower K Γ(A, U) A.functionField :=
     IsScalarTower.of_algebraMap_eq' (germ_comp_algK f U).symm
   let _ := functionField_isFractionRing_of_isAffineOpen A U hU
@@ -203,8 +207,8 @@ theorem trdeg_sections_eq [IsIntegral A] (U : A.Opens) (hU : IsAffineOpen U) [No
   exact hadd
 omit [Field K] in
 theorem appLE_congr_hom {X Y : Scheme.{u}} {g g' : X ⟶ Y} (h : g = g') (U : Y.Opens) (V : X.Opens)
-    (e : V ≤ g ⁻¹ᵁ U) (e' : V ≤ g' ⁻¹ᵁ U) : g.appLE U V e = g'.appLE U V e' := by
-  subst h; rfl
+    (e : V ≤ g ⁻¹ᵁ U) (e' : V ≤ g' ⁻¹ᵁ U) : g.appLE U V e = g'.appLE U V e' :=
+  _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom h U V e e'
 
 variable (γ : A ⟶ A) (hγ : γ ≫ f = f)
 include hγ

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.UnramifiedCriterion
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.UnramifiedCriterion
 
 /-!
 # Trivial inertia implies unramifiedness
@@ -15,6 +17,8 @@ ideal inertia group forces both ramification index one and separability of
 the residue extension.  Thus it gives mathlib's `Algebra.IsUnramifiedAt`
 without a separate residue-separability hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -10,11 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Subring.RingHomExtend
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Subring.RingHomExtend
 
 /-!
 # Is Alg Closed exists valuation Subring ring Hom retraction
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,47 +4,51 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleDatum
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatOnOpenImage
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatAlgebraEqualizer
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatGradedAlgebraEqualizer
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleEqualizer
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleHomDescent
-import Nyll.SchemeTheory.RingTheory.Descent.ModuleBaseChangeHomExt
-import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayAlgebraGluing
-import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayPairGluing
-import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayTensorDetection
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteSubalgebraLocalization
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteEtaleNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.BoundaryNormalIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationModel
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalNormality
+module
 
-import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationSpreading
+public import Nyll.SchemeTheory.RingTheory.Descent.AlgebraizedRingEtaleNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleDatum
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatOnOpenImage
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatAlgebraEqualizer
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatGradedAlgebraEqualizer
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleEqualizer
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleHomDescent
+public import Nyll.SchemeTheory.RingTheory.Descent.ModuleBaseChangeHomExt
+public import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayAlgebraGluing
+public import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayPairGluing
+public import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayTensorDetection
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteSubalgebraLocalization
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteEtaleNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.BoundaryNormalIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationModel
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalNormality
 
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteType
-import Nyll.SchemeTheory.RingTheory.Descent.FinitePresentation
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatNormality
-import Nyll.SchemeTheory.RingTheory.Descent.SmoothAtPrimeNormality
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleFiniteFactor
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationSpreading
 
-import Nyll.SchemeTheory.RingTheory.Descent.InvertibleModule
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteType
+public import Nyll.SchemeTheory.RingTheory.Descent.FinitePresentation
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatNormality
+public import Nyll.SchemeTheory.RingTheory.Descent.SmoothAtPrimeNormality
+
+public import Nyll.SchemeTheory.RingTheory.Descent.InvertibleModule
 
 
 /- Canonical aggregate for SchemeTheory.RingTheory.Descent. -/
-import Nyll.SchemeTheory.RingTheory.Descent.TensorComparison
-import Nyll.SchemeTheory.RingTheory.Descent.GradedSubalgebra
-import Nyll.SchemeTheory.RingTheory.Descent.GradedBaseChange
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleSource
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleOpenImage
-import Nyll.SchemeTheory.RingTheory.Descent.PrincipalLocalizationModel
-import Nyll.SchemeTheory.RingTheory.Descent.LocalizationNormalIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteUnramifiedNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalDomainOfIntegralNormalExtension
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalIrreducibilityOfIntegralNormalExtension
+public import Nyll.SchemeTheory.RingTheory.Descent.TensorComparison
+public import Nyll.SchemeTheory.RingTheory.Descent.GradedSubalgebra
+public import Nyll.SchemeTheory.RingTheory.Descent.GradedBaseChange
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleSource
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleOpenImage
+public import Nyll.SchemeTheory.RingTheory.Descent.PrincipalLocalizationModel
+public import Nyll.SchemeTheory.RingTheory.Descent.LocalizationNormalIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteUnramifiedNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalDomainOfIntegralNormalExtension
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalIrreducibilityOfIntegralNormalExtension
 
 /-!
 # Faithfully flat descent and gluing of algebras

@@ -13,17 +13,21 @@ https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/P2M/Sol/S_AlgebraicCurve_Place_eq_map_mk_taylorCoeff_of_evalEval_C_add_X_eq_zero.lean
 -/
 
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.PowerSeries.Basic
-import Nyll.AlgebraicCurves.Places.Taylor.Taylor
-import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
-import Mathlib.Algebra.Polynomial.Bivariate
-import Nyll.AlgebraicCurves.Foundations.CommutativeAlgebra.LocalRingHenselLiftUnique
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.PowerSeries.Basic
+public import Nyll.AlgebraicCurves.Places.Taylor.Taylor
+public import Nyll.AlgebraicCurves.Places.Evaluation.Evaluation
+public import Mathlib.Algebra.Polynomial.Bivariate
+public import Nyll.AlgebraicCurves.Foundations.CommutativeAlgebra.LocalRingHenselLiftUnique
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-!
 # Place mk taylor Coeff aeval
 -/
+
+@[expose] public section
 
 section
 

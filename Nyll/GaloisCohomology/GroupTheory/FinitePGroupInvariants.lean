@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Basic
-import Mathlib.GroupTheory.PGroup
-import Mathlib.FieldTheory.Finiteness
-import Mathlib.Algebra.Field.ZMod
-import Mathlib.Algebra.Module.ZMod
+module
+
+public import Mathlib.RepresentationTheory.Basic
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.FieldTheory.Finiteness
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.Module.ZMod
 
 /-!
 # Trivial lines in finite characteristic-p representations of p-groups
@@ -17,6 +19,8 @@ The fixed-point counting theorem for p-group actions produces a nonzero
 invariant vector. Its scalar line is an actual injective copy of the
 trivial one-dimensional representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

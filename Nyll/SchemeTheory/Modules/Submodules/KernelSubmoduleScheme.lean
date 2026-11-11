@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Modules.Submodules.KernelSubmodule
-import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+module
+
+public import Nyll.SchemeTheory.Modules.Submodules.KernelSubmodule
+public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentLocal
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Actual kernel submodules on schemes
@@ -16,6 +18,8 @@ The native sectionwise kernel subsheaf is transported through the identity-actio
 equivalence with the category of scheme modules. The comparison with the actual
 categorical kernel respects the inclusion into the original module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

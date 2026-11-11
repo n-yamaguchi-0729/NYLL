@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
-import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
-import Nyll.SchemeTheory.RingTheory.Localization.LocalMapLocalizationSurjective
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalMapLocalizationSurjective
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Closed-point local rings of a base-changed geometric stalk
@@ -35,6 +37,8 @@ No local-ring comparison or alternate presentation of the stalk is assumed.
 This is the local algebra needed for the double and triple overlaps in
 Stacks Project, Lemma 58.10.6 (https://stacks.math.columbia.edu/tag/0BSB).
 -/
+
+@[expose] public section
 
 noncomputable section
 

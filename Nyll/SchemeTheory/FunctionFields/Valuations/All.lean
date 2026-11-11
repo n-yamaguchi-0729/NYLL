@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.Valuations.PurelyInseparable
+module
+
+public import Nyll.SchemeTheory.FunctionFields.Valuations.PurelyInseparable
 
 /-!
 # Valuations in function-field extensions

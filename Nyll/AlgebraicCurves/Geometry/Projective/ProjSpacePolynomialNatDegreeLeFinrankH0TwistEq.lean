@@ -10,19 +10,23 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Tactic.NormNum
-import Nyll.SchemeTheory.ProjectiveSpace.Basic
-import Nyll.SchemeTheory.ProjectiveSpace.Cover
-import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.ProjSpacePolynomialNatDegreeLeEulerCharTwistStdCoverPullbackEq
+module
+
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Tactic.NormNum
+public import Nyll.SchemeTheory.ProjectiveSpace.Basic
+public import Nyll.SchemeTheory.ProjectiveSpace.Cover
+public import Nyll.AlgebraicCurves.Geometry.Projective.ProjTwistDatum
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.OModulePresheafEulerChar
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.ProjSpacePolynomialNatDegreeLeEulerCharTwistStdCoverPullbackEq
 
 /-!
 # Proj Space exists polynomial nat Degree le forall finrank H0 twist eq of forall
 subsingleton HSucc
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

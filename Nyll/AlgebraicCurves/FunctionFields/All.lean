@@ -27,3 +27,5 @@ import Nyll.AlgebraicCurves.FunctionFields.Rational.All
 import Nyll.AlgebraicCurves.FunctionFields.SurjectiveKerPiSpanMulQuotient
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.All
 import Nyll.AlgebraicCurves.FunctionFields.Tsen.All
+import Nyll.AlgebraicCurves.FunctionFields.ConstantPullbackCompositum
+import Nyll.AlgebraicCurves.FunctionFields.ConstantPullbackGeneration

@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.IsIso
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # is Iso of is Open Immersion of is Closed Immersion of section of is Connected fibres
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

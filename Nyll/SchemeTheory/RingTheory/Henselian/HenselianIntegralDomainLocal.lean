@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteDomainLocal
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.LocalRing.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteDomainLocal
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.LocalRing.Basic
 
 /-!
 # Integral domains over Henselian local rings are local
@@ -16,6 +18,8 @@ Each element belongs to a finite simple subalgebra. That subalgebra is a
 domain and is local by the existing finite-domain Henselian theorem. Its
 unit alternative maps into the original integral domain.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

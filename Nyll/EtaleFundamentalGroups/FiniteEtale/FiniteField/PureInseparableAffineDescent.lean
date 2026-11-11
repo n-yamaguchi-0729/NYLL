@@ -3,12 +3,16 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableAffine
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.AffineSchemeModel
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableAffine
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.AffineSchemeModel
 
 /-!
 # Affine descent across purely inseparable constant extensions
 -/
+
+@[expose] public section
 
 noncomputable section
 universe u

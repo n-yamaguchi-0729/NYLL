@@ -10,12 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.AlgebraicCurves.Models.Construction.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+module
+
+public import Nyll.AlgebraicCurves.Models.Construction.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!
 # Curve Model dense range is Pullback lift spec Map comp point
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
