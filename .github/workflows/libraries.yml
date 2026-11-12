@@ -1,6 +1,23 @@
 name: Lean
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - Nyll/**
+      - Nyll.lean
+      - lakefile.toml
+      - lake-manifest.json
+      - lean-toolchain
+      - .github/workflows/libraries.yml
+      - .github/workflows/library-stage.yml
+      - .github/workflows/proof-check.yml
+      - .github/workflows/cache-release.yml
+      - .github/scripts/**
+      - tools/check_lean_rules.py
+      - tools/cache_sources.py
+      - tools/tests/test_check_lean_rules.py
+      - AGENTS.md
   pull_request:
     paths:
       - Nyll/**
@@ -48,7 +65,7 @@ jobs:
       - name: Reject new source-rule violations
         # The previously published sources contain existing bare-simp style debt.
         # Preserve that explicit baseline; reject every newly introduced violation.
-        # The full source audit above and Lean/NanoDa/kernel checks remain required.
+        # The full source audit above and Lean/NanoDa/axiom checks remain required.
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           NYLL_STYLE_BASELINE: e33b859d48bcd59154aaf483309d4b83d18119c4
@@ -290,7 +307,7 @@ jobs:
       target: +Nyll
 
   verify:
-    name: NanoDa and Lean kernel replay for every library
+    name: NanoDa and strict declaration audit for every library
     # A later successful aggregate does not hide an earlier depth-job failure.
     needs: [depth1-procgroups, depth1-valuedfield, depth1-galoiscohomology,
       depth1-schemetheory, depth2-classfield, depth2-curves, depth2-fundamental,
@@ -301,6 +318,8 @@ jobs:
     with:
       config: .github/scripts/proof-manifest-config.json
       partition: true
+      # Owner requested no additional official kernel replay for NYLL.
+      kernel-replay: false
       cache-prefix: nyll-proof-v1
 
   publish-cache:
