@@ -98,8 +98,8 @@
           "name": "ClassFieldTheory.finiteAbelianLocalReciprocity"
         },
         {
-          "path": "Nyll/ClassFieldTheory/LocalClassFieldTheory/Finite/LocalReciprocity/MathlibInterface.lean",
-          "name": "ClassFieldTheory.LocalCFT.finiteAbelianLocalReciprocity"
+          "path": "Nyll/ClassFieldTheory/Theorems/LocalClassFieldTheory/FiniteAbelianLocalReciprocityQuotient.lean",
+          "name": "ClassFieldTheory.finiteAbelianLocalReciprocity_quotient"
         },
         {
           "path": "Nyll/ClassFieldTheory/Theorems/LocalClassFieldTheory/ProfiniteLocalReciprocity.lean",
