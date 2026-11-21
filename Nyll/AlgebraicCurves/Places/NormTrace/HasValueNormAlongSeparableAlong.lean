@@ -18,7 +18,7 @@ import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
 import Nyll.AlgebraicCurves.Places.ValuationRings.OverDVR
 import Nyll.AlgebraicCurves.Places.Ramification.SumRamificationIndexMulInertiaDegFiberOver
 import Nyll.AlgebraicCurves.Places.Ramification.RamificationIndexEqRamificationIdxFiberCenter
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqInertiaDegFiberCenter
+import Nyll.AlgebraicCurves.Places.Ramification.FiberCenterResidueComparison
 import Nyll.AlgebraicCurves.Places.Degree.FinrankPrimePow
 
 /-!

@@ -9,14 +9,11 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.BijectiveLiftTensorSectionsB
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleBijectiveLiftTensorSectionsBilin
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleBijectiveLiftTensorSectionsBilinMonoidalV2
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualTensor
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoEvAppTensorUnit
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitField
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitLocalRing
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitSectionNeZero
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.OfUnitSectionSectionDualApp
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.ShortExactKerModuleTensor

@@ -42,7 +42,7 @@ variable [AlgebraicCurve.IsCurveOver K F]
 private lemma span_D_eq_top (t : F) (hdt : D K F t ≠ 0) :
     Submodule.span F {D K F t} = ⊤ := by
   have h1 : Module.finrank F Ω[F⁄K] = 1 := AlgebraicCurve.IsCurveOver.finrank_kaehler
-  exact (finrank_eq_one_iff_of_nonzero (D K F t) hdt).mp h1
+  exact (finrank_eq_one_iff_of_ne_zero (D K F t) hdt).mp h1
 
 private lemma exists_coeff (t : F) (hdt : D K F t ≠ 0) (ω : Ω[F⁄K]) :
     ∃ c : F, ω = c • D K F t := by
@@ -130,7 +130,7 @@ private lemma dcoord_iter_digit (t : F) (hdt : D K F t ≠ 0) (c : F) (i k : ℕ
       = i.descFactorial k • (c ^ p * t ^ (i - k)) := by
   induction k generalizing i with
   | zero =>
-      simp only [pow_zero, Module.End.one_apply, Nat.descFactorial_zero, Nat.sub_zero, one_smul]
+      simp only [pow_zero, one_apply_eq_self, Nat.descFactorial_zero, Nat.sub_zero, one_smul]
   | succ k ih =>
       rw [pow_succ, endo_mul_app, dtlc_app, dcoord_digit p t hdt c i, map_nsmul, ih (i - 1),
         smul_smul]
@@ -239,7 +239,7 @@ private lemma exists_ker_of_pow_eq_zero (τ : F →ₗ[K] F) (hτp : τ ^ p = 0)
   have hiter : Function.Injective (⇑τ)^[p] := hinj.iterate p
   have h10 : (τ ^ p) (1 : F) = (τ ^ p) (0 : F) := by
     simp only [hτp, LinearMap.zero_apply]
-  rw [Module.End.pow_apply, Module.End.pow_apply] at h10
+  rw [pow_apply_eq_iterate, pow_apply_eq_iterate] at h10
   exact one_ne_zero (hiter h10)
 
 end cartier

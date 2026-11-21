@@ -32,10 +32,7 @@ universe u
 variable {p : ℕ} [Fact p.Prime]
 variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 
-local instance continuousFiveTermH1Module
-    {q : ℕ} {H : Type*} [Group H] [TopologicalSpace H] [IsTopologicalGroup H] :
-    Module (ZMod q) (ContinuousH1ZMod (p := q) (G := H)) :=
-  continuousH1ZModModule
+attribute [local instance] ClassFieldTower.ProP.continuousH1ZModModule
 
 /-- Exactness at the three middle terms of the continuous low-degree sequence
 

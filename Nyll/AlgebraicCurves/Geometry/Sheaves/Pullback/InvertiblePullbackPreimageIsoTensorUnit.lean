@@ -22,7 +22,7 @@ public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
 public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackIsoUnit
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 public import Nyll.SchemeTheory.Modules.Localization.LocallyTrivialSectionsLocalization
 public import Nyll.AlgebraicCurves.Geometry.Projective.TwoAffineCoverSectionsOfInvertibleProjectiveFiniteFinrank
 public import Nyll.SchemeTheory.RingTheory.LinearAlgebra.InvertibleModules

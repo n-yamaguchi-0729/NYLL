@@ -16,8 +16,6 @@ import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechKerBaseChange
 import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechKerMapInjective
 import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordBijectiveCokerMapBaseChange
 import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordBijectiveKerMapBaseChange
-import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordFiniteK0
-import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordFlatK0
 import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordProjectiveK0
 import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordProjectiveKer
 import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechProjectiveKer

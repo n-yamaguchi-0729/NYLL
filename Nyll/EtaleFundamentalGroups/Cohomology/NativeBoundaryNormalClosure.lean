@@ -179,7 +179,7 @@ theorem boundaryStrictInertiaClosure_eq_single_range
         (boundaryStrictGenericPoint D hreg E) point t a ∈
         (geometricSourceHom (boundaryStrictGenericMorphism D hreg E)
           (boundaryStrictGenericPoint D hreg E) point t).toMonoidHom.range := ⟨a, rfl⟩
-    exact Subgroup.Normal.conj_mem inferInstance _
+    exact Subgroup.Normal.conj_mem _
       (Subgroup.subset_normalClosure ha) _
   · apply Subgroup.normalClosure_mono
     rintro g ⟨a, rfl⟩

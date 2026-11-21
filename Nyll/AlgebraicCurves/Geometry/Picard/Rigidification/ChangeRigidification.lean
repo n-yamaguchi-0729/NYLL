@@ -20,7 +20,7 @@ public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
 public import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroCut
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
 
 /-! # Change of the actual rigidifying section
 

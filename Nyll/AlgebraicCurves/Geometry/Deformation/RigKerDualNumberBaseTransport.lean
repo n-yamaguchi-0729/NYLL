@@ -16,6 +16,7 @@ public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Group
 public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 public import Nyll.AlgebraicCurves.Geometry.Deformation.RigKerDualNumber
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-!
 # Rig Ker Dual Number Base Transport
@@ -31,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Re
 noncomputable section
 
 namespace AlgebraicGeometry.RelPicard.BaseTransport
+
+open _root_.AlgebraicGeometry.RelPicard.RigidifiedLineBundle (pullbackAlongPullbackAlongIso)
 
 variable {R : Type u} [CommRing R]
 
@@ -62,14 +65,6 @@ namespace RigidifiedLineBundle
 
 variable {c ε}
 
-/-- The comparison between an iterated rigidified pullback and pullback along the composite. -/
-def pullbackAlong_pullbackAlong_iso {T T' T'' : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)}
-    {t' : T' ⟶ Spec (CommRingCat.of R)} {t'' : T'' ⟶ Spec (CommRingCat.of R)}
-    (M : RigidifiedLineBundle c ε t) (φ : SchemeHomOver t' t) (ψ : SchemeHomOver t'' t') :
-    ((M.pullbackAlong φ).pullbackAlong ψ).L ≅ (M.pullbackAlong (postComp φ ψ)).L :=
-  (Scheme.Modules.pullbackComp (baseChangeSnd c ψ) (baseChangeSnd c φ)).app M.L ≪≫
-    (Scheme.Modules.pullbackCongr (baseChangeSnd_comp c φ ψ)).app M.L
-
 /-- The underlying-module isomorphism for pullback along an identity scheme morphism. -/
 def pullbackAlong_iso_of_coe_eq_id {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)}
     (M : RigidifiedLineBundle c ε t) (φ : SchemeHomOver t t) (hφ : φ.1 = 𝟙 T) :
@@ -85,7 +80,7 @@ def pullbackAlong_idOver_idOver_iso {T : Scheme.{u}} {t₁ t₂ : T ⟶ Spec (Co
   = t₂)
     (M : RigidifiedLineBundle c ε t₁) :
     (((M.pullbackAlong (idOver h)).pullbackAlong (idOver h.symm))).L ≅ M.L :=
-  pullbackAlong_pullbackAlong_iso M _ _ ≪≫
+  M.pullbackAlongPullbackAlongIso _ _ ≪≫
     pullbackAlong_iso_of_coe_eq_id M _ (Category.id_comp _)
 
 /--
@@ -199,11 +194,11 @@ def baseTransportCarrierIso (M : RigKerDualNumber.Carrier c ε B) :
         (Scheme.TwoAffineOpenCover.specMap R' B)).L :=
   BaseChange.ofR_pullbackAlong_iso c ε R' (dualNumberReductionOver R' B) _ ≪≫
     BaseChange.ofR_mapIso c ε R'
-      (RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso M.1 _ _ ≪≫
+      (M.1.pullbackAlongPullbackAlongIso _ _ ≪≫
         RigidifiedLineBundle.pullbackAlong_congr_hom M.1 _
           (postComp (dualNumberReductionOver R B) (idOver (tower_base R' B)))
             (by simp [postComp, idOver, BaseChange.overR]; rfl) ≪≫
-        (RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso M.1 _ _).symm ≪≫
+        (M.1.pullbackAlongPullbackAlongIso _ _).symm ≪≫
         RigidifiedLineBundle.pullbackAlong_mapIso (idOver (tower_base R' B)) M.2.some ≪≫
         RigidifiedLineBundle.unit_pullbackAlong_iso (idOver (tower_base R' B))) ≪≫
     BaseChange.ofR_unit_iso c ε R' (specMap R' B)
@@ -221,12 +216,13 @@ def baseTransportCarrierInvIso
       B).symm)).pullbackAlong
         (dualNumberReductionOver R B)).L ≅
       (RigidifiedLineBundle.unit (c := c) (ε := ε) (Scheme.TwoAffineOpenCover.specMap R B)).L :=
-  RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso _ _ _ ≪≫
+  _root_.AlgebraicGeometry.RelPicard.RigidifiedLineBundle.pullbackAlongPullbackAlongIso _ _ _ ≪≫
     RigidifiedLineBundle.pullbackAlong_congr_hom _ _
       (postComp (BaseChange.overR R' (dualNumberReductionOver R' B)) (idOver (tower_base R'
         B).symm))
       (by simp [postComp, idOver, BaseChange.overR]; rfl) ≪≫
-    (RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso _ _ _).symm ≪≫
+    (_root_.AlgebraicGeometry.RelPicard.RigidifiedLineBundle.pullbackAlongPullbackAlongIso
+      _ _ _).symm ≪≫
     RigidifiedLineBundle.pullbackAlong_mapIso (idOver (tower_base R' B).symm)
       (BaseChange.toR_pullbackAlong_iso c ε R' (dualNumberReductionOver R' B) M'.1 ≪≫
         BaseChange.toR_mapIso c ε R' M'.2.some ≪≫

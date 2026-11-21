@@ -106,7 +106,7 @@ theorem oneRoot_fractionRing_finrank_eq_exponent_of_domain
         (AdjoinRoot.powerBasis'
           (monic_X_pow_sub_C y hN.ne')).finrank
     _ = (X ^ N - Polynomial.C y).natDegree := rfl
-    _ = N := Polynomial.natDegree_X_pow_sub_C
+    _ = N := Polynomial.natDegree_X_pow_sub_C _
 
 /-- Finite-dimensionality companion to
 `oneRoot_fractionRing_finrank_eq_exponent_of_domain`. -/

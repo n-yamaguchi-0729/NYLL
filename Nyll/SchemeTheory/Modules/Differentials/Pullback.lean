@@ -118,8 +118,8 @@ def ιAlong (ℓ : M →+ N) (hℓ : ∀ (r : R) (m : M), ℓ (r • m) = f r �
   have towerN : IsScalarTower R S N := IsScalarTower.of_algebraMap_smul fun _ _ => rfl
   have towerE : IsScalarTower R S (⋀[S]^d N) :=
     IsScalarTower.of_algebraMap_smul fun _ _ => rfl
-  exact { (@MultilinearMap.restrictScalars R (Fin d) (fun _ => N) (⋀[S]^d N)
-      _ _ _ (fun _ => mN) mE S _ _ _ _ (fun _ => towerN) towerE
+  exact { (@MultilinearMap.restrictScalars R _ (Fin d) (fun _ => N) (⋀[S]^d N)
+      _ (fun _ => mN) _ S _ _ _ _ mE (fun _ => towerN) towerE
       (exteriorPower.ιMulti S d (M := N)).toMultilinearMap).compLinearMap
       (fun _ => linAlong ℓ hℓ) with
     map_eq_zero_of_eq' := fun v i j h hij =>

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianActionLifting
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
 public import Nyll.SchemeTheory.FiniteEtale.RadicialDescentCocycle
@@ -29,8 +30,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.FiniteEtale.ProperHenselianActionLifting
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 section Restriction
 

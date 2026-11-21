@@ -3,6 +3,7 @@ Anthropic FLT upstream notice: Copyright 2026 Anthropic, PBC.
 Released under Apache 2.0 license as described in the file LICENSE.
 Adapted Anthropic FLT source (pinned comparison revision):
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/Definitions/Def_AlgebraicGeometry_CechPicardObstruction.lean
+https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/P2M/Sol/S_AlgebraicGeometry_Scheme_Modules_CechTrivialisation_nonempty_iso_unit_of_forall_transition_eq_one.lean
 Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/NOTICE
 Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
 
@@ -38,13 +39,36 @@ namespace Scheme.Modules
 
 variable {Y : Scheme.{u}}
 
+/-- Apply a unit-module automorphism to a global section of the open subscheme. -/
+noncomputable def unitAutSectionValue (W : Y.Opens)
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf))
+    (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : (W : Scheme.{u}).presheaf.obj (op ⊤) :=
+  (e.hom.val.app (op ⊤)).hom x
+
 /-- The section obtained by applying an automorphism of the unit sheaf on an open subscheme to its
 unit section and transporting it to the original open. -/
 def unitAutSection (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
     Γ(Y, W) :=
-  W.topIso.hom ((e.hom.val.app (op ⊤)).hom (1 : (W : Scheme.{u}).presheaf.obj (op ⊤)))
+  W.topIso.hom (unitAutSectionValue W e 1)
+
+/-- Restrict a module trivialisation along a factorisation of its base map. -/
+noncomputable def restrictTrivialisation {V B : Scheme.{u}} (𝓜 : Y.Modules)
+    (ι : V ⟶ Y) (j : B ⟶ Y) (k : B ⟶ V) (e : k ≫ ι = j)
+    (τ : (Scheme.Modules.pullback ι).obj 𝓜 ≅ SheafOfModules.unit V.ringCatSheaf) :
+    (Scheme.Modules.pullback j).obj 𝓜 ≅ SheafOfModules.unit B.ringCatSheaf :=
+  ((pullbackCongr e).app 𝓜).symm ≪≫ ((pullbackComp k ι).app 𝓜).symm ≪≫
+    (Scheme.Modules.pullback k).mapIso τ ≪≫ pullbackUnitIso k
+
+/-- Compare the two pullbacks to a subsidiary open subscheme. -/
+noncomputable def restrictPullbackIso (𝓜 : Y.Modules) {W W' : Y.Opens} (h' : W' ≤ W) :
+    (Scheme.Modules.pullback (Y.homOfLE h')).obj ((Scheme.Modules.pullback W.ι).obj 𝓜) ≅
+      (Scheme.Modules.pullback W'.ι).obj 𝓜 :=
+  (pullbackComp (Y.homOfLE h') W.ι).app 𝓜 ≪≫ (pullbackCongr (Y.homOfLE_ι h')).app 𝓜
 
 /-- A choice of a trivialisation of a sheaf of modules on each member of an ordered affine cover. -/
 abbrev CechTrivialisation (𝒱 : Y.OrderedAffineCover) (𝓜 : Y.Modules) : Type u :=
@@ -59,15 +83,17 @@ variable {𝒱 : Y.OrderedAffineCover} {𝓜 : Y.Modules}
 composition and unit isomorphisms. -/
 def restrict (τ : CechTrivialisation 𝒱 𝓜) {a : 𝒱.ι} {W : Y.Opens} (h : W ≤ 𝒱.U a) :
     (Scheme.Modules.pullback W.ι).obj 𝓜 ≅ SheafOfModules.unit ((W : Scheme.{u})).ringCatSheaf :=
-  ((Scheme.Modules.pullbackCongr (Y.homOfLE_ι h)).app 𝓜).symm ≪≫
-    ((Scheme.Modules.pullbackComp (Y.homOfLE h) (𝒱.U a).ι).app 𝓜).symm ≪≫
-    (Scheme.Modules.pullback (Y.homOfLE h)).mapIso (τ a) ≪≫
-    Scheme.Modules.pullbackUnitIso (Y.homOfLE h)
+  restrictTrivialisation 𝓜 (𝒱.U a).ι W.ι (Y.homOfLE h) (Y.homOfLE_ι h) (τ a)
+
+/-- The transition section between two cover trivialisations on a common smaller open. -/
+noncomputable def transitionSection (τ : CechTrivialisation 𝒱 𝓜) (W : Y.Opens) (a b : 𝒱.ι)
+    (ha : W ≤ 𝒱.U a) (hb : W ≤ 𝒱.U b) : Γ(Y, W) :=
+  unitAutSection W ((τ.restrict ha).symm ≪≫ τ.restrict hb)
 
 /-- The section representing the transition automorphism between the two restricted
 trivialisations on a cover overlap. -/
 def transition (τ : CechTrivialisation 𝒱 𝓜) (s : 𝒱.Idx 1) : Γ(Y, 𝒱.inter s) :=
-  unitAutSection (𝒱.inter s) ((τ.restrict (𝒱.inter_le s 0)).symm ≪≫ τ.restrict (𝒱.inter_le s 1))
+  τ.transitionSection (𝒱.inter s) (s.1 0) (s.1 1) (𝒱.inter_le s 0) (𝒱.inter_le s 1)
 
 /-- Pull back a cover trivialisation along an affine morphism to the inverse-image ordered cover. -/
 def comap (τ : CechTrivialisation 𝒱 𝓜) {Y' : Scheme.{u}} (h : Y' ⟶ Y) [IsAffineHom h] :

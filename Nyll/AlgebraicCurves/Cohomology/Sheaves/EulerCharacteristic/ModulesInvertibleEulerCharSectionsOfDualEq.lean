@@ -135,33 +135,6 @@ open _root_.CategoryTheory.MonoidalCategory
 open _root_.AlgebraicGeometry
 
 
-namespace DEGDUAL
-
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-theorem nonempty_linearEquiv_of_iso {R : Type u} [CommRing R] {X : Scheme.{u}} (x : X ⟶ Spec
-  (CommRingCat.of R))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Nonempty ((𝒱.sectionsOf x M).H0 ≃ₗ[R] (𝒱.sectionsOf x M').H0) ∧
-      Nonempty ((𝒱.sectionsOf x M).H1 ≃ₗ[R] (𝒱.sectionsOf x M').H1) := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  exact ⟨⟨e0⟩, ⟨e1⟩⟩
-
-theorem eulerChar_congr {k : Type u} [Field k] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    (Module.finrank k (𝒱.sectionsOf x M).H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M).H1 =
-      (Module.finrank k (𝒱.sectionsOf x M').H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso x 𝒱 e
-  rw [e0.finrank_eq, e1.finrank_eq]
-
-end DEGDUAL
-
 theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.eulerChar_sectionsOf_dual_eq
     (K : Type u) [Field K] [IsAlgClosed K] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of K))
     [IsIntegral X] [IsProper x] [SmoothOfRelativeDimension 1 x]
@@ -177,7 +150,7 @@ theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.eulerChar_sectionsO
   obtain ⟨hdual, ⟨e⟩⟩ := Scheme.Modules.IsInvertible.dual hL
   have hT := Scheme.Modules.IsInvertible.eulerChar_sectionsOf_tensor_eq_add_sub K x L
     (Scheme.Modules.dual L) hL hdual 𝒱
-  have hc := DEGDUAL.eulerChar_congr x 𝒱 e
+  have hc := Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr x 𝒱 e
   rw [Scheme.Modules.tensorUnit_eq] at hc
   linarith
 end Scheme_Modules_IsInvertible_eulerChar_sectionsOf_dual_eq

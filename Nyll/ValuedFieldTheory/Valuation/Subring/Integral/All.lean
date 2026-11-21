@@ -16,5 +16,6 @@ public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.FaithfullyFlatIs
 public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.MemAdjoinSingletonIsIntegralIsUnitNormAevalDerivativeMinpoly
 public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.MemAdjoinSingletonIsIntegralSeparableMinpoly
 public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.NatDegreeMapEqCardRoots
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.NormalizedPolynomial
 public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.TensorPrimitiveFactor
 public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.IntegralCriterion

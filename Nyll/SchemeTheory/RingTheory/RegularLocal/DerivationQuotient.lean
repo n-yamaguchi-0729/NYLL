@@ -160,9 +160,11 @@ theorem isRegularLocalRing_quotient_of_isUnit_det [IsRegularLocalRing R]
   have hE (i j : Fin n) : E i (f j) = if i = j then 1 else 0 := by
     calc
       E i (f j) = ∑ k, A⁻¹ i k * D k (f j) := by
-        change (Derivation.coeFnAddMonoidHom (∑ k, A⁻¹ i k • D k)) (f j) = _
-        rw [map_sum, Finset.sum_apply]
-        simp only [Derivation.coeFnAddMonoidHom_apply, Derivation.smul_apply, smul_eq_mul]
+        change (Derivation.coeAddMonoidHom (∑ k, A⁻¹ i k • D k)) (f j) = _
+        rw [map_sum, LinearMap.sum_apply]
+        refine Finset.sum_congr rfl fun k _ => ?_
+        change (A⁻¹ i k • D k) (f j) = _
+        rw [smul_apply, smul_eq_mul]
       _ = (A⁻¹ * A) i j := rfl
       _ = (1 : Matrix (Fin n) (Fin n) R) i j :=
         congrArg (fun M : Matrix (Fin n) (Fin n) R => M i j)

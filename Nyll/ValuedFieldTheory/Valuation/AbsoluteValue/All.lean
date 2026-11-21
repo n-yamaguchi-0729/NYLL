@@ -10,6 +10,7 @@ public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicLocalization
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completeness
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completion
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.CompletionIntegers
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.ExponentialValuation
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Extension
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Nonarchimedean

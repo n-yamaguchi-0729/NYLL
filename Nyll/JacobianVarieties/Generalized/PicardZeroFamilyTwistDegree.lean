@@ -77,7 +77,7 @@ theorem eulerChar_fibre_zero_pointTwist
   obtain ⟨et⟩ := nonempty_pullback_sectionTwist_iso R c ε ψ n
   let e := Scheme.Modules.pullbackTensorObjIso f L (sectionTwist c ε t n) ≪≫
     whiskerLeftIso ((Scheme.Modules.pullback f).obj L) et
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso π 𝒱 e
+  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso π 𝒱 e
   change (Module.finrank k (𝒱.sectionsOf π ((Scheme.Modules.pullback f).obj
       (L ⊗ sectionTwist c ε t n))).H0 : ℤ) -
       Module.finrank k (𝒱.sectionsOf π ((Scheme.Modules.pullback f).obj

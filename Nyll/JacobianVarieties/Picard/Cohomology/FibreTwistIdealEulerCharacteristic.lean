@@ -415,34 +415,6 @@ open _root_.AlgebraicGeometry
 
 variable {R : Type u} [CommRing R]
 
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-theorem nonempty_linearEquiv_of_iso {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of R))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Nonempty ((𝒱.sectionsOf x M).H0 ≃ₗ[R] (𝒱.sectionsOf x M').H0) ∧
-      Nonempty ((𝒱.sectionsOf x M).H1 ≃ₗ[R] (𝒱.sectionsOf x M').H1) := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  exact ⟨⟨e0⟩, ⟨e1⟩⟩
-
-theorem eulerChar_congr {k : Type u} [Field k] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    (Module.finrank k (𝒱.sectionsOf x M).H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M).H1 =
-      (Module.finrank k (𝒱.sectionsOf x M').H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso x 𝒱 e
-  rw [e0.finrank_eq, e1.finrank_eq]
-
-theorem finrank_H1_congr {k : Type u} [Field k] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Module.finrank k (𝒱.sectionsOf x M).H1 = Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨-, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso x 𝒱 e
-  exact e1.finrank_eq
-
 theorem eulerChar_of_twists {k : Type u} [Field k] {X : Scheme.{u}}
     (x : X ⟶ Spec (CommRingCat.of k)) [IsProper x]
     (L : X.Modules) (hL : Scheme.Modules.IsInvertible L)
@@ -461,7 +433,7 @@ theorem eulerChar_of_twists {k : Type u} [Field k] {X : Scheme.{u}}
   have hLD : Scheme.Modules.IsInvertible (L ⊗ JD.module) := hL.tensor hJD.isInvertible_module
   have e1 : F ≅ (L ⊗ JD.module) ⊗ K.invModule :=
     eF ≪≫ whiskerLeftIso L ((eP ⊗ᵢ eQ) ≪≫ β_ _ _) ≪≫ (α_ L JD.module K.invModule).symm
-  have h1 := eulerChar_congr x 𝒱 e1
+  have h1 := Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr x 𝒱 e1
   have h2 := Scheme.IdealSheafData.IsInvertible.eulerChar_sectionsOf_tensor_invModule_eq
     x hK hZr hdegr (L ⊗ JD.module) hLD 𝒱
   have h3 := Scheme.IdealSheafData.IsInvertible.eulerChar_sectionsOf_tensor_invModule_eq
@@ -471,7 +443,7 @@ theorem eulerChar_of_twists {k : Type u} [Field k] {X : Scheme.{u}}
       whiskerLeftIso L (β_ _ _ ≪≫
         (Scheme.IdealSheafData.IsInvertible.nonempty_invModule_tensor_module_iso hJD).some) ≪≫
       ρ_ L
-  have h4 := eulerChar_congr x 𝒱 e2
+  have h4 := Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr x 𝒱 e2
   omega
 
 end AlgebraicGeometry.RelPicard.Book2
@@ -562,7 +534,7 @@ theorem eulerChar_pullback_fibreModule_tensor_sectionTwist_tensor_idealModule_eq
     (Scheme.Modules.pullbackComp i₁ pr).app LL
   have hχL : (Module.finrank k ↥(𝒲'.sectionsOf M₁.toBase L).H0 : ℤ) - Module.finrank k
     (𝒲'.sectionsOf M₁.toBase L).H1 = 1 := by
-    rw [← eulerChar_congr M₁.toBase 𝒲' eLL]; exact hLL₁ 𝒲'
+    rw [← Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr M₁.toBase 𝒲' eLL]; exact hLL₁ 𝒲'
   have eF : (Scheme.Modules.pullback i₁).obj (fibreModule c t pt (LL ⊗ (sectionTwist c ε t r ⊗
     D.idealModule))) ≅
       L ⊗ ((Scheme.Modules.pullback ψ).obj (sectionTwist c ε t r) ⊗ (Scheme.Modules.pullback ψ).obj

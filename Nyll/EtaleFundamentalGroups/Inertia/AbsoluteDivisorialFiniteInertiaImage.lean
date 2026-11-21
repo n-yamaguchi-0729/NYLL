@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
 public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteNormalizationInertiaImage
 public import Nyll.EtaleFundamentalGroups.Inertia.AbsoluteDivisorialFiniteQuotientNaturality
 
@@ -40,11 +41,7 @@ variable {A : Type u} [CommRing A] [IsDomain A] [IsIntegrallyClosed A]
   [Algebra A U.functionField] [IsFractionRing A U.functionField]
   [Algebra A Omega] [IsScalarTower A U.functionField Omega]
 
-local instance finiteImageAbsoluteNormalizationPrimeAction :
-    MulSemiringAction Gal(Omega/U.functionField)
-      (integralClosure A Omega) :=
-  IsIntegralClosure.MulSemiringAction A U.functionField Omega
-    (integralClosure A Omega)
+attribute [local instance] normalizationInertiaImageAction
 
 
 /-- Every inertia element at the selected finite normalization prime comes

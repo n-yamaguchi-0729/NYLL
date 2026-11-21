@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Inertia.OpenSourceBoundaryPlaces
 public import Nyll.SchemeTheory.FunctionFields.GenericFieldSourceStalk
 public import Nyll.ClassFieldTheory.AlgebraicFunctionFieldTheory.RayClass.FiniteConstantRayReindex
@@ -33,7 +34,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicCurve TopologicalSpace
 
 namespace EtaleFundamentalGroups.Inertia
 
-attribute [local instance] integralOpenDominant
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 /-- The original generic-source square also commutes on every actual
 local ring. Both spectrum maps factor the same original morphism. -/
@@ -227,13 +228,13 @@ finite constants, is exactly the original field-extension modulus. -/
 theorem genericSourceBoundaryModulus_pullback :
     FunctionField.RayClass.modulusForgetConstants k E L
         (genericSourceBoundaryModulus cY jY pY hpY) =
-      FunctionField.RayClass.rayModulusBaseChange L
+      FunctionField.RayClass.reindexAlongPlaces L
         (genericSourceBoundaryModulus cX jX pX hpX) := by
   classical
   apply Finsupp.ext
   intro v
   rw [FunctionField.RayClass.modulusForgetConstants_apply,
-    FunctionField.RayClass.rayModulusBaseChange_apply,
+    FunctionField.RayClass.reindexAlongPlaces_apply,
     genericSourceBoundaryModulus_apply, genericSourceBoundaryModulus_apply,
     genericSourceBoundaryPlaces_restrict_pullback cX cY jX jY pX hpX pY hpY f g hcart hsource]
   have hv : (v.extendConstants E).forgetConstants (K := k) = v := Place.ext rfl

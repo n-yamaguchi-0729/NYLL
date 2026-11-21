@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ClassFieldTheory.Algebra.NormalEmbeddingRange
 public import Nyll.EtaleFundamentalGroups.Inertia.Tame.FiniteGeometricFiberCriterion
 public import Nyll.EtaleFundamentalGroups.Inertia.PointedCoverStabilizerPreimage
 public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
@@ -95,10 +96,7 @@ def pointedFiniteGaloisCoverField
   have : _root_.IsGalois U.functionField W.left.functionField :=
     isGalois_functionField_of_isGalois_finiteEtale W inferInstance
   let i := finiteEtaleFiberPointFunctionFieldAlgHom W w
-  exact
-    { toIntermediateField := i.fieldRange
-      finiteDimensional := i.equivFieldRange.toLinearEquiv.finiteDimensional
-      isGalois := _root_.IsGalois.of_algEquiv i.equivFieldRange }
+  exact i.finiteGaloisFieldRange
 
 /-- Local wild inertia acts trivially on the original geometric fiber of
 an arbitrary finite Galois cover exactly when its embedded function-field

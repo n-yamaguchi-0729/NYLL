@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperCompletionColimitFiniteEtale
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperFieldBaseChange
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedComponents
@@ -33,8 +34,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 open HenselianNoetherianImageStages
 

@@ -31,7 +31,7 @@ public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
 public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
 public import Nyll.SchemeTheory.Modules.Functoriality.LocallyFreePushforwardFinite
 public import Nyll.SchemeTheory.Modules.Frames.LocallyFreeBasis
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 
 /-!
 # Scheme Modules nonempty norm Module pullback iso tensor Pow

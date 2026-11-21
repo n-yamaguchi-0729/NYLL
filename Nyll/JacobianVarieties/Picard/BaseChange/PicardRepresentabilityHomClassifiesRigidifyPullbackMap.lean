@@ -29,6 +29,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Poincare.PicardRepresentabilityPoinc
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
+import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-!
 # Classifying a semilinear pullback of the Poincare bundle
@@ -189,7 +190,7 @@ theorem keyA {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (a : SchemeHom
   let a' : SchemeHomOver (t ≫ β') (D.toBase ≫ β') := shift β' a
   have e0 : tw β' N a = postComp N a' := rfl
   rw [e0]
-  let e1 := (h.poincare.pullbackAlongPullbackAlongIso' N a').symm
+  let e1 := (h.poincare.pullbackAlongPullbackAlongIso N a').symm
   obtain ⟨e2⟩ := RigidifiedLineBundle.pullbackAlong_congr a' hN
   obtain ⟨e3⟩ := RigidifiedLineBundle.nonempty_ofInvertible_pullbackAlong_iso (ε := ε) a'
     (hinv β β' hβ f hf D.toBase h.poincare)

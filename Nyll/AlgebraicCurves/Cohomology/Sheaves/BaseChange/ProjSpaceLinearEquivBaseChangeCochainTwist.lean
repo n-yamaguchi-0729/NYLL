@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 public import Nyll.AlgebraicCurves.Geometry.Projective.ChartSectionsBaseChange
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
@@ -51,6 +52,12 @@ open HomogeneousLocalization
 
 namespace P2mWs6C3
 
+open ProjSpace.ChartSectionsBaseChange (
+  X_eq_mvMapGraded_mul_one inter_le_pullbackChart isAffineOpen_inter one_mem_zero
+  preimage_inter preimage_pullbackChart restrictFun_app_eq restrictFun_app_frameUnit
+  restrictFun_app_pullAway toB toB_ratio
+)
+
 section Setup
 
 variable {A : Type u} [CommRing A] {n : ℕ} {Z : Scheme.{u}}
@@ -61,79 +68,6 @@ variable {A : Type u} [CommRing A] {n : ℕ} {Z : Scheme.{u}}
 
 local notation "𝒜A" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A
 local notation "𝒜B" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) B
-
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem preimage_pullbackChart (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (j : Fin (n + 1)) :
-    e ⁻¹ᵁ ProjSpace.pullbackChart ι j = ProjSpace.pullbackChart ι' j :=
-  ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι B ι' e hcomp j
-
-theorem preimage_inter (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) {i : ℕ} (s :
-  (ProjSpace.stdCoverPullback ι).Idx i) :
-    e ⁻¹ᵁ (ProjSpace.stdCoverPullback ι).inter s = (ProjSpace.stdCoverPullback ι').inter s :=
-  ProjSpace.ChartSectionsBaseChange.preimage_inter ι B ι' e hcomp s
-
-theorem inter_le_pullbackChart {W : Scheme.{u}} {R : Type u} [CommRing R]
-    (φ : W ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)) [IsAffineHom φ]
-    {i : ℕ} (s : (ProjSpace.stdCoverPullback φ).Idx i) (t : Fin (i + 1)) :
-    (ProjSpace.stdCoverPullback φ).inter s ≤ ProjSpace.pullbackChart φ ((s.1 t).down) :=
-  ProjSpace.ChartSectionsBaseChange.inter_le_pullbackChart φ s t
-
-theorem isAffineOpen_inter {W : Scheme.{u}} {R : Type u} [CommRing R]
-    (φ : W ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)) [IsAffineHom φ]
-    {i : ℕ} (s : (ProjSpace.stdCoverPullback φ).Idx i) :
-    IsAffineOpen ((ProjSpace.stdCoverPullback φ).inter s) :=
-  ProjSpace.ChartSectionsBaseChange.isAffineOpen_inter φ s
-
-theorem X_eq_mvMapGraded_mul_one (i : Fin (n + 1)) :
-    (MvPolynomial.X i : MvPolynomial (Fin (n + 1)) B) = (ProjSpace.mvMapGraded A B n)
-      (MvPolynomial.X i) * 1 :=
-  ProjSpace.ChartSectionsBaseChange.X_eq_mvMapGraded_mul_one (A := A) B i
-
-theorem one_mem_zero : (1 : MvPolynomial (Fin (n + 1)) B) ∈ (MvPolynomial.homogeneousSubmodule (Fin
-  (n + 1)) B) 0 :=
-  ProjSpace.ChartSectionsBaseChange.one_mem_zero (n := n) B
-
-/-- The coordinate localization map induced by the coefficient base change. -/
-noncomputable def toB (i : Fin (n + 1)) : Away 𝒜A (MvPolynomial.X i) →+* Away 𝒜B (MvPolynomial.X i)
-  :=
-  ProjSpace.ChartSectionsBaseChange.toB (A := A) B i
-
-theorem toB_ratio (i j : Fin (n + 1)) : toB (A := A) B i (ProjSpace.ratio A n i j) =
-  ProjSpace.ratio B n i j :=
-  ProjSpace.ChartSectionsBaseChange.toB_ratio (A := A) B i j
-
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_pullAway (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i : Fin (n + 1))
-    (a : Away 𝒜A (MvPolynomial.X i)) {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom
-        ((ι.app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A (MvPolynomial.X
-          i)).hom a)))
-      = ProjSpace.restrictFun h₂ ((ι'.app (Proj.basicOpen 𝒜B (MvPolynomial.X i))).hom
-          ((Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a))) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_pullAway ι B ι' e hcomp i a h₁ h₂
-
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_frameUnit (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i j : Fin (n + 1))
-  {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom (ProjSpace.frameUnit ι i j))
-      = ProjSpace.restrictFun h₂ (ProjSpace.frameUnit ι' i j) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_frameUnit ι B ι' e hcomp i j h₁ h₂
-
-theorem restrictFun_app_eq {U V : Z.Opens} (hVU : V ≤ U) {W' : Z'.Opens} (h₁ : W' ≤ e ⁻¹ᵁ V) (h₂ :
-  W' ≤ e ⁻¹ᵁ U)
-    (x : Γ(Z, U)) :
-    ProjSpace.restrictFun h₁ ((e.app V).hom (ProjSpace.restrictFun hVU x)) = ProjSpace.restrictFun
-      h₂ ((e.app U).hom x) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_eq e hVU h₁ h₂ x
-
-theorem appLE_top_top {X Y : Scheme.{u}} (g : X ⟶ Y) (h : (⊤ : X.Opens) ≤ g ⁻¹ᵁ ⊤) : g.appLE ⊤ ⊤ h
-  = g.appTop := by
-  rw [Scheme.Hom.appLE]
-  have : (homOfLE h).op = 𝟙 _ := Subsingleton.elim _ _
-  rw [this]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 theorem appLE_hom_apply {X Y : Scheme.{u}} (g : X ⟶ Y) (U : Y.Opens) (V : X.Opens) (h : V ≤ g ⁻¹ᵁ
   U) (x : Γ(Y, U)) :
@@ -191,6 +125,9 @@ universe u
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 open AlgebraicCurves.Cohomology.Sheaves.Proofs in
+open _root_.AlgebraicGeometry.ProjSpace.ChartSectionsBaseChange (inter_le_pullbackChart
+  preimage_inter isAffineOpen_inter
+  preimage_pullbackChart restrictFun_app_eq restrictFun_app_frameUnit) in
 open ProjSpace_exists_linearEquiv_baseChange_cochain_twist_of_isPullback.P2mWs6C3 in
 theorem exists_linearEquiv_baseChange_cochain_twist_of_isPullback
     {A : Type u} [CommRing A] {n : ℕ} {Z : Scheme.{u}}
@@ -285,7 +222,7 @@ theorem exists_linearEquiv_baseChange_cochain_twist_of_isPullback
       = (instS ⊤).algebraMap a := by
     intro a
     rw [Scheme.TwoAffineOpenCover.algebraMap_algebraOfHom]
-    erw [appLE_top_top]
+    erw [Scheme.Hom.appLE_top_eq_appTop]
     have nat := Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom (algebraMap A B))
     have := congrArg (fun ψ => ψ.hom a) nat
     simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at this

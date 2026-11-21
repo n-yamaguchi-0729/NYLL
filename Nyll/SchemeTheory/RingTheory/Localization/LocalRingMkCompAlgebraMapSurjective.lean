@@ -117,8 +117,8 @@ theorem main
     refine hle.trans (le_of_eq ?_)
     rw [Ideal.smul_eq_mul, ← pow_two, sup_right_comm]
   have hle' : maximalIdeal A ≤ J ⊔ (maximalIdeal 𝒪).map (algebraMap 𝒪 A) :=
-    Submodule.le_of_le_smul_of_le_jacobson_bot (IsNoetherian.noetherian _)
-      (maximalIdeal_le_jacobson _) hN
+    Submodule.le_of_le_smul_of_le_jacobson (IsNoetherian.noetherian _)
+      (IsLocalRing.ringJacobson_eq_maximalIdeal A).ge hN
   exact surjective_of_maximalIdeal_le_sup hJle hres' hle'
 
 end Main

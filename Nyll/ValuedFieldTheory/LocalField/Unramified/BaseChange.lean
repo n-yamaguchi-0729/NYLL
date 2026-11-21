@@ -190,7 +190,8 @@ private theorem primitive_separable_integral_model_on_commonTop_core
           ((algebraMap K' (L ⊔ K' : IntermediateField K Ω)).comp
             WRight.subtype) =
         (F.map ((algebraMap K L).comp V.subtype)).map iLeftTop := by
-    apply Polynomial.ext
+    apply AddMonoidAlgebra.ext
+    apply Finsupp.ext
     intro n
     apply Subtype.ext
     simp only [FRight, iRight, iLeftTop, Polynomial.coeff_map, RingHom.comp_apply]

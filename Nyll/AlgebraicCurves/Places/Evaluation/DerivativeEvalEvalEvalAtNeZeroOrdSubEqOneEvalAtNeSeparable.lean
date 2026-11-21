@@ -201,7 +201,7 @@ private theorem _root_.AlgebraicCurve.Place.rfg_ord_sub_algebraMap_pos (hv : v.I
     have := v.g2p_sub_mem_maximalIdeal hv hy
     rw [h] at this
     convert this using 1
-    all_goals try rfl
+    rfl
   exact (v.mem_maximalIdeal_iff_ord_pos (sub_ne_zero.mpr h0) hmem).mp hmax
 
 open _root_.AlgebraicCurve.Place

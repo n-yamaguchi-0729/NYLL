@@ -124,7 +124,7 @@ theorem _root_.HenselianLocalRing.exists_isIdempotentElem_map_eq_of_module_finit
     rw [Polynomial.map_pow, Polynomial.map_sub, Polynomial.map_X, Polynomial.map_C, map_one]
   have hf0 : IsUnit (f.coeff 0) := by
     refine IsLocalRing.notMem_maximalIdeal.mp (fun hmem => ?_)
-    have hc := congrArg (fun q => Polynomial.coeff q 0) hfred
+    have hc := congrArg (fun q : Polynomial k => q.coeff 0) hfred
     simp only [Polynomial.coeff_map] at hc
     rw [← h𝔪, ← IsLocalRing.residue_eq_zero_iff] at hmem
     change algebraMap R k (f.coeff 0) = 0 at hmem
@@ -154,7 +154,7 @@ theorem _root_.HenselianLocalRing.exists_isIdempotentElem_map_eq_of_module_finit
     have hfε : aeval ε f = (ε - 1) ^ a := by
       have hdiff : ∀ i, (f - (X - C (1 : R)) ^ a).coeff i ∈ 𝔪 := by
         intro i
-        have hc := congrArg (fun q => Polynomial.coeff q i) hfred
+        have hc := congrArg (fun q : Polynomial k => q.coeff i) hfred
         simp only [Polynomial.coeff_map] at hc
         rw [h𝔪, ← IsLocalRing.residue_eq_zero_iff, coeff_sub, map_sub, sub_eq_zero]
         change algebraMap R k (f.coeff i) = algebraMap R k (((X - C (1:R)) ^ a).coeff i)

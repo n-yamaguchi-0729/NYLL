@@ -15,9 +15,8 @@ module
 
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.RingTheory.Finiteness.Basic
-public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.MumfordTruncation
+public import Nyll.SchemeTheory.RingTheory.MumfordTruncation
 public import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordBijectiveKerMapBaseChange
-public import Nyll.AlgebraicCurves.Cohomology.Cech.BaseChange.TwoChartCechMumfordFiniteK0
 
 /-!
 # finite ker base Change of finite ker of finite coker

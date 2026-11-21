@@ -39,6 +39,7 @@ public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
 public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-! Compatibility of rigidified pullback classification with composition. -/
 
@@ -163,7 +164,7 @@ theorem CT_theta_pullback
       ((Scheme.Modules.pullbackComp _ _).app P.L).symm
   obtain ⟨icongr⟩ := RigidifiedLineBundle.nonempty_ofInvertible_iso_of_iso (ε := ε)
     ((P.isInvertible.pullback _).pullback _) ((P.pullbackAlong a).isInvertible.pullback _) isq
-  refine ⟨(RigidifiedLineBundle.pullbackAlongPullbackAlongIso' P θ a).symm ≪≫
+  refine ⟨(RigidifiedLineBundle.pullbackAlongPullbackAlongIso P θ a).symm ≪≫
     (Scheme.Modules.pullback (baseChangeSnd c a)).mapIso iθ ≪≫ inat ≪≫ icongr ≪≫ ?_⟩
   rw [RigidifiedLineBundle.ofInvertible_L]
 

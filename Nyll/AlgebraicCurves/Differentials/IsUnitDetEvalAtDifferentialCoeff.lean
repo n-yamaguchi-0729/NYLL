@@ -353,7 +353,7 @@ theorem ell_canonicalDivisorOf_eq {ω : Ω[F⁄K]} (hω : ω ≠ 0) :
   have hTsurj : Function.Surjective T := by
     intro η
     have hrank : Module.finrank F (Ω[F⁄K]) = 1 := IsCurveOver.finrank_kaehler
-    obtain ⟨f, hf⟩ := (finrank_eq_one_iff_of_nonzero' ω hω).1 hrank (η : Ω[F⁄K])
+    obtain ⟨f, hf⟩ := (finrank_eq_one_iff_of_ne_zero' ω hω).1 hrank (η : Ω[F⁄K])
     have hfL : f ∈ LSpace (canonicalDivisorOf hω) := by
       rw [mem_lSpace_iff_ord]
       by_cases hf0 : f = 0
@@ -382,7 +382,7 @@ theorem exists_eq_algebraMap_of_ell_eq_one {D : Divisor K F} (hD : 0 ≤ D) (hel
   have h1 : (1 : F) ∈ LSpace D := lSpace_mono hD one_mem_lSpace_zero
   have hne : (⟨1, h1⟩ : ↥(LSpace D)) ≠ 0 := by
     intro h; exact one_ne_zero (congrArg Subtype.val h)
-  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' _ hne).1 hell ⟨f, hf⟩
+  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_ne_zero' _ hne).1 hell ⟨f, hf⟩
   refine ⟨c, ?_⟩
   have := congrArg Subtype.val hc
   simp only [SetLike.mk_smul_mk] at this

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperCompletionColimitSpecialization
 import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperCompleteGeometricSpecializationFunctor
 
@@ -25,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.FiniteEtale
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 open HenselianNoetherianImageStages
 

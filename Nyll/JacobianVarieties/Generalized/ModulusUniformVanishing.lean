@@ -44,7 +44,7 @@ theorem eulerChar_modulusIdeal (I : X.IdealSheafData) (hI : I.IsInvertible)
       (Module.finrank k (𝒱.sectionsOf c (𝟙_ X.Modules)).H0 : ℤ) -
         Module.finrank k (𝒱.sectionsOf c (𝟙_ X.Modules)).H1 - d := by
   obtain ⟨e⟩ := hI.nonempty_module_tensor_invModule_iso.1
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso c 𝒱 e
+  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso c 𝒱 e
   have hχ := hI.eulerChar_sectionsOf_tensor_invModule_eq c hZ hdeg
     I.module hI.isInvertible_module 𝒱
   rw [e0.finrank_eq, e1.finrank_eq] at hχ
@@ -66,7 +66,8 @@ theorem eulerChar_zero_pointTwist (n : ℕ) :
     ε hε n
   have hχ := hp.eulerChar_sectionsOf_tensor_invModule_eq c hf hd
     (𝟙_ X.Modules) (isInvertible_unit _) 𝒱
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso c 𝒱 (λ_ (ε.ker ^ n).invModule)
+  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ :=
+    Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso c 𝒱 (λ_ (ε.ker ^ n).invModule)
   rw [e0.finrank_eq, e1.finrank_eq] at hχ
   exact (IsAlgEquivZero.eulerChar_sectionsOf_tensor_eq c 𝒱 L
     (ε.ker ^ n).invModule hL hp.isInvertible_invModule h0).trans hχ
@@ -93,7 +94,7 @@ theorem subsingleton_H1_zero_pointTwist_modulus [IsAlgClosed k] [IsIntegral X]
     α_ L (ε.ker ^ n).invModule I.module ≪≫
       whiskerLeftIso L (β_ (ε.ker ^ n).invModule I.module) ≪≫
       (α_ L I.module (ε.ker ^ n).invModule).symm
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso c 𝒱 e
+  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso c 𝒱 e
   apply IsInvertible.subsingleton_H1_sectionsOf_of_le_eulerChar_sub k c
     ((L ⊗ (ε.ker ^ n).invModule) ⊗ I.module)
     ((hL.tensor hp.isInvertible_invModule).tensor hI.isInvertible_module) 𝒱

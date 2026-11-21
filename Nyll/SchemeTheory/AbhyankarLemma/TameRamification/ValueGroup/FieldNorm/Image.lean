@@ -49,11 +49,11 @@ theorem subgroupValueSubgroup_fieldNormSubgroup_le_lcm_towers
     (hformula' :
       ∀ x : L'ˣ, vK.val (normUnits K L' x) =
         (residueDegree' : ℤ) * vL'.val x) :
-    vK.subgroupValueSubgroup (fieldNormSubgroup K M) ≤
+    vK.subgroupValueSubgroup (localNormSubgroup K M) ≤
       integerMultipleSubgroup
         ((((residueDegree : ℤ).lcm (residueDegree' : ℤ) : ℕ) : ℤ)) :=
   (MultiplicativeIntegerValuation.subgroupValueSubgroup_le_integerMultipleSubgroup_iff
-    vK (fieldNormSubgroup K M)
+    vK (localNormSubgroup K M)
       ((((residueDegree : ℤ).lcm (residueDegree' : ℤ) : ℕ) : ℤ))).2
     (fun _ hx =>
       lcm_dvd_val_of_mem_common_fieldNormSubgroup_towers
@@ -74,7 +74,7 @@ theorem subgroupValueSubgroup_le_lcm_of_le_fieldNormSubgroup_towers
     (hformula' :
       ∀ x : L'ˣ, vK.val (normUnits K L' x) =
         (residueDegree' : ℤ) * vL'.val x)
-    {S : Subgroup Kˣ} (hS : S ≤ fieldNormSubgroup K M) :
+    {S : Subgroup Kˣ} (hS : S ≤ localNormSubgroup K M) :
     vK.subgroupValueSubgroup S ≤
       integerMultipleSubgroup
         ((((residueDegree : ℤ).lcm (residueDegree' : ℤ) : ℕ) : ℤ)) :=

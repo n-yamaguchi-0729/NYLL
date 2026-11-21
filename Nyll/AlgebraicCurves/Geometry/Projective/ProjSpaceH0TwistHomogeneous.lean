@@ -54,6 +54,12 @@ open HomogeneousLocalization
 
 namespace RM6Sol
 
+open ProjSpace.ChartSectionsBaseChange (
+  X_eq_mvMapGraded_mul_one one_mem_zero preimage_inter preimage_pullbackChart
+  restrictFun_app_eq restrictFun_app_frameUnit restrictFun_app_pullAway toB
+  toB_mkDeg toB_ratio
+)
+
 section Setup
 
 variable {A : Type u} [CommRing A] {n : ℕ} {Z : Scheme.{u}}
@@ -64,75 +70,6 @@ variable {A : Type u} [CommRing A] {n : ℕ} {Z : Scheme.{u}}
 
 local notation "𝒜A" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A
 local notation "𝒜B" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) B
-
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem preimage_pullbackChart (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (j : Fin (n + 1)) :
-    e ⁻¹ᵁ ProjSpace.pullbackChart ι j = ProjSpace.pullbackChart ι' j :=
-  ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι B ι' e hcomp j
-
-theorem preimage_inter (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) {i : ℕ} (s :
-  (ProjSpace.stdCoverPullback ι).Idx i) :
-    e ⁻¹ᵁ (ProjSpace.stdCoverPullback ι).inter s = (ProjSpace.stdCoverPullback ι').inter s :=
-  ProjSpace.ChartSectionsBaseChange.preimage_inter ι B ι' e hcomp s
-
-theorem X_eq_mvMapGraded_mul_one (i : Fin (n + 1)) :
-    (MvPolynomial.X i : MvPolynomial (Fin (n + 1)) B) = (ProjSpace.mvMapGraded A B n)
-      (MvPolynomial.X i) * 1 :=
-  ProjSpace.ChartSectionsBaseChange.X_eq_mvMapGraded_mul_one (A := A) B i
-
-theorem one_mem_zero : (1 : MvPolynomial (Fin (n + 1)) B) ∈ (MvPolynomial.homogeneousSubmodule (Fin
-  (n + 1)) B) 0 :=
-  ProjSpace.ChartSectionsBaseChange.one_mem_zero (n := n) B
-
-/-- The coordinate localization map induced by the coefficient base change. -/
-noncomputable def toB (i : Fin (n + 1)) : Away 𝒜A (MvPolynomial.X i) →+* Away 𝒜B (MvPolynomial.X i)
-  :=
-  ProjSpace.ChartSectionsBaseChange.toB (A := A) B i
-
-theorem toB_ratio (i j : Fin (n + 1)) : toB (A := A) B i (ProjSpace.ratio A n i j) =
-  ProjSpace.ratio B n i j :=
-  ProjSpace.ChartSectionsBaseChange.toB_ratio (A := A) B i j
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_pullAway (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i : Fin (n + 1))
-    (a : Away 𝒜A (MvPolynomial.X i)) {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom
-        ((ι.app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A (MvPolynomial.X
-          i)).hom a)))
-      = ProjSpace.restrictFun h₂ ((ι'.app (Proj.basicOpen 𝒜B (MvPolynomial.X i))).hom
-          ((Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a))) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_pullAway ι B ι' e hcomp i a h₁ h₂
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_frameUnit (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i j : Fin (n + 1))
-  {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom (ProjSpace.frameUnit ι i j))
-      = ProjSpace.restrictFun h₂ (ProjSpace.frameUnit ι' i j) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_frameUnit ι B ι' e hcomp i j h₁ h₂
-
-theorem restrictFun_app_eq {U V : Z.Opens} (hVU : V ≤ U) {W' : Z'.Opens} (h₁ : W' ≤ e ⁻¹ᵁ V) (h₂ :
-  W' ≤ e ⁻¹ᵁ U)
-    (x : Γ(Z, U)) :
-    ProjSpace.restrictFun h₁ ((e.app V).hom (ProjSpace.restrictFun hVU x)) = ProjSpace.restrictFun
-      h₂ ((e.app U).hom x) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_eq e hVU h₁ h₂ x
-
-theorem toB_mkDeg (i : Fin (n + 1)) (d : ℕ) (F : MvPolynomial (Fin (n + 1)) A) (hF :
-  F.IsHomogeneous d) :
-    toB (A := A) B i (HomogeneousLocalization.mk
-        { deg := d
-          num := ⟨F, (MvPolynomial.mem_homogeneousSubmodule d F).mpr hF⟩
-          den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-            (MvPolynomial.isHomogeneous_X_pow i d)⟩
-          den_mem := ⟨d, rfl⟩ } : Away 𝒜A (MvPolynomial.X i)) =
-      (HomogeneousLocalization.mk
-        { deg := d
-          num := ⟨MvPolynomial.map (algebraMap A B) F,
-            (MvPolynomial.mem_homogeneousSubmodule d _).mpr (hF.map (algebraMap A B))⟩
-          den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-            (MvPolynomial.isHomogeneous_X_pow i d)⟩
-          den_mem := ⟨d, rfl⟩ } : Away 𝒜B (MvPolynomial.X i)) :=
-  ProjSpace.ChartSectionsBaseChange.toB_mkDeg (A := A) B i d F hF
 
 end Setup
 
@@ -271,13 +208,14 @@ theorem _root_.AlgebraicGeometry.ProjSpace.forall_H0_twist_exists_isHomogeneous_
       (ProjSpace.stdCoverPullback ι').inter s ⊓ ProjSpace.pullbackChart ι' j ≤
         e ⁻¹ᵁ ((ProjSpace.stdCoverPullback ι).inter s ⊓ ProjSpace.pullbackChart ι j) := by
     intro s j
-    rw [← RM6Sol.preimage_inter ι K ι' e hcomp s, ← RM6Sol.preimage_pullbackChart ι K ι' e hcomp j]
+    rw [← ProjSpace.ChartSectionsBaseChange.preimage_inter ι K ι' e hcomp s,
+      ← ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι K ι' e hcomp j]
     exact le_rfl
   have hle' : ∀ (s : (ProjSpace.stdCoverPullback ι).Idx 0) (j : Fin (n + 1)),
       (ProjSpace.stdCoverPullback ι').inter s ⊓ ProjSpace.pullbackChart ι' j ≤ e ⁻¹ᵁ
         ProjSpace.pullbackChart ι j := by
     intro s j
-    rw [RM6Sol.preimage_pullbackChart ι K ι' e hcomp j]
+    rw [ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι K ι' e hcomp j]
     exact inf_le_right
   have hmapmem : ∀ F : ↥(MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k d),
       MvPolynomial.map (algebraMap k K) (F : MvPolynomial (Fin (n + 1)) k) ∈
@@ -297,9 +235,11 @@ theorem _root_.AlgebraicGeometry.ProjSpace.forall_H0_twist_exists_isHomogeneous_
     refine ProjSpace.twistObj.ext (funext fun j => ?_)
     rw [hεval 0 _ s j (hle s j), hΘ F s j, hΘ' _ s j]
     unfold RM6Sol.chartVal ProjSpace.HomogeneousSectionsH0.chartVal
-    refine (RM6Sol.restrictFun_app_eq e _ (hle s j) (hle' s j) _).trans ?_
-    refine (RM6Sol.restrictFun_app_pullAway ι K ι' e hcomp j _ (hle' s j) inf_le_right).trans ?_
-    rw [RM6Sol.toB_mkDeg K j d F.1 (RM6Sol.isHomogeneous_of_mem d F)]
+    refine (ProjSpace.ChartSectionsBaseChange.restrictFun_app_eq e _ (hle s j) (hle' s j) _).trans
+      ?_
+    refine (ProjSpace.ChartSectionsBaseChange.restrictFun_app_pullAway ι K ι' e hcomp j _ (hle' s j)
+      inf_le_right).trans ?_
+    rw [ProjSpace.ChartSectionsBaseChange.toB_mkDeg K j d F.1 (RM6Sol.isHomogeneous_of_mem d F)]
   have hc' : ε 0 ((1 : K) ⊗ₜ[k] c) ∈
       (ProjSpace.twist (ι' ≫ ProjSpace.π K n) ι' d).H0 (ProjSpace.stdCoverPullback ι') := by
     rw [LinearMap.mem_ker]

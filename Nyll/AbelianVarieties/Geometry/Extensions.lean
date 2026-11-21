@@ -476,13 +476,13 @@ theorem main (G : RelativeGroupLaw R f) [IsSeparated f]
   have hDd : Dense ((prodOpen t V : (pullback t t).Opens) : Set ↑(pullback t t)) :=
       dense_prodOpen t V hVη
   let pΦ : (pullback t t).PartialMap A := ⟨prodOpen t V, hDd, (diffMap G t V v).1⟩
-  have hpΦ : pΦ.IsOver (Spec (CommRingCat.of R)) := by
+  have hpΦ : pΦ.IsOver (pullback.fst t t ≫ t) f := by
     rw [Scheme.PartialMap.isOver_iff, Scheme.PartialMap.compHom_hom]
     exact (diffMap G t V v).2
   let u := pΦ.toRationalMap
-  have hu : u.IsOver (Spec (CommRingCat.of R)) := ⟨⟨pΦ, hpΦ, rfl⟩⟩
+  have hu : u.IsOver (pullback.fst t t ≫ t) f := ⟨⟨pΦ, hpΦ, rfl⟩⟩
   let dW := u.toPartialMap
-  have hdWover : dW.IsOver (Spec (CommRingCat.of R)) :=
+  have hdWover : dW.IsOver (pullback.fst t t ≫ t) f :=
     Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated.mp
       (by rw [Scheme.RationalMap.toRationalMap_toPartialMap]; exact hu)
   have hdW : dW.hom ≫ f = dW.domain.ι ≫ pullback.fst t t ≫ t := by
@@ -657,9 +657,6 @@ open _root_.Topology
 variable {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {A T : Scheme.{u}}
   {f : A ⟶ Spec (CommRingCat.of R)}
 
-theorem isReduced_of_smooth (t : T ⟶ Spec (CommRingCat.of R)) [Smooth t] : IsReduced T  :=
-  Smooth.isReduced_of_isReduced_of_isLocallyNoetherian t
-
 omit [IsDomain R] [IsDiscreteValuationRing R] in
 theorem eq_one_of_mul_eq (G : RelativeGroupLaw R f) {S : Scheme.{u}} (g : S ⟶ Spec
     (CommRingCat.of R))
@@ -687,7 +684,8 @@ theorem diagonal_restrict_comp_eq_unit (G : RelativeGroupLaw R f) [IsSeparated f
             rw [Category.assoc, v.2, ← Category.assoc, ← hb, Category.assoc, Category.assoc]⟩) :
     (pullback.diagonal t ∣_ W) ≫ d.1 =
       ((pullback.diagonal t) ⁻¹ᵁ W).ι ≫ t ≫ (G.one (𝟙 (Spec (CommRingCat.of R)))).1 := by
-  have : IsReduced T := isReduced_of_smooth t
+  have : IsReduced T :=
+    _root_.AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian t
   set U : T.Opens := (pullback.diagonal t) ⁻¹ᵁ W with hU
   have : IsReduced (U : Scheme.{u}) := isReduced_of_isOpenImmersion U.ι
   set e := G.one (𝟙 (Spec (CommRingCat.of R))) with he

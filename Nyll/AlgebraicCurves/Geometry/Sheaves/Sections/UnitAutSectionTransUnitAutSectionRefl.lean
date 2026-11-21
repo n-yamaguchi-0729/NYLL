@@ -24,6 +24,8 @@ public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
 
 @[expose] public section
 
+open AlgebraicGeometry.Scheme.Modules (unitAutSectionValue)
+
 section ProofImplementation
 
 namespace AlgebraicCurves.Geometry.Sheaves.Proofs.UnitAutomorphisms
@@ -59,63 +61,73 @@ open _root_.AlgebraicGeometry
 
 variable {Y : Scheme.{u}}
 
-/-- The action of a unit-sheaf automorphism on global sections of the open subscheme. -/
-noncomputable def uapp (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf)
-    (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : (W : Scheme.{u}).presheaf.obj (op ⊤) :=
-  (e.hom.val.app (op ⊤)).hom x
+/-- Evaluate a unit automorphism on the unit section of the open subscheme. -/
+theorem _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_eq (W : Y.Opens)
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
+    unitAutSection W e = W.topIso.hom.hom (unitAutSectionValue W e 1) := rfl
 
-theorem unitAutSection_eq (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
-    unitAutSection W e = W.topIso.hom.hom (uapp W e 1) := rfl
-
-theorem uapp_mul (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf)
-    (x y : (W : Scheme.{u}).presheaf.obj (op ⊤)) : uapp W e (x * y) = x * uapp W e y :=
+private theorem uapp_mul (W : Y.Opens)
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf))
+    (x y : (W : Scheme.{u}).presheaf.obj (op ⊤)) : unitAutSectionValue W e (x * y) = x *
+      unitAutSectionValue W e y :=
   ((e.hom.val.app (op ⊤)).hom).map_smul (show ((W : Scheme.{u}).ringCatSheaf.obj.obj (op ⊤)) from
     x) y
 
-theorem uapp_trans (W : Y.Opens)
-    (e e' : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf)
-    (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : uapp W (e ≪≫ e') x = uapp W e' (uapp W e x) := by
-  simp only [uapp, Iso.trans_hom, SheafOfModules.comp_val, PresheafOfModules.comp_app]
+private theorem uapp_trans (W : Y.Opens)
+    (e e' : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf))
+    (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : unitAutSectionValue W (e ≪≫ e') x =
+      unitAutSectionValue W e' (unitAutSectionValue W e x) :=
   rfl
 
-theorem uapp_refl (W : Y.Opens) (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : uapp W (Iso.refl _) x
-  = x := by
-  simp only [uapp, Iso.refl_hom, SheafOfModules.id_val, PresheafOfModules.id_app]
+private theorem uapp_refl (W : Y.Opens) (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) :
+    unitAutSectionValue W (Iso.refl _) x = x :=
   rfl
 
-theorem unitAutSection_trans (W : Y.Opens)
-    (e e' : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
+/-- Composition of unit automorphisms multiplies their sections. -/
+theorem _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_trans (W : Y.Opens)
+    (e e' : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
     unitAutSection W (e ≪≫ e') = unitAutSection W e * unitAutSection W e' := by
-  rw [unitAutSection_eq, unitAutSection_eq, unitAutSection_eq, ← map_mul, uapp_trans, ← uapp_mul,
-    mul_one]
+  change W.topIso.hom.hom (unitAutSectionValue W (e ≪≫ e') 1) =
+    W.topIso.hom.hom (unitAutSectionValue W e 1) *
+      W.topIso.hom.hom (unitAutSectionValue W e' 1)
+  rw [← map_mul, uapp_trans, ← uapp_mul, mul_one]
 
-theorem unitAutSection_refl (W : Y.Opens) :
-    unitAutSection W (Iso.refl _) = 1 := by
-  rw [unitAutSection_eq, uapp_refl, map_one]
+/-- The identity unit automorphism gives the unit section. -/
+theorem _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_refl (W : Y.Opens) :
+    unitAutSection W (Iso.refl _) = 1 :=
+  (congrArg W.topIso.hom.hom (uapp_refl W 1)).trans (map_one _)
 
-theorem unitAutSection_symm_mul (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
+/-- The inverse section multiplied by the original section is one. -/
+theorem _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_symm_mul (W : Y.Opens)
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
     unitAutSection W e.symm * unitAutSection W e = 1 := by
-  rw [← unitAutSection_trans, Iso.symm_self_id, unitAutSection_refl]
+  exact (unitAutSection_trans W e.symm e).symm.trans
+    ((congrArg (unitAutSection W) (Iso.symm_self_id e)).trans (unitAutSection_refl W))
 
-theorem unitAutSection_mul_symm (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
+/-- The original section multiplied by the inverse section is one. -/
+theorem _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_mul_symm (W : Y.Opens)
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
     unitAutSection W e * unitAutSection W e.symm = 1 := by
-  rw [← unitAutSection_trans, Iso.self_symm_id, unitAutSection_refl]
+  exact (unitAutSection_trans W e e.symm).symm.trans
+    ((congrArg (unitAutSection W) (Iso.self_symm_id e)).trans (unitAutSection_refl W))
 
-theorem isUnit_unitAutSection (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
+/-- A unit automorphism of an open subscheme gives an invertible section. -/
+theorem _root_.AlgebraicGeometry.Scheme.Modules.isUnit_unitAutSection (W : Y.Opens)
+    (e : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
     IsUnit (unitAutSection W e) :=
   ⟨⟨_, _, unitAutSection_mul_symm W e, unitAutSection_symm_mul W e⟩, rfl⟩
 
@@ -123,12 +135,13 @@ end AlgebraicGeometry.Scheme.Modules
 
 theorem _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_trans_and_unitAutSection_refl
     {Y : Scheme.{u}} (W : Y.Opens) :
-    (∀ e e' : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf,
+    (∀ e e' : @Iso ((W : Scheme.{u}).Modules) _
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
+      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf),
         Scheme.Modules.unitAutSection W (e ≪≫ e') =
           Scheme.Modules.unitAutSection W e * Scheme.Modules.unitAutSection W e') ∧
       Scheme.Modules.unitAutSection W (Iso.refl _) = 1 :=
-  ⟨fun e e' => AlgebraicGeometry.Scheme.Modules.unitAutSection_trans W e e',
-    AlgebraicGeometry.Scheme.Modules.unitAutSection_refl W⟩
+  ⟨fun e e' => _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_trans W e e',
+    _root_.AlgebraicGeometry.Scheme.Modules.unitAutSection_refl W⟩
 end AlgebraicCurves.Geometry.Sheaves.Proofs.UnitAutomorphisms
 end ProofImplementation

@@ -54,10 +54,19 @@ theorem res_mem_H0 (x : (F π M).obj ⊤) : (fun s : K.Idx 0 => (F π M).res (le
     OModulePresheaf.res_res]
   exact add_neg_cancel _
 
+/-- Restrict a global section to the degree-zero Čech cochain of its affine cover. -/
+def _root_.AlgebraicGeometry.OModulePresheaf.toCochain :
+    (F π M).obj ⊤ →ₗ[R] (F π M).cochain K 0 :=
+  LinearMap.pi fun s : K.Idx 0 => (F π M).res (le_top : K.inter s ≤ ⊤)
+
+theorem _root_.AlgebraicGeometry.OModulePresheaf.toCochain_apply
+    (x : Γ(M, ⊤)) (s : K.Idx 0) :
+    OModulePresheaf.toCochain π M K x s =
+      M.presheaf.map (homOfLE (le_top : K.inter s ≤ ⊤)).op x := rfl
+
 /-- The linear map sending a global section to its Čech zero-cocycle. -/
 def toH0 : (F π M).obj ⊤ →ₗ[R] (F π M).H0 K :=
-  LinearMap.codRestrict ((F π M).H0 K) (LinearMap.pi fun s : K.Idx 0 => (F π M).res (le_top :
-    K.inter s ≤ ⊤))
+  LinearMap.codRestrict ((F π M).H0 K) (OModulePresheaf.toCochain π M K)
     (res_mem_H0 π M K)
 
 theorem toH0_apply (x : (F π M).obj ⊤) (s : K.Idx 0) : (toH0 π M K x : (F π M).cochain K 0) s = (F
@@ -83,16 +92,42 @@ theorem toH0_surjective : Function.Surjective (toH0 π M K) := by
   apply Subtype.ext
   exact funext fun s => (hx s).symm
 
+theorem _root_.AlgebraicGeometry.OModulePresheaf.toCochain_injective :
+    Function.Injective (OModulePresheaf.toCochain π M K) := by
+  intro x y h
+  apply toH0_injective π M K
+  exact Subtype.ext h
+
+theorem _root_.AlgebraicGeometry.OModulePresheaf.exists_toCochain_eq
+    (c : (F π M).cochain K 0) (hc : c ∈ (F π M).H0 K) :
+    ∃ x : Γ(M, ⊤), OModulePresheaf.toCochain π M K x = c := by
+  obtain ⟨x, hx⟩ := toH0_surjective π M K ⟨c, hc⟩
+  exact ⟨x, congrArg Subtype.val hx⟩
+
 end AC3Aux
 
 end
 
 open AC3Aux in
+/-- The canonical identification of global sections with Čech cohomology in degree zero. -/
+noncomputable def _root_.AlgebraicGeometry.OModulePresheaf.sectionsEquivH0
+    {R : Type u} [CommRing R] {V : Scheme.{u}} (π : V ⟶ Spec (CommRingCat.of R))
+    (M : V.Modules) (K : V.OrderedAffineCover) :
+    (F π M).obj ⊤ ≃ₗ[R] (F π M).H0 K :=
+  LinearEquiv.ofBijective (toH0 π M K) ⟨toH0_injective π M K, toH0_surjective π M K⟩
+
+theorem _root_.AlgebraicGeometry.OModulePresheaf.coe_sectionsEquivH0
+    {R : Type u} [CommRing R] {V : Scheme.{u}} (π : V ⟶ Spec (CommRingCat.of R))
+    (M : V.Modules) (K : V.OrderedAffineCover) (x : Γ(M, ⊤)) :
+    ((OModulePresheaf.sectionsEquivH0 π M K x :
+        (OModulePresheaf.ofModules π M).H0 K) : (OModulePresheaf.ofModules π M).cochain K 0) =
+      OModulePresheaf.toCochain π M K x := rfl
+
 theorem _root_.AlgebraicGeometry.OModulePresheaf.nonempty_sections_top_equiv_H0_ofModules
     {R : Type u} [CommRing R] {V : Scheme.{u}} (π : V ⟶ Spec (CommRingCat.of R))
     (M : V.Modules) (K : V.OrderedAffineCover) :
     letI := Scheme.TwoAffineOpenCover.moduleSectionsOfHom π M ⊤
     Nonempty (Γ(M, ⊤) ≃ₗ[R] (OModulePresheaf.ofModules π M).H0 K) := by
-  exact ⟨LinearEquiv.ofBijective (toH0 π M K) ⟨toH0_injective π M K, toH0_surjective π M K⟩⟩
+  exact ⟨OModulePresheaf.sectionsEquivH0 π M K⟩
 end AlgebraicCurves.Cohomology.Sheaves.Proofs.GlobalSectionsH0
 end ProofImplementation

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.Descent.AffineTransitionHom
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
@@ -28,23 +29,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryLimitHom (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) :=
-  instCategory X
-
-local instance finiteEtaleHasPullbacksAlongLimitHom
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongLimitHom
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 private abbrev rawToStage {L T S Y : Scheme.{u}}
     (p : L ⟶ S) (q : T ⟶ S) (r : L ⟶ T) (w : r ≫ q = p) (f : Y ⟶ S) :

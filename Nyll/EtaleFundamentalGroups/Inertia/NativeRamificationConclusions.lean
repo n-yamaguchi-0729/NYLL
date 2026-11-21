@@ -48,32 +48,32 @@ structure NativeRamificationConclusions
   wild_normal_in_decomposition : (D.wild.map D.inertiaInclusion.hom').Normal
   /-- Wild inertia is pro-p in positive residue characteristic. -/
   wild_pro_p : ∀ (p : ℕ) [Fact p.Prime] [CharP R.baseResidue p],
-    let : Group (Subtype D.wild.carrier) := Subgroup.toGroup D.wild
-    let : TopologicalSpace (Subtype D.wild.carrier) :=
+    let : Group (↥D.wild) := Subgroup.toGroup D.wild
+    let : TopologicalSpace (↥D.wild) :=
       TopologicalSpace.induced
-        (fun σ : Subtype D.wild.carrier => (show D.inertia.carrier from σ.val))
+        (fun σ : ↥D.wild => (show D.inertia.carrier from σ.val))
         D.inertiaTopology
-    CompactSpace (Subtype D.wild.carrier) ∧
-      T2Space (Subtype D.wild.carrier) ∧
-      TotallyDisconnectedSpace (Subtype D.wild.carrier) ∧
-      IsTopologicalGroup (Subtype D.wild.carrier) ∧
-      ProCGroups.ProC.HasPGroupOpenNormalBasis p (Subtype D.wild.carrier)
+    CompactSpace (↥D.wild) ∧
+      T2Space (↥D.wild) ∧
+      TotallyDisconnectedSpace (↥D.wild) ∧
+      IsTopologicalGroup (↥D.wild) ∧
+      ProCGroups.ProC.HasPGroupOpenNormalBasis p (↥D.wild)
   /-- Wild inertia is trivial in residue characteristic zero. -/
   wild_char_zero : ∀ [CharZero R.baseResidue], D.wild = ⊥
   /-- The actual set of tame degrees is nonempty. -/
   degrees_nonempty : R.degrees.Nonempty
   /-- The actual degrees are multiplicatively directed. -/
   degrees_directed : Directed (· ≤ ·)
-    (id : {n : InvertibleExponent R.baseResidue // R.degrees n} →
-      {n : InvertibleExponent R.baseResidue // R.degrees n})
+    (id : {n : InvertibleExponent R.baseResidue // n ∈ R.degrees} →
+      {n : InvertibleExponent R.baseResidue // n ∈ R.degrees})
   /-- The encoding consists of positive residue-invertible natural integers. -/
-  degrees_positive_invertible : ∀ n : {n : InvertibleExponent R.baseResidue // R.degrees n},
+  degrees_positive_invertible : ∀ n : {n : InvertibleExponent R.baseResidue // n ∈ R.degrees},
     0 < n.val.val ∧ IsUnit (n.val.val : R.baseResidue)
   /-- Thus every degree is prime to the positive residue characteristic. -/
   degrees_coprime : ∀ (p : ℕ) [Fact p.Prime] [CharP R.baseResidue p]
-    (n : {n : InvertibleExponent R.baseResidue // R.degrees n}), Nat.Coprime n.val.val p
+    (n : {n : InvertibleExponent R.baseResidue // n ∈ R.degrees}), Nat.Coprime n.val.val p
   /-- Every actual degree has a primitive root in the literal residue field. -/
-  degrees_primitive_roots : ∀ n : {n : InvertibleExponent R.baseResidue // R.degrees n},
+  degrees_primitive_roots : ∀ n : {n : InvertibleExponent R.baseResidue // n ∈ R.degrees},
     ∃ ζ : R.residue, IsPrimitiveRoot ζ n.val.val
   /-- The same canonical tame character is continuous. -/
   character_continuous : Continuous D.character.hom'.toFun

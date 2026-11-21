@@ -6,6 +6,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Cohomology.CurvePointFillingInertia
 public import Nyll.EtaleFundamentalGroups.Cohomology.NativeBoundaryNormalClosure
 public import Nyll.SchemeTheory.FunctionFields.GenericFieldSourceStalk
@@ -25,6 +27,8 @@ by the full inertia at the same prime of the same local normalization.
 -/
 
 @[expose] public section
+
+open AlgebraicGeometry.Scheme.Hom (sectionEffectiveCartierDivisor)
 
 universe uGeom uField₁ uField₂
 
@@ -92,10 +96,7 @@ private theorem pointedFundamentalGroupHom_fieldSource
       ((htransport h _).symm.trans
         (hn.trans (congrArg (fieldSourceAbsoluteGaloisHom K Ω g') hσ)))
 
-private local instance integralOpenDominant
-    {X U : Scheme.{uGeom}} [IsIntegral X] [IsIntegral U]
-    (j : U ⟶ X) [IsOpenImmersion j] : IsDominant j :=
-  ⟨j.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace j⟩
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 attribute [local instance] normalizationInertiaImageAction
 
@@ -134,7 +135,7 @@ theorem singlePointOpenFilling_ker_eq_normalClosure
     [Algebra K Ω] [IsSepClosure K Ω] [IsSepClosed Ω]
     (g : Spec (.of K) ⟶ U) [IsDominant g] [IsPreimmersion g] :
     let : IsDominant j :=
-      ⟨j.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace j⟩
+      j.isDominant_of_isOpenImmersion
     let x := P (IsLocalRing.closedPoint k)
     let A := X.presheaf.stalk x
     let : Algebra A K := genericFieldSourceStalkAlgebra (g ≫ j) x
@@ -147,7 +148,7 @@ theorem singlePointOpenFilling_ker_eq_normalClosure
           ((Q.inertia Gal(Ω/K)).map (fieldSourceAbsoluteGaloisHom K Ω g).toMonoidHom :
             Set π₁ᵉᵗ(ξ K Ω ≫ g)) := by
   intro hDominant x A instAK fraction instAΩ tower Q hQ
-  let D := curvePointDivisor c P hP
+  let D := sectionEffectiveCartierDivisor c P hP
   have : IsIntegral (D.1.supportComplement : Scheme.{uGeom}) :=
     curvePointComplement_isIntegral c P hP
   have : Subsingleton (Component D) := curvePointDivisor_component_subsingleton c P hP

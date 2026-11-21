@@ -33,7 +33,6 @@ public import Nyll.AlgebraicCurves.Cohomology.Sheaves.EulerCharacteristic.SheafE
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.BijectiveLiftTensorSectionsBilinQuasicoherentMonoidalV2
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.AffHomH0EquivHSuccEquiv
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
 
 /-!
 # OModule Presheaf exists polynomial forall euler Char tensor tensor Pow eq monoidal V2

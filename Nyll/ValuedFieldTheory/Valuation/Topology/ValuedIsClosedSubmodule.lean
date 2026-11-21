@@ -77,7 +77,7 @@ theorem _root_.Valued.isClosed_submodule_of_finiteDimensional_of_isClosed_subfie
       rw [hnorm]; exact (Valued.toNormedField.norm_lt_one_iff.mpr hx₀1).ne⟩
   have hcsm : ContinuousSMul ↥K₀' K :=
     ⟨(continuous_subtype_val.comp continuous_fst).mul continuous_snd⟩
-  exact @Submodule.closed_of_finiteDimensional ↥K₀' K _ hcs _ _ _ _ hcsm _ V _
+  exact @Submodule.isClosed_of_finiteDimensional ↥K₀' K _ hcs _ _ _ _ hcsm _ V _
 end Valued_isClosed_submodule_of_finiteDimensional_of_isClosed_subfield
 end AlgebraicCurves.Valuations.Proofs
 end ProofImplementation

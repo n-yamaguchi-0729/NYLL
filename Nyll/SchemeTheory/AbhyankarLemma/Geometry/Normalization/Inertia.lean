@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealTower
 public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.RingTheory.Ideal.GoingUp
@@ -147,13 +148,7 @@ local instance normalizationBasePrime_isMaximal
     (algebraMap V (integralClosure V M)) (fun x ↦ Algebra.IsIntegral.isIntegral x)
     (normalizationLowerPrime (V := V) (K := K) (E := E) M Q)
 
-noncomputable local instance topNormalizationAction :
-    MulSemiringAction Gal(E/K) (integralClosure V E) :=
-  IsIntegralClosure.MulSemiringAction V K E (integralClosure V E)
-
-noncomputable local instance lowerNormalizationAction :
-    MulSemiringAction Gal(M/K) (integralClosure V M) :=
-  IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
+attribute [local instance] EtaleFundamentalGroups.Inertia.normalizationInertiaImageAction
 
 /-- Restriction from the top Galois group to the normal intermediate field. -/
 noncomputable def normalizationRestrictionHom : Gal(E/K) →* Gal(M/K) :=

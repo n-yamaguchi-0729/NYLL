@@ -74,7 +74,7 @@ private theorem exists_strictlyHenselianDVRFactor_of_injective
   have : IsDiscreteValuationRing V := hV
   let j : A →+* V := (algebraMap A K).codRestrict V.toSubring hmem
   have hj : IsLocalHom j := by
-    apply ((IsLocalRing.local_hom_TFAE j).out 5 1).mp
+    apply ((IsLocalRing.local_hom_tfae j).out 5 1).mp
     apply Ideal.ext
     intro a
     change j a ∈ IsLocalRing.maximalIdeal V ↔ a ∈ IsLocalRing.maximalIdeal A
@@ -166,7 +166,7 @@ private theorem exists_strictlyHenselianDVRDiagram_of_ker_eq_maximalIdeal
         IsLocalHom f ∧ g.comp ((algebraMap D (FractionRing D)).comp f) = ι.comp φ ∧
         r.comp (IsLocalRing.residue A) = (IsLocalRing.residue D).comp f := by
   have : IsLocalHom φ := by
-    apply ((IsLocalRing.local_hom_TFAE φ).out 5 1).mp
+    apply ((IsLocalRing.local_hom_tfae φ).out 5 1).mp
     rw [IsLocalRing.maximalIdeal_eq_bot]
     exact hφ
   let R : Type u := PowerSeries Ω

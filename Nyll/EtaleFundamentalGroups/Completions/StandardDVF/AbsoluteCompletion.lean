@@ -235,9 +235,10 @@ noncomputable def standardDVRAbsoluteCompletionRingHom
   letI : (Valued.v : Valuation (standardDVFCompletionField V K)
       (WithZero (Multiplicative ℤ))).RankOne :=
     standardDVRAbsoluteCompletionRankOne V K
-  exact UniformSpace.Completion.extensionHom
+  exact (UniformSpace.Completion.extensionHom
     (standardDVRAbsoluteCompletionBaseMap V K)
-    (standardDVRAbsoluteCompletionBaseMap_isometry V K).continuous
+    (standardDVRAbsoluteCompletionBaseMap_isometry V K).continuous).comp
+    (AbsoluteValue.Completion.toCompletion (v := standardDVRAbsoluteValue V K))
 
 @[simp]
 theorem standardDVRAbsoluteCompletionRingHom_coe
@@ -251,6 +252,8 @@ theorem standardDVRAbsoluteCompletionRingHom_coe
   let : (Valued.v : Valuation (standardDVFCompletionField V K)
       (WithZero (Multiplicative ℤ))).RankOne :=
     standardDVRAbsoluteCompletionRankOne V K
+  rw [standardDVRAbsoluteCompletionRingHom, RingHom.comp_apply,
+    AbsoluteValue.Completion.toCompletion_coe]
   exact UniformSpace.Completion.extensionHom_coe
     (standardDVRAbsoluteCompletionBaseMap V K)
     (standardDVRAbsoluteCompletionBaseMap_isometry V K).continuous x
@@ -264,7 +267,8 @@ theorem standardDVRAbsoluteCompletionRingHom_isometry
       standardDVRAbsoluteCompletionRankOne V K
     Isometry (standardDVRAbsoluteCompletionRingHom V K) := by
   intro sharedOwner1
-  exact (standardDVRAbsoluteCompletionBaseMap_isometry V K).completion_extension
+  exact (standardDVRAbsoluteCompletionBaseMap_isometry V K).completion_extension.comp
+    (AbsoluteValue.Completion.isometry_toCompletion (standardDVRAbsoluteValue V K))
 
 /-- The canonical copy of `K` is dense in the valued-field completion. -/
 theorem standardDVFCompletionMap_denseRange
@@ -336,11 +340,10 @@ theorem standardDVRAbsoluteCompletionRingEquiv_algebraMap
     standardDVRAbsoluteCompletionRingEquiv V K
         (algebraMap K (standardDVRAbsoluteValue V K).Completion x) =
       standardDVFCompletionMap V K x := by
-  let x' : WithAbs (standardDVRAbsoluteValue V K) :=
-    (WithAbs.equiv (standardDVRAbsoluteValue V K)).symm x
   change standardDVRAbsoluteCompletionRingHom V K
-      (x' : (standardDVRAbsoluteValue V K).Completion) = _
-  rw [standardDVRAbsoluteCompletionRingHom_coe]
+    (algebraMap K (standardDVRAbsoluteValue V K).Completion x) = _
+  rw [AbsoluteValue.Completion.algebraMap_def, WithAbs.algebraMap_right_apply,
+    Algebra.algebraMap_self_apply, standardDVRAbsoluteCompletionRingHom_coe]
   rfl
 
 /-- The absolute-value completion and the standard valued-field completion

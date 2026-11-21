@@ -36,9 +36,9 @@ theorem int_addSubgroup_index_coprime_of_sup_eq_top
     (A B : AddSubgroup ℤ) (hsup : A ⊔ B = ⊤) :
     Nat.Coprime A.index B.index := by
   obtain ⟨a, ha⟩ :=
-    (A.isAddCyclic_iff_exists_zmultiples_eq_top).mp (AddSubgroup.isAddCyclic A)
+    (A.isAddCyclic_iff_exists_zmultiples_eq).mp (AddSubgroup.isAddCyclic A)
   obtain ⟨b, hb⟩ :=
-    (B.isAddCyclic_iff_exists_zmultiples_eq_top).mp (AddSubgroup.isAddCyclic B)
+    (B.isAddCyclic_iff_exists_zmultiples_eq).mp (AddSubgroup.isAddCyclic B)
   rw [← ha, ← hb] at hsup ⊢
   rw [Int.index_zmultiples, Int.index_zmultiples,
     ← Int.isCoprime_iff_nat_coprime]

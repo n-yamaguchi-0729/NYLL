@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FamilySpecializationNaturality
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
@@ -31,9 +32,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X Y S T : Scheme.{u}}
   (f : X ⟶ S) (g : Y ⟶ T) (a : Y ⟶ X) (b : T ⟶ S)

@@ -16,6 +16,7 @@ import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
+import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 /-!
 # Pullback on relative Picard schemes and base change
 
@@ -164,7 +165,7 @@ theorem _root_.AlgebraicGeometry.RelPicard.RepresentsRelSubPic.pullbackHom_baseC
       BaseChange.toR_ofR_iso c ε R' _
   have Lx : (h'.poincare.pullbackAlong x).L ≅
       ((h.poincare.pullbackAlong ψD).pullbackCurve f hf hε).L :=
-    (h'.poincare.pullbackAlongPullbackAlongIso' ψD' (BaseChange.overR R' fbc)).symm ≪≫
+    (h'.poincare.pullbackAlongPullbackAlongIso ψD' (BaseChange.overR R' fbc)).symm ≪≫
       (Scheme.Modules.pullback _).mapIso eD' ≪≫
       BaseChange.toR_pullbackAlong_iso c' ε' R' fbc hR'.poincare ≪≫
       (Scheme.Modules.pullback _).mapIso (hR'.classify_spec _ _ _).some ≪≫
@@ -172,7 +173,7 @@ theorem _root_.AlgebraicGeometry.RelPicard.RepresentsRelSubPic.pullbackHom_baseC
       (Scheme.Modules.pullback _).mapIso eD
   have Ly : (h'.poincare.pullbackAlong y).L ≅
       ((h.poincare.pullbackAlong ψD).pullbackCurve f hf hε).L :=
-    (h'.poincare.pullbackAlongPullbackAlongIso'
+    (h'.poincare.pullbackAlongPullbackAlongIso
       (RepresentsRelSubPic.pullbackHom f hf hε h h') ψD).symm ≪≫
       (Scheme.Modules.pullback _).mapIso (h'.classify_spec _ _ _).some ≪≫
       h.poincare.pullbackCurvePullbackAlongIso f hf hε ψD

@@ -21,7 +21,7 @@ public import Nyll.SchemeTheory.Modules.Differentials.Pullback
 public import Nyll.SchemeTheory.Modules.Differentials.Sections
 public import Nyll.SchemeTheory.Modules.Differentials.TopFormMaps
 public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.Basic
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 public import Nyll.SchemeTheory.Modules.Invertible.RankOne
 public import Nyll.SchemeTheory.Modules.ExteriorPower.Det
 public import Nyll.SchemeTheory.Modules.ExteriorPower.PresheafExteriorPower

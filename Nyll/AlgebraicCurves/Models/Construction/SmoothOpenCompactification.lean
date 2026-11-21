@@ -107,11 +107,12 @@ theorem exists_curveModel_openImmersion_of_smooth_curve
     congrArg (fun h : (W : Scheme) ⟶ M.C => h w) hjW
   have hfibre (y : M.C) : (j ⁻¹' {y}).Finite := by
     have hinside : ((W : Set X) ∩ j ⁻¹' {y}).Finite := by
-      apply Set.Finite.of_injOn (f := j) (t := {y})
-        (fun _ hx => hx.2) ?_ (Set.finite_singleton y)
-      intro x hx z hz hxz
-      exact congrArg Subtype.val (a.isOpenEmbedding.injective
-        ((hpoint ⟨x, hx.1⟩).symm.trans (hxz.trans (hpoint ⟨z, hz.1⟩))))
+      refine Set.Finite.of_injOn (f := j) (t := {y}) ?_ ?_ (Set.finite_singleton y)
+      · intro x hx
+        exact hx.2
+      · intro x hx z hz hxz
+        exact congrArg Subtype.val (a.isOpenEmbedding.injective
+          ((hpoint ⟨x, hx.1⟩).symm.trans (hxz.trans (hpoint ⟨z, hz.1⟩))))
     apply ((finite_compl_of_isOpen f W hW).union hinside).subset
     intro x hx
     by_cases hxW : x ∈ W

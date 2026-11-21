@@ -159,8 +159,8 @@ theorem bijective_of_finite_of_isReduced_of_idempotent {κ : Type*} [Field κ] [
     IsLocalRing.of_unique_max_ideal ⟨M, hM, fun N hN => congrArg MaximalSpectrum.asIdeal (huniq ⟨N,
       hN⟩ ⟨M, hM⟩)⟩
   have hmax : IsLocalRing.maximalIdeal A = ⊥ := by
-    obtain ⟨n, hn⟩ := IsArtinianRing.isNilpotent_jacobson_bot (R := A)
-    rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top] at hn
+    obtain ⟨n, hn⟩ := IsArtinianRing.isNilpotent_jacobson A
+    rw [IsLocalRing.ringJacobson_eq_maximalIdeal] at hn
     refine le_bot_iff.mp (fun x hx => ?_)
     have hxn : x ^ n ∈ (IsLocalRing.maximalIdeal A) ^ n := Ideal.pow_mem_pow hx n
     rw [hn] at hxn

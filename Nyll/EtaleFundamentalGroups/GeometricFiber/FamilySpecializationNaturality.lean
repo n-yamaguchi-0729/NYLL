@@ -50,9 +50,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X Y S T : Scheme.{u}}
   (f : X ⟶ S) (g : Y ⟶ T) (a : Y ⟶ X) (b : T ⟶ S)

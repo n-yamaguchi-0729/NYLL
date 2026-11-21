@@ -24,7 +24,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
 public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
 
 /-!
 # Scheme Modules Is Invertible pullback dual monoidal V2
@@ -48,17 +48,17 @@ namespace AlgebraicGeometry
 
 export _root_.AlgebraicGeometry (Scheme.Modules.pullback Scheme Scheme.Modules
   Scheme.Modules.IsInvertible Scheme.Modules.dual Scheme.Modules.pullbackTensorUnitObjIso
-  Scheme.Modules.IsInvertible.dual_monoidalV2)
+  Scheme.Modules.IsInvertible.dual)
 
 namespace Scheme
 
 export _root_.AlgebraicGeometry.Scheme (Modules.pullback Modules Modules.IsInvertible Modules.dual
-  Modules.pullbackTensorUnitObjIso Modules.IsInvertible.dual_monoidalV2)
+  Modules.pullbackTensorUnitObjIso Modules.IsInvertible.dual)
 
 namespace Modules
 
 export _root_.AlgebraicGeometry.Scheme.Modules (pullback IsInvertible dual pullbackTensorUnitObjIso
-  IsInvertible.dual_monoidalV2)
+  IsInvertible.dual)
 
 namespace InverseUnique
 
@@ -93,8 +93,8 @@ theorem _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback_dual_monoi
         (AlgebraicGeometry.Scheme.Modules.dual L) ≅
       AlgebraicGeometry.Scheme.Modules.dual ((AlgebraicGeometry.Scheme.Modules.pullback f).obj L))
         := by
-  obtain ⟨eL⟩ := (Scheme.Modules.IsInvertible.dual_monoidalV2 hL).2
-  obtain ⟨e'⟩ := (Scheme.Modules.IsInvertible.dual_monoidalV2 (hL.pullback f)).2
+  obtain ⟨eL⟩ := (Scheme.Modules.IsInvertible.dual hL).2
+  obtain ⟨e'⟩ := (Scheme.Modules.IsInvertible.dual (hL.pullback f)).2
   let e : (Scheme.Modules.pullback f).obj L ⊗ (Scheme.Modules.pullback f).obj (Scheme.Modules.dual
     L) ≅
       𝟙_ X.Modules :=

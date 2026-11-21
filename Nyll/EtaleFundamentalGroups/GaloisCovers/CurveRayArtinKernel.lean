@@ -10,8 +10,9 @@ public meta import Nyll.SchemeTheory.Compat.KernelExact
 
 public import Nyll.EtaleFundamentalGroups.GaloisCovers.LocalArtinAction
 public import Nyll.EtaleFundamentalGroups.Inertia.StalkPlaceArtinImage
+public import Nyll.ClassFieldTheory.AlgebraicFunctionFieldTheory.Idele.PrincipalCore
 public import Nyll.ClassFieldTheory.AlgebraicFunctionFieldTheory.RayClass.RayArtinSeparation
-public import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.AbsoluteFiniteQuotients
+public import Nyll.ClassFieldTheory.AlgebraicNumberTheory.Galois.AbsoluteFiniteQuotients
 public import Nyll.EtaleFundamentalGroups.Inertia.GenericKernelStrictNormalGeneration
 public import Nyll.EtaleFundamentalGroups.Inertia.GenericSourceAbelianKernel
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointSurjective
@@ -273,7 +274,7 @@ def curveArtin {k : Type v} [Field k] [Finite k]
     [Algebra (RatFunc k) X.functionField] [IsScalarTower k (RatFunc k) X.functionField]
     [FunctionField k X.functionField] [HasPrincipalDivisors k X.functionField] :
     let _ : CommGroup (IdeleClassGroup k X.functionField) :=
-      RayClass.powerRayIdeleClassCommGroup (k := k) (K := X.functionField)
+      FunctionField.IdeleClassGroup.commGroup k X.functionField
     IdeleClassGroup k X.functionField →ₜ*
       TopologicalAbelianization
         (π₁ᵉᵗ(X.genericExtensionMorphism (AlgebraicClosure X.functionField))) := by
@@ -295,7 +296,7 @@ theorem curveArtin_ker_le_rayClassSubgroup
       [IsScalarTower k (RatFunc k) X.functionField] [FunctionField k X.functionField]
       [HasPrincipalDivisors k X.functionField],
     let _ : CommGroup (IdeleClassGroup k X.functionField) :=
-      RayClass.powerRayIdeleClassCommGroup (k := k) (K := X.functionField)
+      FunctionField.IdeleClassGroup.commGroup k X.functionField
     ∀ (m : RayClass.Modulus k X.functionField),
       (∀ v ∈ curveInteriorPlaces c, m v = 0) →
       (curveArtin (k := k) X).toMonoidHom.ker ≤ RayClass.rayClassSubgroup m := by

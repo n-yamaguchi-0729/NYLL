@@ -559,21 +559,6 @@ namespace ChiFib
 open _root_.AlgebraicGeometry
 
 
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-theorem eulerChar_congr {k : Type u} [Field k] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    (Module.finrank k (𝒱.sectionsOf x M).H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M).H1 =
-      (Module.finrank k (𝒱.sectionsOf x M').H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  rw [e0.finrank_eq, e1.finrank_eq]
-
 theorem prod_ker {K : Type u} [Field K] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of K))
     [IsProper x] [SmoothOfRelativeDimension 1 x] (𝒱 : X.TwoAffineOpenCover)
     {n : ℕ} (v : Fin n → {q : Spec (CommRingCat.of K) ⟶ X // q ≫ x = 𝟙 _}) (s : Finset (Fin n)) :
@@ -650,7 +635,7 @@ theorem eulerChar_sectionsOf_invModule_pow_ker_tensor_module_prod_ker_eq
   have hA := Scheme.IdealSheafData.IsInvertible.eulerChar_sectionsOf_tensor_invModule_eq x hIr hZ
     hdegr
     (𝟙_ _) (Scheme.Modules.isInvertible_unit _) 𝒱
-  have hA' := eulerChar_congr x 𝒱 (λ_ ((p.ker ^ r).invModule))
+  have hA' := Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr x 𝒱 (λ_ ((p.ker ^ r).invModule))
   obtain ⟨hJ, hJfin, hJdeg⟩ := prod_ker x 𝒱 v Finset.univ
   have hN : Scheme.Modules.IsInvertible (∏ j, (v j).1.ker).module := hJ.isInvertible_module
   have hTN : Scheme.Modules.IsInvertible ((p.ker ^ r).invModule ⊗ (∏ j, (v j).1.ker).module) :=
@@ -662,7 +647,7 @@ theorem eulerChar_sectionsOf_invModule_pow_ker_tensor_module_prod_ker_eq
     ((p.ker ^ r).invModule ⊗ (∏ j, (v j).1.ker).module) hTN 𝒱
   have eN : (∏ j, (v j).1.ker).module ⊗ (∏ j, (v j).1.ker).invModule ≅ 𝟙_ X.Modules :=
     (hN.dual).2.some
-  have hB' := eulerChar_congr x 𝒱
+  have hB' := Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr x 𝒱
     (α_ ((p.ker ^ r).invModule) ((∏ j, (v j).1.ker).module) ((∏ j, (v j).1.ker).invModule) ≪≫
       whiskerLeftIso ((p.ker ^ r).invModule) eN ≪≫ ρ_ ((p.ker ^ r).invModule))
   omega

@@ -339,29 +339,6 @@ open _root_.AlgebraicGeometry
 open _root_.AlgebraicGeometry.RelPicard
 open _root_.AlgebraicCurve hiding H1 genus
 
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-theorem nonempty_linearEquiv_of_iso {R : Type u} [CommRing R] {X : Scheme.{u}}
-    (x : X ⟶ Spec (CommRingCat.of R))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Nonempty ((𝒱.sectionsOf x M).H0 ≃ₗ[R] (𝒱.sectionsOf x M').H0) ∧
-      Nonempty ((𝒱.sectionsOf x M).H1 ≃ₗ[R] (𝒱.sectionsOf x M').H1) := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  exact ⟨⟨e0⟩, ⟨e1⟩⟩
-
-theorem eulerChar_congr {k : Type u} [Field k] {X : Scheme.{u}} (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    (Module.finrank k (𝒱.sectionsOf x M).H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M).H1 =
-      (Module.finrank k (𝒱.sectionsOf x M').H0 : ℤ) - Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso x 𝒱 e
-  rw [e0.finrank_eq, e1.finrank_eq]
-
 end M7B
 
 end JacobianVarieties.Picard.Proofs.RationalCurveUnit
@@ -398,7 +375,8 @@ theorem nonempty_pullback_iso_pullback_unit_and_eulerChar_eq_one_of_curveModel_r
   · obtain ⟨e⟩ := h174 𝒲₀
     exact ⟨e ≪≫ (Scheme.Modules.tensorUnit_eq (X := M.C) ▸ (Scheme.Modules.pullbackUnitIso i).symm)⟩
   · obtain ⟨e⟩ := h174 𝒲'
-    rw [M7B.eulerChar_congr M.toBase 𝒲' e, Scheme.Modules.tensorUnit_eq]
+    rw [Scheme.TwoAffineOpenCover.eulerChar_sectionsOf_congr M.toBase 𝒲' e,
+      Scheme.Modules.tensorUnit_eq]
     have h1 := (h10 𝒲').1
     have h0' := (h10 𝒲').2
     omega

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperAlgebraicallyClosedExtension
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.UniversalHomeomorphism
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
@@ -47,8 +48,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 private theorem pullback_equivalence_of_cartesian_square
     {P X Y S : Scheme.{u}} {q : P ⟶ X} {r : P ⟶ Y}

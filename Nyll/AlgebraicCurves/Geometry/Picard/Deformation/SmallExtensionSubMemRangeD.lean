@@ -64,7 +64,7 @@ theorem uAS_conj_homOfLE {Y : Scheme.{u}} {W U : Y.Opens} (h : W ≤ U)
           (Scheme.Modules.pullback (Y.homOfLE h)).mapIso lam ≪≫
           Scheme.Modules.pullbackUnitIso (Y.homOfLE h)) =
       (Y.presheaf.map (homOfLE h).op).hom (Scheme.Modules.unitAutSection U lam) := by
-  unfold Scheme.Modules.unitAutSection
+  unfold Scheme.Modules.unitAutSection Scheme.Modules.unitAutSectionValue
   erw [Scheme.Modules.pullbackUnitIso_conj_app_top_one_eq_appTop]
   rw [Scheme.homOfLE_appTop]
   let f : op (U.ι ''ᵁ ⊤) ⟶ op (W.ι ''ᵁ ⊤) :=
@@ -93,7 +93,7 @@ theorem uAS_conj_morphismRestrict {X X₀ : Scheme.{u}} (g : X₀ ⟶ X) (U : X.
           (Scheme.Modules.pullback (g ∣_ U)).mapIso lam ≪≫
           Scheme.Modules.pullbackUnitIso (g ∣_ U)) =
       (g.app U).hom (Scheme.Modules.unitAutSection U lam) := by
-  unfold Scheme.Modules.unitAutSection
+  unfold Scheme.Modules.unitAutSection Scheme.Modules.unitAutSectionValue
   erw [Scheme.Modules.pullbackUnitIso_conj_app_top_one_eq_appTop]
   rw [morphismRestrict_appTop]
   simp only [Scheme.Opens.topIso_hom]
@@ -203,8 +203,9 @@ theorem uAS_mul_uAS_symm {Z : Scheme.{u}} (W : Z.Opens)
     (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
       Scheme.{u}).ringCatSheaf) :
     Scheme.Modules.unitAutSection W e * Scheme.Modules.unitAutSection W e.symm = 1 := by
-  rw [← uAS_trans', Iso.self_symm_id]
-  exact (Scheme.Modules.unitAutSection_trans_and_unitAutSection_refl W).2
+  exact (uAS_trans' W e e.symm).symm.trans
+    ((congrArg (Scheme.Modules.unitAutSection W) (Iso.self_symm_id e)).trans
+      (Scheme.Modules.unitAutSection_trans_and_unitAutSection_refl W).2)
 
 theorem transportR_transition
     (lam : ∀ a : 𝒱.ι, SheafOfModules.unit ((𝒱.U a : Scheme.{u})).ringCatSheaf ≅
@@ -217,9 +218,34 @@ theorem transportR_transition
       (Y.presheaf.map (homOfLE (𝒱.inter_le s 1)).op).hom
           (Scheme.Modules.unitAutSection (𝒱.U (s.1 1)) (lam (s.1 1))) := by
   unfold Scheme.Modules.CechTrivialisation.transition
-  rw [transportR_restrict, transportR_restrict, ← uAS_conj_homOfLE, ← uAS_conj_homOfLE,
-    ← uAS_trans', ← uAS_trans']
-  congr 1
+    Scheme.Modules.CechTrivialisation.transitionSection
+  rw [transportR_restrict, transportR_restrict, ← uAS_conj_homOfLE, ← uAS_conj_homOfLE]
+  let W := 𝒱.inter s
+  let p₀ := Y.homOfLE (𝒱.inter_le s 0)
+  let p₁ := Y.homOfLE (𝒱.inter_le s 1)
+  let ℓ₀ := (Scheme.Modules.pullbackUnitIso p₀).symm ≪≫
+    (Scheme.Modules.pullback p₀).mapIso (lam (s.1 0)) ≪≫ Scheme.Modules.pullbackUnitIso p₀
+  let ℓ₁ := (Scheme.Modules.pullbackUnitIso p₁).symm ≪≫
+    (Scheme.Modules.pullback p₁).mapIso (lam (s.1 1)) ≪≫ Scheme.Modules.pullbackUnitIso p₁
+  let f := τ.restrict (𝒱.inter_le s 0)
+  let g := τ.restrict (𝒱.inter_le s 1)
+  let U := Scheme.Modules.unitAutSection W
+  have h₀ := conj_symm p₀ (lam (s.1 0))
+  have hcomp : (f ≪≫ ℓ₀).symm ≪≫ g ≪≫ ℓ₁ =
+      (ℓ₀.symm ≪≫ (f.symm ≪≫ g)) ≪≫ ℓ₁ := by
+    apply Iso.ext
+    change (ℓ₀.inv ≫ f.inv) ≫ g.hom ≫ ℓ₁.hom =
+      (ℓ₀.inv ≫ f.inv ≫ g.hom) ≫ ℓ₁.hom
+    calc
+      (ℓ₀.inv ≫ f.inv) ≫ g.hom ≫ ℓ₁.hom = ((ℓ₀.inv ≫ f.inv) ≫ g.hom) ≫ ℓ₁.hom :=
+        (Category.assoc (ℓ₀.inv ≫ f.inv) g.hom ℓ₁.hom).symm
+      _ = (ℓ₀.inv ≫ f.inv ≫ g.hom) ≫ ℓ₁.hom :=
+        congrArg (fun h => h ≫ ℓ₁.hom) (Category.assoc ℓ₀.inv f.inv g.hom)
+  exact (congrArg U hcomp).trans
+    ((uAS_trans' W (ℓ₀.symm ≪≫ (f.symm ≪≫ g)) ℓ₁).trans
+      (congrArg₂ (· * ·)
+        ((uAS_trans' W ℓ₀.symm (f.symm ≪≫ g)).trans
+          (congrArg (fun z => U z * U (f.symm ≪≫ g)) h₀)) rfl))
 
 theorem transportR_discrepancy
     (lam : ∀ a : 𝒱.ι, SheafOfModules.unit ((𝒱.U a : Scheme.{u})).ringCatSheaf ≅
@@ -236,8 +262,21 @@ theorem transportR_discrepancy
           ((τ.comap g a).symm ≪≫
             (Scheme.Modules.pullback (g ⁻¹ᵁ 𝒱.U a).ι).mapIso φ₀ ≪≫
               Scheme.Modules.pullbackUnitIso (g ⁻¹ᵁ 𝒱.U a).ι) := by
-  rw [transportR_comap, ← uAS_conj_morphismRestrict, ← uAS_trans']
-  congr 1
+  rw [transportR_comap, ← uAS_conj_morphismRestrict]
+  let W := g ⁻¹ᵁ 𝒱.U a
+  let p := g ∣_ 𝒱.U a
+  let U := Scheme.Modules.unitAutSection W
+  let ℓ := (Scheme.Modules.pullbackUnitIso p).symm ≪≫
+    (Scheme.Modules.pullback p).mapIso (lam a) ≪≫ Scheme.Modules.pullbackUnitIso p
+  let f := τ.comap g a
+  let b := (Scheme.Modules.pullback W.ι).mapIso φ₀ ≪≫ Scheme.Modules.pullbackUnitIso W.ι
+  have hcomp : (f ≪≫ ℓ).symm ≪≫ b = ℓ.symm ≪≫ (f.symm ≪≫ b) := by
+    apply Iso.ext
+    change (ℓ.inv ≫ f.inv) ≫ b.hom = ℓ.inv ≫ f.inv ≫ b.hom
+    exact Category.assoc _ _ _
+  exact (congrArg U hcomp).trans
+    ((uAS_trans' W ℓ.symm (f.symm ≪≫ b)).trans
+      (congrArg (fun z => U z * U (f.symm ≪≫ b)) (conj_symm p (lam a))))
 
 theorem inter_one_eq_inf {Z : Scheme.{u}} (𝒦 : Z.OrderedAffineCover) (s : 𝒦.Idx 1) :
     𝒦.inter s = 𝒦.U (s.1 0) ⊓ 𝒦.U (s.1 1) := by

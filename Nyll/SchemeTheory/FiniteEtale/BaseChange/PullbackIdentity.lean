@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
@@ -26,8 +27,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Pullback along the identity is identified by the original first projection. -/
 def pullbackIdSchemeIso {A X : Scheme.{u}} (f : A ⟶ X) :

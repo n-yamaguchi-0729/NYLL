@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Morphisms.AppLECongr
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -213,9 +214,6 @@ theorem bijective_appTop_of_abelianSchemePropertyBundle {T : Type u} [CommRing T
       ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of (Localization.AtPrime P))).inv
     exact h1.comp h2
 
-theorem appLE_top_top_eq_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) : f.appLE ⊤ ⊤ le_top = f.appTop :=
-  (Scheme.Hom.app_eq_appLE f).symm
-
 end P2mH0UnivAbelianScheme
 
 open P2mH0UnivAbelianScheme in
@@ -235,7 +233,7 @@ theorem
     ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of T)).inv
   change Function.Bijective ((Scheme.ΓSpecIso (.of T)).inv ≫
     (pullback.snd f (Scheme.TwoAffineOpenCover.specMap R T)).appLE ⊤ ⊤ le_top).hom
-  rw [appLE_top_top_eq_appTop]
+  rw [Scheme.Hom.appLE_top_eq_appTop]
   exact h.comp hiso
 end AbelianSchemePropertyBundle_bijective_algebraMap_sections_pullback
 end AlgebraicCurves.Geometry.AbelianSchemes.Theorems.Proofs

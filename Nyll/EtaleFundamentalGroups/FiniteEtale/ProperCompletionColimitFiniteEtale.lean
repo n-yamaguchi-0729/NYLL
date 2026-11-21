@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperCompleteSubalgebraImages
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianCompletionProperModel
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianCompletionLocal
@@ -31,8 +32,8 @@ open EtaleFundamentalGroups.Inertia
 
 namespace AlgebraicGeometry.FiniteEtale
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 private theorem essSurj_nativeResidue_of_maximalResidue
     (R : Type u) [CommRing R] [IsLocalRing R]

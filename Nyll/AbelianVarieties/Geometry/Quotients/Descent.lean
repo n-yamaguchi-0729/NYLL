@@ -151,7 +151,7 @@ theorem exists_eq_mul_of_comp_eq (hR : IsPullback (pullback.snd (ι ≫ f) f) (L
   apply Subtype.ext
   rw [← hφ₂, comp_action' L ι t φ ht]
   congr 2
-  all_goals exact Subtype.ext hφ₁
+  exact Subtype.ext hφ₁
 
 end Points
 

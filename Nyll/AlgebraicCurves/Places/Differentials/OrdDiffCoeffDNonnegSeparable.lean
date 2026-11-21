@@ -174,40 +174,6 @@ private theorem isAlgebraic_residueField_of_X_mem {K : Type*} [Field K] (u : Pla
   rw [hz]
   exact isAlgebraic_algebraMap _
 
-section Dict
-
-variable {K F F' : Type*} [Field K] [Field F] [Field F']
-  [Algebra K F] [Algebra K F'] [Algebra F F'] [IsScalarTower K F F']
-  [FiniteDimensional F F'] [Algebra.IsSeparable F F']
-
-variable {v : Place K F} {w : Place K F'}
-
-private def toValuationSubringOfRestrictEq (hw : w.restrict F = v) :
-    integralClosureAt F' v →+* w.toValuationSubring :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.toValuationSubringOfRestrictEq hw
-omit [FiniteDimensional F F'] in
-@[scoped simp]
-private theorem coe_toValuationSubringOfRestrictEq (hw : w.restrict F = v)
-    (c : integralClosureAt F' v) :
-    (toValuationSubringOfRestrictEq hw c : F')
-      = algebraMap (integralClosureAt F' v) F' c :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.coe_toValuationSubringOfRestrictEq hw c
-
-private def residueOfCenter (hw : w.restrict F = v) :
-    integralClosureAt F' v →+* w.ResidueField :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter hw
-omit [FiniteDimensional F F'] in
-private theorem residueOfCenter_apply (hw : w.restrict F = v) (c : integralClosureAt F' v) :
-    residueOfCenter hw c = IsLocalRing.residue w.toValuationSubring
-      (toValuationSubringOfRestrictEq hw c) :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter_apply hw c
-
-private theorem surjective_residueOfCenter (hw : w.restrict F = v) :
-    Function.Surjective (residueOfCenter hw) :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.surjective_residueOfCenter hw
-
-end Dict
-
 private theorem engine {K : Type*} [Field K] [PerfectField K] {F : Type*} [Field F] [Algebra K F]
     [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F] [FiniteDimensional (RatFunc K) F]
     [Algebra.IsSeparable (RatFunc K) F]
@@ -238,7 +204,8 @@ private theorem engine {K : Type*} [Field K] [PerfectField K] {F : Type*} [Field
     rw [h, Place.ord_zero] at ht
     exact zero_ne_one ht
   let instCOv : Algebra (integralClosureAt F u) v.toValuationSubring :=
-    (toValuationSubringOfRestrictEq hu).toAlgebra
+    (_root_.AlgebraicCurve.Place.FiberCenterResidueComparison.toValuationSubringOfRestrictEq
+      hu).toAlgebra
   have halgC : ∀ c : integralClosureAt F u,
       (algebraMap (integralClosureAt F u) v.toValuationSubring c : F)
         = algebraMap (integralClosureAt F u) F c := fun _ => rfl
@@ -332,8 +299,9 @@ private theorem engine {K : Type*} [Field K] [PerfectField K] {F : Type*} [Field
       (IsLocalRing.ResidueField v.toValuationSubring) := by
     constructor
     intro y
-    obtain ⟨c, hc⟩ := surjective_residueOfCenter hu y
-    rw [← hc, residueOfCenter_apply]
+    obtain ⟨c, hc⟩ :=
+      _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.surjective_residueOfCenter hu y
+    rw [← hc, _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter_apply]
     apply isAlgebraic_residue
     obtain ⟨p, hpm, hpe⟩ := c.2
     refine ⟨p, hpm, ?_⟩
@@ -346,7 +314,7 @@ private theorem engine {K : Type*} [Field K] [PerfectField K] {F : Type*} [Field
       (IsLocalRing.maximalIdeal u.toValuationSubring)
         = IsLocalRing.maximalIdeal v.toValuationSubring := by
     apply le_antisymm
-    · exact ((IsLocalRing.local_hom_TFAE
+    · exact ((IsLocalRing.local_hom_tfae
         (algebraMap u.toValuationSubring v.toValuationSubring)).out 1 3 rfl rfl).mp instLH
     · intro z hz
       rcases eq_or_ne z 0 with rfl | hz0

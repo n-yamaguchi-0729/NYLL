@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleCohomology.Descent.ProperFiniteEtaleDescent
 public import Nyll.EtaleCohomology.Descent.SetSheafOverlapRepresenter
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianActionPullback
@@ -33,9 +34,9 @@ universe u
 
 namespace EtaleCohomology.SetSheafDescent
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X Y Z T : Scheme.{u}}
 

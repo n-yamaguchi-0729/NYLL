@@ -14,7 +14,9 @@ https://github.com/n-yamaguchi-0729
 
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.Pullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.ChangeRigidification
 import Nyll.JacobianVarieties.Picard.Representability.InversePairIso
+import Nyll.SchemeTheory.CategoryTheory.TensorInverseIso
 import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 
 /-!
@@ -29,6 +31,7 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.RelPicard NeronModelInfra GoodReductionJacobian
+open AlgebraicGeometry.RelPicard.ChangeRigidification (qinv qinvIso sectionPullbackIso)
 open JacobianVarieties.Picard.Proofs.InversePairIsoSections
 
 namespace JacobianVarieties.Picard.CurveSectionComparison
@@ -65,9 +68,9 @@ theorem transport_comp
   let M₁₃ := M.pullbackCurve (e₁₂ ≪≫ e₂₃).inv h₁₃'
     (I2.epsT_comp ε₁ (e₁₂ ≪≫ e₂₃).inv (e₁₂ ≪≫ e₂₃).hom h₁₃
       (e₁₂ ≪≫ e₂₃).hom_inv_id)
-  let Q₁₂ : T.Modules := Sub2c.qinv (I2.epsT ε₁ e₁₂.hom h₁₂) ε₂ M₁₂
-  let Q₂₃ : T.Modules := Sub2c.qinv (I2.epsT ε₂ e₂₃.hom h₂₃) ε₃ N₂₃
-  let Q₁₃ : T.Modules := Sub2c.qinv (I2.epsT ε₁ (e₁₂ ≪≫ e₂₃).hom h₁₃) ε₃ M₁₃
+  let Q₁₂ : T.Modules := qinv (I2.epsT ε₁ e₁₂.hom h₁₂) ε₂ M₁₂
+  let Q₂₃ : T.Modules := qinv (I2.epsT ε₂ e₂₃.hom h₂₃) ε₃ N₂₃
+  let Q₁₃ : T.Modules := qinv (I2.epsT ε₁ (e₁₂ ≪≫ e₂₃).hom h₁₃) ε₃ M₁₃
   have hcc : curveChange e₂₃.inv h₂₃' t ≫ curveChange e₁₂.inv h₁₂' t =
       curveChange (e₁₂ ≪≫ e₂₃).inv h₁₃' t := by
     apply pullback.hom_ext
@@ -86,14 +89,14 @@ theorem transport_comp
   have hEvaluation : A ⊗ (Q₁₂ ⊗ Q₂₃) ≅ 𝟙_ T.Modules :=
     (α_ A Q₁₂ Q₂₃).symm ≪≫
       whiskerRightIso
-        ((whiskerLeftIso A (Sub2c.sectionPullbackIso t ε₃ Q₁₂)).symm ≪≫
+        ((whiskerLeftIso A (sectionPullbackIso t ε₃ Q₁₂)).symm ≪≫
           (Scheme.Modules.pullbackTensorObjIso (rigSection c₃ t ε₃) M₁₃.L
             ((Scheme.Modules.pullback (pullback.snd c₃ t)).obj Q₁₂)).symm ≪≫
           (Scheme.Modules.pullback (rigSection c₃ t ε₃)).mapIso hX.symm) Q₂₃ ≪≫
-      Sub2c.qinvIso (I2.epsT ε₂ e₂₃.hom h₂₃) ε₃ N₂₃
+      qinvIso (I2.epsT ε₂ e₂₃.hom h₂₃) ε₃ N₂₃
   have hInverse : Q₁₂ ⊗ Q₂₃ ≅ Q₁₃ :=
-    Sub2c.inverseIso (Iso.refl A) hEvaluation
-      (Sub2c.qinvIso (I2.epsT ε₁ (e₁₂ ≪≫ e₂₃).hom h₁₃) ε₃ M₁₃)
+    tensorInverseIso (Iso.refl A) hEvaluation
+      (qinvIso (I2.epsT ε₁ (e₁₂ ≪≫ e₂₃).hom h₁₃) ε₃ M₁₃)
   exact ⟨(hX ⊗ᵢ Iso.refl ((Scheme.Modules.pullback (pullback.snd c₃ t)).obj Q₂₃)) ≪≫
     α_ M₁₃.L ((Scheme.Modules.pullback (pullback.snd c₃ t)).obj Q₁₂)
       ((Scheme.Modules.pullback (pullback.snd c₃ t)).obj Q₂₃) ≪≫

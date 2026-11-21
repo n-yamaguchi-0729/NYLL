@@ -174,7 +174,7 @@ theorem genus_eq_genusFF_of_isAlgClosed [IsAlgClosed K] [Algebra.EssFiniteType K
 
 theorem exists_smul_eq [IsCurveOver K F] {ω₀ : Ω[F⁄K]} (hω₀ : ω₀ ≠ 0) (ω : Ω[F⁄K]) :
     ∃ f : F, f • ω₀ = ω :=
-  (finrank_eq_one_iff_of_nonzero' ω₀ hω₀).mp IsCurveOver.finrank_kaehler ω
+  (finrank_eq_one_iff_of_ne_zero' ω₀ hω₀).mp IsCurveOver.finrank_kaehler ω
 
 theorem kaehler_eq_zero_of_forall_D_eq_zero (h : ∀ x : F, D K F x = 0) (ω : Ω[F⁄K]) : ω = 0 := by
   have hω : ω ∈ Submodule.span F (Set.range (D K F)) := by

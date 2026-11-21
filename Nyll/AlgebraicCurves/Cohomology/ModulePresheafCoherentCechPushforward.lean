@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Morphisms.NoetherianFiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Finiteness.Basic
@@ -133,16 +134,9 @@ abbrev ΓW (O : ((pW p W) : Scheme.{u}).Opens) : Type u := Γ(((pW p W) : Scheme
 scoped instance isProper_qW [IsProper p] : IsProper (qW p W) := by
   unfold qW; infer_instance
 
-theorem isNoetherian_of_isProper [IsNoetherianRing A] [IsProper q] : IsNoetherian P := by
-  have : LocallyOfFiniteType q := inferInstance
-  have : IsLocallyNoetherian (Spec (CommRingCat.of A)) := inferInstance
-  have : IsLocallyNoetherian P := LocallyOfFiniteType.isLocallyNoetherian q
-  have : CompactSpace P := QuasiCompact.compactSpace_of_compactSpace q
-  exact {}
-
 theorem isNoetherianRing_chart [IsNoetherianRing A] [IsProper q] : IsNoetherianRing Γ(P, (W :
   P.Opens)) := by
-  have := isNoetherian_of_isProper q
+  have := LocallyOfFiniteType.isNoetherian q
   exact IsLocallyNoetherian.component_noetherian W
 
 theorem ΓSpecIso_inv_qW_app_map (O : ((pW p W) : Scheme.{u}).Opens) :

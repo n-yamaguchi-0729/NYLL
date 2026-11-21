@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationDecompositionBaseLocalization
 public import Nyll.SchemeTheory.FunctionFields.GenericFieldSourceStalk
 public import Nyll.SchemeTheory.FunctionFields.OpenAffineFractionField
@@ -42,10 +43,7 @@ universe u
 attribute [local instance] normalizationCommAlgGaloisAction
   AlgebraicGeometry.FiniteEtale.genericPoint_isDominant
 
-local instance affineNormalizationStalkOpenDominant
-    {X U : Scheme.{u}} [IsIntegral X] [IsIntegral U]
-    (j : U ⟶ X) [IsOpenImmersion j] : IsDominant j :=
-  ⟨j.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace j⟩
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 /-- The original affine normalization prime localizes in the actual stalk
 of any intermediate open containing its base point. The local coefficient

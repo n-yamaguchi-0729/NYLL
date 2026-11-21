@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
 import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
 
@@ -24,8 +25,8 @@ namespace AlgebraicGeometry.FiniteEtale.InverseLimitModel
 
 universe u v w
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {J : Type v} [Category.{w} J] (F : J ⥤ Scheme.{u})
 

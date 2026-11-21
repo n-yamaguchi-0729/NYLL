@@ -82,7 +82,7 @@ theorem nativeRationalDiagonalMiddleClass_frobeniusComponentGraph_degree
       (Fintype.card k ^ m) • e.symm 1 := by
     have h := LinearMap.congr_fun
       (nativeFrobeniusFixedComponentH2 k K X ℓ hℓ m Z hZ) (e.symm 1)
-    simpa only [LinearMap.smul_apply, Module.End.one_apply] using h
+    simpa only [LinearMap.smul_apply, one_apply_eq_self] using h
   have h := M.nativeRationalDiagonalMiddleClass_graph_degree ℓ hℓ v hv hI
   change e (rationalEllAdicCohomologyPullback ℓ (graphOver d v hv) 2
       (M.nativeRationalDiagonalMiddleClass ℓ hℓ)) =

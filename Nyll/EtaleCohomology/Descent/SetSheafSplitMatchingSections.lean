@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.EtaleCohomology.Descent.SetSheafDescentRepresenter
 import Nyll.EtaleCohomology.Descent.SetSheafSplitDescent
 import Nyll.EtaleCohomology.Descent.RepresentedSplitMatchingSections
@@ -27,9 +28,9 @@ universe u
 
 namespace EtaleCohomology.SetSheafDescent
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X Y : Scheme.{u}} (q : Y ⟶ X)
   (G : EtaleFiniteLocallyConstantSetSheaf Y)

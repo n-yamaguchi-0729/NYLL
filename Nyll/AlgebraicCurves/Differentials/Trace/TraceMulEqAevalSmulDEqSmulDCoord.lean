@@ -843,8 +843,8 @@ theorem adjoin_theta_eq_top (θ : Place.integralClosureAt F v) (cst : Place K F 
     · exact aeval_mem_adjoin_singleton _ θ
     · rw [← Algebra.smul_def]
       exact Submodule.smul_mem_smul hπ₀mem Submodule.mem_top
-  have h := Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-    (IsLocalRing.maximalIdeal_le_jacobson ⊥) hle
+  have h := Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+    (IsLocalRing.ringJacobson_eq_maximalIdeal v.toValuationSubring).ge hle
   rw [← Algebra.toSubmodule_eq_top]
   exact top_le_iff.mp h
 omit [IsAlgClosed K] [IsCurveOver K F] in

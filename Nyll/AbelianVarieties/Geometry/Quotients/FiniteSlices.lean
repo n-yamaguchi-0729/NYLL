@@ -725,7 +725,8 @@ theorem exists_opens_isFinite_morphismRestrict_action_slice_maximal_stable
         (sSup {W : G.Opens | IsFinite (amap L i j ∣_ W)}).ι ⁻¹ᵁ W.1)
     · rw [← Scheme.Hom.preimage_iSup]
       have hs : (⨆ W : {W : G.Opens // IsFinite (amap L i j ∣_ W)}, W.1) =
-          sSup {W : G.Opens | IsFinite (amap L i j ∣_ W)} := (sSup_eq_iSup' _).symm
+          sSup {W : G.Opens | IsFinite (amap L i j ∣_ W)} :=
+        (sSup_eq_iSup' {W : G.Opens | IsFinite (amap L i j ∣_ W)}).symm
       rw [hs]
       exact Scheme.Opens.ι_preimage_self _
     · rintro ⟨W, hW⟩

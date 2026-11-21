@@ -56,12 +56,12 @@ theorem inertiaFixedPreimageSubring_eq (D : RingActionRestriction.{u, v, w, x})
   let : MulSemiringAction D.lowerGroup.carrier D.lowerRing.carrier := D.lowerAction
   ext a
   change
-    (∀ g : {g : D.upperGroup.carrier // (D.upperInertia q).carrier g},
+    (∀ g : D.upperInertia q,
       g.val • D.ringMap.toFun a = D.ringMap.toFun a) ↔
-    ∀ g : {g : D.lowerGroup.carrier // (D.lowerInertia p).carrier g}, g.val • a = a
+    ∀ g : D.lowerInertia p, g.val • a = a
   constructor
   · intro ha τ
-    have hτ : ((D.upperInertia q).map D.groupMap).carrier τ.val := by
+    have hτ : τ.val ∈ (D.upperInertia q).map D.groupMap := by
       rw [himage]
       exact τ.property
     obtain ⟨σ, hσ, hστ⟩ := hτ
@@ -74,7 +74,7 @@ theorem inertiaFixedPreimageSubring_eq (D : RingActionRestriction.{u, v, w, x})
     rw [← hστ]
     exact hcoeff.trans (ha ⟨σ, hσ⟩)
   · intro ha σ
-    have hσ : (D.lowerInertia p).carrier (D.groupMap.toFun σ.val) := by
+    have hσ : D.groupMap.toFun σ.val ∈ D.lowerInertia p := by
       rw [← himage]
       exact ⟨σ.val, σ.property, rfl⟩
     have hfixed := ha ⟨D.groupMap.toFun σ.val, hσ⟩

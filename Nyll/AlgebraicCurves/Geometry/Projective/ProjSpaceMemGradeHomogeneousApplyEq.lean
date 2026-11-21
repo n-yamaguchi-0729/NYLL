@@ -647,12 +647,12 @@ theorem xMul_pow_unitFam (j : Fin (n + 1)) (t d : ℕ) (p : ↥(𝒜 d)) :
       by
   induction t with
   | zero =>
-    erw [pow_zero, Module.End.one_apply]
+    erw [pow_zero, one_apply_eq_self]
     apply unitFam_congr φ (by omega)
     change (p : MvPolynomial (Fin (n + 1)) A) = X j ^ 0 * (p : MvPolynomial (Fin (n + 1)) A)
     rw [pow_zero, one_mul]
   | succ t ih =>
-    erw [pow_succ', Module.End.mul_apply, ih, xMul_unitFam]
+    erw [pow_succ', mul_apply_eq_comp, ih, xMul_unitFam]
     exact unitFam_congr φ (by omega) _ _ (by simp only; ring)
 
 end PowUnit
@@ -800,7 +800,7 @@ theorem exists_forall_mem_grade_exists_isHomogeneous_forall_apply_eq_of_isClosed
         have h2 : (((-(σ.d₀ k)).toNat : ℕ) : ℤ) = -(σ.d₀ k) := Int.toNat_of_nonneg hneg
         omega
       refine ⟨X j ^ t * Ff k j, hdeg ▸ X_pow_mul_mem j t _ ⟨Ff k j, hFf k j⟩, ?_⟩
-      rw [ht, add_comm (Kf k j) t, pow_add, Module.End.mul_apply, hKf k j hneg, xMul_pow_unitFam]
+      rw [ht, add_comm (Kf k j) t, pow_add, mul_apply_eq_comp, hKf k j hneg, xMul_pow_unitFam]
       exact unitFam_congr ι hdeg _ _ rfl
     · set y := ψ.toLinearMap (σ.hom.toLinearMap (Pi.single k (1 : MvPolynomial (Fin (n + 1)) A)))
         with hy

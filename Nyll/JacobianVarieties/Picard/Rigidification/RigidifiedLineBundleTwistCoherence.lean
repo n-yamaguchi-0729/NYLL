@@ -20,7 +20,9 @@ New three-section comparison using the existing adapted inverse-line-bundle cons
 identified in the upstream notice above.
 -/
 
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.ChangeRigidification
 import Nyll.JacobianVarieties.Picard.Representability.InversePairSections
+import Nyll.SchemeTheory.CategoryTheory.TensorInverseIso
 
 /-!
 # Composition of changes of rigidifying section
@@ -31,6 +33,8 @@ for the direct change. Their evaluation maps give the required line-bundle isomo
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.RelPicard NeronModelInfra
+open AlgebraicGeometry.RelPicard.ChangeRigidification
+  (qinv qinvIso sectionPullbackIso twist twist_cut)
 
 universe u
 
@@ -57,7 +61,7 @@ theorem twist_trans {R : Type u} [CommRing R] {C : Scheme.{u}}
     (α_ A Q₁₂ Q₂₃).symm ≪≫ whiskerRightIso hX.symm Q₂₃ ≪≫
       qinvIso ε₂ ε₃ (twist ε₁ ε₂ M)
   have hInverse : Q₁₂ ⊗ Q₂₃ ≅ Q₁₃ :=
-    inverseIso (Iso.refl A) hEvaluation (qinvIso ε₁ ε₃ M)
+    tensorInverseIso (Iso.refl A) hEvaluation (qinvIso ε₁ ε₃ M)
   exact ⟨α_ M.L ((Scheme.Modules.pullback (pullback.snd c t)).obj Q₁₂)
       ((Scheme.Modules.pullback (pullback.snd c t)).obj Q₂₃) ≪≫
     whiskerLeftIso M.L

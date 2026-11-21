@@ -28,6 +28,7 @@ import Nyll.AlgebraicCurves.Places.Ramification.All
 import Nyll.AlgebraicCurves.Places.Rational.All
 import Nyll.AlgebraicCurves.Places.Residue.All
 import Nyll.AlgebraicCurves.Places.Restriction.All
+import Nyll.AlgebraicCurves.Places.RingEquiv
 import Nyll.AlgebraicCurves.Places.SubfieldClosureRangeUnionEqTop
 import Nyll.AlgebraicCurves.Places.Taylor.All
 import Nyll.AlgebraicCurves.Places.UniqueMemIffAdjoinSupIsAlgebraic

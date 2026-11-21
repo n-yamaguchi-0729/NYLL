@@ -6,11 +6,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.AbsoluteUpper
 public import Nyll.ValuedFieldTheory.Ramification.LocalField.BaseChange
 public import Nyll.ValuedFieldTheory.Ramification.LocalField.Core
 public import Nyll.ValuedFieldTheory.Ramification.LocalField.InertiaCard
 public import Nyll.ValuedFieldTheory.Ramification.LocalField.FirstRamificationComparison
 public import Nyll.ValuedFieldTheory.Ramification.LocalField.ResidueInertia
+public import Nyll.ValuedFieldTheory.Ramification.LocalField.Solvable
 public import Nyll.ValuedFieldTheory.Ramification.LocalField.Unramified
 
 /-!

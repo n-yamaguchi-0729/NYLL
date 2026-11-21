@@ -396,7 +396,7 @@ theorem divDivisorFn_injective (E : Divisor k (RatFunc k)) : Function.Injective 
   := by
   intro P Q hPQ
   simp only [divDivisorFn_apply] at hPQ
-  exact IsFractionRing.injective k[X] (RatFunc k) ((div_left_inj' (divisorFn_ne_zero E _)).mp hPQ)
+  exact IsFractionRing.injective k[X] (RatFunc k) ((div_left_inj₀ (divisorFn_ne_zero E _)).mp hPQ)
 
 /-- The polynomial description of the Riemann-Roch space on the rational function field. -/
 def riemannRochSpaceEquiv (E : Divisor k (RatFunc k)) :

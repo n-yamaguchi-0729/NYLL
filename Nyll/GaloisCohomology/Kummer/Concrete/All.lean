@@ -116,6 +116,8 @@ public import Nyll.GaloisCohomology.Kummer.Concrete.RadicalPowerSaturation
 
 public import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtensionFieldRange
 
+public import Nyll.GaloisCohomology.Kummer.Concrete.SimpleExtensionBaseChange
+
 /-!
 # Concrete Kummer extensions and characters
 

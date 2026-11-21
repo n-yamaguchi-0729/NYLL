@@ -55,15 +55,14 @@ theorem linearIndependent_pow_of_transcendental {t : Ω} (htr : Transcendental k
   rw [linearIndependent_iff]
   intro l hl
   have hinj := transcendental_iff_injective.mp htr
-  have h0 : Polynomial.aeval t (Polynomial.ofFinsupp (.ofCoeff l)) = 0 := by
+  have h0 : Polynomial.aeval t (AddMonoidAlgebra.ofCoeff l) = 0 := by
     rw [Polynomial.aeval_def, Polynomial.eval₂_eq_sum, Polynomial.sum_def]
     rw [Finsupp.linearCombination_apply, Finsupp.sum] at hl
     convert hl using 1
     refine Finset.sum_congr (by rfl) fun n _ => ?_
     rw [Algebra.smul_def]
-    rfl
-  have := hinj (a₁ := Polynomial.ofFinsupp (.ofCoeff l)) (a₂ := 0) (by rw [h0, map_zero])
-  exact AddMonoidAlgebra.ofCoeff_eq_zero.mp (Polynomial.ofFinsupp_eq_zero.mp this)
+  have := hinj (a₁ := AddMonoidAlgebra.ofCoeff l) (a₂ := 0) (by rw [h0, map_zero])
+  exact AddMonoidAlgebra.ofCoeff_eq_zero.mp this
 
 theorem linearIndependent_adjoin_of_transcendental {t : Ω} (htr : Transcendental k t)
     {ιa : Type*} {a : ιa → k} (ha : LinearIndependent 𝔽 a) :

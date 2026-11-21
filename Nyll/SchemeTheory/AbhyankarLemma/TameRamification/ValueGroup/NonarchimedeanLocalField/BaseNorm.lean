@@ -46,7 +46,7 @@ theorem fieldNormUnits_mapBaseUnitsToExtensionUnits
 /-- Every `[L : K]`-th power of a base unit lies in the field-norm subgroup
 from `L/K`. -/
 theorem pow_finrank_mem_fieldNormSubgroup (x : Kˣ) :
-    x ^ Module.finrank K L ∈ fieldNormSubgroup K L := by
+    x ^ Module.finrank K L ∈ localNormSubgroup K L := by
   rw [← fieldNormUnits_mapBaseUnitsToExtensionUnits (K := K) (L := L) x]
   exact
     ⟨LocalFieldTheory.IsNonarchimedeanLocalField.mapBaseUnitsToExtensionUnits
@@ -61,7 +61,7 @@ variable [IsNonarchimedeanLocalField K]
 valuation is the field degree `[L : K]`. -/
 theorem exists_mem_fieldNormSubgroup_val_finrank_of_uniformizer
     {ϖ : Kˣ} (hϖ : (multiplicativeIntegerValuation K).IsUniformizer ϖ) :
-    ∃ x : Kˣ, x ∈ fieldNormSubgroup K L ∧
+    ∃ x : Kˣ, x ∈ localNormSubgroup K L ∧
       (multiplicativeIntegerValuation K).val x =
         (Module.finrank K L : ℤ) := by
   refine ⟨ϖ ^ Module.finrank K L,
@@ -78,7 +78,7 @@ theorem exists_mem_fieldNormSubgroup_val_finrank_of_uniformizer
 /-- A Neu1999 base local field supplies a concrete field-norm subgroup element
 whose valuation is the field degree `[L : K]`. -/
 theorem exists_mem_fieldNormSubgroup_val_finrank :
-    ∃ x : Kˣ, x ∈ fieldNormSubgroup K L ∧
+    ∃ x : Kˣ, x ∈ localNormSubgroup K L ∧
       (multiplicativeIntegerValuation K).val x =
         (Module.finrank K L : ℤ) := by
   rcases multiplicativeIntegerValuation_exists_uniformizer K with ⟨ϖ, hϖ⟩

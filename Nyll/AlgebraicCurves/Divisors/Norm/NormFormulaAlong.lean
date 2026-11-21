@@ -11,7 +11,7 @@ Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
 import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
-import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormula
+import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaSeparable
 
 /-!
 # Norm Formula Along
@@ -33,7 +33,7 @@ theorem _root_.AlgebraicCurve.normFormulaAlong {K F F' : Type*} [Field K] [Field
   have := isScalarTower_along φ
   have : Module.Finite F F' := hfin
   have : Algebra.IsSeparable F F' := hsep
-  exact Divisor.pushforwardNormFormula
+  exact Divisor.pushforwardNormFormula_of_isSeparable
 
 end
 end AlgebraicCurves.Divisors.Proofs.NormFormulaAlong

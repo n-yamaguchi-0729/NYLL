@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedProjectiveFiniteEtale
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianActionPullback
@@ -41,8 +42,8 @@ namespace AlgebraicGeometry.FiniteEtale.ProperHenselianActionLifting
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 private theorem exists_sigma_comparison
     {X X₀ : Scheme.{u}} (i : X₀ ⟶ X) (m : ℕ) (Y : Fin m → Scheme.{u})

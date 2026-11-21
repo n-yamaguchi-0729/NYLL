@@ -1231,11 +1231,6 @@ lemma ev_map (u : Spec R ⟶ Z) {V V' : Z.Opens} (i : V ≤ V') (h : (⊤ : (Spe
     ev u V h (Z.presheaf.map (homOfLE i).op x) = ev u V' h' x := by
   simp only [ev_apply, ← CommRingCat.comp_apply, Scheme.Hom.map_appLE]
 
-lemma appLE_top_top {X Y : Scheme.{u}} (f : X ⟶ Y) (h : (⊤ : X.Opens) ≤ f ⁻¹ᵁ ⊤) :
-    f.appLE ⊤ ⊤ h = f.appTop := by
-  rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
-  rfl
-
 lemma appLE_congr_hom {X Y : Scheme.{u}} {u u' : X ⟶ Y} (e : u = u') (V : Y.Opens) (W : X.Opens)
     (h : W ≤ u ⁻¹ᵁ V) : u.appLE V W h = u'.appLE V W (e ▸ h) :=
   _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom e V W h (e ▸ h)
@@ -1255,7 +1250,7 @@ lemma ev_specMap_top {A : CommRingCat.{u}} (φ : A ⟶ R) (a : A) :
   exact (congrArg
     (fun q : Γ(Spec A, ⊤) ⟶ Γ(Spec R, ⊤) =>
       (Scheme.ΓSpecIso R).hom (q ((Scheme.ΓSpecIso A).inv a)))
-    (appLE_top_top (Spec.map φ) le_top)).trans (congrArg (fun q : A ⟶ R => q a) hmap)
+    (Scheme.Hom.appLE_top_eq_appTop (Spec.map φ))).trans (congrArg (fun q : A ⟶ R => q a) hmap)
 
 lemma primeIdealOf_eq_comap_ev [IsLocalRing R] (u : Spec R ⟶ Z) {V : Z.Opens} (hV : IsAffineOpen V)
     (h : (⊤ : (Spec R).Opens) ≤ u ⁻¹ᵁ V) :
@@ -1415,7 +1410,7 @@ lemma algebraMap_ev_ℓ₀ (V : P.Opens) (h : (⊤ : (Spec (CommRingCat.of O)).O
     rw [appLE_congr_hom hℓ₀']
   have h2 : (Spec.map ι ≫ ℓ₀).appLE V ⊤ hK x = (Spec.map ι).appTop (ℓ₀.appLE V ⊤ h x) := by
     have he := Scheme.Hom.appLE_comp_appLE (Spec.map ι) ℓ₀ V ⊤ ⊤ h le_top
-    have ht := appLE_top_top (Spec.map ι) le_top
+    have ht := Scheme.Hom.appLE_top_eq_appTop (Spec.map ι)
     exact (congrArg (fun q : Γ(P, V) ⟶ Γ(Spec P.functionField, ⊤) => q x) he).symm.trans
       (congrArg (fun q : Γ(Spec (.of O), ⊤) ⟶ Γ(Spec P.functionField, ⊤) =>
         q (ℓ₀.appLE V ⊤ h x)) ht)
@@ -1594,7 +1589,7 @@ theorem main :
     have key : ∀ c : k, (Scheme.ΓSpecIso (CommRingCat.of O)).hom
         ((ℓ₀ ≫ p).appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c)) = θO p O f hind c := by
       intro c
-      rw [← appLE_top_top (ℓ₀ ≫ p) le_top]
+      rw [← Scheme.Hom.appLE_top_eq_appTop (ℓ₀ ≫ p)]
       exact ev_ℓ₀_p p O ℓ₀ hℓ₀ d f hind le_top c
     rw [← cancel_epi (Scheme.ΓSpecIso (CommRingCat.of k)).inv,
       ← cancel_mono (Scheme.ΓSpecIso (CommRingCat.of O)).hom, Category.assoc, Category.assoc,

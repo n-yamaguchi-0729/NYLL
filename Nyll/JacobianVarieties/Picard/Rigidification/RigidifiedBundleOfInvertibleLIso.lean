@@ -25,7 +25,7 @@ public import Mathlib.Tactic.Ext
 public import Nyll.AlgebraicCurves.Geometry.Schemes.RigidifiedLineBundleOfInvertible
 public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 public import Nyll.SchemeTheory.Modules.Sections.IhomSections
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnUniqueIhomEvalEq
 public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
 

@@ -14,6 +14,7 @@ module
 
 public import Mathlib.RingTheory.Finiteness.Basic
 public import Mathlib.Algebra.Module.Projective
+public import Mathlib.LinearAlgebra.TensorProduct.Associator
 public import Mathlib.RingTheory.Ideal.Maps
 public import Mathlib.Tactic.Ext
 

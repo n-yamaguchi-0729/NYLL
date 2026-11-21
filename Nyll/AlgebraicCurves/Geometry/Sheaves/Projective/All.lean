@@ -10,7 +10,6 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.FiniteBySectionsFiniteBy
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.FiniteBySectionsMemFinsetAway
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.FiniteBySectionsTensorPow
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPow
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPowMonoidalV2
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjPresentationFiniteToProjPullbackSectionEqZeroIff
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjPresentationLinearMapSectionsTensorPowTwistObj
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjPresentationLocallyQuasiFinite

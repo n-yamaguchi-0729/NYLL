@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationResidueField
 public import Nyll.ValuedFieldTheory.Valuation.Completion.DVRAdicCompletionIsDomainDVRIsAdicComplete
 public import Mathlib.RingTheory.AdicCompletion.Noetherian
@@ -137,9 +138,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Complete the concrete DVR family and compare its actual fibers with
 the existing DVR fibers, retaining their maps to the original `X`. -/

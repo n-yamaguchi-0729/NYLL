@@ -49,12 +49,12 @@ namespace NativeRamificationResidues
 
 /-- The literal power-transition roots system on the stored degrees. -/
 def rootsSystem (R : NativeRamificationResidues.{u, w}) :
-    InverseSystem.{0, w} (I := {n : InvertibleExponent R.baseResidue // R.degrees n}) :=
+    InverseSystem.{0, w} (I := {n : InvertibleExponent R.baseResidue // n ∈ R.degrees}) :=
   (primeToRootsSystem R.baseResidue R.residue).restrict R.degrees
 
 /-- The same canonical coordinatewise root groups. -/
 instance rootsSystem_groups (R : NativeRamificationResidues.{u, w}) :
-    ∀ n : {n : InvertibleExponent R.baseResidue // R.degrees n}, Group ((rootsSystem R).X n) :=
+    ∀ n : {n : InvertibleExponent R.baseResidue // n ∈ R.degrees}, Group ((rootsSystem R).X n) :=
   fun n => primeToRootsSystem_group R.baseResidue R.residue n.val
 
 instance rootsSystem_isGroupSystem (R : NativeRamificationResidues.{u, w}) :

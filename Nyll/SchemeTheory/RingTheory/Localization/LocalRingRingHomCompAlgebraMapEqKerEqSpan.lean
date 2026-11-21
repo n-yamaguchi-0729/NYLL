@@ -60,8 +60,8 @@ theorem _root_.IsLocalRing.exists_ringHom_comp_algebraMap_eq_and_ker_eq_span_of_
       rw [h2]
       exact Submodule.add_mem_sup ⟨a, rfl⟩ h1
     have hN : (⊤ : Submodule A (S ⧸ I)) ≤ N :=
-      Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-        (by rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top]) htop
+      Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+        (IsLocalRing.ringJacobson_eq_maximalIdeal A).ge htop
     intro m
     obtain ⟨a, ha⟩ := hN (Submodule.mem_top : m ∈ ⊤)
     exact ⟨a, ha⟩

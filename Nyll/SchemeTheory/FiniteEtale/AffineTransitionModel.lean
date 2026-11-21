@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.FiniteEtale.FilteredColimitSpec
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
@@ -31,18 +32,7 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleHasPullbacksAlongTransition
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongTransition
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- A finite-etale cover of an actual cofiltered limit of affine schemes
 descends to an actual stage, with recovery along the original cone map. -/

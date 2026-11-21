@@ -262,7 +262,7 @@ theorem main [IsAlgClosed K]
     have h1 := Differential.traceAlong_smul_pullbackAlong φ hsep u v.dCoord
     rw [← hω', h0, smul_zero, map_zero] at h1
     exact smul_ne_zero hu hω0 h1.symm
-  obtain ⟨g, hg⟩ : ∃ g : F', g • ω' = η := (finrank_eq_one_iff_of_nonzero' ω' hω'ne).mp hrkF' η
+  obtain ⟨g, hg⟩ : ∃ g : F', g • ω' = η := (finrank_eq_one_iff_of_ne_zero' ω' hω'ne).mp hrkF' η
   set T : F := Algebra.trace F F' g with hT
   have htrace : Differential.traceAlong φ η = T • v.dCoord := by
     rw [← hg, hω', Differential.traceAlong_smul_pullbackAlong φ hsep]

@@ -171,7 +171,7 @@ theorem evalOne_mapMaximal (f : R →+* S) [IsLocalHom f]
 /-- Localness follows from the computed image of the original maximal ideal. -/
 instance mapMaximal_isLocalHom [IsNoetherianRing R] [IsNoetherianRing S]
     (f : R →+* S) [IsLocalHom f] : IsLocalHom (mapMaximal f) := by
-  apply ((IsLocalRing.local_hom_TFAE (mapMaximal f)).out 3 1).mp
+  apply ((IsLocalRing.local_hom_tfae (mapMaximal f)).out 3 1).mp
   rw [maximalIdeal_eq_map (R := R), maximalIdeal_eq_map (R := S), Ideal.map_map]
   have hcomp := mapAlong_comp_algebraMap (IsLocalRing.maximalIdeal R)
     (IsLocalRing.maximalIdeal S) f (IsLocalRing.maximalIdeal_comap f).symm.le

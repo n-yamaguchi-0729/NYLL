@@ -41,9 +41,7 @@ public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentCohe
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
 public import Nyll.AlgebraicCurves.Geometry.Projective.ModulesProjectiveSections
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
-public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentKer
-public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentKer
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafCoherence
 
 /-!
 # OModule Presheaf exists euler Char twist pushforward Unit succ sub eq monoidal V2
@@ -352,7 +350,8 @@ theorem KI_good [IsProper π] : (KI π Z₀ I).IsCoherent ∧ (KI π Z₀ I).IsQ
     isQuasicoherent_ker (rho π Z₀ I) (OZ_good π Z₀).2.1 (OZI_good π Z₀ I).2.1⟩
 
 /-- The closed image in the ambient scheme of the ideal subscheme. -/
-def YI : Closeds V := ⟨Set.range (ιI Z₀ I).base, (ιI Z₀ I).isClosedEmbedding.isClosed_range⟩
+noncomputable def YI : Closeds V :=
+  ⟨Set.range (ιI Z₀ I).base, (ιI Z₀ I).isClosedEmbedding.isClosed_range⟩
 
 theorem range_ι : Set.range (ι Z₀).base = (Z₀ : Set V) := by
   have := (Scheme.IdealSheafData.vanishingIdeal Z₀).range_subschemeι

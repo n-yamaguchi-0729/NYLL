@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.Descent.OverlapPairHom
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianActionPullback
 
@@ -30,8 +31,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 open ProperHenselianActionLifting
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {S Y T : Scheme.{u}} (q : Y ⟶ S) (W : FiniteEtale Y)
   (θ : (FiniteEtale.pullback (Limits.pullback.fst q q)).obj W ≅

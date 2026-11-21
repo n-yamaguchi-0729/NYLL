@@ -44,7 +44,7 @@ theorem fieldNormUnits_map_algEquiv
 /-- Base-field algebra-equivalent extensions have the same norm subgroup. -/
 theorem fieldNormSubgroup_eq_of_algEquiv
     (e : L ≃ₐ[K] E) :
-    fieldNormSubgroup K L = fieldNormSubgroup K E := by
+    localNormSubgroup K L = localNormSubgroup K E := by
   ext x
   constructor
   · rintro ⟨z, rfl⟩

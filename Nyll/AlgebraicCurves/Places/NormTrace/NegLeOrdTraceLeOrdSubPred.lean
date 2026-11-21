@@ -78,10 +78,8 @@ theorem mem_pow_ramificationIdx_sub_one_of_mem_differentIdeal
     {p : Ideal A} [p.IsMaximal] (hp : p ≠ ⊥) (P : Ideal B)
     {d : B} (hd : d ∈ differentIdeal A B) :
     d ∈ P ^ (p.ramificationIdx' P - 1) := by
-  by_cases he : p.ramificationIdx' P = 0
-  · rw [he, Nat.zero_sub, pow_zero, Ideal.one_eq_top]; exact Submodule.mem_top
   have hdvd : P ^ (p.ramificationIdx' P - 1) ∣ differentIdeal A B :=
-    pow_sub_one_dvd_differentIdeal_aux A K L P he hp
+    pow_sub_one_dvd_differentIdeal_aux A K L P hp
       (Ideal.dvd_iff_le.mpr Ideal.le_pow_ramificationIdx')
   exact Ideal.dvd_iff_le.mp hdvd hd
 
@@ -120,16 +118,6 @@ section ValuationDictionary
 
 variable {v : Place K F} {w : Place K F'}
 
-theorem neg_log_valuation_fiberCenter_eq_ord (hw : w.restrict F = v) {x : F'} (hx : x ≠ 0) :
-    -log ((fiberCenter F' v hw).valuation F' x) = w.ord x :=
-  _root_.AlgebraicCurve.Place.neg_log_valuation_fiberCenter_eq_ord hw hx
-
-theorem le_ord_iff_mem_pow_fiberCenter (hw : w.restrict F = v)
-    {c : integralClosureAt F' v} (hc : c ≠ 0) (n : ℕ) :
-    (n : ℤ) ≤ w.ord (algebraMap (integralClosureAt F' v) F' c) ↔
-      c ∈ (fiberCenter F' v hw).asIdeal ^ n :=
-  _root_.AlgebraicCurve.Place.le_ord_iff_mem_pow_fiberCenter hw hc n
-
 end ValuationDictionary
 
 section Core
@@ -146,7 +134,7 @@ theorem sub_one_le_ord_of_mem_differentIdeal {w : Place K F'} (hw : w.restrict F
         (fiberCenter F' v hw).asIdeal - 1) :=
     mem_pow_ramificationIdx_sub_one_of_mem_differentIdeal (K := F) (L := F')
       (maximalIdeal_ne_bot v) _ hd
-  have h1 := (le_ord_iff_mem_pow_fiberCenter hw hd0 _).mpr hmem
+  have h1 := (_root_.AlgebraicCurve.Place.le_ord_iff_mem_pow_fiberCenter hw hd0 _).mpr hmem
   have hpos : 0 < w.ramificationIndex F := w.ramificationIndex_pos
   rw [← hE] at h1
   rw [Nat.cast_sub (by omega)] at h1

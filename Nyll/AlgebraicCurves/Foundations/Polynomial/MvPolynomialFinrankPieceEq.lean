@@ -253,7 +253,10 @@ noncomputable def formsIdeal (e : ℕ) (J : Ideal (MvPolynomial (Fin (n + 1)) L)
 theorem formsIdeal_le (e : ℕ) : formsIdeal e J ≤ J := Ideal.span_le.mpr fun _ hp => hp.1
 
 theorem formsIdeal_generated (e : ℕ) : ∃ s : Set (MvPolynomial (Fin (n + 1)) L),
-    (∀ p ∈ s, p.IsHomogeneous e) ∧ formsIdeal e J = Ideal.span s := ⟨_, fun _ hp => hp.2, rfl⟩
+    (∀ p ∈ s, p.IsHomogeneous e) ∧ formsIdeal e J = Ideal.span s := by
+  refine ⟨{p | p ∈ J ∧ p.IsHomogeneous e}, ?_, rfl⟩
+  intro p hp
+  exact hp.2
 include hJ in
 theorem mem_formsIdeal_of_mem {e : ℕ} (he : m ≤ e) : ∀ (i : ℕ) (x : MvPolynomial (Fin (n + 1)) L),
     x.IsHomogeneous (e + i) → x ∈ J → x ∈ formsIdeal e J

@@ -129,7 +129,8 @@ theorem trace_mem_maximalIdeal_of_forall_ord_pos (c : Place.integralClosureAt F'
       (Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective)
     exact Ideal.mem_comap.mp this
   have hnil : IsNilpotent (Ideal.Quotient.mk (conductorIdeal (F' := F') v) c) := by
-    obtain ⟨n, hn⟩ := IsArtinianRing.isNilpotent_jacobson_bot (R := Q)
+    obtain ⟨n, hn⟩ := IsArtinianRing.isNilpotent_jacobson Q
+    rw [← Ideal.jacobson_bot] at hn
     refine ⟨n, ?_⟩
     have := Ideal.pow_mem_pow hjac n
     rw [hn] at this

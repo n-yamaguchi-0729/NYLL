@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianActionPullback
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.CanonicalDescent
 
@@ -27,8 +28,8 @@ universe u
 
 namespace AlgebraicGeometry.FiniteEtale.ProperHenselianActionLifting
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X X₀ Y : Scheme.{u}}
 

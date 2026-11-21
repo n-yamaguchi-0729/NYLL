@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
 public import Nyll.AlgebraicCurves.Cohomology.Cech.TwoChart.SectionsOf
 public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafOfModules
@@ -20,12 +21,16 @@ public import Nyll.SchemeTheory.Cohomology.Cech.TwoChartCech
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.TwoTermComplexKerMapBaseChangeBijectiveModules
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.BaseChange.CochainBaseChangeEquiv
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.DZeroModulesEqZeroIffUnique
+public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.SectionsTopEquivH0Modules
 
 /-!
 # Scheme Modules exists two Term Complex sections Equiv forall base Change
 -/
 
 @[expose] public section
+
+open _root_.AlgebraicGeometry.OModulePresheaf
+  (toCochain sectionsEquivH0 coe_sectionsEquivH0)
 
 section ProofImplementation
 
@@ -108,88 +113,6 @@ noncomputable section
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite TopologicalSpace TensorProduct
 
 namespace P2mSectionsBaseChangeH0
-
-section Cover
-
-/-- A finite ordered affine cover obtained from compactness and the canonical affine cover. -/
-def coverOfCompact (X : Scheme.{u}) [CompactSpace X] : X.OrderedAffineCover :=
-  let 𝒰 := X.affineCover.finiteSubcover
-  { ι := 𝒰.I₀
-    instFintype := inferInstance
-    instLinearOrder := LinearOrder.lift' (Fintype.equivFin 𝒰.I₀) (Fintype.equivFin 𝒰.I₀).injective
-    U := fun i => (𝒰.f i).opensRange
-    isAffineOpen := fun i => isAffineOpen_opensRange (𝒰.f i)
-    iSup_eq_top := 𝒰.iSup_opensRange }
-
-end Cover
-
-section H0
-
-variable {R : Type u} [CommRing R] {V : Scheme.{u}} (π : V ⟶ Spec (.of R)) (M : V.Modules)
-  (K : V.OrderedAffineCover)
-
-/-- The degree-zero cochain obtained by restricting a global section to each cover intersection. -/
-def toCochain :
-    letI := Scheme.TwoAffineOpenCover.moduleSectionsOfHom π M ⊤
-    Γ(M, ⊤) →ₗ[R] (OModulePresheaf.ofModules π M).cochain K 0 :=
-  let := Scheme.TwoAffineOpenCover.moduleSectionsOfHom π M ⊤
-  LinearMap.pi fun s => (OModulePresheaf.ofModules π M).res (le_top : K.inter s ≤ ⊤)
-
-theorem toCochain_apply (x : Γ(M, ⊤)) (s : K.Idx 0) :
-    toCochain π M K x s = M.presheaf.map (homOfLE (le_top : K.inter s ≤ ⊤)).op x := rfl
-
-theorem toCochain_apply' (x : Γ(M, ⊤)) (s : K.Idx 0) :
-    toCochain π M K x s = (OModulePresheaf.ofModules π M).res (le_top : K.inter s ≤ ⊤)
-      (show (OModulePresheaf.ofModules π M).obj ⊤ from x) := rfl
-
-theorem d_toCochain (x : Γ(M, ⊤)) :
-    (OModulePresheaf.ofModules π M).d K 0 (toCochain π M K x) = 0 := by
-  funext s
-  rw [OModulePresheaf.d_apply, Fin.sum_univ_two]
-  simp only [Fin.val_zero, pow_zero, one_smul, Fin.val_one, pow_one, neg_smul]
-  change (OModulePresheaf.ofModules π M).res (K.inter_le_inter_face s 0)
-      ((OModulePresheaf.ofModules π M).res (le_top : K.inter (K.face s 0) ≤ ⊤) x) +
-    -((OModulePresheaf.ofModules π M).res (K.inter_le_inter_face s 1)
-      ((OModulePresheaf.ofModules π M).res (le_top : K.inter (K.face s 1) ≤ ⊤) x)) =
-    (0 : Γ(M, K.inter s))
-  rw [OModulePresheaf.res_res (OModulePresheaf.ofModules π M) (K.inter_le_inter_face s 0)
-      (le_top : K.inter (K.face s 0) ≤ ⊤) x,
-    OModulePresheaf.res_res (OModulePresheaf.ofModules π M) (K.inter_le_inter_face s 1)
-      (le_top : K.inter (K.face s 1) ≤ ⊤) x]
-  exact add_neg_cancel (M.presheaf.map (homOfLE (le_top : K.inter s ≤ ⊤)).op x)
-
-theorem toCochain_mem (x : Γ(M, ⊤)) : toCochain π M K x ∈ (OModulePresheaf.ofModules π M).H0 K :=
-  d_toCochain π M K x
-
-theorem toCochain_injective : Function.Injective (toCochain π M K) := by
-  intro x y hxy
-  obtain ⟨z, -, huniq⟩ := (OModulePresheaf.d_zero_ofModules_eq_zero_iff_existsUnique π M K _).mp
-    (d_toCochain π M K x)
-  exact (huniq x fun s => rfl).trans (huniq y fun s => by rw [hxy]; rfl).symm
-
-theorem exists_toCochain_eq (c : (OModulePresheaf.ofModules π M).cochain K 0)
-    (hc : c ∈ (OModulePresheaf.ofModules π M).H0 K) : ∃ x : Γ(M, ⊤), toCochain π M K x = c := by
-  obtain ⟨x, hx, -⟩ := (OModulePresheaf.d_zero_ofModules_eq_zero_iff_existsUnique π M K c).mp hc
-  exact ⟨x, funext fun s => (hx s).symm⟩
-
-/-- Identifies global sections with degree-zero Cech cocycles on the affine cover. -/
-def sectionsEquivH0 :
-    letI := Scheme.TwoAffineOpenCover.moduleSectionsOfHom π M ⊤
-    Γ(M, ⊤) ≃ₗ[R] (OModulePresheaf.ofModules π M).H0 K :=
-  let := Scheme.TwoAffineOpenCover.moduleSectionsOfHom π M ⊤
-  LinearEquiv.ofBijective (LinearMap.codRestrict ((OModulePresheaf.ofModules π M).H0 K)
-      (toCochain π M K) (toCochain_mem π M K))
-    ⟨fun x y h => toCochain_injective π M K (congrArg Subtype.val h),
-     fun ⟨c, hc⟩ => by
-      obtain ⟨x, rfl⟩ := exists_toCochain_eq π M K c hc
-      exact ⟨x, rfl⟩⟩
-
-theorem coe_sectionsEquivH0 (x : Γ(M, ⊤)) :
-    letI := Scheme.TwoAffineOpenCover.moduleSectionsOfHom π M ⊤
-    ((sectionsEquivH0 π M K x : (OModulePresheaf.ofModules π M).H0 K) :
-      (OModulePresheaf.ofModules π M).cochain K 0) = toCochain π M K x := rfl
-
-end H0
 
 section Unit
 
@@ -329,7 +252,7 @@ theorem main
                   m)
           = G.kerBaseChangeHom A (1 ⊗ₜ[R] ε₀ m) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  let 𝒰 := coverOfCompact X
+  let 𝒰 := _root_.AlgebraicGeometry.Scheme.OrderedAffineCover.ofCompact X
   let F := OModulePresheaf.ofModules f M
   let instM := Scheme.TwoAffineOpenCover.moduleSectionsOfHom f M ⊤
   obtain ⟨G, ι0, ι1, comm, hbij⟩ :=
@@ -373,8 +296,12 @@ theorem main
     rw [coe_kerEquivOfEquiv_symm, LinearEquiv.symm_apply_eq]
     change ((e1 _ : FA.H0 (𝒰.baseChange f A)) : FA.cochain (𝒰.baseChange f A) 0)
       = E 0 (ι0.baseChange A ((G.kerBaseChangeHom A (1 ⊗ₜ[R] ε₀ m) : G.H0 A) : A ⊗[R] G.C0))
+    have coe_e1 (x : Γ(MA, ⊤)) :
+        ((e1 x : FA.H0 (𝒰.baseChange f A)) : FA.cochain (𝒰.baseChange f A) 0) =
+          toCochain p₂ MA (𝒰.baseChange f A) x :=
+      coe_sectionsEquivH0 p₂ MA (𝒰.baseChange f A) x
     rw [CoherentBaseChange.TwoTermComplex.kerBaseChangeHom_apply_coe, LinearMap.baseChange_tmul,
-      Submodule.subtype_apply, LinearMap.baseChange_tmul, hε₀ m, coe_sectionsEquivH0]
+      Submodule.subtype_apply, LinearMap.baseChange_tmul, hε₀ m, coe_e1]
     funext s
     rw [hEf 0 1 (toCochain f M 𝒰 m) s, one_smul]
     have h2 := unitApp_map p₁ M (homOfLE (le_top : 𝒰.inter s ≤ ⊤))

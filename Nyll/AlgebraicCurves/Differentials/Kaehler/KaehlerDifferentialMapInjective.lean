@@ -81,7 +81,7 @@ theorem _root_.AlgebraicCurve.kaehlerDifferential_map_injective_of_constantField
   have hg0 : D K F g ≠ 0 := fun h => hmg (by rw [h, map_zero])
   rw [injective_iff_map_eq_zero]
   intro ω hω
-  obtain ⟨c, rfl⟩ := (finrank_eq_one_iff_of_nonzero' (D K F g) hg0).1 IsCurveOver.finrank_kaehler ω
+  obtain ⟨c, rfl⟩ := (finrank_eq_one_iff_of_ne_zero' (D K F g) hg0).1 IsCurveOver.finrank_kaehler ω
   rw [map_smul, algebra_compatible_smul FE c, smul_eq_zero] at hω
   rcases hω with hc | h0
   · rw [(algebraMap F FE).injective.eq_iff' (map_zero _)] at hc

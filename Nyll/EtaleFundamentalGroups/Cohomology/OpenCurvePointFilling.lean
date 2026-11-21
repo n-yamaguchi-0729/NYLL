@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
 public import Nyll.EtaleFundamentalGroups.Cohomology.CurvePointFillingInertia
 public import Nyll.AlgebraicCurves.Geometry.IsClosedSingletonNeGenericPoint
 public import Nyll.AlgebraicCurves.Models.Charts.FiniteComplIsOpen
@@ -23,6 +24,8 @@ Thus a single-point filling theorem applies without an assumed puncture model.
 -/
 
 @[expose] public section
+
+open AlgebraicGeometry.Scheme.Hom (sectionEffectiveCartierDivisor)
 
 universe uGeom uField₁ uField₂
 
@@ -177,7 +180,7 @@ theorem exists_openCurvePointFillingPunctureIso
     let V := openCurvePointFillingOpen c j (P (IsLocalRing.closedPoint k))
     let : SmoothOfRelativeDimension 1 (V.ι ≫ c) :=
       smoothOfRelativeDimension_comp 0 1 V.ι c
-    let D := curvePointDivisor (V.ι ≫ c) (openCurvePointFillingSection c j P)
+    let D := sectionEffectiveCartierDivisor (V.ι ≫ c) (openCurvePointFillingSection c j P)
       (openCurvePointFillingSection_structure c j P hP)
     ∃ e : U ≅ (D.1.supportComplement : Scheme.{uGeom}),
       e.hom ≫ D.1.supportComplement.ι ≫ V.ι = j := by

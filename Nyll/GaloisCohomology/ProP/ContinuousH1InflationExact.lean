@@ -9,6 +9,7 @@ module
 public import Nyll.GaloisCohomology.ProP.ContinuousTransgressionExact
 public import Nyll.ProCGroups.Topologies.QuotientMaps
 public import Mathlib.Algebra.Field.ZMod
+public import Nyll.ProCGroups.ProP.ContinuousH1
 
 /-!
 # Exactness of continuous degree-one inflation and restriction
@@ -31,15 +32,11 @@ noncomputable section
 universe u
 
 variable {p : ℕ} [Fact p.Prime]
-variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+variable {G : Type u} [Group G] [TopologicalSpace G]
 
-local instance continuousH1InflationZModAddCommGroup : AddCommGroup (ZMod p) :=
-  (ZMod.instField p).toDivisionRing.toAddCommGroup
+attribute [local instance] ZMod.addCommGroup
 
-local instance continuousH1InflationModule
-    {q : ℕ} {H : Type*} [Group H] [TopologicalSpace H] [IsTopologicalGroup H] :
-    Module (ZMod q) (ContinuousH1ZMod (p := q) (G := H)) :=
-  continuousH1ZModModule
+attribute [local instance] ClassFieldTower.ProP.continuousH1ZModModule
 
 /-- Pull a continuous degree-one character on `G / U` back along the quotient projection. -/
 def continuousH1InflationAddHom

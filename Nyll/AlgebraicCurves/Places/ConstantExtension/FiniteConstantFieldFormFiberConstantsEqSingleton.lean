@@ -70,7 +70,8 @@ theorem isAlgebraic_of_forall_pow_pow_eq (K K' : Type*) [Field K] [Field K'] [Al
   refine ⟨fun a => ?_⟩
   obtain ⟨n, hn, ha⟩ := halg a
   refine ⟨Polynomial.X ^ ℓ ^ n - Polynomial.X, ?_, ?_⟩
-  · exact FiniteField.X_pow_card_pow_sub_X_ne_zero K hn.ne' (Fact.out : ℓ.Prime).one_lt
+  · exact Polynomial.X_pow_sub_X_ne_zero (R := K)
+      (Nat.one_lt_pow hn.ne' (Fact.out : ℓ.Prime).one_lt)
   · simp only [map_sub, map_pow, Polynomial.aeval_X, ha, sub_self]
 
 theorem perfectField_of_forall_pow_pow_eq (K' : Type*) [Field K'] (ℓ : ℕ) [Fact ℓ.Prime] [CharP K'

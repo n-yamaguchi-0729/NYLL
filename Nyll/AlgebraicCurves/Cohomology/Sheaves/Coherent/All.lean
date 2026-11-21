@@ -5,7 +5,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.Coherent
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentKer
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentQuasicoherentSupportedInPushforwardUnit
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.IdealAnnihilates
@@ -14,5 +13,4 @@ import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.IsLocalizedModuleRes
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.Pushforward
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentCoherentSupportedInTensor
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentIdealPow
-import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentKer
 import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules

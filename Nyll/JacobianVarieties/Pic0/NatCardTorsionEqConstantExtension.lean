@@ -125,15 +125,15 @@ theorem linearIndependent_pow_of_transcendental {R A : Type*} [CommRing R] [Ring
     {x : A} (hx : Transcendental R x) : LinearIndependent R fun k : ℕ => x ^ k := by
   rw [linearIndependent_iff]
   intro l hl
-  have h1 : aeval x (Polynomial.ofFinsupp (AddMonoidAlgebra.ofCoeff l)) =
+  have h1 : aeval x (AddMonoidAlgebra.ofCoeff l : R[X]) =
       Finsupp.linearCombination R (fun k : ℕ => x ^ k) l := by
     rw [aeval_def, eval₂_eq_sum, Polynomial.sum, Finsupp.linearCombination_apply, Finsupp.sum,
-      support_ofFinsupp, AddMonoidAlgebra.coeff_ofCoeff]
+      Polynomial.support_ofCoeff]
     refine Finset.sum_congr rfl fun k _ => ?_
-    rw [coeff_ofFinsupp, AddMonoidAlgebra.coeff_ofCoeff, Algebra.smul_def]
+    rw [AddMonoidAlgebra.coeff_ofCoeff, Algebra.smul_def]
   have h2 := (transcendental_iff.mp hx)
-    (Polynomial.ofFinsupp (AddMonoidAlgebra.ofCoeff l)) (h1.trans hl)
-  exact AddMonoidAlgebra.ofCoeff_injective (Polynomial.ofFinsupp_eq_zero.mp h2)
+    (AddMonoidAlgebra.ofCoeff l) (h1.trans hl)
+  exact AddMonoidAlgebra.ofCoeff_injective h2
 
 theorem algebraMap_mem_adjoin_simple {K A K' B : Type*} [Field K] [Field A] [Field K'] [Field B]
     [Algebra K A] [Algebra A B] [Algebra K B] [IsScalarTower K A B]

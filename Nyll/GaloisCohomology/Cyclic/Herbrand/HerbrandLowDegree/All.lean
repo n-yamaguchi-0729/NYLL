@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.FixedCycles
 public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.IntegralTateComparison
 public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.Basic
 public import Nyll.GaloisCohomology.Cyclic.Herbrand.HerbrandLowDegree.BinaryProduct

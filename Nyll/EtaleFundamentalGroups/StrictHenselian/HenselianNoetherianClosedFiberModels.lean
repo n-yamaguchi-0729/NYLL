@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianImageApproximation
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
@@ -29,9 +30,9 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.HenselianNoetherianImageStages
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable (R A : Type u) [CommRing R] [CommRing A] [Algebra R A]
   [HenselianLocalRing A]

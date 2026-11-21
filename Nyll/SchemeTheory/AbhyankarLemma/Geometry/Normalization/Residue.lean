@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Residue.Tame
 
@@ -127,13 +128,7 @@ local instance residueLowerGaloisFinite : Finite Gal(M/K) :=
 local instance residueTopGaloisFinite : Finite Gal(E/K) :=
   IsGaloisGroup.finite Gal(E/K) K E
 
-noncomputable local instance residueTopNormalizationAction :
-    MulSemiringAction Gal(E/K) (integralClosure V E) :=
-  IsIntegralClosure.MulSemiringAction V K E (integralClosure V E)
-
-noncomputable local instance residueLowerNormalizationAction :
-    MulSemiringAction Gal(M/K) (integralClosure V M) :=
-  IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
+attribute [local instance] EtaleFundamentalGroups.Inertia.normalizationInertiaImageAction
 
 local instance residueLowerIsGaloisGroup :
     IsGaloisGroup Gal(M/K) V (integralClosure V M) :=
@@ -218,34 +213,33 @@ theorem normalizationRelativeResidue_isSeparable_of_top_inertia_card_coprime
       (integralClosure V M ⧸
         normalizationLowerPrime (V := V) (K := K) (E := E) M Q)
       (integralClosure V E ⧸ Q) := by
-  let : IsScalarTower
-      (V ⧸ normalizationBasePrime (V := V) (K := K) (E := E) M Q)
-      (integralClosure V M ⧸
-        normalizationLowerPrime (V := V) (K := K) (E := E) M Q)
-      (integralClosure V E ⧸ Q) :=
-    IsScalarTower.of_algebraMap_eq
-      (R := V ⧸ normalizationBasePrime (V := V) (K := K) (E := E) M Q)
-      (S := integralClosure V M ⧸
-        normalizationLowerPrime (V := V) (K := K) (E := E) M Q)
-      (A := integralClosure V E ⧸ Q) <| by
+  let p := normalizationBasePrime (V := V) (K := K) (E := E) M Q
+  let P := normalizationLowerPrime (V := V) (K := K) (E := E) M Q
+  let : Q.LiesOver P := residueLowerPrime_liesOver (V := V) M Q
+  let : P.LiesOver p := residueBasePrime_liesOver (V := V) M Q
+  let : Q.LiesOver p := residueTopPrime_liesOverBase (V := V) M Q
+  let hVP : Algebra (V ⧸ p) (integralClosure V M ⧸ P) :=
+    Ideal.Quotient.algebraOfLiesOver P p
+  let hVQ : Algebra (V ⧸ p) (integralClosure V E ⧸ Q) :=
+    Ideal.Quotient.algebraOfLiesOver Q p
+  let hPQ : Algebra (integralClosure V M ⧸ P) (integralClosure V E ⧸ Q) :=
+    Ideal.Quotient.algebraOfLiesOver Q P
+  let hTower : @IsScalarTower (V ⧸ p) (integralClosure V M ⧸ P) (integralClosure V E ⧸ Q)
+      hVP.toSMul hPQ.toSMul hVQ.toSMul :=
+    @IsScalarTower.of_algebraMap_eq (R := V ⧸ p)
+      (S := integralClosure V M ⧸ P) (A := integralClosure V E ⧸ Q) _ _ _ hVP hPQ hVQ <| by
       intro x
-      obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
-      change Ideal.Quotient.mk Q (algebraMap V (integralClosure V E) y) =
-        Ideal.Quotient.mk Q (algebraMap (integralClosure V M) (integralClosure V E)
-          (algebraMap V (integralClosure V M) y))
+      obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective (I := p) x
+      rw [Ideal.Quotient.algebraMap_mk_of_liesOver Q p,
+        Ideal.Quotient.algebraMap_mk_of_liesOver P p,
+        Ideal.Quotient.algebraMap_mk_of_liesOver Q P]
       exact congrArg (Ideal.Quotient.mk Q)
-        (IsScalarTower.algebraMap_apply
-          V (integralClosure V M) (integralClosure V E) y)
-  let : Algebra.IsSeparable
-      (V ⧸ normalizationBasePrime (V := V) (K := K) (E := E) M Q)
-      (integralClosure V E ⧸ Q) :=
-    normalizationTopResidue_isSeparable_of_inertia_card_coprime
-      (V := V) M Q hV hcop
-  exact Algebra.isSeparable_tower_top_of_isSeparable
-    (V ⧸ normalizationBasePrime (V := V) (K := K) (E := E) M Q)
-    (integralClosure V M ⧸
-      normalizationLowerPrime (V := V) (K := K) (E := E) M Q)
-    (integralClosure V E ⧸ Q)
+        (IsScalarTower.algebraMap_apply V (integralClosure V M) (integralClosure V E) y)
+  let hSep : @Algebra.IsSeparable (V ⧸ p) (integralClosure V E ⧸ Q) _ _ hVQ :=
+    normalizationTopResidue_isSeparable_of_inertia_card_coprime (V := V) M Q hV hcop
+  exact @Algebra.isSeparable_tower_top_of_isSeparable (F := V ⧸ p)
+    (L := integralClosure V M ⧸ P) (E := integralClosure V E ⧸ Q)
+    _ _ _ hVP hVQ hPQ hTower hSep
 
 end GaloisTower
 

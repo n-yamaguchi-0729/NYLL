@@ -198,7 +198,7 @@ noncomputable abbrev leftRegularHomFinsupp (A : Rep k G) (x : A) : leftRegularFi
       A.ρ g (Finsupp.lift A k G (fun a ↦ A.ρ a x) (Finsupp.single h r))
     rw [Representation.ofMulActionFinsupp_single]
     simp only [Finsupp.lift_apply, Finsupp.sum_single_index, zero_smul, smul_eq_mul]
-    rw [map_smul, map_mul, Module.End.mul_apply]⟩
+    rw [map_smul, map_mul, mul_apply_eq_comp]⟩
 
 theorem leftRegularHomFinsupp_hom_single {A : Rep k G} (g : G) (x : A) (r : k) :
     (leftRegularHomFinsupp A x).hom (.single g r) = r • A.ρ g x := by

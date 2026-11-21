@@ -208,7 +208,7 @@ private theorem integral_refinement_of_bound (n : ℕ) :
       ∃ (T : Scheme.{u}) (g : T ⟶ X),
         IsIntegralHom g ∧ Surjective g ∧ g.ZariskiLocallyFactorsThrough f := by
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     intro U X _ _ f _ _ _ hbound
     cases n with
     | zero =>

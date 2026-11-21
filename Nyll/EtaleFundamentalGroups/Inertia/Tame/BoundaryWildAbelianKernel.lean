@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Inertia.Tame.BoundaryWildQuotient
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceGalois
 public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationKernel
@@ -101,7 +102,7 @@ private theorem comap_closedNormalClosure_image
     simpa only [mul_inv_cancel_left] using hproduct
   · exact hNW
 
-attribute [local instance] integralOpenDominant
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 attribute [local instance] Inertia.normalizationCommAlgGaloisAction
 

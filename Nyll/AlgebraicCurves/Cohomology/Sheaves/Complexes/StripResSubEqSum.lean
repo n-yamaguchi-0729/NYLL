@@ -219,10 +219,10 @@ theorem _root_.AlgebraicGeometry.OModulePresheaf.exists_strip_res_sub_eq_sum_of_
             congr 2
             · change rr _ (rr _ (γ _ _)) = rr _ (rr _ (γ _ _))
               simp only [rr_rr]
-              try rfl
+              rfl
             · change rr _ (rr _ (γ' _ _)) = rr _ (rr _ (γ' _ _))
               simp only [rr_rr]
-              try rfl
+              rfl
         _ = 0 := by rw [← h1, ← h1', h2, sub_self]
     have hrange : δ ∈ LinearMap.range ((K i).aug (p₁ ≫ fX)) := by
       rw [← AlgebraicGeometry.Scheme.OrderedAffineCoverOf.ker_d_zero_eq_range_aug]

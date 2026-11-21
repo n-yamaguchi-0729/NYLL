@@ -146,7 +146,7 @@ theorem isPrecomplete_of_module_finite [IsPrecomplete I R] [Module.Finite R M] :
 
 theorem isAdicComplete_of_module_finite [IsNoetherianRing R] [IsAdicComplete I R]
     [Module.Finite R M] : IsAdicComplete I M :=
-  have := IsHausdorff.of_le_jacobson I M (IsAdicComplete.le_jacobson_bot I)
+  have := IsHausdorff.of_le_jacobson I M (IsAdicComplete.le_jacobson I)
   have := isPrecomplete_of_module_finite I (M := M)
   ⟨⟩
 

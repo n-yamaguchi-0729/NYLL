@@ -7,8 +7,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FieldSourceClosureComparison
+public import Nyll.GaloisCohomology.Topology.GaloisConjugation
 public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-public import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.AbsoluteGalois.InfiniteGaloisCorrespondence
 public import Mathlib.FieldTheory.IsSepClosed
 
 /-!

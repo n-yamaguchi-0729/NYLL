@@ -187,7 +187,7 @@ theorem exists_reduced [IsAlgClosed K] [IsCurveOver K F]
     refine le_antisymm hle ?_
     exact Module.finrank_pos_iff_exists_ne_zero.mpr ⟨⟨f, hfmem⟩, hfne⟩
   intro h hh
-  obtain ⟨a, ha⟩ := (finrank_eq_one_iff_of_nonzero' (⟨f, hfmem⟩ : LSpace (Dk r)) hfne).mp hone
+  obtain ⟨a, ha⟩ := (finrank_eq_one_iff_of_ne_zero' (⟨f, hfmem⟩ : LSpace (Dk r)) hfne).mp hone
     ⟨h, hh⟩
   exact ⟨a, congrArg Subtype.val ha⟩
 

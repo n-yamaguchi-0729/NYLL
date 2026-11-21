@@ -348,7 +348,7 @@ theorem main
     intro y z
     simp only [hcdef, hγB1, hd0, zero_add]
     split_ifs with h
-    · subst h; rw [Nat.sub_self, coeff_one_zero]
+    · subst h; simp only [Nat.sub_self, AddMonoidAlgebra.coeff_one_zero]
     · exact coeff_zero _
   have hcc : ∀ x y z, c x y z = c y x z := fun x y z => by
     simp only [hcdef, hγBc x y z, Nat.add_comm (d x) (d y)]

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Inertia
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.FieldCompositum
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealCompositum
@@ -69,13 +70,7 @@ local instance leftBasePrime_isMaximal
     (normalizationBasePrime (V := V) (K := K) (E := E) M Q).IsMaximal :=
   normalizationBasePrime_isMaximal (V := V) M Q
 
-noncomputable local instance compositumTopNormalizationAction :
-    MulSemiringAction Gal(E/K) (integralClosure V E) :=
-  IsIntegralClosure.MulSemiringAction V K E (integralClosure V E)
-
-noncomputable local instance compositumLeftNormalizationAction :
-    MulSemiringAction Gal(M/K) (integralClosure V M) :=
-  IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
+attribute [local instance] EtaleFundamentalGroups.Inertia.normalizationInertiaImageAction
 
 /-- The cyclic step of Abhyankar's lemma for the normalizations in two
 normal subextensions which generate the top field.  Separability of the four

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.Purity.DVRBoundaryEnlargement
 public import Nyll.EtaleFundamentalGroups.Purity.GenericComplementCoverExtension
 public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
@@ -94,8 +95,8 @@ namespace AlgebraicGeometry.FiniteEtale
 universe u
 
 attribute [local instance] Ideal.Quotient.field
-  finiteEtaleOverCategoryCoherence finiteEtaleHasPullbacksAlongCoherence
-  finiteEtaleStableUnderBaseChangeAlongCoherence
+  finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- A cover of a dense open of a Noetherian scheme extends across a regular
 boundary if its actual generic field factors are unramified at every
@@ -205,8 +206,8 @@ namespace AlgebraicGeometry.FiniteEtale
 universe u
 
 attribute [local instance] Ideal.Quotient.field
-  finiteEtaleOverCategoryCoherence finiteEtaleHasPullbacksAlongCoherence
-  finiteEtaleStableUnderBaseChangeAlongCoherence
+  finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The ascending chain condition is needed only on one observation open:
 a cover has an extension whose domain cannot be enlarged inside that open.

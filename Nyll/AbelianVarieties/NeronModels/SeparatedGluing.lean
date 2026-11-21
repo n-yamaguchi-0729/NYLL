@@ -5,6 +5,7 @@ Original copyright, authors, license and pinned sources are retained per unit be
 
 module
 
+public import Nyll.AbelianVarieties.NeronModels.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Gluing
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -138,30 +139,13 @@ variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat
 variable {G : Scheme.{u}} (γ : G ⟶ pullback (pullback.fst y y ≫ y) y)
 variable (a : Spec (CommRingCat.of R) ⟶ Y) (ha : a ≫ y = 𝟙 _)
 
-/-- The triple fibre product containing the multiplication graph. -/
-abbrev Y3 : Scheme.{u} := pullback (pullback.fst y y ≫ y) y
-
-/-- The projection onto the first two coordinates. -/
-abbrev p12 : Y3 y ⟶ pullback y y := pullback.fst (pullback.fst y y ≫ y) y
-
-/-- The projection onto the first and third coordinates. -/
-abbrev p13 : Y3 y ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.fst y y)
-    (pullback.snd (pullback.fst y y ≫ y) y) (by rw [Category.assoc]; exact pullback.condition)
-
-/-- The projection onto the second and third coordinates. -/
-abbrev p23 : Y3 y ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.snd y y)
-    (pullback.snd (pullback.fst y y ≫ y) y)
-    (by rw [Category.assoc, ← pullback.condition (f := y) (g := y)]; exact pullback.condition)
-
 /-- Insert the chosen section as the first coordinate. -/
 abbrev jA : Y ⟶ pullback y y :=
   pullback.lift (f := y) (g := y) (y ≫ a) (𝟙 Y) (by rw [Category.assoc, ha, Category.comp_id,
     Category.id_comp])
 
 /-- Insert the section into the multiplication graph. -/
-abbrev sA : pullback y y ⟶ Y3 y :=
+abbrev sA : pullback y y ⟶ tripleFiberProduct y :=
   pullback.lift (f := pullback.fst y y ≫ y) (g := y)
     (pullback.lift (f := y) (g := y) (pullback.fst y y ≫ y ≫ a) (pullback.fst y y)
       (by rw [Category.assoc, Category.assoc, ha, Category.comp_id]))
@@ -185,12 +169,12 @@ theorem pτ_def : pτ y γ a ha = cA y γ a ha ≫ pullback.fst y y := rfl
 
 theorem pι_def : pι y γ a ha = cA y γ a ha ≫ pullback.snd y y := rfl
 
-theorem sA_p12 : sA y a ha ≫ p12 y = pullback.fst y y ≫ jA y a ha := by
+theorem sA_p12 : sA y a ha ≫ firstSecondProjection y = pullback.fst y y ≫ jA y a ha := by
   apply pullback.hom_ext
   · rw [pullback.lift_fst, Category.assoc, pullback.lift_fst, pullback.lift_fst]
   · rw [pullback.lift_fst, Category.assoc, pullback.lift_snd, pullback.lift_snd, Category.comp_id]
 
-theorem sA_p13 : sA y a ha ≫ p13 y = pullback.snd y y ≫ jA y a ha := by
+theorem sA_p13 : sA y a ha ≫ firstThirdProjection y = pullback.snd y y ≫ jA y a ha := by
   apply pullback.hom_ext
   · rw [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc, pullback.lift_fst,
     Category.assoc,
@@ -198,21 +182,25 @@ theorem sA_p13 : sA y a ha ≫ p13 y = pullback.snd y y ≫ jA y a ha := by
   · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd, Category.assoc, pullback.lift_snd,
       Category.comp_id]
 
-theorem sA_p23 : sA y a ha ≫ p23 y = 𝟙 _ := by
+theorem sA_p23 : sA y a ha ≫ secondThirdProjection y = 𝟙 _ := by
   apply pullback.hom_ext
   · rw [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc, pullback.lift_snd,
     Category.id_comp]
   · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd, Category.id_comp]
 
-theorem isPullback_sA_fst : IsPullback (sA y a ha) (pullback.fst y y) (p12 y) (jA y a ha) := by
-  have comm : sA y a ha ≫ p12 y = pullback.fst y y ≫ jA y a ha := sA_p12 y a ha
-  have c1 : pullback.fst (p12 y) (jA y a ha) ≫ p12 y ≫ pullback.fst y y =
-      pullback.snd (p12 y) (jA y a ha) ≫ y ≫ a := by
+theorem isPullback_sA_fst : IsPullback (sA y a ha) (pullback.fst y y)
+    (firstSecondProjection y) (jA y a ha) := by
+  have comm : sA y a ha ≫ firstSecondProjection y = pullback.fst y y ≫ jA y a ha := sA_p12 y a ha
+  have c1 : pullback.fst (firstSecondProjection y) (jA y a ha)
+    ≫ firstSecondProjection y ≫ pullback.fst y y =
+      pullback.snd (firstSecondProjection y) (jA y a ha) ≫ y ≫ a := by
     rw [← Category.assoc, pullback.condition, Category.assoc, pullback.lift_fst]
-  have c2 : pullback.fst (p12 y) (jA y a ha) ≫ p12 y ≫ pullback.snd y y =
-      pullback.snd (p12 y) (jA y a ha) := by
+  have c2 : pullback.fst (firstSecondProjection y) (jA y a ha)
+    ≫ firstSecondProjection y ≫ pullback.snd y y =
+      pullback.snd (firstSecondProjection y) (jA y a ha) := by
     rw [← Category.assoc, pullback.condition, Category.assoc, pullback.lift_snd, Category.comp_id]
-  have key : pullback.fst (p12 y) (jA y a ha) ≫ p23 y ≫ sA y a ha = pullback.fst (p12 y) (jA y a ha)
+  have key : pullback.fst (firstSecondProjection y) (jA y a ha)
+    ≫ secondThirdProjection y ≫ sA y a ha = pullback.fst (firstSecondProjection y) (jA y a ha)
     := by
     apply pullback.hom_ext
     · apply pullback.hom_ext
@@ -220,9 +208,9 @@ theorem isPullback_sA_fst : IsPullback (sA y a ha) (pullback.fst y y) (p12 y) (j
         rw [reassoc_of% c2, c1]
       · simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd]
     · simp only [Category.assoc, pullback.lift_snd]
-  let e : pullback y y ≅ pullback (p12 y) (jA y a ha) :=
+  let e : pullback y y ≅ pullback (firstSecondProjection y) (jA y a ha) :=
     { hom := pullback.lift (sA y a ha) (pullback.fst y y) comm
-      inv := pullback.fst (p12 y) (jA y a ha) ≫ p23 y
+      inv := pullback.fst (firstSecondProjection y) (jA y a ha) ≫ secondThirdProjection y
       hom_inv_id := by rw [pullback.lift_fst_assoc, sA_p23]
       inv_hom_id := by
         apply pullback.hom_ext
@@ -232,21 +220,25 @@ theorem isPullback_sA_fst : IsPullback (sA y a ha) (pullback.fst y y) (p12 y) (j
           exact c2 }
   exact IsPullback.of_iso_pullback ⟨comm⟩ e (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
 
-theorem isPullback_sA_snd : IsPullback (sA y a ha) (pullback.snd y y) (p13 y) (jA y a ha) := by
-  have comm : sA y a ha ≫ p13 y = pullback.snd y y ≫ jA y a ha := sA_p13 y a ha
-  have c1 : pullback.fst (p13 y) (jA y a ha) ≫ p12 y ≫ pullback.fst y y =
-      pullback.snd (p13 y) (jA y a ha) ≫ y ≫ a := by
-    have := pullback.condition (f := p13 y) (g := jA y a ha)
+theorem isPullback_sA_snd : IsPullback (sA y a ha) (pullback.snd y y)
+    (firstThirdProjection y) (jA y a ha) := by
+  have comm : sA y a ha ≫ firstThirdProjection y = pullback.snd y y ≫ jA y a ha := sA_p13 y a ha
+  have c1 : pullback.fst (firstThirdProjection y) (jA y a ha)
+    ≫ firstSecondProjection y ≫ pullback.fst y y =
+      pullback.snd (firstThirdProjection y) (jA y a ha) ≫ y ≫ a := by
+    have := pullback.condition (f := firstThirdProjection y) (g := jA y a ha)
     have h2 := congrArg (· ≫ pullback.fst y y) this
     simp only [Category.assoc, pullback.lift_fst] at h2
     exact h2
-  have c2 : pullback.fst (p13 y) (jA y a ha) ≫ pullback.snd (pullback.fst y y ≫ y) y =
-      pullback.snd (p13 y) (jA y a ha) := by
-    have := pullback.condition (f := p13 y) (g := jA y a ha)
+  have c2 : pullback.fst (firstThirdProjection y) (jA y a ha)
+    ≫ pullback.snd (pullback.fst y y ≫ y) y =
+      pullback.snd (firstThirdProjection y) (jA y a ha) := by
+    have := pullback.condition (f := firstThirdProjection y) (g := jA y a ha)
     have h2 := congrArg (· ≫ pullback.snd y y) this
     simp only [Category.assoc, pullback.lift_snd, Category.comp_id] at h2
     exact h2
-  have key : pullback.fst (p13 y) (jA y a ha) ≫ p23 y ≫ sA y a ha = pullback.fst (p13 y) (jA y a ha)
+  have key : pullback.fst (firstThirdProjection y) (jA y a ha)
+    ≫ secondThirdProjection y ≫ sA y a ha = pullback.fst (firstThirdProjection y) (jA y a ha)
     := by
     apply pullback.hom_ext
     · apply pullback.hom_ext
@@ -256,9 +248,9 @@ theorem isPullback_sA_snd : IsPullback (sA y a ha) (pullback.snd y y) (p13 y) (j
         exact c1.symm
       · simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd]
     · simp only [Category.assoc, pullback.lift_snd]
-  let e : pullback y y ≅ pullback (p13 y) (jA y a ha) :=
+  let e : pullback y y ≅ pullback (firstThirdProjection y) (jA y a ha) :=
     { hom := pullback.lift (sA y a ha) (pullback.snd y y) comm
-      inv := pullback.fst (p13 y) (jA y a ha) ≫ p23 y
+      inv := pullback.fst (firstThirdProjection y) (jA y a ha) ≫ secondThirdProjection y
       hom_inv_id := by rw [pullback.lift_fst_assoc, sA_p23]
       inv_hom_id := by
         apply pullback.hom_ext
@@ -510,11 +502,7 @@ variable (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y 
 variable {G : Scheme.{u}} (γ : G ⟶ pullback (pullback.fst y y ≫ y) y)
 variable (a : Spec (CommRingCat.of R) ⟶ Y) (ha : a ≫ y = 𝟙 _)
 
-/-- The graph map of the partial multiplication. -/
-abbrev grm : (U : Scheme.{u}) ⟶ Y3 y :=
-  pullback.lift (f := pullback.fst y y ≫ y) (g := y) U.ι m.1 m.2.symm
-
-variable (g₀ : (U : Scheme.{u}) ⟶ G) (hg₀ : g₀ ≫ γ = grm y U m)
+variable (g₀ : (U : Scheme.{u}) ⟶ G) (hg₀ : g₀ ≫ γ = multiplicationGraph y U m)
 
 /-- Lift a section-compatible pair into the restricted multiplication graph. -/
 def mkΓa {T : Scheme.{u}} (x : T ⟶ Y) (w : T ⟶ (U : Scheme.{u}))
@@ -722,7 +710,7 @@ theorem exists_isSeparated_isOpenImmersion_isPullback_glue_translate_of_isClosed
   have : IsReduced (U : Scheme.{u}) :=
     AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian (U.ι ≫ pullback.fst y y ≫
       y)
-  obtain ⟨g₀, hg₀⟩ := exists_lift_of_isClosedImmersion (grm y U m) γ hγ
+  obtain ⟨g₀, hg₀⟩ := exists_lift_of_isClosedImmersion (multiplicationGraph y U m) γ hγ
   refine ⟨Yg y γ a ha, yg y γ a ha, ⟨ιg y γ a ha, ιg_yg y γ a ha⟩, ⟨τg y γ a ha, τg_yg y γ a ha⟩,
     smooth_yg y γ a ha, isSeparated_yg y γ a ha, locallyOfFiniteType_yg y γ a ha, quasiCompact_yg y
       γ a ha,
@@ -792,7 +780,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry NeronModelInfra Good
 universe u
 
 open AbelianVarieties.NOSProofs.GraphClosureRigidity.GraphClosure
-  (dense_of_forall_dense_fibre Y3 gr P12 Zc Gc γc range_γc denseRange_g0 exists_comp_γc_eq)
+  (dense_of_forall_dense_fibre Zc Gc γc range_γc denseRange_g0 exists_comp_γc_eq)
 open scoped AbelianVarieties.NOSProofs.GraphClosureRigidity.GraphClosure
 open AbelianVarieties.NOSProofs.GluingFibreDensity (dense_fibre_mono)
 open AbelianVarieties.NOSProofs.GluingFibreDensity.TranslationCharts
@@ -807,79 +795,66 @@ section Graph
 variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat.of R))
 variable (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 
-/-- The projection onto the first and third graph coordinates. -/
-abbrev P13 : Y3 y ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y)
-    (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.fst y y) (pullback.snd (pullback.fst y y ≫ y)
-      y)
-    (by rw [Category.assoc]; exact pullback.condition)
-
-/-- The projection onto the second and third graph coordinates. -/
-abbrev P23 : Y3 y ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y)
-    (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.snd y y) (pullback.snd (pullback.fst y y ≫ y)
-      y)
-    (by rw [Category.assoc, ← pullback.condition (f := y) (g := y)]; exact pullback.condition)
-
-/-- Pair the first input with the partial multiplication value. -/
-abbrev Phi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (U.ι ≫ pullback.fst y y) m.1 ((Category.assoc _ _ _).trans
-    m.2.symm)
-
-/-- Pair the partial multiplication value with the second input. -/
-abbrev Psi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) m.1 (U.ι ≫ pullback.snd y y)
-    (m.2.trans (by rw [Category.assoc, pullback.condition]))
-
 /-- Exchange the coordinates of the second multiplication chart. -/
-abbrev Psi' : (U : Scheme.{u}) ⟶ pullback y y := Psi y U m ≫ (pullbackSymmetry y y).hom
+abbrev Psi' : (U : Scheme.{u}) ⟶ pullback y y :=
+    secondMultiplicationChart y U m ≫ (pullbackSymmetry y y).hom
 
-theorem gr_P12 : gr y U m ≫ P12 y = U.ι := pullback.lift_fst _ _ _
+theorem gr_P12 : multiplicationGraph y U m ≫ firstSecondProjection y = U.ι :=
+    pullback.lift_fst _ _ _
 
-theorem gr_P13 : gr y U m ≫ P13 y = Phi y U m := by
+theorem gr_P13 : multiplicationGraph y U m ≫ firstThirdProjection y
+    = firstMultiplicationChart y U m := by
   apply pullback.hom_ext
   · simp only [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc]
   · simp only [Category.assoc, pullback.lift_snd]
 
-theorem gr_P23 : gr y U m ≫ P23 y = Psi' y U m := by
+theorem gr_P23 : multiplicationGraph y U m ≫ secondThirdProjection y = Psi' y U m := by
   apply pullback.hom_ext
   · simp only [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc,
     pullbackSymmetry_hom_comp_fst,
       pullback.lift_snd]
   · simp only [Category.assoc, pullback.lift_snd, pullbackSymmetry_hom_comp_snd, pullback.lift_fst]
 
-theorem P13_comp : P13 y ≫ pullback.fst y y ≫ y = pullback.fst _ _ ≫ pullback.fst y y ≫ y := by
+theorem P13_comp : firstThirdProjection y ≫ pullback.fst y y ≫ y
+    = pullback.fst _ _ ≫ pullback.fst y y ≫ y := by
   rw [pullback.lift_fst_assoc, Category.assoc]
 
-theorem P23_comp : P23 y ≫ pullback.fst y y ≫ y = pullback.fst _ _ ≫ pullback.fst y y ≫ y := by
+theorem P23_comp : secondThirdProjection y ≫ pullback.fst y y ≫ y
+    = pullback.fst _ _ ≫ pullback.fst y y ≫ y := by
   rw [pullback.lift_fst_assoc, Category.assoc, ← pullback.condition]
 
-scoped instance [IsSeparated y] : IsSeparated (P13 y) := by
-  have : IsSeparated (P13 y ≫ pullback.fst y y ≫ y) := by rw [P13_comp]; infer_instance
-  exact IsSeparated.of_comp (P13 y) (pullback.fst y y ≫ y)
+scoped instance [IsSeparated y] : IsSeparated (firstThirdProjection y) := by
+  have : IsSeparated (firstThirdProjection y ≫ pullback.fst y y ≫ y) :=
+    by rw [P13_comp]; infer_instance
+  exact IsSeparated.of_comp (firstThirdProjection y) (pullback.fst y y ≫ y)
 
-scoped instance [IsSeparated y] : IsSeparated (P23 y) := by
-  have : IsSeparated (P23 y ≫ pullback.fst y y ≫ y) := by rw [P23_comp]; infer_instance
-  exact IsSeparated.of_comp (P23 y) (pullback.fst y y ≫ y)
+scoped instance [IsSeparated y] : IsSeparated (secondThirdProjection y) := by
+  have : IsSeparated (secondThirdProjection y ≫ pullback.fst y y ≫ y) :=
+    by rw [P23_comp]; infer_instance
+  exact IsSeparated.of_comp (secondThirdProjection y) (pullback.fst y y ≫ y)
 
-scoped instance [IsSeparated y] [QuasiCompact y] : QuasiCompact (P13 y) := by
-  have : QuasiCompact (P13 y ≫ pullback.fst y y ≫ y) := by rw [P13_comp]; infer_instance
-  exact QuasiCompact.of_comp (P13 y) (pullback.fst y y ≫ y)
+scoped instance [IsSeparated y] [QuasiCompact y] : QuasiCompact (firstThirdProjection y) := by
+  have : QuasiCompact (firstThirdProjection y ≫ pullback.fst y y ≫ y) :=
+    by rw [P13_comp]; infer_instance
+  exact QuasiCompact.of_comp (firstThirdProjection y) (pullback.fst y y ≫ y)
 
-scoped instance [IsSeparated y] [QuasiCompact y] : QuasiCompact (P23 y) := by
-  have : QuasiCompact (P23 y ≫ pullback.fst y y ≫ y) := by rw [P23_comp]; infer_instance
-  exact QuasiCompact.of_comp (P23 y) (pullback.fst y y ≫ y)
+scoped instance [IsSeparated y] [QuasiCompact y] : QuasiCompact (secondThirdProjection y) := by
+  have : QuasiCompact (secondThirdProjection y ≫ pullback.fst y y ≫ y) :=
+    by rw [P23_comp]; infer_instance
+  exact QuasiCompact.of_comp (secondThirdProjection y) (pullback.fst y y ≫ y)
 
-scoped instance [LocallyOfFiniteType y] : LocallyOfFiniteType (P13 y) := by
-  have : LocallyOfFiniteType (P13 y ≫ pullback.fst y y ≫ y) := by rw [P13_comp]; infer_instance
-  exact locallyOfFiniteType_of_comp (P13 y) (pullback.fst y y ≫ y)
+scoped instance [LocallyOfFiniteType y] : LocallyOfFiniteType (firstThirdProjection y) := by
+  have : LocallyOfFiniteType (firstThirdProjection y ≫ pullback.fst y y ≫ y) :=
+    by rw [P13_comp]; infer_instance
+  exact locallyOfFiniteType_of_comp (firstThirdProjection y) (pullback.fst y y ≫ y)
 
-scoped instance [LocallyOfFiniteType y] : LocallyOfFiniteType (P23 y) := by
-  have : LocallyOfFiniteType (P23 y ≫ pullback.fst y y ≫ y) := by rw [P23_comp]; infer_instance
-  exact locallyOfFiniteType_of_comp (P23 y) (pullback.fst y y ≫ y)
+scoped instance [LocallyOfFiniteType y] : LocallyOfFiniteType (secondThirdProjection y) := by
+  have : LocallyOfFiniteType (secondThirdProjection y ≫ pullback.fst y y ≫ y) :=
+    by rw [P23_comp]; infer_instance
+  exact locallyOfFiniteType_of_comp (secondThirdProjection y) (pullback.fst y y ≫ y)
 
 theorem range_Psi' : Set.range (Psi' y U m).base =
-    (pullbackSymmetry y y).hom.base '' Set.range (Psi y U m).base := by
+    (pullbackSymmetry y y).hom.base '' Set.range (secondMultiplicationChart y U m).base := by
   rw [← Set.range_comp]
   rfl
 
@@ -891,10 +866,10 @@ theorem range_g0_comp_subset (g₀ : (U : Scheme.{u}) ⟶ Gc y U m) {W : Scheme.
   exact ⟨g₀.base u, (Scheme.Hom.comp_apply g₀ q u).symm⟩
 
 variable {y U m} in
-theorem injective_γc_comp (q : Y3 y ⟶ pullback y y)
-    (hq : ∀ (K : Type u) [Field K] (g g' : Spec (CommRingCat.of K) ⟶ Y3 y),
-      Set.range g.base ⊆ closure (Set.range (gr y U m).base) →
-      Set.range g'.base ⊆ closure (Set.range (gr y U m).base) →
+theorem injective_γc_comp (q : tripleFiberProduct y ⟶ pullback y y)
+    (hq : ∀ (K : Type u) [Field K] (g g' : Spec (CommRingCat.of K) ⟶ tripleFiberProduct y),
+      Set.range g.base ⊆ closure (Set.range (multiplicationGraph y U m).base) →
+      Set.range g'.base ⊆ closure (Set.range (multiplicationGraph y U m).base) →
       g ≫ q = g' ≫ q → g = g') :
     Function.Injective (γc y U m ≫ q).base := by
   intro p₁ p₂ h
@@ -904,7 +879,7 @@ theorem injective_γc_comp (q : Y3 y ⟶ pullback y y)
   let P := pullback (γc y U m ≫ q) (γc y U m ≫ q)
   let k : Spec (P.residueField w) ⟶ P := P.fromSpecResidueField w
   have hsub : ∀ (r : Spec (P.residueField w) ⟶ Gc y U m),
-      Set.range (r ≫ γc y U m).base ⊆ closure (Set.range (gr y U m).base) := by
+      Set.range (r ≫ γc y U m).base ⊆ closure (Set.range (multiplicationGraph y U m).base) := by
     intro r
     rw [← range_γc]
     rintro _ ⟨t, rfl⟩
@@ -926,7 +901,8 @@ theorem injective_γc_comp (q : Y3 y ⟶ pullback y y)
 variable {y U m} in
 theorem isOpenImmersion_γc_comp [IsDomain R] [IsDiscreteValuationRing R]
     [Smooth y] [IsSeparated y] [LocallyOfFiniteType y] [QuasiCompact y]
-    (q : Y3 y ⟶ pullback y y) [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q]
+    (q : tripleFiberProduct y ⟶ pullback y y) [IsSeparated q]
+      [LocallyOfFiniteType q] [QuasiCompact q]
     (hinj : Function.Injective (γc y U m ≫ q).base)
     (V : (pullback y y).Opens) (hV : Dense (V : Set ↑(pullback y y)))
     (s : (V : Scheme.{u}) ⟶ Gc y U m) (hs : s ≫ (γc y U m ≫ q) = V.ι) (hsd : DenseRange s.base) :
@@ -1052,22 +1028,23 @@ theorem exists_isClosedImmersion_range_eq_closure_isOpenImmersion_of_forall_dens
   have : IsReduced (U : Scheme.{u}) :=
     AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian (U.ι ≫ pullback.fst y y ≫
       y)
-  obtain ⟨g₀, hg₀⟩ := exists_comp_γc_eq y U m (gr y U m) subset_closure
+  obtain ⟨g₀, hg₀⟩ := exists_comp_γc_eq y U m (multiplicationGraph y U m) subset_closure
   have hg₀d : DenseRange g₀.base := denseRange_g0 g₀ hg₀
-  have hINJ := fun (K : Type u) [Field K] (g g' : Spec (CommRingCat.of K) ⟶ Y3 y)
-      (hg : Set.range g.base ⊆ closure (Set.range (gr y U m).base))
-      (hg' : Set.range g'.base ⊆ closure (Set.range (gr y U m).base)) =>
+  have hINJ := fun (K : Type u) [Field K] (g g' : Spec (CommRingCat.of K) ⟶ tripleFiberProduct y)
+      (hg : Set.range g.base ⊆ closure (Set.range (multiplicationGraph y U m).base))
+      (hg' : Set.range g'.base ⊆ closure (Set.range (multiplicationGraph y U m).base)) =>
     NeronModelInfra.eq_of_comp_eq_of_range_subset_closure_range_lift_of_forall_dense_preimage_fibre
       y U m hU₁ hΦ hΨ hassoc g g' hg hg'
-  have hinj12 : Function.Injective (γc y U m ≫ P12 y).base :=
-    injective_γc_comp (P12 y) (fun K _ g g' hg hg' h => (hINJ K g g' hg hg').1 h)
-  have hinj13 : Function.Injective (γc y U m ≫ P13 y).base :=
-    injective_γc_comp (P13 y) (fun K _ g g' hg hg' h => (hINJ K g g' hg hg').2.1 h)
-  have hinj23 : Function.Injective (γc y U m ≫ P23 y).base :=
-    injective_γc_comp (P23 y) (fun K _ g g' hg hg' h => (hINJ K g g' hg hg').2.2 h)
+  have hinj12 : Function.Injective (γc y U m ≫ firstSecondProjection y).base :=
+    injective_γc_comp (firstSecondProjection y) (fun K _ g g' hg hg' h => (hINJ K g g' hg hg').1 h)
+  have hinj13 : Function.Injective (γc y U m ≫ firstThirdProjection y).base :=
+    injective_γc_comp (firstThirdProjection y) (fun K _ g g' hg hg' h => (hINJ K g g' hg hg').2.1 h)
+  have hinj23 : Function.Injective (γc y U m ≫ secondThirdProjection y).base :=
+    injective_γc_comp (secondThirdProjection y)
+      (fun K _ g g' hg hg' h => (hINJ K g g' hg hg').2.2 h)
   have hUd : Dense (U : Set ↑(pullback y y)) :=
     dense_of_forall_dense_fibre (fun q => (pullback.fst y y).base q) _ hU₁
-  have hΦd : Dense (Set.range (Phi y U m).base) :=
+  have hΦd : Dense (Set.range (firstMultiplicationChart y U m).base) :=
     dense_of_forall_dense_fibre (fun q => (pullback.fst y y).base q) _ hΦ₁
   have hsym : ∀ q : ↑(pullback y y), (pullback.fst y y).base ((pullbackSymmetry y y).hom.base q) =
       (pullback.snd y y).base q := by
@@ -1092,34 +1069,43 @@ theorem exists_isClosedImmersion_range_eq_closure_isOpenImmersion_of_forall_dens
     exact dense_fibre_image_of_homeomorph esym _ _ hsym' x (hΨ₁ x)
   have hΨ'd : Dense (Set.range (Psi' y U m).base) :=
     dense_of_forall_dense_fibre (fun q => (pullback.fst y y).base q) _ hΨ'₁
-  have h12 : IsOpenImmersion (γc y U m ≫ P12 y) := by
-    refine isOpenImmersion_γc_comp (P12 y) hinj12 U hUd g₀ ?_ hg₀d
+  have h12 : IsOpenImmersion (γc y U m ≫ firstSecondProjection y) := by
+    refine isOpenImmersion_γc_comp (firstSecondProjection y) hinj12 U hUd g₀ ?_ hg₀d
     rw [← Category.assoc, hg₀, gr_P12]
-  have h13 : IsOpenImmersion (γc y U m ≫ P13 y) := by
-    have hV : ((Phi y U m).opensRange : Set ↑(pullback y y)) = Set.range (Phi y U m).base := rfl
-    refine isOpenImmersion_γc_comp (P13 y) hinj13 (Phi y U m).opensRange (by rw [hV]; exact hΦd)
-      ((Phi y U m).isoOpensRange.inv ≫ g₀) ?_ ?_
+  have h13 : IsOpenImmersion (γc y U m ≫ firstThirdProjection y) := by
+    have hV : ((firstMultiplicationChart y U m).opensRange : Set ↑(pullback y y))
+      = Set.range (firstMultiplicationChart y U m).base := rfl
+    refine isOpenImmersion_γc_comp (firstThirdProjection y) hinj13
+      (firstMultiplicationChart y U m).opensRange (by rw [hV]; exact hΦd)
+      ((firstMultiplicationChart y U m).isoOpensRange.inv ≫ g₀) ?_ ?_
     · rw [Category.assoc, ← Category.assoc g₀, hg₀, gr_P13, Scheme.Hom.isoOpensRange_inv_comp]
     · rw [Scheme.Hom.comp_base, TopCat.coe_comp]
-      exact hg₀d.comp (Scheme.homeoOfIso (Phi y U m).isoOpensRange.symm).surjective.denseRange
+      let e := Scheme.homeoOfIso (firstMultiplicationChart y U m).isoOpensRange.symm
+      exact hg₀d.comp e.surjective.denseRange
         g₀.base.hom.continuous
-  have h23 : IsOpenImmersion (γc y U m ≫ P23 y) := by
+  have h23 : IsOpenImmersion (γc y U m ≫ secondThirdProjection y) := by
     have hV : ((Psi' y U m).opensRange : Set ↑(pullback y y)) = Set.range (Psi' y U m).base := rfl
-    refine isOpenImmersion_γc_comp (P23 y) hinj23 (Psi' y U m).opensRange (by rw [hV]; exact hΨ'd)
+    refine isOpenImmersion_γc_comp (secondThirdProjection y) hinj23 (Psi' y U m).opensRange
+      (by rw [hV]; exact hΨ'd)
       ((Psi' y U m).isoOpensRange.inv ≫ g₀) ?_ ?_
     · rw [Category.assoc, ← Category.assoc g₀, hg₀, gr_P23, Scheme.Hom.isoOpensRange_inv_comp]
     · rw [Scheme.Hom.comp_base, TopCat.coe_comp]
       exact hg₀d.comp (Scheme.homeoOfIso (Psi' y U m).isoOpensRange.symm).surjective.denseRange
         g₀.base.hom.continuous
-  have hr12 : (U : Set ↑(pullback y y)) ⊆ Set.range (γc y U m ≫ P12 y).base := by
-    have : Set.range (g₀ ≫ γc y U m ≫ P12 y).base = (U : Set ↑(pullback y y)) := by
+  have hr12 : (U : Set ↑(pullback y y)) ⊆ Set.range (γc y U m ≫ firstSecondProjection y).base := by
+    have : Set.range (g₀ ≫ γc y U m ≫ firstSecondProjection y).base
+      = (U : Set ↑(pullback y y)) := by
       rw [← Category.assoc, hg₀, gr_P12]; exact Scheme.Opens.range_ι U
     rw [← this]; exact range_g0_comp_subset g₀ _
-  have hr13 : Set.range (Phi y U m).base ⊆ Set.range (γc y U m ≫ P13 y).base := by
-    have : g₀ ≫ γc y U m ≫ P13 y = Phi y U m := by rw [← Category.assoc, hg₀, gr_P13]
+  have hr13 : Set.range (firstMultiplicationChart y U m).base
+    ⊆ Set.range (γc y U m ≫ firstThirdProjection y).base := by
+    have : g₀ ≫ γc y U m ≫ firstThirdProjection y
+      = firstMultiplicationChart y U m := by rw [← Category.assoc, hg₀, gr_P13]
     rw [← this]; exact range_g0_comp_subset g₀ _
-  have hr23 : Set.range (Psi' y U m).base ⊆ Set.range (γc y U m ≫ P23 y).base := by
-    have : g₀ ≫ γc y U m ≫ P23 y = Psi' y U m := by rw [← Category.assoc, hg₀, gr_P23]
+  have hr23 : Set.range (Psi' y U m).base
+    ⊆ Set.range (γc y U m ≫ secondThirdProjection y).base := by
+    have : g₀ ≫ γc y U m ≫ secondThirdProjection y = Psi' y U m :=
+      by rw [← Category.assoc, hg₀, gr_P23]
     rw [← this]; exact range_g0_comp_subset g₀ _
   refine ⟨Gc y U m, γc y U m, inferInstance, inferInstance, range_γc y U m, h12, h13, h23, fun x =>
     ?_⟩
@@ -1159,7 +1145,7 @@ namespace AbelianVarieties.NOSProofs.TranslationGluingDensity
 namespace DenseGluing
 
 open AbelianVarieties.NOSProofs.SeparatedTranslationGluing.SeparatedCharts
-  (grm jA sA preimage_jA_subset_range_pτ preimage_jA_range_subset_range_pι
+  (jA sA preimage_jA_subset_range_pτ preimage_jA_range_subset_range_pι
     mem_of_dense_fibre)
 open AbelianVarieties.NOSProofs.QuasiFiniteTranslationGluing.TranslationGluing
   (exists_lift_of_isClosedImmersion dense_fibre_jA)
@@ -1195,7 +1181,7 @@ end AbelianVarieties.NOSProofs.TranslationGluingDensity
 
 open AbelianVarieties.NOSProofs.TranslationGluingDensity.DenseGluing
 open AbelianVarieties.NOSProofs.SeparatedTranslationGluing.SeparatedCharts
-  (grm jA preimage_jA_subset_range_pτ preimage_jA_range_subset_range_pι)
+  (jA preimage_jA_subset_range_pτ preimage_jA_range_subset_range_pι)
 open AbelianVarieties.NOSProofs.QuasiFiniteTranslationGluing.TranslationGluing
   (exists_lift_of_isClosedImmersion dense_fibre_jA)
 
@@ -1335,8 +1321,8 @@ theorem exists_opens_forall_dense_preimage_fibre_of_isPullback_glue_translate_of
   have : IsReduced (U : Scheme.{u}) :=
     AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian (U.ι ≫ pullback.fst y y ≫
       y)
-  have hgr : Set.range (grm y U m).base ⊆ Set.range γ.base := hΓ ▸ subset_closure
-  obtain ⟨g₀, hg₀⟩ := exists_lift_of_isClosedImmersion (grm y U m) γ hgr
+  have hgr : Set.range (multiplicationGraph y U m).base ⊆ Set.range γ.base := hΓ ▸ subset_closure
+  obtain ⟨g₀, hg₀⟩ := exists_lift_of_isClosedImmersion (multiplicationGraph y U m) γ hgr
   have hUb : ∀ s, Dense ((Subtype.val : {b : ↑Y // y.base b = s} → ↑Y) ⁻¹'
       ((jA y a ha).base ⁻¹' (U : Set ↑(pullback y y)))) := fun s => dense_fibre_jA y a ha _ s (hU₁
         _)

@@ -11,7 +11,7 @@ published result is given by its precise Lean statement and assumptions.
 
 ## Using NYLL
 
-Use the Lean version in [lean-toolchain](lean-toolchain) and the Mathlib revision
+Use [Lean 4.36.0](lean-toolchain) and the Mathlib revision
 pinned in [lake-manifest.json](lake-manifest.json). Add NYLL to your project's
 lakefile.toml:
 
@@ -35,6 +35,9 @@ To build a checkout of NYLL, run from its root:
 lake exe cache get
 lake --wfail build +Nyll
 ```
+
+On Linux, the full `Nyll` build needs enough virtual memory mappings to load
+its imports. The hosted Lean workflow sets `vm.max_map_count` to at least 262,144.
 
 ## Libraries
 

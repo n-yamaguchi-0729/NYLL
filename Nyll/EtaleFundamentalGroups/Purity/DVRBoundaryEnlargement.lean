@@ -59,8 +59,8 @@ namespace AlgebraicGeometry.FiniteEtale
 universe u
 
 attribute [local instance] Ideal.Quotient.field
-  finiteEtaleOverCategoryCoherence finiteEtaleHasPullbacksAlongCoherence
-  finiteEtaleStableUnderBaseChangeAlongCoherence
+  finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Any existing extension of the original cover can be enlarged across a
 regular codimension-one boundary point, using the unramified field factors

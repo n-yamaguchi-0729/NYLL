@@ -241,7 +241,7 @@ private theorem F_apply_coeff (r : ⨁ n, Sec f L n) (x : X) (n : ℕ) :
   classical
   conv_lhs => rw [← DirectSum.sum_support_of r]
   rw [map_sum, Finset.sum_apply, Polynomial.finsetSum_coeff]
-  simp only [F_of, coefHom_apply, Polynomial.coeff_monomial]
+  simp only [F_of, coefHom_apply, Polynomial.coeff_monomial, Finsupp.single_apply]
   rw [Finset.sum_ite_eq' r.support n]
   split_ifs with h
   · rfl

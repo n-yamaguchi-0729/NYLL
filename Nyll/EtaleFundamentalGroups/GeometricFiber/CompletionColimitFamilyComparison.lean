@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianCompletionGeometricLift
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperCompletionColimitSpecialization
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
@@ -34,9 +35,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The actual completion-colimit construction compares both specified
 geometric fibers of an arbitrary proper henselian family, preserving the

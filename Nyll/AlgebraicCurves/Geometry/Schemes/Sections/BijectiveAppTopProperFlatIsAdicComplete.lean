@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Morphisms.ClosedBaseChangeLifts
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.Algebra.Ring.Subring.Basic
 public import Mathlib.AlgebraicGeometry.AffineScheme
@@ -96,275 +97,9 @@ lemma mem_map_colon_of_flat {A C : Type*} [CommRing A] [CommRing C] (f : A →+*
   rw [hc]
   exact key z
 
-lemma ker_eq_map_and_surjective_of_isPushout {R A B P : CommRingCat} {f : R ⟶ A} {g : R ⟶ B}
-    {inl : A ⟶ P} {inr : B ⟶ P} (H : IsPushout f g inl inr)
-    (hg : Function.Surjective g) :
-    RingHom.ker inl.hom = Ideal.map f.hom (RingHom.ker g.hom) ∧ Function.Surjective inl := by
-  constructor
-  · apply le_antisymm
-    · set K : Ideal A := Ideal.map f.hom (RingHom.ker g.hom) with hK
-      let k₁ : A →+* A ⧸ K := Ideal.Quotient.mk K
-      have hle : RingHom.ker g.hom ≤ RingHom.ker (k₁.comp f.hom) := by
-        intro r hr
-        simp only [RingHom.mem_ker, RingHom.coe_comp, Function.comp_apply, k₁,
-          Ideal.Quotient.eq_zero_iff_mem]
-        exact Ideal.mem_map_of_mem _ hr
-      let k₂ : B →+* A ⧸ K := RingHom.liftOfSurjective g.hom hg ⟨k₁.comp f.hom, hle⟩
-      have hk₂ : k₂.comp g.hom = k₁.comp f.hom :=
-        RingHom.liftOfRightInverse_comp _ _ _ _
-      have w : f ≫ CommRingCat.ofHom k₁ = g ≫ CommRingCat.ofHom k₂ := by
-        ext r
-        exact (congrArg (fun φ : R →+* A ⧸ K => φ r) hk₂).symm
-      let u : P ⟶ CommRingCat.of (A ⧸ K) := H.desc (CommRingCat.ofHom k₁) (CommRingCat.ofHom k₂) w
-      have hu : inl ≫ u = CommRingCat.ofHom k₁ := H.inl_desc _ _ _
-      intro a ha
-      have : u (inl a) = k₁ a := by
-        rw [← CommRingCat.comp_apply, hu]; rfl
-      rw [RingHom.mem_ker] at ha
-      change inl a = 0 at ha
-      rw [ha, map_zero] at this
-      exact Ideal.Quotient.eq_zero_iff_mem.mp this.symm
-    · rw [Ideal.map_le_iff_le_comap]
-      intro r hr
-      simp only [Ideal.mem_comap, RingHom.mem_ker]
-      change (f ≫ inl) r = 0
-      rw [H.w]
-      change inr (g r) = 0
-      rw [RingHom.mem_ker] at hr
-      change g r = 0 at hr
-      rw [hr, map_zero]
-  · have hcl := CommRingCat.closure_range_union_range_eq_top_of_isPushout H
-    have hsub : Set.range inr ⊆ Set.range inl := by
-      rintro _ ⟨b, rfl⟩
-      obtain ⟨r, rfl⟩ := hg b
-      refine ⟨f r, ?_⟩
-      change (f ≫ inl) r = (g ≫ inr) r
-      rw [H.w]
-    have : Subring.closure (Set.range inl ∪ Set.range inr) = (inl.hom).range := by
-      rw [Set.union_eq_self_of_subset_right hsub]
-      exact Subring.closure_eq inl.hom.range
-    intro x
-    have hx : x ∈ (inl.hom).range := by rw [← this, hcl]; trivial
-    obtain ⟨a, ha⟩ := hx
-    exact ⟨a, ha⟩
-
 end SolH0T1
 
-noncomputable section
-
-namespace SolH0T2
-
-variable {X : Scheme.{u}} {A : CommRingCat.{u}} (p : X ⟶ Spec A)
-
-/-- The quotient map by an ideal, regarded as a morphism of commutative rings. -/
-abbrev quot (I : Ideal A) : A ⟶ CommRingCat.of (A ⧸ I) := CommRingCat.ofHom (Ideal.Quotient.mk I)
-
-/-- The closed base change of the scheme to the quotient by an ideal. -/
-abbrev XI (I : Ideal A) : Scheme.{u} := pullback p (Spec.map (quot I))
-
-/-- The first projection from the closed base change to the original scheme. -/
-abbrev ι (I : Ideal A) : XI p I ⟶ X := pullback.fst _ _
-
-/-- The structure morphism from the closed base change to the quotient spectrum. -/
-abbrev pI (I : Ideal A) : XI p I ⟶ Spec (.of (A ⧸ I)) := pullback.snd _ _
-
-/-- The coefficient ring homomorphism on sections induced by the structure morphism. -/
-noncomputable def _root_.SolH0T2.alg (U : X.Opens) : A →+* Γ(X, U) :=
-  (p.appLE ⊤ U le_top).hom.comp (Scheme.ΓSpecIso A).inv.hom
-export _root_.SolH0T2 (alg)
-
-
-/-- The homomorphism from the quotient ring to global functions on the closed base change. -/
-noncomputable def φ (I : Ideal A) : A ⧸ I →+* Γ(XI p I, ⊤) :=
-  ((pI p I).appTop).hom.comp (Scheme.ΓSpecIso (.of (A ⧸ I))).inv.hom
-
-lemma alg_map {U V : X.Opens} (i : V ≤ U) (a : A) :
-    X.presheaf.map (homOfLE i).op (alg p U a) = alg p V a := by
-  simp only [alg, RingHom.coe_comp, Function.comp_apply]
-  exact ConcreteCategory.congr_hom
-    (Scheme.Hom.appLE_map p (show U ≤ p ⁻¹ᵁ ⊤ from le_top) (homOfLE i).op)
-      ((Scheme.ΓSpecIso A).inv a)
-
-lemma appLE_top_top {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
-    f.appLE ⊤ ⊤ le_top = f.appTop :=
-  f.appLE_eq_app
-
-lemma appLE_congr_hom {Y Z : Scheme.{u}} {f g : Y ⟶ Z} (h : f = g) (U : Z.Opens) (V : Y.Opens)
-    (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ g ⁻¹ᵁ U) : f.appLE U V e = g.appLE U V e' :=
-  _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom h U V e e'
-
-lemma ker_ι_app (I : Ideal A) {U : X.Opens} (hU : IsAffineOpen U) :
-    RingHom.ker ((ι p I).app U).hom = I.map (alg p U) ∧ Function.Surjective ((ι p I).app U) := by
-  have H : IsPullback (ι p I) (pI p I) p (Spec.map (quot I)) := IsPullback.of_hasPullback _ _
-  have hUY : (ι p I) ⁻¹ᵁ U = (ι p I) ⁻¹ᵁ U ⊓ (pI p I) ⁻¹ᵁ ⊤ := by
-    rw [Scheme.Hom.preimage_top, inf_top_eq]
-  have h1 := isIso_pushoutSection_of_isAffineOpen H (US := ⊤) (UT := ⊤) (UX := U) le_top le_top
-    hUY (isAffineOpen_top _) (isAffineOpen_top _) hU
-  have h2 := (isIso_pushoutSection_iff H (US := ⊤) (UT := ⊤) (UX := U) le_top le_top hUY).mp h1
-  have hq : Function.Surjective (Ideal.Quotient.mk I) := Ideal.Quotient.mk_surjective
-  have hleg : (Spec.map (quot I)).appLE ⊤ ⊤ le_top =
-      (Scheme.ΓSpecIso A).hom ≫ quot I ≫ (Scheme.ΓSpecIso (.of (A ⧸ I))).inv := by
-    rw [appLE_top_top, Scheme.ΓSpecIso_inv_naturality, Iso.hom_inv_id_assoc]
-  have hg : Function.Surjective ((Spec.map (quot I)).appLE ⊤ ⊤ le_top) := by
-    rw [hleg]
-    intro y
-    obtain ⟨a, ha⟩ := hq ((Scheme.ΓSpecIso (.of (A ⧸ I))).hom y)
-    refine ⟨(Scheme.ΓSpecIso A).inv a, ?_⟩
-    change (Scheme.ΓSpecIso _).inv (Ideal.Quotient.mk I
-      (((Scheme.ΓSpecIso A).inv ≫ (Scheme.ΓSpecIso A).hom) a)) = y
-    rw [Iso.inv_hom_id]
-    change (Scheme.ΓSpecIso _).inv (Ideal.Quotient.mk I a) = y
-    rw [ha, ← CommRingCat.comp_apply, Iso.hom_inv_id]; rfl
-  obtain ⟨hker, hsurj⟩ := SolH0T1.ker_eq_map_and_surjective_of_isPushout h2 hg
-  rw [Scheme.Hom.appLE_eq_app] at hker hsurj
-  refine ⟨?_, hsurj⟩
-  rw [hker, hleg]
-  have : RingHom.ker ((Scheme.ΓSpecIso A).hom ≫ quot I ≫ (Scheme.ΓSpecIso (.of (A ⧸ I))).inv).hom
-      = I.map (Scheme.ΓSpecIso A).inv.hom := by
-    ext x
-    simp only [CommRingCat.hom_comp, RingHom.mem_ker, RingHom.coe_comp, Function.comp_apply]
-    constructor
-    · intro hx
-      have hx' : (quot I) ((Scheme.ΓSpecIso A).hom x) = 0 := by
-        have := congrArg (Scheme.ΓSpecIso (.of (A ⧸ I))).hom hx
-        rwa [← CommRingCat.comp_apply, Iso.inv_hom_id, map_zero] at this
-      have hmem : (Scheme.ΓSpecIso A).hom x ∈ I := Ideal.Quotient.eq_zero_iff_mem.mp hx'
-      have : x = (Scheme.ΓSpecIso A).inv ((Scheme.ΓSpecIso A).hom x) := by
-        rw [← CommRingCat.comp_apply, Iso.hom_inv_id]; rfl
-      rw [this]
-      exact Ideal.mem_map_of_mem _ hmem
-    · intro hx
-      have hx2 : (Scheme.ΓSpecIso A).hom x ∈ I := by
-        have := Ideal.mem_map_of_mem (Scheme.ΓSpecIso A).hom.hom hx
-        rw [Ideal.map_map] at this
-        have e : (Scheme.ΓSpecIso A).hom.hom.comp (Scheme.ΓSpecIso A).inv.hom = RingHom.id _ := by
-          rw [← CommRingCat.hom_comp, Iso.inv_hom_id]; rfl
-        rwa [e, Ideal.map_id] at this
-      change (Scheme.ΓSpecIso (.of (A ⧸ I))).inv (Ideal.Quotient.mk I ((Scheme.ΓSpecIso A).hom x))
-        = 0
-      rw [Ideal.Quotient.eq_zero_iff_mem.mpr hx2, map_zero]
-  rw [this, Ideal.map_map]
-  rfl
-
-/-- A local section lifts the restriction of a global section on the closed base change. -/
-def LiftsAt (I : Ideal A) (U : X.Opens) (t : Γ(XI p I, ⊤)) (c : Γ(X, U)) : Prop :=
-  (ι p I).app U c = (XI p I).presheaf.map (homOfLE le_top).op t
-
-lemma LiftsAt.exists (I : Ideal A) {U : X.Opens} (hU : IsAffineOpen U) (t : Γ(XI p I, ⊤)) :
-    ∃ c, LiftsAt p I U t c :=
-  (ker_ι_app p I hU).2 _
-
-lemma LiftsAt.zero (I : Ideal A) (U : X.Opens) : LiftsAt p I U 0 0 := by
-  simp [LiftsAt]
-
-lemma LiftsAt.add {I : Ideal A} {U : X.Opens} {t t' : Γ(XI p I, ⊤)} {c c' : Γ(X, U)}
-    (h : LiftsAt p I U t c) (h' : LiftsAt p I U t' c') : LiftsAt p I U (t + t') (c + c') := by
-  simp only [LiftsAt, map_add] at *; rw [h, h']
-
-lemma LiftsAt.sub {I : Ideal A} {U : X.Opens} {t t' : Γ(XI p I, ⊤)} {c c' : Γ(X, U)}
-    (h : LiftsAt p I U t c) (h' : LiftsAt p I U t' c') : LiftsAt p I U (t - t') (c - c') := by
-  simp only [LiftsAt, map_sub] at *; rw [h, h']
-
-lemma LiftsAt.mul {I : Ideal A} {U : X.Opens} {t t' : Γ(XI p I, ⊤)} {c c' : Γ(X, U)}
-    (h : LiftsAt p I U t c) (h' : LiftsAt p I U t' c') : LiftsAt p I U (t * t') (c * c') := by
-  simp only [LiftsAt, map_mul] at *; rw [h, h']
-
-lemma LiftsAt.sub_mem_iff {I : Ideal A} {U : X.Opens} (hU : IsAffineOpen U) {t : Γ(XI p I, ⊤)}
-    {c c' : Γ(X, U)} (h : LiftsAt p I U t c) :
-    LiftsAt p I U t c' ↔ c - c' ∈ I.map (alg p U) := by
-  rw [← (ker_ι_app p I hU).1, RingHom.mem_ker, map_sub, sub_eq_zero]
-  unfold LiftsAt at *
-  rw [h]
-  exact eq_comm
-
-lemma LiftsAt.mem_iff_of_zero {I : Ideal A} {U : X.Opens} (hU : IsAffineOpen U) {c : Γ(X, U)} :
-    LiftsAt p I U 0 c ↔ c ∈ I.map (alg p U) := by
-  have := (LiftsAt.zero p I U).sub_mem_iff p hU (c' := c)
-  rw [zero_sub, neg_mem_iff] at this
-  exact this
-
-lemma LiftsAt.restrict {I : Ideal A} {U V : X.Opens} (i : V ≤ U) {t : Γ(XI p I, ⊤)} {c : Γ(X, U)}
-    (h : LiftsAt p I U t c) : LiftsAt p I V t (X.presheaf.map (homOfLE i).op c) := by
-  unfold LiftsAt at *
-  have := (ι p I).naturality (homOfLE i).op
-  have h2 := congrArg (fun φ => φ.hom c) this
-  simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply] at h2
-  change (ι p I).app V (X.presheaf.map (homOfLE i).op c) = _
-  rw [← CommRingCat.comp_apply, this, CommRingCat.comp_apply, h, ← CommRingCat.comp_apply,
-    ← Functor.map_comp]
-  rfl
-
-lemma LiftsAt.alg (I : Ideal A) (U : X.Opens) (a : A) :
-    LiftsAt p I U (φ p I (Ideal.Quotient.mk I a)) (alg p U a) := by
-  unfold LiftsAt φ SolH0T2.alg
-  simp only [RingHom.coe_comp, Function.comp_apply]
-  have e1 : (ι p I).app U (p.appLE ⊤ U le_top ((Scheme.ΓSpecIso A).inv a)) =
-      ((ι p I) ≫ p).appLE ⊤ ((ι p I) ⁻¹ᵁ U) le_top ((Scheme.ΓSpecIso A).inv a) := by
-    rw [← Scheme.Hom.appLE_comp_appLE (ι p I) p ⊤ U ((ι p I) ⁻¹ᵁ U) le_top le_rfl,
-      Scheme.Hom.appLE_eq_app, CommRingCat.comp_apply]
-  have e2 : (XI p I).presheaf.map (homOfLE le_top).op
-      ((pI p I).appTop ((Scheme.ΓSpecIso (.of (A ⧸ I))).inv (Ideal.Quotient.mk I a))) =
-      ((pI p I) ≫ Spec.map (quot I)).appLE ⊤ ((ι p I) ⁻¹ᵁ U) le_top ((Scheme.ΓSpecIso A).inv a) :=
-        by
-    rw [← Scheme.Hom.appLE_comp_appLE (pI p I) (Spec.map (quot I)) ⊤ ⊤ ((ι p I) ⁻¹ᵁ U) le_top
-      le_top,
-      appLE_top_top, CommRingCat.comp_apply]
-    have := Scheme.ΓSpecIso_inv_naturality (quot I)
-    have h3 := congrArg (fun φ => φ.hom a) this
-    simp only [CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply] at h3
-    change _ = ((pI p I).appLE ⊤ ((ι p I) ⁻¹ᵁ U) le_top)
-      (((Spec.map (quot I)).appTop) ((Scheme.ΓSpecIso A).inv a))
-    rw [← h3]
-    change _ = ((pI p I).appLE ⊤ ((ι p I) ⁻¹ᵁ U) le_top)
-      ((Scheme.ΓSpecIso (.of (A ⧸ I))).inv (Ideal.Quotient.mk I a))
-    simp only [Scheme.Hom.appLE, CommRingCat.comp_apply]
-    rfl
-  rw [e1, e2]
-  exact ConcreteCategory.congr_hom
-    (appLE_congr_hom (f := ι p I ≫ p) (g := pI p I ≫ Spec.map (quot I)) pullback.condition
-      ⊤ ((ι p I) ⁻¹ᵁ U)
-      (show (ι p I) ⁻¹ᵁ U ≤ (ι p I ≫ p) ⁻¹ᵁ ⊤ from le_top)
-      (show (ι p I) ⁻¹ᵁ U ≤ (pI p I ≫ Spec.map (quot I)) ⁻¹ᵁ ⊤ from le_top))
-      ((Scheme.ΓSpecIso A).inv a)
-
-lemma eq_zero_of_forall_affine (I : Ideal A) (t : Γ(XI p I, ⊤))
-    (h : ∀ U : X.affineOpens, (XI p I).presheaf.map (homOfLE (le_top (a := (ι p I) ⁻¹ᵁ U))).op t =
-      0) :
-    t = 0 := by
-  have hcov : (⊤ : (XI p I).Opens) ≤ ⨆ U : X.affineOpens, (ι p I) ⁻¹ᵁ (U : X.Opens) := by
-    rw [← Scheme.Hom.preimage_iSup, iSup_affineOpens_eq_top]
-    exact le_top
-  refine TopCat.Sheaf.eq_of_locally_eq' (XI p I).sheaf (fun U : X.affineOpens => (ι p I) ⁻¹ᵁ (U :
-    X.Opens))
-    ⊤ (fun U => homOfLE le_top) hcov t 0 ?_
-  intro U
-  rw [map_zero]
-  exact h U
-
-lemma eq_zero_of_forall_liftsAt (I : Ideal A) (t : Γ(XI p I, ⊤))
-    (h : ∀ U : X.affineOpens, ∀ c, LiftsAt p I U t c → c ∈ I.map (alg p U)) : t = 0 := by
-  apply eq_zero_of_forall_affine
-  intro U
-  obtain ⟨c, hc⟩ := LiftsAt.exists p I U.2 t
-  have := h U c hc
-  rw [← (ker_ι_app p I U.2).1, RingHom.mem_ker] at this
-  unfold LiftsAt at hc
-  rw [← hc]
-  exact this
-
-lemma eq_of_forall_liftsAt (I : Ideal A) (t t' : Γ(XI p I, ⊤))
-    (h : ∀ U : X.affineOpens, ∃ c, LiftsAt p I U t c ∧ LiftsAt p I U t' c) : t = t' := by
-  rw [← sub_eq_zero]
-  apply eq_zero_of_forall_liftsAt
-  intro U c hc
-  obtain ⟨d, hd, hd'⟩ := h U
-  have h0 : LiftsAt p I U (t - t') 0 := by simpa using hd.sub p hd'
-  have := (h0.sub_mem_iff p U.2).mp hc
-  simpa using this
-
-end SolH0T2
-
-end
+open _root_.AlgebraicGeometry.ClosedBaseChangeLifts
 
 noncomputable section
 
@@ -391,31 +126,12 @@ def τ {I J : Ideal A} (h : I ≤ J) : XI p J ⟶ XI p I :=
 /-- The transition homomorphism on global sections induced by an inclusion of ideals. -/
 def ρ {I J : Ideal A} (h : I ≤ J) : Γ(XI p I, ⊤) →+* Γ(XI p J, ⊤) := ((τ p h).appTop).hom
 
-lemma presheaf_map_congr {Y : Scheme.{u}} {U V : Y.Opens} (i j : op U ⟶ op V) (s : Γ(Y, U)) :
-    Y.presheaf.map i s = Y.presheaf.map j s := by
-  rw [Subsingleton.elim i j]
-
-lemma LiftsAt.trans {I J : Ideal A} (hIJ : I ≤ J) {U : X.Opens} {t : Γ(XI p I, ⊤)} {c : Γ(X, U)}
-    (h : LiftsAt p I U t c) : LiftsAt p J U (ρ p hIJ t) c := by
-  unfold LiftsAt at *
-  rw [Scheme.Hom.congr_app (τ_ι p hIJ).symm U]
-  change (XI p J).presheaf.map _ ((τ p hIJ).app _ ((ι p I).app U c)) = _
-  rw [h]
-  have nat := (τ p hIJ).naturality (homOfLE (le_top (a := (ι p I) ⁻¹ᵁ U))).op
-  have h2 : (τ p hIJ).app ((ι p I) ⁻¹ᵁ U) ((XI p I).presheaf.map (homOfLE le_top).op t) =
-      (XI p J).presheaf.map ((Opens.map (τ p hIJ).base).map (homOfLE le_top)).op ((τ p hIJ).appTop
-        t) := by
-    rw [← CommRingCat.comp_apply, nat, CommRingCat.comp_apply]
-    rfl
-  rw [h2]
-  erw [← CommRingCat.comp_apply, ← Functor.map_comp]
-  exact presheaf_map_congr _ _ _
-
 lemma ρ_φ {I J : Ideal A} (hIJ : I ≤ J) (a : A) :
     ρ p hIJ (φ p I (Ideal.Quotient.mk I a)) = φ p J (Ideal.Quotient.mk J a) := by
   apply eq_of_forall_liftsAt
   intro U
-  exact ⟨alg p U a, (LiftsAt.alg p I U a).trans p hIJ, LiftsAt.alg p J U a⟩
+  exact ⟨alg p U a, LiftsAt.trans_of p (τ p hIJ) (τ_ι p hIJ) (LiftsAt.alg p I U a),
+    LiftsAt.alg p J U a⟩
 
 /-- A local lift together with a divisibility relation modulo the chosen ideal. -/
 def LocData (I : Ideal A) (π : A) (t : Γ(XI p I, ⊤)) (U : X.affineOpens) (c d : Γ(X, U)) : Prop :=
@@ -490,7 +206,9 @@ lemma StepHyp.exists_locData {t : Γ(XI p I, ⊤)} (ht : ρ p (le_sup_left : I �
     ∃ c d, LocData p I π t U c d := by
   obtain ⟨c, hc⟩ := LiftsAt.exists p I U.2 t
   have h1 : LiftsAt p (I ⊔ Ideal.span {π}) U 0 c := by
-    have := hc.trans p (le_sup_left : I ≤ I ⊔ Ideal.span {π})
+    let hI : I ≤ I ⊔ Ideal.span {π} := le_sup_left
+    have : LiftsAt p (I ⊔ Ideal.span {π}) U (ρ p hI t) c :=
+      LiftsAt.trans_of p (τ p hI) (τ_ι p hI) hc
     rwa [ht] at this
   rw [LiftsAt.mem_iff_of_zero p U.2, Ideal.map_sup, Ideal.map_span, Set.image_singleton,
     Submodule.mem_sup] at h1
@@ -905,7 +623,8 @@ theorem bijective_appTop [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete �
     Function.Bijective p.appTop := by
   have h1 := bijective_alg_top p ((bijective_φ_iff p 𝔪).mpr h)
   unfold alg at h1
-  rw [appLE_top_top] at h1
+  have hApp := p.appLE_top_eq_appTop
+  rw [hApp] at h1
   simp only [RingHom.coe_comp] at h1
   exact (Function.Bijective.of_comp_iff _
     (Scheme.ΓSpecIso A).symm.commRingCatIsoToRingEquiv.bijective).mp h1

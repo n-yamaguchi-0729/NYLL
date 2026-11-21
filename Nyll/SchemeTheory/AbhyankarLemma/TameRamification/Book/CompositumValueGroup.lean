@@ -35,6 +35,7 @@ public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReductio
 public import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.RadicalValueGroup
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Book.BaseChange
+public import Nyll.ValuedFieldTheory.LocalField.Unramified.MaximalResidue
 public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
@@ -90,10 +91,7 @@ theorem bookExponentialValueSubgroup_commonTop_eq_sup_of_finiteTame
     exponentialValueSubgroup wTop =
       exponentialValueSubgroup wLeft ⊔ exponentialValueSubgroup wRight := by
   classical
-  let Top := (L ⊔ K' : IntermediateField K Ω)
-  let wLeft := exponentialValuationRestrict w L
-  let wRight := exponentialValuationRestrict w K'
-  let wTop := exponentialValuationRestrict w Top
+  intro Top wLeft wRight wTop
   let hLeft : ∀ a : K,
       wLeft (algebraMap K L a) = v a :=
     exponentialValuationRestrict_extends v w hExt L
@@ -269,24 +267,10 @@ theorem bookExponentialValueSubgroup_commonTop_eq_sup_of_finiteTame
     bookExponentialValueSubgroup_eq_sup_iSup_zmultiples_of_radical_family
       wTTop wTop hTTopTop hhensTTop hpTTop hresTTopTop
         r m aTop alphaTop hmpos hmcopTTop hpowTop hgenTop
-  have hTUnram : FiniteUnramifiedExtension v wT hKT :=
-    maximalUnramifiedSubextension_finiteUnramified
-      v wLeft hLeft hhens
   have hTValue : exponentialValueSubgroup wT = exponentialValueSubgroup v :=
-    bookExponentialValueSubgroup_eq_of_ramificationIndex_eq_one
-      v wT hKT
-        (exponentialRamificationIndex_eq_one_of_finiteUnramifiedExtension
-          v wT hKT hTUnram)
-  have hTTopUnram : FiniteUnramifiedExtension
-      wRight wTTop hRightTTop :=
-    maximalUnramifiedSubextension_finiteUnramified
-      wRight wTop hRightTop hhensRight
-  have hTTopValue : exponentialValueSubgroup wTTop =
-      exponentialValueSubgroup wRight :=
-    bookExponentialValueSubgroup_eq_of_ramificationIndex_eq_one
-      wRight wTTop hRightTTop
-        (exponentialRamificationIndex_eq_one_of_finiteUnramifiedExtension
-          wRight wTTop hRightTTop hTTopUnram)
+    maximalUnramifiedSubextension_valueSubgroup_eq v wLeft hLeft hhens
+  have hTTopValue : exponentialValueSubgroup wTTop = exponentialValueSubgroup wRight :=
+    maximalUnramifiedSubextension_valueSubgroup_eq wRight wTop hRightTop hhensRight
   have hroots :
       (⨆ i, AddSubgroup.zmultiples
         (wTop (alphaTop i)).untop₀) =

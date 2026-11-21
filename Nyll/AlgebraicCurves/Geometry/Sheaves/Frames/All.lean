@@ -9,6 +9,4 @@ import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleBasisOne
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleIsAffineOpenIsFrameOnPreimage
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleIsFrameOnApp
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrameCriterion
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.IsFrameOnPullbackIsoUnitMonoidalV2
 import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.IsFrameOnTensorPowThree

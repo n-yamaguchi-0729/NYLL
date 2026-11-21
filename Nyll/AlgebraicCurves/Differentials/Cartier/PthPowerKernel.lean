@@ -200,7 +200,7 @@ theorem minpoly_pthPowers_natDegree_le (t : F) :
   have h := Polynomial.natDegree_le_of_dvd hdvd hne
   have hdeg : (X ^ ℓ - C (⟨t ^ ℓ, (mem_pthPowers_iff F ℓ).mpr ⟨t, rfl⟩⟩ :
       pthPowers F ℓ) : _).natDegree = ℓ :=
-    Polynomial.natDegree_X_pow_sub_C
+    Polynomial.natDegree_X_pow_sub_C _
   rwa [hdeg] at h
 
 variable {K : Type*} [Field K] [Algebra K F]

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Inertia.Tame.BoundaryWildQuotient
 public import Nyll.EtaleFundamentalGroups.Inertia.WildPrimeToCharacters
 public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotient
@@ -112,7 +113,7 @@ private theorem nativeWild_range_le_embeddedResidual
     (Inertia.normalizationWild_proPrime_character_eq_one A F Ω Q r ℓ hrℓ hq
       (q.comp ψ) σ)
 
-attribute [local instance] integralOpenDominant
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 variable (k F Ω : Type u) [Field k] [Field F] [Field Ω]
   [Algebra F Ω] [IsSepClosure F Ω] [IsSepClosed Ω]

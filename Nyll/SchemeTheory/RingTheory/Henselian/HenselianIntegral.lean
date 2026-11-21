@@ -35,8 +35,11 @@ theorem of_isIntegral
     [Algebra.IsIntegral R B] (I : Ideal R) [HenselianRing R I] :
     HenselianRing B (I.map (algebraMap R B)) := by
   let J : Ideal B := I.map (algebraMap R B)
-  refine ⟨Ideal.map_le_jacobson_bot_of_isIntegral
-    (HenselianRing.jac (R := R) (I := I)), ?_⟩
+  refine ⟨?_, ?_⟩
+  · rw [← Ideal.jacobson_bot]
+    apply Ideal.map_le_jacobson_bot_of_isIntegral
+    rw [Ideal.jacobson_bot]
+    exact HenselianRing.jac
   intro f hf a₀ ha₀ hd
   let P : StandardEtalePair B := {
     f := f

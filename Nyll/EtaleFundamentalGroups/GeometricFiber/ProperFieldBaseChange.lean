@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSeparablyClosedExtension
 public import Nyll.EtaleFundamentalGroups.GaloisCategories.EquivalenceFunctoriality
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
@@ -37,8 +38,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X S : Scheme.{u}} {k K : Type u} [Field k] [Field K]
   (f : X ⟶ S) (s : Spec (CommRingCat.of k) ⟶ S)

@@ -43,14 +43,14 @@ theorem exists_finiteStage_continuousH1Cup
     ∃ U : OpenNormalSubgroupInClass (FiniteGroupClass.pGroup p) G,
       ∃ χU ψU : ContinuousH1ZMod
           (p := p) (G := G ⧸ (U.1 : Subgroup G)),
-        continuousH1ZModRestriction
+        continuousH1ZModRestriction (p := p)
             (OpenNormalSubgroupInClass.quotientProj U) χU = χ ∧
-          continuousH1ZModRestriction
+          continuousH1ZModRestriction (p := p)
             (OpenNormalSubgroupInClass.quotientProj U) ψU = ψ ∧
           (continuousCohomologyZModPMapLifted p
               (OpenNormalSubgroupInClass.quotientProj U) 2).hom
-              (continuousH1CupProductLifted χU ψU) =
-            continuousH1CupProductLifted χ ψ := by
+              (continuousH1CupProductLifted (p := p) (G := G ⧸ (U.1 : Subgroup G)) χU ψU) =
+            continuousH1CupProductLifted (p := p) (G := G) χ ψ := by
   let ρ : G → ZMod p × ZMod p :=
     fun g ↦ (χ (Additive.ofMul g), ψ (Additive.ofMul g))
   have hρ : Continuous ρ :=
@@ -102,11 +102,11 @@ theorem exists_finiteStage_continuousH1Cup
       map_add' := fun a b ↦ hsnd_mul (Additive.toMul a) (Additive.toMul b)
       continuous_toFun := continuous_of_discreteTopology }
   have hχ :
-      continuousH1ZModRestriction q χU = χ := by
+      continuousH1ZModRestriction (p := p) q χU = χ := by
     ext g
     exact congrArg Prod.fst (hρU (Additive.toMul g))
   have hψ :
-      continuousH1ZModRestriction q ψU = ψ := by
+      continuousH1ZModRestriction (p := p) q ψU = ψ := by
     ext g
     exact congrArg Prod.snd (hρU (Additive.toMul g))
   refine ⟨U, χU, ψU, hχ, hψ, ?_⟩

@@ -33,22 +33,10 @@ open CategoryTheory Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryStalkSpreading (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) := instCategory X
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
 
-local instance finiteEtaleHasPullbacksAlongStalkSpreading
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongStalkSpreading
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Every finite-etale cover of the actual local spectrum comes from a
 finite-etale cover of an open neighborhood, with its literal native

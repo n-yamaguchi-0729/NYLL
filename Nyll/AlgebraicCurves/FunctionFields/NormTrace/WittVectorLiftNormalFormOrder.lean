@@ -611,7 +611,7 @@ theorem natDegree_stage_le (m : ℕ) (i j k : Fin (n + 1)) :
 
 theorem map_truncate_Γlim (m : ℕ) (i j k : Fin (n + 1)) :
     (Γlim p D i j k).map (WittVector.truncate (m + 1)) = (stage p D m).1 i j k := by
-  ext t : 1
+  refine AddMonoidAlgebra.ext (Finsupp.ext fun t => ?_)
   rw [Polynomial.coeff_map, coeff_Γlim]
   split_ifs with ht
   · exact truncate_wlim p D m i j k t

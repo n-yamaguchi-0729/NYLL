@@ -8,7 +8,6 @@ import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.CoverFibreH0RankTensorPowEqE
 import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.IsClopenPreimageSigmaInjUniqueLift
 import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.IsZariskiLocalAtTargetSigmaMap
 import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.MemIffSubsetUnionPreimageOrDisjoint
-import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.MumfordTruncation
 import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OpenImmersionPresheafOverTotal
 import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
 import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverCompactSpace

@@ -5,6 +5,7 @@ Original copyright, authors, license and pinned sources are retained per unit be
 
 module
 
+public import Nyll.AbelianVarieties.NeronModels.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Gluing
 public import Mathlib.AlgebraicGeometry.Birational.RationalMap
@@ -150,16 +151,6 @@ section Setup
 variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat.of R))
   (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 
-/-- The partial translation map keeping the first coordinate. -/
-abbrev Phi : (U : Scheme.{u}) ⟶ pullback y y :=
-  open AbelianVarieties.NOSProofs in
-  EtaleTranslationPieces.TranslationPiece.Phi y U m
-
-/-- The partial translation map keeping the second coordinate. -/
-abbrev Psi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) m.1 (U.ι ≫ pullback.snd y y)
-    (m.2.trans (by rw [Category.assoc, pullback.condition]))
-
 /-- Base change of the second projection along a chosen point. -/
 def lamSnd {T : Scheme.{u}} (c : T ⟶ Spec (CommRingCat.of R)) (g : T ⟶ Y) (hg : g ≫ y = c) :
     pullback y c ⟶ pullback y y :=
@@ -297,14 +288,14 @@ structure Cx where
       y)) ⁻¹'
         (U : Set ↑(pullback y y)))
   /-- The first translation map is an open immersion. -/
-  hΦ : IsOpenImmersion (Phi y U m)
+  hΦ : IsOpenImmersion (firstMultiplicationChart y U m)
   /-- Density of the first translation image along the second projection. -/
   hΦ₂ : ∀ x : Y,
     Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.snd y y).base q = x} → ↑(pullback y
       y)) ⁻¹'
-        (Set.range (Phi y U m).base))
+        (Set.range (firstMultiplicationChart y U m).base))
   /-- The second translation map is an open immersion. -/
-  hΨ : IsOpenImmersion (Psi y U m)
+  hΨ : IsOpenImmersion (secondMultiplicationChart y U m)
   /-- Associativity on the common domain. -/
   hassoc : ∀ {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
       (u v p q : SchemeHomOver t (U.ι ≫ pullback.fst y y ≫ y)),
@@ -499,22 +490,25 @@ theorem exists_datum (t : C.P)
   let lam := lamSnd C.y cK xK hxK
   let lam' := lamFst C.y cK xK hxK
   let lamv := lamSnd C.y cK vK hvK
-  let e₁ := pullback.fst lam (Phi C.y C.U C.m)
+  let e₁ := pullback.fst lam (firstMultiplicationChart C.y C.U C.m)
   have : IsOpenImmersion e₁ :=
     MorphismProperty.of_isPullback
       (P := (@IsOpenImmersion : MorphismProperty Scheme.{u}))
-      (IsPullback.of_hasPullback lam (Phi C.y C.U C.m)).flip C.hΦ
-  let β := pullback.snd lam (Phi C.y C.U C.m)
+      (IsPullback.of_hasPullback lam (firstMultiplicationChart C.y C.U C.m)).flip C.hΦ
+  let β := pullback.snd lam (firstMultiplicationChart C.y C.U C.m)
   have hd₁ : Dense (Set.range e₁) := by
     rw [Scheme.Pullback.range_fst]
     exact dense_preimage_of_isPullback (pullback.snd C.y C.y) _ (Spec.map ((fst' ≫ p1 C.y
       C.R').residueFieldMap t))
       xK hxK' (isPullback_lamSnd C.y cK xK hxK) _ (C.hΦ₂ _)
-  have hPhi₁ : Phi C.y C.U C.m ≫ pullback.fst C.y C.y = C.U.ι ≫ pullback.fst C.y C.y :=
+  have hPhi₁ : firstMultiplicationChart C.y C.U C.m ≫ pullback.fst C.y C.y
+    = C.U.ι ≫ pullback.fst C.y C.y :=
     pullback.lift_fst _ _ _
-  have hPhi₂ : Phi C.y C.U C.m ≫ pullback.snd C.y C.y = C.m.1 := pullback.lift_snd _ _ _
+  have hPhi₂ : firstMultiplicationChart C.y C.U C.m ≫ pullback.snd C.y C.y = C.m.1 :=
+    pullback.lift_snd _ _ _
   have hν₀ : (β ≫ C.U.ι ≫ pullback.snd C.y C.y) ≫ C.y = (e₁ ≫ pullback.snd C.y cK) ≫ cK := by
-    calc (β ≫ C.U.ι ≫ pullback.snd C.y C.y) ≫ C.y = β ≫ (Phi C.y C.U C.m ≫ pullback.fst C.y C.y)
+    calc (β ≫ C.U.ι ≫ pullback.snd C.y C.y) ≫ C.y
+      = β ≫ (firstMultiplicationChart C.y C.U C.m ≫ pullback.fst C.y C.y)
       ≫ C.y := by
           rw [hPhi₁]; simp only [Category.assoc, pullback.condition]
       _ = (e₁ ≫ lam) ≫ pullback.fst C.y C.y ≫ C.y := by
@@ -522,16 +516,17 @@ theorem exists_datum (t : C.P)
       _ = (e₁ ≫ pullback.snd C.y cK) ≫ cK := by
           simp only [Category.assoc, lam, lamSnd_fst_assoc]
           rw [pullback.condition]
-  let ν : pullback lam (Phi C.y C.U C.m) ⟶ pullback C.y cK :=
+  let ν : pullback lam (firstMultiplicationChart C.y C.U C.m) ⟶ pullback C.y cK :=
     pullback.lift (β ≫ C.U.ι ≫ pullback.snd C.y C.y) (e₁ ≫ pullback.snd C.y cK) hν₀
   have hν₁ : ν ≫ pullback.fst C.y cK = β ≫ C.U.ι ≫ pullback.snd C.y C.y := pullback.lift_fst _ _ _
   have hν₂ : ν ≫ pullback.snd C.y cK = e₁ ≫ pullback.snd C.y cK := pullback.lift_snd _ _ _
-  have hνsq : IsPullback ν β lam' (Psi C.y C.U C.m) := by
+  have hνsq : IsPullback ν β lam' (secondMultiplicationChart C.y C.U C.m) := by
     refine IsPullback.of_right (h₁₂ := pullback.snd C.y cK) (v₁₃ := xK) (h₂₂ := pullback.fst C.y
       C.y) ?_ ?_
       (isPullback_lamFst C.y cK xK hxK)
     · rw [hν₂, pullback.lift_fst]
-      have h := (IsPullback.of_hasPullback lam (Phi C.y C.U C.m)).paste_horiz (isPullback_lamSnd
+      have h := (IsPullback.of_hasPullback lam (firstMultiplicationChart C.y C.U C.m)).paste_horiz
+        (isPullback_lamSnd
         C.y cK xK hxK)
       rwa [hPhi₂] at h
     · apply pullback.hom_ext
@@ -647,13 +642,14 @@ theorem exists_datum (t : C.P)
   let w₁ : Spec (CommRingCat.of L) ⟶ C.U := a₁' ≫ β
   let a : Spec (CommRingCat.of R'') ⟶ C.Y := a₁ ≫ p1 C.y C.R'
   let s : Spec (CommRingCat.of L) ⟶ C.P := lL ≫ pt
-  have hβΦ : β ≫ Phi C.y C.U C.m = e₁ ≫ lam := pullback.condition.symm
+  have hβΦ : β ≫ firstMultiplicationChart C.y C.U C.m = e₁ ≫ lam := pullback.condition.symm
   have hMcond : pullback.fst κ₁ a₁ ≫ κ₁ = pullback.snd κ₁ a₁ ≫ a₁ := pullback.condition
   refine ⟨R'', inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance,
     a, Spec (CommRingCat.of L), lR, w₁, w₂, s, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · simp only [a, Category.assoc]; rw [pullback.condition, reassoc_of% ha₁]
-  · calc w₁ ≫ C.U.ι ≫ pullback.fst C.y C.y = a₁' ≫ β ≫ Phi C.y C.U C.m ≫ pullback.fst C.y C.y := by
+  · calc w₁ ≫ C.U.ι ≫ pullback.fst C.y C.y
+    = a₁' ≫ β ≫ firstMultiplicationChart C.y C.U C.m ≫ pullback.fst C.y C.y := by
           simp only [w₁, Category.assoc, hPhi₁]
       _ = zL ≫ pullback.fst C.y cK := by rw [reassoc_of% hβΦ, reassoc_of% ha₁']; simp only [lam,
         lamSnd_fst]
@@ -1560,7 +1556,8 @@ noncomputable def ρ : Ω y φ₀ ⟶ E.X :=
     (by rw [Category.id_comp, Category.comp_id]) (by rw [Category.comp_id, E.specMap_φ_comp_s])
 
 /-- The closed locus where the refined multiplication is undefined. -/
-def Z (hS : Strict y U m) : Set ↥(Ω y φ₀) := E.ρ.base ⁻¹' (E.D hS : Set ↥E.X)ᶜ
+noncomputable def Z (hS : Strict y U m) : Set ↥(Ω y φ₀) :=
+  E.ρ.base ⁻¹' (E.D hS : Set ↥E.X)ᶜ
 
 theorem isClosed_Z (hS : Strict y U m) : IsClosed (E.Z hS) :=
   ((E.D hS).isOpen.isClosed_compl).preimage E.ρ.base.hom.continuous

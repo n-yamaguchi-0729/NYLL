@@ -64,7 +64,7 @@ theorem _root_.AlgebraicCurve.Place.hasPoleOrderLE_one_inv_smul_D_and_hasLogResi
   have : FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F := hfd
   have hDt : KaehlerDifferential.D K F t ≠ 0 := Place.D_ne_zero_of_ord_eq_one x v ht
   have h1 : Module.finrank F (Ω[F⁄K]) = 1 := (IsCurveOver.kaehler_free_rank_one (K := K) (F := F)).2
-  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' (KaehlerDifferential.D K F t) hDt).mp h1
+  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_ne_zero' (KaehlerDifferential.D K F t) hDt).mp h1
     (KaehlerDifferential.D K F f)
   set g : F := Place.diffCoeff t (KaehlerDifferential.D K F f) with hg_def
   have hg : g • KaehlerDifferential.D K F t = KaehlerDifferential.D K F f := Place.diffCoeff_smul_D

@@ -12,12 +12,15 @@ Authors of the section-change comparison: Naganori Yamaguchi (assisted by OpenAI
 https://github.com/n-yamaguchi-0729
 -/
 
+import Nyll.SchemeTheory.CategoryTheory.TensorInverseIso
+import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.ChangeRigidification
 import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.BaseChange
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.Representation
 import Nyll.JacobianVarieties.Picard.Representability.InversePairSections
 import Nyll.AlgebraicCurves.Geometry.Picard.BaseChange.PicardRepresentabilityBaseChange
 import Nyll.JacobianVarieties.Pic0.RelativePic0DesignationBaseChange
 import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
+import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-!
 # Base change of the comparison between rigidifying sections
@@ -47,18 +50,21 @@ noncomputable def toR_twistIso
     (R' : Type u) [CommRing R'] [Algebra R R']
     {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R')}
     (M : RigidifiedLineBundle (baseChange R c R') (sectionBaseChange R' ε₁) t) :
-    (toR c ε₂ R' (twist (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)).L ≅
-      (twist ε₁ ε₂ (toR c ε₁ R' M)).L := by
-  let Q : T.Modules := qinv (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M
+    (toR c ε₂ R' (ChangeRigidification.twist
+      (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)).L ≅
+      (ChangeRigidification.twist ε₁ ε₂ (toR c ε₁ R' M)).L := by
+  let Q : T.Modules :=
+    ChangeRigidification.qinv (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M
   have hX : (Scheme.Modules.pullback (rigSection c (t ≫ specMap R R') ε₂)).obj
         (toR c ε₁ R' M).L ≅
       (Scheme.Modules.pullback (rigSection (baseChange R c R') t
         (sectionBaseChange R' ε₂))).obj M.L :=
     (Scheme.Modules.pullbackComp _ _).app M.L ≪≫
       (Scheme.Modules.pullbackCongr (rigSection_κ_inv c ε₂ R' t)).app M.L
-  have hQ : Q ≅ qinv ε₁ ε₂ (toR c ε₁ R' M) :=
-    inverseIso hX.symm (qinvIso (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)
-      (qinvIso ε₁ ε₂ (toR c ε₁ R' M))
+  have hQ : Q ≅ ChangeRigidification.qinv ε₁ ε₂ (toR c ε₁ R' M) :=
+    tensorInverseIso hX.symm
+      (ChangeRigidification.qinvIso (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)
+      (ChangeRigidification.qinvIso ε₁ ε₂ (toR c ε₁ R' M))
   have hsnd : (κ c R' t).inv ≫ pullback.snd (baseChange R c R') t =
       pullback.snd c (t ≫ specMap R R') := by
     rw [← κ_hom_snd c R' t, Iso.inv_hom_id_assoc]
@@ -95,7 +101,7 @@ private theorem classify_baseChange_fst
       (toR_pullbackAlong_iso c ε R' z P).symm ≪≫
       (Scheme.Modules.pullback (baseChangeSnd c (overR R' z))).mapIso
         (toR_ofR_iso c ε R' (h.poincare.pullbackAlong ψ)) ≪≫
-      pullbackAlongComp h.poincare ψ (overR R' z)
+      h.poincare.pullbackAlongPullbackAlongIso ψ (overR R' z)
   exact congrArg Subtype.val (h.classify_unique (t ≫ specMap R R') (toR c ε R' M)
     ((fibrewiseAlgEquivZero_toR_iff c ε R' M).2 hM) (postComp ψ (overR R' z))
     ⟨chain.symm ≪≫ (Scheme.Modules.pullback (κ c R' t).inv).mapIso
@@ -132,26 +138,31 @@ theorem sectionComparison_baseChange
       ⟨(Scheme.Modules.pullbackCongr (baseChangeSnd_id (baseChange R c R') t)).app M.L ≪≫
         (Scheme.Modules.pullbackId (pullback (baseChange R c R') t)).app M.L⟩).symm
   have hθ' : postComp θ' (h₁'.classify t M hM) = h₂'.classify t
-      (twist (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)
-      (twist_cut (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) t M hM) :=
+      (ChangeRigidification.twist
+        (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)
+      (ChangeRigidification.twist_cut
+        (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) t M hM) :=
     (exists_theta (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) h₁' h₂').choose_spec t M hM
   rw [hid] at hθ'
   have hθ'val : θ'.1 = (h₂'.classify t
-      (twist (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)
-      (twist_cut (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) t M hM)).1 := by
+      (ChangeRigidification.twist
+        (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) M)
+      (ChangeRigidification.twist_cut
+        (sectionBaseChange R' ε₁) (sectionBaseChange R' ε₂) t M hM)).1 := by
     simpa only [postComp, Category.id_comp] using congrArg Subtype.val hθ'
   have hfst := classify_baseChange_fst ε₁ D₁ h₁ R' h₁' hP₁ t M hM
   rw [hid, Category.id_comp] at hfst
   rw [hθ'val, classify_baseChange_fst ε₂ D₂ h₂ R' h₂' hP₂, hfst]
   have hθ : postComp θ (h₁.classify (t ≫ specMap R R') (toR c ε₁ R' M)
       ((fibrewiseAlgEquivZero_toR_iff c ε₁ R' M).2 hM)) =
-      h₂.classify (t ≫ specMap R R') (twist ε₁ ε₂ (toR c ε₁ R' M))
-        (twist_cut ε₁ ε₂ (t ≫ specMap R R') (toR c ε₁ R' M)
+      h₂.classify (t ≫ specMap R R')
+        (ChangeRigidification.twist ε₁ ε₂ (toR c ε₁ R' M))
+        (ChangeRigidification.twist_cut ε₁ ε₂ (t ≫ specMap R R') (toR c ε₁ R' M)
           ((fibrewiseAlgEquivZero_toR_iff c ε₁ R' M).2 hM)) :=
     (exists_theta ε₁ ε₂ h₁ h₂).choose_spec (t ≫ specMap R R')
       (toR c ε₁ R' M) ((fibrewiseAlgEquivZero_toR_iff c ε₁ R' M).2 hM)
   refine (congrArg Subtype.val (classify_congr h₂ (t ≫ specMap R R') _ _ _
-    (twist_cut ε₁ ε₂ (t ≫ specMap R R') (toR c ε₁ R' M)
+    (ChangeRigidification.twist_cut ε₁ ε₂ (t ≫ specMap R R') (toR c ε₁ R' M)
       ((fibrewiseAlgEquivZero_toR_iff c ε₁ R' M).2 hM))
     ⟨toR_twistIso ε₁ ε₂ R' M⟩)).trans ?_
   exact (congrArg Subtype.val hθ).symm

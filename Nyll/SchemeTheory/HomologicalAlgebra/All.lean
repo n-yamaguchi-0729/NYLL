@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Nyll.SchemeTheory.HomologicalAlgebra.HomologySequenceExactFunctor
+public import Nyll.SchemeTheory.HomologicalAlgebra.HomologySequenceThreeByThree
 public import Nyll.SchemeTheory.HomologicalAlgebra.HomFromSingleSectionsMap
 public import Nyll.SchemeTheory.HomologicalAlgebra.RightDerivedFunctorPlusMapResolution
 

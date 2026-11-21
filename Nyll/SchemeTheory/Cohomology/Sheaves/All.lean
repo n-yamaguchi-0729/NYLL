@@ -29,9 +29,8 @@ public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafBasicOpenSectio
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafDEqDDMemPow
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafIdealPowSubEqBot
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafHasDevissageStep
-public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafCoherentCoker
+public import Nyll.SchemeTheory.Cohomology.Sheaves.OModulePresheafCoherence
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafCoherentIdealPowQuot
-public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafQuasicoherentCoker
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafQuasicoherentIdealPow
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafQuasicoherentIdealPowQuot
 public import Nyll.SchemeTheory.Cohomology.Sheaves.ModulePresheafSupportedInIdealPowQuot

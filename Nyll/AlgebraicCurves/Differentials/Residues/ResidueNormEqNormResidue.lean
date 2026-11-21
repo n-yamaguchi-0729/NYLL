@@ -132,7 +132,7 @@ theorem linearIndependent_pow_of_transcendental' {R S : Type*} [CommRing R] [Rin
   set p : R[X] := l.sum fun n a => Polynomial.monomial n a with hp
   have hcoeff : ∀ n, p.coeff n = l n := fun n => by
     rw [hp, Finsupp.sum, Polynomial.finsetSum_coeff]
-    simp only [Polynomial.coeff_monomial]
+    simp only [Polynomial.coeff_monomial_apply]
     rw [Finset.sum_ite_eq']
     split_ifs with h
     · rfl
@@ -473,7 +473,7 @@ theorem exists_rho_eq_algebraMap (m : RatFunc E) (hm : algebraMap (RatFunc E) FE
     · obtain ⟨n, hn, hcn⟩ := Polynomial.mem_coeffs_iff.mp hc
       refine Or.inl ⟨n, ?_⟩
       apply Subtype.ext
-      have := congrArg (fun f => Polynomial.coeff f n) hp₀
+      have := congrArg (fun f : E[X] => f.coeff n) hp₀
       simp only [Polynomial.coeff_map, Polynomial.coeff_C_mul] at this
       rw [show ((p₀.coeff n : A) : E) = algebraMap A E (p₀.coeff n) from rfl, this, ← hcn,
         inv_mul_cancel₀ hc₀]
@@ -481,14 +481,14 @@ theorem exists_rho_eq_algebraMap (m : RatFunc E) (hm : algebraMap (RatFunc E) FE
     · obtain ⟨n, hn, hcn⟩ := Polynomial.mem_coeffs_iff.mp hc
       refine Or.inr ⟨n, ?_⟩
       apply Subtype.ext
-      have := congrArg (fun f => Polynomial.coeff f n) hq₀
+      have := congrArg (fun f : E[X] => f.coeff n) hq₀
       simp only [Polynomial.coeff_map, Polynomial.coeff_C_mul] at this
       rw [show ((q₀.coeff n : A) : E) = algebraMap A E (q₀.coeff n) from rfl, this, ← hcn,
         inv_mul_cancel₀ hc₀]
       rfl
   have hred : ∀ r₀ : A[X], (∃ n, r₀.coeff n = 1) → r₀.map (sigma A hKA hArat) ≠ 0 := by
     rintro r₀ ⟨n, hn⟩ h0
-    have := congrArg (fun f => Polynomial.coeff f n) h0
+    have := congrArg (fun f : K[X] => f.coeff n) h0
     simp only [Polynomial.coeff_map, hn, map_one, Polynomial.coeff_zero] at this
     exact one_ne_zero this
   have hunit : ∀ r₀ : A[X], (∃ n, r₀.coeff n = 1) → IsUnit (polyEmb A O ρ hO hρ hX r₀) := by

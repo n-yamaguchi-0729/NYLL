@@ -131,7 +131,7 @@ theorem exists_eq_smul_pullbackAlong [IsCurveOver K F'] (φ : F →ₐ[K] F') (h
       exact (smul_eq_zero.mp h2).resolve_right hω₀
     exact one_ne_zero ((Module.forall_dual_apply_eq_zero_iff F (1 : F')).mp hall)
   have hspan : Submodule.span F' {Differential.pullbackAlong φ ω₀} = ⊤ :=
-    (finrank_eq_one_iff_of_nonzero _ hη₀).mp IsCurveOver.finrank_kaehler
+    (finrank_eq_one_iff_of_ne_zero _ hη₀).mp IsCurveOver.finrank_kaehler
   have hmem : ω' ∈ Submodule.span F' {Differential.pullbackAlong φ ω₀} := by
     rw [hspan]
     exact Submodule.mem_top

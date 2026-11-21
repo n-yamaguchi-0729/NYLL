@@ -24,14 +24,33 @@ noncomputable section
 
 namespace AlgebraicGeometry.GeneralizedJacobian.RigidifiedLineBundle
 
-/-- Evaluation of a one-member module descent datum on its actual covering scheme. -/
-def descentComponentFunctor {Y Y' : Scheme.{u}} (q : Y' ⟶ Y) :
-    ((Scheme.Modules.pseudofunctor.{u}).comp Bicategory.Adj.forget₁).DescentData
-      (fun _ : Unit => q) ⥤ Y'.Modules where
+private def evaluateDescentComponent
+    {C : Type*} [Category C]
+    (P : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat)
+    {Y Y' : C} (q : Y' ⟶ Y) :
+    P.DescentData (fun _ : Unit => q) ⥤ P.obj (.mk (Opposite.op Y')) where
   obj d := d.obj ()
   map e := e.hom ()
   map_id _ := rfl
   map_comp _ _ := rfl
+
+private theorem evaluateDescentComponent_compPullFunctorIso
+    {C : Type*} [Category C]
+    (P : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat)
+    {X D X' D' : C} (i : D ⟶ X) (q : X' ⟶ X)
+    (i' : D' ⟶ X') (q' : D' ⟶ D) (h : i' ≫ q = q' ≫ i)
+    (L : P.obj (.mk (Opposite.op X))) :
+    (evaluateDescentComponent P q').mapIso
+      ((Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso P
+        (f := fun _ : Unit => q) (p := i) (f' := fun _ : Unit => q')
+        (α := fun a => a) (p' := fun _ => i') (fun _ => h)).app L) =
+      (Cat.Hom.toNatIso (P.isoMapOfCommSq (CommSq.mk h).op.toLoc)).symm.app L := rfl
+
+/-- Evaluation of a one-member module descent datum on its actual covering scheme. -/
+def descentComponentFunctor {Y Y' : Scheme.{u}} (q : Y' ⟶ Y) :
+    ((Scheme.Modules.pseudofunctor.{u}).comp Bicategory.Adj.forget₁).DescentData
+      (fun _ : Unit => q) ⥤ Y'.Modules :=
+  evaluateDescentComponent ((Scheme.Modules.pseudofunctor.{u}).comp Bicategory.Adj.forget₁) q
 
 variable {X D X' : Scheme.{u}} (i : D ⟶ X) (q : X' ⟶ X)
 
@@ -41,10 +60,11 @@ theorem restrictCanonicalDescentDataIso_component (L : X.Modules) :
     (descentComponentFunctor (pullback.snd q i)).mapIso
         ((restrictCanonicalDescentDataIso i q).app L) =
       (restrictionComparison q (pullback.snd q i) pullback.condition).app L := by
-  apply CategoryTheory.Iso.ext
-  exact congrArg CategoryTheory.Iso.hom
-    (AlgebraicCurves.Geometry.Sheaves.DescentComparison.square_component_eq
-      (pullback.fst q i) q (pullback.snd q i) i pullback.condition L)
+  have h := evaluateDescentComponent_compPullFunctorIso
+    ((Scheme.Modules.pseudofunctor.{u}).comp Bicategory.Adj.forget₁)
+    i q (pullback.fst q i) (pullback.snd q i) pullback.condition L
+  exact h.trans (AlgebraicCurves.Geometry.Sheaves.DescentComparison.square_component_eq
+    (pullback.fst q i) q (pullback.snd q i) i pullback.condition L)
 
 namespace DescentData
 

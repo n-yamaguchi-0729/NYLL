@@ -604,7 +604,7 @@ theorem _root_.existsUnique_valuationSubring_of_pow_eq_mul
     have h1 : (1 : ↥(integralClosure R L) ⧸ P) ≠ 0 := by
       rw [Ne, ← map_one (Ideal.Quotient.mk P), Ideal.Quotient.eq_zero_iff_mem]
       exact hPprime.ne_top ∘ (Ideal.eq_top_iff_one P).mpr
-    obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' (K := R ⧸ maximalIdeal R) (1 :
+    obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_ne_zero' (K := R ⧸ maximalIdeal R) (1 :
       ↥(integralClosure R L) ⧸ P) h1).mp hf1 (Ideal.Quotient.mk P s)
     obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective c
     refine ⟨r, ?_⟩

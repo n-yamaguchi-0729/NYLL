@@ -559,7 +559,7 @@ theorem isLocalization_functionField (W : Y.Opens) (hW : IsAffineOpen W) [Nonemp
     rw [map_ne_zero_iff _ hinj]
     exact nonZeroDivisors.ne_zero hr
   · intro n hn
-    obtain ⟨r, hr, hdvd⟩ := (Algebra.IsAlgebraic.isAlgebraic (R := Γ(Y, W)) n).exists_nonzero_dvd hn
+    obtain ⟨r, hr, hdvd⟩ := (Algebra.IsAlgebraic.isAlgebraic (R := Γ(Y, W)) n).exists_ne_zero_dvd hn
     exact ⟨algebraMap _ _ r, ⟨r, mem_nonZeroDivisors_of_ne_zero hr, rfl⟩, hdvd⟩
 
 theorem germ_norm_eq_normGerm (W : Y.Opens) (hW : IsAffineOpen W) [Nonempty W]

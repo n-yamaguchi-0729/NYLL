@@ -55,7 +55,7 @@ lemma homogeneousPart_monomial_coeff (n : ℕ) (x : homogeneousPart I n) :
 lemma homogeneousPart_coeff (n m : ℕ) (x : homogeneousPart I n) :
     x.val.val.coeff m = if n = m then x.val.val.coeff n else 0 :=
   (congrArg (fun p : R[X] => p.coeff m) (homogeneousPart_monomial_coeff I n x)).trans
-    (Polynomial.coeff_monomial (n := n) (a := x.val.val.coeff n) (m := m))
+    Polynomial.coeff_monomial_apply
 
 private lemma component_coeff (p : reesAlgebra I) (n : ℕ) :
     (component I p n).val.val.coeff n = p.val.coeff n :=
@@ -99,7 +99,8 @@ lemma decomposition_leftInverse :
     Function.LeftInverse (DirectSum.coeAddMonoidHom (homogeneousPart I)) (decomposition I) := by
   intro p
   apply Subtype.ext
-  apply Polynomial.ext
+  apply AddMonoidAlgebra.ext
+  apply DFunLike.ext
   intro n
   rw [coefficient_sum, decomposition_apply, component_coeff]
 

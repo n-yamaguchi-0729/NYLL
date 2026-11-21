@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.Unrigidified
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
 public import Mathlib.AlgebraicGeometry.Cover.Open
 public import Mathlib.Data.Quot
 

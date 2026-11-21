@@ -99,7 +99,7 @@ theorem
       (pullback.congrHom rfl hk).hom) ≫ pullback.snd q k = _
     simp only [Category.assoc, pullback.congrHom_hom, pullback.map,
       pullback.lift_snd, Category.comp_id, pullbackLeftPullbackSndIso_hom_snd]
-    all_goals rfl
+    rfl
   exact FibreIdentGC3.bijective_appTop_of_iso_over e.symm _ _
     (by rw [Iso.symm_hom, Iso.inv_comp_eq, he]) h2
 end bijective_appTop_pullback_snd_of_bijective_appTop_fiberToSpecResidueField

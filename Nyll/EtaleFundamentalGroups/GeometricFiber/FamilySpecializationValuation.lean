@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FamilyGeometricFiberCartesian
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FamilySpecializationNaturality
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
@@ -44,9 +45,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The specified lift produces an actual valuation family, its unchanged
 generic fiber, and the two proper field-extension comparisons at the closed

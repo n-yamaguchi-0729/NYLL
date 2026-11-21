@@ -94,7 +94,7 @@ lemma uAS_symm_trans {Y : Scheme.{u}} (W : Y.Opens) {A : ((W : Scheme.{u})).Modu
 
 lemma canTriv_transition (𝒰 : X.OrderedAffineCover) (s : 𝒰.Idx 1) : (canTriv 𝒰).transition s = 1 :=
   by
-  simp only [CechTrivialisation.transition, canTriv_restrict]
+  simp only [CechTrivialisation.transition, CechTrivialisation.transitionSection, canTriv_restrict]
   exact uAS_symm_trans _ _
 
 lemma canTriv_comap (𝒰 : X.OrderedAffineCover) {X₀ : Scheme.{u}} (g : X₀ ⟶ X) [IsAffineHom g] (a :

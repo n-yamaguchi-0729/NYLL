@@ -46,6 +46,10 @@ This file proves the coequalizer-preservation part of Stacks Project, Tag
 
 @[expose] public section
 
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+  AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
+  AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
+
 universe u v w u' v'
 
 noncomputable section
@@ -411,11 +415,6 @@ private lemma preservesColimit_parallelPair_of_split
 end CategoryTheory.Limits
 
 namespace AlgebraicGeometry
-
-private instance finiteEtaleOverCategoryForCoequalizers (Y : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ Y) :=
-  FiniteEtale.instCategory Y
 
 private lemma sigmaMap_comp_sigmaSpec {R : Type u} [CommRing R]
     {E F : Type u} (sigma : E → F) :
@@ -1107,19 +1106,6 @@ end AlgebraicGeometry
 namespace AlgebraicGeometry.FiniteEtale
 
 variable {X : Scheme.{u}}
-
-local instance finiteEtaleHasPullbacksAlongForCoequalizers
-    {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  FiniteEtale.finiteEtaleHasPullbacksAlong f
-
-private instance finiteEtaleBaseChangeAlongForCoequalizers
-    {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hp ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hp⟩
 
 /-- An object finite étale over a finite étale `X`-scheme is the same data as
 an object over that scheme in `FiniteEtale X`. -/

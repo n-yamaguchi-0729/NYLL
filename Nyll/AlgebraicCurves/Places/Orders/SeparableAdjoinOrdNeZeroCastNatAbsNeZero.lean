@@ -62,19 +62,8 @@ open _root_.AlgebraicCurve
 namespace SEPEngine
 open _root_.AlgebraicCurve
 
-open IntermediateField Polynomial
-
-private def frobeniusSubfield (M : Type*) [Field M] (p : ℕ) [ExpChar M p] : Subfield M :=
-  (frobenius M p).fieldRange
-
-end AlgebraicCurve.SEPEngine
-
-namespace AlgebraicCurve
-open _root_.AlgebraicCurve
-namespace SEPEngine
-open _root_.AlgebraicCurve
-
 open KaehlerDifferential IntermediateField
+open _root_.AlgebraicCurve (frobeniusSubfield)
 
 private theorem not_pow_of_cast_natAbs_ord_ne_zero {K F : Type*} [Field K] [Field F] [Algebra K F]
     (v : AlgebraicCurve.Place K F) {t : F} {p : ℕ} [CharP K p]

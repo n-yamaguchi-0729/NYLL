@@ -18,6 +18,8 @@ frontier where the actual ramification-image subgroup will be constructed.
 
 @[expose] public section
 
+open LocalFieldTheory (localNormSubgroup)
+
 noncomputable section
 
 universe u
@@ -42,7 +44,7 @@ theorem fieldNormSubgroup_valueImage_eq_residueDegree
     [Valuation.HasExtension (ValuativeRel.valuation K)
       (ValuativeRel.valuation L)] :
     (multiplicativeIntegerValuation K).subgroupValueSubgroup
-        (fieldNormSubgroup K L) =
+        (localNormSubgroup K L) =
       integerMultipleSubgroup (Module.finrank 𝓀[K] 𝓀[L] : ℤ) := by
   rcases multiplicativeIntegerValuation_exists_uniformizer L with ⟨ϖL, hϖL⟩
   let N :=
@@ -51,7 +53,7 @@ theorem fieldNormSubgroup_valueImage_eq_residueDegree
       (multiplicativeIntegerValuation L)
       (Module.finrank 𝓀[K] 𝓀[L])
       (fieldNormUnits_valuation_formula (K := K) (L := L))
-  have hnorm : N.normSubgroup = fieldNormSubgroup K L := by
+  have hnorm : N.normSubgroup = localNormSubgroup K L := by
     simpa [N] using
       valuedFieldNorm_normSubgroup_eq_fieldNormSubgroup
         K L
@@ -76,7 +78,7 @@ theorem exists_mem_fieldNormSubgroup_val_iff_residueDegree_dvd
     [Valuation.HasExtension (ValuativeRel.valuation K)
       (ValuativeRel.valuation L)]
     (n : ℤ) :
-    (∃ x : Kˣ, x ∈ fieldNormSubgroup K L ∧
+    (∃ x : Kˣ, x ∈ localNormSubgroup K L ∧
         (multiplicativeIntegerValuation K).val x = n) ↔
       (Module.finrank 𝓀[K] 𝓀[L] : ℤ) ∣ n := by
   have himage :=
@@ -86,9 +88,9 @@ theorem exists_mem_fieldNormSubgroup_val_iff_residueDegree_dvd
     have hmem :
         Multiplicative.ofAdd n ∈
           (multiplicativeIntegerValuation K).subgroupValueSubgroup
-            (fieldNormSubgroup K L) :=
+            (localNormSubgroup K L) :=
       (MultiplicativeIntegerValuation.ofAdd_mem_subgroupValueSubgroup_iff
-        (multiplicativeIntegerValuation K) (fieldNormSubgroup K L) n).2 hn
+        (multiplicativeIntegerValuation K) (localNormSubgroup K L) n).2 hn
     have hmultiple :
         Multiplicative.ofAdd n ∈
           integerMultipleSubgroup (Module.finrank 𝓀[K] 𝓀[L] : ℤ) := by
@@ -103,11 +105,11 @@ theorem exists_mem_fieldNormSubgroup_val_iff_residueDegree_dvd
     have hmem :
         Multiplicative.ofAdd n ∈
           (multiplicativeIntegerValuation K).subgroupValueSubgroup
-            (fieldNormSubgroup K L) := by
+            (localNormSubgroup K L) := by
       simpa [himage] using hmultiple
     exact
       (MultiplicativeIntegerValuation.ofAdd_mem_subgroupValueSubgroup_iff
-        (multiplicativeIntegerValuation K) (fieldNormSubgroup K L) n).1 hmem
+        (multiplicativeIntegerValuation K) (localNormSubgroup K L) n).1 hmem
 
 /-- Natural-number form of
 `exists_mem_fieldNormSubgroup_val_iff_residueDegree_dvd`. -/
@@ -121,7 +123,7 @@ theorem exists_mem_fieldNormSubgroup_val_nat_iff_residueDegree_dvd
     [Valuation.HasExtension (ValuativeRel.valuation K)
       (ValuativeRel.valuation L)]
     (n : ℕ) :
-    (∃ x : Kˣ, x ∈ fieldNormSubgroup K L ∧
+    (∃ x : Kˣ, x ∈ localNormSubgroup K L ∧
         (multiplicativeIntegerValuation K).val x = (n : ℤ)) ↔
       Module.finrank 𝓀[K] 𝓀[L] ∣ n := by
   rw [exists_mem_fieldNormSubgroup_val_iff_residueDegree_dvd
@@ -139,7 +141,7 @@ theorem exists_mem_fieldNormSubgroup_val_residueDegree
     [Algebra K L] [FiniteDimensional K L] [Algebra.IsSeparable K L]
     [Valuation.HasExtension (ValuativeRel.valuation K)
       (ValuativeRel.valuation L)] :
-    ∃ x : Kˣ, x ∈ fieldNormSubgroup K L ∧
+    ∃ x : Kˣ, x ∈ localNormSubgroup K L ∧
       (multiplicativeIntegerValuation K).val x =
         (Module.finrank 𝓀[K] 𝓀[L] : ℤ) :=
   (exists_mem_fieldNormSubgroup_val_iff_residueDegree_dvd
@@ -173,7 +175,7 @@ theorem: the base valuation image of `N_{M/K}(Mˣ)` is cut out by the lcm of
 the two lower Neu1999 residue degrees. -/
 theorem fieldNormSubgroup_valueImage_le_lcm_towers :
     (multiplicativeIntegerValuation K).subgroupValueSubgroup
-        (fieldNormSubgroup K M) ≤
+        (localNormSubgroup K M) ≤
       integerMultipleSubgroup
         ((((Module.finrank 𝓀[K] 𝓀[L] : ℤ).lcm
           (Module.finrank 𝓀[K] 𝓀[L'] : ℤ) : ℕ) : ℤ)) :=
@@ -191,7 +193,7 @@ theorem fieldNormSubgroup_valueImage_le_lcm_towers :
 inherits the lcm value-step inclusion.  This is the immediate input shape for
 the actual ramification-image subgroup. -/
 theorem subgroupValueSubgroup_le_lcm_of_le_fieldNormSubgroup_towers
-    {S : Subgroup Kˣ} (hS : S ≤ fieldNormSubgroup K M) :
+    {S : Subgroup Kˣ} (hS : S ≤ localNormSubgroup K M) :
     (multiplicativeIntegerValuation K).subgroupValueSubgroup S ≤
       integerMultipleSubgroup
         ((((Module.finrank 𝓀[K] 𝓀[L] : ℤ).lcm
@@ -214,7 +216,7 @@ theorem lcm_residueDegree_dvd_of_exists_mem_val_of_le_fieldNormSubgroup_towers
     (hn :
       ∃ x : Kˣ, x ∈ S ∧
         (multiplicativeIntegerValuation K).val x = n)
-    (hS : S ≤ fieldNormSubgroup K M) :
+    (hS : S ≤ localNormSubgroup K M) :
     ((((Module.finrank 𝓀[K] 𝓀[L] : ℤ).lcm
       (Module.finrank 𝓀[K] 𝓀[L'] : ℤ) : ℕ) : ℤ) ∣ n) :=
   by
@@ -241,7 +243,7 @@ theorem intLcm_residueDegree_dvd_nat_of_exists_mem_val_of_le_fieldNormSubgroup_t
     (hn :
       ∃ x : Kˣ, x ∈ S ∧
         (multiplicativeIntegerValuation K).val x = (n : ℤ))
-    (hS : S ≤ fieldNormSubgroup K M) :
+    (hS : S ≤ localNormSubgroup K M) :
     ((Module.finrank 𝓀[K] 𝓀[L] : ℤ).lcm
       (Module.finrank 𝓀[K] 𝓀[L'] : ℤ) : ℕ) ∣ n := by
   exact Int.natCast_dvd_natCast.mp
@@ -255,7 +257,7 @@ theorem nat_lcm_residueDegree_dvd_nat_of_exists_mem_val_of_le_fieldNormSubgroup_
     (hn :
       ∃ x : Kˣ, x ∈ S ∧
         (multiplicativeIntegerValuation K).val x = (n : ℤ))
-    (hS : S ≤ fieldNormSubgroup K M) :
+    (hS : S ≤ localNormSubgroup K M) :
     Nat.lcm (Module.finrank 𝓀[K] 𝓀[L])
         (Module.finrank 𝓀[K] 𝓀[L']) ∣ n := by
   simpa [Int.lcm_def] using
@@ -291,7 +293,7 @@ common-top field-norm value image is cut out by the lcm of the two Galois
 residue degrees. -/
 theorem fieldNormSubgroup_valueImage_le_galoisResidueDegree_lcm_towers :
     (multiplicativeIntegerValuation K).subgroupValueSubgroup
-        (fieldNormSubgroup K M) ≤
+        (localNormSubgroup K M) ≤
       integerMultipleSubgroup
         ((((Module.finrank 𝓀[K] 𝓀[L] : ℤ).lcm
           (Module.finrank 𝓀[K] 𝓀[L'] : ℤ) : ℕ) : ℤ)) := by
@@ -302,7 +304,7 @@ theorem fieldNormSubgroup_valueImage_le_galoisResidueDegree_lcm_towers :
 /-- Any subgroup already contained in the common-top norm subgroup inherits
 the Galois-residue-degree lcm value-step inclusion. -/
 theorem subgroupValueSubgroup_le_galoisResidueDegree_lcm_of_le_fieldNormSubgroup
-    {S : Subgroup Kˣ} (hS : S ≤ fieldNormSubgroup K M) :
+    {S : Subgroup Kˣ} (hS : S ≤ localNormSubgroup K M) :
     (multiplicativeIntegerValuation K).subgroupValueSubgroup S ≤
       integerMultipleSubgroup
         ((((Module.finrank 𝓀[K] 𝓀[L] : ℤ).lcm
@@ -318,7 +320,7 @@ theorem nat_lcm_galoisResidueDegree_dvd_nat_of_mem_le_fieldNormSubgroup
     (hn :
       ∃ x : Kˣ, x ∈ S ∧
         (multiplicativeIntegerValuation K).val x = (n : ℤ))
-    (hS : S ≤ fieldNormSubgroup K M) :
+    (hS : S ≤ localNormSubgroup K M) :
     Nat.lcm
         (Module.finrank 𝓀[K] 𝓀[L])
         (Module.finrank 𝓀[K] 𝓀[L']) ∣ n := by

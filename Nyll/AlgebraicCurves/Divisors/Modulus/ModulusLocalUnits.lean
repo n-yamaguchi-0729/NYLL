@@ -93,9 +93,9 @@ theorem congruenceUnitSubgroup_antitone (v : Place K F) :
 theorem unitReduction_isLocalHom (v : Place K F) {n : ℕ} (hn : n ≠ 0) :
     IsLocalHom
       (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal v.toValuationSubring) ^ n)) :=
-  isLocalHom_of_le_jacobson_bot _
+  isLocalHom_of_le_jacobson
     ((Ideal.pow_le_self hn).trans
-      (IsLocalRing.maximalIdeal_le_jacobson (⊥ : Ideal v.toValuationSubring)))
+      (IsLocalRing.ringJacobson_eq_maximalIdeal v.toValuationSubring).ge)
 
 /-- Every unit of a positive truncated local ring lifts to a local unit. -/
 theorem unitReduction_surjective (v : Place K F) {n : ℕ} (hn : n ≠ 0) :

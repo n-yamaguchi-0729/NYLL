@@ -56,7 +56,8 @@ theorem integralClosure_etale_of_ramificationIndex_eq_one
       (Ideal.residueFieldRingEquiv (IsLocalRing.maximalIdeal R) (P.under R)
         (RingEquiv.refl R)
         (hbase.symm.trans (Ideal.comap_id (P.under R)).symm))
-  refine ⟨inferInstance, ?_⟩
+  let : Algebra.IsIntegral R (integralClosure R L) := integralClosure.algebraIsIntegral
+  refine ⟨Algebra.IsAlgebraic.isSeparable_of_perfectField, ?_⟩
   have hm : IsLocalRing.maximalIdeal R ≠ ⊥ := by
     intro hm
     exact IsDiscreteValuationRing.not_isField R

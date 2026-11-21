@@ -56,7 +56,8 @@ public import Mathlib.Logic.Equiv.Basic
 public import Mathlib.Logic.Equiv.Set
 public import Mathlib.NumberTheory.RamificationInertia.Galois
 public import Mathlib.NumberTheory.RamificationInertia.Ramification
-public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Completion
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Valuation
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import Mathlib.RingTheory.DedekindDomain.Dvr
 public import Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas
@@ -90,6 +91,7 @@ public import Mathlib.RingTheory.Valuation.LocalSubring
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.SetTheory.Cardinal.Finite
 public import Mathlib.Tactic.Ring.RingNF
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Discrete.DVRAlgebraMapMemSeparable
 public import Nyll.SchemeTheory.RingTheory.Localization.InertiaDegree
 
 /-!
@@ -105,7 +107,19 @@ namespace ValuationSubring_natCard_algHom_comap_eq_ramificationIdx_mul_inertiaDe
 
 open IsLocalRing IsDedekindDomain
 
+open ValuationSubring_isDiscreteValuationRing_of_forall_algebraMap_mem_of_isSeparable.EmbCountDvr
+  (Over)
+
 namespace KFA2a
+
+open ValuationSubring_isDiscreteValuationRing_of_forall_algebraMap_mem_of_isSeparable.EmbCountDvr
+  (valuationSubringAtCenter_eq over_valuationSubringAtPrime overAlgebra
+  algebraMap_injective algebraMap_overAlgebra_injective
+  mem_of_mem_integralClosure ne_top_of_over coe_algebraMap_integralClosure
+  algebraMap_integralClosure_injective isTorsionFree_integralClosure toOver coe_toOver center
+  mem_center_iff
+  center_isPrime center_ne_bot vOf mem_maximalIdeal_iff_inv_not_mem
+  maximalIdeal_ne_bot liesOver_maximalIdeal)
 
 section Dict
 
@@ -113,250 +127,42 @@ variable {C : Type*} [CommRing C] [IsDomain C] [IsDiscreteValuationRing C]
 variable (K : Type*) [Field K] [Algebra C K] [IsFractionRing C K]
 variable {F : Type*} [Field F] [Algebra K F] [Algebra C F] [IsScalarTower C K F]
 
-theorem isUnit_iff_inv_mem {L : Type*} [Field L] (B : ValuationSubring L) (x : B)
-    (hx0 : (x : L) ≠ 0) : IsUnit x ↔ (x : L)⁻¹ ∈ B := by
-  refine ⟨fun hx => ?_, fun hx => ?_⟩
-  · obtain ⟨y, hy⟩ := hx.exists_left_inv
-    have hyx : (y : L) * (x : L) = 1 := by
-      have := congrArg (Subtype.val) hy
-      simpa using this
-    rw [← eq_inv_of_mul_eq_one_left hyx]
-    exact y.2
-  · exact isUnit_iff_exists_inv.mpr ⟨⟨_, hx⟩, Subtype.ext (mul_inv_cancel₀ hx0)⟩
-
-theorem mem_maximalIdeal_iff_inv_not_mem {L : Type*} [Field L] (B : ValuationSubring L) (x : B)
-    (hx0 : (x : L) ≠ 0) : x ∈ maximalIdeal B ↔ (x : L)⁻¹ ∉ B := by
-  rw [IsLocalRing.mem_maximalIdeal, _root_.mem_nonunits_iff, isUnit_iff_inv_mem B x hx0]
-
-theorem mem_nonunits_iff_eq_zero_or {L : Type*} [Field L] (B : ValuationSubring L) (x : L) :
-    x ∈ B.nonunits ↔ x ∈ B ∧ (x = 0 ∨ x⁻¹ ∉ B) := by
-  constructor
-  · intro hx
-    have hxB : x ∈ B := B.nonunits_le hx
-    refine ⟨hxB, ?_⟩
-    by_cases hx0 : x = 0
-    · exact Or.inl hx0
-    · right
-      have : (⟨x, hxB⟩ : B) ∈ maximalIdeal B :=
-        (ValuationSubring.coe_mem_nonunits_iff (a := ⟨x, hxB⟩)).mp hx
-      exact (mem_maximalIdeal_iff_inv_not_mem B ⟨x, hxB⟩ hx0).mp this
-  · rintro ⟨hxB, h⟩
-    rw [show x = ((⟨x, hxB⟩ : B) : L) from rfl, ValuationSubring.coe_mem_nonunits_iff]
-    rcases h with h | h
-    · have : (⟨x, hxB⟩ : B) = 0 := Subtype.ext h
-      rw [this]; exact Ideal.zero_mem _
-    · exact (mem_maximalIdeal_iff_inv_not_mem B ⟨x, hxB⟩ (fun h0 => h (by
-        rw [show x = 0 from h0, inv_zero]
-        exact B.zero_mem))).mpr h
-
 theorem mem_nonunits_comap_iff {L L' : Type*} [Field L] [Field L'] (B : ValuationSubring L')
     (f : L →+* L') (x : L) : x ∈ (B.comap f).nonunits ↔ f x ∈ B.nonunits := by
-  rw [mem_nonunits_iff_eq_zero_or, mem_nonunits_iff_eq_zero_or, ValuationSubring.mem_comap,
+  rw [ValuationSubring.mem_nonunits_iff_or, ValuationSubring.mem_nonunits_iff_or,
     ValuationSubring.mem_comap, map_inv₀, map_eq_zero]
-
-theorem inertiaDeg_maximalIdeal_eq_one_of_isLocalization {R : Type*} [CommRing R]
-    (p : Ideal R) [p.IsMaximal] (Rₚ : Type*) [CommRing Rₚ] [Algebra R Rₚ]
-    [IsLocalization.AtPrime Rₚ p] [IsLocalRing Rₚ] :
-    (maximalIdeal Rₚ).inertiaDeg R = 1 :=
-  _root_.IsLocalization.AtPrime.inertiaDeg_maximalIdeal_eq_one p Rₚ
-
-variable (C) in
-omit K in
-/-- The condition that the base ring maps into the valuation ring with the same nonunits. -/
-def Over (B : ValuationSubring F) : Prop :=
-  (∀ c : C, algebraMap C F c ∈ B) ∧ ∀ c : C, algebraMap C F c ∈ B.nonunits ↔ c ∈ maximalIdeal C
-
-/-- The algebra structure on the valuation subring induced by the base-ring map landing in it. -/
-abbrev overAlgebra (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B) : Algebra C B :=
-  ((algebraMap C F).codRestrict B h).toAlgebra
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-theorem coe_algebraMap_overAlgebra (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B)
-    (c : C) :
-    letI := overAlgebra B h
-    ((algebraMap C B c : B) : F) = algebraMap C F c := rfl
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-theorem isScalarTower_overAlgebra (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B) :
-    let := overAlgebra B h
-    IsScalarTower C B F := by
-  intro sharedOwner1
-  exact IsScalarTower.of_algebraMap_eq fun a => rfl
-omit [IsDomain C] [IsDiscreteValuationRing C] in
-include K in
-theorem algebraMap_injective : Function.Injective (algebraMap C F) := by
-  rw [IsScalarTower.algebraMap_eq C K F]
-  exact (algebraMap K F).injective.comp (IsFractionRing.injective C K)
-omit [IsDomain C] [IsDiscreteValuationRing C] in
-include K in
-theorem algebraMap_overAlgebra_injective (B : ValuationSubring F)
-    (h : ∀ c : C, algebraMap C F c ∈ B) :
-    let := overAlgebra B h
-    Function.Injective (algebraMap C B) := by
-  intro sharedOwner1 a b hab
-  have h' : algebraMap C F a = algebraMap C F b := congrArg (fun z : B => (z : F)) hab
-  exact algebraMap_injective (C := C) K h'
-omit K in
-theorem comap_maximalIdeal_overAlgebra (B : ValuationSubring F) (h : Over C B) :
-    let := overAlgebra B h.1
-    (maximalIdeal B).comap (algebraMap C B) = maximalIdeal C := by
-  intro sharedOwner1
-  ext c
-  rw [Ideal.mem_comap, ← h.2 c, ← ValuationSubring.coe_mem_nonunits_iff]
-  rfl
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-theorem mem_of_mem_integralClosure (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B)
-    {y : F} (hy : y ∈ integralClosure C F) : y ∈ B := by
-  let := overAlgebra B h
-  have := isScalarTower_overAlgebra B h
-  have hyB : IsIntegral B y := ((mem_integralClosure_iff C F).mp hy).tower_top
-  obtain ⟨z, hz⟩ := (isIntegrallyClosed_iff F).mp inferInstance hyB
-  rw [← hz]
-  exact z.2
-
-variable (C) in
-omit K in
-theorem maximalIdeal_ne_bot : maximalIdeal C ≠ ⊥ :=
-  IsDiscreteValuationRing.not_a_field C
-include K in
-theorem ne_top_of_over (B : ValuationSubring F) (h : Over C B) : B ≠ ⊤ := by
-  intro hB
-  obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible C
-  have hϖ0 : algebraMap C F ϖ ≠ 0 :=
-    (map_ne_zero_iff _ (algebraMap_injective (C := C) (F := F) K)).mpr hϖ.ne_zero
-  have hmem : algebraMap C F ϖ ∈ B.nonunits := (h.2 ϖ).mpr hϖ.not_isUnit
-  rcases ((mem_nonunits_iff_eq_zero_or B _).mp hmem).2 with h0 | hinv
-  · exact hϖ0 h0
-  · exact hinv (hB.symm ▸ ValuationSubring.mem_top _)
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-theorem coe_algebraMap_integralClosure (c : C) :
-    ((algebraMap C (integralClosure C F) c : integralClosure C F) : F) = algebraMap C F c := rfl
-omit [IsDomain C] [IsDiscreteValuationRing C] in
-include K in
-theorem algebraMap_integralClosure_injective :
-    Function.Injective (algebraMap C (integralClosure C F)) := by
-  intro a b hab
-  have h' : algebraMap C F a = algebraMap C F b :=
-    congrArg (fun z : integralClosure C F => (z : F)) hab
-  exact algebraMap_injective (C := C) K h'
-omit [IsDiscreteValuationRing C] in
-include K in
-theorem isTorsionFree_integralClosure : Module.IsTorsionFree C (integralClosure C F) := by
-  rw [Module.isTorsionFree_iff_smul_eq_zero]
-  intro r c hrc
-  rw [Algebra.smul_def] at hrc
-  rcases mul_eq_zero.mp hrc with h | h
-  · exact Or.inl (algebraMap_integralClosure_injective (C := C) (F := F) K (by rw [h, map_zero]))
-  · exact Or.inr h
-
-theorem liesOver_maximalIdeal (v : HeightOneSpectrum (integralClosure C F)) :
-    v.asIdeal.LiesOver (maximalIdeal C) := by
-  refine ⟨(IsLocalRing.eq_maximalIdeal ?_).symm⟩
-  have hne : v.asIdeal.under C ≠ ⊥ := fun h0 =>
-    v.ne_bot (Ideal.eq_bot_of_under_eq_bot h0)
-  exact Ring.DimensionLEOne.maximalOfPrime hne (Ideal.IsPrime.under C v.asIdeal)
 
 attribute [local instance] liesOver_maximalIdeal
 
-/-- The inclusion of the integral closure into a valuation ring containing the base ring. -/
-noncomputable def toOver (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B) :
-    integralClosure C F →+* B :=
-  (algebraMap (integralClosure C F) F).codRestrict B fun y => mem_of_mem_integralClosure B h y.2
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-@[scoped simp] theorem coe_toOver (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B)
-    (s : integralClosure C F) : ((toOver B h s : B) : F) = (s : F) := rfl
-
-/-- The center of the valuation on the integral closure of the local base ring. -/
-noncomputable def center (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B) :
-    Ideal (integralClosure C F) :=
-  (maximalIdeal B).comap (toOver B h)
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-theorem mem_center_iff (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B)
-    (s : integralClosure C F) : s ∈ center B h ↔ (s : F) ∈ B.nonunits := by
-  rw [center, Ideal.mem_comap, ← ValuationSubring.coe_mem_nonunits_iff]
-  rfl
-
-scoped instance center_isPrime (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c ∈ B) :
-    (center B h).IsPrime :=
-  Ideal.comap_isPrime _ _
-
 omit K in
 theorem comap_center (B : ValuationSubring F) (h : Over C B) :
-    (center B h.1).comap (algebraMap C (integralClosure C F)) = maximalIdeal C := by
+    (center B h.mem).comap (algebraMap C (integralClosure C F)) = maximalIdeal C := by
   ext c
-  rw [Ideal.mem_comap, mem_center_iff, coe_algebraMap_integralClosure, h.2]
+  rw [Ideal.mem_comap, mem_center_iff, coe_algebraMap_integralClosure, h.nonunit_iff]
 
 scoped instance center_liesOver (B : ValuationSubring F) (h : Over C B) :
-    (center B h.1).LiesOver (maximalIdeal C) :=
+    (center B h.mem).LiesOver (maximalIdeal C) :=
   ⟨(comap_center B h).symm⟩
 
-include K in
-theorem center_ne_bot (B : ValuationSubring F) (h : Over C B) : center B h.1 ≠ ⊥ := by
-  intro h0
-  have h1 : (center B h.1).comap (algebraMap C (integralClosure C F)) = ⊥ := by
-    rw [h0, Ideal.comap_bot_of_injective _ (algebraMap_integralClosure_injective (C := C) (F := F)
-      K)]
-  rw [comap_center B h] at h1
-  exact maximalIdeal_ne_bot C h1
-include K in
-/-- The height-one prime defined by the center of a valuation above the local base ring. -/
-noncomputable def vOf (B : ValuationSubring F) (h : Over C B) :
-    HeightOneSpectrum (integralClosure C F) :=
-  ⟨center B h.1, inferInstance, center_ne_bot K B h⟩
-
 @[scoped simp] theorem vOf_asIdeal (B : ValuationSubring F) (h : Over C B) :
-    (vOf K B h).asIdeal = center B h.1 := rfl
+    (vOf K B h).asIdeal = center B h.mem := rfl
 
 section dedekind
 
 variable [IsDedekindDomain (integralClosure C F)] [IsFractionRing (integralClosure C F) F]
 
-/-- The valuation ring corresponding to a height-one prime of the integral closure. -/
-noncomputable abbrev W (v : HeightOneSpectrum (integralClosure C F)) : ValuationSubring F :=
-  HeightOneSpectrum.valuationSubringAtPrime F v
+local notation "W" => HeightOneSpectrum.valuationSubringAtPrime F
+
 omit [IsDomain C] [IsDiscreteValuationRing C] in
 theorem isDiscreteValuationRing_W (v : HeightOneSpectrum (integralClosure C F)) :
     IsDiscreteValuationRing (W v) :=
   IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain (integralClosure C F)
     v.ne_bot (W v)
-omit K [IsDomain C] [IsDiscreteValuationRing C] in
-theorem coe_algebraMap_W (v : HeightOneSpectrum (integralClosure C F)) (s : integralClosure C F) :
-    ((algebraMap (integralClosure C F) (W v) s : W v) : F) = (s : F) := rfl
-omit K in
-theorem over_W (v : HeightOneSpectrum (integralClosure C F)) : Over C (W v) := by
-  have key : ∀ c : C, algebraMap C F c =
-      ((algebraMap (integralClosure C F) (W v) (algebraMap C (integralClosure C F) c) : W v) : F) :=
-    fun c => rfl
-  refine ⟨fun c => ?_, fun c => ?_⟩
-  · rw [key]; exact SetLike.coe_mem _
-  · rw [key, ValuationSubring.coe_mem_nonunits_iff,
-      IsLocalization.AtPrime.to_map_mem_maximal_iff (W v) v.asIdeal,
-      Ideal.over_def v.asIdeal (maximalIdeal C), Ideal.under_def, Ideal.mem_comap]
 
-theorem W_vOf_le (B : ValuationSubring F) (h : Over C B) : W (vOf K B h) ≤ B := by
-  rintro y ⟨a, s, hs, rfl⟩
-  refine B.mul_mem _ _ (mem_of_mem_integralClosure B h.1 a.2) ?_
-  have hs' : s ∉ center B h.1 := hs
-  have hs0 : (s : F) ≠ 0 := by
-    rintro h0
-    apply hs'
-    have : s = 0 := Subtype.ext h0
-    rw [this]; exact Ideal.zero_mem _
-  have := (mem_maximalIdeal_iff_inv_not_mem B (toOver B h.1 s) hs0).not.mp
-    (fun hm => hs' (Ideal.mem_comap.mpr hm))
-  simpa using this
-
-theorem W_vOf_eq (B : ValuationSubring F) (h : Over C B) : W (vOf K B h) = B :=
-  ValuationSubring.eq_of_le_of_ne_top _ (W_vOf_le K B h) (ne_top_of_over K B h)
-
-theorem vOf_W (v : HeightOneSpectrum (integralClosure C F)) : vOf K (W v) (over_W v) = v := by
-  apply HeightOneSpectrum.ext
-  ext s
-  change s ∈ center (W v) (over_W v).1 ↔ s ∈ v.asIdeal
-  rw [mem_center_iff, ← coe_algebraMap_W v s, ValuationSubring.coe_mem_nonunits_iff,
-    IsLocalization.AtPrime.to_map_mem_maximal_iff (W v) v.asIdeal]
 include K in
 theorem eq_of_center_eq (B B' : ValuationSubring F) (h : Over C B) (h' : Over C B')
-    (hc : center B h.1 = center B' h'.1) : B = B' := by
-  rw [← W_vOf_eq K B h, ← W_vOf_eq K B' h']
+    (hc : center B h.mem = center B' h'.mem) : B = B' := by
+  rw [← valuationSubringAtCenter_eq K B h, ← valuationSubringAtCenter_eq K B' h']
   have : vOf K B h = vOf K B' h' := HeightOneSpectrum.ext hc
   rw [this]
 
@@ -366,9 +172,9 @@ noncomputable def ef (B : ValuationSubring F) (h : ∀ c : C, algebraMap C F c �
   (maximalIdeal C).ramificationIdx' (maximalIdeal B) * (maximalIdeal B).inertiaDeg C
 include K in
 theorem ef_W (v : HeightOneSpectrum (integralClosure C F)) :
-    ef (W v) (over_W v).1 =
+    ef (W v) (over_valuationSubringAtPrime v).mem =
     (maximalIdeal C).ramificationIdx' v.asIdeal * v.asIdeal.inertiaDeg C := by
-  let : Algebra C (W v) := overAlgebra (W v) (over_W v).1
+  let : Algebra C (W v) := overAlgebra (W v) (over_valuationSubringAtPrime v).mem
   have : IsScalarTower C (integralClosure C F) (W v) :=
     IsScalarTower.of_algebraMap_eq fun a => Subtype.ext rfl
   have : IsDiscreteValuationRing (W v) := isDiscreteValuationRing_W v
@@ -384,7 +190,7 @@ theorem ef_W (v : HeightOneSpectrum (integralClosure C F)) :
     Ideal.ramificationIdx'_algebra_tower (by rw [hmapS]; exact hmW0)
       (by
         rw [Ne, Ideal.map_eq_bot_iff_of_injective (algebraMap_overAlgebra_injective K _ _)]
-        exact maximalIdeal_ne_bot C)
+        exact IsDiscreteValuationRing.not_a_field C)
       hmapS.le
   have he1 : v.asIdeal.ramificationIdx' (maximalIdeal (W v)) = 1 := by
     rw [← hmapS]
@@ -394,17 +200,18 @@ theorem ef_W (v : HeightOneSpectrum (integralClosure C F)) :
       v.asIdeal.inertiaDeg C * (maximalIdeal (W v)).inertiaDeg (integralClosure C F) :=
     Ideal.inertiaDeg_tower _ _
   have hf1 : (maximalIdeal (W v)).inertiaDeg (integralClosure C F) = 1 :=
-    inertiaDeg_maximalIdeal_eq_one_of_isLocalization v.asIdeal (W v)
+    _root_.IsLocalization.AtPrime.inertiaDeg_maximalIdeal_eq_one v.asIdeal (W v)
   change (maximalIdeal C).ramificationIdx' (maximalIdeal (W v)) *
       (maximalIdeal (W v)).inertiaDeg C = _
   rw [he, he1, hf, hf1, mul_one, mul_one]
 include K in
 theorem ef_eq (B : ValuationSubring F) (h : Over C B) :
-    ef B h.1 = (maximalIdeal C).ramificationIdx' (center B h.1) *
-      (center B h.1).inertiaDeg C := by
-  have key : (⟨B, h⟩ : {B : ValuationSubring F // Over C B}) = ⟨W (vOf K B h), over_W _⟩ :=
-    Subtype.ext (W_vOf_eq K B h).symm
-  have := congrArg (fun x : {B : ValuationSubring F // Over C B} => ef x.1 x.2.1) key
+    ef B h.mem = (maximalIdeal C).ramificationIdx' (center B h.mem) *
+      (center B h.mem).inertiaDeg C := by
+  have key : (⟨B, h⟩ : {B : ValuationSubring F // Over C B}) =
+      ⟨W (vOf K B h), over_valuationSubringAtPrime _⟩ :=
+    Subtype.ext (valuationSubringAtCenter_eq K B h).symm
+  have := congrArg (fun x : {B : ValuationSubring F // Over C B} => ef x.1 x.2.mem) key
   simp only at this
   rw [this, ef_W K]
   rfl
@@ -465,7 +272,7 @@ theorem over_comap {N' : Type*} [Field N'] [Algebra K N'] [Algebra C N'] [IsScal
     rw [IsScalarTower.algebraMap_apply C K κ, AlgHom.commutes, ← IsScalarTower.algebraMap_apply]
   refine ⟨fun c => ?_, fun c => ?_⟩
   · simp only [ValuationSubring.mem_comap, RingHom.coe_coe, hτ]
-    exact hV.1 c
+    exact hV.mem c
   · simp only [mem_nonunits_comap_iff, RingHom.coe_coe, hτ]
     exact hV.2 c
 
@@ -483,7 +290,7 @@ variable [IsDedekindDomain (integralClosure C N)] [IsFractionRing (integralClosu
 theorem card_twist (V : ValuationSubring N) (hV : Over C V) (B : ValuationSubring κ)
     (hB : Over C B) [FiniteDimensional K κ] [Algebra.IsSeparable K κ] :
     Nat.card {g : N ≃ₐ[K] N // V.comap (twist K (κ := κ) g : κ →+* N) = B} =
-      Module.finrank κ N * ef B hB.1 := by
+      Module.finrank κ N * ef B hB.mem := by
   classical
   let algSS : Algebra (integralClosure C κ) (integralClosure C N) :=
     (jS (C := C) (κ := κ) (N := N)).toRingHom.toAlgebra
@@ -525,13 +332,13 @@ theorem card_twist (V : ValuationSubring N) (hV : Over C V) (B : ValuationSubrin
   have coe_smul : ∀ (g : N ≃ₐ[K] N) (s : integralClosure C N),
       ((g • s : integralClosure C N) : N) = g (s : N) := fun g s => algebraMap_galRestrict_apply C
         g s
-  set P₀ : Ideal (integralClosure C N) := center V hV.1 with hP₀
-  set 𝔮 : Ideal (integralClosure C κ) := center B hB.1 with h𝔮
-  have : 𝔮.IsPrime := center_isPrime B hB.1
+  set P₀ : Ideal (integralClosure C N) := center V hV.mem with hP₀
+  set 𝔮 : Ideal (integralClosure C κ) := center B hB.mem with h𝔮
+  have : 𝔮.IsPrime := center_isPrime B hB.mem
   have h𝔮0 : 𝔮 ≠ ⊥ := center_ne_bot K B hB
   have h𝔮max : 𝔮.IsMaximal := Ring.DimensionLEOne.maximalOfPrime h𝔮0 inferInstance
   have : 𝔮.LiesOver (maximalIdeal C) := center_liesOver B hB
-  have : P₀.IsPrime := center_isPrime V hV.1
+  have : P₀.IsPrime := center_isPrime V hV.mem
   have : P₀.LiesOver (maximalIdeal C) := center_liesOver V hV
   have key : ∀ g : N ≃ₐ[K] N, ∀ s : integralClosure C κ,
       (s ∈ center (V.comap (twist K (κ := κ) g : κ →+* N)) (over_comap K V hV (twist K g)).1 ↔
@@ -633,7 +440,8 @@ theorem card_twist (V : ValuationSubring N) (hV : Over C V) (B : ValuationSubrin
     have : P.IsMaximal := Ring.DimensionLEOne.maximalOfPrime hP0 hPprime
     rw [heN, hfN, Ideal.ramificationIdxIn_eq_ramificationIdx (maximalIdeal C) P (N ≃ₐ[K] N),
       Ideal.inertiaDegIn_eq_inertiaDeg (maximalIdeal C) P (N ≃ₐ[K] N),
-      ← Ideal.ramificationIdx'_eq_ramificationIdx (maximalIdeal C) P (maximalIdeal_ne_bot C)]
+      ← Ideal.ramificationIdx'_eq_ramificationIdx (maximalIdeal C) P
+        (IsDiscreteValuationRing.not_a_field C)]
     have he : (maximalIdeal C).ramificationIdx' P =
         (maximalIdeal C).ramificationIdx' 𝔮 * 𝔮.ramificationIdx' P := by
       refine Ideal.ramificationIdx'_algebra_tower ?_ ?_ ?_
@@ -642,7 +450,7 @@ theorem card_twist (V : ValuationSubring N) (hV : Over C V) (B : ValuationSubrin
         · intro a b hab
           exact jS_injective (by rw [← hSS, ← hSS]; exact hab)
       · rw [Ne, Ideal.map_eq_bot_iff_of_injective (algebraMap_integralClosure_injective (F := N) K)]
-        exact maximalIdeal_ne_bot C
+        exact IsDiscreteValuationRing.not_a_field C
       · exact Ideal.map_le_iff_le_comap.mpr (le_of_eq
           (by rw [← Ideal.under_def]; exact hPover.over))
     have hf : P.inertiaDeg C = 𝔮.inertiaDeg C * P.inertiaDeg (integralClosure C κ) :=
@@ -707,9 +515,9 @@ theorem _root_.ValuationSubring.natCard_algHom_comap_eq_ramificationIdx_mul_iner
        (maximalIdeal C).ramificationIdx' (maximalIdeal ↥B) * (maximalIdeal ↥B).inertiaDeg C) := by
   classical
   refine ⟨inferInstance, ?_⟩
-  have hB : KFA2a.Over C B :=
+  have hB : Over C B :=
     ⟨hCB, fun c => by rw [← hCBmax c, ← ValuationSubring.coe_mem_nonunits_iff]⟩
-  have hA : KFA2a.Over C A :=
+  have hA : Over C A :=
     ⟨hCA, fun c => by rw [← hCAmax c, ← ValuationSubring.coe_mem_nonunits_iff]⟩
   have : IsAlgClosure K L := (isAlgClosure_iff K L).mpr ⟨inferInstance, inferInstance⟩
   set N : IntermediateField K L := IntermediateField.normalClosure K κ L with hN
@@ -742,7 +550,7 @@ theorem _root_.ValuationSubring.natCard_algHom_comap_eq_ramificationIdx_mul_iner
   have : IsDedekindDomain (integralClosure C N) :=
     IsIntegralClosure.isDedekindDomain C K N (integralClosure C N)
   let ι : N →ₐ[K] L := N.val
-  have hAN : KFA2a.Over C (A.comap (ι : N →+* L)) := KFA2a.over_comap K A hA ι
+  have hAN : Over C (A.comap (ι : N →+* L)) := KFA2a.over_comap K A hA ι
   have hcount := KFA2a.card_twist K (A.comap (ι : N →+* L)) hAN B hB
   let act : MulAction (N ≃ₐ[K] N) (κ →ₐ[K] N) :=
     { smul := fun g τ => (g : N →ₐ[K] N).comp τ

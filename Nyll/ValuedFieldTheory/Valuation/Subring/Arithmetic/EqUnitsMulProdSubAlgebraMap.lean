@@ -461,8 +461,8 @@ theorem _root_.ValuationSubring.exists_eq_units_mul_prod_sub_algebraMap_of_notMe
       rw [map_mul, map_pow, AlgHom.commutes, ← Algebra.smul_def]
       exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨i, rfl⟩)
     have hN : (⊤ : Submodule ↥A (S ⧸ J)) ≤ N :=
-      Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-        (IsLocalRing.maximalIdeal_le_jacobson _) hle
+      Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+        (IsLocalRing.ringJacobson_eq_maximalIdeal ↥A).ge hle
     have hmem : πC t ^ n ∈ N := hN Submodule.mem_top
     obtain ⟨c, hc⟩ := (Submodule.mem_span_range_iff_exists_fun (R := ↥A)).mp hmem
     set q : (↥A)[X] := ∑ i : Fin n, Polynomial.C (c i) * X ^ (i : ℕ) with hqdef

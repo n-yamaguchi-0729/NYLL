@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperCompleteFiniteEtale
 public import Nyll.SchemeTheory.Descent.NoetherianImageResidueLimit
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitEssentialSurjectivity
@@ -30,8 +31,8 @@ open EtaleFundamentalGroups.Inertia
 
 namespace AlgebraicGeometry.FiniteEtale
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Complete-local comparison with the actual prime-residue field at the
 maximal ideal, retaining the original algebra-map fiber projection. -/

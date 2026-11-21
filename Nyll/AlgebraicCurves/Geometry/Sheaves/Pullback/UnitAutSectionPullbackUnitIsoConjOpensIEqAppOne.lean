@@ -56,7 +56,7 @@ theorem
         ((Scheme.Modules.pullbackUnitIso W.ι).symm ≪≫ (Scheme.Modules.pullback W.ι).mapIso ψ ≪≫
           Scheme.Modules.pullbackUnitIso W.ι) =
       (ψ.hom.val.app (op W)).hom (1 : Y.presheaf.obj (op W)) := by
-  unfold Scheme.Modules.unitAutSection
+  unfold Scheme.Modules.unitAutSection Scheme.Modules.unitAutSectionValue
   erw [Scheme.Modules.pullbackUnitIso_conj_app_top_one_eq_appTop]
   rw [← unit_app_one_res ψ (homOfLE (le_top : W ≤ ⊤))]
   change (W.ι.appTop ≫ W.topIso.hom).hom

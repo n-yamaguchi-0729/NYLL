@@ -106,7 +106,7 @@ theorem polynomial_inverse_coeff_ord_lower (Q : Polynomial F) (n : ℕ) :
   let B := v.polynomialOrderBound Q
   change -((B * (2 * n + 1) : ℕ) : ℤ) ≤ _
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     by_cases hn : n = 0
     · subst n
       rw [PowerSeries.coeff_inv, ite_eq_left rfl, Polynomial.constantCoeff_coe,

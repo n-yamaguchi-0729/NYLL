@@ -80,8 +80,8 @@ theorem finiteDimensional_quot_of_monicTorsion
         = (Polynomial.aeval φ c) s := by
       conv_rhs => rw [hc.as_sum]
       simp only [map_add, map_pow, Polynomial.aeval_X, map_sum, map_mul, Polynomial.aeval_C,
-        LinearMap.add_apply, LinearMap.sum_apply, Module.End.mul_apply,
-        Algebra.algebraMap_eq_smul_one, LinearMap.smul_apply, Module.End.one_apply]
+        LinearMap.add_apply, LinearMap.sum_apply, mul_apply_eq_comp,
+        Algebra.algebraMap_eq_smul_one, LinearMap.smul_apply, one_apply_eq_self]
       simp only [← hd]
     have hd_expr : (φ^d) s =
         (Polynomial.aeval φ c) s - ∑ j ∈ Finset.range d, c.coeff j • (φ^j) s :=

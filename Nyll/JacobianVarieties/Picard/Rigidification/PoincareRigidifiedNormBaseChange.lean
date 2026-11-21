@@ -26,6 +26,7 @@ import Nyll.SchemeTheory.CategoryTheory.Pullback
 
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
+import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-!
 # Base change of the norm comparison for Poincaré bundles
@@ -168,7 +169,7 @@ noncomputable def poincareOfRIso (b : SchemeHomOver t (D.baseChange K).toBase) :
       D t b))).L :=
   (Scheme.Modules.pullback (baseChangeSnd (baseChange R c K) b)).mapIso hP.some ≪≫
     ofR_pullbackAlong_iso c ε K b _ ≪≫
-    ofR_mapIso c ε K (h.poincare.pullbackAlongPullbackAlongIso' _ _)
+    ofR_mapIso c ε K (h.poincare.pullbackAlongPullbackAlongIso _ _)
 
 end BC
 

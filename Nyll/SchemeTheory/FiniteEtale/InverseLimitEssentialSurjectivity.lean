@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 
@@ -33,22 +34,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryInverseLimitEssSurj (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) := instCategory X
-
-local instance finiteEtaleHasPullbacksAlongInverseLimitEssSurj
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongInverseLimitEssSurj
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Actual stage lifts recover the original cover after pullback along the
 map of cones. Only the source cone needs to be a limit: target-stage lifts

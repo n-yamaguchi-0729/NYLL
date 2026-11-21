@@ -28,7 +28,6 @@ public import Nyll.AlgebraicCurves.RelativeDivisors.PointSums.RelEffCartierDivOf
 public import Nyll.AlgebraicCurves.RelativeDivisors.Cartier.Cartier
 public import Nyll.AlgebraicCurves.Geometry.Curves.SmoothProperCurveBase
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorInverse
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
 public import Nyll.AlgebraicCurves.Geometry.Picard.Poincare.PicardRepresentabilityPoincarePullbackMulIso
 public import Nyll.AlgebraicCurves.Geometry.Schemes.BaseChange.HomPullbackKerPowInvModuleIso
@@ -66,81 +65,6 @@ universe u
 noncomputable section
 
 namespace Sub2c
-
-section Monoidal
-
-variable {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞] [SymmetricCategory 𝒞]
-
-/-- Tensor inverses of isomorphic objects are isomorphic via the given inverse evaluations. -/
-def inverseIso {X X' Q Q' : 𝒞} (eX : X ≅ X') (hQ : X ⊗ Q ≅ 𝟙_ 𝒞) (hQ' : X' ⊗ Q' ≅ 𝟙_ 𝒞) : Q ≅ Q' :=
-  _root_.CategoryTheory.MonoidalCategory.tensorInverseIso eX hQ hQ'
-
-/-- Transport the given tensor-inverse evaluation along an isomorphism of its first factor. -/
-def inverseOfIso {X Y Q : 𝒞} (eX : X ≅ Y) (hQ : X ⊗ Q ≅ 𝟙_ 𝒞) : Y ⊗ Q ≅ 𝟙_ 𝒞 :=
-  _root_.CategoryTheory.MonoidalCategory.tensorInverseOfIso eX hQ
-
-end Monoidal
-
-section Modules
-
-variable {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingCat.of R)}
-
-theorem rigSection_snd {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
-    (ε : SchemeHomOver (𝟙 (Spec (CommRingCat.of R))) c) :
-    rigSection c t ε ≫ pullback.snd c t = 𝟙 T :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.rigSection_snd t ε
-
-/-- Pulling a base module to the curve and then back along the section recovers that module. -/
-def sectionPullbackIso {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
-    (ε : SchemeHomOver (𝟙 (Spec (CommRingCat.of R))) c) (Q : T.Modules) :
-    (Scheme.Modules.pullback (rigSection c t ε)).obj ((Scheme.Modules.pullback (pullback.snd c
-      t)).obj Q) ≅ Q :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.sectionPullbackIso t ε Q
-
-end Modules
-
-theorem nonempty_iso_unit_of_field {k : Type u} [Field k] (Q : (Spec (CommRingCat.of k)).Modules)
-    (hQ : Scheme.Modules.IsInvertible Q) : Nonempty (Q ≅ 𝟙_ (Spec (CommRingCat.of k)).Modules) :=
-  _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_tensorUnit_of_field k Q hQ
-
-section Twist
-
-variable {R : Type u} [CommRing R] {C : Scheme.{u}} {c : C ⟶ Spec (CommRingCat.of R)}
-  (ε₁ ε₂ : SchemeHomOver (𝟙 (Spec (CommRingCat.of R))) c)
-
-/-- A chosen tensor inverse of the line bundle restricted to the second rigidifying section. -/
-noncomputable def qinv {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)}
-    (M : RigidifiedLineBundle c ε₁ t) : T.Modules :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.qinv ε₁ ε₂ M
-
-theorem qinv_isInvertible {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)}
-    (M : RigidifiedLineBundle c ε₁ t) :
-    Scheme.Modules.IsInvertible (qinv ε₁ ε₂ M) :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.qinv_isInvertible ε₁ ε₂ M
-
-/-- The chosen inverse evaluates the restriction at the second section to the unit module. -/
-noncomputable def qinvIso {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)}
-    (M : RigidifiedLineBundle c ε₁ t) :
-    (Scheme.Modules.pullback (rigSection c t ε₂)).obj M.L ⊗ qinv ε₁ ε₂ M ≅ 𝟙_ _ :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.qinvIso ε₁ ε₂ M
-
-/-- Change the rigidifying section using the inverse of the restricted line bundle. -/
-noncomputable def twist {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)}
-    (M : RigidifiedLineBundle c ε₁ t) :
-    RigidifiedLineBundle c ε₂ t :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.twist ε₁ ε₂ M
-
-theorem twist_L {T : Scheme.{u}} {t : T ⟶ Spec (CommRingCat.of R)} (M : RigidifiedLineBundle c ε₁ t)
-    :
-    (twist ε₁ ε₂ M).L = M.L ⊗ (Scheme.Modules.pullback (pullback.snd c t)).obj (qinv ε₁ ε₂ M) :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.twist_L ε₁ ε₂ M
-
-theorem twist_cut {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
-    (M : RigidifiedLineBundle c ε₁ t)
-    (hM : FibrewiseAlgEquivZero M) : FibrewiseAlgEquivZero (twist ε₁ ε₂ M) :=
-  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.twist_cut ε₁ ε₂ t M hM
-
-end Twist
 
 section Rep
 
@@ -184,17 +108,20 @@ theorem epsT_comp : (epsT ε g hg).1 ≫ f = ε.1 := by
 /-- Pull back the line bundle and adjust its rigidifying section. -/
 def Phi {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (M : RigidifiedLineBundle c ε t) :
     RigidifiedLineBundle c' ε' t :=
-  Sub2c.twist (epsT ε g hg) ε' (M.pullbackCurve f hf (epsT_comp ε f g hg hgf))
+  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.twist (epsT ε g hg) ε' (M.pullbackCurve
+    f hf (epsT_comp ε f g hg hgf))
 
 theorem Phi_L {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (M : RigidifiedLineBundle c ε t) :
     (Phi ε ε' f g hf hg hgf t M).L =
       (Scheme.Modules.pullback (curveChange f hf t)).obj M.L ⊗
         (Scheme.Modules.pullback (pullback.snd c' t)).obj
-          (Sub2c.qinv (epsT ε g hg) ε' (M.pullbackCurve f hf (epsT_comp ε f g hg hgf))) := rfl
+          (_root_.AlgebraicGeometry.RelPicard.ChangeRigidification.qinv (epsT ε g hg) ε'
+            (M.pullbackCurve f hf (epsT_comp ε f g hg hgf))) := rfl
 
 theorem Phi_cut {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (M : RigidifiedLineBundle c ε t)
     (hM : FibrewiseAlgEquivZero M) : FibrewiseAlgEquivZero (Phi ε ε' f g hf hg hgf t M) :=
-  Sub2c.twist_cut _ _ t _ (FibrewiseAlgEquivZero.pullbackCurve f hf (epsT_comp ε f g hg hgf) hM)
+  _root_.AlgebraicGeometry.RelPicard.ChangeRigidification.twist_cut _ _ t _
+    (FibrewiseAlgEquivZero.pullbackCurve f hf (epsT_comp ε f g hg hgf) hM)
 
 include hgf in
 theorem curveChange_comp_eq_id {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) :
@@ -282,8 +209,10 @@ theorem Phi_L_iso_of_field {R : Type u} [CommRing R] {C C' : Scheme.{u}}
       RigidifiedLineBundle c ε t) :
     Nonempty ((I2.Phi ε ε' f g hf hg hgf t M).L ≅ (Scheme.Modules.pullback (curveChange f hf
       t)).obj M.L) := by
-  obtain ⟨e0⟩ := Sub2c.nonempty_iso_unit_of_field _
-    (Sub2c.qinv_isInvertible (I2.epsT ε g hg) ε' (M.pullbackCurve f hf (I2.epsT_comp ε f g hg hgf)))
+  obtain ⟨e0⟩ :=
+    _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_tensorUnit_of_field _ _
+    (_root_.AlgebraicGeometry.RelPicard.ChangeRigidification.qinv_isInvertible (I2.epsT ε g hg) ε'
+      (M.pullbackCurve f hf (I2.epsT_comp ε f g hg hgf)))
   exact ⟨whiskerLeftIso _ ((Scheme.Modules.pullback _).mapIso e0 ≪≫
     Scheme.Modules.pullbackTensorUnitObjIso _) ≪≫
     ρ_ _⟩
@@ -373,7 +302,9 @@ theorem abelJacobi_comp_eq_mul_abelJacobi_of_iso_of_classify
   have hθa : postComp θ a = h'.classify t (I2.Phi ε ε' e.inv e.hom he' he e.hom_inv_id t M)
       (I2.Phi_cut ε ε' e.inv e.hom he' he e.hom_inv_id t M hM) := by
     conv_lhs => rw [ha]
-    exact hθ t M hM _ _ _ (Sub2c.qinv_isInvertible _ ε' _) ⟨Iso.refl _⟩
+    exact hθ t M hM _ _ _
+      (_root_.AlgebraicGeometry.RelPicard.ChangeRigidification.qinv_isInvertible _ ε' _) ⟨Iso.refl
+      _⟩
   obtain ⟨e1⟩ : Nonempty ((h'.poincare.pullbackAlong (postComp θ a)).L ≅
       (I2.Phi ε ε' e.inv e.hom he' he e.hom_inv_id t M).L) := by
     rw [hθa]

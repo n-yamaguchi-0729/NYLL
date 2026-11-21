@@ -162,7 +162,8 @@ private theorem reesRestriction_refl (U : X.Opens)
     (p : ↥(reesAlgebra (sectionsIdeal f I U))) :
     reesRestriction f I (le_refl U) p = p := by
   apply Subtype.ext
-  apply Polynomial.ext
+  apply AddMonoidAlgebra.ext
+  apply DFunLike.ext
   intro n
   change (Polynomial.map (X.presheaf.map (homOfLE (le_refl U)).op).hom p.val).coeff n = _
   rw [Polynomial.coeff_map]
@@ -173,7 +174,8 @@ private theorem reesRestriction_comp {U V W : X.Opens} (h : U ≤ V) (h' : V ≤
     reesRestriction f I (h.trans h') p =
       reesRestriction f I h (reesRestriction f I h' p) := by
   apply Subtype.ext
-  apply Polynomial.ext
+  apply AddMonoidAlgebra.ext
+  apply DFunLike.ext
   intro n
   change (Polynomial.map (X.presheaf.map (homOfLE (h.trans h')).op).hom p.val).coeff n =
     (Polynomial.map (X.presheaf.map (homOfLE h).op).hom

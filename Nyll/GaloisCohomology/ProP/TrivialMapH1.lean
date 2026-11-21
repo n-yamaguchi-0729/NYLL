@@ -34,7 +34,7 @@ variable {G H : Type} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 /-- Pullback along the constant-one group homomorphism is zero on continuous cocycles in
 degree one with trivial `ZMod p` coefficients. -/
 theorem trivialZModPCocyclesMap_trivial_one_eq_zero :
-    trivialZModPCocyclesMap p (trivialContinuousHom H G) 1 = 0 := by
+    trivialZModPCocyclesMap p (1 : H →ₜ* G) 1 = 0 := by
   rw [← cancel_mono ((trivialZModPCochains p H).iCycles 1)]
   simp only [HomologicalComplex.cyclesMap_i, Limits.zero_comp]
   ext z
@@ -63,7 +63,7 @@ theorem trivialZModPCocyclesMap_trivial_one_eq_zero :
 /-- Pullback along the constant-one group homomorphism is zero on continuous `H¹` with trivial
 `ZMod p` coefficients. -/
 theorem continuousCohomologyZModPMap_trivial_one_eq_zero :
-    continuousCohomologyZModPMap p (trivialContinuousHom H G) 1 = 0 := by
+    continuousCohomologyZModPMap p (1 : H →ₜ* G) 1 = 0 := by
   rw [← cancel_epi (ContinuousCohomology.π (trivialZModP p G) 1)]
   rw [trivialZModP_π_naturality]
   rw [trivialZModPCocyclesMap_trivial_one_eq_zero]
@@ -73,8 +73,8 @@ theorem continuousCohomologyZModPMap_trivial_one_eq_zero :
 coefficients. -/
 theorem inflation_comp_restriction_degree_one_eq_zero
     (N : Subgroup G) [N.Normal] :
-    continuousCohomologyZModPMap p (quotientProjection N) 1 ≫
-        continuousCohomologyZModPMap p (subgroupInclusion N) 1 = 0 := by
+    continuousCohomologyZModPMap p (ProCGroups.ContinuousMonoidHom.quotientMk N) 1 ≫
+        continuousCohomologyZModPMap p (ProCGroups.ContinuousMonoidHom.subtype N) 1 = 0 := by
   rw [inflation_comp_restriction_eq_trivialMap]
   exact continuousCohomologyZModPMap_trivial_one_eq_zero p
 
@@ -86,7 +86,7 @@ variable {G H : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 /-- Pullback along the constant-one homomorphism is zero on degree-one cocycles with
 universe-lifted trivial `ZMod p` coefficients. -/
 theorem trivialZModPCocyclesMapLifted_trivial_one_eq_zero :
-    trivialZModPCocyclesMapLifted p (trivialContinuousHom H G) 1 = 0 := by
+    trivialZModPCocyclesMapLifted p (1 : H →ₜ* G) 1 = 0 := by
   rw [← cancel_mono ((trivialZModPCochainsLifted p H).iCycles 1)]
   simp only [HomologicalComplex.cyclesMap_i, Limits.zero_comp]
   ext z
@@ -114,7 +114,7 @@ theorem trivialZModPCocyclesMapLifted_trivial_one_eq_zero :
 
 /-- Pullback along the constant-one homomorphism is zero on lifted continuous `H¹`. -/
 theorem continuousCohomologyZModPMapLifted_trivial_one_eq_zero :
-    continuousCohomologyZModPMapLifted p (trivialContinuousHom H G) 1 = 0 := by
+    continuousCohomologyZModPMapLifted p (1 : H →ₜ* G) 1 = 0 := by
   rw [← cancel_epi (ContinuousCohomology.π (trivialZModPLifted p G) 1)]
   rw [trivialZModPLifted_π_naturality]
   rw [trivialZModPCocyclesMapLifted_trivial_one_eq_zero]
@@ -124,8 +124,8 @@ theorem continuousCohomologyZModPMapLifted_trivial_one_eq_zero :
 `ZMod p` coefficients. -/
 theorem inflation_comp_restriction_degree_one_eq_zero_lifted
     (N : Subgroup G) [N.Normal] :
-    continuousCohomologyZModPMapLifted p (quotientProjection N) 1 ≫
-        continuousCohomologyZModPMapLifted p (subgroupInclusion N) 1 = 0 := by
+    continuousCohomologyZModPMapLifted p (ProCGroups.ContinuousMonoidHom.quotientMk N) 1 ≫
+        continuousCohomologyZModPMapLifted p (ProCGroups.ContinuousMonoidHom.subtype N) 1 = 0 := by
   rw [inflation_comp_restriction_eq_trivialMap_lifted]
   exact continuousCohomologyZModPMapLifted_trivial_one_eq_zero p
 

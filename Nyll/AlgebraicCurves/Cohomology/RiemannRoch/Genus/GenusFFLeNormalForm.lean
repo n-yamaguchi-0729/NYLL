@@ -344,7 +344,7 @@ theorem _root_.AlgebraicCurve.genusFF_le_of_normalForm
     have he := hind e hsum
     rintro ⟨i, j⟩
     have := congrArg (fun q : L[X] => q.coeff (j : ℕ)) (congrFun he i)
-    simp only [e, Polynomial.finsetSum_coeff, Polynomial.coeff_monomial, Pi.zero_apply,
+    simp only [e, Polynomial.finsetSum_coeff, Polynomial.coeff_monomial_apply, Pi.zero_apply,
       Polynomial.coeff_zero] at this
     rw [Finset.sum_eq_single j] at this
     · simpa using this

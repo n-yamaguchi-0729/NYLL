@@ -156,7 +156,7 @@ theorem hasValue_map {F' : Type*} [Field F'] [Algebra K F'] (φ : F →ₐ[K] F'
 
 theorem exists_coeff [IsCurveOver K F] {t : F} (hDt : D K F t ≠ 0) (ω : Ω[F⁄K]) : ∃ c : F, ω = c •
   D K F t := by
-  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' (D K F t) hDt).mp IsCurveOver.finrank_kaehler ω
+  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_ne_zero' (D K F t) hDt).mp IsCurveOver.finrank_kaehler ω
   exact ⟨c, hc.symm⟩
 
 end ResPullbackE107

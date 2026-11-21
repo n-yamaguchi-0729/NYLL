@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleCohomology.Descent.ProperFiniteEtaleIsoDescent
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperClosedFiberDescentRecovery
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperCompleteProjectiveCoverLift
@@ -42,8 +43,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 open ProperHenselianActionLifting
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Descend an actual finite étale cover and recover its prescribed
 restriction by descending the original comparison under the base-changed

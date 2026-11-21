@@ -84,7 +84,6 @@ namespace BaseTransport
 
 export _root_.AlgebraicGeometry.RelPicard.BaseTransport (
   idOver
-  RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso
   BaseChange.ofR_mapIso)
 
 open _root_.AlgebraicGeometry.RelPicard.BaseTransport
@@ -255,7 +254,7 @@ theorem kerPointsToRigKer_baseTransport_liftPt
     (castBase (tower_dualNumber R' B) x.1)
   refine Quotient.sound (?_ : Nonempty (_ ≅ _))
   exact ⟨BaseChange.ofR_mapIso c ε R'
-      (RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso _ _ _ ≪≫
+      (RigidifiedLineBundle.pullbackAlongPullbackAlongIso _ _ _ ≪≫
         RigidifiedLineBundle.pullbackAlong_congr_hom h.poincare (postComp x.1 (idOver
           (tower_dualNumber R' B)))
           (castBase (tower_dualNumber R' B) x.1) (by exact Category.id_comp x.1.1)) ≪≫

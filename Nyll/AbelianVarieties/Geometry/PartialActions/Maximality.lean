@@ -263,7 +263,8 @@ theorem eq_of_specializes_of_fst_eq (s₀ : B) (hs₀ : ∀ y : B, s₀ ⤳ y �
       {z : ↥(pullback g (B.fromSpecResidueField s₀ ≫ g)) // π.base z = π.base e} := hdisc
   let w' : {z : ↥(pullback g (B.fromSpecResidueField s₀ ≫ g)) // π.base z = π.base e} := ⟨w, hp⟩
   let e' : {z : ↥(pullback g (B.fromSpecResidueField s₀ ≫ g)) // π.base z = π.base e} := ⟨e, rfl⟩
-  have hwe' : w' ⤳ e' := (Topology.IsInducing.subtypeVal.specializes_iff (x := w') (y := e')).mp hwe
+  have hInducing := Topology.IsInducing.subtypeVal (t := {z | π.base z = π.base e})
+  have hwe' : w' ⤳ e' := (hInducing.specializes_iff (x := w') (y := e')).mp hwe
   have : w' = e' := (specializes_iff_eq.mp hwe')
   exact congrArg Subtype.val this
 
@@ -2255,13 +2256,13 @@ theorem toPartialMap_hom_comp :
       (ρ L ι hι).toPartialMap.domain.ι ≫ pullback.snd f p ≫ p := by
   let : (pullback f p).Over (Spec (CommRingCat.of k)) := ⟨q f p⟩
   let : P.Over (Spec (CommRingCat.of k)) := ⟨p⟩
-  have : (chart L ι hι).IsOver (Spec (CommRingCat.of k)) := by
+  have : (chart L ι hι).IsOver (q f p) p := by
     rw [Scheme.PartialMap.isOver_iff]
     change hom₀ L ι hι ≫ p = (dom₀ L ι hι).ι ≫ pullback.fst f p ≫ f
     rw [hom₀_comp, pullback.condition]
-  have : (ρ L ι hι).IsOver (Spec (CommRingCat.of k)) := by
+  have : (ρ L ι hι).IsOver (q f p) p := by
     unfold ρ; infer_instance
-  have h : (ρ L ι hι).toPartialMap.IsOver (Spec (CommRingCat.of k)) := inferInstance
+  have h : (ρ L ι hι).toPartialMap.IsOver (q f p) p := inferInstance
   rw [Scheme.PartialMap.isOver_iff] at h
   have h' : (ρ L ι hι).toPartialMap.hom ≫ p =
       (ρ L ι hι).toPartialMap.domain.ι ≫ pullback.fst f p ≫ f := h

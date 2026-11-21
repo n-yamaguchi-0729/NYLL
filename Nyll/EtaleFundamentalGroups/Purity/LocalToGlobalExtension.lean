@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.Purity.GenericComplementCoverExtension
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
@@ -36,8 +37,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Local purity along the missing points extends all finite étale covers
 of the open. Only topological Noetherianity of the ambient scheme is needed

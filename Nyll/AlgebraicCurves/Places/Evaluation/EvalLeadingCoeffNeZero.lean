@@ -358,7 +358,7 @@ theorem _root_.AlgebraicCurve.Place.eval_leadingCoeff_ne_zero_of_forall_mem_toVa
       = ((G.leadingCoeff).map (algebraMap K L)).eval zz
           * algebraMap v.toValuationSubring L ((minpoly v.toValuationSubring y).coeff i) := by
     intro i
-    have h := congrArg (fun p => Polynomial.coeff p i) hGz
+    have h := congrArg (fun p : L[X] => p.coeff i) hGz
     simp only [coeff_map, coe_evalRingHom, coe_mapRingHom, coeff_C_mul] at h
     rw [hminO, coeff_map] at h
     exact h

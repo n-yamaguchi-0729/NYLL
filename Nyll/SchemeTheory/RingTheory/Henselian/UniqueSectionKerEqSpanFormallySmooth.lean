@@ -134,11 +134,11 @@ theorem ker_eq_span [IsLocalRing A] [IsNoetherianRing A] [IsLocalRing S]
     hJtop ((Ideal.eq_top_iff_one J).mpr (h10 ▸ J.zero_mem))
   have : IsLocalRing B :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk J₀) Ideal.Quotient.mk_surjective
-  have hJjac : J ≤ (⊥ : Ideal B).jacobson := by
-    rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top]
+  have hJjac : J ≤ Ring.jacobson B := by
+    rw [IsLocalRing.ringJacobson_eq_maximalIdeal]
     exact IsLocalRing.le_maximalIdeal hJtop
   have hJbot : J = ⊥ :=
-    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot J J (IsNoetherian.noetherian J)
+    Submodule.eq_bot_of_le_smul_of_le_jacobson J J (IsNoetherian.noetherian J)
       (by rw [Ideal.smul_eq_mul, ← pow_two]; exact hJJ) hJjac
   have hsJ : (Ideal.Quotient.mk J₀ s : B) ∈ J := by
     rw [hJdef, RingHom.mem_ker]

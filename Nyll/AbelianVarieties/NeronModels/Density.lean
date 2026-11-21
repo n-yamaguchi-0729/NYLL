@@ -482,44 +482,41 @@ theorem PsiY_fst : PsiY f W m X' U hUW hU₂ ≫ pullback.fst (X'.ι ≫ f) (X'.
 theorem PsiY_snd : PsiY f W m X' U hUW hU₂ ≫ pullback.snd (X'.ι ≫ f) (X'.ι ≫ f) =
     (UY f X' U).ι ≫ pullback.snd (X'.ι ≫ f) (X'.ι ≫ f) := pullback.lift_snd _ _ _
 
-/-- The chart map recording the first input and its product. -/
-def Phi : (W : Scheme.{u}) ⟶ pullback f f :=
-  pullback.lift (f := f) (g := f) (W.ι ≫ pullback.fst f f) m.1 ((Category.assoc _ _ _).trans
-    m.2.symm)
-
-/-- The chart map recording the product and the second input. -/
-def Psi : (W : Scheme.{u}) ⟶ pullback f f :=
-  pullback.lift (f := f) (g := f) m.1 (W.ι ≫ pullback.snd f f)
-    (m.2.trans (by rw [Category.assoc, pullback.condition]))
+@[reassoc (attr := simp)]
+theorem Phi_fst : firstMultiplicationChart f W m ≫ pullback.fst f f = W.ι ≫ pullback.fst f f :=
+    pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
-theorem Phi_fst : Phi f W m ≫ pullback.fst f f = W.ι ≫ pullback.fst f f := pullback.lift_fst _ _ _
+theorem Phi_snd : firstMultiplicationChart f W m ≫ pullback.snd f f = m.1 := pullback.lift_snd _ _ _
 
 @[reassoc (attr := simp)]
-theorem Phi_snd : Phi f W m ≫ pullback.snd f f = m.1 := pullback.lift_snd _ _ _
+theorem Psi_fst : secondMultiplicationChart f W m ≫ pullback.fst f f = m.1 :=
+    pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
-theorem Psi_fst : Psi f W m ≫ pullback.fst f f = m.1 := pullback.lift_fst _ _ _
+theorem Psi_snd : secondMultiplicationChart f W m ≫ pullback.snd f f = W.ι ≫ pullback.snd f f :=
+    pullback.lift_snd _ _ _
 
-@[reassoc (attr := simp)]
-theorem Psi_snd : Psi f W m ≫ pullback.snd f f = W.ι ≫ pullback.snd f f := pullback.lift_snd _ _ _
-
-theorem PhiY_jj : PhiY f W m X' U hUW hU₂ ≫ jj f X' = θ f W X' U hUW ≫ Phi f W m := by
+theorem PhiY_jj : PhiY f W m X' U hUW hU₂ ≫ jj f X' = θ f W X' U hUW
+    ≫ firstMultiplicationChart f W m := by
   apply pullback.hom_ext
   · rw [Category.assoc, jj_fst, PhiY_fst_assoc, Category.assoc, Phi_fst, θ_ι_assoc, jj_fst]
   · rw [Category.assoc, jj_snd, PhiY_snd_assoc, mY₁_ι, Category.assoc, Phi_snd]
 
-theorem PsiY_jj : PsiY f W m X' U hUW hU₂ ≫ jj f X' = θ f W X' U hUW ≫ Psi f W m := by
+theorem PsiY_jj : PsiY f W m X' U hUW hU₂ ≫ jj f X' = θ f W X' U hUW
+    ≫ secondMultiplicationChart f W m := by
   apply pullback.hom_ext
   · rw [Category.assoc, jj_fst, PsiY_fst_assoc, mY₁_ι, Category.assoc, Psi_fst]
   · rw [Category.assoc, jj_snd, PsiY_snd_assoc, Category.assoc, Psi_snd, θ_ι_assoc, jj_snd]
 
-theorem isOpenImmersion_PhiY (hΦ : IsOpenImmersion (Phi f W m)) : IsOpenImmersion (PhiY f W m X' U
+theorem isOpenImmersion_PhiY (hΦ : IsOpenImmersion (firstMultiplicationChart f W m)) :
+    IsOpenImmersion (PhiY f W m X' U
     hUW hU₂) := by
   have : IsOpenImmersion (PhiY f W m X' U hUW hU₂ ≫ jj f X') := by rw [PhiY_jj]; infer_instance
   exact IsOpenImmersion.of_comp _ (jj f X')
 
-theorem isOpenImmersion_PsiY (hΨ : IsOpenImmersion (Psi f W m)) : IsOpenImmersion (PsiY f W m X' U
+theorem isOpenImmersion_PsiY (hΨ : IsOpenImmersion (secondMultiplicationChart f W m)) :
+    IsOpenImmersion (PsiY f W m X' U
     hUW hU₂) := by
   have : IsOpenImmersion (PsiY f W m X' U hUW hU₂ ≫ jj f X') := by rw [PsiY_jj]; infer_instance
   exact IsOpenImmersion.of_comp _ (jj f X')
@@ -529,12 +526,12 @@ theorem range_comp_base {A B C : Scheme.{u}} (φ : A ⟶ B) (ψ : B ⟶ C) :
   rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
 
 include hU₂ in
-theorem image_Phi_eq : (Phi f W m).base '' {w | W.ι.base w ∈ U} =
+theorem image_Phi_eq : (firstMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U} =
     (jj f X').base '' Set.range (PhiY f W m X' U hUW hU₂).base := by
   rw [← range_θ f W m X' U hUW hU₂, ← range_comp_base, ← range_comp_base, PhiY_jj]
 
 include hU₂ in
-theorem image_Psi_eq : (Psi f W m).base '' {w | W.ι.base w ∈ U} =
+theorem image_Psi_eq : (secondMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U} =
     (jj f X').base '' Set.range (PsiY f W m X' U hUW hU₂).base := by
   rw [← range_θ f W m X' U hUW hU₂, ← range_comp_base, ← range_comp_base, PsiY_jj]
 
@@ -547,16 +544,16 @@ variable (hU₃ : ∀ x : X, x ∈ X' →
         (U : Set ↑(pullback f f))) ∧
     Dense ((Subtype.val : {q : ↑(pullback f f) // (pullback.fst f f).base q = x} → ↑(pullback f f))
       ⁻¹'
-        ((Phi f W m).base '' {w | W.ι.base w ∈ U})) ∧
+        ((firstMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U})) ∧
     Dense ((Subtype.val : {q : ↑(pullback f f) // (pullback.snd f f).base q = x} → ↑(pullback f f))
       ⁻¹'
-        ((Phi f W m).base '' {w | W.ι.base w ∈ U})) ∧
+        ((firstMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U})) ∧
     Dense ((Subtype.val : {q : ↑(pullback f f) // (pullback.fst f f).base q = x} → ↑(pullback f f))
       ⁻¹'
-        ((Psi f W m).base '' {w | W.ι.base w ∈ U})) ∧
+        ((secondMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U})) ∧
     Dense ((Subtype.val : {q : ↑(pullback f f) // (pullback.snd f f).base q = x} → ↑(pullback f f))
       ⁻¹'
-        ((Psi f W m).base '' {w | W.ι.base w ∈ U})))
+        ((secondMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U})))
 
 theorem X'ι_injective : Function.Injective X'.ι.base := X'.ι.isOpenEmbedding.injective
 
@@ -577,20 +574,22 @@ theorem dense_UY_snd (x : ↥X') :
     (U_subset_range_jj f W m X' U hUW hU₂) (coe_UY f X' U) x (hU₃ x.1 x.2).2.1
 
 theorem range_PhiY_eq : Set.range (PhiY f W m X' U hUW hU₂).base =
-    (jj f X').base ⁻¹' ((Phi f W m).base '' {w | W.ι.base w ∈ U}) := by
+    (jj f X').base ⁻¹' ((firstMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U}) := by
   rw [image_Phi_eq f W m X' U hUW hU₂, Set.preimage_image_eq _ (jj_injective f X')]
 
 theorem range_PsiY_eq : Set.range (PsiY f W m X' U hUW hU₂).base =
-    (jj f X').base ⁻¹' ((Psi f W m).base '' {w | W.ι.base w ∈ U}) := by
+    (jj f X').base ⁻¹' ((secondMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U}) := by
   rw [image_Psi_eq f W m X' U hUW hU₂, Set.preimage_image_eq _ (jj_injective f X')]
 
 include hUW hU₂ in
-theorem image_Phi_subset : (Phi f W m).base '' {w | W.ι.base w ∈ U} ⊆ Set.range (jj f X').base := by
+theorem image_Phi_subset : (firstMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U}
+    ⊆ Set.range (jj f X').base := by
   rw [image_Phi_eq f W m X' U hUW hU₂]
   exact Set.image_subset_range _ _
 
 include hUW hU₂ in
-theorem image_Psi_subset : (Psi f W m).base '' {w | W.ι.base w ∈ U} ⊆ Set.range (jj f X').base := by
+theorem image_Psi_subset : (secondMultiplicationChart f W m).base '' {w | W.ι.base w ∈ U}
+    ⊆ Set.range (jj f X').base := by
   rw [image_Psi_eq f W m X' U hUW hU₂]
   exact Set.image_subset_range _ _
 
@@ -1465,29 +1464,23 @@ section Family
 variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat.of R))
 variable (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 
-/-- The triple fibre product containing the multiplication graph. -/
-abbrev Y3 : Scheme.{u} := pullback (pullback.fst y y ≫ y) y
-
-/-- The graph of the partial multiplication inside the triple fibre product. -/
-abbrev gr : (U : Scheme.{u}) ⟶ Y3 y := pullback.lift (f := pullback.fst y y ≫ y) (g := y) U.ι m.1
-    m.2.symm
-
-/-- The projection onto the first two coordinates. -/
-abbrev P12 : Y3 y ⟶ pullback y y := pullback.fst (pullback.fst y y ≫ y) y
-
 /-- The structure map of the triple fibre product. -/
-abbrev t3 : Y3 y ⟶ Spec (CommRingCat.of R) := pullback.snd (pullback.fst y y ≫ y) y ≫ y
+abbrev t3 : tripleFiberProduct y ⟶ Spec (CommRingCat.of R) :=
+    pullback.snd (pullback.fst y y ≫ y) y ≫ y
 
 /-- The topological closure of the partial multiplication graph. -/
-def Zc : Closeds ↑(Y3 y) := ⟨closure (Set.range (gr y U m).base), isClosed_closure⟩
+def Zc : Closeds ↑(tripleFiberProduct y) :=
+    ⟨closure (Set.range (multiplicationGraph y U m).base), isClosed_closure⟩
 
 /-- The reduced closed subscheme supported on the multiplication-graph closure. -/
 abbrev Gc : Scheme.{u} := (Scheme.IdealSheafData.vanishingIdeal (Zc y U m)).subscheme
 
 /-- The inclusion of the reduced multiplication-graph closure. -/
-abbrev γc : Gc y U m ⟶ Y3 y := (Scheme.IdealSheafData.vanishingIdeal (Zc y U m)).subschemeι
+abbrev γc : Gc y U m ⟶ tripleFiberProduct y :=
+    (Scheme.IdealSheafData.vanishingIdeal (Zc y U m)).subschemeι
 
-theorem range_γc : Set.range (γc y U m).base = closure (Set.range (gr y U m).base) := by
+theorem range_γc : Set.range (γc y U m).base
+    = closure (Set.range (multiplicationGraph y U m).base) := by
   rw [Scheme.IdealSheafData.range_subschemeι, Scheme.IdealSheafData.coe_support_vanishingIdeal]
   rfl
 
@@ -1495,8 +1488,8 @@ scoped instance isReduced_Gc : IsReduced (Gc y U m) :=
   (AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal_and_le_ker (Zc y U
     m)).1
 
-theorem exists_comp_γc_eq {T : Scheme.{u}} [IsReduced T] (g : T ⟶ Y3 y)
-    (hg : Set.range g.base ⊆ closure (Set.range (gr y U m).base)) :
+theorem exists_comp_γc_eq {T : Scheme.{u}} [IsReduced T] (g : T ⟶ tripleFiberProduct y)
+    (hg : Set.range g.base ⊆ closure (Set.range (multiplicationGraph y U m).base)) :
     ∃ g₁ : T ⟶ Gc y U m, g₁ ≫ γc y U m = g := by
   have hker : (γc y U m).ker ≤ g.ker := by
     rw [Scheme.IdealSheafData.ker_subschemeι]
@@ -1505,7 +1498,8 @@ theorem exists_comp_γc_eq {T : Scheme.{u}} [IsReduced T] (g : T ⟶ Y3 y)
   exact ⟨IsClosedImmersion.lift (γc y U m) g hker, IsClosedImmersion.lift_fac _ _ _⟩
 
 variable {y U m} in
-theorem denseRange_g0 (g₀ : (U : Scheme.{u}) ⟶ Gc y U m) (hg₀ : g₀ ≫ γc y U m = gr y U m) :
+theorem denseRange_g0 (g₀ : (U : Scheme.{u}) ⟶ Gc y U m)
+    (hg₀ : g₀ ≫ γc y U m = multiplicationGraph y U m) :
     DenseRange g₀.base := by
   have hemb : IsInducing (γc y U m).base := (γc y U m).isClosedEmbedding.isInducing
   rw [DenseRange, Dense]
@@ -1520,7 +1514,8 @@ theorem denseRange_g0 (g₀ : (U : Scheme.{u}) ⟶ Gc y U m) (hg₀ : g₀ ≫ �
 abbrev GY : Scheme.{u} := pullback (γc y U m ≫ t3 y) y
 
 /-- The first pair of coordinates on the enlarged graph closure. -/
-def cxy : GY y U m ⟶ pullback y y := pullback.fst (γc y U m ≫ t3 y) y ≫ γc y U m ≫ P12 y
+def cxy : GY y U m ⟶ pullback y y :=
+    pullback.fst (γc y U m ≫ t3 y) y ≫ γc y U m ≫ firstSecondProjection y
 /-- The first coordinate on the enlarged graph closure. -/
 def cx : GY y U m ⟶ Y := cxy y U m ≫ pullback.fst y y
 /-- The second coordinate on the enlarged graph closure. -/
@@ -1535,9 +1530,9 @@ theorem cz_y : cz y U m ≫ y = cw y U m ≫ y := by
   simp only [Category.assoc]
   exact pullback.condition
 
-theorem P12_fst_y : P12 y ≫ pullback.fst y y ≫ y = t3 y := pullback.condition
+theorem P12_fst_y : firstSecondProjection y ≫ pullback.fst y y ≫ y = t3 y := pullback.condition
 
-theorem P12_snd_y : P12 y ≫ pullback.snd y y ≫ y = t3 y := by
+theorem P12_snd_y : firstSecondProjection y ≫ pullback.snd y y ≫ y = t3 y := by
   rw [← pullback.condition (f := y) (g := y)]
   exact pullback.condition
 
@@ -1644,7 +1639,7 @@ theorem FF_y : FF y U m ≫ y = GG y U m ≫ y := by rw [FF_y', GG_y']
 /-- The multiplication domain pulled back to the chosen open subscheme product. -/
 abbrev UY : Scheme.{u} := pullback (U.ι ≫ pullback.fst y y ≫ y) y
 
-variable (g₀ : (U : Scheme.{u}) ⟶ Gc y U m) (hg₀ : g₀ ≫ γc y U m = gr y U m)
+variable (g₀ : (U : Scheme.{u}) ⟶ Gc y U m) (hg₀ : g₀ ≫ γc y U m = multiplicationGraph y U m)
 
 include hg₀ in
 theorem g₀_t3 : (U.ι ≫ pullback.fst y y ≫ y) ≫ 𝟙 _ = g₀ ≫ γc y U m ≫ t3 y := by
@@ -1953,16 +1948,6 @@ theorem dense_preimage_rho (O : (pullback y y).Opens)
 
 variable (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 
-/-- The chart map recording the first input and its product. -/
-abbrev Phi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (U.ι ≫ pullback.fst y y) m.1 ((Category.assoc _ _ _).trans
-    m.2.symm)
-
-/-- The chart map recording the product and the second input. -/
-abbrev Psi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) m.1 (U.ι ≫ pullback.snd y y)
-    (m.2.trans (by rw [Category.assoc, pullback.condition]))
-
 /-- The fibre of the first projection at a chosen field-valued point. -/
 abbrev Sl : Scheme.{u} := pullback (pullback.fst y y) β
 /-- The partial multiplication domain over a chosen first coordinate. -/
@@ -1970,7 +1955,8 @@ abbrev Ub : Scheme.{u} := pullback (U.ι ≫ pullback.fst y y) β
 
 /-- The first-input and product chart map on the chosen fibre. -/
 abbrev Phib : Ub y β U ⟶ Sl y β :=
-  pullback.map (U.ι ≫ pullback.fst y y) β (pullback.fst y y) β (Phi y U m) (𝟙 _) (𝟙 Y)
+  pullback.map (U.ι ≫ pullback.fst y y) β (pullback.fst y y) β
+    (firstMultiplicationChart y U m) (𝟙 _) (𝟙 Y)
     (by rw [Category.comp_id, pullback.lift_fst]) (by rw [Category.comp_id, Category.id_comp])
 
 /-- The inclusion of the multiplication domain into the chosen fibre. -/
@@ -2026,7 +2012,7 @@ def D3 : Set ↑(YK y k₀) :=
     ((sig y k₀ β hβ).hom.base ⁻¹' ((rho y k₀ α hα ⁻¹ᵁ U : (YK y k₀).Opens) : Set ↑(YK y k₀)))))
 
 include hβ in
-theorem dense_D3 [IsOpenImmersion (Phi y U m)]
+theorem dense_D3 [IsOpenImmersion (firstMultiplicationChart y U m)]
     (hUβ : Dense ((rho y k₀ β hβ ⁻¹ᵁ U : (YK y k₀).Opens) : Set ↑(YK y k₀)))
     (hUα : Dense ((rho y k₀ α hα ⁻¹ᵁ U : (YK y k₀).Opens) : Set ↑(YK y k₀))) :
     Dense (D3 y k₀ β hβ U m α hα) := by
@@ -2056,7 +2042,7 @@ variable {K : Type u} [Field K] (k₀ : Spec (CommRingCat.of K) ⟶ Spec (CommRi
 variable (a b c : Spec (CommRingCat.of K) ⟶ Y) (ha : a ≫ y = k₀) (hb : b ≫ y = k₀) (hc : c ≫ y = k₀)
 
 /-- The triple point formed from the prescribed field-valued coordinates. -/
-abbrev gpt : Spec (CommRingCat.of K) ⟶ Y3 y :=
+abbrev gpt : Spec (CommRingCat.of K) ⟶ tripleFiberProduct y :=
   pullback.lift (pullback.lift a b (ha.trans hb.symm)) c (by rw [pullback.lift_fst_assoc, ha, hc])
 
 variable (gΓ : Spec (CommRingCat.of K) ⟶ Gc y U m) (hgΓ : gΓ ≫ γc y U m = gpt y k₀ a b c ha hb hc)
@@ -2194,19 +2180,21 @@ theorem lemma2W (hFG : FF y U m = GG y U m) :
   rw [← h1, ← h2, hFG]
 
 omit hW in
-theorem eq_of_snd_eq_of_mul_eq [Mono (Psi y U m)] (P Q : (W : Scheme.{u}) ⟶ (U : Scheme.{u}))
+theorem eq_of_snd_eq_of_mul_eq [Mono (secondMultiplicationChart y U m)]
+    (P Q : (W : Scheme.{u}) ⟶ (U : Scheme.{u}))
     (h2 : P ≫ U.ι ≫ pullback.snd y y = Q ≫ U.ι ≫ pullback.snd y y) (hm : P ≫ m.1 = Q ≫ m.1) : P = Q
       := by
-  rw [← cancel_mono (Psi y U m)]
+  rw [← cancel_mono (secondMultiplicationChart y U m)]
   apply pullback.hom_ext
   · rw [Category.assoc, Category.assoc, pullback.lift_fst, hm]
   · rw [Category.assoc, Category.assoc, pullback.lift_snd, h2]
 
 omit hW in
-theorem eq_of_fst_eq_of_mul_eq [Mono (Phi y U m)] (P Q : (W : Scheme.{u}) ⟶ (U : Scheme.{u}))
+theorem eq_of_fst_eq_of_mul_eq [Mono (firstMultiplicationChart y U m)]
+    (P Q : (W : Scheme.{u}) ⟶ (U : Scheme.{u}))
     (h1 : P ≫ U.ι ≫ pullback.fst y y = Q ≫ U.ι ≫ pullback.fst y y) (hm : P ≫ m.1 = Q ≫ m.1) : P = Q
       := by
-  rw [← cancel_mono (Phi y U m)]
+  rw [← cancel_mono (firstMultiplicationChart y U m)]
   apply pullback.hom_ext
   · rw [Category.assoc, Category.assoc, pullback.lift_fst]
     simpa only [Category.assoc] using h1
@@ -2257,7 +2245,7 @@ theorem D3_subset : D3 y k₀ b hb U m a ha ⊆
       ((iotab y b U) ≫ (sig y k₀ b hb).hom ≫ jg y U m k₀ a b c ha hb hc gΓ hgΓ) u'
     rw [nuL2_ι]
 
-theorem dense_OmK [IsOpenImmersion (Phi y U m)]
+theorem dense_OmK [IsOpenImmersion (firstMultiplicationChart y U m)]
     (hU₁ : ∀ x : Y, Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.fst y y).base q = x} →
       ↑(pullback y y)) ⁻¹' (U : Set ↑(pullback y y)))) :
     Dense ((OmK y U m k₀ a b c ha hb hc gΓ hgΓ : (YK y k₀).Opens) : Set ↑(YK y k₀)) := by
@@ -2284,7 +2272,8 @@ section Clauses
 variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat.of R))
 variable (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 variable {K : Type u} [Field K] (k₀ : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of R))
-variable [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (Psi y U m)]
+variable [IsOpenImmersion (firstMultiplicationChart y U m)]
+  [IsOpenImmersion (secondMultiplicationChart y U m)]
 variable (hU₁ : ∀ x : Y, Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.fst y y).base q =
     x} →
       ↑(pullback y y)) ⁻¹' (U : Set ↑(pullback y y))))
@@ -2417,7 +2406,8 @@ theorem injK
       Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.fst y y).base q = x} → ↑(pullback y
         y)) ⁻¹'
         (U : Set ↑(pullback y y))))
-    (hΦ : IsOpenImmersion (Phi y U m)) (hΨ : IsOpenImmersion (Psi y U m))
+    (hΦ : IsOpenImmersion (firstMultiplicationChart y U m))
+      (hΨ : IsOpenImmersion (secondMultiplicationChart y U m))
     (hassoc : ∀ {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
         (u v p q : SchemeHomOver t (U.ι ≫ pullback.fst y y ≫ y)),
       u.1 ≫ U.ι ≫ pullback.snd y y = v.1 ≫ U.ι ≫ pullback.fst y y →
@@ -2426,10 +2416,10 @@ theorem injK
       q.1 ≫ U.ι ≫ pullback.fst y y = u.1 ≫ U.ι ≫ pullback.fst y y → q.1 ≫ U.ι ≫ pullback.snd y y =
         v.1 ≫ m.1 →
       p.1 ≫ m.1 = q.1 ≫ m.1)
-    {K : Type u} [Field K] (g g' : Spec (CommRingCat.of K) ⟶ Y3 y)
-    (hg : Set.range g.base ⊆ closure (Set.range (gr y U m).base))
-    (hg' : Set.range g'.base ⊆ closure (Set.range (gr y U m).base)) :
-    (g ≫ P12 y = g' ≫ P12 y → g = g') ∧
+    {K : Type u} [Field K] (g g' : Spec (CommRingCat.of K) ⟶ tripleFiberProduct y)
+    (hg : Set.range g.base ⊆ closure (Set.range (multiplicationGraph y U m).base))
+    (hg' : Set.range g'.base ⊆ closure (Set.range (multiplicationGraph y U m).base)) :
+    (g ≫ firstSecondProjection y = g' ≫ firstSecondProjection y → g = g') ∧
     (g ≫ pullback.lift (f := y) (g := y)
         (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.fst y y) (pullback.snd (pullback.fst y y ≫
           y) y)
@@ -2447,30 +2437,32 @@ theorem injK
           y) y)
         (by rw [Category.assoc, ← pullback.condition (f := y) (g := y)]; exact pullback.condition) →
           g = g') := by
-  have : IsOpenImmersion (Phi y U m) := hΦ
-  have : IsOpenImmersion (Psi y U m) := hΨ
+  have : IsOpenImmersion (firstMultiplicationChart y U m) := hΦ
+  have : IsOpenImmersion (secondMultiplicationChart y U m) := hΨ
   have : UniversallyOpen m.1 := universallyOpen_m y U m hΦ
   have hU : Dense (U : Set ↑(pullback y y)) := dense_of_forall_dense_fibre _ _ hU₁
   have : IsReduced (U : Scheme.{u}) :=
     AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian (U.ι ≫ pullback.fst y y ≫
       y)
-  obtain ⟨g₀, hg₀⟩ := exists_comp_γc_eq y U m (gr y U m) subset_closure
+  obtain ⟨g₀, hg₀⟩ := exists_comp_γc_eq y U m (multiplicationGraph y U m) subset_closure
   have hFG : FF y U m = GG y U m := FF_eq_GG y U m g₀ hg₀ hassoc hU
   let k₀ := g ≫ t3 y
-  let a := g ≫ P12 y ≫ pullback.fst y y
-  let b := g ≫ P12 y ≫ pullback.snd y y
+  let a := g ≫ firstSecondProjection y ≫ pullback.fst y y
+  let b := g ≫ firstSecondProjection y ≫ pullback.snd y y
   let c := g ≫ pullback.snd (pullback.fst y y ≫ y) y
   have ha : a ≫ y = k₀ := by simp only [a, k₀, Category.assoc, P12_fst_y]
   have hb : b ≫ y = k₀ := by simp only [b, k₀, Category.assoc, P12_snd_y]
   have hc : c ≫ y = k₀ := by simp only [c, k₀, Category.assoc]
-  let a' := g' ≫ P12 y ≫ pullback.fst y y
-  let b' := g' ≫ P12 y ≫ pullback.snd y y
+  let a' := g' ≫ firstSecondProjection y ≫ pullback.fst y y
+  let b' := g' ≫ firstSecondProjection y ≫ pullback.snd y y
   let c' := g' ≫ pullback.snd (pullback.fst y y ≫ y) y
   obtain ⟨gΓ, hgΓ0⟩ := exists_comp_γc_eq y U m g hg
   obtain ⟨gΓ', hgΓ0'⟩ := exists_comp_γc_eq y U m g' hg'
-  have key : ∀ (h : Spec (CommRingCat.of K) ⟶ Y3 y) (α β γ : Spec (CommRingCat.of K) ⟶ Y)
+  have key : ∀ (h : Spec (CommRingCat.of K) ⟶ tripleFiberProduct y)
+    (α β γ : Spec (CommRingCat.of K) ⟶ Y)
       (hα : α ≫ y = k₀) (hβ : β ≫ y = k₀) (hγ : γ ≫ y = k₀),
-      h ≫ P12 y ≫ pullback.fst y y = α → h ≫ P12 y ≫ pullback.snd y y = β →
+      h ≫ firstSecondProjection y ≫ pullback.fst y y = α →
+        h ≫ firstSecondProjection y ≫ pullback.snd y y = β →
       h ≫ pullback.snd (pullback.fst y y ≫ y) y = γ → h = gpt y k₀ α β γ hα hβ hγ := by
     intro h α β γ hα hβ hγ h1 h2 h3
     apply pullback.hom_ext

@@ -46,7 +46,8 @@ theorem Scheme.powerSeries_preimage_eq_top_of_constantCoeff
   have hker : RingHom.ker (PowerSeries.constantCoeff (R := A)) ≤
       (⊥ : Ideal (PowerSeries A)).jacobson := by
     intro a ha
-    apply Ideal.mem_jacobson_bot.mpr
+    rw [Ideal.jacobson_bot]
+    apply Ring.mem_jacobson_iff.mpr
     intro b
     apply PowerSeries.isUnit_iff_constantCoeff.mpr
     have ha0 : PowerSeries.constantCoeff a = 0 := ha

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianClosedFiberModels
 
 /-!
@@ -27,9 +28,9 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.HenselianNoetherianImageStages
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable (R A : Type u) [CommRing R] [CommRing A] [Algebra R A]
   [HenselianLocalRing A]

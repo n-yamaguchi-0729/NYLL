@@ -112,7 +112,7 @@ theorem
       (IsLocalRing.ResidueField.map (algebraMap B₀ Bhat)) := by
     simpa only [Ahat, B₀, Bhat, aHat] using hclosed.2
   let : IsLocalHom (algebraMap B₀ Bhat) :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap B₀ Bhat)).out 3 1).mp <| by
+    ((IsLocalRing.local_hom_tfae (algebraMap B₀ Bhat)).out 3 1).mp <| by
       rw [hmax]
   let tensor := Ahat ⊗[A] B₀
   let : Algebra B₀ tensor := Algebra.TensorProduct.rightAlgebra

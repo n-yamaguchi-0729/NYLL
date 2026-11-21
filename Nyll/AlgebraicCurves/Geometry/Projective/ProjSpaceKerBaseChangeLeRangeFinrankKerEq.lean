@@ -55,6 +55,12 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace P2mWs6K4C
 
+open ProjSpace.ChartSectionsBaseChange (
+  X_eq_mvMapGraded_mul_one one_mem_zero preimage_inter preimage_pullbackChart
+  restrictFun_app_eq restrictFun_app_frameUnit restrictFun_app_pullAway toB
+  toB_mk toB_ratio
+)
+
 section Pull
 variable {A : Type u} [CommRing A] {n : ℕ} {Z : Scheme.{u}}
   (ι : Z ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A)) [IsAffineHom ι]
@@ -66,72 +72,6 @@ local notation "𝒜A" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) A
 local notation "𝒜B" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) B
 
 open HomogeneousLocalization
-
-theorem X_eq_mvMapGraded_mul_one (i : Fin (n + 1)) :
-    (MvPolynomial.X i : MvPolynomial (Fin (n + 1)) B) = (ProjSpace.mvMapGraded A B n)
-      (MvPolynomial.X i) * 1 :=
-  ProjSpace.ChartSectionsBaseChange.X_eq_mvMapGraded_mul_one (A := A) B i
-
-theorem one_mem_zero : (1 : MvPolynomial (Fin (n + 1)) B) ∈ (MvPolynomial.homogeneousSubmodule (Fin
-  (n + 1)) B) 0 :=
-  ProjSpace.ChartSectionsBaseChange.one_mem_zero (n := n) B
-
-/-- The coordinate localization map induced by the coefficient base change. -/
-noncomputable def toB (i : Fin (n + 1)) : Away 𝒜A (MvPolynomial.X i) →+* Away 𝒜B (MvPolynomial.X i)
-  :=
-  ProjSpace.ChartSectionsBaseChange.toB (A := A) B i
-
-theorem toB_ratio (i j : Fin (n + 1)) : toB (A := A) B i (ProjSpace.ratio A n i j) =
-  ProjSpace.ratio B n i j :=
-  ProjSpace.ChartSectionsBaseChange.toB_ratio (A := A) B i j
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_pullAway (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i : Fin (n + 1))
-    (a : Away 𝒜A (MvPolynomial.X i)) {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom
-        ((ι.app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A (MvPolynomial.X
-          i)).hom a)))
-      = ProjSpace.restrictFun h₂ ((ι'.app (Proj.basicOpen 𝒜B (MvPolynomial.X i))).hom
-          ((Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a))) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_pullAway ι B ι' e hcomp i a h₁ h₂
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_frameUnit (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i j : Fin (n + 1))
-  {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom (ProjSpace.frameUnit ι i j))
-      = ProjSpace.restrictFun h₂ (ProjSpace.frameUnit ι' i j) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_frameUnit ι B ι' e hcomp i j h₁ h₂
-
-theorem restrictFun_app_eq {U V : Z.Opens} (hVU : V ≤ U) {W' : Z'.Opens} (h₁ : W' ≤ e ⁻¹ᵁ V) (h₂ :
-  W' ≤ e ⁻¹ᵁ U)
-    (x : Γ(Z, U)) :
-    ProjSpace.restrictFun h₁ ((e.app V).hom (ProjSpace.restrictFun hVU x)) = ProjSpace.restrictFun
-      h₂ ((e.app U).hom x) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_eq e hVU h₁ h₂ x
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem preimage_pullbackChart (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (j : Fin (n + 1)) :
-    e ⁻¹ᵁ ProjSpace.pullbackChart ι j = ProjSpace.pullbackChart ι' j :=
-  ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι B ι' e hcomp j
-
-theorem preimage_inter (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) {i : ℕ} (s :
-  (ProjSpace.stdCoverPullback ι).Idx i) :
-    e ⁻¹ᵁ (ProjSpace.stdCoverPullback ι).inter s = (ProjSpace.stdCoverPullback ι').inter s :=
-  ProjSpace.ChartSectionsBaseChange.preimage_inter ι B ι' e hcomp s
-
-theorem toB_mk (i : Fin (n + 1)) (d : ℕ) (F : MvPolynomial (Fin (n + 1)) A) (hF : F ∈ 𝒜A d) :
-    toB (A := A) B i (HomogeneousLocalization.mk
-      ({ deg := d, num := ⟨F, hF⟩,
-         den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-           (MvPolynomial.isHomogeneous_X_pow i d)⟩,
-         den_mem := ⟨d, rfl⟩ } : NumDenSameDeg 𝒜A (Submonoid.powers (MvPolynomial.X i))))
-    = HomogeneousLocalization.mk
-      ({ deg := d,
-         num := ⟨MvPolynomial.map (algebraMap A B) F,
-           ((MvPolynomial.mem_homogeneousSubmodule d F).mp hF).map _⟩,
-         den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-           (MvPolynomial.isHomogeneous_X_pow i d)⟩,
-         den_mem := ⟨d, rfl⟩ } : NumDenSameDeg 𝒜B (Submonoid.powers (MvPolynomial.X i))) :=
-  ProjSpace.ChartSectionsBaseChange.toB_mk (A := A) B i d F hF
 
 end Pull
 
@@ -171,6 +111,9 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 open _root_.AlgebraicCurves.Geometry.Projective.Proofs in
 open ProjSpace_ker_baseChange_le_range_and_finrank_ker_eq_of_point_of_isPullback in
+open _root_.AlgebraicGeometry.ProjSpace.ChartSectionsBaseChange (preimage_pullbackChart
+  preimage_inter
+  restrictFun_app_eq restrictFun_app_pullAway toB_mk) in
 open P2mWs6K4C in
 theorem ker_baseChange_le_range_and_finrank_ker_eq_of_point_of_isPullback
     {A₀ : Type u} [CommRing A₀] {n : ℕ} {Z₀ : Scheme.{u}}

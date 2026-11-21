@@ -251,8 +251,8 @@ theorem surjective_components_of_surjective_zero
         exact Submodule.add_mem _ (Submodule.mem_sup_right hdI)
           (Submodule.mem_sup_left (LinearMap.mem_range_self G a))
       have htop : (⊤ : Submodule R (M (n + 1))) ≤ G.range :=
-        Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-          (IsAdicComplete.le_jacobson_bot (I := I)) hgen
+        Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+          (IsAdicComplete.le_jacobson (I := I)) hgen
       exact LinearMap.range_eq_top.mp (top_unique htop)
 
 /-- A complete Noetherian base makes the actual compatible-sequence

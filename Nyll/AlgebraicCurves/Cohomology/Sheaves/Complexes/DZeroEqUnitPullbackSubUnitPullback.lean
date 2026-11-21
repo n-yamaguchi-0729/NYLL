@@ -340,8 +340,8 @@ theorem unitPullback_one_eq_Z (hlam : ∀ w, 𝒲.U w ≤ h ⁻¹ᵁ 𝒦.U (lam
           exact hgt
         · exact absurd hab (by decide)
         · exact le_rfl
-      · intro a b hab hfab
-        exact absurd ((Equiv.swap (0 : Fin 2) 1).injective (hinj hfab)) (ne_of_lt hab)
+      · intro a b _ hfab
+        exact (hinj hfab).le
     have hidx : 𝒲.sortIdx 𝒦 lam s hinj = pair 𝒦 hgt := by
       apply Subtype.ext
       rw [Scheme.OrderedAffineCover.sortIdx_val, hsort, pair_val]

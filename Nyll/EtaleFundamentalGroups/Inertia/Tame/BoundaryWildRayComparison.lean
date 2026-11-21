@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointSurjective
 public import Nyll.EtaleFundamentalGroups.Inertia.OpenSourceBoundaryPlaces
 public import Nyll.EtaleFundamentalGroups.Inertia.ActualWildResidualCore
@@ -128,7 +129,8 @@ end Inertia
 
 namespace Tame
 
-attribute [local instance] integralOpenDominant Inertia.smoothOpenCurve
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
+  Inertia.smoothOpenCurve
 
 section SuppliedBoundary
 

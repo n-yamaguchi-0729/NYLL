@@ -23,15 +23,6 @@ namespace EtaleFundamentalGroups.Inertia
 
 universe u
 
-private theorem genericExtension_point_comp
-    (U : Scheme.{u}) [IsIntegral U]
-    (Ω : Type u) [Field Ω] [Algebra U.functionField Ω] :
-    ξ U.functionField Ω ≫ U.genericExtensionMorphism U.functionField =
-      U.genericExtensionMorphism Ω := by
-  simp only [Scheme.genericExtensionMorphism]
-  rw [← Spec.map_comp_assoc]
-  congr 1
-
 variable {U : Scheme.{u}} [IsIntegral U] [IsNormalIntegral U]
   [IsLocallyNoetherian U] [ConnectedSpace U]
   (Ω : Type u) [Field Ω] [Algebra U.functionField Ω]
@@ -60,7 +51,7 @@ def pointedCoverPlaceDoubleCosetEquiv
     let : FiniteDimensional K L :=
       finiteDimensional_functionField_of_finiteEtale_isConnected W
     let : _root_.IsGalois K L := isGalois_functionField_of_isGalois_finiteEtale W hW
-    let h := genericExtension_point_comp U Ω
+    let h := U.genericExtension_point_comp Ω
     let x := (absoluteGenericFiberIso U Ω).inv.app W w
     let g := genericPointLiftRebase h W
       (fiberObjEquivHom (ξ K Ω ≫ U.genericExtensionMorphism K) W x)

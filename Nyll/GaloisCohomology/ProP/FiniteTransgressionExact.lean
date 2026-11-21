@@ -33,9 +33,7 @@ universe u
 variable {p : ℕ} [Fact p.Prime]
 variable {P : Type u} [Group P]
 
-local instance exactQuotientTopology (N : Subgroup P) : TopologicalSpace (P ⧸ N) := ⊥
-local instance exactQuotientDiscrete (N : Subgroup P) : DiscreteTopology (P ⧸ N) :=
-  discreteTopology_bot _
+attribute [local instance] discreteQuotientTopology discreteQuotient
 
 /-- Restriction of finite ambient characters to invariant subgroup characters. -/
 def finiteCharacterRestrictionAddHom (N : Subgroup P) [N.Normal] :

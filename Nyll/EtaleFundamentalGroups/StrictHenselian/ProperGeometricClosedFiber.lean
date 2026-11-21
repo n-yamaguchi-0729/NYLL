@@ -48,9 +48,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategoryCoherence
-  AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  AlgebraicGeometry.FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+  AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
+  AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X S : Scheme.{u}} {Ω : Type u} [Field Ω]
   (s : Spec (CommRingCat.of Ω) ⟶ S) (f : X ⟶ S)

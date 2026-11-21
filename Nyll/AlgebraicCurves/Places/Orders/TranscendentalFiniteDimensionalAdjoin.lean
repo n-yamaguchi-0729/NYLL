@@ -282,7 +282,8 @@ theorem linearIndependent_pow_of_transcendental {f : F} (htr : Transcendental K 
     simpa [Polynomial.aeval_monomial, Algebra.smul_def] using hg
   have hp0 := (transcendental_iff.1 htr) _ hp
   have hcoeff := congrArg (fun p : Polynomial K => p.coeff (i : ℕ)) hp0
-  simp only [Polynomial.finsetSum_coeff, Polynomial.coeff_monomial, Polynomial.coeff_zero] at hcoeff
+  simp only [Polynomial.finsetSum_coeff, Polynomial.coeff_monomial_apply,
+    Polynomial.coeff_zero] at hcoeff
   rw [Finset.sum_eq_single i (fun j _ hji => ite_eq_right (fun h => hji (Fin.ext h))) (fun h =>
     absurd (Finset.mem_univ i) h),
     ite_eq_left rfl] at hcoeff

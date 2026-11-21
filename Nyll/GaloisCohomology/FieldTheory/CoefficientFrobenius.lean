@@ -42,7 +42,7 @@ theorem frobenius_pow_sub_id_surjective (n : ℕ) (hn : n ≠ 0) :
     Function.Surjective (fun x : Ω => (frobeniusAlgEquivOfAlgebraic k Ω ^ n) x - x) := by
   have hdegree : (Polynomial.X ^ (Fintype.card k ^ n) - Polynomial.X :
       Polynomial Ω).natDegree ≠ 0 := by
-    rw [X_pow_card_sub_X_natDegree_eq Ω (one_lt_pow₀ Fintype.one_lt_card hn)]
+    rw [Polynomial.natDegree_X_pow_sub_X (one_lt_pow₀ Fintype.one_lt_card hn)]
     exact pow_ne_zero _ Fintype.card_ne_zero
   intro a
   obtain ⟨x, hx⟩ := IsAlgClosed.eval_surjective hdegree a

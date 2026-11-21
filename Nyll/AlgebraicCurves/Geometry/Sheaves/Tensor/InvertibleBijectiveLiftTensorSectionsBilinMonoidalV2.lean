@@ -19,8 +19,8 @@ public import Nyll.SchemeTheory.Modules.Tensor.Monoidal
 public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
 public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 public import Nyll.SchemeTheory.Modules.Tensor.TensorFrames
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.IsFrameOnPullbackIsoUnitMonoidalV2
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
 
 /-!
@@ -62,8 +62,8 @@ export _root_.AlgebraicGeometry (Spec Scheme IsAffineOpen.self_le_iSup_basicOpen
   Scheme.Modules.tensorSections_smul_right Scheme.Modules.tensorSectionsBilin
   Scheme.Modules.map_homOfLE_tensorSections Scheme.Modules.IsFrameOn
   Scheme.Modules.IsFrameOn.tensorSections_monoidalV2
-  Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2
-  Scheme.Modules.IsInvertible.tensor_monoidalV2
+  Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit
+  Scheme.Modules.IsInvertible.tensor
   OModulePresheaf.isQuasicoherent_ofModules_of_locallyTrivial OModulePresheaf)
 namespace Scheme
 export _root_.AlgebraicGeometry.Scheme (Γ affineOpens basicOpen Modules Opens
@@ -72,13 +72,13 @@ export _root_.AlgebraicGeometry.Scheme (Γ affineOpens basicOpen Modules Opens
   Modules.tensorSections_add_right Modules.tensorSections_smul_left
   Modules.tensorSections_smul_right Modules.tensorSectionsBilin Modules.map_homOfLE_tensorSections
   Modules.IsFrameOn Modules.IsFrameOn.tensorSections_monoidalV2
-  Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2 Modules.IsInvertible.tensor_monoidalV2)
+  Modules.exists_isFrameOn_of_pullback_iso_unit Modules.IsInvertible.tensor)
 namespace Modules
 export _root_.AlgebraicGeometry.Scheme.Modules (presheaf restrict map_smul IsInvertible
   tensorSections tensorSections_add_left tensorSections_add_right tensorSections_smul_left
   tensorSections_smul_right tensorSectionsBilin map_tensorSections map_homOfLE_tensorSections
   IsFrameOn tensor IsFrameOn.tensorSections_monoidalV2
-  exists_isFrameOn_of_pullback_iso_unit_monoidalV2 IsInvertible.tensor_monoidalV2)
+  exists_isFrameOn_of_pullback_iso_unit IsInvertible.tensor)
 namespace IsFrameOn
 export _root_.AlgebraicGeometry.Scheme.Modules.IsFrameOn (bijective mono map
   tensorSections_monoidalV2)
@@ -92,8 +92,8 @@ export _root_.AlgebraicGeometry (Spec Scheme IsAffineOpen.self_le_iSup_basicOpen
   Scheme.Modules.tensorSections_smul_right Scheme.Modules.tensorSectionsBilin
   Scheme.Modules.map_homOfLE_tensorSections Scheme.Modules.IsFrameOn
   Scheme.Modules.IsFrameOn.tensorSections_monoidalV2
-  Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2
-  Scheme.Modules.IsInvertible.tensor_monoidalV2
+  Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit
+  Scheme.Modules.IsInvertible.tensor
   OModulePresheaf.isQuasicoherent_ofModules_of_locallyTrivial OModulePresheaf)
 namespace Scheme
 export _root_.AlgebraicGeometry.Scheme (Γ affineOpens basicOpen Modules Opens
@@ -102,20 +102,20 @@ export _root_.AlgebraicGeometry.Scheme (Γ affineOpens basicOpen Modules Opens
   Modules.tensorSections_add_right Modules.tensorSections_smul_left
   Modules.tensorSections_smul_right Modules.tensorSectionsBilin Modules.map_homOfLE_tensorSections
   Modules.IsFrameOn Modules.IsFrameOn.tensorSections_monoidalV2
-  Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2 Modules.IsInvertible.tensor_monoidalV2)
+  Modules.exists_isFrameOn_of_pullback_iso_unit Modules.IsInvertible.tensor)
 namespace Modules
 export _root_.AlgebraicGeometry.Scheme.Modules (presheaf restrict map_smul IsInvertible
   tensorSections tensorSections_add_left tensorSections_add_right tensorSections_smul_left
   tensorSections_smul_right tensorSectionsBilin map_tensorSections map_homOfLE_tensorSections
   IsFrameOn tensor IsFrameOn.tensorSections_monoidalV2
-  exists_isFrameOn_of_pullback_iso_unit_monoidalV2 IsInvertible.tensor_monoidalV2)
+  exists_isFrameOn_of_pullback_iso_unit IsInvertible.tensor)
 end AlgebraicGeometry.Scheme.Modules
 
 open scoped _root_.AlgebraicGeometry in
 open scoped _root_.AlgebraicGeometry.Scheme in
 open scoped _root_.AlgebraicGeometry.Scheme.Modules in
 alias AlgebraicGeometry.Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit :=
-  AlgebraicGeometry.Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2
+  AlgebraicGeometry.Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit
 namespace AlgebraicGeometry
 export _root_.AlgebraicGeometry (Spec Scheme IsAffineOpen.self_le_iSup_basicOpen_iff IsAffineOpen
   Scheme.Modules Scheme.Modules.map_smul toSpecΓ Scheme.Modules.IsInvertible
@@ -124,8 +124,8 @@ export _root_.AlgebraicGeometry (Spec Scheme IsAffineOpen.self_le_iSup_basicOpen
   Scheme.Modules.tensorSections_smul_right Scheme.Modules.tensorSectionsBilin
   Scheme.Modules.map_homOfLE_tensorSections Scheme.Modules.IsFrameOn
   Scheme.Modules.IsFrameOn.tensorSections_monoidalV2
-  Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2
-  Scheme.Modules.IsInvertible.tensor_monoidalV2
+  Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit
+  Scheme.Modules.IsInvertible.tensor
   OModulePresheaf.isQuasicoherent_ofModules_of_locallyTrivial OModulePresheaf)
 namespace Scheme
 export _root_.AlgebraicGeometry.Scheme (Γ affineOpens basicOpen Modules Opens
@@ -134,15 +134,15 @@ export _root_.AlgebraicGeometry.Scheme (Γ affineOpens basicOpen Modules Opens
   Modules.tensorSections_add_right Modules.tensorSections_smul_left
   Modules.tensorSections_smul_right Modules.tensorSectionsBilin Modules.map_homOfLE_tensorSections
   Modules.IsFrameOn Modules.IsFrameOn.tensorSections_monoidalV2
-  Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2 Modules.IsInvertible.tensor_monoidalV2)
+  Modules.exists_isFrameOn_of_pullback_iso_unit Modules.IsInvertible.tensor)
 namespace Modules
 export _root_.AlgebraicGeometry.Scheme.Modules (presheaf restrict map_smul IsInvertible
   tensorSections tensorSections_add_left tensorSections_add_right tensorSections_smul_left
   tensorSections_smul_right tensorSectionsBilin map_tensorSections map_homOfLE_tensorSections
   IsFrameOn tensor IsFrameOn.tensorSections_monoidalV2
-  exists_isFrameOn_of_pullback_iso_unit_monoidalV2 IsInvertible.tensor_monoidalV2)
+  exists_isFrameOn_of_pullback_iso_unit IsInvertible.tensor)
 namespace IsInvertible
-export _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible (tensor_monoidalV2)
+export _root_.AlgebraicGeometry.Scheme.Modules.IsInvertible (tensor)
 end AlgebraicGeometry.Scheme.Modules.IsInvertible
 
 universe u
@@ -327,8 +327,8 @@ theorem exists_basicOpen_isFrameOn (hL : Scheme.Modules.IsInvertible L) (hM :
       (∃ t : Γ(M, X.basicOpen f), Scheme.Modules.IsFrameOn t (X.basicOpen f)) := by
   obtain ⟨WL, hxL, ⟨eL⟩⟩ := hL.1 x
   obtain ⟨WM, hxM, ⟨eM⟩⟩ := hM.1 x
-  obtain ⟨sL, hsL⟩ := Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2 WL eL
-  obtain ⟨sM, hsM⟩ := Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit_monoidalV2 WM eM
+  obtain ⟨sL, hsL⟩ := Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit WL eL
+  obtain ⟨sM, hsM⟩ := Scheme.Modules.exists_isFrameOn_of_pullback_iso_unit WM eM
   obtain ⟨f, hfle, hxf⟩ := hU.exists_basicOpen_le (⟨x, (⟨hxL, hxM⟩ : x ∈ WL ⊓ WM)⟩ : (WL ⊓ WM :
     X.Opens)) hx
   refine ⟨f, hxf, ⟨L.presheaf.map (homOfLE (hfle.trans inf_le_left)).op sL, ?_⟩,
@@ -354,7 +354,7 @@ theorem main (hL : Scheme.Modules.IsInvertible L) (hM : Scheme.Modules.IsInverti
     obtain ⟨f, hxf, hfL, hfM⟩ := exists_basicOpen_isFrameOn hL hM (U : X.Opens) U.2 hx
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨f, hfL, hfM⟩, hxf⟩
   have hLM : Scheme.Modules.IsInvertible (L ⊗ M) :=
-    Scheme.Modules.IsInvertible.tensor_monoidalV2 hL hM
+    Scheme.Modules.IsInvertible.tensor hL hM
   have : ∀ r : s, IsLocalizedModule.Away r.1 (resBO L (U : X.Opens) r.1) := fun r =>
     isLocalizedModule_resBO L U r.1 hL U.2
   have : ∀ r : s, IsLocalizedModule.Away r.1 (resBO M (U : X.Opens) r.1) := fun r =>

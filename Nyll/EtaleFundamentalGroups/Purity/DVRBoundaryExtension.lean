@@ -60,8 +60,8 @@ namespace AlgebraicGeometry.FiniteEtale
 universe u
 
 attribute [local instance] Ideal.Quotient.field
-  finiteEtaleOverCategoryCoherence finiteEtaleHasPullbacksAlongCoherence
-  finiteEtaleStableUnderBaseChangeAlongCoherence
+  finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Over a locally Noetherian scheme, a finite etale cover of an open
 extends across a generic boundary point whose stalk is regular and has

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitHom
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitEquality
 public import Mathlib.CategoryTheory.Filtered.Basic
@@ -29,22 +30,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryLimitIso (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) := instCategory X
-
-local instance finiteEtaleHasPullbacksAlongLimitIso
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongLimitIso
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 
 private theorem map_eq_of_comparison
     {C₀ C₁ : Type*} [Category* C₀] [Category* C₁]

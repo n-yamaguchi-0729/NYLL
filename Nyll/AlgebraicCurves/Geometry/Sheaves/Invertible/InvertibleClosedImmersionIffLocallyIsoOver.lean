@@ -23,8 +23,8 @@ public import Nyll.SchemeTheory.Modules.Tensor.PresheafPullbackMonoidal
 public import Nyll.SchemeTheory.Modules.Tensor.PullbackMonoidal
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Invertible.InvertibleClosedImmersionIffLocallyIsoOverUnit
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoTensorUnitSectionNeZero
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDualMonoidalV2
 
 /-!
@@ -182,7 +182,7 @@ def dualIso {A B : E.Modules} (e : A ≅ B) : Scheme.Modules.dual A ≅ Scheme.M
 
 /-- The canonical isomorphism from the dual of the unit module to the unit module. -/
 def dualUnitIso : Scheme.Modules.dual (𝟙_ E.Modules) ≅ 𝟙_ E.Modules :=
-  (λ_ _).symm ≪≫ (Scheme.Modules.IsInvertible.dual_monoidalV2 (Scheme.Modules.isInvertible_unit
+  (λ_ _).symm ≪≫ (Scheme.Modules.IsInvertible.dual (Scheme.Modules.isInvertible_unit
     E)).2.some
 
 /-- The pullback comparison for a tensor product with the dual of an invertible module. -/
@@ -212,14 +212,14 @@ theorem locallyIsoOver_iff_tensor_dual (A B : E.Modules) (hB : Scheme.Modules.Is
     obtain ⟨U, hτ, ⟨e⟩⟩ := h τ
     let r := (q ⁻¹ᵁ U).ι
     have hBr : Scheme.Modules.IsInvertible ((Scheme.Modules.pullback r).obj B) := hB.pullback r
-    obtain ⟨eBr⟩ := (Scheme.Modules.IsInvertible.dual_monoidalV2 hBr).2
+    obtain ⟨eBr⟩ := (Scheme.Modules.IsInvertible.dual hBr).2
     exact ⟨U, hτ, ⟨pullbackTensorDualIso r A B hB ≪≫ isoUnitOfIso e eBr ≪≫
       (Scheme.Modules.pullbackTensorUnitObjIso r).symm⟩⟩
   · intro h τ
     obtain ⟨U, hτ, ⟨e⟩⟩ := h τ
     let r := (q ⁻¹ᵁ U).ι
     have hBr : Scheme.Modules.IsInvertible ((Scheme.Modules.pullback r).obj B) := hB.pullback r
-    obtain ⟨eBr⟩ := (Scheme.Modules.IsInvertible.dual_monoidalV2 hBr).2
+    obtain ⟨eBr⟩ := (Scheme.Modules.IsInvertible.dual hBr).2
     exact ⟨U, hτ, ⟨isoOfIsoUnit ((pullbackTensorDualIso r A B hB).symm ≪≫ e ≪≫
       Scheme.Modules.pullbackTensorUnitObjIso r) eBr⟩⟩
 
@@ -244,11 +244,11 @@ theorem main
             ((Scheme.Modules.pullback (Limits.pullback.fst (Limits.pullback.snd c t) ψ)).obj M)
             ((Scheme.Modules.pullback (Limits.pullback.fst (Limits.pullback.snd c t) ψ)).obj M') :=
               by
-  have hM'd := (Scheme.Modules.IsInvertible.dual_monoidalV2 hM').1
+  have hM'd := (Scheme.Modules.IsInvertible.dual hM').1
   let N : (Limits.pullback c t).Modules := M ⊗ Scheme.Modules.dual M'
-  have hN : Scheme.Modules.IsInvertible N := Scheme.Modules.IsInvertible.tensor_monoidalV2 hM hM'd
+  have hN : Scheme.Modules.IsInvertible N := Scheme.Modules.IsInvertible.tensor hM hM'd
   let Ninv : (Limits.pullback c t).Modules := Scheme.Modules.dual N
-  have hNinv : Scheme.Modules.IsInvertible Ninv := (Scheme.Modules.IsInvertible.dual_monoidalV2
+  have hNinv : Scheme.Modules.IsInvertible Ninv := (Scheme.Modules.IsInvertible.dual
     hN).1
   have hinv : ∀ (Y : Scheme.{u}) (g : Y ⟶ Limits.pullback c t),
       Nonempty ((Scheme.Modules.pullback g).obj N ≅ SheafOfModules.unit Y.ringCatSheaf) →

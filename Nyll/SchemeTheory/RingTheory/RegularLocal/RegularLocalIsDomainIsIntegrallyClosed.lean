@@ -70,8 +70,8 @@ theorem _root_.IsRegularLocalRing.isDomain_and_isIntegrallyClosed_of_ringKrullDi
       have hy : y ∈ P := ((hP.mem_or_mem (by simpa [mul_comm] using hx)).resolve_right hπP)
       rw [mul_comm]
       exact Submodule.smul_mem_smul (hmax ▸ Ideal.mem_span_singleton_self π) hy
-    have hPbot : P = ⊥ := Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal A) P
-      (IsNoetherian.noetherian _) hPle (by rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top])
+    have hPbot : P = ⊥ := Submodule.eq_bot_of_le_smul_of_le_jacobson (maximalIdeal A) P
+      (IsNoetherian.noetherian _) hPle (IsLocalRing.ringJacobson_eq_maximalIdeal A).ge
     have : (⊥ : Ideal A).IsPrime := hPbot ▸ hP
     have : IsDomain A := Function.Injective.isDomain (RingEquiv.quotientBot A).symm.toRingHom
       (RingEquiv.quotientBot A).symm.injective

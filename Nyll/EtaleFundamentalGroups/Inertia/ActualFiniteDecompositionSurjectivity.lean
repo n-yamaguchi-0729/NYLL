@@ -39,13 +39,13 @@ theorem actualNormalizationDecomposition_exists_finiteNative_restriction
     (Q : Ideal (integralClosure A L)) [hQ : Q.IsPrime]
     (E : FiniteGaloisIntermediateField K L)
     (τ : { g : (finiteGaloisGroupObject K L E).carrier //
-      ((finiteNormalizationActionDiagram A K L E).lowerDecomposition
-        (finiteAbsoluteNormalizationPrime A K L Q E)).carrier g }) :
+      g ∈ (finiteNormalizationActionDiagram A K L E).lowerDecomposition
+        (finiteAbsoluteNormalizationPrime A K L Q E) }) :
     ∃ σ : (normalizationDecompositionGroup A K L Q).carrier,
       (finiteGaloisRestrictionGroupMap K L E).hom'.toFun σ.val = τ.val := by
   have hmap := (finiteNormalizationActionDiagram_images A K L Q E (hQ := hQ)).1
-  have hτ : (((finiteNormalizationActionDiagram A K L E).upperDecomposition Q).map
-      (finiteNormalizationActionDiagram A K L E).groupMap).carrier τ.val := by
+  have hτ : τ.val ∈ ((finiteNormalizationActionDiagram A K L E).upperDecomposition Q).map
+      (finiteNormalizationActionDiagram A K L E).groupMap := by
     rw [hmap]
     exact τ.property
   obtain ⟨g, hg, hrestrict⟩ := hτ
@@ -58,8 +58,8 @@ theorem finiteNormalizationDecomposition_exists_finiteNative_lift
     (τ : (commAlgIdealDecompositionGroup A (finiteAbsoluteNormalizationAlgebra A K L E)
       (finiteAbsoluteNormalizationPrime A K L Q E)).carrier) :
     ∃ g : { g : (finiteGaloisGroupObject K L E).carrier //
-      ((finiteNormalizationActionDiagram A K L E).lowerDecomposition
-        (finiteAbsoluteNormalizationPrime A K L Q E)).carrier g },
+      g ∈ (finiteNormalizationActionDiagram A K L E).lowerDecomposition
+        (finiteAbsoluteNormalizationPrime A K L Q E) },
       (finiteNormalizationGaloisGroupMap A K L E).hom'.toFun g.val = τ.val := by
   obtain ⟨g, hg, hcoeff⟩ := coefficientDecomposition_exists_preimage A
     (finiteAbsoluteNormalizationAlgebra A K L E) (finiteGaloisGroupObject K L E)

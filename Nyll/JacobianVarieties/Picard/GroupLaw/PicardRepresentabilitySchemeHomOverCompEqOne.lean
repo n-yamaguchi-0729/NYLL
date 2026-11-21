@@ -45,6 +45,7 @@ public import Nyll.JacobianVarieties.Picard.Representability.PullbackOneIso
 public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
 public import Nyll.JacobianVarieties.Picard.Representability.RepresentsRelSubPicKerPoints
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-! The norm map kills tangent points under the characteristic-rank hypothesis. -/
 
@@ -181,7 +182,7 @@ theorem schemeHomOverComp_eq_one_of_dualNumber_of_classifies_rigidify_normModule
     obtain ⟨e⟩ := RepresentsRelSubPic.nonempty_pullbackAlong_one_iso (P := algEquivZeroGroupCut c'
       ε') h'
       (Scheme.TwoAffineOpenCover.specMap κ κ)
-    exact ⟨RigidifiedLineBundle.pullbackAlongPullbackAlongIso' h'.poincare u red ≪≫
+    exact ⟨RigidifiedLineBundle.pullbackAlongPullbackAlongIso h'.poincare u red ≪≫
       eqToIso (congrArg (fun ψ => (h'.poincare.pullbackAlong ψ).L) hredu) ≪≫ e⟩
   obtain ⟨eN⟩ :=
     nonempty_normModule_curveChange_dualNumber_iso_unit_of_finrank_eq_char_of_forall_isClosed_eq

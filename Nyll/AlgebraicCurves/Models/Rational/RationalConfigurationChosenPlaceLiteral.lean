@@ -32,9 +32,9 @@ theorem rationalConfiguration_arithmeticPlace_eq_literal
     (hord : ∀ z : RatFunc k,
       (rationalConfigurationBoundaryPlace k κ s a).val.ord
         (algebraMap (RatFunc k) (RatFunc κ) z) = V.ord z) :
-    V = literalRationalPuncturePlace k a.val.rep a.val.rep_nonzero := by
+    V = literalRationalPuncturePlace k a.val.rep a.val.rep_ne_zero := by
   have heq (z : RatFunc k) : V.ord z =
-      (literalRationalPuncturePlace k a.val.rep a.val.rep_nonzero).ord z :=
+      (literalRationalPuncturePlace k a.val.rep a.val.rep_ne_zero).ord z :=
     (hord z).symm.trans (rationalConfigurationBoundaryPlace_coefficient_orders
       k κ s a z)
   apply Place.ext
@@ -42,7 +42,7 @@ theorem rationalConfiguration_arithmeticPlace_eq_literal
   rcases eq_or_ne z 0 with rfl | hz
   · exact iff_of_true (zero_mem _) (zero_mem _)
   · rw [V.mem_iff_ord_nonneg hz,
-      (literalRationalPuncturePlace k a.val.rep a.val.rep_nonzero).mem_iff_ord_nonneg hz,
+      (literalRationalPuncturePlace k a.val.rep a.val.rep_ne_zero).mem_iff_ord_nonneg hz,
       heq z]
 
 /-- The exact choice used by the original normalization-prime decomposition
@@ -51,7 +51,7 @@ theorem rationalConfiguration_chosen_arithmeticPlace_eq_literal
     [IsAlgClosed κ] (s : Finset (Projectivization k (k × k))) (a : s) :
     (rationalConfiguration_every_boundaryPlace_exists_rationalPlace k κ s
       (rationalConfigurationBoundaryPlace k κ s a)).choose =
-        literalRationalPuncturePlace k a.val.rep a.val.rep_nonzero := by
+        literalRationalPuncturePlace k a.val.rep a.val.rep_ne_zero := by
   apply rationalConfiguration_arithmeticPlace_eq_literal k κ s a
   exact (rationalConfiguration_every_boundaryPlace_exists_rationalPlace k κ s
     (rationalConfigurationBoundaryPlace k κ s a)).choose_spec.2

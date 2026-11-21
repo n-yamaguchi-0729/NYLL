@@ -115,7 +115,7 @@ theorem exists_normalizedSection_of_uniform_pointTwist
       ((Scheme.Modules.pullbackTensorObjIso f M.L (ε.ker ^ n).invModule ≪≫
         whiskerLeftIso L (sectionPowerBaseChangeIso c ε hε σ n)) ⊗ᵢ
           asIso (I.pullbackModuleComparison f))
-  obtain ⟨_, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso π 𝒲 e
+  obtain ⟨_, ⟨e1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso π 𝒲 e
   exact e1.toEquiv.subsingleton
 
 include 𝒱 hI hε havoid in

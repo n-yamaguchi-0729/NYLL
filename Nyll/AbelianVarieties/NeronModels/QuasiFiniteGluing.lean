@@ -5,6 +5,7 @@ Original copyright, authors, license and pinned sources are retained per unit be
 
 module
 
+public import Nyll.AbelianVarieties.NeronModels.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Gluing
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -55,7 +56,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry NeronModelInfra Good
 universe u
 
 open AbelianVarieties.NOSProofs.GluingFibreDensity.TranslationCharts
-  (Phi Psi U2 Ua Ub V2 Ya bY bY_ι bY_ι_assoc ch ch_fst ch_fst_assoc ch_fst_y' ch_snd eV eV_hom_ι
+  (U2 Ua Ub V2 Ya bY bY_ι bY_ι_assoc ch ch_fst ch_fst_assoc ch_fst_y' ch_snd eV eV_hom_ι
     eV_hom_ι_assoc eV_inv_ι eV_inv_ι_assoc fst_y isClosedImmersion_jA isClosedImmersion_kA
     isOpenImmersion_ch isOpenImmersion_rho isOpenImmersion_Θ isPullback_jA isPullback_kA
     isPullback_rho isPullback_Θ jA jA_fst jA_snd kA kA_fst kA_snd la la_ι m_eq_Phi_snd m_y range_ch
@@ -284,7 +285,8 @@ theorem dense_fibre_jA [IsSeparated y] (S : Set ↑(pullback y y)) (s : Spec (Co
     continuous_subtype_val).subtype_mk _
   have hφi : Topology.IsInducing φ := by
     refine Topology.IsInducing.of_comp hφc continuous_subtype_val ?_
-    exact (jA y a ha).isClosedEmbedding.isInducing.comp Topology.IsInducing.subtypeVal
+    exact (jA y a ha).isClosedEmbedding.isInducing.comp
+      (Topology.IsInducing.subtypeVal (t := {b | y.base b = s}))
   have hE : pullback.fst (pullback.fst y y) a =
       (pullback.fst (pullback.fst y y) a ≫ pullback.snd y y) ≫ jA y a ha := by
     apply pullback.hom_ext
@@ -332,11 +334,7 @@ abbrev sA : pullback y y ⟶ pullback (pullback.fst y y ≫ y) y :=
     (by rw [pullback.lift_fst_assoc, Category.assoc, Category.assoc, ha, Category.comp_id,
       pullback.condition])
 
-/-- The graph map of the partial multiplication. -/
-abbrev grm : (U : Scheme.{u}) ⟶ pullback (pullback.fst y y ≫ y) y :=
-  pullback.lift (f := pullback.fst y y ≫ y) (g := y) U.ι m.1 m.2.symm
-
-variable (g₀ : (U : Scheme.{u}) ⟶ G) (hg₀ : g₀ ≫ γ = grm y U m)
+variable (g₀ : (U : Scheme.{u}) ⟶ G) (hg₀ : g₀ ≫ γ = NeronModelInfra.multiplicationGraph y U m)
 
 /-- Lift a section-compatible pair into the closed multiplication graph. -/
 def mkΓa {T : Scheme.{u}} (x : T ⟶ Y) (w : T ⟶ (U : Scheme.{u}))
@@ -572,7 +570,8 @@ variable (hU₁ : ∀ x : Y,
       (U : Set ↑(pullback y y))))
 
 include hU₁ in
-theorem subset_closure_U01 [Smooth y] [IsSeparated y] [IsOpenImmersion (Phi y U m)] :
+theorem subset_closure_U01 [Smooth y] [IsSeparated y]
+    [IsOpenImmersion (firstMultiplicationChart y U m)] :
     (U : Set ↑(pullback y y)) ⊆ closure (U01 y U m a ha : Set ↑(pullback y y)) := by
   have hUb : Dense ((Ub y U a ha : Y.Opens) : Set Y) := dense_Ub y U a ha hU₁
   have : UniversallyOpen m.1 := universallyOpen_m y U m
@@ -603,7 +602,7 @@ theorem subset_closure_U2' [Smooth y] [IsSeparated y] :
   exact this ⟨hq, hA.closure_eq ▸ Set.mem_univ q⟩
 
 include hU₁ in
-theorem closure_W01 [Smooth y] [IsSeparated y] [IsOpenImmersion (Phi y U m)] :
+theorem closure_W01 [Smooth y] [IsSeparated y] [IsOpenImmersion (firstMultiplicationChart y U m)] :
     ((P0 y U y' ι ⊓ P1 y U y' ι τ : (pullback y' y').Opens) : Set ↑(pullback y' y')) ⊆
       closure (W01 y U m a ha y' ι τ : Set ↑(pullback y' y')) := by
   simp only [W01, P1, Opens.coe_inf, Scheme.Hom.coe_image]
@@ -808,7 +807,8 @@ variable
 
 include hU₁ hassoc htr hιd in
 theorem exists_law [IsDomain R] [IsNoetherianRing R] [Smooth y] [IsSeparated y]
-    [Smooth y'] [IsSeparated y'] [LocallyOfFiniteType y'] [QuasiCompact y'] [IsOpenImmersion (Phi y
+    [Smooth y'] [IsSeparated y'] [LocallyOfFiniteType y'] [QuasiCompact y']
+      [IsOpenImmersion (firstMultiplicationChart y
       U m)] :
     ∃ M : (U' y U m a ha y' ι τ : Scheme.{u}) ⟶ Y',
       (pullback y' y').homOfLE (P0_le y U m a ha y' ι τ) ≫ M = f0 y U m y' ι ∧
@@ -963,7 +963,8 @@ theorem iSup_eq_top : (⨆ i, cov y U m a ha y' ι τ i) = ⊤ := by
   · exact Opens.mem_iSup.mpr ⟨none, hx⟩
 
 include hM0 hM1 hM2 hM' in
-theorem locallyQuasiFinite_Phi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (Psi y U m)] :
+theorem locallyQuasiFinite_Phi' [IsOpenImmersion (firstMultiplicationChart y U m)]
+    [IsOpenImmersion (secondMultiplicationChart y U m)] :
     LocallyQuasiFinite (pullback.lift (f := y') (g := y') ((U' y U m a ha y' ι τ).ι ≫ pullback.fst
       y' y') M'.1
       ((Category.assoc _ _ _).trans M'.2.symm)) := by
@@ -997,12 +998,12 @@ theorem locallyQuasiFinite_Phi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     have hφb : φ₂' ≫ bY y U a ha = (V2 y U m a ha).ι ≫ bY y U a ha := by
       rw [← cancel_mono (Ua y U a ha).ι, Category.assoc, Category.assoc, bY_ι, reassoc_of% hφ₂',
         hφ₁]
-    have hφΘ : φ₂' ≫ Θ y U m a ha = θ y U m a ha ≫ Phi y U m := by
+    have hφΘ : φ₂' ≫ Θ y U m a ha = θ y U m a ha ≫ firstMultiplicationChart y U m := by
       apply pullback.hom_ext
       · rw [Category.assoc, Θ_fst, reassoc_of% hφb, Category.assoc, pullback.lift_fst, θ_ι_assoc,
         Θ_fst]
       · rw [Category.assoc, Θ_snd, reassoc_of% hφ₂', hφ₂, Category.assoc, pullback.lift_snd]
-    have : LocallyQuasiFinite (θ y U m a ha ≫ Phi y U m) := inferInstance
+    have : LocallyQuasiFinite (θ y U m a ha ≫ firstMultiplicationChart y U m) := inferInstance
     have : LocallyQuasiFinite (φ₂' ≫ Θ y U m a ha) := by rw [hφΘ]; infer_instance
     have : LocallyQuasiFinite φ₂' := LocallyQuasiFinite.of_comp φ₂' (Θ y U m a ha)
     have : LocallyQuasiFinite φ₂ := by rw [← hφ₂']; infer_instance
@@ -1022,7 +1023,8 @@ theorem locallyQuasiFinite_Phi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     rw [h]; infer_instance
   · change LocallyQuasiFinite (((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P1 y U y' ι τ).ι ≫ Φ')
     have h : ((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P1 y U y' ι τ).ι ≫ Φ' =
-        ((U' y U m a ha y' ι τ).ι ∣_ P1 y U y' ι τ) ≫ (e1 y U y' ι τ).inv ≫ Phi y U m ≫ ch y y' τ τ
+        ((U' y U m a ha y' ι τ).ι ∣_ P1 y U y' ι τ) ≫ (e1 y U y' ι τ).inv
+          ≫ firstMultiplicationChart y U m ≫ ch y y' τ τ
           := by
       apply pullback.hom_ext
       · rw [Category.assoc, pullback.lift_fst, reassoc_of% (res_fac y U m a ha y' ι τ _ (P1_le y U m
@@ -1037,7 +1039,8 @@ theorem locallyQuasiFinite_Phi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     rw [h]; infer_instance
   · change LocallyQuasiFinite (((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P0 y U y' ι).ι ≫ Φ')
     have h : ((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P0 y U y' ι).ι ≫ Φ' =
-        ((U' y U m a ha y' ι τ).ι ∣_ P0 y U y' ι) ≫ (e0 y U y' ι).inv ≫ Phi y U m ≫ ch y y' ι ι :=
+        ((U' y U m a ha y' ι τ).ι ∣_ P0 y U y' ι) ≫ (e0 y U y' ι).inv
+          ≫ firstMultiplicationChart y U m ≫ ch y y' ι ι :=
           by
       apply pullback.hom_ext
       · rw [Category.assoc, pullback.lift_fst, reassoc_of% (res_fac y U m a ha y' ι τ _ (P0_le y U m
@@ -1052,7 +1055,8 @@ theorem locallyQuasiFinite_Phi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     rw [h]; infer_instance
 
 include hM0 hM1 hM2 hM' in
-theorem locallyQuasiFinite_Psi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (Psi y U m)] :
+theorem locallyQuasiFinite_Psi' [IsOpenImmersion (firstMultiplicationChart y U m)]
+    [IsOpenImmersion (secondMultiplicationChart y U m)] :
     LocallyQuasiFinite (pullback.lift (f := y') (g := y') M'.1 ((U' y U m a ha y' ι τ).ι ≫
       pullback.snd y' y')
       (M'.2.trans (by rw [Category.assoc, pullback.condition]))) := by
@@ -1069,7 +1073,7 @@ theorem locallyQuasiFinite_Psi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     have h : ((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P2 y U m a ha y' ι τ).ι ≫ Ψ' =
         ((U' y U m a ha y' ι τ).ι ∣_ P2 y U m a ha y' ι τ) ≫ (e2 y U m a ha y' ι τ).inv ≫ (eV y U m
           a ha).inv ≫
-          θ y U m a ha ≫ Psi y U m ≫ ch y y' ι τ := by
+          θ y U m a ha ≫ secondMultiplicationChart y U m ≫ ch y y' ι τ := by
       apply pullback.hom_ext
       · rw [Category.assoc, pullback.lift_fst, res_fac y U m a ha y' ι τ _ (P2_le y U m a ha y' ι
         τ), Category.assoc,
@@ -1085,7 +1089,8 @@ theorem locallyQuasiFinite_Psi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     rw [h]; infer_instance
   · change LocallyQuasiFinite (((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P1 y U y' ι τ).ι ≫ Ψ')
     have h : ((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P1 y U y' ι τ).ι ≫ Ψ' =
-        ((U' y U m a ha y' ι τ).ι ∣_ P1 y U y' ι τ) ≫ (e1 y U y' ι τ).inv ≫ Psi y U m ≫ ch y y' τ ι
+        ((U' y U m a ha y' ι τ).ι ∣_ P1 y U y' ι τ) ≫ (e1 y U y' ι τ).inv
+          ≫ secondMultiplicationChart y U m ≫ ch y y' τ ι
           := by
       apply pullback.hom_ext
       · rw [Category.assoc, pullback.lift_fst, res_fac y U m a ha y' ι τ _ (P1_le y U m a ha y' ι
@@ -1100,7 +1105,8 @@ theorem locallyQuasiFinite_Psi' [IsOpenImmersion (Phi y U m)] [IsOpenImmersion (
     rw [h]; infer_instance
   · change LocallyQuasiFinite (((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P0 y U y' ι).ι ≫ Ψ')
     have h : ((U' y U m a ha y' ι τ).ι ⁻¹ᵁ P0 y U y' ι).ι ≫ Ψ' =
-        ((U' y U m a ha y' ι τ).ι ∣_ P0 y U y' ι) ≫ (e0 y U y' ι).inv ≫ Psi y U m ≫ ch y y' ι ι :=
+        ((U' y U m a ha y' ι τ).ι ∣_ P0 y U y' ι) ≫ (e0 y U y' ι).inv
+          ≫ secondMultiplicationChart y U m ≫ ch y y' ι ι :=
           by
       apply pullback.hom_ext
       · rw [Category.assoc, pullback.lift_fst, res_fac y U m a ha y' ι τ _ (P0_le y U m a ha y' ι
@@ -1196,13 +1202,15 @@ theorem exists_opens_locallyQuasiFinite_forall_exists_comp_eq_of_glue_translate_
           w'.1 ≫ U'.ι ≫ pullback.fst y' y' = u.1 ≫ U.ι ≫ pullback.fst y y ≫ ι.1 ∧
           w'.1 ≫ U'.ι ≫ pullback.snd y' y' = d.1 ≫ τ.1 ∧
           w'.1 ≫ m'.1 = v.1 ≫ m.1 ≫ ι.1) := by
-  have : IsOpenImmersion (Phi y U m) := hΦ
-  have : IsOpenImmersion (Psi y U m) := hΨ
+  have : IsOpenImmersion (firstMultiplicationChart y U m) := hΦ
+  have : IsOpenImmersion (secondMultiplicationChart y U m) := hΨ
   have : IsReduced (U : Scheme.{u}) :=
     AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian (U.ι ≫ pullback.fst y y ≫
       y)
-  have hgr : Set.range (grm y U m).base ⊆ Set.range γ.base := hΓ ▸ subset_closure
-  obtain ⟨g₀, hg₀⟩ := exists_lift_of_isClosedImmersion (grm y U m) γ hgr
+  have hgr : Set.range (NeronModelInfra.multiplicationGraph y U m).base ⊆ Set.range γ.base :=
+    hΓ ▸ subset_closure
+  obtain ⟨g₀, hg₀⟩ := exists_lift_of_isClosedImmersion
+    (NeronModelInfra.multiplicationGraph y U m) γ hgr
   have htr : ∀ {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (x : T ⟶ Y) (_ : x ≫ y = t)
       (w : T ⟶ (U : Scheme.{u})),
       w ≫ U.ι ≫ pullback.fst y y = t ≫ a → w ≫ U.ι ≫ pullback.snd y y = x → x ≫ τ.1 = w ≫ m.1 ≫ ι.1
@@ -1261,7 +1269,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry NeronModelInfra Good
 universe u
 
 open AbelianVarieties.NOSProofs.GluingFibreDensity.TranslationCharts
-  (Phi Psi ch ch_fst ch_snd ch_fst_assoc ch_snd_assoc range_ch)
+  (ch ch_fst ch_snd ch_fst_assoc ch_snd_assoc range_ch)
 open scoped AbelianVarieties.NOSProofs.GluingFibreDensity.TranslationCharts
 open AbelianVarieties.NOSProofs.GraphClosureRigidity.GraphClosure
   (dense_of_forall_dense_fibre)
@@ -1718,7 +1726,8 @@ omit [IsOpenImmersion ι.1] in
 include hw₀ hw₀m in
 theorem w0_Phi' :
     w₀ ≫ pullback.lift (f := y') (g := y') (U'.ι ≫ pullback.fst y' y') m'.1
-        ((Category.assoc _ _ _).trans m'.2.symm) = Phi y U m ≫ ch y y' ι ι := by
+        ((Category.assoc _ _ _).trans m'.2.symm)
+          = firstMultiplicationChart y U m ≫ ch y y' ι ι := by
   apply pullback.hom_ext
   · rw [Category.assoc, pullback.lift_fst, reassoc_of% hw₀, ch_fst, Category.assoc, ch_fst,
       pullback.lift_fst_assoc, Category.assoc]
@@ -1728,7 +1737,8 @@ omit [IsOpenImmersion ι.1] in
 include hw₀ hw₀m in
 theorem w0_Psi' :
     w₀ ≫ pullback.lift (f := y') (g := y') m'.1 (U'.ι ≫ pullback.snd y' y')
-        (m'.2.trans (by rw [Category.assoc, pullback.condition])) = Psi y U m ≫ ch y y' ι ι := by
+        (m'.2.trans (by rw [Category.assoc, pullback.condition]))
+          = secondMultiplicationChart y U m ≫ ch y y' ι ι := by
   apply pullback.hom_ext
   · rw [Category.assoc, pullback.lift_fst, hw₀m, Category.assoc, ch_fst, pullback.lift_fst_assoc]
   · rw [Category.assoc, pullback.lift_snd, reassoc_of% hw₀, ch_snd, Category.assoc, ch_snd,
@@ -1900,16 +1910,16 @@ theorem isOpenImmersion_lift_and_forall_comp_eq_of_locallyQuasiFinite_of_forall_
       q.1 ≫ U'.ι ≫ pullback.fst y' y' = u.1 ≫ U'.ι ≫ pullback.fst y' y' →
       q.1 ≫ U'.ι ≫ pullback.snd y' y' = v.1 ≫ m'.1 →
       p.1 ≫ m'.1 = q.1 ≫ m'.1) := by
-  have : IsOpenImmersion (Phi y U m) := hΦ
-  have : IsOpenImmersion (Psi y U m) := hΨ
+  have : IsOpenImmersion (firstMultiplicationChart y U m) := hΦ
+  have : IsOpenImmersion (secondMultiplicationChart y U m) := hΨ
   obtain ⟨w₀, hw₀, hw₀m⟩ := exists_w0 y U m y' ι U' m' hext
   have hUD : U0 y U y' ι ≤ U' := U0_le w₀ hw₀
   have hM : (pullback y' y').homOfLE hUD ≫ m'.1 = (m0 y U m y' ι).1 := homOfLE_m' w₀ hw₀ hw₀m hUD
   have hU : Dense (U : Set ↑(pullback y y)) := dense_of_forall_dense_fibre (fun q => (pullback.fst y
     y).base q) _ hU₁
-  have hΦU : Dense (Set.range (Phi y U m).base) :=
+  have hΦU : Dense (Set.range (firstMultiplicationChart y U m).base) :=
     dense_of_forall_dense_fibre (fun q => (pullback.fst y y).base q) _ hΦ₁
-  have hΨU : Dense (Set.range (Psi y U m).base) :=
+  have hΨU : Dense (Set.range (secondMultiplicationChart y U m).base) :=
     dense_of_forall_dense_fibre (fun q => (pullback.fst y y).base q) _ hΨ₁
   have hU0 : Dense ((U0 y U y' ι : (pullback y' y').Opens) : Set ↑(pullback y' y')) := by
     rw [U0, Scheme.Hom.coe_image]; exact dense_image_ch y y' ι hιd hU
@@ -1919,14 +1929,16 @@ theorem isOpenImmersion_lift_and_forall_comp_eq_of_locallyQuasiFinite_of_forall_
   set Ψ' := pullback.lift (f := y') (g := y') m'.1 (U'.ι ≫ pullback.snd y' y')
     (m'.2.trans (by rw [Category.assoc, pullback.condition])) with hΨ'
   have hΦ'oi : IsOpenImmersion Φ' := by
-    obtain ⟨s, hs, hsr⟩ := exists_section w₀ Φ' (Phi y U m ≫ ch y y' ι ι) (w0_Phi' w₀ hw₀ hw₀m)
+    obtain ⟨s, hs, hsr⟩ := exists_section w₀ Φ'
+      (firstMultiplicationChart y U m ≫ ch y y' ι ι) (w0_Phi' w₀ hw₀ hw₀m)
     refine isOpenImmersion_of_zmt y' U' Φ' (pullback.fst y' y') (pullback.lift_fst _ _ _) _ ?_ s hs
       ?_
     · rw [Scheme.Hom.coe_opensRange, range_comp]
       exact dense_image_ch y y' ι hιd hΦU
     · rw [DenseRange, hsr]; exact hdw₀
   have hΨ'oi : IsOpenImmersion Ψ' := by
-    obtain ⟨s, hs, hsr⟩ := exists_section w₀ Ψ' (Psi y U m ≫ ch y y' ι ι) (w0_Psi' w₀ hw₀ hw₀m)
+    obtain ⟨s, hs, hsr⟩ := exists_section w₀ Ψ'
+      (secondMultiplicationChart y U m ≫ ch y y' ι ι) (w0_Psi' w₀ hw₀ hw₀m)
     refine isOpenImmersion_of_zmt y' U' Ψ' (pullback.snd y' y') (pullback.lift_snd _ _ _) _ ?_ s hs
       ?_
     · rw [Scheme.Hom.coe_opensRange, range_comp]

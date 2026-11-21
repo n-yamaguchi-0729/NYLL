@@ -20,6 +20,8 @@ field-norm value-image comparison.
 
 @[expose] public section
 
+open LocalFieldTheory (localNormSubgroup)
+
 noncomputable section
 
 universe u
@@ -105,7 +107,7 @@ theorem nat_lcm_residueDegree_dvd_common_residueDegree_towers :
       (K := K) (L := L) (L' := L') (M := M)
 
 /-- Element-generator proof of the common-top residue-degree divisibility:
-`fieldNormSubgroup K M` contains an element of valuation `f(K,M)`, and the
+`localNormSubgroup K M` contains an element of valuation `f(K,M)`, and the
 common-top norm-image theorem forces that valuation to be divisible by the
 lower residue-degree lcm. -/
 theorem nat_lcm_residueDegree_dvd_common_residueDegree_towers_from_norm_generator :
@@ -114,7 +116,7 @@ theorem nat_lcm_residueDegree_dvd_common_residueDegree_towers_from_norm_generato
       Module.finrank 𝓀[K] 𝓀[M] :=
   nat_lcm_residueDegree_dvd_nat_of_exists_mem_val_of_le_fieldNormSubgroup_towers
     (K := K) (L := L) (L' := L') (M := M)
-    (S := fieldNormSubgroup K M)
+    (S := localNormSubgroup K M)
     (n := Module.finrank 𝓀[K] 𝓀[M])
     (exists_mem_fieldNormSubgroup_val_residueDegree (K := K) (L := M))
     (fun _ hx => hx)
@@ -151,7 +153,7 @@ omit [ValuativeRel M] [TopologicalSpace M] [IsNonarchimedeanLocalField M]
     [Valuation.HasExtension (ValuativeRel.valuation K)
       (ValuativeRel.valuation M)] in
 /-- Element-generator proof of the common-top field-degree divisibility: the
-base uniformizer produces a concrete member of `fieldNormSubgroup K M` with
+base uniformizer produces a concrete member of `localNormSubgroup K M` with
 valuation `[M : K]`, and the common-top norm-image theorem forces the same
 valuation to be divisible by the lower residue-degree lcm. -/
 theorem nat_lcm_residueDegree_dvd_common_finrank_towers_from_base_norm :
@@ -160,7 +162,7 @@ theorem nat_lcm_residueDegree_dvd_common_finrank_towers_from_base_norm :
       Module.finrank K M :=
   nat_lcm_residueDegree_dvd_nat_of_exists_mem_val_of_le_fieldNormSubgroup_towers
     (K := K) (L := L) (L' := L') (M := M)
-    (S := fieldNormSubgroup K M)
+    (S := localNormSubgroup K M)
     (n := Module.finrank K M)
     (exists_mem_fieldNormSubgroup_val_finrank (K := K) (L := M))
     (fun _ hx => hx)

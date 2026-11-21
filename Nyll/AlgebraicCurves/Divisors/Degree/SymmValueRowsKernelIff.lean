@@ -2275,7 +2275,7 @@ private theorem mwALGC_rows_iff_dvd (a n mdeg : ℕ)
     intro s i' m
     rw [Polynomial.finsetSum_coeff]
     refine Finset.sum_congr rfl fun col _ => ?_
-    rw [Polynomial.coeff_smul, smul_eq_mul, mul_comm]
+    rw [AddMonoidAlgebra.coeff_smul_apply, smul_eq_mul, mul_comm]
   rcases subsingleton_or_nontrivial k with hk | hk
   · exact ⟨fun _ s i' => ⟨0, Subsingleton.elim _ _⟩, fun _ ρ => Subsingleton.elim _ _⟩
   by_cases hr : r = 0
@@ -2294,7 +2294,7 @@ private theorem mwALGC_rows_iff_dvd (a n mdeg : ℕ)
   constructor
   · intro h s i'
     rw [← Polynomial.modByMonic_eq_zero_iff_dvd hSm, hlin]
-    refine Polynomial.ext fun m => ?_
+    refine AddMonoidAlgebra.ext (Finsupp.ext fun m => ?_)
     rw [Polynomial.coeff_zero]
     by_cases hm : m < r
     · rw [hcoeff]

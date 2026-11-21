@@ -6,9 +6,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ClassFieldTheory.AlgebraicFunctionFieldTheory.Idele.PrincipalCore
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.CompletedArtin
 public import Nyll.EtaleFundamentalGroups.GaloisCovers.CurveRayArtinKernel
-public import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
+public import Nyll.ProCGroups.Completion.Topological
 public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
 
 /-! # The same curve Artin map before and after completion
@@ -31,10 +32,7 @@ open FunctionField LocalClassFieldTheory ProCGroups.Abelian
 namespace EtaleFundamentalGroups
 
 -- Resolve the actual quotient structure before substituting a scheme stalk.
-local instance curveIdeleClassCommGroup
-    (k : Type v) (K : Type u) [Field k] [Field K] [Algebra k K]
-    [HasPrincipalDivisors k K] : CommGroup (IdeleClassGroup k K) :=
-  RayClass.powerRayIdeleClassCommGroup (k := k) (K := K)
+attribute [local instance] FunctionField.IdeleClassGroup.commGroup
 
 local instance curveAbelianizationTotallyDisconnected
     (X : Scheme.{u}) [IsIntegral X] :

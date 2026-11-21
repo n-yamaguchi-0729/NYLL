@@ -282,7 +282,7 @@ theorem
   have hf0 : f ≠ 0 := fun h0 => hf 0 (by rw [zero_pow hqp.ne_zero, h0])
   have : IsGalois F F' := IsGalois.of_separable_splitting_field (separable_X_pow_sub_C f hqF hf0)
   have : Algebra.IsSeparable F F' := IsGalois.to_isSeparable
-  have hirr : Irreducible (X ^ q - C f) := X_pow_sub_C_irreducible_of_prime hqp hf
+  have hirr : Irreducible (X ^ q - C f) := irreducible_X_pow_sub_C_of_prime hqp hf
   have hζ : (primitiveRoots q F).Nonempty := by
     have : NeZero (q : L) := ⟨hq⟩
     obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot L q

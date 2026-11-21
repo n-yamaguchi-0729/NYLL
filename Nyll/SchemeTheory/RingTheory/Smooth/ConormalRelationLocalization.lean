@@ -91,10 +91,10 @@ theorem exists_notMem_mul_mem_of_conormal_generators
     have hm := Ideal.mem_map_of_mem f (hrel x hx)
     rw [Ideal.map_sup, Ideal.map_pow, map_mul] at hm
     exact hm
-  have hJac : K ≤ (⊥ : Ideal S).jacobson := by
-    rw [IsLocalRing.jacobson_eq_maximalIdeal _ bot_ne_top]
+  have hJac : K ≤ Ring.jacobson S := by
+    rw [IsLocalRing.ringJacobson_eq_maximalIdeal]
     exact hKmax
-  have hKle : K ≤ L := Submodule.le_of_le_smul_of_le_jacobson_bot
+  have hKle : K ≤ L := Submodule.le_of_le_smul_of_le_jacobson
     (hI.map f) hJac (by simpa only [Ideal.smul_eq_mul, pow_two] using hKrel)
   exact exists_notMem_mul_mem_of_map_le I J p hI hKle
 

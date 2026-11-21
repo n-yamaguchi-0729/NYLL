@@ -55,8 +55,8 @@ theorem main
   let _ : Module.Finite R C := Module.Finite.of_basis e
   let _ : Nonempty ι := ⟨i₀⟩
   have hspan_all : (⊤ : Submodule R C) ≤ Submodule.span R (Set.range fun k : ℕ => y ^ k) := by
-    apply Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-      (IsLocalRing.maximalIdeal_le_jacobson ⊥)
+    apply Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+      (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge
     intro z _
     obtain ⟨q, hq⟩ := hy z
     have h1 : aeval y q ∈ Submodule.span R (Set.range fun k : ℕ => y ^ k) := by
@@ -182,7 +182,8 @@ theorem main
     (IsLocalRing.le_maximalIdeal (RingHom.ker_ne_top π)).trans
       (IsLocalRing.maximalIdeal_le_jacobson ⊥)
   have hev_span : (⊤ : Submodule R' (AdjoinRoot χ')) ≤ Submodule.span R' (Set.range ev) := by
-    apply Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top hkerπ
+    apply Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+      (by simpa only [Ideal.jacobson_bot] using hkerπ)
     intro c _
     let c'' : AdjoinRoot χ' := ∑ i, s (e.repr (σ c) i) • ev i
     have hc'' : c'' ∈ Submodule.span R' (Set.range ev) :=

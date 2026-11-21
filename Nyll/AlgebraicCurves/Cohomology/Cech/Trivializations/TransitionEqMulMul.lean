@@ -109,7 +109,7 @@ noncomputable def mulIsoM (W : Y.Opens) (r r' : Γ(Y, W)) (h : r * r' = 1) : UMo
 
 theorem unitAutSection_mulIso (W : Y.Opens) (r r' : Γ(Y, W)) (h : r * r' = 1) :
     Scheme.Modules.unitAutSection W (mulIsoM W r r' h) = r := by
-  unfold Scheme.Modules.unitAutSection
+  unfold Scheme.Modules.unitAutSection Scheme.Modules.unitAutSectionValue
   change W.topIso.hom (((mulHom W r).val.app (op ⊤)).hom (1 : (W : Scheme.{u}).presheaf.obj (op
     ⊤))) = r
   rw [mulHom_app, one_mul]
@@ -134,7 +134,7 @@ theorem unitAutSection_conj_mulIso {W W' : Y.Opens} (hle : W' ≤ W) (r r' : Γ(
         (Scheme.Modules.pullback (Y.homOfLE hle)).mapIso (mulIsoM W r r' h) ≪≫
         Scheme.Modules.pullbackUnitIso (Y.homOfLE hle)) =
       (Y.presheaf.map (homOfLE hle).op).hom r := by
-  unfold Scheme.Modules.unitAutSection
+  unfold Scheme.Modules.unitAutSection Scheme.Modules.unitAutSectionValue
   erw [Scheme.Modules.pullbackUnitIso_conj_app_top_one_eq_appTop]
   change W'.topIso.hom ((Y.homOfLE hle).appTop.hom (((mulHom W r).val.app (op ⊤)).hom
     (1 : (W : Scheme.{u}).presheaf.obj (op ⊤)))) = _

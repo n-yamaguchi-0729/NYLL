@@ -303,7 +303,7 @@ theorem mem_fiberCenter_iff {v : Place k F} {w : Place k F'} (hw : w.restrict F 
 theorem deg_eq_one_iff_forall (w' : Place k' F') [Module.Finite k' w'.ResidueField] :
     w'.deg = 1 ↔ ∀ x : w'.ResidueField, ∃ a : k', algebraMap k' w'.ResidueField a = x := by
   unfold Place.deg
-  rw [finrank_eq_one_iff_of_nonzero' (1 : w'.ResidueField) one_ne_zero]
+  rw [finrank_eq_one_iff_of_ne_zero' (1 : w'.ResidueField) one_ne_zero]
   simp only [Algebra.algebraMap_eq_smul_one]
 
 theorem deg_eq_one_iff_good (v : Place k F) (w' : Place k' F')
@@ -321,7 +321,7 @@ theorem deg_eq_one_iff_good (v : Place k F) (w' : Place k' F')
     have : residue w'.toValuationSubring (y - algebraMap k' w'.toValuationSubring a) = 0 := by
       rw [map_sub, ← ha, sub_eq_zero]; rfl
     rw [residue_eq_zero_iff] at this
-    convert this using 1 <;> try rfl
+    convert this using 1 <;> rfl
   · intro h x
     obtain ⟨y, rfl⟩ := residue_surjective x
     have hy : (y : F') ∈ HeightOneSpectrum.valuationSubringAtPrime F' (fiberCenter F' v hw) := by
@@ -341,14 +341,14 @@ theorem deg_eq_one_iff_good (v : Place k F) (w' : Place k' F')
       have hm : cO - algebraMap k' w'.toValuationSubring a ∈ maximalIdeal w'.toValuationSubring :=
         by
         have := (mem_fiberCenter_iff hw _).1 ha
-        convert this using 1 <;> try rfl
+        convert this using 1 <;> rfl
       rw [← residue_eq_zero_iff, map_sub, sub_eq_zero] at hm
       exact hm
     have hsb : residue _ sO = algebraMap k' _ b := by
       have hm : sO - algebraMap k' w'.toValuationSubring b ∈ maximalIdeal w'.toValuationSubring :=
         by
         have := (mem_fiberCenter_iff hw _).1 hb
-        convert this using 1 <;> try rfl
+        convert this using 1 <;> rfl
       rw [← residue_eq_zero_iff, map_sub, sub_eq_zero] at hm
       exact hm
     have hysc : y * sO = cO := by
@@ -688,9 +688,12 @@ theorem card_places_deg_one
     have : Module.Finite k v.ResidueField := IsCurveOver.finite_residueField v
     exact card_degOneOver v α htop (exists_aeval_eq hconst v α hFtop)
       (map_minpoly_dvd hconst v α)
-  have hfib : ∀ v : Place k F, Finite (DegOneOver k' (F' := F') v) := fun v =>
-    ((restrictConstants_fiber_finite k' (K := k) (F := F) v).subset
-      (fun w (h : restrictConstants F (K := k) w = v ∧ w.deg = 1) => h.1)).to_subtype
+  have hfib : ∀ v : Place k F, Finite (DegOneOver k' (F' := F') v) := fun v => by
+    have hf : Set.Finite {w : Place k' F' | restrictConstants F (K := k) w = v ∧ w.deg = 1} :=
+      (restrictConstants_fiber_finite k' (K := k) (F := F) v).subset (by
+        intro w hw
+        exact hw.1)
+    exact hf.to_subtype
   have hdiv : ∀ w' : Place k' F', w'.deg = 1 → (restrictConstants F (K := k) w').deg ∣ n := by
     intro w' hw'
     by_contra h

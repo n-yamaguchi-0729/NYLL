@@ -508,7 +508,7 @@ theorem res_acoord (hr : r ∘ₗ (ZZ _).subtype = (BB ((OModulePresheaf.unit fY
     (OModulePresheaf.unit fX).res hle (acoord fX fY p₁ p₂ hP 𝒱 r bH e U l)
       = acoord fX fY p₁ p₂ hP 𝒱 r bH e U' l := by
   have hdd : (OModulePresheaf.unit fY).d 𝒱 1 ∘ₗ (OModulePresheaf.unit fY).d 𝒱 0 = 0 :=
-    AlgebraicGeometry.OModulePresheaf.Leray.d_d _ 𝒱 0
+    AlgebraicGeometry.OModulePresheaf.d_comp_d _ 𝒱 0
   have hw : TensorProduct.map ((OModulePresheaf.unit fX).res hle) LinearMap.id (ζ fX fY p₁ p₂ hP 𝒱
     e U)
       = ζ fX fY p₁ p₂ hP 𝒱 e U'
@@ -563,7 +563,7 @@ theorem c_eq_zero
     (l : Λ) : c l = 0 := by
   classical
   have hdd : (OModulePresheaf.unit fY).d 𝒱 1 ∘ₗ (OModulePresheaf.unit fY).d 𝒱 0 = 0 :=
-    AlgebraicGeometry.OModulePresheaf.Leray.d_d _ 𝒱 0
+    AlgebraicGeometry.OModulePresheaf.d_comp_d _ 𝒱 0
   have : Nontrivial Γ(Spec (CommRingCat.of k), x₀ ⁻¹ᵁ U₀.1) := by rw [hU₀]; infer_instance
   have : Nontrivial Γ(X, U₀.1) := RingHom.domain_nontrivial (x₀.app U₀.1).hom
   have hinj : Function.Injective
@@ -679,7 +679,7 @@ theorem main
   classical
   obtain ⟨r, hr⟩ := exists_r ((OModulePresheaf.unit fY).d 𝒱 0) ((OModulePresheaf.unit fY).d 𝒱 1)
   have hdd : (OModulePresheaf.unit fY).d 𝒱 1 ∘ₗ (OModulePresheaf.unit fY).d 𝒱 0 = 0 :=
-    AlgebraicGeometry.OModulePresheaf.Leray.d_d _ 𝒱 0
+    AlgebraicGeometry.OModulePresheaf.d_comp_d _ 𝒱 0
   let bH := Module.Free.chooseBasis k
     (HH ((OModulePresheaf.unit fY).d 𝒱 0) ((OModulePresheaf.unit fY).d 𝒱 1))
   have hz : ∀ U : X.affineOpens,

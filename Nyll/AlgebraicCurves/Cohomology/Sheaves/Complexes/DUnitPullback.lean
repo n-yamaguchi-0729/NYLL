@@ -99,9 +99,8 @@ theorem collision (u : Fin (n + 1) → ι) {a b : Fin (n + 1)} (hab : a ≠ b) (
         have hππ : ∀ z, π (π⁻¹ z) = z := fun z => Equiv.apply_symm_apply π z
         simp only [Function.comp_apply, Equiv.Perm.coe_mul, hππ]
         exact Tuple.monotone_sort (u ∘ a.succAbove) hxy
-      · intro x y hxy heq
-        exact absurd ((π⁻¹ * Tuple.sort (u ∘ a.succAbove)).injective (hinjb heq) ▸ hxy) (lt_irrefl
-          _)
+      · intro x y _ heq
+        exact (hinjb heq).le
     rw [← hsort, Equiv.Perm.sign_mul, Equiv.Perm.sign_inv, Equiv.Perm.sign_swap hab] at *
     have hπs : Equiv.Perm.sign π = -((-1) ^ ((a : ℕ) + (b : ℕ))) := by
       have := hsign

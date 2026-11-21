@@ -54,6 +54,9 @@ invertibility from the given open part of the curve model.
 
 @[expose] public section
 
+open _root_.AlgebraicGeometry.RelPicard (fibreIso fibreIso_hom_baseChangeSnd
+  fibreIso_hom_fst fibreIso_hom_snd fibreIso_inv_fibreAt)
+
 section ProofImplementation
 
 namespace JacobianVarieties.Picard.Proofs.OpenSectionIntersection
@@ -89,49 +92,6 @@ namespace ChildA
 
 variable {R : Type u} [CommRing R]
 
-section FibreIso
-
-variable {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of R))
-  {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
-  {k : Type u} [Field k] (s : Spec (CommRingCat.of k) ⟶ T)
-  (x : Spec (CommRingCat.of k) ⟶ Spec (CommRingCat.of R))
-  (hx : s ≫ t = x)
-
-/-- The comparison between the iterated base-change fibre and the original fibre. -/
-def fibreIso : pullback (pullback.snd c t) s ≅ pullback c x :=
-  pullbackLeftPullbackSndIso c t s ≪≫ pullback.congrHom rfl hx
-
-@[reassoc]
-theorem fibreIso_hom_snd : (fibreIso c t s x hx).hom ≫ pullback.snd c x = fibreAt c t s := by
-  subst hx
-  simp only [fibreIso, Iso.trans_hom, pullback.congrHom_hom, Category.assoc,
-    pullback.lift_snd, Category.comp_id, pullbackLeftPullbackSndIso_hom_snd, fibreAt]
-
-@[reassoc]
-theorem fibreIso_hom_fst :
-    (fibreIso c t s x hx).hom ≫ pullback.fst c x =
-      pullback.fst (pullback.snd c t) s ≫ pullback.fst c t := by
-  subst hx
-  simp only [fibreIso, Iso.trans_hom, pullback.congrHom_hom, Category.assoc,
-    pullback.lift_fst, Category.comp_id, pullbackLeftPullbackSndIso_hom_fst]
-
-theorem fibreIso_inv_fibreAt : (fibreIso c t s x hx).inv ≫ fibreAt c t s = pullback.snd c x := by
-  rw [← fibreIso_hom_snd c t s x hx, Iso.inv_hom_id_assoc]
-
-theorem fibreIso_hom_baseChangeSnd :
-    (fibreIso c t s x hx).hom ≫ baseChangeSnd c (⟨s, hx⟩ : SchemeHomOver x t)
-      = pullback.fst (pullback.snd c t) s := by
-  apply pullback.hom_ext
-  · rw [Category.assoc]
-    unfold baseChangeSnd
-    rw [pullback.lift_fst, ← Category.assoc, fibreIso_hom_fst, Category.assoc, Category.comp_id]
-  · rw [Category.assoc]
-    unfold baseChangeSnd
-    rw [pullback.lift_snd, ← Category.assoc, fibreIso_hom_snd, pullback.condition]
-    rfl
-
-end FibreIso
-
 theorem comap_pow {X Y : Scheme.{u}} (I : Y.IdealSheafData) (f : X ⟶ Y) (n : ℕ) :
     (I ^ n).comap f = (I.comap f) ^ n := by
   induction n with
@@ -140,14 +100,6 @@ theorem comap_pow {X Y : Scheme.{u}} (I : Y.IdealSheafData) (f : X ⟶ Y) (n : �
   | succ n ih => rw [pow_succ, pow_succ, Scheme.IdealSheafData.comap_mul, ih]
 
 variable {R : Type u} [CommRing R] {C : Scheme.{u}}
-
-theorem sectionIdeal_comap (c : C ⟶ Spec (CommRingCat.of R)) [IsSeparated c]
-    (ε : SchemeHomOver (𝟙 (Spec (CommRingCat.of R))) c) {T T' : Scheme.{u}}
-    {t : T ⟶ Spec (CommRingCat.of R)} {t' : T' ⟶ Spec (CommRingCat.of R)}
-    (ψ : SchemeHomOver t' t) :
-    (RelPicard.sectionIdeal c ε t).comap (RelPicard.baseChangeSnd c ψ) =
-      RelPicard.sectionIdeal c ε t' :=
-  _root_.AlgebraicGeometry.RelPicard.sectionIdeal_comap c ε ψ
 
 theorem isInvertible_comap_line {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of R))
     {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
@@ -196,7 +148,8 @@ theorem isInvertible_comap_sectionIdeal_pow_and_comap_I_of_isOpenImmersion
     (fibreIso_hom_baseChangeSnd c t pt (pt ≫ t) rfl).symm
   have hε1 : ((sectionIdeal c ε t) ^ r).comap (pullback.fst (pullback.snd c t) pt)
       = ((sectionIdeal c ε (pt ≫ t)) ^ r).comap φ.hom := by
-    rw [hpr, Scheme.IdealSheafData.comap_comp, comap_pow, sectionIdeal_comap, comap_pow]
+    rw [hpr, Scheme.IdealSheafData.comap_comp, comap_pow,
+      _root_.AlgebraicGeometry.RelPicard.sectionIdeal_comap, comap_pow]
   have hKε :
       (((sectionIdeal c ε t) ^ r).comap (pullback.fst (pullback.snd c t) pt)).IsInvertible := by
     rw [hε1]

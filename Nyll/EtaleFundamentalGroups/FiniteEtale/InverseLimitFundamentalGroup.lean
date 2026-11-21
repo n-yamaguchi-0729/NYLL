@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.CanonicalPointedComposition
 public import Nyll.ProCGroups.InverseSystems.StagewiseIso
@@ -60,8 +61,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Transport of the target geometric point preserves the original
 fundamental-group homomorphism and its canonical pullback comparison. -/

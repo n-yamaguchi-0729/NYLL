@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperCompleteGeometricSpecialization
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 
@@ -28,8 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.FiniteEtale
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The map on the actual fibers of a morphism over the same base. -/
 def properFamilyFiberMap {X Y S T : Scheme.{u}}

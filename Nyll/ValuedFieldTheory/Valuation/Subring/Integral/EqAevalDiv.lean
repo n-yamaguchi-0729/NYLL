@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.Subring.Integral.NormalizedPolynomial
 public import Nyll.SchemeTheory.RingTheory.Polynomial.MultisetLinearFactorNormalization
 public import Mathlib.Algebra.BigOperators.Group.Multiset.Basic
 public import Mathlib.Algebra.Order.Antidiag.Prod
@@ -50,127 +51,11 @@ section ProofImplementation
 namespace AlgebraicCurves.Valuations.Proofs
 namespace ValuationSubring_exists_eq_aeval_div_of_forall_valuationSubring_mem_of_eq_sum_mul
 
-open Polynomial
+open Polynomial ValuationSubring.NormalizedPolynomial
 
 namespace ZfSol
 
 variable {L : Type*} [Field L] (A : ValuationSubring L)
-
-/-- The condition that all coefficients of a polynomial belong to the valuation ring. -/
-def ACoeff (p : L[X]) : Prop := ∀ j, p.coeff j ∈ A
-
-theorem ACoeff.zero : ACoeff A (0 : L[X]) := fun j => by simp [A.zero_mem]
-
-theorem ACoeff.one : ACoeff A (1 : L[X]) := fun j => by
-  rw [coeff_one]; split_ifs <;> simp [A.one_mem, A.zero_mem]
-
-theorem ACoeff.C {a : L} (ha : a ∈ A) : ACoeff A (C a) := fun j => by
-  rw [coeff_C]; split_ifs <;> simp [ha, A.zero_mem]
-
-theorem ACoeff.X : ACoeff A (X : L[X]) := fun j => by
-  rw [coeff_X]; split_ifs <;> simp [A.one_mem, A.zero_mem]
-
-theorem ACoeff.add {p q : L[X]} (hp : ACoeff A p) (hq : ACoeff A q) : ACoeff A (p + q) :=
-  fun j => by rw [coeff_add]; exact add_mem (hp j) (hq j)
-
-theorem ACoeff.neg {p : L[X]} (hp : ACoeff A p) : ACoeff A (-p) :=
-  fun j => by rw [coeff_neg]; exact neg_mem (hp j)
-
-theorem ACoeff.sub {p q : L[X]} (hp : ACoeff A p) (hq : ACoeff A q) : ACoeff A (p - q) :=
-  fun j => by rw [coeff_sub]; exact sub_mem (hp j) (hq j)
-
-theorem ACoeff.mul {p q : L[X]} (hp : ACoeff A p) (hq : ACoeff A q) : ACoeff A (p * q) := by
-  intro j
-  rw [coeff_mul]
-  refine sum_mem fun x _ => ?_
-  exact mul_mem (hp _) (hq _)
-
-theorem ACoeff.prod {ι : Type*} (s : Finset ι) (g : ι → L[X]) (hg : ∀ i ∈ s, ACoeff A (g i)) :
-    ACoeff A (∏ i ∈ s, g i) := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simpa using ACoeff.one A
-  | insert a s ha ih =>
-    rw [Finset.prod_insert ha]
-    exact ACoeff.mul A (hg a (Finset.mem_insert_self _ _))
-      (ih fun i hi => hg i (Finset.mem_insert_of_mem hi))
-
-theorem ACoeff.multiset_prod {ι : Type*} (s : Multiset ι) (g : ι → L[X])
-    (hg : ∀ i ∈ s, ACoeff A (g i)) : ACoeff A (s.map g).prod := by
-  induction s using Multiset.induction_on with
-  | empty => simpa using ACoeff.one A
-  | cons a s ih =>
-    rw [Multiset.map_cons, Multiset.prod_cons]
-    exact ACoeff.mul A (hg a (Multiset.mem_cons_self _ _))
-      (ih fun i hi => hg i (Multiset.mem_cons_of_mem hi))
-
-theorem ACoeff.valuation_le {p : L[X]} (hp : ACoeff A p) (j : ℕ) :
-    A.valuation (p.coeff j) ≤ 1 :=
-  (A.valuation_le_one_iff _).mpr (hp j)
-
-theorem acoeff_of_valuation_le {p : L[X]} (hp : ∀ j, A.valuation (p.coeff j) ≤ 1) :
-    ACoeff A p := fun j => (A.valuation_le_one_iff _).mp (hp j)
-
-/-- A polynomial with unit-valued constant coefficient and strictly smaller other coefficients. -/
-def IsGood (t : L[X]) : Prop :=
-  A.valuation (t.coeff 0) = 1 ∧ ∀ j, j ≠ 0 → A.valuation (t.coeff j) < 1
-
-theorem IsGood.valuation_le {t : L[X]} (ht : IsGood A t) (j : ℕ) :
-    A.valuation (t.coeff j) ≤ 1 := by
-  by_cases hj : j = 0
-  · rw [hj, ht.1]
-  · exact (ht.2 j hj).le
-
-theorem IsGood.acoeff {t : L[X]} (ht : IsGood A t) : ACoeff A t :=
-  acoeff_of_valuation_le A (ht.valuation_le A)
-
-theorem IsGood.ne_zero {t : L[X]} (ht : IsGood A t) : t ≠ 0 := by
-  intro h; have := ht.1; rw [h, coeff_zero, map_zero] at this; exact zero_ne_one this
-
-theorem IsGood.one : IsGood A (1 : L[X]) := by
-  refine ⟨by rw [coeff_one_zero, map_one], fun j hj => ?_⟩
-  rw [coeff_one, ite_eq_right hj, map_zero]; exact zero_lt_one
-
-theorem IsGood.one_sub {c : L} (hc : A.valuation c < 1) :
-    IsGood A (1 - Polynomial.C c * Polynomial.X : L[X]) := by
-  refine ⟨?_, fun j hj => ?_⟩
-  · rw [coeff_sub, coeff_one_zero, coeff_C_mul, coeff_X_zero, mul_zero, sub_zero, map_one]
-  · rw [coeff_sub, coeff_one, ite_eq_right hj, coeff_C_mul]
-    by_cases h1 : j = 1
-    · subst h1; simp [Valuation.map_neg, hc]
-    · rw [coeff_X_of_ne_one h1, mul_zero, sub_zero, map_zero]; exact zero_lt_one
-
-theorem IsGood.mul {t s : L[X]} (ht : IsGood A t) (hs : IsGood A s) : IsGood A (t * s) := by
-  refine ⟨?_, fun j hj => ?_⟩
-  · rw [mul_coeff_zero, map_mul, ht.1, hs.1, one_mul]
-  · rw [coeff_mul]
-    apply Valuation.map_sum_lt _ one_ne_zero
-    intro x hx
-    rw [Finset.HasAntidiagonal.mem_antidiagonal] at hx
-    rw [map_mul]
-    by_cases h1 : x.1 = 0
-    · have h2 : x.2 ≠ 0 := by omega
-      calc A.valuation (t.coeff x.1) * A.valuation (s.coeff x.2)
-          ≤ 1 * A.valuation (s.coeff x.2) := by gcongr; exact ht.valuation_le A _
-        _ < 1 := by rw [one_mul]; exact hs.2 _ h2
-    · calc A.valuation (t.coeff x.1) * A.valuation (s.coeff x.2)
-          ≤ A.valuation (t.coeff x.1) * 1 := by gcongr; exact hs.valuation_le A _
-        _ < 1 := by rw [mul_one]; exact ht.2 _ h1
-
-theorem IsGood.multiset_prod_one_sub (rs : Multiset L) (hrs : ∀ r ∈ rs, A.valuation r < 1) :
-    IsGood A (rs.map fun r => (1 - Polynomial.C r * Polynomial.X : L[X])).prod := by
-  induction rs using Multiset.induction_on with
-  | empty => simpa using IsGood.one A
-  | cons a s ih =>
-    rw [Multiset.map_cons, Multiset.prod_cons]
-    exact IsGood.mul A (IsGood.one_sub A (hrs a (Multiset.mem_cons_self _ _)))
-      (ih fun r hr => hrs r (Multiset.mem_cons_of_mem hr))
-
-theorem prod_X_sub_C_eq_C_mul_prod_one_sub (s : Multiset L) (hs : ∀ ρ ∈ s, ρ ≠ 0) :
-    (s.map fun ρ => (X - C ρ : L[X])).prod =
-      C (s.map fun ρ => -ρ).prod *
-        ((s.map fun ρ => ρ⁻¹).map fun r => (1 - C r * X : L[X])).prod :=
-  Polynomial.prod_X_sub_C_eq_C_mul_prod_one_sub s hs
 
 /-- A polynomial with integral coefficients and at least one coefficient of valuation one. -/
 def IsPrim (p : L[X]) : Prop :=
@@ -258,7 +143,7 @@ theorem IsPrim.prod {ι : Type*} (s : Finset ι) (g : ι → L[X]) (hg : ∀ i �
     IsPrim A (∏ i ∈ s, g i) := by
   classical
   induction s using Finset.induction_on with
-  | empty => simpa using (IsGood.one A).isPrim A
+  | empty => simpa using IsGood.isPrim A (IsGood.one A)
   | insert a s ha ih =>
     rw [Finset.prod_insert ha]
     exact IsPrim.mul A (hg a (Finset.mem_insert_self _ _))
@@ -324,7 +209,8 @@ theorem isPrim_one_sub_X_sub_C_mul {α : L} (hα : A.valuation α ≤ 1) {C₀ :
     rw [sub_mul, coeff_sub, coeff_X_mul, coeff_C_mul]
   by_cases hall : ∀ j, A.valuation (C₀.coeff j) < 1
   · refine ⟨0, ?_⟩
-    rw [coeff_sub, coeff_one_zero, mul_coeff_zero, coeff_sub, coeff_X_zero, coeff_C_zero, zero_sub,
+    rw [coeff_sub, AddMonoidAlgebra.coeff_one_zero, mul_coeff_zero, coeff_sub,
+      coeff_X_zero, coeff_C_zero, zero_sub,
       neg_mul, sub_neg_eq_add]
     rw [Valuation.map_add_eq_of_lt_left]
     · exact map_one A.valuation
@@ -400,7 +286,7 @@ def IsMW (f x : F) : Prop :=
 
 /-- The condition of admitting a polynomial fraction whose denominator has distinguished
 constant term. -/
-def IsLam (f x : F) : Prop :=
+def IsNormalizedFraction (f x : F) : Prop :=
   ∃ p t : L[X], (∀ j, p.coeff j ∈ A) ∧
     (A.valuation (t.coeff 0) = 1 ∧ ∀ j, j ≠ 0 → A.valuation (t.coeff j) < 1) ∧
     x = aeval f p / aeval f t
@@ -464,7 +350,7 @@ theorem ZfSol.caseB
     {F : Type*} [Field F] [Algebra L F] {f : F} (hf : Transcendental L f)
     {x : F} (hx : IsW A f x) {D P : L[X]} (hD0 : D ≠ 0)
     (hroots : ∀ ρ ∈ D.roots, 1 < A.valuation ρ) (hP : x * aeval f D = aeval f P) :
-    IsLam A f x := by
+    IsNormalizedFraction A f x := by
   classical
   have hsplit : C D.leadingCoeff * (D.roots.map fun a => X - C a).prod = D :=
     C_leadingCoeff_mul_prod_multiset_X_sub_C IsAlgClosed.card_roots_eq_natDegree
@@ -482,7 +368,7 @@ theorem ZfSol.caseB
   have htgood : IsGood A t := IsGood.multiset_prod_one_sub A cs hcs1
   set u : L := D.leadingCoeff * (D.roots.map fun ρ => -ρ).prod with hu
   have hfac : D = C u * t := by
-    conv_lhs => rw [← hsplit, prod_X_sub_C_eq_C_mul_prod_one_sub D.roots hroots0]
+    conv_lhs => rw [← hsplit, Polynomial.prod_X_sub_C_eq_C_mul_prod_one_sub D.roots hroots0]
     rw [hu, ht, hcs, C_mul, mul_assoc]
   have hu0 : u ≠ 0 := by
     intro h; apply hD0; rw [hfac, h, C_0, zero_mul]
@@ -659,7 +545,7 @@ theorem ZfSol.main
         y = ∑ i, (aeval f (C₁ i) + μ i) * z i)
     (s : F) (w : ι → F) (hsT : InT L f s) (hw : ∀ i, IsW A f (w i)) (hs : s = ∑ i, w i * z i) :
     ∀ (N : ℕ) (D : L[X]) (P : ι → L[X]), D ≠ 0 → D.natDegree ≤ N →
-      (∀ i, w i * aeval f D = aeval f (P i)) → ∀ i, IsLam A f (w i) := by
+      (∀ i, w i * aeval f D = aeval f (P i)) → ∀ i, IsNormalizedFraction A f (w i) := by
   classical
   intro N
   induction N with

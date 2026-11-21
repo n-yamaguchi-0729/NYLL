@@ -228,22 +228,19 @@ theorem geometricStalkNeighborhoodBaseChangeMap_source_comp
   let n := geometricStalkNeighborhoodMap φ U v
   let mX := geometricStalkNeighborhoodBaseChangeMap φ f U v
   let mY := geometricStalkNeighborhoodBaseChangeMap φ (g ≫ f) U v
-  let e : pullback U.hom (g ≫ f) ⟶ pullback (pullback.snd U.hom f) g :=
+  let eOver :=
     ((MorphismProperty.Over.pullbackComp
-      (P := show MorphismProperty Scheme from @Etale) (Q := ⊤) g f).hom.app U).left
+      (P := show MorphismProperty Scheme from @Etale) (Q := ⊤) g f).hom.app U)
+  let e := eOver.left
   let p : pullback (pullback.snd h f) g ⟶ pullback (pullback.snd U.hom f) g :=
     ((Over.pullback g).map
     (Over.homMk mX (geometricStalkNeighborhoodBaseChangeMap_snd φ f U v) :
       Over.mk (pullback.snd h f) ⟶
         (Scheme.Etale.forget X).obj ((etaleBaseChange f).obj U))).left
-  have he₁ : e ≫ pullback.fst (pullback.snd U.hom f) g ≫ pullback.fst U.hom f =
-      pullback.fst U.hom (g ≫ f) :=
+  have he₁ :=
     MorphismProperty.Over.pullbackComp_left_fst_fst
       (P := show MorphismProperty Scheme from @Etale) (Q := ⊤) g f U
-  have he₂ : e ≫ pullback.snd (pullback.snd U.hom f) g =
-      pullback.snd U.hom (g ≫ f) :=
-    ((MorphismProperty.Over.pullbackComp
-      (P := show MorphismProperty Scheme from @Etale) (Q := ⊤) g f).hom.app U).w
+  have he₂ := eOver.w
   have hp₁ : p ≫ pullback.fst (pullback.snd U.hom f) g =
       pullback.fst (pullback.snd h f) g ≫ mX := pullback.lift_fst _ _ _
   have hp₂ : p ≫ pullback.snd (pullback.snd U.hom f) g =

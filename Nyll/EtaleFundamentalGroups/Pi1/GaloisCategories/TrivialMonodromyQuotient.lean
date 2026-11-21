@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.TrivialMonodromyFiber
 public import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.TrivialMonodromy
 public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
 public import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
@@ -40,31 +41,12 @@ namespace CategoryTheory.PreGaloisCategory
 variable {C : Type u} [Category.{v} C] [GaloisCategory C]
   (F : C ⥤ FintypeCat.{w}) [FiberFunctor F] (N : Subgroup (Aut F))
 
-/-- Restrict the original fibre-functor automorphism to the actual full subcategory. -/
-def trivialMonodromyRestriction : Aut F →ₜ* Aut (trivialMonodromyFiber F N) :=
-  autHomOfCompIso (trivialMonodromyInclusion F N) (Iso.refl _)
-
-omit [GaloisCategory C] [FiberFunctor F] in
-/-- Restriction evaluates the original automorphism on the original fibre. -/
-@[simp] theorem trivialMonodromyRestriction_apply
-    (g : Aut F) (X : TrivialMonodromy F N) (x : F.obj X.obj) :
-    (trivialMonodromyRestriction F N g).asIso.hom.app X x =
-      g.asIso.hom.app X.obj x := rfl
-
-/-- Full faithfulness of the actual inclusion makes restriction surjective. -/
-theorem trivialMonodromyRestriction_surjective :
-    Function.Surjective (trivialMonodromyRestriction F N) := by
-  have hff : Nonempty (trivialMonodromyInclusion F N).FullyFaithful :=
-    ⟨(trivialMonodromy F N).fullyFaithfulι⟩
-  exact ((autHomOfCompIso_surjective_tfae (trivialMonodromyFiber F N) F
-    (trivialMonodromyInclusion F N) (Iso.refl _)).out 2 1).mp hff
-
 omit [GaloisCategory C] [FiberFunctor F] in
 /-- Every element of the prescribed subgroup acts trivially after restriction. -/
 theorem le_ker_trivialMonodromyRestriction :
-    N ≤ (trivialMonodromyRestriction F N).toMonoidHom.ker := by
+    N ≤ (trivialMonodromyRestrictionAt F N F).toMonoidHom.ker := by
   intro g hg
-  change trivialMonodromyRestriction F N g = 1
+  change trivialMonodromyRestrictionAt F N F g = 1
   apply Aut.ext
   apply Iso.ext
   apply NatTrans.ext
@@ -78,7 +60,7 @@ variable [N.Normal] (hN : IsClosed (N : Set (Aut F)))
 include hN in
 /-- Finite Galois objects detect every element outside the closed normal subgroup. -/
 theorem trivialMonodromyRestriction_ker :
-    (trivialMonodromyRestriction F N).toMonoidHom.ker = N := by
+    (trivialMonodromyRestrictionAt F N F).toMonoidHom.ker = N := by
   apply le_antisymm ?_ (le_ker_trivialMonodromyRestriction F N)
   intro g hg
   let K : ClosedSubgroup (Aut F) := ⟨N, hN⟩
@@ -99,10 +81,10 @@ theorem trivialMonodromyRestriction_ker :
     rw [← stabilizer_eq_of_isGalois F A x y, hx]
     exact hU.2.1 hn
   let B : TrivialMonodromy F N := ⟨A, hAN⟩
-  have hfix : (trivialMonodromyRestriction F N g).asIso.hom.app B x = x := by
-    rw [show trivialMonodromyRestriction F N g = 1 from hg]
+  have hfix : (trivialMonodromyRestrictionAt F N F g).asIso.hom.app B x = x := by
+    rw [show trivialMonodromyRestrictionAt F N F g = 1 from hg]
     rfl
-  rw [trivialMonodromyRestriction_apply] at hfix
+  rw [trivialMonodromyRestrictionAt_apply] at hfix
   have hstab : g ∈ MulAction.stabilizer (Aut F) x := hfix
   rw [hx] at hstab
   exact hstab
@@ -110,14 +92,14 @@ theorem trivialMonodromyRestriction_ker :
 /-- The restriction map descended through the prescribed closed normal subgroup. -/
 def trivialMonodromyQuotientMap :
     Aut F ⧸ N →ₜ* Aut (trivialMonodromyFiber F N) :=
-  ProCGroups.QuotientGroup.liftₜ N (trivialMonodromyRestriction F N)
+  ProCGroups.QuotientGroup.liftₜ N (trivialMonodromyRestrictionAt F N F)
     (le_ker_trivialMonodromyRestriction F N)
 
 omit [GaloisCategory C] [FiberFunctor F] in
 /-- The descended restriction map retains each original automorphism. -/
 @[simp] theorem trivialMonodromyQuotientMap_apply_mk (g : Aut F) :
     trivialMonodromyQuotientMap F N (QuotientGroup.mk' N g) =
-      trivialMonodromyRestriction F N g := rfl
+      trivialMonodromyRestrictionAt F N F g := rfl
 
 include hN in
 /-- The quotient restriction map is bijective by its exact original kernel. -/
@@ -133,7 +115,7 @@ theorem trivialMonodromyQuotientMap_bijective :
     rw [← trivialMonodromyRestriction_ker F N hN]
     exact ha
   · intro a
-    obtain ⟨g, rfl⟩ := trivialMonodromyRestriction_surjective F N a
+    obtain ⟨g, rfl⟩ := trivialMonodromyRestrictionAt_surjective F N F a
     exact ⟨QuotientGroup.mk' N g, rfl⟩
 
 /-- The automorphism group of the restricted fibre functor is canonically the
@@ -148,12 +130,12 @@ def trivialMonodromyQuotientEquiv :
 /-- The comparison identifies the quotient projection with actual restriction. -/
 @[simp] theorem trivialMonodromyQuotientEquiv_apply_mk (g : Aut F) :
     trivialMonodromyQuotientEquiv F N hN (QuotientGroup.mk' N g) =
-      trivialMonodromyRestriction F N g := rfl
+      trivialMonodromyRestrictionAt F N F g := rfl
 
 /-- The inverse comparison sends a restricted automorphism to its original quotient class. -/
 @[simp] theorem trivialMonodromyQuotientEquiv_symm_apply_restriction (g : Aut F) :
     (trivialMonodromyQuotientEquiv F N hN).symm
-        (trivialMonodromyRestriction F N g) = QuotientGroup.mk' N g := by
+        (trivialMonodromyRestrictionAt F N F g) = QuotientGroup.mk' N g := by
   rw [← trivialMonodromyQuotientEquiv_apply_mk F N hN g]
   exact (trivialMonodromyQuotientEquiv F N hN).symm_apply_apply _
 

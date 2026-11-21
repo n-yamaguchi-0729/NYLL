@@ -205,7 +205,7 @@ theorem fstPoint_coe (b : SchemeHomOver t (D.baseChange K).toBase) :
 noncomputable def poincareFstIso (b : SchemeHomOver t (D.baseChange K).toBase) :
     (h.poincare.pullbackAlong (fstPoint c K D t b)).L ≅ (BaseChange.toR c ε K
       (h'.poincare.pullbackAlong b)).L :=
-  (RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso h.poincare _ _).symm ≪≫
+  (RigidifiedLineBundle.pullbackAlongPullbackAlongIso h.poincare _ _).symm ≪≫
     (BaseChange.toR_ofR_iso c ε K _).symm ≪≫
     BaseChange.toR_mapIso c ε K
       ((BaseChange.ofR_pullbackAlong_iso c ε K b _).symm ≪≫
@@ -316,7 +316,7 @@ theorem RepresentsRelSubPic.nonempty_poincare_pullbackAlong_iso_rigidify_normMod
     RigidifiedLineBundle.pullbackAlong_mapIso _ hP.some ≪≫
       BaseChange.ofR_pullbackAlong_iso c ε K _ _ ≪≫
       BaseChange.ofR_mapIso c ε K
-        (RigidifiedLineBundle.pullbackAlong_pullbackAlong_iso h.poincare _ _ ≪≫
+        (RigidifiedLineBundle.pullbackAlongPullbackAlongIso h.poincare _ _ ≪≫
           RigidifiedLineBundle.pullbackAlong_congr_hom h.poincare _ _ hcoe)
   let e2 := (Scheme.Modules.pullback (BaseChange.κ c K t).hom).mapIso (hmoduli T t (BaseChange.toR
     c ε K M) hM₀).some

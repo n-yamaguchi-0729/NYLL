@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitModel
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitIsomorphism
 public import Mathlib.CategoryTheory.Endomorphism
@@ -53,22 +54,8 @@ theorem exists_inverse_limit_models_finite_family
     (e a).some⟩
 
 
-local instance finiteEtaleOverCategoryFiniteAction (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) := instCategory X
-
-local instance finiteEtaleHasPullbacksAlongFiniteAction
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongFiniteAction
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] finiteEtaleOverCategory finiteEtaleHasPullbacksAlong
+  finiteEtaleIsStableUnderBaseChangeAlong
 /-- A finite family of endomorphisms of an original cover descends at one
 common stage. The recovery isomorphism intertwines every original map. -/
 theorem exists_inverse_limit_model_endomorphisms

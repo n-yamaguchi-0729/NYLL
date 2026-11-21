@@ -63,7 +63,7 @@ theorem isUnit_one_add_of_mem_map (hI : I.FG) {x : AdicCompletion I A}
     (hx : x ∈ I.map (algebraMap A (AdicCompletion I A))) : IsUnit (1 + x) := by
   have : IsAdicComplete (I.map (algebraMap A (AdicCompletion I A))) (AdicCompletion I A) :=
     (IsAdicComplete.map_algebraMap_iff I (AdicCompletion I A)).mpr (isAdicComplete hI)
-  have h := Ideal.mem_jacobson_bot.mp (IsAdicComplete.le_jacobson_bot _ hx) 1
+  have h := Ring.mem_jacobson_iff.mp (IsAdicComplete.le_jacobson _ hx) 1
   rwa [mul_one, add_comm] at h
 
 theorem isUnit_add_of_mem_map (hI : I.FG) {u x : AdicCompletion I A} (hu : IsUnit u)

@@ -41,6 +41,7 @@ public import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralDescent
 public import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralFieldDescent
 public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleConnected
 public import Nyll.SchemeTheory.Morphisms.GeometricallyIrreducibleOverAlgebraicallyClosed
+public import Nyll.SchemeTheory.Morphisms.NoetherianFiniteType
 public import Nyll.SchemeTheory.Morphisms.NoetherianProperFiberSections
 public import Nyll.SchemeTheory.Morphisms.NormalizationFiniteFactor
 public import Nyll.SchemeTheory.Morphisms.NormalizationFlatBaseChangeIso
@@ -64,6 +65,7 @@ public import Nyll.SchemeTheory.Morphisms.SmoothReducedReduced
 public import Nyll.SchemeTheory.Morphisms.StalkIdealPower
 public import Nyll.SchemeTheory.Morphisms.UnramifiedHomExt
 public import Nyll.SchemeTheory.Morphisms.UnramifiedPointRigidity
+public import Nyll.SchemeTheory.Morphisms.ClosedBaseChangeLifts
 public import Nyll.SchemeTheory.Morphisms.AppTopPullbackMapEqAppTopPullbackFst
 public import Nyll.SchemeTheory.Morphisms.ReducedSmooth
 public import Nyll.SchemeTheory.Morphisms.Compactification

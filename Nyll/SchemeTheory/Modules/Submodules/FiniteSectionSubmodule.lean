@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
 public import Nyll.SchemeTheory.Modules.Quasicoherent.QuasicoherentImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
@@ -31,19 +32,6 @@ open CategoryTheory Opposite AlgebraicGeometry
 namespace SheafOfModules
 
 variable {X : Scheme.{u}} (M : SheafOfModules.{u} X.ringCatSheaf)
-
-/-- A section on the top open gives the actual compatible family on all opens. -/
-def topSection (s : M.val.obj (op ⊤)) : M.sections :=
-  PresheafOfModules.sectionsMk (fun W => M.val.map W.unop.leTop.op s)
-    (fun {V _} f =>
-      (M.val.map_comp_apply V.unop.leTop.op f s).symm.trans
-        (M.val.congr_map_apply (Subsingleton.elim _ _) s))
-
-/-- The compatible family retains the original top section. -/
-theorem topSection_top (s : M.val.obj (op ⊤)) : (M.topSection s).val (op ⊤) = s := by
-  change M.val.presheaf.map (𝟙 (op ⊤)) s = s
-  rw [M.val.presheaf.map_id]
-  rfl
 
 /-- The native image of the morphism specified by an actual section family. -/
 def sectionFamilySubmodule {I : Type u} (s : I → M.sections) : M.Submodule :=

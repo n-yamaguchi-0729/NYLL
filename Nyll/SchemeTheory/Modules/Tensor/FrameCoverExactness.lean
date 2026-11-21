@@ -106,7 +106,7 @@ theorem tensorRight_preservesFiniteLimits_of_frame_cover :
   have : (tensorRight L).IsLeftAdjoint := inferInstance
   have hcolim : PreservesFiniteColimits (tensorRight L) := inferInstance
   have : (tensorRight L).Additive :=
-    rightExactFunctor_le_additiveFunctor X.Modules X.Modules (tensorRight L) hcolim
+    preservesFiniteColimits_le_additiveFunctor X.Modules X.Modules (tensorRight L) hcolim
   apply (Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono (tensorRight L)).mpr
   intro S hS
   have : Mono S.f := hS.mono_f

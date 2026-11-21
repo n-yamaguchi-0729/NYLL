@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.SchemeTheory.Descent.SubalgebraStagesIsLimitCone
 public import Nyll.SchemeTheory.Descent.IntegerSubalgebraModels
 public import Nyll.SchemeTheory.FiniteEtale.InverseLimitFiniteFamily
@@ -301,8 +302,8 @@ theorem exists_arithmetic_galois_torsor_model_finite_residue
     V, p, hp, hpfst, e, ρV, hinj Function.injective_id, hcover hsurj, hpair hgraph, hρV⟩
 
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- An original finite étale Galois cover of a finite-presentation scheme
 over a finitely generated characteristic-zero field admits a labelled,

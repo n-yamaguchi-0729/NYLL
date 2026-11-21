@@ -225,7 +225,7 @@ theorem exists_box_zigzag_of_d_eq_zero_of_isAffineOpen
     congr 1
     change rr _ (rr _ (g σ _)) = rr _ (rr _ (g σ _))
     simp only [rr_rr]
-    try rfl
+    rfl
   have step2 : ∀ σ : 𝒱.Idx 1, ∃ eσ : Γ(P, p₁ ⁻¹ᵁ U ⊓ p₂ ⁻¹ᵁ 𝒱.inter σ),
       (K σ).aug (p₁ ≫ fX) eσ = fun t => ∑ j : Fin (0 + 2), ((-1 : ℤ) ^ (j : ℕ)) •
         rr ((hKB σ t).trans (inf_le_inf_left (𝒲.inter t ⊓ p₁ ⁻¹ᵁ U)
@@ -315,7 +315,7 @@ theorem exists_box_zigzag_of_d_eq_zero_of_isAffineOpen
     intro t
     let G := OModulePresheaf.Leray.pullOpen p₂ fY (𝒲.inter t ⊓ p₁ ⁻¹ᵁ U)
     let γt : G.cochain 𝒱 0 := fun σ => γ σ t
-    have hdd := congrFun (LinearMap.congr_fun (OModulePresheaf.Leray.d_d G 𝒱 0) γt) ρ
+    have hdd := congrFun (LinearMap.congr_fun (OModulePresheaf.d_comp_d G 𝒱 0) γt) ρ
     rw [LinearMap.comp_apply, LinearMap.zero_apply, OModulePresheaf.d_apply] at hdd
     rw [map_sum]
     refine Eq.trans (Finset.sum_congr rfl fun j _ => ?_) hdd

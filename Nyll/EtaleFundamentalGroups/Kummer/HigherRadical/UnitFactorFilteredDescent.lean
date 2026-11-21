@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
 import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.UnitFactorFiniteEtale
 import Nyll.EtaleFundamentalGroups.StrictHenselian.ChosenFactorFilteredDescent
 
@@ -29,10 +30,7 @@ open ValuationTheory.DiscreteValuationField.ValuedExtension
 
 universe u w x
 
-local instance underCommRingCatAlgebraHigherRadicalFilteredDescent
-    {R : Type u} [CommRing R]
-    (A : Under (CommRingCat.of R)) : Algebra R A :=
-  RingHom.toAlgebra A.hom.hom
+attribute [local instance] EtaleFundamentalGroups.underCommRingCatAlgebra
 
 section
 

@@ -55,8 +55,8 @@ public import Nyll.SchemeTheory.GroupSchemes.RelativeGroupLaw.BaseChange
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.InvertiblePullbackDualMonoidalV2
 public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBasePullback
 public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationLocIsoOnBaseEquivalence
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDualMonoidalV2
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleDual
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
 public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeMemRangeDZero
 public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverLePreimage
 public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.SmallExtensionIsPicDeformationCocycleAppTopEqUnitAutSection
@@ -687,13 +687,13 @@ theorem
     exact (Submodule.mem_bot B₁).mp this
   let N : X.Modules := M ⊗ Scheme.Modules.dual M'
   have hN : Scheme.Modules.IsInvertible N :=
-    hM.tensor_monoidalV2 (Scheme.Modules.IsInvertible.dual_monoidalV2 hM').1
+    hM.tensor (Scheme.Modules.IsInvertible.dual hM').1
   obtain ⟨e0⟩ := h0
   let φ₀ : (Scheme.Modules.pullback gg).obj N ≅ SheafOfModules.unit X₀.ringCatSheaf :=
     Scheme.Modules.pullbackTensorObjIso gg M (Scheme.Modules.dual M') ≪≫
       whiskerLeftIso _ ((Scheme.Modules.IsInvertible.pullback_dual_monoidalV2 gg hM').some ≪≫
         (P2N12.dualIso e0).symm) ≪≫
-      (Scheme.Modules.IsInvertible.dual_monoidalV2 (hM.pullback gg)).2.some
+      (Scheme.Modules.IsInvertible.dual (hM.pullback gg)).2.some
   obtain ⟨𝒰₀, ⟨τ⟩⟩ :=
     Scheme.Modules.exists_orderedAffineCover_nonempty_cechTrivialisation_comap_of_isInvertible
       (𝟙 X) N hN
@@ -857,7 +857,7 @@ theorem
     Scheme.Modules.pullbackTensorObjIso s M (Scheme.Modules.dual M') ≪≫
       (a ⊗ᵢ ((Scheme.Modules.IsInvertible.pullback_dual_monoidalV2 s hM').some ≪≫ P2N12.dualIso b))
         ≪≫
-      (Scheme.Modules.IsInvertible.dual_monoidalV2 (Scheme.Modules.isInvertible_unit A)).2.some
+      (Scheme.Modules.IsInvertible.dual (Scheme.Modules.isInvertible_unit A)).2.some
   obtain ⟨a₁⟩ := bridge _ s₁ hsl₁ M h1.some
   obtain ⟨b₁⟩ := bridge _ s₁ hsl₁ M' h1'.some
   obtain ⟨a₂⟩ := bridge _ s₂ hsl₂ M
@@ -928,7 +928,7 @@ theorem
   obtain ⟨eN⟩ := nonempty_iso_unit_of_isPicDeformationCocycle_of_forall_mem_range
       π hsmall' hI ↥V V.subtype hιI F gg Fk ii hii (𝒰₀.comap (𝟙 _)) N φ₀ w hw hKun
   have eMM' : Scheme.Modules.dual M' ⊗ M' ≅ 𝟙_ X.Modules :=
-    β_ _ _ ≪≫ (Scheme.Modules.IsInvertible.dual_monoidalV2 hM').2.some
+    β_ _ _ ≪≫ (Scheme.Modules.IsInvertible.dual hM').2.some
   exact ⟨(ρ_ M).symm ≪≫ whiskerLeftIso M eMM'.symm ≪≫ (α_ M (Scheme.Modules.dual M') M').symm ≪≫
     whiskerRightIso eN M' ≪≫ λ_ M'⟩
 end GoodReductionJacobian.AbelianSchemePropertyBundle

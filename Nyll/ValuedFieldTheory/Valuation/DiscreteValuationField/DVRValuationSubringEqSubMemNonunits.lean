@@ -204,7 +204,7 @@ theorem valuationSubring_eq_and_exists_sub_nonunit_of_unique_prime
     have h1 := hf
     rw [Ideal.inertiaDeg_eq_of_isMaximal p 𝔓] at h1
     have h1' : Module.finrank (O ⧸ p) (↥(integralClosure O E) ⧸ 𝔓) = 1 := by convert h1
-    obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' (1 : ↥(integralClosure O E) ⧸ 𝔓)
+    obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_ne_zero' (1 : ↥(integralClosure O E) ⧸ 𝔓)
       one_ne_zero).mp h1'
       (Ideal.Quotient.mk 𝔓 r)
     obtain ⟨c₀, rfl⟩ := Ideal.Quotient.mk_surjective c

@@ -503,37 +503,6 @@ theorem finite_and_finrank_eq (K : Type u) [Field K] [IsAlgClosed K] {X : Scheme
     AlgebraicCurve.finrank_H0_H1_sectionsOf_of_range_eq_lSpaceOn 𝒱' x M D φ hnat hsmul hinj hrange
   exact ⟨hf0, hf1, h0.trans h0'.symm, h1.trans h1'.symm⟩
 
-/-- A two-affine cover is determined by its two opens. -/
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-/-- Isomorphic modules have equal cohomology dimensions. -/
-theorem finrank_H0_H1_congr {k : Type u} [Field k] {X : Scheme.{u}}
-    (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Module.finrank k (𝒱.sectionsOf x M).H0 = Module.finrank k (𝒱.sectionsOf x M').H0 ∧
-      Module.finrank k (𝒱.sectionsOf x M).H1 = Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  exact ⟨e0.finrank_eq, e1.finrank_eq⟩
-
-/-- An isomorphism of modules induces linear equivalences on both cohomology groups. -/
-theorem nonempty_linearEquiv_H0_H1_congr {k : Type u} [Field k] {X : Scheme.{u}}
-    (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Nonempty ((𝒱.sectionsOf x M).H0 ≃ₗ[k] (𝒱.sectionsOf x M').H0) ∧
-      Nonempty ((𝒱.sectionsOf x M).H1 ≃ₗ[k] (𝒱.sectionsOf x M').H1) := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  exact ⟨⟨e0⟩, ⟨e1⟩⟩
-
 /-- A smooth rational curve model over an algebraically closed field is geometrically integral. -/
 theorem geometricallyIntegral_toBase (k : Type u) [Field k] [IsAlgClosed k]
     (M : CurveModel k (RatFunc k)) :
@@ -629,7 +598,9 @@ theorem nonempty_pullback_iso_of_isAlgEquivZero_baseChange
   obtain ⟨𝒲s', hs0', hs1', ⟨eH0N⟩, ⟨eH1N⟩⟩ :=
     Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso
     (fibreAt M.toBase (𝟙 _) (𝟙 _)) M.toBase φ₁ hφ₁ 𝒲M N _ eN1
-  obtain rfl : 𝒲s = 𝒲s' := cover_ext (hs0.trans hs0'.symm) (hs1.trans hs1'.symm)
+  obtain rfl : 𝒲s = 𝒲s' :=
+    _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.cover_ext (hs0.trans hs0'.symm)
+      (hs1.trans hs1'.symm)
   obtain ⟨hO1, hO0⟩ :=
     CurveModel.finrank_H1_sectionsOf_unit_eq_zero_and_finrank_H0_eq_one_of_ratFunc k M 𝒲M
   obtain ⟨hfinU0, hfinU1, -, -⟩ := finite_and_finrank_eq k M.toBase (SheafOfModules.unit
@@ -683,17 +654,16 @@ theorem nonempty_pullback_iso_of_isAlgEquivZero_baseChange
     have eTrivF' : fibreModule M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _) N₁ ≅
         (SheafOfModules.unit F'.ringCatSheaf : F'.Modules) :=
       eN2 ≪≫ (Scheme.Modules.pullback φ₂.hom).mapIso eNΩ ≪≫ Scheme.Modules.pullbackUnitIso φ₂.hom
-    obtain ⟨hcN0, hcN1⟩ := finrank_H0_H1_congr (fibreAt M.toBase (𝟙 _)
-      (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _))
-      𝒲'N eTrivF'
-    obtain ⟨⟨lcN0⟩, ⟨lcN1⟩⟩ := nonempty_linearEquiv_H0_H1_congr
-      (fibreAt M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _)) 𝒲'N eTrivF'
+    obtain ⟨hcN0, hcN1⟩ := 𝒲'N.finrank_sectionsOf_H0_H1_congr
+      (fibreAt M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _)) eTrivF'
+    obtain ⟨⟨lcN0⟩, ⟨lcN1⟩⟩ := 𝒲'N.sectionsOf_linearEquiv_of_moduleIso
+      (fibreAt M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _)) eTrivF'
     obtain ⟨hfU0', hfU1', hU0eq, hU1eq⟩ := finite_and_finrank_eq Ω
       (fibreAt M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _))
       (SheafOfModules.unit F'.ringCatSheaf) (Scheme.Modules.isInvertible_unit _) 𝒲'N 𝒲'
-    obtain ⟨hcU0, hcU1⟩ := finrank_H0_H1_congr (fibreAt M.toBase (𝟙 _)
-      (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _))
-      𝒲' (Scheme.Modules.pullbackUnitIso
+    obtain ⟨hcU0, hcU1⟩ := 𝒲'.finrank_sectionsOf_H0_H1_congr
+      (fibreAt M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _))
+      (Scheme.Modules.pullbackUnitIso
         (pullback.fst (pullback.snd M.toBase (𝟙 _)) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _)) :
         fibreModule M.toBase (𝟙 _) (Scheme.TwoAffineOpenCover.specMap k Ω ≫ 𝟙 _)
           (SheafOfModules.unit P1.ringCatSheaf) ≅ _)

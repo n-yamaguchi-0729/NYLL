@@ -60,11 +60,10 @@ open Polynomial TensorProduct
 namespace W4B
 
 theorem aeval_ofFinsupp_eq {R A : Type*} [CommRing R] [Ring A] [Algebra R A] (x : A)
-    (l : ℕ →₀ R) : aeval x (⟨.ofCoeff l⟩ : R[X]) = Finsupp.linearCombination R (fun n : ℕ => x ^ n)
-      l := by
-  simp only [aeval_def, eval₂_eq_sum, Polynomial.sum_def, Finsupp.linearCombination_apply,
-    Finsupp.sum,
-    support_ofFinsupp, coeff_ofFinsupp]
+    (l : ℕ →₀ R) : aeval x (AddMonoidAlgebra.ofCoeff l : R[X]) =
+      Finsupp.linearCombination R (fun n : ℕ => x ^ n) l := by
+  simp only [aeval_def, eval₂_eq_sum, Polynomial.sum, Finsupp.linearCombination_apply,
+    Finsupp.sum, Polynomial.support_ofCoeff]
   refine Finset.sum_congr rfl fun n _ => ?_
   rw [Algebra.smul_def]
 
@@ -74,12 +73,11 @@ theorem transcendental_iff_linearIndependent_pow {R A : Type*} [CommRing R] [Rin
   rw [transcendental_iff, linearIndependent_iff]
   constructor
   · intro h l hl
-    have := h ⟨.ofCoeff l⟩ (by rwa [aeval_ofFinsupp_eq])
-    exact AddMonoidAlgebra.ofCoeff_eq_zero.1 (Polynomial.ofFinsupp_eq_zero.1 this)
+    have hp := h (AddMonoidAlgebra.ofCoeff l) (by rwa [aeval_ofFinsupp_eq])
+    exact AddMonoidAlgebra.ofCoeff_eq_zero.1 hp
   · intro h p hp
-    obtain ⟨l⟩ := p
-    have hl := h l.coeff (by rwa [← aeval_ofFinsupp_eq, AddMonoidAlgebra.ofCoeff_coeff])
-    exact Polynomial.ofFinsupp_eq_zero.2 (AddMonoidAlgebra.coeff_eq_zero.1 hl)
+    have hl := h p.coeff (by rwa [← aeval_ofFinsupp_eq, AddMonoidAlgebra.ofCoeff_coeff])
+    exact AddMonoidAlgebra.coeff_eq_zero.1 hl
 
 theorem transcendental_one_tmul {K₀ : Type*} [Field K₀] (K' : Type*) [Field K'] [Algebra K₀ K']
     {F₀ : Type*} [Field F₀] [Algebra K₀ F₀] {x : F₀} (hx : Transcendental K₀ x) :

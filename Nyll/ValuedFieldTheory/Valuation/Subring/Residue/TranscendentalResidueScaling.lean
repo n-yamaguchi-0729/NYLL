@@ -52,10 +52,9 @@ open _root_.ValuationSubring
 
 theorem aeval_eq_linearCombination {K B : Type*} [CommRing K] [Ring B] [Algebra K B]
     (x : B) (p : Polynomial K) :
-    Polynomial.aeval x p = Finsupp.linearCombination K (fun j : ℕ => x ^ j) p.toFinsupp.coeff := by
-  rcases p with ⟨q⟩
+    Polynomial.aeval x p = Finsupp.linearCombination K (fun j : ℕ => x ^ j) p.coeff := by
   simp only [Polynomial.aeval_def, Polynomial.eval₂_eq_sum, Polynomial.sum_def,
-    Polynomial.support_ofFinsupp, Polynomial.coeff_ofFinsupp, Finsupp.linearCombination_apply,
+    Polynomial.support, Finsupp.linearCombination_apply,
     Finsupp.sum, Algebra.smul_def]
 
 theorem linearIndependent_pow_of_transcendental {K B : Type*} [Field K] [Ring B] [Algebra K B]
@@ -63,8 +62,10 @@ theorem linearIndependent_pow_of_transcendental {K B : Type*} [Field K] [Ring B]
   rw [linearIndependent_iff]
   rw [transcendental_iff] at hx
   intro l hl
-  have := hx ⟨.ofCoeff l⟩ (by rw [aeval_eq_linearCombination]; exact hl)
-  exact AddMonoidAlgebra.ofCoeff_eq_zero.mp (Polynomial.ofFinsupp_eq_zero.mp this)
+  have hp : Polynomial.aeval x (AddMonoidAlgebra.ofCoeff l : Polynomial K) = 0 := by
+    rw [aeval_eq_linearCombination, AddMonoidAlgebra.coeff_ofCoeff]
+    exact hl
+  exact AddMonoidAlgebra.ofCoeff_eq_zero.mp (hx _ hp)
 
 variable {L : Type*} [Field L] {A : ValuationSubring L}
   {F : Type*} [Field F] [Algebra L F]

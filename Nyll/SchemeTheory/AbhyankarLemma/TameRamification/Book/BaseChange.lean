@@ -98,7 +98,8 @@ private theorem finiteUnramifiedExtension_algEquiv
         (F.map ((algebraMap K A).comp V.subtype)).map
           e.toRingEquiv.toRingHom := by
     rw [Polynomial.map_map]
-    apply Polynomial.ext
+    apply AddMonoidAlgebra.ext
+    apply DFunLike.ext
     intro n
     simp only [Polynomial.coeff_map, RingHom.coe_comp, Function.comp_apply]
     exact (e.commutes (F.coeff n : K)).symm

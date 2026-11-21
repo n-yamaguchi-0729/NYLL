@@ -52,7 +52,7 @@ theorem _root_.AlgebraicGeometry.OModulePresheaf.exists_linearMap_apply_eq_unitP
         OModulePresheaf.unitPullback_apply_of_injective _ _ _ _ _ _ _ _ hinj,
         OModulePresheaf.unitPullback_apply_of_injective _ _ _ _ _ _ _ _ hinj]
       erw [map_add, map_add, smul_add]
-      try rfl
+      rfl
     · rw [Pi.add_apply, OModulePresheaf.unitPullback_apply_of_not_injective _ _ _ _ _ _ _ _ hinj,
         OModulePresheaf.unitPullback_apply_of_not_injective _ _ _ _ _ _ _ _ hinj,
         OModulePresheaf.unitPullback_apply_of_not_injective _ _ _ _ _ _ _ _ hinj, add_zero]

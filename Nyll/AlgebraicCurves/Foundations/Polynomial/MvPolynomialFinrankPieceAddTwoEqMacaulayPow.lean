@@ -277,7 +277,10 @@ noncomputable def regen (m : ℕ) (J : Ideal (MvPolynomial (Fin (n + 1)) L)) (�
 theorem regen_le : regen m J ℓ ≤ J ⊔ Ideal.span {ℓ} := Ideal.span_le.mpr fun _ hp => hp.1
 
 theorem regen_generated : ∃ s : Set (MvPolynomial (Fin (n + 1)) L), (∀ p ∈ s, p.IsHomogeneous m) ∧
-    regen m J ℓ = Ideal.span s := ⟨_, fun _ hp => hp.2, rfl⟩
+    regen m J ℓ = Ideal.span s := by
+  refine ⟨{p | p ∈ J ⊔ Ideal.span {ℓ} ∧ p.IsHomogeneous m}, ?_, rfl⟩
+  intro p hp
+  exact hp.2
 include hJ in
 theorem le_regen : J ≤ regen m J ℓ := by
   obtain ⟨s, hs, rfl⟩ := hJ

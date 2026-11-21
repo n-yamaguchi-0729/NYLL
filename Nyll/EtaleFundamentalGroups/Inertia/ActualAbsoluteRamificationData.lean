@@ -165,7 +165,7 @@ theorem actualAbsoluteRamificationGroups_tameQuotientTopology :
 /-- The wild topology is the SAME independently defined subgroup topology. -/
 theorem actualAbsoluteRamificationGroups_wildTopology :
     TopologicalSpace.induced
-        (fun σ : Subtype (actualAbsoluteRamificationGroups A K Ω Q).wild.carrier =>
+        (fun σ : ↥(actualAbsoluteRamificationGroups A K Ω Q).wild =>
           (show (actualAbsoluteRamificationGroups A K Ω Q).inertia.carrier from σ.val))
         (actualAbsoluteRamificationGroups A K Ω Q).inertiaTopology =
       actualNormalizationWildGroup_topologicalSpace A K Ω Q := rfl

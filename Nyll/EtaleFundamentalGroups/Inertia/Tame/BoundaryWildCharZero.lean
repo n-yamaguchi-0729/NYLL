@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Inertia.Tame.BoundaryWildQuotient
 public import Nyll.EtaleFundamentalGroups.Inertia.ActualNormalizationWildCharZero
 public import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
@@ -31,7 +32,9 @@ namespace EtaleFundamentalGroups.Tame
 
 universe u
 
-attribute [local instance] Inertia.normalizationCommAlgGaloisAction integralOpenDominant
+attribute [local instance]
+  Inertia.normalizationCommAlgGaloisAction
+  AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 variable (k F Ω : Type u) [Field k] [CharZero k] [Field F] [Field Ω]
   [Algebra F Ω] [IsSepClosure F Ω] [IsSepClosed Ω]
@@ -48,7 +51,7 @@ theorem normalizationWildImageAt_eq_bot_of_charZero
     (x : X) (hx : IsClosed ({x} : Set X)) :
     normalizationWildImageAt k F Ω c j p x hx = ⊥ := by
   have : IsDominant j :=
-    ⟨j.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace j⟩
+    j.isDominant_of_isOpenImmersion
   let A := X.presheaf.stalk x
   have : IsDiscreteValuationRing A :=
     SmoothOfRelativeDimension.isDiscreteValuationRing_stalk_of_isClosed c x hx

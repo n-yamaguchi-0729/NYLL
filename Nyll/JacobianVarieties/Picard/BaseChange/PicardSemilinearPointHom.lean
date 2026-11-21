@@ -28,6 +28,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.Poincare.PicardRepresentabilityPoinc
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
+import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 /-!
 # The additive map induced by a semilinear Picard morphism
 
@@ -90,7 +91,7 @@ theorem existsUnique_addMonoidHom_pts_comp_fst_eq_comp_of_semilinear_mul_comp_of
       (Scheme.Modules.pullback (baseChangeSnd c (BaseChange.overR R' w))).mapIso
         ((Scheme.Modules.pullback (BaseChange.κ c R' (D.baseChange R').toBase).inv).mapIso ePR ≪≫
           BaseChange.toR_ofR_iso c ε R' _) ≪≫
-      RigidifiedLineBundle.pullbackAlongPullbackAlongIso' h.poincare fstD (BaseChange.overR R' w)⟩
+      RigidifiedLineBundle.pullbackAlongPullbackAlongIso h.poincare fstD (BaseChange.overR R' w)⟩
   have hQadd : ∀ a b : J, Q (a + b) =
       (RepresentsRelSubPic.relativeGroupLaw
         (P := algEquivZeroGroupCut c ε) h).mul _ (Q a) (Q b) := by

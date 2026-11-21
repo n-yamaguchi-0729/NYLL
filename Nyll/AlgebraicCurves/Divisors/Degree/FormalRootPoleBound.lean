@@ -105,7 +105,7 @@ private theorem ord_coeff_weighted_fixed_point_ge
     (M : ℕ) (hc : ∀ i ∈ I, -(M : ℤ) ≤ v.ord (c i)) (n : ℕ) :
     -((M * (2 * n + 1) : ℕ) : ℤ) ≤ v.ord (PowerSeries.coeff n W) := by
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     nth_rw 1 [hfixed]
     rw [map_sum]
     apply ord_finset_sum_ge_neg_bound v _ _ (M * (2 * n + 1))

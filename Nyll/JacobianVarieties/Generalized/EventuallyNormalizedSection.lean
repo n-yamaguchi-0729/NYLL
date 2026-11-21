@@ -70,7 +70,7 @@ theorem eventually_exists_normalizedSection
     α_ M.L (ε.ker ^ (n + 1)).invModule I.module ≪≫
       whiskerLeftIso M.L (β_ (ε.ker ^ (n + 1)).invModule I.module) ≪≫
       (α_ M.L I.module (ε.ker ^ (n + 1)).invModule).symm
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso c 𝒱 e
+  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso c 𝒱 e
   have hd := Scheme.Hom.isFinite_and_finrank_subschemeIota_ker_pow_of_comp_eq_id ε hε (n + 1)
   have hχ := (hp.pow (n + 1)).eulerChar_sectionsOf_tensor_invModule_eq
     c hd.1 hd.2.1 L hL 𝒱

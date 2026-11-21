@@ -45,7 +45,7 @@ namespace AlgebraicGeometry.HenselianNoetherianImageStages
 private theorem localizationMap_isLocalHom
     {B A : Type u} [CommRing B] [CommRing A] [IsLocalRing A] (φ : B →+* A) :
     IsLocalHom (LocalStageResidue.localizationMap φ) := by
-  apply ((IsLocalRing.local_hom_TFAE (LocalStageResidue.localizationMap φ)).out 5 1).mp
+  apply ((IsLocalRing.local_hom_tfae (LocalStageResidue.localizationMap φ)).out 5 1).mp
   apply (Localization.AtPrime.eq_maximalIdeal_iff_under_eq
     (I := LocalStageResidue.prime φ)).mp
   change ((IsLocalRing.maximalIdeal A).comap

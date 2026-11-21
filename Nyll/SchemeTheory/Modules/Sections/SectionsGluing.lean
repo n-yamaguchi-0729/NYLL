@@ -23,6 +23,27 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
+namespace SheafOfModules
+
+open Opposite
+
+variable {X : Scheme.{u}} (M : SheafOfModules.{u} X.ringCatSheaf)
+
+/-- A section on the top open gives the actual compatible family on all opens. -/
+noncomputable def topSection (s : M.val.obj (op ⊤)) : M.sections :=
+  PresheafOfModules.sectionsMk (fun W => M.val.map W.unop.leTop.op s)
+    (fun {V _} f =>
+      (M.val.map_comp_apply V.unop.leTop.op f s).symm.trans
+        (M.val.congr_map_apply (Subsingleton.elim _ _) s))
+
+/-- The compatible family retains the original top section. -/
+theorem topSection_top (s : M.val.obj (op ⊤)) : (M.topSection s).val (op ⊤) = s := by
+  change M.val.presheaf.map (𝟙 (op ⊤)) s = s
+  rw [M.val.presheaf.map_id]
+  rfl
+
+end SheafOfModules
+
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Sections of a scheme module satisfy separatedness and gluing on an open cover. -/

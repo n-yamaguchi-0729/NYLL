@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.EtaleCohomology.Descent.SetSheafOverlapCocycle
 import Nyll.SchemeTheory.Descent.OverlapPairHom
 
@@ -24,9 +25,9 @@ universe u
 
 namespace EtaleCohomology.SetSheafDescent
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X Y T : Scheme.{u}} (q : Y ⟶ X)
   (G : EtaleFiniteLocallyConstantSetSheaf Y)

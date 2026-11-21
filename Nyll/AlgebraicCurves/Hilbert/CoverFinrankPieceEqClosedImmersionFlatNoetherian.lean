@@ -164,6 +164,12 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace P2mWs6C0
 
+open ProjSpace.ChartSectionsBaseChange (
+  X_eq_mvMapGraded_mul_one inter_le_pullbackChart isAffineOpen_inter one_mem_zero
+  preimage_inter preimage_pullbackChart restrictFun_app_eq restrictFun_app_frameUnit
+  restrictFun_app_pullAway toB toB_mk toB_ratio
+)
+
 theorem cover {A : Type u} [CommRing A] {σ : Type} (v : PrimeSpectrum A → σ) (hv : IsLocallyConstant
   v) :
     ∃ (J : Type) (_ : Fintype J) (r : J → A), Ideal.span (Set.range r) = ⊤ ∧
@@ -222,18 +228,6 @@ theorem flat_sections {A : Type u} [CommRing A] {Z : Scheme.{u}} (πZ : Z ⟶ Sp
 
 section FromC3
 variable {n : ℕ}
-
-theorem inter_le_pullbackChart {W : Scheme.{u}} {R : Type u} [CommRing R]
-    (φ : W ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)) [IsAffineHom φ]
-    {i : ℕ} (s : (ProjSpace.stdCoverPullback φ).Idx i) (t : Fin (i + 1)) :
-    (ProjSpace.stdCoverPullback φ).inter s ≤ ProjSpace.pullbackChart φ ((s.1 t).down) :=
-  ProjSpace.ChartSectionsBaseChange.inter_le_pullbackChart φ s t
-
-theorem isAffineOpen_inter {W : Scheme.{u}} {R : Type u} [CommRing R]
-    (φ : W ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) R)) [IsAffineHom φ]
-    {i : ℕ} (s : (ProjSpace.stdCoverPullback φ).Idx i) :
-    IsAffineOpen ((ProjSpace.stdCoverPullback φ).inter s) :=
-  ProjSpace.ChartSectionsBaseChange.isAffineOpen_inter φ s
 
 end FromC3
 
@@ -300,72 +294,6 @@ local notation "𝒜B" => MvPolynomial.homogeneousSubmodule (Fin (n + 1)) B
 
 open HomogeneousLocalization
 
-theorem X_eq_mvMapGraded_mul_one (i : Fin (n + 1)) :
-    (MvPolynomial.X i : MvPolynomial (Fin (n + 1)) B) = (ProjSpace.mvMapGraded A B n)
-      (MvPolynomial.X i) * 1 :=
-  ProjSpace.ChartSectionsBaseChange.X_eq_mvMapGraded_mul_one (A := A) B i
-
-theorem one_mem_zero : (1 : MvPolynomial (Fin (n + 1)) B) ∈ (MvPolynomial.homogeneousSubmodule (Fin
-  (n + 1)) B) 0 :=
-  ProjSpace.ChartSectionsBaseChange.one_mem_zero (n := n) B
-
-/-- The coordinate localization map induced by the coefficient base change. -/
-noncomputable def toB (i : Fin (n + 1)) : Away 𝒜A (MvPolynomial.X i) →+* Away 𝒜B (MvPolynomial.X i)
-  :=
-  ProjSpace.ChartSectionsBaseChange.toB (A := A) B i
-
-theorem toB_ratio (i j : Fin (n + 1)) : toB (A := A) B i (ProjSpace.ratio A n i j) =
-  ProjSpace.ratio B n i j :=
-  ProjSpace.ChartSectionsBaseChange.toB_ratio (A := A) B i j
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_pullAway (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i : Fin (n + 1))
-    (a : Away 𝒜A (MvPolynomial.X i)) {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom
-        ((ι.app (Proj.basicOpen 𝒜A (MvPolynomial.X i))).hom ((Proj.awayToSection 𝒜A (MvPolynomial.X
-          i)).hom a)))
-      = ProjSpace.restrictFun h₂ ((ι'.app (Proj.basicOpen 𝒜B (MvPolynomial.X i))).hom
-          ((Proj.awayToSection 𝒜B (MvPolynomial.X i)).hom (toB (A := A) B i a))) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_pullAway ι B ι' e hcomp i a h₁ h₂
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem restrictFun_app_frameUnit (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (i j : Fin (n + 1))
-  {W' : Z'.Opens}
-    (h₁ : W' ≤ e ⁻¹ᵁ ProjSpace.pullbackChart ι i) (h₂ : W' ≤ ProjSpace.pullbackChart ι' i) :
-    ProjSpace.restrictFun h₁ ((e.app (ProjSpace.pullbackChart ι i)).hom (ProjSpace.frameUnit ι i j))
-      = ProjSpace.restrictFun h₂ (ProjSpace.frameUnit ι' i j) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_frameUnit ι B ι' e hcomp i j h₁ h₂
-
-theorem restrictFun_app_eq {U V : Z.Opens} (hVU : V ≤ U) {W' : Z'.Opens} (h₁ : W' ≤ e ⁻¹ᵁ V) (h₂ :
-  W' ≤ e ⁻¹ᵁ U)
-    (x : Γ(Z, U)) :
-    ProjSpace.restrictFun h₁ ((e.app V).hom (ProjSpace.restrictFun hVU x)) = ProjSpace.restrictFun
-      h₂ ((e.app U).hom x) :=
-  ProjSpace.ChartSectionsBaseChange.restrictFun_app_eq e hVU h₁ h₂ x
-omit [IsAffineHom ι] [IsAffineHom ι'] in
-theorem preimage_pullbackChart (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) (j : Fin (n + 1)) :
-    e ⁻¹ᵁ ProjSpace.pullbackChart ι j = ProjSpace.pullbackChart ι' j :=
-  ProjSpace.ChartSectionsBaseChange.preimage_pullbackChart ι B ι' e hcomp j
-
-theorem preimage_inter (hcomp : e ≫ ι = ι' ≫ ProjSpace.map A B n) {i : ℕ} (s :
-  (ProjSpace.stdCoverPullback ι).Idx i) :
-    e ⁻¹ᵁ (ProjSpace.stdCoverPullback ι).inter s = (ProjSpace.stdCoverPullback ι').inter s :=
-  ProjSpace.ChartSectionsBaseChange.preimage_inter ι B ι' e hcomp s
-
-theorem toB_mk (i : Fin (n + 1)) (d : ℕ) (F : MvPolynomial (Fin (n + 1)) A) (hF : F ∈ 𝒜A d) :
-    toB (A := A) B i (HomogeneousLocalization.mk
-      ({ deg := d, num := ⟨F, hF⟩,
-         den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-           (MvPolynomial.isHomogeneous_X_pow i d)⟩,
-         den_mem := ⟨d, rfl⟩ } : NumDenSameDeg 𝒜A (Submonoid.powers (MvPolynomial.X i))))
-    = HomogeneousLocalization.mk
-      ({ deg := d,
-         num := ⟨MvPolynomial.map (algebraMap A B) F,
-           ((MvPolynomial.mem_homogeneousSubmodule d F).mp hF).map _⟩,
-         den := ⟨MvPolynomial.X i ^ d, (MvPolynomial.mem_homogeneousSubmodule d _).mpr
-           (MvPolynomial.isHomogeneous_X_pow i d)⟩,
-         den_mem := ⟨d, rfl⟩ } : NumDenSameDeg 𝒜B (Submonoid.powers (MvPolynomial.X i))) :=
-  ProjSpace.ChartSectionsBaseChange.toB_mk (A := A) B i d F hF
-
 end Pull
 
 theorem subsingleton_HSucc_iff {R : Type u} [CommRing R] {V : Scheme.{u}} {π : V ⟶ Spec (.of R)}
@@ -409,6 +337,9 @@ open MvPolynomial CategoryTheory CategoryTheory.Limits AlgebraicGeometry TensorP
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 open _root_.AlgebraicCurves.Hilbert.Proofs.HilbertNoetherianCover in
+open _root_.AlgebraicGeometry.ProjSpace.ChartSectionsBaseChange (preimage_pullbackChart
+  preimage_inter
+  toB toB_mk restrictFun_app_pullAway restrictFun_app_eq) in
 open P2mWs6C0 _root_.AlgebraicGeometry.ProjSpace in
 theorem exists_cover_forall_finrank_piece_eq_of_isClosedImmersion_of_flat_of_isNoetherianRing
     (n : ℕ) (A : Type u) [CommRing A] [IsNoetherianRing A]

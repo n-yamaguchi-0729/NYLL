@@ -73,7 +73,8 @@ theorem exists_eq_const_of_polynomialChart
   apply ext_of_isDominant_of_isSeparated G.X.hom hbase l
   calc
     l ≫ τ.1 = Spec.map (CommRingCat.ofHom (Polynomial.C (R := K))) ≫ a := hconst
-    _ = (l ≫ (V.ι ≫ P.toBase)) ≫ a := by rw [hlbase]
+    _ = (l ≫ (V.ι ≫ P.toBase)) ≫ a := by
+      rw [hlbase, Polynomial.algebraMap_eq]
     _ = l ≫ ((V.ι ≫ P.toBase) ≫ a) := Category.assoc _ _ _
 
 

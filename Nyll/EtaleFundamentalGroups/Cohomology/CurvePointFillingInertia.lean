@@ -24,6 +24,8 @@ No boundary-component or generic-source comparison is additional input.
 
 @[expose] public section
 
+open AlgebraicGeometry.Scheme.Hom (sectionEffectiveCartierDivisor)
+
 noncomputable section
 
 universe u
@@ -41,13 +43,10 @@ variable {k : Type u} [Field k] {X : Scheme.{u}}
   (c : X ⟶ Spec (.of k)) [IsSeparated c] [SmoothOfRelativeDimension 1 c]
   (p : Spec (.of k) ⟶ X) (hp : p ≫ c = 𝟙 _)
 
-/-- The effective Cartier divisor defined by the original rational point. -/
-def curvePointDivisor : X.EffectiveCartierDivisor :=
-  ⟨p.ker, (Scheme.Hom.isInvertible_ker_of_comp_eq_id p hp).isEffectiveCartier⟩
-
 /-- The constructed divisor has exactly the specified point as support. -/
 theorem curvePointDivisor_support :
-    ((curvePointDivisor c p hp).1.support : Set X) = {p (IsLocalRing.closedPoint k)} := by
+    ((sectionEffectiveCartierDivisor c p hp).1.support : Set X) =
+      {p (IsLocalRing.closedPoint k)} := by
   have : IsClosedImmersion p := isClosedImmersion_of_comp_eq_id c p hp
   change (p.ker.support : Set X) = _
   rw [Scheme.Hom.support_ker, p.isClosedEmbedding.isClosed_range.closure_eq]
@@ -61,7 +60,7 @@ private theorem curvePointDivisor_subschemeι_eq (z : p.ker.subscheme) :
   exact Set.mem_singleton_iff.mp (hr ▸ Set.mem_range_self z)
 
 private theorem curvePointDivisor_subscheme_subsingleton :
-    Subsingleton (curvePointDivisor c p hp).1.subscheme := by
+    Subsingleton (sectionEffectiveCartierDivisor c p hp).1.subscheme := by
   constructor
   intro a b
   apply p.ker.subschemeι.isEmbedding.injective
@@ -70,17 +69,17 @@ private theorem curvePointDivisor_subscheme_subsingleton :
 
 /-- The subscheme defined by the rational point is irreducible. -/
 theorem curvePointDivisor_subscheme_irreducible :
-    IrreducibleSpace (curvePointDivisor c p hp).1.subscheme := by
-  have : Subsingleton (curvePointDivisor c p hp).1.subscheme :=
+    IrreducibleSpace (sectionEffectiveCartierDivisor c p hp).1.subscheme := by
+  have : Subsingleton (sectionEffectiveCartierDivisor c p hp).1.subscheme :=
     curvePointDivisor_subscheme_subsingleton c p hp
-  have : Nonempty (curvePointDivisor c p hp).1.subscheme :=
+  have : Nonempty (sectionEffectiveCartierDivisor c p hp).1.subscheme :=
     ⟨p.toImage (IsLocalRing.closedPoint k)⟩
   exact { toPreirreducibleSpace := inferInstance, toNonempty := inferInstance }
 
 /-- There is only one boundary component; this is proved from the actual
 point ideal, rather than imposed on the curve. -/
 theorem curvePointDivisor_component_subsingleton :
-    Subsingleton (Component (curvePointDivisor c p hp)) := by
+    Subsingleton (Component (sectionEffectiveCartierDivisor c p hp)) := by
   have : IrreducibleSpace p.ker.subscheme :=
     curvePointDivisor_subscheme_irreducible c p hp
   constructor
@@ -99,14 +98,14 @@ theorem curvePointDivisor_component_subsingleton :
   exact hE.trans hF.symm
 
 /-- The unique component of the actual point divisor. -/
-def curvePointDivisorComponent : Component (curvePointDivisor c p hp) := by
-  have : IrreducibleSpace (curvePointDivisor c p hp).1.subscheme :=
+def curvePointDivisorComponent : Component (sectionEffectiveCartierDivisor c p hp) := by
+  have : IrreducibleSpace (sectionEffectiveCartierDivisor c p hp).1.subscheme :=
     curvePointDivisor_subscheme_irreducible c p hp
   exact ⟨Set.univ, by rw [irreducibleComponents_eq_singleton]; exact Set.mem_singleton _⟩
 
 /-- Its component generic point is the original rational point. -/
 theorem curvePointDivisor_componentPoint :
-    componentPoint (curvePointDivisor c p hp) (curvePointDivisorComponent c p hp) =
+    componentPoint (sectionEffectiveCartierDivisor c p hp) (curvePointDivisorComponent c p hp) =
       p (IsLocalRing.closedPoint k) := by
   exact curvePointDivisor_subschemeι_eq c p hp _
 
@@ -114,7 +113,7 @@ variable [IsIntegral X]
 
 /-- Smoothness makes the ambient curve regular at the actual divisor. -/
 theorem curvePointDivisor_isAmbientRegularAlongSupport :
-    (curvePointDivisor c p hp).IsAmbientRegularAlongSupport := by
+    (sectionEffectiveCartierDivisor c p hp).IsAmbientRegularAlongSupport := by
   intro x hx
   have hx' : x = p (IsLocalRing.closedPoint k) := by
     rwa [curvePointDivisor_support c p hp, Set.mem_singleton_iff] at hx
@@ -127,11 +126,11 @@ variable [IsLocallyNoetherian X]
 
 /-- Removing the actual point leaves an integral open curve. -/
 theorem curvePointComplement_isIntegral :
-    IsIntegral ((curvePointDivisor c p hp).1.supportComplement : Scheme.{u}) := by
-  have : ConnectedSpace (curvePointDivisor c p hp).1.supportComplement :=
-    boundaryComplement_connectedSpace (curvePointDivisor c p hp)
+    IsIntegral ((sectionEffectiveCartierDivisor c p hp).1.supportComplement : Scheme.{u}) := by
+  have : ConnectedSpace (sectionEffectiveCartierDivisor c p hp).1.supportComplement :=
+    boundaryComplement_connectedSpace (sectionEffectiveCartierDivisor c p hp)
       (curvePointDivisor_isAmbientRegularAlongSupport c p hp)
-  exact isIntegral_of_isOpenImmersion (curvePointDivisor c p hp).1.supportComplement.ι
+  exact isIntegral_of_isOpenImmersion (sectionEffectiveCartierDivisor c p hp).1.supportComplement.ι
 
 end PointDivisor
 
@@ -178,7 +177,7 @@ theorem curvePointFillingAbelianization_ker_eq_normalizationInertia
     (p : Spec (.of k) ⟶ X) (hp : p ≫ c = 𝟙 _)
     (K Ω : Type u) [Field K] [Field Ω]
     [Algebra K Ω] [IsSepClosure K Ω] [IsSepClosed Ω] :
-    let D := curvePointDivisor c p hp
+    let D := sectionEffectiveCartierDivisor c p hp
     let : IsIntegral (D.1.supportComplement : Scheme.{u}) := curvePointComplement_isIntegral c p hp
     ∀ (g : Spec (.of K) ⟶ D.1.supportComplement) [IsDominant g] [IsPreimmersion g],
       let A := X.presheaf.stalk (p (IsLocalRing.closedPoint k))

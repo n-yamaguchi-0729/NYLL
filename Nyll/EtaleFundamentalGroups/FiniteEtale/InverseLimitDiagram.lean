@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismInverseLimit
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedComposition
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackIdentity
@@ -32,8 +33,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 private theorem pullbackCone_identity
     {X Y : Scheme.{u}} (p : X ⟶ Y) (f : Y ⟶ Y)

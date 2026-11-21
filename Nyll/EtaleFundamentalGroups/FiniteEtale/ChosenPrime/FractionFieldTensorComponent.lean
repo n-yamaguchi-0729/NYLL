@@ -270,6 +270,12 @@ noncomputable def
   have hcomap : q = q'.comap E.toRingHom := by
     symm
     exact Ideal.comap_map_of_bijective E.toRingEquiv E.bijective
+  let n := finiteBaseFractionFieldTensorIdeal (R := R) (C := C) (L := L) m
+  let : n.IsMaximal := finiteBaseFractionFieldTensorIdeal_isMaximal m
+  let : CommRing (GenericTensorFieldComponent n) := (genericTensorFieldComponentField n).toCommRing
+  let : Algebra C (GenericTensorFieldComponent n) :=
+    genericTensorFieldComponentLeftScalarAlgebra (R := C) n
+  let : CommRing (integralClosure C (GenericTensorFieldComponent n)) := Subalgebra.toCommRing _
   exact Localization.localAlgEquiv q q' E hcomap
 
 end EtaleFundamentalGroups

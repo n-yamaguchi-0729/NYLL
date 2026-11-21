@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
@@ -245,16 +246,13 @@ theorem chi_def (M : Y.Modules) :
       M).H1 :=
   rfl
 
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
 theorem chi_congr {M M' : Y.Modules} (e : M ≅ M') : chi y 𝒲 M = chi y 𝒲 M' := by
   obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
     Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso y y (Iso.refl Y)
       (Category.id_comp y)
       𝒲 M' M (e ≪≫ ((Scheme.Modules.pullbackId Y).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒲 := cover_ext h0 h1
+  obtain rfl : 𝒱₂ = 𝒲 :=
+    _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.cover_ext h0 h1
   rw [chi_def, chi_def, e0.finrank_eq, e1.finrank_eq]
 
 variable {X : Scheme.{u}} (ι : Y ⟶ X) [IsProper y]

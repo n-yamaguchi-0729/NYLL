@@ -121,7 +121,7 @@ theorem actualNormalizationRamificationDiagram_tameQuotientTopology :
 /-- The inherited wild topology is the SAME independent subgroup topology. -/
 theorem actualNormalizationRamificationDiagram_wildTopology :
     TopologicalSpace.induced
-        (fun σ : Subtype (actualNormalizationRamificationDiagram A K L Q).wild.carrier =>
+        (fun σ : ↥(actualNormalizationRamificationDiagram A K L Q).wild =>
           (show (actualNormalizationRamificationDiagram A K L Q).inertia.carrier from σ.val))
         (actualNormalizationRamificationDiagram A K L Q).inertiaTopology =
       actualNormalizationWildGroup_topologicalSpace A K L Q := rfl

@@ -36,7 +36,7 @@ public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Complexes.OModulePresheafO
 public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.FibreH0RankIdEqFinrankSections
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Vanishing.SectionsTopEquivH0Modules
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPowMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.ProjectiveTwistSectionsMap
 public import Nyll.SchemeTheory.HomologicalAlgebra.FiniteDimensionalExactSequences
 public import Nyll.AlgebraicCurves.Geometry.Projective.ProjSpaceLinearMapHomogeneousSubmoduleTwistObjTopValEq
@@ -282,7 +282,7 @@ theorem H0AB.exists_forall_geomFibreH0Finrank_eq_finrank_piece
   let := Scheme.TwoAffineOpenCover.moduleSectionsOfHom (ι ≫ ProjSpace.π k n) (𝓛.tensorPow d) ⊤
   rw [hrec d, Scheme.Modules.geomFibreH0Finrank_id_eq_finrank_sections k (ι ≫ ProjSpace.π k n)
     (𝓛.tensorPow d)
-    (h𝓛.tensorPow_monoidalV2 d)]
+    (h𝓛.tensorPow d)]
   obtain ⟨e1⟩ := AlgebraicGeometry.OModulePresheaf.nonempty_sections_top_equiv_H0_ofModules (ι ≫
     ProjSpace.π k n)
     (𝓛.tensorPow d) (ProjSpace.stdCoverPullback ι)

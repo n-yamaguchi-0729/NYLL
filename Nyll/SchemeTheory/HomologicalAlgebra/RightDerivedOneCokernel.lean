@@ -102,13 +102,38 @@ def Functor.rightDerivedOneCokernelIso (X : C) :
           rw [← hlift]
           exact hk
         exact ⟨cokernel.desc (F.map p) k hk', cokernel.π_desc _ _ _⟩ }
-  let I := InjectiveResolution.of X
-  have hI : I.cocomplex = K := by
-    change (InjectiveResolution.of X).cocomplex = InjectiveResolution.ofCocomplex X
-    rw [InjectiveResolution.of_def]
-  let e := I.isoRightDerivedObj F 1
-  refine e ≪≫ ?_
-  rw [hI]
+  have hι : (Injective.ι X : X ⟶ K.X 0) ≫ K.d 0 1 = 0 := by
+    rw [hd]
+    change Injective.ι X ≫ cokernel.π (Injective.ι X) ≫ Injective.ι Q = 0
+    rw [cokernel.condition_assoc, zero_comp]
+  let ι := (CochainComplex.fromSingle₀Equiv K X).symm ⟨Injective.ι X, hι⟩
+  have hι₀ : ι.f 0 = Injective.ι X :=
+    CochainComplex.fromSingle₀Equiv_symm_apply_f_zero (C := K) (X := X) (Injective.ι X) hι
+  let I : InjectiveResolution X :=
+    { cocomplex := K
+      ι := ι
+      quasiIso := ⟨fun n => by
+        cases n with
+        | zero =>
+          rw [CochainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros]
+          · refine (ShortComplex.exact_and_mono_f_iff_of_iso ?_).2
+              ⟨exact_f_d (Injective.ι X), inferInstance⟩
+            exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
+              (by
+                change 𝟙 X ≫ Injective.ι X = ι.f 0 ≫ 𝟙 (K.X 0)
+                exact Eq.trans (Category.id_comp (Injective.ι X))
+                  (Eq.trans hι₀.symm (Category.comp_id (ι.f 0)).symm))
+              (by
+                change 𝟙 (K.X 0) ≫ Injective.d (Injective.ι X) = K.d 0 1 ≫ 𝟙 (K.X 1)
+                exact Eq.trans (Category.id_comp (Injective.d (Injective.ι X)))
+                  (Eq.trans (InjectiveResolution.ofCocomplex_d_0_1 X).symm
+                    (Category.comp_id (K.d 0 1)).symm))
+          all_goals rfl
+        | succ n =>
+          rw [quasiIsoAt_iff_exactAt]
+          · exact InjectiveResolution.ofCocomplex_exactAt_succ X n
+          · exact CochainComplex.exactAt_succ_single_obj _ _⟩ }
+  refine I.isoRightDerivedObj F 1 ≪≫ ?_
   let L := (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj K
   exact L.homologyIsoSc' 0 1 2 hprev hnext ≪≫ h.homologyIso
 

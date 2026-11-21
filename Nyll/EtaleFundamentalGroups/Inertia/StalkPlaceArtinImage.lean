@@ -123,13 +123,13 @@ theorem exists_placeNormalizationPrime_decomposition_inertia_eq_of_range
     constructor
     · intro hσ b
       change eN.symm (σ • b - b) ∈ Q
-      rw [map_sub, haction]
+      rw [eN.symm.map_sub, haction]
       exact hσ (eN.symm b)
     · intro hσ a
       obtain ⟨b, rfl⟩ := eN.symm.surjective a
       have hb := hσ b
       change eN.symm (σ • b - b) ∈ Q at hb
-      rw [map_sub, haction] at hb
+      rw [eN.symm.map_sub, haction] at hb
       exact hb
 
 /-- The full inertia comparison is the inertia component of the

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianCompletionLocal
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FamilyGeometricFiberCartesian
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -83,9 +84,9 @@ theorem exists_completionGeometricLift
 
 open EtaleFundamentalGroups.StrictHenselian
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The constructed lift gives the actual geometric fiber comparison of
 the original proper family, retaining its Cartesian square, original

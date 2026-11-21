@@ -46,10 +46,9 @@ theorem eq_span_of_le_span_sup_sq {S : Type*} [CommRing S] [IsLocalRing S] {I : 
     (hI : I ≤ maximalIdeal S) {t : S} (ht : t ∈ I) (hle : I ≤ Ideal.span {t} ⊔ I ^ 2) : I =
       Ideal.span {t} := by
   apply le_antisymm _ ((Ideal.span_singleton_le_iff_mem _).mpr ht)
-  have hjac : I ≤ (⊥ : Ideal S).jacobson := by
-    rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top]
-    exact hI
-  exact Submodule.le_of_le_smul_of_le_jacobson_bot hfg hjac (by rwa [Ideal.smul_eq_mul, ← pow_two])
+  have hjac : I ≤ Ring.jacobson S := by
+    rwa [IsLocalRing.ringJacobson_eq_maximalIdeal]
+  exact Submodule.le_of_le_smul_of_le_jacobson hfg hjac (by rwa [Ideal.smul_eq_mul, ← pow_two])
 
 theorem maximalIdeal_eq_ker_sup_map {A S : Type*} [CommRing A] [IsLocalRing A] [CommRing S]
   [IsLocalRing S]

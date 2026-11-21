@@ -52,16 +52,16 @@ structure NativeAbsoluteRamificationConclusions
   wild_normal_in_decomposition : (G.wild.map G.inertiaInclusion.hom').Normal
   /-- Pro-p includes its original profinite topology and finite-p quotient basis. -/
   wild_pro_p : ∀ (p : ℕ) [Fact p.Prime] [CharP R.baseResidue.α p],
-    let : Group (Subtype G.wild.carrier) := Subgroup.toGroup G.wild
-    let : TopologicalSpace (Subtype G.wild.carrier) :=
+    let : Group ↥G.wild := Subgroup.toGroup G.wild
+    let : TopologicalSpace ↥G.wild :=
       TopologicalSpace.induced
-        (fun σ : Subtype G.wild.carrier => (show G.inertia.carrier from σ.val))
+        (fun σ : ↥G.wild => (show G.inertia.carrier from σ.val))
         G.inertiaTopology
-    CompactSpace (Subtype G.wild.carrier) ∧
-      T2Space (Subtype G.wild.carrier) ∧
-      TotallyDisconnectedSpace (Subtype G.wild.carrier) ∧
-      IsTopologicalGroup (Subtype G.wild.carrier) ∧
-      ProCGroups.ProC.HasPGroupOpenNormalBasis p (Subtype G.wild.carrier)
+    CompactSpace ↥G.wild ∧
+      T2Space ↥G.wild ∧
+      TotallyDisconnectedSpace ↥G.wild ∧
+      IsTopologicalGroup ↥G.wild ∧
+      ProCGroups.ProC.HasPGroupOpenNormalBasis p ↥G.wild
   /-- The SAME independently defined wild subgroup is trivial in characteristic zero. -/
   wild_char_zero : ∀ [CharZero R.baseResidue.α], G.wild = ⊥
   /-- The canonical character into the literal full root limit is continuous. -/

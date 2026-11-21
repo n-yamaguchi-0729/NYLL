@@ -493,7 +493,8 @@ theorem main
     rw [coeff_zero]
     change (W.map θ).coeff t = 0
     rw [coeff_map]
-    exact hann _ (by simpa only [coeff_C_mul, coeff_zero] using congrArg (fun F => coeff F t) hW)
+    have hcoeff := congrArg (fun P : Polynomial A' => P.coeff t) hW
+    exact hann _ (by simpa only [coeff_C_mul, coeff_zero] using hcoeff)
   let _ : P.IsMaximal := hP
   let Q : Ideal A[X] := P.comap ρX
   have hQmax : Q.IsMaximal := Ideal.comap_isMaximal_of_surjective ρX hρXs

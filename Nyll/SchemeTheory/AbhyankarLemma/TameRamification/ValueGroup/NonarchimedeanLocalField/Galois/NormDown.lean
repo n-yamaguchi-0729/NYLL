@@ -8,7 +8,8 @@ module
 
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.Index
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.GaloisInvariants
-public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.Basic
+public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.BaseNorm
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNormBase
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.ValueImage
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.LocalTop
 
@@ -216,7 +217,7 @@ variable [Valuation.HasExtension (ValuativeRel.valuation K)
 ramification-image generator. -/
 theorem exists_mem_fieldNormSubgroup_val_normDownRamificationStep :
     ∃ x : Kˣ,
-      x ∈ fieldNormSubgroup K M ∧
+      x ∈ localNormSubgroup K M ∧
         (multiplicativeIntegerValuation K).val x =
           (normDownRamificationStepNat (K := K) (L := L) (M := M) : ℤ) := by
   rcases exists_mem_normPoweredBaseUnitsImageSubgroup_val_normDownRamificationStep
@@ -232,7 +233,7 @@ theorem integerMultipleSubgroup_normDownRamificationStep_le_fieldNormSubgroup :
     integerMultipleSubgroup
         (normDownRamificationStepNat (K := K) (L := L) (M := M) : ℤ) ≤
       (multiplicativeIntegerValuation K).subgroupValueSubgroup
-        (fieldNormSubgroup K M) :=
+        (localNormSubgroup K M) :=
   MultiplicativeIntegerValuation.integerMultipleSubgroup_le_subgroupValueSubgroup_of_exists_mem_val
     (multiplicativeIntegerValuation K)
     (exists_mem_fieldNormSubgroup_val_normDownRamificationStep
@@ -257,7 +258,7 @@ variable [Valuation.HasExtension (ValuativeRel.valuation K)
 /-- Galois-data form of the concrete common-top norm-down generator. -/
 theorem exists_mem_fieldNormSubgroup_val_galoisNormDownRamificationStep :
     ∃ x : Kˣ,
-      x ∈ fieldNormSubgroup K M ∧
+      x ∈ localNormSubgroup K M ∧
         (multiplicativeIntegerValuation K).val x =
           (galoisNormDownRamificationStepNat (K := K) (L := L) (M := M) :
             ℤ) := by
@@ -271,7 +272,7 @@ theorem integerMultipleSubgroup_galoisNormDownRamificationStep_le_fieldNormSubgr
         (galoisNormDownRamificationStepNat (K := K) (L := L) (M := M) :
           ℤ) ≤
       (multiplicativeIntegerValuation K).subgroupValueSubgroup
-        (fieldNormSubgroup K M) :=
+        (localNormSubgroup K M) :=
   MultiplicativeIntegerValuation.integerMultipleSubgroup_le_subgroupValueSubgroup_of_exists_mem_val
     (multiplicativeIntegerValuation K)
     (exists_mem_fieldNormSubgroup_val_galoisNormDownRamificationStep
@@ -349,7 +350,7 @@ theorem nat_lcm_galoisResidueDegree_dvd_galoisNormDownRamificationStep :
       galoisNormDownRamificationStepNat (K := K) (L := L) (M := M) := by
   exact nat_lcm_galoisResidueDegree_dvd_nat_of_mem_le_fieldNormSubgroup
     (K := K) (L := L) (L' := L') (M := M)
-    (S := fieldNormSubgroup K M)
+    (S := localNormSubgroup K M)
     (n := galoisNormDownRamificationStepNat (K := K) (L := L) (M := M))
     (exists_mem_fieldNormSubgroup_val_galoisNormDownRamificationStep
       (K := K) (L := L) (M := M))

@@ -13,6 +13,7 @@ public import Nyll.GaloisCohomology.ArtinSchreier.CharacterClasses
 public import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
 public import Nyll.GaloisCohomology.ArtinSchreier.CohomologyVanishing
 public import Nyll.GaloisCohomology.ArtinSchreier.OpenCohomologyVanishing
+public import Nyll.GaloisCohomology.ArtinSchreier.AbsoluteCohomologicalVanishing
 public import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
 public import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
 

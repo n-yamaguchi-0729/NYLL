@@ -31,6 +31,7 @@ public import Nyll.AlgebraicCurves.Geometry.Picard.Theta.PolarisationRosati
 public import Nyll.SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
 public import Nyll.AlgebraicCurves.Geometry.Picard.Rigidification.RigidifiedBundleIsoPullbackOpenCover
 public import Nyll.AlgebraicCurves.Geometry.AbelianSchemes.Theorems.AbelianSchemeBijectiveAlgebraMapSectionsPullback
+public import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-!
 Closed immersion charts for the triviality locus of a rigidified line bundle glue globally.
@@ -127,21 +128,6 @@ def Triv (M : RigidifiedLineBundle f ε g) {T : Scheme.{0}} (t : T ⟶ Spec (Com
     (ψ : SchemeHomOver t g) : Prop :=
   Nonempty ((M.pullbackAlong ψ).L ≅ (RigidifiedLineBundle.unit (c := f) (ε := ε) t).L)
 
-/-- The composition comparison for pullbacks of a rigidified line bundle. -/
-def pullbackAlongComp (M : RigidifiedLineBundle f ε g) {T T' : Scheme.{0}}
-    {t : T ⟶ Spec (CommRingCat.of R)}
-    {t' : T' ⟶ Spec (CommRingCat.of R)} (ψ : SchemeHomOver t g) (φ : SchemeHomOver t' t) :
-    ((M.pullbackAlong ψ).pullbackAlong φ).L ≅ (M.pullbackAlong (postComp ψ φ)).L :=
-  (Scheme.Modules.pullbackComp (baseChangeSnd f φ) (baseChangeSnd f ψ)).app M.L ≪≫
-    (Scheme.Modules.pullbackCongr (baseChangeSnd_comp f ψ φ)).app M.L
-
-/-- Pulling back the unit line bundle gives the unit line bundle. -/
-def unitPullbackAlong {T T' : Scheme.{0}} (t : T ⟶ Spec (CommRingCat.of R))
-    {t' : T' ⟶ Spec (CommRingCat.of R)} (φ : SchemeHomOver t' t) :
-    ((RigidifiedLineBundle.unit (c := f) (ε := ε) t).pullbackAlong φ).L ≅
-      (RigidifiedLineBundle.unit (c := f) (ε := ε) t').L :=
-  Scheme.Modules.pullbackUnitIso (baseChangeSnd f φ)
-
 /-- Triviality is preserved by further pullback. -/
 theorem Triv.comp {M : RigidifiedLineBundle f ε g} {T T' : Scheme.{0}}
     {t : T ⟶ Spec (CommRingCat.of R)}
@@ -149,8 +135,9 @@ theorem Triv.comp {M : RigidifiedLineBundle f ε g} {T T' : Scheme.{0}}
       t' t) :
     Triv M t' (postComp ψ φ) := by
   obtain ⟨e⟩ := h
-  exact ⟨(pullbackAlongComp M ψ φ).symm ≪≫ (Scheme.Modules.pullback (baseChangeSnd f φ)).mapIso e ≪≫
-    unitPullbackAlong t φ⟩
+  exact ⟨(M.pullbackAlongPullbackAlongIso ψ φ).symm ≪≫
+    (Scheme.Modules.pullback (baseChangeSnd f φ)).mapIso e ≪≫
+    Scheme.Modules.pullbackUnitIso (baseChangeSnd f φ)⟩
 
 /-- View a morphism to the parameter scheme as a point over its composite base map. -/
 abbrev pt {T : Scheme.{0}} (h : T ⟶ X) : SchemeHomOver (h ≫ g) g := ⟨h, rfl⟩
@@ -234,10 +221,6 @@ abbrev θ (V : X.Opens) : Γ(X, V) ⟶ Γ((V : Scheme.{0}), ⊤) := V.ι.appLE V
 
 scoped instance (V : X.Opens) : IsIso (θ V) := inferInstanceAs (IsIso (V.ι.appLE V ⊤
   V.ι_preimage_self.ge))
-
-/-- Restriction on top sections agrees with the usual top-section map. -/
-theorem appLE_top_top_eq_appTop {S T : Scheme.{0}} (k : T ⟶ S) : k.appLE ⊤ ⊤ le_top = k.appTop :=
-  (Scheme.Hom.app_eq_appLE k).symm
 
 /-- Compare the kernel after an open inclusion with the kernel on top sections. -/
 theorem ker_comp_ι_app {T : Scheme.{0}} (V : X.Opens) (k : T ⟶ (V : Scheme.{0})) :
@@ -442,7 +425,7 @@ theorem main
         X.Opens)).ι ≫ t) t))
       hf (M.pullbackAlong ψ) (RigidifiedLineBundle.unit t) (fun V => by
         obtain ⟨e⟩ := key V
-        exact ⟨pullbackAlongComp M ψ _ ≪≫ e ≪≫ (unitPullbackAlong t _).symm⟩)
+        exact ⟨M.pullbackAlongPullbackAlongIso ψ _ ≪≫ e ≪≫ (Scheme.Modules.pullbackUnitIso _).symm⟩)
     exact ⟨e⟩
 
 end GlueClosed2

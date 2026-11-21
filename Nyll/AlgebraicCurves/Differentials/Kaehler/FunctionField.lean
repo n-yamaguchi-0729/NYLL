@@ -43,7 +43,7 @@ theorem germToFunctionField_algebraMap (U : X.Opens) [Nonempty U] (r : k) :
   unfold Scheme.Hom.appLE
   rw [Category.assoc]
   erw [TopCat.Presheaf.germ_res]
-  try rfl
+  rfl
 
 theorem germToFunctionField_comp_algebraMap (U : X.Opens) [Nonempty U] :
     letI := Scheme.TwoAffineOpenCover.algebraOfHom c U

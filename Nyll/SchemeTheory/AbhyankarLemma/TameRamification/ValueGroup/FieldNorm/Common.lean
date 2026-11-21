@@ -42,7 +42,7 @@ theorem fieldNormSubgroup_le_valuedFieldNorm_normSubgroup_of_tower
     (hformula :
       ∀ x : Eˣ, vK.val (normUnits K E x) =
         (residueDegree : ℤ) * vE.val x) :
-    fieldNormSubgroup K M ≤
+    localNormSubgroup K M ≤
       (valuedFieldNorm K E vK vE residueDegree hformula).normSubgroup := by
   rw [valuedFieldNorm_normSubgroup_eq_fieldNormSubgroup
     K E vK vE residueDegree hformula]
@@ -76,13 +76,13 @@ theorem lcm_dvd_of_exists_mem_val_of_common_fieldNormSubgroup_le_towers
         (residueDegree' : ℤ) * vL'.val x)
     {S : Subgroup Kˣ} {n : ℤ}
     (hn : ∃ x : Kˣ, x ∈ S ∧ vK.val x = n)
-    (hS : S ≤ fieldNormSubgroup K M) :
+    (hS : S ≤ localNormSubgroup K M) :
     ((((residueDegree : ℤ).lcm (residueDegree' : ℤ) : ℕ) : ℤ) ∣ n) := by
   simpa [valuedFieldNorm] using
     (ValuedNorm.lcm_dvd_of_exists_mem_val_of_common_le_normSubgroups
       (valuedFieldNorm K L vK vL residueDegree hformula)
       (valuedFieldNorm K L' vK vL' residueDegree' hformula')
-      (S := S) (T := fieldNormSubgroup K M) hn hS
+      (S := S) (T := localNormSubgroup K M) hn hS
       (fieldNormSubgroup_le_valuedFieldNorm_normSubgroup_of_tower
         (K := K) (E := L) (M := M) vK vL residueDegree hformula)
       (fieldNormSubgroup_le_valuedFieldNorm_normSubgroup_of_tower
@@ -108,7 +108,7 @@ theorem lcm_dvd_val_fieldNormUnits_of_common_tower
   lcm_dvd_of_exists_mem_val_of_common_fieldNormSubgroup_le_towers
     (K := K) (L := L) (L' := L') (M := M)
     vK vL vL' residueDegree residueDegree' hformula hformula'
-    (S := fieldNormSubgroup K M)
+    (S := localNormSubgroup K M)
     (n := vK.val (normUnits K M y))
     ⟨normUnits K M y, ⟨y, rfl⟩, rfl⟩
     (fun _ hx => hx)
@@ -127,7 +127,7 @@ theorem lcm_dvd_val_of_mem_common_fieldNormSubgroup_towers
     (hformula' :
       ∀ x : L'ˣ, vK.val (normUnits K L' x) =
         (residueDegree' : ℤ) * vL'.val x)
-    {x : Kˣ} (hx : x ∈ fieldNormSubgroup K M) :
+    {x : Kˣ} (hx : x ∈ localNormSubgroup K M) :
     ((((residueDegree : ℤ).lcm (residueDegree' : ℤ) : ℕ) : ℤ) ∣
       vK.val x) := by
   rcases hx with ⟨y, hy⟩

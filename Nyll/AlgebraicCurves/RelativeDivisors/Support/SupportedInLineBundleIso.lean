@@ -288,37 +288,6 @@ theorem RelEffCartierDiv_I_eq_of_le
   exact IdealSheafData_eq_of_le_of_finrank_eq (pullback.snd c x) hle
     ⟨t, by rw [D.finrank_eq, E.finrank_eq]⟩
 
-/-- The unit-module section corresponding to a global section. -/
-def sectionOfGlobal {X : Scheme.{u}} (M : X.Modules) (σ : Γ(M, ⊤)) : M.val.sections :=
-  ⟨fun U => (Scheme.Modules.presheaf M).map (homOfLE (le_top : U.unop ≤ ⊤)).op σ,
-   fun {U V} f => by
-     change (Scheme.Modules.presheaf M).map f ((Scheme.Modules.presheaf M).map (homOfLE (le_top :
-       U.unop ≤ ⊤)).op σ) =
-       (Scheme.Modules.presheaf M).map (homOfLE (le_top : V.unop ≤ ⊤)).op σ
-     have hg : (homOfLE (le_top : U.unop ≤ ⊤)).op ≫ f = (homOfLE (le_top : V.unop ≤ ⊤)).op :=
-       Subsingleton.elim _ _
-     rw [← CategoryTheory.ConcreteCategory.comp_apply, ← Functor.map_comp, hg]⟩
-
-theorem sectionOfGlobal_top {X : Scheme.{u}} (M : X.Modules) (σ : Γ(M, ⊤)) :
-    (sectionOfGlobal M σ).val (op ⊤) = σ := by
-  change (Scheme.Modules.presheaf M).map (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)).op σ = σ
-  have h1 : (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)).op = 𝟙 (op ⊤) := Subsingleton.elim _ _
-  rw [h1, CategoryTheory.Functor.map_id]
-  rfl
-
-theorem exists_hom_ne_zero {X : Scheme.{u}} (M : X.Modules) (σ : Γ(M, ⊤)) (hσ : σ ≠ 0) :
-    ∃ s : 𝟙_ X.Modules ⟶ M, s ≠ 0 := by
-  obtain ⟨s, hs⟩ : ∃ s : 𝟙_ X.Modules ⟶ M, (SheafOfModules.unitHomEquiv M) s = sectionOfGlobal M σ
-    :=
-    ⟨(SheafOfModules.unitHomEquiv M).symm (sectionOfGlobal M σ), Equiv.apply_symm_apply _ _⟩
-  refine ⟨s, fun h0 => hσ ?_⟩
-  have e2 : (sectionOfGlobal M σ).val (op ⊤) = σ := sectionOfGlobal_top M σ
-  have e3 : (sectionOfGlobal M σ).val (op ⊤) = (Scheme.Modules.Hom.app s ⊤) (1 : Γ(X, ⊤)) := by
-    rw [← hs]
-    rfl
-  rw [← e2, e3, h0, Scheme.Modules.Hom.zero_app]
-  rfl
-
 theorem exists_section_ne_zero_of_isAffine {X : Scheme.{u}} [IsAffine X] [Nonempty ↥X]
     {M : X.Modules} (hM : Scheme.Modules.IsInvertible M) : ∃ σ : Γ(M, ⊤), σ ≠ 0 := by
   classical
@@ -351,7 +320,7 @@ theorem exists_section_ne_zero_of_I_eq_bot
     rw [h]; infer_instance
   have : IsAffine (pullback c x) := isAffine_of_isAffineHom (pullback.snd c x)
   obtain ⟨σ, hσ⟩ := exists_section_ne_zero_of_isAffine hM
-  exact exists_hom_ne_zero M σ hσ
+  exact _root_.AlgebraicGeometry.Scheme.Modules.exists_hom_ne_zero M σ hσ
 
 theorem isInvertible_of_iso {X : Scheme.{u}} {M M' : X.Modules} (e : M ≅ M')
     (hM : Scheme.Modules.IsInvertible M) : Scheme.Modules.IsInvertible M' := by

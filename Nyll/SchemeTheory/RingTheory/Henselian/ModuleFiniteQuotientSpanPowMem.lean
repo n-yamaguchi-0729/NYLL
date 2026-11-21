@@ -226,14 +226,13 @@ theorem
       have := Ideal.sub_mem _ this hmem
       rwa [sub_sub_cancel] at this
     exact (Ideal.ne_top_iff_one _).mp (maximalIdeal.isMaximal Q).ne_top h1
-  obtain ⟨k, hk⟩ := IsArtinianRing.isNilpotent_jacobson_bot (R := R)
-  have hjac : maximalIdeal R ≤ Ideal.jacobson (⊥ : Ideal R) := IsLocalRing.maximalIdeal_le_jacobson
-    _
+  obtain ⟨k, hk⟩ := IsArtinianRing.isNilpotent_jacobson R
+  have hjac : maximalIdeal R ≤ Ring.jacobson R := (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge
   refine ⟨k, ?_⟩
   change (mk T) ^ k ∈ K
   rw [← Ideal.Quotient.eq_zero_iff_mem, map_pow]
   change Tt ^ k = 0
-  have : Tt ^ k ∈ (Ideal.jacobson (⊥ : Ideal R)) ^ k := Ideal.pow_mem_pow (hjac hTt) k
+  have : Tt ^ k ∈ Ring.jacobson R ^ k := Ideal.pow_mem_pow (hjac hTt) k
   rw [hk] at this
   exact this
 end HenselianLocalRing

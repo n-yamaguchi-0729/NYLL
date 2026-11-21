@@ -45,8 +45,8 @@ open CategoryTheory CategoryTheory.Limits IsLocalRing
 
 namespace AlgebraicGeometry.FiniteEtale
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- An open containing the punctured hypersurface admits one smaller open
 inside the puncture on which every two finite étale morphisms agreeing on

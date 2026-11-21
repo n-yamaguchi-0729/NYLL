@@ -43,16 +43,16 @@ theorem smodEq_pow_smul_top_iff (I : Ideal R) (n : ℕ) (x y : R) :
 theorem isAdicComplete_map_of_surjective [IsNoetherianRing R] (I : Ideal R)
     [IsAdicComplete I R] (f : R →+* S)
     (hf : Function.Surjective f) : IsAdicComplete (I.map f) S := by
-  have hI : I ≤ (⊥ : Ideal R).jacobson := IsAdicComplete.le_jacobson_bot I
+  have hI : I ≤ Ring.jacobson R := IsAdicComplete.le_jacobson I
   have : IsNoetherianRing S := isNoetherianRing_of_surjective R S f hf
-  have hJ : I.map f ≤ (⊥ : Ideal S).jacobson := by
+  have hJ : I.map f ≤ Ring.jacobson S := by
     intro x hx
     rw [Ideal.mem_map_iff_of_surjective f hf] at hx
     obtain ⟨a, ha, rfl⟩ := hx
-    rw [Ideal.mem_jacobson_bot]
+    rw [Ring.mem_jacobson_iff]
     intro y
     obtain ⟨b, rfl⟩ := hf y
-    have hu := Ideal.mem_jacobson_bot.mp (hI ha) b
+    have hu := Ring.mem_jacobson_iff.mp (hI ha) b
     simpa only [map_add, map_mul, map_one] using hu.map f
   have hH : IsHausdorff (I.map f) S := IsHausdorff.of_le_jacobson _ _ hJ
   have hP : IsPrecomplete (I.map f) S := by

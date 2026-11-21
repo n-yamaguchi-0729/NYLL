@@ -304,7 +304,7 @@ theorem toLaurent_mem_polyPart (Q : k[X]) : Polynomial.toLaurent Q ∈ polyPart 
 theorem toLaurent_apply_zero (Q : k[X]) : (Polynomial.toLaurent Q : k[T;T⁻¹]).coeff 0 = Q.coeff 0
   := by
   rw [LaurentPolynomial.coeff_toLaurent]
-  exact Finsupp.mapDomain_apply_of_injective Nat.cast_injective Q.toFinsupp.coeff 0
+  exact Finsupp.mapDomain_apply_of_injective Nat.cast_injective Q.coeff 0
 
 theorem zero_mem_support_toLaurent {Q : k[X]} (hQ : Q.coeff 0 ≠ 0) : (0 : ℤ) ∈
   (Polynomial.toLaurent Q : k[T;T⁻¹]).coeff.support := by

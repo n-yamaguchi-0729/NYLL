@@ -6,7 +6,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.QuotientReps
 public import Nyll.GaloisCohomology.Cyclic.Herbrand.PrincipalUnits.QuotientTower
 
 /-! # Principal-unit quotient representatives and towers -/

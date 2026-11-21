@@ -13,7 +13,8 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Galois.Basic
 public import Mathlib.FieldTheory.Normal.Closure
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Completion
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Valuation
 public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Ideal.GoingUp

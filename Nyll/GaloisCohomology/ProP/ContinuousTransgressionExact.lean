@@ -16,6 +16,7 @@ public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Topology.ContinuousMap.Basic
 public import Mathlib.Topology.ContinuousMap.Defs
 public import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
+public import Nyll.ProCGroups.ProP.ContinuousH1
 
 /-!
 # Exactness of continuous transgression
@@ -43,13 +44,9 @@ universe u
 variable {p : ℕ} [Fact p.Prime]
 variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 
-local instance continuousExactZModAddCommGroup : AddCommGroup (ZMod p) :=
-  (ZMod.instField p).toDivisionRing.toAddCommGroup
+attribute [local instance] ZMod.addCommGroup
 
-local instance continuousExactH1Module
-    {q : ℕ} {H : Type*} [Group H] [TopologicalSpace H] [IsTopologicalGroup H] :
-    Module (ZMod q) (ContinuousH1ZMod (p := q) (G := H)) :=
-  continuousH1ZModModule
+attribute [local instance] ClassFieldTower.ProP.continuousH1ZModModule
 
 /-- Restriction of an ambient continuous character to an open normal subgroup. -/
 def continuousCharacterRestrictionAddHom
@@ -133,7 +130,7 @@ theorem continuousHomogeneousOneCochainNormalizedValue_primitive
   have hinv := continuousHomogeneousOneCochain_invariant U c q q (q * r)
   have hinv' : c.1 q (q * r) = c.1 1 r := by
     convert hinv.symm using 1
-    all_goals group
+    group
   rw [hinv'] at hcpoint
   have htrans : (continuousTransgressionHomogeneousCochain U chi).1 1 q (q * r) =
       ULift.up (transgressionFactor (U.1 : Subgroup G)
@@ -141,7 +138,7 @@ theorem continuousHomogeneousOneCochainNormalizedValue_primitive
     change ULift.up (transgressionFactor (U.1 : Subgroup G)
       (characterOfH1 chi.1).toMonoidHom (1⁻¹ * q) (q⁻¹ * (q * r))) = _
     congr 1
-    all_goals group
+    group
   rw [htrans] at hcpoint
   let e : ULift.{u} (ZMod p) ≃ₗ[ZMod p] ZMod p := ULift.moduleEquiv
   change e (c.1 1 r) - e (c.1 1 (q * r)) + e (c.1 1 q) = _

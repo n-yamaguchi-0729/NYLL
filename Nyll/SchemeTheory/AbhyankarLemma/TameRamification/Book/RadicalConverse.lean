@@ -274,7 +274,7 @@ theorem exponentialRamificationIndex_eq_one_and_residueFieldMap_surjective_of_fi
   have hfinrank : Module.finrank k ell = 1 :=
     hdegreeFinrank.symm.trans hf
   obtain ⟨c, hc⟩ :=
-    (finrank_eq_one_iff_of_nonzero' (1 : ell) one_ne_zero).mp hfinrank y
+    (finrank_eq_one_iff_of_ne_zero' (1 : ell) one_ne_zero).mp hfinrank y
   refine ⟨c, ?_⟩
   change algebraMap k ell c = y
   simpa [Algebra.smul_def] using hc

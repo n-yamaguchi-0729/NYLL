@@ -53,10 +53,10 @@ theorem trace_eq_zero_of_isLocalRing {k B : Type*} [Field k] [CommRing B] [Algeb
       Ideal.Quotient.algebraMap_eq]
   let _ : IsArtinianRing B := IsArtinianRing.of_finite k B
   have hnil : IsNilpotent (b - algebraMap k B c) := by
-    obtain ⟨n, hn⟩ := IsArtinianRing.isNilpotent_jacobson_bot (R := B)
+    obtain ⟨n, hn⟩ := IsArtinianRing.isNilpotent_jacobson B
     refine ⟨n, ?_⟩
-    have h1 : (b - algebraMap k B c) ^ n ∈ (Ideal.jacobson (⊥ : Ideal B)) ^ n :=
-      Ideal.pow_mem_pow (by rwa [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top]) n
+    have h1 : (b - algebraMap k B c) ^ n ∈ Ring.jacobson B ^ n :=
+      Ideal.pow_mem_pow (by rwa [IsLocalRing.ringJacobson_eq_maximalIdeal]) n
     rw [hn] at h1
     exact h1
   have htn : Algebra.trace k B (b - algebraMap k B c) = 0 := by

@@ -69,11 +69,11 @@ theorem _root_.IsLocalRing.uniqueFactorizationMonoid_of_isPrincipalIdealRing_quo
       have hg' : g = f * c := by rw [← sub_eq_zero, ← hd, ht0, mul_zero]
       rw [hg']
       exact Submodule.mem_sup_left hfc
-  have hjac : Ideal.span {t} ≤ (⊥ : Ideal A).jacobson := by
-    rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top]
+  have hjac : Ideal.span {t} ≤ Ring.jacobson A := by
+    rw [IsLocalRing.ringJacobson_eq_maximalIdeal]
     exact (Ideal.span_singleton_le_iff_mem _).mpr htm
   have hIf : I ≤ Ideal.span {f} :=
-    Submodule.le_of_le_smul_of_le_jacobson_bot (IsNoetherian.noetherian I) hjac hle
+    Submodule.le_of_le_smul_of_le_jacobson (IsNoetherian.noetherian I) hjac hle
   have hIeq : I = Ideal.span {f} := le_antisymm hIf ((Ideal.span_singleton_le_iff_mem _).mpr hfI)
   have hf0 : f ≠ 0 := by
     rintro rfl

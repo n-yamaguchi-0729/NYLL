@@ -29,12 +29,16 @@ public import Nyll.GaloisCohomology.Kummer.FiniteKummerCupCoefficientSquare
 public import Nyll.GaloisCohomology.Kummer.FiniteKummerCyclicFactorSet
 public import Nyll.GaloisCohomology.Kummer.RelativeTwoCocycle
 public import Nyll.GaloisCohomology.Kummer.MixedTwoCocycle
+public import Nyll.GaloisCohomology.Kummer.QuotientTwoCoboundary
 public import Nyll.GaloisCohomology.Kummer.QuotientTwoCocycle
 public import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormSurjective
 public import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormClass
 public import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormCriterion
 public import Nyll.GaloisCohomology.Kummer.FiniteCyclicUnitsH2NormRestriction
 public import Nyll.GaloisCohomology.Kummer.FiniteGaloisUnitsH2TowerNaturality
+public import Nyll.GaloisCohomology.Kummer.AbsoluteMuNTopRep
+public import Nyll.GaloisCohomology.Kummer.AbsoluteMuNKummerLinear
+public import Nyll.GaloisCohomology.Kummer.AbsoluteMuNKummerEquiv
 public import Nyll.GaloisCohomology.Kummer.AbsoluteMuPTopRep
 public import Nyll.GaloisCohomology.Kummer.AbsoluteMuPTrivialization
 public import Nyll.GaloisCohomology.Kummer.FiniteKummerMuPCoefficients

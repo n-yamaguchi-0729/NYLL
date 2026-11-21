@@ -21,8 +21,11 @@ public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharLogTermBound
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogBound
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogExtension
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogNorm
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogImage
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitExpLogEquiv
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitExpLogValues
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMap
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogLinearity

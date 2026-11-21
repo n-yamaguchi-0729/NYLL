@@ -71,7 +71,7 @@ theorem coeff_prod_of_natDegree_le {R : Type*} [CommRing R] {ι : Type*} (s : Fi
   induction s using Finset.induction_on with
   | empty =>
     simp only [Finset.prod_empty, Finset.sum_empty, Polynomial.natDegree_one,
-      Polynomial.coeff_one_zero, le_refl, and_self]
+      AddMonoidAlgebra.coeff_one_zero, le_refl, and_self]
   | insert a s ha ih =>
     have h' : ∀ i ∈ s, (f i).natDegree ≤ N i := fun i hi => h i (Finset.mem_insert_of_mem hi)
     obtain ⟨ih1, ih2⟩ := ih h'
@@ -135,7 +135,7 @@ theorem main (b : Module.Basis (Fin (n + 1)) K[X] B) (d : Fin (n + 1) → ℕ)
     intro y z
     simp only [hcdef, hγ0, hd0, zero_add]
     split_ifs with h
-    · subst h; rw [Nat.sub_self, Polynomial.coeff_one_zero]
+    · subst h; rw [Nat.sub_self, AddMonoidAlgebra.coeff_one_zero]
     · exact Polynomial.coeff_zero _
   have hcc : ∀ x y z, c x y z = c y x z := fun x y z => by
     simp only [hcdef, hγc x y z, Nat.add_comm (d x) (d y)]

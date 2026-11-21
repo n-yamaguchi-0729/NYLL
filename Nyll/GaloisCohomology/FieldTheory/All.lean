@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 module
 
+public import Nyll.GaloisCohomology.FieldTheory.RestrictionQuotient
 public import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
 public import Nyll.GaloisCohomology.FieldTheory.FiniteConstants
 public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedCharZero
@@ -34,6 +35,7 @@ public import Nyll.GaloisCohomology.FieldTheory.PeriodicGaloisAction
 
 public import Nyll.GaloisCohomology.FieldTheory.ConstantTensorEquiv
 public import Nyll.GaloisCohomology.FieldTheory.CompositumNorm
+public import Nyll.GaloisCohomology.FieldTheory.NormTraceNormalAmbient
 public import Nyll.GaloisCohomology.FieldTheory.SimpleBaseChangeNorm
 public import Nyll.GaloisCohomology.FieldTheory.CompositumCyclic
 

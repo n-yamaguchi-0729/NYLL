@@ -356,7 +356,7 @@ theorem adicValuation_pow_card_sub_lt (P : Place k F) (hP : P.deg = 1) {w : F}
   have hwO : w ∈ P.toValuationSubring := mem_of_adicValuation_le_one P hw
   set W : P.toValuationSubring := ⟨w, hwO⟩ with hW
   have hsurj : ∃ c : k, algebraMap k P.ResidueField c = IsLocalRing.residue _ W := by
-    obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' (1 : P.ResidueField) one_ne_zero).mp hP
+    obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_ne_zero' (1 : P.ResidueField) one_ne_zero).mp hP
       (IsLocalRing.residue _ W)
     exact ⟨c, by rw [Algebra.algebraMap_eq_smul_one]; exact hc⟩
   obtain ⟨c, hc⟩ := hsurj

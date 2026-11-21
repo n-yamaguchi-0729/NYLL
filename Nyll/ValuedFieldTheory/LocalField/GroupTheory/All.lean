@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.ContinuousQuotientEquiv
+public import Nyll.ProCGroups.Topologies.ContinuousQuotientEquiv
 public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.IntegerMultipleSubgroup
 public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.PowerIndex
 

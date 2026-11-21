@@ -172,7 +172,7 @@ theorem kummerTateEllAdicH1BaseChangeEquiv_frobenius_pow
       (M.kummerPic0TateFrobenius C e he ℓ)
       (finiteFieldFrobeniusEllAdicCohomology k K C ℓ 1) :=
     fun x => (M.kummerTateEllAdicH1BaseChangeEquiv_frobenius C e he xi ℓ hℓ x).symm
-  simpa only [Module.End.pow_apply] using (h.iterate_right m x).symm
+  simpa only [pow_apply_eq_iterate] using (h.iterate_right m x).symm
 
 /-- The same actual base-change comparison on the original rational tensors. -/
 def kummerTateRationalEllAdicH1BaseChangeEquiv :
@@ -212,7 +212,7 @@ theorem kummerTateRationalEllAdicH1BaseChangeEquiv_frobenius_pow
       (M.kummerPic0RationalTateFrobenius C e he ℓ)
       (finiteFieldFrobeniusRationalEllAdicCohomology k K C ℓ 1) :=
     fun x => (M.kummerTateRationalEllAdicH1BaseChangeEquiv_frobenius C e he xi ℓ hℓ x).symm
-  simpa only [Module.End.pow_apply] using (h.iterate_right m x).symm
+  simpa only [pow_apply_eq_iterate] using (h.iterate_right m x).symm
 
 include xi hℓ in
 /-- The traces of every original rational Frobenius power agree under the

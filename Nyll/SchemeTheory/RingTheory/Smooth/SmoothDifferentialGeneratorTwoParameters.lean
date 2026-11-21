@@ -78,9 +78,9 @@ theorem existsUnique_eq_smul_kaehlerDifferential_D_of_formallySmooth_of_maximalI
   have hspan : Submodule.span S {dt} = ⊤ := by
     apply le_antisymm le_top
     have hfg : (⊤ : Submodule S (KaehlerDifferential A S)).FG := Module.Finite.fg_top
-    have hjac : maximalIdeal S ≤ (⊥ : Ideal S).jacobson := by
-      rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top]
-    apply Submodule.le_of_le_smul_of_le_jacobson_bot hfg hjac
+    have hjac : maximalIdeal S ≤ Ring.jacobson S := by
+      rw [IsLocalRing.ringJacobson_eq_maximalIdeal]
+    apply Submodule.le_of_le_smul_of_le_jacobson hfg hjac
     intro ω _
     have hω : ω ∈ Submodule.span S (Set.range (KaehlerDifferential.D A S)) := by
       rw [KaehlerDifferential.span_range_derivation]; trivial

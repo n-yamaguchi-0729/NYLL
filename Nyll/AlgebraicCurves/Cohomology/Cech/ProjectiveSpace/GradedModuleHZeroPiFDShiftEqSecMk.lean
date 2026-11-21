@@ -67,17 +67,17 @@ theorem pi_monMul_apply {ι : Type} [Fintype ι] (Dk : ι → GradedModule R n) 
     intro j a q
     induction a generalizing q with
     | zero => rfl
-    | succ a ih => rw [pow_succ, pow_succ, Module.End.mul_apply, Module.End.mul_apply, ih]; rfl
+    | succ a ih => rw [pow_succ, pow_succ, mul_apply_eq_comp, mul_apply_eq_comp, ih]; rfl
   intro s
   induction s using Finset.induction with
   | empty =>
     intro _ _
-    simp only [Finset.noncommProd_empty, Module.End.one_apply]
+    simp only [Finset.noncommProd_empty, one_apply_eq_self]
   | insert j s hj ih =>
     intro hc hc'
     rw [Finset.noncommProd_insert_of_notMem _ _ _ _ hj, Finset.noncommProd_insert_of_notMem _ _
       _ _ hj,
-      Module.End.mul_apply, Module.End.mul_apply, hpow,
+      mul_apply_eq_comp, mul_apply_eq_comp, hpow,
       ih (hc.mono (fun _ hi => Finset.mem_insert_of_mem hi))
         (hc'.mono (fun _ hi => Finset.mem_insert_of_mem hi))]
 

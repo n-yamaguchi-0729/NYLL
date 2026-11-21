@@ -5,6 +5,7 @@ Original copyright, authors, license and pinned sources are retained per unit be
 
 module
 
+public import Nyll.AbelianVarieties.NeronModels.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -1641,19 +1642,9 @@ variable (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y 
 variable (D : (pullback y y).Opens) (hUD : U ≤ D) (M : SchemeHomOver (D.ι ≫ pullback.fst y y ≫ y) y)
 variable (hM : (pullback y y).homOfLE hUD ≫ M.1 = m.1)
 
-/-- The triple product containing the multiplication graph. -/
-abbrev Y3g : Scheme.{u} := pullback (pullback.fst y y ≫ y) y
-
-/-- The graph of the original partial multiplication. -/
-abbrev grm : (U : Scheme.{u}) ⟶ Y3g y :=
-  pullback.lift (f := pullback.fst y y ≫ y) (g := y) U.ι m.1 m.2.symm
-
-/-- The graph of multiplication on the enlarged domain. -/
-abbrev grM : (D : Scheme.{u}) ⟶ Y3g y :=
-  pullback.lift (f := pullback.fst y y ≫ y) (g := y) D.ι M.1 M.2.symm
-
 include hM in
-theorem homOfLE_grM : (pullback y y).homOfLE hUD ≫ grM y D M = grm y U m := by
+theorem homOfLE_grM : (pullback y y).homOfLE hUD ≫ multiplicationGraph y D M
+    = multiplicationGraph y U m := by
   apply pullback.hom_ext
   · rw [Category.assoc, pullback.lift_fst, pullback.lift_fst, Scheme.homOfLE_ι]
   · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd, hM]
@@ -1680,81 +1671,68 @@ theorem dense_range_homOfLE (hU : Dense (U : Set ↑(pullback y y))) :
 
 include hM in
 theorem range_grM_subset (hU : Dense (U : Set ↑(pullback y y))) :
-    Set.range (grM y D M).base ⊆ closure (Set.range (grm y U m).base) := by
-  have hC : (grM y D M).base ⁻¹' closure (Set.range (grm y U m).base) = Set.univ := by
+    Set.range (multiplicationGraph y D M).base
+      ⊆ closure (Set.range (multiplicationGraph y U m).base) := by
+  have hC : (multiplicationGraph y D M).base
+    ⁻¹' closure (Set.range (multiplicationGraph y U m).base) = Set.univ := by
     refine eq_univ_of_dense_subset (dense_range_homOfLE y U D hUD hU) (isClosed_closure.preimage
-      (grM y D M).base.hom.continuous) ?_
+      (multiplicationGraph y D M).base.hom.continuous) ?_
     rintro _ ⟨u, rfl⟩
     rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, homOfLE_grM y U m D hUD M hM]
     exact subset_closure ⟨u, rfl⟩
   rintro _ ⟨d, rfl⟩
-  have : d ∈ (grM y D M).base ⁻¹' closure (Set.range (grm y U m).base) := by rw [hC]; trivial
+  have : d ∈ (multiplicationGraph y D M).base
+    ⁻¹' closure (Set.range (multiplicationGraph y U m).base) := by rw [hC]; trivial
   exact this
 
-/-- Left translation paired with its fixed first coordinate. -/
-abbrev PhiM : (D : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (D.ι ≫ pullback.fst y y) M.1
-      ((Category.assoc _ _ _).trans M.2.symm)
-
-/-- Right translation paired with its fixed second coordinate. -/
-abbrev PsiM : (D : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) M.1 (D.ι ≫ pullback.snd y y)
-    (M.2.trans (by rw [Category.assoc, pullback.condition]))
-
-/-- Projection to the first and third coordinates of the graph ambient space. -/
-abbrev p13 : Y3g y ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y)
-    (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.fst y y) (pullback.snd (pullback.fst y y ≫
-        y) y)
-    (by rw [Category.assoc]; exact pullback.condition)
-
-/-- Projection to the second and third coordinates of the graph ambient space. -/
-abbrev p23 : Y3g y ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y)
-    (pullback.fst (pullback.fst y y ≫ y) y ≫ pullback.snd y y) (pullback.snd (pullback.fst y y ≫
-        y) y)
-    (by rw [Category.assoc, ← pullback.condition (f := y) (g := y)]; exact pullback.condition)
-
-theorem grM_p13 : grM y D M ≫ p13 y = PhiM y D M := by
+theorem grM_p13 : multiplicationGraph y D M ≫ firstThirdProjection y
+    = firstMultiplicationChart y D M := by
   apply pullback.hom_ext
   · simp only [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc]
   · simp only [Category.assoc, pullback.lift_snd]
 
-theorem grM_p23 : grM y D M ≫ p23 y ≫ (pullbackSymmetry y y).hom = PsiM y D M := by
+theorem grM_p23 : multiplicationGraph y D M ≫ secondThirdProjection y ≫ (pullbackSymmetry y y).hom
+    = secondMultiplicationChart y D M := by
   apply pullback.hom_ext
   · simp only [Category.assoc, pullbackSymmetry_hom_comp_fst, pullback.lift_fst, pullback.lift_snd]
   · simp only [Category.assoc, pullbackSymmetry_hom_comp_snd, pullback.lift_fst, pullback.lift_snd,
       pullback.lift_fst_assoc]
 
 theorem exists_isOpenImmersion_comp_eq_grM [IsReduced (D : Scheme.{u})] {G : Scheme.{u}}
-    (γ : G ⟶ Y3g y)
+    (γ : G ⟶ tripleFiberProduct y)
     [IsClosedImmersion γ] [IsOpenImmersion (γ ≫ pullback.fst (pullback.fst y y ≫ y) y)]
-    (h : Set.range (grM y D M).base ⊆ Set.range γ.base) :
-    ∃ g : (D : Scheme.{u}) ⟶ G, IsOpenImmersion g ∧ g ≫ γ = grM y D M := by
-  obtain ⟨g, hg⟩ := exists_lift_of_isClosedImmersion (grM y D M) γ h
+    (h : Set.range (multiplicationGraph y D M).base ⊆ Set.range γ.base) :
+    ∃ g : (D : Scheme.{u}) ⟶ G, IsOpenImmersion g ∧ g ≫ γ = multiplicationGraph y D M := by
+  obtain ⟨g, hg⟩ := exists_lift_of_isClosedImmersion (multiplicationGraph y D M) γ h
   have hgι : g ≫ (γ ≫ pullback.fst (pullback.fst y y ≫ y) y) = D.ι := by
     rw [← Category.assoc, hg, pullback.lift_fst]
   have : IsOpenImmersion (g ≫ (γ ≫ pullback.fst (pullback.fst y y ≫ y) y)) := by
     rw [hgι]; infer_instance
   exact ⟨g, IsOpenImmersion.of_comp g (γ ≫ pullback.fst (pullback.fst y y ≫ y) y), hg⟩
 
-theorem isOpenImmersion_PhiM_of {G : Scheme.{u}} (γ : G ⟶ Y3g y) (g : (D : Scheme.{u}) ⟶ G)
-    [IsOpenImmersion g] (hg : g ≫ γ = grM y D M) [IsOpenImmersion (γ ≫ p13 y)] :
-    IsOpenImmersion (PhiM y D M) := by
-  have h : PhiM y D M = g ≫ (γ ≫ p13 y) := by rw [← grM_p13, ← hg, Category.assoc]
+theorem isOpenImmersion_PhiM_of {G : Scheme.{u}} (γ : G ⟶ tripleFiberProduct y)
+    (g : (D : Scheme.{u}) ⟶ G)
+    [IsOpenImmersion g] (hg : g ≫ γ = multiplicationGraph y D M)
+      [IsOpenImmersion (γ ≫ firstThirdProjection y)] :
+    IsOpenImmersion (firstMultiplicationChart y D M) := by
+  have h : firstMultiplicationChart y D M = g ≫ (γ ≫ firstThirdProjection y) :=
+    by rw [← grM_p13, ← hg, Category.assoc]
   rw [h]
   infer_instance
 
-theorem isOpenImmersion_PsiM_of {G : Scheme.{u}} (γ : G ⟶ Y3g y) (g : (D : Scheme.{u}) ⟶ G)
-    [IsOpenImmersion g] (hg : g ≫ γ = grM y D M) [IsOpenImmersion (γ ≫ p23 y)] :
-    IsOpenImmersion (PsiM y D M) := by
-  have h : PsiM y D M = g ≫ (γ ≫ p23 y) ≫ (pullbackSymmetry y y).hom := by
+theorem isOpenImmersion_PsiM_of {G : Scheme.{u}} (γ : G ⟶ tripleFiberProduct y)
+    (g : (D : Scheme.{u}) ⟶ G)
+    [IsOpenImmersion g] (hg : g ≫ γ = multiplicationGraph y D M)
+      [IsOpenImmersion (γ ≫ secondThirdProjection y)] :
+    IsOpenImmersion (secondMultiplicationChart y D M) := by
+  have h : secondMultiplicationChart y D M = g ≫ (γ ≫ secondThirdProjection y)
+    ≫ (pullbackSymmetry y y).hom := by
     rw [← grM_p23, ← hg]; simp only [Category.assoc]
   rw [h]
   infer_instance
 
 theorem homOfLE_PhiM (hM : (pullback y y).homOfLE hUD ≫ M.1 = m.1) :
-    (pullback y y).homOfLE hUD ≫ PhiM y D M =
+    (pullback y y).homOfLE hUD ≫ firstMultiplicationChart y D M =
       pullback.lift (f := y) (g := y) (U.ι ≫ pullback.fst y y) m.1
           ((Category.assoc _ _ _).trans m.2.symm) := by
   apply pullback.hom_ext
@@ -1762,7 +1740,7 @@ theorem homOfLE_PhiM (hM : (pullback y y).homOfLE hUD ≫ M.1 = m.1) :
   · rw [Category.assoc, pullback.lift_snd, pullback.lift_snd, hM]
 
 theorem homOfLE_PsiM (hM : (pullback y y).homOfLE hUD ≫ M.1 = m.1) :
-    (pullback y y).homOfLE hUD ≫ PsiM y D M =
+    (pullback y y).homOfLE hUD ≫ secondMultiplicationChart y D M =
       pullback.lift (f := y) (g := y) m.1 (U.ι ≫ pullback.snd y y)
         (m.2.trans (by rw [Category.assoc, pullback.condition])) := by
   apply pullback.hom_ext
@@ -1892,28 +1870,29 @@ theorem isOpenImmersion_lift_and_forall_comp_eq_of_homOfLE_comp_eq_of_forall_den
   have : IsReduced (D : Scheme.{u}) :=
     AlgebraicGeometry.Smooth.isReduced_of_isReduced_of_isLocallyNoetherian (D.ι ≫
         pullback.fst y y ≫ y)
-  have hsub : Set.range (DomainExtension.grM y D M).base ⊆ Set.range γ.base := by
+  have hsub : Set.range (NeronModelInfra.multiplicationGraph y D M).base ⊆ Set.range γ.base := by
     rw [hrange]
     exact DomainExtension.range_grM_subset y U m D hUD M hM hU
   obtain ⟨g, hg, hgγ⟩ := DomainExtension.exists_isOpenImmersion_comp_eq_grM y D M γ hsub
   have := hg
-  have hΦM : IsOpenImmersion (DomainExtension.PhiM y D M) :=
+  have hΦM : IsOpenImmersion (NeronModelInfra.firstMultiplicationChart y D M) :=
       DomainExtension.isOpenImmersion_PhiM_of y D M γ g hgγ
-  have hΨM : IsOpenImmersion (DomainExtension.PsiM y D M) :=
+  have hΨM : IsOpenImmersion (NeronModelInfra.secondMultiplicationChart y D M) :=
       DomainExtension.isOpenImmersion_PsiM_of y D M γ g hgγ
   have : UniversallyOpen M.1 := by
-    have h : M.1 = DomainExtension.PhiM y D M ≫ pullback.snd y y := (pullback.lift_snd _ _ _).symm
+    have h : M.1 = NeronModelInfra.firstMultiplicationChart y D M ≫ pullback.snd y y :=
+      (pullback.lift_snd _ _ _).symm
     rw [h]
     infer_instance
   have hUD' : (U : Set ↑(pullback y y)) ⊆ (D : Set ↑(pullback y y)) := hUD
   have hΦr : Set.range (pullback.lift (f := y) (g := y) (U.ι ≫ pullback.fst y y) m.1
       ((Category.assoc _ _ _).trans m.2.symm)).base ⊆ Set.range
-          (DomainExtension.PhiM y D M).base := by
+          (NeronModelInfra.firstMultiplicationChart y D M).base := by
     rw [← DomainExtension.homOfLE_PhiM y U m D hUD M hM]
     exact DomainExtension.range_comp_subset _ _
   have hΨr : Set.range (pullback.lift (f := y) (g := y) m.1 (U.ι ≫ pullback.snd y y)
       (m.2.trans (by rw [Category.assoc, pullback.condition]))).base ⊆
-      Set.range (DomainExtension.PsiM y D M).base := by
+      Set.range (NeronModelInfra.secondMultiplicationChart y D M).base := by
     rw [← DomainExtension.homOfLE_PsiM y U m D hUD M hM]
     exact DomainExtension.range_comp_subset _ _
   refine ⟨fun x => DomainExtension.dense_fibre_mono _ hUD' x (hU₁ x),

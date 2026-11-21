@@ -36,14 +36,9 @@ variable {p : ℕ} [Fact p.Prime]
 variable {F : Type u} [Group F] [TopologicalSpace F] [IsTopologicalGroup F]
 variable [CompactSpace F] [T2Space F] [TotallyDisconnectedSpace F]
 
-local instance finiteStageExactCanonicalZModAddCommGroup : AddCommGroup (ZMod p) :=
-  (ZMod.instField p).toDivisionRing.toAddCommGroup
+attribute [local instance] ZMod.addCommGroup
 
-local instance finiteStageContinuousH1Module
-    (U : OpenNormalSubgroupInClass (FiniteGroupClass.pGroup p) F) :
-    Module (ZMod p)
-      (ContinuousH1ZMod (p := p) (G := F ⧸ (U.1 : Subgroup F))) :=
-  continuousH1ZModModule
+attribute [local instance] ClassFieldTower.ProP.continuousH1ZModModule
 
 /-- Regard an abstract character of an open finite quotient as a continuous degree-one
 character. -/

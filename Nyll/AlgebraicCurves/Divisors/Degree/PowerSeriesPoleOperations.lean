@@ -58,7 +58,7 @@ theorem powerSeries_inv_coeff_ord_lower (v : Place K F)
     (hconstant : -(b : ℤ) ≤ v.ord ((PowerSeries.constantCoeff A)⁻¹)) (n : ℕ) :
     -(((2 * a + b) * n + b : ℕ) : ℤ) ≤ v.ord (PowerSeries.coeff n A⁻¹) := by
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     by_cases hn : n = 0
     · subst n
       rw [PowerSeries.coeff_inv, ite_eq_left rfl]

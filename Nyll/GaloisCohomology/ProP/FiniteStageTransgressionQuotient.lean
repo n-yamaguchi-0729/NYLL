@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Mathlib.Topology.Instances.ZMod
 public import Nyll.GaloisCohomology.ProP.FiniteStageTransgressionExact
 public import Nyll.GaloisCohomology.ProP.FiniteTransgressionQuotient
 
@@ -31,15 +32,7 @@ variable {p : ℕ} [Fact p.Prime]
 variable {F : Type u} [Group F] [TopologicalSpace F] [IsTopologicalGroup F]
 variable [CompactSpace F]
 
-local instance finiteStageQuotientZModTopology : TopologicalSpace (ZMod p) := ⊥
-local instance finiteStageQuotientZModDiscrete : DiscreteTopology (ZMod p) :=
-  discreteTopology_bot _
-
-local instance finiteStageQuotientContinuousH1Module
-    (U : OpenNormalSubgroupInClass (FiniteGroupClass.pGroup p) F) :
-    Module (ZMod p)
-      (ContinuousH1ZMod (p := p) (G := F ⧸ (U.1 : Subgroup F))) :=
-  continuousH1ZModModule
+attribute [local instance] ClassFieldTower.ProP.continuousH1ZModModule
 
 /-- Invariant finite-stage characters modulo continuous ambient restrictions are linearly
 equivalent to the finite-transgression range. -/

@@ -10,6 +10,7 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
+import Nyll.AlgebraicCurves.Differentials.Kaehler.KaehlerRankOneTranscendental
 import Nyll.AlgebraicCurves.Divisors.ClassGroup.ClassGroup
 import Nyll.AlgebraicCurves.FunctionFields.Transcendence.CurveOver
 import Nyll.AlgebraicCurves.Divisors.Principal.Canonical
@@ -145,80 +146,13 @@ theorem finiteDimensional_adjoin_of_transcendental {L F : Type*} [Field L] [Fiel
 
 variable (K : Type*) [Field K]
 
-/-- The one-element basis of polynomial differentials given by the variable differential. -/
-noncomputable def polyBasis : Module.Basis (Fin 1) K[X] Ω[K[X]⁄K] :=
-  (Module.Basis.singleton (Fin 1) K[X]).map (KaehlerDifferential.polynomialEquiv K).symm
-
-theorem polyBasis_zero : polyBasis K 0 = D K K[X] Polynomial.X := by
-  simp only [polyBasis, Module.Basis.map_apply, Module.Basis.singleton_apply,
-    KaehlerDifferential.polynomialEquiv_symm, one_smul]
-
-/-- The one-element basis of rational-function differentials obtained by localization. -/
-noncomputable def ratFuncBasis : Module.Basis (Fin 1) (RatFunc K) Ω[(RatFunc K)⁄K] :=
-  haveI : Algebra.FormallyEtale K[X] (RatFunc K) :=
-    Algebra.FormallyEtale.of_isLocalization (Rₘ := RatFunc K) (nonZeroDivisors K[X])
-  ((polyBasis K).baseChange (RatFunc K)).map
-    (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale K K[X] (RatFunc K))
-
-theorem ratFuncBasis_zero : ratFuncBasis K 0 = D K (RatFunc K) RatFunc.X := by
-  have : Algebra.FormallyEtale K[X] (RatFunc K) :=
-    Algebra.FormallyEtale.of_isLocalization (Rₘ := RatFunc K) (nonZeroDivisors K[X])
-  simp only [ratFuncBasis, Module.Basis.map_apply, Module.Basis.baseChange_apply, polyBasis_zero,
-    KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply,
-    KaehlerDifferential.mapBaseChange_tmul, one_smul, KaehlerDifferential.map_D,
-    RatFunc.algebraMap_X]
-
-variable {F : Type*} [Field F] [Algebra K F]
-
-/-- Extend the differential basis along the separable function-field extension. -/
-noncomputable def towerBasis [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F]
-    [Algebra.IsSeparable (RatFunc K) F] : Module.Basis (Fin 1) F Ω[F⁄K] :=
-  haveI : Algebra.FormallyEtale (RatFunc K) F := Algebra.FormallyEtale.of_isSeparable _ _
-  ((ratFuncBasis K).baseChange F).map
-    (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale K (RatFunc K) F)
-
-theorem towerBasis_zero [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F]
-    [Algebra.IsSeparable (RatFunc K) F] :
-    towerBasis K (F := F) 0 = D K F (algebraMap (RatFunc K) F RatFunc.X) := by
-  have : Algebra.FormallyEtale (RatFunc K) F := Algebra.FormallyEtale.of_isSeparable _ _
-  simp only [towerBasis, Module.Basis.map_apply, Module.Basis.baseChange_apply, ratFuncBasis_zero,
-    KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply,
-    KaehlerDifferential.mapBaseChange_tmul, one_smul, KaehlerDifferential.map_D]
-
-theorem exists_basis_D (F : Type*) [Field F] [Algebra K F] [CharZero K]
-    (hfg : ∃ x : F, Transcendental K x ∧
-      FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F)
-    {t : F} (ht : Transcendental K t) :
-    ∃ b : Module.Basis (Fin 1) F (Ω[F⁄K]), b 0 = D K F t := by
-  have hfin : FiniteDimensional K⟮t⟯ F := finiteDimensional_adjoin_of_transcendental hfg ht
-  have : CharZero K⟮t⟯ := charZero_of_injective_algebraMap (algebraMap K K⟮t⟯).injective
-  have : Algebra.IsSeparable K⟮t⟯ F := Algebra.IsSeparable.of_integral K⟮t⟯ F
-  let e : RatFunc K ≃ₐ[K] K⟮t⟯ := RatFunc.algEquivOfTranscendental t ht
-  let : Algebra (RatFunc K) F :=
-    ((algebraMap K⟮t⟯ F).comp e.toAlgHom.toRingHom).toAlgebra
-  have hsq : RingHom.comp (algebraMap (RatFunc K) F)
-        (e.symm.toRingEquiv : K⟮t⟯ →+* RatFunc K)
-      = RingHom.comp (RingEquiv.refl F : F →+* F) (algebraMap K⟮t⟯ F) := by
-    refine RingHom.ext fun a => ?_
-    change algebraMap K⟮t⟯ F (e (e.symm a)) = algebraMap K⟮t⟯ F a
-    rw [e.apply_symm_apply]
-  have : IsScalarTower K (RatFunc K) F :=
-    IsScalarTower.of_algebraMap_eq fun a => by
-      change algebraMap K F a = algebraMap K⟮t⟯ F (e (algebraMap K (RatFunc K) a))
-      rw [e.commutes, ← IsScalarTower.algebraMap_apply]
-  have : Algebra.IsSeparable (RatFunc K) F :=
-    Algebra.IsSeparable.of_equiv_equiv e.symm.toRingEquiv (RingEquiv.refl F) hsq
-  refine ⟨towerBasis K, ?_⟩
-  rw [towerBasis_zero]
-  change D K F (algebraMap K⟮t⟯ F (e RatFunc.X)) = D K F t
-  congr 1
-  exact RatFunc.algEquivOfTranscendental_X t ht
-
 theorem D_ne_zero_of_transcendental (F : Type*) [Field F] [Algebra K F] [CharZero K]
     (hfg : ∃ x : F, Transcendental K x ∧
       FiniteDimensional (IntermediateField.adjoin K ({x} : Set F)) F)
     {t : F} (ht : Transcendental K t) : D K F t ≠ 0 := by
-  obtain ⟨b, hb⟩ := exists_basis_D K F hfg ht
+  obtain ⟨b, hb⟩ :=
+    _root_.KaehlerDifferential.exists_basis_eq_D_of_transcendental K F ht
+      (finiteDimensional_adjoin_of_transcendental hfg ht)
   rw [← hb]
   exact b.ne_zero 0
 
@@ -304,7 +238,7 @@ theorem differentialCoeff_ne_zero (v : Place K F) [v.DCoordGenerates] {ω : Ω[F
   rw [← v.differentialCoeff_smul_dCoord ω, h, zero_smul]
 
 theorem exists_smul_eq {ω₁ ω₂ : Ω[F⁄K]} (h₂ : ω₂ ≠ 0) : ∃ c : F, c • ω₂ = ω₁ :=
-  (finrank_eq_one_iff_of_nonzero' ω₂ h₂).1 IsCurveOver.finrank_kaehler ω₁
+  (finrank_eq_one_iff_of_ne_zero' ω₂ h₂).1 IsCurveOver.finrank_kaehler ω₁
 
 variable [HasCanonicalDivisor (K := K) (F := F)] [∀ v : Place K F, v.DCoordGenerates]
 

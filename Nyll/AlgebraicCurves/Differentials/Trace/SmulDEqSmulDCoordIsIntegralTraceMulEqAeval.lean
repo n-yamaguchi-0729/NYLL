@@ -39,14 +39,6 @@ section ProofImplementation
 
 namespace AlgebraicCurves.Differentials.Proofs
 namespace Exists_smul_D_eq_smul_dCoord_of_forall_isIntegral_trace_mul_eq_aeval
-attribute [-instance]
-  AlgebraicCurve.Place.instIsRankOneDiscreteWithZeroMultiplicativeIntAdicValuation
-  AlgebraicCurve.Place.instIsTrivialOnWithZeroMultiplicativeIntAdicValuation
-attribute [-simp] AlgebraicCurve.Place.congrEquiv_symm_apply
-  AlgebraicCurve.RationalFunctionField.heightOneSpectrumOfIrreducible_asIdeal
-  AlgebraicCurve.Place.congrRingEquiv_toValuationSubring AlgebraicCurve.Place.congrEquiv_apply
-  AlgebraicCurve.Place.coe_comapSymmRingEquiv_apply
-  AlgebraicCurve.RationalFunctionField.deg_placeOfPoint
 
 noncomputable section
 
@@ -915,8 +907,6 @@ attribute [-instance]
   instIsTorsionFreeSubtypeMemValuationSubringToValuationSubringIntegralClosureAt
   instIsDedekindDomainIntegralClosureAt
   instFiniteSubtypeMemValuationSubringToValuationSubringIntegralClosureAt
-  instIsRankOneDiscreteWithZeroMultiplicativeIntAdicValuation
-  instIsTrivialOnWithZeroMultiplicativeIntAdicValuation
 attribute [-simp] AlgebraicCurve.Divisor.evalFun_zero AlgebraicCurve.Place.evalAt_one
   AlgebraicCurve.Divisor.mapRestrict_single AlgebraicCurve.Divisor.pushforward_single
   AlgebraicCurve.Place.coe_restrictInclusion AlgebraicCurve.Place.mem_fiber
@@ -925,8 +915,3 @@ attribute [-simp] AlgebraicCurve.Divisor.evalFun_zero AlgebraicCurve.Place.evalA
   AlgebraicCurve.Pic0.coe_pullbackDegZeroHom AlgebraicCurve.Place.placeOfPrime_toValuationSubring
   AlgebraicCurve.Place.mem_fiberOver AlgebraicCurve.Place.fiberEquiv_symm_apply
   AlgebraicCurve.Place.fiberEquiv_apply AlgebraicCurve.Place.centerHeightOneSpectrum_asIdeal
-  AlgebraicCurve.Place.congrEquiv_symm_apply
-  AlgebraicCurve.RationalFunctionField.heightOneSpectrumOfIrreducible_asIdeal
-  AlgebraicCurve.Place.congrRingEquiv_toValuationSubring AlgebraicCurve.Place.congrEquiv_apply
-  AlgebraicCurve.Place.coe_comapSymmRingEquiv_apply
-  AlgebraicCurve.RationalFunctionField.deg_placeOfPoint

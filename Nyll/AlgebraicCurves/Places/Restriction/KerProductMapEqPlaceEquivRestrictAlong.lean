@@ -125,9 +125,10 @@ theorem finite_setOf_not_mem {F : Type*} [Field F] [Algebra K F] [IsAlgClosed K]
     {v : Place K F | f ∉ v.toValuationSubring}.Finite := by
   by_cases hf : f ∈ Set.range (algebraMap K F)
   · obtain ⟨c, rfl⟩ := hf
-    convert Set.finite_empty
-    ext v
-    simpa using v.algebraMap_mem' c
+    have hempty : {v : Place K F | algebraMap K F c ∉ v.toValuationSubring} = ∅ :=
+      Set.eq_empty_iff_forall_notMem.mpr (fun v hv => hv (v.algebraMap_mem' c))
+    rw [hempty]
+    exact Set.finite_empty
   · have := IsCurveOver.hasPrincipalDivisors (K := K) (F := F)
     refine (AlgebraicCurve.Place.finite_setOf_not_mem_toValuationSubring_or_evalAt_mem isRational f
       hf ∅).subset ?_

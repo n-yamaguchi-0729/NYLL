@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.FieldNormBase
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.FieldNormImage
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.ValueImage
 public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.Norm
@@ -18,6 +19,8 @@ the powered embedded-base-unit image inside a field-norm subgroup.
 -/
 
 @[expose] public section
+
+open LocalFieldTheory (localNormSubgroup)
 
 noncomputable section
 
@@ -59,7 +62,7 @@ theorem residueDegree_dvd_finrank_mul_val_of_mem_baseUnitsImage_tower
       (Module.finrank L M : ℤ) *
         (multiplicativeIntegerValuation L).val x := by
   have hxnorm :
-      x ^ Module.finrank L M ∈ fieldNormSubgroup L M :=
+      x ^ Module.finrank L M ∈ localNormSubgroup L M :=
     pow_finrank_mem_fieldNormSubgroup_of_mem_baseUnitsImage_tower
       (K := K) (L := L) (M := M) hx
   have hxval :
@@ -86,7 +89,7 @@ theorem residueDegree_dvd_finrank_mul_galoisRamificationIndex_mul_val
   have hxmem :
       LocalFieldTheory.IsNonarchimedeanLocalField.mapBaseUnitsToExtensionUnits K L x ∈
         baseUnitsImageSubgroup (K := K) (L := L) :=
-    mapBaseUnitsToExtensionUnits_mem_baseUnitsImageSubgroup
+    baseUnitsMap_mem_baseUnitsImageSubgroup
       (K := K) (L := L) x
   have hdiv :=
     residueDegree_dvd_finrank_mul_val_of_mem_baseUnitsImage_tower
@@ -125,7 +128,7 @@ theorem poweredBaseUnitsImageSubgroup_valueImage_le_residueDegree :
       (multiplicativeIntegerValuation L).subgroupValueSubgroup
           (poweredBaseUnitsImageSubgroup (K := K) (L := L) (M := M)) ≤
         (multiplicativeIntegerValuation L).subgroupValueSubgroup
-          (fieldNormSubgroup L M) :=
+          (localNormSubgroup L M) :=
     MultiplicativeIntegerValuation.subgroupValueSubgroup_mono
       (multiplicativeIntegerValuation L)
       (poweredBaseUnitsImageSubgroup_le_fieldNormSubgroup

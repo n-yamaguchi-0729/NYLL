@@ -154,7 +154,7 @@ theorem exists_uniformizer_radical_generator_of_moduleFinite_of_charZeroResidue
   have hadjoin_finrank :
       Module.finrank K (IntermediateField.adjoin K ({α} : Set L)) = n := by
     rw [IntermediateField.adjoin.finrank hα_integral, ← hf_minpoly]
-    exact natDegree_X_pow_sub_C
+    exact natDegree_X_pow_sub_C _
   have hadjoin_top : IntermediateField.adjoin K ({α} : Set L) = ⊤ := by
     apply IntermediateField.eq_of_le_of_finrank_eq le_top
     simpa using hadjoin_finrank.trans hn_degree

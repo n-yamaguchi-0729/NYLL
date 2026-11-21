@@ -39,7 +39,7 @@ public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.ZeroSchemeIdealCompEq
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Divisors.InvertibleComapZeroSchemeIdeal
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 public import Nyll.SchemeTheory.Modules.Frames.IsFrameOnPullbackLocalSection
 
 /-!

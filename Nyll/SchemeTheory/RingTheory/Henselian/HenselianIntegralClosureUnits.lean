@@ -89,7 +89,7 @@ private theorem integralClosureToNormalRing_isLocalHom :
         rw [hPbase]
         infer_instance)
   have hP : P = IsLocalRing.maximalIdeal C := IsLocalRing.eq_maximalIdeal hPmax
-  exact ((IsLocalRing.local_hom_TFAE k).out 5 1).mp hP
+  exact ((IsLocalRing.local_hom_tfae k).out 5 1).mp hP
 
 /-- A base-linear automorphism of the fraction field preserves unit status
 for elements integral over the Henselian local base, in the given normal

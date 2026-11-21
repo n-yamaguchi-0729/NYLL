@@ -17,7 +17,6 @@ import Nyll.AlgebraicCurves.Divisors.Norm.PullbackPushforwardAlongEqSumAlgAutSmu
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardAlongLiesOver
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardDiv
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardDivSeparable
-import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormula
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaFiniteDimensional
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardNormFormulaSeparable
 import Nyll.AlgebraicCurves.Divisors.Norm.PushforwardPullbackFinite

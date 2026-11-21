@@ -17,6 +17,7 @@ public import Nyll.SchemeTheory.Cohomology.Cech.OrderedAffineCoverCech
 public import Nyll.AlgebraicCurves.Geometry.Schemes.Covers.OrderedAffineCoverComap
 public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
 public import Nyll.AlgebraicCurves.Geometry.Picard.Deformation.CechObstruction
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Sections.UnitAutSectionTransUnitAutSectionRefl
 public import Nyll.SchemeTheory.Modules.Functoriality.PullbackLocalSection
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppCompPullbackUnitIsoHom
 
@@ -25,6 +26,12 @@ public import Nyll.AlgebraicCurves.Geometry.Sheaves.Pullback.PullbackCompHomAppC
 -/
 
 @[expose] public section
+
+open AlgebraicGeometry.Scheme.Modules
+  (unitAutSection_eq unitAutSection_trans unitAutSection_refl
+    unitAutSection_symm_mul unitAutSection_mul_symm isUnit_unitAutSection)
+
+open AlgebraicGeometry.Scheme.Modules (unitAutSectionValue restrictTrivialisation)
 
 section ProofImplementation
 
@@ -73,66 +80,6 @@ open _root_.AlgebraicGeometry
 
 
 variable {Y : Scheme.{u}}
-
-/-- Evaluate a unit-module automorphism on a section over the whole restricted scheme. -/
-noncomputable def uapp (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf)
-    (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : (W : Scheme.{u}).presheaf.obj (op ⊤) :=
-  (e.hom.val.app (op ⊤)).hom x
-
-theorem unitAutSection_eq (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
-    unitAutSection W e = W.topIso.hom.hom (uapp W e 1) := rfl
-
-theorem uapp_mul (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf)
-    (x y : (W : Scheme.{u}).presheaf.obj (op ⊤)) : uapp W e (x * y) = x * uapp W e y :=
-  ((e.hom.val.app (op ⊤)).hom).map_smul (show ((W : Scheme.{u}).ringCatSheaf.obj.obj (op ⊤))
-    from x) y
-
-theorem uapp_trans (W : Y.Opens)
-    (e e' : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf)
-    (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : uapp W (e ≪≫ e') x = uapp W e' (uapp W e x) := by
-  simp only [uapp, Iso.trans_hom, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-  rfl
-
-theorem uapp_refl (W : Y.Opens) (x : (W : Scheme.{u}).presheaf.obj (op ⊤)) : uapp W (Iso.refl _)
-  x = x := by
-  simp only [uapp, Iso.refl_hom, SheafOfModules.id_val, PresheafOfModules.id_app]
-  rfl
-
-theorem unitAutSection_trans (W : Y.Opens)
-    (e e' : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
-    unitAutSection W (e ≪≫ e') = unitAutSection W e * unitAutSection W e' := by
-  rw [unitAutSection_eq, unitAutSection_eq, unitAutSection_eq, ← map_mul, uapp_trans, ←
-    uapp_mul, mul_one]
-
-theorem unitAutSection_refl (W : Y.Opens) :
-    unitAutSection W (Iso.refl _) = 1 := by
-  rw [unitAutSection_eq, uapp_refl, map_one]
-
-theorem unitAutSection_symm_mul (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
-    unitAutSection W e.symm * unitAutSection W e = 1 := by
-  rw [← unitAutSection_trans, Iso.symm_self_id, unitAutSection_refl]
-
-theorem unitAutSection_mul_symm (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
-    unitAutSection W e * unitAutSection W e.symm = 1 := by
-  rw [← unitAutSection_trans, Iso.self_symm_id, unitAutSection_refl]
-
-theorem isUnit_unitAutSection (W : Y.Opens)
-    (e : SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf ≅ SheafOfModules.unit (W :
-      Scheme.{u}).ringCatSheaf) :
-    IsUnit (unitAutSection W e) :=
-  ⟨⟨_, _, unitAutSection_mul_symm W e, unitAutSection_symm_mul W e⟩, rfl⟩
 
 end AlgebraicGeometry.Scheme.Modules
 
@@ -262,20 +209,14 @@ open SchemeModulesCechTrivComap.AlgebraicGeometry.Scheme.Modules
 section G
 variable {Y V B : Scheme.{u}} (𝓜 : Y.Modules)
 
-/-- Restrict a local module trivialisation along a factorisation of its open immersion. -/
-noncomputable def genRestrict (ι : V ⟶ Y) (j : B ⟶ Y) (k : B ⟶ V) (e : k ≫ ι = j)
-    (τ : (Scheme.Modules.pullback ι).obj 𝓜 ≅ SheafOfModules.unit V.ringCatSheaf) :
-    (Scheme.Modules.pullback j).obj 𝓜 ≅ SheafOfModules.unit B.ringCatSheaf :=
-  ((pullbackCongr e).app 𝓜).symm ≪≫ ((pullbackComp k ι).app 𝓜).symm ≪≫
-    (Scheme.Modules.pullback k).mapIso τ ≪≫ pullbackUnitIso k
-
 theorem genRestrict_comp (ι : V ⟶ Y) (j : B ⟶ Y) (k : B ⟶ V) (e : k ≫ ι = j)
     (τ : (Scheme.Modules.pullback ι).obj 𝓜 ≅ SheafOfModules.unit V.ringCatSheaf)
     {B' : Scheme.{u}} (q : B' ⟶ B) (j' : B' ⟶ Y) (e' : q ≫ j = j') (k' : B' ⟶ V) (Hk : q ≫ k = k')
     (e'' : k' ≫ ι = j') :
-    genRestrict 𝓜 ι j' k' e'' τ =
+    restrictTrivialisation 𝓜 ι j' k' e'' τ =
       ((pullbackComp q j).app 𝓜 ≪≫ (pullbackCongr e').app 𝓜).symm ≪≫
-        (Scheme.Modules.pullback q).mapIso (genRestrict 𝓜 ι j k e τ) ≪≫ pullbackUnitIso q := by
+        (Scheme.Modules.pullback q).mapIso (restrictTrivialisation 𝓜 ι j k e τ) ≪≫
+          pullbackUnitIso q := by
   subst e e' Hk
   let U : V.Modules := SheafOfModules.unit V.ringCatSheaf
   let UB : B.Modules := SheafOfModules.unit B.ringCatSheaf
@@ -333,9 +274,9 @@ variable {Y Y' V B B' : Scheme.{u}} (𝓜 : Y.Modules)
 theorem genRestrict_pullback (h : Y' ⟶ Y) (ι : V ⟶ Y) (j₁ : B ⟶ Y') (k : B ⟶ V) (e : k ≫ ι = j₁ ≫ h)
     (τ : (Scheme.Modules.pullback ι).obj 𝓜 ≅ SheafOfModules.unit V.ringCatSheaf)
     (k₂ : B' ⟶ B) (j₂ : B' ⟶ Y') (e₂ : k₂ ≫ j₁ = j₂) (e₃ : (k₂ ≫ k) ≫ ι = j₂ ≫ h) :
-    genRestrict ((Scheme.Modules.pullback h).obj 𝓜) j₁ j₂ k₂ e₂
-        ((pullbackComp j₁ h).app 𝓜 ≪≫ genRestrict 𝓜 ι (j₁ ≫ h) k e τ) =
-      (pullbackComp j₂ h).app 𝓜 ≪≫ genRestrict 𝓜 ι (j₂ ≫ h) (k₂ ≫ k) e₃ τ := by
+    restrictTrivialisation ((Scheme.Modules.pullback h).obj 𝓜) j₁ j₂ k₂ e₂
+        ((pullbackComp j₁ h).app 𝓜 ≪≫ restrictTrivialisation 𝓜 ι (j₁ ≫ h) k e τ) =
+      (pullbackComp j₂ h).app 𝓜 ≪≫ restrictTrivialisation 𝓜 ι (j₂ ≫ h) (k₂ ≫ k) e₃ τ := by
   subst e₂
   have key := genRestrict_comp 𝓜 ι (j₁ ≫ h) k e τ k₂ ((k₂ ≫ j₁) ≫ h)
     (by rw [Category.assoc]) (k₂ ≫ k) rfl e₃
@@ -344,7 +285,7 @@ theorem genRestrict_pullback (h : Y' ⟶ Y) (ι : V ⟶ Y) (j₁ : B ⟶ Y') (k 
   let U' : B'.Modules := SheafOfModules.unit B'.ringCatSheaf
   let F := Scheme.Modules.pullback k₂
   let t : (Scheme.Modules.pullback (j₁ ≫ h)).obj 𝓜 ≅ U :=
-    genRestrict 𝓜 ι (j₁ ≫ h) k e τ
+    restrictTrivialisation 𝓜 ι (j₁ ≫ h) k e τ
   let ε : F.obj U ≅ U' := pullbackUnitIso k₂
   let β := (pullbackComp k₂ j₁).app ((Scheme.Modules.pullback h).obj 𝓜)
   let γ := (pullbackComp (k₂ ≫ j₁) h).app 𝓜
@@ -409,27 +350,16 @@ end conjGeneral
 
 variable {Y : Scheme.{u}}
 
-/-- The function determined by a unit-module automorphism on an open subscheme. -/
-noncomputable def uASm (W : Y.Opens)
-    (E : @Iso ((W : Scheme.{u}).Modules) _ (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
-      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) : Γ(Y, W) :=
-  unitAutSection W E
-
-theorem uASm_eq (W : Y.Opens)
-    (E : @Iso ((W : Scheme.{u}).Modules) _ (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
-      (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
-    uASm W E = W.topIso.hom.hom (uapp W E 1) := rfl
-
 theorem uASm_conj_general {Y' : Scheme.{u}} {W : Y.Opens} {W'' : Y'.Opens}
     (q : (W'' : Scheme.{u}) ⟶ (W : Scheme.{u}))
     (E : @Iso ((W : Scheme.{u}).Modules) _ (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
       (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
-    uASm W'' ((pullbackUnitIso q).symm ≪≫ (Scheme.Modules.pullback q).mapIso E ≪≫
+    unitAutSection W'' ((pullbackUnitIso q).symm ≪≫ (Scheme.Modules.pullback q).mapIso E ≪≫
       pullbackUnitIso q) =
-      W''.topIso.hom.hom (q.appTop.hom (uapp W E 1)) := by
-  have step : uapp W'' (show @Iso ((W'' : Scheme.{u}).Modules) _ _ _ from
+      W''.topIso.hom.hom (q.appTop.hom (unitAutSectionValue W E 1)) := by
+  have step : unitAutSectionValue W'' (show @Iso ((W'' : Scheme.{u}).Modules) _ _ _ from
       (pullbackUnitIso q).symm ≪≫ (Scheme.Modules.pullback q).mapIso E ≪≫ pullbackUnitIso q) 1 =
-      (q.appTop).hom (uapp W E 1) := by
+      (q.appTop).hom (unitAutSectionValue W E 1) := by
     let L : (W : Scheme.{u}).Modules := SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf
     let N : (W'' : Scheme.{u}).Modules := SheafOfModules.unit (W'' : Scheme.{u}).ringCatSheaf
     let F := Scheme.Modules.pullback q
@@ -450,35 +380,38 @@ theorem uASm_conj_general {Y' : Scheme.{u}} {W : Y.Opens} {W'' : Y'.Opens}
       (congrArg (fun z : Γ(P, V) => e.hom.app V ((F.map E'.hom).app V z)) hi).trans
         ((congrArg (fun z : Γ(P, V) => e.hom.app V z) hm).trans hh)
     exact hc
-  rw [uASm_eq, step]
+  exact congrArg W''.topIso.hom.hom step
 
 theorem uASm_conj_resLE {Y' : Scheme.{u}} (h : Y' ⟶ Y) {W : Y.Opens} {W'' : Y'.Opens} (c : W'' ≤
   h ⁻¹ᵁ W)
     (E : @Iso ((W : Scheme.{u}).Modules) _ (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)
       (SheafOfModules.unit (W : Scheme.{u}).ringCatSheaf)) :
-    uASm W'' ((pullbackUnitIso (h.resLE W W'' c)).symm ≪≫
+    unitAutSection W'' ((pullbackUnitIso (h.resLE W W'' c)).symm ≪≫
         (Scheme.Modules.pullback (h.resLE W W'' c)).mapIso E ≪≫ pullbackUnitIso (h.resLE W W'' c)) =
-      (Y'.presheaf.map (homOfLE c).op).hom ((h.app W).hom (uASm W E)) := by
-  rw [uASm_conj_general, uASm_eq, Scheme.Hom.appTop, Scheme.Hom.resLE_app_top]
+      (Y'.presheaf.map (homOfLE c).op).hom ((h.app W).hom (unitAutSection W E)) := by
+  rw [uASm_conj_general, unitAutSection_eq, Scheme.Hom.appTop, Scheme.Hom.resLE_app_top]
   simp only [CategoryTheory.comp_apply, CategoryTheory.Iso.inv_hom_id_apply]
   rfl
 
 variable {𝒱 : Y.OrderedAffineCover} {𝓜 : Y.Modules} (τ : CechTrivialisation 𝒱 𝓜)
 
 theorem restrict_eq_genRestrict {a : 𝒱.ι} {W : Y.Opens} (hx : W ≤ 𝒱.U a) :
-    τ.restrict hx = genRestrict 𝓜 (𝒱.U a).ι W.ι (Y.homOfLE hx) (Y.homOfLE_ι hx) (τ a) := rfl
+    τ.restrict hx = restrictTrivialisation 𝓜 (𝒱.U a).ι W.ι (Y.homOfLE hx) (Y.homOfLE_ι hx) (τ
+      a) := rfl
 
 variable {Y' : Scheme.{u}} (h : Y' ⟶ Y) [IsAffineHom h]
 
 theorem comap_apply_eq (a : 𝒱.ι) :
     τ.comap h a = (pullbackComp (h ⁻¹ᵁ 𝒱.U a).ι h).app 𝓜 ≪≫
-      genRestrict 𝓜 (𝒱.U a).ι ((h ⁻¹ᵁ 𝒱.U a).ι ≫ h) (h ∣_ 𝒱.U a) (morphismRestrict_ι h (𝒱.U a))
+      restrictTrivialisation 𝓜 (𝒱.U a).ι ((h ⁻¹ᵁ 𝒱.U a).ι ≫ h) (h ∣_ 𝒱.U a) (morphismRestrict_ι
+        h (𝒱.U a))
         (τ a) := by
   rfl
 
 theorem comap_restrict_eq_genRestrict (a : 𝒱.ι) {W'' : Y'.Opens} (hx' : W'' ≤ (𝒱.comap h).U a) :
     (τ.comap h).restrict hx' =
-      genRestrict ((Scheme.Modules.pullback h).obj 𝓜) (h ⁻¹ᵁ 𝒱.U a).ι W''.ι (Y'.homOfLE hx')
+      restrictTrivialisation ((Scheme.Modules.pullback h).obj 𝓜) (h ⁻¹ᵁ 𝒱.U a).ι W''.ι
+        (Y'.homOfLE hx')
         (Y'.homOfLE_ι hx')
         (τ.comap h a) := rfl
 
@@ -499,10 +432,12 @@ theorem comap_restrict (a : 𝒱.ι) {W : Y.Opens} (hx : W ≤ 𝒱.U a) {W'' : 
   have Hk : h.resLE W W'' c ≫ Y.homOfLE hx = Y'.homOfLE hx' ≫ h ∣_ 𝒱.U a := by
     rw [Scheme.Hom.resLE_map]; rfl
   have step1 : (τ.comap h).restrict hx' =
-      genRestrict ((Scheme.Modules.pullback h).obj 𝓜) (h ⁻¹ᵁ 𝒱.U a).ι W''.ι (Y'.homOfLE hx')
+      restrictTrivialisation ((Scheme.Modules.pullback h).obj 𝓜) (h ⁻¹ᵁ 𝒱.U a).ι W''.ι
+        (Y'.homOfLE hx')
         (Y'.homOfLE_ι hx')
         ((pullbackComp (h ⁻¹ᵁ 𝒱.U a).ι h).app 𝓜 ≪≫
-          genRestrict 𝓜 (𝒱.U a).ι ((h ⁻¹ᵁ 𝒱.U a).ι ≫ h) (h ∣_ 𝒱.U a) (morphismRestrict_ι h (𝒱.U
+          restrictTrivialisation 𝓜 (𝒱.U a).ι ((h ⁻¹ᵁ 𝒱.U a).ι ≫ h) (h ∣_ 𝒱.U a)
+            (morphismRestrict_ι h (𝒱.U
             a)) (τ a)) := by
     rw [comap_restrict_eq_genRestrict, comap_apply_eq]
   have step2 := genRestrict_pullback 𝓜 h (𝒱.U a).ι (h ⁻¹ᵁ 𝒱.U a).ι (h ∣_ 𝒱.U a)
@@ -546,7 +481,7 @@ theorem comap_transition (s : 𝒱.Idx 1) :
     (congrArg (fun k : M' ≅ U' => k.symm ≪≫ R'b) e0').trans
       ((congrArg (fun k : M' ≅ U' => (P ≪≫ F.mapIso Ra ≪≫ ε).symm ≪≫ k) e1').trans
         (pre_symm_trans_pre F P ε Ra Rb))
-  exact (congrArg (fun k : U' ≅ U' => uASm W' k) he).trans
+  exact (congrArg (fun k : U' ≅ U' => unitAutSection W' k) he).trans
     (uASm_conj_resLE h c (Ra.symm ≪≫ Rb))
 
 end PV1TL

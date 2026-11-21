@@ -49,7 +49,9 @@ private theorem exists_integral_factor_of_integral_henselian_base
           (I.map (algebraMap R B)).map (algebraMap B (D ⧸ Ideal.span {1 - e})))) := by
   let J : Ideal B := I.map (algebraMap R B)
   have hJ : J ≤ Ideal.jacobson ⊥ :=
-    Ideal.map_le_jacobson_bot_of_isIntegral (HenselianRing.jac (R := R) (I := I))
+    Ideal.map_le_jacobson_bot_of_isIntegral (by
+      simpa only [Ideal.jacobson_bot] using
+        (HenselianRing.jac (R := R) (I := I)))
   let C := integralClosure B D
   let K : Ideal C := J.map (algebraMap B C)
   let : CommRing C := inferInstance
@@ -86,8 +88,11 @@ private theorem exists_integral_factor_of_integral_henselian_base
     intro x
     obtain ⟨b, hb⟩ := Ideal.Quotient.mk_surjective (E x).1
     refine ⟨b, E.injective ?_⟩
-    rw [← IsScalarTower.algebraMap_smul (B ⧸ J) b (qC g),
-      map_smul, map_mul, hEg]
+    have hsmul (t : B ⧸ J) : E (t • qC g) = t • E (qC g) :=
+      E.toLinearEquiv.map_smul t (qC g)
+    have hmul : E (qC g * x) = E (qC g) * E x := E.map_mul (qC g) x
+    have hg' : E (qC g) = (1, 0) := hEg
+    rw [← IsScalarTower.algebraMap_smul (B ⧸ J) b (qC g), hsmul, hmul, hg']
     apply Prod.ext
     · change 1 * (E x).1 = Ideal.Quotient.mk J b * 1
       rw [one_mul, mul_one, hb]
@@ -140,7 +145,9 @@ theorem exists_lift_section_of_isIntegral_henselian_base
       (Ideal.Quotient.mkₐ B (I.map (algebraMap R B))).comp τ = σ := by
   let J : Ideal B := I.map (algebraMap R B)
   have hJ : J ≤ Ideal.jacobson ⊥ :=
-    Ideal.map_le_jacobson_bot_of_isIntegral (HenselianRing.jac (R := R) (I := I))
+    Ideal.map_le_jacobson_bot_of_isIntegral (by
+      simpa only [Ideal.jacobson_bot] using
+        (HenselianRing.jac (R := R) (I := I)))
   obtain ⟨e, he, hσe, hintegral, hscalar⟩ :=
     exists_integral_factor_of_integral_henselian_base I σ
   let K : Ideal D := Ideal.span {1 - e}

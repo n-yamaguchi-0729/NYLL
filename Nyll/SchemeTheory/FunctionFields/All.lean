@@ -33,6 +33,7 @@ public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.SchemeTheory.FunctionFields.OpenImmersionSections
 public import Nyll.SchemeTheory.FunctionFields.PlainIntegerBase
 public import Nyll.SchemeTheory.FunctionFields.RatFuncAlgEquivApplyXEqMoebius
+public import Nyll.SchemeTheory.FunctionFields.RatFuncScalarAction
 public import Nyll.SchemeTheory.FunctionFields.ScalarFunctoriality
 public import Nyll.SchemeTheory.FunctionFields.StalkFactorization
 public import Nyll.SchemeTheory.FunctionFields.StalkFunctoriality

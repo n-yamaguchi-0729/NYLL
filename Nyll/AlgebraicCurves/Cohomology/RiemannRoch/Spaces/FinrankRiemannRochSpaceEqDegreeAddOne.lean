@@ -415,7 +415,7 @@ theorem divDivisorPolynomial_injective (E : Divisor k (RatFunc k)) :
   intro P Q hPQ
   simp only [divDivisorPolynomial_apply] at hPQ
   exact IsFractionRing.injective k[X] (RatFunc k)
-    ((div_left_inj' (algebraMap_divisorPolynomial_ne_zero E)).mp hPQ)
+    ((div_left_inj₀ (algebraMap_divisorPolynomial_ne_zero E)).mp hPQ)
 
 omit [IsAlgClosed k] [DecidableEq (RatFunc k)] in
 theorem mem_degreeLT_succ_iff {P : k[X]} {d : ℕ} : P ∈ degreeLT k (d + 1) ↔ P.natDegree ≤ d := by

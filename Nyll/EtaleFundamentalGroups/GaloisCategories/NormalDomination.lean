@@ -45,7 +45,7 @@ theorem closedCommutator_le_stabilizer_of_abelian_galois
     Subgroup.closedCommutator (Aut F) ≤ MulAction.stabilizer (Aut F) x := by
   have hcomm : commutator (Aut F) ≤ MulAction.stabilizer (Aut F) x := by
     rw [← galoisObjectQuotientMonoidHom_ker F (Aut F) A x]
-    exact Abelianization.commutator_subset_ker
+    exact Group.Abelianization.commutator_le_ker
       (galoisObjectQuotientMonoidHom F (Aut F) A x)
   exact Subgroup.topologicalClosure_minimal (commutator (Aut F)) hcomm
     ((MulAction.stabilizer (Aut F) x).isClosed_of_isOpen

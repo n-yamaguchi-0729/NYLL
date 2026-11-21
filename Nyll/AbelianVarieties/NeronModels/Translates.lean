@@ -5,6 +5,7 @@ Original copyright, authors, license and pinned sources are retained per unit be
 
 module
 
+public import Nyll.AbelianVarieties.NeronModels.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
@@ -80,11 +81,6 @@ section Setup
 variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat.of R))
   (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 
-/-- The left translation graph of the partial law. -/
-abbrev Phi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (U.ι ≫ pullback.fst y y) m.1
-      ((Category.assoc _ _ _).trans m.2.symm)
-
 /-- Insert a base-changed section as the first coordinate. -/
 def lamFst {T : Scheme.{u}} (c : T ⟶ Spec (CommRingCat.of R)) (g : T ⟶ Y) (hg : g ≫ y = c) :
     pullback y c ⟶ pullback y y :=
@@ -148,19 +144,21 @@ theorem Phia_y : Phia y U m a ≫ y = (Ua y U a).ι ≫ y := by
   rw [Phia, Category.assoc, m.2, zeta_ι_assoc, sig_fst_assoc, a.2, Category.comp_id]
 
 @[reassoc]
-theorem Phia_sig : Phia y U m a ≫ sig y a = zeta y U a ≫ Phi y U m := by
+theorem Phia_sig : Phia y U m a ≫ sig y a = zeta y U a ≫ firstMultiplicationChart y U m := by
   apply pullback.hom_ext
   · rw [Category.assoc, sig_fst, Phia_y_assoc, Category.assoc, pullback.lift_fst, zeta_ι_assoc,
       sig_fst]
   · rw [Category.assoc, sig_snd, Category.comp_id, Category.assoc, pullback.lift_snd, Phia]
 
-theorem isPullback_Phia : IsPullback (Phia y U m a) (zeta y U a) (sig y a) (Phi y U m) := by
+theorem isPullback_Phia : IsPullback (Phia y U m a) (zeta y U a) (sig y a)
+    (firstMultiplicationChart y U m) := by
   refine IsPullback.of_right (h₁₂ := y) (v₁₃ := a.1) (h₂₂ := pullback.fst y y) ?_ (Phia_sig y U m a)
     (isPullback_sig y a).flip
   rw [Phia_y, pullback.lift_fst]
   exact ((isPullback_morphismRestrict (sig y a) U).paste_vert (isPullback_sig y a)).flip
 
-theorem isOpenImmersion_Phia [IsOpenImmersion (Phi y U m)] : IsOpenImmersion (Phia y U m a) :=
+theorem isOpenImmersion_Phia [IsOpenImmersion (firstMultiplicationChart y U m)]
+    : IsOpenImmersion (Phia y U m a) :=
   MorphismProperty.of_isPullback (P := @IsOpenImmersion)
       (isPullback_Phia y U m a).flip inferInstance
 
@@ -204,7 +202,8 @@ theorem isPullback_ja' :
   exact (isPullback_morphismRestrict (pullback.fst y y) (Ua y U a)).flip.paste_horiz
     (IsPullback.of_hasPullback y y).flip
 
-scoped instance isOpenImmersion_ja' [IsOpenImmersion (Phi y U m)] : IsOpenImmersion (ja' y U m a) :=
+scoped instance isOpenImmersion_ja' [IsOpenImmersion (firstMultiplicationChart y U m)]
+    : IsOpenImmersion (ja' y U m a) :=
   have : IsOpenImmersion (Phia y U m a) := isOpenImmersion_Phia y U m a
   MorphismProperty.of_isPullback (P := @IsOpenImmersion) (isPullback_ja' y U m a).flip inferInstance
 
@@ -212,7 +211,8 @@ scoped instance isOpenImmersion_ja' [IsOpenImmersion (Phi y U m)] : IsOpenImmers
 def ja : (Fa y U a : Scheme.{u}) ⟶ pullback y y :=
   (pullback y y).homOfLE (Fa_le_fst y U a) ≫ ja' y U m a
 
-scoped instance isOpenImmersion_ja [IsOpenImmersion (Phi y U m)] : IsOpenImmersion (ja y U m a) :=
+scoped instance isOpenImmersion_ja [IsOpenImmersion (firstMultiplicationChart y U m)]
+    : IsOpenImmersion (ja y U m a) :=
     by
   unfold ja; infer_instance
 
@@ -270,7 +270,7 @@ theorem dense_Ua
   rw [h]
   exact hd
 
-theorem dense_theta_preimage [Smooth y] [IsOpenImmersion (Phi y U m)]
+theorem dense_theta_preimage [Smooth y] [IsOpenImmersion (firstMultiplicationChart y U m)]
     (hUa : Dense ((Ua y U a : Y.Opens) : Set Y)) :
     Dense ((theta y U m a ⁻¹ᵁ U : (Fa y U a : Scheme.{u}).Opens) : Set (Fa y U a)) := by
   have : UniversallyOpen m.1 := universallyOpen_m y U m
@@ -279,7 +279,8 @@ theorem dense_theta_preimage [Smooth y] [IsOpenImmersion (Phi y U m)]
   rw [h]
   exact hUa.preimage (toU y U a ≫ m.1).isOpenMap
 
-theorem dense_Ga [Smooth y] [IsOpenImmersion (Phi y U m)] (hU : Dense (U : Set ↑(pullback y y)))
+theorem dense_Ga [Smooth y] [IsOpenImmersion (firstMultiplicationChart y U m)]
+    (hU : Dense (U : Set ↑(pullback y y)))
     (hUa : Dense ((Ua y U a : Y.Opens) : Set Y)) :
     Dense ((Ga y U m a : (Fa y U a : Scheme.{u}).Opens) : Set (Fa y U a)) := by
   have h1 : Dense ((ja y U m a ⁻¹ᵁ U : (Fa y U a : Scheme.{u}).Opens) : Set (Fa y U a)) :=
@@ -300,7 +301,7 @@ theorem agree_piece
         (w : SchemeHomOver t (U.ι ≫ pullback.fst y y ≫ y)),
         w.1 ≫ U.ι ≫ pullback.fst y y = t ≫ a.1 → w.1 ≫ U.ι ≫ pullback.snd y y = x.1 →
         x.1 ≫ τ.1 = w.1 ≫ m.1 ≫ ι.1)
-    [IsOpenImmersion (Phi y U m)]
+    [IsOpenImmersion (firstMultiplicationChart y U m)]
     {T : Scheme.{u}} (t₁ : T ⟶ Fa y U a) (w : T ⟶ U) (h : t₁ ≫ ja y U m a = w ≫ U.ι)
     (hG : ∀ p : T, t₁ p ∈ Ga y U m a) :
     t₁ ≫ ga y U m a τ = w ≫ m.1 ≫ ι.1 := by
@@ -547,25 +548,28 @@ theorem m2_y2 : (m2 y R' R'' U m).1 ≫ y2 y R' R'' = (U2 y R' R'' U).ι ≫ pul
   pullback.lift_snd _ _ _
 
 @[reassoc]
-theorem Phi2_pi2 : Phi (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m) ≫ pi2 y R' R'' =
-    piU y R' R'' U ≫ Phi y U m := by
+theorem Phi2_pi2 : firstMultiplicationChart (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m)
+    ≫ pi2 y R' R'' =
+    piU y R' R'' U ≫ firstMultiplicationChart y U m := by
   apply pullback.hom_ext
   · simp only [Category.assoc, pi2_fst, pullback.lift_fst, pullback.lift_fst_assoc, piU_fst]
   · simp only [Category.assoc, pi2_snd, pullback.lift_snd, pullback.lift_snd_assoc, m2_p2]
 
 theorem isPullback_Phi2 :
-    IsPullback (Phi (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m)) (piU y R' R'' U) (pi2 y R' R'')
-      (Phi y U m) := by
+    IsPullback (firstMultiplicationChart (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m))
+      (piU y R' R'' U) (pi2 y R' R'')
+      (firstMultiplicationChart y U m) := by
   have HU : IsPullback (piU y R' R'' U) ((U2 y R' R'' U).ι ≫ pullback.fst _ _ ≫ y2 y R' R'')
       (U.ι ≫ pullback.fst y y ≫ y) (bS R' R'' ≫ bS R R') :=
     (isPullback_morphismRestrict (pi2 y R' R'') U).paste_vert (isPullback_pi2_base y R' R'')
   refine (IsPullback.of_bot (h₁₁ := piU y R' R'' U) (v₁₁ :=
-      Phi (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m))
-    (v₁₂ := Phi y U m) ?_ (Phi2_pi2 y R' R'' U m).symm (isPullback_pi2_base y R' R'')).flip
+      firstMultiplicationChart (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m))
+    (v₁₂ := firstMultiplicationChart y U m) ?_ (Phi2_pi2 y R' R'' U m).symm
+      (isPullback_pi2_base y R' R'')).flip
   rwa [pullback.lift_fst_assoc, pullback.lift_fst_assoc]
 
-scoped instance isOpenImmersion_Phi2 [IsOpenImmersion (Phi y U m)] :
-    IsOpenImmersion (Phi (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m)) :=
+scoped instance isOpenImmersion_Phi2 [IsOpenImmersion (firstMultiplicationChart y U m)] :
+    IsOpenImmersion (firstMultiplicationChart (y2 y R' R'') (U2 y R' R'' U) (m2 y R' R'' U m)) :=
   MorphismProperty.of_isPullback (P := @IsOpenImmersion)
       (isPullback_Phi2 y R' R'' U m).flip inferInstance
 
@@ -661,7 +665,7 @@ structure Ctx where
         ↑(pullback y y)) ⁻¹'
         (U : Set ↑(pullback y y)))
   /-- The left translation graph is an open immersion. -/
-  hΦ : IsOpenImmersion (Phi y U m)
+  hΦ : IsOpenImmersion (firstMultiplicationChart y U m)
   /-- The partial multiplication is associative wherever both sides are defined. -/
   hassoc : ∀ {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R))
       (u v p q : SchemeHomOver t (U.ι ≫ pullback.fst y y ≫ y)),
@@ -1917,8 +1921,7 @@ theorem progress (G : Glued C) :
   have : IsClosedImmersion γ₂ := hγ₂
   let q12 : G₂ ⟶ pullback G.y'' G.y'' := γ₂ ≫ pullback.fst (pullback.fst G.y'' G.y'' ≫ G.y'') G.y''
   have : IsOpenImmersion q12 := hq₁₂
-  let grm : (G.U'' : Scheme.{u}) ⟶ pullback (pullback.fst G.y'' G.y'' ≫ G.y'') G.y'' :=
-    pullback.lift (f := pullback.fst G.y'' G.y'' ≫ G.y'') (g := G.y'') G.U''.ι G.m''.1 G.m''.2.symm
+  let grm := multiplicationGraph G.y'' G.U'' G.m''
   have hsub : Set.range grm.base ⊆ Set.range γ₂.base := hΓ₂ ▸ subset_closure
   let D : (pullback G.y'' G.y'').Opens := q12.opensRange
   have hDr : Set.range D.ι.base ⊆ Set.range q12.base := by

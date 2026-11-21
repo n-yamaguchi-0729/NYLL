@@ -5,6 +5,7 @@ Original copyright, authors, license and pinned sources are retained per unit be
 
 module
 
+public import Nyll.AbelianVarieties.NeronModels.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
@@ -264,25 +265,17 @@ section Setup
 variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat.of R))
   (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
 
-/-- The chart map recording the first input and its product. -/
-abbrev Phi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) (U.ι ≫ pullback.fst y y) m.1 ((Category.assoc _ _ _).trans
-    m.2.symm)
-
-/-- The chart map recording the product and the second input. -/
-abbrev Psi : (U : Scheme.{u}) ⟶ pullback y y :=
-  pullback.lift (f := y) (g := y) m.1 (U.ι ≫ pullback.snd y y)
-    (m.2.trans (by rw [Category.assoc, pullback.condition]))
-
 @[reassoc]
 theorem fst_y : pullback.fst y y ≫ y = pullback.snd y y ≫ y := pullback.condition
 
 @[reassoc]
 theorem m_y : m.1 ≫ y = U.ι ≫ pullback.fst y y ≫ y := m.2
 
-theorem m_eq_Phi_snd : m.1 = Phi y U m ≫ pullback.snd y y := (pullback.lift_snd _ _ _).symm
+theorem m_eq_Phi_snd : m.1 = firstMultiplicationChart y U m ≫ pullback.snd y y :=
+    (pullback.lift_snd _ _ _).symm
 
-theorem universallyOpen_m [Smooth y] [IsOpenImmersion (Phi y U m)] : UniversallyOpen m.1 := by
+theorem universallyOpen_m [Smooth y] [IsOpenImmersion (firstMultiplicationChart y U m)]
+    : UniversallyOpen m.1 := by
   rw [m_eq_Phi_snd y U m]; infer_instance
 
 variable (a : Spec (CommRingCat.of R) ⟶ Y) (ha : a ≫ y = 𝟙 _)
@@ -344,18 +337,20 @@ theorem rho_y : rho y U m a ha ≫ y = (Ua y U a ha).ι ≫ y := by
   rw [rho, Category.assoc, m.2, la_ι_assoc, kA_fst_assoc]
 
 @[reassoc]
-theorem rho_kA : rho y U m a ha ≫ kA y a ha = la y U a ha ≫ Psi y U m := by
+theorem rho_kA : rho y U m a ha ≫ kA y a ha = la y U a ha ≫ secondMultiplicationChart y U m := by
   apply pullback.hom_ext
   · rw [Category.assoc, kA_fst, Category.comp_id, Category.assoc, pullback.lift_fst, rho]
   · rw [Category.assoc, kA_snd, rho_y_assoc, Category.assoc, pullback.lift_snd, la_ι_assoc, kA_snd]
 
-theorem isPullback_rho : IsPullback (rho y U m a ha) (la y U a ha) (kA y a ha) (Psi y U m) := by
+theorem isPullback_rho : IsPullback (rho y U m a ha) (la y U a ha) (kA y a ha)
+    (secondMultiplicationChart y U m) := by
   refine IsPullback.of_right (h₁₂ := y) (v₁₃ := a) (h₂₂ := pullback.snd y y) ?_ (rho_kA y U m a ha)
     (isPullback_kA y a ha).flip
   rw [rho_y, pullback.lift_snd]
   exact ((isPullback_morphismRestrict (kA y a ha) U).paste_vert (isPullback_kA y a ha)).flip
 
-theorem isOpenImmersion_rho [IsOpenImmersion (Psi y U m)] : IsOpenImmersion (rho y U m a ha) :=
+theorem isOpenImmersion_rho [IsOpenImmersion (secondMultiplicationChart y U m)]
+    : IsOpenImmersion (rho y U m a ha) :=
   MorphismProperty.of_isPullback (P := @IsOpenImmersion) (isPullback_rho y U m a ha).flip
     inferInstance
 
@@ -393,7 +388,8 @@ theorem isPullback_Θ : IsPullback (Θ y U m a ha) (bY y U a ha) (pullback.fst y
   exact (isPullback_morphismRestrict (pullback.fst y y) (Ua y U a ha)).flip.paste_horiz
     (IsPullback.of_hasPullback y y).flip
 
-theorem isOpenImmersion_Θ [IsOpenImmersion (Psi y U m)] : IsOpenImmersion (Θ y U m a ha) :=
+theorem isOpenImmersion_Θ [IsOpenImmersion (secondMultiplicationChart y U m)]
+    : IsOpenImmersion (Θ y U m a ha) :=
   have : IsOpenImmersion (rho y U m a ha) := isOpenImmersion_rho y U m a ha
   MorphismProperty.of_isPullback (P := @IsOpenImmersion) (isPullback_Θ y U m a ha).flip
     inferInstance
@@ -478,7 +474,8 @@ theorem dense_fibre_kA [IsSeparated y] (S : Set ↑(pullback y y)) (s : Spec (Co
     continuous_subtype_val).subtype_mk _
   have hφi : Topology.IsInducing φ := by
     refine Topology.IsInducing.of_comp hφc continuous_subtype_val ?_
-    exact (kA y a ha).isClosedEmbedding.isInducing.comp Topology.IsInducing.subtypeVal
+    exact (kA y a ha).isClosedEmbedding.isInducing.comp
+      (Topology.IsInducing.subtypeVal (t := {b | y.base b = s}))
   have hE : pullback.fst (pullback.snd y y) a =
       (pullback.fst (pullback.snd y y) a ≫ pullback.fst y y) ≫ kA y a ha := by
     apply pullback.hom_ext
@@ -554,7 +551,8 @@ theorem range_comp_of_surjective {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C
   · rintro ⟨x, rfl⟩; exact ⟨f.base x, (Scheme.Hom.comp_apply _ _ _).symm⟩
   · rintro ⟨w, rfl⟩; obtain ⟨x, rfl⟩ := hf w; exact ⟨x, Scheme.Hom.comp_apply _ _ _⟩
 
-theorem range_rho : Set.range (rho y U m a ha).base = (kA y a ha).base ⁻¹' Set.range (Psi y U
+theorem range_rho : Set.range (rho y U m a ha).base
+    = (kA y a ha).base ⁻¹' Set.range (secondMultiplicationChart y U
     m).base := by
   have h := isPullback_rho y U m a ha
   rw [← h.isoPullback_hom_fst, range_comp_of_surjective _ _ h.isoPullback.hom.surjective,
@@ -566,11 +564,12 @@ theorem range_Θ : Set.range (Θ y U m a ha).base = (pullback.fst y y).base ⁻�
   rw [← h.isoPullback_hom_fst, range_comp_of_surjective _ _ h.isoPullback.hom.surjective,
     Scheme.Pullback.range_fst]
 
-theorem rdense_range_rho [IsSeparated y] [NoetherianSpace Y] [IsOpenImmersion (Psi y U m)]
+theorem rdense_range_rho [IsSeparated y] [NoetherianSpace Y]
+    [IsOpenImmersion (secondMultiplicationChart y U m)]
     (hΨ₂ : ∀ x : Y,
       Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.snd y y).base q = x} → ↑(pullback y
         y)) ⁻¹'
-          Set.range (Psi y U m).base)) :
+          Set.range (secondMultiplicationChart y U m).base)) :
     ∀ p : Y, (∀ p' : Y, p' ⤳ p → y.base p' = y.base p → p' = p) → p ∈ Set.range (rho y U m a
       ha).base := by
   have : IsOpenImmersion (rho y U m a ha) := isOpenImmersion_rho y U m a ha
@@ -660,7 +659,7 @@ variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat
   (U : (pullback y y).Opens) (m : SchemeHomOver (U.ι ≫ pullback.fst y y ≫ y) y)
   (a : Spec (CommRingCat.of R) ⟶ Y) (ha : a ≫ y = 𝟙 _)
 
-theorem dense_fibre_snd_U2 [IsOpenImmersion (Psi y U m)] (d : Y)
+theorem dense_fibre_snd_U2 [IsOpenImmersion (secondMultiplicationChart y U m)] (d : Y)
     (hD : Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.snd y y).base q = d} → ↑(pullback
       y y)) ⁻¹'
       ((Ya y U a ha : (pullback y y).Opens) : Set ↑(pullback y y))))
@@ -700,25 +699,27 @@ theorem dense_fibre_snd_U2 [IsOpenImmersion (Psi y U m)] (d : Y)
   rw [U2, Scheme.Hom.coe_image]
   exact ⟨q.1, hq, rfl⟩
 
-theorem dense_fibre_snd_θPsi [IsOpenImmersion (Psi y U m)] (d : Y)
+theorem dense_fibre_snd_θPsi [IsOpenImmersion (secondMultiplicationChart y U m)] (d : Y)
     (hRd : Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.snd y y).base q = d} → ↑(pullback
       y y)) ⁻¹'
       Set.range (Θ y U m a ha).base))
     (hΨd : Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.snd y y).base q = d} → ↑(pullback
       y y)) ⁻¹'
-      Set.range (Psi y U m).base)) :
+      Set.range (secondMultiplicationChart y U m).base)) :
     Dense ((Subtype.val : {q : ↑(pullback y y) // (pullback.snd y y).base q = d} → ↑(pullback y y))
       ⁻¹'
-      Set.range (θ y U m a ha ≫ Psi y U m).base) := by
+      Set.range (θ y U m a ha ≫ secondMultiplicationChart y U m).base) := by
   let t : Set ↑(pullback y y) := (pullback.snd y y).base ⁻¹' {d}
-  have heq : (Psi y U m).base ⁻¹' t = U.ι.base ⁻¹' t := by
+  have heq : (secondMultiplicationChart y U m).base ⁻¹' t = U.ι.base ⁻¹' t := by
     ext u
-    change (pullback.snd y y).base ((Psi y U m).base u) ∈ ({d} : Set Y) ↔
+    change (pullback.snd y y).base ((secondMultiplicationChart y U m).base u) ∈ ({d} : Set Y) ↔
       (pullback.snd y y).base (U.ι.base u) ∈ ({d} : Set Y)
     rw [← Scheme.Hom.comp_apply, pullback.lift_snd, Scheme.Hom.comp_apply]
-  let Ψt : ↥(U.ι.base ⁻¹' t) → ↥t := t.restrictPreimage (Psi y U m).base ∘ (Homeomorph.setCongr
+  let Ψt : ↥(U.ι.base ⁻¹' t) → ↥t := t.restrictPreimage (secondMultiplicationChart y U m).base
+    ∘ (Homeomorph.setCongr
     heq).symm
-  have hΨc : Continuous Ψt := (Psi y U m).continuous.restrictPreimage.comp (Homeomorph.setCongr
+  have hΨc : Continuous Ψt := (secondMultiplicationChart y U m).continuous.restrictPreimage.comp
+    (Homeomorph.setCongr
     heq).symm.continuous
   have hΨr : DenseRange Ψt := by
     rw [DenseRange, Set.range_comp, (Homeomorph.setCongr heq).symm.surjective.range_eq,
@@ -743,10 +744,12 @@ theorem dense_fibre_snd_θPsi [IsOpenImmersion (Psi y U m)] (d : Y)
       (θ_ι y U m a ha)
     exact he.trans hq
   refine ⟨⟨q, hqV⟩, ?_⟩
-  change ((θ y U m a ha ≫ Psi y U m).base ⟨q, hqV⟩) = (Psi y U m).base ((Homeomorph.setCongr
+  change ((θ y U m a ha ≫ secondMultiplicationChart y U m).base ⟨q, hqV⟩)
+    = (secondMultiplicationChart y U m).base ((Homeomorph.setCongr
     heq).symm u).1
-  change (Psi y U m).base ((θ y U m a ha).base ⟨q, hqV⟩) = (Psi y U m).base u.1
-  exact congrArg (fun z : (U : Scheme.{u}) => (Psi y U m).base z) hθq
+  change (secondMultiplicationChart y U m).base ((θ y U m a ha).base ⟨q, hqV⟩)
+    = (secondMultiplicationChart y U m).base u.1
+  exact congrArg (fun z : (U : Scheme.{u}) => (secondMultiplicationChart y U m).base z) hθq
 
 end Piece2
 
@@ -757,16 +760,6 @@ variable {R : Type u} [CommRing R] {Y : Scheme.{u}} (y : Y ⟶ Spec (CommRingCat
   (a : Spec (CommRingCat.of R) ⟶ Y) (ha : a ≫ y = 𝟙 _)
   {Y' : Scheme.{u}} (y' : Y' ⟶ Spec (CommRingCat.of R)) (ι τ : SchemeHomOver y y')
   (U' : (pullback y' y').Opens) (m' : SchemeHomOver (U'.ι ≫ pullback.fst y' y' ≫ y') y')
-
-/-- The first-input and product chart map on the target scheme. -/
-abbrev Phi' : (U' : Scheme.{u}) ⟶ pullback y' y' :=
-  pullback.lift (f := y') (g := y') (U'.ι ≫ pullback.fst y' y') m'.1 ((Category.assoc _ _ _).trans
-    m'.2.symm)
-
-/-- The product and second-input chart map on the target scheme. -/
-abbrev Psi' : (U' : Scheme.{u}) ⟶ pullback y' y' :=
-  pullback.lift (f := y') (g := y') m'.1 (U'.ι ≫ pullback.snd y' y')
-    (m'.2.trans (by rw [Category.assoc, pullback.condition]))
 
 theorem range_subset_of_fac {T : Scheme.{u}} (w : T ⟶ U') (g : T ⟶ pullback y' y') (hw : w ≫ U'.ι =
     g) :
@@ -794,8 +787,10 @@ theorem images_of_piece (i₃ : SchemeHomOver y y') (w : (U : Scheme.{u}) ⟶ U'
     (h₂ : w ≫ U'.ι ≫ pullback.snd y' y' = U.ι ≫ pullback.snd y y ≫ i₂.1)
     (h₃ : w ≫ m'.1 = m.1 ≫ i₃.1) :
     (ch y y' i₁ i₂).base '' (U : Set ↑(pullback y y)) ⊆ (U' : Set ↑(pullback y' y')) ∧
-    (ch y y' i₁ i₃).base '' Set.range (Phi y U m).base ⊆ Set.range (Phi' y' U' m').base ∧
-    (ch y y' i₃ i₂).base '' Set.range (Psi y U m).base ⊆ Set.range (Psi' y' U' m').base := by
+    (ch y y' i₁ i₃).base '' Set.range (firstMultiplicationChart y U m).base
+      ⊆ Set.range (firstMultiplicationChart y' U' m').base ∧
+    (ch y y' i₃ i₂).base '' Set.range (secondMultiplicationChart y U m).base
+      ⊆ Set.range (secondMultiplicationChart y' U' m').base := by
   refine ⟨?_, ?_, ?_⟩
   · rw [← Scheme.Opens.range_ι U, ← range_comp]
     refine range_subset_of_fac y' U' w _ ?_
@@ -823,7 +818,8 @@ theorem images_of_piece2 (w : (V2 y U m a ha : Scheme.{u}) ⟶ U')
     (h₃ : w ≫ m'.1 = θ y U m a ha ≫ m.1 ≫ ι.1) :
     (ch y y' ι τ).base '' ((U2 y U m a ha : (pullback y y).Opens) : Set ↑(pullback y y)) ⊆
       (U' : Set ↑(pullback y' y')) ∧
-    (ch y y' ι τ).base '' Set.range (θ y U m a ha ≫ Psi y U m).base ⊆ Set.range (Psi' y' U' m').base
+    (ch y y' ι τ).base '' Set.range (θ y U m a ha ≫ secondMultiplicationChart y U m).base
+      ⊆ Set.range (secondMultiplicationChart y' U' m').base
       := by
   refine ⟨?_, ?_⟩
   · rw [U2, Scheme.Hom.coe_image, ← Scheme.Opens.range_ι (V2 y U m a ha), ← range_comp, ←
@@ -939,7 +935,7 @@ theorem _root_.NeronModelInfra.forall_dense_preimage_fibre_of_forall_exists_comp
       ↑(pullback y' y')) ⁻¹'
         (Set.range (pullback.lift (f := y') (g := y') m'.1 (U'.ι ≫ pullback.snd y' y')
           (m'.2.trans (by rw [Category.assoc, pullback.condition]))).base))) := by
-  have : IsOpenImmersion (Psi y U m) := hΨ
+  have : IsOpenImmersion (secondMultiplicationChart y U m) := hΨ
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian y
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace y
   have : IsNoetherian Y := {}

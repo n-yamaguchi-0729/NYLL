@@ -56,9 +56,9 @@ open AlgebraicGeometry CategoryTheory TopologicalSpace
 universe u
 
 attribute [local instance] Ideal.Quotient.field
-  FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+  FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 namespace EtaleFundamentalGroups.Kummer
 

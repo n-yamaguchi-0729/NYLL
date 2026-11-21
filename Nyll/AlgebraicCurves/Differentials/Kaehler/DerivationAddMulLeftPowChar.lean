@@ -322,7 +322,7 @@ private lemma W_pow_natDegree_le (d : Derivation R F F) (a : F) (n : ℕ) :
 private lemma W_coeff_top (d : Derivation R F F) (a : F) (n : ℕ) :
     ((zpoly d a) ^ n).coeff n = (LinearMap.mulLeft R a) ^ n := by
   induction n with
-  | zero => simp only [pow_zero, Polynomial.coeff_one_zero]
+  | zero => simp only [pow_zero, AddMonoidAlgebra.coeff_one_zero]
   | succ n ih =>
       have hz : ((zpoly d a) ^ n).coeff (n + 1) = 0 :=
         Polynomial.coeff_eq_zero_of_natDegree_lt
@@ -351,7 +351,7 @@ private lemma char_nsmul2 (f : F →ₗ[R] F) : p • f = 0 := by
 omit [Fact p.Prime] in
 private lemma charP_nsmul_P (x : Polynomial (F →ₗ[R] F)) : p • x = 0 := by
   ext n
-  rw [Polynomial.coeff_smul, Polynomial.coeff_zero, char_nsmul2 p]
+  rw [AddMonoidAlgebra.coeff_smul_apply, Polynomial.coeff_zero, char_nsmul2 p]
 omit [Fact p.Prime] in
 private lemma zsmul_eq_self_of_dvd (c : ℤ) (hdvd : (p : ℤ) ∣ (c - 1))
     (x : Polynomial (F →ₗ[R] F)) : c • x = x := by

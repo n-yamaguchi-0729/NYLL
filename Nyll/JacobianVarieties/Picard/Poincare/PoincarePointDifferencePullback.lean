@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Sheaves.IdealSheafModule
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
@@ -48,6 +49,8 @@ public import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRe
 @[expose] public section
 
 section ProofImplementation
+
+open AlgebraicGeometry.Scheme.IdealSheafData (topModuleIso topInvModuleIso)
 
 namespace JacobianVarieties.Picard.Proofs.LocalPointClass
 attribute [-instance]
@@ -363,39 +366,6 @@ end foldr
 
 section top
 variable {X : Scheme.{u}}
-
-/-- Sections of the structure sheaf on an empty scheme form a subsingleton. -/
-theorem subsingleton_sections_of_isEmpty {Z : Scheme.{u}} [IsEmpty Z] (V : Z.Opens) :
-    Subsingleton Γ(Z, V) := by
-  obtain rfl : V = ⊥ := by
-    ext x
-    exact (IsEmpty.false x).elim
-  exact CommRingCat.subsingleton_of_isTerminal (TopCat.Sheaf.isTerminalOfEmpty Z.sheaf)
-
-/-- The unit morphism to the pushforward from an empty scheme is zero. -/
-theorem unitToPushforwardUnit_eq_zero_of_isEmpty {Z : Scheme.{u}} (i : Z ⟶ X) [IsEmpty Z] :
-    i.unitToPushforwardUnit = 0 := by
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  ext
-  have : Subsingleton Γ(Z, i ⁻¹ᵁ U.unop) := subsingleton_sections_of_isEmpty _
-  exact Subsingleton.elim (α := Γ(Z, i ⁻¹ᵁ U.unop)) _ _
-
-/-- The module of the unit ideal is the tensor unit. -/
-def topModuleIso : (⊤ : X.IdealSheafData).module ≅ 𝟙_ X.Modules :=
-  (kernelIsoOfEq (unitToPushforwardUnit_eq_zero_of_isEmpty (⊤ : X.IdealSheafData).subschemeι) ≪≫
-    kernelZeroIsoSource : (kernel ((⊤ : X.IdealSheafData).subschemeι.unitToPushforwardUnit) :
-      SheafOfModules X.ringCatSheaf) ≅ SheafOfModules.unit X.ringCatSheaf)
-
-/-- The inverse module of the unit ideal is isomorphic to the tensor unit. -/
-theorem nonempty_topInvModuleIso : Nonempty ((⊤ : X.IdealSheafData).invModule ≅ 𝟙_ X.Modules) :=
-  MonoidalCategory.nonempty_iso_of_tensor_iso_tensorUnit (topModuleIso (X := X))
-    (Scheme.IdealSheafData.isInvertible_top (X := X)).nonempty_module_tensor_invModule_iso.1 ⟨λ_ _⟩
-
-/-- An isomorphism from the inverse module of the unit ideal to the tensor unit. -/
-def topInvModuleIso : (⊤ : X.IdealSheafData).invModule ≅ 𝟙_ X.Modules :=
-  nonempty_topInvModuleIso.some
 
 /-- A twist by the unit ideal leaves the module unchanged up to isomorphism. -/
 def twistStepTopIso {ι : Type*} (K : ι → X.IdealSheafData) (pos neg : ι → ℕ) (i : ι) (hi : K i = ⊤)

@@ -420,7 +420,8 @@ theorem exists_opens_extension_of_forall_nhds_extension
       t.base y = IsLocalRing.closedPoint R → y = (ηZ Z).1 := by
     intro Z y hy hys
     let y' : Ts := ⟨y, hys⟩
-    have hy' : y' ⤳ ηZ Z := Topology.IsInducing.subtypeVal.specializes_iff.mp hy
+    have hInducing : Topology.IsInducing (Subtype.val : Ts → T) := ⟨rfl⟩
+    have hy' : y' ⤳ ηZ Z := (hInducing.specializes_iff (x := y') (y := ηZ Z)).mp hy
     have h1 : (Z.1 : Set Ts) ⊆ closure {y'} := by
       rw [← (hηZ Z).def]
       exact closure_minimal (Set.singleton_subset_iff.mpr (specializes_iff_mem_closure.mp hy'))

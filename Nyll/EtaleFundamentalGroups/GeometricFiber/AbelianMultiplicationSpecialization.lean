@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.AbelianUnitMultiplicationCover
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperCompleteGeometricSpecializationFunctor
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackFiberPoint
@@ -36,8 +37,8 @@ open AlgebraicGeometry.FiniteEtale
 
 namespace GoodReductionJacobian.RelativeGroupLaw
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Base change retains the actual multiplication morphism as a finite étale cover. -/
 def unitMultiplicationCoverBaseChangeIso

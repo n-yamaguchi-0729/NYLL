@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperFamilyFiberComparison
 import Nyll.EtaleFundamentalGroups.GeometricFiber.ProperCompletionColimitSpecializationFunctor
 import Nyll.EtaleFundamentalGroups.StrictHenselian.HenselianNoetherianCompletionGeometricLift
@@ -30,8 +31,8 @@ namespace AlgebraicGeometry.FiniteEtale.CompletionColimitFamily
 
 open HenselianNoetherianImageStages
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable (R A : Type u) [CommRing R] [IsNoetherianRing R]
   [CommRing A] [Algebra R A] [HenselianLocalRing A]

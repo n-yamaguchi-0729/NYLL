@@ -74,7 +74,7 @@ theorem exists_uniform_geometric_H1_bound
   obtain ⟨⟨eb⟩, _, _⟩ :=
     Scheme.TwoAffineOpenCover.exists_cech_sectionsOf_baseChange_equiv_of_locallyTrivial
       𝒱 c F hF.exists_trivialization k
-  obtain ⟨_, ⟨eu⟩⟩ := nonempty_linearEquiv_of_iso π 𝒲
+  obtain ⟨_, ⟨eu⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso π 𝒲
     (Scheme.Modules.pullbackTensorUnitObjIso f)
   calc
     Module.finrank k (𝒲.sectionsOf π (𝟙_ _)).H1 =

@@ -317,7 +317,7 @@ theorem xMul_pow_apply (j : Fin (n + 1)) (k : ℕ) (f : ProjSpace.twistFam (ι �
     simp only [pow_zero, Nat.cast_zero, sub_zero, one_mul]
     rfl
   | succ k ih =>
-    erw [pow_succ', Module.End.mul_apply]
+    erw [pow_succ', mul_apply_eq_comp]
     change ProjSpace.restrictFun (inf_le_right : (⊤ : Z.Opens) ⊓ ProjSpace.pullbackChart ι i ≤
       ProjSpace.pullbackChart ι i)
         (ProjSpace.frameUnit ι i j) *

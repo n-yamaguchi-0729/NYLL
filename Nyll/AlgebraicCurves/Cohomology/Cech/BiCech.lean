@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Cohomology.Cech.OrderedFaceMaps
 public import Mathlib.Order.Fin.Basic
 public import Mathlib.Order.Prod.Lex.Basic
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
@@ -173,15 +174,6 @@ theorem dV_apply (p q : ℕ) (c : C F 𝔄 𝔅 p q) (st : 𝔄.Idx p × 𝔅.Id
     LinearMap.comp_apply,
     LinearMap.proj_apply]
 
-theorem succAbove_comp_succAbove {n : ℕ} {i j : Fin (n + 2)} (H : i ≤ j) :
-    Fin.succAbove j.succ ∘ Fin.succAbove i = Fin.succAbove i.castSucc ∘ Fin.succAbove j := by
-  ext k
-  simp only [Function.comp_apply, Fin.succAbove]
-  rcases i with ⟨i, hi⟩; rcases j with ⟨j, hj⟩; rcases k with ⟨k, hk⟩
-  simp only [Fin.le_def] at H
-  simp only [Fin.lt_def, Fin.castSucc_mk, Fin.succ_mk, Fin.val_castSucc]
-  split_ifs <;> simp_all only [Fin.val_succ, Fin.val_castSucc] <;> omega
-
 theorem res_left_eq {p q : ℕ} {s s' : 𝔄.Idx p} (heq : s = s') (t : 𝔅.Idx q) (f : C F 𝔄 𝔅 p q)
     {O : Z.Opens} (h : O ≤ 𝔄.inter s ⊓ 𝔅.inter t) (h' : O ≤ 𝔄.inter s' ⊓ 𝔅.inter t) :
     F.res h (f (s, t)) = F.res h' (f (s', t)) := by
@@ -243,7 +235,7 @@ theorem dH_sq (p q : ℕ) : dH F 𝔄 𝔅 (p + 1) q ∘ₗ dH F 𝔄 𝔅 p q =
       apply Subtype.ext
       change s.1 ∘ (Fin.succAbove a ∘ Fin.succAbove b) = s.1 ∘ (Fin.succAbove b.succ ∘
         Fin.succAbove a')
-      rw [← hacs, succAbove_comp_succAbove halt]
+      rw [← hacs, Fin.succAbove_comp_succAbove_of_le halt]
     have hsign : ((-1 : ℤ) ^ ((a : ℕ) + (b : ℕ)))
         = -((-1 : ℤ) ^ (((b.succ : Fin (p + 3)) : ℕ) + (a' : ℕ))) := by
       simp only [Fin.val_succ, a', Fin.val_castLT]
@@ -303,7 +295,7 @@ theorem dV_sq (p q : ℕ) : dV F 𝔄 𝔅 p (q + 1) ∘ₗ dV F 𝔄 𝔅 p q =
       apply Subtype.ext
       change t.1 ∘ (Fin.succAbove a ∘ Fin.succAbove b) = t.1 ∘ (Fin.succAbove b.succ ∘
         Fin.succAbove a')
-      rw [← hacs, succAbove_comp_succAbove halt]
+      rw [← hacs, Fin.succAbove_comp_succAbove_of_le halt]
     have hsign : ((-1 : ℤ) ^ ((a : ℕ) + (b : ℕ)))
         = -((-1 : ℤ) ^ (((b.succ : Fin (q + 3)) : ℕ) + (a' : ℕ))) := by
       simp only [Fin.val_succ, a', Fin.val_castLT]

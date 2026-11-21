@@ -522,44 +522,6 @@ namespace WrapB
 
 open _root_.AlgebraicGeometry
 
-/-- A two-affine cover is determined by its two open subsets. -/
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-/-- The compatible section family obtained by restricting a global section. -/
-def sectionOfGlobal {X : Scheme.{u}} (M : X.Modules) (σ : Γ(M, ⊤)) : M.val.sections :=
-  ⟨fun U => (Scheme.Modules.presheaf M).map (homOfLE (le_top : U.unop ≤ ⊤)).op σ,
-   fun {U V} f => by
-     change (Scheme.Modules.presheaf M).map f ((Scheme.Modules.presheaf M).map (homOfLE (le_top :
-       U.unop ≤ ⊤)).op σ) =
-       (Scheme.Modules.presheaf M).map (homOfLE (le_top : V.unop ≤ ⊤)).op σ
-     have hg : (homOfLE (le_top : U.unop ≤ ⊤)).op ≫ f = (homOfLE (le_top : V.unop ≤ ⊤)).op :=
-       Subsingleton.elim _ _
-     rw [← CategoryTheory.ConcreteCategory.comp_apply, ← Functor.map_comp, hg]⟩
-
-/-- The restricted section family recovers its original global section. -/
-theorem sectionOfGlobal_top {X : Scheme.{u}} (M : X.Modules) (σ : Γ(M, ⊤)) :
-    (sectionOfGlobal M σ).val (op ⊤) = σ := by
-  change (Scheme.Modules.presheaf M).map (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)).op σ = σ
-  have h1 : (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)).op = 𝟙 (op ⊤) := Subsingleton.elim _ _
-  rw [h1, CategoryTheory.Functor.map_id]
-  rfl
-
-/-- A nonzero global section gives a nonzero morphism from the unit module. -/
-theorem exists_hom_ne_zero {X : Scheme.{u}} (M : X.Modules) (σ : Γ(M, ⊤)) (hσ : σ ≠ 0) :
-    ∃ s : 𝟙_ X.Modules ⟶ M, s ≠ 0 := by
-  obtain ⟨s, hs⟩ : ∃ s : 𝟙_ X.Modules ⟶ M, (SheafOfModules.unitHomEquiv M) s = sectionOfGlobal M σ
-    :=
-    ⟨(SheafOfModules.unitHomEquiv M).symm (sectionOfGlobal M σ), Equiv.apply_symm_apply _ _⟩
-  refine ⟨s, fun h0 => hσ ?_⟩
-  have e2 : (sectionOfGlobal M σ).val (op ⊤) = σ := sectionOfGlobal_top M σ
-  have e3 : (sectionOfGlobal M σ).val (op ⊤) = (Scheme.Modules.Hom.app s ⊤) (1 : Γ(X, ⊤)) := by
-    rw [← hs]
-    rfl
-  rw [← e2, e3, h0, Scheme.Modules.Hom.zero_app]
-  rfl
-
 /-- Nontrivial zeroth cohomology gives a nonzero section morphism. -/
 theorem exists_section_ne_zero {K : Type u} [Field K] {X : Scheme.{u}}
     (x : X ⟶ Spec (CommRingCat.of K))
@@ -568,7 +530,7 @@ theorem exists_section_ne_zero {K : Type u} [Field K] {X : Scheme.{u}}
   obtain ⟨y, hy⟩ := exists_ne (0 : (𝒱.sectionsOf x M).H0)
   obtain ⟨eΓ, -⟩ := Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_H0 𝒱 x M
   have hσ : eΓ.symm y ≠ 0 := fun h => hy (by rw [← eΓ.apply_symm_apply y, h, map_zero])
-  exact exists_hom_ne_zero M (eΓ.symm y) hσ
+  exact _root_.AlgebraicGeometry.Scheme.Modules.exists_hom_ne_zero M (eΓ.symm y) hσ
 
 end AlgebraicGeometry.WrapB
 
@@ -704,7 +666,9 @@ theorem exists_nonempty_pullback_fst_iso_invModule_prodKerGraph_of_eulerChar_eq
     (Limits.pullback.snd x (𝟙 _)) x φ hφ 𝒱 (𝟙_ X.Modules) (𝟙_ (Limits.pullback x (𝟙 (Spec
       (CommRingCat.of K)))).Modules)
     (Scheme.Modules.pullbackUnitIso φ.hom).symm
-  obtain rfl : 𝒱Y' = 𝒱Y := cover_ext (hU0'.trans hU0.symm) (hU1'.trans hU1.symm)
+  obtain rfl : 𝒱Y' = 𝒱Y :=
+    _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.cover_ext
+      (hU0'.trans hU0.symm) (hU1'.trans hU1.symm)
   have hnt : Nontrivial (𝒱Y'.sectionsOf (Limits.pullback.snd x (𝟙 _)) MY).H0 :=
     Module.nontrivial_of_finrank_pos (R := K) (by rw [e0.finrank_eq]; exact h0)
   obtain ⟨sY, hsY⟩ := exists_section_ne_zero (Limits.pullback.snd x (𝟙 _)) 𝒱Y' MY hnt
@@ -845,28 +809,6 @@ theorem exists_nonempty_iso_invModule_prod_ker_of_eulerChar_eq
 
 end AlgebraicGeometry.Scheme.Modules.IsInvertible
 
-namespace WSM
-
-/-- A two-affine cover is determined by its two open subsets. -/
-theorem cover_ext {X : Scheme.{u}} {𝒱 𝒱' : X.TwoAffineOpenCover}
-    (h0 : 𝒱.U0 = 𝒱'.U0) (h1 : 𝒱.U1 = 𝒱'.U1) : 𝒱 = 𝒱' := by
-  cases 𝒱; cases 𝒱'; cases h0; cases h1; rfl
-
-/-- A module isomorphism induces linear equivalences on two-chart cohomology. -/
-theorem nonempty_linearEquiv_of_iso {R : Type u} [CommRing R] {X : Scheme.{u}}
-    (x : X ⟶ Spec (CommRingCat.of R))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Nonempty ((𝒱.sectionsOf x M).H0 ≃ₗ[R] (𝒱.sectionsOf x M').H0) ∧
-      Nonempty ((𝒱.sectionsOf x M).H1 ≃ₗ[R] (𝒱.sectionsOf x M').H1) := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := cover_ext h0 h1
-  exact ⟨⟨e0⟩, ⟨e1⟩⟩
-
-end WSM
-
 end
 end JacobianVarieties.Picard.Proofs.InjectiveTwistedSections
 
@@ -972,7 +914,7 @@ theorem exists_injective_forall_subsingleton_H1_sectionsOf_tensor_of_isAlgEquivZ
   obtain ⟨fin0, fin1, hrk⟩ :=
     AlgebraicCurve.CurveModel.finrank_H0_sectionsOf_invModule_prod_ker_tensor_module_prod_ker_eq_ell
       x M e he Pt v 𝒱
-  obtain ⟨⟨k0⟩, ⟨k1⟩⟩ := WSM.nonempty_linearEquiv_of_iso x 𝒱 eMN
+  obtain ⟨⟨k0⟩, ⟨k1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso x 𝒱 eMN
   have hM0 : Module.finrank K (𝒱.sectionsOf x (L ⊗ ((p.ker ^ r).invModule ⊗ (∏ j, (v
     j).1.ker).module))).H0 = 1 :=
     k0.finrank_eq.trans (hrk.trans (hgood v hv))

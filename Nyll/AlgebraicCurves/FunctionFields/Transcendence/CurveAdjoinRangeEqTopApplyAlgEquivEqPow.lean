@@ -267,7 +267,7 @@ theorem exists_eq_algebraMap_of_mem_S (hr : 0 < r) {n : ℕ} (hn : 0 < n) {c : F
   rw [mem_S] at hc
   have halg : IsAlgebraic K c :=
     ⟨Polynomial.X ^ ((p ^ r) ^ n) - Polynomial.X,
-      FiniteField.X_pow_card_sub_X_ne_zero K (one_lt_Qn p r hr hn), by
+      Polynomial.X_pow_sub_X_ne_zero (R := K) (one_lt_Qn p r hr hn), by
         rw [map_sub, Polynomial.aeval_X_pow, Polynomial.aeval_X, hc, sub_self]⟩
   exact halg.isIntegral.mem_range_algebraMap_of_minpoly_splits
     (by simpa using IsAlgClosed.splits (minpoly K c))
@@ -286,7 +286,7 @@ theorem coe_S_eq_rootSet (hr : 0 < r) {n : ℕ} (hn : 0 < n) :
     (S F p r n : Set F) = (Polynomial.X ^ ((p ^ r) ^ n) - Polynomial.X : Polynomial K).rootSet F :=
       by
   have hne : (Polynomial.X ^ ((p ^ r) ^ n) - Polynomial.X : Polynomial K) ≠ 0 :=
-    FiniteField.X_pow_card_sub_X_ne_zero K (one_lt_Qn p r hr hn)
+    Polynomial.X_pow_sub_X_ne_zero (R := K) (one_lt_Qn p r hr hn)
   ext c
   rw [SetLike.mem_coe, mem_S, Polynomial.mem_rootSet_of_ne hne]
   simp [sub_eq_zero]
@@ -305,7 +305,7 @@ theorem natCard_S (hr : 0 < r) {n : ℕ} (hn : 0 < n) : Nat.card (S F p r n) = (
   have hcard : Fintype.card ((Polynomial.X ^ ((p ^ r) ^ n) - Polynomial.X : Polynomial K).rootSet F)
       = (Polynomial.X ^ ((p ^ r) ^ n) - Polynomial.X : Polynomial K).natDegree :=
     Polynomial.card_rootSet_eq_natDegree hsep (IsAlgClosed.splits_domain _)
-  rw [FiniteField.X_pow_card_sub_X_natDegree_eq K (one_lt_Qn p r hr hn)] at hcard
+  rw [Polynomial.natDegree_X_pow_sub_X (R := K) (one_lt_Qn p r hr hn)] at hcard
   rw [← hcard, ← Nat.card_eq_fintype_card]
   exact Nat.card_congr (Set.equivOfEq (coe_S_eq_rootSet (K := K) p r hr hn))
 
@@ -604,22 +604,22 @@ theorem alpha_pow_e : αα ^ e = 1 := by
   | add y z hy hz ihy ihz =>
     have := congrArg₂ (· + ·) ihy ihz
     have h__ := this
-    try simp only [← map_add] at h__
+    simp only [← map_add] at h__
     exact h__
   | neg y hy ihy =>
     have := congrArg (fun w => -w) ihy
     have h__ := this
-    try simp only [← map_neg] at h__
+    simp only [← map_neg] at h__
     exact h__
   | inv y hy ihy =>
     have := congrArg (fun w => w⁻¹) ihy
     have h__ := this
-    try simp only [← map_inv₀] at h__
+    simp only [← map_inv₀] at h__
     exact h__
   | mul y z hy hz ihy ihz =>
     have := congrArg₂ (· * ·) ihy ihz
     have h__ := this
-    try simp only [← map_mul] at h__
+    simp only [← map_mul] at h__
     exact h__
 
 /-- The product of the comparison automorphism and the restricted original automorphism. -/
@@ -898,7 +898,7 @@ theorem adjoin_range_coe_F1I_eq_top
     IntermediateField.adjoin K (Set.range (fun y : FI => ((y : L) : F))) = ⊤ := by
   have h := adjoin_range_F1_eq_top p r φ hφ σ e he hσe hcomm hr s hgen hF₀L
   convert h using 2
-  all_goals try rfl
+  rfl
 
 end WithData4
 

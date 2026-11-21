@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.AlgebraicCurves.Geometry.Schemes.Morphisms.HomInvertibleKerCompEqId
 public import Nyll.EtaleFundamentalGroups.Cohomology.CurvePointFillingInertia
 public import Nyll.EtaleFundamentalGroups.Cohomology.NativeBoundaryNormalClosure
 public import Nyll.EtaleFundamentalGroups.GaloisCovers.ConstantBaseChangeCompactification
@@ -25,6 +26,8 @@ normalization prime, without filling the other conjugate points.
 -/
 
 @[expose] public section
+
+open AlgebraicGeometry.Scheme.Hom (sectionEffectiveCartierDivisor)
 
 noncomputable section
 
@@ -152,7 +155,7 @@ theorem constantPointFilling_ker_eq_normalClosure_normalizationInertia
         (inferInstance : SmoothOfRelativeDimension 1 c)
     let pE := constantPointLift k E c p hp
     let hpoint := constantPointLift_structure k E c p hp
-    let D := curvePointDivisor cE pE hpoint
+    let D := sectionEffectiveCartierDivisor cE pE hpoint
     let : IsIntegral (D.1.supportComplement : Scheme) :=
       curvePointComplement_isIntegral cE pE hpoint
     ∀ (g : Spec (.of K) ⟶ D.1.supportComplement) [IsDominant g] [IsPreimmersion g],

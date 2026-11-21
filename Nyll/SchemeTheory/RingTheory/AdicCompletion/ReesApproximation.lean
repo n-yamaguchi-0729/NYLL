@@ -61,7 +61,7 @@ private theorem coeff_mem_pow_succ_of_mem_map
     exact hf
   refine Submodule.smul_induction_on hf' ?_ ?_
   · intro r hr g _
-    rw [Subalgebra.coe_smul, Polynomial.coeff_smul, smul_eq_mul, pow_succ']
+    rw [Subalgebra.coe_smul, AddMonoidAlgebra.coeff_smul_apply, smul_eq_mul, pow_succ']
     exact Ideal.mul_mem_mul hr (g.property n)
   · intro f g hf hg
     change ((f : R[X]) + (g : R[X])).coeff n ∈ I ^ (n + 1)
@@ -156,7 +156,7 @@ theorem exists_finite_approximation (hI : I.FG) [IsNoetherianRing (R ⧸ I)] (J 
     rw [map_sub, map_sum, Polynomial.coeff_sub, Polynomial.finsetSum_coeff]
     change (Polynomial.monomial n x).coeff n -
       ∑ i, (v (p i * reesMonomial I (d i) (g i) (hgI i))).coeff n = _
-    rw [Polynomial.coeff_monomial, ite_eq_left rfl]
+    rw [Polynomial.coeff_monomial_same]
     congr 1
     apply Finset.sum_congr rfl
     intro i _

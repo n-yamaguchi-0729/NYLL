@@ -10,7 +10,16 @@ public import Nyll.GaloisCohomology.GroupTheory.ProjectiveResolutionComparison
 public import Nyll.GaloisCohomology.GroupTheory.PGroupGaloisTower
 public import Nyll.GaloisCohomology.GroupTheory.Augmentation
 public import Nyll.GaloisCohomology.GroupTheory.RepresentationPowers
+public import Nyll.GaloisCohomology.GroupTheory.EquivariantPowerReduction
+public import Nyll.GaloisCohomology.GroupTheory.GroupAlgebraReduction
+public import Nyll.GaloisCohomology.GroupTheory.MatrixProjectorExactness
+public import Nyll.GaloisCohomology.GroupTheory.ModularProjectorHom
+public import Nyll.GaloisCohomology.GroupTheory.PrimePowerIdempotentLift
+public import Nyll.GaloisCohomology.GroupTheory.PrimeProjectorReduction
+public import Nyll.GaloisCohomology.GroupTheory.PrimeProjectorWeight
+public import Nyll.GaloisCohomology.GroupTheory.PrimePrimaryModule
 public import Nyll.GaloisCohomology.GroupTheory.Finite
+public import Nyll.GaloisCohomology.GroupTheory.FiniteExactSequence
 public import Nyll.GaloisCohomology.GroupTheory.Quotient
 public import Nyll.GaloisCohomology.GroupTheory.QuotientTower
 public import Nyll.GaloisCohomology.GroupTheory.RestrictionKernel
@@ -26,8 +35,21 @@ public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingEquivalence
 public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingHomologyEquivalence
 public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingConnectingMap
 public import Nyll.GaloisCohomology.GroupTheory.CoefficientRingCoinduction
+public import Nyll.GaloisCohomology.GroupTheory.CoinducedShift
+public import Nyll.GaloisCohomology.GroupTheory.CoinducedShiftNaturality
+public import Nyll.GaloisCohomology.GroupTheory.InducedShift
+public import Nyll.GaloisCohomology.GroupTheory.InducedShiftNaturality
+public import Nyll.GaloisCohomology.GroupTheory.InductionCounit
+public import Nyll.GaloisCohomology.GroupTheory.FiniteGroupTrace
+public import Nyll.GaloisCohomology.GroupTheory.TensorInvariant
+public import Nyll.GaloisCohomology.GroupTheory.RepresentationTensor
+public import Nyll.GaloisCohomology.GroupTheory.TensorShiftExactness
 public import Nyll.GaloisCohomology.GroupTheory.H2FiniteIndexTrace
+public import Nyll.GaloisCohomology.GroupTheory.H2EquivariantEquivalence
+public import Nyll.GaloisCohomology.GroupTheory.H2EquivariantPullback
 public import Nyll.GaloisCohomology.GroupTheory.FinitePGroupInvariants
+public import Nyll.GaloisCohomology.GroupTheory.ModularTameMonomial
+public import Nyll.GaloisCohomology.GroupTheory.MonomialInduction
 
 
 public import Nyll.GaloisCohomology.GroupTheory.FiniteTorsorInvariants

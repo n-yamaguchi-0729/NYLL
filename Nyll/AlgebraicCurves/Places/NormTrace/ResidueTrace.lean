@@ -110,21 +110,9 @@ variable {K F F' : Type*} [Field K] [Field F] [Field F']
 namespace Dict
 
 open _root_.AlgebraicCurve.Place hiding mem_iff_ord_nonneg ord_nonneg_of_mem
-  le_ord_iff_mem_pow_fiberCenter neg_log_valuation_fiberCenter_eq_ord eq_ord_of_addHom_of_nonneg_iff
+  eq_ord_of_addHom_of_nonneg_iff
 
 variable {v : Place K F} {w : Place K F'}
-
-/-- The fibre-centre valuation computes the extending place order. -/
-theorem neg_log_valuation_fiberCenter_eq_ord (hw : w.restrict F = v) {x : F'} (hx : x ≠ 0) :
-    -log ((fiberCenter F' v hw).valuation F' x) = w.ord x :=
-  _root_.AlgebraicCurve.Place.neg_log_valuation_fiberCenter_eq_ord hw hx
-
-/-- Powers of the fibre centre measure the original order bound. -/
-theorem le_ord_iff_mem_pow_fiberCenter (hw : w.restrict F = v)
-    {c : integralClosureAt F' v} (hc : c ≠ 0) (n : ℕ) :
-    (n : ℤ) ≤ w.ord (algebraMap (integralClosureAt F' v) F' c) ↔
-      c ∈ (fiberCenter F' v hw).asIdeal ^ n :=
-  _root_.AlgebraicCurve.Place.le_ord_iff_mem_pow_fiberCenter hw hc n
 
 /-- The place and ideal ramification indices agree at the actual fibre centre. -/
 theorem ramificationIndex_eq_ramificationIdx_fiberCenter (hw : w.restrict F = v) :
@@ -133,88 +121,12 @@ theorem ramificationIndex_eq_ramificationIdx_fiberCenter (hw : w.restrict F = v)
         (fiberCenter F' v hw).asIdeal :=
   _root_.AlgebraicCurve.Place.ramificationIndex_eq_ramificationIdx_fiberCenter v hw
 
-/-- The map from the integral closure to the valuation subring of the extending place. -/
-def toValuationSubringOfRestrictEq (hw : w.restrict F = v) :
-    integralClosureAt F' v →+* w.toValuationSubring :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.toValuationSubringOfRestrictEq hw
-
-omit [FiniteDimensional F F'] in
-/-- The restricted inclusion has the original field value. -/
-@[scoped simp]
-theorem coe_toValuationSubringOfRestrictEq (hw : w.restrict F = v)
-    (c : integralClosureAt F' v) :
-    (toValuationSubringOfRestrictEq hw c : F')
-      = algebraMap (integralClosureAt F' v) F' c :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.coe_toValuationSubringOfRestrictEq hw c
-
-/-- The residue homomorphism on the integral closure, induced by the place above `v`. -/
-def residueOfCenter (hw : w.restrict F = v) :
-    integralClosureAt F' v →+* w.ResidueField :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter hw
-
-omit [FiniteDimensional F F'] in
-/-- The centre residue map is the residue of the same restricted inclusion. -/
-theorem residueOfCenter_apply (hw : w.restrict F = v) (c : integralClosureAt F' v) :
-    residueOfCenter hw c = IsLocalRing.residue w.toValuationSubring
-      (toValuationSubringOfRestrictEq hw c) :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueOfCenter_apply hw c
-
-/-- The actual centre residue map has the fibre centre as kernel. -/
-theorem ker_residueOfCenter (hw : w.restrict F = v) :
-    RingHom.ker (residueOfCenter hw) = (fiberCenter F' v hw).asIdeal :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.ker_residueOfCenter hw
-
-/-- The actual residue map at the fibre centre is surjective. -/
-theorem surjective_residueOfCenter (hw : w.restrict F = v) :
-    Function.Surjective (residueOfCenter hw) :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.surjective_residueOfCenter hw
-
-/-- The quotient by the fibre centre identified with the residue field of the place. -/
-def residueFieldEquivQuotientCenter (hw : w.restrict F = v) :
-    integralClosureAt F' v ⧸ (fiberCenter F' v hw).asIdeal ≃+* w.ResidueField :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueFieldEquivQuotientCenter hw
-
-/-- The quotient comparison evaluates through the same residue map. -/
-theorem residueFieldEquivQuotientCenter_mk (hw : w.restrict F = v)
-    (c : integralClosureAt F' v) :
-    residueFieldEquivQuotientCenter hw (Ideal.Quotient.mk _ c) = residueOfCenter hw c :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.residueFieldEquivQuotientCenter_mk hw c
-
-/-- The valuation-subring equivalence induced by equality of two places. -/
-def placeCongrEquiv {u u' : Place K F} (h : u = u') :
-    u.toValuationSubring ≃+* u'.toValuationSubring :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.placeCongrEquiv h
-/-- Equality transport of places preserves the underlying field element. -/
-@[scoped simp]
-theorem coe_placeCongrEquiv {u u' : Place K F} (h : u = u') (x : u.toValuationSubring) :
-    (placeCongrEquiv h x : F) = (x : F) :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.coe_placeCongrEquiv h x
-
-/-- The residue-field equivalence induced by equality of the restricted and base places. -/
-def restrictResidueFieldEquiv (hw : w.restrict F = v) :
-    (w.restrict F).ResidueField ≃+* IsLocalRing.ResidueField v.toValuationSubring :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.restrictResidueFieldEquiv hw
-
-omit [FiniteDimensional F F'] in
-/-- Restriction transport commutes with the original residue maps. -/
-theorem restrictResidueFieldEquiv_residue (hw : w.restrict F = v)
-    (a : (w.restrict F).toValuationSubring) :
-    restrictResidueFieldEquiv hw (IsLocalRing.residue _ a)
-      = IsLocalRing.residue _ (placeCongrEquiv hw a) :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.restrictResidueFieldEquiv_residue hw a
-
-/-- The actual residue comparison identifies the inertia degrees. -/
-theorem inertiaDeg_eq_inertiaDeg_fiberCenter (hw : w.restrict F = v) :
-    w.inertiaDeg F =
-      (fiberCenter F' v hw).asIdeal.inertiaDeg v.toValuationSubring :=
-  _root_.AlgebraicCurve.Place.FiberCenterResidueComparison.inertiaDeg_eq_inertiaDeg_fiberCenter hw
-
 end Dict
 
 namespace Blocks
 
 open _root_.AlgebraicCurve.Place hiding mem_iff_ord_nonneg ord_nonneg_of_mem
-  le_ord_iff_mem_pow_fiberCenter neg_log_valuation_fiberCenter_eq_ord eq_ord_of_addHom_of_nonneg_iff
+  eq_ord_of_addHom_of_nonneg_iff
 open Dict
 
 local instance : DecidableEq (Place K F') := Classical.decEq _
@@ -349,7 +261,7 @@ theorem finrank_fiberCenterPow (hw : w.restrict F = v) (hwrat : w.IsRational)
         _ _ (fiberCenter F' v hw).ne_bot hne,
       ← Ideal.inertiaDeg_eq_of_isMaximal (IsLocalRing.maximalIdeal v.toValuationSubring)
         (fiberCenter F' v hw).asIdeal,
-      ← inertiaDeg_eq_inertiaDeg_fiberCenter hw,
+      ← _root_.AlgebraicCurve.Place.inertiaDeg_eq_inertiaDeg_fiberCenter _ hw,
       w.inertiaDeg_eq_one_of_isRational hwrat (hw.symm ▸ hvrat), mul_one,
       ← Dict.ramificationIndex_eq_ramificationIdx_fiberCenter hw]
   exact key
@@ -652,7 +564,7 @@ end Blocks
 namespace Assembly
 
 open _root_.AlgebraicCurve.Place hiding mem_iff_ord_nonneg ord_nonneg_of_mem
-  le_ord_iff_mem_pow_fiberCenter neg_log_valuation_fiberCenter_eq_ord eq_ord_of_addHom_of_nonneg_iff
+  eq_ord_of_addHom_of_nonneg_iff
 open Blocks
 
 variable {v : Place K F} [HasPrincipalDivisors K F']

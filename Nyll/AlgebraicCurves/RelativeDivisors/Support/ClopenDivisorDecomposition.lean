@@ -124,8 +124,8 @@ theorem ideal_eq_mul_clopen_complement
   apply Scheme.IdealSheafData.ext
   funext A
   change D.I.ideal A = j₀.ker.ideal A * j₁.ker.ideal A
-  rw [Ideal.mul_eq_inf_of_coprime
-    (congrArg (fun I : (pullback c t).IdealSheafData => I.ideal A) hsup)]
+  rw [Ideal.mul_eq_inf_of_isCoprime (Ideal.isCoprime_iff_sup_eq.mpr
+    (congrArg (fun I : (pullback c t).IdealSheafData => I.ideal A) hsup))]
   exact congrArg (fun I : (pullback c t).IdealSheafData => I.ideal A) hinf.symm
 
 /-- Every clopen split constructs both finite-flat blocks, their product

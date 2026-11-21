@@ -291,14 +291,6 @@ theorem pullbackSection_ne_zero_of_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso
   have h2 := congrArg (fun t => (Scheme.Modules.pullbackUnitIso f).hom ≫ t) h0
   exact (map_eq_zero_iff_of_isIso f s).1 ((h1.trans h2).trans Limits.comp_zero)
 
-theorem twoAffineOpenCover_ext {X : Scheme.{u}} (𝒱₁ 𝒱₂ : X.TwoAffineOpenCover)
-    (h0 : 𝒱₁.U0 = 𝒱₂.U0) (h1 : 𝒱₁.U1 = 𝒱₂.U1) : 𝒱₁ = 𝒱₂ := by
-  rcases 𝒱₁ with ⟨U0, U1, a1, a2, a3, a4⟩
-  rcases 𝒱₂ with ⟨V0, V1, b1, b2, b3, b4⟩
-  simp only at h0 h1
-  subst h0 h1
-  rfl
-
 end M16Child
 end
 end AlgebraicCurves.RelativeDivisors.Proofs.OpenCartierIdealExtension
@@ -368,7 +360,8 @@ theorem exists_I_eq_zeroSchemeIdeal_and_supportedIn_of_support_subset_of_isOpenI
         (asIso φ) hφy' 𝒱
         (𝟙_ Y.Modules) (𝟙_ (pullback y (𝟙 (Spec (CommRingCat.of k)))).Modules)
         (Scheme.Modules.pullbackUnitIso φ).symm
-    have h12 : 𝒱₂ = 𝒱₁ := twoAffineOpenCover_ext _ _ (h20.trans h10.symm) (h21.trans h11.symm)
+    have h12 : 𝒱₂ = 𝒱₁ :=
+    Scheme.TwoAffineOpenCover.cover_ext (h20.trans h10.symm) (h21.trans h11.symm)
     subst h12
     refine ⟨𝒱₂, ?_⟩
     have e1 := eH0.finrank_eq

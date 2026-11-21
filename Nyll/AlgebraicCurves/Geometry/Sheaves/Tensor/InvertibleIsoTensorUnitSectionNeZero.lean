@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Modules.Sections.SectionsGluing
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -254,17 +255,9 @@ lemma app_map {M N : Y.Modules} (φ : M ⟶ N) {U V : Y.Opens} (i : V ⟶ U) (x 
 
 variable (P : Y.Modules)
 
-/-- The compatible family obtained by restricting a global section. -/
-def sectionOfGlobal (s : Γ(P, ⊤)) : (P : SheafOfModules Y.ringCatSheaf).sections :=
-  PresheafOfModules.sectionsMk (fun U => P.presheaf.map (homOfLE le_top).op s) (by
-    intro U V i
-    change (P.presheaf.map (homOfLE le_top).op ≫ P.presheaf.map i) s = _
-    rw [← P.presheaf.map_comp]
-    rfl)
-
 /-- The morphism from the unit module determined by a global section. -/
 def homOfSection (s : Γ(P, ⊤)) : 𝟙_ Y.Modules ⟶ P :=
-  (SheafOfModules.unitHomEquiv P).symm (sectionOfGlobal P s)
+  (SheafOfModules.unitHomEquiv P).symm (P.topSection s)
 
 lemma homOfSection_app (s : Γ(P, ⊤)) (U : Y.Opens) (g : Γ(𝟙_ Y.Modules, U)) :
     (homOfSection P s).app U g = fn g • P.presheaf.map (homOfLE le_top).op s := rfl

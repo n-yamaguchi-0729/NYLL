@@ -96,7 +96,7 @@ section Pure
 variable {F L : Type*} [Field F] [Field L] [Algebra F L]
 variable {p : ℕ} [hp : Fact p.Prime] {f : F} {α : L}
 private theorem irreducible_X_pow_sub_C (hf : ∀ g : F, g ^ p ≠ f) : Irreducible (X ^ p - C f) :=
-  X_pow_sub_C_irreducible_of_prime hp.out hf
+  irreducible_X_pow_sub_C_of_prime hp.out hf
 private theorem ne_zero_of_forall_pow_ne (hf : ∀ g : F, g ^ p ≠ f) : f ≠ 0 := by
   rintro rfl
   exact hf 0 (zero_pow hp.out.ne_zero)

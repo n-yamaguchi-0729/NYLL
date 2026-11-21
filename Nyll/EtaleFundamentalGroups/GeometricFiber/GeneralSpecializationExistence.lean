@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.CompletionColimitFamilySpecialization
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FamilySpecializationValuation
 public import Nyll.EtaleFundamentalGroups.StrictHenselian.SpecializationSpecifiedLift
@@ -34,9 +35,9 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-attribute [local instance] FiniteEtale.finiteEtaleOverCategoryCoherence
-  FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] FiniteEtale.finiteEtaleOverCategory
+  FiniteEtale.finiteEtaleHasPullbacksAlong
+  FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- A chosen geometric specialization over an arbitrary base gives a
 continuous map on the two connected geometric fibers, with constructed

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.RingTheory.Ramification.FiniteLevelInertiaImage
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.DVR
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
 public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Normalization.Compositum
@@ -80,13 +81,7 @@ local instance abhyankarLeftBasePrimeIsMaximal
     (normalizationBasePrime (V := V) (K := K) (E := E) M Q).IsMaximal :=
   normalizationBasePrime_isMaximal (V := V) M Q
 
-noncomputable local instance abhyankarTopNormalizationAction :
-    MulSemiringAction Gal(E/K) (integralClosure V E) :=
-  IsIntegralClosure.MulSemiringAction V K E (integralClosure V E)
-
-noncomputable local instance abhyankarLeftNormalizationAction :
-    MulSemiringAction Gal(M/K) (integralClosure V M) :=
-  IsIntegralClosure.MulSemiringAction V K M (integralClosure V M)
+attribute [local instance] EtaleFundamentalGroups.Inertia.normalizationInertiaImageAction
 
 /-- Prime-to-residue-characteristic tameness of the inertia group obtained by
 contracting a top normalization prime to an intermediate normalization. -/

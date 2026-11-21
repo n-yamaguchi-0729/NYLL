@@ -15,7 +15,6 @@ import Nyll.AlgebraicCurves.Places.Ramification.FinsumRamificationIndexSubOneEq
 import Nyll.AlgebraicCurves.Places.Ramification.GaloisPlaceFiber
 import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegAlongComp
 import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegAlongEqOneAlgClosed
-import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqInertiaDegFiberCenter
 import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqOneIsRational
 import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegEqRestrictEq
 import Nyll.AlgebraicCurves.Places.Ramification.InertiaDegPos

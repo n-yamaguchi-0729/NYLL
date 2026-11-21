@@ -38,7 +38,6 @@ public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentCohe
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.CoherentModules
 public import Nyll.AlgebraicCurves.Cohomology.Sheaves.Coherent.QuasicoherentModules
 public import Nyll.AlgebraicCurves.Geometry.Projective.ModulesProjectiveSections
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensorMonoidalV2
 
 /-!
 # OModule Presheaf exists polynomial forall euler Char twist tensor Pow eq monoidal V2

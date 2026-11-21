@@ -105,7 +105,7 @@ theorem finiteEtaleFunctionFieldImage_le_hilbertImage
   let jH : Y.left.functionField →ₐ[X.functionField] H.val :=
     (IntermediateField.inclusion hj).comp j.equivFieldRange.toAlgHom
   have hrange : i.fieldRange = (iH.comp jH).fieldRange :=
-    ClassFieldTheory.fieldRange_eq_of_normal i (iH.comp jH)
+    AlgHom.fieldRange_eq_of_normal i (iH.comp jH)
   rw [hrange]
   rintro a ⟨b, rfl⟩
   exact ⟨jH b, rfl⟩

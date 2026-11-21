@@ -28,6 +28,17 @@ jobs:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
+      - name: Allow the full library to map its Lean imports
+        if: inputs.target == '+Nyll'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          minimum=262144
+          if (( $(sysctl -n vm.max_map_count) < minimum )); then
+            sudo sysctl -w "vm.max_map_count=$minimum"
+          fi
+
       - name: Reserve space on the ephemeral runner
         shell: bash
         run: |

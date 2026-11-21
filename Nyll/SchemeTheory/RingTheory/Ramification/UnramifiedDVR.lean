@@ -616,7 +616,7 @@ theorem
   have hmR' : IsLocalRing.maximalIdeal (AdjoinRoot F) = 𝔪' := (IsLocalRing.eq_maximalIdeal
       hmax).symm
   have hlh : IsLocalHom (algebraMap R (AdjoinRoot F)) :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap R (AdjoinRoot F))).out 1 3).mpr (by
+    ((IsLocalRing.local_hom_tfae (algebraMap R (AdjoinRoot F))).out 1 3).mpr (by
       rw [← h𝔪', hmR'])
   have hunit : ∀ p : R[X], AdjoinRoot.mk (F.map (IsLocalRing.residue R)) (p.map
       (IsLocalRing.residue R)) ≠ 0 →

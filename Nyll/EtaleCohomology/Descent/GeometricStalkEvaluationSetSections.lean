@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleCohomology.Descent.FiniteLocallyConstantHenselianHom
 public import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
 public import Nyll.EtaleCohomology.Sites.GeometricStalkEvaluationSections
@@ -49,9 +50,9 @@ universe u
 
 namespace EtaleCohomology
 
-attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategoryCoherence
-  AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlongCoherence
-  AlgebraicGeometry.FiniteEtale.finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+  AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
+  AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The actual inverse-image map on global set sections, using the
 existing identity base-change isomorphism and the original adjunction unit. -/

@@ -714,7 +714,7 @@ theorem finrank_eq_addOrderOf_valueCoset_of_single_radical_of_separableResidue
     have := Polynomial.natDegree_le_of_dvd hdvd hPmonic.ne_zero
     calc
       (minpoly K alpha).natDegree ≤ P.natDegree := this
-      _ = n := Polynomial.natDegree_X_pow_sub_C
+      _ = n := Polynomial.natDegree_X_pow_sub_C (b' * z)
   exact le_antisymm (hfieldDegree.trans_le hminle) hnle
 
 /-- A one-generator prime-to-`p` radical extension with unchanged residue
@@ -866,7 +866,7 @@ theorem tameResidueFieldMap_surjective_of_single_radical_of_separableResidue
   have hfinrank : Module.finrank k ell = 1 :=
     hdegreeFinrank.symm.trans hf
   obtain ⟨c, hc⟩ :=
-    (finrank_eq_one_iff_of_nonzero' (1 : ell) one_ne_zero).mp
+    (finrank_eq_one_iff_of_ne_zero' (1 : ell) one_ne_zero).mp
       hfinrank y
   refine ⟨c, ?_⟩
   change algebraMap k ell c = y

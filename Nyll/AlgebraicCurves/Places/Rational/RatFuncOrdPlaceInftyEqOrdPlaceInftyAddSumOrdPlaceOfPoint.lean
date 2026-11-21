@@ -191,7 +191,7 @@ theorem exists_normalization {E : Type*} [Field E] (A : ValuationSubring E) (f :
   refine ⟨c₀, f₁, hc₀0, ?_, n₀, ?_⟩
   · rw [hf₁, ← mul_assoc, ← Polynomial.C_mul, mul_inv_cancel₀ hc₀0, Polynomial.C_1, one_mul]
   · apply Subtype.ext
-    have := congrArg (fun g => Polynomial.coeff g n₀) hf₁
+    have := congrArg (fun g : E[X] => g.coeff n₀) hf₁
     simp only [Polynomial.coeff_map, Polynomial.coeff_C_mul] at this
     rw [show ((f₁.coeff n₀ : A) : E) = algebraMap A E (f₁.coeff n₀) from rfl, this, ← hc₀,
       inv_mul_cancel₀ hc₀0]
@@ -209,7 +209,7 @@ theorem ord_placeInfty_eq_neg_intDegree [DecidableEq (RatFunc k)] {f : RatFunc k
   have hu0 : u ≠ 0 := mul_ne_zero hf (zpow_ne_zero _ hX0)
   have hval : RatFunc.inftyValuation k u = 1 := by
     rw [hu_def, map_mul, RatFunc.inftyValuation.X_zpow, RatFunc.inftyValuation_apply,
-      RatFunc.inftyValuation_of_nonzero (hx := hf), ← WithZero.exp_add, ← hd, add_neg_cancel,
+      RatFunc.inftyValuation_of_ne_zero (hx := hf), ← WithZero.exp_add, ← hd, add_neg_cancel,
       WithZero.exp_zero]
   have hmem : ∀ x : RatFunc k, RatFunc.inftyValuation k x = 1 →
       x ∈ (placeInfty k).toValuationSubring := by
@@ -414,7 +414,7 @@ theorem map_sigma_ne_zero (f₁ : A[X]) (h1 : ∃ n, f₁.coeff n = 1) :
     f₁.map (sigma A hKA hArat) ≠ 0 := by
   obtain ⟨n, hn⟩ := h1
   intro h0
-  have := congrArg (fun f => Polynomial.coeff f n) h0
+  have := congrArg (fun f : K[X] => f.coeff n) h0
   simp only [Polynomial.coeff_map, hn, map_one, Polynomial.coeff_zero] at this
   exact one_ne_zero this
 include hKA hArat hker in

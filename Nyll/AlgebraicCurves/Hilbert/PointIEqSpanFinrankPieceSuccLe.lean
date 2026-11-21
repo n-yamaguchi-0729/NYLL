@@ -143,8 +143,10 @@ noncomputable def J' : Ideal (MvPolynomial (Fin (n + 1)) A) := Ideal.span {p | p
 theorem J'_le : J' h P e ≤ P.I := Ideal.span_le.mpr fun _ hp => hp.1
 
 theorem J'_generated : ∃ s : Set (MvPolynomial (Fin (n + 1)) A), (∀ p ∈ s, p.IsHomogeneous e) ∧ J'
-  h P e = Ideal.span s :=
-  ⟨_, fun _ hp => hp.2, rfl⟩
+  h P e = Ideal.span s := by
+  refine ⟨{p | p ∈ P.I ∧ p.IsHomogeneous e}, ?_, rfl⟩
+  intro p hp
+  exact hp.2
 
 theorem J'_homogeneous : ∀ p ∈ J' h P e, ∀ d : ℕ, homogeneousComponent d p ∈ J' h P e :=
   span_homogeneous A _ e fun _ hp => hp.2
@@ -320,7 +322,11 @@ theorem _root_.AlgebraicGeometry.HilbertFunctor.Point.I_eq_span_of_forall_finran
   rcases subsingleton_or_nontrivial A with hA | hA
   · have : Subsingleton (MvPolynomial (Fin (n + 1)) A) := inferInstance
     exact Subsingleton.elim _ _
-  apply le_antisymm _ (Ideal.span_le.mpr fun _ hp => hp.1)
+  have hspan : Ideal.span {p | p ∈ P.I ∧ p.IsHomogeneous m} ≤ P.I := by
+    apply Ideal.span_le.mpr
+    intro p hp
+    exact hp.1
+  apply le_antisymm _ hspan
   have hgood : ∀ d, ∀ q ∈ P.I, q.IsHomogeneous d → q ∈ Ideal.span {p | p ∈ P.I ∧ p.IsHomogeneous m}
     := by
     intro d
@@ -334,7 +340,11 @@ theorem _root_.AlgebraicGeometry.HilbertFunctor.Point.I_eq_span_of_forall_finran
       | succ e hme ih =>
         intro q hqI hq
         have hqJ := mem_J'_of_mem h P e (h₂ e hme) q hqI hq
-        exact (Ideal.span_le.mpr fun p hp => ih (by omega) p hp.1 hp.2) hqJ
+        have hspan : J' h P e ≤ Ideal.span {p | p ∈ P.I ∧ p.IsHomogeneous m} := by
+          apply Ideal.span_le.mpr
+          intro p hp
+          exact ih (by omega) p hp.1 hp.2
+        exact hspan hqJ
   intro p hp
   rw [← sum_homogeneousComponent p]
   exact Ideal.sum_mem _ fun d _ => hgood d _ (P.homogeneous p hp d)

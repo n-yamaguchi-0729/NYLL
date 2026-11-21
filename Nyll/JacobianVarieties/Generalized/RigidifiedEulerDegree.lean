@@ -37,7 +37,7 @@ def moduleEulerCharacteristic (L : X.Modules) : ℤ :=
 /-- An actual sheaf isomorphism preserves its Euler characteristic. -/
 theorem moduleEulerCharacteristic_iso {L L' : X.Modules} (e : L ≅ L') :
     moduleEulerCharacteristic c 𝒱 L = moduleEulerCharacteristic c 𝒱 L' := by
-  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := nonempty_linearEquiv_of_iso c 𝒱 e
+  obtain ⟨⟨e0⟩, ⟨e1⟩⟩ := Scheme.TwoAffineOpenCover.sectionsOf_linearEquiv_of_moduleIso c 𝒱 e
   exact congrArg₂ (fun a b : ℕ => (a : ℤ) - b) e0.finrank_eq e1.finrank_eq
 
 variable [IsAlgClosed K] [IsIntegral X] [IsProper c] [SmoothOfRelativeDimension 1 c]

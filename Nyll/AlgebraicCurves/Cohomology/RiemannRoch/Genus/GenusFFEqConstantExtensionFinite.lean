@@ -497,7 +497,7 @@ theorem mem_range_algebraMap_of_pow_card_eq {L : Type*} [Field L] [Algebra k L] 
       Nat.card_eq_fintype_card]
   have hsub : Z.val ⊆ (Polynomial.X ^ Nat.card k - Polynomial.X : Polynomial L).roots := by
     intro z hz
-    rw [Polynomial.mem_roots (FiniteField.X_pow_card_sub_X_ne_zero _ hq)]
+    rw [Polynomial.mem_roots (Polynomial.X_pow_sub_X_ne_zero (R := L) hq)]
     simp only [Polynomial.IsRoot, Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
       sub_eq_zero]
     rcases Finset.mem_insert.mp (Finset.mem_val.mp hz) with rfl | hz''
@@ -505,7 +505,7 @@ theorem mem_range_algebraMap_of_pow_card_eq {L : Type*} [Field L] [Algebra k L] 
     · obtain ⟨a, -, rfl⟩ := Finset.mem_image.mp hz''
       rw [← map_pow, Nat.card_eq_fintype_card, FiniteField.pow_card]
   have hle := Polynomial.card_le_degree_of_subset_roots hsub
-  rw [FiniteField.X_pow_card_sub_X_natDegree_eq _ hq, hcardZ] at hle
+  rw [Polynomial.natDegree_X_pow_sub_X (R := L) hq, hcardZ] at hle
   omega
 
 variable [Algebra k K]

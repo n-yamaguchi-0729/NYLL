@@ -32,10 +32,7 @@ variable {G H : Type u}
 variable [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 variable [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
 
-local instance continuousH1CupRestrictionModule
-    {J : Type u} [Group J] [TopologicalSpace J] [IsTopologicalGroup J] :
-    Module (ZMod p) (ContinuousH1ZMod (p := p) (G := J)) :=
-  continuousH1ZModModule
+attribute [local instance] ClassFieldTower.ProP.continuousH1ZModModule
 
 /-- Pullback of continuous additive mod-`p` characters along a continuous
 group homomorphism. -/
@@ -62,10 +59,11 @@ noncomputable def continuousH1ZModRestriction (f : H →ₜ* G) :
       map_add' := by intro χ ψ; ext h; rfl }
   exact { r with map_smul' := ZMod.map_smul r }
 
+omit [IsTopologicalGroup G] [IsTopologicalGroup H] in
 @[simp]
 theorem continuousH1ZModRestriction_apply
     (f : H →ₜ* G) (χ : ContinuousH1ZMod (p := p) (G := G)) (h : Additive H) :
-    continuousH1ZModRestriction f χ h =
+    continuousH1ZModRestriction (p := p) f χ h =
       χ (Additive.ofMul (f (Additive.toMul h))) :=
   rfl
 
@@ -77,8 +75,8 @@ theorem trivialZModPCochainsMapLifted_continuousH1Cup
     (((trivialZModPCochainsMapLifted p f).f 2).hom
         (continuousH1CupHomogeneousTwoCochainLifted χ ψ)) =
       continuousH1CupHomogeneousTwoCochainLifted
-        (continuousH1ZModRestriction f χ)
-        (continuousH1ZModRestriction f ψ) := by
+        (continuousH1ZModRestriction (p := p) f χ)
+        (continuousH1ZModRestriction (p := p) f ψ) := by
   apply Subtype.ext
   ext g h k
   change
@@ -102,8 +100,8 @@ theorem trivialZModPCocyclesMapLifted_continuousH1Cup
     trivialZModPCocyclesMapLifted p f 2
         (continuousH1CupHomogeneousTwoCocycleLifted χ ψ) =
       continuousH1CupHomogeneousTwoCocycleLifted
-        (continuousH1ZModRestriction f χ)
-        (continuousH1ZModRestriction f ψ) := by
+        (continuousH1ZModRestriction (p := p) f χ)
+        (continuousH1ZModRestriction (p := p) f ψ) := by
   apply topModule_mono_injective_lifted
     ((trivialZModPCochainsLifted p H).iCycles 2)
   rw [← ConcreteCategory.comp_apply, HomologicalComplex.cyclesMap_i]
@@ -114,8 +112,8 @@ theorem trivialZModPCocyclesMapLifted_continuousH1Cup
         (continuousH1CupHomogeneousTwoCochainLifted χ ψ)) =
       (trivialZModPCochainsLifted p H).iCycles 2
         (continuousH1CupHomogeneousTwoCocycleLifted
-          (continuousH1ZModRestriction f χ)
-          (continuousH1ZModRestriction f ψ))
+          (continuousH1ZModRestriction (p := p) f χ)
+          (continuousH1ZModRestriction (p := p) f ψ))
   rw [trivialZModPCochainsMapLifted_continuousH1Cup,
     iCycles_continuousH1CupHomogeneousTwoCocycleLifted]
 
@@ -124,18 +122,18 @@ theorem continuousCohomologyZModPMapLifted_continuousH1Cup
     (f : H →ₜ* G)
     (χ ψ : ContinuousH1ZMod (p := p) (G := G)) :
     (continuousCohomologyZModPMapLifted p f 2).hom
-        (continuousH1CupProductLifted χ ψ) =
-      continuousH1CupProductLifted
-        (continuousH1ZModRestriction f χ)
-        (continuousH1ZModRestriction f ψ) := by
+        (continuousH1CupProductLifted (p := p) (G := G) χ ψ) =
+      continuousH1CupProductLifted (p := p) (G := H)
+        (continuousH1ZModRestriction (p := p) f χ)
+        (continuousH1ZModRestriction (p := p) f ψ) := by
   change
     (continuousCohomologyZModPMapLifted p f 2).hom
         (ContinuousCohomology.π (trivialZModPLifted p G) 2
           (continuousH1CupHomogeneousTwoCocycleLifted χ ψ)) =
       ContinuousCohomology.π (trivialZModPLifted p H) 2
         (continuousH1CupHomogeneousTwoCocycleLifted
-          (continuousH1ZModRestriction f χ)
-          (continuousH1ZModRestriction f ψ))
+          (continuousH1ZModRestriction (p := p) f χ)
+          (continuousH1ZModRestriction (p := p) f ψ))
   rw [← ConcreteCategory.comp_apply, trivialZModPLifted_π_naturality,
     ConcreteCategory.comp_apply,
     trivialZModPCocyclesMapLifted_continuousH1Cup]

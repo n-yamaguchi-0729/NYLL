@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFractions
 public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackComposition
 
@@ -29,8 +30,8 @@ namespace AlgebraicGeometry.FiniteEtale.InverseLimitModel
 
 universe u v w u' v'
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {J : Type v} [Category.{w} J] (F : J ⥤ Scheme.{u})
 

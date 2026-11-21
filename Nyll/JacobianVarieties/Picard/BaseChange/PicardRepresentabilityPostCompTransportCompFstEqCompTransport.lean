@@ -30,6 +30,7 @@ import Nyll.AlgebraicCurves.Geometry.Picard.AlgebraicEquivalence.AlgEquivZeroGro
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicPullback
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicGroup
 import Nyll.AlgebraicCurves.Geometry.Picard.Representability.RepresentsRelSubPicBaseChange
+import Nyll.AlgebraicCurves.Geometry.Picard.RelSubPic.Presheaf
 
 /-!
 # Base change of postcomposition on the relative Picard object
@@ -228,7 +229,7 @@ theorem RepresentsRelSubPic.postComp_transport_comp_fst_eq_comp_transport_of_bas
         ((Scheme.Modules.pullbackComp _ _).app P.L).symm
     obtain ⟨icongr⟩ := RigidifiedLineBundle.nonempty_ofInvertible_iso_of_iso (ε := ε)
       ((P.isInvertible.pullback _).pullback _) (X.isInvertible.pullback _) isq
-    exact ⟨(RigidifiedLineBundle.pullbackAlongPullbackAlongIso' P θ fstD).symm ≪≫
+    exact ⟨(RigidifiedLineBundle.pullbackAlongPullbackAlongIso P θ fstD).symm ≪≫
       (Scheme.Modules.pullback (baseChangeSnd c fstD)).mapIso iθ ≪≫ inat ≪≫ icongr⟩
   have I₁ : Nonempty ((P.pullbackAlong g₁).L ≅
       (RigidifiedLineBundle.ofInvertible (ε := ε) ((Scheme.Modules.pullback (cW u)).obj X.L)
@@ -291,7 +292,7 @@ theorem RepresentsRelSubPic.postComp_transport_comp_fst_eq_comp_transport_of_bas
       ((Pb.isInvertible.pullback _).pullback _) (X.isInvertible.pullback _) i3
     have i0 : (P.pullbackAlong g₁).L ≅ ((BaseChange.toR c ε R' Pb).pullbackAlong (BaseChange.overR
       R' θ')).L :=
-      (RigidifiedLineBundle.pullbackAlongPullbackAlongIso' P fstD (BaseChange.overR R' θ')).symm ≪≫
+      (RigidifiedLineBundle.pullbackAlongPullbackAlongIso P fstD (BaseChange.overR R' θ')).symm ≪≫
         (Scheme.Modules.pullback (baseChangeSnd c (BaseChange.overR R' θ'))).mapIso iX.symm
     refine ⟨i0 ≪≫ i1 ≪≫ ?_ ≪≫ i4⟩
     rw [RigidifiedLineBundle.ofInvertible_L, RigidifiedLineBundle.ofInvertible_L]

@@ -742,8 +742,8 @@ theorem formallyUnramified_of_span_eq_maximalIdeal
     apply le_antisymm hle
     have hfg : (maximalIdeal S).FG := by
       rw [hy]; exact ⟨(Set.finite_range y).toFinset, by rw [Set.Finite.coe_toFinset]⟩
-    refine Submodule.le_of_le_smul_of_le_jacobson_bot (I := maximalIdeal S) hfg ?_ ?_
-    · rw [jacobson_eq_maximalIdeal ⊥ bot_ne_top]
+    refine Submodule.le_of_le_smul_of_le_jacobson (I := maximalIdeal S) hfg ?_ ?_
+    · rw [IsLocalRing.ringJacobson_eq_maximalIdeal]
     · have : Ideal.span (Set.range y) ≤
           (maximalIdeal R).map (algebraMap R S) ⊔ maximalIdeal S • maximalIdeal S := by
         rw [Ideal.span_le]
@@ -1384,7 +1384,8 @@ theorem exists_affine_formallyUnramified_stalkMap_action_one
       refine ⟨S.image (algebraMap Γ(G, V) (G.presheaf.stalk xG)), ?_⟩
       rw [h1, Finset.coe_image, ← Ideal.map_span, hS]
     apply le_antisymm
-    · apply Submodule.le_of_le_smul_of_le_jacobson_bot hFG (maximalIdeal_le_jacobson _)
+    · apply Submodule.le_of_le_smul_of_le_jacobson hFG
+        (IsLocalRing.ringJacobson_eq_maximalIdeal (G.presheaf.stalk xG)).ge
       calc maximalIdeal (G.presheaf.stalk xG)
           = (RingHom.ker (algebraMap Γ(G, V) k)).map (algebraMap Γ(G, V) (G.presheaf.stalk xG)) :=
             h1

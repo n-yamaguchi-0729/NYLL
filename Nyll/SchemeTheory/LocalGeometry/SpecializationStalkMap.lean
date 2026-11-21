@@ -71,7 +71,7 @@ theorem ker_stalkSpecializationToField_ne_maximalIdeal
       maximalIdeal (S.presheaf.stalk x) := by
   intro hker
   have : IsLocalHom (stalkSpecializationToField x t h).hom := by
-    apply ((local_hom_TFAE (stalkSpecializationToField x t h).hom).out 5 1).mp
+    apply ((local_hom_tfae (stalkSpecializationToField x t h).hom).out 5 1).mp
     rw [maximalIdeal_eq_bot]
     exact hker
   have hpoint := congrArg (fun f : Spec (.of Ω) ⟶ S => f (closedPoint Ω))

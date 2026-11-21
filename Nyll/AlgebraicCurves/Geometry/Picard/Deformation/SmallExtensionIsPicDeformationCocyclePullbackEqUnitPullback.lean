@@ -142,11 +142,11 @@ theorem sort_pair_eq_swap {ι : Type u} [LinearOrder ι] (f : Fin 2 → ι) (h :
     · exact le_rfl
   · intro x y hxy hfe
     fin_cases x <;> fin_cases y
-    · exact absurd hxy (lt_irrefl _)
+    · exact le_rfl
     · change f 1 = f 0 at hfe
       exact absurd hfe h.ne
     · exact absurd hxy (by decide)
-    · exact absurd hxy (lt_irrefl _)
+    · exact le_rfl
 
 theorem injective_pair {ι : Type u} (f : Fin 2 → ι) (h : f 0 ≠ f 1) : Function.Injective f := by
   intro x y hxy

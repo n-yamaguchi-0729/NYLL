@@ -37,10 +37,19 @@ private theorem toPresheafFiber_shrinkYonedaCompPresheafFiberIso
     Φ.toPresheafFiber U v (shrinkYoneda.{u}.obj W) ≫
         Φ.shrinkYonedaCompPresheafFiberIso.hom.app W =
       TypeCat.ofHom (fun a : (shrinkYoneda.{u}.obj W).obj (op U) =>
-        Φ.fiber.map (shrinkYonedaObjObjEquiv.{u} a) v) :=
-  IsColimit.comp_coconePointUniqueUpToIso_hom (colimit.isColimit _)
-    (Functor.Elements.isColimitCoconeπOpCompShrinkYonedaObj Φ.fiber W)
-    (op (Φ.fiber.elementsMk U v))
+        Φ.fiber.map (shrinkYonedaObjObjEquiv.{u} a) v) := by
+  apply ConcreteCategory.hom_ext
+  intro a
+  obtain ⟨f, rfl⟩ := shrinkYonedaObjObjEquiv.{u}.symm.surjective a
+  let e := (Φ.shrinkYonedaCompPresheafFiberIso.app W).toEquiv
+  change e (Φ.toPresheafFiber U v (shrinkYoneda.{u}.obj W)
+    (shrinkYonedaObjObjEquiv.{u}.symm f)) = Φ.fiber.map (shrinkYonedaObjObjEquiv.{u}
+      (shrinkYonedaObjObjEquiv.{u}.symm f)) v
+  rw [Equiv.apply_symm_apply]
+  apply e.symm.injective
+  rw [e.symm_apply_apply,
+    ← Φ.presheafFiber_map_shrinkYoneda_map_shrinkYonedaCompPresheafFiberIso_inv_app]
+  exact (Φ.shrinkYonedaCompPresheafFiberIso.inv.naturality_apply f v).symm
 
 /-- The existing representable fiber comparison sends the original germ
 of a represented section to the original point functor applied to that

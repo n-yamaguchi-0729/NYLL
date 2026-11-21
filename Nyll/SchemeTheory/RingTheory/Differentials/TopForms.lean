@@ -8,7 +8,8 @@ module
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
 public import Mathlib.RingTheory.Etale.Kaehler
 public import Mathlib.RingTheory.Localization.Module
-public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Completion
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Valuation
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
@@ -55,8 +56,8 @@ def ιMultiAlong :
   intro mO
   have hTower : IsScalarTower O F (⋀[F]^d (Ω[F⁄K'])) :=
     IsScalarTower.of_algebraMap_smul fun _ _ => rfl
-  exact { (@MultilinearMap.restrictScalars O (Fin d) (fun _ => Ω[F⁄K'])
-      (⋀[F]^d (Ω[F⁄K'])) _ _ _ _ mO F _ _ _ _ (fun _ => inferInstance) hTower
+  exact { (@MultilinearMap.restrictScalars O _ (Fin d) (fun _ => Ω[F⁄K'])
+      (⋀[F]^d (Ω[F⁄K'])) _ _ _ F _ _ _ _ mO (fun _ => inferInstance) hTower
       (exteriorPower.ιMulti F d (M := Ω[F⁄K'])).toMultilinearMap).compLinearMap
       (fun _ => KaehlerDifferential.map R' K' O F) with
     map_eq_zero_of_eq' := fun v i j h hij =>

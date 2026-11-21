@@ -56,7 +56,7 @@ map local: its maximal ideal contracts to the maximal ideal of the base. -/
 theorem reducedNormalizationMap_isLocalHom (R : Type u) [CommRing R]
     [IsLocalRing R] [IsLocalRing (reducedNormalization R)] :
     IsLocalHom (reducedNormalizationMap R) := by
-  apply ((local_hom_TFAE (reducedNormalizationMap R)).out 5 1).mp
+  apply ((local_hom_tfae (reducedNormalizationMap R)).out 5 1).mp
   exact eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal
     (reducedNormalizationMap R) (reducedNormalizationMap_isIntegral R)
     (maximalIdeal (reducedNormalization R)))

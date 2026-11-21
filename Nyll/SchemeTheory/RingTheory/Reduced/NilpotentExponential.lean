@@ -81,7 +81,7 @@ private theorem exp_bijective_of_pow_eq_bot (N : ℕ) :
         ∃ a : R, a ∈ I ∧ IsNilpotent.exp a = (u : R)) ∧
       (∀ a : R, a ∈ I → IsNilpotent.exp a = 1 → a = 0) := by
   induction N using Nat.strong_induction_on with
-  | h N ih =>
+  | ind N ih =>
     intro I hN
     by_cases hsmall : N ≤ 1
     · have hI : I = ⊥ := by

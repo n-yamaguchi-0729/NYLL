@@ -10,6 +10,7 @@ public import Nyll.ValuedFieldTheory.Ramification.InertiaLifting
 public import Nyll.ValuedFieldTheory.Ramification.InertiaSubgroup
 public import Nyll.ValuedFieldTheory.Ramification.ClosedSubgroups
 public import Nyll.ValuedFieldTheory.Ramification.Different
+public import Nyll.ValuedFieldTheory.Ramification.Different.All
 public import Nyll.ValuedFieldTheory.Ramification.Filtration
 public import Nyll.ValuedFieldTheory.Ramification.GaloisValuation.All
 public import Nyll.ValuedFieldTheory.Ramification.Herbrand.All

@@ -154,9 +154,9 @@ theorem coefficients_eq_zero_of_sum_mul_pow_eq_zero
     intro i
     rw [hq, Polynomial.finsetSum_coeff]
     rw [Finset.sum_eq_single i]
-    · rw [Polynomial.coeff_monomial, ite_eq_left rfl]
+    · rw [Polynomial.coeff_monomial_apply, ite_eq_left rfl]
     · intro j _ hji
-      rw [Polynomial.coeff_monomial, ite_eq_right (fun hj => hji (Fin.ext hj))]
+      rw [Polynomial.coeff_monomial_apply, ite_eq_right (fun hj => hji (Fin.ext hj))]
     · intro hni
       exact absurd (Finset.mem_univ i) hni
   have hqaeval : Polynomial.aeval t q = 0 := by

@@ -75,7 +75,7 @@ private theorem rationalH2_actualFrobeniusPower
   have h := LinearMap.congr_fun
     (rationalEllAdicH2_geometricFrobenius_pow k K X ℓ hℓ m) a
   rw [finiteFieldFrobeniusRationalEllAdicCohomology_pow k K X ℓ 2 m] at h
-  simpa only [LinearMap.smul_apply, Module.End.one_apply] using h
+  simpa only [LinearMap.smul_apply, one_apply_eq_self] using h
 
 omit [NeZero m] in
 /-- The original Frobenius graph gives precisely q^m plus one on

@@ -497,8 +497,7 @@ theorem ΓSpecIso_nat_apply {R S : Type u} [CommRing R] [CommRing S] (g : R →+
   have h := congrArg (fun k : Γ(Spec (CommRingCat.of R), ⊤) ⟶ CommRingCat.of S => k.hom r) this
   simpa only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] using h
 
-open _root_.AlgebraicCurves.Geometry.Schemes.Proofs.AffineOpenBaseChange in
-open AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange in
+open _root_.AlgebraicGeometry.Scheme.TwoAffineOpenCover.AffineBaseChange in
 theorem topIso_inv_map {X : Scheme.{u}} (U : X.Opens) (s : Γ(X, ⊤)) :
     U.topIso.inv.hom ((X.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op).hom s) = U.ι.appTop.hom s := by
   have hmap := opens_ι_appTop_topIso_hom U

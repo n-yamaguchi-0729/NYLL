@@ -33,7 +33,7 @@ theorem moduleAction_semiconj_pow
     (ModuleCat.endRingEquiv (H.obj A)).toMonoidHom.comp (Functor.mapEnd A H)
   have hs : Function.Semiconj e a (φ b) := h
   have hp : e ((a ^ m) x) = ((φ b) ^ m) (e x) := by
-    simpa only [Module.End.pow_apply] using hs.iterate_right m x
+    simpa only [pow_apply_eq_iterate] using hs.iterate_right m x
   exact hp.trans (congrArg (fun t : Module.End S (H.obj A) => t (e x))
     (φ.map_pow b m).symm)
 

@@ -73,7 +73,7 @@ private theorem isLocalHom_of_unique_prime_over_maximal_primeOrUnit
       (maximalIdeal S).comap (algebraMap R S) = maximalIdeal R := by
     rw [← hqEq]
     exact (q.over_def (maximalIdeal R)).symm
-  exact ((IsLocalRing.local_hom_TFAE (algebraMap R S)).out 5 1).mp hcomap
+  exact ((IsLocalRing.local_hom_tfae (algebraMap R S)).out 5 1).mp hcomap
 
 private theorem faithfullyFlat_of_unique_prime_over_maximal_primeOrUnit
     {R : Type uA} {S : Type uD}

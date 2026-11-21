@@ -147,16 +147,6 @@ section ValuationDictionary
 
 variable {v : Place K F} {w : Place K F'}
 
-theorem neg_log_valuation_fiberCenter_eq_ord (hw : w.restrict F = v) {x : F'} (hx : x ≠ 0) :
-    -log ((fiberCenter F' v hw).valuation F' x) = w.ord x :=
-  _root_.AlgebraicCurve.Place.neg_log_valuation_fiberCenter_eq_ord hw hx
-
-theorem le_ord_iff_mem_pow_fiberCenter (hw : w.restrict F = v)
-    {c : integralClosureAt F' v} (hc : c ≠ 0) (n : ℕ) :
-    (n : ℤ) ≤ w.ord (algebraMap (integralClosureAt F' v) F' c) ↔
-      c ∈ (fiberCenter F' v hw).asIdeal ^ n :=
-  _root_.AlgebraicCurve.Place.le_ord_iff_mem_pow_fiberCenter hw hc n
-
 theorem ramificationIndex_eq_ramificationIdx_fiberCenter (hw : w.restrict F = v) :
     w.ramificationIndex F =
       (IsLocalRing.maximalIdeal v.toValuationSubring).ramificationIdx'
@@ -174,13 +164,9 @@ theorem differentIdeal_le_pow (P : HeightOneSpectrum (integralClosureAt F' v)) :
     differentIdeal v.toValuationSubring (integralClosureAt F' v) ≤
       P.asIdeal ^ ((IsLocalRing.maximalIdeal v.toValuationSubring).ramificationIdx' P.asIdeal - 1)
         := by
-  set e := (IsLocalRing.maximalIdeal v.toValuationSubring).ramificationIdx' P.asIdeal with he_def
-  by_cases he : e = 0
-  · rw [he, Nat.zero_sub, pow_zero, Ideal.one_eq_top]
-    exact le_top
-  rw [← Ideal.dvd_iff_le]
-  exact pow_sub_one_dvd_differentIdeal_aux v.toValuationSubring F F' P.asIdeal he
-    (maximalIdeal_ne_bot v) (Ideal.dvd_iff_le.mpr Ideal.le_pow_ramificationIdx')
+  exact Ideal.dvd_iff_le.mp
+    (pow_sub_one_dvd_differentIdeal_aux v.toValuationSubring F F' P.asIdeal
+      (maximalIdeal_ne_bot v) (Ideal.dvd_iff_le.mpr Ideal.le_pow_ramificationIdx'))
 
 theorem trace_mem_of_le_ord (g : F')
     (hg : ∀ w : Place K F', w.restrict F = v → 1 - (w.ramificationIndex F : ℤ) ≤ w.ord g) :
@@ -224,7 +210,7 @@ theorem trace_mem_of_le_ord (g : F')
       exact (HeightOneSpectrum.intValuation_le_pow_iff_mem _ _ _).mpr hdmem
     have hg0' : P.valuation F' g ≠ 0 := (Valuation.ne_zero_iff _).mpr hg0
     have hlog : -log (P.valuation F' g) = w.ord g := by
-      have := neg_log_valuation_fiberCenter_eq_ord hw hg0
+      have := _root_.AlgebraicCurve.Place.neg_log_valuation_fiberCenter_eq_ord hw hg0
       rwa [hP] at this
     have hbound := hg w hw
     have hepos : 0 < e := he ▸ w.ramificationIndex_pos
@@ -420,11 +406,12 @@ theorem span_D_eq_top [IsAlgClosed K] (v : Place K F) [v.FiniteResidue]
     {ϖ : v.toValuationSubring} (hϖ : Irreducible ϖ) :
     Submodule.span v.toValuationSubring
       {KaehlerDifferential.D K v.toValuationSubring ϖ} = ⊤ := by
-  refine top_le_iff.mp (Submodule.le_of_le_smul_of_le_jacobson_bot
+  refine top_le_iff.mp (Submodule.le_of_le_smul_of_le_jacobson
     (I := IsLocalRing.maximalIdeal v.toValuationSubring)
     (N := Submodule.span v.toValuationSubring
       {KaehlerDifferential.D K v.toValuationSubring ϖ})
-    (N' := ⊤) Module.Finite.fg_top (IsLocalRing.maximalIdeal_le_jacobson ⊥) ?_)
+    (N' := ⊤) Module.Finite.fg_top
+    (IsLocalRing.ringJacobson_eq_maximalIdeal v.toValuationSubring).ge ?_)
   conv_lhs => rw [← KaehlerDifferential.span_range_derivation]
   rw [Submodule.span_le]
   rintro _ ⟨a, rfl⟩
@@ -712,7 +699,7 @@ theorem traceAlong_mem [IsAlgClosed K] [CharZero K] [IsCurveOver K F] [IsCurveOv
     rw [hD]
     exact smul_ne_zero hδ0 (D_ne_zero_of_ord_eq_one w₀ hfg' hϖ₀)
   obtain ⟨g, hg⟩ :=
-    (finrank_eq_one_iff_of_nonzero' _ hθ0).mp (IsCurveOver.finrank_kaehler (K := K) (F := F')) η
+    (finrank_eq_one_iff_of_ne_zero' _ hθ0).mp (IsCurveOver.finrank_kaehler (K := K) (F := F')) η
   have hgbound : ∀ w : Place K F', w.restrict F = v →
       1 - (w.ramificationIndex F : ℤ) ≤ w.ord g := by
     intro w hw

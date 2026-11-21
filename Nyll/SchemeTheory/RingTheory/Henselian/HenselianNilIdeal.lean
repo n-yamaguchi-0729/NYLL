@@ -47,7 +47,9 @@ for the ideal is required. -/
 theorem of_le_nilradical
     {R : Type u} [CommRing R] (I : Ideal R) (hI : I ≤ nilradical R) :
     HenselianRing R I := by
-  have hJac : I ≤ Ideal.jacobson ⊥ := hI.trans Ideal.radical_le_jacobson
+  have hJac : I ≤ Ring.jacobson R := by
+    rw [← Ideal.jacobson_bot]
+    exact hI.trans Ideal.radical_le_jacobson
   refine ⟨hJac, ?_⟩
   intro f hf a₀ ha₀ hd
   let J : Ideal R := Ideal.span {f.eval a₀}
@@ -59,7 +61,7 @@ theorem of_le_nilradical
     dsimp only [J]
     rw [Ideal.span_singleton_pow, hn, Ideal.span_singleton_zero]
   let : IsAdicComplete J R := isAdicComplete_of_pow_eq_bot J n hJn
-  let : IsLocalHom (Ideal.Quotient.mk I) := isLocalHom_of_le_jacobson_bot I hJac
+  let : IsLocalHom (Ideal.Quotient.mk I) := isLocalHom_of_le_jacobson hJac
   have hderiv : IsUnit (f.derivative.eval a₀) :=
     IsUnit.of_map (Ideal.Quotient.mk I) (f.derivative.eval a₀) hd
   obtain ⟨a, ha, hamem⟩ := HenselianRing.is_henselian (I := J) f hf a₀

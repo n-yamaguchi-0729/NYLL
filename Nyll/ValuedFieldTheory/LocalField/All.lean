@@ -11,6 +11,7 @@ public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.All
 public import Nyll.ValuedFieldTheory.LocalField.GroupTheory.All
 public import Nyll.ValuedFieldTheory.LocalField.NonarchimedeanLocalField.All
 public import Nyll.ValuedFieldTheory.LocalField.NormUnits
+public import Nyll.ValuedFieldTheory.LocalField.NormUnitsBaseChange
 public import Nyll.ValuedFieldTheory.LocalField.Padic.All
 public import Nyll.ValuedFieldTheory.LocalField.Unramified.All
 

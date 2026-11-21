@@ -135,8 +135,8 @@ private theorem etale_of_finite_projective_of_quotient
   have htop : J • (⊤ : Submodule R Ω[B⁄R]) = ⊤ :=
     Submodule.Quotient.subsingleton_iff.mp hquot
   have hzero : (⊤ : Submodule R Ω[B⁄R]) = ⊥ :=
-    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot J ⊤ Module.Finite.fg_top
-      htop.ge hJ
+    Submodule.eq_bot_of_le_smul_of_le_jacobson J ⊤ Module.Finite.fg_top
+      htop.ge (by simpa only [Ideal.jacobson_bot] using hJ)
   have hdiff : Subsingleton Ω[B⁄R] := by
     have hx0 : ∀ x : Ω[B⁄R], x = 0 := by
       intro x
@@ -169,6 +169,8 @@ theorem etale [∀ n : ℕ, Algebra.Etale (R ⧸ I ^ (n + 1)) (A n)] :
   have hfiber : Algebra.Etale Q (Q ⊗[R] B) :=
     Algebra.Etale.of_equiv (baseChangeEquiv A t I ht hker 0).symm
   exact etale_of_finite_projective_of_quotient (sections A t) (I ^ (0 + 1))
-    ((Ideal.pow_le_self (Nat.succ_ne_zero 0)).trans (IsAdicComplete.le_jacobson_bot I))
+    (by
+      rw [Ideal.jacobson_bot]
+      exact (Ideal.pow_le_self (Nat.succ_ne_zero 0)).trans (IsAdicComplete.le_jacobson I))
 
 end AdicAlgebraSystem

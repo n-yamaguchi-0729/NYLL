@@ -148,11 +148,6 @@ theorem top_le_fromSpec_preimage {P : Scheme.{u}} {U' : P.Opens} (hU' : IsAffine
   rw [← hU'.range_fromSpec]
   exact ⟨x, rfl⟩
 
-theorem appLE_top_top {P Q : Scheme.{u}} (φ : P ⟶ Q) (e : (⊤ : P.Opens) ≤ φ ⁻¹ᵁ ⊤) :
-    φ.appLE ⊤ ⊤ e = φ.appTop := by
-  rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
-  rfl
-
 theorem fromSpec_appLE_top {P : Scheme.{u}} {U' : P.Opens} (hU' : IsAffineOpen U')
     (e : (⊤ : (Spec Γ(P, U')).Opens) ≤ hU'.fromSpec ⁻¹ᵁ U') :
     hU'.fromSpec.appLE U' ⊤ e = (Scheme.ΓSpecIso Γ(P, U')).inv := by
@@ -175,7 +170,8 @@ theorem toTensor_fst (a : Γ(X, U)) :
   rw [← CommRingCat.comp_apply, ← Category.assoc, Scheme.Hom.appLE_comp_appLE,
     appLE_congr_hom (chart_fst f g U hU V hV), ← Scheme.Hom.appLE_comp_appLE _ _ U ⊤ ⊤
       (top_le_fromSpec_preimage hU) (Scheme.Hom.preimage_top _).ge,
-    fromSpec_appLE_top, appLE_top_top, Category.assoc, ← Scheme.ΓSpecIso_inv_naturality_assoc,
+    fromSpec_appLE_top, Scheme.Hom.appLE_top_eq_appTop, Category.assoc,
+    ← Scheme.ΓSpecIso_inv_naturality_assoc,
     Iso.inv_hom_id, Category.comp_id]
   rfl
 
@@ -190,7 +186,8 @@ theorem toTensor_snd (b : Γ(Y, V)) :
   rw [← CommRingCat.comp_apply, ← Category.assoc, Scheme.Hom.appLE_comp_appLE,
     appLE_congr_hom (chart_snd f g U hU V hV), ← Scheme.Hom.appLE_comp_appLE _ _ V ⊤ ⊤
       (top_le_fromSpec_preimage hV) (Scheme.Hom.preimage_top _).ge,
-    fromSpec_appLE_top, appLE_top_top, Category.assoc, ← Scheme.ΓSpecIso_inv_naturality_assoc,
+    fromSpec_appLE_top, Scheme.Hom.appLE_top_eq_appTop, Category.assoc,
+    ← Scheme.ΓSpecIso_inv_naturality_assoc,
     Iso.inv_hom_id, Category.comp_id]
   rfl
 

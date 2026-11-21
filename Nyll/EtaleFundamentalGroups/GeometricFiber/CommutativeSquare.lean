@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 public import Nyll.EtaleFundamentalGroups.GaloisCategories.AutFunctorComparison
 
@@ -29,8 +30,8 @@ namespace AlgebraicGeometry.FiniteEtale
 
 universe u
 
-attribute [local instance] finiteEtaleStableUnderBaseChangeAlongFunctoriality
-  finiteEtaleHasPullbacksAlongFunctoriality
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
+  AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
 
 /-- A commuting square of actual scheme maps determines the comparison of
 its original pointed fundamental-group maps up to one full inner correction.

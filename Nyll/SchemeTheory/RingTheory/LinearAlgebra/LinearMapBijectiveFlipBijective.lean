@@ -102,8 +102,8 @@ theorem surjective_of_baseChange_residueField [Module.Free R N] [Module.Finite R
     rw [this]
     exact Submodule.add_mem_sup (LinearMap.mem_range_self _ _) hm
   have htop : (⊤ : Submodule R (N →ₗ[R] R)) ≤ LinearMap.range B :=
-    Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-      (IsLocalRing.maximalIdeal_le_jacobson _) hle
+    Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+      (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge hle
   exact LinearMap.range_eq_top.mp (top_le_iff.mp htop)
 
 theorem finrank_eq_of_baseChange_residueField [Module.Free R M] [Module.Finite R M]

@@ -218,10 +218,6 @@ theorem irreducibleSpace_of_connectedSpace [IsAlgClosed k] {G : Scheme.{u}}
     exact PreconnectedSpace.connectedComponent_eq_univ _
   exact hsurj.irreducibleSpace i.continuous
 
-theorem isReduced_of_smooth {G : Scheme.{u}} (f : G ⟶ Spec (CommRingCat.of k)) [Smooth f] :
-    IsReduced G :=
-  AlgebraicGeometry.isReduced_of_smooth_of_field f
-
 end Group
 
 section Main
@@ -242,7 +238,8 @@ theorem main [IsAlgClosed k] {G : Scheme.{u}} (f : G ⟶ Spec (CommRingCat.of k)
       a.act γ (GoodReductionJacobian.schemeHomOverComp t (Category.comp_id t) P₀) hd =
         GoodReductionJacobian.schemeHomOverComp t (Category.comp_id t) P₀ := by
   have : IrreducibleSpace G := irreducibleSpace_of_connectedSpace f L
-  have : IsReduced G := isReduced_of_smooth f
+  have : IsReduced G :=
+    _root_.AlgebraicGeometry.isReduced_of_smooth_of_field f
   have : JacobsonSpace G := LocallyOfFiniteType.jacobsonSpace f
   obtain ⟨s, hs_fst, hs_snd⟩ : ∃ s : G ⟶ pullback f p,
       s ≫ pullback.fst f p = 𝟙 G ∧ s ≫ pullback.snd f p = f ≫ P₀.1 :=

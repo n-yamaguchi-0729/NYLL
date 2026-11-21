@@ -505,19 +505,6 @@ theorem isIntegral_of_geometricallyIrreducible_of_isReduced
   have : IrreducibleSpace X := GeometricallyIrreducible.irreducibleSpace_of_subsingleton (f := q)
   exact (isIntegral_iff_irreducibleSpace_and_isReduced (X := X)).mpr ⟨inferInstance, inferInstance⟩
 
-/-- An isomorphism of modules preserves the dimensions of both Čech cohomology groups. -/
-theorem finrank_H0_H1_congr {k : Type u} [Field k] {X : Scheme.{u}}
-    (x : X ⟶ Spec (CommRingCat.of k))
-    (𝒱 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') :
-    Module.finrank k (𝒱.sectionsOf x M).H0 = Module.finrank k (𝒱.sectionsOf x M').H0 ∧
-      Module.finrank k (𝒱.sectionsOf x M).H1 = Module.finrank k (𝒱.sectionsOf x M').H1 := by
-  obtain ⟨𝒱₂, h0, h1, ⟨e0⟩, ⟨e1⟩⟩ :=
-    Scheme.TwoAffineOpenCover.exists_linearEquiv_sectionsOf_of_iso x x (Iso.refl X)
-      (Category.id_comp x)
-      𝒱 M' M (e ≪≫ ((Scheme.Modules.pullbackId X).app M').symm)
-  obtain rfl : 𝒱₂ = 𝒱 := by cases 𝒱; cases 𝒱₂; cases h0; cases h1; rfl
-  exact ⟨e0.finrank_eq, e1.finrank_eq⟩
-
 /-- The Euler characteristic computed by the chosen two-affine cover. -/
 noncomputable def χ {k : Type u} [Field k] {X : Scheme.{u}} (q : X ⟶ Spec (CommRingCat.of k))
     (𝒲 : X.TwoAffineOpenCover) (M : X.Modules) : ℤ :=
@@ -526,7 +513,7 @@ noncomputable def χ {k : Type u} [Field k] {X : Scheme.{u}} (q : X ⟶ Spec (Co
 /-- Isomorphic modules have the same Euler characteristic. -/
 theorem χ_congr {k : Type u} [Field k] {X : Scheme.{u}} (q : X ⟶ Spec (CommRingCat.of k))
     (𝒲 : X.TwoAffineOpenCover) {M M' : X.Modules} (e : M ≅ M') : χ q 𝒲 M = χ q 𝒲 M' := by
-  obtain ⟨h0, h1⟩ := finrank_H0_H1_congr q 𝒲 e
+  obtain ⟨h0, h1⟩ := 𝒲.finrank_sectionsOf_H0_H1_congr q e
   simp only [χ, h0, h1]
 
 /-- The point twist and Cartier ideal give the prescribed Euler characteristic. -/

@@ -138,6 +138,113 @@ open _root_.IsLocalRing _root_.IsDedekindDomain
 open scoped _root_.IntermediateField _root_.Polynomial
 
 
+private theorem adjoin_simple_eq_of_uniformizer_power
+    {L : Type*} [Field L]
+    (C : Subring L) [IsDiscreteValuationRing ↥C]
+    (K₀ : Type*) [Field K₀] [CharZero K₀] [Algebra ↥C K₀] [IsFractionRing ↥C K₀]
+    [Algebra K₀ L] [IsScalarTower ↥C K₀ L]
+    (K₁ : IntermediateField K₀ L) [FiniteDimensional K₀ ↥K₁]
+    (ϖ : ↥C) (hirr : Irreducible ϖ) (hϖ0 : (ϖ : L) ≠ 0)
+    (ϖ₁ vL wL : L) (hϖ₁K : ϖ₁ ∈ K₁) (hϖ₁i : IsIntegral ↥C ϖ₁)
+    (hvi : IsIntegral ↥C vL) (hwi : IsIntegral ↥C wL) (hvw : vL * wL = 1)
+    (hϖL : (ϖ : L) = vL * ϖ₁ ^ Module.finrank K₀ ↥K₁) :
+    K₀⟮ϖ₁⟯ = K₁ := by
+  let n := Module.finrank K₀ ↥K₁
+  have hn0 : 0 < n := Module.finrank_pos
+  have hle : K₀⟮ϖ₁⟯ ≤ K₁ := IntermediateField.adjoin_simple_le_iff.mpr hϖ₁K
+  have hϖ₁K₀ : IsIntegral K₀ ϖ₁ := hϖ₁i.tower_top
+  have : FiniteDimensional K₀ ↥K₀⟮ϖ₁⟯ := IntermediateField.adjoin.finiteDimensional hϖ₁K₀
+  have hfin : Module.finrank K₀ ↥K₀⟮ϖ₁⟯ ≤ n := IntermediateField.finrank_le_of_le_right hle
+  have hϖK : ((ϖ : ↥C) : L) ∈ K₀⟮ϖ₁⟯ := by
+    have : ((ϖ : ↥C) : L) = algebraMap K₀ L (algebraMap (↥C) K₀ ϖ) :=
+      IsScalarTower.algebraMap_apply _ _ _ ϖ
+    rw [this]
+    exact IntermediateField.algebraMap_mem _ _
+  have hwϖ : wL * ((ϖ : ↥C) : L) = ϖ₁ ^ n := by
+    calc wL * ((ϖ : ↥C) : L) = wL * (vL * ϖ₁ ^ n) := by rw [← hϖL]
+      _ = vL * wL * ϖ₁ ^ n := by ring
+      _ = ϖ₁ ^ n := by rw [hvw, one_mul]
+  have hwL : wL = ϖ₁ ^ n * (((ϖ : ↥C) : L))⁻¹ := (eq_mul_inv_iff_mul_eq₀ hϖ0).mpr hwϖ
+  have hwK : wL ∈ K₀⟮ϖ₁⟯ := by
+    rw [hwL]
+    exact (K₀⟮ϖ₁⟯).mul_mem
+      (pow_mem (IntermediateField.mem_adjoin_simple_self K₀ ϖ₁) n) (inv_mem hϖK)
+  have hvL : vL = wL⁻¹ := eq_inv_of_mul_eq_one_left hvw
+  have hvK : vL ∈ K₀⟮ϖ₁⟯ := by rw [hvL]; exact inv_mem hwK
+  have : IsScalarTower (↥C) (↥K₀⟮ϖ₁⟯) L := IsScalarTower.of_algebraMap_eq (fun _ => rfl)
+  set! ϖE : ↥K₀⟮ϖ₁⟯ := ⟨ϖ₁, IntermediateField.mem_adjoin_simple_self K₀ ϖ₁⟩ with hϖE
+  set! uE : ↥K₀⟮ϖ₁⟯ := ⟨wL, hwK⟩ with huE
+  set! vE : ↥K₀⟮ϖ₁⟯ := ⟨vL, hvK⟩ with hvE
+  have hinjE : Function.Injective (IsScalarTower.toAlgHom (↥C) (↥K₀⟮ϖ₁⟯) L) := fun a b h =>
+    Subtype.ext h
+  have huint : IsIntegral (↥C) uE :=
+    (isIntegral_algHom_iff (IsScalarTower.toAlgHom (↥C) (↥K₀⟮ϖ₁⟯) L) hinjE (x := uE)).mp hwi
+  have hvint : IsIntegral (↥C) vE :=
+    (isIntegral_algHom_iff (IsScalarTower.toAlgHom (↥C) (↥K₀⟮ϖ₁⟯) L) hinjE (x := vE)).mp hvi
+  have huvE : uE * vE = 1 := Subtype.ext (by change wL * vL = 1; rw [mul_comm]; exact hvw)
+  have hϖEeq : ϖE ^ n = algebraMap (↥C) (↥K₀⟮ϖ₁⟯) ϖ * uE := by
+    apply Subtype.ext
+    change ϖ₁ ^ n = ((ϖ : ↥C) : L) * wL
+    rw [mul_comm, hwϖ]
+  obtain ⟨hdeg, -⟩ := existsUnique_valuationSubring_of_pow_eq_mul (↥C) K₀ (↥K₀⟮ϖ₁⟯) n hn0 hfin ϖ
+    hirr uE vE huvE
+    huint hvint ϖE hϖEeq
+  exact IntermediateField.eq_of_le_of_finrank_eq hle hdeg
+
+private theorem prime_eq_of_unique_valuationSubring
+    {L : Type*} [Field L] (A : ValuationSubring L)
+    (C : Subring L) (ϖ : ↥C)
+    (huniq : ∀ V : ValuationSubring L,
+      (∀ c : L, c ∈ C → c ∈ V) → (ϖ : L) ∈ V.nonunits → V = A)
+    (K₀ : Type*) [Field K₀] [Algebra ↥C K₀] [Algebra K₀ L] [IsScalarTower ↥C K₀ L]
+    (K₁ : IntermediateField K₀ L) (S : Subalgebra ↥C ↥K₁)
+    (φSA : ↥S →+* ↥A)
+    (hφSA_apply : ∀ s, ((φSA s : ↥A) : L) = ((s : ↥K₁) : L))
+    (hCK₁L : ∀ c : ↥C, ((algebraMap ↥C ↥K₁ c : ↥K₁) : L) = (c : L))
+    (h1E : ∀ s : ↥S, algebraMap ↥S ↥K₁ s = (s : ↥K₁))
+    (h01 : ∀ c : ↥C, ((algebraMap ↥C ↥S c : ↥S) : ↥K₁) = algebraMap ↥C ↥K₁ c)
+    {Q : Ideal ↥S} (hQ : Q.IsPrime) (hϖQ : algebraMap ↥C ↥S ϖ ∈ Q) :
+    Q = (maximalIdeal ↥A).comap φSA := by
+  have := hQ
+  have hunits : ∀ s : Q.primeCompl, IsUnit (algebraMap (↥S) (↥K₁) s) := by
+    intro s
+    apply IsUnit.mk0
+    intro h0
+    apply s.2
+    have : (s : ↥S) = 0 := by
+      apply Subtype.ext
+      rw [h1E] at h0
+      exact h0
+    rw [this]; exact Q.zero_mem
+  set! ψ : Localization.AtPrime Q →+* ↥K₁ := IsLocalization.lift (M := Q.primeCompl) hunits with
+    hψ
+  have hψ_alg : ∀ z : ↥S, ψ (algebraMap (↥S) (Localization.AtPrime Q) z) = (z : ↥K₁) :=
+    fun z => IsLocalization.lift_eq hunits z
+  set! φ : Localization.AtPrime Q →+* L := (algebraMap (↥K₁) L).comp ψ with hφ
+  have hφ_alg : ∀ z : ↥S, φ (algebraMap (↥S) (Localization.AtPrime Q) z) = ((z : ↥K₁) : L) := by
+    intro z; change algebraMap (↥K₁) L (ψ _) = _; rw [hψ_alg]; rfl
+  obtain ⟨V, hVmem, hVloc⟩ := IsLocalRing.exists_factor_valuationRing (R := Localization.AtPrime
+    Q) (K := L) φ
+  have hdom : ∀ z : ↥S, z ∈ Q ↔ ((z : ↥K₁) : L) ∈ V.nonunits := by
+    intro z
+    have hm := IsLocalization.AtPrime.to_map_mem_maximal_iff (Localization.AtPrime Q) Q z
+    rw [← IsLocalRing.maximalIdeal_comap (S := ↥V) (φ.codRestrict V.toSubring hVmem),
+      Ideal.mem_comap, ← ValuationSubring.coe_mem_nonunits_iff] at hm
+    change φ (algebraMap (↥S) (Localization.AtPrime Q) z) ∈ V.nonunits ↔ z ∈ Q at hm
+    rw [hφ_alg] at hm
+    exact hm.symm
+  have hCV : ∀ c : L, c ∈ C → c ∈ V := by
+    intro c hc
+    have := hVmem (algebraMap (↥S) (Localization.AtPrime Q) (algebraMap (↥C) _ ⟨c, hc⟩))
+    rw [hφ_alg, h01, hCK₁L] at this
+    exact this
+  have hϖV : ((ϖ : ↥C) : L) ∈ V.nonunits := by
+    have := (hdom _).mp hϖQ
+    rwa [h01, hCK₁L] at this
+  have hVA : V = A := huniq V hCV hϖV
+  ext s
+  rw [hdom, hVA, Ideal.mem_comap, ← ValuationSubring.coe_mem_nonunits_iff, hφSA_apply]
+
 open TubeMaxConst in
 theorem exists_eq_mul_pow_finrank_and_adjoin_simple_eq_of_forall_valuationSubring_eq
     {L : Type*} [Field L] [CharZero L] (A : ValuationSubring L)
@@ -217,45 +324,9 @@ theorem exists_eq_mul_pow_finrank_and_adjoin_simple_eq_of_forall_valuationSubrin
   have hclaim : ∀ Q : Ideal ↥S, Q.IsPrime →
       algebraMap (↥C) _ ϖ ∈ Q → Q = QA := by
     intro Q hQ hϖQ
-    have := hQ
-    have hunits : ∀ s : Q.primeCompl, IsUnit (algebraMap (↥S) (↥K₁) s) := by
-      intro s
-      apply IsUnit.mk0
-      intro h0
-      apply s.2
-      have : (s : ↥S) = 0 := by
-        apply Subtype.ext
-        rw [h1E] at h0
-        exact h0
-      rw [this]; exact Q.zero_mem
-    set! ψ : Localization.AtPrime Q →+* ↥K₁ := IsLocalization.lift (M := Q.primeCompl) hunits with
-      hψ
-    have hψ_alg : ∀ z : ↥S, ψ (algebraMap (↥S) (Localization.AtPrime Q) z) = (z : ↥K₁) :=
-      fun z => IsLocalization.lift_eq hunits z
-    set! φ : Localization.AtPrime Q →+* L := (algebraMap (↥K₁) L).comp ψ with hφ
-    have hφ_alg : ∀ z : ↥S, φ (algebraMap (↥S) (Localization.AtPrime Q) z) = ((z : ↥K₁) : L) := by
-      intro z; change algebraMap (↥K₁) L (ψ _) = _; rw [hψ_alg]; rfl
-    obtain ⟨V, hVmem, hVloc⟩ := IsLocalRing.exists_factor_valuationRing (R := Localization.AtPrime
-      Q) (K := L) φ
-    have hdom : ∀ z : ↥S, z ∈ Q ↔ ((z : ↥K₁) : L) ∈ V.nonunits := by
-      intro z
-      have hm := IsLocalization.AtPrime.to_map_mem_maximal_iff (Localization.AtPrime Q) Q z
-      rw [← IsLocalRing.maximalIdeal_comap (S := ↥V) (φ.codRestrict V.toSubring hVmem),
-        Ideal.mem_comap, ← ValuationSubring.coe_mem_nonunits_iff] at hm
-      change φ (algebraMap (↥S) (Localization.AtPrime Q) z) ∈ V.nonunits ↔ z ∈ Q at hm
-      rw [hφ_alg] at hm
-      exact hm.symm
-    have hCV : ∀ c : L, c ∈ C → c ∈ V := by
-      intro c hc
-      have := hVmem (algebraMap (↥S) (Localization.AtPrime Q) (algebraMap (↥C) _ ⟨c, hc⟩))
-      rw [hφ_alg, h01, hCK₁L] at this
-      exact this
-    have hϖV : ((ϖ : ↥C) : L) ∈ V.nonunits := by
-      have := (hdom _).mp hϖQ
-      rwa [h01, hCK₁L] at this
-    have hVA : V = A := huniq V hCV hϖV
-    ext s
-    rw [hdom, hQA, hVA]
+    rw [hQAdef]
+    exact prime_eq_of_unique_valuationSubring A C ϖ huniq K₀ K₁ S φSA
+      hφSA_apply hCK₁L h1E h01 hQ hϖQ
   have hϖQA : algebraMap (↥C) _ ϖ ∈ QA := by
     rw [hQA, h01, hCK₁L]
     exact ValuationSubring.coe_mem_nonunits_iff.mpr ((hmCA ϖ).mp (hmC ▸
@@ -359,53 +430,16 @@ theorem exists_eq_mul_pow_finrank_and_adjoin_simple_eq_of_forall_valuationSubrin
   have hvw : vL * wL = 1 := by
     have h1 : ((v : ↥W) : ↥K₁) * (((v⁻¹ : (↥W)ˣ) : ↥W) : ↥K₁) = 1 := by
       rw [← MulMemClass.coe_mul, Units.mul_inv]; rfl
-    have := congrArg (algebraMap (↥K₁) L) h1
-    rwa [map_mul, map_one] at this
+    have hmap := congrArg (fun x : ↥K₁ => (x : L)) h1
+    change vL * wL = 1 at hmap
+    exact hmap
   have hϖL : ((ϖ : ↥C) : L) = vL * ϖ₁ ^ n := by
     have := congrArg (algebraMap (↥K₁) L) hϖeq
     rw [map_mul, map_pow] at this
     exact this
   refine ⟨ϖ₁, vL, wL, hϖ₁K, hvK₁, hwK₁, hϖ₁i, hvi, hwi, hvw, hϖL, ?_⟩
-  have hn0 : 0 < n := Module.finrank_pos
-  have hle : K₀⟮ϖ₁⟯ ≤ K₁ := IntermediateField.adjoin_simple_le_iff.mpr hϖ₁K
-  have hϖ₁K₀ : IsIntegral K₀ ϖ₁ := hϖ₁i.tower_top
-  have : FiniteDimensional K₀ ↥K₀⟮ϖ₁⟯ := IntermediateField.adjoin.finiteDimensional hϖ₁K₀
-  have hfin : Module.finrank K₀ ↥K₀⟮ϖ₁⟯ ≤ n := IntermediateField.finrank_le_of_le_right hle
-  have hϖK : ((ϖ : ↥C) : L) ∈ K₀⟮ϖ₁⟯ := by
-    have : ((ϖ : ↥C) : L) = algebraMap K₀ L (algebraMap (↥C) K₀ ϖ) :=
-      IsScalarTower.algebraMap_apply _ _ _ ϖ
-    rw [this]
-    exact IntermediateField.algebraMap_mem _ _
-  have hwϖ : wL * ((ϖ : ↥C) : L) = ϖ₁ ^ n := by
-    calc wL * ((ϖ : ↥C) : L) = wL * (vL * ϖ₁ ^ n) := by rw [← hϖL]
-      _ = vL * wL * ϖ₁ ^ n := by ring
-      _ = ϖ₁ ^ n := by rw [hvw, one_mul]
-  have hwL : wL = ϖ₁ ^ n * (((ϖ : ↥C) : L))⁻¹ := (eq_mul_inv_iff_mul_eq₀ hϖ0).mpr hwϖ
-  have hwK : wL ∈ K₀⟮ϖ₁⟯ := by
-    rw [hwL]
-    exact (K₀⟮ϖ₁⟯).mul_mem
-      (pow_mem (IntermediateField.mem_adjoin_simple_self K₀ ϖ₁) n) (inv_mem hϖK)
-  have hvL : vL = wL⁻¹ := eq_inv_of_mul_eq_one_left hvw
-  have hvK : vL ∈ K₀⟮ϖ₁⟯ := by rw [hvL]; exact inv_mem hwK
-  have : IsScalarTower (↥C) (↥K₀⟮ϖ₁⟯) L := IsScalarTower.of_algebraMap_eq (fun _ => rfl)
-  set! ϖE : ↥K₀⟮ϖ₁⟯ := ⟨ϖ₁, IntermediateField.mem_adjoin_simple_self K₀ ϖ₁⟩ with hϖE
-  set! uE : ↥K₀⟮ϖ₁⟯ := ⟨wL, hwK⟩ with huE
-  set! vE : ↥K₀⟮ϖ₁⟯ := ⟨vL, hvK⟩ with hvE
-  have hinjE : Function.Injective (IsScalarTower.toAlgHom (↥C) (↥K₀⟮ϖ₁⟯) L) := fun a b h =>
-    Subtype.ext h
-  have huint : IsIntegral (↥C) uE :=
-    (isIntegral_algHom_iff (IsScalarTower.toAlgHom (↥C) (↥K₀⟮ϖ₁⟯) L) hinjE (x := uE)).mp hwi
-  have hvint : IsIntegral (↥C) vE :=
-    (isIntegral_algHom_iff (IsScalarTower.toAlgHom (↥C) (↥K₀⟮ϖ₁⟯) L) hinjE (x := vE)).mp hvi
-  have huvE : uE * vE = 1 := Subtype.ext (by change wL * vL = 1; rw [mul_comm]; exact hvw)
-  have hϖEeq : ϖE ^ n = algebraMap (↥C) (↥K₀⟮ϖ₁⟯) ϖ * uE := by
-    apply Subtype.ext
-    change ϖ₁ ^ n = ((ϖ : ↥C) : L) * wL
-    rw [mul_comm, hwϖ]
-  obtain ⟨hdeg, -⟩ := existsUnique_valuationSubring_of_pow_eq_mul (↥C) K₀ (↥K₀⟮ϖ₁⟯) n hn0 hfin ϖ
-    hirr uE vE huvE
-    huint hvint ϖE hϖEeq
-  exact IntermediateField.eq_of_le_of_finrank_eq hle hdeg
+  exact adjoin_simple_eq_of_uniformizer_power C K₀ K₁ ϖ hirr hϖ0 ϖ₁ vL wL
+    hϖ₁K hϖ₁i hvi hwi hvw hϖL
 
 end
 end ValuationSubring

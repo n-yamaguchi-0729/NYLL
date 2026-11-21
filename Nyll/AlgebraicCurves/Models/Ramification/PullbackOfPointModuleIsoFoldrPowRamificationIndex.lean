@@ -12,6 +12,7 @@ AI assistance in local adaptation and maintenance: OpenAI Codex.
 
 module
 
+public import Nyll.SchemeTheory.Sheaves.IdealSheafModule
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Nyll.AlgebraicCurves.Models.Construction.Basic
 public import Nyll.AlgebraicCurves.Divisors.Correspondences.Correspondences
@@ -44,6 +45,8 @@ section ProofImplementation
 
 open _root_.AlgebraicCurve (
   isCurveOver_of_ringEquiv_functionField_of_isIntegral_of_smoothOfRelativeDimension_one)
+
+open AlgebraicGeometry.Scheme.IdealSheafData (topModuleIso)
 
 namespace AlgebraicCurves.Models.Proofs.PointModuleRamificationPullback
 open _root_.AlgebraicCurve.Place in
@@ -132,33 +135,6 @@ theorem comapMonoidHom_apply (g : X ⟶ Y) [IsIso g] (I : Y.IdealSheafData) : co
   I.comap g := rfl
 
 end IsoTransport
-
-section top
-variable {X : Scheme.{u}}
-
-theorem subsingleton_sections_of_isEmpty {Z : Scheme.{u}} [IsEmpty Z] (V : Z.Opens) :
-    Subsingleton Γ(Z, V) := by
-  obtain rfl : V = ⊥ := by
-    ext x
-    exact (IsEmpty.false x).elim
-  exact CommRingCat.subsingleton_of_isTerminal (TopCat.Sheaf.isTerminalOfEmpty Z.sheaf)
-
-theorem unitToPushforwardUnit_eq_zero_of_isEmpty {Z : Scheme.{u}} (i : Z ⟶ X) [IsEmpty Z] :
-    i.unitToPushforwardUnit = 0 := by
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  ext
-  have : Subsingleton Γ(Z, i ⁻¹ᵁ U.unop) := subsingleton_sections_of_isEmpty _
-  exact Subsingleton.elim (α := Γ(Z, i ⁻¹ᵁ U.unop)) _ _
-
-/-- Identifies the module of the unit ideal with the structure module. -/
-def topModuleIso : (⊤ : X.IdealSheafData).module ≅ 𝟙_ X.Modules :=
-  (kernelIsoOfEq (unitToPushforwardUnit_eq_zero_of_isEmpty (⊤ : X.IdealSheafData).subschemeι) ≪≫
-    kernelZeroIsoSource : (kernel ((⊤ : X.IdealSheafData).subschemeι.unitToPushforwardUnit) :
-      SheafOfModules X.ringCatSheaf) ≅ SheafOfModules.unit X.ringCatSheaf)
-
-end top
 
 section prodmod
 variable {X : Scheme.{u}} {ι : Type*}

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
 public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
 public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
@@ -34,10 +35,7 @@ namespace EtaleFundamentalGroups
 
 universe u
 
-local instance underCommRingCatAlgebraChosenFactorDescent
-    {R : Type u} [CommRing R]
-    (A : Under (CommRingCat.of R)) : Algebra R A :=
-  RingHom.toAlgebra A.hom.hom
+attribute [local instance] EtaleFundamentalGroups.underCommRingCatAlgebra
 
 /-- The strict-Henselian trivialization of a chosen finite etale factor,
 written between the two tensor products used by finite-stage descent. -/

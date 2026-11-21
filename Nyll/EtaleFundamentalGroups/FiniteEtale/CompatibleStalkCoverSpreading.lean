@@ -34,22 +34,10 @@ open CategoryTheory Limits TopologicalSpace
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryCompatibleCover (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) := instCategory X
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
 
-local instance finiteEtaleHasPullbacksAlongCompatibleCover
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongCompatibleCover
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- A local finite etale cover compatible with the cover of a retrocompact
 open spreads to an actual neighborhood, preserving compatibility on its

@@ -76,7 +76,7 @@ def HomOver.pullback {𝒱 : X.TwoAffineOpenCover} {c : X ⟶ Spec (.of R)} {�
       (𝒲.pullback c' A) (Limits.pullback.snd c' (specMap R A)) where
   hom := Limits.pullback.map c' (specMap R A) c (specMap R A) f.hom (𝟙 _) (𝟙 _)
     (by rw [Category.comp_id, f.comm, CommRingCat.ofHom_id];
-        erw [Spec.map_id]; try rw [Category.comp_id])
+        erw [Spec.map_id]; rw [Category.comp_id])
     (by rw [Category.comp_id, Category.id_comp])
   comm := by
     rw [Limits.pullback.lift_snd, CommRingCat.ofHom_id]

@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPowMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoEvAppTensorUnit
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicClosedPullbackSections
 public import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverClosedProjectiveSyzygyVanishing
@@ -212,7 +212,7 @@ theorem hom_eq_zero_of_forall_levelPullbackUnit_comp_eq_zero
   obtain ⟨J, _hJ, α, hα⟩ := hd d le_rfl
   have : Epi α := hα
   let T := L.tensorPow d
-  have hT : IsInvertible T := hL.tensorPow_monoidalV2 d
+  have hT : IsInvertible T := hL.tensorPow d
   have : T.IsQuasicoherent := closedProjectiveTwistingPow_isQuasicoherent R n j d
   have : (N ⊗ T).IsQuasicoherent := IsInvertible.isQuasicoherent_tensorPow N hL d
   have : (N ⊗ T).IsFiniteType := IsInvertible.isFiniteType_tensorPow N hL d

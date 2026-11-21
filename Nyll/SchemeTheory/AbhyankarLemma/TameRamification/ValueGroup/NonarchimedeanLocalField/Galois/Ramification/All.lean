@@ -6,7 +6,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.Basic
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.LocalTop
 public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.NonarchimedeanLocalField.Galois.Ramification.ValueImage
 
@@ -16,8 +15,6 @@ public import Nyll.SchemeTheory.AbhyankarLemma.TameRamification.ValueGroup.Nonar
 This umbrella keeps the Galois ramification image source layer available under
 the original import path.  The implementation is split into:
 
-* `GaloisRamification.Basic`: embedded-base-unit subgroups, tower transport,
-  powered lower-branch images, and their norm-down image;
 * `GaloisRamification.ValueImage`: Galois valuation-data generators and exact
   value images for embedded and powered base-unit subgroups;
 * `GaloisRamification.LocalTop`: lower local-top residue-degree comparisons

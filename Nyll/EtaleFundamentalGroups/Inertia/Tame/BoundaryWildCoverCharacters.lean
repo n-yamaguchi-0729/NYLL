@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 public import Nyll.EtaleFundamentalGroups.Inertia.Tame.BoundaryWildGeometricCharacters
 
 /-!
@@ -32,7 +33,7 @@ universe u v
 
 attribute [local instance] Inertia.normalizationCommAlgGaloisAction
 
-attribute [local instance] integralOpenDominant
+attribute [local instance] AlgebraicGeometry.Scheme.Hom.isDominant_of_isOpenImmersion
 
 variable (k F Ω : Type u) [Field k] [Field F] [Field Ω]
   [Algebra F Ω] [IsSepClosure F Ω] [IsSepClosed Ω]

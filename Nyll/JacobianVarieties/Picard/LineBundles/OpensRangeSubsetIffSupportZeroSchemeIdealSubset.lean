@@ -645,7 +645,7 @@ theorem zeroSchemeIdeal_eq_of_finrank_H0_eq_one
     (eq_zero_of_app_top_toUnitSection_one σ₀ h)
   have hv0 : σ.app ⊤ (Scheme.Modules.toUnitSection ⊤ 1) ≠ 0 := fun h => hσ
     (eq_zero_of_app_top_toUnitSection_one σ h)
-  obtain ⟨lam, hlam⟩ := (finrank_eq_one_iff_of_nonzero' _ hv₀0).1 hfin (σ.app ⊤
+  obtain ⟨lam, hlam⟩ := (finrank_eq_one_iff_of_ne_zero' _ hv₀0).1 hfin (σ.app ⊤
     (Scheme.Modules.toUnitSection ⊤ 1))
   have hlam0 : lam ≠ 0 := by rintro rfl; exact hv0 (by rw [← hlam, zero_smul])
   have hu : IsUnit (algebraMap k Γ(Y, ⊤) lam) := (IsUnit.mk0 lam hlam0).map _

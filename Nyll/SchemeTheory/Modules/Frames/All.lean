@@ -13,6 +13,7 @@ public import Nyll.SchemeTheory.Modules.Frames.BasisPullbackFieldPoint
 public import Nyll.SchemeTheory.Modules.Frames.FrameBridge
 public import Nyll.SchemeTheory.Modules.Frames.FrameDescent
 public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
+public import Nyll.SchemeTheory.Modules.Frames.FrameGeneration
 public import Nyll.SchemeTheory.Modules.Frames.FrameLinearCombination
 public import Nyll.SchemeTheory.Modules.Frames.FrameLocality
 public import Nyll.SchemeTheory.Modules.Frames.FrameTransitions

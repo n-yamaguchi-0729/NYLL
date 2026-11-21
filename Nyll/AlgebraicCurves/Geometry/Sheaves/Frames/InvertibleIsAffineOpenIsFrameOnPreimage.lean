@@ -40,7 +40,7 @@ public import Mathlib.Tactic.Simps.Basic
 public import Nyll.SchemeTheory.Descent.AlgebraDirectLimit
 public import Nyll.SchemeTheory.Modules.Tensor.TensorSections
 public import Nyll.AlgebraicCurves.Geometry.Picard.Functor.Functor
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Frames.InvertibleModuleFrames
+public import Nyll.SchemeTheory.Modules.Frames.FrameFromTrivialization
 
 /-!
 # Scheme Modules Is Invertible exists is Affine Open is Frame On preimage of is Direct Limit

@@ -161,7 +161,8 @@ theorem exists_integral_root_lifting_separable_residue_element
     have hpoly :
         F.map ((algebraMap K L).comp V.subtype) =
           (G * H).map Wv.subtype := by
-      apply Polynomial.ext
+      apply AddMonoidAlgebra.ext
+      apply Finsupp.ext
       intro n
       rw [Polynomial.coeff_map, Polynomial.coeff_map]
       calc
@@ -245,7 +246,8 @@ theorem exists_finiteUnramifiedSubextension_residue_image_eq
         (F.map ((algebraMap K E).comp V.subtype)).map E.val.toRingHom =
           F.map ((algebraMap K L).comp V.subtype) := by
       rw [Polynomial.map_map]
-      apply Polynomial.ext
+      apply AddMonoidAlgebra.ext
+      apply Finsupp.ext
       intro n
       rfl
     rw [hpoly]

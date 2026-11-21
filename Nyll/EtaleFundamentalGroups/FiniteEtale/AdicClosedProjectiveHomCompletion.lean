@@ -22,7 +22,7 @@ public import Nyll.SchemeTheory.Modules.Tensor.TensorPowers
 public import Nyll.SchemeTheory.ProjectiveSpace.ClosedImmersionGlobalGeneration
 public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheaf
 public import Nyll.SchemeTheory.ProjectiveSpace.TwistingSheafPresentation
-public import Nyll.AlgebraicCurves.Geometry.Sheaves.Projective.InvertibleTensorPowMonoidalV2
+public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleTensor
 public import Nyll.AlgebraicCurves.Geometry.Sheaves.Tensor.InvertibleIsoEvAppTensorUnit
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -250,7 +250,7 @@ theorem existsUnique_hom_of_compatible_levelMaps_to_locallyFree
   let d := max c₀ c₁
   let T : Y.Modules := L.tensorPow d
   have hL : IsInvertible L := IsInvertible.pullback j (isInvertible_twistingSheaf R n)
-  have hT : IsInvertible T := hL.tensorPow_monoidalV2 d
+  have hT : IsInvertible T := hL.tensorPow d
   have : T.IsQuasicoherent := closedProjectiveTwistingPow_isQuasicoherent R n j d
   have : (M ⊗ T).IsQuasicoherent := IsInvertible.isQuasicoherent_tensorPow M hL d
   have : (N ⊗ T).IsQuasicoherent := IsInvertible.isQuasicoherent_tensorPow N hL d

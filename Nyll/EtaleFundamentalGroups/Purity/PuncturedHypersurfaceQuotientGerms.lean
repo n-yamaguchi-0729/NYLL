@@ -52,8 +52,8 @@ namespace AlgebraicGeometry.FiniteEtale.PuncturedHypersurface
 
 universe u
 
-attribute [local instance] finiteEtaleOverCategoryCoherence
-  finiteEtaleHasPullbacksAlongCoherence finiteEtaleStableUnderBaseChangeAlongCoherence
+attribute [local instance] finiteEtaleOverCategory
+  finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 variable (R : Type u) [CommRing R] [IsLocalRing R] (f : R)
   (hf : f ∈ IsLocalRing.maximalIdeal R)

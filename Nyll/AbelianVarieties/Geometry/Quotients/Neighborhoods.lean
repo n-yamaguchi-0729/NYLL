@@ -98,7 +98,7 @@ section Main
 variable [IsDomain R] [IsDiscreteValuationRing R] [Smooth g] [IsSeparated g] [QuasiCompact g]
 
 /-- The image of points translated outside the chosen open. -/
-def badSet (U : B.Opens) (s₀ : B) : Set B :=
+noncomputable def badSet (U : B.Opens) (s₀ : B) : Set B :=
   (pullback.fst g (B.fromSpecResidueField s₀ ≫ g)).base ''
     ((rightMul LB (B.fromSpecResidueField s₀ ≫ g) ⟨B.fromSpecResidueField s₀, rfl⟩).base ⁻¹' ((U :
       Set B)ᶜ))

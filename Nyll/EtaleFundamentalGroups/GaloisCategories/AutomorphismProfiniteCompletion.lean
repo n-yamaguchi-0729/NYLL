@@ -7,12 +7,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.EtaleFundamentalGroups.ContinuousActions.FiniteLimitsAndColimits
 public import Mathlib.CategoryTheory.Action.Concrete
 public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 public import Mathlib.Topology.Category.FinTopCat
-public import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
-public import Nyll.ClassFieldTheory.Definitions.LocalClassFieldTheory.TopologicalProfiniteCompletion
+public import Nyll.ProCGroups.Completion.Topological
+public import Nyll.ProCGroups.Completion.TopologicalBasic
 
 /-!
 # The profinite completion of a topological group
@@ -37,20 +38,7 @@ namespace FiniteContinuousAction
 
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 
-/-- Use the original action on the carrier of a finite continuous action. -/
-local instance carrierMulAction
-    (X : ContAction FintypeCat.{u} G) :
-    MulAction G
-      ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) :=
-  inferInstanceAs <| MulAction G X.obj.V
-
-private instance carrierContinuousSMul
-    (X : ContAction FintypeCat.{u} G) :
-    ContinuousSMul G
-      ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) := by
-  change ContinuousSMul G
-    ((forget₂ (Action FintypeCat.{u} G) TopCat).obj X.obj)
-  exact X.property
+attribute [local instance] ContAction.finiteCarrierMulAction ContAction.finiteCarrierContinuousSMul
 
 /-- Morphisms of finite continuous actions commute with the carrier actions. -/
 local instance naturalSMul :

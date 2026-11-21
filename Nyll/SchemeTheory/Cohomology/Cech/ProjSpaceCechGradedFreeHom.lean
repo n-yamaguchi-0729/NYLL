@@ -87,14 +87,14 @@ theorem freeLinear_monomial (D : GradedModule R n) (v : D.M)
 /-- The constant polynomial one recovers the original element. -/
 theorem freeLinear_one (D : GradedModule R n) (v : D.M) : freeLinear D v 1 = v := by
   change polynomialAction D 1 v = v
-  rw [map_one, Module.End.one_apply]
+  rw [map_one, one_apply_eq_self]
 
 /-- Multiplication by a coordinate is intertwined with its original operator. -/
 theorem freeLinear_X_mul (D : GradedModule R n) (v : D.M)
     (j : Fin (n + 1)) (p : MvPolynomial (Fin (n + 1)) R) :
     freeLinear D v (X j * p) = D.xMul j (freeLinear D v p) := by
   change polynomialAction D (X j * p) v = D.xMul j (polynomialAction D p v)
-  rw [map_mul, polynomialAction_X, Module.End.mul_apply]
+  rw [map_mul, polynomialAction_X, mul_apply_eq_comp]
 
 /-- A homogeneous polynomial shifts the degree by its actual homogeneous degree. -/
 theorem freeLinear_mem_grade (D : GradedModule R n) {e d : ℤ}

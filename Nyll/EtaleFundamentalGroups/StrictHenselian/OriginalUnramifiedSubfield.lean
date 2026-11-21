@@ -139,7 +139,7 @@ theorem mem_originalKernelFixedField_iff_exists_unramified_finite_subfield
     have hE : E ≤ IntermediateField.fixedField
         (originalFractionAbsoluteGaloisHom A K L).toMonoidHom.ker :=
       IntermediateField.adjoin_simple_le_iff.mpr hx
-    have hfix := (IntermediateField.le_iff_le _ E).mp hE
+    have hfix := (IntermediateField.le_fixedField_iff_le_fixingSubgroup _ E).mp hE
     exact ⟨E, inferInstance,
       (integralClosure_unramified_iff_originalKernel_le_fixingSubgroup A K L E).mpr hfix,
       IntermediateField.subset_adjoin K {x} (Set.mem_singleton x)⟩
@@ -147,7 +147,7 @@ theorem mem_originalKernelFixedField_iff_exists_unramified_finite_subfield
     let : FiniteDimensional K E := hfinite
     have hfix :=
       (integralClosure_unramified_iff_originalKernel_le_fixingSubgroup A K L E).mp hunram
-    exact ((IntermediateField.le_iff_le _ E).mpr hfix) hx
+    exact ((IntermediateField.le_fixedField_iff_le_fixingSubgroup _ E).mpr hfix) hx
 
 /-- The independently defined original maximal unramified field is the
 fixed field of the actual fraction-point fundamental-group kernel. -/

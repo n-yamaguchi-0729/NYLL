@@ -169,7 +169,7 @@ private theorem exists_uniformizer_radical_generator_of_residue_separable
   have hαIntegral : IsIntegral K α := IsIntegral.of_finite K α
   have hadjoinRank : Module.finrank K (IntermediateField.adjoin K ({α} : Set L)) = n := by
     rw [IntermediateField.adjoin.finrank hαIntegral, ← hfMinpoly]
-    exact natDegree_X_pow_sub_C
+    exact natDegree_X_pow_sub_C _
   have hadjoin : IntermediateField.adjoin K ({α} : Set L) = ⊤ := by
     apply IntermediateField.eq_of_le_of_finrank_eq le_top
     simpa only [IntermediateField.finrank_top'] using hadjoinRank

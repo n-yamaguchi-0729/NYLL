@@ -32,6 +32,7 @@ public import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicChainComparison
 public import Nyll.GaloisCohomology.ProP.FiniteCyclicBarPeriodicH2Comparison
 public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryCocycle
 public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryCoefficientNorm
+public import Nyll.GaloisCohomology.ProP.FiniteCyclicCarryInflation
 public import Nyll.GaloisCohomology.ProP.FiniteCyclicH2TateH0
 public import Nyll.GaloisCohomology.ProP.FiniteIndexTransfer
 public import Nyll.GaloisCohomology.ProP.FiniteStageTransgression

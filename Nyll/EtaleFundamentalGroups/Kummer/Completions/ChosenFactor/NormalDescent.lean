@@ -132,7 +132,7 @@ theorem
     IsIntegrallyClosed A := by
   let : Algebra.IsIntegral A C := Algebra.IsIntegral.of_finite A C
   let : IsLocalHom (algebraMap A C) := by
-    apply ((IsLocalRing.local_hom_TFAE (algebraMap A C)).out 5 1).mp
+    apply ((IsLocalRing.local_hom_tfae (algebraMap A C)).out 5 1).mp
     exact IsLocalRing.eq_maximalIdeal
       (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (algebraMap A C)
         (fun x ↦ Algebra.IsIntegral.isIntegral x) (IsLocalRing.maximalIdeal C))

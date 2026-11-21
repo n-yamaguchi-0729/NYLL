@@ -7,17 +7,25 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Nyll.GaloisCohomology.Topology.FiniteCocycleLifting
+public import Nyll.GaloisCohomology.Topology.GaloisConjugation
 public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisAbelianModPower
 public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
 public import Nyll.GaloisCohomology.Topology.SeparableGaloisMap
 public import Nyll.GaloisCohomology.Topology.TotallyDisconnectedQuotients
 
 public import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
+public import Nyll.GaloisCohomology.Topology.ContinuousH2InnerAction
+public import Nyll.GaloisCohomology.Topology.ContinuousH2UniverseMap
+public import Nyll.GaloisCohomology.Topology.ContinuousCorestriction
+public import Nyll.GaloisCohomology.Topology.ContinuousInvariantPairing
 public import Nyll.GaloisCohomology.Topology.ContinuousRepresentationUniverseLift
 public import Nyll.GaloisCohomology.Topology.ContinuousCrossedHom
 public import Nyll.GaloisCohomology.Topology.ContinuousH1Lifting
+public import Nyll.GaloisCohomology.Topology.ContinuousNormalSubgroupH1
+public import Nyll.GaloisCohomology.Topology.ContinuousCharacterDuality
 
 public import Nyll.GaloisCohomology.Topology.ContinuousH1CocycleSurjectivity
+public import Nyll.GaloisCohomology.Topology.ContinuousH1CoprimeNormalImage
 
 public import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
 public import Nyll.GaloisCohomology.Topology.AlgebraicGaloisOrbits
@@ -28,6 +36,13 @@ public import Nyll.GaloisCohomology.Topology.GaloisRestrictionScalars
 public import Nyll.GaloisCohomology.Topology.ContinuousH0Naturality
 public import Nyll.GaloisCohomology.Topology.GaloisFiniteStageTuples
 public import Nyll.GaloisCohomology.Topology.ContinuousCochainTuples
+public import Nyll.GaloisCohomology.Topology.ContinuousCupLow
+public import Nyll.GaloisCohomology.Topology.ContinuousCupCorestriction
+public import Nyll.GaloisCohomology.Topology.ContinuousEulerMultiplicity
+public import Nyll.GaloisCohomology.Topology.ContinuousEulerScalarExtension
+public import Nyll.GaloisCohomology.Topology.ContinuousShapiro
+public import Nyll.GaloisCohomology.Topology.ContinuousDual
+public import Nyll.GaloisCohomology.Topology.ContinuousDualExactness
 public import Nyll.GaloisCohomology.Topology.ContinuousCoinducedDimensionShift
 public import Nyll.GaloisCohomology.Topology.ContinuousCoinducedPrimitives
 public import Nyll.GaloisCohomology.Topology.HomogeneousContinuousCochainsFunctor
@@ -39,8 +54,13 @@ public import Nyll.GaloisCohomology.Topology.ContinuousSubgroupPrimitiveExtensio
 public import Nyll.GaloisCohomology.Topology.ContinuousTupleExactness
 public import Nyll.GaloisCohomology.Topology.DiscreteCoefficientQuotient
 public import Nyll.GaloisCohomology.Topology.DiscreteCoinducedQuotient
+public import Nyll.GaloisCohomology.Topology.DiscreteGroupComparison
+public import Nyll.GaloisCohomology.Topology.DiscreteGroupH2
+public import Nyll.GaloisCohomology.Topology.DiscreteOriginalH2
+public import Nyll.GaloisCohomology.Topology.DiscreteOriginalH2Naturality
 public import Nyll.GaloisCohomology.Topology.FiniteCoefficientCochains
 public import Nyll.GaloisCohomology.Topology.FiniteCoefficientPrimeDevissage
+public import Nyll.GaloisCohomology.Topology.FiniteStageCoinduction
 public import Nyll.GaloisCohomology.Topology.FiniteInvariantCoefficients
 public import Nyll.GaloisCohomology.Topology.FinitePGroupCoefficientVanishing
 public import Nyll.GaloisCohomology.Topology.InvariantCoefficientExactness
